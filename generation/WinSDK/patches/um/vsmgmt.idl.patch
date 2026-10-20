@@ -1,5 +1,5 @@
 diff --git a/um/vsmgmt.idl b/um/vsmgmt.idl
-index 8efb7222..a83b56ec 100644
+index 8efb7222..40e7c9cb 100644
 --- a/um/vsmgmt.idl
 +++ b/um/vsmgmt.idl
 @@ -10,6 +10,7 @@
@@ -14,7 +14,7 @@ index 8efb7222..a83b56ec 100644
  
  // Used to manage diff areas remotely for Software-based snapshots (using hte copy-on-write mechanism).
  // Implemented by VSS and each provider.
-+_Win32_AnnotateInterface_(IVssSnapshotMgmt, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssSnapshotMgmt => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(FA7DF749-66E7-4986-A27F-E2F04AE53772),
@@ -22,7 +22,7 @@ index 8efb7222..a83b56ec 100644
  
  // More APIs to manage diff areas remotely for Software-based snapshots (using hte copy-on-write mechanism).
  // Implemented by VSS 
-+_Win32_AnnotateInterface_(IVssSnapshotMgmt2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssSnapshotMgmt2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0f61ec39-fe82-45f2-a3f0-768b5d427102),
@@ -30,7 +30,7 @@ index 8efb7222..a83b56ec 100644
  // snapshots (using the copy-on-write mechanism).
  // This is implemented by a Snapshot/System provider and
  // returned by IVssSnapshotMgmt::GetProviderMgmtInterface
-+_Win32_AnnotateInterface_(IVssDifferentialSoftwareSnapshotMgmt, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssDifferentialSoftwareSnapshotMgmt => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(214A0F28-B737-4026-B847-4F9E37D79529),
@@ -38,7 +38,7 @@ index 8efb7222..a83b56ec 100644
          );                                              
  };
  
-+_Win32_AnnotateInterface_(IVssDifferentialSoftwareSnapshotMgmt2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssDifferentialSoftwareSnapshotMgmt2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(949d7353-675f-4275-8969-f044c6277815),
@@ -46,7 +46,7 @@ index 8efb7222..a83b56ec 100644
          );
  };
  
-+_Win32_AnnotateInterface_(IVssDifferentialSoftwareSnapshotMgmt3, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssDifferentialSoftwareSnapshotMgmt3 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(383f7e71-a4c5-401f-b27f-f826289f8458),
@@ -54,7 +54,7 @@ index 8efb7222..a83b56ec 100644
  
  
  // This returns a set of volumes that can be snapshotted by Babbage. Returned by Query.
-+_Win32_AnnotateInterface_(IVssEnumMgmtObject, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssEnumMgmtObject => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(01954E6B-9254-4e6e-808C-C9E05D007696),

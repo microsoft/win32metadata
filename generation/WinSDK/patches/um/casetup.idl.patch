@@ -1,5 +1,5 @@
 diff --git a/um/casetup.idl b/um/casetup.idl
-index 295d43d5..2e62e948 100644
+index 295d43d5..3a030ca9 100644
 --- a/um/casetup.idl
 +++ b/um/casetup.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 295d43d5..2e62e948 100644
  //
  // Interface ICertSrvSetupKeyInformation
  //
-+_Win32_AnnotateInterface_(ICertSrvSetupKeyInformation, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ICertSrvSetupKeyInformation => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(6ba73778-36da-4c39-8a85-bcfa7d000793),
@@ -22,7 +22,7 @@ index 295d43d5..2e62e948 100644
  //+--------------------------------------------------------------------------
  // ICertSrvSetupKeyInformationCollection -- local COM interface
  //+--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(ICertSrvSetupKeyInformationCollection, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ICertSrvSetupKeyInformationCollection => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(e65c8b00-e58f-41f9-a9ec-a28d7427c844),
@@ -30,7 +30,7 @@ index 295d43d5..2e62e948 100644
  //
  // Interface ICertSrvSetup
  //
-+_Win32_AnnotateInterface_(ICertSrvSetup, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ICertSrvSetup => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(b760a1bb-4784-44c0-8f12-555f0780ff25),
@@ -38,7 +38,7 @@ index 295d43d5..2e62e948 100644
  //
  // Interface IMSCEPSetup
  //
-+_Win32_AnnotateInterface_(IMSCEPSetup, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IMSCEPSetup => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(4f7761bb-9f3b-4592-9ee0-9a73259c313e),
@@ -46,7 +46,7 @@ index 295d43d5..2e62e948 100644
  //
  // Interface ICertificateEnrollmentServerSetup
  //
-+_Win32_AnnotateInterface_(ICertificateEnrollmentServerSetup, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ICertificateEnrollmentServerSetup => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(70027FDB-9DD9-4921-8944-B35CB31BD2EC),
@@ -54,7 +54,7 @@ index 295d43d5..2e62e948 100644
  //
  // Interface ICertificateEnrollmentPolicyServerSetup
  //
-+_Win32_AnnotateInterface_(ICertificateEnrollmentPolicyServerSetup, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ICertificateEnrollmentPolicyServerSetup => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(859252CC-238C-4a88-B8FD-A37E7D04E68B),

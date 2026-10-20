@@ -1,5 +1,5 @@
 diff --git a/um/wsmandisp.idl b/um/wsmandisp.idl
-index 32ab6bc3..4fd3ce5f 100644
+index 32ab6bc3..6cb8b708 100644
 --- a/um/wsmandisp.idl
 +++ b/um/wsmandisp.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 32ab6bc3..4fd3ce5f 100644
      };    
  };
  
-+_Win32_AnnotateInterface_(IWSMan, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSMan => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -19,7 +19,7 @@ index 32ab6bc3..4fd3ce5f 100644
      HRESULT Error([out, retval] BSTR * value);
  };
  
-+_Win32_AnnotateInterface_(IWSManEx, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManEx => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -27,7 +27,7 @@ index 32ab6bc3..4fd3ce5f 100644
      HRESULT EnumerationFlagReturnObject([out, retval] long *flags);
  };
  
-+_Win32_AnnotateInterface_(IWSManEx2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManEx2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -35,7 +35,7 @@ index 32ab6bc3..4fd3ce5f 100644
      HRESULT SessionFlagUseClientCertificate([out, retval] long *flags);
  };
  
-+_Win32_AnnotateInterface_(IWSManEx3, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWSManEx3 => SupportedOSPlatform(\"windows6.1\") */")
  [
      dual,
      object,
@@ -43,7 +43,7 @@ index 32ab6bc3..4fd3ce5f 100644
      [id(32)]
      HRESULT SessionFlagUseSsl([out, retval] long *flags);
  };
-+_Win32_AnnotateInterface_(IWSManConnectionOptions, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManConnectionOptions => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -51,7 +51,7 @@ index 32ab6bc3..4fd3ce5f 100644
  
  };
  
-+_Win32_AnnotateInterface_(IWSManConnectionOptionsEx, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManConnectionOptionsEx => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -59,7 +59,7 @@ index 32ab6bc3..4fd3ce5f 100644
      HRESULT CertificateThumbprint([in] BSTR thumbprint);
  };
  
-+_Win32_AnnotateInterface_(IWSManConnectionOptionsEx2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWSManConnectionOptionsEx2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      dual,
      object,
@@ -67,7 +67,7 @@ index 32ab6bc3..4fd3ce5f 100644
      HRESULT ProxyAuthenticationUseDigest([out, retval] long *value);
  };
  
-+_Win32_AnnotateInterface_(IWSManSession, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManSession => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -75,7 +75,7 @@ index 32ab6bc3..4fd3ce5f 100644
     
  };
  
-+_Win32_AnnotateInterface_(IWSManEnumerator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManEnumerator => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,
@@ -83,7 +83,7 @@ index 32ab6bc3..4fd3ce5f 100644
      HRESULT Error([out, retval] BSTR * value);
  };
  
-+_Win32_AnnotateInterface_(IWSManResourceLocator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSManResourceLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      dual,
      object,

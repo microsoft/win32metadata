@@ -1,5 +1,5 @@
 diff --git a/winrt/windows.applicationmodel.resources.core.idl b/winrt/windows.applicationmodel.resources.core.idl
-index 6f71ea68..bc2d7aec 100644
+index 6f71ea68..8df9d075 100644
 --- a/winrt/windows.applicationmodel.resources.core.idl
 +++ b/winrt/windows.applicationmodel.resources.core.idl
 @@ -5,6 +5,8 @@
@@ -15,7 +15,7 @@ index 6f71ea68..bc2d7aec 100644
                      HRESULT GetForUIContext([in] Windows.UI.UIContext* context, [out] [retval] Windows.ApplicationModel.Resources.Core.ResourceContext** value);
                  }
  
-+_Win32_AnnotateInterface_(IResourceManager, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IResourceManager => SupportedOSPlatform(\"windows5.0\") */")
                  [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                  [exclusiveto(Windows.ApplicationModel.Resources.Core.ResourceManager)]
                  [uuid(F744D97B-9988-44FB-ABD6-5378844CFA8B)]

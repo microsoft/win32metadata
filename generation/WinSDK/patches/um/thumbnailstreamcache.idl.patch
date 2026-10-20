@@ -1,5 +1,5 @@
 diff --git a/um/thumbnailstreamcache.idl b/um/thumbnailstreamcache.idl
-index a55238ac..0a93de8c 100644
+index a55238ac..a57e3728 100644
 --- a/um/thumbnailstreamcache.idl
 +++ b/um/thumbnailstreamcache.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index a55238ac..0a93de8c 100644
  
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(ThumbnailStreamCacheOptions)")
  
-+_Win32_AnnotateInterface_(IThumbnailStreamCache, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IThumbnailStreamCache => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(90E11430-9569-41D8-AE75-6D4D2AE7CCA0),

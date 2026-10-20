@@ -1,5 +1,5 @@
 diff --git a/um/dshowasf.idl b/um/dshowasf.idl
-index 89c562b4..18b23c23 100644
+index 89c562b4..f737b243 100644
 --- a/um/dshowasf.idl
 +++ b/um/dshowasf.idl
 @@ -5,6 +5,7 @@
@@ -14,7 +14,7 @@ index 89c562b4..18b23c23 100644
  };
  
  // Interface to control the ASF writer (version 2)
-+_Win32_AnnotateInterface_(IConfigAsfWriter2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IConfigAsfWriter2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
  object,
  uuid(7989CCAA-53F0-44f0-884A-F3B03F6AE066),
@@ -22,7 +22,7 @@ index 89c562b4..18b23c23 100644
  }
  
  // Interface to control the ASF writer
-+_Win32_AnnotateInterface_(IConfigAsfWriter, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IConfigAsfWriter => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
  object,
  uuid(45086030-F7E4-486a-B504-826BB5792A3B),

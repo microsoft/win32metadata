@@ -1,5 +1,5 @@
 diff --git a/um/wmsecure.idl b/um/wmsecure.idl
-index 0fcdb251..e40e6987 100644
+index 0fcdb251..14f52893 100644
 --- a/um/wmsecure.idl
 +++ b/um/wmsecure.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 0fcdb251..e40e6987 100644
  //
  // IWMAuthorizer Interface : used for passing around certs
  //
-+_Win32_AnnotateInterface_(IWMAuthorizer, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IWMAuthorizer => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid( D9B67D36-A9AD-4eb4-BAEF-DB284EF5504C ),
@@ -22,7 +22,7 @@ index 0fcdb251..e40e6987 100644
  // IWMSecureChannel Interface : provides methods that allow two DLLs to validate
  // each other and do secure communication.
  //
-+_Win32_AnnotateInterface_(IWMSecureChannel, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IWMSecureChannel => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid( 2720598A-D0F2-4189-BD10-91C46EF0936F ),
@@ -30,7 +30,7 @@ index 0fcdb251..e40e6987 100644
  // IWMGetChannel Interface : used by one communication party to get the
  // other party's IWMSecureChannel interface.
  //
-+_Win32_AnnotateInterface_(IWMGetSecureChannel, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IWMGetSecureChannel => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid( 94bc0598-c3d2-11d3-bedf-00c04f612986 ),

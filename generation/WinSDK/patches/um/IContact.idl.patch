@@ -1,5 +1,5 @@
 diff --git a/um/IContact.idl b/um/IContact.idl
-index 663ee4c1..1b268e78 100644
+index 663ee4c1..f0afad10 100644
 --- a/um/IContact.idl
 +++ b/um/IContact.idl
 @@ -11,11 +11,18 @@
@@ -12,11 +12,11 @@ index 663ee4c1..1b268e78 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IContactManager, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IContactCollection, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IContactProperties, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IContact, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IContactPropertyCollection, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IContactManager => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IContactCollection => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IContactProperties => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IContact => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IContactPropertyCollection => SupportedOSPlatform(\"windows6.0.6000\") */")
 +
  import "oaidl.idl";
  import "ocidl.idl";

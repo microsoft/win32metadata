@@ -1,5 +1,5 @@
 diff --git a/um/inputscope.idl b/um/inputscope.idl
-index 7d0afb6c..25489ea3 100644
+index 7d0afb6c..682ad977 100644
 --- a/um/inputscope.idl
 +++ b/um/inputscope.idl
 @@ -1,3 +1,5 @@
@@ -8,34 +8,33 @@ index 7d0afb6c..25489ea3 100644
  cpp_quote("#include <winapifamily.h>")
  
  //+-------------------------------------------------------------------------
-@@ -133,10 +135,10 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
- //
+@@ -134,9 +136,13 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  // MSCTF entry
  //
--cpp_quote("HRESULT WINAPI SetInputScope(HWND hwnd, InputScope inputscope);")
--cpp_quote("HRESULT WINAPI SetInputScopes(HWND hwnd, const InputScope *pInputScopes, UINT cInputScopes, _In_reads_(cPhrases) PWSTR *ppszPhraseList, UINT cPhrases, _In_opt_ PWSTR pszRegExp, _In_opt_ PWSTR pszSRGS);")
--cpp_quote("HRESULT WINAPI SetInputScopeXML(HWND hwnd, _In_opt_ PWSTR pszXML);")
--cpp_quote("HRESULT WINAPI SetInputScopes2(HWND hwnd, const InputScope *pInputScopes, UINT cInputScopes, IEnumString *pEnumString, _In_opt_ PWSTR pszRegExp, _In_opt_ PWSTR pszSRGS);")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ SetInputScope(HWND hwnd, InputScope inputscope);")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ SetInputScopes(HWND hwnd, const InputScope *pInputScopes, UINT cInputScopes, _In_reads_(cPhrases) PWSTR *ppszPhraseList, UINT cPhrases, _In_opt_ PWSTR pszRegExp, _In_opt_ PWSTR pszSRGS);")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ SetInputScopeXML(HWND hwnd, _In_opt_ PWSTR pszXML);")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ SetInputScopes2(HWND hwnd, const InputScope *pInputScopes, UINT cInputScopes, IEnumString *pEnumString, _In_opt_ PWSTR pszRegExp, _In_opt_ PWSTR pszSRGS);")
+ cpp_quote("HRESULT WINAPI SetInputScope(HWND hwnd, InputScope inputscope);")
++cpp_quote("/* Win32Metadata: function ::SetInputScope => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("HRESULT WINAPI SetInputScopes(HWND hwnd, const InputScope *pInputScopes, UINT cInputScopes, _In_reads_(cPhrases) PWSTR *ppszPhraseList, UINT cPhrases, _In_opt_ PWSTR pszRegExp, _In_opt_ PWSTR pszSRGS);")
++cpp_quote("/* Win32Metadata: function ::SetInputScopes => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("HRESULT WINAPI SetInputScopeXML(HWND hwnd, _In_opt_ PWSTR pszXML);")
++cpp_quote("/* Win32Metadata: function ::SetInputScopeXML => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("HRESULT WINAPI SetInputScopes2(HWND hwnd, const InputScope *pInputScopes, UINT cInputScopes, IEnumString *pEnumString, _In_opt_ PWSTR pszRegExp, _In_opt_ PWSTR pszSRGS);")
++cpp_quote("/* Win32Metadata: function ::SetInputScopes2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  cpp_quote("#pragma endregion")
-@@ -162,6 +164,7 @@ import "ocidl.idl";
+@@ -162,6 +168,7 @@ import "ocidl.idl";
  //
  // ITfInputScope
  //
-+_Win32_AnnotateInterface_(ITfInputScope, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ITfInputScope => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
    object,
    uuid(fde1eaee-6924-4cdf-91e7-da38cff5559d),
-@@ -185,6 +188,7 @@ interface ITfInputScope : IUnknown
+@@ -185,6 +192,7 @@ interface ITfInputScope : IUnknown
  //
  // ITfInputScope2
  //
-+_Win32_AnnotateInterface_(ITfInputScope2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ITfInputScope2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
    object,
    uuid(5731eaa0-6bc2-4681-a532-92fbb74d7c41),

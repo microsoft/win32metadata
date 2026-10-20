@@ -1,5 +1,5 @@
 diff --git a/um/certmod.idl b/um/certmod.idl
-index 906cdf6f..5f6b5f49 100644
+index 906cdf6f..da670660 100644
 --- a/um/certmod.idl
 +++ b/um/certmod.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 906cdf6f..5f6b5f49 100644
  // ICertManageModule class -- local COM interface
  //+--------------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(ICertManageModule, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::ICertManageModule => SupportedOSPlatform(\"windowsserver2003\") */")
  [
      object,
      uuid(e7d7ad42-bd3d-11d1-9a4d-00c04fc297eb),

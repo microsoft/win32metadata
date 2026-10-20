@@ -1,5 +1,5 @@
 diff --git a/um/inputpaneinterop.idl b/um/inputpaneinterop.idl
-index 8dd545b9..d9257a65 100644
+index 8c315576..d5c140e8 100644
 --- a/um/inputpaneinterop.idl
 +++ b/um/inputpaneinterop.idl
 @@ -5,6 +5,7 @@
@@ -14,7 +14,7 @@ index 8dd545b9..d9257a65 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IInputPaneInterop, _Win32_SupportedOS_14393_)
++cpp_quote("/* Win32Metadata: interface ::IInputPaneInterop => SupportedOSPlatform(\"windows10.0.14393\") */")
  [
      uuid(75CF2C57-9195-4931-8332-F0B409E916AF),
  ]

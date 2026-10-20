@@ -1,5 +1,5 @@
 diff --git a/um/filter.idl b/um/filter.idl
-index 7c5ca1ea..16309886 100644
+index 7c5ca1ea..2dd3f582 100644
 --- a/um/filter.idl
 +++ b/um/filter.idl
 @@ -11,6 +11,7 @@
@@ -14,7 +14,7 @@ index 7c5ca1ea..16309886 100644
  } FULLPROPSPEC;
  cpp_quote("#endif // #if !defined(_TAGFULLPROPSPEC_DEFINED_)")
  
-+_Win32_AnnotateInterface_(IFilter, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IFilter => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(89BCB740-6119-101A-BCB7-00DD010655AF),

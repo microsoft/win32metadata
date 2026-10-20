@@ -1,3 +1,5 @@
+diff --git a/um/exdisp.idl b/um/exdisp.idl
+index 903a321b..899b67ff 100644
 --- a/um/exdisp.idl
 +++ b/um/exdisp.idl
 @@ -12,6 +12,8 @@
@@ -9,40 +11,22 @@
  cpp_quote("//=--------------------------------------------------------------------------=")
  cpp_quote("// exdisp.h")
  cpp_quote("//=--------------------------------------------------------------------------=")
-@@ -332,6 +334,7 @@
+@@ -332,6 +334,7 @@ cpp_quote("//;end_internal")
          HRESULT FullScreen([in] VARIANT_BOOL bFullScreen);
      }
  
-+_Win32_AnnotateInterface_(IWebBrowser2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWebBrowser2 => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          uuid(D30C1661-CDAF-11d0-8A3E-00C04FC9E26E), // IID_IWebBrowser2
          helpstring("Web Browser Interface for IE4."),
-@@ -700,14 +703,14 @@
-         [helpstring("Register a window with the list"), hidden]
-         HRESULT Register([in] IDispatch *pid,
-                          [in] long hwnd,
--                         [in] int swClass,
-+                         [annotation("_Win32_AssociatedEnum_(ShellWindowTypeConstants)")] [in] int swClass,
-                          [out]long *plCookie);
+@@ -674,6 +677,10 @@ cpp_quote("//;end_internal")
+         void WindowRevoked([in] long lCookie);
+     }
  
-         [helpstring("Register a pending open with the list"), hidden]
-         HRESULT RegisterPending([in] long lThreadId,
-                          [in] VARIANT* pvarloc,     // will hold pidl that is being opened.
-                          [in] VARIANT* pvarlocRoot, // Optional root pidl
--                         [in] int swClass,
-+                         [annotation("_Win32_AssociatedEnum_(ShellWindowTypeConstants)")] [in] int swClass,
-                          [out]long *plCookie);
- 
-         [helpstring("Remove a window from the list"), hidden]
-@@ -723,9 +726,9 @@
-         [helpstring("Find the window based on the location"), hidden]
-         HRESULT FindWindowSW([in] VARIANT* pvarLoc,
-                              [in] VARIANT* pvarLocRoot, /* unused */
--                             [in] int swClass,
-+                             [annotation("_Win32_AssociatedEnum_(ShellWindowTypeConstants)")] [in] int swClass,
-                              [out] long * phwnd,
--                             [in] int swfwOptions,
-+                             [annotation("_Win32_AssociatedEnum_(ShellWindowFindWindowOptions)")] [in] int swfwOptions,
-                              [out,retval] IDispatch** ppdispOut);
-         [helpstring("Notifies on creation and frame name set"), hidden]
-         HRESULT OnCreated([in]long lCookie,[in] IUnknown *punk);
++cpp_quote("/* Win32Metadata: parameter ::IShellWindows::Register::swClass => AssociatedEnum(ShellWindowTypeConstants) */")
++cpp_quote("/* Win32Metadata: parameter ::IShellWindows::RegisterPending::swClass => AssociatedEnum(ShellWindowTypeConstants) */")
++cpp_quote("/* Win32Metadata: parameter ::IShellWindows::FindWindowSW::swClass => AssociatedEnum(ShellWindowTypeConstants) */")
++cpp_quote("/* Win32Metadata: parameter ::IShellWindows::FindWindowSW::swfwOptions => AssociatedEnum(ShellWindowFindWindowOptions) */")
+     [
+         uuid(85CB6900-4D95-11CF-960C-0080C7F4EE85),     // IID_IShellWindows
+         helpstring("Definition of interface IShellWindows"),

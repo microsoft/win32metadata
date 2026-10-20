@@ -1,5 +1,5 @@
 diff --git a/um/fsrmpipeline.idl b/um/fsrmpipeline.idl
-index 5e0f95e7..3e32c7e8 100644
+index 5e0f95e7..d9a08a85 100644
 --- a/um/fsrmpipeline.idl
 +++ b/um/fsrmpipeline.idl
 @@ -2,6 +2,7 @@
@@ -14,7 +14,7 @@ index 5e0f95e7..3e32c7e8 100644
  //        Interfaces
  //
  
-+_Win32_AnnotateInterface_(IFsrmPropertyDefinition, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPropertyDefinition => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(ede0150f-e9a3-419c-877c-01fe5d24c5d3),
@@ -22,7 +22,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmPropertyDefinition2, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPropertyDefinition2 => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(47782152-d16c-4229-b4e1-0ddfe308b9f6),
@@ -30,7 +30,7 @@ index 5e0f95e7..3e32c7e8 100644
      HRESULT ValueDefinitions([out, retval] IFsrmCollection **valueDefinitions);
  };
  
-+_Win32_AnnotateInterface_(IFsrmPropertyDefinitionValue, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPropertyDefinitionValue => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(E946D148-BD67-4178-8E22-1C44925ED710),
@@ -38,7 +38,7 @@ index 5e0f95e7..3e32c7e8 100644
      HRESULT UniqueID([out, retval] BSTR *uniqueID);
  };
  
-+_Win32_AnnotateInterface_(IFsrmProperty, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmProperty => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(4a73fee4-4102-4fcc-9ffb-38614f9ee768),
@@ -46,7 +46,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmRule, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmRule => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(cb0df960-16f5-4495-9079-3f9360d831df),
@@ -54,7 +54,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmClassificationRule, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmClassificationRule => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(afc052c2-5315-45ab-841b-c6db0e120148),
@@ -62,7 +62,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmPipelineModuleDefinition, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPipelineModuleDefinition => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(515c1277-2c81-440e-8fcf-367921ed4f59),
@@ -70,7 +70,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmClassifierModuleDefinition, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmClassifierModuleDefinition => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(bb36ea26-6318-4b8c-8592-f72dd602e7a5),
@@ -78,7 +78,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmStorageModuleDefinition, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmStorageModuleDefinition => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(15a81350-497d-4aba-80e9-d4dbcc5521fe),
@@ -86,7 +86,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmClassificationManager, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmClassificationManager => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(d2dc89da-ee91-48a0-85d8-cc72a56f7d04),
@@ -94,7 +94,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmClassificationManager2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmClassificationManager2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(0004c1c9-127e-4765-ba07-6a3147bca112),
@@ -102,7 +102,7 @@ index 5e0f95e7..3e32c7e8 100644
  //
  
  
-+_Win32_AnnotateInterface_(IFsrmPropertyBag, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPropertyBag => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(774589d1-d300-4f7a-9a24-f7b766800250),
@@ -110,7 +110,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmPropertyBag2, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPropertyBag2 => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(0e46bdbd-2402-4fed-9c30-9266e6eb2cc9),
@@ -118,7 +118,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmPipelineModuleImplementation, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPipelineModuleImplementation => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(b7907906-2b02-4cb5-84a9-fdf54613d6cd),
@@ -126,7 +126,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmClassifierModuleImplementation, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmClassifierModuleImplementation => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(4c968fc6-6edb-4051-9c18-73b7291ae106),
@@ -134,7 +134,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmStorageModuleImplementation, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmStorageModuleImplementation => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(0af4a0da-895a-4e50-8712-a96724bcec64),
@@ -142,7 +142,7 @@ index 5e0f95e7..3e32c7e8 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmPipelineModuleConnector, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPipelineModuleConnector => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(c16014f3-9aa1-46b3-b0a7-ab146eb205f2),

@@ -1,29 +1,30 @@
 diff --git a/um/txlogpub.idl b/um/txlogpub.idl
+index 39509c12..63719672 100644
 --- a/um/txlogpub.idl
 +++ b/um/txlogpub.idl
-@@ -6,6 +6,9 @@
- //  File: txlogpub.idl
+@@ -7,6 +7,9 @@
  //
  //----------------------------------------------------------------------------
-+
+ 
 +#include <sal.h>
 +cpp_quote("#include <sal.h>")
- 
++
  cpp_quote("//+-------------------------------------------------------------------------")
  cpp_quote("//")
-@@ -72,6 +75,7 @@
+ cpp_quote("//  Microsoft Windows")
+@@ -72,6 +75,7 @@ cpp_quote("// takes care of writing the records to disk in a stable manner. Reco
  cpp_quote("// protocols, transaction awareness, and the like are provided by a higher")
  cpp_quote("// semantic level.")
  
-+_Win32_AnnotateInterface_(ILog, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ILog => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(FF222117-0C6C-11d2-B89A-00C04FB9618A),
-@@ -163,6 +167,7 @@
+@@ -163,6 +167,7 @@ cpp_quote("// ILog.  This interface defines the single method InitNew, which is
  cpp_quote("// create a log on a new log file.  Objects that implement IFileBasedLogInit")
  cpp_quote("// should also implement IPersistFile, to allow existing log files to be opened.")
  
-+_Win32_AnnotateInterface_(IFileBasedLogInit, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IFileBasedLogInit => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(00951E8C-1294-11d1-97E4-00C04FB9618A),

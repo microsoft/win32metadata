@@ -1,5 +1,5 @@
 diff --git a/um/camerauicontrol.idl b/um/camerauicontrol.idl
-index 67e79b8e..404baaf9 100644
+index 67e79b8e..9480a74b 100644
 --- a/um/camerauicontrol.idl
 +++ b/um/camerauicontrol.idl
 @@ -6,6 +6,7 @@
@@ -14,7 +14,7 @@ index 67e79b8e..404baaf9 100644
      ItemList,
  } CameraUIControlViewType;
  
-+_Win32_AnnotateInterface_(ICameraUIControlEventCallback, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ICameraUIControlEventCallback => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(1BFA0C2C-FBCD-4776-BDA4-88BF974E74F4),
@@ -22,7 +22,7 @@ index 67e79b8e..404baaf9 100644
      void OnClosed();
  }
  
-+_Win32_AnnotateInterface_(ICameraUIControl, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ICameraUIControl => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(B8733ADF-3D68-4b8f-BB08-E28A0BED0376),

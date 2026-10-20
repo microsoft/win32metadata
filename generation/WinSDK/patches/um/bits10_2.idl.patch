@@ -1,5 +1,5 @@
 diff --git a/um/bits10_2.idl b/um/bits10_2.idl
-index 702530ac..1c59556d 100644
+index 702530ac..fdf76af2 100644
 --- a/um/bits10_2.idl
 +++ b/um/bits10_2.idl
 @@ -4,6 +4,8 @@
@@ -15,7 +15,7 @@ index 702530ac..1c59556d 100644
  import "bits5_0.idl";
  import "bits10_1.idl";
  
-+_Win32_AnnotateInterface_(IBackgroundCopyJobHttpOptions2, _Win32_SupportedOS_17763_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyJobHttpOptions2 => SupportedOSPlatform(\"windows10.0.17763\") */")
  [
      uuid(B591A192-A405-4FC3-8323-4C5C542578FC)
  ]
@@ -23,7 +23,7 @@ index 702530ac..1c59556d 100644
          [out] LPWSTR *method
          );
  }
-+_Win32_AnnotateParameter_(IBackgroundCopyJobHttpOptions2::GetHttpMethod, method, _Win32_RAIIFree_(CoTaskMemFree))
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJobHttpOptions2::GetHttpMethod::method => RAIIFree(CoTaskMemFree) */")
  
  [
    uuid(70CDC92E-4B95-49EB-8CDA-AD39AA7CC4A0),

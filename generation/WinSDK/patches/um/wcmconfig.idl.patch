@@ -1,5 +1,5 @@
 diff --git a/um/wcmconfig.idl b/um/wcmconfig.idl
-index 20d045a5..89603450 100644
+index 20d045a5..53c6045e 100644
 --- a/um/wcmconfig.idl
 +++ b/um/wcmconfig.idl
 @@ -11,6 +11,8 @@
@@ -15,7 +15,7 @@ index 20d045a5..89603450 100644
  //_____________________________________________________________________________
  //
  
-+_Win32_AnnotateInterface_(IItemEnumerator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IItemEnumerator => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -23,7 +23,7 @@ index 20d045a5..89603450 100644
  cpp_quote("#define WCM_SETTINGS_ID_FLAG_DEFINITION    0x00000001")
  
  
-+_Win32_AnnotateInterface_(ISettingsIdentity, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISettingsIdentity => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -31,7 +31,7 @@ index 20d045a5..89603450 100644
  //_____________________________________________________________________________
  //
  
-+_Win32_AnnotateInterface_(ITargetInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ITargetInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -39,7 +39,7 @@ index 20d045a5..89603450 100644
  
  cpp_quote("#define LINK_STORE_TO_ENGINE_INSTANCE    0x00000001")
  
-+_Win32_AnnotateInterface_(ISettingsEngine, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISettingsEngine => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -47,7 +47,7 @@ index 20d045a5..89603450 100644
  //_____________________________________________________________________________
  //
  
-+_Win32_AnnotateInterface_(ISettingsItem, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISettingsItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -55,7 +55,7 @@ index 20d045a5..89603450 100644
  //_____________________________________________________________________________
  //
  
-+_Win32_AnnotateInterface_(ISettingsNamespace, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISettingsNamespace => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -63,7 +63,7 @@ index 20d045a5..89603450 100644
  //_____________________________________________________________________________
  //
  
-+_Win32_AnnotateInterface_(ISettingsResult, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISettingsResult => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),
@@ -71,7 +71,7 @@ index 20d045a5..89603450 100644
  cpp_quote("#define LIMITED_VALIDATION_MODE    0x00000001")
  
  
-+_Win32_AnnotateInterface_(ISettingsContext, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISettingsContext => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object, nonextensible, pointer_default(unique),

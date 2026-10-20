@@ -1,3 +1,5 @@
+diff --git a/um/wsdxml.idl b/um/wsdxml.idl
+index 22a47838..253e892a 100644
 --- a/um/wsdxml.idl
 +++ b/um/wsdxml.idl
 @@ -11,6 +11,8 @@
@@ -9,30 +11,32 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -166,12 +168,14 @@
+@@ -166,12 +168,16 @@ cpp_quote("#define WSDXML_TYPE_ENCODING(typeIndex,layerNumber) ((((DWORD)layerNu
  cpp_quote("#define WSDXML_NAMESPACE_ENCODING(namespaceIndex,layerNumber) ((((WORD)layerNumber) << 12) | namespaceIndex)")
  cpp_quote("#define WSDXML_NAME_ENCODING(nameIndex,nameSpaceEncoding) ((((DWORD)nameSpaceEncoding) << 16) | nameIndex)")
  
-+cpp_quote("_Win32_SupportedOS_WindowsVista_")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::WSDXMLGetNameFromBuiltinNamespace => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("HRESULT WINAPI")
  cpp_quote("WSDXMLGetNameFromBuiltinNamespace(")
  cpp_quote("    _In_ LPCWSTR pszNamespace,")
  cpp_quote("    _In_ LPCWSTR pszName,")
  cpp_quote("    _Outptr_ WSDXML_NAME** ppName);")
  
-+cpp_quote("_Win32_SupportedOS_WindowsVista_")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::WSDXMLCreateContext => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("HRESULT WINAPI")
  cpp_quote("WSDXMLCreateContext(")
  cpp_quote("    _Outptr_ IWSDXMLContext** ppContext);")
-@@ -180,6 +184,7 @@
+@@ -180,6 +186,7 @@ cpp_quote("    _Outptr_ IWSDXMLContext** ppContext);")
  //  IWSDXMLContext Interface
  //  Description: Interface for namespaces and types used in a WSDAPI stack
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDXMLContext, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDXMLContext => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(75d8f3ee-3e5a-43b4-a15a-bcf6887460c0),
-@@ -213,4 +218,3 @@
+@@ -213,4 +220,3 @@ interface IWSDXMLContext : IUnknown
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion

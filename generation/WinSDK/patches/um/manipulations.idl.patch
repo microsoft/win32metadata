@@ -1,5 +1,5 @@
 diff --git a/um/manipulations.idl b/um/manipulations.idl
-index f59148b9..495b6fd4 100644
+index f59148b9..0bd08253 100644
 --- a/um/manipulations.idl
 +++ b/um/manipulations.idl
 @@ -1,5 +1,6 @@
@@ -13,7 +13,7 @@ index f59148b9..495b6fd4 100644
      // _IManipulationEvents interface
      // Public COM event interface for Manipulation and Inertia Processors
      ////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(_IManipulationEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::_IManipulationEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(4f62c8da-9c53-4b22-93df-927a862bbb03),
@@ -21,7 +21,7 @@ index f59148b9..495b6fd4 100644
      // IInertiaProcessor interface
      // Public COM interface for Inertia Processor
      ////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IInertiaProcessor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IInertiaProcessor => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(18b00c6d-c5ee-41b1-90a9-9d4a929095ad),
@@ -29,7 +29,7 @@ index f59148b9..495b6fd4 100644
      // IManipulationProcessor interface
      // Public COM Interface for Manipulation Processor (WM_TOUCH-based)
      ////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IManipulationProcessor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IManipulationProcessor => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(A22AC519-8300-48a0-BEF4-F1BE8737DBA4),

@@ -1,5 +1,5 @@
 diff --git a/um/emptyvc.idl b/um/emptyvc.idl
-index 5fb131c4..77aa959b 100644
+index 5fb131c4..38595dec 100644
 --- a/um/emptyvc.idl
 +++ b/um/emptyvc.idl
 @@ -6,6 +6,8 @@
@@ -25,7 +25,7 @@ index 5fb131c4..77aa959b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPEMPTYVOLUMECACHECALLBACK_DEFINED")
  cpp_quote("#define _LPEMPTYVOLUMECACHECALLBACK_DEFINED")
-+_Win32_AnnotateInterface_(IEmptyVolumeCacheCallBack, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEmptyVolumeCacheCallBack => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(6E793361-73C6-11D0-8469-00AA00442901),
@@ -33,7 +33,7 @@ index 5fb131c4..77aa959b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPEMPTYVOLUMECACHE_DEFINED")
  cpp_quote("#define _LPEMPTYVOLUMECACHE_DEFINED")
-+_Win32_AnnotateInterface_(IEmptyVolumeCache, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEmptyVolumeCache => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(8FCE5227-04DA-11d1-A004-00805F8ABE06),
@@ -41,8 +41,8 @@ index 5fb131c4..77aa959b 100644
          [out] DWORD *pdwFlags
          );
  }
-+_Win32_AnnotateParameter_(IEmptyVolumeCache::Initialize, pdwFlags, _Win32_AssociatedEnum_(EMPTY_VOLUME_CACHE_FLAGS))
-+_Win32_AnnotateParameter_(IEmptyVolumeCache::Deactivate, pdwFlags, _Win32_AssociatedEnum_(EMPTY_VOLUME_CACHE_FLAGS))
++cpp_quote("/* Win32Metadata: parameter ::IEmptyVolumeCache::Initialize::pdwFlags => AssociatedEnum(EMPTY_VOLUME_CACHE_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::IEmptyVolumeCache::Deactivate::pdwFlags => AssociatedEnum(EMPTY_VOLUME_CACHE_FLAGS) */")
  cpp_quote("#endif")
  
  //+---------------------------------------------------------------------------
@@ -50,7 +50,7 @@ index 5fb131c4..77aa959b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPEMPTYVOLUMECACHE2_DEFINED")
  cpp_quote("#define _LPEMPTYVOLUMECACHE2_DEFINED")
-+_Win32_AnnotateInterface_(IEmptyVolumeCache2, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEmptyVolumeCache2 => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c),
@@ -58,7 +58,7 @@ index 5fb131c4..77aa959b 100644
          [out] DWORD *pdwFlags
          );
  }
-+_Win32_AnnotateParameter_(IEmptyVolumeCache2::InitializeEx, pdwFlags, _Win32_AssociatedEnum_(EMPTY_VOLUME_CACHE_FLAGS))
++cpp_quote("/* Win32Metadata: parameter ::IEmptyVolumeCache2::InitializeEx::pdwFlags => AssociatedEnum(EMPTY_VOLUME_CACHE_FLAGS) */")
  cpp_quote("#endif")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")

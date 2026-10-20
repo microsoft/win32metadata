@@ -1,5 +1,5 @@
 diff --git a/um/certpol.idl b/um/certpol.idl
-index 6e86bffa..ca4d418c 100644
+index 6e86bffa..b38b6470 100644
 --- a/um/certpol.idl
 +++ b/um/certpol.idl
 @@ -12,6 +12,7 @@
@@ -14,7 +14,7 @@ index 6e86bffa..ca4d418c 100644
  // ICertPolicy class -- local COM interface
  //+--------------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(ICertPolicy, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::ICertPolicy => SupportedOSPlatform(\"windowsserver2003\") */")
  [
      object,
      uuid(38bb5a00-7636-11d0-b413-00a0c91bbf8c),
@@ -22,7 +22,7 @@ index 6e86bffa..ca4d418c 100644
  // ICertPolicy2 -- local COM interface
  //+--------------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(ICertPolicy2, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::ICertPolicy2 => SupportedOSPlatform(\"windowsserver2003\") */")
  [
      object,
      uuid(3db4910e-8001-4bf1-aa1b-f43a808317a0),

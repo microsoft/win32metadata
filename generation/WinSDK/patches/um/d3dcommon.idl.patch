@@ -1,3 +1,5 @@
+diff --git a/um/d3dcommon.idl b/um/d3dcommon.idl
+index 6ad5de76..a333fb4b 100644
 --- a/um/d3dcommon.idl
 +++ b/um/d3dcommon.idl
 @@ -4,6 +4,9 @@
@@ -10,23 +12,23 @@
  import "oaidl.idl";
  import "ocidl.idl";
  
-@@ -401,6 +404,7 @@
+@@ -401,6 +404,7 @@ cpp_quote("#define IID_ID3DBlob IID_ID3D10Blob")
  // ID3DDestructionNotifier: An interface to QI for, to set a callback which is triggered when the object is fully destroyed
  typedef void(__stdcall *PFN_DESTRUCTION_CALLBACK)(void* pData);
  
-+_Win32_AnnotateInterface_(ID3DDestructionNotifier, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ID3DDestructionNotifier => SupportedOSPlatform(\"windows6.1\") */")
  [uuid(a06eb39a-50da-425b-8c31-4eecd6c270f3), object, local, pointer_default(unique)]
  interface ID3DDestructionNotifier
      : IUnknown
-@@ -453,6 +457,7 @@
+@@ -453,6 +457,7 @@ cpp_quote("{")
  cpp_quote("    STDMETHOD(Open)(THIS_ D3D_INCLUDE_TYPE IncludeType, LPCSTR pFileName, LPCVOID pParentData, LPCVOID *ppData, UINT *pBytes) PURE;")
  cpp_quote("    STDMETHOD(Close)(THIS_ LPCVOID pData) PURE;")
  cpp_quote("};")
-+_Win32_AnnotateInterface_(ID3DInclude, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ID3DInclude => SupportedOSPlatform(\"windows6.1\") */")
  
  cpp_quote("typedef ID3DInclude* LPD3DINCLUDE;")
  
-@@ -988,4 +993,3 @@
+@@ -988,4 +993,3 @@ cpp_quote("#define D3D_COMPONENT_MASK_W   8")
  
  cpp_quote("DEFINE_GUID(D3D_TEXTURE_LAYOUT_ROW_MAJOR,0xb5dc234f,0x72bb,0x4bec,0x97,0x05,0x8c,0xf2,0x58,0xdf,0x6b,0x6c);") // Feature_D3D1XDisplayable
  cpp_quote("DEFINE_GUID(D3D_TEXTURE_LAYOUT_64KB_STANDARD_SWIZZLE,0x4c0f29e3,0x3f5f,0x4d35,0x84,0xc9,0xbc,0x09,0x83,0xb6,0x2c,0x28);") // Feature_D3D1XDisplayable

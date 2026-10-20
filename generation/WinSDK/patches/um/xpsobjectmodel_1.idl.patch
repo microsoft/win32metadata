@@ -1,5 +1,5 @@
 diff --git a/um/xpsobjectmodel_1.idl b/um/xpsobjectmodel_1.idl
-index 7117a467..f2e7313e 100644
+index 7117a467..87bc3f54 100644
 --- a/um/xpsobjectmodel_1.idl
 +++ b/um/xpsobjectmodel_1.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 7117a467..f2e7313e 100644
      XPS_DOCUMENT_TYPE_OPENXPS
  } XPS_DOCUMENT_TYPE;
  
-+_Win32_AnnotateInterface_(IXpsOMObjectFactory1, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMObjectFactory1 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(0a91b617-d612-4181-bf7c-be5824e9cc8f),
@@ -19,7 +19,7 @@ index 7117a467..f2e7313e 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPackage1, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPackage1 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(95a9435e-12bb-461b-8e7f-c6adb04cd96a),
@@ -27,7 +27,7 @@ index 7117a467..f2e7313e 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPage1, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPage1 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(305b60ef-6892-4dda-9cbb-3aa65974508a),
@@ -35,7 +35,7 @@ index 7117a467..f2e7313e 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsDocumentPackageTarget, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IXpsDocumentPackageTarget => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(3b0b6d38-53ad-41da-b212-d37637a6714e),
@@ -43,7 +43,7 @@ index 7117a467..f2e7313e 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMRemoteDictionaryResource1, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMRemoteDictionaryResource1 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(BF8FC1D4-9D46-4141-BA5F-94BB9250D041),

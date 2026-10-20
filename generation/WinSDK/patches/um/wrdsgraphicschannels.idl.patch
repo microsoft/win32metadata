@@ -1,5 +1,5 @@
 diff --git a/um/wrdsgraphicschannels.idl b/um/wrdsgraphicschannels.idl
-index e5b94107..346cd6d2 100644
+index e5b94107..9885dd19 100644
 --- a/um/wrdsgraphicschannels.idl
 +++ b/um/wrdsgraphicschannels.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index e5b94107..346cd6d2 100644
  const ULONG WRdsGraphicsChannels_RTT_Unavailable = (ULONG)(-1);
  
  cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWRdsGraphicsChannelEvents = {0x67f2368c, 0xd674, 0x4fae, {0x66, 0xa5, 0xd2, 0x06, 0x28, 0xa6, 0x40, 0xd2}};")
-+_Win32_AnnotateInterface_(IWRdsGraphicsChannelEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWRdsGraphicsChannelEvents => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(67f2368c-d674-4fae-66a5-d20628a640d2),
@@ -22,7 +22,7 @@ index e5b94107..346cd6d2 100644
  //
  
  cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWRdsGraphicsChannel = {0x684b7a0b, 0xedff, 0x43ad, {0xd5, 0xa2, 0x4a, 0x8d, 0x53, 0x88, 0xf4, 0x01}};")
-+_Win32_AnnotateInterface_(IWRdsGraphicsChannel, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWRdsGraphicsChannel => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(684b7a0b-edff-43ad-d5a2-4a8d5388f401),
@@ -30,7 +30,7 @@ index e5b94107..346cd6d2 100644
  // =========================================================================
  //
  cpp_quote("EXTERN_C __declspec(selectany) const IID IID_IWRdsGraphicsChannelManager = {0x0fd57159, 0xe83e, 0x476a, {0xa8, 0xb9, 0x4a, 0x79, 0x76, 0xe7, 0x1e, 0x18}};")
-+_Win32_AnnotateInterface_(IWRdsGraphicsChannelManager, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWRdsGraphicsChannelManager => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(0fd57159-e83e-476a-a8b9-4a7976e71e18),

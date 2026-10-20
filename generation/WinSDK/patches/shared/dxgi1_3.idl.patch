@@ -1,4 +1,5 @@
 diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
+index 06b176bc..27b291b8 100644
 --- a/shared/dxgi1_3.idl
 +++ b/shared/dxgi1_3.idl
 @@ -1,5 +1,6 @@
@@ -8,67 +9,67 @@ diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
  import "dxgi1_2.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -8,12 +9,16 @@ cpp_quote("#include <winapifamily.h>")
+@@ -8,12 +9,19 @@ cpp_quote("#include <winapifamily.h>")
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
  cpp_quote( "#define DXGI_CREATE_FACTORY_DEBUG 0x1")
--cpp_quote( "HRESULT WINAPI CreateDXGIFactory2(UINT Flags, REFIID riid, _COM_Outptr_ void **ppFactory);" )
--cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_Outptr_ void **pDebug);" )
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("_Win32_FlagsEnum_(DXGI_CREATE_FACTORY_FLAGS, unsigned int, DXGI_CREATE_FACTORY_DEBUG);")
 +cpp_quote("#endif")
-+cpp_quote( "HRESULT WINAPI _Win32_SupportedOS_Windows81_ CreateDXGIFactory2(_Win32_AssociatedEnum_(DXGI_CREATE_FACTORY_FLAGS) UINT Flags, REFIID riid, _COM_Outptr_ void **ppFactory);" )
-+cpp_quote( "HRESULT WINAPI _Win32_SupportedOS_Windows81_ DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_Outptr_ void **pDebug);" )
+ cpp_quote( "HRESULT WINAPI CreateDXGIFactory2(UINT Flags, REFIID riid, _COM_Outptr_ void **ppFactory);" )
++cpp_quote("/* Win32Metadata: function ::CreateDXGIFactory2 => SupportedOSPlatform(\"windows8.1\") */")
++cpp_quote("/* Win32Metadata: parameter ::CreateDXGIFactory2::Flags => AssociatedEnum(DXGI_CREATE_FACTORY_FLAGS) */")
+ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_Outptr_ void **pDebug);" )
++cpp_quote("/* Win32Metadata: function ::DXGIGetDebugInterface1 => SupportedOSPlatform(\"windows8.1\") */")
  
  //--------------------------------------------------------------------------------------------------------
  // IDXGIDevice3 interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGIDevice3, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIDevice3 => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid( 6007896c-3244-4afd-bf18-a6d3beda5023 ),
-@@ -45,6 +50,7 @@ typedef struct DXGI_MATRIX_3X2_F
+@@ -45,6 +53,7 @@ typedef struct DXGI_MATRIX_3X2_F
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapChain2 interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGISwapChain2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGISwapChain2 => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid( a8be2ac4-199f-4946-b331-79599fb98de7 ),
-@@ -67,6 +73,7 @@ interface IDXGISwapChain2 :
+@@ -67,6 +76,7 @@ interface IDXGISwapChain2 :
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput2 interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGIOutput2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIOutput2 => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid( 595e39d1-2724-4663-99b1-da969de28364 ),
-@@ -83,6 +90,7 @@ interface IDXGIOutput2 :
+@@ -83,6 +93,7 @@ interface IDXGIOutput2 :
  // IDXGIFactory3 interface
  //--------------------------------------------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(IDXGIFactory3, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIFactory3 => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid( 25483823-cd46-4c7d-86ca-47aa95b837bd ),
-@@ -94,6 +102,7 @@ interface IDXGIFactory3 :
+@@ -94,6 +105,7 @@ interface IDXGIFactory3 :
  {
      UINT GetCreationFlags();
  };
-+_Win32_AnnotateMethod_(IDXGIFactory3::GetCreationFlags, _Win32_AssociatedEnum_(DXGI_CREATE_FACTORY_FLAGS))
++cpp_quote("/* Win32Metadata: return ::IDXGIFactory3::GetCreationFlags => AssociatedEnum(DXGI_CREATE_FACTORY_FLAGS) */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -108,7 +117,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -106,6 +118,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //  Struct: DXGI_DECODE_SWAP_CHAIN_DESC
+ //
  //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: field ::DXGI_DECODE_SWAP_CHAIN_DESC::Flags => AssociatedEnum(DXGI_SWAP_CHAIN_FLAG) */")
  typedef struct DXGI_DECODE_SWAP_CHAIN_DESC
  {
--    UINT Flags;
-+    [annotation("_Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG)")] UINT Flags;
- }  DXGI_DECODE_SWAP_CHAIN_DESC;
- 
- //+-----------------------------------------------------------------------------
-@@ -116,16 +125,23 @@ typedef struct DXGI_DECODE_SWAP_CHAIN_DESC
+     UINT Flags;
+@@ -116,16 +129,24 @@ typedef struct DXGI_DECODE_SWAP_CHAIN_DESC
  //  Flags: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
  //
  //------------------------------------------------------------------------------
@@ -88,42 +89,34 @@ diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
  //--------------------------------------------------------------------------------------------------------
  // IDXGIDecodeSwapChain interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGIDecodeSwapChain, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIDecodeSwapChain => SupportedOSPlatform(\"windows8.1\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGIDecodeSwapChain::PresentBuffer::Flags => AssociatedEnum(DXGI_PRESENT) */")
  [
      object,
      uuid( 2633066b-4514-4c7a-8fd8-12ea98059d18 ),
-@@ -135,7 +151,7 @@ typedef enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
- interface IDXGIDecodeSwapChain :
-     IUnknown
- {
--    HRESULT PresentBuffer(UINT BufferToPresent, UINT SyncInterval, UINT Flags);
-+    HRESULT PresentBuffer(UINT BufferToPresent, UINT SyncInterval, [annotation("_Win32_AssociatedEnum_(DXGI_PRESENT)")] UINT Flags);
- 
-     HRESULT SetSourceRect(const RECT *pRect); // ID3D11VideoContext::VideoProcessorSetStreamSourceRect
-     HRESULT SetTargetRect(const RECT *pRect); // ID3D11VideoContext::VideoProcessorSetOutputTargetRect
-@@ -149,11 +165,13 @@ interface IDXGIDecodeSwapChain :
+@@ -149,11 +170,13 @@ interface IDXGIDecodeSwapChain :
      HRESULT SetColorSpace(DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS ColorSpace);
      DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS GetColorSpace();
  };
-+_Win32_AnnotateMethod_(IDXGIDecodeSwapChain::PresentBuffer, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IDXGIDecodeSwapChain::PresentBuffer => PreserveResult */")
  
  //--------------------------------------------------------------------------------------------------------
  // IDXGIFactoryMedia interface
  //--------------------------------------------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(IDXGIFactoryMedia, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIFactoryMedia => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid( 41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12 ),
-@@ -206,6 +224,7 @@ typedef struct DXGI_FRAME_STATISTICS_MEDIA
+@@ -206,6 +229,7 @@ typedef struct DXGI_FRAME_STATISTICS_MEDIA
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapChainMedia interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGISwapChainMedia, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGISwapChainMedia => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid( dd95b90b-f05f-4f6a-bd65-25bfb264bd84 ),
-@@ -220,11 +239,17 @@ interface IDXGISwapChainMedia :
+@@ -220,11 +244,17 @@ interface IDXGISwapChainMedia :
      HRESULT CheckPresentDurationSupport(UINT DesiredPresentDuration, [out, annotation("_Out_")] UINT *pClosestSmallerPresentDuration, [out, annotation("_Out_")] UINT *pClosestLargerPresentDuration);
  };
  
@@ -141,20 +134,12 @@ diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
  
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
-@@ -235,6 +260,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+@@ -235,6 +265,8 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput3 interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGIOutput3, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIOutput3 => SupportedOSPlatform(\"windows8.1\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGIOutput3::CheckOverlaySupport::pFlags => AssociatedEnum(DXGI_OVERLAY_SUPPORT_FLAG) */")
  [
      object,
      uuid( 8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18 ),
-@@ -244,7 +270,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
- interface IDXGIOutput3 :
-     IDXGIOutput2
- {
--    HRESULT CheckOverlaySupport( [in, annotation("_In_")] DXGI_FORMAT EnumFormat, [out, annotation("_In_")] IUnknown *pConcernedDevice, [out, annotation("_Out_")] UINT *pFlags );
-+    HRESULT CheckOverlaySupport( [in, annotation("_In_")] DXGI_FORMAT EnumFormat, [out, annotation("_In_")] IUnknown *pConcernedDevice, [out, annotation("_Out_ _Win32_AssociatedEnum_(DXGI_OVERLAY_SUPPORT_FLAG)")] UINT *pFlags );
- };
- 
- cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")

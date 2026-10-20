@@ -1,5 +1,5 @@
 diff --git a/um/filtereg.idl b/um/filtereg.idl
-index d036a83a..3e54d144 100644
+index e4303cbb..7cfb8f70 100644
 --- a/um/filtereg.idl
 +++ b/um/filtereg.idl
 @@ -12,6 +12,7 @@
@@ -14,7 +14,7 @@ index d036a83a..3e54d144 100644
  // 9E175B8D-F52A-11D8-B9A5-505054503030
  cpp_quote("EXTERN_C const CLSID CLSID_FilterRegistration;")
  
-+_Win32_AnnotateInterface_(ILoadFilter, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ILoadFilter => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(c7310722-ac80-11d1-8df3-00c04fb6ef4f),

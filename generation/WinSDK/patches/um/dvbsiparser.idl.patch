@@ -1,5 +1,5 @@
 diff --git a/um/dvbsiparser.idl b/um/dvbsiparser.idl
-index bec5e557..16ca81e9 100644
+index bec5e557..886c0baa 100644
 --- a/um/dvbsiparser.idl
 +++ b/um/dvbsiparser.idl
 @@ -18,6 +18,7 @@
@@ -14,7 +14,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbSiParser2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbSiParser2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -22,7 +22,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_SDT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_SDT => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -30,7 +30,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDVB_EIT2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDVB_EIT2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -38,7 +38,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_BIT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_BIT => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -46,7 +46,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_NBIT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_NBIT => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -54,7 +54,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_LDT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_LDT => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -62,7 +62,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_SDTT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_SDTT => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -70,7 +70,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_CDT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_CDT => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -78,7 +78,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IISDB_EMM, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IISDB_EMM => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -86,7 +86,7 @@ index bec5e557..16ca81e9 100644
  
      } CRID_LOCATION;
  
-+_Win32_AnnotateInterface_(IDvbContentIdentifierDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbContentIdentifierDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -94,7 +94,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbDefaultAuthorityDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbDefaultAuthorityDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -102,7 +102,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbPrivateDataSpecifierDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbPrivateDataSpecifierDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -110,7 +110,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbLogicalChannelDescriptor2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbLogicalChannelDescriptor2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -118,7 +118,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbLogicalChannel2Descriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbLogicalChannel2Descriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -126,7 +126,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbHDSimulcastLogicalChannelDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbHDSimulcastLogicalChannelDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -134,7 +134,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbDataBroadcastIDDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbDataBroadcastIDDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -142,7 +142,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbDataBroadcastDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbDataBroadcastDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -150,7 +150,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbLinkageDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbLinkageDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -158,7 +158,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbTeletextDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbTeletextDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -166,7 +166,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbSubtitlingDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbSubtitlingDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -174,7 +174,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbServiceDescriptor2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbServiceDescriptor2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -182,7 +182,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbServiceListDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbServiceListDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -190,7 +190,7 @@ index bec5e557..16ca81e9 100644
      //
      /////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDvbMultilingualServiceNameDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbMultilingualServiceNameDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -198,7 +198,7 @@ index bec5e557..16ca81e9 100644
      // IDvbNetworkNameDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDvbNetworkNameDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbNetworkNameDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -206,7 +206,7 @@ index bec5e557..16ca81e9 100644
      // IDvbShortEventDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDvbShortEventDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbShortEventDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -214,7 +214,7 @@ index bec5e557..16ca81e9 100644
      // IDvbExntededEventDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDvbExtendedEventDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbExtendedEventDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -222,7 +222,7 @@ index bec5e557..16ca81e9 100644
      // IDvbComponentDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDvbComponentDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbComponentDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -230,7 +230,7 @@ index bec5e557..16ca81e9 100644
      // IDvbContentDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDvbContentDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbContentDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -238,7 +238,7 @@ index bec5e557..16ca81e9 100644
      // IDvbParentalRatingDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDvbParentalRatingDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDvbParentalRatingDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -246,7 +246,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbTerrestrialDeliverySystemDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbTerrestrialDeliverySystemDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbTerrestrialDeliverySystemDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -254,7 +254,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbTSInformationDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbTSInformationDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbTSInformationDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -262,7 +262,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbDigitalCopyControlDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbDigitalCopyControlDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbDigitalCopyControlDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -270,7 +270,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbAudioComponentDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbAudioComponentDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbAudioComponentDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -278,7 +278,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbDataContentDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbDataContentDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbDataContentDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -286,7 +286,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbCAContractInformationDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbCAContractInformationDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbCAContractInformationDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -294,7 +294,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbEventGroupDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbEventGroupDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbEventGroupDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -302,7 +302,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbComponentGroupDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbComponentGroupDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbComponentGroupDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -310,7 +310,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbSeriesDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbSeriesDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbSeriesDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -318,7 +318,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbDownloadContentDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbDownloadContentDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbDownloadContentDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -326,7 +326,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbLogoTransmissionDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbLogoTransmissionDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbLogoTransmissionDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -334,7 +334,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbSIParameterDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbSIParameterDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbSIParameterDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -342,7 +342,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbEmergencyInformationDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbEmergencyInformationDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbEmergencyInformationDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -350,7 +350,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbCADescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbCADescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbCADescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -358,7 +358,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbCAServiceDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbCAServiceDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbCAServiceDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -366,7 +366,7 @@ index bec5e557..16ca81e9 100644
      // IIsdbHierarchicalTransmissionDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IIsdbHierarchicalTransmissionDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IIsdbHierarchicalTransmissionDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -374,7 +374,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IPBDASiParser, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPBDASiParser => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -382,7 +382,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IPBDA_EIT, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPBDA_EIT => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          local,
@@ -390,7 +390,7 @@ index bec5e557..16ca81e9 100644
      //
      ////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IPBDA_Services, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPBDA_Services => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          local,
@@ -398,7 +398,7 @@ index bec5e557..16ca81e9 100644
      // IPBDAEntitlementDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IPBDAEntitlementDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPBDAEntitlementDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,
@@ -406,7 +406,7 @@ index bec5e557..16ca81e9 100644
      // IPBDAAttributesDescriptor Interface
      //
      ///////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IPBDAAttributesDescriptor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPBDAAttributesDescriptor => SupportedOSPlatform(\"windows6.1\") */")
      [
          AM_LOCAL
          object,

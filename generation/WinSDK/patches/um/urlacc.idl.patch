@@ -1,3 +1,5 @@
+diff --git a/um/urlacc.idl b/um/urlacc.idl
+index d5490e4c..5dad3486 100644
 --- a/um/urlacc.idl
 +++ b/um/urlacc.idl
 @@ -13,6 +13,7 @@
@@ -8,19 +10,19 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -20,6 +21,7 @@
+@@ -20,6 +21,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
  interface ISearchProtocolThreadContext;
  
-+_Win32_AnnotateInterface_(IOpLockStatus, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IOpLockStatus => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(c731065d-ac80-11d1-8df3-00c04fb6ef4f),
-@@ -46,6 +48,7 @@
+@@ -46,6 +48,7 @@ interface IOpLockStatus: IUnknown
  //  History:    05/23/00    mcheng      Created
  //
  //+-------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(ISearchProtocolThreadContext, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchProtocolThreadContext => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(c73106e1-ac80-11d1-8df3-00c04fb6ef4f),

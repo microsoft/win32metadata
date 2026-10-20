@@ -1,5 +1,5 @@
 diff --git a/um/msopc.idl b/um/msopc.idl
-index 125b8842..68643289 100644
+index 125b8842..b3ea278d 100644
 --- a/um/msopc.idl
 +++ b/um/msopc.idl
 @@ -6,6 +6,7 @@
@@ -14,7 +14,7 @@ index 125b8842..68643289 100644
  #include "opcobjectmodel.idl"
  #include "opcdigitalsignature.idl"
  
-+_Win32_AnnotateInterface_(IOpcFactory, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcFactory => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(6d0b4446-cd73-4ab3-94f4-8ccdf6116154),

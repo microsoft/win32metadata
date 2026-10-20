@@ -1,5 +1,5 @@
 diff --git a/um/portabledeviceconnectapi.idl b/um/portabledeviceconnectapi.idl
-index 712313e0..6ac91333 100644
+index 961e9ee3..94c409ec 100644
 --- a/um/portabledeviceconnectapi.idl
 +++ b/um/portabledeviceconnectapi.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index 712313e0..6ac91333 100644
  // This interface is used by applications to communicate to
  // portable device connectors. 
  //---------------------------------------------------------
-+_Win32_AnnotateInterface_(IPortableDeviceConnector, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPortableDeviceConnector => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(625e2df8-6392-4cf0-9ad1-3cfa5f17775c),

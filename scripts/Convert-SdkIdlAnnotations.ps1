@@ -10,22 +10,31 @@ Complete top-level interfaces need no trailing cpp_quote region. Native IDL and
 quoted-native conditional frames must match. Short Interface::parameter selectors
 must identify one actual non-property method parameter. Existing method/return
 placement and the default authoring behavior are unchanged.
+.PARAMETER PatchedIdl
+Converts an existing original-IDL source from compiler metadata carriers to
+selector-bound cpp_quote comments. PristineIdl is required to restore the exact
+native SAL annotation of each affected declaration. Logical enum groups remain
+compiled. This mode does not compile, prepare an SDK, or change the input files.
 #>
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory)][string]$InputMap,
-    [Parameter(Mandatory)][string]$SdkIncludeRoot,
-    [Parameter(Mandatory)][string]$OutputDirectory,
+    [Parameter(Mandatory, ParameterSetName = 'Author')][string]$InputMap,
+    [Parameter(Mandatory, ParameterSetName = 'Author')][string]$SdkIncludeRoot,
+    [Parameter(Mandatory, ParameterSetName = 'Author')][string]$OutputDirectory,
     [string[]]$Original,
     [string]$SdkProjectRoot = "$PSScriptRoot\..\generation\WinSDK",
     [switch]$Apply,
     [string]$AnnotationHeader = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h",
     [switch]$SharedSalBootstrap,
-    [switch]$AllowCompleteInterfaceParameterCarriers
+    [switch]$AllowCompleteInterfaceParameterCarriers,
+    [Parameter(Mandatory, ParameterSetName = 'Transport')][string]$PatchedIdl,
+    [Parameter(Mandatory, ParameterSetName = 'Transport')][string]$PristineIdl,
+    [Parameter(Mandatory, ParameterSetName = 'Transport')][string]$TransportOutput
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+if ($PSCmdlet.ParameterSetName -eq 'Author') {
 $SdkIncludeRoot = [IO.Path]::GetFullPath($SdkIncludeRoot).TrimEnd('\')
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
 $SdkProjectRoot = [IO.Path]::GetFullPath($SdkProjectRoot).TrimEnd('\')
@@ -41,6 +50,7 @@ if ($SdkProjectRoot -eq $SdkIncludeRoot -or
 }
 if (Test-Path -LiteralPath $OutputDirectory) {
     throw "Use a new output directory; do not overwrite an existing authoring result: $OutputDirectory"
+}
 }
 
 function Resolve-Input([string]$Relative) {
@@ -489,6 +499,389 @@ function Get-RspValues([string]$Text, [string]$Option) {
     }
 }
 
+function Get-TransportMacro([string]$Text, [int]$Offset) {
+    $match = [regex]::Match($Text.Substring($Offset), '^_Win32_(?<name>[A-Za-z0-9_]+)_(?<call>\()?', 'Singleline')
+    if (!$match.Success) { throw "Invalid metadata macro at offset $Offset" }
+    $length = $match.Length
+    $arguments = ''
+    if ($match.Groups['call'].Success) {
+        $open = $Offset + $length - 1
+        $depth = 1; $quote = [char]0; $close = -1
+        for ($i = $open + 1; $i -lt $Text.Length; $i++) {
+            $c = $Text[$i]
+            if ($quote -ne [char]0) {
+                if ($c -eq '\') { $i++ }
+                elseif ($c -eq $quote) { $quote = [char]0 }
+            }
+            elseif ($c -in @('"', "'")) { $quote = $c }
+            elseif ($c -eq '(') { $depth++ }
+            elseif ($c -eq ')') {
+                $depth--
+                if (!$depth) { $close = $i; break }
+            }
+        }
+        if ($close -lt 0) { throw "Unclosed metadata macro at offset $Offset" }
+        $arguments = $Text.Substring($open + 1, $close - $open - 1)
+        $length = $close - $Offset + 1
+    }
+    [pscustomobject]@{ name = $match.Groups['name'].Value; arguments = $arguments; length = $length }
+}
+
+function Convert-TransportPayload([string]$Macro, [string]$Header) {
+    $value = Get-TransportMacro $Macro 0
+    if ($value.length -ne $Macro.Length) { throw "Expected exactly one metadata fact: $Macro" }
+    if ($value.name.StartsWith('SupportedOS_', [StringComparison]::Ordinal)) {
+        $version = $value.name.Substring('SupportedOS_'.Length)
+        $definition = [regex]::Match($Header,
+            '(?m)^#define _WIN32META_OS_VERSION_' + [regex]::Escape($version) + ' "SupportedOSPlatform\(\\"([^"\\]+)\\"\)"')
+        if (!$definition.Success) { throw "Unknown SupportedOS metadata: $Macro" }
+        return 'SupportedOSPlatform("' + $definition.Groups[1].Value + '")'
+    }
+    $name = if ($value.name -ceq 'Retval') { 'RetVal' } else { $value.name }
+    if ($name -cnotin @('PreserveResult', 'RetVal', 'Retained', 'Reserved', 'ContainsInteriorPointers',
+        'AlsoUsableFor', 'Optional', 'ComOutPtr', 'AssociatedConstant', 'SetLastError', 'ImportLibrary',
+        'RAIIFree', 'AssociatedEnum')) { throw "Unsupported original-IDL metadata: $Macro" }
+    $arguments = $value.arguments.Trim()
+    if ($name -ceq 'AssociatedEnum') { $arguments = $arguments -creplace '^enum\s+', '' }
+    if ($name -ceq 'RAIIFree' -and $arguments -cnotmatch '^[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*(?:\s*,\s*-?\d+)*$') {
+        throw "RAIIFree requires a native cleanup name and decimal invalids: $Macro"
+    }
+    if ($name -ceq 'RAIIFree') {
+        foreach ($invalid in @(($arguments -split ',') | Select-Object -Skip 1)) {
+            $parsed = 0L
+            if (![long]::TryParse($invalid.Trim(), [Globalization.NumberStyles]::AllowLeadingSign,
+                [Globalization.CultureInfo]::InvariantCulture, [ref]$parsed)) {
+                throw "RAIIFree invalid value is outside signed Int64: $Macro"
+            }
+        }
+    }
+    if ($arguments) { "$name($arguments)" } else { $name }
+}
+
+function New-TransportComment([string]$Kind, [string]$Target, [string]$Payload) {
+    if ($Target -cnotmatch '^[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*$' -or $Payload.Contains('*/')) {
+        throw "Invalid structured metadata target/payload: $Kind $Target => $Payload"
+    }
+    $comment = "/* Win32Metadata: $Kind ::$Target => $Payload */"
+    'cpp_quote("' + $comment.Replace('\', '\\').Replace('"', '\"') + '")'
+}
+
+function Get-TransportTargets([string]$Text) {
+    $mask = Get-CodeMask $Text
+    $mutable = [Text.StringBuilder]::new($mask)
+    foreach ($m in [regex]::Matches($mask, '_Win32_')) {
+        $macro = Get-TransportMacro $Text $m.Index
+        for ($i = $m.Index; $i -lt $m.Index + $macro.length; $i++) {
+            if ($mutable[$i] -notin @("`r", "`n")) { $mutable[$i] = ' ' }
+        }
+    }
+    $mask = $mutable.ToString()
+    $mask = [regex]::Replace($mask, '(?m)^[ \t]*#(?:[^\r\n]*\\\r?\n)*[^\r\n]*', {
+        param($m) [regex]::Replace($m.Value, '[^\r\n]', ' ')
+    })
+    $records = [Collections.Generic.List[object]]::new()
+    foreach ($m in [regex]::Matches($mask,
+        '\b(?:(?<kind>interface|struct|class|enum)\s*(?<tag>[A-Za-z_]\w*)?|' +
+        'MIDL_INTERFACE\s*\(\s*\)\s*(?<tag>[A-Za-z_]\w*))\s*(?::[^{;]+)?\{')) {
+        $open = $m.Index + $m.Length - 1
+        $close = Get-ClosingDelimiter $mask $open '{' '}'
+        if ($close -lt 0) { throw "Unclosed native declaration at $($m.Index)" }
+        $name = $m.Groups['tag'].Value
+        $prefix = $mask.Substring([Math]::Max(0, $m.Index - 80), [Math]::Min(80, $m.Index))
+        $alias = [regex]::Match($mask.Substring($close + 1), '^\s*(?<name>[A-Za-z_]\w*)\s*[,;]')
+        if ($alias.Success -and $prefix -match '\btypedef\s*$') { $name = $alias.Groups['name'].Value }
+        $recordStart = $m.Index
+        $typedef = [regex]::Match($prefix, '\btypedef\s*$')
+        if ($typedef.Success) { $recordStart = $m.Index - ($prefix.Length - $typedef.Index) }
+        $recordStart = Get-AttributeStart $mask $recordStart ([Collections.Generic.HashSet[string]]::new())
+        $isObject = $m.Groups['kind'].Value -cne 'interface' -or $m.Value.Contains(':') -or
+            $mask.Substring($recordStart, $m.Index - $recordStart) -cmatch '\bobject\b'
+        $records.Add([pscustomobject]@{
+            name = $name; kind = $m.Groups['kind'].Value; start = $recordStart; open = $open; end = $close; isObject = $isObject
+        })
+    }
+    $targets = [Collections.Generic.List[object]]::new()
+    foreach ($m in [regex]::Matches($mask, '\b(?<name>[A-Za-z_]\w*)\s*\(')) {
+        $name = $m.Groups['name'].Value
+        if ($name -cin @('if','for','while','switch','sizeof','catch','annotation','size_is','length_is','iid_is','switch_is','range','id','uuid','helpstring',
+            'call_as','cpp_quote','MIDL_INTERFACE','__declspec','__attribute__') -or $name.StartsWith('_')) { continue }
+        $open = $m.Index + $m.Length - 1
+        $close = Get-ClosingDelimiter $mask $open '(' ')'
+        if ($close -lt 0) { continue }
+        $tail = [regex]::Match($mask.Substring($close + 1), '^\s*(?:=\s*0\s*)?(?:;|\{)')
+        if (!$tail.Success) { continue }
+        $owner = @($records | Where-Object { $_.open -lt $m.Index -and $_.end -gt $close } |
+            Sort-Object open -Descending | Select-Object -First 1)
+        if ($owner.Count -and $owner[0].kind -ceq 'enum') { continue }
+        $start = [Math]::Max($mask.LastIndexOf(';', [Math]::Max(0, $m.Index - 1)),
+            $mask.LastIndexOf('}', [Math]::Max(0, $m.Index - 1))) + 1
+        if ($owner.Count) { $start = [Math]::Max($start, $owner[0].open + 1) }
+        $prefix = $mask.Substring($start, $m.Index - $start)
+        if ($prefix.Trim() -ceq 'return') { continue }
+        if ($prefix -notmatch '[A-Za-z_]\w*\s+$' -and $prefix -notmatch '\)\s*$') { continue }
+        $nativeName = $name
+        if ($prefix -cmatch '\bpropget\b') { $nativeName = "get_$name" }
+        elseif ($prefix -cmatch '\bpropputref\b') { $nativeName = "putref_$name" }
+        elseif ($prefix -cmatch '\bpropput\b') { $nativeName = "put_$name" }
+        $isMethod = $owner.Count -and $owner[0].isObject
+        $qualified = if ($isMethod -and $owner[0].name) { "$($owner[0].name)::$nativeName" } else { $nativeName }
+        $kind = if ($isMethod) { 'method' } else { 'function' }
+        $insertion = if ($owner.Count) { $owner[0].start } else { $start }
+        $trailingInsertion = $insertion
+        if ($owner.Count) {
+            $trailingInsertion = $owner[0].end + 1
+            $semicolon = [regex]::Match($Text.Substring($trailingInsertion), '^[ \t]*;')
+            $trailingInsertion += $semicolon.Length
+        }
+        $targets.Add([pscustomobject]@{ kind = $kind; name = $qualified; start = $start; end = $close + 1 + $tail.Length
+            insertion = $insertion; trailingInsertion = $trailingInsertion; nativeName = $name })
+        $round = 0; $square = 0; $parameterStart = $open + 1
+        for ($i = $parameterStart; $i -le $close; $i++) {
+            $c = $mask[$i]
+            if ($i -eq $close -or ($c -eq ',' -and !$round -and !$square)) {
+                $part = $mask.Substring($parameterStart, $i - $parameterStart)
+                $parameter = [regex]::Match($part, '(?<name>[A-Za-z_]\w*)\s*(?:\[[^\]]*\]\s*)*$')
+                if ($parameter.Success -and $parameter.Groups['name'].Value -cne 'void') {
+                    $targets.Add([pscustomobject]@{ kind = 'parameter'
+                        name = "$qualified::$($parameter.Groups['name'].Value)"
+                        start = $parameterStart; end = $i; insertion = $insertion; trailingInsertion = $trailingInsertion
+                        nativeName = $parameter.Groups['name'].Value })
+                }
+                $parameterStart = $i + 1
+                continue
+            }
+            if ($c -eq '(') { $round++ }; if ($c -eq ')') { $round-- }
+            if ($c -eq '[') { $square++ }; if ($c -eq ']') { $square-- }
+        }
+    }
+    foreach ($record in $records) {
+        if (!$record.name -or $record.kind -ceq 'enum') { continue }
+        $start = $record.open + 1; $depth = 0
+        for ($i = $start; $i -lt $record.end; $i++) {
+            if ($mask[$i] -eq '{') { $depth++ }
+            elseif ($mask[$i] -eq '}') { $depth-- }
+            elseif ($mask[$i] -eq ';' -and !$depth) {
+                $part = $mask.Substring($start, $i - $start)
+                if ($part -notmatch '\)\s*(?:=\s*0\s*)?$') {
+                    $field = [regex]::Match($part, '(?<name>[A-Za-z_]\w*)\s*(?:\[[^\]]*\]\s*)*$')
+                    if ($field.Success) {
+                        $targets.Add([pscustomobject]@{ kind = 'field'; name = "$($record.name)::$($field.Groups['name'].Value)"
+                            start = $start; end = $i; insertion = $record.start
+                            trailingInsertion = $record.end + 1 + [regex]::Match($Text.Substring($record.end + 1), '^[ \t]*;').Length
+                            nativeName = $field.Groups['name'].Value })
+                    }
+                }
+                $start = $i + 1
+            }
+        }
+    }
+    @($targets)
+}
+
+function Convert-IdlMetadataTransport([string]$Text, [string]$Pristine, [string]$Header) {
+    $newline = [regex]::Match($Text, '\r\n|\n|\r').Value
+    if (!$newline) { $newline = "`r`n" }
+    $edits = [Collections.Generic.List[object]]::new()
+    $comments = [Collections.Generic.List[object]]::new()
+    $mask = Get-CodeMask $Text
+    $carrierPattern = '(?m)^[ \t]*_Win32_Annotate(?<kind>Interface|Method|Parameter|Field)_\('
+    foreach ($m in [regex]::Matches($Text, $carrierPattern)) {
+        $offset = $Text.IndexOf('_Win32_', $m.Index)
+        if ($mask.Substring($offset, '_Win32_'.Length) -cne '_Win32_') { continue }
+        $macro = Get-TransportMacro $Text $offset
+        $args = $macro.arguments
+        $parts = [regex]::Match($args, '^\s*(?<target>[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*)\s*,\s*(?:(?<parameter>[A-Za-z_]\w*)\s*,\s*)?(?<macro>_Win32_.+)\s*$', 'Singleline')
+        if (!$parts.Success) { throw "Invalid synthetic carrier at $offset" }
+        $kind = $m.Groups['kind'].Value.ToLowerInvariant()
+        $target = $parts.Groups['target'].Value
+        if ($kind -ceq 'parameter') { $target += '::' + $parts.Groups['parameter'].Value }
+        $payload = Convert-TransportPayload $parts.Groups['macro'].Value.Trim() $Header
+        if ($kind -ceq 'method' -and $payload -match '^(?:AssociatedEnum|RAIIFree)\(') { $kind = 'return' }
+        $comment = New-TransportComment $kind $target $payload
+        $edits.Add([pscustomobject]@{ offset = $offset; length = $macro.length; text = $comment })
+    }
+    $quotes = @([regex]::Matches($Text,
+        '(?m)^[ \t]*(?:cpp_quote\s*\(\s*|#pragma\s+midl_echo\s*\(\s*)"(?<code>(?:\\.|[^"\\\r\n])*)"\s*\)') |
+        Where-Object { $mask.Substring($_.Index, $_.Length) -match '^\s*(?:cpp_quote|#pragma)' })
+    $nativeDirectives = Get-NativeQuoteDirectiveMask $mask $quotes
+    $annotations = @([regex]::Matches($Text, '\bannotation\s*\(\s*"(?<value>(?:\\.|[^"\\])*)"\s*\)') |
+        Where-Object { $mask.Substring($_.Index, 'annotation'.Length) -ceq 'annotation' -and
+            $_.Groups['value'].Value -match '_Win32_' })
+    $targets = if ($annotations.Count) { @(Get-TransportTargets $Text) } else { @() }
+    $originalTargets = if ($annotations.Count) { @(Get-TransportTargets $Pristine) } else { @() }
+    foreach ($annotation in $annotations) {
+        $target = @($targets | Where-Object { $_.start -le $annotation.Index -and $_.end -gt $annotation.Index } |
+            Sort-Object @{ Expression = { $_.end - $_.start } } | Select-Object -First 1)
+        if ($target.Count -ne 1) { throw "No native target for metadata annotation at $($annotation.Index)" }
+        $target = $target[0]
+        $insertion = $target.insertion
+        $frame = Get-IdlConditionalFrame $mask $annotation.Index
+        $nativeFrame = Get-IdlConditionalFrame $nativeDirectives $annotation.Index
+        if ($frame -cne (Get-IdlConditionalFrame $mask $insertion) -or
+            $nativeFrame -cne (Get-IdlConditionalFrame $nativeDirectives $insertion)) {
+            $insertion = $target.trailingInsertion
+        }
+        if ($frame -cne (Get-IdlConditionalFrame $mask $insertion)) {
+            throw "Metadata placement would cross a native conditional for $($target.name)"
+        }
+        if ($nativeFrame -cne (Get-IdlConditionalFrame $nativeDirectives $insertion)) {
+            throw "Metadata placement would cross a quoted native conditional for $($target.name)"
+        }
+        $targetName = $target.name
+        if ($target.kind -ceq 'field') {
+            $recordName = ($target.name -split '::')[0]
+            $emptyTag = [regex]::IsMatch($Text, '(?m)^\s*cpp_quote\("#define ' +
+                [regex]::Escape($recordName) + '\s*"\)')
+            if ($emptyTag) {
+                $aliases = @([regex]::Matches($Pristine,
+                    '\btypedef\s+struct\s+' + [regex]::Escape($recordName) + '\s+(?<alias>[A-Za-z_]\w*)\s*;'))
+                if ($aliases.Count -ne 1) { throw "Erased native record tag requires one original typedef: $recordName" }
+                $targetName = $aliases[0].Groups['alias'].Value + '::' + $target.nativeName
+            }
+        }
+        foreach ($m in [regex]::Matches($annotation.Groups['value'].Value, '_Win32_')) {
+            $macro = Get-TransportMacro $annotation.Groups['value'].Value $m.Index
+            $payload = Convert-TransportPayload $annotation.Groups['value'].Value.Substring($m.Index, $macro.length) $Header
+            $comments.Add([pscustomobject]@{ offset = $insertion
+                text = New-TransportComment $target.kind $targetName $payload })
+        }
+        $native = @($originalTargets | Where-Object { $_.name -ceq $target.name -and $_.kind -ceq $target.kind })
+        if ($native.Count -ne 1) { throw "Expected one pristine native target for $($target.name), found $($native.Count)" }
+        $originalDeclaration = $Pristine.Substring($native[0].start, $native[0].end - $native[0].start)
+        $originalAnnotations = @([regex]::Matches($originalDeclaration, '\bannotation\s*\(\s*"(?:\\.|[^"\\])*"\s*\)'))
+        $replacement = if ($originalAnnotations.Count -eq 1) { $originalAnnotations[0].Value }
+            elseif (!$originalAnnotations.Count) { '' } else { throw "Ambiguous pristine SAL for $($target.name)" }
+        $start = $annotation.Index; $length = $annotation.Length
+        if (!$replacement) {
+            $before = $Text.Substring(0, $start)
+            $after = $Text.Substring($start + $length)
+            if ($before -match '\[\s*$' -and $after -match '^\s*\]') {
+                $open = [regex]::Match($before, '\[\s*$')
+                $close = [regex]::Match($after, '^\s*\][ \t]*')
+                $start = $open.Index; $length += $annotation.Index - $start + $close.Length
+            }
+            elseif ($before -match ',\s*$') {
+                $comma = [regex]::Match($before, ',\s*$')
+                $start = $comma.Index; $length += $annotation.Index - $start
+            }
+            elseif ($after -match '^\s*,[ \t]*') {
+                $length += [regex]::Match($after, '^\s*,[ \t]*').Length
+            }
+            else { throw "Cannot remove metadata-only IDL annotation at $start" }
+            $lineStart = $Text.LastIndexOf("`n", [Math]::Max(0, $start - 1)) + 1
+            $lineEnd = $Text.IndexOf("`n", $start + $length)
+            if ($lineEnd -lt 0) { $lineEnd = $Text.Length }
+            if ($Text.Substring($lineStart, $start - $lineStart) -match '^[ \t]*$' -and
+                $Text.Substring($start + $length, $lineEnd - $start - $length) -match '^[ \t\r]*$') {
+                $start = $lineStart
+                $length = [Math]::Min($Text.Length, $lineEnd + 1) - $lineStart
+            }
+        }
+        $edits.Add([pscustomobject]@{ offset = $start; length = $length; text = $replacement })
+    }
+    foreach ($group in @($comments | Group-Object offset)) {
+        $offset = [int]$group.Name
+        $prefix = $Text.Substring(0, $offset)
+        $line = $prefix.LastIndexOf("`n") + 1
+        if ($prefix.Substring($line) -match '^\s*$') { $offset = $line }
+        if ($Text.Substring($offset) -match '^\r?\n') {
+            $offset += [regex]::Match($Text.Substring($offset), '^\r?\n').Length
+        }
+        $separator = if ($offset -gt 0 -and $Text[$offset - 1] -notin @("`r", "`n")) { $newline } else { '' }
+        $edits.Add([pscustomobject]@{ offset = $offset; length = 0
+            text = $separator + (($group.Group | ForEach-Object text) -join $newline) + $newline })
+    }
+    $projection = [Text.StringBuilder]::new()
+    $quoteRanges = [Collections.Generic.List[object]]::new()
+    foreach ($quote in $quotes) {
+        $code = [regex]::Replace($quote.Groups['code'].Value, '\\(["\\])', '$1')
+        $quoteRanges.Add([pscustomobject]@{ quote = $quote; start = $projection.Length; end = $projection.Length + $code.Length; code = $code })
+        [void]$projection.Append($code).Append("`n")
+    }
+    $projected = $projection.ToString()
+    $hasQuotedMetadata = @($quoteRanges | Where-Object { $_.code -match '_Win32_' -and
+        $_.code -notmatch '^\s*_Win32_(?:FlagsEnum|Enum)_\(' }).Count -gt 0
+    $quotedTargets = if ($hasQuotedMetadata) { @(Get-TransportTargets $projected) } else { @() }
+    foreach ($range in $quoteRanges) {
+        $code = $range.code
+        $codeMask = Get-CodeMask $code
+        if ($code -match '^\s*_Win32_(?:FlagsEnum|Enum)_\(') { continue }
+        $quotedCarrier = [regex]::Match($code, '^\s*_Win32_Annotate(?<kind>Interface|Method|Parameter|Field)_\(')
+        if ($quotedCarrier.Success) {
+            $macro = Get-TransportMacro $code $code.IndexOf('_Win32_')
+            $parts = [regex]::Match($macro.arguments, '^\s*(?<target>[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*)\s*,\s*(?:(?<parameter>[A-Za-z_]\w*)\s*,\s*)?(?<macro>_Win32_.+)\s*$', 'Singleline')
+            if (!$parts.Success) { throw "Invalid quoted synthetic carrier: $code" }
+            $kind = $quotedCarrier.Groups['kind'].Value.ToLowerInvariant()
+            $target = $parts.Groups['target'].Value
+            if ($kind -ceq 'parameter') { $target += '::' + $parts.Groups['parameter'].Value }
+            $payload = Convert-TransportPayload $parts.Groups['macro'].Value.Trim() $Header
+            if ($kind -ceq 'method' -and $payload -match '^(?:AssociatedEnum|RAIIFree)\(') { $kind = 'return' }
+            $quoted = $range.quote
+            $edits.Add([pscustomobject]@{ offset = $quoted.Index; length = $quoted.Length
+                text = New-TransportComment $kind $target $payload })
+            continue
+        }
+        $changes = [Collections.Generic.List[object]]::new()
+        $facts = [Collections.Generic.List[string]]::new()
+        foreach ($m in [regex]::Matches($codeMask, '_Win32_')) {
+            $macro = Get-TransportMacro $code $m.Index
+            if ($macro.name -cin @('Enum', 'FlagsEnum')) { continue }
+            $offset = $range.start + $m.Index
+            $target = @($quotedTargets | Where-Object { $_.start -le $offset -and $_.end -gt $offset } |
+                Sort-Object @{ Expression = { $_.end - $_.start } } | Select-Object -First 1)
+            if ($target.Count -ne 1) { throw "No quoted native target for $($macro.name) at $offset" }
+            $target = $target[0]
+            $kind = $target.kind
+            if ($kind -cin @('function', 'method') -and $macro.name -cin @('AssociatedEnum', 'RAIIFree')) { $kind = 'return' }
+            $payload = Convert-TransportPayload $code.Substring($m.Index, $macro.length) $Header
+            $facts.Add((New-TransportComment $kind $target.name $payload))
+            $offset = $m.Index; $length = $macro.length
+            if ($offset + $length -lt $code.Length -and $code[$offset + $length] -eq ' ') { $length++ }
+            elseif ($offset -gt 0 -and $code[$offset - 1] -eq ' ' -and
+                $offset + $length -lt $code.Length -and $code[$offset + $length] -eq ';') {
+                $offset--; $length++
+            }
+            $changes.Add([pscustomobject]@{ offset = $offset; length = $length })
+        }
+        if (!$changes.Count) { continue }
+        foreach ($change in @($changes | Sort-Object offset -Descending)) {
+            $code = $code.Remove($change.offset, $change.length)
+        }
+        $quoted = $range.quote
+        $edits.Add([pscustomobject]@{ offset = $quoted.Groups['code'].Index
+            length = $quoted.Groups['code'].Length; text = $code.Replace('\', '\\').Replace('"', '\"') })
+        $edits.Add([pscustomobject]@{ offset = $quoted.Index + $quoted.Length; length = 0
+            text = $newline + ($facts -join $newline) })
+    }
+    $after = $Text
+    foreach ($edit in @($edits | Sort-Object offset -Descending -Stable)) {
+        $after = $after.Remove($edit.offset, $edit.length).Insert($edit.offset, $edit.text)
+    }
+    $after
+}
+
+if ($PSCmdlet.ParameterSetName -eq 'Transport') {
+    if ([IO.Path]::GetExtension($PatchedIdl) -notin @('.idl', '.odl') -or
+        [IO.Path]::GetExtension($PristineIdl) -notin @('.idl', '.odl')) {
+        throw 'Transport conversion requires original IDL inputs, not generated headers.'
+    }
+    if (Test-Path -LiteralPath $TransportOutput) {
+        throw "Transport output must be a new private file: $TransportOutput"
+    }
+    $before = [IO.File]::ReadAllBytes([IO.Path]::GetFullPath($PatchedIdl))
+    $originalBytes = [IO.File]::ReadAllBytes([IO.Path]::GetFullPath($PristineIdl))
+    foreach ($bytes in @($before, $originalBytes)) {
+        if ($bytes -contains 0 -or ($bytes.Length -ge 2 -and
+            (($bytes[0] -eq 255 -and $bytes[1] -eq 254) -or ($bytes[0] -eq 254 -and $bytes[1] -eq 255)))) {
+            throw 'UTF-16/NUL IDL requires an explicit encoding-aware owner review.'
+        }
+    }
+    $converted = Convert-IdlMetadataTransport ([Text.Encoding]::Latin1.GetString($before)) `
+        ([Text.Encoding]::Latin1.GetString($originalBytes)) ([IO.File]::ReadAllText($AnnotationHeader))
+    [IO.File]::WriteAllBytes([IO.Path]::GetFullPath($TransportOutput), [Text.Encoding]::Latin1.GetBytes($converted))
+    return
+}
+
 $map = Get-Content -LiteralPath $InputMap -Raw | ConvertFrom-Json
 if ($map.schemaVersion -ne 1 -or $null -eq $map.PSObject.Properties['owners']) {
     throw 'Expected schema 1 with an explicit reserved owners array.'
@@ -514,7 +907,6 @@ $parameterMacros = @{}
 foreach ($name in @('Optional', 'ComOutPtr')) {
     $parameterMacros[$name] = [regex]::IsMatch($annotationText, "(?m)^#define _Win32_${name}_\(")
 }
-$parameterCarrier = [regex]::IsMatch($annotationText, '(?m)^#define _Win32_AnnotateParameter_\(')
 $globalSettings = Join-Path $SdkProjectRoot 'scraper.settings.rsp'
 $enumRemaps = @(if (Test-Path -LiteralPath $globalSettings -PathType Leaf) {
     Get-RspValues ([IO.File]::ReadAllText($globalSettings)) '--remap'
@@ -593,9 +985,6 @@ foreach ($owner in $owners) {
             }
             elseif ($targets.Count -ne 1 -or $targets[0].kind -cne 'ParmVarDecl') {
                 $reason = "requires-one-original-native-parameter-found-$($targets.Count)"
-            }
-            elseif ($targets[0].sourceForm -cne 'quoted-native-function-parameter' -and !$parameterCarrier) {
-                $reason = 'parameter-carrier-not-in-selected-annotation-vocabulary'
             }
             elseif ($targets[0].sourceForm -cne 'quoted-native-function-parameter' -and $targets[0].isProperty) {
                 $reason = 'requires-actual-native-property-method-identity'
@@ -836,6 +1225,9 @@ foreach ($owner in $owners) {
     foreach ($insertion in @($insertions | Sort-Object offset -Descending -Stable)) {
         $after = $after.Insert($insertion.offset, $insertion.text)
     }
+    if ($insertions.Count) {
+        $after = Convert-IdlMetadataTransport $after $text $annotationText
+    }
     $plans.Add([ordered]@{ relative = $relative; path = $path; before = $bytes; after = [Text.Encoding]::Latin1.GetBytes($after); insertions = @($insertions) })
     $results.Add([ordered]@{
         original = $relative; generatedHeaders = @($owner.generatedHeaders); partitionCandidates = @($owner.partitionCandidates)
@@ -935,6 +1327,7 @@ foreach ($plan in $plans) {
 $all = @($results | ForEach-Object dispositions)
 $report = [ordered]@{
     schemaVersion = 1; kind = 'original-idl-authoring-not-compile-or-full-sdk-acceptance'
+    metadataTransport = 'selector-bound-cpp-quote-comments'
     inputMapSha256 = Get-Hash ([IO.File]::ReadAllBytes([IO.Path]::GetFullPath($InputMap)))
     sdkIncludeRoot = $SdkIncludeRoot
     bootstrapPolicy = if ($SharedSalBootstrap) { 'shared-sal' } else { 'existing-idl-sal' }

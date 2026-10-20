@@ -1,5 +1,5 @@
 diff --git a/um/bdaiface.idl b/um/bdaiface.idl
-index dd7af9a9..7425e75f 100644
+index dd7af9a9..709ea9a5 100644
 --- a/um/bdaiface.idl
 +++ b/um/bdaiface.idl
 @@ -15,6 +15,8 @@
@@ -15,7 +15,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_AutoDemodulateEx interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_AutoDemodulateEx, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_AutoDemodulateEx => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(34518D13-1182-48e6-B28F-B24987787326),
@@ -43,7 +43,7 @@ index dd7af9a9..7425e75f 100644
  } PID_MAP ;
  #endif // REMOVE_THESE
  
-+_Win32_AnnotateInterface_(IEnumPIDMap, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumPIDMap => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid (afb6c2a2-2c41-11d3-8a60-0000f81e0e4a),
@@ -51,7 +51,7 @@ index dd7af9a9..7425e75f 100644
  // IMPEG2PIDMap interface
  //---------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(IMPEG2PIDMap, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMPEG2PIDMap => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid (afb6c2a1-2c41-11d3-8a60-0000f81e0e4a),
@@ -59,7 +59,7 @@ index dd7af9a9..7425e75f 100644
  // Currently implemented on the TIF and registered as a service by TIF.
  //---------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(IBDA_EasMessage, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_EasMessage => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
           object,
       uuid(D806973D-3EBE-46de-8FBB-6358FE784208),
@@ -67,7 +67,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_ConditionalAccess interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_ConditionalAccess, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_ConditionalAccess => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(CD51F1E0-7BE9-4123-8482-A2A796C0A6B0),
@@ -75,7 +75,7 @@ index dd7af9a9..7425e75f 100644
  // IBDA_DRM interface
  //---------------------------------------------------------------------
  
-+_Win32_AnnotateInterface_(IBDA_DRM, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_DRM => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          uuid(F98D88B0-1992-4cd6-A6D9-B9AFAB99330D),
@@ -83,7 +83,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_ConditionalAccessEx interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_ConditionalAccessEx, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_ConditionalAccessEx => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(497C3418-23CB-44ba-BB62-769F506FCEA7),
@@ -91,7 +91,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_ISDBConditionalAccess interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_ISDBConditionalAccess, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_ISDBConditionalAccess => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(5E68C627-16C2-4e6c-B1E2-D00170CDAA0F),
@@ -99,7 +99,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_EventingService interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_EventingService, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_EventingService => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(207C413F-00DC-4c61-BAD6-6FEE1FF07064),
@@ -107,7 +107,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_Encoder interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_Encoder, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_Encoder => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(3a8bad59-59fe-4559-a0ba-396cfaa98ae3),
@@ -115,7 +115,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_FDC interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_FDC, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_FDC => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(138adc7e-58ae-437f-b0b4-c9fe19d5b4ac),
@@ -123,7 +123,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_GuideDataDeliveryService interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_GuideDataDeliveryService, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_GuideDataDeliveryService => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(C0AFCB73-23E7-4bc6-BAFA-FDC167B4719F),
@@ -131,7 +131,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_DRIDRMService interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_DRIDRMService, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_DRIDRMService => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(1F9BC2A5-44A3-4c52-AAB1-0BBCE5A1381D),
@@ -139,7 +139,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_MUX interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_MUX, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_MUX => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(942AAFEC-4C05-4c74-B8EB-8706C2A4943F),
@@ -147,7 +147,7 @@ index dd7af9a9..7425e75f 100644
  //---------------------------------------------------------------------
  // IBDA_UserActivityService interface
  //---------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IBDA_UserActivityService, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDA_UserActivityService => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(53B14189-E478-4b7a-A1FF-506DB4B99DFE),
@@ -155,7 +155,7 @@ index dd7af9a9..7425e75f 100644
  // Generic and specific events that could return
  // in OnESEventReceived
  //
-+_Win32_AnnotateInterface_(IESEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESEvent => SupportedOSPlatform(\"windows6.1\") */")
  [
  	object,
  	uuid(1F0E5357-AF43-44e6-8547-654C645145D2),
@@ -163,7 +163,7 @@ index dd7af9a9..7425e75f 100644
  	HRESULT GetStringData ([out, retval] BSTR* pbstrData);
  };
  
-+_Win32_AnnotateInterface_(IESEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESEvents => SupportedOSPlatform(\"windows6.1\") */")
  [
  	object,
  	uuid(ABD414BF-CFE5-4e5e-AF5B-4B4E49C5BFEB),
@@ -171,7 +171,7 @@ index dd7af9a9..7425e75f 100644
  	HRESULT OnESEventReceived([in] GUID guidEventType, [in] IESEvent* pESEvent);
  };
  
-+_Win32_AnnotateInterface_(IBroadcastEvent, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBroadcastEvent => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      hidden,
@@ -179,7 +179,7 @@ index dd7af9a9..7425e75f 100644
      HRESULT FireEx([in] GUID EventID, [in] ULONG Param1, [in] ULONG Param2, [in] ULONG Param3, [in] ULONG Param4);
  };
  
-+_Win32_AnnotateMethod_(IEnumPIDMap::Next, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IEnumPIDMap::Next => PreserveResult */")
  cpp_quote ("DEFINE_GUID(CLSID_BroadcastEventService, 0x0B3FFB92, 0x0919, 0x4934, 0x9D, 0x5B, 0x61, 0x9C, 0x71, 0x9D, 0x02, 0x02);")
  cpp_quote("#define SID_SBroadcastEventService CLSID_BroadcastEventService")
  

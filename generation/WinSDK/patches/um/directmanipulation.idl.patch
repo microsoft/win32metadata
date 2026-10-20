@@ -1,5 +1,5 @@
 diff --git a/um/directmanipulation.idl b/um/directmanipulation.idl
-index e56de98e..7ab31c07 100644
+index e56de98e..67198654 100644
 --- a/um/directmanipulation.idl
 +++ b/um/directmanipulation.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index e56de98e..7ab31c07 100644
  
  
  // Direct Manipulation manager object and factory.
-+_Win32_AnnotateInterface_(IDirectManipulationManager, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationManager => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      FBF5D3B4-70C7-4163-9322-5A6F660D6FBC,
      1E8F982A-0562-40D5-B245-A2D4EC4E2338,
@@ -22,7 +22,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Direct Manipulation manager (v2).
-+_Win32_AnnotateInterface_(IDirectManipulationManager2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationManager2 => SupportedOSPlatform(\"windows8.1\") */")
  DMANIP_INTERFACE(
      FA1005E9-3D16-484C-BFC9-62B61E56EC4E,
      040E1600-93A2-43A5-A08E-3BAA2160A4AF,
@@ -30,7 +30,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Direct Manipulation manager (v3).
-+_Win32_AnnotateInterface_(IDirectManipulationManager3, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationManager3 => SupportedOSPlatform(\"windows10.0.10240\") */")
  DMANIP_INTERFACE(
      2CB6B33D-FFE8-488C-B750-FBDFE88DCA8C,
      024D86A1-69A3-457A-8993-6897A87070FD,
@@ -38,7 +38,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Defines a Direct Manipulation viewport
-+_Win32_AnnotateInterface_(IDirectManipulationViewport, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationViewport => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d,
      80C9672B-B125-453B-A063-D0A3A94DEDAA,
@@ -46,7 +46,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Defines a Direct Manipulation viewport (v2)
-+_Win32_AnnotateInterface_(IDirectManipulationViewport2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationViewport2 => SupportedOSPlatform(\"windows8.1\") */")
  DMANIP_INTERFACE(
      923CCAAC-61E1-4385-B726-017AF189882A,
      13574032-95CF-4F42-B7F7-53B67BC91DCB,
@@ -54,7 +54,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Application-implemented interface to receive notifications about manipulations
-+_Win32_AnnotateInterface_(IDirectManipulationViewportEventHandler, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationViewportEventHandler => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      952121DA-D69F-45F9-B0F9-F23944321A6D,
      7605BD5C-6C94-4C55-8E49-F1F57843FB95,
@@ -62,7 +62,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Represents visual content that gets transformed by a manipulation
-+_Win32_AnnotateInterface_(IDirectManipulationContent, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationContent => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      B89962CB-3D89-442B-BB58-5098FA0F9F16,
      61C164A4-065A-47C1-8633-2367F9F73CA1,
@@ -70,7 +70,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // This describes operations only possible on the primary instance of content for a given viewport
-+_Win32_AnnotateInterface_(IDirectManipulationPrimaryContent, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationPrimaryContent => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      C12851E4-1698-4625-B9B1-7CA3EC18630B,
      6DC692EA-7CA5-4E68-A309-0F8E669DBB03,
@@ -78,7 +78,7 @@ index e56de98e..7ab31c07 100644
  } DIRECTMANIPULATION_DRAG_DROP_STATUS;
  
  // Application-implemented interface to receive notifications about drag-drop behavior specific events
-+_Win32_AnnotateInterface_(IDirectManipulationDragDropEventHandler, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationDragDropEventHandler => SupportedOSPlatform(\"windows8.1\") */")
  DMANIP_INTERFACE(
      1FA11B10-701B-41AE-B5F2-49E36BD595AA,
      1EB08D03-BA3C-43E0-BA94-5EE21B8D0850,
@@ -86,7 +86,7 @@ index e56de98e..7ab31c07 100644
  } DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION;
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION)")
  
-+_Win32_AnnotateInterface_(IDirectManipulationDragDropBehavior, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationDragDropBehavior => SupportedOSPlatform(\"windows8.1\") */")
  DMANIP_INTERFACE(
      814B5AF5-C2C8-4270-A9B7-A198CE8D02FA,
      8C0A60CC-9FE2-4D6D-B125-505C224BDBBC,
@@ -94,7 +94,7 @@ index e56de98e..7ab31c07 100644
  } DIRECTMANIPULATION_INTERACTION_TYPE;
  
  // Application-implemented interface to receive notifications about interaction type events
-+_Win32_AnnotateInterface_(IDirectManipulationInteractionEventHandler, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationInteractionEventHandler => SupportedOSPlatform(\"windows8.1\") */")
  DMANIP_INTERFACE(
      E43F45B8-42B4-403E-B1F2-273B8F510830,
      320599B5-5B82-4DB2-B881-4B4ACB0BDF63,
@@ -102,7 +102,7 @@ index e56de98e..7ab31c07 100644
  
  
  // This interface represents time-based information used by manipulations
-+_Win32_AnnotateInterface_(IDirectManipulationFrameInfoProvider, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationFrameInfoProvider => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      fb759dba-6f4c-4c01-874e-19c8a05907f9,
      3D6E45E3-6886-45E5-8D35-FFC24A47D9AF,
@@ -110,7 +110,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Defines a compositor object, which drives visual updates of content on screen
-+_Win32_AnnotateInterface_(IDirectManipulationCompositor, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationCompositor => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      537A0825-0387-4EFA-B62F-71EB1F085A7E,
      53CB09B8-8B30-4AE0-A9DD-1F3582D299D5,
@@ -118,7 +118,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Defines a compositor object, which drives visual updates of content on screen
-+_Win32_AnnotateInterface_(IDirectManipulationCompositor2, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationCompositor2 => SupportedOSPlatform(\"windows10.0.10240\") */")
  DMANIP_INTERFACE(
      D38C7822-F1CB-43CB-B4B9-AC0C767A412E,
      B09294A8-9A4E-40B0-A84C-AF3412723794,
@@ -126,7 +126,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Defines methods for handling inertia animation update events
-+_Win32_AnnotateInterface_(IDirectManipulationUpdateHandler, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationUpdateHandler => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      790B6337-64F8-4FF5-A269-B32BC2AF27A7,
      1BEA57EA-3C25-4B30-8088-FC132540E1E5,
@@ -134,7 +134,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Defines methods for driving a compositor object automatically or manually
-+_Win32_AnnotateInterface_(IDirectManipulationUpdateManager, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationUpdateManager => SupportedOSPlatform(\"windows8.0\") */")
  DMANIP_INTERFACE(
      B0AE62FD-BE34-46E7-9CAA-D361FACBB9CC,
      54697F09-EE1F-4A4C-9873-C7A6162BD249,
@@ -142,7 +142,7 @@ index e56de98e..7ab31c07 100644
  } DIRECTMANIPULATION_AUTOSCROLL_CONFIGURATION;
  
  // Behavior to perform automatic-scrolling on the viewport.
-+_Win32_AnnotateInterface_(IDirectManipulationAutoScrollBehavior, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationAutoScrollBehavior => SupportedOSPlatform(\"windows8.1\") */")
  DMANIP_INTERFACE(
      6D5954D4-2003-4356-9B31-D051C9FF0AF7,
      4FF0CFBD-ABA0-45BF-BFE2-73C5156ECF24,
@@ -150,7 +150,7 @@ index e56de98e..7ab31c07 100644
  }
  
  // Service to enable deferring SetContact calls with a timeout
-+_Win32_AnnotateInterface_(IDirectManipulationDeferContactService, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IDirectManipulationDeferContactService => SupportedOSPlatform(\"windows10.0.10240\") */")
  DMANIP_INTERFACE(
      652D5C71-FE60-4A98-BE70-E5F21291E7F1,
      CA5024CA-51C7-4EB3-9393-65A69297AF8C,

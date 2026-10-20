@@ -1,5 +1,5 @@
 diff --git a/um/fsrmreports.idl b/um/fsrmreports.idl
-index 0173c802..b0d9616b 100644
+index 0173c802..129911f2 100644
 --- a/um/fsrmreports.idl
 +++ b/um/fsrmreports.idl
 @@ -2,6 +2,7 @@
@@ -14,7 +14,7 @@ index 0173c802..b0d9616b 100644
  //        Interfaces
  //
  
-+_Win32_AnnotateInterface_(IFsrmReportManager, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmReportManager => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(27b899fe-6ffa-4481-a184-d3daade8a02b),
@@ -22,7 +22,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmReportJob, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmReportJob => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(38e87280-715c-4c7d-a280-ea1651a19fef),
@@ -30,7 +30,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmReport, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmReport => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(d8cc81d9-46b8-4fa4-bfa5-4aa9dec9b638),
@@ -38,7 +38,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmReportScheduler, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmReportScheduler => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(6879caf9-6617-4484-8719-71c3d8645f94),
@@ -46,7 +46,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmFileManagementJobManager, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmFileManagementJobManager => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(ee321ecb-d95e-48e9-907c-c7685a013235),
@@ -54,7 +54,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmFileManagementJob, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmFileManagementJob => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(0770687e-9f36-4d6f-8778-599d188461c9),
@@ -62,7 +62,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmPropertyCondition, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmPropertyCondition => SupportedOSPlatform(\"windowsserver2008\") */")
  [
    odl,
    uuid(326af66f-2ac0-4f68-bf8c-4759f054fa29),
@@ -70,7 +70,7 @@ index 0173c802..b0d9616b 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmFileConditionProperty, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmFileConditionProperty => SupportedOSPlatform(\"windowsserver2012\") */")
  [
    odl,
    uuid(81926775-B981-4479-988F-DA171D627360),

@@ -1,3 +1,5 @@
+diff --git a/um/mfidl.idl b/um/mfidl.idl
+index d7abc97e..b6bb4ace 100644
 --- a/um/mfidl.idl
 +++ b/um/mfidl.idl
 @@ -1,3 +1,4 @@
@@ -5,33 +7,31 @@
  cpp_quote("#include <winapifamily.h>")
  
  //*@@@+++@@@@******************************************************************
-@@ -239,6 +240,7 @@
+@@ -239,6 +240,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IMFMediaSession, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSession => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(90377834-21D0-4dee-8214-BA2E3E6C1127),
-@@ -546,7 +548,7 @@
- ///     Specifies a pointer to a variable where the media session object
+@@ -547,6 +549,7 @@ cpp_quote( "EXTERN_GUID( MF_PMP_SERVER_CONTEXT, 0x2f00c910, 0xd2cf, 0x4278, 0x8b
  ///     will be stored.
  /// </param>
--cpp_quote( "STDAPI MFCreateMediaSession(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateMediaSession(" )
+ cpp_quote( "STDAPI MFCreateMediaSession(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMediaSession => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IMFAttributes* pConfiguration," )
  cpp_quote( "    _Outptr_ IMFMediaSession** ppMediaSession" )
  cpp_quote( "    );" )
-@@ -579,7 +581,7 @@
- ///     will be stored
+@@ -580,6 +583,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
  /// </param>
  
--cpp_quote( "STDAPI MFCreatePMPMediaSession(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreatePMPMediaSession(" )
+ cpp_quote( "STDAPI MFCreatePMPMediaSession(" )
++cpp_quote("/* Win32Metadata: function ::MFCreatePMPMediaSession => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    DWORD dwCreationFlags," )
  cpp_quote( "    IMFAttributes *pConfiguration," )
  cpp_quote( "    _Outptr_ IMFMediaSession** ppMediaSession," )
-@@ -605,6 +607,9 @@
+@@ -605,6 +609,9 @@ typedef enum MF_OBJECT_TYPE
      MF_OBJECT_INVALID
  } MF_OBJECT_TYPE;
  
@@ -41,7 +41,7 @@
  enum
  {
      //
-@@ -658,6 +663,9 @@
+@@ -658,6 +665,9 @@ enum
      MF_RESOLUTION_READ              = 0x00010000,
      MF_RESOLUTION_WRITE             = 0x00020000
  };
@@ -51,1560 +51,1497 @@
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
  
-@@ -700,6 +708,7 @@
+@@ -700,6 +710,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IMFSourceResolver, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSourceResolver => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(FBE5A32D-A497-4b61-BB85-97B1A848A6E3),
-@@ -806,7 +815,7 @@
-                 );
+@@ -807,6 +818,7 @@ interface IMFSourceResolver : IUnknown
  }
  
--cpp_quote( "STDAPI MFCreateSourceResolver( "                )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateSourceResolver( "                )
+ cpp_quote( "STDAPI MFCreateSourceResolver( "                )
++cpp_quote("/* Win32Metadata: function ::MFCreateSourceResolver => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        /* out */     _Outptr_ IMFSourceResolver     **ppISourceResolver);" )
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
-@@ -815,7 +824,7 @@
- #pragma region Desktop Family
+@@ -816,6 +828,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
  
--cpp_quote( "STDAPI CreatePropertyStore( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ CreatePropertyStore( " )
+ cpp_quote( "STDAPI CreatePropertyStore( " )
++cpp_quote("/* Win32Metadata: function ::CreatePropertyStore => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        /* out */     _Outptr_ IPropertyStore        **ppStore);" )
  
  
-@@ -832,7 +841,7 @@
- ///     The user of this function is responsible for calling PropVariantClear()
+@@ -833,6 +846,7 @@ cpp_quote( "        /* out */     _Outptr_ IPropertyStore        **ppStore);" )
  ///     on the PROPVARIANT to ensure that the array of strings is deallocated.
  /// </remarks>
--cpp_quote( "STDAPI MFGetSupportedSchemes(                      ")
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFGetSupportedSchemes(                      ")
+ cpp_quote( "STDAPI MFGetSupportedSchemes(                      ")
++cpp_quote("/* Win32Metadata: function ::MFGetSupportedSchemes => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "       _Out_ PROPVARIANT* pPropVarSchemeArray  );  ")
  
  /// <summary>
-@@ -848,7 +857,7 @@
- ///     The user of this function is responsible for calling PropVariantClear()
+@@ -849,6 +863,7 @@ cpp_quote( "       _Out_ PROPVARIANT* pPropVarSchemeArray  );  ")
  ///     on the PROPVARIANT to ensure that the array of strings is deallocated.
  /// </remarks>
--cpp_quote( "STDAPI MFGetSupportedMimeTypes(                      ")
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFGetSupportedMimeTypes(                      ")
+ cpp_quote( "STDAPI MFGetSupportedMimeTypes(                      ")
++cpp_quote("/* Win32Metadata: function ::MFGetSupportedMimeTypes => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "       _Out_ PROPVARIANT* pPropVarMimeTypeArray  );  ")
  
  
-@@ -1108,6 +1117,7 @@
+@@ -1108,6 +1123,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  interface IMFPresentationDescriptor;
  interface IMFStreamDescriptor;
  
-+_Win32_AnnotateInterface_(IMFMediaSource, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSource => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(279a808d-aec7-40c8-9c6b-a6b492c78a66),
-@@ -1246,6 +1256,7 @@
+@@ -1246,6 +1262,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IMFMediaSourceEx, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSourceEx => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(3C9B2EB9-86D5-4514-A394-F56664F9F0D8),
-@@ -1286,6 +1297,7 @@
+@@ -1286,6 +1303,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IMFClockConsumer, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFClockConsumer => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(6ef2a662-47c0-4666-b13d-cbb717f2fa2c)
-@@ -1312,6 +1324,7 @@
+@@ -1312,6 +1330,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IMFMediaStream, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaStream => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(D182108F-4EC6-443f-AA42-A71106EC825F),
-@@ -1455,6 +1468,7 @@
+@@ -1455,6 +1474,7 @@ cpp_quote( "EXTERN_GUID( MF_INDEPENDENT_STILL_IMAGE, 0xea12af41, 0x0710, 0x42c9,
  
  interface IMFStreamSink;
  
-+_Win32_AnnotateInterface_(IMFMediaSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6ef2a660-47c0-4666-b13d-cbb717f2fa2c)
-@@ -1793,6 +1807,7 @@
+@@ -1793,6 +1813,7 @@ typedef enum _MFSTREAMSINK_MARKER_TYPE
  
  interface IMFMediaTypeHandler;
  
-+_Win32_AnnotateInterface_(IMFStreamSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFStreamSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0A97B3CF-8E7C-4a3d-8F8C-0C843DC247FB),
-@@ -2009,6 +2024,7 @@
+@@ -2009,6 +2030,7 @@ interface IMFStreamSink : IMFMediaEventGenerator
  ///////////////////////////////////////////////////////////////////////////////
  
  
-+_Win32_AnnotateInterface_(IMFVideoSampleAllocator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoSampleAllocator => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(86cbc910-e533-4751-8e3b-f19b5b806a03),
-@@ -2033,6 +2049,7 @@
+@@ -2033,6 +2055,7 @@ interface IMFVideoSampleAllocator : IUnknown
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFVideoSampleAllocatorNotify, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoSampleAllocatorNotify => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(A792CDBE-C374-4e89-8335-278E7B9956A4),
-@@ -2045,6 +2062,7 @@
+@@ -2045,6 +2068,7 @@ interface IMFVideoSampleAllocatorNotify : IUnknown
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFVideoSampleAllocatorNotifyEx, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoSampleAllocatorNotifyEx => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(3978AA1A-6D5B-4B7F-A340-90899189AE34),
-@@ -2058,6 +2076,7 @@
+@@ -2058,6 +2082,7 @@ interface IMFVideoSampleAllocatorNotifyEx : IMFVideoSampleAllocatorNotify
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFVideoSampleAllocatorCallback, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoSampleAllocatorCallback => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(992388B4-3372-4f67-8B6F-C84C071F4751),
-@@ -2072,6 +2091,7 @@
+@@ -2072,6 +2097,7 @@ interface IMFVideoSampleAllocatorCallback : IUnknown
          [out] LONG* plSamples);
  };
  
-+_Win32_AnnotateInterface_(IMFVideoSampleAllocatorEx, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoSampleAllocatorEx => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
-@@ -2095,6 +2115,7 @@
+@@ -2095,6 +2121,7 @@ interface IMFVideoSampleAllocatorEx : IMFVideoSampleAllocator
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  
-+_Win32_AnnotateInterface_(IMFDXGIDeviceManagerSource, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IMFDXGIDeviceManagerSource => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid(20bc074b-7a8d-4609-8c3b-64a0a3b5d7ce),
-@@ -2129,6 +2150,7 @@
+@@ -2129,6 +2156,7 @@ typedef enum _MF_VIDEO_PROCESSOR_MIRROR
      MIRROR_VERTICAL            = 2
  } MF_VIDEO_PROCESSOR_MIRROR;
  
-+_Win32_AnnotateInterface_(IMFVideoProcessorControl, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoProcessorControl => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
-@@ -2155,6 +2177,7 @@
+@@ -2155,6 +2183,7 @@ interface IMFVideoProcessorControl : IUnknown
  };
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
-+_Win32_AnnotateInterface_(IMFVideoProcessorControl2, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoProcessorControl2 => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      local,
-@@ -2362,6 +2385,7 @@
+@@ -2362,6 +2391,7 @@ interface IMFTopologyNode;
  /// IMFTopology is provided to configure topology. The application or other MF components can create
  /// the topology object via MFCreateTopology and then use the interface to configure the partial topology.
  /// </summary>
-+_Win32_AnnotateInterface_(IMFTopology, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTopology => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(83CF873A-F6DA-4bc8-823F-BACFD55DC433),
-@@ -2693,7 +2717,7 @@
- //
+@@ -2694,6 +2724,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
  // Topology functions
  //
--cpp_quote( "STDAPI MFCreateTopology(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateTopology(" )
+ cpp_quote( "STDAPI MFCreateTopology(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTopology => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFTopology ** ppTopo );" )
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -2737,6 +2761,7 @@
+@@ -2737,6 +2768,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  /// IMFTopologyNode interface.
  /// Methods for configuring topology nodes
  /// </summary>
-+_Win32_AnnotateInterface_(IMFTopologyNode, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTopologyNode => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(83CF873A-F6DA-4bc8-823F-BACFD55DC430),
-@@ -3325,7 +3350,7 @@
- #pragma region PC Application Family
+@@ -3326,6 +3358,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
  
--cpp_quote( "STDAPI MFCreateTopologyNode(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateTopologyNode(" )
+ cpp_quote( "STDAPI MFCreateTopologyNode(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTopologyNode => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    MF_TOPOLOGY_TYPE NodeType," )
  cpp_quote( "    _Outptr_ IMFTopologyNode ** ppNode );" )
  
-@@ -3347,7 +3372,7 @@
- /// If the method succeeds, the return value is S_OK.
+@@ -3348,6 +3381,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  /// If the method fails, the return value will be some failure code.
  /// </returns>
--cpp_quote( "STDAPI MFGetTopoNodeCurrentType(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFGetTopoNodeCurrentType(" )
+ cpp_quote( "STDAPI MFGetTopoNodeCurrentType(" )
++cpp_quote("/* Win32Metadata: function ::MFGetTopoNodeCurrentType => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    IMFTopologyNode* pNode," )
  cpp_quote( "    DWORD dwStreamIndex," )
  cpp_quote( "    BOOL fOutput," )
-@@ -3363,6 +3388,7 @@
+@@ -3363,6 +3397,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IMFGetService, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFGetService => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(fa993888-4383-415a-a930-dd472a8cf6f7)
-@@ -3407,7 +3433,7 @@
- 
+@@ -3408,6 +3443,7 @@ interface IMFGetService : IUnknown
  }
  
--cpp_quote( "STDAPI MFGetService(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFGetService(" )
+ cpp_quote( "STDAPI MFGetService(" )
++cpp_quote("/* Win32Metadata: function ::MFGetService => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IUnknown* punkObject," )
  cpp_quote( "    REFGUID guidService," )
  cpp_quote( "    REFIID riid," )
-@@ -3603,6 +3629,7 @@
+@@ -3603,6 +3639,7 @@ cpp_quote( "#define MFCLOCK_JITTER_DPC          4000" )
  cpp_quote( "#define MFCLOCK_JITTER_PASSIVE      10000" )
  
  
-+_Win32_AnnotateInterface_(IMFClock, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFClock => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(2eb1e945-18b8-4139-9b1a-d5d584818530),
-@@ -3691,7 +3718,7 @@
- ///     Return value is the current MF system time in 100ns units
+@@ -3692,6 +3729,7 @@ interface IMFClock : IUnknown
  /// </returns>
  cpp_quote( "STDAPI_(MFTIME) " )
--cpp_quote( "MFGetSystemTime(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFGetSystemTime(" )
+ cpp_quote( "MFGetSystemTime(" )
++cpp_quote("/* Win32Metadata: function ::MFGetSystemTime => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    );" )
  
  ///////////////////////////////////////////////////////////////////////////////
-@@ -3708,6 +3735,7 @@
+@@ -3708,6 +3746,7 @@ cpp_quote( "#define PRESENTATION_CURRENT_POSITION   0x7fffffffffffffff" )
  interface IMFClockStateSink;
  interface IMFPresentationTimeSource;
  
-+_Win32_AnnotateInterface_(IMFPresentationClock, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFPresentationClock => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(868CE85C-8EA9-4f55-AB82-B009A910A805),
-@@ -3913,7 +3941,7 @@
- ///     *ppPresentationClock must be given a valid Presentation Time Source
+@@ -3914,6 +3953,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
  ///     before it will work.
  /// </remarks>
--cpp_quote( "STDAPI MFCreatePresentationClock(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreatePresentationClock(" )
+ cpp_quote( "STDAPI MFCreatePresentationClock(" )
++cpp_quote("/* Win32Metadata: function ::MFCreatePresentationClock => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFPresentationClock** ppPresentationClock" )
  cpp_quote( "    );" )
  
-@@ -3926,6 +3954,7 @@
+@@ -3926,6 +3966,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */")
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IMFPresentationTimeSource, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFPresentationTimeSource => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(7FF12CCE-F76F-41c2-863B-1666C8E5E139),
-@@ -3988,13 +4017,14 @@
- ///     Presentation Time Source based on system time
+@@ -3989,12 +4030,14 @@ interface IMFPresentationTimeSource : IMFClock
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateSystemTimeSource(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateSystemTimeSource(" )
+ cpp_quote( "MFCreateSystemTimeSource(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateSystemTimeSource => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFPresentationTimeSource** ppSystemTimeSource" )
  cpp_quote( "    );" )
  
  ///////////////////////////////////////////////////////////////////////////////
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFClockStateSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFClockStateSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(F6696E82-74F7-4f3d-A178-8A5E09C3659F),
-@@ -4295,6 +4325,7 @@
+@@ -4295,6 +4338,7 @@ cpp_quote("DEFINE_GUID( MF_PD_ADAPTIVE_STREAMING, 0xEA0D5D97, 0x29F9, 0x488B, 0x
  
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
  
-+_Win32_AnnotateInterface_(IMFPresentationDescriptor, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFPresentationDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(03cb2711-24d7-4db6-a17f-f3a7a479a536),
-@@ -4330,7 +4361,7 @@
- // The IMFStreamDescriptors in the apStreamDescriptors array should be the
+@@ -4331,6 +4375,7 @@ interface IMFPresentationDescriptor : IMFAttributes
  // MF implementations.
  //
--cpp_quote( "STDAPI MFCreatePresentationDescriptor(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreatePresentationDescriptor(" )
+ cpp_quote( "STDAPI MFCreatePresentationDescriptor(" )
++cpp_quote("/* Win32Metadata: function ::MFCreatePresentationDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    DWORD cStreamDescriptors," )
  cpp_quote( "    _In_reads_opt_( cStreamDescriptors ) IMFStreamDescriptor** apStreamDescriptors," )
  cpp_quote( "    _Outptr_ IMFPresentationDescriptor** ppPresentationDescriptor" )
-@@ -4348,7 +4379,7 @@
- // Given an IMFPresentationDescriptor, determines whether this presentation
+@@ -4349,6 +4394,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  // requires that it be played in the Media Foundation Protected Environment.
  //
--cpp_quote("STDAPI MFRequireProtectedEnvironment(")
-+cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFRequireProtectedEnvironment(")
+ cpp_quote("STDAPI MFRequireProtectedEnvironment(")
++cpp_quote("/* Win32Metadata: function ::MFRequireProtectedEnvironment => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("     _In_ IMFPresentationDescriptor* pPresentationDescriptor")
  cpp_quote("     );")
  cpp_quote("")
-@@ -4356,13 +4387,13 @@
- //
+@@ -4357,12 +4403,14 @@ cpp_quote("")
  // Functions to serialize and deserialize a Presentation Descriptor
  //
--cpp_quote( "STDAPI MFSerializePresentationDescriptor(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFSerializePresentationDescriptor(" )
+ cpp_quote( "STDAPI MFSerializePresentationDescriptor(" )
++cpp_quote("/* Win32Metadata: function ::MFSerializePresentationDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _In_ IMFPresentationDescriptor * pPD,")
  cpp_quote( "    _Out_ DWORD * pcbData," )
  cpp_quote( "    _Outptr_result_bytebuffer_to_(*pcbData, *pcbData) BYTE ** ppbData);" )
  cpp_quote("")
  
--cpp_quote( "STDAPI MFDeserializePresentationDescriptor(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFDeserializePresentationDescriptor(" )
+ cpp_quote( "STDAPI MFDeserializePresentationDescriptor(" )
++cpp_quote("/* Win32Metadata: function ::MFDeserializePresentationDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _In_ DWORD cbData," )
  cpp_quote( "    _In_reads_( cbData ) BYTE * pbData," )
  cpp_quote( "    _Outptr_ IMFPresentationDescriptor ** ppPD);")
-@@ -4407,6 +4438,7 @@
+@@ -4407,6 +4455,7 @@ cpp_quote( "EXTERN_GUID(MF_SD_MUTUALLY_EXCLUSIVE, 0x23ef79c, 0x388d, 0x487f, 0xa
  // even if the content is protected.
  cpp_quote("DEFINE_GUID( MF_SD_SUPPORTS_PROTECTED_CODEC_SWITCH, 0x8fb6b117, 0x862e, 0x4b31, 0x8d, 0xab, 0x5e, 0x0a, 0x43, 0x4c, 0xae, 0xf0);")
  
-+_Win32_AnnotateInterface_(IMFStreamDescriptor, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFStreamDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(56c03d9c-9dbb-45f5-ab4b-d80f47c05938),
-@@ -4427,7 +4459,7 @@
- // Instantiates the Media Foundation-provided implementations of
+@@ -4428,6 +4477,7 @@ interface IMFStreamDescriptor : IMFAttributes
  // IMFStreamDescriptor
  //
--cpp_quote( "STDAPI MFCreateStreamDescriptor(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateStreamDescriptor(" )
+ cpp_quote( "STDAPI MFCreateStreamDescriptor(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateStreamDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    DWORD dwStreamIdentifier," )
  cpp_quote( "    DWORD cMediaTypes," )
  cpp_quote( "    _In_reads_(cMediaTypes) IMFMediaType** apMediaTypes," )
-@@ -4438,6 +4470,7 @@
+@@ -4438,6 +4488,7 @@ cpp_quote( "" )
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFMediaTypeHandler, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaTypeHandler => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e93dcf6c-4b07-4e1e-8123-aa16ed6eadf5),
-@@ -4517,7 +4550,7 @@
- // type.  To use this object, initialize it with a media type via
+@@ -4518,6 +4569,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  // IMFMediaTypeHandler::SetCurrentMediaType.
  //
--cpp_quote( "STDAPI MFCreateSimpleTypeHandler(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateSimpleTypeHandler(" )
+ cpp_quote( "STDAPI MFCreateSimpleTypeHandler(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateSimpleTypeHandler => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFMediaTypeHandler ** ppHandler );" )
  
  ///////////////////////////////////////////////////////////////////////////////
-@@ -4533,6 +4566,7 @@
+@@ -4533,6 +4585,7 @@ typedef enum MFTIMER_FLAGS
  } MFTIMER_FLAGS;
  
  
-+_Win32_AnnotateInterface_(IMFTimer, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTimer => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e56e4cbd-8f70-49d8-a0f8-edb3d6ab9bf2),
-@@ -4649,6 +4683,7 @@
+@@ -4649,6 +4702,7 @@ typedef enum _MFSHUTDOWN_STATUS
      MFSHUTDOWN_COMPLETED,
  } MFSHUTDOWN_STATUS;
  
-+_Win32_AnnotateInterface_(IMFShutdown, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFShutdown => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(97ec2ea4-0e42-4937-97ac-9d6d328824e1),
-@@ -4689,7 +4724,7 @@
- // If the object inherits from IMFShutdown, then IMFShutdown::Shutdown is
+@@ -4690,6 +4744,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  // called.  Regardless, this function will return success.
  cpp_quote( "STDAPI " )
--cpp_quote( "MFShutdownObject(")
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFShutdownObject(")
+ cpp_quote( "MFShutdownObject(")
++cpp_quote("/* Win32Metadata: function ::MFShutdownObject => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IUnknown * pUnk );")
  
  
-@@ -4701,7 +4736,7 @@
- 
+@@ -4702,6 +4757,7 @@ cpp_quote( "    IUnknown * pUnk );")
  
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateAudioRenderer(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateAudioRenderer(" )
+ cpp_quote( "MFCreateAudioRenderer(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateAudioRenderer => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IMFAttributes* pAudioAttributes," )
  cpp_quote( "    _Outptr_ IMFMediaSink** ppSink" )
  cpp_quote( "    );" )
-@@ -4720,7 +4755,7 @@
- ///     Returns pointer to an Audio Renderer Media Sink Activate
+@@ -4721,6 +4777,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateAudioRendererActivate( " )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateAudioRendererActivate( " )
+ cpp_quote( "MFCreateAudioRendererActivate( " )
++cpp_quote("/* Win32Metadata: function ::MFCreateAudioRendererActivate => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFActivate ** ppActivate " )
  cpp_quote( "    );" )
  
-@@ -4809,7 +4844,7 @@
- ///     Returns pointer to a Video Renderer Media Sink Activate
+@@ -4810,6 +4867,7 @@ cpp_quote( "EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_STREAM_CATEGORY, 0xa9770471
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateVideoRendererActivate(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateVideoRendererActivate(" )
+ cpp_quote( "MFCreateVideoRendererActivate(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateVideoRendererActivate => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _In_ HWND hwndVideo, " )
  cpp_quote( "    _Outptr_ IMFActivate ** ppActivate " )
  cpp_quote( "    );" )
-@@ -4831,7 +4866,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -4832,6 +4890,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateMPEG4MediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows7_ MFCreateMPEG4MediaSink(" )
+ cpp_quote( "MFCreateMPEG4MediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMPEG4MediaSink => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -4855,7 +4890,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -4856,6 +4915,7 @@ cpp_quote( "    );" )
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreate3GPMediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows7_ MFCreate3GPMediaSink(" )
+ cpp_quote( "MFCreate3GPMediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreate3GPMediaSink => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -4873,7 +4908,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -4874,6 +4934,7 @@ cpp_quote( "    );" )
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateMP3MediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows7_ MFCreateMP3MediaSink(" )
+ cpp_quote( "MFCreateMP3MediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMP3MediaSink => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _Outptr_ IMFMediaSink** ppMediaSink " )
  cpp_quote( "    );" )
-@@ -4891,7 +4926,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -4892,6 +4953,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateAC3MediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows8_ MFCreateAC3MediaSink(" )
+ cpp_quote( "MFCreateAC3MediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateAC3MediaSink => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pAudioMediaType, " )
  cpp_quote("     _Outptr_ IMFMediaSink** ppMediaSink " )
-@@ -4908,7 +4943,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -4909,6 +4971,7 @@ cpp_quote( "    );" )
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateADTSMediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows8_ MFCreateADTSMediaSink(" )
+ cpp_quote( "MFCreateADTSMediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateADTSMediaSink => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pAudioMediaType, " )
  cpp_quote("     _Outptr_ IMFMediaSink** ppMediaSink " )
-@@ -4939,7 +4974,7 @@
- ///         the return value will be a failure code.
+@@ -4940,6 +5003,7 @@ cpp_quote( "    );" )
  /// </returns>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateMuxSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows8_ MFCreateMuxSink(" )
+ cpp_quote( "MFCreateMuxSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMuxSink => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ GUID guidOutputSubType, " )
  cpp_quote( "    _In_opt_ IMFAttributes* pOutputAttributes, " )
  cpp_quote( "    _In_opt_ IMFByteStream* pOutputByteStream, " )
-@@ -4962,7 +4997,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -4963,6 +5027,7 @@ cpp_quote( "    );" )
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateFMPEG4MediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows8_ MFCreateFMPEG4MediaSink(" )
+ cpp_quote( "MFCreateFMPEG4MediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateFMPEG4MediaSink => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -4988,7 +5023,7 @@
- ///     Receives a pointer to the IMFMediaSink Interface.  The caller must release this interface.
+@@ -4989,6 +5054,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateAVIMediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows81_ MFCreateAVIMediaSink(" )
+ cpp_quote( "MFCreateAVIMediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateAVIMediaSink => SupportedOSPlatform(\"windows8.1\") */")
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -5009,7 +5044,7 @@
- ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
+@@ -5010,6 +5076,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  /// </param>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateWAVEMediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows81_ MFCreateWAVEMediaSink(" )
+ cpp_quote( "MFCreateWAVEMediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateWAVEMediaSink => SupportedOSPlatform(\"windows8.1\") */")
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pAudioMediaType, " )
  cpp_quote("     _Outptr_ IMFMediaSink** ppMediaSink " )
-@@ -5040,6 +5075,7 @@
+@@ -5040,6 +5107,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINBLUE) ")
  ///     topology to afull topology, which can be set on the Media Session with
  ///     the flag MFSESSION_SETTOPOLOGY_NORESOLUTION.
  /// </summary>
-+_Win32_AnnotateInterface_(IMFTopoLoader, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTopoLoader => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(DE9A6157-F660-4643-B56A-DF9F7998C7CD),
-@@ -5094,7 +5130,7 @@
- ///     Pointer to an IMFTopoLoader pointer where the Topology Loader object
+@@ -5095,6 +5163,7 @@ interface IMFTopoLoader : IUnknown
  ///     will be returned
  /// </param>
--cpp_quote( "STDAPI MFCreateTopoLoader(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateTopoLoader(" )
+ cpp_quote( "STDAPI MFCreateTopoLoader(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTopoLoader => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFTopoLoader ** ppObj );" )
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
-@@ -5112,6 +5148,7 @@
+@@ -5112,6 +5181,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFContentProtectionManager, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFContentProtectionManager => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( ACF92459-6A61-42bd-B57C-B43E51203CB0 ),
-@@ -5229,6 +5266,7 @@
+@@ -5229,6 +5299,7 @@ typedef enum
      MF_LICENSE_URL_TAMPERED,
  }   MF_URL_TRUST_STATUS;
  
-+_Win32_AnnotateInterface_(IMFContentEnabler, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFContentEnabler => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( D3C4EF59-49CE-4381-9071-D5BCD044C770 ),
-@@ -5565,6 +5603,7 @@
+@@ -5565,6 +5636,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IMFMetadata, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMetadata => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(F88CFB8C-EF16-4991-B450-CB8C69E51704),
-@@ -5687,6 +5726,7 @@
+@@ -5687,6 +5759,7 @@ interface IMFMetadata : IUnknown
                  );
  };
  
-+_Win32_AnnotateInterface_(IMFMetadataProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMetadataProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(56181D2D-E221-4adb-B1C8-3CEE6A53F76F)
-@@ -5782,6 +5822,7 @@
+@@ -5782,6 +5855,7 @@ typedef enum _MFRATE_DIRECTION
  
  }   MFRATE_DIRECTION;
  
-+_Win32_AnnotateInterface_(IMFRateSupport, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFRateSupport => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0a9ccdbc-d797-4563-9667-94ec5d79292d),
-@@ -6008,6 +6049,7 @@
+@@ -6008,6 +6082,7 @@ cpp_quote( "EXTERN_GUID( MF_RATE_CONTROL_SERVICE, 0x866fa297, 0xb802, 0x4bf8, 0x
  
  
  
-+_Win32_AnnotateInterface_(IMFRateControl, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFRateControl => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(88ddcd21-03c3-4275-91ed-55ee3929328f),
-@@ -6142,6 +6184,7 @@
+@@ -6142,6 +6217,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFTimecodeTranslate, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFTimecodeTranslate => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(ab9d8661-f7e8-4ef4-9861-89f334f94e74),
-@@ -6195,6 +6238,7 @@
+@@ -6195,6 +6271,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFSeekInfo, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFSeekInfo => SupportedOSPlatform(\"windows8.0\") */")
  [
      object, 
      uuid(26AFEA53-D9ED-42B5-AB80-E64F9EE34779),
-@@ -6256,6 +6300,7 @@
+@@ -6256,6 +6333,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN8) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFSimpleAudioVolume, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSimpleAudioVolume => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(089EDF13-CF71-4338-8D13-9E569DBDC319)
-@@ -6296,6 +6341,7 @@
+@@ -6296,6 +6374,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  cpp_quote( "EXTERN_GUID( MR_CAPTURE_POLICY_VOLUME_SERVICE, 0x24030acd, 0x107a, 0x4265, 0x97, 0x5c, 0x41, 0x4e, 0x33, 0xe6, 0x5f, 0x2a);" )
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN8) ")
  
-+_Win32_AnnotateInterface_(IMFAudioStreamVolume, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFAudioStreamVolume => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(76B1BBDB-4EC8-4f36-B106-70A9316DF593)
-@@ -6346,6 +6392,7 @@
+@@ -6346,6 +6425,7 @@ cpp_quote( "EXTERN_GUID( MR_STREAM_VOLUME_SERVICE, 0xf8b5fa2f, 0x32ef, 0x46f5, 0
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFAudioPolicy, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFAudioPolicy => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(a0638c2b-6465-4395-9ae7-a321a9fd2856),
-@@ -6385,6 +6432,7 @@
+@@ -6385,6 +6465,7 @@ cpp_quote( "EXTERN_GUID( MR_AUDIO_POLICY_SERVICE, 0x911fd737, 0x6775, 0x4ab0, 0x
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFSampleGrabberSinkCallback, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSampleGrabberSinkCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(8C7B80BF-EE42-4b59-B1DF-55668E1BDCA8),
-@@ -6418,7 +6466,7 @@
- }
+@@ -6419,6 +6500,7 @@ interface IMFSampleGrabberSinkCallback : IMFClockStateSink
  
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateSampleGrabberSinkActivate(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateSampleGrabberSinkActivate(" )
+ cpp_quote( "MFCreateSampleGrabberSinkActivate(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateSampleGrabberSinkActivate => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IMFMediaType *pIMFMediaType,")
  cpp_quote( "    IMFSampleGrabberSinkCallback* pIMFSampleGrabberSinkCallback," )
  cpp_quote( "    _Outptr_ IMFActivate** ppIActivate" )
-@@ -6447,6 +6495,7 @@
+@@ -6447,6 +6529,7 @@ cpp_quote( "EXTERN_GUID( MF_SAMPLEGRABBERSINK_IGNORE_CLOCK, 0x0efda2c0, 0x2b69,
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFSampleGrabberSinkCallback2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFSampleGrabberSinkCallback2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(ca86aa50-c46e-429e-ab27-16d6ac6844cb),
-@@ -6520,6 +6569,7 @@
+@@ -6520,6 +6603,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFWorkQueueServices, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFWorkQueueServices => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
     object,
     uuid(35FE1BB8-A3A9-40fe-BBEC-EB569C9CCCA3),
-@@ -6776,6 +6826,7 @@
+@@ -6776,6 +6860,7 @@ cpp_quote( "EXTERN_GUID( MF_WORKQUEUE_SERVICES, 0x8e37d489, 0x41e0, 0x413a, 0x90
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFWorkQueueServicesEx, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFWorkQueueServicesEx => SupportedOSPlatform(\"windows8.0\") */")
  [
     object,
     uuid(96bf961b-40fe-42f1-ba9d-320238b49700),
-@@ -6923,6 +6974,7 @@
+@@ -6923,6 +7008,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFQualityManager, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFQualityManager => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(8D009D86-5B9F-4115-B1FC-9F80D52AB8AB),
-@@ -7051,7 +7103,7 @@
- ///     A 3rd party can create the default MF Quality Manager using
+@@ -7052,6 +7138,7 @@ interface IMFQualityManager : IUnknown
  ///     this function. It could be used to sub-class its functionality.
  /// </remarks>
--cpp_quote( "STDAPI MFCreateStandardQualityManager(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateStandardQualityManager(" )
+ cpp_quote( "STDAPI MFCreateStandardQualityManager(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateStandardQualityManager => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFQualityManager **ppQualityManager );" )
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
-@@ -7073,6 +7125,7 @@
+@@ -7073,6 +7160,7 @@ cpp_quote( "EXTERN_GUID( MF_QUALITY_NOTIFY_SAMPLE_LAG, 0x30d15206, 0xed2a, 0x476
  
  
  
-+_Win32_AnnotateInterface_(IMFQualityAdvise, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFQualityAdvise => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(EC15E2E9-E36B-4f7c-8758-77D452EF4CE7)
-@@ -7216,6 +7269,7 @@
+@@ -7216,6 +7304,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IMFQualityAdvise2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFQualityAdvise2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(F3706F0D-8EA2-4886-8000-7155E9EC2EAE)
-@@ -7246,6 +7300,7 @@
+@@ -7246,6 +7335,7 @@ interface IMFQualityAdvise2: IMFQualityAdvise
  };
  
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFQualityAdviseLimits, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFQualityAdviseLimits => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(dfcd8e4d-30b5-4567-acaa-8eb5b7853dc9)
-@@ -7282,6 +7337,7 @@
+@@ -7282,6 +7372,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFRealTimeClient, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFRealTimeClient => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
     object,
     uuid(2347D60B-3FB5-480c-8803-8DF3ADCD3EF0),
-@@ -7326,6 +7382,7 @@
+@@ -7326,6 +7417,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IMFRealTimeClientEx, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFRealTimeClientEx => SupportedOSPlatform(\"windows8.0\") */")
  [
     object,
     uuid(03910848-AB16-4611-B100-17B88AE2F248)   
-@@ -7387,6 +7444,7 @@
+@@ -7387,6 +7479,7 @@ typedef enum _MFSequencerTopologyFlags
      SequencerTopologyFlags_Last = 0x00000001,
  } MFSequencerTopologyFlags;
  
-+_Win32_AnnotateInterface_(IMFSequencerSource, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSequencerSource => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(197CD219-19CB-4de1-A64C-ACF2EDCBE59E),
-@@ -7530,7 +7588,7 @@
- /// <param name="ppSequencer">
+@@ -7531,6 +7624,7 @@ cpp_quote( "EXTERN_GUID( MF_TIME_FORMAT_SEGMENT_OFFSET, 0xc8b8be77, 0x869c, 0x43
  ///     Returns pointer to a Sequencer.
  /// </param>
--cpp_quote( "STDAPI MFCreateSequencerSource(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateSequencerSource(" )
+ cpp_quote( "STDAPI MFCreateSequencerSource(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateSequencerSource => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IUnknown *pReserved," )
  cpp_quote( "    _Outptr_ IMFSequencerSource **ppSequencerSource" )
  cpp_quote( "    );" )
-@@ -7550,7 +7608,7 @@
- ///     Pointer to receive the PROPVARIANT that should be used with Start()
+@@ -7551,6 +7645,7 @@ cpp_quote( "    );" )
  ///     calls
  /// </param>
--cpp_quote( "STDAPI MFCreateSequencerSegmentOffset(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateSequencerSegmentOffset(" )
+ cpp_quote( "STDAPI MFCreateSequencerSegmentOffset(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateSequencerSegmentOffset => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    MFSequencerElementId dwId," )
  cpp_quote( "    MFTIME hnsOffset," )
  cpp_quote( "    _Out_ PROPVARIANT *pvarSegmentOffset" )
-@@ -7572,7 +7630,7 @@
- /// <param name="ppAggSource">
+@@ -7573,6 +7668,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  ///     Returns a pointer to the aggregated media source.
  /// </param>
--cpp_quote( "STDAPI MFCreateAggregateSource(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateAggregateSource(" )
+ cpp_quote( "STDAPI MFCreateAggregateSource(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateAggregateSource => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_ IMFCollection *pSourceCollection," )
  cpp_quote( "    _Outptr_ IMFMediaSource **ppAggSource" )
  cpp_quote( "    );" )
-@@ -7587,6 +7645,7 @@
+@@ -7587,6 +7683,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFMediaSourceTopologyProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSourceTopologyProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0E1D6009-C9F3-442d-8C51-A42D2D49452F),
-@@ -7621,6 +7680,7 @@
+@@ -7621,6 +7718,7 @@ interface IMFMediaSourceTopologyProvider : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFMediaSourcePresentationProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSourcePresentationProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0E1D600a-C9F3-442d-8C51-A42D2D49452F),
-@@ -7695,6 +7755,7 @@
+@@ -7695,6 +7793,7 @@ cpp_quote("#if defined(_MSC_VER) && (_MSC_VER >= 1600)")
  cpp_quote("#pragma warning(pop)")
  cpp_quote("#endif")
  
-+_Win32_AnnotateInterface_(IMFTopologyNodeAttributeEditor, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTopologyNodeAttributeEditor => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(676aa6dd-238a-410d-bb99-65668d01605a),
-@@ -7846,6 +7907,7 @@
+@@ -7846,6 +7945,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IMFByteStreamBuffering, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFByteStreamBuffering => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6d66d782-1d4f-4db7-8c63-cb8c77f1ef5e),
-@@ -7886,6 +7948,7 @@
+@@ -7886,6 +7986,7 @@ interface IMFByteStreamBuffering : IUnknown
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFByteStreamCacheControl, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFByteStreamCacheControl => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(F5042EA4-7A96-4a75-AA7B-2BE1EF7F88D5),
-@@ -7909,6 +7972,7 @@
+@@ -7909,6 +8010,7 @@ interface IMFByteStreamCacheControl : IUnknown
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFByteStreamTimeSeek, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFByteStreamTimeSeek => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(64976BFA-FB61-4041-9069-8C9A5F659BEB),
-@@ -7982,6 +8046,7 @@
+@@ -7982,6 +8084,7 @@ typedef struct
      QWORD qwEndOffset;
  } MF_BYTE_STREAM_CACHE_RANGE;
  
-+_Win32_AnnotateInterface_(IMFByteStreamCacheControl2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFByteStreamCacheControl2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(71CE469C-F34B-49EA-A56B-2D2A10E51149),
-@@ -8049,6 +8114,7 @@
+@@ -8049,6 +8152,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFNetCredential, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetCredential => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(5b87ef6a-7ed8-434f-ba0e-184fac1628d1),
-@@ -8166,6 +8232,7 @@
+@@ -8166,6 +8270,7 @@ HRESULT SetPassword(
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFNetCredentialManager, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetCredentialManager => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(5b87ef6b-7ed8-434f-ba0e-184fac1628d1),
-@@ -8279,6 +8346,7 @@
+@@ -8279,6 +8384,7 @@ interface IMFNetCredentialManager : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFNetCredentialCache, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetCredentialCache => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(5b87ef6c-7ed8-434f-ba0e-184fac1628d1),
-@@ -8431,7 +8499,7 @@
- ///     should use the default Credential Cache to persist credentials.
+@@ -8432,6 +8538,7 @@ interface IMFNetCredentialCache : IUnknown
  /// </summary>
  cpp_quote( "STDAPI ")
--cpp_quote( "MFCreateCredentialCache(")
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateCredentialCache(")
+ cpp_quote( "MFCreateCredentialCache(")
++cpp_quote("/* Win32Metadata: function ::MFCreateCredentialCache => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFNetCredentialCache ** ppCache);")
  
  
-@@ -8447,6 +8515,7 @@
+@@ -8447,6 +8554,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFSSLCertificateManager, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFSSLCertificateManager => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(61f7d887-1230-4a8b-aeba-8ad434d1a64d),
-@@ -8575,6 +8644,7 @@
+@@ -8575,6 +8683,7 @@ cpp_quote( "EXTERN_GUID( MFNETSOURCE_SSLCERTIFICATE_MANAGER, 0x55e6cb27, 0xe69b,
  //  Synopsis:   Callbacks for filtering and sending requests.
  //
  //------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IMFNetResourceFilter, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetResourceFilter => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(091878a3-bf11-4a5c-bc9f-33995b06ef2d),
-@@ -8607,6 +8677,7 @@
+@@ -8607,6 +8716,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFSourceOpenMonitor, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSourceOpenMonitor => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(059054B3-027C-494C-A27D-9113291CF87F),
-@@ -8637,6 +8708,7 @@
+@@ -8637,6 +8747,7 @@ interface IMFSourceOpenMonitor : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFNetProxyLocator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetProxyLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e9cd0383-a268-4bb4-82de-658d53574d41),
-@@ -8704,7 +8776,7 @@
- ///     See property keys MFNETSOURCE_PROXYHOSTNAME through MFNETSOURCE_PROXYRERUNAUTODETECTION.
+@@ -8705,6 +8816,7 @@ interface IMFNetProxyLocator : IUnknown
  /// </param>
  /// <param name=ppProxyLocator>Pointer to receive the ProxyLocator object.</param>
--cpp_quote( "STDAPI MFCreateProxyLocator(")
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateProxyLocator(")
+ cpp_quote( "STDAPI MFCreateProxyLocator(")
++cpp_quote("/* Win32Metadata: function ::MFCreateProxyLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    LPCWSTR pszProtocol," )
  cpp_quote( "    IPropertyStore* pProxyConfig, " )
  cpp_quote( "    _Outptr_ IMFNetProxyLocator** ppProxyLocator );" )
-@@ -8714,6 +8786,7 @@
+@@ -8714,6 +8826,7 @@ cpp_quote( "    _Outptr_ IMFNetProxyLocator** ppProxyLocator );" )
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFNetProxyLocatorFactory, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetProxyLocatorFactory => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e9cd0384-a268-4bb4-82de-658d53574d41),
-@@ -8747,6 +8820,7 @@
+@@ -8747,6 +8860,7 @@ interface IMFNetProxyLocatorFactory : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFSaveJob, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSaveJob => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e9931663-80bf-4c6e-98af-5dcf58747d1f),
-@@ -8836,6 +8910,7 @@
+@@ -8836,6 +8950,7 @@ typedef enum _MFNETSOURCE_PROTOCOL_TYPE
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFNetSchemeHandlerConfig, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetSchemeHandlerConfig => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(7BE19E73-C9BF-468a-AC5A-A5E8653BEC87),
-@@ -8883,7 +8958,7 @@
- ///////////////////////////////////////////////////////////////////////////////
+@@ -8884,6 +8999,7 @@ interface IMFNetSchemeHandlerConfig : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  
--cpp_quote( "STDAPI MFCreateNetSchemePlugin(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateNetSchemePlugin(" )
+ cpp_quote( "STDAPI MFCreateNetSchemePlugin(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateNetSchemePlugin => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    REFIID riid, " )
  cpp_quote( "    LPVOID *ppvHandler );" )
  
-@@ -9480,6 +9555,7 @@
+@@ -9480,6 +9596,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IMFSchemeHandler, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSchemeHandler => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6D4C7B74-52A0-4bb7-B0DB-55F29F47A668),
-@@ -9520,6 +9596,7 @@
+@@ -9520,6 +9637,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  cpp_quote( "EXTERN_GUID(MF_BYTESTREAMHANDLER_ACCEPTS_SHARE_WRITE, 0xa6e1f733, 0x3001, 0x4915, 0x81, 0x50, 0x15, 0x58, 0xa2, 0x18, 0xe, 0xc8);" )
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  
-+_Win32_AnnotateInterface_(IMFByteStreamHandler, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFByteStreamHandler => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(BB420AA4-765B-4a1f-91FE-D6A8A143924C),
-@@ -9576,6 +9653,7 @@
+@@ -9576,6 +9694,7 @@ cpp_quote( "EXTERN_GUID( MF_BYTESTREAM_SERVICE, 0xab025e2b, 0x16d9, 0x4180, 0xa1
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFTrustedInput, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTrustedInput => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 542612C4-A1B8-4632-B521-DE11EA64A0B0 ),
-@@ -9701,6 +9779,7 @@
+@@ -9701,6 +9820,7 @@ interface IMFOutputPolicy;
  
  cpp_quote("EXTERN_GUID( MF_MEDIA_PROTECTION_MANAGER_PROPERTIES, 0x38BD81A9, 0xACEA, 0x4C73, 0x89, 0xB2, 0x55, 0x32, 0xC0, 0xAE, 0xCA, 0x79 );")
  
-+_Win32_AnnotateInterface_(IMFInputTrustAuthority, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFInputTrustAuthority => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( D19F8E98-B126-4446-890C-5DCB7AD71453 ),
-@@ -9937,6 +10016,7 @@
+@@ -9937,6 +10057,7 @@ interface IMFInputTrustAuthority : IUnknown
  
  interface IMFOutputTrustAuthority;
  
-+_Win32_AnnotateInterface_(IMFTrustedOutput, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTrustedOutput => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( D19F8E95-B126-4446-890C-5DCB7AD71453 ),
-@@ -10015,6 +10095,7 @@
+@@ -10015,6 +10136,7 @@ interface IMFTrustedOutput : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFOutputTrustAuthority, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFOutputTrustAuthority => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( D19F8E94-B126-4446-890C-5DCB7AD71453 ),
-@@ -10081,6 +10162,7 @@
+@@ -10081,6 +10203,7 @@ interface IMFOutputSchema;
  ////////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFOutputPolicy, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFOutputPolicy => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 7F00F10A-DAED-41AF-AB26-5FDFA4DFBA3C ),
-@@ -10271,6 +10353,7 @@
+@@ -10271,6 +10394,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFOutputSchema, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFOutputSchema => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 7BE0FC5B-ABD9-44FB-A5C8-F50136E71599 ),
-@@ -10590,6 +10673,7 @@
+@@ -10590,6 +10714,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IMFSecureChannel, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSecureChannel => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( d0ae555d-3b12-4d97-b060-0990bc5aeb67 ),
-@@ -10656,6 +10740,7 @@
+@@ -10656,6 +10781,7 @@ typedef enum SAMPLE_PROTECTION_VERSION
  
  cpp_quote( "EXTERN_GUID( MF_SampleProtectionSalt, 0x5403deee, 0xb9ee, 0x438f, 0xaa, 0x83, 0x38, 0x4, 0x99, 0x7e, 0x56, 0x9d);" )
  
-+_Win32_AnnotateInterface_(IMFSampleProtection, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSampleProtection => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 8e36395f-c7b9-43c4-a54d-512b4af63c95 ),
-@@ -10788,6 +10873,7 @@
+@@ -10788,6 +10914,7 @@ interface IMFSampleProtection : IUnknown
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFMediaSinkPreroll, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSinkPreroll => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(5dfd4b2a-7674-4110-a4e6-8a68fd5f3688)
-@@ -10829,6 +10915,7 @@
+@@ -10829,6 +10956,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IMFFinalizableMediaSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFFinalizableMediaSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(EAECB74A-9A50-42ce-9541-6A7F57AA4AD7),
-@@ -10895,6 +10982,7 @@
+@@ -10895,6 +11023,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IMFStreamingSinkConfig, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFStreamingSinkConfig => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(9db7aa41-3cc5-40d4-8509-555804ad34cc)
-@@ -10959,6 +11047,7 @@
+@@ -10959,6 +11088,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  /// process for source and sequencer. All proxy objects should implement the IMFRemoteProxy interface in order for
  /// pipeline to access remote object and proxy host.
  /// </summary>
-+_Win32_AnnotateInterface_(IMFRemoteProxy, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFRemoteProxy => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 994e23ad-1cc2-493c-b9fa-46f1cb040fa4 ),
-@@ -10982,6 +11071,7 @@
+@@ -10982,6 +11112,7 @@ cpp_quote( "EXTERN_GUID( MF_REMOTE_PROXY, 0x2f00c90e, 0xd2cf, 0x4278, 0x8b, 0x6a
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFObjectReferenceStream, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFObjectReferenceStream => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(09EF5BE3-C8A7-469e-8B70-73BF25BB193F),
-@@ -11009,6 +11099,7 @@
+@@ -11009,6 +11140,7 @@ cpp_quote( "EXTERN_GUID( CLSID_CreateMediaExtensionObject, 0xef65a54d, 0x0788, 0
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFPMPHost, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFPMPHost => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(F70CA1A9-FDC7-4782-B994-ADFFB1C98606),
-@@ -11062,6 +11153,7 @@
+@@ -11062,6 +11194,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  cpp_quote( "EXTERN_C const GUID MF_PMP_SERVICE;" )
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  
-+_Win32_AnnotateInterface_(IMFPMPClient, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFPMPClient => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6C4E655D-EAD8-4421-B6B9-54DCDBBDF820),
-@@ -11081,6 +11173,7 @@
+@@ -11081,6 +11214,7 @@ interface IMFPMPClient: IUnknown
          );
  }
  
-+_Win32_AnnotateInterface_(IMFPMPServer, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFPMPServer => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 994e23af-1cc2-493c-b9fa-46f1cb040fa4 ),
-@@ -11110,7 +11203,7 @@
-                 [out, iid_is(riid)] void ** ppObject);
+@@ -11111,6 +11245,7 @@ interface IMFPMPServer : IUnknown
  };
  
--cpp_quote( "STDAPI MFCreatePMPServer(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreatePMPServer(" )
+ cpp_quote( "STDAPI MFCreatePMPServer(" )
++cpp_quote("/* Win32Metadata: function ::MFCreatePMPServer => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    DWORD dwCreationFlags," )
  cpp_quote( "    _Outptr_ IMFPMPServer** ppPMPServer" )
  cpp_quote( "    );" )
-@@ -11118,6 +11211,7 @@
+@@ -11118,6 +11253,7 @@ cpp_quote( "    );" )
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFRemoteDesktopPlugin, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFRemoteDesktopPlugin => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid( 1cde6309-cae0-4940-907e-c1ec9c3d1d4a ),
-@@ -11140,7 +11234,7 @@
- /// <summary>
+@@ -11141,6 +11277,7 @@ interface IMFRemoteDesktopPlugin : IUnknown
  /// Creates party remote manager
  /// </summary>
--cpp_quote( "STDAPI MFCreateRemoteDesktopPlugin(")
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateRemoteDesktopPlugin(")
+ cpp_quote( "STDAPI MFCreateRemoteDesktopPlugin(")
++cpp_quote("/* Win32Metadata: function ::MFCreateRemoteDesktopPlugin => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    _Outptr_ IMFRemoteDesktopPlugin** ppPlugin );" )
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -11149,7 +11243,7 @@
- //
+@@ -11150,6 +11287,7 @@ cpp_quote( "    _Outptr_ IMFRemoteDesktopPlugin** ppPlugin );" )
  // CreateNamedPropertyStore
  //
--cpp_quote( "EXTERN_C HRESULT STDAPICALLTYPE CreateNamedPropertyStore(" )
-+cpp_quote( "EXTERN_C HRESULT STDAPICALLTYPE _Win32_SupportedOS_WindowsVista_ CreateNamedPropertyStore(" )
+ cpp_quote( "EXTERN_C HRESULT STDAPICALLTYPE CreateNamedPropertyStore(" )
++cpp_quote("/* Win32Metadata: function ::CreateNamedPropertyStore => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        _Outptr_ INamedPropertyStore **ppStore" )
  cpp_quote( "        );" )
  cpp_quote( "" )
-@@ -11165,6 +11259,7 @@
+@@ -11165,6 +11303,7 @@ cpp_quote( "" )
  /// <summary>
  ///     Used to retrieve and set SAMI styles on the MF SAMI Media Source.
  /// </summary>
-+_Win32_AnnotateInterface_(IMFSAMIStyle, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFSAMIStyle => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(A7E025DD-5303-4a62-89D6-E747E1EFAC73),
-@@ -11251,13 +11346,14 @@
- ///     Specifies a pointer to a variable where the sample copier transform
+@@ -11252,12 +11391,14 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///     will be stored.
  /// </param>
--cpp_quote("STDAPI MFCreateSampleCopierMFT(_Outptr_ IMFTransform** ppCopierMFT);")
-+cpp_quote("STDAPI _Win32_SupportedOS_Windows7_ MFCreateSampleCopierMFT(_Outptr_ IMFTransform** ppCopierMFT);")
+ cpp_quote("STDAPI MFCreateSampleCopierMFT(_Outptr_ IMFTransform** ppCopierMFT);")
++cpp_quote("/* Win32Metadata: function ::MFCreateSampleCopierMFT => SupportedOSPlatform(\"windows6.1\") */")
  
  //////////////////////////////////////////////////////////////////////////////
  //
  // Transcode APIs
  //
  /////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFTranscodeProfile, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFTranscodeProfile => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(4ADFDBA3-7AB0-4953-A62B-461E7FF3DA1E),
-@@ -11554,7 +11650,7 @@
- ///     Specifies a pointer to a variable where the transcode profile
+@@ -11555,6 +11696,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINBLUE) ")
  ///     will be stored.
  /// </param>
--cpp_quote( "STDAPI MFCreateTranscodeProfile(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateTranscodeProfile(" )
+ cpp_quote( "STDAPI MFCreateTranscodeProfile(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTranscodeProfile => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _Outptr_ IMFTranscodeProfile** ppTranscodeProfile" )
  cpp_quote( "    );" )
  
-@@ -11578,7 +11674,7 @@
- ///     Specifies a pointer to a variable where the partial transcode topology
+@@ -11579,6 +11721,7 @@ cpp_quote( "    );" )
  ///     will be stored.
  /// </param>
--cpp_quote( "STDAPI MFCreateTranscodeTopology(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateTranscodeTopology(" )
+ cpp_quote( "STDAPI MFCreateTranscodeTopology(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTranscodeTopology => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_ IMFMediaSource* pSrc," )
  cpp_quote( "    _In_ LPCWSTR pwszOutputFilePath," )
  cpp_quote( "    _In_ IMFTranscodeProfile* pProfile," )
-@@ -11613,7 +11709,7 @@
- ///     Specifies a pointer to a variable where the partial transcode topology
+@@ -11614,6 +11757,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///     will be stored.
  /// </param>
--cpp_quote( "STDAPI MFCreateTranscodeTopologyFromByteStream(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFCreateTranscodeTopologyFromByteStream(" )
+ cpp_quote( "STDAPI MFCreateTranscodeTopologyFromByteStream(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTranscodeTopologyFromByteStream => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ IMFMediaSource* pSrc," )
  cpp_quote( "    _In_ IMFByteStream* pOutputStream," )
  cpp_quote( "    _In_ IMFTranscodeProfile* pProfile," )
-@@ -11645,7 +11741,7 @@
- /// <param name="ppAvailableTypes">
+@@ -11646,6 +11790,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///     Specifies a pointer to a variable to a list of the available output types.
  /// </param>
--cpp_quote( "STDAPI MFTranscodeGetAudioOutputAvailableTypes(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFTranscodeGetAudioOutputAvailableTypes(" )
+ cpp_quote( "STDAPI MFTranscodeGetAudioOutputAvailableTypes(" )
++cpp_quote("/* Win32Metadata: function ::MFTranscodeGetAudioOutputAvailableTypes => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( " _In_ REFGUID guidSubType," )
  cpp_quote( " _In_ DWORD dwMFTFlags," )
  cpp_quote( " _In_opt_ IMFAttributes* pCodecConfig, ")
-@@ -11659,6 +11755,7 @@
+@@ -11659,6 +11804,7 @@ typedef struct _MF_TRANSCODE_SINK_INFO {
      IMFMediaType* pAudioMediaType;
  } MF_TRANSCODE_SINK_INFO;
  
-+_Win32_AnnotateInterface_(IMFTranscodeSinkInfoProvider, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFTranscodeSinkInfoProvider => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(8CFFCD2E-5A03-4a3a-AFF7-EDCD107C620E),
-@@ -11680,7 +11777,7 @@
- /// <param name="ppActivate">
+@@ -11681,6 +11827,7 @@ interface IMFTranscodeSinkInfoProvider : IUnknown
  ///    Receive pointer for a transcode sink activate.
  /// </param>
--cpp_quote(" STDAPI MFCreateTranscodeSinkActivate( ")
-+cpp_quote(" STDAPI _Win32_SupportedOS_Windows7_ MFCreateTranscodeSinkActivate( ")
+ cpp_quote(" STDAPI MFCreateTranscodeSinkActivate( ")
++cpp_quote("/* Win32Metadata: function ::MFCreateTranscodeSinkActivate => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote(" _Outptr_ IMFActivate** ppActivate ); ")
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -11689,6 +11786,7 @@
+@@ -11689,6 +11836,7 @@ cpp_quote(" _Outptr_ IMFActivate** ppActivate ); ")
  //
  /////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFFieldOfUseMFTUnlock, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFFieldOfUseMFTUnlock => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(508E71D3-EC66-4fc3-8775-B4B9ED6BA847),
-@@ -11731,6 +11829,7 @@
+@@ -11731,6 +11879,7 @@ typedef struct _MFT_REGISTRATION_INFO
  /* ddf5cf9c-4506-45aa-abf0-6d5d94dd1b4a */
  cpp_quote( "EXTERN_GUID(MF_LOCAL_MFT_REGISTRATION_SERVICE, 0xddf5cf9c, 0x4506, 0x45aa, 0xab, 0xf0, 0x6d, 0x5d, 0x94, 0xdd, 0x1b, 0x4a);" )
  
-+_Win32_AnnotateInterface_(IMFLocalMFTRegistration, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFLocalMFTRegistration => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(149c4d73-b4be-4f8d-8b87-079e926b6add),
-@@ -11795,6 +11894,7 @@
+@@ -11795,6 +11944,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  
-+_Win32_AnnotateInterface_(IMFPMPHostApp, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFPMPHostApp => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(84d2054a-3aa1-4728-a3b0-440a418cf49c)
-@@ -11813,6 +11913,7 @@
+@@ -11813,6 +11963,7 @@ interface IMFPMPHostApp : IUnknown
        [out, iid_is(riid)] void ** ppv);
  }
  
-+_Win32_AnnotateInterface_(IMFPMPClientApp, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFPMPClientApp => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(c004f646-be2c-48f3-93a2-a0983eba1108),
-@@ -11835,6 +11936,7 @@
+@@ -11835,6 +11986,7 @@ interface IMFPMPClientApp : IUnknown
  cpp_quote("#endif ")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  
-+_Win32_AnnotateInterface_(IMFMediaStreamSourceSampleRequest, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IMFMediaStreamSourceSampleRequest => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid(380b9af9-a85b-4e78-a2af-ea5ce645c6b4),
-@@ -11851,6 +11953,7 @@
+@@ -11851,6 +12003,7 @@ interface IMFMediaStreamSourceSampleRequest : IUnknown
  
  cpp_quote("#endif ")
  
-+_Win32_AnnotateInterface_(IMFTrackedSample, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFTrackedSample => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(245BF8E9-0755-40f7-88A5-AE0F18D55E17),
-@@ -11900,7 +12003,7 @@
- /////////////////////////////////////////////////////////////////////////////
+@@ -11901,6 +12054,7 @@ interface IMFTrackedSample : IUnknown
  
  
--cpp_quote( "STDAPI MFCreateTrackedSample(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFCreateTrackedSample(" )
+ cpp_quote( "STDAPI MFCreateTrackedSample(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateTrackedSample => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _Outptr_ IMFTrackedSample** ppMFSample);" )
  
  
-@@ -11911,7 +12014,7 @@
- cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
+@@ -11912,6 +12066,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  
  /////////////////////////////////////////////////////////////////////////////
--cpp_quote( "STDAPI MFCreateMFByteStreamOnStream(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateMFByteStreamOnStream(" )
+ cpp_quote( "STDAPI MFCreateMFByteStreamOnStream(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMFByteStreamOnStream => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    IStream*        pStream," )
  cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream);" )
  
-@@ -11919,7 +12022,7 @@
- 
+@@ -11920,6 +12075,7 @@ cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream);" )
  cpp_quote( "STDAPI MFCreateStreamOnMFByteStream(" ) 
  cpp_quote( "    _In_ IMFByteStream* pByteStream," ) 
--cpp_quote( "    _Outptr_ IStream** ppStream);" )
-+cpp_quote( "    _Outptr_ IStream** ppStream) _Win32_SupportedOS_Windows8_;" )
+ cpp_quote( "    _Outptr_ IStream** ppStream);" )
++cpp_quote("/* Win32Metadata: function ::MFCreateStreamOnMFByteStream => SupportedOSPlatform(\"windows8.0\") */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -11927,7 +12030,7 @@
- #pragma region Application Family
+@@ -11928,6 +12084,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  cpp_quote( "#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)" )
  
--cpp_quote( "STDAPI MFCreateMFByteStreamOnStreamEx(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFCreateMFByteStreamOnStreamEx(" )
+ cpp_quote( "STDAPI MFCreateMFByteStreamOnStreamEx(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMFByteStreamOnStreamEx => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ IUnknown* punkStream," )
  cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream );" )
  
-@@ -11935,16 +12038,16 @@
- cpp_quote( "STDAPI MFCreateStreamOnMFByteStreamEx(" ) 
+@@ -11936,8 +12093,10 @@ cpp_quote( "STDAPI MFCreateStreamOnMFByteStreamEx(" )
  cpp_quote( "    _In_ IMFByteStream* pByteStream," ) 
  cpp_quote( "    _In_ REFIID riid," )
--cpp_quote( "    _Outptr_ void **ppv );" )
--
--cpp_quote( "STDAPI MFCreateMediaTypeFromProperties(" )
-+cpp_quote( "    _Outptr_ void **ppv ) _Win32_SupportedOS_Windows8_;" )
-+
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFCreateMediaTypeFromProperties(" )
+ cpp_quote( "    _Outptr_ void **ppv );" )
++cpp_quote("/* Win32Metadata: function ::MFCreateStreamOnMFByteStreamEx => SupportedOSPlatform(\"windows8.0\") */")
+ 
+ cpp_quote( "STDAPI MFCreateMediaTypeFromProperties(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateMediaTypeFromProperties => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ IUnknown* punkStream," )
  cpp_quote( "    _Outptr_ IMFMediaType** ppMediaType );" )
  
- cpp_quote( "STDAPI MFCreatePropertiesFromMediaType(" ) 
+@@ -11945,6 +12104,7 @@ cpp_quote( "STDAPI MFCreatePropertiesFromMediaType(" )
  cpp_quote( "    _In_ IMFMediaType* pMediaType," ) 
  cpp_quote( "    _In_ REFIID riid," )
--cpp_quote( "    _Outptr_ void **ppv );" )
-+cpp_quote( "    _Outptr_ void **ppv ) _Win32_SupportedOS_Windows8_;" )
+ cpp_quote( "    _Outptr_ void **ppv );" )
++cpp_quote("/* Win32Metadata: function ::MFCreatePropertiesFromMediaType => SupportedOSPlatform(\"windows8.0\") */")
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  
-@@ -12016,7 +12119,7 @@
- /// <param name="pcSourceActivate">
+@@ -12017,6 +12177,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  ///     Number of pointers in the pppSourceActivate array
  /// </param>
--cpp_quote( "STDAPI MFEnumDeviceSources(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFEnumDeviceSources(" )
+ cpp_quote( "STDAPI MFEnumDeviceSources(" )
++cpp_quote("/* Win32Metadata: function ::MFEnumDeviceSources => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_                IMFAttributes*                      pAttributes," )
  cpp_quote( "    _Outptr_result_buffer_(*pcSourceActivate) IMFActivate***    pppSourceActivate," )
  cpp_quote( "    _Out_               UINT32*                             pcSourceActivate" )
-@@ -12033,7 +12136,7 @@
- /// <param name="ppSource">
+@@ -12034,6 +12195,7 @@ cpp_quote( ");" )
  ///     Returns pointer to a Device Source
  /// </param>
--cpp_quote( "STDAPI MFCreateDeviceSource(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateDeviceSource(" )
+ cpp_quote( "STDAPI MFCreateDeviceSource(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateDeviceSource => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_  IMFAttributes*   pAttributes," )
  cpp_quote( "    _Outptr_ IMFMediaSource** ppSource" )
  cpp_quote( ");" )
-@@ -12049,7 +12152,7 @@
- /// <param name="ppActivate">
+@@ -12050,6 +12212,7 @@ cpp_quote( ");" )
  ///     Returns pointer to a Device Source Activate
  /// </param>
--cpp_quote( "STDAPI MFCreateDeviceSourceActivate( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateDeviceSourceActivate( " )
+ cpp_quote( "STDAPI MFCreateDeviceSourceActivate( " )
++cpp_quote("/* Win32Metadata: function ::MFCreateDeviceSourceActivate => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    _In_  IMFAttributes*   pAttributes," )
  cpp_quote( "    _Outptr_ IMFActivate**   ppActivate" )
  cpp_quote( ");" )
-@@ -12324,6 +12427,7 @@
+@@ -12324,6 +12487,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
  interface IMFSignedLibrary;
  
-+_Win32_AnnotateInterface_(IMFProtectedEnvironmentAccess, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFProtectedEnvironmentAccess => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(ef5dc845-f0d9-4ec9-b00c-cb5183d38434),
-@@ -12336,6 +12440,7 @@
+@@ -12336,6 +12500,7 @@ interface IMFProtectedEnvironmentAccess : IUnknown
      HRESULT ReadGRL([annotation("_Out_")] UINT32 *outputLength, [annotation("_Outptr_result_bytebuffer_(*outputLength)")] BYTE **output);
  }
  
-+_Win32_AnnotateInterface_(IMFSignedLibrary, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFSignedLibrary => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(4a724bca-ff6a-4c07-8e0d-7a358421cf06),
-@@ -12346,6 +12451,7 @@
+@@ -12346,6 +12511,7 @@ interface IMFSignedLibrary : IUnknown
      HRESULT GetProcedureAddress([annotation("_In_")] LPCSTR name, [annotation("_Outptr_")] PVOID *address);
  }
  
-+_Win32_AnnotateInterface_(IMFSystemId, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMFSystemId => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(fff4af3a-1fc1-4ef9-a29b-d26c49e2f31a),
-@@ -12360,22 +12466,22 @@
-                   
+@@ -12361,21 +12527,25 @@ interface IMFSystemId : IUnknown
  }
  
--cpp_quote( "STDAPI MFCreateProtectedEnvironmentAccess( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFCreateProtectedEnvironmentAccess( " )
+ cpp_quote( "STDAPI MFCreateProtectedEnvironmentAccess( " )
++cpp_quote("/* Win32Metadata: function ::MFCreateProtectedEnvironmentAccess => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _Outptr_ IMFProtectedEnvironmentAccess**   ppAccess" )
  cpp_quote( ");" )
  
  
--cpp_quote( "STDAPI MFLoadSignedLibrary( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFLoadSignedLibrary( " )
+ cpp_quote( "STDAPI MFLoadSignedLibrary( " )
++cpp_quote("/* Win32Metadata: function ::MFLoadSignedLibrary => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_ LPCWSTR pszName," )
  cpp_quote( "    _Outptr_ IMFSignedLibrary**   ppLib" )
  cpp_quote( ");" )
  
--cpp_quote( "STDAPI MFGetSystemId( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFGetSystemId( " )
+ cpp_quote( "STDAPI MFGetSystemId( " )
++cpp_quote("/* Win32Metadata: function ::MFGetSystemId => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _Outptr_ IMFSystemId** ppId" )
  cpp_quote( ");" )
  
  
--cpp_quote( "STDAPI MFGetLocalId( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFGetLocalId( " )
+ cpp_quote( "STDAPI MFGetLocalId( " )
++cpp_quote("/* Win32Metadata: function ::MFGetLocalId => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote( "    _In_reads_bytes_(size) const BYTE *verifier," )
  cpp_quote( "    _In_ UINT32 size," )
  cpp_quote( "    _Outptr_ LPWSTR *id" )
-@@ -12503,6 +12609,7 @@
+@@ -12503,6 +12673,7 @@ cpp_quote( "} MFCONTENTPROTECTIONDEVICE_REALTIMECLIENT_DATA;" )
  /// <summary>
  /// This interface allows a decryptor to communicate with the security processor implementing the hardware decryption for the given ProtectionSystemId.
  /// </summary>
-+_Win32_AnnotateInterface_(IMFContentProtectionDevice, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IMFContentProtectionDevice => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(E6257174-A060-4C9A-A088-3B1B471CAD28),
-@@ -12541,20 +12648,21 @@
- /// <summary>
+@@ -12542,6 +12713,7 @@ interface IMFContentProtectionDevice : IUnknown
  /// This API creates an IMFContentProtectionDevice interface for the given ProtectionSystemId.
  /// </summary>
--cpp_quote( "STDAPI MFCreateContentProtectionDevice( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_10240_ MFCreateContentProtectionDevice( " )
+ cpp_quote( "STDAPI MFCreateContentProtectionDevice( " )
++cpp_quote("/* Win32Metadata: function ::MFCreateContentProtectionDevice => SupportedOSPlatform(\"windows10.0.10240\") */")
  cpp_quote( "   _In_ REFGUID ProtectionSystemId, " )
  cpp_quote( "   _Outptr_ IMFContentProtectionDevice **ContentProtectionDevice); " )
  
- /// <summary>
+@@ -12549,12 +12721,14 @@ cpp_quote( "   _Outptr_ IMFContentProtectionDevice **ContentProtectionDevice); "
  /// This API checks whether there's support for a hardware security processor for the given MediaProtectionSystemId.
  /// </summary>
--cpp_quote("STDAPI MFIsContentProtectionDeviceSupported( ")
-+cpp_quote("STDAPI _Win32_SupportedOS_10240_ MFIsContentProtectionDeviceSupported( ")
+ cpp_quote("STDAPI MFIsContentProtectionDeviceSupported( ")
++cpp_quote("/* Win32Metadata: function ::MFIsContentProtectionDeviceSupported => SupportedOSPlatform(\"windows10.0.10240\") */")
  cpp_quote("   _In_ REFGUID ProtectionSystemId, ")
  cpp_quote("   _Out_ BOOL *isSupported); ")
  
  /// <summary>
  /// This interface allows a decryptor to perform hardware key management and hardware sample decryption.
  /// </summary>
-+_Win32_AnnotateInterface_(IMFContentDecryptorContext, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IMFContentDecryptorContext => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(7EC4B1BD-43FB-4763-85D2-64FCB5C5F4CB),
-@@ -12587,7 +12695,7 @@
- /// <summary>
+@@ -12588,6 +12762,7 @@ cpp_quote("EXTERN_GUID( MF_CONTENT_PROTECTION_DEVICE_SERVICE, 0xff58436f, 0x76a0
  /// This API creates an IMFContentDecryptorContext interface for the given ProtectionSystemId.
  /// </summary>
--cpp_quote( "STDAPI MFCreateContentDecryptorContext( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_10240_ MFCreateContentDecryptorContext( " )
+ cpp_quote( "STDAPI MFCreateContentDecryptorContext( " )
++cpp_quote("/* Win32Metadata: function ::MFCreateContentDecryptorContext => SupportedOSPlatform(\"windows10.0.10240\") */")
  cpp_quote( "   _In_ REFGUID guidMediaProtectionSystemId, " )
  cpp_quote( "   _In_opt_ IMFDXGIDeviceManager *pD3DManager, " )
  cpp_quote( "   _In_ IMFContentProtectionDevice *pContentProtectionDevice, " )
-@@ -12758,6 +12866,7 @@
+@@ -12758,6 +12933,7 @@ typedef enum _MF_CROSS_ORIGIN_POLICY
  //  * GetSourceOrigin() returns the W3C origin of the HTML5 media element.  Use CoTaskMemFree to free the string.
  //  * IsSameOrigin() returns true when the specified URL has the same origin as the HTML5 media element.
  // </summary>
-+_Win32_AnnotateInterface_(IMFNetCrossOriginSupport, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IMFNetCrossOriginSupport => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(bc2b7d44-a72d-49d5-8376-1480dee58b22),
-@@ -12791,6 +12900,7 @@
+@@ -12791,6 +12967,7 @@ cpp_quote("EXTERN_GUID(MFNETSOURCE_CROSS_ORIGIN_SUPPORT, 0x9842207c, 0xb02c, 0x4
  // <summary>
  // This interface is implemented by clients to provide HTTP based download functionality to Media Foundation.
  // </summary>
-+_Win32_AnnotateInterface_(IMFHttpDownloadRequest, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFHttpDownloadRequest => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(F779FDDF-26E7-4270-8A8B-B983D1859DE0),
-@@ -12877,6 +12987,7 @@
+@@ -12877,6 +13054,7 @@ interface IMFHttpDownloadRequest : IUnknown
  // <summary>
  // This interface is implemented by clients to provide an IMFHttpDownloadRequest implementation to Media Foundation.
  // </summary>
-+_Win32_AnnotateInterface_(IMFHttpDownloadSession, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFHttpDownloadSession => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(71FA9A2C-53CE-4662-A132-1A7E8CBF62DB),
-@@ -12905,6 +13016,7 @@
+@@ -12905,6 +13083,7 @@ interface IMFHttpDownloadSession : IUnknown
  // This interface is implemented by clients that want to provide their own IMFHttpDownloadSession implementation.
  // Media Foundation uses this interface to create an IMFHttpDownloadSession for downloading media.
  // </summary>
-+_Win32_AnnotateInterface_(IMFHttpDownloadSessionProvider, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFHttpDownloadSessionProvider => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(1B4CF4B9-3A16-4115-839D-03CC5C99DF01),
-@@ -13109,6 +13221,7 @@
+@@ -13109,6 +13288,7 @@ typedef enum
      MFSensorDeviceMode_Shared
  } MFSensorDeviceMode;
  
-+_Win32_AnnotateInterface_(IMFSensorDevice, _Win32_SupportedOS_14393_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorDevice => SupportedOSPlatform(\"windows10.0.14393\") */")
  [
      object,
      uuid(FB9F48F2-2A18-4E28-9730-786F30F04DC4),
-@@ -13159,6 +13272,7 @@
+@@ -13159,6 +13339,7 @@ interface IMFSensorDevice : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorGroup, _Win32_SupportedOS_14393_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorGroup => SupportedOSPlatform(\"windows10.0.14393\") */")
  [
      object,
      uuid(4110243A-9757-461F-89F1-F22345BCAB4E),
-@@ -13203,6 +13317,7 @@
+@@ -13203,6 +13384,7 @@ interface IMFSensorGroup : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorStream, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorStream => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(E9A42171-C56E-498A-8B39-EDA5A070B7FC),
-@@ -13225,6 +13340,7 @@
+@@ -13225,6 +13407,7 @@ interface IMFSensorStream : IMFAttributes
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorTransformFactory, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorTransformFactory => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(EED9C2EE-66B4-4F18-A697-AC7D3960215C),
-@@ -13263,13 +13379,13 @@
- };
+@@ -13264,12 +13447,14 @@ interface IMFSensorTransformFactory : IUnknown
  
  cpp_quote("STDAPI")
--cpp_quote("MFCreateSensorGroup(")
-+cpp_quote("_Win32_SupportedOS_14393_ MFCreateSensorGroup(")
+ cpp_quote("MFCreateSensorGroup(")
++cpp_quote("/* Win32Metadata: function ::MFCreateSensorGroup => SupportedOSPlatform(\"windows10.0.14393\") */")
  cpp_quote("    _In_z_ LPCWSTR SensorGroupSymbolicLink,")
  cpp_quote("    _COM_Outptr_ IMFSensorGroup** ppSensorGroup")
  cpp_quote("    );")
  cpp_quote("")
  cpp_quote("STDAPI")
--cpp_quote("MFCreateSensorStream(")
-+cpp_quote("_Win32_SupportedOS_15063_ MFCreateSensorStream(")
+ cpp_quote("MFCreateSensorStream(")
++cpp_quote("/* Win32Metadata: function ::MFCreateSensorStream => SupportedOSPlatform(\"windows10.0.15063\") */")
  cpp_quote("    _In_ DWORD StreamId,")
  cpp_quote("    _In_opt_ IMFAttributes* pAttributes,")
  cpp_quote("    _In_ IMFCollection* pMediaTypeCollection,")
-@@ -13284,6 +13400,7 @@
+@@ -13284,6 +13469,7 @@ typedef struct
      UINT32  Unused;
  } SENSORPROFILEID;
  
-+_Win32_AnnotateInterface_(IMFSensorProfile, _Win32_SupportedOS_17134_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorProfile => SupportedOSPlatform(\"windows10.0.17134\") */")
  [
      object,
      uuid(22F765D1-8DAB-4107-846D-56BAF72215E7),
-@@ -13312,6 +13429,7 @@
+@@ -13312,6 +13498,7 @@ interface IMFSensorProfile : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorProfileCollection, _Win32_SupportedOS_17134_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorProfileCollection => SupportedOSPlatform(\"windows10.0.17134\") */")
  [
      object,
      uuid(C95EA55B-0187-48BE-9353-8D2507662351),
-@@ -13347,7 +13465,7 @@
- };
+@@ -13348,6 +13535,7 @@ interface IMFSensorProfileCollection : IUnknown
  
  cpp_quote("STDAPI")
--cpp_quote("MFCreateSensorProfile(")
-+cpp_quote("_Win32_SupportedOS_17134_ MFCreateSensorProfile(")
+ cpp_quote("MFCreateSensorProfile(")
++cpp_quote("/* Win32Metadata: function ::MFCreateSensorProfile => SupportedOSPlatform(\"windows10.0.17134\") */")
  cpp_quote("    _In_ REFGUID ProfileType,")
  cpp_quote("    _In_ UINT32 ProfileIndex,")
  cpp_quote("    _In_opt_z_ LPCWSTR Constraints,")
-@@ -13355,7 +13473,7 @@
- cpp_quote("    );")
+@@ -13356,6 +13544,7 @@ cpp_quote("    );")
  
  cpp_quote("STDAPI")
--cpp_quote("MFCreateSensorProfileCollection(")
-+cpp_quote("_Win32_SupportedOS_15063_ MFCreateSensorProfileCollection(")
+ cpp_quote("MFCreateSensorProfileCollection(")
++cpp_quote("/* Win32Metadata: function ::MFCreateSensorProfileCollection => SupportedOSPlatform(\"windows10.0.15063\") */")
  cpp_quote("    _COM_Outptr_ IMFSensorProfileCollection** ppSensorProfile")
  cpp_quote("    );")
  
-@@ -13363,6 +13481,7 @@
+@@ -13363,6 +13552,7 @@ cpp_quote("    );")
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
  
-+_Win32_AnnotateInterface_(IMFSensorProcessActivity, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorProcessActivity => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(39DC7F4A-B141-4719-813C-A7F46162A2B8),
-@@ -13388,6 +13507,7 @@
+@@ -13388,6 +13578,7 @@ interface IMFSensorProcessActivity : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorActivityReport, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorActivityReport => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(3E8C4BE1-A8C2-4528-90DE-2851BDE5FEAD),
-@@ -13418,6 +13538,7 @@
+@@ -13418,6 +13609,7 @@ interface IMFSensorActivityReport  : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorActivitiesReport, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorActivitiesReport => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(683F7A5E-4A19-43CD-B1A9-DBF4AB3F7777),
-@@ -13441,6 +13562,7 @@
+@@ -13441,6 +13633,7 @@ interface IMFSensorActivitiesReport : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorActivitiesReportCallback, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorActivitiesReportCallback => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(DE5072EE-DBE3-46DC-8A87-B6F631194751),
-@@ -13454,6 +13576,7 @@
+@@ -13454,6 +13647,7 @@ interface IMFSensorActivitiesReportCallback : IUnknown
          );
  };
  
-+_Win32_AnnotateInterface_(IMFSensorActivityMonitor, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IMFSensorActivityMonitor => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      object,
      uuid(D0CEF145-B3F4-4340-A2E5-7A5080CA05CB),
-@@ -13761,6 +13884,7 @@
+@@ -13761,6 +13955,7 @@ interface IMFExtendedCameraController : IUnknown
  };
  
  
-+_Win32_AnnotateInterface_(IMFRelativePanelReport, _Win32_SupportedOS_19041_)
++cpp_quote("/* Win32Metadata: interface ::IMFRelativePanelReport => SupportedOSPlatform(\"windows10.0.19041\") */")
  [
      object,
      uuid(F25362EA-2C0E-447F-81E2-755914CDC0C3),
-@@ -13785,6 +13909,7 @@
+@@ -13785,6 +13980,7 @@ interface IMFRelativePanelReport : IUnknown
      );
  };
  
-+_Win32_AnnotateInterface_(IMFRelativePanelWatcher, _Win32_SupportedOS_19041_)
++cpp_quote("/* Win32Metadata: interface ::IMFRelativePanelWatcher => SupportedOSPlatform(\"windows10.0.19041\") */")
  [
      object,
      uuid(421AF7F6-573E-4AD0-8FDA-2E57CEDB18C6),
-@@ -13825,12 +13950,13 @@
- /// </param>
+@@ -13826,11 +14022,13 @@ interface IMFRelativePanelWatcher : IMFShutdown
  cpp_quote("")
  cpp_quote("STDAPI")
--cpp_quote("MFCreateRelativePanelWatcher(")
-+cpp_quote("_Win32_SupportedOS_19041_ MFCreateRelativePanelWatcher(")
+ cpp_quote("MFCreateRelativePanelWatcher(")
++cpp_quote("/* Win32Metadata: function ::MFCreateRelativePanelWatcher => SupportedOSPlatform(\"windows10.0.19041\") */")
  cpp_quote("    _In_ PCWSTR videoDeviceId,")
  cpp_quote("    _In_ PCWSTR displayMonitorDeviceId,")
  cpp_quote("    _COM_Outptr_ IMFRelativePanelWatcher** ppRelativePanelWatcher")
  cpp_quote("    );")
  
-+_Win32_AnnotateInterface_(IMFVideoCaptureSampleAllocator, _Win32_SupportedOS_19041_)
++cpp_quote("/* Win32Metadata: interface ::IMFVideoCaptureSampleAllocator => SupportedOSPlatform(\"windows10.0.19041\") */")
  [
      object,
      local,
-@@ -13896,6 +14022,7 @@
+@@ -13896,6 +14094,7 @@ typedef enum MFSampleAllocatorUsage
      MFSampleAllocatorUsage_DoesNotAllocate
  } MFSampleAllocatorUsage;
  
-+_Win32_AnnotateInterface_(IMFSampleAllocatorControl, _Win32_SupportedOS_19041_)
++cpp_quote("/* Win32Metadata: interface ::IMFSampleAllocatorControl => SupportedOSPlatform(\"windows10.0.19041\") */")
  [
      object,
      uuid(DA62B958-3A38-4A97-BD27-149C640C0771),

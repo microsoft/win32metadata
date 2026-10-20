@@ -1,5 +1,5 @@
 diff --git a/um/windowsstoragecom.idl b/um/windowsstoragecom.idl
-index 435f2a19..e9596624 100644
+index 435f2a19..cba972d1 100644
 --- a/um/windowsstoragecom.idl
 +++ b/um/windowsstoragecom.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index 435f2a19..e9596624 100644
  import "oaidl.idl";
  import "shobjidl_core.idl";
  
-+_Win32_AnnotateInterface_(IRandomAccessStreamFileAccessMode, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IRandomAccessStreamFileAccessMode => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(332E5848-2E15-458E-85C4-C911C0C3D6F4),
@@ -22,7 +22,7 @@ index 435f2a19..e9596624 100644
      HRESULT GetMode([out] DWORD* fileAccessMode); // Windows::Storage::FileAccessMode
  }
  
-+_Win32_AnnotateInterface_(IUnbufferedFileHandleOplockCallback, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IUnbufferedFileHandleOplockCallback => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      uuid(D1019A0E-6243-4329-8497-2E75894D7710),
      object,
@@ -30,7 +30,7 @@ index 435f2a19..e9596624 100644
      HRESULT OnBrokenCallback();
  }
  
-+_Win32_AnnotateInterface_(IUnbufferedFileHandleProvider, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IUnbufferedFileHandleProvider => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(A65C9109-42AB-4B94-A7B1-DD2E4E68515E),
@@ -58,7 +58,7 @@ index 435f2a19..e9596624 100644
      HCO_TRUNCATE_EXISTING = 0x5,
  } HANDLE_CREATION_OPTIONS;
  
-+_Win32_AnnotateInterface_(IOplockBreakingHandler, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IOplockBreakingHandler => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(826ABE3D-3ACD-47D3-84F2-88AAEDCF6304),
@@ -66,7 +66,7 @@ index 435f2a19..e9596624 100644
      HRESULT OplockBreaking();
  }
  
-+_Win32_AnnotateInterface_(IStorageItemHandleAccess, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IStorageItemHandleAccess => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(5CA296B2-2C25-4D22-B785-B885C8201E6A),
@@ -74,7 +74,7 @@ index 435f2a19..e9596624 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IStorageFolderHandleAccess, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IStorageFolderHandleAccess => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(DF19938F-5462-48A0-BE65-D2A3271A08D6),

@@ -1,3 +1,5 @@
+diff --git a/um/ocidl.idl b/um/ocidl.idl
+index a775180c..9a14db9d 100644
 --- a/um/ocidl.idl
 +++ b/um/ocidl.idl
 @@ -1,3 +1,9 @@
@@ -10,415 +12,342 @@
  cpp_quote("#include <winapifamily.h>")
  
  //+---------------------------------------------------------------------------
-@@ -183,6 +189,7 @@
+@@ -183,6 +189,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IEnumConnections, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumConnections => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B287-BAB4-101A-B69C-00AA00341D07),
-@@ -230,8 +237,10 @@
+@@ -230,8 +237,10 @@ interface IEnumConnections : IUnknown
                  [out] IEnumConnections ** ppEnum
              );
  }
--
--
-+_Win32_AnnotateMethod_(IEnumConnections::Next, _Win32_PreserveResult_)
-+
-+
-+_Win32_AnnotateInterface_(IConnectionPoint, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IEnumConnections::Next => PreserveResult */")
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConnectionPoint => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B286-BAB4-101A-B69C-00AA00341D07),
-@@ -266,6 +275,7 @@
+@@ -266,6 +275,7 @@ interface IConnectionPoint : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IEnumConnectionPoints, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumConnectionPoints => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B285-BAB4-101A-B69C-00AA00341D07),
-@@ -305,8 +315,10 @@
+@@ -305,8 +315,10 @@ interface IEnumConnectionPoints : IUnknown
                  [out] IEnumConnectionPoints ** ppEnum
              );
  }
--
--
-+_Win32_AnnotateMethod_(IEnumConnectionPoints::Next, _Win32_PreserveResult_)
-+
-+
-+_Win32_AnnotateInterface_(IConnectionPointContainer, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IEnumConnectionPoints::Next => PreserveResult */")
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConnectionPointContainer => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B284-BAB4-101A-B69C-00AA00341D07),
-@@ -336,6 +348,7 @@
+@@ -336,6 +348,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IClassFactory2, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IClassFactory2 => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B28F-BAB4-101A-B69C-00AA00341D07),
-@@ -379,8 +392,10 @@
+@@ -379,8 +392,10 @@ interface IClassFactory2 : IClassFactory
                  [out, iid_is(riid)] IUnknown ** ppvObj
              );
  }
--
--
-+_Win32_AnnotateParameter_(IClassFactory2::CreateInstanceLic, ppvObj, _Win32_ComOutPtr_(true))
-+
-+
-+_Win32_AnnotateInterface_(IProvideClassInfo, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: parameter ::IClassFactory2::CreateInstanceLic::ppvObj => ComOutPtr(true) */")
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IProvideClassInfo => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B283-BAB4-101A-B69C-00AA00341D07),
-@@ -397,6 +412,7 @@
+@@ -397,6 +412,7 @@ interface IProvideClassInfo : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IProvideClassInfo2, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IProvideClassInfo2 => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851),
-@@ -418,6 +434,10 @@
+@@ -418,6 +434,11 @@ interface IProvideClassInfo2 : IProvideClassInfo
  }
  
  
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("typedef unsigned int MULTICLASSINFO_FLAGS;")
 +cpp_quote("#endif")
-+_Win32_AnnotateInterface_(IProvideMultipleClassInfo, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IProvideMultipleClassInfo => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IProvideMultipleClassInfo::GetInfoOfIndex::dwFlags => AssociatedEnum(MULTICLASSINFO_FLAGS) */")
  [
      object,
      uuid(A7ABA9C1-8983-11cf-8F20-00805F2CD064),
-@@ -440,7 +460,7 @@
- 
-     HRESULT GetInfoOfIndex(
-                 [in]  ULONG iti,
--                [in]  DWORD dwFlags,
-+                [annotation("_Win32_AssociatedEnum_(MULTICLASSINFO_FLAGS)")] [in]  DWORD dwFlags,
-                 [out] ITypeInfo ** pptiCoClass,
-                 [out] DWORD * pdwTIFlags,
-                 [out] ULONG * pcdispidReserved,
-@@ -448,8 +468,12 @@
+@@ -448,8 +469,12 @@ interface IProvideMultipleClassInfo : IProvideClassInfo2
                  [out] IID   * piidSource
              );
  }
--
--
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("_Win32_Enum_(MULTICLASSINFO_FLAGS, unsigned int, MULTICLASSINFO_GETTYPEINFO, MULTICLASSINFO_GETNUMRESERVEDDISPIDS, MULTICLASSINFO_GETIIDPRIMARY, MULTICLASSINFO_GETIIDSOURCE);")
 +cpp_quote("#endif")
-+
-+
-+_Win32_AnnotateInterface_(IOleControl, _Win32_SupportedOS_Windows2000_)
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleControl => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B288-BAB4-101A-B69C-00AA00341D07),
-@@ -492,6 +516,7 @@
+@@ -492,6 +517,9 @@ interface IOleControl : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IOleControlSite, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleControlSite => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IOleControlSite::TransformCoords::dwFlags => AssociatedEnum(XFORMCOORDS) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleControlSite::TranslateAccelerator::grfModifiers => AssociatedEnum(KEYMODIFIERS) */")
  [
      object,
      uuid(B196B289-BAB4-101A-B69C-00AA00341D07),
-@@ -532,12 +557,12 @@
-     HRESULT TransformCoords(
-                 [in, out] POINTL * pPtlHimetric,
-                 [in, out] POINTF * pPtfContainer,
--                [in] DWORD dwFlags
-+                [annotation("_Win32_AssociatedEnum_(XFORMCOORDS)")] [in] DWORD dwFlags
-             );
- 
-     HRESULT TranslateAccelerator(
-                 [in] MSG * pMsg,
--                [in] DWORD grfModifiers
-+                [annotation("_Win32_AssociatedEnum_(KEYMODIFIERS)")] [in] DWORD grfModifiers
-             );
- 
-     HRESULT OnFocus(
-@@ -550,6 +575,7 @@
+@@ -550,6 +578,7 @@ interface IOleControlSite : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IPropertyPage, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPropertyPage => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B28D-BAB4-101A-B69C-00AA00341D07),
-@@ -620,6 +646,7 @@
+@@ -620,6 +649,7 @@ interface IPropertyPage : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IPropertyPage2, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPropertyPage2 => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(01E44665-24AC-101B-84ED-08002B2EC713),
-@@ -636,6 +663,7 @@
+@@ -636,6 +666,8 @@ interface IPropertyPage2 : IPropertyPage
  }
  
  
-+_Win32_AnnotateInterface_(IPropertyPageSite, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPropertyPageSite => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IPropertyPageSite::OnStatusChange::dwFlags => AssociatedEnum(PROPPAGESTATUS) */")
  [
      object,
      uuid(B196B28C-BAB4-101A-B69C-00AA00341D07),
-@@ -653,7 +681,7 @@
-     } PROPPAGESTATUS;
- 
-     HRESULT OnStatusChange(
--                [in] DWORD dwFlags
-+                [annotation("_Win32_AssociatedEnum_(PROPPAGESTATUS)")] [in] DWORD dwFlags
-             );
- 
-     HRESULT GetLocaleID(
-@@ -670,6 +698,7 @@
+@@ -670,6 +702,7 @@ interface IPropertyPageSite : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IPropertyNotifySink, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPropertyNotifySink => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(9BFBBC02-EFF1-101A-84ED-00AA00341D07),
-@@ -690,6 +719,7 @@
+@@ -690,6 +723,7 @@ interface IPropertyNotifySink : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(ISpecifyPropertyPages, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISpecifyPropertyPages => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(B196B28B-BAB4-101A-B69C-00AA00341D07),
-@@ -761,8 +791,10 @@
+@@ -761,8 +795,10 @@ interface IPersistMemory : IPersist
                  void
              );
  }
--
--
-+_Win32_AnnotateMethod_(IPersistMemory::IsDirty, _Win32_PreserveResult_)
-+
-+
-+_Win32_AnnotateInterface_(IPersistStreamInit, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IPersistMemory::IsDirty => PreserveResult */")
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IPersistStreamInit => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(7FD52380-4E07-101B-AE2D-08002B2EC713),
-@@ -794,6 +826,7 @@
+@@ -794,6 +830,7 @@ interface IPersistStreamInit : IPersist
                  void
              );
  }
-+_Win32_AnnotateMethod_(IPersistStreamInit::IsDirty, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IPersistStreamInit::IsDirty => PreserveResult */")
  
  
  [
-@@ -823,6 +856,7 @@
+@@ -823,6 +860,7 @@ interface IPersistPropertyBag : IPersist
  }
  
  
-+_Win32_AnnotateInterface_(ISimpleFrameSite, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISimpleFrameSite => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(742B0E01-14E6-101B-914E-00AA00300CAB),
-@@ -853,6 +887,7 @@
+@@ -853,6 +891,7 @@ interface ISimpleFrameSite : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IFont, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IFont => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(BEF6E002-A874-101A-8BBA-00AA00300CAB),
-@@ -970,6 +1005,7 @@
+@@ -970,6 +1009,8 @@ cpp_quote("#endif")
  }
  
  
-+_Win32_AnnotateInterface_(IPicture, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPicture => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IPicture::get_Type::pType => AssociatedEnum(PICTYPE) */")
  [
      object,
      uuid(7BF80980-BF32-101A-8BBB-00AA00300CAB),
-@@ -1000,7 +1036,7 @@
-             );
- 
-     HRESULT get_Type(
--                [out] SHORT * pType
-+                [annotation("_Win32_AssociatedEnum_(PICTYPE)")] [out] SHORT * pType
-             );
- 
-     HRESULT get_Width(
-@@ -1172,6 +1208,7 @@
+@@ -1172,6 +1213,7 @@ interface IFontEventsDisp : IDispatch
      typedef IFontEventsDisp * LPFONTEVENTS;
  }
  
-+_Win32_AnnotateInterface_(IFontDisp, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IFontDisp => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(BEF6E003-A874-101A-8BBA-00AA00300CAB),
-@@ -1184,6 +1221,7 @@
+@@ -1184,6 +1226,7 @@ interface IFontDisp : IDispatch
  }
  
  
-+_Win32_AnnotateInterface_(IPictureDisp, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPictureDisp => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(7BF80981-BF32-101A-8BBB-00AA00300CAB),
-@@ -1203,6 +1241,7 @@
+@@ -1203,6 +1246,7 @@ interface IPictureDisp : IDispatch
  //----------------------------------------------------------------------------
  
  
-+_Win32_AnnotateInterface_(IOleInPlaceObjectWindowless, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceObjectWindowless => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1226,6 +1265,7 @@
+@@ -1226,6 +1270,7 @@ interface IOleInPlaceObjectWindowless : IOleInPlaceObject
  }
  
  
-+_Win32_AnnotateInterface_(IOleInPlaceSiteEx, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceSiteEx => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1255,6 +1295,7 @@
+@@ -1255,6 +1300,7 @@ interface IOleInPlaceSiteEx : IOleInPlaceSite
  }
  
  
-+_Win32_AnnotateInterface_(IOleInPlaceSiteWindowless, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceSiteWindowless => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1333,6 +1374,7 @@
+@@ -1333,6 +1379,8 @@ midl_pragma warning (default: 2495)
  }
  
  
-+_Win32_AnnotateInterface_(IViewObjectEx, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IViewObjectEx => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObjectEx::GetNaturalExtent::dwAspect => AssociatedEnum(DVASPECT) */")
  [
      object,
      pointer_default(unique),
-@@ -1410,7 +1452,7 @@
-             );
- 
-     HRESULT GetNaturalExtent (
--                [in] DWORD dwAspect,
-+                [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in] DWORD dwAspect,
-                 [in] LONG lindex,
-                 [in] DVTARGETDEVICE * ptd,
-                 [in] HDC hicTargetDev,
-@@ -1420,6 +1462,7 @@
+@@ -1420,6 +1468,7 @@ interface IViewObjectEx : IViewObject2
  }
  
  
-+_Win32_AnnotateInterface_(IOleUndoUnit, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleUndoUnit => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1449,6 +1492,7 @@
+@@ -1449,6 +1498,7 @@ interface IOleUndoUnit : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IOleParentUndoUnit, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleParentUndoUnit => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1482,6 +1526,7 @@
+@@ -1482,6 +1532,7 @@ interface IOleParentUndoUnit : IOleUndoUnit
  }
  
  
-+_Win32_AnnotateInterface_(IEnumOleUndoUnits, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumOleUndoUnits => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1520,8 +1565,10 @@
+@@ -1520,8 +1571,10 @@ interface IEnumOleUndoUnits : IUnknown
                  [out] IEnumOleUndoUnits ** ppEnum
              );
  }
--
--
-+_Win32_AnnotateMethod_(IEnumOleUndoUnits::Next, _Win32_PreserveResult_)
-+
-+
-+_Win32_AnnotateInterface_(IOleUndoManager, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IEnumOleUndoUnits::Next => PreserveResult */")
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleUndoManager => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1583,8 +1630,10 @@
+@@ -1583,8 +1636,11 @@ cpp_quote("#define SID_SOleUndoManager IID_IOleUndoManager")
                  [in] BOOL fEnable
              );
  }
--
--
-+_Win32_AnnotateMethod_(IOleUndoManager::Close, _Win32_PreserveResult_)
-+
-+
-+_Win32_AnnotateInterface_(IPointerInactive, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IOleUndoManager::Close => PreserveResult */")
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IPointerInactive => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IPointerInactive::GetActivationPolicy::pdwPolicy => AssociatedEnum(POINTERINACTIVE) */")
  [
      object,
      pointer_default(unique),
-@@ -1602,7 +1651,7 @@
-     } POINTERINACTIVE;
- 
-     HRESULT GetActivationPolicy(
--                [out] DWORD * pdwPolicy
-+                [annotation("_Win32_AssociatedEnum_(POINTERINACTIVE)")] [out] DWORD * pdwPolicy
-             );
- 
-     HRESULT OnInactiveMouseMove(
-@@ -1622,6 +1671,7 @@
+@@ -1622,6 +1678,7 @@ interface IPointerInactive : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IObjectWithSite, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IObjectWithSite => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(FC4801A3-2BA9-11CF-A229-00AA003D7352),
-@@ -1654,6 +1704,7 @@
+@@ -1654,6 +1711,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  
  
  
-+_Win32_AnnotateInterface_(IPerPropertyBrowsing, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPerPropertyBrowsing => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(376BD3AA-3845-101B-84ED-08002B2EC713),
-@@ -1810,6 +1861,7 @@
+@@ -1810,6 +1868,7 @@ interface IPersistPropertyBag2 : IPersist
                  void
              );
  }
-+_Win32_AnnotateMethod_(IPersistPropertyBag2::IsDirty, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IPersistPropertyBag2::IsDirty => PreserveResult */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */")
  #pragma endregion
-@@ -1823,6 +1875,7 @@
+@@ -1823,6 +1882,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  
  #if !defined(_DCOM_OC_REMOTING_)
  
-+_Win32_AnnotateInterface_(IAdviseSinkEx, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAdviseSinkEx => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1852,6 +1905,7 @@
+@@ -1852,6 +1912,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IQuickActivate, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IQuickActivate => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      pointer_default(unique),
-@@ -1881,7 +1935,7 @@
-         IAdviseSinkEx *         pAdviseSink;
-         IPropertyNotifySink *   pPropertyNotifySink;
-         IUnknown *              pUnkEventSink;
--        DWORD                   dwAmbientFlags;
-+        [annotation("_Win32_AssociatedEnum_(QACONTAINERFLAGS)")] DWORD                   dwAmbientFlags;
-         OLE_COLOR               colorFore;
-         OLE_COLOR               colorBack;
-         IFont *                 pFont;
-@@ -1896,11 +1950,11 @@
+@@ -1875,6 +1936,7 @@ interface IQuickActivate : IUnknown
  
+     typedef [uuid(66504301-BE0F-101A-8BBB-00AA00300CAB), public] DWORD OLE_COLOR;
+ 
++cpp_quote("/* Win32Metadata: field ::QACONTAINER::dwAmbientFlags => AssociatedEnum(QACONTAINERFLAGS) */")
+     typedef struct tagQACONTAINER {
+         ULONG                   cbSize;
+         IOleClientSite *        pClientSite;
+@@ -1894,6 +1956,9 @@ interface IQuickActivate : IUnknown
+         IServiceProvider *      pServiceProvider;
+     } QACONTAINER;
+ 
++cpp_quote("/* Win32Metadata: field ::QACONTROL::dwMiscStatus => AssociatedEnum(OLEMISC) */")
++cpp_quote("/* Win32Metadata: field ::QACONTROL::dwViewStatus => AssociatedEnum(VIEWSTATUS) */")
++cpp_quote("/* Win32Metadata: field ::QACONTROL::dwPointerActivationPolicy => AssociatedEnum(POINTERINACTIVE) */")
      typedef struct tagQACONTROL {
          ULONG   cbSize;
--        DWORD   dwMiscStatus;
--        DWORD   dwViewStatus;
-+        [annotation("_Win32_AssociatedEnum_(OLEMISC)")] DWORD   dwMiscStatus;
-+        [annotation("_Win32_AssociatedEnum_(VIEWSTATUS)")] DWORD   dwViewStatus;
-         DWORD   dwEventCookie;
-         DWORD   dwPropNotifyCookie;
--        DWORD   dwPointerActivationPolicy;
-+        [annotation("_Win32_AssociatedEnum_(POINTERINACTIVE)")] DWORD   dwPointerActivationPolicy;
-     } QACONTROL;
- 
-     [local]
+         DWORD   dwMiscStatus;

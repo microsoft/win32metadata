@@ -1,5 +1,5 @@
 diff --git a/um/d3d11_2.idl b/um/d3d11_2.idl
-index 2161bcdc..3114320b 100644
+index 2161bcdc..d7c01dd0 100644
 --- a/um/d3d11_2.idl
 +++ b/um/d3d11_2.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index 2161bcdc..3114320b 100644
  //
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(ID3D11DeviceContext2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::ID3D11DeviceContext2 => SupportedOSPlatform(\"windows8.1\") */")
  [ uuid( 420d5b32-b90c-4da4-bef0-359f6a24a83a ), object, local, pointer_default( unique ) ]
  interface ID3D11DeviceContext2
      : ID3D11DeviceContext1
@@ -24,7 +24,7 @@ index 2161bcdc..3114320b 100644
      void EndEvent();
 -};[ uuid( 9d06dffa-d1e5-4d07-83a8-1bb123f2f841 ), object, local, pointer_default( unique ) ]
 +};
-+_Win32_AnnotateInterface_(ID3D11Device2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::ID3D11Device2 => SupportedOSPlatform(\"windows8.1\") */")
 +[ uuid( 9d06dffa-d1e5-4d07-83a8-1bb123f2f841 ), object, local, pointer_default( unique ) ]
  interface ID3D11Device2
      : ID3D11Device1

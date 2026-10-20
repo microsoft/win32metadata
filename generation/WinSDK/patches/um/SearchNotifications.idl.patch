@@ -1,3 +1,5 @@
+diff --git a/um/SearchNotifications.idl b/um/SearchNotifications.idl
+index 2f843bb0..e8194284 100644
 --- a/um/SearchNotifications.idl
 +++ b/um/SearchNotifications.idl
 @@ -11,6 +11,7 @@
@@ -8,27 +10,27 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -69,6 +70,7 @@
+@@ -69,6 +70,7 @@ typedef enum _SEARCH_NOTIFICATION_PRIORITY {
  //                            to alert the indexer that an item needs to be
  //                            updated
  //
-+_Win32_AnnotateInterface_(ISearchItemsChangedSink, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchItemsChangedSink => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF58),
-@@ -140,6 +142,7 @@
+@@ -140,6 +142,7 @@ interface ISearchItemsChangedSink: IUnknown
  //                                      to alert the indexer that an item needs
  //                                      to be updated
  //
-+_Win32_AnnotateInterface_(ISearchPersistentItemsChangedSink, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchPersistentItemsChangedSink => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(A2FFDF9B-4758-4F84-B729-DF81A1A0612F),
-@@ -206,6 +209,7 @@
+@@ -206,6 +209,7 @@ interface ISearchPersistentItemsChangedSink: IUnknown
  //
  // ISearchViewChangedSink
  //
-+_Win32_AnnotateInterface_(ISearchViewChangedSink, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchViewChangedSink => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF65),

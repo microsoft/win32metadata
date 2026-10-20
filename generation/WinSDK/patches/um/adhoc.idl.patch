@@ -1,5 +1,5 @@
 diff --git a/um/adhoc.idl b/um/adhoc.idl
-index c95243d6..751e0e16 100644
+index c95243d6..aeb52a8a 100644
 --- a/um/adhoc.idl
 +++ b/um/adhoc.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index c95243d6..751e0e16 100644
  // IDot11AdHocManager -- root interface for the home networking configuration
  //                manager.
  //
-+_Win32_AnnotateInterface_(IDot11AdHocManager, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocManager => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -22,7 +22,7 @@ index c95243d6..751e0e16 100644
  // IDot11AdHocManager -- root interface for the home networking configuration
  //                manager.
  //
-+_Win32_AnnotateInterface_(IDot11AdHocManagerNotificationSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocManagerNotificationSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -30,7 +30,7 @@ index c95243d6..751e0e16 100644
  // IEnumDot11AdHocNetworks -- Is used to enumerate the scanned Ad-Hoc Connections,
  //                         which optionally just matches the provided Guid Filter
  //
-+_Win32_AnnotateInterface_(IEnumDot11AdHocNetworks, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumDot11AdHocNetworks => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -38,7 +38,7 @@ index c95243d6..751e0e16 100644
  //+---------------------------------------------------------------------------
  // IDot11AdHocNetwork -- 
  //
-+_Win32_AnnotateInterface_(IDot11AdHocNetwork, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocNetwork => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -46,7 +46,7 @@ index c95243d6..751e0e16 100644
  //+---------------------------------------------------------------------------
  // IDot11AdHocNetworkNotificationSink -- 
  //
-+_Win32_AnnotateInterface_(IDot11AdHocNetworkNotificationSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocNetworkNotificationSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -54,7 +54,7 @@ index c95243d6..751e0e16 100644
  // IDot11AdHocInterface
  //
  //
-+_Win32_AnnotateInterface_(IDot11AdHocInterface, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocInterface => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -62,7 +62,7 @@ index c95243d6..751e0e16 100644
  // IEnumDot11AdHocInterfaces
  //
  //
-+_Win32_AnnotateInterface_(IEnumDot11AdHocInterfaces, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumDot11AdHocInterfaces => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -70,7 +70,7 @@ index c95243d6..751e0e16 100644
  // IEnumDot11InterfaceSecuritySettings
  //
  //
-+_Win32_AnnotateInterface_(IEnumDot11AdHocSecuritySettings, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumDot11AdHocSecuritySettings => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -78,7 +78,7 @@ index c95243d6..751e0e16 100644
  // IDot11AdHocSecuritySettings
  //
  //
-+_Win32_AnnotateInterface_(IDot11AdHocSecuritySettings, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocSecuritySettings => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,
@@ -86,7 +86,7 @@ index c95243d6..751e0e16 100644
  // IDot11AdHocInterfaceNotificationSink
  //
  //
-+_Win32_AnnotateInterface_(IDot11AdHocInterfaceNotificationSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDot11AdHocInterfaceNotificationSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      local,
      object,

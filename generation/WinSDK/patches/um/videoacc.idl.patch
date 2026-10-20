@@ -1,5 +1,5 @@
 diff --git a/um/videoacc.idl b/um/videoacc.idl
-index 156ee507..7c6116b0 100644
+index 156ee507..d6264f86 100644
 --- a/um/videoacc.idl
 +++ b/um/videoacc.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index 156ee507..7c6116b0 100644
  cpp_quote("#include <amva.h>")
  
  
-+_Win32_AnnotateInterface_(IAMVideoAcceleratorNotify, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAMVideoAcceleratorNotify => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,
@@ -22,7 +22,7 @@ index 156ee507..7c6116b0 100644
                                            [out] [annotation("_Outptr_result_bytebuffer_(*pdwSizeMiscData)")] LPVOID *ppMiscData);
  };
  
-+_Win32_AnnotateInterface_(IAMVideoAccelerator, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAMVideoAccelerator => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,

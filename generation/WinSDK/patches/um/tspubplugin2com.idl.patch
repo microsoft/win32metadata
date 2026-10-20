@@ -1,5 +1,5 @@
 diff --git a/um/tspubplugin2com.idl b/um/tspubplugin2com.idl
-index d89d7f2b..0aec4ab1 100644
+index d89d7f2b..432b9aad 100644
 --- a/um/tspubplugin2com.idl
 +++ b/um/tspubplugin2com.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index d89d7f2b..0aec4ab1 100644
  #define MAX_FILE_ASSOC_EXTENSION_SIZE                                  256
  #define MAX_ENDPOINT_SIZE                                              256
  
-+_Win32_AnnotateInterface_(ItsPubPlugin2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ItsPubPlugin2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(FA4CE418-AAD7-4ec6-BAD1-0A321BA465D5),

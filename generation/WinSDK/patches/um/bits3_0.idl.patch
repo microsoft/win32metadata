@@ -1,5 +1,5 @@
 diff --git a/um/bits3_0.idl b/um/bits3_0.idl
-index 7cb425e8..13fc0364 100644
+index 7cb425e8..11983e76 100644
 --- a/um/bits3_0.idl
 +++ b/um/bits3_0.idl
 @@ -13,6 +13,8 @@ Abstract:
@@ -15,7 +15,7 @@ index 7cb425e8..13fc0364 100644
  /**
   * IBitsPeerCacheRecord - deprecated interface
   */
-+_Win32_AnnotateInterface_(IBitsPeerCacheRecord, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBitsPeerCacheRecord => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdeaf-489e-11d9-a9cd-000d56965251),
      helpstring("IBitsPeerCacheRecord"),
@@ -23,7 +23,7 @@ index 7cb425e8..13fc0364 100644
  /**
   * IEnumBitsPeerCacheRecords - deprecated interface
   */
-+_Win32_AnnotateInterface_(IEnumBitsPeerCacheRecords, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumBitsPeerCacheRecords => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdea4-489e-11d9-a9cd-000d56965251),
      helpstring("IEnumBitsPeerCacheRecords"),
@@ -31,7 +31,7 @@ index 7cb425e8..13fc0364 100644
  };
  
  
-+_Win32_AnnotateInterface_(IBitsPeer, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBitsPeer => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdea2-489e-11d9-a9cd-000d56965251),
      helpstring("IBitsPeer"),
@@ -39,7 +39,7 @@ index 7cb425e8..13fc0364 100644
  /**
   * IEnumBitsPeers - deprecated interface
   */
-+_Win32_AnnotateInterface_(IEnumBitsPeers, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumBitsPeers => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdea5-489e-11d9-a9cd-000d56965251),
      helpstring("IEnumBitsPeers"),
@@ -47,7 +47,7 @@ index 7cb425e8..13fc0364 100644
  /**
   * IBitsPeerCacheAdministration - deprecated interface
   */
-+_Win32_AnnotateInterface_(IBitsPeerCacheAdministration, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBitsPeerCacheAdministration => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdead-489e-11d9-a9cd-000d56965251),
      helpstring("IBitsPeerCacheAdministration"),
@@ -55,7 +55,7 @@ index 7cb425e8..13fc0364 100644
      HRESULT DiscoverPeers();
  };
  
-+_Win32_AnnotateInterface_(IBackgroundCopyJob4, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyJob4 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdeae-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyJob4 Interface"),
@@ -63,7 +63,7 @@ index 7cb425e8..13fc0364 100644
  
  };
  
-+_Win32_AnnotateInterface_(IBackgroundCopyFile3, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyFile3 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdeaa-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyFile3 interface"),
@@ -71,10 +71,10 @@ index 7cb425e8..13fc0364 100644
  	//
  	HRESULT IsDownloadedFromPeer( [out] BOOL * pVal );
  }
-+_Win32_AnnotateParameter_(IBackgroundCopyFile3::GetTemporaryName, pFilename, _Win32_RAIIFree_(CoTaskMemFree))
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyFile3::GetTemporaryName::pFilename => RAIIFree(CoTaskMemFree) */")
  
  
-+_Win32_AnnotateInterface_(IBackgroundCopyCallback2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyCallback2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(659cdeac-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyCallback2 Interface"),
@@ -82,7 +82,7 @@ index 7cb425e8..13fc0364 100644
      interface IEnumBitsPeers;
  }
  
-+_Win32_AnnotateMethod_(IBitsPeerCacheAdministration::SetMaximumContentAge, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IBitsPeerCacheAdministration::SetMaximumContentAge => PreserveResult */")
  cpp_quote("#include \"bits4_0.h\"")
  
  

@@ -1,5 +1,5 @@
 diff --git a/um/bits4_0.idl b/um/bits4_0.idl
-index db102204..6a9905be 100644
+index db102204..87ab0b73 100644
 --- a/um/bits4_0.idl
 +++ b/um/bits4_0.idl
 @@ -13,6 +13,8 @@ Abstract:
@@ -15,7 +15,7 @@ index db102204..6a9905be 100644
  bb6df573-cace-11dc-9992-0019b93a3a84
  */
  
-+_Win32_AnnotateInterface_(IBitsTokenOptions, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBitsTokenOptions => SupportedOSPlatform(\"windows6.1\") */")
  [
      uuid(9a2584c3-f7d2-457a-9a5e-22b67bffc7d2),
      helpstring("IBitsTokenOptions"),
@@ -23,7 +23,7 @@ index db102204..6a9905be 100644
  };
  
  
-+_Win32_AnnotateInterface_(IBackgroundCopyFile4, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyFile4 => SupportedOSPlatform(\"windows6.1\") */")
  [
      uuid(ef7e0655-7888-4960-b0e5-730846e03492),
      helpstring("IBackgroundCopyFile4 interface"),
@@ -34,8 +34,8 @@ index db102204..6a9905be 100644
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("_Win32_Enum_(BG_TOKEN, unsigned int, BG_TOKEN_LOCAL_FILE, BG_TOKEN_NETWORK);")
 +cpp_quote("#endif")
-+_Win32_AnnotateParameter_(IBitsTokenOptions::SetHelperTokenFlags, UsageFlags, _Win32_AssociatedEnum_(BG_TOKEN))
-+_Win32_AnnotateParameter_(IBitsTokenOptions::GetHelperTokenFlags, pFlags, _Win32_AssociatedEnum_(BG_TOKEN))
++cpp_quote("/* Win32Metadata: parameter ::IBitsTokenOptions::SetHelperTokenFlags::UsageFlags => AssociatedEnum(BG_TOKEN) */")
++cpp_quote("/* Win32Metadata: parameter ::IBitsTokenOptions::GetHelperTokenFlags::pFlags => AssociatedEnum(BG_TOKEN) */")
  cpp_quote("#include \"bits5_0.h\"")
  
  

@@ -1,5 +1,5 @@
 diff --git a/um/uianimation.idl b/um/uianimation.idl
-index aa71fea3..b1bebe5b 100644
+index aa71fea3..cb09b795 100644
 --- a/um/uianimation.idl
 +++ b/um/uianimation.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index aa71fea3..b1bebe5b 100644
  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  // Defines the animation manager, which provides a central interface for creating and managing UI animations
-+_Win32_AnnotateInterface_(IUIAnimationManager, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationManager => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -22,7 +22,7 @@ index aa71fea3..b1bebe5b 100644
  } UI_ANIMATION_ROUNDING_MODE;
  
  // Defines an animation variable, which represents a value that may be animated
-+_Win32_AnnotateInterface_(IUIAnimationVariable, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariable => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -30,7 +30,7 @@ index aa71fea3..b1bebe5b 100644
  const INT32 UI_ANIMATION_REPEAT_INDEFINITELY_CONCLUDE_AT_START = -2;
  
  // Defines a storyboard, which combines animation variables and transitions to define an animation
-+_Win32_AnnotateInterface_(IUIAnimationStoryboard, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationStoryboard => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object, 
@@ -38,7 +38,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines a transition, which determines how an animation variable changes over time
-+_Win32_AnnotateInterface_(IUIAnimationTransition, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTransition => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -46,7 +46,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling animation manager status change events
-+_Win32_AnnotateInterface_(IUIAnimationManagerEventHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationManagerEventHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -54,7 +54,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling animation variable update events
-+_Win32_AnnotateInterface_(IUIAnimationVariableChangeHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariableChangeHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -62,7 +62,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling animation variable update events
-+_Win32_AnnotateInterface_(IUIAnimationVariableIntegerChangeHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariableIntegerChangeHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -70,7 +70,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling animation variable update events
-+_Win32_AnnotateInterface_(IUIAnimationStoryboardEventHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationStoryboardEventHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -78,7 +78,7 @@ index aa71fea3..b1bebe5b 100644
  } UI_ANIMATION_PRIORITY_EFFECT;
  
  // Defines a priority comparison that the animation manager uses to resolve scheduling conflicts
-+_Win32_AnnotateInterface_(IUIAnimationPriorityComparison, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationPriorityComparison => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -86,7 +86,7 @@ index aa71fea3..b1bebe5b 100644
  } UI_ANIMATION_SLOPE;
  
  // Defines a library of standard transitions
-+_Win32_AnnotateInterface_(IUIAnimationTransitionLibrary, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTransitionLibrary => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -94,7 +94,7 @@ index aa71fea3..b1bebe5b 100644
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UI_ANIMATION_DEPENDENCIES);")
  
  // Defines methods for creating a custom interpolator
-+_Win32_AnnotateInterface_(IUIAnimationInterpolator, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationInterpolator => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -102,7 +102,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for creating transitions from custom interpolators
-+_Win32_AnnotateInterface_(IUIAnimationTransitionFactory, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTransitionFactory => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -110,7 +110,7 @@ index aa71fea3..b1bebe5b 100644
  } UI_ANIMATION_IDLE_BEHAVIOR;
  
  // Defines an animation timer, which provides services for managing animation timing
-+_Win32_AnnotateInterface_(IUIAnimationTimer, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTimer => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -118,7 +118,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling timing update events
-+_Win32_AnnotateInterface_(IUIAnimationTimerUpdateHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTimerUpdateHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -126,7 +126,7 @@ index aa71fea3..b1bebe5b 100644
  } UI_ANIMATION_TIMER_CLIENT_STATUS;
  
  // Defines methods for handling events related to changes in timer client status
-+_Win32_AnnotateInterface_(IUIAnimationTimerClientEventHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTimerClientEventHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -134,7 +134,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling timing events
-+_Win32_AnnotateInterface_(IUIAnimationTimerEventHandler, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTimerEventHandler => SupportedOSPlatform(\"windows6.1\") */")
  [
      local,
      object,
@@ -142,7 +142,7 @@ index aa71fea3..b1bebe5b 100644
  const UI_ANIMATION_SECONDS UI_ANIMATION_SECONDS_INFINITE = -1.0;
  
  // Defines the animation manager, which provides a central interface for creating and managing UI animations
-+_Win32_AnnotateInterface_(IUIAnimationManager2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationManager2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -150,7 +150,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines a WAM2 animation variable, which represents a value that may be animated
-+_Win32_AnnotateInterface_(IUIAnimationVariable2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariable2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -158,7 +158,7 @@ index aa71fea3..b1bebe5b 100644
  // value has not yet been determined
  const UINT UI_ANIMATION_DIMENSION_UNKNOWN = (UINT)(-1);
  
-+_Win32_AnnotateInterface_(IUIAnimationTransition2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTransition2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -166,7 +166,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling animation manager status change events
-+_Win32_AnnotateInterface_(IUIAnimationManagerEventHandler2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationManagerEventHandler2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -174,7 +174,7 @@ index aa71fea3..b1bebe5b 100644
      );
  };
  
-+_Win32_AnnotateInterface_(IUIAnimationVariableChangeHandler2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariableChangeHandler2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -182,7 +182,7 @@ index aa71fea3..b1bebe5b 100644
      );
  };
  
-+_Win32_AnnotateInterface_(IUIAnimationVariableIntegerChangeHandler2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariableIntegerChangeHandler2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -190,7 +190,7 @@ index aa71fea3..b1bebe5b 100644
      );                                                              
  };
  
-+_Win32_AnnotateInterface_(IUIAnimationVariableCurveChangeHandler2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationVariableCurveChangeHandler2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -198,7 +198,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for handling animation storyboard update events
-+_Win32_AnnotateInterface_(IUIAnimationStoryboardEventHandler2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationStoryboardEventHandler2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -206,7 +206,7 @@ index aa71fea3..b1bebe5b 100644
  const UINT32 UI_ANIMATION_ITERATION_NONE = (UINT32)-1;
  
  // Defines methods for handling storyboard loop iteration events
-+_Win32_AnnotateInterface_(IUIAnimationLoopIterationChangeHandler2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationLoopIterationChangeHandler2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -214,7 +214,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines a priority comparison that the animation manager uses to resolve scheduling conflicts
-+_Win32_AnnotateInterface_(IUIAnimationPriorityComparison2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationPriorityComparison2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -222,7 +222,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines a library of standard transitions
-+_Win32_AnnotateInterface_(IUIAnimationTransitionLibrary2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTransitionLibrary2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -230,7 +230,7 @@ index aa71fea3..b1bebe5b 100644
  // Interpolator API
  
  // Defines an interface for interpolators to propagate their curve information back to WAM
-+_Win32_AnnotateInterface_(IUIAnimationPrimitiveInterpolation, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationPrimitiveInterpolation => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -238,7 +238,7 @@ index aa71fea3..b1bebe5b 100644
  };
  
  // Defines methods for creating a custom interpolator
-+_Win32_AnnotateInterface_(IUIAnimationInterpolator2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationInterpolator2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,
@@ -246,7 +246,7 @@ index aa71fea3..b1bebe5b 100644
   };
  
  // Defines methods for creating transitions from custom interpolators
-+_Win32_AnnotateInterface_(IUIAnimationTransitionFactory2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IUIAnimationTransitionFactory2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,

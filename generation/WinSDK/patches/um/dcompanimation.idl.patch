@@ -1,5 +1,5 @@
 diff --git a/um/dcompanimation.idl b/um/dcompanimation.idl
-index baf5e081..f9c1a7a0 100644
+index baf5e081..1a0ca2d0 100644
 --- a/um/dcompanimation.idl
 +++ b/um/dcompanimation.idl
 @@ -3,6 +3,7 @@
@@ -14,7 +14,7 @@ index baf5e081..f9c1a7a0 100644
  //      can be used to animate the value of a property of another DirectComposition object.
  //
  //------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDCompositionAnimation, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDCompositionAnimation => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,

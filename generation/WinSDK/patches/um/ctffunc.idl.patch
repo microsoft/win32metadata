@@ -1,5 +1,5 @@
 diff --git a/um/ctffunc.idl b/um/ctffunc.idl
-index 2eb5d8e3..9bd1241a 100644
+index 2eb5d8e3..aa8acbeb 100644
 --- a/um/ctffunc.idl
 +++ b/um/ctffunc.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfCandidateString
  //
-+_Win32_AnnotateInterface_(ITfCandidateString, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfCandidateString => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(581f317e-fd9d-443f-b972-ed00467c5d40),
@@ -19,7 +19,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // IEnumTfCandidates
  //
-+_Win32_AnnotateInterface_(IEnumTfCandidates, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumTfCandidates => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(defb1926-6c80-4ce8-87d4-d6b72b812bde),
@@ -27,7 +27,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfCandidateList
  //
-+_Win32_AnnotateInterface_(ITfCandidateList, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfCandidateList => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(a3ad50fb-9bdb-49e3-a843-6c76520fbf5d),
@@ -35,7 +35,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnReconversion
  //
-+_Win32_AnnotateInterface_(ITfFnReconversion, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnReconversion => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(4cea93c0-0a58-11d3-8df0-00105a2799b5),
@@ -43,7 +43,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnPlayBack
  //
-+_Win32_AnnotateInterface_(ITfFnPlayBack, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnPlayBack => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(a3a416a4-0f64-11d3-b5b7-00c04fc324a1),
@@ -51,7 +51,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfLangProfileUtil
  //
-+_Win32_AnnotateInterface_(ITfFnLangProfileUtil, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnLangProfileUtil => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(A87A8574-A6C1-4E15-99F0-3D3965F548EB),
@@ -59,7 +59,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnConfigure
  //
-+_Win32_AnnotateInterface_(ITfFnConfigure, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnConfigure => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(88f567c6-1757-49f8-a1b2-89234c1eeff9),
@@ -67,7 +67,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnConfigureRegisterWord
  //
-+_Win32_AnnotateInterface_(ITfFnConfigureRegisterWord, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnConfigureRegisterWord => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(bb95808a-6d8f-4bca-8400-5390b586aedf),
@@ -75,7 +75,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnConfigureRegisterEudc
  //
-+_Win32_AnnotateInterface_(ITfFnConfigureRegisterEudc, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnConfigureRegisterEudc => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(b5e26ff5-d7ad-4304-913f-21a2ed95a1b0),
@@ -83,7 +83,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnShowHelp
  //
-+_Win32_AnnotateInterface_(ITfFnShowHelp, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnShowHelp => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(5AB1D30C-094D-4C29-8EA5-0BF59BE87BF3),
@@ -91,7 +91,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnBalloon
  //
-+_Win32_AnnotateInterface_(ITfFnBalloon, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnBalloon => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(3BAB89E4-5FBE-45F4-A5BC-DCA36AD225A8),
@@ -99,7 +99,7 @@ index 2eb5d8e3..9bd1241a 100644
      GETIF_RECOGNIZERNOINIT        = 0x5 , // for candidate UI
  } TfSapiObject;
  
-+_Win32_AnnotateInterface_(ITfFnGetSAPIObject, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnGetSAPIObject => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(5c0ab7ea-167d-4f59-bfb5-4693755e90ca),
@@ -107,7 +107,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnPropertyUIStatus
  //
-+_Win32_AnnotateInterface_(ITfFnPropertyUIStatus, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnPropertyUIStatus => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(2338AC6E-2B9D-44C0-A75E-EE64F256B3BD),
@@ -115,7 +115,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnLMProcessor
  //
-+_Win32_AnnotateInterface_(ITfFnLMProcessor, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnLMProcessor => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(7AFBF8E7-AC4B-4082-B058-890899D3A010),
@@ -123,7 +123,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnLMInternal
  //
-+_Win32_AnnotateInterface_(ITfFnLMInternal, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnLMInternal => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(04B825B1-AC9A-4F7B-B5AD-C7168F1EE445),
@@ -131,7 +131,7 @@ index 2eb5d8e3..9bd1241a 100644
  // IEnumTfLatticeElements
  //
  //
-+_Win32_AnnotateInterface_(IEnumTfLatticeElements, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumTfLatticeElements => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(56988052-47DA-4A05-911A-E3D941F17145),
@@ -139,7 +139,7 @@ index 2eb5d8e3..9bd1241a 100644
  // ITfLMLattice
  //
  //
-+_Win32_AnnotateInterface_(ITfLMLattice, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfLMLattice => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(D4236675-A5BF-4570-9D42-5D6D7B02D59B),
@@ -147,7 +147,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnAdviseText
  //
-+_Win32_AnnotateInterface_(ITfFnAdviseText, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnAdviseText => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(3527268B-7D53-4DD9-92B7-7296AE461249),
@@ -155,7 +155,7 @@ index 2eb5d8e3..9bd1241a 100644
  //
  // ITfFnSearchCandidateProvider
  //
-+_Win32_AnnotateInterface_(ITfFnSearchCandidateProvider, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnSearchCandidateProvider => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(87a2ad8f-f27b-4920-8501-67602280175d),
@@ -163,7 +163,7 @@ index 2eb5d8e3..9bd1241a 100644
  //  - Allows IMEs to adjust search keyboarding behavior
  //  - Implemented by IME
  //
-+_Win32_AnnotateInterface_(ITfIntegratableCandidateListUIElement, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ITfIntegratableCandidateListUIElement => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(C7A6F54F-B180-416F-B2BF-7BF2E4683D7B),
@@ -171,7 +171,7 @@ index 2eb5d8e3..9bd1241a 100644
  // depending on the langid with which it is associated.
  // Additionally, a layout may only be valid for certain languages.
  //
-+_Win32_AnnotateInterface_(ITfFnGetPreferredTouchKeyboardLayout, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnGetPreferredTouchKeyboardLayout => SupportedOSPlatform(\"windows8.0\") */")
  [
    object,
    uuid(5F309A41-590A-4ACC-A97F-D8EFFF13FDFC),
@@ -179,7 +179,7 @@ index 2eb5d8e3..9bd1241a 100644
  }
  
  // ITfFnGetLinguisticAlternates
-+_Win32_AnnotateInterface_(ITfFnGetLinguisticAlternates, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::ITfFnGetLinguisticAlternates => SupportedOSPlatform(\"windows8.1\") */")
  [
    object, 
    local,
@@ -187,7 +187,7 @@ index 2eb5d8e3..9bd1241a 100644
  }
  
  // IUIManagerEventSink
-+_Win32_AnnotateInterface_(IUIManagerEventSink, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IUIManagerEventSink => SupportedOSPlatform(\"windows8.1\") */")
  [
    object, 
    local,

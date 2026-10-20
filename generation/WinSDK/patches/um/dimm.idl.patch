@@ -1,5 +1,5 @@
 diff --git a/um/dimm.idl b/um/dimm.idl
-index 4350234e..008904cb 100644
+index 4350234e..c65242ec 100644
 --- a/um/dimm.idl
 +++ b/um/dimm.idl
 @@ -10,6 +10,8 @@
@@ -11,33 +11,25 @@ index 4350234e..008904cb 100644
  cpp_quote("//=--------------------------------------------------------------------------=")
  cpp_quote("// dimm.h")
  cpp_quote("//=--------------------------------------------------------------------------=")
-@@ -87,10 +89,10 @@ library ActiveIMM
-         BYTE      lfItalic;
-         BYTE      lfUnderline;
-         BYTE      lfStrikeOut;
--        BYTE      lfCharSet;
--        BYTE      lfOutPrecision;
--        BYTE      lfClipPrecision;
--        BYTE      lfQuality;
-+        [annotation("_Win32_AssociatedEnum_(FONT_CHARSET)")] BYTE      lfCharSet;
-+        [annotation("_Win32_AssociatedEnum_(FONT_OUTPUT_PRECISION)")] BYTE      lfOutPrecision;
-+        [annotation("_Win32_AssociatedEnum_(FONT_CLIP_PRECISION)")] BYTE      lfClipPrecision;
-+        [annotation("_Win32_AssociatedEnum_(FONT_QUALITY)")] BYTE      lfQuality;
-         BYTE      lfPitchAndFamily;
+@@ -77,6 +79,10 @@ library ActiveIMM
+ 
+     #define LF_FACESIZE         32
+ 
++cpp_quote("/* Win32Metadata: field ::LOGFONTA::lfCharSet => AssociatedEnum(FONT_CHARSET) */")
++cpp_quote("/* Win32Metadata: field ::LOGFONTA::lfOutPrecision => AssociatedEnum(FONT_OUTPUT_PRECISION) */")
++cpp_quote("/* Win32Metadata: field ::LOGFONTA::lfClipPrecision => AssociatedEnum(FONT_CLIP_PRECISION) */")
++cpp_quote("/* Win32Metadata: field ::LOGFONTA::lfQuality => AssociatedEnum(FONT_QUALITY) */")
+     typedef struct
+     {
+         LONG      lfHeight;
+@@ -95,6 +101,10 @@ library ActiveIMM
          CHAR      lfFaceName[LF_FACESIZE];
      } LOGFONTA;
-@@ -105,10 +107,10 @@ library ActiveIMM
-         BYTE      lfItalic;
-         BYTE      lfUnderline;
-         BYTE      lfStrikeOut;
--        BYTE      lfCharSet;
--        BYTE      lfOutPrecision;
--        BYTE      lfClipPrecision;
--        BYTE      lfQuality;
-+        [annotation("_Win32_AssociatedEnum_(FONT_CHARSET)")] BYTE      lfCharSet;
-+        [annotation("_Win32_AssociatedEnum_(FONT_OUTPUT_PRECISION)")] BYTE      lfOutPrecision;
-+        [annotation("_Win32_AssociatedEnum_(FONT_CLIP_PRECISION)")] BYTE      lfClipPrecision;
-+        [annotation("_Win32_AssociatedEnum_(FONT_QUALITY)")] BYTE      lfQuality;
-         BYTE      lfPitchAndFamily;
-         WCHAR     lfFaceName[LF_FACESIZE];
-     } LOGFONTW;
+ 
++cpp_quote("/* Win32Metadata: field ::LOGFONTW::lfCharSet => AssociatedEnum(FONT_CHARSET) */")
++cpp_quote("/* Win32Metadata: field ::LOGFONTW::lfOutPrecision => AssociatedEnum(FONT_OUTPUT_PRECISION) */")
++cpp_quote("/* Win32Metadata: field ::LOGFONTW::lfClipPrecision => AssociatedEnum(FONT_CLIP_PRECISION) */")
++cpp_quote("/* Win32Metadata: field ::LOGFONTW::lfQuality => AssociatedEnum(FONT_QUALITY) */")
+     typedef struct
+     {
+         LONG      lfHeight;

@@ -1,5 +1,5 @@
 diff --git a/um/mbnapi.idl b/um/mbnapi.idl
-index f7002dee..72b190f6 100644
+index f7002dee..c0bfa9ba 100644
 --- a/um/mbnapi.idl
 +++ b/um/mbnapi.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnection
      //
-+_Win32_AnnotateInterface_(IMbnConnection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnection => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-200D-4BBB-AAEE-338E368AF6FA), 
@@ -22,7 +22,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionEvents
      //
-+_Win32_AnnotateInterface_(IMbnConnectionEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-200E-4BBB-AAEE-338E368AF6FA), 
@@ -30,7 +30,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnInterface
      //
-+_Win32_AnnotateInterface_(IMbnInterface, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnInterface => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2001-4BBB-AAEE-338E368AF6FA), 
@@ -38,7 +38,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnInterfaceEvents
      //
-+_Win32_AnnotateInterface_(IMbnInterfaceEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnInterfaceEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2002-4BBB-AAEE-338E368AF6FA), 
@@ -46,7 +46,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnInterfaceManager
      //
-+_Win32_AnnotateInterface_(IMbnInterfaceManager, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnInterfaceManager => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-201B-4BBB-AAEE-338E368AF6FA), 
@@ -54,7 +54,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnInterfaceManagerEvents
      //
-+_Win32_AnnotateInterface_(IMbnInterfaceManagerEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnInterfaceManagerEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-201C-4BBB-AAEE-338E368AF6FA), 
@@ -62,7 +62,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnRegistration
      //
-+_Win32_AnnotateInterface_(IMbnRegistration, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnRegistration => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2009-4BBB-AAEE-338E368AF6FA), 
@@ -70,7 +70,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnRegistrationEvents
      //
-+_Win32_AnnotateInterface_(IMbnRegistrationEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnRegistrationEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-200A-4BBB-AAEE-338E368AF6FA), 
@@ -78,7 +78,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionManager
      //
-+_Win32_AnnotateInterface_(IMbnConnectionManager, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionManager => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-201D-4BBB-AAEE-338E368AF6FA), 
@@ -86,7 +86,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionManagerEvents
      //
-+_Win32_AnnotateInterface_(IMbnConnectionManagerEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionManagerEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-201E-4BBB-AAEE-338E368AF6FA), 
@@ -94,7 +94,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnPinManager
      //
-+_Win32_AnnotateInterface_(IMbnPinManager, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnPinManager => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2005-4BBB-AAEE-338E368AF6FA), 
@@ -102,7 +102,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnPinManagerEvents
      //
-+_Win32_AnnotateInterface_(IMbnPinManagerEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnPinManagerEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2006-4BBB-AAEE-338E368AF6FA), 
@@ -110,7 +110,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnPinEvents
      //
-+_Win32_AnnotateInterface_(IMbnPinEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnPinEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2008-4BBB-AAEE-338E368AF6FA), 
@@ -118,7 +118,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSubscriberInformation
      //
-+_Win32_AnnotateInterface_(IMbnSubscriberInformation, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSubscriberInformation => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation,  
          uuid(459ECC43-BCF5-11DC-A8A8-001321F1405F), 
@@ -126,7 +126,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSignal
      //
-+_Win32_AnnotateInterface_(IMbnSignal, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSignal => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2003-4BBB-AAEE-338E368AF6FA), 
@@ -134,7 +134,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSignalEvents
      //
-+_Win32_AnnotateInterface_(IMbnSignalEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSignalEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2004-4BBB-AAEE-338E368AF6FA), 
@@ -142,7 +142,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionContext
      //
-+_Win32_AnnotateInterface_(IMbnConnectionContext, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionContext => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-200B-4BBB-AAEE-338E368AF6FA), 
@@ -150,7 +150,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionContextEvents
      //
-+_Win32_AnnotateInterface_(IMbnConnectionContextEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionContextEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-200C-4BBB-AAEE-338E368AF6FA), 
@@ -158,7 +158,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionProfileManager
      //
-+_Win32_AnnotateInterface_(IMbnConnectionProfileManager, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionProfileManager => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-200F-4BBB-AAEE-338E368AF6FA), 
@@ -166,7 +166,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionProfile
      //
-+_Win32_AnnotateInterface_(IMbnConnectionProfile, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionProfile => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2010-4BBB-AAEE-338E368AF6FA), 
@@ -174,7 +174,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionProfileEvents
      //
-+_Win32_AnnotateInterface_(IMbnConnectionProfileEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionProfileEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2011-4BBB-AAEE-338E368AF6FA), 
@@ -182,7 +182,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSmsConfiguration
      //
-+_Win32_AnnotateInterface_(IMbnSmsConfiguration, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSmsConfiguration => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2012-4BBB-AAEE-338E368AF6FA), 
@@ -190,7 +190,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSmsReadMsgPdu
      //
-+_Win32_AnnotateInterface_(IMbnSmsReadMsgPdu, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSmsReadMsgPdu => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2013-4BBB-AAEE-338E368AF6FA), 
@@ -198,7 +198,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSmsReadMsgTextCdma
      //
-+_Win32_AnnotateInterface_(IMbnSmsReadMsgTextCdma, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSmsReadMsgTextCdma => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2014-4BBB-AAEE-338E368AF6FA), 
@@ -206,7 +206,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSms
      //
-+_Win32_AnnotateInterface_(IMbnSms, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSms => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2015-4BBB-AAEE-338E368AF6FA), 
@@ -214,7 +214,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnSmsEvents
      //
-+_Win32_AnnotateInterface_(IMbnSmsEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnSmsEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2016-4BBB-AAEE-338E368AF6FA), 
@@ -222,7 +222,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnServiceActivation
      //
-+_Win32_AnnotateInterface_(IMbnServiceActivation, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnServiceActivation => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2017-4BBB-AAEE-338E368AF6FA), 
@@ -230,7 +230,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnServiceActivationEvents
      //
-+_Win32_AnnotateInterface_(IMbnServiceActivationEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnServiceActivationEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2018-4BBB-AAEE-338E368AF6FA), 
@@ -238,7 +238,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnVendorSpecificOperation
      //
-+_Win32_AnnotateInterface_(IMbnVendorSpecificOperation, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnVendorSpecificOperation => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2019-4BBB-AAEE-338E368AF6FA), 
@@ -246,7 +246,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnVendorSpecificEvents
      //
-+_Win32_AnnotateInterface_(IMbnVendorSpecificEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnVendorSpecificEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-201A-4BBB-AAEE-338E368AF6FA), 
@@ -254,7 +254,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnConnectionProfileManagerEvents
      //
-+_Win32_AnnotateInterface_(IMbnConnectionProfileManagerEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnConnectionProfileManagerEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-201F-4BBB-AAEE-338E368AF6FA), 
@@ -262,7 +262,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnRadio
      //
-+_Win32_AnnotateInterface_(IMbnRadio, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnRadio => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCCCCAB6-201F-4BBB-AAEE-338E368AF6FA), 
@@ -270,7 +270,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnRadioEvents
      //
-+_Win32_AnnotateInterface_(IMbnRadioEvents, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnRadioEvents => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCDDDAB6-201F-4BBB-AAEE-338E368AF6FA), 
@@ -278,7 +278,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnMultiCarrier
      //
-+_Win32_AnnotateInterface_(IMbnMultiCarrier, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMbnMultiCarrier => SupportedOSPlatform(\"windows8.0\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2020-4BBB-AAEE-338E368AF6FA), 
@@ -286,7 +286,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnMultiCarrierEvents
      //
-+_Win32_AnnotateInterface_(IMbnMultiCarrierEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMbnMultiCarrierEvents => SupportedOSPlatform(\"windows8.0\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCDDDAB6-2021-4BBB-AAEE-338E368AF6FA), 
@@ -294,7 +294,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnDeviceServicesManager
      //
-+_Win32_AnnotateInterface_(IMbnDeviceServicesManager, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMbnDeviceServicesManager => SupportedOSPlatform(\"windows8.0\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(20A26258-6811-4478-AC1D-13324E45E41C), 
@@ -302,7 +302,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnDeviceServicesContext
      //
-+_Win32_AnnotateInterface_(IMbnDeviceServicesContext, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMbnDeviceServicesContext => SupportedOSPlatform(\"windows8.0\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(FC5AC347-1592-4068-80BB-6A57580150D8), 
@@ -310,7 +310,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnDeviceServicesManagerEvents
      //
-+_Win32_AnnotateInterface_(IMbnDeviceServicesEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMbnDeviceServicesEvents => SupportedOSPlatform(\"windows8.0\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(0A900C19-6824-4E97-B76E-CF239D0CA642), 
@@ -318,7 +318,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnDeviceService
      //
-+_Win32_AnnotateInterface_(IMbnDeviceService, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IMbnDeviceService => SupportedOSPlatform(\"windows8.0\") */")
      [
          object, nonextensible, oleautomation,
          uuid(B3BB9A71-DC70-4BE9-A4DA-7886AE8B191B),
@@ -326,7 +326,7 @@ index f7002dee..72b190f6 100644
      //
      // Interface: IMbnPin
      //
-+_Win32_AnnotateInterface_(IMbnPin, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMbnPin => SupportedOSPlatform(\"windows6.1\") */")
      [
          object, nonextensible, oleautomation, 
          uuid(DCBBBAB6-2007-4BBB-AAEE-338E368AF6FA), 

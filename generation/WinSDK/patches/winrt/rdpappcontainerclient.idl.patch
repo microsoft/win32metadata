@@ -1,5 +1,5 @@
 diff --git a/winrt/rdpappcontainerclient.idl b/winrt/rdpappcontainerclient.idl
-index 286a7bdf..e113e7a1 100644
+index 286a7bdf..8bf6ce9c 100644
 --- a/winrt/rdpappcontainerclient.idl
 +++ b/winrt/rdpappcontainerclient.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 286a7bdf..e113e7a1 100644
  // IRemoteDesktopClientSettings
  // (Windows8.0)
  //
-+_Win32_AnnotateInterface_(IRemoteDesktopClientSettings, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IRemoteDesktopClientSettings => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(48A0F2A7-2713-431f-BBAC-6F4558E7D64D),
@@ -22,7 +22,7 @@ index 286a7bdf..e113e7a1 100644
  // IRemoteDesktopClientActions
  // (Windows8.0)
  //
-+_Win32_AnnotateInterface_(IRemoteDesktopClientActions, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IRemoteDesktopClientActions => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(7D54BC4E-1028-45d4-8B0A-B9B6BFFBA176),
@@ -30,7 +30,7 @@ index 286a7bdf..e113e7a1 100644
  // IRemoteDesktopClientTouchPointer
  // (Windows8.0)
  //
-+_Win32_AnnotateInterface_(IRemoteDesktopClientTouchPointer, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IRemoteDesktopClientTouchPointer => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(260ec22d-8cbc-44b5-9e88-2a37f6c93ae9),
@@ -38,7 +38,7 @@ index 286a7bdf..e113e7a1 100644
  // (Windows8.0)
  //
  
-+_Win32_AnnotateInterface_(IRemoteDesktopClient, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IRemoteDesktopClient => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(57D25668-625A-4905-BE4E-304CAA13F89C),

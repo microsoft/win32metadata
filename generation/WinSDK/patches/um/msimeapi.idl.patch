@@ -1,5 +1,5 @@
 diff --git a/um/msimeapi.idl b/um/msimeapi.idl
-index 5b38a652..f84d2c6e 100644
+index 6f737e80..ef8581dd 100644
 --- a/um/msimeapi.idl
 +++ b/um/msimeapi.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 5b38a652..f84d2c6e 100644
  //
  // IImePlugInDictDictionaryList
  //
-+_Win32_AnnotateInterface_(IImePlugInDictDictionaryList, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IImePlugInDictDictionaryList => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(98752974-b0a6-489b-8f6f-bff3769c8eeb),

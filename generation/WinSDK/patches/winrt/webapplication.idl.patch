@@ -1,5 +1,5 @@
 diff --git a/winrt/webapplication.idl b/winrt/webapplication.idl
-index 6cdaf3a4..1f3d129b 100644
+index 6cdaf3a4..48a7305d 100644
 --- a/winrt/webapplication.idl
 +++ b/winrt/webapplication.idl
 @@ -3,6 +3,7 @@
@@ -14,7 +14,7 @@ index 6cdaf3a4..1f3d129b 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IWebApplicationScriptEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationScriptEvents => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
@@ -22,7 +22,7 @@ index 6cdaf3a4..1f3d129b 100644
          [in] BOOL errorHandled);
  };
  
-+_Win32_AnnotateInterface_(IWebApplicationNavigationEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationNavigationEvents => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
@@ -30,7 +30,7 @@ index 6cdaf3a4..1f3d129b 100644
      HRESULT DownloadComplete();
  };
  
-+_Win32_AnnotateInterface_(IWebApplicationUIEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationUIEvents => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
@@ -38,7 +38,7 @@ index 6cdaf3a4..1f3d129b 100644
          [out] HRESULT* result);
  };
  
-+_Win32_AnnotateInterface_(IWebApplicationUpdateEvents, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationUpdateEvents => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
@@ -46,7 +46,7 @@ index 6cdaf3a4..1f3d129b 100644
      HRESULT OnCssChanged();
  };
  
-+_Win32_AnnotateInterface_(IWebApplicationHost, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationHost => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
@@ -54,7 +54,7 @@ index 6cdaf3a4..1f3d129b 100644
          [in] DWORD cookie);
  }
  
-+_Win32_AnnotateInterface_(IWebApplicationActivation, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationActivation => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      local,
@@ -62,7 +62,7 @@ index 6cdaf3a4..1f3d129b 100644
  
  cpp_quote("// Implemented by the activator. The query service implementation is required to respond to")
  cpp_quote("// requests for SID_SWebApplicationAuthor.")
-+_Win32_AnnotateInterface_(IWebApplicationAuthoringMode, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWebApplicationAuthoringMode => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(720AEA93-1964-4DB0-B005-29EB9E2B18A9),

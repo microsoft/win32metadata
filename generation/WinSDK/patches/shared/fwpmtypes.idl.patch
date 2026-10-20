@@ -1,3 +1,5 @@
+diff --git a/shared/fwpmtypes.idl b/shared/fwpmtypes.idl
+index b6c6d084..acb320d8 100644
 --- a/shared/fwpmtypes.idl
 +++ b/shared/fwpmtypes.idl
 @@ -5,6 +5,8 @@
@@ -9,37 +11,35 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family or AppRuntime Package
-@@ -62,6 +64,11 @@
- // Flags used to indicate which notifications a subscriber wishes to receive.
+@@ -63,6 +65,11 @@ typedef [v1_enum] enum FWPM_CHANGE_TYPE_
  cpp_quote("#define FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD    (0x00000001)")
  cpp_quote("#define FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE (0x00000002)")
-+
+ 
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("_Win32_Enum_(FWPM_SUBSCRIPTION_FLAGS, unsigned int,")
 +cpp_quote("    FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD, FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE);")
 +cpp_quote("#endif")
- 
++
  
  ///////////////////////////////////////////////////////////////////////////////
-@@ -544,7 +551,7 @@
-    // the template is NULL, it matches all objects.
-    [unique] FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0* enumTemplate;
-    // Flags -- see FWPM_SUBSCRIPTION_FLAG_XXX above.
--   UINT32 flags;
-+   [annotation("_Win32_AssociatedEnum_(FWPM_SUBSCRIPTION_FLAGS)")] UINT32 flags;
+ //
+@@ -536,6 +543,7 @@ typedef struct FWPM_PROVIDER_CONTEXT_CHANGE0_
+ } FWPM_PROVIDER_CONTEXT_CHANGE0;
  
-    // Additional information returned when getting subscriptions.
+ // Used to subscribe for change notifications.
++cpp_quote("/* Win32Metadata: field ::FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0::flags => AssociatedEnum(FWPM_SUBSCRIPTION_FLAGS) */")
+ typedef struct FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0_
+ {
+    // Information supplied when subscribing.
+@@ -601,6 +609,7 @@ typedef struct FWPM_SUBLAYER_CHANGE0_
+ } FWPM_SUBLAYER_CHANGE0;
  
-@@ -609,7 +616,7 @@
-    // the template is NULL, it matches all objects.
-    [unique] FWPM_SUBLAYER_ENUM_TEMPLATE0* enumTemplate;
-    // Flags -- see FWPM_SUBSCRIPTION_FLAG_XXX above.
--   UINT32 flags;
-+   [annotation("_Win32_AssociatedEnum_(FWPM_SUBSCRIPTION_FLAGS)")] UINT32 flags;
- 
-    // Additional information returned when getting subscriptions.
- 
-@@ -835,6 +842,14 @@
+ // Used to subscribe for change notifications.
++cpp_quote("/* Win32Metadata: field ::FWPM_SUBLAYER_SUBSCRIPTION0::flags => AssociatedEnum(FWPM_SUBSCRIPTION_FLAGS) */")
+ typedef struct FWPM_SUBLAYER_SUBSCRIPTION0_
+ {
+    // Information supplied when subscribing.
+@@ -835,6 +844,14 @@ cpp_quote("#define FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED (0x00000010)"
  cpp_quote("#define FWPM_FILTER_FLAG_DISABLED (0x00000020)")
  // BFE has indexed the filter for fast run-time lookup.
  cpp_quote("#define FWPM_FILTER_FLAG_INDEXED (0x00000040)")
@@ -54,12 +54,11 @@
  // The filter references a provider context for IPsec security realm Id
  cpp_quote("#define FWPM_FILTER_FLAG_HAS_SECURITY_REALM_PROVIDER_CONTEXT (0x00000080)")
  // The filter is exclusive to system OS only
-@@ -867,7 +882,7 @@
-    // Allows filters to be annotated in a human-readable form.
-    FWPM_DISPLAY_DATA0 displayData;
-    // Flags
--   UINT32 flags;
-+   [annotation("_Win32_AssociatedEnum_(FWPM_FILTER_FLAGS)")] UINT32 flags;
-    // Optional GUID of the policy provider that manages this object.
-    [unique] GUID* providerKey;
-    // Optional provider-specific data; allows providers to store additional
+@@ -857,6 +874,7 @@ cpp_quote("#define FWPM_FILTER_FLAG_RESERVED2   (0x00004000)")
+ 
+ 
+ // Stores the state associated with a filter.
++cpp_quote("/* Win32Metadata: field ::FWPM_FILTER0::flags => AssociatedEnum(FWPM_FILTER_FLAGS) */")
+ typedef struct FWPM_FILTER0_
+ {
+    // Information supplied when adding objects.

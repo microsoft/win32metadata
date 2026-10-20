@@ -1,5 +1,5 @@
 diff --git a/um/structuredquerycondition.idl b/um/structuredquerycondition.idl
-index f2de3038..5aec694a 100644
+index f2de3038..7526c5dc 100644
 --- a/um/structuredquerycondition.idl
 +++ b/um/structuredquerycondition.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index f2de3038..5aec694a 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IRichChunk, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IRichChunk => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(4FDEF69C-DBC9-454e-9910-B34F3C64B510),
@@ -19,7 +19,7 @@ index f2de3038..5aec694a 100644
                            [out] PROPVARIANT* pValue);
  }
  
-+_Win32_AnnotateInterface_(ICondition, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ICondition => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(0FC988D4-C935-4b97-A973-46282EA175C8),
@@ -27,7 +27,7 @@ index f2de3038..5aec694a 100644
      HRESULT Clone([out, retval] ICondition** ppc);
  };
  
-+_Win32_AnnotateInterface_(ICondition2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ICondition2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      uuid(0DB8851D-2E5B-47eb-9208-D28C325A01D7),
      object,

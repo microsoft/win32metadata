@@ -1,5 +1,5 @@
 diff --git a/um/RrasCfg.idl b/um/RrasCfg.idl
-index f19354e2..f7dc25d7 100644
+index f19354e2..1deb258d 100644
 --- a/um/RrasCfg.idl
 +++ b/um/RrasCfg.idl
 @@ -18,11 +18,14 @@ cpp_quote("// PARTICULAR PURPOSE.")
@@ -12,7 +12,7 @@ index f19354e2..f7dc25d7 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IEAPProviderConfig, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEAPProviderConfig => SupportedOSPlatform(\"windows5.0\") */")
 +
  import "basetsd.h";
  import "wtypes.idl";

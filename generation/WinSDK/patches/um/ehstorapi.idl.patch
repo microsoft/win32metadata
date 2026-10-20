@@ -1,5 +1,5 @@
 diff --git a/um/ehstorapi.idl b/um/ehstorapi.idl
-index 12f1c371..cf208287 100644
+index 12f1c371..0633dd93 100644
 --- a/um/ehstorapi.idl
 +++ b/um/ehstorapi.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index 12f1c371..cf208287 100644
  // This interface is used to enumerate available
  // addressable command targets (ACTs).
  //---------------------------------------------------------
-+_Win32_AnnotateInterface_(IEnumEnhancedStorageACT, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumEnhancedStorageACT => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(09b224bd-1335-4631-a7ff-cfd3a92646d7),
@@ -22,7 +22,7 @@ index 12f1c371..cf208287 100644
  cpp_quote("#define ACT_AUTHORIZE_ON_RESUME               0x00000001")
  cpp_quote("#define ACT_AUTHORIZE_ON_SESSION_UNLOCK       0x00000002")
  
-+_Win32_AnnotateInterface_(IEnhancedStorageACT, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnhancedStorageACT => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6e7781f4-e0f2-4239-b976-a01abab52930),
@@ -30,7 +30,7 @@ index 12f1c371..cf208287 100644
  //---------------------------------------------------------
  // This is the extension of IEnhancedStorageACT interface.
  //---------------------------------------------------------
-+_Win32_AnnotateInterface_(IEnhancedStorageACT2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IEnhancedStorageACT2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(4DA57D2E-8EB3-41f6-A07E-98B52B88242B),
@@ -38,7 +38,7 @@ index 12f1c371..cf208287 100644
  //---------------------------------------------------------
  // This interface is used to access a silo.
  //---------------------------------------------------------
-+_Win32_AnnotateInterface_(IEnhancedStorageSilo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnhancedStorageSilo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(5aef78c6-2242-4703-bf49-44b29357a359),
@@ -46,7 +46,7 @@ index 12f1c371..cf208287 100644
  //---------------------------------------------------------
  // This interface is used to access a silo action.
  //---------------------------------------------------------
-+_Win32_AnnotateInterface_(IEnhancedStorageSiloAction, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnhancedStorageSiloAction => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(b6f7f311-206f-4ff8-9c4b-27efee77a86f),

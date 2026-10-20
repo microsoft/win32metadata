@@ -1,5 +1,5 @@
 diff --git a/um/workspaceruntime.idl b/um/workspaceruntime.idl
-index 466ab5b0..d4a958e0 100644
+index 466ab5b0..d7a61523 100644
 --- a/um/workspaceruntime.idl
 +++ b/um/workspaceruntime.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index 466ab5b0..d4a958e0 100644
  cpp_quote( "#define WKS_FLAG_CREDS_AUTHENTICATED  4" )
  
  
-+_Win32_AnnotateInterface_(IWorkspace, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspace => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(B922BBB8-4C55-4FEA-8496-BEB0B44285E5),
@@ -22,7 +22,7 @@ index 466ab5b0..d4a958e0 100644
      [helpstring("method GetProcessId")] HRESULT GetProcessId([out,retval] ULONG* pulProcessId);
  };
  
-+_Win32_AnnotateInterface_(IWorkspace2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspace2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(96D8D7CF-783E-4286-834C-EBC0E95F783C),
@@ -30,7 +30,7 @@ index 466ab5b0..d4a958e0 100644
          [in] SAFEARRAY(BSTR) psaParams);
  };
  
-+_Win32_AnnotateInterface_(IWorkspace3, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspace3 => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(1BECBE4A-D654-423B-AFEB-BE8D532C13C6),
@@ -38,7 +38,7 @@ index 466ab5b0..d4a958e0 100644
          [in] BSTR bstrRefreshToken);
  };
  
-+_Win32_AnnotateInterface_(IWorkspaceRegistration, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceRegistration => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(B922BBB8-4C55-4FEA-8496-BEB0B44285E6),
@@ -46,7 +46,7 @@ index 466ab5b0..d4a958e0 100644
      [helpstring("method RemoveResource")] HRESULT RemoveResource([in] DWORD dwCookieConnection);
  };
  
-+_Win32_AnnotateInterface_(IWorkspaceRegistration2, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceRegistration2 => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid(CF59F654-39BB-44D8-94D0-4635728957E9),
@@ -54,7 +54,7 @@ index 466ab5b0..d4a958e0 100644
  };
  
  
-+_Win32_AnnotateInterface_(IWorkspaceScriptable, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceScriptable => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(EFEA49A2-DDA5-429D-8F42-B23B92C4C347),
@@ -62,7 +62,7 @@ index 466ab5b0..d4a958e0 100644
      [id(7), helpstring("method DisconnectWorkspaceByFriendlyName")] HRESULT DisconnectWorkspaceByFriendlyName([in] BSTR bstrWorkspaceFriendlyName);
  };
  
-+_Win32_AnnotateInterface_(IWorkspaceScriptable2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceScriptable2 => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(EFEA49A2-DDA5-429D-8F42-B33BA2C4C348),
@@ -70,7 +70,7 @@ index 466ab5b0..d4a958e0 100644
          [in] BSTR bstrWorkspaceFriendlyName);
  };
  
-+_Win32_AnnotateInterface_(IWorkspaceScriptable3, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceScriptable3 => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid(531E6512-2CBF-4BD2-80A5-D90A71636A9A),
@@ -78,7 +78,7 @@ index 466ab5b0..d4a958e0 100644
          [in] GUID correlationId);    
  };
  
-+_Win32_AnnotateInterface_(IWorkspaceReportMessage, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceReportMessage => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(a7c06739-500f-4e8c-99a8-2bd6955899eb),        

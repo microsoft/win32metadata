@@ -1,5 +1,5 @@
 diff --git a/um/wsbapp.idl b/um/wsbapp.idl
-index 05c218d6..6b18eeae 100644
+index 05c218d6..57edf5be 100644
 --- a/um/wsbapp.idl
 +++ b/um/wsbapp.idl
 @@ -13,11 +13,16 @@ engine to invoke application during backup/restore. These needs to be implemente
@@ -12,9 +12,9 @@ index 05c218d6..6b18eeae 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IWsbApplicationAsync, _Win32_SupportedOS_Server2008_)
-+_Win32_AnnotateInterface_(IWsbApplicationBackupSupport, _Win32_SupportedOS_Server2008_)
-+_Win32_AnnotateInterface_(IWsbApplicationRestoreSupport, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IWsbApplicationAsync => SupportedOSPlatform(\"windowsserver2008\") */")
++cpp_quote("/* Win32Metadata: interface ::IWsbApplicationBackupSupport => SupportedOSPlatform(\"windowsserver2008\") */")
++cpp_quote("/* Win32Metadata: interface ::IWsbApplicationRestoreSupport => SupportedOSPlatform(\"windowsserver2008\") */")
 +
  
  

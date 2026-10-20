@@ -1,3 +1,5 @@
+diff --git a/um/objidl.idl b/um/objidl.idl
+index 00cd5a8f..fb27f41b 100644
 --- a/um/objidl.idl
 +++ b/um/objidl.idl
 @@ -1,3 +1,5 @@
@@ -6,98 +8,89 @@
  cpp_quote("#include <winapifamily.h>")
  
  //+-------------------------------------------------------------------------
-@@ -83,6 +85,7 @@
+@@ -83,6 +85,7 @@ midl_pragma warning (disable: 2480)
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IMallocSpy, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IMallocSpy => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,
-@@ -169,6 +172,7 @@
+@@ -169,6 +172,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_S
   *  Binding Interfaces
   ****************************************************************************/
  
-+_Win32_AnnotateInterface_(IBindCtx, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IBindCtx => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000000e-0000-0000-C000-000000000046),
-@@ -316,6 +320,7 @@
+@@ -316,6 +320,7 @@ cpp_quote("#endif")
      );
  }
  
-+_Win32_AnnotateInterface_(IEnumMoniker, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumMoniker => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000102-0000-0000-C000-000000000046),
-@@ -350,6 +355,8 @@
+@@ -350,6 +355,8 @@ interface IEnumMoniker : IUnknown
      HRESULT Clone(
          [out] IEnumMoniker **ppenum);
  }
-+_Win32_AnnotateMethod_(IEnumMoniker::Skip, _Win32_PreserveResult_)
-+_Win32_AnnotateMethod_(IEnumMoniker::Next, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IEnumMoniker::Skip => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IEnumMoniker::Next => PreserveResult */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -357,6 +364,7 @@
+@@ -357,6 +364,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IRunnableObject, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IRunnableObject => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000126-0000-0000-C000-000000000046)
-@@ -386,6 +394,7 @@
+@@ -386,6 +394,8 @@ interface IRunnableObject : IUnknown
          [in] BOOL fContained);
  }
  
-+_Win32_AnnotateInterface_(IRunningObjectTable, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IRunningObjectTable => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IRunningObjectTable::Register::grfFlags => AssociatedEnum(ROT_FLAGS) */")
  [
      object,
      uuid(00000010-0000-0000-C000-000000000046)
-@@ -398,7 +407,7 @@
- 
-     HRESULT Register
-     (
--        [in] DWORD grfFlags,
-+        [annotation("_Win32_AssociatedEnum_(ROT_FLAGS)")] [in] DWORD grfFlags,
-         [in, unique] IUnknown *punkObject,
-         [in, unique] IMoniker *pmkObjectName,
-         [out] DWORD *pdwRegister
-@@ -445,6 +454,7 @@
+@@ -445,6 +455,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IPersist, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPersist => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000010c-0000-0000-C000-000000000046)
-@@ -461,6 +471,7 @@
+@@ -461,6 +472,7 @@ interface IPersist : IUnknown
      );
  }
  
-+_Win32_AnnotateInterface_(IPersistStream, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPersistStream => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000109-0000-0000-C000-000000000046),
-@@ -494,7 +505,9 @@
+@@ -494,7 +506,9 @@ interface IPersistStream : IPersist
      );
  
  }
--
-+_Win32_AnnotateMethod_(IPersistStream::IsDirty, _Win32_PreserveResult_)
-+
-+_Win32_AnnotateInterface_(IMoniker, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IPersistStream::IsDirty => PreserveResult */")
+ 
++cpp_quote("/* Win32Metadata: interface ::IMoniker => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000000f-0000-0000-C000-000000000046),
-@@ -620,12 +633,17 @@
+@@ -620,12 +634,17 @@ interface IMoniker : IPersistStream
  
  }
  
-+_Win32_AnnotateParameter_(IMoniker::BindToObject, ppvResult, _Win32_ComOutPtr_(true))
-+_Win32_AnnotateParameter_(IMoniker::BindToStorage, ppvObj, _Win32_ComOutPtr_(true))
-+_Win32_AnnotateMethod_(IMoniker::IsEqual, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: parameter ::IMoniker::BindToObject::ppvResult => ComOutPtr(true) */")
++cpp_quote("/* Win32Metadata: parameter ::IMoniker::BindToStorage::ppvObj => ComOutPtr(true) */")
++cpp_quote("/* Win32Metadata: method ::IMoniker::IsEqual => PreserveResult */")
 +
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
@@ -105,303 +98,250 @@
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IROTData, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IROTData => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(f29f6bc0-5021-11ce-aa15-00006901293f),
-@@ -646,6 +664,7 @@
+@@ -646,6 +665,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IEnumSTATSTG, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumSTATSTG => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000000d-0000-0000-C000-000000000046),
-@@ -678,6 +697,7 @@
+@@ -678,6 +698,12 @@ interface IEnumSTATSTG : IUnknown
          [out] IEnumSTATSTG **ppenum);
  }
  
-+_Win32_AnnotateInterface_(IStorage, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IStorage => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IStorage::CreateStream::grfMode => AssociatedEnum(STGM) */")
++cpp_quote("/* Win32Metadata: parameter ::IStorage::OpenStream::grfMode => AssociatedEnum(STGM) */")
++cpp_quote("/* Win32Metadata: parameter ::IStorage::CreateStorage::grfMode => AssociatedEnum(STGM) */")
++cpp_quote("/* Win32Metadata: parameter ::IStorage::OpenStorage::grfMode => AssociatedEnum(STGM) */")
++cpp_quote("/* Win32Metadata: parameter ::IStorage::MoveElementTo::grfFlags => AssociatedEnum(STGMOVE) */")
  [
      object,
      uuid(0000000b-0000-0000-C000-000000000046),
-@@ -704,7 +724,7 @@
- 
-     HRESULT CreateStream(
-         [in, string] const OLECHAR *pwcsName,
--        [in] DWORD grfMode,
-+        [annotation("_Win32_AssociatedEnum_(STGM)")] [in] DWORD grfMode,
-         [in] DWORD reserved1,
-         [in] DWORD reserved2,
-         [out] IStream **ppstm);
-@@ -713,7 +733,7 @@
-     HRESULT OpenStream(
-         [in, string, annotation("_In_z_")] const OLECHAR *pwcsName,
-         [in, unique, annotation("_Reserved_")] void *reserved1,
--        [in] DWORD grfMode,
-+        [annotation("_Win32_AssociatedEnum_(STGM)")] [in] DWORD grfMode,
-         [in] DWORD reserved2,
-         [out, annotation("_Outptr_")] IStream **ppstm);
- 
-@@ -728,7 +748,7 @@
- 
-     HRESULT CreateStorage(
-         [in, string] const OLECHAR *pwcsName,
--        [in] DWORD grfMode,
-+        [annotation("_Win32_AssociatedEnum_(STGM)")] [in] DWORD grfMode,
-         [in] DWORD reserved1,
-         [in] DWORD reserved2,
-         [out] IStorage **ppstg);
-@@ -736,7 +756,7 @@
-     HRESULT OpenStorage(
-         [in, unique, string] const OLECHAR *pwcsName,
-         [in, unique] IStorage *pstgPriority,
--        [in] DWORD grfMode,
-+        [annotation("_Win32_AssociatedEnum_(STGM)")] [in] DWORD grfMode,
-         [in, unique] SNB snbExclude,
-         [in] DWORD reserved,
-         [out] IStorage **ppstg);
-@@ -759,7 +779,7 @@
-         [in, string] const OLECHAR * pwcsName,
-         [in, unique] IStorage *pstgDest,
-         [in, string] const OLECHAR *pwcsNewName,
--        [in] DWORD grfFlags);
-+        [annotation("_Win32_AssociatedEnum_(STGMOVE)")] [in] DWORD grfFlags);
- 
-     HRESULT Commit(
-         [in] DWORD grfCommitFlags);
-@@ -814,6 +834,7 @@
+@@ -814,6 +840,8 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IPersistFile, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPersistFile => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IPersistFile::Load::dwMode => AssociatedEnum(STGM) */")
  [
      object,
      uuid(0000010b-0000-0000-C000-000000000046),
-@@ -833,7 +854,7 @@
-     HRESULT Load
-     (
-         [in] LPCOLESTR pszFileName,
--        [in] DWORD dwMode
-+        [annotation("_Win32_AssociatedEnum_(STGM)")] [in] DWORD dwMode
-     );
- 
-     HRESULT Save
-@@ -852,7 +873,9 @@
+@@ -852,7 +880,9 @@ interface IPersistFile : IPersist
          [out] LPOLESTR *ppszFileName
      );
  }
--
-+_Win32_AnnotateMethod_(IPersistFile::IsDirty, _Win32_PreserveResult_)
-+
-+_Win32_AnnotateInterface_(IPersistStorage, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IPersistFile::IsDirty => PreserveResult */")
+ 
++cpp_quote("/* Win32Metadata: interface ::IPersistStorage => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000010a-0000-0000-C000-000000000046),
-@@ -895,6 +918,7 @@
+@@ -895,6 +925,7 @@ interface IPersistStorage : IPersist
          void
      );
  }
-+_Win32_AnnotateMethod_(IPersistStorage::IsDirty, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IPersistStorage::IsDirty => PreserveResult */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */")
  #pragma endregion
-@@ -902,6 +926,7 @@
+@@ -902,6 +933,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(ILockBytes, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ILockBytes => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000000a-0000-0000-C000-000000000046),
-@@ -963,6 +988,7 @@
+@@ -963,6 +995,7 @@ interface ILockBytes : IUnknown
          [in] DWORD grfStatFlag);
  }
  
-+_Win32_AnnotateInterface_(IEnumFORMATETC, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumFORMATETC => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000103-0000-0000-C000-000000000046),
-@@ -1018,7 +1044,9 @@
+@@ -1018,7 +1051,9 @@ midl_pragma warning( default: 2480 )
      HRESULT Clone(
          [out] IEnumFORMATETC **ppenum);
  }
--
-+_Win32_AnnotateMethod_(IEnumFORMATETC::Next, _Win32_PreserveResult_)
-+
-+_Win32_AnnotateInterface_(IEnumSTATDATA, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: method ::IEnumFORMATETC::Next => PreserveResult */")
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumSTATDATA => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000105-0000-0000-C000-000000000046),
-@@ -1077,6 +1105,7 @@
+@@ -1077,6 +1112,7 @@ interface IEnumSTATDATA : IUnknown
          [out] IEnumSTATDATA **ppenum);
  }
  
-+_Win32_AnnotateInterface_(IRootStorage, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IRootStorage => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000012-0000-0000-C000-000000000046),
-@@ -1099,6 +1128,7 @@
+@@ -1099,6 +1135,7 @@ interface IRootStorage : IUnknown
   *  Notification Interfaces
   ****************************************************************************/
  
-+_Win32_AnnotateInterface_(IAdviseSink, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAdviseSink => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000010f-0000-0000-C000-000000000046),
-@@ -1132,7 +1162,7 @@
+@@ -1131,6 +1168,7 @@ interface IAdviseSink : IUnknown
+     cpp_quote("#pragma warning(disable:4200)")
      cpp_quote("#endif")
  
++cpp_quote("/* Win32Metadata: field ::RemSTGMEDIUM::tymed => AssociatedEnum(TYMED) */")
      typedef struct tagRemSTGMEDIUM {
--        DWORD tymed;
-+        [annotation("_Win32_AssociatedEnum_(TYMED)")] DWORD tymed;
+         DWORD tymed;
          DWORD dwHandleType;
-         ULONG pData;
-         ULONG pUnkForRelease;
-@@ -1150,7 +1180,7 @@
- 
+@@ -1151,6 +1189,7 @@ interface IAdviseSink : IUnknown
  cpp_quote("#ifdef NONAMELESSUNION")
  cpp_quote("typedef struct tagSTGMEDIUM {")
--cpp_quote("    DWORD tymed;")
-+cpp_quote("    _Win32_AssociatedEnum_(TYMED) DWORD tymed;")
+ cpp_quote("    DWORD tymed;")
++cpp_quote("/* Win32Metadata: field ::uSTGMEDIUM::tymed => AssociatedEnum(TYMED) */")
  cpp_quote("    union {")
  cpp_quote("        HBITMAP hBitmap;")
  cpp_quote("        HMETAFILEPICT hMetaFilePict;")
-@@ -1165,7 +1195,7 @@
+@@ -1164,6 +1203,7 @@ cpp_quote("    IUnknown *pUnkForRelease;")
+ cpp_quote("}uSTGMEDIUM;")
  cpp_quote("#else")
  
++cpp_quote("/* Win32Metadata: field ::uSTGMEDIUM::tymed => AssociatedEnum(TYMED) */")
      typedef struct tagSTGMEDIUM {
--    DWORD tymed;
-+    [annotation("_Win32_AssociatedEnum_(TYMED)")] DWORD tymed;
+     DWORD tymed;
      [switch_type(DWORD), switch_is((DWORD) tymed)]
-         union
-         {
-@@ -1359,6 +1389,7 @@
+@@ -1359,6 +1399,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IAdviseSink2, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAdviseSink2 => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000125-0000-0000-C000-000000000046),
-@@ -1404,6 +1435,7 @@
+@@ -1404,6 +1445,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IDataObject, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IDataObject => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0000010e-0000-0000-C000-000000000046),
-@@ -1479,6 +1511,8 @@
+@@ -1479,6 +1521,8 @@ interface IDataObject : IUnknown
          [out] IEnumSTATDATA **ppenumAdvise);
  
  }
-+_Win32_AnnotateMethod_(IDataObject::QueryGetData, _Win32_PreserveResult_)
-+_Win32_AnnotateMethod_(IDataObject::GetCanonicalFormatEtc, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IDataObject::QueryGetData => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IDataObject::GetCanonicalFormatEtc => PreserveResult */")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -1486,6 +1520,7 @@
+@@ -1486,6 +1530,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IDataAdviseHolder, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IDataAdviseHolder => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,
-@@ -1525,6 +1560,7 @@
+@@ -1525,6 +1570,7 @@ interface IDataAdviseHolder : IUnknown
  
  }
  
-+_Win32_AnnotateInterface_(IMessageFilter, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IMessageFilter => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,
-@@ -1779,6 +1815,7 @@
+@@ -1779,6 +1825,7 @@ interface IEnumConnectionPoints : IUnknown
      );
  }
  #endif // __INCLUDE_CPIFS
-+_Win32_AnnotateInterface_(IClassActivator, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IClassActivator => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(00000140-0000-0000-C000-000000000046)
-@@ -1800,6 +1837,7 @@
+@@ -1800,6 +1847,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IFillLockBytes, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IFillLockBytes => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(99caf010-415e-11cf-8814-00aa00b569f5),
-@@ -1855,6 +1893,7 @@
+@@ -1855,6 +1903,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IProgressNotify, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IProgressNotify => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(a9d758a0-4617-11cf-95fc-00aa00680db4),
-@@ -1878,6 +1917,7 @@
+@@ -1878,6 +1927,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(ILayoutStorage, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ILayoutStorage => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,
-@@ -1926,6 +1966,7 @@
+@@ -1926,6 +1976,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IBlockingLock, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IBlockingLock => SupportedOSPlatform(\"windows5.0\") */")
  [
   object,
   uuid(30f3d47a-6447-11d1-8e3c-00c04fb9386d)
-@@ -1979,6 +2020,7 @@
+@@ -1979,6 +2030,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IDirectWriterLock, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IDirectWriterLock => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0e6d4d92-6738-11cf-9608-00aa00680db4),
-@@ -2021,6 +2063,7 @@
+@@ -2021,6 +2073,7 @@ interface IUrlMon : IUnknown
          [in]         DWORD      flags);
  }
  
-+_Win32_AnnotateInterface_(IForegroundTransfer, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IForegroundTransfer => SupportedOSPlatform(\"windows5.0\") */")
  [
  local,
  object,
-@@ -2102,6 +2145,7 @@
+@@ -2102,6 +2155,7 @@ typedef enum tagShutdownType
  //
  // IProcessLock
  //
-+_Win32_AnnotateInterface_(IProcessLock, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IProcessLock => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
  	local,
-@@ -2118,6 +2162,7 @@
+@@ -2118,6 +2172,7 @@ interface IProcessLock : IUnknown
  //
  // ISurrogateService
  //
-+_Win32_AnnotateInterface_(ISurrogateService, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISurrogateService => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      local,
-@@ -2139,6 +2184,7 @@
+@@ -2139,6 +2194,7 @@ interface ISurrogateService : IUnknown
  
  cpp_quote( "#if  (_WIN32_WINNT >= 0x0501 )" )
  
-+_Win32_AnnotateInterface_(IInitializeSpy, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInitializeSpy => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
-@@ -2168,6 +2214,7 @@
+@@ -2168,6 +2224,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
  
-+_Win32_AnnotateInterface_(IApartmentShutdown, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IApartmentShutdown => SupportedOSPlatform(\"windows8.0\") */")
  [
      local,
      object,

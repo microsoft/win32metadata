@@ -61,6 +61,29 @@ Track drafted, applied, and validated facts separately against the same fixed
 inventory. A draft is useful unfinished work; neither its existence nor deletion of
 a legacy row earns validation or API-acceptance credit.
 
+### Breadth-first conversion and shared gap families
+
+Work across the SDK before trying to complete an individual partition. Partitions
+are scrape and comparison units, not authoring-completion gates. Draft the currently
+expressible facts in leased originals, record the remaining dependencies, and move
+to the next source cohort. Do not wait for every fact in a partition to qualify.
+
+Group gaps by the shared mechanism across all affected originals and partitions:
+declaration selection, cleanup binding, IDL placement, enum-provider and namespace
+closure, macro-only targets, type projection, or import discovery. Reuse the exact
+fact IDs, native targets, and examples in existing receipts; do not require another
+per-fact census or proof matrix before authors continue. Keep source ambiguity and
+API-specific contract questions explicit rather than calling a whole bucket
+unsupported.
+
+Repair a shared mechanism once, then replay its affected cohorts together in a
+central successor. Collect independent scrape failures across the batch where
+possible instead of repeatedly completing one partition before attempting another.
+Failed or unattempted jobs remain visible; collecting a partial batch does not make
+its image acceptable. Review unresolved buckets separately while other source
+conversion continues. Paired header/reader changes still require coherent central
+qualification, not separate author qualification.
+
 ## Start from a pinned control
 
 The integration lane records the qualified tooling and pilot commits, tree
@@ -109,13 +132,33 @@ either output without claiming to have migrated their APIs.
 | Annotation definitions | Use the shared SAL bootstrap and the matching scraper SAL shim. Do not add `win32metadata_annotations.h` to every API header. An original IDL preprocessing stream that does not already include SAL must include `<sal.h>` before using helpers; an IDL `import` is not a CPP macro include. |
 | Import DLL | First inspect the selected SDK's `.lib` imports and the actual processing set. If a library is missing from that set or the parser missed its imports, fix discovery. Only retain an authored import override when justified by actual native/library evidence. |
 | Logical enums | Keep metadata-only, unscoped bags of existing constants. Preserve names, members, compiled values, and storage; associate native integer fields/parameters rather than replacing their native types. Native scoped enums remain scoped. |
-| Historical labels absent from native source | Use the already-qualified original-AST carrier, with a short explanation of the label/expression pairing. Do not invent a native alias or expose an ordinary-consumer symbol. The XInput `ALL = 0` label is such an exception. |
+| Historical labels absent from native source | Require an exact qualification pin for an original-AST label/expression carrier compatible with the selected header/reader pair. If that pin is unavailable, retain the fact in the shared carrier-gap bucket. Do not invent a native alias or expose an ordinary-consumer symbol. |
 | Availability | Use the qualified Clang lexical OS scopes or explicit type carriers. Preserve actual floors and scope boundaries; do not invent floors for structs merely because a nearby interface has one. |
-| Cleanup and invalid values | Put resource ownership on producers' return values or output parameters. Do not create pseudo-handle types or move ownership onto an existing plain handle typedef. |
+| Cleanup and invalid values | Put resource ownership on producers' return values or output parameters. Resolve cleanup names against actual native function declarations after the complete translation-unit walk; declaration order must not require copied or moved prototypes. Preserve complete invalid sets. Do not create pseudo-handle types or move ownership onto an existing plain handle typedef. |
+| Compiler intrinsics | Preserve the generator's actual native-Builtin exclusion. Do not invent DLL APIs or require metadata projection for those excluded declarations; still parse and validate their authored annotations. |
 | Direction, buffers, counts, and retval | Prefer native SAL/MIDL semantics, preserving count expressions and units. Do not replace or silently discard existing SAL, or add redundant scalar direction annotations. |
 | Exact results | `_Win32_PreserveResult_`, legacy `CanReturnMultipleSuccessValues`, and legacy `CanReturnErrorsAsSuccess` converge on CLR `PreserveSig`. Do not introduce a separate multiple-success annotation or preserve the legacy custom-attribute instances. |
 | Agile | Do not migrate the old Agile fact into SDK headers; its intentional removal is not a missing annotation to restore. |
 | Removed SDK APIs | Do not restore headers or declarations missing from the selected shipped SDK. Compare same-SDK controls so SDK surface changes are not mistaken for annotation omissions. |
+
+Original-IDL API facts use selector-bound comments emitted by `cpp_quote`, such as
+`cpp_quote("/* Win32Metadata: parameter ::IStream::Seek::dwOrigin => AssociatedEnum(STREAM_SEEK) */")`.
+Use `Convert-SdkIdlAnnotations.ps1` for authoring, or its
+`-PatchedIdl`/`-PristineIdl`/`-TransportOutput` mode to convert an existing original.
+Restore native SAL against that pristine declaration; never replace it with metadata
+`[annotation]` payloads. Preserve native direction, counts, retval, UUID, locality,
+and conditional scopes. Logical `Enum`/`FlagsEnum` groups still use their compiled
+value transport. Comments use canonical native identifiers without the C `enum`
+elaborated prefix; ordinary authored C/C++ annotations remain unchanged.
+
+Retiring a legacy type-wide cleanup or invalid-value field requires evidence that
+the producer annotations cover the same ownership contract and complete invalid
+set. A few annotated producers, or a passing cleanup-name binding test, do not
+establish that closure. Keep unresolved type-policy facts on the legacy path and
+count their producer drafts as partial. This does not require recreating type-wide
+cleanup annotations. Assess independent typedef aliases against their own wrapper
+projection path; cleanup binding does not prove alias transport. Continue other
+source drafting while central coverage and output review remain pending.
 
 For an existing native enum with only a C tag, use its actual C type spelling in
 the association carrier: `_Win32_AssociatedEnum_(enum VARENUM)`, not the nonexistent
@@ -134,24 +177,42 @@ global namespace mechanism. Preserve the complete physical member inventory acro
 all owners, including mixed-case native names. A prefix-only or uppercase-only
 inventory is not a completeness check.
 
-Do not satisfy an association with an unbound typedef, subset group, generated C#
-enum, or broad include of another API's headers. Qualify the source-owned group and
-its native visibility first. Preserve `.header-types.cs` producer filenames in frozen
+Do not accept an association with an unbound typedef, subset group, generated C#
+enum, or broad include of another API's headers. Central integration must qualify
+the source-owned group and its native visibility before accepting the association.
+Authors can draft providers and use-site contributions in parallel, keeping missing
+provider or visibility closure as a shared dependency rather than an authoring gate.
+Preserve `.header-types.cs` producer filenames in frozen
 source overlays so the emitter can distinguish group contributions from ordinary
 native or residual legacy enum definitions. Keep unmigrated use-site facts explicit
-until their own declaration owners qualify. After moving a complete group definition,
-the existing `addUsesTo` form can retain those existing uses without `name`, `members`,
-or `autoPopulate`; it emits remaps, not another enum definition. Do not add new
-API-specific sidecar facts as part of that bridge.
+until central qualification covers their declaration owners. After moving a complete
+group definition, the existing `addUsesTo` form can retain those existing uses without
+`name`, `members`, or `autoPopulate`; it emits remaps, not another enum definition.
+Do not add new API-specific sidecar facts as part of that bridge.
+
+Header typedef annotations can also coexist with a retained AutoTypes record during
+incremental migration. The emitter composes generated native typedef wrappers by
+their Roslyn-bound full identity and unmanaged `Value` storage, keeping one wrapper,
+one `Value` field, and one copy of matching annotations. Remaining AutoTypes facts
+are preserved; conflicting storage or annotation values fail rather than winning by
+input order. Ordinary declarations and foreign short names are not merged. This is
+an intermediate compatibility bridge, not permission to add type-wide ownership:
+new cleanup annotations still belong on producing results or output parameters.
 
 Include the complete normal constants scrape and emission in that dependency batch.
+An actual header-group member can share its name with a separate retained enum type.
+The constants stage recognizes producer-owned members in their resolved namespace,
+preserving both enum identities and the normal scalar-alias processing; unrelated
+constant/type collisions remain errors. The emitter removes the loose member copy.
 Scalar macro aliases outside the group must keep their own primitive storage and
 values; do not absorb them into the group or add casts to native headers. The emitter
 uses Roslyn-bound header-group identities to add checked scalar conversions in its
 private compiler inputs. When removal of a grouped member's loose constant leaves
 a bare scalar alias unbound, the emitter resolves it only if normal C# lookup has
 no symbol or candidates and exactly one producer-owned logical group supplies that
-member. Parenthesized aliases follow the same rule; existing bindings and ambiguous
+member. Parenthesized aliases follow the same rule. A bare alias that instead names
+an enum type can resolve the unique header-group member in that same namespace:
+the type is not a value binding. Valid value bindings, foreign types, and ambiguous
 or missing names are not guessed. Original generated sources remain unchanged.
 Ordinary native enums, enum-typed aliases, and unrelated compiler errors are
 unchanged; out-of-range constants still fail. A small group-only image does not
@@ -274,6 +335,13 @@ Enable a migrated partition with `parse-win32-annotations` under its existing
 `--config`. There is no automatic annotation-admission command.
 `Build-WinHttpMigrationImage.ps1` is the pilot's frozen complete-source
 overlay/repeat/comparison harness, not a general full-SDK admission shortcut.
+
+Annotation projection validation honors the same configured exclusions as
+ClangSharp. With `exclude-funcs-with-body`, native function definitions and their
+parameters still have their annotations parsed and validated, but do not require
+winmd projection. Keep those native sites annotated and qualified; a C++ inline
+overload is not the same declaration as a same-named C export. Without that
+exclusion, unprojected annotations still fail.
 
 Scraper-only response-file edits can miss the
 incremental emitter inputs: invalidate only the relevant known scrape stamps and

@@ -1,5 +1,5 @@
 diff --git a/um/wsddisco.idl b/um/wsddisco.idl
-index d83a8ecb..c444ebd2 100644
+index d83a8ecb..6bc121d8 100644
 --- a/um/wsddisco.idl
 +++ b/um/wsddisco.idl
 @@ -11,6 +11,8 @@
@@ -11,83 +11,81 @@ index d83a8ecb..c444ebd2 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -36,13 +38,13 @@ interface IWSDiscoveryPublisherNotify;
- interface IWSDScopeMatchingRule;
+@@ -37,12 +39,14 @@ interface IWSDScopeMatchingRule;
  
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDiscoveryProvider(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateDiscoveryProvider(")
+ cpp_quote("WSDCreateDiscoveryProvider(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDiscoveryProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _Outptr_ IWSDiscoveryProvider** ppProvider);")
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDiscoveryProvider2(")
-+cpp_quote("_Win32_SupportedOS_Windows7_ WSDCreateDiscoveryProvider2(")
+ cpp_quote("WSDCreateDiscoveryProvider2(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDiscoveryProvider2 => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _In_reads_opt_(dwConfigParamCount) WSD_CONFIG_PARAM* pConfigParams,")
  cpp_quote("    DWORD dwConfigParamCount,")
-@@ -54,6 +56,7 @@ cpp_quote("#endif")
+@@ -54,6 +58,7 @@ cpp_quote("#endif")
  //  IWSDiscoveryProvider Interface
  //  Description: Defines the behavior of the discovery provider
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDiscoveryProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDiscoveryProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(8FFC8E55-F0EB-480F-88B7-B435DD281D45),
-@@ -95,6 +98,7 @@ interface IWSDiscoveryProvider : IUnknown
+@@ -95,6 +100,7 @@ interface IWSDiscoveryProvider : IUnknown
  //  Description: Defines the behavior of the sink attached to 
  //               the discovery provider
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDiscoveryProviderNotify, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDiscoveryProviderNotify => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(73ee3ced-b6e6-4329-a546-3e8ad46563d2),
-@@ -123,6 +127,7 @@ interface IWSDiscoveryProviderNotify : IUnknown
+@@ -123,6 +129,7 @@ interface IWSDiscoveryProviderNotify : IUnknown
  //  IWSDiscoveredService Interface
  //  Description: Encapsulates information about a discovered service
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDiscoveredService, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDiscoveredService => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(4BAD8A3B-B374-4420-9632-AAC945B374AA),
-@@ -169,13 +174,13 @@ interface IWSDiscoveredService : IUnknown
- }
+@@ -170,12 +177,14 @@ interface IWSDiscoveredService : IUnknown
  
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDiscoveryPublisher(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateDiscoveryPublisher(")
+ cpp_quote("WSDCreateDiscoveryPublisher(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDiscoveryPublisher => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _Outptr_ IWSDiscoveryPublisher** ppPublisher);")
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDiscoveryPublisher2(")
-+cpp_quote("_Win32_SupportedOS_Windows7_ WSDCreateDiscoveryPublisher2(")
+ cpp_quote("WSDCreateDiscoveryPublisher2(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDiscoveryPublisher2 => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _In_reads_opt_(dwConfigParamCount) WSD_CONFIG_PARAM* pConfigParams,")
  cpp_quote("    DWORD dwConfigParamCount,")
-@@ -186,6 +191,7 @@ cpp_quote("#endif")
+@@ -186,6 +195,7 @@ cpp_quote("#endif")
  //  IWSDiscoveryPublisher Interface
  //  Description: Defines the behavior of the discovery publisher
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDiscoveryPublisher, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDiscoveryPublisher => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(AE01E1A8-3FF9-4148-8116-057CC616FE13),
-@@ -310,6 +316,7 @@ interface IWSDiscoveryPublisher : IUnknown
+@@ -310,6 +320,7 @@ interface IWSDiscoveryPublisher : IUnknown
  //  Description: Defines the behavior of the sink attached to the 
  //               discovery publisher
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDiscoveryPublisherNotify, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDiscoveryPublisherNotify => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e67651b0-337a-4b3c-9758-733388568251),
-@@ -333,6 +340,7 @@ interface IWSDiscoveryPublisherNotify : IUnknown
+@@ -333,6 +344,7 @@ interface IWSDiscoveryPublisherNotify : IUnknown
  //  IWSDScopeMatchingRule Interface
  //  Description: Defines an interface for new scope matching rules
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDScopeMatchingRule, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDScopeMatchingRule => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(fcafe424-fef5-481a-bd9f-33ce0574256f),

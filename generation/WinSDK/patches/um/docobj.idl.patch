@@ -1,5 +1,5 @@
 diff --git a/um/docobj.idl b/um/docobj.idl
-index 8a1ee2e5..a2e1245b 100644
+index 8a1ee2e5..45111a6b 100644
 --- a/um/docobj.idl
 +++ b/um/docobj.idl
 @@ -6,6 +6,8 @@
@@ -15,7 +15,7 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLEDOCUMENT_DEFINED")
  cpp_quote("#define _LPOLEDOCUMENT_DEFINED")
-+_Win32_AnnotateInterface_(IOleDocument, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleDocument => SupportedOSPlatform(\"windows5.0\") */")
  [
          object,
          uuid(b722bcc5-4e68-101b-a2bc-00aa00404770),
@@ -23,7 +23,7 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLEDOCUMENTSITE_DEFINED")
  cpp_quote("#define _LPOLEDOCUMENTSITE_DEFINED")
-+_Win32_AnnotateInterface_(IOleDocumentSite, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleDocumentSite => SupportedOSPlatform(\"windows5.0\") */")
  [
          object,
          uuid(b722bcc7-4e68-101b-a2bc-00aa00404770),
@@ -31,7 +31,7 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLEDOCUMENTVIEW_DEFINED")
  cpp_quote("#define _LPOLEDOCUMENTVIEW_DEFINED")
-+_Win32_AnnotateInterface_(IOleDocumentView, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleDocumentView => SupportedOSPlatform(\"windows5.0\") */")
  [
          object,
          uuid(b722bcc6-4e68-101b-a2bc-00aa00404770),
@@ -39,7 +39,7 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPENUMOLEDOCUMENTVIEWS_DEFINED")
  cpp_quote("#define _LPENUMOLEDOCUMENTVIEWS_DEFINED")
-+_Win32_AnnotateInterface_(IEnumOleDocumentViews, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumOleDocumentViews => SupportedOSPlatform(\"windows5.0\") */")
  [
          object,
          uuid(b722bcc8-4e68-101b-a2bc-00aa00404770),
@@ -47,7 +47,7 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPCONTINUECALLBACK_DEFINED")
  cpp_quote("#define _LPCONTINUECALLBACK_DEFINED")
-+_Win32_AnnotateInterface_(IContinueCallback, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IContinueCallback => SupportedOSPlatform(\"windows5.0\") */")
  [
          object,
          uuid(b722bcca-4e68-101b-a2bc-00aa00404770),
@@ -55,7 +55,7 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPPRINT_DEFINED")
  cpp_quote("#define _LPPRINT_DEFINED")
-+_Win32_AnnotateInterface_(IPrint, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPrint => SupportedOSPlatform(\"windows5.0\") */")
  [
          object,
          uuid(b722bcc9-4e68-101b-a2bc-00aa00404770),
@@ -83,16 +83,15 @@ index 8a1ee2e5..a2e1245b 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLECOMMANDTARGET_DEFINED")
  cpp_quote("#define _LPOLECOMMANDTARGET_DEFINED")
-+_Win32_AnnotateInterface_(IOleCommandTarget, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IOleCommandTarget => SupportedOSPlatform(\"windows5.0\") */")
  [
          //local,
          object,
-@@ -371,7 +386,7 @@ interface IOleCommandTarget : IUnknown
+@@ -369,6 +384,7 @@ interface IOleCommandTarget : IUnknown
+         } OLECMDF;
  
+ 
++cpp_quote("/* Win32Metadata: field ::OLECMD::cmdf => AssociatedEnum(OLECMDF) */")
          typedef struct _tagOLECMD {
                  ULONG   cmdID;
--                DWORD   cmdf;
-+                [annotation("_Win32_AssociatedEnum_(OLECMDF)")] DWORD   cmdf;
-         } OLECMD;
- 
-         typedef struct _tagOLECMDTEXT{
+                 DWORD   cmdf;

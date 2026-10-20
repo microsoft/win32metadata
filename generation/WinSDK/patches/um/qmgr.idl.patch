@@ -1,5 +1,5 @@
 diff --git a/um/qmgr.idl b/um/qmgr.idl
-index b457991c..8fb657c7 100644
+index b457991c..3517126e 100644
 --- a/um/qmgr.idl
 +++ b/um/qmgr.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index b457991c..8fb657c7 100644
  // IJob Interface
  //     The IJob interface is the management layer for a file (or set of files)
  //     to be transferred.
-+_Win32_AnnotateInterface_(IBackgroundCopyJob1, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyJob1 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(59f5553c-2031-4629-bb18-2645a6970947),
      helpstring("IBackgroundCopyJob Interface"),
@@ -22,7 +22,7 @@ index b457991c..8fb657c7 100644
  // ==============================================
  // IEnumJobs Interface
  //     This interface allows enumerating the jobs under a Group
-+_Win32_AnnotateInterface_(IEnumBackgroundCopyJobs1, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumBackgroundCopyJobs1 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(8baeba9d-8f1c-42c4-b82c-09ae79980d25),
      helpstring("IEnumBackgroundCopyJobs Interface"),
@@ -30,7 +30,7 @@ index b457991c..8fb657c7 100644
  // ==============================================
  // IGroup Interface
  //     This interface is the base unit of management for a Job or Set of Jobs
-+_Win32_AnnotateInterface_(IBackgroundCopyGroup, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyGroup => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(1ded80a7-53ea-424f-8a04-17fea9adc4f5),
      helpstring("IBackgroundCopyGroup Interface"),
@@ -38,7 +38,7 @@ index b457991c..8fb657c7 100644
  
  // ==============================================
  // IEnumGroups Interface
-+_Win32_AnnotateInterface_(IEnumBackgroundCopyGroups, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumBackgroundCopyGroups => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(d993e603-4aa4-47c5-8665-c20d39c2ba4f),
      helpstring("IEnumBackgroundCopyGroups Interface"),
@@ -46,7 +46,7 @@ index b457991c..8fb657c7 100644
  // IBackgroundCallback Interface
  //     This interface is implemented by the client and is used by the queue manager to supply status and
  //     progress information to the client.
-+_Win32_AnnotateInterface_(IBackgroundCopyCallback1, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyCallback1 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(084f6593-3800-4e08-9b59-99fa59addf82),
      helpstring("IBackgroundCopyCallback Interface"),
@@ -54,7 +54,7 @@ index b457991c..8fb657c7 100644
                            [in, size_is(dwByteArraySize)] BYTE *pByte );
  }
  
-+_Win32_AnnotateInterface_(IBackgroundCopyQMgr, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyQMgr => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(16f41c69-09f5-41d2-8cd8-3c08c47bc8a8), // IID_IQMgr
      helpstring("Background Copy QMgr interface"),

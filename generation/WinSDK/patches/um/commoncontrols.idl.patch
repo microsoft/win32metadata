@@ -1,5 +1,5 @@
 diff --git a/um/commoncontrols.idl b/um/commoncontrols.idl
-index 10787e66..f22eebc9 100644
+index 10787e66..e7fcd14f 100644
 --- a/um/commoncontrols.idl
 +++ b/um/commoncontrols.idl
 @@ -1,5 +1,7 @@
@@ -10,17 +10,16 @@ index 10787e66..f22eebc9 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -58,16 +60,19 @@ cpp_quote("#endif") // MIDL_PASS
- 
+@@ -59,20 +61,26 @@ cpp_quote("#endif") // MIDL_PASS
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
--cpp_quote("WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(")
-+cpp_quote("WINCOMMCTRLAPI HRESULT WINAPI _Win32_SupportedOS_WindowsVista_ ImageList_CoCreateInstance(")
+ cpp_quote("WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(")
++cpp_quote("/* Win32Metadata: function ::ImageList_CoCreateInstance => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("         _In_  REFCLSID rclsid,")
  cpp_quote("     _In_opt_  const IUnknown *punkOuter,")
  cpp_quote("         _In_  REFIID riid,")
--cpp_quote("  _Outptr_ void **ppv);")
-+cpp_quote("  _Win32_ComOutPtr_(true) _Outptr_ void **ppv);")
+ cpp_quote("  _Outptr_ void **ppv);")
++cpp_quote("/* Win32Metadata: parameter ::ImageList_CoCreateInstance::ppv => ComOutPtr(true) */")
  cpp_quote("#endif")
  
  // flags returned by GetItemFlags
@@ -32,20 +31,17 @@ index 10787e66..f22eebc9 100644
  
  // return values (if SUCCEEDED()) for IImageList::Draw
  cpp_quote("#define ILDRF_IMAGELOWQUALITY    0x00000001") // image is low quality
-@@ -106,7 +111,7 @@ interface IImageList : IUnknown
-     HRESULT SetDragCursorImage([in, annotation("_In_")] IUnknown* punk, int iDrag, int dxHotspot, int dyHotspot);
-     HRESULT DragShowNolock(BOOL fShow);
-     HRESULT GetDragImage([out, annotation("_Out_opt_")] POINT * ppt, [out, annotation("_Out_opt_")] POINT * pptHotspot, REFIID riid, [out, iid_is(riid), annotation("_Outptr_")] void** ppv);
--    HRESULT GetItemFlags(int i, [out, annotation("_Out_")] DWORD *dwFlags);
-+    HRESULT GetItemFlags(int i, [out, annotation("_Out_ _Win32_AssociatedEnum_(IMAGE_LIST_ITEM_FLAGS)")] DWORD *dwFlags);
-     HRESULT GetOverlayImage(int iOverlay, [out, annotation("_Out_")] int* piIndex);
- };
+ cpp_quote("#define ILDRF_OVERLAYLOWQUALITY  0x00000010") // overlay is low quality
  
-@@ -126,6 +131,7 @@ cpp_quote("#define ILR_SCALE_ASPECTRATIO        0x0100")
++cpp_quote("/* Win32Metadata: parameter ::IImageList::GetItemFlags::dwFlags => AssociatedEnum(IMAGE_LIST_ITEM_FLAGS) */")
+ [
+     uuid(46EB5926-582E-4017-9FDF-E8998DAA0950),
+     local
+@@ -126,6 +134,7 @@ cpp_quote("#define ILR_SCALE_ASPECTRATIO        0x0100")
  
  
  // New for (_WIN32_IE >= 0x0605)
-+_Win32_AnnotateInterface_(IImageList2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IImageList2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(192b9d83-50fc-457b-90a0-2b82a8b5dae1),
      local

@@ -1,5 +1,5 @@
 diff --git a/um/wsdbase.idl b/um/wsdbase.idl
-index 0089023c..d5ac9dcc 100644
+index 0089023c..9fbfe712 100644
 --- a/um/wsdbase.idl
 +++ b/um/wsdbase.idl
 @@ -11,6 +11,7 @@
@@ -14,7 +14,7 @@ index 0089023c..d5ac9dcc 100644
  //  IWSDAddress Interface
  //  Description: Generic Transport Address
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDAddress, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDAddress => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(b9574c6c-12a6-4f74-93a1-3318ff605759),
@@ -22,7 +22,7 @@ index 0089023c..d5ac9dcc 100644
  //  IWSDTransportAddress Interface
  //  Description: IP-based Transport Address
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDTransportAddress, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDTransportAddress => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(70d23498-4ee6-4340-a3df-d845d2235467),
@@ -30,97 +30,93 @@ index 0089023c..d5ac9dcc 100644
  //  IWSDMessageParameters Interface
  //  Description: Specific transmission with a remote device
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDMessageParameters, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDMessageParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c)
-@@ -273,7 +277,7 @@ interface IWSDMessageParameters : IUnknown
- // Helper for creating UDP message parameters
+@@ -274,6 +278,7 @@ interface IWSDMessageParameters : IUnknown
  //
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateUdpMessageParameters(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateUdpMessageParameters(")
+ cpp_quote("WSDCreateUdpMessageParameters(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateUdpMessageParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    IWSDUdpMessageParameters** ppTxParams);")
  
  //
-@@ -292,6 +296,7 @@ typedef struct _WSDUdpRetransmitParams
+@@ -292,6 +297,7 @@ typedef struct _WSDUdpRetransmitParams
  //  IWSDUdpMessageParameters Interface
  //  Description: UDP specific retransmission information for this message
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDUdpMessageParameters, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDUdpMessageParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(9934149f-8f0c-447b-aa0b-73124b0ca7f0)
-@@ -310,7 +315,7 @@ interface IWSDUdpMessageParameters : IWSDMessageParameters
- // Helper for creating UDP address
+@@ -311,6 +317,7 @@ interface IWSDUdpMessageParameters : IWSDMessageParameters
  //
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateUdpAddress(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateUdpAddress(")
+ cpp_quote("WSDCreateUdpAddress(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateUdpAddress => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    _Outptr_ IWSDUdpAddress** ppAddress);")
  
  //
-@@ -337,6 +342,7 @@ typedef enum _WSDUdpMessageType
+@@ -337,6 +344,7 @@ typedef enum _WSDUdpMessageType
  //  IWSDUdpAddress Interface
  //  Description: UDP Address Interface
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDUdpAddress, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDUdpAddress => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(74d6124a-a441-4f78-a1eb-97a8d1996893),
-@@ -384,13 +390,14 @@ interface IWSDUdpAddress : IWSDTransportAddress
- // Helper for creating http message parameters
+@@ -385,12 +393,14 @@ interface IWSDUdpAddress : IWSDTransportAddress
  //
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateHttpMessageParameters(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateHttpMessageParameters(")
+ cpp_quote("WSDCreateHttpMessageParameters(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateHttpMessageParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    _Outptr_ IWSDHttpMessageParameters** ppTxParams);")
  
  //+-------------------------------------------------------------------------
  //  IWSDHttpMessageParameters Interface
  //  Description: HTTP message parameters
  //--------------------------------------------------------------------------  
-+_Win32_AnnotateInterface_(IWSDHttpMessageParameters, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDHttpMessageParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(540bd122-5c83-4dec-b396-ea62a2697fdf),
-@@ -430,13 +437,14 @@ interface IWSDHttpMessageParameters : IWSDMessageParameters
- // Helper for creating HTTP address objects
+@@ -431,12 +441,14 @@ interface IWSDHttpMessageParameters : IWSDMessageParameters
  //
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateHttpAddress(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateHttpAddress(")
+ cpp_quote("WSDCreateHttpAddress(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateHttpAddress => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    _Outptr_ IWSDHttpAddress** ppAddress);")
  
  //+-------------------------------------------------------------------------
  //  IWSDHttpAddress Interface
  //  Description: HTTP address interface
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDHttpAddress, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDHttpAddress => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0),
-@@ -463,6 +471,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
+@@ -463,6 +475,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
  //  IWSDSSLClientCertificate Interface
  //  Description: Interface to retrive SSL client certificate
  //--------------------------------------------------------------------------  
-+_Win32_AnnotateInterface_(IWSDSSLClientCertificate, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWSDSSLClientCertificate => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(de105e87-a0da-418e-98ad-27b9eed87bdc),
-@@ -485,6 +494,7 @@ interface IWSDSSLClientCertificate : IUnknown
+@@ -485,6 +498,7 @@ interface IWSDSSLClientCertificate : IUnknown
  //  Description:    Interface through which applications can retrieve http authentication
  //                        parameters related to the current request.
  //---------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDHttpAuthParameters, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWSDHttpAuthParameters => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(0b476df0-8dac-480d-b05c-99781a5884aa),
-@@ -513,6 +523,7 @@ interface IWSDHttpAuthParameters: IUnknown
+@@ -513,6 +527,7 @@ interface IWSDHttpAuthParameters: IUnknown
  //  Description: Interface to retrieve the compact signature properties present in the
  //  message and the signature trust status based on user specified validation params
  //------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDSignatureProperty, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWSDSignatureProperty => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(03ce20aa-71c4-45e2-b32e-3766c61c790f),

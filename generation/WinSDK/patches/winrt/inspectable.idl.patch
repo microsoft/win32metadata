@@ -1,5 +1,5 @@
 diff --git a/winrt/inspectable.idl b/winrt/inspectable.idl
-index e239f6ee..a59ef23d 100644
+index e239f6ee..9fd77538 100644
 --- a/winrt/inspectable.idl
 +++ b/winrt/inspectable.idl
 @@ -5,6 +5,7 @@
@@ -14,7 +14,7 @@ index e239f6ee..a59ef23d 100644
      FullTrust
  } TrustLevel;
  
-+_Win32_AnnotateInterface_(IInspectable, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IInspectable => SupportedOSPlatform(\"windows8.0\") */")
  [
    object,
    uuid(AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90),

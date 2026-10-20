@@ -1,4 +1,5 @@
 diff --git a/shared/dxgi1_5.idl b/shared/dxgi1_5.idl
+index d08fe528..2e06b8c0 100644
 --- a/shared/dxgi1_5.idl
 +++ b/shared/dxgi1_5.idl
 @@ -1,5 +1,6 @@
@@ -26,7 +27,7 @@ diff --git a/shared/dxgi1_5.idl b/shared/dxgi1_5.idl
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput5 interface
  //--------------------------------------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IDXGIOutput5, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIOutput5 => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      object,
      uuid(80A07424-AB52-42EB-833C-0C42FD282D98),
@@ -47,12 +48,11 @@ diff --git a/shared/dxgi1_5.idl b/shared/dxgi1_5.idl
  
  typedef enum _DXGI_RECLAIM_RESOURCE_RESULTS
  {
-@@ -110,7 +124,7 @@ interface IDXGIDevice4 :
-         [in, annotation("_In_")] UINT NumResources,
-         [in, size_is(NumResources), annotation("_In_reads_(NumResources)")] IDXGIResource *const *ppResources,
-         [in, annotation("_In_")] DXGI_OFFER_RESOURCE_PRIORITY Priority,
--        [in, annotation("_In_")] UINT Flags);
-+        [in, annotation("_In_ _Win32_AssociatedEnum_(DXGI_OFFER_RESOURCE_FLAGS)")] UINT Flags);
-     HRESULT ReclaimResources1(
-         [in, annotation("_In_")] UINT NumResources,
-         [in, size_is(NumResources), annotation("_In_reads_(NumResources)")] IDXGIResource *const *ppResources,
+@@ -97,6 +111,7 @@ typedef enum _DXGI_RECLAIM_RESOURCE_RESULTS
+     DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED = 2,
+ } DXGI_RECLAIM_RESOURCE_RESULTS;
+ 
++cpp_quote("/* Win32Metadata: parameter ::IDXGIDevice4::OfferResources1::Flags => AssociatedEnum(DXGI_OFFER_RESOURCE_FLAGS) */")
+ [
+     object,
+     uuid(95B4F95F-D8DA-4CA4-9EE6-3B76D5968A10),

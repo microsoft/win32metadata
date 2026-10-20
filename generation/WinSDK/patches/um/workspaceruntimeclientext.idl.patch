@@ -1,5 +1,5 @@
 diff --git a/um/workspaceruntimeclientext.idl b/um/workspaceruntimeclientext.idl
-index a2258732..a459dc1d 100644
+index a2258732..56366e6d 100644
 --- a/um/workspaceruntimeclientext.idl
 +++ b/um/workspaceruntimeclientext.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index a2258732..a459dc1d 100644
  import "oaidl.idl";
  import "ocidl.idl";
  
-+_Win32_AnnotateInterface_(IWorkspaceClientExt, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWorkspaceClientExt => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(12B952F4-41CA-4F21-A829-A6D07D9A16E5),

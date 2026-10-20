@@ -1,5 +1,5 @@
 diff --git a/um/inkpresenterdesktop.idl b/um/inkpresenterdesktop.idl
-index 90702e8d..ffe11c32 100644
+index 90702e8d..b3eea17c 100644
 --- a/um/inkpresenterdesktop.idl
 +++ b/um/inkpresenterdesktop.idl
 @@ -1,4 +1,5 @@
@@ -12,7 +12,7 @@ index 90702e8d..ffe11c32 100644
      // When used with custom drying, InkPresenter calls back on this interface
      // to request that the application commit its DComposition device when it
      // can safely do so
-+_Win32_AnnotateInterface_(IInkCommitRequestHandler, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IInkCommitRequestHandler => SupportedOSPlatform(\"windows10.0.10240\") */")
      [object, uuid(fabea3fc-b108-45b6-a9fc-8d08fa9f85cf)]
      interface IInkCommitRequestHandler : IUnknown
      {
@@ -20,7 +20,7 @@ index 90702e8d..ffe11c32 100644
  
      // Used to integrate an InkPresenter instance into the application's
      // DComposition visual tree
-+_Win32_AnnotateInterface_(IInkPresenterDesktop, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IInkPresenterDesktop => SupportedOSPlatform(\"windows10.0.10240\") */")
      [object, uuid(73f3c0d9-2e8b-48f3-895e-20cbd27b723b)]
      interface IInkPresenterDesktop : IUnknown
      {
@@ -28,7 +28,7 @@ index 90702e8d..ffe11c32 100644
      // Implemented by the application
      // Provided to a call to IInkDesktopHost::QueueWorkItem to be invoked
      // on the ink host thread
-+_Win32_AnnotateInterface_(IInkHostWorkItem, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IInkHostWorkItem => SupportedOSPlatform(\"windows10.0.10240\") */")
      [object, uuid(ccda0a9a-1b78-4632-bb96-97800662e26c)]
      interface IInkHostWorkItem : IUnknown
      {
@@ -36,7 +36,7 @@ index 90702e8d..ffe11c32 100644
      }
  
      // Used to host InkPresenter from a desktop application
-+_Win32_AnnotateInterface_(IInkDesktopHost, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IInkDesktopHost => SupportedOSPlatform(\"windows10.0.10240\") */")
      [object, uuid(4ce7d875-a981-4140-a1ff-ad93258e8d59)]
      interface IInkDesktopHost : IUnknown
      {

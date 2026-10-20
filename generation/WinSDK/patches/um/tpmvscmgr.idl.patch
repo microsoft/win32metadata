@@ -1,5 +1,5 @@
 diff --git a/um/tpmvscmgr.idl b/um/tpmvscmgr.idl
-index d32f8659..13201cc6 100644
+index d32f8659..5f10a719 100644
 --- a/um/tpmvscmgr.idl
 +++ b/um/tpmvscmgr.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index d32f8659..13201cc6 100644
      TPMVSCMGR_ERROR_CARD_DESTROY, // Unable to destroy TPM Smart Card.
  } TPMVSCMGR_ERROR;
  
-+_Win32_AnnotateInterface_(ITpmVirtualSmartCardManagerStatusCallback, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ITpmVirtualSmartCardManagerStatusCallback => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(1A1BB35F-ABB8-451C-A1AE-33D98F1BEF4A),
@@ -22,7 +22,7 @@ index d32f8659..13201cc6 100644
  
  const BYTE TPMVSC_DEFAULT_ADMIN_ALGORITHM_ID = 0x82;
  
-+_Win32_AnnotateInterface_(ITpmVirtualSmartCardManager, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ITpmVirtualSmartCardManager => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(112B1DFF-D9DC-41F7-869F-D67FEE7CB591),

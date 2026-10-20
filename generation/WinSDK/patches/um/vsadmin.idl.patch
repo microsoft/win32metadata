@@ -1,5 +1,5 @@
 diff --git a/um/vsadmin.idl b/um/vsadmin.idl
-index f023feca..ec184f0f 100644
+index f023feca..73e2cafe 100644
 --- a/um/vsadmin.idl
 +++ b/um/vsadmin.idl
 @@ -10,6 +10,7 @@
@@ -14,7 +14,7 @@ index f023feca..ec184f0f 100644
  import "ocidl.idl";
  import "vss.idl";
  
-+_Win32_AnnotateInterface_(IVssAdmin, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVssAdmin => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(77ED5996-2F63-11d3-8A39-00C04F72D8E3),

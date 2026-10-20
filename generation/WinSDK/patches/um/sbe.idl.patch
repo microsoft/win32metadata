@@ -1,5 +1,5 @@
 diff --git a/um/sbe.idl b/um/sbe.idl
-index 5cbf16ff..1be5bd49 100644
+index 5cbf16ff..cfc8ca0f 100644
 --- a/um/sbe.idl
 +++ b/um/sbe.idl
 @@ -13,6 +13,7 @@
@@ -14,7 +14,7 @@ index 5cbf16ff..1be5bd49 100644
  interface   INotifyStreamBufferRecordControl;       //  notifes implementations about StreamBufferRecordControl interface
  
  
-+_Win32_AnnotateInterface_(IStreamBufferInitialize, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferInitialize => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(9ce50f2d-6ba7-40fb-a034-50b1a674ec78),
@@ -22,7 +22,7 @@ index 5cbf16ff..1be5bd49 100644
      RECORDING_TYPE_REFERENCE,           //  allows post-recording & overlapped
  } ;
  
-+_Win32_AnnotateInterface_(IStreamBufferSink, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferSink => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(afd1f242-7efd-45ee-ba4e-407a25c9a77a),
@@ -30,7 +30,7 @@ index 5cbf16ff..1be5bd49 100644
      Stream Source interface;
      implemented on the StreamBufferSink filter;
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferSink2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferSink2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(DB94A660-F4FB-4bfa-BCC6-FE159A4EEA93),
@@ -38,7 +38,7 @@ index 5cbf16ff..1be5bd49 100644
      Stream Source interface;
      implemented on the StreamBufferSink filter;
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferSink3, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferSink3 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(974723f2-887a-4452-9366-2cff3057bc8f),
@@ -46,7 +46,7 @@ index 5cbf16ff..1be5bd49 100644
      Stream Source reader interface;
      Implemented on the StreamBufferSource filter;
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferSource, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferSource => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(1c5bd776-6ced-4f44-8164-5eab0e98db12),
@@ -54,7 +54,7 @@ index 5cbf16ff..1be5bd49 100644
  
      obtained by QIing IStreamBufferSink::CreateRecorder()-returned IUnknown *
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferRecordControl, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferRecordControl => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(ba9b6c99-f3c7-4ff2-92db-cfdd4851bf31),
@@ -62,7 +62,7 @@ index 5cbf16ff..1be5bd49 100644
      (reference or content; can mix & match if desired)
  --*/
  
-+_Win32_AnnotateInterface_(IStreamBufferRecComp, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferRecComp => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(9E259A9B-8815-42ae-B09F-221970B154FD),
@@ -70,7 +70,7 @@ index 5cbf16ff..1be5bd49 100644
      STREAMBUFFER_TYPE_GUID   = 6,
  } STREAMBUFFER_ATTR_DATATYPE ;
  
-+_Win32_AnnotateInterface_(IStreamBufferRecordingAttribute, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferRecordingAttribute => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(16CA4E03-FE69-4705-BD41-5B7DFC0C95F3),
@@ -78,7 +78,7 @@ index 5cbf16ff..1be5bd49 100644
      WORD                        cbLength ;
  } STREAMBUFFER_ATTRIBUTE ;
  
-+_Win32_AnnotateInterface_(IEnumStreamBufferRecordingAttrib, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumStreamBufferRecordingAttrib => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid (C18A9162-1E82-4142-8C73-5690FA62FE33),
@@ -86,7 +86,7 @@ index 5cbf16ff..1be5bd49 100644
      IStreamBufferConfigure
  
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferConfigure, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferConfigure => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(ce14dfae-4098-4af7-bbf7-d6511f835414),
@@ -94,7 +94,7 @@ index 5cbf16ff..1be5bd49 100644
      IStreamBufferConfigure2
  
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferConfigure2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferConfigure2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(53E037BF-3992-4282-AE34-2487B4DAE06B),
@@ -102,7 +102,7 @@ index 5cbf16ff..1be5bd49 100644
      IStreamBufferConfigure3
  
  --*/
-+_Win32_AnnotateInterface_(IStreamBufferConfigure3, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferConfigure3 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(7E2D2A1E-7192-4bd7-80C1-061FD1D10402),
@@ -110,7 +110,7 @@ index 5cbf16ff..1be5bd49 100644
  
  --*/
  
-+_Win32_AnnotateInterface_(IStreamBufferMediaSeeking, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferMediaSeeking => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(f61f5c26-863d-4afa-b0ba-2f81dc978596),
@@ -118,7 +118,7 @@ index 5cbf16ff..1be5bd49 100644
  
  --*/
  
-+_Win32_AnnotateInterface_(IStreamBufferMediaSeeking2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferMediaSeeking2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(3a439ab0-155f-470a-86a6-9ea54afd6eaf),
@@ -126,7 +126,7 @@ index 5cbf16ff..1be5bd49 100644
      ULONGLONG   cTimestamps ;           //  number of timestamps
  } SBE_PIN_DATA ;
  
-+_Win32_AnnotateInterface_(IStreamBufferDataCounters, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStreamBufferDataCounters => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(9D2A2563-31AB-402e-9A6B-ADB903489440),
@@ -134,7 +134,7 @@ index 5cbf16ff..1be5bd49 100644
        SBE2 source filter (for playback-side global events)
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2GlobalEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2GlobalEvent => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (caede759-b6b1-11db-a578-0018f3fa24c6),
@@ -142,7 +142,7 @@ index 5cbf16ff..1be5bd49 100644
        SBE2 source filter (for playback-side global events)
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2GlobalEvent2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2GlobalEvent2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (6D8309BF-00FE-4506-8B03-F8C65B5C9B39),
@@ -150,7 +150,7 @@ index 5cbf16ff..1be5bd49 100644
        SBE2 source filter (for playback-side global events)
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2SpanningEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2SpanningEvent => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (caede760-b6b1-11db-a578-0018f3fa24c6),
@@ -158,7 +158,7 @@ index 5cbf16ff..1be5bd49 100644
      This interface is obtained by QIing ISBE2Source
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2Crossbar, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2Crossbar => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (547b6d26-3226-487e-8253-8aa168749434),
@@ -166,7 +166,7 @@ index 5cbf16ff..1be5bd49 100644
      This interface is implemented on an output pin of the crossbar
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2StreamMap, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2StreamMap => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (667c7745-85b1-4c55-ae55-4e25056159fc),
@@ -174,7 +174,7 @@ index 5cbf16ff..1be5bd49 100644
        obtained from
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2EnumStream, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2EnumStream => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (f7611092-9fbc-46ec-a7c7-548ea78b71a4),
@@ -182,7 +182,7 @@ index 5cbf16ff..1be5bd49 100644
      This interface is a profile of media types
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2MediaTypeProfile, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2MediaTypeProfile => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (f238267d-4671-40d7-997e-25dc32cfed2a),
@@ -190,7 +190,7 @@ index 5cbf16ff..1be5bd49 100644
      can be obtained by QueryInterface in CLSID_SBE2FileScan
  
  --*/
-+_Win32_AnnotateInterface_(ISBE2FileScan, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ISBE2FileScan => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid (3E2BF5A5-4F96-4899-A1A3-75E8BE9A5AC0),

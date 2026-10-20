@@ -1,5 +1,5 @@
 diff --git a/um/tssbx.idl b/um/tssbx.idl
-index 363fa9a9..b3a5f31f 100644
+index 363fa9a9..1d1524cc 100644
 --- a/um/tssbx.idl
 +++ b/um/tssbx.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 363fa9a9..b3a5f31f 100644
  cpp_quote("#define PLUGIN_CAPABILITY_EXTERNAL_REDIRECTION 0x1")
  cpp_quote("")
  
-+_Win32_AnnotateInterface_(IWTSSBPlugin, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IWTSSBPlugin => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(DC44BE78-B18D-4399-B210-641BF67A002C),

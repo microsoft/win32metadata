@@ -1,5 +1,5 @@
 diff --git a/um/spellcheckprovider.idl b/um/spellcheckprovider.idl
-index 3a14f777..7471bd93 100644
+index 3a14f777..51b600c3 100644
 --- a/um/spellcheckprovider.idl
 +++ b/um/spellcheckprovider.idl
 @@ -1,4 +1,5 @@
@@ -12,7 +12,7 @@ index 3a14f777..7471bd93 100644
  
  // This interface represents a spell check provider (someone who provides a spell checker to be used in the system)
  // Should be implemented by spell checking providers - it is NOT used by clients, but by the system
-+_Win32_AnnotateInterface_(ISpellCheckProvider, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ISpellCheckProvider => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(73E976E0-8ED4-4EB1-80D7-1BE0A16B0C38),
@@ -20,7 +20,7 @@ index 3a14f777..7471bd93 100644
  
  // This interface should be implemented by spell checking providers - it is NOT used by clients, but by the system
  // It creates a provider for a given language and gives information about which providers a given spell checking engine supports
-+_Win32_AnnotateInterface_(ISpellCheckProviderFactory, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ISpellCheckProviderFactory => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(9F671E11-77D6-4C92-AEFB-615215E3A4BE),

@@ -1,5 +1,5 @@
 diff --git a/um/segment.idl b/um/segment.idl
-index 40488e58..06af45d6 100644
+index 40488e58..06f41a1f 100644
 --- a/um/segment.idl
 +++ b/um/segment.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index 40488e58..06af45d6 100644
  
  interface IMSVidRect;
  
-+_Win32_AnnotateInterface_(IMSVidRect, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidRect => SupportedOSPlatform(\"windows5.1.2600\") */")
  [object,
          uuid(7F5000A6-A440-47ca-8ACC-C0E75531A2C2),
          helpstring("Automation Compliant GDI Rect with Automatic HWND Scaling"),
@@ -22,7 +22,7 @@ index 40488e58..06af45d6 100644
  		// if segments need to change the control state(stop, run, pause, etc) or get any stock
  		// properties that are also made available to clients such as HWND, then they should simply
  		// QI for the main IMSVidCtl interface.  there's no reason to implement this stuff twice.
-+_Win32_AnnotateInterface_(IMSVidGraphSegmentContainer, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidGraphSegmentContainer => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object,
                  uuid(3DD2903D-E0AA-11d2-B63A-00C04F79498E),
                  helpstring("DShow Graph Segment Container"),
@@ -30,7 +30,7 @@ index 40488e58..06af45d6 100644
  ///////////////////////////////////////////////////////////////////////////////
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidDevice, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidDevice => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy,
                  uuid(1C15D47C-911D-11d2-B632-00C04F79498E),
                  helpstring("MS Video Control Device Interface"),
@@ -38,7 +38,7 @@ index 40488e58..06af45d6 100644
                  [propget, id(dispidDevicePath)] HRESULT DevicePath([out, retval] BSTR *DevPath);
          };
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidInputDevice, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidInputDevice => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy,
                  uuid(37B0353D-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control Input Device Interface"),
@@ -46,7 +46,7 @@ index 40488e58..06af45d6 100644
          };
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidVideoInputDevice, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidVideoInputDevice => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy,
                  uuid(1C15D47F-911D-11d2-B632-00C04F79498E),
                  helpstring("MS Video Control Video Device Interface"),
@@ -54,7 +54,7 @@ index 40488e58..06af45d6 100644
  
          ///////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMSVidPlayback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidPlayback => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy,
                  uuid(37B03538-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control Playback Device Interface"),
@@ -62,7 +62,7 @@ index 40488e58..06af45d6 100644
  
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidTuner, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidTuner => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(1C15D47D-911D-11d2-B632-00C04F79498E),
                  helpstring("MS Video Tuner Interface"),
@@ -70,7 +70,7 @@ index 40488e58..06af45d6 100644
          };
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidAnalogTuner, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidAnalogTuner => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(1C15D47E-911D-11d2-B632-00C04F79498E),
                  helpstring("MS Video TV Tuner Interface"),
@@ -78,7 +78,7 @@ index 40488e58..06af45d6 100644
          };
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidFilePlayback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidFilePlayback => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(37B03539-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control File Playback Device Interface"),
@@ -86,7 +86,7 @@ index 40488e58..06af45d6 100644
              [propput, id(dispid_DVDScreenInMouseCoordinates), helpstring("DVDScreenInMouseCoordinates")] HRESULT DVDScreenInMouseCoordinates([in] IMSVidRect* pRect);
          };
  
-+_Win32_AnnotateInterface_(IMSVidWebDVD2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidWebDVD2 => SupportedOSPlatform(\"windows6.1\") */")
          [object, dual, oleautomation, hidden,
              uuid(7027212F-EE9A-4a7c-8B67-F023714CDAFF),
              helpstring("IMSVidWebDVD2 Interface"),
@@ -94,7 +94,7 @@ index 40488e58..06af45d6 100644
  ///////////////////////////////////////////////////////////////////////////////
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidOutputDevice, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidOutputDevice => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy,
                  uuid(37B03546-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control Output Device Interface"),
@@ -102,7 +102,7 @@ index 40488e58..06af45d6 100644
  ///////////////////////////////////////////////////////////////////////////////
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidFeature, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidFeature => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy,
                  uuid(37B03547-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control Feature Interface"),
@@ -110,7 +110,7 @@ index 40488e58..06af45d6 100644
  
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidEncoder, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidEncoder => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, 
                  uuid(C0020FD4-BEE7-43d9-A495-9F213117103D),
                  helpstring("MS Video Control Encoder Feature Interface"),
@@ -118,7 +118,7 @@ index 40488e58..06af45d6 100644
  
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidClosedCaptioning, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidClosedCaptioning => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(99652EA1-C1F7-414f-BB7B-1C967DE75983),
                  helpstring("MS Video Control Closed Captioning Feature Interface"),
@@ -126,7 +126,7 @@ index 40488e58..06af45d6 100644
          };
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidClosedCaptioning2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidClosedCaptioning2 => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(E00CB864-A029-4310-9987-A873F5887D97),
                  helpstring("MS Video Control Closed Captioning Feature Interface 2"),
@@ -134,7 +134,7 @@ index 40488e58..06af45d6 100644
  
          ///////////////////////////////////////////////////////////////////////////////////////
          //This feature is deprecated starting with Fiji and Windows7.
-+_Win32_AnnotateInterface_(IMSVidDataServices, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidDataServices => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(334125C1-77E5-11d3-B653-00C04F79498E),
                  helpstring("MS Video Control Data Services Feature Interface"),
@@ -142,7 +142,7 @@ index 40488e58..06af45d6 100644
  
          ///////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMSVidVideoRenderer, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidVideoRenderer => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(37B03540-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control Video Renderer Device Interface"),
@@ -150,7 +150,7 @@ index 40488e58..06af45d6 100644
  ////    
  // Stream Buffer Recording Control Object
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidStreamBufferRecordingControl, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidStreamBufferRecordingControl => SupportedOSPlatform(\"windows5.1.2600\") */")
  	[
          object,
          dual,
@@ -158,7 +158,7 @@ index 40488e58..06af45d6 100644
          [propget, id(dispidRecordingAttribute), helpstring("get Recording Attribute interface")] HRESULT RecordingAttribute ([out, retval] IUnknown **pRecordingAttribute);
      };
          // Sink        
-+_Win32_AnnotateInterface_(IMSVidStreamBufferSink, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidStreamBufferSink => SupportedOSPlatform(\"windows5.1.2600\") */")
  		[object, dual, oleautomation, proxy, hidden,
                  uuid(159DBB45-CD1B-4dab-83EA-5CB1F4F21D07),
                  helpstring("MS Video Control Stream Buffer Sink Output Device Interface"),
@@ -166,7 +166,7 @@ index 40488e58..06af45d6 100644
          interface IMSVidStreamBufferSinkEvent3 : IMSVidStreamBufferSinkEvent2 {
              [id(eventidLicenseChange), helpstring("License Change Event")] HRESULT LicenseChange([in]long dwProt);
          };
-+_Win32_AnnotateInterface_(IMSVidStreamBufferSinkEvent4, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidStreamBufferSinkEvent4 => SupportedOSPlatform(\"windows6.1\") */")
          [object, oleautomation, hidden,
                  uuid(1B01DCB0-DAF0-412c-A5D1-590C7F62E2B8),
                  helpstring("MS Video Control Stream Buffer Sink 4 Device Event Interface"),
@@ -174,7 +174,7 @@ index 40488e58..06af45d6 100644
          };
  ///////////////////////////////////////////////////////////////////////////////////////
  // SBE Source Playback
-+_Win32_AnnotateInterface_(IMSVidStreamBufferSource, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidStreamBufferSource => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(EB0C8CF9-6950-4772-87B1-47D11CF3A02F),
                  helpstring("MS Video Control Stream Buffer Source Device Interface"),
@@ -182,7 +182,7 @@ index 40488e58..06af45d6 100644
          };
  
  
-+_Win32_AnnotateInterface_(IMSVidStreamBufferV2SourceEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidStreamBufferV2SourceEvent => SupportedOSPlatform(\"windows6.1\") */")
          [object, oleautomation, hidden,
                  uuid(49C771F9-41B2-4CF7-9F9A-A313A8F6027E),
                  helpstring("MS Video Control Stream Buffer V2 Source Device Event Interface"),
@@ -190,7 +190,7 @@ index 40488e58..06af45d6 100644
  //
  ///////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMSVidVideoRenderer2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidVideoRenderer2 => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(6BDD5C1E-2810-4159-94BC-05511AE8549B),
                  helpstring("MS Video Control Video Renderer Device(DX7/8) Interface"),
@@ -198,7 +198,7 @@ index 40488e58..06af45d6 100644
              [propget, id(dispidAlloctor)] HRESULT Allocator([out, retval] IUnknown ** AllocPresent);
          };
  
-+_Win32_AnnotateInterface_(IMSVidEVR, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidEVR => SupportedOSPlatform(\"windows6.0.6000\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(15E496AE-82A8-4cf9-A6B6-C561DC60398F),
                  helpstring("MS Video Control Enhanced Video Renderer(DX10) Device Interface"),
@@ -206,7 +206,7 @@ index 40488e58..06af45d6 100644
  ///////////////////////////////////////////////////////////////////////////////
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidAudioRenderer, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidAudioRenderer => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
                  uuid(37B0353F-A4C8-11d2-B634-00C04F79498E),
                  helpstring("MS Video Control Audio Renderer Device Interface"),
@@ -214,7 +214,7 @@ index 40488e58..06af45d6 100644
          interface IMSVidAudioRendererEvent : IMSVidOutputDeviceEvent {
          };
  
-+_Win32_AnnotateInterface_(IMSVidAudioRendererEvent2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidAudioRendererEvent2 => SupportedOSPlatform(\"windows6.1\") */")
          [object, oleautomation, hidden,
                  uuid(E3F55729-353B-4c43-A028-50F79AA9A907),
                  helpstring("MS Video Control Audio Renderer Device Event Interface 2"),
@@ -222,7 +222,7 @@ index 40488e58..06af45d6 100644
  // device collection
  ///////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMSVidInputDevices, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidInputDevices => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
              uuid(C5702CD1-9B79-11d3-B654-00C04F79498E),
              helpstring("MS Video Control Input Device Writable Collection Interface"),
@@ -230,7 +230,7 @@ index 40488e58..06af45d6 100644
                          [id(DISPID_REMOVEITEM)] HRESULT Remove([in] VARIANT v);
          };
  
-+_Win32_AnnotateInterface_(IMSVidOutputDevices, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidOutputDevices => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
              uuid(C5702CD2-9B79-11d3-B654-00C04F79498E),
              helpstring("MS Video Control Output Device Writable Collection Interface"),
@@ -238,7 +238,7 @@ index 40488e58..06af45d6 100644
                          [id(DISPID_REMOVEITEM)] HRESULT Remove([in] VARIANT v);
          };
  
-+_Win32_AnnotateInterface_(IMSVidVideoRendererDevices, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidVideoRendererDevices => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
              uuid(C5702CD3-9B79-11d3-B654-00C04F79498E),
              helpstring("MS Video Control Video Renderer Device Writable Collection Interface"),
@@ -246,7 +246,7 @@ index 40488e58..06af45d6 100644
                          [id(DISPID_REMOVEITEM)] HRESULT Remove([in] VARIANT v);
          };
  
-+_Win32_AnnotateInterface_(IMSVidAudioRendererDevices, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidAudioRendererDevices => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
              uuid(C5702CD4-9B79-11d3-B654-00C04F79498E),
              helpstring("MS Video Control Audio Renderer Device Writable Collection Interface"),
@@ -254,7 +254,7 @@ index 40488e58..06af45d6 100644
                          [id(DISPID_REMOVEITEM)] HRESULT Remove([in] VARIANT v);
          };
  
-+_Win32_AnnotateInterface_(IMSVidFeatures, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidFeatures => SupportedOSPlatform(\"windows5.1.2600\") */")
          [object, dual, oleautomation, proxy, hidden,
              uuid(C5702CD5-9B79-11d3-B654-00C04F79498E),
              helpstring("MS Video Control Features Writable Collection Interface"),

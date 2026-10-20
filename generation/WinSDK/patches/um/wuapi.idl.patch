@@ -1,5 +1,5 @@
 diff --git a/um/wuapi.idl b/um/wuapi.idl
-index 1236a555..8ea51697 100644
+index 1236a555..93d2f029 100644
 --- a/um/wuapi.idl
 +++ b/um/wuapi.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index 1236a555..8ea51697 100644
  interface IUpdateServiceManager2;
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateLockdown, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateLockdown => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateLockdown Interface"),
      object,
@@ -22,7 +22,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IStringCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IStringCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IStringCollection Interface"),
      object,
@@ -30,7 +30,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWebProxy, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWebProxy => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWebProxy Interface"),
      object,
@@ -38,7 +38,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ISystemInformation, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISystemInformation => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ISystemInformation Interface"),
      object,
@@ -46,7 +46,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsUpdateAgentInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsUpdateAgentInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsUpdateAgentInfo Interface"),
      object,
@@ -54,7 +54,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IAutomaticUpdatesResults, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAutomaticUpdatesResults => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IAutomaticUpdatesResults Interface"),
      object,
@@ -62,7 +62,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IAutomaticUpdatesSettings, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAutomaticUpdatesSettings => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IAutomaticUpdatesSettings Interface"),
      object,
@@ -70,7 +70,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IAutomaticUpdatesSettings2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAutomaticUpdatesSettings2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IAutomaticUpdatesSettings2 Interface"),
      object,
@@ -78,7 +78,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IAutomaticUpdatesSettings3, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAutomaticUpdatesSettings3 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IAutomaticUpdatesSettings3 Interface"),
      object,
@@ -86,7 +86,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IAutomaticUpdates, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAutomaticUpdates => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IAutomaticUpdates Interface"),
      object,
@@ -94,7 +94,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IAutomaticUpdates2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAutomaticUpdates2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IAutomaticUpdates2 Interface"),
      object,
@@ -102,7 +102,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateIdentity, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateIdentity => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateIdentity Interface"),
      object,
@@ -110,7 +110,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IImageInformation, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IImageInformation => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IImageInformation Interface"),
      object,
@@ -118,7 +118,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ICategory, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ICategory => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ICategory Interface"),
      object,
@@ -126,7 +126,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ICategoryCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ICategoryCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ICategoryCollection Interface"),
      object,
@@ -134,7 +134,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationBehavior, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationBehavior => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationBehavior Interface"),
      object,
@@ -142,7 +142,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateDownloadContent, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateDownloadContent => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateDownloadContent Interface"),
      object,
@@ -150,7 +150,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateDownloadContent2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateDownloadContent2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateDownloadContent2 Interface"),
      object,
@@ -158,7 +158,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateDownloadContentCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateDownloadContentCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateDownloadContentCollection Interface"),
      object,
@@ -166,7 +166,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdate, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdate => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdate Interface"),
      object,
@@ -174,7 +174,7 @@ index 1236a555..8ea51697 100644
  
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdate, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdate => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     helpstring("IWindowsDriverUpdate Interface"),
     object,
@@ -182,7 +182,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdate2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdate2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdate2 Interface"),
      object,
@@ -190,7 +190,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdate3, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdate3 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdate3 Interface"),
      object,
@@ -198,7 +198,7 @@ index 1236a555..8ea51697 100644
  
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdate4, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdate4 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdate4 Interface"),
      object,
@@ -206,7 +206,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdate5, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdate5 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdate5 Interface"),
      object,
@@ -214,7 +214,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdate2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdate2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsDriverUpdate2 Interface"),
      object,
@@ -222,7 +222,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdate3, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdate3 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsDriverUpdate3 Interface"),
      object,
@@ -230,7 +230,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdateEntry, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdateEntry => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsDriverUpdateEntry Interface"),
      object,
@@ -238,7 +238,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdateEntryCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdateEntryCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsDriverUpdateEntryCollection Interface"),
      object,
@@ -246,7 +246,7 @@ index 1236a555..8ea51697 100644
  
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdate4, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdate4 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsDriverUpdate4 Interface"),
      object,
@@ -254,7 +254,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IWindowsDriverUpdate5, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWindowsDriverUpdate5 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IWindowsDriverUpdate5 Interface"),
      object,
@@ -262,7 +262,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateCollection Interface"),
      object,
@@ -270,7 +270,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateException, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateException => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateException Interface"),
      object,
@@ -278,7 +278,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInvalidProductLicenseException, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInvalidProductLicenseException => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInvalidProductLicenseException Interface"),
      object,
@@ -286,7 +286,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateExceptionCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateExceptionCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateExceptionCollection Interface"),
      object,
@@ -294,7 +294,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ISearchResult, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchResult => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ISearchResult Interface"),
      object,
@@ -302,7 +302,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ISearchJob, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchJob => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ISearchJob Interface"),
      object,
@@ -310,7 +310,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ISearchCompletedCallbackArgs, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchCompletedCallbackArgs => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ISearchCompletedCallbackArgs Interface"),
      object,
@@ -318,7 +318,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(ISearchCompletedCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchCompletedCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("ISearchCompletedCallback Interface"),
      object,
@@ -326,7 +326,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateHistoryEntry, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateHistoryEntry => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateHistoryEntry Interface"),
      object,
@@ -334,7 +334,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateHistoryEntry2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateHistoryEntry2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateHistoryEntry2 Interface"),
      object,
@@ -342,7 +342,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateHistoryEntryCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateHistoryEntryCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateHistoryEntryCollection Interface"),
      object,
@@ -350,7 +350,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateSearcher, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateSearcher => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateSearcher Interface"),
      object,
@@ -358,7 +358,7 @@ index 1236a555..8ea51697 100644
  };
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateSearcher2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateSearcher2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateSearcher2 Interface"),
      object,
@@ -366,7 +366,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateSearcher3, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateSearcher3 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateSearcher3 Interface"),
      object,
@@ -374,7 +374,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateDownloadResult, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateDownloadResult => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateDownloadResult Interface"),
      object,
@@ -382,7 +382,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadResult, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadResult => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadResult Interface"),
      object,
@@ -390,7 +390,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadProgress, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadProgress => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadProgress Interface"),
      object,
@@ -398,7 +398,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadJob, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadJob => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadJob Interface"),
      object,
@@ -406,7 +406,7 @@ index 1236a555..8ea51697 100644
  
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadCompletedCallbackArgs, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadCompletedCallbackArgs => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadCompletedCallbackArgs Interface"),
      object,
@@ -414,7 +414,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadCompletedCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadCompletedCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadCompletedCallback Interface"),
      object,
@@ -422,7 +422,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadProgressChangedCallbackArgs, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadProgressChangedCallbackArgs => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadProgressChangedCallbackArgs Interface"),
      object,
@@ -430,7 +430,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IDownloadProgressChangedCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDownloadProgressChangedCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IDownloadProgressChangedCallback Interface"),
      object,
@@ -438,7 +438,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateDownloader, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateDownloader => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateDownloader Interface"),
      object,
@@ -446,7 +446,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateInstallationResult, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateInstallationResult => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateInstallationResult Interface"),
      object,
@@ -454,7 +454,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationResult, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationResult => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationResult Interface"),
      object,
@@ -462,7 +462,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationProgress, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationProgress => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationProgress Interface"),
      object,
@@ -470,7 +470,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationJob, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationJob => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationJob Interface"),
      object,
@@ -478,7 +478,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationCompletedCallbackArgs, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationCompletedCallbackArgs => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationCompletedCallbackArgs Interface"),
      object,
@@ -486,7 +486,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationCompletedCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationCompletedCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationCompletedCallback Interface"),
      object,
@@ -494,7 +494,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationProgressChangedCallbackArgs, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationProgressChangedCallbackArgs => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationProgressChangedCallbackArgs Interface"),
      object,
@@ -502,7 +502,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationProgressChangedCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationProgressChangedCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationProgressChangedCallback Interface"),
      object,
@@ -510,7 +510,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateInstaller, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateInstaller => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateInstaller Interface"),
      object,
@@ -518,7 +518,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateInstaller2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateInstaller2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateInstaller2 Interface"),
      object,
@@ -526,7 +526,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateInstaller3, _Win32_SupportedOS_17134_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateInstaller3 => SupportedOSPlatform(\"windows10.0.17134\") */")
  [
      helpstring("IUpdateInstaller3 Interface"),
      object,
@@ -534,7 +534,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateInstaller4, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateInstaller4 => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
      helpstring("IUpdateInstaller4 Interface"),
      object,
@@ -542,7 +542,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateSession, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateSession => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateSession Interface"),
      object,
@@ -550,7 +550,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateSession2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateSession2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateSession2 Interface"),
      object,
@@ -558,7 +558,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateSession3, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateSession3 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateSession3 Interface"),
      object,
@@ -566,7 +566,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateService, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateService => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateService Interface"),
      object,
@@ -574,7 +574,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateService2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateService2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateService2 Interface"),
      object,
@@ -582,7 +582,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateServiceCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateServiceCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateServiceCollection Interface"),
      object,
@@ -590,7 +590,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateServiceRegistration, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateServiceRegistration => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateServiceRegistration Interface"),
      object,
@@ -598,7 +598,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateServiceManager, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateServiceManager => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateServiceManager Interface"),
      object,
@@ -606,7 +606,7 @@ index 1236a555..8ea51697 100644
  }
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IUpdateServiceManager2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUpdateServiceManager2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IUpdateServiceManager2 Interface"),
      object,
@@ -614,7 +614,7 @@ index 1236a555..8ea51697 100644
  
  
  // This interface is registered by the WindowsUpdateClient-Aux manifest.
-+_Win32_AnnotateInterface_(IInstallationAgent, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IInstallationAgent => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      helpstring("IInstallationAgent Interface"),
      object,

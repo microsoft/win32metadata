@@ -1,5 +1,5 @@
 diff --git a/um/servprov.idl b/um/servprov.idl
-index 5603cd62..e6edcac3 100644
+index 5603cd62..a685557c 100644
 --- a/um/servprov.idl
 +++ b/um/servprov.idl
 @@ -9,6 +9,8 @@
@@ -15,7 +15,7 @@ index 5603cd62..e6edcac3 100644
          [in] REFIID riid,
          [out, iid_is(riid)] IUnknown ** ppvObject);
  }
-+_Win32_AnnotateParameter_(IServiceProvider::QueryService, ppvObject, _Win32_ComOutPtr_(true))
++cpp_quote("/* Win32Metadata: parameter ::IServiceProvider::QueryService::ppvObject => ComOutPtr(true) */")
  cpp_quote("#endif // VC6 Hack")
  
  

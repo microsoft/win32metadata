@@ -1,5 +1,5 @@
 diff --git a/um/mobsync.idl b/um/mobsync.idl
-index b3f37c1f..0745719c 100644
+index b3f37c1f..d167cfde 100644
 --- a/um/mobsync.idl
 +++ b/um/mobsync.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index b3f37c1f..0745719c 100644
  
  
  
-+_Win32_AnnotateInterface_(ISyncMgrSynchronizeCallback, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSynchronizeCallback => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(6295DF41-35EE-11d1-8707-00C04FD93327)  // IID_ISyncMgrSynchronizeCallback
@@ -22,7 +22,7 @@ index b3f37c1f..0745719c 100644
  }
  
  
-+_Win32_AnnotateInterface_(ISyncMgrEnumItems, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrEnumItems => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(6295DF2A-35EE-11d1-8707-00C04FD93327), // IID_ISyncMgrEnumItems
@@ -30,7 +30,7 @@ index b3f37c1f..0745719c 100644
  }
  
  
-+_Win32_AnnotateInterface_(ISyncMgrSynchronize, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSynchronize => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(6295DF40-35EE-11d1-8707-00C04FD93327)  // IID_ISyncMgrSynchronize
@@ -38,7 +38,7 @@ index b3f37c1f..0745719c 100644
  
  
  
-+_Win32_AnnotateInterface_(ISyncMgrSynchronizeInvoke, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSynchronizeInvoke => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(6295DF2C-35EE-11d1-8707-00C04FD93327), // IID_ISyncMgrSynchronizeInvoke
@@ -46,7 +46,7 @@ index b3f37c1f..0745719c 100644
  }
  
  
-+_Win32_AnnotateInterface_(ISyncMgrRegister, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrRegister => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(6295DF42-35EE-11d1-8707-00C04FD93327), // IID_ISyncMgrRegister

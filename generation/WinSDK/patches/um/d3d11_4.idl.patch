@@ -1,5 +1,5 @@
 diff --git a/um/d3d11_4.idl b/um/d3d11_4.idl
-index 7feeb6b5..3146a0c7 100644
+index 7feeb6b5..e908ada8 100644
 --- a/um/d3d11_4.idl
 +++ b/um/d3d11_4.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index 7feeb6b5..3146a0c7 100644
  //
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(ID3D11VideoContext2, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoContext2 => SupportedOSPlatform(\"windows10.0.10240\") */")
  [uuid(C4E7374C-6243-4D1B-AE87-52B4F740E261), object, local, pointer_default(unique)]
  interface ID3D11VideoContext2
      : ID3D11VideoContext1

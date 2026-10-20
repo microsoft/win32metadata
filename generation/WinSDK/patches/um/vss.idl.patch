@@ -1,5 +1,5 @@
 diff --git a/um/vss.idl b/um/vss.idl
-index 6b768fc6..50ab9614 100644
+index 6b768fc6..d51f5ec9 100644
 --- a/um/vss.idl
 +++ b/um/vss.idl
 @@ -3,6 +3,7 @@
@@ -14,7 +14,7 @@ index 6b768fc6..50ab9614 100644
  
  
  
-+_Win32_AnnotateInterface_(IVssEnumObject, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVssEnumObject => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
          object,
          uuid(AE1C7110-2F60-11d3-8A39-00C04F72D8E3),
@@ -22,7 +22,7 @@ index 6b768fc6..50ab9614 100644
  
  
  
-+_Win32_AnnotateInterface_(IVssAsync, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVssAsync => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
          object,
          uuid(507C37B4-CF5B-4e95-B0AF-14EB9767467E),

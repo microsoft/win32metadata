@@ -1,5 +1,5 @@
 diff --git a/um/dbs.idl b/um/dbs.idl
-index 1e1fa010..b3ac67b3 100644
+index 1e1fa010..ed7611a0 100644
 --- a/um/dbs.idl
 +++ b/um/dbs.idl
 @@ -14,6 +14,8 @@
@@ -11,12 +11,11 @@ index 1e1fa010..b3ac67b3 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -1976,7 +1978,7 @@ typedef struct tagDBPROPINFO {
+@@ -1972,6 +1974,7 @@ enum DBPROPFLAGSENUM26 {
+ cpp_quote("#endif // OLEDBVER >= 0x0260")
+ cpp_quote("//@@@- V2.6")
+ 
++cpp_quote("/* Win32Metadata: field ::DBPROPINFO::vtType => AssociatedEnum(VARENUM) */")
+ typedef struct tagDBPROPINFO {
  	LPOLESTR pwszDescription;
  	DBPROPID dwPropertyID;
- 	DBPROPFLAGS dwFlags;
--	VARTYPE vtType;
-+	[annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vtType;
- 	VARIANT vValues;
- } DBPROPINFO;
- 

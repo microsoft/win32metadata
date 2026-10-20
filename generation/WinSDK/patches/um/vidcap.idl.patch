@@ -1,5 +1,5 @@
 diff --git a/um/vidcap.idl b/um/vidcap.idl
-index dad39d21..3ea7c8ff 100644
+index dad39d21..6adb53c6 100644
 --- a/um/vidcap.idl
 +++ b/um/vidcap.idl
 @@ -11,6 +11,7 @@
@@ -14,7 +14,7 @@ index dad39d21..3ea7c8ff 100644
  
  
  // IKsTopologyInfo interface
-+_Win32_AnnotateInterface_(IKsTopologyInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IKsTopologyInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -22,7 +22,7 @@ index dad39d21..3ea7c8ff 100644
  
  
  // ISelector interface
-+_Win32_AnnotateInterface_(ISelector, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISelector => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -30,7 +30,7 @@ index dad39d21..3ea7c8ff 100644
  }
  
  // ICameraControl interface
-+_Win32_AnnotateInterface_(ICameraControl, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ICameraControl => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -38,7 +38,7 @@ index dad39d21..3ea7c8ff 100644
  
  
  // IVideoProcAmp interface
-+_Win32_AnnotateInterface_(IVideoProcAmp, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVideoProcAmp => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -46,7 +46,7 @@ index dad39d21..3ea7c8ff 100644
  }
  
  // IKsNodeControl interface
-+_Win32_AnnotateInterface_(IKsNodeControl, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IKsNodeControl => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,

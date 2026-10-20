@@ -1,3 +1,5 @@
+diff --git a/um/comadmin.idl b/um/comadmin.idl
+index 0dbe8613..a2e02a56 100644
 --- a/um/comadmin.idl
 +++ b/um/comadmin.idl
 @@ -1,9 +1,11 @@
@@ -12,48 +14,48 @@
  cpp_quote("// -----------------------------------------------------------------------   ") 
  cpp_quote("// comadmin.h  -- COM Administration Programming Interfaces                  ")
  cpp_quote("//                                                                           ")
-@@ -33,6 +35,7 @@
+@@ -33,6 +35,7 @@ import "unknwn.idl";
  
      // ICOMAdminCatalog
  
-+_Win32_AnnotateInterface_(ICOMAdminCatalog, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICOMAdminCatalog => SupportedOSPlatform(\"windows5.0\") */")
      [
          object,
          uuid(DD662187-DFC2-11d1-A2CF-00805FC79235),
-@@ -190,6 +193,7 @@
+@@ -190,6 +193,7 @@ midl_pragma warning( default : 2400)
  
      // ICOMAdminCatalog2 -- new in Windows XP (Whistler)
  
-+_Win32_AnnotateInterface_(ICOMAdminCatalog2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ICOMAdminCatalog2 => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(790C6E0B-9194-4cc9-9426-A48A63185696),
-@@ -368,6 +372,7 @@
+@@ -368,6 +372,7 @@ midl_pragma warning( default : 2400)
  
      // ICatalogObject
  
-+_Win32_AnnotateInterface_(ICatalogObject, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICatalogObject => SupportedOSPlatform(\"windows5.0\") */")
      [
          object,
          uuid(6eb22871-8a19-11d0-81b6-00a0c9231c29),
-@@ -403,6 +408,7 @@
+@@ -403,6 +408,7 @@ midl_pragma warning( default : 2400)
  
      // ICatalogCollection
  
-+_Win32_AnnotateInterface_(ICatalogCollection, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICatalogCollection => SupportedOSPlatform(\"windows5.0\") */")
      [
          object,
          uuid(6eb22872-8a19-11d0-81b6-00a0c9231c29),
-@@ -531,6 +537,12 @@
-         COMAdminExportForceOverwriteOfFiles = 4,
+@@ -532,6 +538,12 @@ library COMAdmin
          COMAdminExportIn10Format = 16
      } COMAdminApplicationExportOptions;
-+
-+    _Win32_AnnotateParameter_(ICOMAdminCatalog::InstallApplication, lOptions, _Win32_AssociatedEnum_(COMAdminApplicationInstallOptions))
-+    _Win32_AnnotateParameter_(ICOMAdminCatalog::ExportApplication, lOptions, _Win32_AssociatedEnum_(COMAdminApplicationExportOptions))
-+    _Win32_AnnotateParameter_(ICOMAdminCatalog2::InstallPartition, lOptions, _Win32_AssociatedEnum_(COMAdminApplicationInstallOptions))
-+    _Win32_AnnotateParameter_(ICOMAdminCatalog2::ExportPartition, lOptions, _Win32_AssociatedEnum_(COMAdminApplicationExportOptions))
-+
  
++    cpp_quote("/* Win32Metadata: parameter ::ICOMAdminCatalog::InstallApplication::lOptions => AssociatedEnum(COMAdminApplicationInstallOptions) */")
++    cpp_quote("/* Win32Metadata: parameter ::ICOMAdminCatalog::ExportApplication::lOptions => AssociatedEnum(COMAdminApplicationExportOptions) */")
++    cpp_quote("/* Win32Metadata: parameter ::ICOMAdminCatalog2::InstallPartition::lOptions => AssociatedEnum(COMAdminApplicationInstallOptions) */")
++    cpp_quote("/* Win32Metadata: parameter ::ICOMAdminCatalog2::ExportPartition::lOptions => AssociatedEnum(COMAdminApplicationExportOptions) */")
++
++
      typedef[helpstring("Threading Model Enumerations")]
      enum COMAdminThreadingModels
+     { 

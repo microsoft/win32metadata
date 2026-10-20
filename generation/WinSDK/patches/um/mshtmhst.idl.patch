@@ -1,19 +1,17 @@
 diff --git a/um/mshtmhst.idl b/um/mshtmhst.idl
-index 38eaa7f5..903c7375 100644
+index 22563834..d75e16c6 100644
 --- a/um/mshtmhst.idl
 +++ b/um/mshtmhst.idl
-@@ -281,8 +281,8 @@ interface IDocHostUIHandler : IUnknown
+@@ -278,6 +278,8 @@ typedef enum tagDOCHOSTUIFLAG {
+ interface IDocHostUIHandler : IUnknown
+ {
+ 
++cpp_quote("/* Win32Metadata: field ::DOCHOSTUIINFO::dwFlags => AssociatedEnum(DOCHOSTUIFLAG) */")
++cpp_quote("/* Win32Metadata: field ::DOCHOSTUIINFO::dwDoubleClick => AssociatedEnum(DOCHOSTUIDBLCLK) */")
      typedef struct _DOCHOSTUIINFO
      {
          ULONG       cbSize;
--        DWORD       dwFlags;
--        DWORD       dwDoubleClick;
-+        [annotation("_Win32_AssociatedEnum_(DOCHOSTUIFLAG)")] DWORD       dwFlags;
-+        [annotation("_Win32_AssociatedEnum_(DOCHOSTUIDBLCLK)")] DWORD       dwDoubleClick;
-         OLECHAR *   pchHostCss;
-         OLECHAR *   pchHostNS;
-     } DOCHOSTUIINFO;
-@@ -398,7 +398,7 @@ cpp_quote("#define IID_IClassFactory3  IID_IClassFactoryEx")
+@@ -398,7 +400,7 @@ cpp_quote("#define IID_IClassFactory3  IID_IClassFactoryEx")
  interface IClassFactoryEx : IClassFactory
  {
          HRESULT CreateInstanceWithContext(IUnknown *punkContext,

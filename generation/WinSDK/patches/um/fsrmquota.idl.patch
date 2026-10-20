@@ -1,5 +1,5 @@
 diff --git a/um/fsrmquota.idl b/um/fsrmquota.idl
-index f891450f..7868fc94 100644
+index f891450f..b1200683 100644
 --- a/um/fsrmquota.idl
 +++ b/um/fsrmquota.idl
 @@ -2,6 +2,7 @@
@@ -14,7 +14,7 @@ index f891450f..7868fc94 100644
  //        Interfaces
  //
  
-+_Win32_AnnotateInterface_(IFsrmQuotaBase, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaBase => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(1568a795-3924-4118-b74b-68d8f0fa5daf),
@@ -22,7 +22,7 @@ index f891450f..7868fc94 100644
  }
  
  
-+_Win32_AnnotateInterface_(IFsrmQuotaObject, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaObject => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(42dc3511-61d5-48ae-b6dc-59fc00c0a8d6),
@@ -30,7 +30,7 @@ index f891450f..7868fc94 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmQuota, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuota => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(377f739d-9647-4b8e-97d2-5ffce6d759cd),
@@ -38,7 +38,7 @@ index f891450f..7868fc94 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmAutoApplyQuota, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmAutoApplyQuota => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(f82e5729-6aba-4740-bfc7-c7f58f75fb7b),
@@ -46,7 +46,7 @@ index f891450f..7868fc94 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmQuotaManager, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaManager => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(8bb68c7d-19d8-4ffb-809e-be4fc1734014),
@@ -54,7 +54,7 @@ index f891450f..7868fc94 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmQuotaManagerEx, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaManagerEx => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(4846cb01-d430-494f-abb4-b1054999fb09),
@@ -62,7 +62,7 @@ index f891450f..7868fc94 100644
  }
  
  
-+_Win32_AnnotateInterface_(IFsrmQuotaTemplate, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaTemplate => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(a2efab31-295e-46bb-b976-e86d58b52e8b),
@@ -70,7 +70,7 @@ index f891450f..7868fc94 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmQuotaTemplateImported, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaTemplateImported => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(9a2bf113-a329-44cc-809a-5c00fce8da40),
@@ -78,7 +78,7 @@ index f891450f..7868fc94 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFsrmQuotaTemplateManager, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IFsrmQuotaTemplateManager => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      object,
      uuid(4173ac41-172d-4d52-963c-fdc7e415f717),

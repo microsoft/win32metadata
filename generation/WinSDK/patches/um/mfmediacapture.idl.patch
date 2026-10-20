@@ -1,5 +1,5 @@
 diff --git a/um/mfmediacapture.idl b/um/mfmediacapture.idl
-index b04c7033..1d185517 100644
+index b04c7033..79d71c6f 100644
 --- a/um/mfmediacapture.idl
 +++ b/um/mfmediacapture.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index b04c7033..1d185517 100644
  // IAdvancedMediaCaptureInitializationSettings Interface
  //
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAdvancedMediaCaptureInitializationSettings, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IAdvancedMediaCaptureInitializationSettings => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(3DE21209-8BA6-4f2a-A577-2819B56FF14D),
@@ -19,7 +19,7 @@ index b04c7033..1d185517 100644
  // IAdvancedMediaCaptureSettings Interface
  //
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAdvancedMediaCaptureSettings, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IAdvancedMediaCaptureSettings => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(24E0485F-A33E-4aa1-B564-6019B1D14F65),
@@ -27,7 +27,7 @@ index b04c7033..1d185517 100644
  // IAdvancedMediaCapture Interface
  //
  ///////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAdvancedMediaCapture, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IAdvancedMediaCapture => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(D0751585-D216-4344-B5BF-463B68F977BB)

@@ -1,3 +1,5 @@
+diff --git a/um/devenum.idl b/um/devenum.idl
+index a9b29345..107d3905 100644
 --- a/um/devenum.idl
 +++ b/um/devenum.idl
 @@ -9,6 +9,7 @@
@@ -8,11 +10,11 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -34,6 +35,7 @@
+@@ -34,6 +35,7 @@ cpp_quote("#define CDEF_DEVMON_SELECTIVE_MASK  0x00f0")
  #define AM_ANNOTATION(_x_) ,annotation(_x_)
  #endif
  
-+_Win32_AnnotateInterface_(ICreateDevEnum, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICreateDevEnum => SupportedOSPlatform(\"windows5.0\") */")
  [
          AM_LOCAL
          object,

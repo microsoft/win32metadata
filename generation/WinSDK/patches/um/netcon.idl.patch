@@ -1,5 +1,5 @@
 diff --git a/um/netcon.idl b/um/netcon.idl
-index a5154b2c..7f027fce 100644
+index a5154b2c..8a449870 100644
 --- a/um/netcon.idl
 +++ b/um/netcon.idl
 @@ -7,6 +7,7 @@
@@ -14,125 +14,124 @@ index a5154b2c..7f027fce 100644
  //+---------------------------------------------------------------------------
  // INetConnection -
  //
-+_Win32_AnnotateInterface_(INetConnection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetConnection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956A1-1CD3-11D1-B1C5-00805FC1270E),
-@@ -213,11 +215,11 @@ cpp_quote("#define S_OBJECT_NO_LONGER_VALID ((HRESULT)0x00000002L)")
- };
+@@ -214,10 +216,12 @@ cpp_quote("#define S_OBJECT_NO_LONGER_VALID ((HRESULT)0x00000002L)")
  
  cpp_quote("")
--cpp_quote("STDAPI_(VOID) NcFreeNetconProperties (NETCON_PROPERTIES* pProps);")
-+cpp_quote("STDAPI_(VOID) _Win32_SupportedOS_WindowsXP_ NcFreeNetconProperties (NETCON_PROPERTIES* pProps);")
+ cpp_quote("STDAPI_(VOID) NcFreeNetconProperties (NETCON_PROPERTIES* pProps);")
++cpp_quote("/* Win32Metadata: function ::NcFreeNetconProperties => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("")
  
  cpp_quote("")
--cpp_quote("STDAPI_(BOOL) NcIsValidConnectionName (PCWSTR pszwName);")
-+cpp_quote("STDAPI_(BOOL) _Win32_SupportedOS_WindowsXP_ NcIsValidConnectionName (PCWSTR pszwName);")
+ cpp_quote("STDAPI_(BOOL) NcIsValidConnectionName (PCWSTR pszwName);")
++cpp_quote("/* Win32Metadata: function ::NcIsValidConnectionName => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("")
  
  
-@@ -288,6 +290,7 @@ interface INetConnectionConnectUi : IUnknown
+@@ -288,6 +292,7 @@ interface INetConnectionConnectUi : IUnknown
  //+---------------------------------------------------------------------------
  // IEnumNetSharingPortMapping - An enumerator for INetSharingPortMapping objects.
  //
-+_Win32_AnnotateInterface_(IEnumNetSharingPortMapping, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumNetSharingPortMapping => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B0-1CD3-11D1-B1C5-00805FC1270E),
-@@ -310,6 +313,7 @@ interface IEnumNetSharingPortMapping : IUnknown
+@@ -310,6 +315,7 @@ interface IEnumNetSharingPortMapping : IUnknown
          [out] IEnumNetSharingPortMapping** ppenum);
  };
  
-+_Win32_AnnotateInterface_(INetSharingPortMappingProps, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingPortMappingProps => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(24B7E9B5-E38F-4685-851B-00892CF5F940),
-@@ -332,6 +336,7 @@ interface INetSharingPortMappingProps : IDispatch
+@@ -332,6 +338,7 @@ interface INetSharingPortMappingProps : IDispatch
  //+---------------------------------------------------------------------------
  // INetSharingPortMapping -
  //
-+_Win32_AnnotateInterface_(INetSharingPortMapping, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingPortMapping => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B1-1CD3-11D1-B1C5-00805FC1270E),
-@@ -359,6 +364,7 @@ interface INetSharingPortMapping : IDispatch
+@@ -359,6 +366,7 @@ interface INetSharingPortMapping : IDispatch
  // IEnumNetSharingEveryConnection - An enumerator for INetConnection interface pointers
  //                          that represent all connections in the connections folder
  //
-+_Win32_AnnotateInterface_(IEnumNetSharingEveryConnection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumNetSharingEveryConnection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B8-1CD3-11D1-B1C5-00805FC1270E),
-@@ -386,6 +392,7 @@ interface IEnumNetSharingEveryConnection : IUnknown
+@@ -386,6 +394,7 @@ interface IEnumNetSharingEveryConnection : IUnknown
  // IEnumNetSharingPublicConnection - An enumerator for INetConnection interface pointers
  //                         that represent connections configured as publicly shared.
  //
-+_Win32_AnnotateInterface_(IEnumNetSharingPublicConnection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumNetSharingPublicConnection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B4-1CD3-11D1-B1C5-00805FC1270E),
-@@ -413,6 +420,7 @@ interface IEnumNetSharingPublicConnection : IUnknown
+@@ -413,6 +422,7 @@ interface IEnumNetSharingPublicConnection : IUnknown
  // IEnumNetSharingPrivateConnection - An enumerator for INetConnection interface pointers
  //                         that represent connections configured as privately shared.
  //
-+_Win32_AnnotateInterface_(IEnumNetSharingPrivateConnection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumNetSharingPrivateConnection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B5-1CD3-11D1-B1C5-00805FC1270E),
-@@ -435,6 +443,7 @@ interface IEnumNetSharingPrivateConnection : IUnknown
+@@ -435,6 +445,7 @@ interface IEnumNetSharingPrivateConnection : IUnknown
  };
  
  // Collection needed for INetSharingConfiguration::EnumPortMappings() below
-+_Win32_AnnotateInterface_(INetSharingPortMappingCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingPortMappingCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(02E4A2DE-DA20-4E34-89C8-AC22275A010B),
-@@ -449,6 +458,7 @@ interface INetSharingPortMappingCollection : IDispatch
+@@ -449,6 +460,7 @@ interface INetSharingPortMappingCollection : IDispatch
  };
  
  cpp_quote("// properties for INetConnection (wraps NETCON_PROPERTIES)")
-+_Win32_AnnotateInterface_(INetConnectionProps, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetConnectionProps => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(F4277C95-CE5B-463D-8167-5662D9BCAA72),
-@@ -486,6 +496,7 @@ interface INetConnectionProps : IDispatch
+@@ -486,6 +498,7 @@ interface INetConnectionProps : IDispatch
  //     - Enumerate Port Mappings
  //     - Add Port Mappings
  //
-+_Win32_AnnotateInterface_(INetSharingConfiguration, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingConfiguration => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B6-1CD3-11D1-B1C5-00805FC1270E),
-@@ -560,6 +571,7 @@ interface INetSharingConfiguration : IDispatch
+@@ -560,6 +573,7 @@ interface INetSharingConfiguration : IDispatch
  };
  
  // ICollection interfaces
-+_Win32_AnnotateInterface_(INetSharingEveryConnectionCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingEveryConnectionCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(33C4643C-7811-46FA-A89A-768597BD7223),
-@@ -573,6 +585,7 @@ interface INetSharingConfiguration : IDispatch
+@@ -573,6 +587,7 @@ interface INetSharingConfiguration : IDispatch
          [propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
      };
  
-+_Win32_AnnotateInterface_(INetSharingPublicConnectionCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingPublicConnectionCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(7D7A6355-F372-4971-A149-BFC927BE762A),
-@@ -586,6 +599,7 @@ interface INetSharingConfiguration : IDispatch
+@@ -586,6 +601,7 @@ interface INetSharingConfiguration : IDispatch
          [propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
      };
  
-+_Win32_AnnotateInterface_(INetSharingPrivateConnectionCollection, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingPrivateConnectionCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(38AE69E0-4409-402A-A2CB-E965C727F840),
-@@ -607,6 +621,7 @@ interface INetSharingConfiguration : IDispatch
+@@ -607,6 +623,7 @@ interface INetSharingConfiguration : IDispatch
  //     - Enumerate Public Connections
  //     - Enumerate Private Connections
  //
-+_Win32_AnnotateInterface_(INetSharingManager, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::INetSharingManager => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C08956B7-1CD3-11D1-B1C5-00805FC1270E),

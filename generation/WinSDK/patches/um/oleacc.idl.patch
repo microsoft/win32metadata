@@ -1,3 +1,5 @@
+diff --git a/um/oleacc.idl b/um/oleacc.idl
+index 1d722fd8..3fca9a8d 100644
 --- a/um/oleacc.idl
 +++ b/um/oleacc.idl
 @@ -12,6 +12,10 @@
@@ -11,123 +13,122 @@
  cpp_quote("#include <winapifamily.h>")
  
  cpp_quote("//=--------------------------------------------------------------------------=")
-@@ -76,16 +80,16 @@
- cpp_quote("//=--------------------------------------------------------------------------=")
+@@ -77,15 +81,26 @@ cpp_quote("//=------------------------------------------------------------------
  cpp_quote("")
  
--cpp_quote("STDAPI_(LRESULT) LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);")
--cpp_quote("STDAPI          ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);")
--cpp_quote("STDAPI          WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);")
--cpp_quote("STDAPI          AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);")
--cpp_quote("STDAPI          AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);")
--cpp_quote("STDAPI          AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);")
--cpp_quote("STDAPI          AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);")
--cpp_quote("")
--cpp_quote("STDAPI_(UINT)   GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);")
--cpp_quote("STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);")
-+cpp_quote("STDAPI_(LRESULT) _Win32_SupportedOS_Windows2000_ LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_WindowsXP_ ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);")
-+cpp_quote("")
-+cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);")
+ cpp_quote("STDAPI_(LRESULT) LresultFromObject(_In_ REFIID riid, _In_ WPARAM wParam, _In_ LPUNKNOWN punk);")
++cpp_quote("/* Win32Metadata: function ::LresultFromObject => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI          ObjectFromLresult(_In_ LRESULT lResult, _In_ REFIID riid, _In_ WPARAM wParam, _Outptr_ void** ppvObject);")
++cpp_quote("/* Win32Metadata: function ::ObjectFromLresult => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("STDAPI          WindowFromAccessibleObject(_In_ IAccessible*, _Out_opt_ HWND* phwnd);")
++cpp_quote("/* Win32Metadata: function ::WindowFromAccessibleObject => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI          AccessibleObjectFromWindow(_In_ HWND hwnd, _In_ DWORD dwId, _In_ REFIID riid, _Outptr_ void **ppvObject);")
++cpp_quote("/* Win32Metadata: function ::AccessibleObjectFromWindow => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI          AccessibleObjectFromEvent(_In_ HWND hwnd, _In_ DWORD dwId, _In_ DWORD dwChildId, _Outptr_ IAccessible** ppacc, _Out_ VARIANT* pvarChild);")
++cpp_quote("/* Win32Metadata: function ::AccessibleObjectFromEvent => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI          AccessibleObjectFromPoint(_In_ POINT ptScreen, _Outptr_ IAccessible ** ppacc, _Out_ VARIANT* pvarChild);")
++cpp_quote("/* Win32Metadata: function ::AccessibleObjectFromPoint => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI          AccessibleChildren (_In_ IAccessible* paccContainer, _In_ LONG iChildStart, _In_ LONG cChildren, _Out_writes_(cChildren) VARIANT* rgvarChildren, _Out_ LONG* pcObtained);")
++cpp_quote("/* Win32Metadata: function ::AccessibleChildren => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("")
+ cpp_quote("STDAPI_(UINT)   GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);")
++cpp_quote("/* Win32Metadata: function ::GetRoleTextA => SetLastError */")
++cpp_quote("/* Win32Metadata: function ::GetRoleTextA => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);")
++cpp_quote("/* Win32Metadata: function ::GetRoleTextW => SetLastError */")
++cpp_quote("/* Win32Metadata: function ::GetRoleTextW => SupportedOSPlatform(\"windows5.0\") */")
  cpp_quote("")
  cpp_quote("#ifdef UNICODE")
  cpp_quote("#define GetRoleText     GetRoleTextW")
-@@ -93,20 +97,20 @@
- cpp_quote("#define GetRoleText     GetRoleTextA")
+@@ -94,7 +109,11 @@ cpp_quote("#define GetRoleText     GetRoleTextA")
  cpp_quote("#endif // UNICODE")
  cpp_quote("")
--cpp_quote("STDAPI_(UINT)   GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);")
--cpp_quote("STDAPI_(UINT)   GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);")
+ cpp_quote("STDAPI_(UINT)   GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);")
++cpp_quote("/* Win32Metadata: function ::GetStateTextA => SetLastError */")
++cpp_quote("/* Win32Metadata: function ::GetStateTextA => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI_(UINT)   GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);")
++cpp_quote("/* Win32Metadata: function ::GetStateTextW => SetLastError */")
++cpp_quote("/* Win32Metadata: function ::GetStateTextW => SupportedOSPlatform(\"windows5.0\") */")
  cpp_quote("#ifdef UNICODE")
  cpp_quote("#define GetStateText    GetStateTextW")
  cpp_quote("#else")
- cpp_quote("#define GetStateText    GetStateTextA")
+@@ -102,11 +121,15 @@ cpp_quote("#define GetStateText    GetStateTextA")
  cpp_quote("#endif // UNICODE")
  cpp_quote("")
--cpp_quote("STDAPI_(VOID)   GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);")
--cpp_quote("")
--cpp_quote("STDAPI          CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
--cpp_quote("")
--cpp_quote("STDAPI          CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
--cpp_quote("STDAPI          CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
-+cpp_quote("STDAPI_(VOID)   _Win32_SupportedOS_Windows2000_ GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);")
-+cpp_quote("")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
-+cpp_quote("")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows2000_ CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
+ cpp_quote("STDAPI_(VOID)   GetOleaccVersionInfo(_Out_ DWORD* pVer, _Out_ DWORD* pBuild);")
++cpp_quote("/* Win32Metadata: function ::GetOleaccVersionInfo => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("")
+ cpp_quote("STDAPI          CreateStdAccessibleObject(_In_ HWND hwnd, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
++cpp_quote("/* Win32Metadata: function ::CreateStdAccessibleObject => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("")
+ cpp_quote("STDAPI          CreateStdAccessibleProxyA(_In_ HWND hwnd, _In_ LPCSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
++cpp_quote("/* Win32Metadata: function ::CreateStdAccessibleProxyA => SupportedOSPlatform(\"windows5.0\") */")
+ cpp_quote("STDAPI          CreateStdAccessibleProxyW(_In_ HWND hwnd, _In_ LPCWSTR pClassName, _In_ LONG idObject, _In_ REFIID riid, _Outptr_ void** ppvObject);")
++cpp_quote("/* Win32Metadata: function ::CreateStdAccessibleProxyW => SupportedOSPlatform(\"windows5.0\") */")
  cpp_quote("")
  cpp_quote("#ifdef UNICODE")
  cpp_quote("#define CreateStdAccessibleProxy     CreateStdAccessibleProxyW")
-@@ -118,11 +122,12 @@
+@@ -118,11 +141,15 @@ cpp_quote("#define ANRUS_ON_SCREEN_KEYBOARD_ACTIVE 0x0000001")
  cpp_quote("#define ANRUS_TOUCH_MODIFICATION_ACTIVE 0x0000002")
  cpp_quote("#define ANRUS_PRIORITY_AUDIO_ACTIVE     0x0000004")
  cpp_quote("#define ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK 0x0000008")
 +cpp_quote("_Win32_FlagsEnum_(ACC_UTILITY_STATE_FLAGS, unsigned int, ANRUS_ON_SCREEN_KEYBOARD_ACTIVE, ANRUS_TOUCH_MODIFICATION_ACTIVE, ANRUS_PRIORITY_AUDIO_ACTIVE, ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK);")
  cpp_quote("#define ANRUS_PRIORITY_AUDIO_DYNAMIC_DUCK 0x0000010")
  cpp_quote("")
--cpp_quote("STDAPI          AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _In_ DWORD dwUtilityState);")
--cpp_quote("")
--cpp_quote("STDAPI          AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows8_ AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _Win32_AssociatedEnum_(ACC_UTILITY_STATE_FLAGS) _In_ DWORD dwUtilityState);")
-+cpp_quote("")
-+cpp_quote("STDAPI          _Win32_SupportedOS_Windows8_ AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);")
+ cpp_quote("STDAPI          AccSetRunningUtilityState(_In_ HWND hwndApp, _In_ DWORD dwUtilityStateMask, _In_ DWORD dwUtilityState);")
++cpp_quote("/* Win32Metadata: function ::AccSetRunningUtilityState => SupportedOSPlatform(\"windows8.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::AccSetRunningUtilityState::dwUtilityState => AssociatedEnum(ACC_UTILITY_STATE_FLAGS) */")
+ cpp_quote("")
+ cpp_quote("STDAPI          AccNotifyTouchInteraction(_In_ HWND hwndApp, _In_ HWND hwndTarget, _In_ POINT ptTarget);")
++cpp_quote("/* Win32Metadata: function ::AccNotifyTouchInteraction => SupportedOSPlatform(\"windows8.0\") */")
  cpp_quote("")
  cpp_quote("")
  cpp_quote("// Simple Owner-Drawn Menu support...")
-@@ -186,6 +191,7 @@
+@@ -186,6 +213,7 @@ cpp_quote("")
  #define DO_NO_IMPORTS
  import "oaidl.idl";
  
-+_Win32_AnnotateInterface_(IAccessible, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAccessible => SupportedOSPlatform(\"windows5.0\") */")
  [
  	object,
  	uuid(618736e0-3c3d-11cf-810c-00aa00389b71),
-@@ -423,6 +429,7 @@
+@@ -423,6 +451,7 @@ cpp_quote("#endif //STATE_SYSTEM_HASPOPUP")
  //
  //
  
-+_Win32_AnnotateInterface_(IAccessibleHandler, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAccessibleHandler => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
  	object,
  	uuid(03022430-ABC4-11d0-BDE2-00AA001A1953),
-@@ -439,6 +446,7 @@
+@@ -439,6 +468,7 @@ interface IAccessibleHandler : IUnknown
  }
  
  
-+_Win32_AnnotateInterface_(IAccessibleWindowlessSite, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IAccessibleWindowlessSite => SupportedOSPlatform(\"windows8.0\") */")
  [
  	object,
  	uuid(BF3ABD9C-76DA-4389-9EB6-1427D25ABAB7),
-@@ -492,6 +500,7 @@
+@@ -492,6 +522,7 @@ typedef GUID MSAAPROPID;
  
  // This interface is used to expose an identity string that is used as a key
  // into the annotation database.
-+_Win32_AnnotateInterface_(IAccIdentity, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAccIdentity => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(7852b78d-1cfd-41c1-a615-9c0c85960b5f),
-@@ -509,6 +518,7 @@
+@@ -509,6 +540,7 @@ interface IAccIdentity: IUnknown
  
  
  
-+_Win32_AnnotateInterface_(IAccPropServer, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAccPropServer => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(76c0dbbb-15e0-4e7b-b61b-20eeea2001e0),
-@@ -526,6 +536,7 @@
+@@ -526,6 +558,7 @@ interface IAccPropServer: IUnknown
  };
  
  
-+_Win32_AnnotateInterface_(IAccPropServices, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAccPropServices => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(6e26e776-04f0-495d-80e4-3330352e3169),

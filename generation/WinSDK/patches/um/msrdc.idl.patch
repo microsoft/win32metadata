@@ -1,5 +1,5 @@
 diff --git a/um/msrdc.idl b/um/msrdc.idl
-index 692cd9db..76eaf0df 100644
+index 692cd9db..e772cf1e 100644
 --- a/um/msrdc.idl
 +++ b/um/msrdc.idl
 @@ -5,11 +5,30 @@
@@ -12,23 +12,23 @@ index 692cd9db..76eaf0df 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IRdcGeneratorParameters, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcGeneratorFilterMaxParameters, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcGenerator, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcFileReader, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcFileWriter, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcSignatureReader, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcComparator, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcLibrary, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarityReportProgress, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarityTableDumpState, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarityTraitsMappedView, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarityTraitsMapping, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarityTraitsTable, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarityFileIdTable, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IRdcSimilarityGenerator, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(IFindSimilarResults, _Win32_SupportedOS_WindowsVista_)
-+_Win32_AnnotateInterface_(ISimilarity, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IRdcGeneratorParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcGeneratorFilterMaxParameters => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcGenerator => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcFileReader => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcFileWriter => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcSignatureReader => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcComparator => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcLibrary => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarityReportProgress => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarityTableDumpState => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarityTraitsMappedView => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarityTraitsMapping => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarityTraitsTable => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarityFileIdTable => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IRdcSimilarityGenerator => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IFindSimilarResults => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::ISimilarity => SupportedOSPlatform(\"windows6.0.6000\") */")
 +
  import "oaidl.idl";
  import "ocidl.idl";

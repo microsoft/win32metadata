@@ -1,5 +1,5 @@
 diff --git a/um/propidlbase.idl b/um/propidlbase.idl
-index ad551dd7..d0332652 100644
+index ad551dd7..b0620f53 100644
 --- a/um/propidlbase.idl
 +++ b/um/propidlbase.idl
 @@ -1,4 +1,5 @@
@@ -12,54 +12,48 @@ index ad551dd7..d0332652 100644
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
-+_Win32_AnnotateInterface_(IPropertyStorage, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IPropertySetStorage, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEnumSTATPROPSTG, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEnumSTATPROPSETSTG, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IPropertyStorage => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertySetStorage => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEnumSTATPROPSTG => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEnumSTATPROPSETSTG => SupportedOSPlatform(\"windows5.0\") */")
 +
  interface IPropertyStorage;
  interface IEnumSTATPROPSTG;
  interface IEnumSTATPROPSETSTG;
-@@ -159,7 +165,7 @@ cpp_quote("  union {")
+@@ -157,6 +163,7 @@ cpp_quote("#ifndef MIDL_PASS")
+ cpp_quote("struct tagPROPVARIANT {")
+ cpp_quote("  union {")
  cpp_quote("#endif")
++cpp_quote("/* Win32Metadata: field ::PROPVARIANT::vt => AssociatedEnum(VARENUM) */")
  struct tag_inner_PROPVARIANT
  {
--    VARTYPE vt;
-+    [annotation("_Win32_AssociatedEnum_(enum VARENUM)")] VARTYPE vt;
-     PROPVAR_PAD1   wReserved1;
-     PROPVAR_PAD2   wReserved2;
-     PROPVAR_PAD3   wReserved3;
-@@ -323,10 +329,12 @@ const ULONG PRSPEC_INVALID = 0xffffffff;
+     VARTYPE vt;
+@@ -323,6 +330,9 @@ const ULONG PRSPEC_INVALID = 0xffffffff;
  const ULONG PRSPEC_LPWSTR = 0;
  const ULONG PRSPEC_PROPID = 1;
  
 +cpp_quote("_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);")
 +
++cpp_quote("/* Win32Metadata: field ::PROPSPEC::ulKind => AssociatedEnum(PROPSPEC_KIND) */")
  typedef struct tagPROPSPEC
  {
  
--    ULONG   ulKind;
-+    [annotation("_Win32_AssociatedEnum_(PROPSPEC_KIND)")] ULONG   ulKind;
-     [switch_is(ulKind)] union
-     {
-         [case(PRSPEC_PROPID)]
-@@ -343,7 +351,7 @@ typedef struct tagSTATPROPSTG
+@@ -338,6 +348,7 @@ typedef struct tagPROPSPEC
  
-     LPOLESTR    lpwstrName;
-     PROPID      propid;
--    VARTYPE     vt;
-+    [annotation("_Win32_AssociatedEnum_(enum VARENUM)")] VARTYPE     vt;
+ } PROPSPEC;
  
- } STATPROPSTG;
++cpp_quote("/* Win32Metadata: field ::STATPROPSTG::vt => AssociatedEnum(VARENUM) */")
+ typedef struct tagSTATPROPSTG
+ {
  
-@@ -617,6 +625,11 @@ interface IEnumSTATPROPSETSTG : IUnknown
+@@ -617,6 +628,11 @@ interface IEnumSTATPROPSETSTG : IUnknown
  
  typedef [unique] IPropertyStorage * LPPROPERTYSTORAGE;
  
-+_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Next, _Win32_PreserveResult_)
-+_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Skip, _Win32_PreserveResult_)
-+_Win32_AnnotateMethod_(IEnumSTATPROPSETSTG::Next, _Win32_PreserveResult_)
-+_Win32_AnnotateMethod_(IEnumSTATPROPSETSTG::Skip, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSTG::Next => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSTG::Skip => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSETSTG::Next => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSETSTG::Skip => PreserveResult */")
 +
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion

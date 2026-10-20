@@ -1,5 +1,5 @@
 diff --git a/um/cluadmex.idl b/um/cluadmex.idl
-index 769ca49f..0e99c601 100644
+index 769ca49f..1d3afedb 100644
 --- a/um/cluadmex.idl
 +++ b/um/cluadmex.idl
 @@ -50,6 +50,7 @@
@@ -14,7 +14,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterUIInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterUIInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE50-FC6B-11CF-B5F5-00A0C90AB505),
@@ -22,7 +22,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterDataInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterDataInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE51-FC6B-11CF-B5F5-00A0C90AB505),
@@ -30,7 +30,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterObjectInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterObjectInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE52-FC6B-11CF-B5F5-00A0C90AB505),
@@ -38,7 +38,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterNodeInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterNodeInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE53-FC6B-11CF-B5F5-00A0C90AB505),
@@ -46,7 +46,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterGroupInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterGroupInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE54-FC6B-11CF-B5F5-00A0C90AB505),
@@ -54,7 +54,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterResourceInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterResourceInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE55-FC6B-11CF-B5F5-00A0C90AB505),
@@ -62,7 +62,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterNetworkInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterNetworkInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE56-FC6B-11CF-B5F5-00A0C90AB505),
@@ -70,7 +70,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IGetClusterNetInterfaceInfo, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IGetClusterNetInterfaceInfo => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE57-FC6B-11CF-B5F5-00A0C90AB505),
@@ -78,7 +78,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWCPropertySheetCallback, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IWCPropertySheetCallback => SupportedOSPlatform(\"windowsserver2008\") */")
  	[
  		object,
  		uuid(97DEDE60-FC6B-11CF-B5F5-00A0C90AB505),
@@ -86,7 +86,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWEExtendPropertySheet, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::IWEExtendPropertySheet => SupportedOSPlatform(\"windowsserver2008\") */")
  	[
  		object,
  		uuid(97DEDE61-FC6B-11CF-B5F5-00A0C90AB505),
@@ -94,7 +94,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWCWizardCallback, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWCWizardCallback => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE62-FC6B-11CF-B5F5-00A0C90AB505),
@@ -102,7 +102,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWEExtendWizard, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWEExtendWizard => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE63-FC6B-11CF-B5F5-00A0C90AB505),
@@ -110,7 +110,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWCContextMenuCallback, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWCContextMenuCallback => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE64-FC6B-11CF-B5F5-00A0C90AB505),
@@ -118,7 +118,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWEExtendContextMenu, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWEExtendContextMenu => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE65-FC6B-11CF-B5F5-00A0C90AB505),
@@ -126,7 +126,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWEInvokeCommand, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWEInvokeCommand => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE66-FC6B-11CF-B5F5-00A0C90AB505),
@@ -134,7 +134,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWCWizard97Callback, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWCWizard97Callback => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE67-FC6B-11CF-B5F5-00A0C90AB505),
@@ -142,7 +142,7 @@ index 769ca49f..0e99c601 100644
  	//
  	/////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IWEExtendWizard97, _Win32_SupportedOS_Server2003_)
++cpp_quote("/* Win32Metadata: interface ::IWEExtendWizard97 => SupportedOSPlatform(\"windowsserver2003\") */")
  	[
  		object,
  		uuid(97DEDE68-FC6B-11CF-B5F5-00A0C90AB505),

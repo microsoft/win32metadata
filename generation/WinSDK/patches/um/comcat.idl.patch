@@ -1,5 +1,5 @@
 diff --git a/um/comcat.idl b/um/comcat.idl
-index 0ff9b30c..1e68aa66 100644
+index 0ff9b30c..c92e0c26 100644
 --- a/um/comcat.idl
 +++ b/um/comcat.idl
 @@ -6,6 +6,8 @@
@@ -15,7 +15,7 @@ index 0ff9b30c..1e68aa66 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPENUMGUID_DEFINED")
  cpp_quote("#define _LPENUMGUID_DEFINED")
-+_Win32_AnnotateInterface_(IEnumGUID, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumGUID => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0002E000-0000-0000-C000-000000000046),
@@ -23,8 +23,8 @@ index 0ff9b30c..1e68aa66 100644
      HRESULT Clone(
  	[out] IEnumGUID **ppenum);
  }
-+_Win32_AnnotateMethod_(IEnumGUID::Next, _Win32_PreserveResult_)
-+_Win32_AnnotateMethod_(IEnumGUID::Skip, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IEnumGUID::Next => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IEnumGUID::Skip => PreserveResult */")
  cpp_quote("#endif")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
@@ -32,7 +32,7 @@ index 0ff9b30c..1e68aa66 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPENUMCATEGORYINFO_DEFINED")
  cpp_quote("#define _LPENUMCATEGORYINFO_DEFINED")
-+_Win32_AnnotateInterface_(IEnumCATEGORYINFO, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEnumCATEGORYINFO => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0002E011-0000-0000-C000-000000000046),
@@ -40,7 +40,7 @@ index 0ff9b30c..1e68aa66 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPCATREGISTER_DEFINED")
  cpp_quote("#define _LPCATREGISTER_DEFINED")
-+_Win32_AnnotateInterface_(ICatRegister, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICatRegister => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0002E012-0000-0000-C000-000000000046),
@@ -48,7 +48,7 @@ index 0ff9b30c..1e68aa66 100644
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPCATINFORMATION_DEFINED")
  cpp_quote("#define _LPCATINFORMATION_DEFINED")
-+_Win32_AnnotateInterface_(ICatInformation, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICatInformation => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(0002E013-0000-0000-C000-000000000046),

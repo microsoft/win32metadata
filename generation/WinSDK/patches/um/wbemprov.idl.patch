@@ -1,5 +1,5 @@
 diff --git a/um/wbemprov.idl b/um/wbemprov.idl
-index 4bba922b..382e48dc 100644
+index 4bba922b..b96a35ad 100644
 --- a/um/wbemprov.idl
 +++ b/um/wbemprov.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 4bba922b..382e48dc 100644
  
  #define OPTIONAL in, unique
  
-+_Win32_AnnotateInterface_(IWbemUnboundObjectSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemUnboundObjectSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(e246107b-b06e-11d0-ad61-00c04fd8fdff)]
  interface IWbemUnboundObjectSink : IUnknown
  {
@@ -19,7 +19,7 @@ index 4bba922b..382e48dc 100644
  //
  //
  
-+_Win32_AnnotateInterface_(IWbemPropertyProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemPropertyProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(CE61E841-65BC-11d0-B6BD-00AA003240C7)]
  
  interface IWbemPropertyProvider : IUnknown
@@ -27,7 +27,7 @@ index 4bba922b..382e48dc 100644
          );        
  };
  
-+_Win32_AnnotateInterface_(IWbemEventProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemEventProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(e245105b-b06e-11d0-ad61-00c04fd8fdff)]
  interface IWbemEventProvider : IUnknown
  {
@@ -35,7 +35,7 @@ index 4bba922b..382e48dc 100644
              );
  };
  
-+_Win32_AnnotateInterface_(IWbemEventProviderQuerySink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemEventProviderQuerySink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(580acaf8-fa1c-11d0-ad72-00c04fd8fdff)]
  interface IWbemEventProviderQuerySink : IUnknown
  {
@@ -43,7 +43,7 @@ index 4bba922b..382e48dc 100644
                  [in] unsigned long dwId);
  };
  
-+_Win32_AnnotateInterface_(IWbemEventProviderSecurity, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemEventProviderSecurity => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(631f7d96-d993-11d2-b339-00105a1f4aaf)]
  interface IWbemEventProviderSecurity : IUnknown
  {
@@ -51,7 +51,7 @@ index 4bba922b..382e48dc 100644
                  [in, size_is(lSidLength), unique] const BYTE* pSid);
  };
  
-+_Win32_AnnotateInterface_(IWbemProviderIdentity, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemProviderIdentity => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(631f7d97-d993-11d2-b339-00105a1f4aaf)]
  interface IWbemProviderIdentity : IUnknown
  {
@@ -59,7 +59,7 @@ index 4bba922b..382e48dc 100644
  };
  
  
-+_Win32_AnnotateInterface_(IWbemEventConsumerProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemEventConsumerProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [restricted, object, uuid(e246107a-b06e-11d0-ad61-00c04fd8fdff)]
  interface IWbemEventConsumerProvider : IUnknown
  {
@@ -67,7 +67,7 @@ index 4bba922b..382e48dc 100644
  
  
  
-+_Win32_AnnotateInterface_(IWbemProviderInitSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemProviderInitSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [object, uuid(1be41571-91dd-11d1-aeb2-00c04fb68820)]
  
  interface IWbemProviderInitSink : IUnknown
@@ -75,7 +75,7 @@ index 4bba922b..382e48dc 100644
  
  
  
-+_Win32_AnnotateInterface_(IWbemProviderInit, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemProviderInit => SupportedOSPlatform(\"windows6.0.6000\") */")
  [object, uuid(1be41572-91dd-11d1-aeb2-00c04fb68820)]
  
  interface IWbemProviderInit : IUnknown
@@ -83,7 +83,7 @@ index 4bba922b..382e48dc 100644
          );
  };
  
-+_Win32_AnnotateInterface_(IWbemHiPerfProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemHiPerfProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [local, restricted, object, uuid(49353c93-516b-11d1-aea6-00c04fb68820)]
  interface IWbemHiPerfProvider : IUnknown
  {
@@ -91,7 +91,7 @@ index 4bba922b..382e48dc 100644
  
  };
  
-+_Win32_AnnotateInterface_(IWbemDecoupledRegistrar, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemDecoupledRegistrar => SupportedOSPlatform(\"windows6.0.6000\") */")
  [object, local, uuid(1005cbcf-e64f-4646-bcd3-3a089d8a84b4)]
  interface IWbemDecoupledRegistrar : IUnknown
  {
@@ -99,7 +99,7 @@ index 4bba922b..382e48dc 100644
  	HRESULT UnRegister () ;
  } ;
  
-+_Win32_AnnotateInterface_(IWbemDecoupledBasicEventProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemDecoupledBasicEventProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [object, local, uuid(86336d20-ca11-4786-9ef1-bc8a946b42fc)]
  interface IWbemDecoupledBasicEventProvider : IWbemDecoupledRegistrar
  {
@@ -107,7 +107,7 @@ index 4bba922b..382e48dc 100644
  } WBEM_BATCH_TYPE;
  
  
-+_Win32_AnnotateInterface_(IWbemEventSink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWbemEventSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [object, restricted, uuid(3ae0080a-7e3a-4366-bf89-0feedc931659)]
  interface IWbemEventSink : IWbemObjectSink
  {

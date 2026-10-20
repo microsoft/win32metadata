@@ -1,5 +1,5 @@
 diff --git a/um/sbtsv.idl b/um/sbtsv.idl
-index 1a1e5772..74be1ce5 100644
+index 1a1e5772..4ecbd09d 100644
 --- a/um/sbtsv.idl
 +++ b/um/sbtsv.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 1a1e5772..74be1ce5 100644
  interface ITsSbProvisioningPluginNotifySink;
  
  
-+_Win32_AnnotateInterface_(ITsSbPlugin, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbPlugin => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(48cd7406-caab-465f-a5d6-baa863b9ea4f),
@@ -19,7 +19,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbResourcePlugin, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbResourcePlugin => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(EA8DB42C-98ED-4535-A88B-2A164F35490F),
@@ -27,7 +27,7 @@ index 1a1e5772..74be1ce5 100644
  {                      
  };
  
-+_Win32_AnnotateInterface_(ITsSbServiceNotification, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbServiceNotification => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(86CB68AE-86E0-4F57-8A64-BB7406BC5550),
@@ -35,7 +35,7 @@ index 1a1e5772..74be1ce5 100644
      NotifyServiceSuccess();
  };
  
-+_Win32_AnnotateInterface_(ITsSbLoadBalancing, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbLoadBalancing => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(24329274-9EB7-11DC-AE98-F2B456D89593),
@@ -43,7 +43,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbPlacement, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbPlacement => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(DAADEE5F-6D32-480E-9E36-DDAB2329F06D),
@@ -51,7 +51,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbOrchestration, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbOrchestration => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(64FC1172-9EB7-11DC-8B00-3ABA56D89593),
@@ -59,7 +59,7 @@ index 1a1e5772..74be1ce5 100644
              );   
  };
  
-+_Win32_AnnotateInterface_(ITsSbEnvironment, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbEnvironment => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256),
@@ -67,7 +67,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbLoadBalanceResult, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbLoadBalanceResult => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(24FDB7AC-FEA6-11DC-9672-9A8956D89593),
@@ -75,7 +75,7 @@ index 1a1e5772..74be1ce5 100644
              );
  }
  
-+_Win32_AnnotateInterface_(ITsSbTarget, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbTarget => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(16616ECC-272D-411D-B324-126893033856),
@@ -83,7 +83,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbSession, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbSession => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(D453AAC7-B1D8-4C5E-BA34-9AFB4C8C5510),
@@ -91,7 +91,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbResourceNotification, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbResourceNotification => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(65D3E85A-C39B-11DC-B92D-3CD255D89593),
@@ -99,7 +99,7 @@ index 1a1e5772..74be1ce5 100644
         );
  };
  
-+_Win32_AnnotateInterface_(ITsSbResourceNotificationEx, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbResourceNotificationEx => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(A8A47FDE-CA91-44D2-B897-3AA28A43B2B7),
@@ -107,7 +107,7 @@ index 1a1e5772..74be1ce5 100644
         );
  };
  
-+_Win32_AnnotateInterface_(ITsSbTaskInfo, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbTaskInfo => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(523D1083-89BE-48DD-99EA-04E82FFA7265),
@@ -115,7 +115,7 @@ index 1a1e5772..74be1ce5 100644
          );
  };
  
-+_Win32_AnnotateInterface_(ITsSbTaskPlugin, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbTaskPlugin => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(FA22EF0F-8705-41BE-93BC-44BDBCF1C9C4),
@@ -123,7 +123,7 @@ index 1a1e5772..74be1ce5 100644
  //
  //Interfaces implemented by the broker
  //
-+_Win32_AnnotateInterface_(ITsSbPropertySet, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbPropertySet => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(5c025171-bb1e-4baf-a212-6d5e9774b33b),
@@ -131,7 +131,7 @@ index 1a1e5772..74be1ce5 100644
  {   
  };
  
-+_Win32_AnnotateInterface_(ITsSbPluginPropertySet, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbPluginPropertySet => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(95006e34-7eff-4b6c-bb40-49a4fda7cea6),
@@ -139,7 +139,7 @@ index 1a1e5772..74be1ce5 100644
  {
  };
  
-+_Win32_AnnotateInterface_(ITsSbClientConnectionPropertySet, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbClientConnectionPropertySet => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(E51995B0-46D6-11DD-AA21-CEDC55D89593),
@@ -147,7 +147,7 @@ index 1a1e5772..74be1ce5 100644
  };
  
  
-+_Win32_AnnotateInterface_(ITsSbTargetPropertySet, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbTargetPropertySet => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(f7bda5d6-994c-4e11-a079-2763b61830ac),
@@ -155,7 +155,7 @@ index 1a1e5772..74be1ce5 100644
  {    
  };
  
-+_Win32_AnnotateInterface_(ITsSbEnvironmentPropertySet, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbEnvironmentPropertySet => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(D0D1BF7E-7ACF-11DD-A243-E51156D89593),
@@ -163,7 +163,7 @@ index 1a1e5772..74be1ce5 100644
  {    
  };
  
-+_Win32_AnnotateInterface_(ITsSbBaseNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbBaseNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(808a6537-1282-4989-9e09-f43938b71722),
@@ -171,7 +171,7 @@ index 1a1e5772..74be1ce5 100644
              );            
  };
  
-+_Win32_AnnotateInterface_(ITsSbPluginNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbPluginNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(44dfe30b-c3be-40f5-bf82-7a95bb795adf),
@@ -179,7 +179,7 @@ index 1a1e5772..74be1ce5 100644
      OnTerminated();    
  };
  
-+_Win32_AnnotateInterface_(ITsSbLoadBalancingNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbLoadBalancingNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(5F8A8297-3244-4E6A-958A-27C822C1E141),
@@ -187,7 +187,7 @@ index 1a1e5772..74be1ce5 100644
              );
  };
  
-+_Win32_AnnotateInterface_(ITsSbPlacementNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbPlacementNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(68A0C487-2B4F-46C2-94A1-6CE685183634),
@@ -195,7 +195,7 @@ index 1a1e5772..74be1ce5 100644
              );    
  };
  
-+_Win32_AnnotateInterface_(ITsSbOrchestrationNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbOrchestrationNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(36c37d61-926b-442f-bca5-118c6d50dcf2),
@@ -203,7 +203,7 @@ index 1a1e5772..74be1ce5 100644
             );                 
  };
  
-+_Win32_AnnotateInterface_(ITsSbTaskPluginNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbTaskPluginNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(6AAF899E-C2EC-45EE-AA37-45E60895261A),
@@ -211,7 +211,7 @@ index 1a1e5772..74be1ce5 100644
  
  };
  
-+_Win32_AnnotateInterface_(ITsSbClientConnection, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbClientConnection => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(18857499-AD61-4B1B-B7DF-CBCD41FB8338),
@@ -219,7 +219,7 @@ index 1a1e5772..74be1ce5 100644
              
  };
  
-+_Win32_AnnotateInterface_(ITsSbProvider, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbProvider => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(87A4098F-6D7B-44DD-BC17-8CE44E370D52),
@@ -227,7 +227,7 @@ index 1a1e5772..74be1ce5 100644
           );
  };
  
-+_Win32_AnnotateInterface_(ITsSbResourcePluginStore, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbResourcePluginStore => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(5C38F65F-BCF1-4036-A6BF-9E3CCCAE0B63),
@@ -235,7 +235,7 @@ index 1a1e5772..74be1ce5 100644
          );
  };
  
-+_Win32_AnnotateInterface_(ITsSbFilterPluginStore, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbFilterPluginStore => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(85b44b0f-ed78-413f-9702-fa6d3b5ee755),
@@ -243,7 +243,7 @@ index 1a1e5772..74be1ce5 100644
          );         
  };
  
-+_Win32_AnnotateInterface_(ITsSbGlobalStore, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbGlobalStore => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(9AB60F7B-BD72-4D9F-8A3A-A0EA5574E635),
@@ -251,7 +251,7 @@ index 1a1e5772..74be1ce5 100644
          
  };
  
-+_Win32_AnnotateInterface_(ITsSbProvisioningPluginNotifySink, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbProvisioningPluginNotifySink => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(aca87a8e-818b-4581-a032-49c3dfb9c701),
@@ -259,7 +259,7 @@ index 1a1e5772..74be1ce5 100644
  }
  
  
-+_Win32_AnnotateInterface_(ITsSbProvisioning, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbProvisioning => SupportedOSPlatform(\"windowsserver2012\") */")
  [
      object,
      uuid(2f6f0dbb-9e4f-462b-9c3f-fccc3dcb6232),
@@ -267,7 +267,7 @@ index 1a1e5772..74be1ce5 100644
  }
  
  
-+_Win32_AnnotateInterface_(ITsSbGenericNotifySink, _Win32_SupportedOS_Server2016_)
++cpp_quote("/* Win32Metadata: interface ::ITsSbGenericNotifySink => SupportedOSPlatform(\"windowsserver2016\") */")
  [
      object,
      uuid(4c4c8c4f-300b-46ad-9164-8468a7e7568c),

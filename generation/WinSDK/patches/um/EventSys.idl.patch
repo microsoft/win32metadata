@@ -1,5 +1,5 @@
 diff --git a/um/EventSys.idl b/um/EventSys.idl
-index 5af5a009..1bd1196c 100644
+index 5af5a009..2bdae03e 100644
 --- a/um/EventSys.idl
 +++ b/um/EventSys.idl
 @@ -8,11 +8,28 @@
@@ -12,21 +12,21 @@ index 5af5a009..1bd1196c 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IEventSystem, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventPublisher, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventClass, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventClass2, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventSubscription, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IFiringControl, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IPublisherFilter, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IMultiInterfacePublisherFilter, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventObjectChange, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventObjectChange2, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEnumEventObject, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventObjectCollection, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventProperty, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IEventControl, _Win32_SupportedOS_Windows2000_)
-+_Win32_AnnotateInterface_(IMultiInterfaceEventControl, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IEventSystem => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventPublisher => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventClass => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventClass2 => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventSubscription => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IFiringControl => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IPublisherFilter => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IMultiInterfacePublisherFilter => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventObjectChange => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventObjectChange2 => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEnumEventObject => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventObjectCollection => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventProperty => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventControl => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IMultiInterfaceEventControl => SupportedOSPlatform(\"windows5.0\") */")
 +
  import "oaidl.idl";
  import "ocidl.idl";
@@ -35,7 +35,7 @@ index 5af5a009..1bd1196c 100644
  
  //midl_pragma warning(default: 2039) // oleautomation conformance
  
-+_Win32_AnnotateMethod_(IEnumEventObject::Reset, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::IEnumEventObject::Reset => PreserveResult */")
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion
  

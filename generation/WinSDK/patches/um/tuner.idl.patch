@@ -1,5 +1,5 @@
 diff --git a/um/tuner.idl b/um/tuner.idl
-index 895cf1b2..f218f678 100644
+index 895cf1b2..6f46843a 100644
 --- a/um/tuner.idl
 +++ b/um/tuner.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index 895cf1b2..f218f678 100644
  //////////////////////////////////////////////////////////////////////////////////////
  // simple read-only collection of tuning spaces for enumerating subsets of the total
  // set of system tuning spaces
-+_Win32_AnnotateInterface_(ITuningSpaces, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ITuningSpaces => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(901284E4-33FE-4b69-8D63-634A596F3756),
@@ -22,7 +22,7 @@ index 895cf1b2..f218f678 100644
  //////////////////////////////////////////////////////////////////////////////////////
  // Tuning Space Container
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ITuningSpaceContainer, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ITuningSpaceContainer => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(5B692E84-E2F1-11d2-9493-00C04F72D980),
@@ -30,7 +30,7 @@ index 895cf1b2..f218f678 100644
  //////////////////////////////////////////////////////////////////////////////////////
  
  // note: the network type is the clsid of the tuning space implementation
-+_Win32_AnnotateInterface_(ITuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ITuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          uuid(061C6E30-E622-11d2-9493-00C04F72D980),
@@ -38,7 +38,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IEnumTuningSpaces, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumTuningSpaces => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          hidden,
          restricted,
@@ -46,7 +46,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBTuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -54,7 +54,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBTuningSpace2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBTuningSpace2 => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -62,7 +62,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBSTuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBSTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -70,7 +70,7 @@ index 895cf1b2..f218f678 100644
  
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAuxInTuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAuxInTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
     [
          object,
          hidden,
@@ -78,7 +78,7 @@ index 895cf1b2..f218f678 100644
      }
      
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAnalogTVTuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAnalogTVTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -86,7 +86,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IATSCTuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IATSCTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -94,7 +94,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDigitalCableTuningSpace, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDigitalCableTuningSpace => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          hidden,
@@ -102,7 +102,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAnalogRadioTuningSpace, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IAnalogRadioTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -110,7 +110,7 @@ index 895cf1b2..f218f678 100644
  // ITuningSpace::CreateTuneRequest.  one reason for this is that we always want to be 
  // certain that a tune request is bound to the right tuning space.  this means we don't 
  // have to perform consistency checks all over the place.
-+_Win32_AnnotateInterface_(ITuneRequest, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ITuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -118,7 +118,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IChannelIDTuneRequest, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IChannelIDTuneRequest => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          nonextensible,
@@ -126,7 +126,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IChannelTuneRequest, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IChannelTuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -134,7 +134,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IATSCChannelTuneRequest, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IATSCChannelTuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -142,7 +142,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDigitalCableTuneRequest, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDigitalCableTuneRequest => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          nonextensible,
@@ -150,7 +150,7 @@ index 895cf1b2..f218f678 100644
  
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBTuneRequest, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBTuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -158,7 +158,7 @@ index 895cf1b2..f218f678 100644
  /// from their createtunerequest() method.  in other words, this is not the "best" tune request
  /// for any of the current tuning spaces.
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMPEG2TuneRequest, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMPEG2TuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -166,7 +166,7 @@ index 895cf1b2..f218f678 100644
              );
      }
  
-+_Win32_AnnotateInterface_(IMPEG2TuneRequestFactory, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMPEG2TuneRequestFactory => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -174,7 +174,7 @@ index 895cf1b2..f218f678 100644
              );
      }
  
-+_Win32_AnnotateInterface_(IMPEG2TuneRequestSupport, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMPEG2TuneRequestSupport => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -182,7 +182,7 @@ index 895cf1b2..f218f678 100644
      }
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ITunerCapEx, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ITunerCapEx => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          hidden,
@@ -190,7 +190,7 @@ index 895cf1b2..f218f678 100644
  
      // Component Category
  
-+_Win32_AnnotateInterface_(IComponentType, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -198,7 +198,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ILanguageComponentType, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ILanguageComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -206,7 +206,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMPEG2ComponentType, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMPEG2ComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -214,7 +214,7 @@ index 895cf1b2..f218f678 100644
  
  //////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IATSCComponentType, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IATSCComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -222,7 +222,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IEnumComponentTypes, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumComponentTypes => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          hidden, restricted,
          object,
@@ -230,7 +230,7 @@ index 895cf1b2..f218f678 100644
  // Component Type Container
  //////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IComponentTypes, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IComponentTypes => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -238,7 +238,7 @@ index 895cf1b2..f218f678 100644
  // Component Interfaces
  //////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IComponent, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IComponent => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          nonextensible,
@@ -246,7 +246,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IAnalogAudioComponentType, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IAnalogAudioComponentType => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          nonextensible,
@@ -254,7 +254,7 @@ index 895cf1b2..f218f678 100644
              );
      }
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMPEG2Component, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMPEG2Component => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -262,7 +262,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IEnumComponents, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumComponents => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          hidden, restricted,
          object,
@@ -270,7 +270,7 @@ index 895cf1b2..f218f678 100644
  // Component Container
  //////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IComponents, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IComponents => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -278,7 +278,7 @@ index 895cf1b2..f218f678 100644
      
  
  
-+_Win32_AnnotateInterface_(ILocator, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ILocator => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          nonextensible,
@@ -286,7 +286,7 @@ index 895cf1b2..f218f678 100644
          HRESULT Clone([out, retval] ILocator **NewLocator);
      };
  
-+_Win32_AnnotateInterface_(IAnalogLocator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IAnalogLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          nonextensible,
@@ -294,7 +294,7 @@ index 895cf1b2..f218f678 100644
              );
      }
  
-+_Win32_AnnotateInterface_(IDigitalLocator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDigitalLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          nonextensible,
@@ -302,7 +302,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IATSCLocator, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IATSCLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -310,7 +310,7 @@ index 895cf1b2..f218f678 100644
              );
      };
  
-+_Win32_AnnotateInterface_(IATSCLocator2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IATSCLocator2 => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          hidden,
@@ -318,7 +318,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDigitalCableLocator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IDigitalCableLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
      [
          object,
          hidden,
@@ -326,7 +326,7 @@ index 895cf1b2..f218f678 100644
      }
  //////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IDVBTLocator, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBTLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -334,7 +334,7 @@ index 895cf1b2..f218f678 100644
              );
      };
  
-+_Win32_AnnotateInterface_(IDVBTLocator2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDVBTLocator2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          hidden,
@@ -342,7 +342,7 @@ index 895cf1b2..f218f678 100644
      };
  
  //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBSLocator, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBSLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -350,7 +350,7 @@ index 895cf1b2..f218f678 100644
              );
      };
      //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBSLocator2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IDVBSLocator2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          hidden,
@@ -358,7 +358,7 @@ index 895cf1b2..f218f678 100644
              );
      };
   //////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IDVBCLocator, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IDVBCLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
          object,
          hidden,
@@ -366,7 +366,7 @@ index 895cf1b2..f218f678 100644
  // Extensible eventing mechanism
  ///////////////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IESOpenMmiEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESOpenMmiEvent => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
  		uuid(BA4B6526-1A35-4635-8B56-3EC612746A8C),
@@ -374,7 +374,7 @@ index 895cf1b2..f218f678 100644
  		HRESULT GetDialogStringData ([out] BSTR* pbstrBaseUrl, [out, retval] BSTR* pbstrData);
  	};
  
-+_Win32_AnnotateInterface_(IESCloseMmiEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESCloseMmiEvent => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
  		uuid(6B80E96F-55E2-45aa-B754-0C23C8E7D5C1),
@@ -382,7 +382,7 @@ index 895cf1b2..f218f678 100644
  		HRESULT GetDialogNumber ([out, retval] DWORD* pDialogNumber);
  	};
  
-+_Win32_AnnotateInterface_(IESValueUpdatedEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESValueUpdatedEvent => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
  		uuid(8A24C46E-BB63-4664-8602-5D9C718C146D),
@@ -390,7 +390,7 @@ index 895cf1b2..f218f678 100644
  		HRESULT GetValueNames ([out, retval] SAFEARRAY(BSTR)* pbstrNames);
  	};
  
-+_Win32_AnnotateInterface_(IESRequestTunerEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESRequestTunerEvent => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
  		uuid(54C7A5E8-C3BB-4f51-AF14-E0E2C0E34C6D),
@@ -398,7 +398,7 @@ index 895cf1b2..f218f678 100644
  		HRESULT GetEstimatedTime ([out, retval] DWORD* pdwEstimatedTime);
  	};
  
-+_Win32_AnnotateInterface_(IESIsdbCasResponseEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESIsdbCasResponseEvent => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
  		uuid(2017cb03-dc0f-4c24-83ca-36307b2cd19f),
@@ -406,7 +406,7 @@ index 895cf1b2..f218f678 100644
              [out, retval] IESEvent** ppESEvent);
  	};
  
-+_Win32_AnnotateInterface_(IESLicenseRenewalResultEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESLicenseRenewalResultEvent => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(d5a48ef5-a81b-4df0-acaa-5e35e7ea45d4),
@@ -414,7 +414,7 @@ index 895cf1b2..f218f678 100644
      };
  
  
-+_Win32_AnnotateInterface_(IESFileExpiryDateEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESFileExpiryDateEvent => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(BA9EDCB6-4D36-4cfe-8C56-87A6B0CA48E1),
@@ -422,7 +422,7 @@ index 895cf1b2..f218f678 100644
      };
  
  
-+_Win32_AnnotateInterface_(IESEventService, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESEventService => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
  		uuid(ED89A619-4C06-4b2f-99EB-C7669B13047C),
@@ -430,7 +430,7 @@ index 895cf1b2..f218f678 100644
  	    HRESULT FireESEvent(IESEvent* pESEvent);
  	};
  
-+_Win32_AnnotateInterface_(IESEventServiceConfiguration, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IESEventServiceConfiguration => SupportedOSPlatform(\"windows6.1\") */")
  	[
  		object,
          hidden,
@@ -438,7 +438,7 @@ index 895cf1b2..f218f678 100644
  
      // IPersistTuneXml : defines an individual property-based xml persistence mechanism
      //
-+_Win32_AnnotateInterface_(IPersistTuneXml, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPersistTuneXml => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(0754CD31-8D15-47a9-8215-D20064157244),
@@ -446,7 +446,7 @@ index 895cf1b2..f218f678 100644
      // IPersistTuneXmlUtility : defines an utility object to create Tuning Model 
      // objects based on the xml node passed in
      //
-+_Win32_AnnotateInterface_(IPersistTuneXmlUtility, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPersistTuneXmlUtility => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          hidden,
@@ -454,7 +454,7 @@ index 895cf1b2..f218f678 100644
       // IPersistTuneXmlUtility2 : defines an utility object to extract TuneXml
      // from the Tune Request.
      //
-+_Win32_AnnotateInterface_(IPersistTuneXmlUtility2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPersistTuneXmlUtility2 => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          hidden,
@@ -462,7 +462,7 @@ index 895cf1b2..f218f678 100644
      };
  
          // this interface adds a CreateTuneRequestEx method to a TuningSpace
-+_Win32_AnnotateInterface_(IBDACreateTuneRequestEx, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IBDACreateTuneRequestEx => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(C0A4A1D4-2B3C-491a-BA22-499FBADD4D12),

@@ -22,6 +22,139 @@ namespace Win32MetadataScraperTests
 
         public BulkIdlAnnotationMigrationTests(ITestOutputHelper output) => this.output = output;
 
+        private static string TransportComment(string kind, string target, string payload) =>
+            "cpp_quote(\"/* Win32Metadata: " + kind + " ::" + target + " => " +
+            payload.Replace("\\", "\\\\", StringComparison.Ordinal).Replace("\"", "\\\"", StringComparison.Ordinal) + " */\")";
+
+        private static string WithoutTransportComments(string source, string kind = null) => Regex.Replace(source,
+            "(?m)^[ \\t]*cpp_quote\\(\"/\\* Win32Metadata: " + (kind == null ? "\\w+" : Regex.Escape(kind)) +
+            " [^\\r\\n]*\\*/\"\\)\\r?\\n", "");
+
+        [Theory]
+        [InlineData("\n")]
+        [InlineData("\r\n")]
+        public void ExistingTransportSweepRestoresPristineSalAndUsesNativeSelectors(string newline)
+        {
+            string pristine = ("typedef struct _RECORD {\n    unsigned flags;\n} RECORD;\n" +
+                "[object, local]\ninterface INative : IUnknown {\n" +
+                "HRESULT Read([out, annotation(\"_Out_\")] void **value, [out] long *result);\n" +
+                "[propget] HRESULT Kind([out] unsigned *value);\n};\n" +
+                "cpp_quote(\"STDAPI Native(_In_opt_ unsigned options);\")\n" +
+                "cpp_quote(\"_Win32_Enum_(KIND, unsigned, KindOne);\")\n").Replace("\n", newline, StringComparison.Ordinal);
+            string patched = pristine
+                .Replace("[object, local]", "_Win32_AnnotateInterface_(INative, _Win32_SupportedOS_Windows7_)" + newline +
+                    "[object, local]", StringComparison.Ordinal)
+                .Replace("unsigned flags;", "[annotation(\"_Win32_AssociatedEnum_(KIND)\")] unsigned flags;", StringComparison.Ordinal)
+                .Replace("annotation(\"_Out_\")", "annotation(\"_Out_ _Win32_ComOutPtr_(true)\")", StringComparison.Ordinal)
+                .Replace("[out] long *result", "[out, annotation(\"_Out_ _Win32_Retval_\")] long *result", StringComparison.Ordinal)
+                .Replace("[out] unsigned *value", "[annotation(\"_Win32_AssociatedEnum_(KIND)\")] [out] unsigned *value", StringComparison.Ordinal)
+                .Replace("Native(_In_opt_", "Native(_Win32_Optional_(false) _In_opt_", StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.Latin1.GetBytes(pristine));
+            var result = fixture.ConvertTransport(patched);
+            Assert.True(result.ExitCode == 0, result.Error);
+            string converted = File.ReadAllText(result.Output);
+            Assert.Contains(TransportComment("interface", "INative", "SupportedOSPlatform(\"windows6.1\")"), converted);
+            Assert.Contains(TransportComment("field", "RECORD::flags", "AssociatedEnum(KIND)"), converted);
+            Assert.Contains(TransportComment("parameter", "INative::Read::value", "ComOutPtr(true)"), converted);
+            Assert.Contains(TransportComment("parameter", "INative::Read::result", "RetVal"), converted);
+            Assert.Contains(TransportComment("parameter", "INative::get_Kind::value", "AssociatedEnum(KIND)"), converted);
+            Assert.Contains(TransportComment("parameter", "Native::options", "Optional(false)"), converted);
+            Assert.Equal(pristine, WithoutTransportComments(converted));
+            Assert.Equal(Encoding.Latin1.GetBytes(pristine), File.ReadAllBytes(fixture.Source));
+            Assert.DoesNotContain("_Win32_Annotate", converted);
+            Assert.DoesNotContain("_Out_retval_", converted);
+        }
+
+        [Fact]
+        public void ExistingTransportSweepKeepsReturnInvalidsAndErasedTagAlias()
+        {
+            const string pristine = "typedef struct tag_inner_VALUE VALUE;\n" +
+                "cpp_quote(\"typedef struct tagVALUE VALUE;\")\ncpp_quote(\"#define tag_inner_VALUE\")\n" +
+                "struct tag_inner_VALUE {\n    unsigned kind;\n};\n" +
+                "cpp_quote(\"HANDLE WINAPI Create(void);\")\n";
+            string patched = pristine.Replace("unsigned kind;", "[annotation(\"_Win32_AssociatedEnum_(enum KIND)\")] unsigned kind;",
+                StringComparison.Ordinal).Replace("WINAPI Create", "WINAPI _Win32_RAIIFree_(CloseHandle, -1, 0) Create",
+                StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(pristine));
+            var result = fixture.ConvertTransport(patched);
+            Assert.True(result.ExitCode == 0, result.Error);
+            string converted = File.ReadAllText(result.Output);
+            Assert.Contains(TransportComment("field", "VALUE::kind", "AssociatedEnum(KIND)"), converted);
+            Assert.Contains(TransportComment("return", "Create", "RAIIFree(CloseHandle, -1, 0)"), converted);
+            Assert.DoesNotContain("::tag_inner_VALUE::", converted);
+            Assert.Equal(pristine, WithoutTransportComments(converted));
+        }
+
+        [Fact]
+        public void ExistingTransportSweepPreservesNativeAndQuotedBranchLocality()
+        {
+            const string pristine = "interface IReference : IUnknown {\n" +
+                "cpp_quote(\"#if defined(__cplusplus) && !defined(CINTERFACE)\")\n" +
+                "cpp_quote(\"MIDL_INTERFACE(\\\"00000000-0000-0000-0000-000000000001\\\")\")\n" +
+                "cpp_quote(\"IReference : public IUnknown {\")\n" +
+                "cpp_quote(\"virtual HRESULT Resolve(void **value) = 0;\")\ncpp_quote(\"};\")\n" +
+                "cpp_quote(\"#else\")\nHRESULT Resolve([out] void **value);\n};\ncpp_quote(\"#endif\")\n";
+            string patched = pristine.Replace("Resolve(void **value)", "Resolve(_Win32_ComOutPtr_(true) void **value)",
+                StringComparison.Ordinal).Replace("[out] void **value",
+                "[out, annotation(\"_Win32_ComOutPtr_(true)\")] void **value", StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(pristine));
+            var result = fixture.ConvertTransport(patched);
+            Assert.True(result.ExitCode == 0, result.Error);
+            string converted = File.ReadAllText(result.Output);
+            string comment = TransportComment("parameter", "IReference::Resolve::value", "ComOutPtr(true)");
+            Assert.Equal(2, Regex.Matches(converted, Regex.Escape(comment)).Count);
+            int split = converted.IndexOf("cpp_quote(\"#else\")", StringComparison.Ordinal);
+            Assert.True(converted.IndexOf(comment, StringComparison.Ordinal) < split);
+            Assert.True(converted.LastIndexOf(comment, StringComparison.Ordinal) > split);
+            Assert.Equal(pristine, WithoutTransportComments(converted));
+        }
+
+        [Fact]
+        public void ExistingTransportSweepIgnoresMacroSpellingsInCommentsAndQuotedData()
+        {
+            const string pristine = "/*\n_Win32_AnnotateInterface_(INotNative, _Win32_SupportedOS_Windows7_)\n*/\n" +
+                "cpp_quote(\"// _Win32_Retval_ is documentation\")\n" +
+                "cpp_quote(\"const char *text = \\\"_Win32_Retval_\\\";\")\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(pristine));
+            var result = fixture.ConvertTransport(pristine);
+            Assert.True(result.ExitCode == 0, result.Error);
+            Assert.Equal(pristine, File.ReadAllText(result.Output));
+        }
+
+        [Fact]
+        public void ExistingTransportSweepAcceptsOriginalOdlWithoutAdmittingNewRecipeInputs()
+        {
+            const string pristine = "interface INative : IUnknown {};\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(pristine));
+            var result = fixture.ConvertTransport("_Win32_AnnotateInterface_(INative, _Win32_SupportedOS_Windows7_)\n" +
+                pristine, ".odl");
+            Assert.True(result.ExitCode == 0, result.Error);
+            string converted = File.ReadAllText(result.Output);
+            Assert.Contains(TransportComment("interface", "INative", "SupportedOSPlatform(\"windows6.1\")"), converted);
+            Assert.Equal(pristine, WithoutTransportComments(converted));
+        }
+
+        [Theory]
+        [InlineData("missing")]
+        [InlineData("conditional")]
+        [InlineData("expression")]
+        [InlineData("overflow")]
+        public void ExistingTransportSweepRejectsUnboundOrUnsafeFactsBeforePublication(string form)
+        {
+            const string pristine = "interface INative : IUnknown {\nHRESULT Read([out] long *value);\n};\n";
+            string patched = form == "missing" ? pristine + "[annotation(\"_Win32_Retval_\")] long missing;\n" :
+                form == "conditional" ? pristine.Replace("[out] long *value",
+                    "\n#if FEATURE\n[annotation(\"_Win32_Retval_\")] [out] long *value\n#endif\n", StringComparison.Ordinal) :
+                pristine.Replace("[out] long *value", "[annotation(\"_Win32_RAIIFree_(FreeValue, " +
+                    (form == "overflow" ? "9223372036854775808" : "INVALID_VALUE") + ")\")] [out] long *value",
+                    StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(pristine));
+            var result = fixture.ConvertTransport(patched);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.False(File.Exists(result.Output));
+            Assert.Equal(pristine, File.ReadAllText(fixture.Source));
+        }
+
         [Theory]
         [InlineData("\r\n", false)]
         [InlineData("\n", true)]
@@ -53,10 +186,10 @@ namespace Win32MetadataScraperTests
             Assert.Single(report.RootElement.GetProperty("candidateGeneratedHeaders").EnumerateArray());
             byte[] authored = File.ReadAllBytes(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
             string decoded = Encoding.Latin1.GetString(authored);
-            Assert.Contains("_Win32_AnnotateInterface_(IMigrated, _Win32_SupportedOS_Windows7_)" + newline +
+            Assert.Contains(TransportComment("interface", "IMigrated", "SupportedOSPlatform(\"windows6.1\")") + newline +
                 "[object, uuid", decoded);
             decoded = decoded.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
-                .Replace("_Win32_AnnotateInterface_(IMigrated, _Win32_SupportedOS_Windows7_)" + newline, "", StringComparison.Ordinal);
+                .Replace(TransportComment("interface", "IMigrated", "SupportedOSPlatform(\"windows6.1\")") + newline, "", StringComparison.Ordinal);
             Assert.Equal(bytes, Encoding.Latin1.GetBytes(decoded));
             var application = Fixture.Command("git", fixture.RepositoryRoot, "apply", "--unsafe-paths", "-p1",
                 "--directory=" + fixture.Sdk, "--whitespace=error-all", "--check", "--",
@@ -194,20 +327,14 @@ namespace Win32MetadataScraperTests
             var result = fixture.Run();
             Assert.True(result.ExitCode == 0, result.Error);
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-            const string method = "_Win32_AnnotateMethod_(IExisting::Read, _Win32_PreserveResult_)";
+            string method = TransportComment("method", "IExisting::Read", "PreserveResult");
             Assert.Contains("}" + (terminator ? ";" : "") + " // native definition" + newline + method + newline, authored);
-            Assert.Contains(inlineAnnotation ? "[out, annotation(\"_Out_ _Win32_Retval_\")] long* result" :
-                "[annotation(\"_Win32_Retval_\")] [out] long* result", authored);
-            Assert.Contains("STDAPI_(UINT) _Win32_SetLastError_ Exported", authored);
-            Assert.Contains("SHSTDAPI _Win32_SupportedOS_Windows7_ ShellNative", authored);
-            Assert.Contains("cpp_quote(\"WINAPI\")" + newline +
-                "cpp_quote(\"_Win32_SupportedOS_Windows7_ NetworkNative", authored);
-            Assert.Equal(source, authored.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
-                .Replace("_Win32_AnnotateInterface_(IExisting, _Win32_SupportedOS_Windows7_)" + newline, "", StringComparison.Ordinal)
-                .Replace(method + newline, "", StringComparison.Ordinal)
-                .Replace(inlineAnnotation ? " _Win32_Retval_" : "[annotation(\"_Win32_Retval_\")] ", "", StringComparison.Ordinal)
-                .Replace("_Win32_SetLastError_ ", "", StringComparison.Ordinal)
-                .Replace("_Win32_SupportedOS_Windows7_ ", "", StringComparison.Ordinal));
+            Assert.Contains(TransportComment("parameter", "IExisting::Read::result", "RetVal"), authored);
+            Assert.Contains(parameterAttributes + " long* result", authored);
+            Assert.Contains(TransportComment("function", "Exported", "SetLastError"), authored);
+            Assert.Contains(TransportComment("function", "ShellNative", "SupportedOSPlatform(\"windows6.1\")"), authored);
+            Assert.Contains(TransportComment("function", "NetworkNative", "SupportedOSPlatform(\"windows6.1\")"), authored);
+            Assert.Equal(source, WithoutTransportComments(authored).Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal));
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(6, report.RootElement.GetProperty("authoredFacts").GetInt32());
             Assert.Equal(0, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
@@ -242,14 +369,12 @@ namespace Win32MetadataScraperTests
             var result = fixture.Run();
             Assert.True(result.ExitCode == 0, result.Error);
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-            const string macro = "_Win32_AssociatedEnum_(NATIVE_KIND)";
-            Assert.Contains(inlineAnnotation ? "[annotation(\"_Field_range_(0, 2) " + macro + "\")] unsigned flags" :
-                "[annotation(\"" + macro + "\")] unsigned flags", authored);
-            Assert.Contains("[out, annotation(\"_Out_ " + macro + "\")] unsigned* result", authored);
+            Assert.Contains(TransportComment("field", "NATIVE_RECORD::flags", "AssociatedEnum(NATIVE_KIND)"), authored);
+            Assert.Contains(TransportComment("parameter", "IExisting::Read::result", "AssociatedEnum(NATIVE_KIND)"), authored);
+            Assert.Contains(native + "unsigned flags", authored);
+            Assert.Contains("[out, annotation(\"_Out_\")] unsigned* result", authored);
             Assert.Contains("struct { unsigned flags; } nested;", authored);
-            Assert.Equal(source, authored.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
-                .Replace(inlineAnnotation ? " " + macro : "[annotation(\"" + macro + "\")] ", "", StringComparison.Ordinal)
-                .Replace(" " + macro, "", StringComparison.Ordinal));
+            Assert.Equal(source, WithoutTransportComments(authored).Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal));
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(2, report.RootElement.GetProperty("authoredFacts").GetInt32());
             Assert.Equal(0, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
@@ -316,10 +441,8 @@ namespace Win32MetadataScraperTests
             if (!ambiguous)
             {
                 string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-                const string annotation = "[annotation(\"_Win32_AssociatedEnum_(enum " + tag + ")\")] ";
-                Assert.Contains(annotation + "unsigned flags", authored);
-                Assert.Equal(source, authored.Replace("#include <sal.h>\n", "", StringComparison.Ordinal)
-                    .Replace(annotation, "", StringComparison.Ordinal));
+                Assert.Contains(TransportComment("field", "HOLDER::flags", "AssociatedEnum(" + tag + ")"), authored);
+                Assert.Equal(source, WithoutTransportComments(authored).Replace("#include <sal.h>\n", "", StringComparison.Ordinal));
             }
         }
 
@@ -352,7 +475,7 @@ namespace Win32MetadataScraperTests
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
             foreach (string name in new[] { "IZFirst", "IASecond", "IMThird" })
             {
-                string carrier = "_Win32_AnnotateInterface_(" + name + ", _Win32_SupportedOS_Windows7_)\r\n";
+                string carrier = TransportComment("interface", name, "SupportedOSPlatform(\"windows6.1\")") + "\r\n";
                 Assert.Contains(carrier + "[object]\r\ninterface " + name, authored);
                 authored = authored.Replace(carrier, "", StringComparison.Ordinal);
             }
@@ -376,7 +499,7 @@ namespace Win32MetadataScraperTests
             var result = fixture.Run();
             Assert.True(result.ExitCode == 0, result.Error);
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-            const string carrier = "_Win32_AnnotateInterface_(IMigrated, _Win32_SupportedOS_Windows7_)\r\n";
+            string carrier = TransportComment("interface", "IMigrated", "SupportedOSPlatform(\"windows6.1\")") + "\r\n";
             Assert.Contains(carrier + "NATIVE_INTERFACE(00000000", authored);
             Assert.Equal(source, authored.Replace(carrier, "", StringComparison.Ordinal)
                 .Replace("#include <sal.h>\r\n", "", StringComparison.Ordinal));
@@ -410,18 +533,17 @@ namespace Win32MetadataScraperTests
             Assert.True(result.ExitCode == 0, result.Error);
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
             Assert.Equal(File.ReadAllText(Path.Combine(previous.OutputDirectory, "source", "um", "sample.idl")),
-                authored.Replace("_Win32_SupportedOS_Windows7_ ", "", StringComparison.Ordinal)
-                    .Replace(") _Win32_SupportedOS_Windows7_;", ");", StringComparison.Ordinal));
+                WithoutTransportComments(authored, "function"));
             Assert.Equal(source, File.ReadAllText(fixture.Source));
-            Assert.Contains("EXTERN_C HRESULT STDAPICALLTYPE _Win32_SupportedOS_Windows7_ Linked", authored);
-            Assert.Contains("HRESULT WINAPI _Win32_SupportedOS_Windows7_ Winapi", authored);
+            Assert.Contains("EXTERN_C HRESULT STDAPICALLTYPE Linked", authored);
+            Assert.Contains("HRESULT WINAPI Winapi", authored);
             Assert.Contains("cpp_quote(\"EXTERN_C HRESULT WINAPI\")" + newline +
-                "cpp_quote(\"_Win32_SupportedOS_Windows7_ SplitWinapi(", authored);
-            Assert.Contains("cpp_quote(\"STDAPI\")" + newline + "cpp_quote(\"_Win32_SupportedOS_Windows7_ SplitLine(", authored);
+                "cpp_quote(\"SplitWinapi(", authored);
+            Assert.Contains("cpp_quote(\"STDAPI\")" + newline + "cpp_quote(\"SplitLine(", authored);
             Assert.Contains("cpp_quote(\"STDAPI Trailing(\") \t" + newline +
-                "cpp_quote(\"    _In_ long value) _Win32_SupportedOS_Windows7_;\")", authored);
+                "cpp_quote(\"    _In_ long value);\")", authored);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
-            Assert.Contains("annotate(\\\"(marker)\\\")))) _Win32_SupportedOS_Windows7_;", authored);
+            Assert.Contains("annotate(\\\"(marker)\\\"))));", authored);
             Assert.Equal(10, report.RootElement.GetProperty("authoredFacts").GetInt32());
             var functions = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions").EnumerateArray()
                 .Where(item => item.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl").ToArray();
@@ -979,9 +1101,9 @@ namespace Win32MetadataScraperTests
                         foreach (var disposition in owner.GetProperty("dispositions").EnumerateArray())
                         {
                             Assert.Equal("CXXMethodDecl", disposition.GetProperty("declaration").GetProperty("kind").GetString());
-                            string carrier = "_WIN32META_ANNOTATE_METHOD_(" +
-                                disposition.GetProperty("fact").GetProperty("symbol").GetString() + ", " +
-                                disposition.GetProperty("macro").GetString() + ");";
+                            Assert.Equal("_Win32_PreserveResult_", disposition.GetProperty("macro").GetString());
+                            string carrier = "/* Win32Metadata: method ::" +
+                                disposition.GetProperty("fact").GetProperty("symbol").GetString() + " => PreserveResult */";
                             Assert.DoesNotContain(carrier, oldText);
                             string linePattern = @"(?m)^[\t ]*" + Regex.Escape(carrier) + @"\r?\n";
                             var line = Assert.Single(Regex.Matches(newText, linePattern).Cast<Match>());
@@ -1597,7 +1719,7 @@ namespace Win32MetadataScraperTests
                 ("IWICBitmapEncoderInfo", "CreateInstance", "ppIBitmapEncoder", "ComOutPtr",
                     "HRESULT CreateInstance([out] IWICBitmapEncoder **ppIBitmapEncoder);"),
                 ("IWICImagingFactory", "CreateDecoderFromFilename", "pguidVendor", "Optional",
-                    "HRESULT CreateDecoderFromFilename([in, string] LPCWSTR wzFilename, [in, unique] const GUID *pguidVendor, [in, annotation(\"_Win32_AssociatedEnum_(GENERIC_ACCESS_RIGHTS)\")] DWORD dwDesiredAccess, [in] WICDecodeOptions metadataOptions, [out] IWICBitmapDecoder **ppIDecoder);"),
+                    "HRESULT CreateDecoderFromFilename([in, string] LPCWSTR wzFilename, [in, unique] const GUID *pguidVendor, [in, annotation(\"_In_\")] DWORD dwDesiredAccess, [in] WICDecodeOptions metadataOptions, [out] IWICBitmapDecoder **ppIDecoder);"),
                 ("IWICBitmapSource", "CopyPixels", "prc", "Optional",
                     "HRESULT CopyPixels([in, unique] const WICRect *prc, [in] UINT cbStride, [in] UINT cbBufferSize, [out, size_is(cbBufferSize)] BYTE *pbBuffer);"),
             };
@@ -1624,7 +1746,8 @@ namespace Win32MetadataScraperTests
                 foreach (var value in parameters)
                 {
                     Assert.Contains(value.Prototype, authored);
-                    string carrier = $"_Win32_AnnotateParameter_({value.Interface}::{value.Method}, {value.Parameter}, _Win32_{value.Attribute}_(true))";
+                    string carrier = TransportComment("parameter", $"{value.Interface}::{value.Method}::{value.Parameter}",
+                        value.Attribute + "(true)");
                     Assert.Contains(carrier, authored);
                     var declaration = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")
                         .EnumerateArray().Single(row => row.GetProperty("fact").GetProperty("symbol").GetString() ==
@@ -1632,8 +1755,8 @@ namespace Win32MetadataScraperTests
                     Assert.Equal($"{value.Interface}::{value.Method}::{value.Parameter}",
                         declaration.GetProperty("nativeQualifiedName").GetString());
                 }
-                Assert.Equal(source, Regex.Replace(authored,
-                    "(?m)^(?:#include <sal\\.h>|cpp_quote\\(\"#include <sal\\.h>\"\\)|_Win32_AnnotateParameter_\\([^\\r\\n]*)\\r?\\n", ""));
+                Assert.Equal(source, Regex.Replace(WithoutTransportComments(authored),
+                    "(?m)^(?:#include <sal\\.h>|cpp_quote\\(\"#include <sal\\.h>\"\\))\\r?\\n", ""));
                 var patch = Fixture.Command("git", fixture.RepositoryRoot, "apply", "--unsafe-paths", "-p1",
                     "--directory=" + fixture.Sdk, "--whitespace=error-all", "--check", "--",
                     Path.Combine(result.OutputDirectory, "patches", "um", "sample.idl.patch"));
@@ -1737,7 +1860,7 @@ namespace Win32MetadataScraperTests
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(trailingRegion ? 1 : 0, report.RootElement.GetProperty("authoredFacts").GetInt32());
             if (trailingRegion)
-                Assert.Contains("};\n};\n_Win32_AnnotateParameter_(INative::Read, value, _Win32_ComOutPtr_(true))\ncpp_quote(",
+                Assert.Contains("};\n};\n" + TransportComment("parameter", "INative::Read::value", "ComOutPtr(true)") + "\ncpp_quote(",
                     File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl")));
         }
 
@@ -1757,11 +1880,19 @@ namespace Win32MetadataScraperTests
             var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true, annotationHeader: fixture.AnnotationHeader);
             Assert.True(result.ExitCode == 0, result.Error);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
-            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
-            Assert.Equal(missing == "AnnotateParameter" ? "parameter-carrier-not-in-selected-annotation-vocabulary" :
-                "parameter-override-not-in-selected-annotation-vocabulary",
-                report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0].GetProperty("reason").GetString());
-            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            Assert.Equal(missing == "AnnotateParameter" ? 1 : 0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            if (missing == "AnnotateParameter")
+            {
+                string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+                Assert.Contains(TransportComment("parameter", "INative::Read::value", "Optional(true)"), authored);
+                Assert.DoesNotContain("_Win32_AnnotateParameter_", authored);
+            }
+            else
+            {
+                Assert.Equal("parameter-override-not-in-selected-annotation-vocabulary",
+                    report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0].GetProperty("reason").GetString());
+                Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            }
             Assert.Equal(source, File.ReadAllText(fixture.Source));
         }
 
@@ -1809,9 +1940,10 @@ namespace Win32MetadataScraperTests
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(2, report.RootElement.GetProperty("authoredFacts").GetInt32());
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-            Assert.Contains("_Win32_AnnotateMethod_(INative::Read, _Win32_PreserveResult_)", authored);
-            Assert.Contains("[annotation(\"_Win32_Retval_\")] [out] long *value", authored);
-            Assert.DoesNotContain("cpp_quote", authored);
+            Assert.Contains(TransportComment("method", "INative::Read", "PreserveResult"), authored);
+            Assert.Contains(TransportComment("parameter", "INative::Read::value", "RetVal"), authored);
+            Assert.Contains("[out] long *value", authored);
+            Assert.DoesNotContain("[annotation(", authored);
             Assert.Equal(source, File.ReadAllText(fixture.Source));
         }
 
@@ -1831,9 +1963,10 @@ namespace Win32MetadataScraperTests
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(3, report.RootElement.GetProperty("authoredFacts").GetInt32());
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-            Assert.Contains("_Win32_Optional_(false) _In_opt_ unsigned options", authored);
-            Assert.Contains("_Win32_ComOutPtr_(true) _Outptr_ void** output", authored);
-            Assert.Contains("_Win32_ComOutPtr_(false) _COM_Outptr_ void** nativeCom", authored);
+            Assert.Contains(TransportComment("parameter", "Native::options", "Optional(false)"), authored);
+            Assert.Contains(TransportComment("parameter", "Native::output", "ComOutPtr(true)"), authored);
+            Assert.Contains(TransportComment("parameter", "Native::nativeCom", "ComOutPtr(false)"), authored);
+            Assert.Contains(source, authored);
             Assert.Equal(source, File.ReadAllText(fixture.Source));
         }
 
@@ -1844,7 +1977,7 @@ namespace Win32MetadataScraperTests
         {
             const string source = "#include <sal.h>\n#include <win32metadata_annotations.h>\n" +
                 "cpp_quote(\"#include <sal.h>\")\ninterface INative : IUnknown {\nHRESULT Read([in] long value);\n};\n" +
-                "_Win32_AnnotateMethod_(INative::Read, _Win32_PreserveResult_)\n";
+                "cpp_quote(\"/* Win32Metadata: method ::INative::Read => PreserveResult */\")\n";
             using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
             fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "Optional") });
             var result = fixture.Run(sharedSalBootstrap: sharedSal, allowCompleteInterfaceParameterCarriers: true);
@@ -1852,7 +1985,7 @@ namespace Win32MetadataScraperTests
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(1, report.RootElement.GetProperty("authoredFacts").GetInt32());
             string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
-            Assert.Equal(source, authored.Replace("_Win32_AnnotateParameter_(INative::Read, value, _Win32_Optional_(true))\n",
+            Assert.Equal(source, authored.Replace(TransportComment("parameter", "INative::Read::value", "Optional(true)") + "\n",
                 "", StringComparison.Ordinal));
             Assert.Equal(source, File.ReadAllText(fixture.Source));
         }
@@ -1894,7 +2027,7 @@ namespace Win32MetadataScraperTests
             string authored = Encoding.Latin1.GetString(File.ReadAllBytes(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl")));
             string recovered = authored.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
                 .Replace("cpp_quote(\"#include <sal.h>\")" + newline, "", StringComparison.Ordinal)
-                .Replace(newline + "_Win32_AnnotateParameter_(INative::Read, value, _Win32_ComOutPtr_(true))" + newline, "", StringComparison.Ordinal);
+                .Replace(newline + TransportComment("parameter", "INative::Read::value", "ComOutPtr(true)") + newline, "", StringComparison.Ordinal);
             Assert.Equal(bytes, Encoding.Latin1.GetBytes(recovered));
             Assert.Equal(bytes, File.ReadAllBytes(fixture.Source));
         }
@@ -1912,6 +2045,7 @@ namespace Win32MetadataScraperTests
             {
                 "InputMap", "SdkIncludeRoot", "OutputDirectory", "Original", "SdkProjectRoot", "Apply", "AnnotationHeader",
                 "SharedSalBootstrap", "AllowCompleteInterfaceParameterCarriers",
+                "PatchedIdl", "PristineIdl", "TransportOutput",
             }, JsonSerializer.Deserialize<string[]>(result.Error));
         }
 
@@ -1948,6 +2082,18 @@ namespace Win32MetadataScraperTests
             public string Source { get; }
             public string Project { get; }
             public string AnnotationHeader => Path.Combine(this.directory, "annotation-input.h");
+
+            public (int ExitCode, string Error, string Output) ConvertTransport(string patched, string extension = ".idl")
+            {
+                string input = Path.Combine(this.directory, "patched" + extension);
+                string output = Path.Combine(this.directory, "transport-" + this.runs++ + ".idl");
+                File.WriteAllBytes(input, Encoding.Latin1.GetBytes(patched));
+                var result = Command("pwsh", this.RepositoryRoot, "-NoProfile", "-File",
+                    Path.Combine(this.RepositoryRoot, "scripts", "Convert-SdkIdlAnnotations.ps1"),
+                    "-PatchedIdl", input, "-PristineIdl", this.Source, "-TransportOutput", output);
+                Assert.Equal(patched, Encoding.Latin1.GetString(File.ReadAllBytes(input)));
+                return (result.ExitCode, result.Error, output);
+            }
 
             public void WriteMap(object[] facts, string original = @"um\sample.idl", bool stale = false)
             {

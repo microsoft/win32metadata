@@ -1,3 +1,5 @@
+diff --git a/um/textstor.idl b/um/textstor.idl
+index e2e7f949..756f28cd 100644
 --- a/um/textstor.idl
 +++ b/um/textstor.idl
 @@ -1,3 +1,5 @@
@@ -6,7 +8,7 @@
  cpp_quote("#include <winapifamily.h>")
  
  //+-------------------------------------------------------------------------
-@@ -52,6 +54,7 @@
+@@ -52,6 +54,7 @@ const DWORD TS_AS_ALL_SINKS = (TS_AS_TEXT_CHANGE | TS_AS_SEL_CHANGE | TS_AS_LAYO
  const DWORD TS_LF_SYNC            = 0x1;
  const DWORD TS_LF_READ            = 0x2;
  const DWORD TS_LF_READWRITE       = 0x6;
@@ -14,72 +16,56 @@
  
  // bit values for TS_STATUS's dwDynamicFlags field
  const DWORD TS_SD_READONLY              = 0x001;   // if set, document is read only; writes will fail
-@@ -173,6 +176,7 @@
+@@ -173,6 +176,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITextStoreACP
  //
-+_Win32_AnnotateInterface_(ITextStoreACP, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITextStoreACP => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d),
-@@ -311,6 +315,7 @@
+@@ -311,6 +315,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITextStoreACP2
  //
-+_Win32_AnnotateInterface_(ITextStoreACP2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::ITextStoreACP2 => SupportedOSPlatform(\"windows8.0\") */")
  [
    object,
    uuid(f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f),
-@@ -440,6 +445,7 @@
+@@ -440,6 +445,8 @@ interface ITextStoreACP2 : IUnknown
  //
  // ITextStoreACPSink
  //
-+_Win32_AnnotateInterface_(ITextStoreACPSink, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITextStoreACPSink => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreACPSink::OnLockGranted::dwLockFlags => AssociatedEnum(TEXT_STORE_LOCK_FLAGS) */")
  [
    object,
    uuid(22d44c94-a419-4542-a272-ae26093ececf),
-@@ -461,7 +467,7 @@
-                           [in] ULONG cAttrs,
-                           [in, size_is(cAttrs)] const TS_ATTRID *paAttrs);
- 
--    HRESULT OnLockGranted([in] DWORD dwLockFlags);
-+    HRESULT OnLockGranted([annotation("_Win32_AssociatedEnum_(TEXT_STORE_LOCK_FLAGS)")] [in] DWORD dwLockFlags);
- 
-     HRESULT OnStartEditTransaction();
- 
-@@ -471,6 +477,7 @@
+@@ -471,6 +478,7 @@ interface ITextStoreACPSink : IUnknown
  //
  // IAnchor
  //
-+_Win32_AnnotateInterface_(IAnchor, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAnchor => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(0feb7e34-5a60-4356-8ef7-abdec2ff7cf8),
-@@ -519,6 +526,10 @@
+@@ -519,6 +527,10 @@ interface IAnchor : IUnknown
      HRESULT Clone([out] IAnchor **ppaClone);
  };
  
 +cpp_quote("_Win32_FlagsEnum_(ANCHOR_CHANGE_HISTORY_FLAGS, unsigned int, TS_CH_PRECEDING_DEL, TS_CH_FOLLOWING_DEL);")
-+cpp_quote("_Win32_AnnotateParameter_(IAnchor::GetChangeHistory, pdwHistory, _Win32_AssociatedEnum_(ANCHOR_CHANGE_HISTORY_FLAGS));")
++cpp_quote("/* Win32Metadata: parameter ::IAnchor::GetChangeHistory::pdwHistory => AssociatedEnum(ANCHOR_CHANGE_HISTORY_FLAGS) */")
 +
-+_Win32_AnnotateInterface_(ITextStoreAnchor, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITextStoreAnchor => SupportedOSPlatform(\"windows5.0\") */")
  [
    object,
    uuid(9b2077b0-5f18-4dec-bee9-3cc722f5dfe0),
-@@ -651,6 +662,7 @@
+@@ -651,6 +663,8 @@ interface ITextStoreAnchor : IUnknown
  //
  // ITextStoreAnchorSink
  //
-+_Win32_AnnotateInterface_(ITextStoreAnchorSink, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ITextStoreAnchorSink => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreAnchorSink::OnLockGranted::dwLockFlags => AssociatedEnum(TEXT_STORE_LOCK_FLAGS) */")
  [
    object,
    uuid(aa80e905-2021-11d2-93e0-0060b067b86e),
-@@ -673,7 +685,7 @@
-                           [in] ULONG cAttrs,
-                           [in, size_is(cAttrs)] const TS_ATTRID *paAttrs);
- 
--    HRESULT OnLockGranted([in] DWORD dwLockFlags);
-+    HRESULT OnLockGranted([annotation("_Win32_AssociatedEnum_(TEXT_STORE_LOCK_FLAGS)")] [in] DWORD dwLockFlags);
- 
-     HRESULT OnStartEditTransaction();
- 

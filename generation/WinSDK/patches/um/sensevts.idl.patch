@@ -1,5 +1,5 @@
 diff --git a/um/sensevts.idl b/um/sensevts.idl
-index 6b563d00..a5d9d8e2 100644
+index 6b563d00..96e1e671 100644
 --- a/um/sensevts.idl
 +++ b/um/sensevts.idl
 @@ -25,6 +25,8 @@ Revision History:
@@ -11,44 +11,36 @@ index 6b563d00..a5d9d8e2 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -59,6 +61,7 @@ library SensEvents
+@@ -59,6 +61,8 @@ library SensEvents
      //
      // Interface ISensNetwork
      //
-+_Win32_AnnotateInterface_(ISensNetwork, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISensNetwork => SupportedOSPlatform(\"windows5.1.2600\") */")
++cpp_quote("/* Win32Metadata: parameter ::ISensNetwork::ConnectionLost::ulType => AssociatedEnum(SENS_CONNECTION_TYPE) */")
      [
      object,
      uuid(d597bab1-5b9f-11d1-8dd2-00aa004abd5e),
-@@ -87,7 +90,7 @@ library SensEvents
-         HRESULT
-         ConnectionLost(
-             [in] BSTR bstrConnection,
--            [in] ULONG ulType
-+            [annotation("_Win32_AssociatedEnum_(SENS_CONNECTION_TYPE)")] [in] ULONG ulType
-             );
- 
-         [id(0x00000004)]
-@@ -112,6 +115,7 @@ library SensEvents
+@@ -112,6 +116,7 @@ library SensEvents
      //
      // Interface ISensOnNow
      //
-+_Win32_AnnotateInterface_(ISensOnNow, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISensOnNow => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
      object,
      uuid(d597bab2-5b9f-11d1-8dd2-00aa004abd5e),
-@@ -144,6 +148,7 @@ library SensEvents
+@@ -144,6 +149,7 @@ library SensEvents
      //
      // Interface ISensLogon
      //
-+_Win32_AnnotateInterface_(ISensLogon, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISensLogon => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
      object,
      uuid(d597bab3-5b9f-11d1-8dd2-00aa004abd5e),
-@@ -201,6 +206,7 @@ library SensEvents
+@@ -201,6 +207,7 @@ library SensEvents
      //
      // Interface ISensLogon2
      //
-+_Win32_AnnotateInterface_(ISensLogon2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISensLogon2 => SupportedOSPlatform(\"windows5.1.2600\") */")
      [
      object,
      uuid(d597bab4-5b9f-11d1-8dd2-00aa004abd5e),

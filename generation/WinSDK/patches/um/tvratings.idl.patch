@@ -1,5 +1,5 @@
 diff --git a/um/tvratings.idl b/um/tvratings.idl
-index 85185ae5..92f2af15 100644
+index 85185ae5..467eb745 100644
 --- a/um/tvratings.idl
 +++ b/um/tvratings.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index 85185ae5..92f2af15 100644
  
  // -------------------------------------------------------
  // -------------------------------------------------------
-+_Win32_AnnotateInterface_(IXDSToRat, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IXDSToRat => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(C5C5C5B0-3ABC-11D6-B25B-00C04FA0C026),
@@ -22,7 +22,7 @@ index 85185ae5..92f2af15 100644
  };
  
  // ------------------------
-+_Win32_AnnotateInterface_(IEvalRat, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEvalRat => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
  	object,
  	uuid(C5C5C5B1-3ABC-11D6-B25B-00C04FA0C026),

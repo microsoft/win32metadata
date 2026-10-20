@@ -1,5 +1,5 @@
 diff --git a/um/xpsobjectmodel_2.idl b/um/xpsobjectmodel_2.idl
-index 4d5a7634..18ec0e37 100644
+index 4d5a7634..8d8da75a 100644
 --- a/um/xpsobjectmodel_2.idl
 +++ b/um/xpsobjectmodel_2.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index 4d5a7634..18ec0e37 100644
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
-+_Win32_AnnotateInterface_(IXpsOMPackageWriter3D, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPackageWriter3D => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid(e8a45033-640e-43fa-9bdf-fddeaa31c6a0),
@@ -22,7 +22,7 @@ index 4d5a7634..18ec0e37 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IXpsDocumentPackageTarget3D, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IXpsDocumentPackageTarget3D => SupportedOSPlatform(\"windows8.1\") */")
  [
      object,
      uuid(60ba71b8-3101-4984-9199-f4ea775ff01d),

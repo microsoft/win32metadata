@@ -1,5 +1,5 @@
 diff --git a/um/xpsobjectmodel.idl b/um/xpsobjectmodel.idl
-index 941a6bb0..49112dc2 100644
+index 941a6bb0..3add817e 100644
 --- a/um/xpsobjectmodel.idl
 +++ b/um/xpsobjectmodel.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 941a6bb0..49112dc2 100644
  //
  // Interfaces
  //
-+_Win32_AnnotateInterface_(IXpsOMShareable, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMShareable => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(7137398F-2FC1-454D-8C6A-2C3115A16ECE)
@@ -19,7 +19,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMVisual, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMVisual => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(BC3E7333-FB0B-4af3-A819-0B4EAAD0D2FD)
@@ -27,7 +27,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPart, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPart => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  uuid(74eb2f0b-a91e-4486-afac-0fabeca3dfc6)
@@ -35,7 +35,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGlyphsEditor, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGlyphsEditor => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  uuid(A5AB8616-5B16-4B9F-9629-89B323ED7909)
@@ -43,7 +43,7 @@ index 941a6bb0..49112dc2 100644
  
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGlyphs, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGlyphs => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  uuid(819B3199-0A5A-4B64-BEC7-A9E17E780DE2)
@@ -51,7 +51,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMDashCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMDashCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(081613F4-74EB-48F2-83B3-37A9CE2D7DC6)
@@ -59,7 +59,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMMatrixTransform, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMMatrixTransform => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(B77330FF-BB37-4501-A93E-F1B1E50BFC46)
@@ -67,7 +67,7 @@ index 941a6bb0..49112dc2 100644
  }
  
  
-+_Win32_AnnotateInterface_(IXpsOMGeometry, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGeometry => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(64FCF3D7-4D58-44BA-AD73-A13AF6492072)
@@ -75,7 +75,7 @@ index 941a6bb0..49112dc2 100644
  
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGeometryFigure, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGeometryFigure => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(D410DC83-908C-443E-8947-B1795D3C165A)
@@ -83,7 +83,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGeometryFigureCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGeometryFigureCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(FD48C3F3-A58E-4B5A-8826-1DE54ABE72B2)
@@ -91,7 +91,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPath, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPath => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(37D38BB6-3EE9-4110-9312-14B194163337)
@@ -99,7 +99,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(56A3F80C-EA4C-4187-A57B-A2A473B2B42B)
@@ -107,7 +107,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGradientStopCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGradientStopCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(C9174C3A-3CD3-4319-BDA4-11A39392CEEF)
@@ -115,7 +115,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMSolidColorBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMSolidColorBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(A06F9F05-3BE9-4763-98A8-094FC672E488)
@@ -123,7 +123,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMTileBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMTileBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(0FC2328D-D722-4A54-B2EC-BE90218A789E)
@@ -131,7 +131,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMVisualBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMVisualBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(97E294AF-5B37-46B4-8057-874D2F64119B)
@@ -139,7 +139,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMImageBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMImageBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(3DF0B466-D382-49EF-8550-DD94C80242E4)
@@ -147,7 +147,7 @@ index 941a6bb0..49112dc2 100644
  
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGradientStop, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGradientStop => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(5CF4F5CC-3969-49B5-A70A-5550B618FE49)
@@ -155,7 +155,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMGradientBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMGradientBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(EDB59622-61A2-42C3-BACE-ACF2286C06BF)
@@ -163,7 +163,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMLinearGradientBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMLinearGradientBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(005E279F-C30D-40FF-93EC-1950D3C528DB)
@@ -171,7 +171,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMRadialGradientBrush, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMRadialGradientBrush => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(75F207E5-08BF-413C-96B1-B82B4064176B)
@@ -179,7 +179,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(da2ac0a2-73a2-4975-ad14-74097c3ff3a5)
@@ -187,7 +187,7 @@ index 941a6bb0..49112dc2 100644
  {
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPartResources, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPartResources => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(f4cf7729-4864-4275-99b3-a8717163ecaf)
@@ -195,7 +195,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMDictionary, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMDictionary => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(897C86B8-8EAF-4AE3-BDDE-56419FCF4236)
@@ -203,7 +203,7 @@ index 941a6bb0..49112dc2 100644
  
  }
  
-+_Win32_AnnotateInterface_(IXpsOMFontResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMFontResource => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  uuid(a8c45708-47d9-4af4-8d20-33b48c9b8485)
@@ -211,7 +211,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMFontResourceCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMFontResourceCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  uuid(70B4A6BB-88D4-4FA8-AAF9-6D9C596FDBAD)
@@ -219,7 +219,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMImageResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMImageResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(3db8417d-ae50-485e-9a44-d7758f78a23f)
@@ -227,7 +227,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMImageResourceCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMImageResourceCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(7A4A1A71-9CDE-4B71-B33F-62DE843EABFE)
@@ -235,7 +235,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMColorProfileResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMColorProfileResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(67bd7d69-1eef-4bb1-b5e7-6f4f87be8abe)
@@ -243,7 +243,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMColorProfileResourceCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMColorProfileResourceCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(12759630-5FBA-4283-8F7D-CCA849809EDB)
@@ -251,7 +251,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPrintTicketResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPrintTicketResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(e7ff32d2-34aa-499b-bbe9-9cd4ee6c59f7)
@@ -259,7 +259,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMRemoteDictionaryResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMRemoteDictionaryResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(c9bd7cd4-e16a-4bf8-8c84-c950af7a3061)
@@ -267,7 +267,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMRemoteDictionaryResourceCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMRemoteDictionaryResourceCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(5C38DB61-7FEC-464A-87BD-41E3BEF018BE)
@@ -275,7 +275,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMSignatureBlockResourceCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMSignatureBlockResourceCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(AB8F5D8E-351B-4D33-AAED-FA56F0022931)
@@ -283,7 +283,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMDocumentStructureResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMDocumentStructureResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(85febc8a-6b63-48a9-af07-7064e4ecff30)
@@ -291,7 +291,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMStoryFragmentsResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMStoryFragmentsResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(c2b3ca09-0473-4282-87ae-1780863223f0)
@@ -299,7 +299,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMSignatureBlockResource, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMSignatureBlockResource => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(4776ad35-2e04-4357-8743-ebf6c171a905),
@@ -307,7 +307,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMVisualCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMVisualCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(94D8ABDE-AB91-46A8-82B7-F5B05EF01A96),
@@ -315,7 +315,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMCanvas, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMCanvas => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(221D1452-331E-47c6-87E9-6CCEFB9B5BA3),
@@ -323,7 +323,7 @@ index 941a6bb0..49112dc2 100644
  }
  
  
-+_Win32_AnnotateInterface_(IXpsOMPage, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPage => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(d3e18888-f120-4fee-8c68-35296eae91d4),
@@ -331,7 +331,7 @@ index 941a6bb0..49112dc2 100644
  }
  
  
-+_Win32_AnnotateInterface_(IXpsOMPageReference, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPageReference => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(ED360180-6F92-4998-890D-2F208531A0A0),
@@ -339,7 +339,7 @@ index 941a6bb0..49112dc2 100644
  
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPageReferenceCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPageReferenceCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(CA16BA4D-E7B9-45C5-958B-F98022473745),
@@ -347,7 +347,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMDocument, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMDocument => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(2C2C94CB-AC5F-4254-8EE9-23948309D9F0),
@@ -355,7 +355,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMDocumentCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMDocumentCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(D1C87F0D-E947-4754-8A25-971478F7E83E),
@@ -363,7 +363,7 @@ index 941a6bb0..49112dc2 100644
  }
  
  
-+_Win32_AnnotateInterface_(IXpsOMDocumentSequence, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMDocumentSequence => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(56492EB4-D8D5-425e-8256-4C2B64AD0264),
@@ -371,7 +371,7 @@ index 941a6bb0..49112dc2 100644
  
  }
  
-+_Win32_AnnotateInterface_(IXpsOMCoreProperties, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMCoreProperties => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(3340FE8F-4027-4aa1-8F5F-D35AE45FE597),
@@ -379,7 +379,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPackage, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPackage => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(18C3DF65-81E1-4674-91DC-FC452F5A416F),
@@ -387,7 +387,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMObjectFactory, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMObjectFactory => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(f9b2a685-a50d-4fc2-b764-b56e093ea0ca),
@@ -395,7 +395,7 @@ index 941a6bb0..49112dc2 100644
        );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMNameCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMNameCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  uuid(4BDDF8EC-C915-421B-A166-D173D25653D2)
@@ -403,7 +403,7 @@ index 941a6bb0..49112dc2 100644
      );
  }
  
-+_Win32_AnnotateInterface_(IXpsOMPartUriCollection, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPartUriCollection => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(57C650D4-067C-4893-8C33-F62A0633730F)
@@ -411,7 +411,7 @@ index 941a6bb0..49112dc2 100644
  }
  
  
-+_Win32_AnnotateInterface_(IXpsOMPackageWriter, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPackageWriter => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(4E2AA182-A443-42c6-B41B-4F8E9DE73FF9)
@@ -419,7 +419,7 @@ index 941a6bb0..49112dc2 100644
      );
  };
  
-+_Win32_AnnotateInterface_(IXpsOMPackageTarget, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMPackageTarget => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(219A9DB0-4959-47D0-8034-B1CE84F41A4D),
@@ -427,7 +427,7 @@ index 941a6bb0..49112dc2 100644
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
-+_Win32_AnnotateInterface_(IXpsOMThumbnailGenerator, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IXpsOMThumbnailGenerator => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(15B873D5-1971-41E8-83A3-6578403064C7),

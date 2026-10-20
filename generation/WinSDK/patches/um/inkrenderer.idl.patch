@@ -1,5 +1,5 @@
 diff --git a/um/inkrenderer.idl b/um/inkrenderer.idl
-index bc8c02d7..e9d8c382 100644
+index d78afc4d..b8235b9a 100644
 --- a/um/inkrenderer.idl
 +++ b/um/inkrenderer.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index bc8c02d7..e9d8c382 100644
  } INK_HIGH_CONTRAST_ADJUSTMENT;
  
  // Interfaces 
-+_Win32_AnnotateInterface_(IInkD2DRenderer, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IInkD2DRenderer => SupportedOSPlatform(\"windows10.0.10240\") */")
  [object, uuid(407fb1de-f85a-4150-97cf-b7fb274fb4f8)]
  interface IInkD2DRenderer : IUnknown
  {

@@ -1,5 +1,5 @@
 diff --git a/um/msvidctl.idl b/um/msvidctl.idl
-index 283d9eac..01c63b3d 100644
+index 50c2d166..f548ee89 100644
 --- a/um/msvidctl.idl
 +++ b/um/msvidctl.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index 283d9eac..01c63b3d 100644
  //*****************************************************************************
  
          ///////////////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMSVidCtl, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IMSVidCtl => SupportedOSPlatform(\"windows5.1.2600\") */")
          [
                  object,
                  uuid(B0EDF162-910A-11D2-B632-00C04F79498E),

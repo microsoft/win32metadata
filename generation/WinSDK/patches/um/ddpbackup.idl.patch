@@ -1,5 +1,5 @@
 diff --git a/um/ddpbackup.idl b/um/ddpbackup.idl
-index f8578964..c2303ce4 100644
+index f8578964..f1df1c87 100644
 --- a/um/ddpbackup.idl
 +++ b/um/ddpbackup.idl
 @@ -6,6 +6,7 @@
@@ -14,8 +14,8 @@ index f8578964..c2303ce4 100644
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
  
-+_Win32_AnnotateInterface_(IDedupBackupSupport, _Win32_SupportedOS_Server2012_)
-+_Win32_AnnotateInterface_(IDedupReadFileCallback, _Win32_SupportedOS_Server2012_)
++cpp_quote("/* Win32Metadata: interface ::IDedupBackupSupport => SupportedOSPlatform(\"windowsserver2012\") */")
++cpp_quote("/* Win32Metadata: interface ::IDedupReadFileCallback => SupportedOSPlatform(\"windowsserver2012\") */")
 +
  typedef struct _DEDUP_CONTAINER_EXTENT {
      ULONG      ContainerIndex;      // index of the container

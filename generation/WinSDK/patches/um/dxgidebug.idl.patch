@@ -1,4 +1,5 @@
 diff --git a/um/dxgidebug.idl b/um/dxgidebug.idl
+index ad3184d3..9864b9ae 100644
 --- a/um/dxgidebug.idl
 +++ b/um/dxgidebug.idl
 @@ -8,6 +8,7 @@
@@ -29,36 +30,35 @@ diff --git a/um/dxgidebug.idl b/um/dxgidebug.idl
  
  
  //==================================================================================================================================
-@@ -103,7 +110,7 @@ typedef struct DXGI_INFO_QUEUE_FILTER
- 
+@@ -104,6 +111,7 @@ typedef struct DXGI_INFO_QUEUE_FILTER
  cpp_quote("#define DXGI_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024")
  
--cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);" )
-+cpp_quote( "HRESULT WINAPI _Win32_SupportedOS_Windows8_ DXGIGetDebugInterface(REFIID riid, void **ppDebug);" )
+ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);" )
++cpp_quote("/* Win32Metadata: function ::DXGIGetDebugInterface => SupportedOSPlatform(\"windows8.0\") */")
  
  //=============================================================================
  // IDXGIInfoQueue
-@@ -113,6 +120,7 @@ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);"
+@@ -113,6 +121,7 @@ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);"
  // to this object which can be retrieved through its APIs.
  //
  //
-+_Win32_AnnotateInterface_(IDXGIInfoQueue, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIInfoQueue => SupportedOSPlatform(\"windows8.0\") */")
  [ uuid( D67441C7-672A-476f-9E82-CD55B44949CE ), object, local, pointer_default( unique ) ]
  
  interface IDXGIInfoQueue
-@@ -424,6 +432,7 @@ interface IDXGIInfoQueue
+@@ -424,6 +433,7 @@ interface IDXGIInfoQueue
          [annotation("_In_")]    DXGI_DEBUG_ID                           Producer);
  };
  
-+_Win32_AnnotateInterface_(IDXGIDebug, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIDebug => SupportedOSPlatform(\"windows8.0\") */")
  [ uuid(119E7452-DE9E-40fe-8806-88F90C12B441), object, local, pointer_default( unique ) ]
  interface IDXGIDebug
      : IUnknown
-@@ -431,6 +440,7 @@ interface IDXGIDebug
+@@ -431,6 +441,7 @@ interface IDXGIDebug
      HRESULT ReportLiveObjects(GUID apiid, DXGI_DEBUG_RLO_FLAGS flags);
  };
  
-+_Win32_AnnotateInterface_(IDXGIDebug1, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IDXGIDebug1 => SupportedOSPlatform(\"windows8.1\") */")
  [ uuid(c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550), object, local, pointer_default( unique ) ]
  interface IDXGIDebug1
      : IDXGIDebug

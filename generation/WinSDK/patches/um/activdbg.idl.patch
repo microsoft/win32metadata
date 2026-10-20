@@ -1,11 +1,12 @@
+diff --git a/um/activdbg.idl b/um/activdbg.idl
+index c68eb914..8f47d2a3 100644
 --- a/um/activdbg.idl
 +++ b/um/activdbg.idl
-@@ -3035,7 +3035,7 @@
- {
- 	HRESULT  GetStringForVariant([in] VARIANT *pvar, [in] ULONG nRadix, [out] BSTR *pbstrValue);
- 	HRESULT  GetVariantForString([in] LPCOLESTR pwstrValue, [out] VARIANT *pvar);
--	HRESULT	 GetStringForVarType([in] VARTYPE vt, [in] TYPEDESC *ptdescArrayType, [out] BSTR *pbstr);
-+	HRESULT	 GetStringForVarType([in, annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vt, [in] TYPEDESC *ptdescArrayType, [out] BSTR *pbstr);
- }
- 
- /* ISimpleConnectionPoint
+@@ -3024,6 +3024,7 @@ IDebugFormatter allows a language or IDE to customize the conversion
+ between variants or VARTYPES and strings.  This interface is used by the
+ ITypeInfo->IDebugProperty mapping implementation.
+ */
++cpp_quote("/* Win32Metadata: parameter ::IDebugFormatter::GetStringForVarType::vt => AssociatedEnum(VARENUM) */")
+ [
+ 	object,
+ 	uuid(51973C05-CB0C-11d0-B5C9-00A0244A0E7A),

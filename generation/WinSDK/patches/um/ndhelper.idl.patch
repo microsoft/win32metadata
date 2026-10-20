@@ -1,5 +1,5 @@
 diff --git a/um/ndhelper.idl b/um/ndhelper.idl
-index 6a10a3e9..af6a7fe6 100644
+index 6a10a3e9..edff4ff8 100644
 --- a/um/ndhelper.idl
 +++ b/um/ndhelper.idl
 @@ -2,6 +2,7 @@
@@ -14,7 +14,7 @@ index 6a10a3e9..af6a7fe6 100644
  //
  // interfaces implemented by Network Diagnostics Helper Classes
  //
-+_Win32_AnnotateInterface_(INetDiagHelper, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelper => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
    object,
    uuid(c0b35746-ebf5-11d8-bbe9-505054503030),
@@ -22,7 +22,7 @@ index 6a10a3e9..af6a7fe6 100644
      DIAGNOSIS_STATUS pathStatus;
  } HypothesisResult;
  
-+_Win32_AnnotateInterface_(INetDiagHelperUtilFactory, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelperUtilFactory => SupportedOSPlatform(\"windows6.1\") */")
  [     object,
        uuid(104613FB-BC57-4178-95BA-88809698354A),
        pointer_default(unique) // default embedded ptrs to [unique]
@@ -30,7 +30,7 @@ index 6a10a3e9..af6a7fe6 100644
  //
  // interface implemented by Network Diagnostics Helper Classes
  //
-+_Win32_AnnotateInterface_(INetDiagHelperEx, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelperEx => SupportedOSPlatform(\"windows6.1\") */")
  [
    object,
    uuid(972DAB4D-E4E3-4fc6-AE54-5F65CCDE4A15),
@@ -38,7 +38,7 @@ index 6a10a3e9..af6a7fe6 100644
  //
  // interfaces implemented by Network Diagnostics Helper Classes
  //
-+_Win32_AnnotateInterface_(INetDiagHelperInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelperInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
    object,
    uuid(c0b35747-ebf5-11d8-bbe9-505054503030),

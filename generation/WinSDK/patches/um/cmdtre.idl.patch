@@ -1,5 +1,5 @@
 diff --git a/um/cmdtre.idl b/um/cmdtre.idl
-index c66ea37f..bae41096 100644
+index c66ea37f..7cdd0da6 100644
 --- a/um/cmdtre.idl
 +++ b/um/cmdtre.idl
 @@ -14,6 +14,8 @@
@@ -15,7 +15,7 @@ index c66ea37f..bae41096 100644
      LOCAL_INTERFACE(0c733a87-2a1c-11ce-ade5-00aa0044773d)
  
      
-+_Win32_AnnotateInterface_(ICommandTree, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::ICommandTree => SupportedOSPlatform(\"windows5.0\") */")
  interface ICommandTree : IUnknown {
  
  typedef DWORD DBCOMMANDREUSE;

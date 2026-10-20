@@ -1,5 +1,5 @@
 diff --git a/um/opcparturi.idl b/um/opcparturi.idl
-index 024b4b7f..e21993d2 100644
+index 024b4b7f..5f5b0e9e 100644
 --- a/um/opcparturi.idl
 +++ b/um/opcparturi.idl
 @@ -10,6 +10,8 @@
@@ -15,7 +15,7 @@ index 024b4b7f..e21993d2 100644
  interface IOpcUri;
  interface IOpcPartUri;
  
-+_Win32_AnnotateInterface_(IOpcUri, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcUri => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(bc9c1b9b-d62c-49eb-aef0-3b4e0b28ebed),
@@ -23,7 +23,7 @@ index 024b4b7f..e21993d2 100644
  
  };
  
-+_Win32_AnnotateInterface_(IOpcPartUri, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcPartUri => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(7d3babe7-88b2-46ba-85cb-4203cb016c87),

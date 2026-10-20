@@ -1,5 +1,5 @@
 diff --git a/winrt/activation.idl b/winrt/activation.idl
-index e1bec5ef..fdbf6a9d 100644
+index e1bec5ef..d7ddc1ed 100644
 --- a/winrt/activation.idl
 +++ b/winrt/activation.idl
 @@ -7,6 +7,7 @@
@@ -14,7 +14,7 @@ index e1bec5ef..fdbf6a9d 100644
  import "inspectable.idl";
  #endif
  
-+_Win32_AnnotateInterface_(IActivationFactory, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IActivationFactory => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(00000035-0000-0000-C000-000000000046),

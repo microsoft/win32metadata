@@ -1,5 +1,5 @@
 diff --git a/um/wmcontainer.idl b/um/wmcontainer.idl
-index d0efb922..d4f28fc9 100644
+index d0efb922..5c384f12 100644
 --- a/um/wmcontainer.idl
 +++ b/um/wmcontainer.idl
 @@ -5,6 +5,7 @@
@@ -14,205 +14,192 @@ index d0efb922..d4f28fc9 100644
  
  interface IMFASFProfile;
  
-+_Win32_AnnotateInterface_(IMFASFContentInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFContentInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(B1DCA5CD-D5DA-4451-8E9E-DB5C59914EAD),
-@@ -72,7 +74,7 @@ interface IMFASFContentInfo : IUnknown
-         [out]     IPropertyStore **ppIStore);
+@@ -73,6 +75,7 @@ interface IMFASFContentInfo : IUnknown
  };
  
--cpp_quote("STDAPI MFCreateASFContentInfo( ")
-+cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFContentInfo( ")
+ cpp_quote("STDAPI MFCreateASFContentInfo( ")
++cpp_quote("/* Win32Metadata: function ::MFCreateASFContentInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("        /* out */     IMFASFContentInfo     **ppIContentInfo);")
  
  
-@@ -83,6 +85,7 @@ interface IMFASFStreamConfig;
+@@ -83,6 +86,7 @@ interface IMFASFStreamConfig;
  interface IMFASFMutualExclusion;
  interface IMFASFStreamPrioritization;
  
-+_Win32_AnnotateInterface_(IMFASFProfile, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFProfile => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(D267BF6A-028B-4e0d-903D-43F0EF82D0D4),
-@@ -150,6 +153,7 @@ interface IMFASFProfile : IMFAttributes
+@@ -150,6 +154,7 @@ interface IMFASFProfile : IMFAttributes
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFASFStreamConfig, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFStreamConfig => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(9E8AE8D2-DBBD-4200-9ACA-06E6DF484913),
-@@ -209,6 +213,7 @@ interface IMFASFStreamConfig : IMFAttributes
+@@ -209,6 +214,7 @@ interface IMFASFStreamConfig : IMFAttributes
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFASFMutualExclusion, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFMutualExclusion => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(12558291-E399-11D5-BC2A-00B0D0F3F4AB),
-@@ -253,6 +258,7 @@ interface IMFASFMutualExclusion : IUnknown
+@@ -253,6 +259,7 @@ interface IMFASFMutualExclusion : IUnknown
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFASFStreamPrioritization, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFStreamPrioritization => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(699bdc27-bbaf-49ff-8e38-9c39c9b5e088),
-@@ -347,6 +353,7 @@ typedef struct _ASF_INDEX_DESCRIPTOR
+@@ -347,6 +354,7 @@ typedef struct _ASF_INDEX_DESCRIPTOR
  
  }   ASF_INDEX_DESCRIPTOR;
  
-+_Win32_AnnotateInterface_(IMFASFIndexer, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFIndexer => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(53590F48-DC3B-4297-813F-787761AD7B3E),
-@@ -445,7 +452,7 @@ interface IMFASFIndexer : IUnknown
- 
+@@ -446,6 +454,7 @@ interface IMFASFIndexer : IUnknown
  };
  
--cpp_quote("STDAPI MFCreateASFIndexer( ")
-+cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFIndexer( ")
+ cpp_quote("STDAPI MFCreateASFIndexer( ")
++cpp_quote("/* Win32Metadata: function ::MFCreateASFIndexer => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("        /* out */     IMFASFIndexer         **ppIIndexer);")
  
  //
-@@ -455,7 +462,7 @@ cpp_quote("        /* out */     IMFASFIndexer         **ppIIndexer);")
- // For write-mode indexing, the Indexer will automatically use default
+@@ -456,6 +465,7 @@ cpp_quote("        /* out */     IMFASFIndexer         **ppIIndexer);")
  // IMFByteStreams, unless overridden by the user with custom byte streams.
  //
--cpp_quote("STDAPI MFCreateASFIndexerByteStream( ")
-+cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFIndexerByteStream( ")
+ cpp_quote("STDAPI MFCreateASFIndexerByteStream( ")
++cpp_quote("/* Win32Metadata: function ::MFCreateASFIndexerByteStream => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("        /* in */      IMFByteStream         *pIContentByteStream,")
  cpp_quote("        /* in */      QWORD                  cbIndexStartOffset,")
  cpp_quote("        /* out */     IMFByteStream        **pIIndexByteStream);")
-@@ -472,6 +479,7 @@ cpp_quote("        /* out */     IMFByteStream        **pIIndexByteStream);")
+@@ -472,6 +482,7 @@ cpp_quote("        /* out */     IMFByteStream        **pIIndexByteStream);")
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
-+_Win32_AnnotateInterface_(IMFASFSplitter, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFSplitter => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(12558295-E399-11D5-BC2A-00B0D0F3F4AB),
-@@ -517,7 +525,7 @@ interface IMFASFSplitter : IUnknown
- 
+@@ -518,6 +529,7 @@ interface IMFASFSplitter : IUnknown
  };
  
--cpp_quote("STDAPI MFCreateASFSplitter( ")
-+cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFSplitter( ")
+ cpp_quote("STDAPI MFCreateASFSplitter( ")
++cpp_quote("/* Win32Metadata: function ::MFCreateASFSplitter => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("        /* out */     IMFASFSplitter        **ppISplitter);")
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
-@@ -889,14 +897,14 @@ cpp_quote( "EXTERN_GUID(MF_ASFPROFILE_MAXPACKETSIZE, 0x22587627, 0x47de, 0x4168,
- //
+@@ -890,13 +902,16 @@ cpp_quote( "EXTERN_GUID(MF_ASFPROFILE_MAXPACKETSIZE, 0x22587627, 0x47de, 0x4168,
  // ASF Profile functions
  //
--cpp_quote( "STDAPI MFCreateASFProfile( "                                      )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFProfile( "                                      )
+ cpp_quote( "STDAPI MFCreateASFProfile( "                                      )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFProfile => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        /* out */     IMFASFProfile         **ppIProfile);"       )
  
--cpp_quote( "STDAPI MFCreateASFProfileFromPresentationDescriptor( "            )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFProfileFromPresentationDescriptor( "            )
+ cpp_quote( "STDAPI MFCreateASFProfileFromPresentationDescriptor( "            )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFProfileFromPresentationDescriptor => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        /* in  */     IMFPresentationDescriptor  *pIPD,"          )
  cpp_quote( "        /* out */     IMFASFProfile             **ppIProfile);"   )
  
--cpp_quote( "STDAPI MFCreatePresentationDescriptorFromASFProfile( "            )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreatePresentationDescriptorFromASFProfile( "            )
+ cpp_quote( "STDAPI MFCreatePresentationDescriptorFromASFProfile( "            )
++cpp_quote("/* Win32Metadata: function ::MFCreatePresentationDescriptorFromASFProfile => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        /* in  */     IMFASFProfile              *pIProfile,"     )
  cpp_quote( "        /* out */     IMFPresentationDescriptor **ppIPD);"        )
  
-@@ -1007,6 +1015,7 @@ typedef struct ASF_MUX_STATISTICS
+@@ -1007,6 +1022,7 @@ typedef struct ASF_MUX_STATISTICS
  
  } ASF_MUX_STATISTICS;
  
-+_Win32_AnnotateInterface_(IMFASFMultiplexer, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFMultiplexer => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(57BDD80A-9B38-4838-B737-C58F670D7D4F),
-@@ -1045,7 +1054,7 @@ interface IMFASFMultiplexer : IUnknown
-                 [in]      DWORD                msSyncTolerance );
+@@ -1046,6 +1062,7 @@ interface IMFASFMultiplexer : IUnknown
  };
  
--cpp_quote( "STDAPI MFCreateASFMultiplexer( "                          )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFMultiplexer( "                          )
+ cpp_quote( "STDAPI MFCreateASFMultiplexer( "                          )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFMultiplexer => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "        /* out */     IMFASFMultiplexer     **ppIMultiplexer);"     )
  
  
-@@ -1107,6 +1116,7 @@ typedef enum ASF_SELECTION_STATUS
+@@ -1107,6 +1124,7 @@ typedef enum ASF_SELECTION_STATUS
  
  } ASF_SELECTION_STATUS;
  
-+_Win32_AnnotateInterface_(IMFASFStreamSelector, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IMFASFStreamSelector => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(d01bad4a-4fa0-4a60-9349-c27e62da9d41),
-@@ -1150,7 +1160,7 @@ interface IMFASFStreamSelector : IUnknown
-     HRESULT SetStreamSelectorFlags( [in] DWORD dwStreamSelectorFlags );
+@@ -1151,6 +1169,7 @@ interface IMFASFStreamSelector : IUnknown
  };
  
--cpp_quote( "STDAPI MFCreateASFStreamSelector( " )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFStreamSelector( " )
+ cpp_quote( "STDAPI MFCreateASFStreamSelector( " )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFStreamSelector => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    /* in */ IMFASFProfile *pIASFProfile, " )
  cpp_quote( "    /* out */ IMFASFStreamSelector **ppSelector );" )
  
-@@ -1186,7 +1196,7 @@ cpp_quote( "    /* out */ IMFASFStreamSelector **ppSelector );" )
- ///     encode settings, etc)
+@@ -1187,6 +1206,7 @@ cpp_quote( "    /* out */ IMFASFStreamSelector **ppSelector );" )
  /// </remarks>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateASFMediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateASFMediaSink(" )
+ cpp_quote( "MFCreateASFMediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFMediaSink => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IMFByteStream *pIByteStream," )
  cpp_quote( "    IMFMediaSink** ppIMediaSink" )
  cpp_quote( "    );" )
-@@ -1211,7 +1221,7 @@ cpp_quote( "    );" )
- /// <param name="ppIActivate">
+@@ -1212,6 +1232,7 @@ cpp_quote( "    );" )
  ///     Returns pointer to an ASF Media Sink Activate
  /// </param>
--cpp_quote( "STDAPI MFCreateASFMediaSinkActivate(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFMediaSinkActivate(" )
+ cpp_quote( "STDAPI MFCreateASFMediaSinkActivate(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFMediaSinkActivate => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    LPCWSTR pwszFileName," )
  cpp_quote( "    IMFASFContentInfo *pContentInfo," )
  cpp_quote( "    IMFActivate** ppIActivate" )
-@@ -1231,7 +1241,7 @@ cpp_quote( "    );" )
- ///     Returns pointer to a WMV encoder MFT Activate
+@@ -1232,6 +1253,7 @@ cpp_quote( "    );" )
  /// </param>
  cpp_quote( "HRESULT STDMETHODCALLTYPE" )
--cpp_quote( "MFCreateWMVEncoderActivate(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateWMVEncoderActivate(" )
+ cpp_quote( "MFCreateWMVEncoderActivate(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateWMVEncoderActivate => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IMFMediaType * pMediaType, " )
  cpp_quote( "    IPropertyStore * pEncodingConfigurationProperties, " )
  cpp_quote( "    IMFActivate ** ppActivate " )
-@@ -1251,7 +1261,7 @@ cpp_quote( "    );" )
- ///     Returns pointer to a WMA encoder MFT Activate
+@@ -1252,6 +1274,7 @@ cpp_quote( "    );" )
  /// </param>
  cpp_quote( "HRESULT STDMETHODCALLTYPE" )
--cpp_quote( "MFCreateWMAEncoderActivate(" )
-+cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateWMAEncoderActivate(" )
+ cpp_quote( "MFCreateWMAEncoderActivate(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateWMAEncoderActivate => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote( "    IMFMediaType * pMediaType, " )
  cpp_quote( "    IPropertyStore * pEncodingConfigurationProperties, " )
  cpp_quote( "    IMFActivate ** ppActivate " )
-@@ -1272,7 +1282,7 @@ cpp_quote( "    );" )
- ///     encode settings, etc)
+@@ -1273,6 +1296,7 @@ cpp_quote( "    );" )
  /// </remarks>
  cpp_quote( "STDAPI" )
--cpp_quote( "MFCreateASFStreamingMediaSink(" )
-+cpp_quote( "_Win32_SupportedOS_Windows7_ MFCreateASFStreamingMediaSink(" )
+ cpp_quote( "MFCreateASFStreamingMediaSink(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFStreamingMediaSink => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    IMFByteStream *pIByteStream," )
  cpp_quote( "    IMFMediaSink** ppIMediaSink" )
  cpp_quote( "    );" )
-@@ -1297,7 +1307,7 @@ cpp_quote( "    );" )
- /// <param name="ppIActivate">
+@@ -1298,6 +1322,7 @@ cpp_quote( "    );" )
  ///     Returns pointer to an ASF Streaming Media Sink Activate
  /// </param>
--cpp_quote( "STDAPI MFCreateASFStreamingMediaSinkActivate(" )
-+cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateASFStreamingMediaSinkActivate(" )
+ cpp_quote( "STDAPI MFCreateASFStreamingMediaSinkActivate(" )
++cpp_quote("/* Win32Metadata: function ::MFCreateASFStreamingMediaSinkActivate => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote( "    IMFActivate *pByteStreamActivate," )
  cpp_quote( "    IMFASFContentInfo *pContentInfo," )
  cpp_quote( "    IMFActivate** ppIActivate" )
-@@ -1379,6 +1389,7 @@ cpp_quote( "// "  )
+@@ -1379,6 +1404,7 @@ cpp_quote( "// "  )
  
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
-+_Win32_AnnotateInterface_(IMFDRMNetHelper, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFDRMNetHelper => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(3D1FF0EA-679A-4190-8D46-7FA69E8C7E15)

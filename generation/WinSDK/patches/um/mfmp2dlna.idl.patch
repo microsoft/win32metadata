@@ -1,5 +1,5 @@
 diff --git a/um/mfmp2dlna.idl b/um/mfmp2dlna.idl
-index fd8b5abb..c3ae5081 100644
+index cd50b2c0..c23ed592 100644
 --- a/um/mfmp2dlna.idl
 +++ b/um/mfmp2dlna.idl
 @@ -6,6 +6,7 @@
@@ -14,7 +14,7 @@ index fd8b5abb..c3ae5081 100644
  ///     Initialize Media Foundation MPEG-2 sink
  /// </summary>
  //////////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(IMFDLNASinkInit, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IMFDLNASinkInit => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(0c012799-1b61-4c10-bda9-04445be5f561),

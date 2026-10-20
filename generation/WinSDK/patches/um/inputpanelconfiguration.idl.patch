@@ -1,5 +1,5 @@
 diff --git a/um/inputpanelconfiguration.idl b/um/inputpanelconfiguration.idl
-index 9381d483..fca76bd1 100644
+index 9381d483..3dc1c632 100644
 --- a/um/inputpanelconfiguration.idl
 +++ b/um/inputpanelconfiguration.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 9381d483..fca76bd1 100644
  // and dismissal semantics of the Touch Keyboard and Handwriting Input Panel
  // can opt in to the Modern Focus tracking mechanism by implementing the 
  // following interface.
-+_Win32_AnnotateInterface_(IInputPanelConfiguration, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IInputPanelConfiguration => SupportedOSPlatform(\"windows8.0\") */")
  [
      uuid(41C81592-514C-48BD-A22E-E6AF638521A6),
      pointer_default(unique),
@@ -19,7 +19,7 @@ index 9381d483..fca76bd1 100644
      [helpstring("method EnableFocusTracking")] HRESULT EnableFocusTracking();
  };
  
-+_Win32_AnnotateInterface_(IInputPanelInvocationConfiguration, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IInputPanelInvocationConfiguration => SupportedOSPlatform(\"windows8.0\") */")
  [
      uuid(A213F136-3B45-4362-A332-EFB6547CD432),
      pointer_default(unique),

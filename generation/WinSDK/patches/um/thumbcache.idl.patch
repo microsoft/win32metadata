@@ -1,5 +1,5 @@
 diff --git a/um/thumbcache.idl b/um/thumbcache.idl
-index 6ff74327..d33e7b2d 100644
+index 6ff74327..39df8c97 100644
 --- a/um/thumbcache.idl
 +++ b/um/thumbcache.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 6ff74327..d33e7b2d 100644
  
  // This interface is used as a thin wrapper around HBITMAP objects.  It allows an
  // HBITMAP to be ref-counted and protected from having its underlying data be changed
-+_Win32_AnnotateInterface_(ISharedBitmap, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISharedBitmap => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(091162a4-bc96-411f-aae8-c5122cd03363),
      pointer_default(unique),
@@ -19,7 +19,7 @@ index 6ff74327..d33e7b2d 100644
  // the WTS_FLAGS.  GetThumbnailID allows the caller to retrieve an image known to be in
  // the cache via its ID (which was returned by GetThumbnail).
  
-+_Win32_AnnotateInterface_(IThumbnailCache, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IThumbnailCache => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(F676C15D-596A-4ce2-8234-33996F445DB1),
@@ -27,7 +27,7 @@ index 6ff74327..d33e7b2d 100644
                                     [out] WTS_CACHEFLAGS *pOutFlags);
  }
  
-+_Win32_AnnotateInterface_(IThumbnailProvider, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IThumbnailProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(e357fccd-a995-4576-b01f-234630154e96),
  ]
@@ -35,7 +35,7 @@ index 6ff74327..d33e7b2d 100644
      HRESULT GetThumbnail([in] UINT cx, [out] HBITMAP *phbmp, [out] WTS_ALPHATYPE *pdwAlpha);
  }
  
-+_Win32_AnnotateInterface_(IThumbnailSettings, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IThumbnailSettings => SupportedOSPlatform(\"windows8.0\") */")
  [
      uuid(F4376F00-BEF5-4d45-80F3-1E023BBF1209),
  ]
@@ -43,7 +43,7 @@ index 6ff74327..d33e7b2d 100644
      HRESULT SetContext([in] WTS_CONTEXTFLAGS dwContext);
  }
  
-+_Win32_AnnotateInterface_(IThumbnailCachePrimer, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IThumbnailCachePrimer => SupportedOSPlatform(\"windows8.0\") */")
  [
      uuid(0f03f8fe-2b26-46f0-965a-212aa8d66b76),
      object,

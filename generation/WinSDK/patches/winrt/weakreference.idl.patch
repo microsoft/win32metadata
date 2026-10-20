@@ -1,3 +1,5 @@
+diff --git a/winrt/weakreference.idl b/winrt/weakreference.idl
+index e2a3c552..8790edb7 100644
 --- a/winrt/weakreference.idl
 +++ b/winrt/weakreference.idl
 @@ -1,14 +1,17 @@
@@ -14,29 +16,26 @@
  import "inspectable.idl";
  #endif
  
-+_Win32_AnnotateInterface_(IWeakReference, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWeakReference => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(00000037-0000-0000-C000-000000000046),
-@@ -26,7 +29,7 @@
- cpp_quote("        public:")
+@@ -27,6 +30,7 @@ cpp_quote("        public:")
  cpp_quote("            virtual HRESULT STDMETHODCALLTYPE Resolve( ")
  cpp_quote("                /* [in] */ __RPC__in REFIID riid,")
--cpp_quote("                /* [iid_is][out] */ __RPC__deref_out IInspectable **objectReference) = 0;")
-+cpp_quote("                /* [iid_is][out] */ _Win32_ComOutPtr_(true) __RPC__deref_out IInspectable **objectReference) = 0;")
+ cpp_quote("                /* [iid_is][out] */ __RPC__deref_out IInspectable **objectReference) = 0;")
++cpp_quote("/* Win32Metadata: parameter ::IWeakReference::Resolve::objectReference => ComOutPtr(true) */")
  cpp_quote("")
  cpp_quote("            template <typename T>")
  cpp_quote("            _At_(*objectReference, _When_(FAILED(return), _Null_))")
-@@ -41,10 +44,11 @@
- cpp_quote("#else")
- 
+@@ -43,8 +47,10 @@ cpp_quote("#else")
     HRESULT Resolve([in] REFIID riid, 
--                   [out, retval, iid_is(riid)] IInspectable **objectReference);
-+                   [out, retval, iid_is(riid), annotation("_Win32_ComOutPtr_(true)")] IInspectable **objectReference);
+                    [out, retval, iid_is(riid)] IInspectable **objectReference);
  }
++cpp_quote("/* Win32Metadata: parameter ::IWeakReference::Resolve::objectReference => ComOutPtr(true) */")
  cpp_quote("#endif")
  
-+_Win32_AnnotateInterface_(IWeakReferenceSource, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWeakReferenceSource => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(00000038-0000-0000-C000-000000000046),

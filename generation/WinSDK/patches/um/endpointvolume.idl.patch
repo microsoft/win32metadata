@@ -1,5 +1,5 @@
 diff --git a/um/endpointvolume.idl b/um/endpointvolume.idl
-index 3f5b3627..1daf6e24 100644
+index 3f5b3627..fff6ee31 100644
 --- a/um/endpointvolume.idl
 +++ b/um/endpointvolume.idl
 @@ -1,3 +1,4 @@
@@ -11,7 +11,7 @@ index 3f5b3627..1daf6e24 100644
  //  Callback interface to be implemented by clients to respond to changes in the volume/mute
  // state of an endpoint.
  //
-+_Win32_AnnotateInterface_(IAudioEndpointVolumeCallback, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IAudioEndpointVolumeCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      local,
@@ -19,7 +19,7 @@ index 3f5b3627..1daf6e24 100644
  //
  //  Volume control interface for a device endpoint.
  //
-+_Win32_AnnotateInterface_(IAudioEndpointVolume, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IAudioEndpointVolume => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      local,
@@ -27,7 +27,7 @@ index 3f5b3627..1daf6e24 100644
  //
  //  Volume control interface for a device endpoint.
  //
-+_Win32_AnnotateInterface_(IAudioEndpointVolumeEx, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IAudioEndpointVolumeEx => SupportedOSPlatform(\"windows6.1\") */")
  [
  object,
  local,
@@ -35,7 +35,7 @@ index 3f5b3627..1daf6e24 100644
  //
  //  Volume control interface for a device endpoint.
  //
-+_Win32_AnnotateInterface_(IAudioMeterInformation, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IAudioMeterInformation => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      local,

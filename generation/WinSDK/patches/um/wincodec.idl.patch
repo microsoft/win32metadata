@@ -1,5 +1,5 @@
 diff --git a/um/wincodec.idl b/um/wincodec.idl
-index 0fe8f083..6fa3ce6a 100644
+index 0fe8f083..b21f925f 100644
 --- a/um/wincodec.idl
 +++ b/um/wincodec.idl
 @@ -15,6 +15,10 @@ Revision History:
@@ -17,7 +17,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICPalette -  Palette
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICPalette, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICPalette => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000040-a8f2-4877-ba0a-fd2b6645fb94)
@@ -25,7 +25,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapSource -  Source bitmap/imaging functionality
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapSource, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapSource => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000120-a8f2-4877-ba0a-fd2b6645fb94)
@@ -33,14 +33,14 @@ index 0fe8f083..6fa3ce6a 100644
          [out, size_is(cbBufferSize)] BYTE *pbBuffer
          );
  };
-+_Win32_AnnotateParameter_(IWICBitmapSource::CopyPixels, prc, _Win32_Optional_(true))
++cpp_quote("/* Win32Metadata: parameter ::IWICBitmapSource::CopyPixels::prc => Optional(true) */")
  
  
  /*=========================================================================*\
      IWICFormatConverter
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICFormatConverter, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICFormatConverter => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000301-a8f2-4877-ba0a-fd2b6645fb94)
@@ -48,7 +48,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICPlanarFormatConverter
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICPlanarFormatConverter, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWICPlanarFormatConverter => SupportedOSPlatform(\"windows8.1\") */")
  [
     object,
     uuid(BEBEE9CB-83B0-4DCC-8132-B0AAA55EAC96)
@@ -56,7 +56,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapScaler
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapScaler, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapScaler => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000302-a8f2-4877-ba0a-fd2b6645fb94)
@@ -64,7 +64,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapClipper
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapClipper, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapClipper => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(E4FBCF03-223D-4e81-9333-D635556DD1B5)
@@ -72,7 +72,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapFlipRotator
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapFlipRotator, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapFlipRotator => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(5009834F-2D6A-41ce-9E1B-17C5AFF7A782)
@@ -80,7 +80,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapLock - WIC Lock object for bitmaps.
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapLock, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapLock => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000123-a8f2-4877-ba0a-fd2b6645fb94)
@@ -88,7 +88,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmap - WIC Bitmap cache interface
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmap, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmap => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000121-a8f2-4877-ba0a-fd2b6645fb94)
@@ -96,7 +96,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICColorContext - WIC color context
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICColorContext, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICColorContext => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(3C613A02-34B2-44ea-9A7C-45AEA9C6FD6D)
@@ -104,7 +104,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICColorTransform - WIC color transform
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICColorTransform, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICColorTransform => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(B66F034F-D0E2-40ab-B436-6DE39E321A94)
@@ -112,7 +112,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICFastMetadataEncoder
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICFastMetadataEncoder, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICFastMetadataEncoder => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(B84E2C09-78C9-4AC4-8BD3-524AE1663A2F)
@@ -120,7 +120,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICStream - WIC Bitmap Stream
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICStream, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICStream => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(135FF860-22B7-4ddf-B0F6-218F4F299A43)
@@ -128,7 +128,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICEnumMetadataItem
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICEnumMetadataItem, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICEnumMetadataItem => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(DC2BB46D-3F07-481E-8625-220C4AEDBB33)
@@ -136,7 +136,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICMetadataQueryReader - Metadata Query Reader
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICMetadataQueryReader, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICMetadataQueryReader => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(30989668-E1C9-4597-B395-458EEDB808DF)
@@ -144,7 +144,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICMetadataQueryWriter - Metadata Query Writer
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICMetadataQueryWriter, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICMetadataQueryWriter => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(A721791A-0DEF-4d06-BD91-2118BF1DB10B)
@@ -152,7 +152,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapFrameEncode -  Bitmap Frame Encoder
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapFrameEncode, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapFrameEncode => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(00000105-a8f2-4877-ba0a-fd2b6645fb94)
@@ -160,7 +160,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICPlanarBitmapFrameEncode
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICPlanarBitmapFrameEncode, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWICPlanarBitmapFrameEncode => SupportedOSPlatform(\"windows8.1\") */")
  [
     object,
     uuid(F928B7B8-2221-40C1-B72E-7E82F1974D1A)
@@ -168,7 +168,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICImageEncoder -  ID2D1Image Encoder 
  \*=========================================================================*/
  cpp_quote("#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8) || defined(_WIN7_PLATFORM_UPDATE)")
-+_Win32_AnnotateInterface_(IWICImageEncoder, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWICImageEncoder => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(04C75BF8-3CE1-473B-ACC5-3CC4F5E94999),
@@ -176,7 +176,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapDecoder -  Bitmap Decoder
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapDecoder, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapDecoder => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(9EDDE9E7-8DEE-47ea-99DF-E6FAF2ED44BF)
@@ -184,7 +184,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapSourceTransform
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapSourceTransform, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapSourceTransform => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(3B16811B-6A43-4ec9-B713-3D5A0C13B940)
@@ -192,7 +192,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICPlanarBitmapSourceTransform
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICPlanarBitmapSourceTransform, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWICPlanarBitmapSourceTransform => SupportedOSPlatform(\"windows8.1\") */")
  [
     object,
     uuid(3AFF9CCE-BE95-4303-B927-E7D16FF4A613)
@@ -200,7 +200,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapFrameDecode -  Bitmap Decoder
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapFrameDecode, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapFrameDecode => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(3B16811B-6A43-4ec9-A813-3D930C13B940)
@@ -208,7 +208,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICProgressiveLevelControl -  Progressive Decoding
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICProgressiveLevelControl, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWICProgressiveLevelControl => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(DAAC296F-7AA5-4dbf-8D15-225C5976F891)
@@ -216,7 +216,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICProgressCallback - Cross apartment callback interface
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICProgressCallback, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWICProgressCallback => SupportedOSPlatform(\"windows6.1\") */")
  [
     object,
     uuid(4776F9CD-9517-45FA-BF24-E89C5EC5C60C)
@@ -224,7 +224,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapCodecProgressNotification - Register Progress Notifications
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapCodecProgressNotification, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapCodecProgressNotification => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(64C1024E-C3CF-4462-8078-88C2B11C46D9)
@@ -232,7 +232,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICComponentInfo
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICComponentInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICComponentInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(23BC3F0A-698B-4357-886B-F24D50671334)
@@ -240,7 +240,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICFormatConverterInfo
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICFormatConverterInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICFormatConverterInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(9F34FB65-13F4-4f15-BC57-3726B5E53D9F)
@@ -248,7 +248,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapCodecInfo
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapCodecInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapCodecInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(E87A44C4-B76E-4c47-8B09-298EB12A2714)
@@ -256,7 +256,7 @@ index 0fe8f083..6fa3ce6a 100644
      IWICBitmapEncoderInfo
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapEncoderInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapEncoderInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(94C9B4EE-A09F-4f92-8A1E-4A9BCE7E76FB)
@@ -264,14 +264,14 @@ index 0fe8f083..6fa3ce6a 100644
          [out] IWICBitmapEncoder **ppIBitmapEncoder
          );
  };
-+_Win32_AnnotateParameter_(IWICBitmapEncoderInfo::CreateInstance, ppIBitmapEncoder, _Win32_ComOutPtr_(true))
++cpp_quote("/* Win32Metadata: parameter ::IWICBitmapEncoderInfo::CreateInstance::ppIBitmapEncoder => ComOutPtr(true) */")
  
  
  /*=========================================================================*\
      IWICBitmapDecoderInfo
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICBitmapDecoderInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICBitmapDecoderInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(D8CD007F-D08F-4191-9BFC-236EA7F0E4B5)
@@ -279,14 +279,14 @@ index 0fe8f083..6fa3ce6a 100644
          [out] IWICBitmapDecoder **ppIBitmapDecoder
          );
  };
-+_Win32_AnnotateParameter_(IWICBitmapDecoderInfo::CreateInstance, ppIBitmapDecoder, _Win32_ComOutPtr_(true))
++cpp_quote("/* Win32Metadata: parameter ::IWICBitmapDecoderInfo::CreateInstance::ppIBitmapDecoder => ComOutPtr(true) */")
  
  
  /*=========================================================================*\
      IWICPixelFormatInfo
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICPixelFormatInfo, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICPixelFormatInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(E8EDA601-3D48-431a-AB44-69059BE88BBE)
@@ -294,142 +294,131 @@ index 0fe8f083..6fa3ce6a 100644
      IWICPixelFormatInfo2
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICPixelFormatInfo2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IWICPixelFormatInfo2 => SupportedOSPlatform(\"windows6.1\") */")
  [
     object,
     uuid(A9DB33A2-AF5F-43C7-B679-74F5984B5AA4)
-@@ -2543,6 +2583,7 @@ interface IWICPixelFormatInfo2 : IWICPixelFormatInfo
+@@ -2543,6 +2583,8 @@ interface IWICPixelFormatInfo2 : IWICPixelFormatInfo
      IWICImagingFactory
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICImagingFactory, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICImagingFactory => SupportedOSPlatform(\"windows5.1.2600\") */")
++cpp_quote("/* Win32Metadata: parameter ::IWICImagingFactory::CreateDecoderFromFilename::dwDesiredAccess => AssociatedEnum(GENERIC_ACCESS_RIGHTS) */")
  [
     object,
     uuid(ec5ec8a9-c395-4314-9c77-54d7a935ff70)
-@@ -2552,7 +2593,7 @@ interface IWICImagingFactory : IUnknown
-     HRESULT CreateDecoderFromFilename(
-         [in] LPCWSTR wzFilename,
-         [in, unique] const GUID *pguidVendor,
--        [in]  DWORD dwDesiredAccess,
-+        [annotation("_Win32_AssociatedEnum_(GENERIC_ACCESS_RIGHTS)")] [in]  DWORD dwDesiredAccess,
-         [in] WICDecodeOptions metadataOptions,
-         [out, retval] IWICBitmapDecoder **ppIDecoder
-         );
-@@ -2695,11 +2736,13 @@ interface IWICImagingFactory : IUnknown
+@@ -2695,11 +2737,13 @@ interface IWICImagingFactory : IUnknown
          [out] IWICMetadataQueryWriter **ppIQueryWriter
          );
  };
-+_Win32_AnnotateParameter_(IWICImagingFactory::CreateDecoderFromFilename, pguidVendor, _Win32_Optional_(true))
++cpp_quote("/* Win32Metadata: parameter ::IWICImagingFactory::CreateDecoderFromFilename::pguidVendor => Optional(true) */")
  
  /*=========================================================================*\
      IWICImagingFactory2
  \*=========================================================================*/
  cpp_quote("#if (_WIN32_WINNT >= _WIN32_WINNT_WIN8) || defined(_WIN7_PLATFORM_UPDATE)")
-+_Win32_AnnotateInterface_(IWICImagingFactory2, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IWICImagingFactory2 => SupportedOSPlatform(\"windows8.0\") */")
  [
     object,
     uuid(7B816B45-1996-4476-B132-DE9E247C8AF0),
-@@ -2732,13 +2775,13 @@ cpp_quote("#endif")
-     APIs
+@@ -2733,12 +2777,14 @@ cpp_quote("#endif")
  \*=========================================================================*/
  
--cpp_quote("HRESULT WINAPI WICConvertBitmapSource(" )
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICConvertBitmapSource(" )
+ cpp_quote("HRESULT WINAPI WICConvertBitmapSource(" )
++cpp_quote("/* Win32Metadata: function ::WICConvertBitmapSource => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("     _In_ REFWICPixelFormatGUID dstFormat, // Destination pixel format" )
  cpp_quote("     _In_ IWICBitmapSource  *pISrc,    // Source bitmap" )
  cpp_quote("     _Outptr_ IWICBitmapSource **ppIDst   // Destination bitmap, a copy or addrefed source" )
  cpp_quote("     );" )
  
--cpp_quote("HRESULT WINAPI WICCreateBitmapFromSection(" )
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICCreateBitmapFromSection(" )
+ cpp_quote("HRESULT WINAPI WICCreateBitmapFromSection(" )
++cpp_quote("/* Win32Metadata: function ::WICCreateBitmapFromSection => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("     _In_ UINT width," )
  cpp_quote("     _In_ UINT height," )
  cpp_quote("     _In_ REFWICPixelFormatGUID pixelFormat," )
-@@ -2748,7 +2791,7 @@ cpp_quote("     _In_ UINT offset," )
- cpp_quote("     _Outptr_ IWICBitmap **ppIBitmap" )
+@@ -2749,6 +2795,7 @@ cpp_quote("     _Outptr_ IWICBitmap **ppIBitmap" )
  cpp_quote("     );" )
  
--cpp_quote("HRESULT WINAPI WICCreateBitmapFromSectionEx(" )
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_Windows7_ WICCreateBitmapFromSectionEx(" )
+ cpp_quote("HRESULT WINAPI WICCreateBitmapFromSectionEx(" )
++cpp_quote("/* Win32Metadata: function ::WICCreateBitmapFromSectionEx => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote("     _In_ UINT width," )
  cpp_quote("     _In_ UINT height," )
  cpp_quote("     _In_ REFWICPixelFormatGUID pixelFormat," )
-@@ -2759,19 +2802,19 @@ cpp_quote("     _In_ WICSectionAccessLevel desiredAccessLevel," )
- cpp_quote("     _Outptr_ IWICBitmap **ppIBitmap" )
+@@ -2760,6 +2807,7 @@ cpp_quote("     _Outptr_ IWICBitmap **ppIBitmap" )
  cpp_quote("     );" )
  
--cpp_quote("HRESULT WINAPI WICMapGuidToShortName(")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMapGuidToShortName(")
+ cpp_quote("HRESULT WINAPI WICMapGuidToShortName(")
++cpp_quote("/* Win32Metadata: function ::WICMapGuidToShortName => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("    _In_ REFGUID guid,")
  cpp_quote("    _In_ UINT cchName,")
  cpp_quote("    _Inout_updates_opt_(cchName) WCHAR *wzName,")
- cpp_quote("    _Out_ UINT *pcchActual")
+@@ -2767,11 +2815,13 @@ cpp_quote("    _Out_ UINT *pcchActual")
  cpp_quote("   );")
  
--cpp_quote("HRESULT WINAPI WICMapShortNameToGuid(")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMapShortNameToGuid(")
+ cpp_quote("HRESULT WINAPI WICMapShortNameToGuid(")
++cpp_quote("/* Win32Metadata: function ::WICMapShortNameToGuid => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("    _In_ PCWSTR wzName,")
  cpp_quote("    _Out_ GUID *pguid")
  cpp_quote("   );")
  
--cpp_quote("HRESULT WINAPI WICMapSchemaToName(")
-+cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMapSchemaToName(")
+ cpp_quote("HRESULT WINAPI WICMapSchemaToName(")
++cpp_quote("/* Win32Metadata: function ::WICMapSchemaToName => SupportedOSPlatform(\"windows5.1.2600\") */")
  cpp_quote("    _In_ REFGUID guidMetadataFormat,")
  cpp_quote("    _In_ LPWSTR pwzSchema,")
  cpp_quote("    _In_ UINT cchName,")
-@@ -3019,6 +3062,7 @@ cpp_quote("#define WICRawChangeNotification_ToneCurve                  0x0000080
+@@ -3019,6 +3069,7 @@ cpp_quote("#define WICRawChangeNotification_ToneCurve                  0x0000080
  cpp_quote("#define WICRawChangeNotification_Rotation                   0x00001000")
  cpp_quote("#define WICRawChangeNotification_RenderMode                 0x00002000")
  
-+_Win32_AnnotateInterface_(IWICDevelopRawNotificationCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICDevelopRawNotificationCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(95c75a6e-3e8c-4ec2-85a8-aebcc551e59b)
-@@ -3038,6 +3082,7 @@ interface IWICDevelopRawNotificationCallback : IUnknown
+@@ -3038,6 +3089,7 @@ interface IWICDevelopRawNotificationCallback : IUnknown
      IWICDevelopRaw -  Raw Develop
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICDevelopRaw, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IWICDevelopRaw => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
     object,
     uuid(fbec5e44-f7be-4b65-b7f8-c0c81fef026d)
-@@ -3308,6 +3353,7 @@ typedef [public] struct WICDdsParameters
+@@ -3308,6 +3360,7 @@ typedef [public] struct WICDdsParameters
      IWICDdsDecoder
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICDdsDecoder, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWICDdsDecoder => SupportedOSPlatform(\"windows8.1\") */")
  [
     object,
     uuid(409cd537-8532-40cb-9774-e2feb2df4e9c)
-@@ -3330,6 +3376,7 @@ interface IWICDdsDecoder : IUnknown
+@@ -3330,6 +3383,7 @@ interface IWICDdsDecoder : IUnknown
      IWICDdsEncoder
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICDdsEncoder, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWICDdsEncoder => SupportedOSPlatform(\"windows8.1\") */")
  [
     object,
     uuid(5cacdb4c-407e-41b3-b936-d0f010cd6732)]
-@@ -3367,6 +3414,7 @@ typedef [public] struct WICDdsFormatInfo
+@@ -3367,6 +3421,7 @@ typedef [public] struct WICDdsFormatInfo
      IWICDdsFrameDecode - raw DDS data access
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICDdsFrameDecode, _Win32_SupportedOS_Windows81_)
++cpp_quote("/* Win32Metadata: interface ::IWICDdsFrameDecode => SupportedOSPlatform(\"windows8.1\") */")
  [
     object,
     uuid(3d4c0c61-18a4-41e4-bd80-481a4fc9f464)
-@@ -3394,6 +3442,7 @@ interface IWICDdsFrameDecode : IUnknown
+@@ -3394,6 +3449,7 @@ interface IWICDdsFrameDecode : IUnknown
      IWICJpegFrameDecode
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICJpegFrameDecode, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IWICJpegFrameDecode => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
     object,
     uuid(8939F66E-C46A-4c21-A9D1-98B327CE1679)
-@@ -3458,6 +3507,7 @@ interface IWICJpegFrameDecode : IUnknown
+@@ -3458,6 +3514,7 @@ interface IWICJpegFrameDecode : IUnknown
      IWICJpegFrameEncode
  \*=========================================================================*/
  
-+_Win32_AnnotateInterface_(IWICJpegFrameEncode, _Win32_SupportedOS_10240_)
++cpp_quote("/* Win32Metadata: interface ::IWICJpegFrameEncode => SupportedOSPlatform(\"windows10.0.10240\") */")
  [
     object,
     uuid(2F0C601F-D2C6-468C-ABFA-49495D983ED1)

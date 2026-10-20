@@ -1,5 +1,5 @@
 diff --git a/um/imapi2fs.idl b/um/imapi2fs.idl
-index bb565ae2..c6235b55 100644
+index bb565ae2..6eb3f533 100644
 --- a/um/imapi2fs.idl
 +++ b/um/imapi2fs.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index bb565ae2..c6235b55 100644
      PlatformEFI = 0xEF,
  } PlatformId;
  
-+_Win32_AnnotateInterface_(IBootOptions, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBootOptions => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, nonextensible, oleautomation,
@@ -22,7 +22,7 @@ index bb565ae2..c6235b55 100644
  
  };
  
-+_Win32_AnnotateInterface_(IProgressItem, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IProgressItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, nonextensible, oleautomation,
@@ -30,7 +30,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  BlockCount([out,retval] ULONG *blocks);
  };
  
-+_Win32_AnnotateInterface_(IEnumProgressItems, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumProgressItems => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      uuid(2C941FD6-975B-59BE-A960-9A2A262853A5),
@@ -38,7 +38,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  Clone([out] IEnumProgressItems **ppEnum );
  };
  
-+_Win32_AnnotateInterface_(IProgressItems, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IProgressItems => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, nonextensible, oleautomation,
@@ -46,7 +46,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  EnumProgressItems([out,retval] IEnumProgressItems **NewEnum );
  };
  
-+_Win32_AnnotateInterface_(IFileSystemImageResult, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImageResult => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -54,7 +54,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  DiscId([out,retval] BSTR *pVal);
  };
  
-+_Win32_AnnotateInterface_(IFileSystemImageResult2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImageResult2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation, 
@@ -62,7 +62,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  ModifiedBlocks([out,ref,retval] IBlockRangeList **pVal);
  }
  
-+_Win32_AnnotateInterface_(IFsiItem, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFsiItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -70,7 +70,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  FileSystemPath([in] FsiFileSystems fileSystem, [out,retval] BSTR *pVal );
  };
  
-+_Win32_AnnotateInterface_(IEnumFsiItems, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumFsiItems => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      uuid(2C941FDA-975B-59BE-A960-9A2A262853A5),
@@ -78,7 +78,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  Clone([out] IEnumFsiItems **ppEnum );
  };
  
-+_Win32_AnnotateInterface_(IFsiFileItem, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFsiFileItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -86,7 +86,7 @@ index bb565ae2..c6235b55 100644
  // Forward declaration for interface IFsiNamedStreams
  interface IFsiNamedStreams;
  
-+_Win32_AnnotateInterface_(IFsiFileItem2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFsiFileItem2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -94,7 +94,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  IsRealTime([in] VARIANT_BOOL newVal);
  };
  
-+_Win32_AnnotateInterface_(IFsiNamedStreams, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFsiNamedStreams => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation, nonextensible,
@@ -102,7 +102,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  EnumNamedStreams([out,ref,retval] IEnumFsiItems **NewEnum);
  }
  
-+_Win32_AnnotateInterface_(IFsiDirectoryItem, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFsiDirectoryItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -110,7 +110,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  RemoveTree([in] BSTR path);
  };
  
-+_Win32_AnnotateInterface_(IFsiDirectoryItem2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFsiDirectoryItem2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -118,7 +118,7 @@ index bb565ae2..c6235b55 100644
                                       [in] VARIANT_BOOL includeBaseDirectory);
  };
  
-+_Win32_AnnotateInterface_(IFileSystemImage, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImage => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -126,7 +126,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  MultisessionInterfaces([in] SAFEARRAY(VARIANT) newVal);
  };
  
-+_Win32_AnnotateInterface_(IFileSystemImage2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImage2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -134,7 +134,7 @@ index bb565ae2..c6235b55 100644
      HRESULT  BootImageOptionsArray([in] SAFEARRAY(VARIANT) newVal);
  }
  
-+_Win32_AnnotateInterface_(IFileSystemImage3, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImage3 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, pointer_default(unique),
      dual, oleautomation,
@@ -142,7 +142,7 @@ index bb565ae2..c6235b55 100644
  ////////////////////////////////////////////////////////////////////////////////
  
  cpp_quote("#define DISPID_DFILESYSTEMIMAGEEVENTS_UPDATE 0x100")
-+_Win32_AnnotateInterface_(DFileSystemImageEvents, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::DFileSystemImageEvents => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, nonextensible, 
      oleautomation,
@@ -150,7 +150,7 @@ index bb565ae2..c6235b55 100644
  }
  
  cpp_quote("#define DISPID_DFILESYSTEMIMAGEIMPORTEVENTS_UPDATEIMPORT 0x101")
-+_Win32_AnnotateInterface_(DFileSystemImageImportEvents, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::DFileSystemImageImportEvents => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object, nonextensible, 
      oleautomation,
@@ -158,7 +158,7 @@ index bb565ae2..c6235b55 100644
                           [in] LONG totalFileItems);
  }
  
-+_Win32_AnnotateInterface_(IIsoImageManager, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IIsoImageManager => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6CA38BE5-FBBB-4800-95A1-A438865EB0D4),

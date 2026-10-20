@@ -1,5 +1,5 @@
 diff --git a/um/wsdhost.idl b/um/wsdhost.idl
-index 95ea72e0..81e4abf8 100644
+index 95ea72e0..a8bb2136 100644
 --- a/um/wsdhost.idl
 +++ b/um/wsdhost.idl
 @@ -11,6 +11,7 @@
@@ -10,52 +10,50 @@ index 95ea72e0..81e4abf8 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -35,13 +36,13 @@ interface IWSDDeviceHostNotify;
- interface IWSDServiceMessaging;
+@@ -36,12 +37,14 @@ interface IWSDServiceMessaging;
  
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDeviceHost(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateDeviceHost(")
+ cpp_quote("WSDCreateDeviceHost(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDeviceHost => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    _In_ LPCWSTR pszLocalId,")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _Outptr_ IWSDDeviceHost** ppDeviceHost);")
  
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDeviceHostAdvanced(")
-+cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateDeviceHostAdvanced(")
+ cpp_quote("WSDCreateDeviceHostAdvanced(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDeviceHostAdvanced => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("    _In_ LPCWSTR pszLocalId,")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _In_reads_opt_(dwHostAddressCount) IWSDAddress** ppHostAddresses,")
-@@ -50,7 +51,7 @@ cpp_quote("    _Outptr_ IWSDDeviceHost** ppDeviceHost);")
- 
+@@ -51,6 +54,7 @@ cpp_quote("    _Outptr_ IWSDDeviceHost** ppDeviceHost);")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
  cpp_quote("HRESULT WINAPI")
--cpp_quote("WSDCreateDeviceHost2(")
-+cpp_quote("_Win32_SupportedOS_Windows7_ WSDCreateDeviceHost2(")
+ cpp_quote("WSDCreateDeviceHost2(")
++cpp_quote("/* Win32Metadata: function ::WSDCreateDeviceHost2 => SupportedOSPlatform(\"windows6.1\") */")
  cpp_quote("    _In_ LPCWSTR pszLocalId,")
  cpp_quote("    IWSDXMLContext* pContext,")
  cpp_quote("    _In_reads_opt_(dwConfigParamCount) WSD_CONFIG_PARAM* pConfigParams,")
-@@ -62,6 +63,7 @@ cpp_quote("#endif")
+@@ -62,6 +66,7 @@ cpp_quote("#endif")
  //  IWSDDeviceHost Interface
  //  Description: Host-side representation of devices
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDDeviceHost, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDDeviceHost => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(917fe891-3d13-4138-9809-934c8abeb12c),
-@@ -128,6 +130,7 @@ interface IWSDDeviceHost : IUnknown
+@@ -128,6 +133,7 @@ interface IWSDDeviceHost : IUnknown
  //  IWSDDeviceHostNotify Interface
  //  Description: Provides device-related notifications for devices
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDDeviceHostNotify, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDDeviceHostNotify => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(b5bee9f9-eeda-41fe-96f7-f45e14990fb0),
-@@ -149,6 +152,7 @@ midl_pragma warning(disable:2495)
+@@ -149,6 +155,7 @@ midl_pragma warning(disable:2495)
  //  Description: Provides response channels for dispatched service messages.
  //               This interface is used only by generated stubs.
  //--------------------------------------------------------------------------
-+_Win32_AnnotateInterface_(IWSDServiceMessaging, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IWSDServiceMessaging => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(94974cf4-0cab-460d-a3f6-7a0ad623c0e6),

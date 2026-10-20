@@ -1,5 +1,5 @@
 diff --git a/um/vmr9.idl b/um/vmr9.idl
-index 5b839f4d..a860fb76 100644
+index 5b839f4d..7be27694 100644
 --- a/um/vmr9.idl
 +++ b/um/vmr9.idl
 @@ -5,6 +5,7 @@
@@ -14,7 +14,7 @@ index 5b839f4d..a860fb76 100644
      DWORD                   dwReserved2;
  } VMR9PresentationInfo;
  
-+_Win32_AnnotateInterface_(IVMRImagePresenter9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRImagePresenter9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -22,7 +22,7 @@ index 5b839f4d..a860fb76 100644
      SIZE                    szNativeSize;
  } VMR9AllocationInfo;
  
-+_Win32_AnnotateInterface_(IVMRSurfaceAllocator9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRSurfaceAllocator9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -30,7 +30,7 @@ index 5b839f4d..a860fb76 100644
          );
  };
  
-+_Win32_AnnotateInterface_(IVMRSurfaceAllocatorEx9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRSurfaceAllocatorEx9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -38,7 +38,7 @@ index 5b839f4d..a860fb76 100644
  // IVMRSurfaceAllocatorNotify9
  //
  //=====================================================================
-+_Win32_AnnotateInterface_(IVMRSurfaceAllocatorNotify9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRSurfaceAllocatorNotify9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -46,7 +46,7 @@ index 5b839f4d..a860fb76 100644
      VMR9ARMode_LetterBox
  } VMR9AspectRatioMode;
  
-+_Win32_AnnotateInterface_(IVMRWindowlessControl9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRWindowlessControl9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -54,7 +54,7 @@ index 5b839f4d..a860fb76 100644
  } VMR9ProcAmpControlRange;
  
  
-+_Win32_AnnotateInterface_(IVMRMixerControl9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRMixerControl9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -62,7 +62,7 @@ index 5b839f4d..a860fb76 100644
      VMR9AlphaBitmap_FilterMode                  = 0x00000020
  } VMR9AlphaBitmapFlags;
  
-+_Win32_AnnotateInterface_(IVMRMixerBitmap9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRMixerBitmap9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -70,7 +70,7 @@ index 5b839f4d..a860fb76 100644
  // IVMRSurface9
  //
  //=====================================================================
-+_Win32_AnnotateInterface_(IVMRSurface9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRSurface9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -78,7 +78,7 @@ index 5b839f4d..a860fb76 100644
      RenderPrefs9_DoNotRenderBorder           = 0x00000001, // app paints color keys
      RenderPrefs9_Mask                        = 0x00000001, // OR of all above flags
  } VMR9RenderPrefs;
-+_Win32_AnnotateInterface_(IVMRImagePresenterConfig9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRImagePresenterConfig9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,
@@ -86,7 +86,7 @@ index 5b839f4d..a860fb76 100644
  // IVMRVideoStreamControl9
  //
  //=====================================================================
-+_Win32_AnnotateInterface_(IVMRVideoStreamControl9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRVideoStreamControl9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -94,7 +94,7 @@ index 5b839f4d..a860fb76 100644
      VMR9Mode_Mask                            = 0x00000007, // OR of all above flags
  } VMR9Mode;
  
-+_Win32_AnnotateInterface_(IVMRFilterConfig9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRFilterConfig9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -102,7 +102,7 @@ index 5b839f4d..a860fb76 100644
  // IVMRAspectRatioControl9
  //
  //=====================================================================
-+_Win32_AnnotateInterface_(IVMRAspectRatioControl9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRAspectRatioControl9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -110,7 +110,7 @@ index 5b839f4d..a860fb76 100644
      //
  } VMR9MonitorInfo;
  
-+_Win32_AnnotateInterface_(IVMRMonitorConfig9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRMonitorConfig9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -118,7 +118,7 @@ index 5b839f4d..a860fb76 100644
      VMR9DeinterlaceTech DeinterlaceTechnology;
  } VMR9DeinterlaceCaps;
  
-+_Win32_AnnotateInterface_(IVMRDeinterlaceControl9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRDeinterlaceControl9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      local,
@@ -126,7 +126,7 @@ index 5b839f4d..a860fb76 100644
      REFERENCE_TIME              rtEnd;
      VMR9_SampleFormat           SampleFormat;
  } VMR9VideoStreamInfo;
-+_Win32_AnnotateInterface_(IVMRImageCompositor9, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IVMRImageCompositor9 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      local,
      object,

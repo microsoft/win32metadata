@@ -1,5 +1,5 @@
 diff --git a/um/syncmgr.idl b/um/syncmgr.idl
-index 10c046fc..a099160e 100644
+index 10c046fc..742610a9 100644
 --- a/um/syncmgr.idl
 +++ b/um/syncmgr.idl
 @@ -8,6 +8,8 @@
@@ -15,7 +15,7 @@ index 10c046fc..a099160e 100644
  // be unique across all handlers in the system.  For that reason, most handler
  // IDs will be simply string-ized GUIDs.
  //
-+_Win32_AnnotateInterface_(ISyncMgrHandlerCollection, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrHandlerCollection => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(a7f337a3-d20b-45cb-9ed7-87d094ca5045)
@@ -23,7 +23,7 @@ index 10c046fc..a099160e 100644
  //  SYNCMGR_OBJECTID_QueryBeforeDisable
  //      Query the user before disabling the handler.
  //
-+_Win32_AnnotateInterface_(ISyncMgrHandler, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrHandler => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(04ec2e43-ac77-49f9-9b98-0307ef7a72a2)
@@ -31,7 +31,7 @@ index 10c046fc..a099160e 100644
  // changed in the future without requiring handlers to be recompiled.  It also
  // provides type-safe access to the properties.
  //
-+_Win32_AnnotateInterface_(ISyncMgrHandlerInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrHandlerInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(4ff1d798-ecf7-4524-aa81-1e362a0aef3a)
@@ -39,7 +39,7 @@ index 10c046fc..a099160e 100644
  // call QueryInterface() on the ISyncMgrHandler interface to query for the
  // ISyncMgrItemContainer interface.
  //
-+_Win32_AnnotateInterface_(ISyncMgrSyncItemContainer, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSyncItemContainer => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(90701133-be32-4129-a65c-99e616cafff4)
@@ -47,7 +47,7 @@ index 10c046fc..a099160e 100644
  //  SYNCMGR_OBJECTID_QueryBeforeDelete
  //      Query the user before deleting an item.
  //
-+_Win32_AnnotateInterface_(ISyncMgrSyncItem, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSyncItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(b20b24ce-2593-4f04-bd8b-7ad6c45051cd)
@@ -55,7 +55,7 @@ index 10c046fc..a099160e 100644
  // An alternate approach would be to define a single method that returns a
  // structure.
  //
-+_Win32_AnnotateInterface_(ISyncMgrSyncItemInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSyncItemInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e7fd9502-be0c-4464-90a1-2b5277031232)
@@ -63,13 +63,13 @@ index 10c046fc..a099160e 100644
      HRESULT IsEnabled();
      HRESULT IsConnected();
  }
-+_Win32_AnnotateMethod_(ISyncMgrSyncItemInfo::IsConnected, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::ISyncMgrSyncItemInfo::IsConnected => PreserveResult */")
  
  //
  // The IEnumSyncMgrSyncItems interface simply enumerates the sync item objects
  // managed by the handler.
  //
-+_Win32_AnnotateInterface_(IEnumSyncMgrSyncItems, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumSyncMgrSyncItems => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(54b3abf3-f085-4181-b546-e29c403c726b)
@@ -77,7 +77,7 @@ index 10c046fc..a099160e 100644
  // Note that the ISyncMgrSyncCallback interface should NOT be created in the
  // handler and then passed to the external process.
  //
-+_Win32_AnnotateInterface_(ISyncMgrSessionCreator, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSessionCreator => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(17f48517-f305-4321-a08d-b25a834918fd)
@@ -85,7 +85,7 @@ index 10c046fc..a099160e 100644
  // The object implementing this interface will also implement the
  // ISyncMgrEvents interface.
  //
-+_Win32_AnnotateInterface_(ISyncMgrSyncCallback, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSyncCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(884ccd87-b139-4937-a4ba-4f8e19513fbe)
@@ -93,7 +93,7 @@ index 10c046fc..a099160e 100644
  //  SYNCMGR_OBJECTID_QueryBeforeDelete
  //      Query the user before deleting an item.
  //
-+_Win32_AnnotateInterface_(ISyncMgrUIOperation, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrUIOperation => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(fc7cfa47-dfe1-45b5-a049-8cfd82bec271)
@@ -101,7 +101,7 @@ index 10c046fc..a099160e 100644
  {
      HRESULT Run([in, unique] HWND hwndOwner);
  }
-+_Win32_AnnotateMethod_(ISyncMgrUIOperation::Run, _Win32_PreserveResult_)
++cpp_quote("/* Win32Metadata: method ::ISyncMgrUIOperation::Run => PreserveResult */")
  
  //
  // The ISyncMgrEventLinkUIOperation interface will be called when event links
@@ -109,7 +109,7 @@ index 10c046fc..a099160e 100644
  // on the ISyncMgrHandler specifying SYNCMGR_OBJECTID_EventLinkClick for the
  // object ID.
  //
-+_Win32_AnnotateInterface_(ISyncMgrEventLinkUIOperation, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrEventLinkUIOperation => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(64522e52-848b-4015-89ce-5a36f00b94ff)
@@ -117,7 +117,7 @@ index 10c046fc..a099160e 100644
  // Center calls the GetObject() method on ISyncMgrHandler specifying
  // SYNCMGR_OBJECTID_ShowSchedule for the object ID.
  //
-+_Win32_AnnotateInterface_(ISyncMgrScheduleWizardUIOperation, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrScheduleWizardUIOperation => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(459a6c84-21d2-4ddc-8a53-f023a46066f2)
@@ -125,7 +125,7 @@ index 10c046fc..a099160e 100644
  // Applications calling ISyncMgrControl can pass this interface to get the
  // result of a StartHandlerSync() or StartItemSync() call.
  //
-+_Win32_AnnotateInterface_(ISyncMgrSyncResult, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrSyncResult => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(2b90f17e-5a3e-4b33-bb7f-1bc48056b94d)
@@ -133,7 +133,7 @@ index 10c046fc..a099160e 100644
  // or to properties.  All methods on this interface will not block but will
  // queue the request with Sync Center.
  //
-+_Win32_AnnotateInterface_(ISyncMgrControl, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrControl => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(9B63616C-36B2-46BC-959F-C1593952D19B)
@@ -141,7 +141,7 @@ index 10c046fc..a099160e 100644
  // SYNCMGR_HC_EVENT_STORE flag in the mask returned from its
  // GetCapabilities() method.
  //
-+_Win32_AnnotateInterface_(ISyncMgrEventStore, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrEventStore => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(37e412f9-016e-44c2-81ff-db3add774266)
@@ -149,7 +149,7 @@ index 10c046fc..a099160e 100644
  // the store as well as toretrieve individual events.  The ISyncMgrEvent
  // interface provides the data for the event to Sync Center.
  //
-+_Win32_AnnotateInterface_(ISyncMgrEvent, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrEvent => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(fee0ef8b-46bd-4db4-b7e6-ff2c687313bc)
@@ -157,7 +157,7 @@ index 10c046fc..a099160e 100644
      HRESULT GetContext([out, ref, string] LPWSTR *ppszContext);
  }
  
-+_Win32_AnnotateInterface_(IEnumSyncMgrEvents, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumSyncMgrEvents => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(c81a1d4e-8cf7-4683-80e0-bcae88d677b6)
@@ -165,7 +165,7 @@ index 10c046fc..a099160e 100644
  } SYNCMGR_CONFLICT_ID_INFO, *PSYNCMGR_CONFLICT_ID_INFO;
  
  // ISyncMgrConflictStore
-+_Win32_AnnotateInterface_(ISyncMgrConflictStore, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflictStore => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(cf8fc579-c396-4774-85f1-d908a831156e),
      pointer_default(unique),
@@ -173,7 +173,7 @@ index 10c046fc..a099160e 100644
  };
  
  // IEnumSyncMgrConflict
-+_Win32_AnnotateInterface_(IEnumSyncMgrConflict, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IEnumSyncMgrConflict => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(82705914-dda3-4893-ba99-49de6c8c8036),
      pointer_default(unique),
@@ -181,7 +181,7 @@ index 10c046fc..a099160e 100644
  interface ISyncMgrConflictResolveInfo;
  
  // ISyncMgrConflict
-+_Win32_AnnotateInterface_(ISyncMgrConflict, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflict => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(9c204249-c443-4ba4-85ed-c972681db137),
      pointer_default(unique),
@@ -189,7 +189,7 @@ index 10c046fc..a099160e 100644
  } SYNCMGR_RESOLUTION_FEEDBACK;
  
  // ISyncMgrResolutionHandler
-+_Win32_AnnotateInterface_(ISyncMgrResolutionHandler, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrResolutionHandler => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(40A3D052-8BFF-4c4b-A338-D4A395700DE9),
      pointer_default(unique),
@@ -197,7 +197,7 @@ index 10c046fc..a099160e 100644
  }
  
  // ISyncMgrConflictPresenter
-+_Win32_AnnotateInterface_(ISyncMgrConflictPresenter, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflictPresenter => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(0b4f5353-fd2b-42cd-8763-4779f2d508a3),
      pointer_default(unique),
@@ -205,7 +205,7 @@ index 10c046fc..a099160e 100644
  } SYNCMGR_PRESENTER_CHOICE;
  
  // ISyncMgrConflictResolveInfo
-+_Win32_AnnotateInterface_(ISyncMgrConflictResolveInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflictResolveInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      local,  // don't allow marshaling across threads/processes
@@ -213,32 +213,31 @@ index 10c046fc..a099160e 100644
  }
  
  // ISyncMgrConflictFolder
-+_Win32_AnnotateInterface_(ISyncMgrConflictFolder, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflictFolder => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69),
      pointer_default(unique),
-@@ -1116,7 +1144,7 @@ typedef struct CONFIRM_CONFLICT_ITEM
- } CONFIRM_CONFLICT_ITEM;
+@@ -1117,6 +1145,7 @@ typedef struct CONFIRM_CONFLICT_ITEM
  
  cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE)")
--cpp_quote("__inline void FreeConfirmConflictItem(_Inout_ CONFIRM_CONFLICT_ITEM *pcci)")
-+cpp_quote("__inline void _Win32_SupportedOS_WindowsVista_ FreeConfirmConflictItem(_Inout_ CONFIRM_CONFLICT_ITEM *pcci)")
+ cpp_quote("__inline void FreeConfirmConflictItem(_Inout_ CONFIRM_CONFLICT_ITEM *pcci)")
++cpp_quote("/* Win32Metadata: function ::FreeConfirmConflictItem => SupportedOSPlatform(\"windows6.0.6000\") */")
  cpp_quote("{")
  cpp_quote("    if (pcci->pShellItem)")
  cpp_quote("    {")
-@@ -1137,6 +1165,7 @@ typedef struct CONFIRM_CONFLICT_RESULT_INFO
+@@ -1137,6 +1166,7 @@ typedef struct CONFIRM_CONFLICT_RESULT_INFO
  } CONFIRM_CONFLICT_RESULT_INFO;
  
  // ISyncMgrConflictItems
-+_Win32_AnnotateInterface_(ISyncMgrConflictItems, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflictItems => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(9C7EAD52-8023-4936-A4DB-D2A9A99E436A),
      pointer_default(unique),
-@@ -1152,6 +1181,7 @@ interface ISyncMgrConflictItems : IUnknown
+@@ -1152,6 +1182,7 @@ interface ISyncMgrConflictItems : IUnknown
  }
  
  // ISyncMgrConflictResolutionItems
-+_Win32_AnnotateInterface_(ISyncMgrConflictResolutionItems, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::ISyncMgrConflictResolutionItems => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(458725B9-129D-4135-A998-9CEAFEC27007),
      pointer_default(unique),

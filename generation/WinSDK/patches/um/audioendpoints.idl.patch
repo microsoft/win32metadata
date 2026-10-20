@@ -1,5 +1,5 @@
 diff --git a/um/audioendpoints.idl b/um/audioendpoints.idl
-index f15493d7..c8ff29fd 100644
+index f15493d7..f87d0dae 100644
 --- a/um/audioendpoints.idl
 +++ b/um/audioendpoints.idl
 @@ -15,6 +15,7 @@
@@ -14,7 +14,7 @@ index f15493d7..c8ff29fd 100644
  //  and can be read from the endpoint propertystore using
  //  PKEY_AudioEngine_DeviceFormat
  //
-+_Win32_AnnotateInterface_(IAudioEndpointFormatControl, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IAudioEndpointFormatControl => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      local,

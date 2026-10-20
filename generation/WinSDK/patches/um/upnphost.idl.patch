@@ -1,5 +1,5 @@
 diff --git a/um/upnphost.idl b/um/upnphost.idl
-index 03bb5421..1acc74c2 100644
+index 03bb5421..70b49da2 100644
 --- a/um/upnphost.idl
 +++ b/um/upnphost.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 03bb5421..1acc74c2 100644
  ////////////////////////////////////
  // Interface definitions
  
-+_Win32_AnnotateInterface_(IUPnPEventSink, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPEventSink => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(204810b4-73b2-11d4-bf42-00b0d0118b56),
      pointer_default(unique)
@@ -22,7 +22,7 @@ index 03bb5421..1acc74c2 100644
          [in] VARIANT varsadispidChanges);
  }
  
-+_Win32_AnnotateInterface_(IUPnPEventSource, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPEventSource => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(204810b5-73b2-11d4-bf42-00b0d0118b56),
      pointer_default(unique)
@@ -30,7 +30,7 @@ index 03bb5421..1acc74c2 100644
          [in] IUPnPEventSink * pesSubscriber);
  }
  
-+_Win32_AnnotateInterface_(IUPnPRegistrar, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPRegistrar => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(204810b6-73b2-11d4-bf42-00b0d0118b56),
      pointer_default(unique)
@@ -38,7 +38,7 @@ index 03bb5421..1acc74c2 100644
          [in] BSTR     bstrProviderName);
  }
  
-+_Win32_AnnotateInterface_(IUPnPReregistrar, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPReregistrar => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(204810b7-73b2-11d4-bf42-00b0d0118b56),
      pointer_default(unique)
@@ -46,7 +46,7 @@ index 03bb5421..1acc74c2 100644
          [in] long     nLifeTime);
  }
  
-+_Win32_AnnotateInterface_(IUPnPDeviceControl, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPDeviceControl => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(204810ba-73b2-11d4-bf42-00b0d0118b56),
      pointer_default(unique),
@@ -54,7 +54,7 @@ index 03bb5421..1acc74c2 100644
         [out,retval] BSTR*     bstrHttpResponseHeaders);
  }
  
-+_Win32_AnnotateInterface_(IUPnPDeviceProvider, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPDeviceProvider => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(204810b8-73b2-11d4-bf42-00b0d0118b56),
      pointer_default(unique),
@@ -62,7 +62,7 @@ index 03bb5421..1acc74c2 100644
  }
  
  // IUPnPRemoteEndpointInfo
-+_Win32_AnnotateInterface_(IUPnPRemoteEndpointInfo, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IUPnPRemoteEndpointInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
     uuid(c92eb863-0269-4aff-9c72-75321bba2952),
     pointer_default(unique)

@@ -1,5 +1,5 @@
 diff --git a/um/sdoias.idl b/um/sdoias.idl
-index 0e1ae287..c1cd44e2 100644
+index 0e1ae287..607201c6 100644
 --- a/um/sdoias.idl
 +++ b/um/sdoias.idl
 @@ -9,6 +9,7 @@
@@ -14,7 +14,7 @@ index 0e1ae287..c1cd44e2 100644
     //////////////////////////////////////////////////////////////////////////
     // ISdoMachine - Used to retrieve information from a Machine SDO
     //////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ISdoMachine, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ISdoMachine => SupportedOSPlatform(\"windowsserver2008\") */")
     [
        object,
        uuid(479F6E75-49A2-11d2-8ECA-00C04FC2F519),
@@ -22,7 +22,7 @@ index 0e1ae287..c1cd44e2 100644
     //////////////////////////////////////////////////////////////////////////
     // ISdoServiceControl - Used to control a Service SDO
     //////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ISdoServiceControl, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ISdoServiceControl => SupportedOSPlatform(\"windowsserver2008\") */")
     [
        object,
        uuid(479F6E74-49A2-11d2-8ECA-00C04FC2F519),
@@ -30,7 +30,7 @@ index 0e1ae287..c1cd44e2 100644
     //////////////////////////////////////////////////////////////////////////
     // ISdo - Used to store, retrieve and update SDO information
     //////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ISdo, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ISdo => SupportedOSPlatform(\"windowsserver2008\") */")
     [
        object,
        uuid(56BC53DE-96DB-11D1-BF3F-000000000000),
@@ -38,7 +38,7 @@ index 0e1ae287..c1cd44e2 100644
     //////////////////////////////////////////////////////////////////////////
     // ISdoCollection - Used to manipulate the contents of a collection
     //////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ISdoCollection, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ISdoCollection => SupportedOSPlatform(\"windowsserver2008\") */")
     [
        object,
        uuid(56BC53E2-96DB-11D1-BF3F-000000000000),
@@ -46,7 +46,7 @@ index 0e1ae287..c1cd44e2 100644
     //////////////////////////////////////////////////////////////////////////
     // ISdoDictionaryOld - interface Used to access dictionary contents
     //////////////////////////////////////////////////////////////////////////
-+_Win32_AnnotateInterface_(ISdoDictionaryOld, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ISdoDictionaryOld => SupportedOSPlatform(\"windowsserver2008\") */")
     [
        object,
        uuid(d432e5f4-53d8-11d2-9a3a-00c04fb998ac),

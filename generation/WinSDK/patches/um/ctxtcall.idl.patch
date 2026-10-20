@@ -1,5 +1,5 @@
 diff --git a/um/ctxtcall.idl b/um/ctxtcall.idl
-index 26b52966..6c31c780 100644
+index 26b52966..e1069cd8 100644
 --- a/um/ctxtcall.idl
 +++ b/um/ctxtcall.idl
 @@ -8,6 +8,7 @@
@@ -14,7 +14,7 @@ index 26b52966..6c31c780 100644
  
  
  // IContextCallback interface
-+_Win32_AnnotateInterface_(IContextCallback, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IContextCallback => SupportedOSPlatform(\"windows5.0\") */")
  [
      local,
      object,

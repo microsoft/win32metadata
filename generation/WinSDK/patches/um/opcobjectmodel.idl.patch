@@ -1,5 +1,5 @@
 diff --git a/um/opcobjectmodel.idl b/um/opcobjectmodel.idl
-index a9b20840..cbae7883 100644
+index a9b20840..c4919ed7 100644
 --- a/um/opcobjectmodel.idl
 +++ b/um/opcobjectmodel.idl
 @@ -14,6 +14,8 @@
@@ -15,7 +15,7 @@ index a9b20840..cbae7883 100644
  
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(OPC_WRITE_FLAGS);")
  
-+_Win32_AnnotateInterface_(IOpcPackage, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcPackage => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE70),
@@ -23,7 +23,7 @@ index a9b20840..cbae7883 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IOpcPart, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcPart => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE71),
@@ -31,7 +31,7 @@ index a9b20840..cbae7883 100644
          );    
  }
  
-+_Win32_AnnotateInterface_(IOpcRelationship, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcRelationship => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE72),
@@ -39,7 +39,7 @@ index a9b20840..cbae7883 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IOpcPartSet, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcPartSet => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE73),
@@ -47,7 +47,7 @@ index a9b20840..cbae7883 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IOpcRelationshipSet, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcRelationshipSet => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE74),
@@ -55,7 +55,7 @@ index a9b20840..cbae7883 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IOpcPartEnumerator, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcPartEnumerator => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE75),
@@ -63,7 +63,7 @@ index a9b20840..cbae7883 100644
      HRESULT Clone([out, retval] IOpcPartEnumerator **copy);
  }
  
-+_Win32_AnnotateInterface_(IOpcRelationshipEnumerator, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IOpcRelationshipEnumerator => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(42195949-3B79-4fc8-89C6-FC7FB979EE76),

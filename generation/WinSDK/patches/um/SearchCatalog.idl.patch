@@ -1,3 +1,5 @@
+diff --git a/um/SearchCatalog.idl b/um/SearchCatalog.idl
+index 10f0519b..453b6078 100644
 --- a/um/SearchCatalog.idl
 +++ b/um/SearchCatalog.idl
 @@ -10,6 +10,7 @@
@@ -8,19 +10,19 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -122,6 +123,7 @@
+@@ -122,6 +123,7 @@ typedef enum _CatalogPausedReason {
  
  } CatalogPausedReason;
  
-+_Win32_AnnotateInterface_(ISearchCatalogManager, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchCatalogManager => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF50),
-@@ -350,6 +352,7 @@
+@@ -350,6 +352,7 @@ interface ISearchCatalogManager: IUnknown
  typedef int PRIORITIZE_FLAGS;
  
  
-+_Win32_AnnotateInterface_(ISearchCatalogManager2, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::ISearchCatalogManager2 => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      object,
      uuid(7AC3286D-4D1D-4817-84FC-C1C85E3AF0D9),

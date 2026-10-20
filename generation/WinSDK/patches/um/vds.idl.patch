@@ -1,5 +1,5 @@
 diff --git a/um/vds.idl b/um/vds.idl
-index 3a3d5899..bf6c6336 100644
+index 3a3d5899..5c6267f7 100644
 --- a/um/vds.idl
 +++ b/um/vds.idl
 @@ -16,6 +16,7 @@
@@ -14,7 +14,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsServiceLoader, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsServiceLoader => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(e0393303-90d4-4a97-ab71-e9b671ee2729),
@@ -22,7 +22,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsService, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsService => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0818a8ef-9ba9-40d8-a6f9-e22833cc771e),
@@ -30,7 +30,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsServiceUninstallDisk, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsServiceUninstallDisk => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(B6B22DA8-F903-4be7-B492-C09D875AC9DA),
@@ -38,7 +38,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsServiceHba, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsServiceHba => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(0ac13689-3134-47c6-a17c-4669216801be),
@@ -46,7 +46,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsServiceIscsi, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsServiceIscsi => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(14fbe036-3ed7-4e10-90e9-a5ff991aff01),
@@ -54,7 +54,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsHbaPort, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsHbaPort => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(2abd757f-2851-4997-9a13-47d2a885d6ca),
@@ -62,7 +62,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsIscsiInitiatorAdapter, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsIscsiInitiatorAdapter => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(b07fedd4-1682-4440-9189-a39b55194dc5),
@@ -70,7 +70,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsIscsiInitiatorPortal, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsIscsiInitiatorPortal => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(38a0a9ab-7cc8-4693-ac07-1f28bd03c3da),
@@ -78,7 +78,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: disk object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsDiskPartitionMF, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsDiskPartitionMF => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(538684e0-ba3d-4bc0-aca9-164aff85c2a9),
@@ -86,7 +86,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: volume object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsVolumeMF, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsVolumeMF => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(ee2d5ded-6236-4169-931d-b9778ce03dc6),
@@ -94,7 +94,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: volume object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsVolumeMF2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsVolumeMF2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(4dbcee9a-6343-4651-b85f-5e75d74d983c),
@@ -102,7 +102,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: volume object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsVolumeShrink, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsVolumeShrink => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(d68168c9-82a2-4f85-b6e9-74707c49a58f),
@@ -110,7 +110,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented where: common layer
  // Accessed by: applications
  //
-+_Win32_AnnotateInterface_(IVdsSubSystemImportTarget, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsSubSystemImportTarget => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(83bfb87f-43fb-4903-baa6-127f01029eec),
@@ -118,7 +118,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: iSCSI target portal object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsIscsiPortalLocal, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsIscsiPortalLocal => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(ad837c28-52c1-421d-bf04-fae7da665396),
@@ -126,7 +126,7 @@ index 3a3d5899..bf6c6336 100644
  //  Implemented by: Service object
  //  Implemented where: common layer
  //  Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsServiceSAN, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IVdsServiceSAN => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(FC5D23E8-A88B-41a5-8DE0-2D2F73C5A630),
@@ -134,7 +134,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: volume object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsVolumeMF3, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IVdsVolumeMF3 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(6788FAF9-214E-4b85-BA59-266953616E09),
@@ -142,7 +142,7 @@ index 3a3d5899..bf6c6336 100644
  // Implemented by: disk object
  // Implemented where: common layer
  // Accessed by: applications
-+_Win32_AnnotateInterface_(IVdsDiskPartitionMF2, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IVdsDiskPartitionMF2 => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(9CBE50CA-F2D2-4bf4-ACE1-96896B729625),

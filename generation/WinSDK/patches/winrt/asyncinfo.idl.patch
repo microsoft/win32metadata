@@ -1,5 +1,5 @@
 diff --git a/winrt/asyncinfo.idl b/winrt/asyncinfo.idl
-index 2dec9a58..8282c2c8 100644
+index 2dec9a58..4f3ded83 100644
 --- a/winrt/asyncinfo.idl
 +++ b/winrt/asyncinfo.idl
 @@ -1,6 +1,7 @@
@@ -14,7 +14,7 @@ index 2dec9a58..8282c2c8 100644
  
  // IAsyncInfo
  // C++, C & IDL definition, global namespace
-+_Win32_AnnotateInterface_(IAsyncInfo, _Win32_SupportedOS_Windows8_)
++cpp_quote("/* Win32Metadata: interface ::IAsyncInfo => SupportedOSPlatform(\"windows8.0\") */")
  [
      object,
      uuid(00000036-0000-0000-C000-000000000046),

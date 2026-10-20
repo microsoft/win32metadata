@@ -1,5 +1,5 @@
 diff --git a/um/msclus.idl b/um/msclus.idl
-index 5420b708..83b06387 100644
+index 768fee27..76e1ed25 100644
 --- a/um/msclus.idl
 +++ b/um/msclus.idl
 @@ -11,6 +11,7 @@
@@ -14,7 +14,7 @@ index 5420b708..83b06387 100644
  
  /////////////////////////////////////////////////
  // ISClusPartitionEx
-+_Win32_AnnotateInterface_(ISClusPartitionEx, _Win32_SupportedOS_Server2008_)
++cpp_quote("/* Win32Metadata: interface ::ISClusPartitionEx => SupportedOSPlatform(\"windowsserver2008\") */")
  [
      oleautomation,
      hidden,

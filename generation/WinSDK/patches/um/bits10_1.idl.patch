@@ -1,5 +1,5 @@
 diff --git a/um/bits10_1.idl b/um/bits10_1.idl
-index 20b5f64a..1e0b2f6d 100644
+index 20b5f64a..fa36666b 100644
 --- a/um/bits10_1.idl
 +++ b/um/bits10_1.idl
 @@ -4,6 +4,7 @@
@@ -14,7 +14,7 @@ index 20b5f64a..1e0b2f6d 100644
  import "bits4_0.idl";
  import "bits5_0.idl";
  
-+_Win32_AnnotateInterface_(IBackgroundCopyCallback3, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyCallback3 => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      uuid(98c97bd2-e32b-4ad8-a528-95fd8b16bd42)
  ]
@@ -22,7 +22,7 @@ index 20b5f64a..1e0b2f6d 100644
          );
  }
  
-+_Win32_AnnotateInterface_(IBackgroundCopyFile6, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyFile6 => SupportedOSPlatform(\"windows10.0.15063\") */")
  [
      uuid(CF6784F7-D677-49FD-9368-CB47AEE9D1AD)
  ]

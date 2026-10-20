@@ -1,3 +1,5 @@
+diff --git a/um/urlmon.idl b/um/urlmon.idl
+index c28def31..106a42ca 100644
 --- a/um/urlmon.idl
 +++ b/um/urlmon.idl
 @@ -1,3 +1,5 @@
@@ -6,43 +8,40 @@
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
-@@ -124,7 +126,7 @@
- #pragma midl_echo("STDAPI CreateURLMoniker(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk);             ")
+@@ -125,6 +127,7 @@ cpp_quote("EXTERN_C const IID IID_IAsyncBindCtx;    ")
  #pragma midl_echo("STDAPI CreateURLMonikerEx(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             ")
  #pragma midl_echo("STDAPI GetClassURL(_In_ LPCWSTR szURL, _Out_ CLSID *pClsID);                                           ")
--#pragma midl_echo("STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       ")
-+#pragma midl_echo("STDAPI _Win32_SupportedOS_Windows2000_ CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       ")
+ #pragma midl_echo("STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       ")
++cpp_quote("/* Win32Metadata: function ::CreateAsyncBindCtx => SupportedOSPlatform(\"windows5.0\") */")
  #pragma midl_echo("                                _In_opt_ IEnumFORMATETC *pEFetc, _Outptr_ IBindCtx **ppBC);                   ")
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
-@@ -147,7 +149,7 @@
- #pragma midl_echo("STDAPI CoGetClassObjectFromURL( _In_ REFCLSID rCLASSID,")
+@@ -148,6 +151,7 @@ cpp_quote("#endif")
  #pragma midl_echo("            _In_ LPCWSTR szCODE, DWORD dwFileVersionMS, ")
  #pragma midl_echo("            DWORD dwFileVersionLS, _In_ LPCWSTR szTYPE,")
--#pragma midl_echo("            _In_ LPBINDCTX pBindCtx, DWORD dwClsContext,")
-+#pragma midl_echo("            _In_ LPBINDCTX pBindCtx, _Win32_AssociatedEnum_(CLSCTX) DWORD dwClsContext,")
+ #pragma midl_echo("            _In_ LPBINDCTX pBindCtx, DWORD dwClsContext,")
++cpp_quote("/* Win32Metadata: parameter ::CoGetClassObjectFromURL::dwClsContext => AssociatedEnum(CLSCTX) */")
  #pragma midl_echo("            _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);")
  
  #pragma midl_echo("STDAPI IEInstallScope(_Out_ LPDWORD pdwScope);")
-@@ -177,7 +179,7 @@
- #pragma midl_echo(" ")
+@@ -178,6 +182,7 @@ cpp_quote("#endif")
  #pragma midl_echo("STDAPI RegisterMediaTypes(_In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _Out_writes_(ctypes) CLIPFORMAT* rgcfTypes);            ")
  #pragma midl_echo("STDAPI FindMediaType(_In_ LPCSTR rgszTypes, _Out_ CLIPFORMAT* rgcfTypes);                                       ")
--#pragma midl_echo("STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); ")
-+#pragma midl_echo("STDAPI _Win32_SupportedOS_Windows2000_ CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); ")
+ #pragma midl_echo("STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); ")
++cpp_quote("/* Win32Metadata: function ::CreateFormatEnumerator => SupportedOSPlatform(\"windows5.0\") */")
  #pragma midl_echo("STDAPI RegisterFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc, DWORD reserved);          ")
  #pragma midl_echo("STDAPI RevokeFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc);                            ")
  #pragma midl_echo("STDAPI RegisterMediaTypeClass(_In_ LPBC pBC, _In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _In_reads_(ctypes)  CLSID *rgclsID, DWORD reserved);    ")
-@@ -541,6 +543,8 @@
-     HRESULT GetCurMoniker(
+@@ -542,6 +547,8 @@ interface IPersistMoniker : IUnknown
          [out] IMoniker ** ppimkName);
  }
-+
-+_Win32_AnnotateMethod_(IPersistMoniker::IsDirty, _Win32_PreserveResult_)
  
++cpp_quote("/* Win32Metadata: method ::IPersistMoniker::IsDirty => PreserveResult */")
++
  cpp_quote("#endif")
  
-@@ -1576,8 +1580,11 @@
+ //+---------------------------------------------------------------------------
+@@ -1576,8 +1583,12 @@ interface IUri : IUnknown
          [out] BOOL* pfEqual);
  }
  
@@ -50,12 +49,12 @@
 +cpp_quote("typedef unsigned int URI_CREATE_FLAGS;")
 +cpp_quote("#endif")
  #pragma midl_echo("STDAPI CreateUri(_In_ LPCWSTR pwzURI,")
--#pragma midl_echo("                 _In_ DWORD dwFlags,")
-+#pragma midl_echo("                 _In_ _Win32_AssociatedEnum_(URI_CREATE_FLAGS) DWORD dwFlags,")
+ #pragma midl_echo("                 _In_ DWORD dwFlags,")
++cpp_quote("/* Win32Metadata: parameter ::CreateUri::dwFlags => AssociatedEnum(URI_CREATE_FLAGS) */")
  #pragma midl_echo("                 _Reserved_ DWORD_PTR dwReserved,   // must be 0")
  #pragma midl_echo("                 _Outptr_ IUri** ppURI);")
  #pragma midl_echo("")
-@@ -1650,6 +1657,7 @@
+@@ -1650,6 +1661,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_S
  #pragma midl_echo("#define Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS 0x00008000    // Don't percent-encode characters that are forbidden by the RFC.")
  #pragma midl_echo("#define Uri_CREATE_NORMALIZE_INTL_CHARACTERS      0x00010000    // Percent encode all extended unicode charcters, then decode all percent encoded extended unicode characters (except those identified as dangerous)")
  #pragma midl_echo("#define Uri_CREATE_CANONICALIZE_ABSOLUTE          0x00020000    // Generate a fully UTF-8 encoded value for absoluteUri")

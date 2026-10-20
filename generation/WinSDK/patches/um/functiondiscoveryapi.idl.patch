@@ -1,5 +1,5 @@
 diff --git a/um/functiondiscoveryapi.idl b/um/functiondiscoveryapi.idl
-index 5d2aa6ce..036a24e6 100644
+index 5d2aa6ce..c34277b1 100644
 --- a/um/functiondiscoveryapi.idl
 +++ b/um/functiondiscoveryapi.idl
 @@ -2,6 +2,8 @@
@@ -15,7 +15,7 @@ index 5d2aa6ce..036a24e6 100644
  
  
  // This interface should be implemented by clients performing async queries...
-+_Win32_AnnotateInterface_(IFunctionDiscoveryNotification, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFunctionDiscoveryNotification => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(5f6c1ba8-5330-422e-a368-572b244d3f87),
@@ -23,7 +23,7 @@ index 5d2aa6ce..036a24e6 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFunctionDiscovery, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFunctionDiscovery => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(4df99b70-e148-4432-b004-4c9eeb535a5e),
@@ -31,7 +31,7 @@ index 5d2aa6ce..036a24e6 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFunctionInstance, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFunctionInstance => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(33591c10-0bed-4f02-b0ab-1530d5533ee9),
@@ -39,7 +39,7 @@ index 5d2aa6ce..036a24e6 100644
  };
  
  
-+_Win32_AnnotateInterface_(IFunctionInstanceCollection, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFunctionInstanceCollection => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(f0a3d895-855c-42a2-948d-2f97d450ecb1),
@@ -47,7 +47,7 @@ index 5d2aa6ce..036a24e6 100644
  /////////////////////////////////
  // Query interfaces
  /////////////////////////////////
-+_Win32_AnnotateInterface_(IFunctionInstanceQuery, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFunctionInstanceQuery => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(6242bc6b-90ec-4b37-bb46-e229fd84ed95),
@@ -55,7 +55,7 @@ index 5d2aa6ce..036a24e6 100644
          [out, retval] IFunctionInstance ** ppIFunctionInstance );
  };
  
-+_Win32_AnnotateInterface_(IFunctionInstanceCollectionQuery, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IFunctionInstanceCollectionQuery => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      object,
      uuid(57cc6fd2-c09a-4289-bb72-25f04142058e),
@@ -63,7 +63,7 @@ index 5d2aa6ce..036a24e6 100644
          [out] IFunctionInstanceCollection ** ppIFunctionInstanceCollection );
  };
  
-+_Win32_AnnotateParameter_(IFunctionInstance::OpenPropertyStore, dwStgAccess, _Win32_AssociatedEnum_(STGM))
++cpp_quote("/* Win32Metadata: parameter ::IFunctionInstance::OpenPropertyStore::dwStgAccess => AssociatedEnum(STGM) */")
  cpp_quote("#include \"FunctionDiscoveryNotification.h\"")
  
  

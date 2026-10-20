@@ -1,5 +1,5 @@
 diff --git a/um/mixerocx.idl b/um/mixerocx.idl
-index 5777918d..4957f58c 100644
+index 5777918d..9ae6259c 100644
 --- a/um/mixerocx.idl
 +++ b/um/mixerocx.idl
 @@ -1,4 +1,5 @@
@@ -12,7 +12,7 @@ index 5777918d..4957f58c 100644
  interface IMixerOCXNotify;
  interface IMixerOCX;
  
-+_Win32_AnnotateInterface_(IMixerOCXNotify, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IMixerOCXNotify => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(81A3BD31-DEE1-11d1-8508-00A0C91F9CA0),
@@ -20,7 +20,7 @@ index 5777918d..4957f58c 100644
      HRESULT OnDataChange([in] ULONG ulDataFlags);
  };
  
-+_Win32_AnnotateInterface_(IMixerOCX, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IMixerOCX => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(81A3BD32-DEE1-11d1-8508-00A0C91F9CA0),

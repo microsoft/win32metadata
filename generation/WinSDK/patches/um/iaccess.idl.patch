@@ -1,5 +1,5 @@
 diff --git a/um/iaccess.idl b/um/iaccess.idl
-index ee0ac8bb..defb0266 100644
+index 2293cb02..11e140ea 100644
 --- a/um/iaccess.idl
 +++ b/um/iaccess.idl
 @@ -11,6 +11,7 @@
@@ -14,7 +14,7 @@ index ee0ac8bb..defb0266 100644
  typedef PACTRL_AUDITW  PACTRL_AUDITW_ALLOCATE_ALL_NODES;
  
  interface IAccessControl;
-+_Win32_AnnotateInterface_(IAccessControl, _Win32_SupportedOS_Windows2000_)
++cpp_quote("/* Win32Metadata: interface ::IAccessControl => SupportedOSPlatform(\"windows5.0\") */")
  [
      object,
      uuid(EEDD23E0-8410-11CE-A1C3-08002B2B8D8F),

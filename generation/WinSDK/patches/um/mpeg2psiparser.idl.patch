@@ -1,5 +1,5 @@
 diff --git a/um/mpeg2psiparser.idl b/um/mpeg2psiparser.idl
-index f3dbc681..683bf955 100644
+index 42c9a15b..ed26eb60 100644
 --- a/um/mpeg2psiparser.idl
 +++ b/um/mpeg2psiparser.idl
 @@ -17,6 +17,7 @@
@@ -14,7 +14,7 @@ index f3dbc681..683bf955 100644
      // IPSITables Interface
      //
      ////////////////////////////////////
-+_Win32_AnnotateInterface_(IPSITables, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::IPSITables => SupportedOSPlatform(\"windows6.1\") */")
      [
          object,
          uuid(919F24C5-7B14-42ac-A4B0-2AE08DAF00AC),    

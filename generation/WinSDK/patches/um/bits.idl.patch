@@ -1,5 +1,5 @@
 diff --git a/um/bits.idl b/um/bits.idl
-index 65af0618..bb1265a0 100644
+index 65af0618..a23bd1f9 100644
 --- a/um/bits.idl
 +++ b/um/bits.idl
 @@ -10,6 +10,8 @@
@@ -15,7 +15,7 @@ index 65af0618..bb1265a0 100644
  // Marshalled interfaces
  // =============================
  
-+_Win32_AnnotateInterface_(IBackgroundCopyFile, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyFile => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(01b7bd23-fb88-4a77-8490-5891d3e4653a),
      odl
@@ -23,7 +23,7 @@ index 65af0618..bb1265a0 100644
  
  //--------------------------------------------------------------------
  //
-+_Win32_AnnotateInterface_(IEnumBackgroundCopyFiles, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumBackgroundCopyFiles => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(ca51e165-c365-424c-8d41-24aaa4ff3c40),
      helpstring("IEnumBackgroundCopyFiles Interface"),
@@ -31,7 +31,7 @@ index 65af0618..bb1265a0 100644
  //--------------------------------------------------------------------
  //
  
-+_Win32_AnnotateInterface_(IBackgroundCopyError, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyError => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(19c613a0-fcb8-4f28-81ae-897c3d078f81),
      helpstring("error object for IBackgroundCopyJob"),
@@ -39,7 +39,7 @@ index 65af0618..bb1265a0 100644
  
  // ==============================================
  // Job Interface
-+_Win32_AnnotateInterface_(IBackgroundCopyJob, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyJob => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(37668d37-507e-4160-9316-26306d150b12),
      helpstring("IBackgroundCopyJob Interface"),
@@ -47,17 +47,17 @@ index 65af0618..bb1265a0 100644
      HRESULT TakeOwnership();
  
  }
-+_Win32_AnnotateParameter_(IBackgroundCopyJob::GetProxySettings, pProxyBypassList, _Win32_RAIIFree_(CoTaskMemFree))
-+_Win32_AnnotateParameter_(IBackgroundCopyJob::GetProxySettings, pProxyList, _Win32_RAIIFree_(CoTaskMemFree))
-+_Win32_AnnotateParameter_(IBackgroundCopyJob::GetOwner, pVal, _Win32_RAIIFree_(CoTaskMemFree))
-+_Win32_AnnotateParameter_(IBackgroundCopyJob::GetDisplayName, pVal, _Win32_RAIIFree_(CoTaskMemFree))
-+_Win32_AnnotateParameter_(IBackgroundCopyJob::GetDescription, pVal, _Win32_RAIIFree_(CoTaskMemFree))
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJob::GetProxySettings::pProxyBypassList => RAIIFree(CoTaskMemFree) */")
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJob::GetProxySettings::pProxyList => RAIIFree(CoTaskMemFree) */")
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJob::GetOwner::pVal => RAIIFree(CoTaskMemFree) */")
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJob::GetDisplayName::pVal => RAIIFree(CoTaskMemFree) */")
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJob::GetDescription::pVal => RAIIFree(CoTaskMemFree) */")
  
  
  // ==============================================
  // IEnumJobs Interface
  //     This interface allows enumerating the jobs under a Job
-+_Win32_AnnotateInterface_(IEnumBackgroundCopyJobs, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IEnumBackgroundCopyJobs => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(1af4f612-3b71-466f-8f58-7b6f73ac57ad),
      helpstring("IEnumBackgroundCopyJobs2 Interface"),
@@ -65,7 +65,7 @@ index 65af0618..bb1265a0 100644
  // IBackgroundCallback Interface
  //     This interface is implemented by the client and is used by the queue manager
  //     to supply progress information to the client.
-+_Win32_AnnotateInterface_(IBackgroundCopyCallback, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22),
  #if !defined( BITS_DONT_USE_ASYNC_DCOM )
@@ -73,7 +73,7 @@ index 65af0618..bb1265a0 100644
  //
  // IBackgroundCopyManager is the "root" interface to the background file copy component.
  //
-+_Win32_AnnotateInterface_(IBackgroundCopyManager, _Win32_SupportedOS_WindowsXP_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyManager => SupportedOSPlatform(\"windows5.1.2600\") */")
  [
      uuid(5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c),
      helpstring("Background Copy interface"),
@@ -81,7 +81,7 @@ index 65af0618..bb1265a0 100644
          [in] DWORD LanguageId,
          [out] LPWSTR *pErrorDescription );
  }
-+_Win32_AnnotateParameter_(IBackgroundCopyManager::GetErrorDescription, pErrorDescription, _Win32_RAIIFree_(CoTaskMemFree))
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyManager::GetErrorDescription::pErrorDescription => RAIIFree(CoTaskMemFree) */")
  
  //---------------------------------------------------------------------------
  

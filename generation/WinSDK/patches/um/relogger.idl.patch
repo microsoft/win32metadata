@@ -1,5 +1,5 @@
 diff --git a/um/relogger.idl b/um/relogger.idl
-index 93264ea7..7f51eb54 100644
+index 93264ea7..dfdf7db9 100644
 --- a/um/relogger.idl
 +++ b/um/relogger.idl
 @@ -2,6 +2,7 @@
@@ -14,7 +14,7 @@ index 93264ea7..7f51eb54 100644
  
  interface ITraceRelogger;
  
-+_Win32_AnnotateInterface_(ITraceEvent, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ITraceEvent => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(8CC97F40-9028-4FF3-9B62-7D1F79CA7BCB),
@@ -22,7 +22,7 @@ index 93264ea7..7f51eb54 100644
  };
  
  
-+_Win32_AnnotateInterface_(ITraceEventCallback, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ITraceEventCallback => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(3ED25501-593F-43E9-8F38-3AB46F5A4A52),
@@ -30,7 +30,7 @@ index 93264ea7..7f51eb54 100644
  };
  
  
-+_Win32_AnnotateInterface_(ITraceRelogger, _Win32_SupportedOS_Windows7_)
++cpp_quote("/* Win32Metadata: interface ::ITraceRelogger => SupportedOSPlatform(\"windows6.1\") */")
  [
      object,
      uuid(F754AD43-3BCC-4286-8009-9C5DA214E84E),

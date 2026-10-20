@@ -1,5 +1,5 @@
 diff --git a/um/bits1_5.idl b/um/bits1_5.idl
-index 0acdbb52..7a9522eb 100644
+index 0acdbb52..a406bd5f 100644
 --- a/um/bits1_5.idl
 +++ b/um/bits1_5.idl
 @@ -1,4 +1,5 @@
@@ -12,7 +12,7 @@ index 0acdbb52..7a9522eb 100644
  
  import "bits.idl";
  
-+_Win32_AnnotateInterface_(IBackgroundCopyJob2, _Win32_SupportedOS_WindowsVista_)
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyJob2 => SupportedOSPlatform(\"windows6.0.6000\") */")
  [
      uuid(54b50739-686f-45eb-9dff-d6a9a0faa9af),
      helpstring("IBackgroundCopyJob2 Interface"),
