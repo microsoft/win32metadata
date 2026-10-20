@@ -7981,7 +7981,7 @@
   "patches": [
     "shared\\sal.h.patch",
     "shared\\winerror.h.patch",
-    "um\\SetupAPI.h.patch",
+    "um\\setupapi.h.patch",
     "um\\waasapi.idl.patch",
     "um\\propidlbase.idl.patch",
     "um\\winhttp.h.patch",
