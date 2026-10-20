@@ -1058,8 +1058,13 @@ namespace Win32MetadataScraperTests
                 "void H([annotation(\"_Win32_Retval_\")][out][retval] long* value);\r\n" +
                 "cpp_quote(\"void Native([out] long* value);\")\r\n";
             string converted = fixture.ConvertSal(input);
-            Assert.Contains("[out, retval][annotation(\"_Out_retval_ _Win32_Retval_\")]", converted);
-            Assert.Equal(3, converted.Split("_Out_retval_").Length - 1);
+            const string expected = "void F([out, retval][annotation(\"_Out_ _Win32_Retval_\")] long* value, [in][annotation(\"_In_\")] long count);\n" +
+                "void G([out, retval][annotation(\"_Out_retval_\")] long* value, [in][annotation(\"_In_\")] long count);\n" +
+                "void H([out, retval][annotation(\"_Out_ _Win32_Retval_\")] long* value);\n" +
+                "cpp_quote(\"void Native([out] long* value);\")\n";
+            Assert.Equal(expected, converted.Replace("\r\n", "\n"));
+            Assert.Equal(1, converted.Split("_Out_retval_").Length - 1);
+            Assert.DoesNotContain("_COM_Outptr_retval_", converted);
             Assert.Equal(2, converted.Split("[annotation(\"_In_\")]").Length - 1);
             Assert.Contains("cpp_quote(\"void Native([out] long* value);\")", converted);
         }
@@ -1086,7 +1091,8 @@ namespace Win32MetadataScraperTests
 
                 RepositoryRoot = directory?.FullName ?? throw new InvalidOperationException("Repository scripts were not found.");
                 this.scripts = Path.Combine(RepositoryRoot, "scripts");
-                this.root = Path.Combine(RepositoryRoot, "artifacts", "prepared-header-tests", Guid.NewGuid().ToString("N"));
+                // Native process launch fails when nested snapshots push MIDL's working directory past MAX_PATH.
+                this.root = Path.Combine(Path.GetTempPath(), "prepared-header-tests-" + Guid.NewGuid().ToString("N"));
                 this.source = Path.Combine(this.root, "source");
                 this.sdk = Path.Combine(this.root, "sdk");
                 this.recipe = Path.Combine(this.root, "recipe.json");
