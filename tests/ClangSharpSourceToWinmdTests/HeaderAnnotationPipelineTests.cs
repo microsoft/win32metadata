@@ -14,6 +14,132 @@ namespace ClangSharpSourceToWinmdTests
     [TestClass]
     public class HeaderAnnotationPipelineTests
     {
+        [DataTestMethod]
+        [DataRow("Optional", true, false)]
+        [DataRow("Optional", true, true)]
+        [DataRow("Optional", false, false)]
+        [DataRow("Optional", false, true)]
+        [DataRow("ComOutPtr", true, false)]
+        [DataRow("ComOutPtr", true, true)]
+        [DataRow("ComOutPtr", false, false)]
+        [DataRow("ComOutPtr", false, true)]
+        public void ParameterOverridesApplyAfterNativeAttributesWithoutChangingOtherFacts(
+            string name, bool enabled, bool alreadyPresent)
+        {
+            string existing = alreadyPresent ? $"[{name}]" : "";
+            var tree = Clean($@"
+namespace Test {{ public unsafe delegate int F(
+    [NativeAnnotation(""Win32Metadata.{name}({enabled.ToString().ToLowerInvariant()})"")]
+    {existing}
+    [In, Out, NativeArrayInfo(CountParamIndex = 1), Other.Optional, Other.ComOutPtr]
+    void** value, uint count); }}");
+            var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
+            var actual = parameter.AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(enabled ? 1 : 0, actual.Count(attribute =>
+                attribute.Name.ToString() == name || attribute.Name.ToString().EndsWith("." + name) &&
+                !attribute.Name.ToString().StartsWith("Other.", StringComparison.Ordinal)));
+            foreach (string retained in new[] { "In", "Out", "NativeArrayInfo", "Other.Optional", "Other.ComOutPtr" })
+                Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == retained));
+            Assert.AreEqual("void**", parameter.Type?.ToString());
+            Assert.IsFalse(actual.Any(attribute => attribute.Name.ToString() == "NativeAnnotation"));
+            Assert.AreEqual(tree.GetRoot().ToFullString(), Clean(tree.GetRoot().ToFullString()).GetRoot().ToFullString());
+        }
+
+        [TestMethod]
+        public void ParameterOverridesComposeWithDerivedSalInsteadOfReplacingIt()
+        {
+            var tree = Clean(@"
+namespace Test { public unsafe delegate int F(
+    [CppAttributeList(""Name=SAL_name;p1=\""_In_opt_\""^Name=SAL_pre^Name=SAL_valid"")]
+    [NativeAnnotation(""Win32Metadata.Optional(false)"")] uint scalar,
+    [CppAttributeList(""Name=SAL_name;p1=\""_Outptr_\""^Name=SAL_post^Name=SAL_valid"")]
+    [NativeAnnotation(""Win32Metadata.ComOutPtr(true)"")] void** result); }");
+            var parameters = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().ToArray();
+            CollectionAssert.AreEqual(new[] { "In" }, parameters[0].AttributeLists.SelectMany(list => list.Attributes)
+                .Select(attribute => attribute.Name.ToString()).ToArray());
+            CollectionAssert.AreEquivalent(new[] { "Out", "global::Windows.Win32.Foundation.Metadata.ComOutPtr" },
+                parameters[1].AttributeLists.SelectMany(list => list.Attributes).Select(attribute => attribute.Name.ToString()).ToArray());
+        }
+
+        [TestMethod]
+        public void RemovingComOutPtrPreservesItsImplicitPhysicalOutFlag()
+        {
+            var tree = Clean(@"
+namespace Test { public unsafe delegate int F(
+    [ComOutPtr, NativeAnnotation(""Win32Metadata.ComOutPtr(false)"")] void** value); }");
+            var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.AreEqual("global::System.Runtime.InteropServices.Out", attributes[0].Name.ToString());
+        }
+
+        [DataTestMethod]
+        [DataRow("NativeAnnotation")]
+        [DataRow("NativeAnnotationAttribute")]
+        [DataRow("global::NativeAnnotation")]
+        [DataRow("global::NativeAnnotationAttribute")]
+        public void RecognizedParameterOverrideTransportCannotLeakIntoFinalSource(string attributeName)
+        {
+            var tree = Clean($@"namespace Test {{ public delegate void F(
+                [{attributeName}(""Win32Metadata.Optional(false)"")] [Optional, In] int value); }}");
+            var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.AreEqual("In", attributes[0].Name.ToString());
+        }
+
+        [DataTestMethod]
+        [DataRow("Optional", false, "[-Optional]", false)]
+        [DataRow("Optional", true, "[Optional]", false)]
+        [DataRow("ComOutPtr", true, "[ComOutPtr]", false)]
+        [DataRow("Optional", false, "[Optional]", true)]
+        [DataRow("Optional", true, "[-Optional]", true)]
+        [DataRow("ComOutPtr", true, "[-ComOutPtr]", true)]
+        public void ParameterOverridesDoNotPermitContradictoryLegacyRemaps(
+            string name, bool enabled, string remap, bool conflict)
+        {
+            string source = $@"
+namespace Test {{ public unsafe delegate int F(
+    [NativeAnnotation(""Win32Metadata.{name}({enabled.ToString().ToLowerInvariant()})"")]
+    [In, Out] void** value); }}";
+            var remaps = new Dictionary<string, string> { ["F::value"] = remap };
+            if (conflict)
+            {
+                var error = Assert.ThrowsException<InvalidOperationException>(() => Clean(source, remaps));
+                StringAssert.Contains(error.Message, "WMA002");
+            }
+            else
+            {
+                var tree = Clean(source, remaps);
+                var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                    .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+                Assert.AreEqual(enabled ? 3 : 2, attributes.Length);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("Optional")]
+        [DataRow("Optional(1)")]
+        [DataRow("ComOutPtr(TRUE)")]
+        [DataRow("ComOutPtr(false, true)")]
+        public void MalformedParameterOverridesCannotBeSilentlyDropped(string payload)
+        {
+            var error = Assert.ThrowsException<InvalidOperationException>(() =>
+                Clean($@"namespace Test {{ public delegate void F([NativeAnnotation(""Win32Metadata.{payload}"")] int value); }}"));
+            StringAssert.Contains(error.Message, "WMA001");
+        }
+
+        [DataTestMethod]
+        [DataRow("[NativeAnnotation(\"Win32Metadata.Optional(true)\")] public int value;")]
+        [DataRow("[return: NativeAnnotation(\"Win32Metadata.ComOutPtr(false)\")] public int F() => 0;")]
+        [DataRow("public extern void F([NativeAnnotation(\"Win32Metadata.Optional(true)\"), NativeAnnotation(\"Win32Metadata.Optional(false)\")] int value);")]
+        public void ParameterOverridesRejectWrongTargetsAndDuplicates(string declaration)
+        {
+            var error = Assert.ThrowsException<InvalidOperationException>(() =>
+                Clean("namespace Test { public class S { " + declaration + " } }"));
+            StringAssert.Contains(error.Message, "WMA001");
+        }
+
         [TestMethod]
         public void CleanerHandlesMixedAttributeListsAndReturnTargets()
         {

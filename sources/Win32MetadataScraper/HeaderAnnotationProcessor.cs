@@ -31,9 +31,11 @@ namespace Win32MetadataScraper
         private readonly List<(CXCursor Declaration, NativeLocation Location)> enumAssociations = new();
         private readonly HashSet<CXCursor> enumReferenceCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> methodCarriers = new();
+        private readonly List<(VarDecl Declaration, Attr Target)> parameterCarriers = new();
         private readonly HashSet<Cursor> visited = new();
 
-        internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Select(carrier => carrier.Declaration.Name);
+        internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers)
+            .Select(carrier => carrier.Declaration.Name);
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody)
@@ -45,6 +47,7 @@ namespace Win32MetadataScraper
             this.excludeFunctionsWithBody = excludeFunctionsWithBody;
             Walk(translationUnit.TranslationUnitDecl);
             ApplyMethodAnnotations();
+            ApplyParameterAnnotations();
             MergeRedeclarationFacts();
             foreach (var association in enumAssociations)
                 if (association.Declaration.Kind != CXCursorKind.CXCursor_EnumDecl &&
@@ -210,7 +213,7 @@ namespace Win32MetadataScraper
         private static string ReadStringArgument(Cursor argument, NativeLocation location)
         {
             if (UnwrapArgument(argument) is not StringLiteral literal || literal.Kind != CX_StringKind.CX_SLK_Ordinary)
-                throw Error(location, "Import metadata requires ordinary narrow string literals.");
+                throw Error(location, "Metadata references require ordinary narrow string literals.");
             return literal.String;
         }
 
@@ -315,27 +318,33 @@ namespace Win32MetadataScraper
             if (cursor is NamedDecl declaration)
             {
                 var location = GetLocation(declaration.Location);
-                var methodTargets = declaration.Attrs.Where(attribute =>
+                var targets = declaration.Attrs.Where(attribute =>
                     attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
-                    attribute.Spelling == HeaderAnnotation.OwnerPrefix + "Method").ToArray();
-                if (methodTargets.Length != 0)
+                    attribute.Spelling is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter").ToArray();
+                if (targets.Length != 0)
                 {
-                    if (methodTargets.Length != 1 || declaration is not VarDecl variable ||
+                    bool parameterCarrier = targets[0].Spelling == HeaderAnnotation.OwnerPrefix + "Parameter";
+                    string kind = parameterCarrier ? "Parameter" : "Method";
+                    if (targets.Length != 1 || declaration is not VarDecl variable ||
                         variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
                         variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
                         !variable.Type.Handle.IsConstQualified ||
-                        !variable.Name.StartsWith("_WIN32META_METHOD_", StringComparison.Ordinal))
-                        throw Error(location, "Method annotations require the metadata-only _Win32_AnnotateMethod_ carrier.");
-                    methodCarriers.Add((variable, methodTargets[0]));
+                        !variable.Name.StartsWith("_WIN32META_" + kind.ToUpperInvariant() + "_", StringComparison.Ordinal))
+                        throw Error(location, $"{kind} annotations require the metadata-only _Win32_Annotate{kind}_ carrier.");
+                    (parameterCarrier ? parameterCarriers : methodCarriers).Add((variable, targets[0]));
                     return;
                 }
                 var facts = new DeclarationFacts(declaration, location);
-                ReadAnnotations(declaration, facts);
                 if (declaration is ParmVarDecl)
                 {
                     string comment = GetLegacyParameterComment(declaration);
                     if (!HasSalParameterDirection(declaration))
                         facts.MidlDirection = GetMidlDirection(comment);
+                }
+                ReadAnnotations(declaration, facts);
+                if (declaration is ParmVarDecl)
+                {
+                    string comment = GetLegacyParameterComment(declaration);
                     if (comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
                     {
                         var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
@@ -389,6 +398,31 @@ namespace Win32MetadataScraper
             }
         }
 
+        private void ApplyParameterAnnotations()
+        {
+            foreach (var carrier in parameterCarriers)
+            {
+                var location = GetLocation(carrier.Target.Location);
+                var arguments = carrier.Target.CursorChildren.ToArray();
+                if (arguments.Length != 2)
+                    throw Error(location, "A parameter carrier requires a compiler-parsed method reference and native parameter name.");
+                var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_CXXMethod, location,
+                    "A parameter carrier requires a reference to a declared native interface method.");
+                string name = ReadStringArgument(arguments[1], location);
+                if (!Regex.IsMatch(name, @"^[A-Za-z_]\w*$"))
+                    throw Error(location, "A parameter carrier requires one native parameter identifier.");
+                var method = declarations.Keys.OfType<CXXMethodDecl>()
+                    .FirstOrDefault(declaration => declaration.Handle.CanonicalCursor == target);
+                var parameters = method?.Parameters.Where(parameter => parameter.Name == name).ToArray();
+                if (parameters?.Length != 1 || !declarations.TryGetValue(parameters[0], out var facts))
+                    throw Error(location, $"The native parameter '{name}' does not uniquely identify a parameter of the referenced method.");
+                if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                    attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Parameter" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
+                    throw Error(location, "A parameter carrier requires at least one metadata annotation.");
+                ReadAnnotations(carrier.Declaration, facts);
+            }
+        }
+
         private void ReadAnnotations(NamedDecl declaration, DeclarationFacts facts)
         {
             var occurrences = new HashSet<CXCursor>();
@@ -404,7 +438,7 @@ namespace Win32MetadataScraper
             {
                 var attributeLocation = GetLocation(attribute.Location);
                 string payload = attribute.Spelling;
-                if (payload == HeaderAnnotation.OwnerPrefix + "Method")
+                if (payload is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter")
                     continue;
                 if (!HeaderAnnotation.IsKnownPayload(payload))
                     continue;
@@ -549,11 +583,31 @@ namespace Win32MetadataScraper
                 "Enum" or "FlagsEnum" => typedef,
                 "AlsoUsableFor" => typedef && facts.LogicalEnumMembers == null,
                 "RAIIFree" => function || parameter,
-                "Retained" or "ContainsInteriorPointers" or "RetVal" or "Reserved" => parameter,
+                "Retained" or "ContainsInteriorPointers" or "RetVal" or "Reserved" or "Optional" or "ComOutPtr" => parameter,
                 _ => false,
             };
             if (!valid)
                 throw Error(location, $"'{annotation.Name}' is not valid on {declaration.Handle.DeclKind} '{declaration.Name}'.");
+            if (annotation.Name == "ComOutPtr")
+            {
+                var type = ((ParmVarDecl)declaration).Type.CanonicalType;
+                var pointee = type switch
+                {
+                    PointerType pointer => pointer.PointeeType,
+                    ReferenceType reference => reference.PointeeType,
+                    _ => null,
+                };
+                if (pointee == null || pointee.Handle.IsConstQualified || pointee.CanonicalType is not PointerType)
+                    throw Error(location, "ComOutPtr requires writable output pointer storage.");
+                bool inputOnly = facts.MidlDirection == ParameterAttributes.In || declaration.Attrs.Any(attribute =>
+                {
+                    string name = Regex.Match(attribute.Spelling, @"\bName\s*=\s*SAL_name\s*;\s*p1\s*=\s*""([^""]+)""").Groups[1].Value;
+                    return name.StartsWith("_In_", StringComparison.Ordinal) ||
+                        name == "__RPC__in" || name.StartsWith("__RPC__in_", StringComparison.Ordinal);
+                });
+                if (inputOnly)
+                    throw Error(location, "ComOutPtr requires output/inout storage, not an input-only parameter.");
+            }
             if (parameter && annotation.Name is "Retained" or "ContainsInteriorPointers" or "RAIIFree" or "RetVal")
             {
                 var type = ((ParmVarDecl)declaration).Type.CanonicalType;
@@ -639,6 +693,11 @@ namespace Win32MetadataScraper
                 };
                 switch (annotation.Name)
                 {
+                    case "Optional":
+                    case "ComOutPtr":
+                        yield return MakeAttribute("NativeAnnotation(" +
+                            HeaderAnnotation.Quote(HeaderAnnotation.OwnerPrefix + annotation.Name + "(" + annotation.Arguments[0] + ")") + ")");
+                        continue;
                     case "SetLastError":
                     case "ImportLibrary":
                     case "Enum":

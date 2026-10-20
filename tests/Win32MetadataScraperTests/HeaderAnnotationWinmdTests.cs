@@ -29,6 +29,115 @@ namespace Win32MetadataScraperTests
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void ParameterOverridesPreserveNativeContractsAndReachPhysicalMetadata(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+typedef struct RECT { int left; int top; int right; int bottom; } RECT;
+struct __declspec(uuid(""592ee928-49ea-414a-91b2-ae009f63f348"")) IOpaque
+{
+    virtual HRESULT __stdcall Ordinary() = 0;
+};
+extern ""C"" {
+HRESULT __stdcall Scalar(_In_opt_ _Win32_Optional_(false) unsigned creationOptions);
+HRESULT __stdcall Direct(_Outptr_ _Win32_ComOutPtr_(true) void** result);
+HRESULT __stdcall InterfaceOutput(_Outptr_ _Win32_ComOutPtr_(true) IOpaque** result);
+HRESULT __stdcall AlreadyCom(_COM_Outptr_ _Win32_ComOutPtr_(true) void** result);
+HRESULT __stdcall RemoveCom(_COM_Outptr_ _Win32_ComOutPtr_(false) void** result);
+HRESULT __stdcall Counted(_Out_writes_(count) _Win32_Optional_(true) unsigned* pIndex, unsigned count);
+}
+typedef HRESULT (__stdcall* PFN_OVERRIDES)(
+    _In_opt_ _Win32_Optional_(false) void* context,
+    _Outptr_ _Win32_ComOutPtr_(true) void** result);
+void UseCallback(PFN_OVERRIDES callback);
+struct __declspec(uuid(""2742050f-cfe2-475a-8ddb-a422215d8d09"")) IParameterOverrides
+{
+    virtual HRESULT __stdcall BindToObject(_Outptr_ void** result) = 0;
+    virtual HRESULT __stdcall GetPageIndex(_Out_writes_(count) unsigned* pIndex, unsigned count) = 0;
+    virtual HRESULT __stdcall ReadRect(_In_opt_ const RECT* prc) = 0;
+};
+_WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::BindToObject, result, _Win32_ComOutPtr_(true));
+_WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::GetPageIndex, pIndex, _Win32_Optional_(true));
+_WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::ReadRect, prc, _Win32_Optional_(true));
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("_WIN32META_PARAMETER_", fixture.ReadSource());
+            Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            Check("Apis", "Scalar", "creationOptions", "UInt32", ParameterAttributes.In |
+                (annotationsEnabled ? ParameterAttributes.None : ParameterAttributes.Optional), false);
+            Check("Apis", "Direct", "result", "Void**", ParameterAttributes.Out, annotationsEnabled);
+            Check("Apis", "InterfaceOutput", "result", "IOpaque*", ParameterAttributes.Out, annotationsEnabled);
+            Check("Apis", "AlreadyCom", "result", "Void**", ParameterAttributes.Out, true);
+            Check("Apis", "RemoveCom", "result", "Void**", ParameterAttributes.Out, !annotationsEnabled);
+            Check("Apis", "Counted", "pIndex", "UInt32*", ParameterAttributes.Out |
+                (annotationsEnabled ? ParameterAttributes.Optional : ParameterAttributes.None), false, array: true);
+            Check("IParameterOverrides", "BindToObject", "result", "Void**", ParameterAttributes.Out, annotationsEnabled);
+            Check("IParameterOverrides", "GetPageIndex", "pIndex", "UInt32*", ParameterAttributes.Out |
+                (annotationsEnabled ? ParameterAttributes.Optional : ParameterAttributes.None), false, array: true);
+            Check("IParameterOverrides", "ReadRect", "prc", "RECT*", ParameterAttributes.In | ParameterAttributes.Optional, false);
+            Check("PFN_OVERRIDES", "Invoke", "context", "Void*", ParameterAttributes.In |
+                (annotationsEnabled ? ParameterAttributes.None : ParameterAttributes.Optional), false);
+            Check("PFN_OVERRIDES", "Invoke", "result", "Void**", ParameterAttributes.Out, annotationsEnabled);
+            var rect = FindMethod(reader, "IParameterOverrides", "ReadRect").GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 1);
+            AssertHasAttribute(reader, rect.GetCustomAttributes(), "ConstAttribute");
+            AssertMetadataClosure(reader);
+
+            void Check(string owner, string name, string parameterName, string expectedType,
+                ParameterAttributes attributes, bool comOutPtr, bool array = false)
+            {
+                var method = FindMethod(reader, owner, name);
+                Assert.Equal("Int32", method.DecodeSignature(new SignatureNames(), null).ReturnType);
+                var parameters = method.GetParameters().Select(reader.GetParameter)
+                    .Where(parameter => parameter.SequenceNumber != 0).ToArray();
+                var parameter = Assert.Single(parameters, candidate => reader.GetString(candidate.Name) == parameterName);
+                Assert.Equal(attributes, parameter.Attributes);
+                Assert.Equal(expectedType, method.DecodeSignature(new SignatureNames(), null).ParameterTypes[parameter.SequenceNumber - 1]);
+                Assert.Equal(comOutPtr ? 1 : 0, parameter.GetCustomAttributes()
+                    .Count(handle => AttributeName(reader, handle) == "ComOutPtrAttribute"));
+                Assert.Equal(array, parameter.GetCustomAttributes()
+                    .Any(handle => AttributeName(reader, handle) == "NativeArrayInfoAttribute"));
+                if (owner == "Apis")
+                {
+                    Assert.Equal("scan.dll", reader.GetString(reader.GetModuleReference(method.GetImport().Module).Name));
+                    Assert.Equal(name, reader.GetString(method.GetImport().Name));
+                    Assert.False(method.GetImport().Attributes.HasFlag(MethodImportAttributes.SetLastError));
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void ParameterOverridesSupportNativeCWithoutChangingSignatures(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+int Scalar(_In_opt_ _Win32_Optional_(false) unsigned creationOptions);
+int Output(_Outptr_ _Win32_ComOutPtr_(true) void** result);
+", extraSettings: "--language\nc\n--std\nc11\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, target, false, "c"), NativeSurface(fixture, target, true, "c"));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var scalar = FindMethod(reader, "Apis", "Scalar").GetParameters().Select(reader.GetParameter).Single();
+            Assert.Equal(ParameterAttributes.In, scalar.Attributes);
+            var output = FindMethod(reader, "Apis", "Output").GetParameters().Select(reader.GetParameter).Single();
+            Assert.Equal(ParameterAttributes.Out, output.Attributes);
+            AssertHasAttribute(reader, output.GetCustomAttributes(), "ComOutPtrAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
         public void HeaderGroupMemberAndIndependentLegacyEnumKeepTheirIdentities(string architecture, string target, bool sameNamespace)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
