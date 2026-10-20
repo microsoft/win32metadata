@@ -65,6 +65,9 @@ SUBCLASSPROC=Windows.Win32.UI.Shell
 # region coml2api.h
 STGM=Windows.Win32.System.Com
 # endregion coml2api.h
+# region consoleapi.h
+CONSOLE_MODE=Windows.Win32.System.Console
+# endregion consoleapi.h
 # region consoleapi2.h (also defined in ntddvdeo.h)
 FOREGROUND_BLUE=Windows.Win32.System.Console
 FOREGROUND_GREEN=Windows.Win32.System.Console
@@ -253,6 +256,7 @@ FILE_INFO_BY_NAME_CLASS=Windows.Win32.Storage.FileSystem
 FILETIME=Windows.Win32.Foundation
 FINDEX_INFO_LEVELS=Windows.Win32.Storage.FileSystem
 FINDEX_SEARCH_OPS=Windows.Win32.Storage.FileSystem
+FIND_FIRST_EX_FLAGS=Windows.Win32.Storage.FileSystem
 GET_FILEEX_INFO_LEVELS=Windows.Win32.Storage.FileSystem
 LOAD_DLL_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
 LPOVERLAPPED_COMPLETION_ROUTINE=Windows.Win32.System.IO
@@ -776,6 +780,7 @@ IKsNodeControl=Windows.Win32.Media.KernelStreaming
 IKsTopologyInfo=Windows.Win32.Media.KernelStreaming
 # endregion vidcap.h
 # region winbase.h
+DEFINE_DOS_DEVICE_FLAGS=Windows.Win32.Storage.FileSystem
 AccessCheckAndAuditAlarmA=Windows.Win32.Security
 AccessCheckByTypeAndAuditAlarmA=Windows.Win32.Security
 AccessCheckByTypeResultListAndAuditAlarmA=Windows.Win32.Security
@@ -1551,6 +1556,7 @@ E_INVALIDARG=Windows.Win32.Foundation
 E_NOTIMPL=Windows.Win32.Foundation
 E_OUTOFMEMORY=Windows.Win32.Foundation
 MENROLL_E_*=Windows.Win32.Management.MobileDeviceManagementRegistration
+WSA_ERROR=Windows.Win32.Networking.WinSock
 # endregion winerror.h
 # region wingdi.h
 AbortDoc=Windows.Win32.Storage.Xps
@@ -1693,6 +1699,9 @@ InitiateSystemShutdownExW=Windows.Win32.System.Shutdown
 InitiateSystemShutdownW=Windows.Win32.System.Shutdown
 # endregion winreg.h
 # region winnt.h (SLIST per-architecture design also defined in ntdef.h)
+PROCESS_ACCESS_RIGHTS=Windows.Win32.System.Threading
+REG_VALUE_TYPE=Windows.Win32.System.Registry
+TOKEN_ACCESS_MASK=Windows.Win32.Security
 ACCESS_ALLOWED_ACE=Windows.Win32.Security
 ACCESS_ALLOWED_CALLBACK_ACE=Windows.Win32.Security
 ACCESS_ALLOWED_CALLBACK_OBJECT_ACE=Windows.Win32.Security
