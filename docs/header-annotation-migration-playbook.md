@@ -364,6 +364,13 @@ inputs, not SDK fallbacks. The bounded result and the full wave's
 order. Check expected declarations as well; process success alone does not
 establish source capture.
 
+ClangSharp excludes functions carrying the compiler's `CX_AttrKind_Builtin`
+attribute. Projection validation uses that same attribute for functions and
+their parameter owners after parsing and target-validating their annotations.
+These declarations do not introduce DLL APIs. Ordinary functions retain strict
+projection validation, including functions with similar names; the existing
+function-body filter remains opt-in.
+
 `Headers`, `Constants` and `Emit` are distinct stages. A runtime without
 `ConstantsScraper.dll` supports only `Headers`; the other stages fail explicitly
 before starting a producer. A library-only enum control is not a normal complete

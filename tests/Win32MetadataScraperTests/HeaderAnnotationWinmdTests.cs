@@ -29,6 +29,32 @@ namespace Win32MetadataScraperTests
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void CompilerBuiltinsRemainAbsentFromPhysicalDllApiMetadata(string architecture, string target, bool annotated)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                HeaderAnnotationIntrinsicTests.Declarations, annotationsEnabled: annotated);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            Assert.DoesNotContain(reader.MethodDefinitions, handle => reader.GetString(reader.GetMethodDefinition(handle).Name)
+                is "__builtin_trap" or "__builtin_memcpy" or "_mm_pause" or "__faststorefence");
+            var ordinary = FindMethod(reader, "Apis", "Ordinary");
+            Assert.Equal("scan.dll", reader.GetString(reader.GetModuleReference(ordinary.GetImport().Module).Name));
+            Assert.Equal("Ordinary", reader.GetString(ordinary.GetImport().Name));
+            var parameter = Assert.Single(ordinary.GetParameters().Select(reader.GetParameter));
+            Assert.Equal(annotated, parameter.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "RetainedAttribute"));
+            Assert.Equal(annotated, ordinary.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "SupportedOSPlatformAttribute"));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
         public void ParameterOverridesPreserveNativeContractsAndReachPhysicalMetadata(
             string architecture, string target, bool annotationsEnabled)
         {

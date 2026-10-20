@@ -735,7 +735,9 @@ namespace Win32MetadataScraper
         {
             for (Cursor cursor = declaration; cursor is NamedDecl named; cursor = cursor.SemanticParentCursor)
                 if (excludedNames.Contains(named.Name) ||
-                    excludeFunctionsWithBody && named is FunctionDecl function && function.HasBody)
+                    named is FunctionDecl function &&
+                    (function.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Builtin) ||
+                        excludeFunctionsWithBody && function.HasBody))
                     return false;
             if (location.File.Length == 0)
                 return false;
