@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sdkPackageVersion": "10.0.26100.7705",
   "sourceStage": "post-midl",
-  "sourceGitTree": "0be4558f5ebfcc8abf75d778d04b33b501dedea5",
+  "sourceGitTree": "f42b3302ba7029c30b09f69df2dd733da9c2a290",
   "headers": [
     {
       "path": "um\\winnt.h",
