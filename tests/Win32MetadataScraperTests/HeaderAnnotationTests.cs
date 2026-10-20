@@ -1849,6 +1849,86 @@ int UseCallback(PFN_ALIAS callback);
             Assert.Contains("SupportedOSPlatform(\"windows6.1\")", source);
         }
 
+        internal const string PointerSizedTypedefDeclarations = @"
+#if defined(_WIN64)
+typedef unsigned long long ULONG_PTR;
+typedef long long LONG_PTR;
+#else
+typedef unsigned long ULONG_PTR;
+typedef long LONG_PTR;
+#endif
+typedef ULONG_PTR UINT_PTR;
+typedef ULONG_PTR* PULONG_PTR;
+typedef UINT_PTR* PUINT_PTR;
+_Win32_SupportedOS_Windows7_ typedef ULONG_PTR UNSIGNED_BASE;
+_Win32_SupportedOS_Windows7_ _Win32_AlsoUsableFor_(UNSIGNED_BASE)
+typedef UNSIGNED_BASE UNSIGNED_ALIAS;
+_Win32_SupportedOS_Windows7_ typedef UNSIGNED_ALIAS* UNSIGNED_POINTER;
+_Win32_SupportedOS_Windows7_ typedef UNSIGNED_POINTER* UNSIGNED_POINTER_POINTER;
+_Win32_SupportedOS_Windows7_ typedef PULONG_PTR UNSIGNED_MAPPED_POINTER;
+_Win32_SupportedOS_Windows7_ typedef PUINT_PTR UNSIGNED_OTHER_POINTER;
+_Win32_SupportedOS_Windows7_ typedef LONG_PTR SIGNED_BASE;
+_Win32_SupportedOS_Windows7_ typedef SIGNED_BASE SIGNED_ALIAS;
+_Win32_SupportedOS_Windows7_ typedef SIGNED_ALIAS* SIGNED_POINTER;
+_Win32_SupportedOS_Windows7_ typedef long long FIXED_SIGNED;
+_Win32_SupportedOS_Windows7_ typedef unsigned long long FIXED_UNSIGNED;
+_Win32_SupportedOS_Windows7_ typedef unsigned NOMINAL_FIRST;
+_Win32_SupportedOS_Windows7_ typedef NOMINAL_FIRST NOMINAL_SECOND;
+#define POINTER_MEMBER 1
+_Win32_Enum_(FIXED_ENUM, ULONG_PTR, POINTER_MEMBER);
+extern ""C"" {
+UNSIGNED_BASE __stdcall UseUnsigned(UNSIGNED_ALIAS value);
+SIGNED_BASE __stdcall UseSigned(SIGNED_ALIAS value);
+void __stdcall UsePointers(UNSIGNED_POINTER first, UNSIGNED_POINTER_POINTER second);
+}
+";
+
+        internal static string PointerSizedTypedefSettings(int mappingStyle) => mappingStyle switch
+        {
+            0 => string.Empty,
+            1 => "--remap\nULONG_PTR=System.UIntPtr\nLONG_PTR=global::System.IntPtr\nPULONG_PTR=UIntPtr*\nPUINT_PTR=global::System.UIntPtr*\nNOMINAL_FIRST=RENAMED_FIRST\n",
+            2 => "--remap\nULONG_PTR=nuint\nLONG_PTR=nint\nPULONG_PTR=nuint*\nPUINT_PTR=nuint*\nNOMINAL_FIRST=RENAMED_FIRST\n",
+            _ => throw new ArgumentOutOfRangeException(nameof(mappingStyle)),
+        };
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", 0)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 0)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 0)]
+        [InlineData("x86", "i686-pc-windows-msvc", 1)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 1)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 1)]
+        [InlineData("x86", "i686-pc-windows-msvc", 2)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 2)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 2)]
+        public void TypedefStoragePreservesEffectivePointerMappings(string architecture, string target, int mappingStyle)
+        {
+            using var fixture = new NativeFixture(architecture, target, PointerSizedTypedefDeclarations,
+                extraSettings: PointerSizedTypedefSettings(mappingStyle));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var root = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot();
+            foreach (string name in new[] { "UNSIGNED_BASE", "UNSIGNED_ALIAS" })
+                Assert.Equal("global::System.UIntPtr", Storage(name));
+            foreach (string name in new[] { "UNSIGNED_POINTER", "UNSIGNED_MAPPED_POINTER", "UNSIGNED_OTHER_POINTER" })
+                Assert.Equal("global::System.UIntPtr*", Storage(name));
+            Assert.Equal("global::System.UIntPtr**", Storage("UNSIGNED_POINTER_POINTER"));
+            foreach (string name in new[] { "SIGNED_BASE", "SIGNED_ALIAS" })
+                Assert.Equal("global::System.IntPtr", Storage(name));
+            Assert.Equal("global::System.IntPtr*", Storage("SIGNED_POINTER"));
+            Assert.Equal("long", Storage("FIXED_SIGNED"));
+            Assert.Equal("ulong", Storage("FIXED_UNSIGNED"));
+            Assert.Equal("uint", Storage(mappingStyle == 0 ? "NOMINAL_FIRST" : "RENAMED_FIRST"));
+            Assert.Equal("uint", Storage("NOMINAL_SECOND"));
+            var enumeration = root.DescendantNodes().OfType<EnumDeclarationSyntax>()
+                .Single(value => value.Identifier.ValueText == "FIXED_ENUM");
+            Assert.Equal(architecture == "x86" ? "uint" : "ulong",
+                Assert.Single(enumeration.BaseList.Types).Type.ToString());
+
+            string Storage(string name) => root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                .Single(value => value.Identifier.ValueText == name).Members.OfType<FieldDeclarationSyntax>()
+                .Single().Declaration.Type.ToString();
+        }
+
         [Fact]
         public void RecordTypedefsKeepTheirOwnFacts()
         {

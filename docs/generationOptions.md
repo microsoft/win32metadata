@@ -249,6 +249,8 @@ is missing, normal ownership is unresolved, or an actual owner is not enabled.
 
 Header-generated `[NativeTypedef]` wrappers can compose with retained AutoTypes
 wrappers of the same fully qualified identity and unmanaged `Value` storage.
+Wrapper storage honors ClangSharp's effective pointer-sized typedef remaps,
+including defaults and pointer aliases; logical enums keep fixed integral storage.
 The emitter keeps one wrapper and unions compatible attributes, including a
 header-owned `AlsoUsableFor` and the complete retained cleanup/invalid-value set.
 Conflicting storage, annotations, ordinary declarations or incomplete retained

@@ -278,7 +278,7 @@ class Program
                 }
                 if (annotations != null)
                 {
-                    annotations.PrepareProjections(generatedFiles.Values);
+                    annotations.PrepareProjections(generatedFiles.Values, config.RemappedNames);
                     foreach (string path in generatedFiles.Keys.ToArray())
                         generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
                 }

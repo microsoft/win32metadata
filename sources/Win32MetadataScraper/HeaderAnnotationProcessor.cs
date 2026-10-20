@@ -21,6 +21,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<NamedDecl, DeclarationFacts> declarations = new();
         private readonly Dictionary<(string File, uint Line, uint Column), List<DeclarationFacts>> projectionLocations = new();
         private readonly Dictionary<string, string> remaps;
+        private IReadOnlyDictionary<string, string> storageTypeRemaps;
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
         private readonly HashSet<NamedDecl> projectedDeclarations = new();
         private readonly string generatedNamespace;
@@ -44,6 +45,7 @@ namespace Win32MetadataScraper
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody)
         {
             this.remaps = remaps;
+            storageTypeRemaps = remaps;
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
@@ -346,8 +348,9 @@ namespace Win32MetadataScraper
             CXTypeKind.CXType_Int or CXTypeKind.CXType_UInt or CXTypeKind.CXType_Long or CXTypeKind.CXType_ULong or
             CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong;
 
-        internal void PrepareProjections(IEnumerable<string> sources)
+        internal void PrepareProjections(IEnumerable<string> sources, IReadOnlyDictionary<string, string> typeRemaps)
         {
+            storageTypeRemaps = typeRemaps;
             var rewriter = new ProjectionRewriter(this);
             foreach (var source in sources)
                 foreach (var node in CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<DelegateDeclarationSyntax>())
@@ -397,7 +400,7 @@ namespace Win32MetadataScraper
                     projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     continue;
                 }
-                string valueType = GetManagedType(alias.UnderlyingType.CanonicalType, facts.Location);
+                string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
                 declaration = declaration.AddAttributeLists(GetAttributes(facts).ToArray());
@@ -1023,17 +1026,43 @@ namespace Win32MetadataScraper
             return template;
         }
 
-        private string GetSignatureType(ClangSharp.Type type, NativeLocation location)
+        private string GetSignatureType(ClangSharp.Type type, NativeLocation location, bool underlyingStorage = false)
         {
             type = RemapDiscovery.UnwrapType(type);
             if (type is TypedefType typedef)
             {
                 var alias = (TypedefNameDecl)typedef.Decl;
-                return remaps.ContainsKey(alias.Name) ? Remap(alias.Name) : GetSignatureType(alias.UnderlyingType, location);
+                var mappings = underlyingStorage ? storageTypeRemaps : remaps;
+                if (mappings.TryGetValue(alias.Name, out string mapped) && (!underlyingStorage || mapped != alias.Name))
+                {
+                    if (!underlyingStorage)
+                        return mapped;
+                    // Nominal remaps name wrappers, not their underlying storage.
+                    string storage = GetNativeIntegerStorage(mapped);
+                    if (storage != null)
+                        return storage;
+                }
+                return GetSignatureType(alias.UnderlyingType, location, underlyingStorage);
             }
             if (type is PointerType pointer)
-                return GetSignatureType(pointer.PointeeType, location) + "*";
+                return GetSignatureType(pointer.PointeeType, location, underlyingStorage) + "*";
             return GetManagedType(type, location);
+        }
+
+        private static string GetNativeIntegerStorage(string mapped)
+        {
+            mapped = mapped.Trim();
+            if (mapped.EndsWith("*", StringComparison.Ordinal))
+            {
+                string pointee = GetNativeIntegerStorage(mapped.Substring(0, mapped.Length - 1));
+                return pointee == null ? null : pointee + "*";
+            }
+            return mapped switch
+            {
+                "IntPtr" or "System.IntPtr" or "global::System.IntPtr" or "nint" => "global::System.IntPtr",
+                "UIntPtr" or "System.UIntPtr" or "global::System.UIntPtr" or "nuint" => "global::System.UIntPtr",
+                _ => null,
+            };
         }
 
         private static bool HasSalParameterDirection(NamedDecl declaration)

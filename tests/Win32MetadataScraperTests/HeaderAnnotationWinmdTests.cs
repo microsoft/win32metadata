@@ -23,6 +23,66 @@ namespace Win32MetadataScraperTests
     public class HeaderAnnotationWinmdTests
     {
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", 0)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 0)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 0)]
+        [InlineData("x86", "i686-pc-windows-msvc", 1)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 1)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 1)]
+        [InlineData("x86", "i686-pc-windows-msvc", 2)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 2)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 2)]
+        public void PointerSizedHeaderAliasesComposeWithRetainedStorage(string architecture, string target, int mappingStyle)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                HeaderAnnotationTests.PointerSizedTypedefDeclarations,
+                extraSettings: HeaderAnnotationTests.PointerSizedTypedefSettings(mappingStyle));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "autotypes.modified.cs"), @"
+using System;
+using Windows.Win32.Foundation.Metadata;
+namespace Test {
+[NativeTypedef] public partial struct UNSIGNED_ALIAS { public UIntPtr Value; }
+[NativeTypedef] public partial struct SIGNED_ALIAS { public IntPtr Value; }
+[NativeTypedef] public partial struct FIXED_SIGNED { public long Value; }
+[NativeTypedef] public partial struct FIXED_UNSIGNED { public ulong Value; }
+}");
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            foreach (string name in new[] { "UNSIGNED_BASE", "UNSIGNED_ALIAS" })
+                Check(name, "UIntPtr");
+            foreach (string name in new[] { "UNSIGNED_POINTER", "UNSIGNED_MAPPED_POINTER", "UNSIGNED_OTHER_POINTER" })
+                Check(name, "UIntPtr*");
+            Check("UNSIGNED_POINTER_POINTER", "UIntPtr**");
+            foreach (string name in new[] { "SIGNED_BASE", "SIGNED_ALIAS" })
+                Check(name, "IntPtr");
+            Check("SIGNED_POINTER", "IntPtr*");
+            Check("FIXED_SIGNED", "Int64");
+            Check("FIXED_UNSIGNED", "UInt64");
+            Check(mappingStyle == 0 ? "NOMINAL_FIRST" : "RENAMED_FIRST", "UInt32");
+            Check("NOMINAL_SECOND", "UInt32");
+            Assert.Equal(new byte[] { 0x06, 0x19 },
+                reader.GetBlobBytes(Value("UNSIGNED_ALIAS").Signature));
+            Assert.Equal(new byte[] { 0x06, 0x18 },
+                reader.GetBlobBytes(Value("SIGNED_ALIAS").Signature));
+            AssertStringAttribute(reader, FindType(reader, "UNSIGNED_ALIAS").GetCustomAttributes(),
+                "AlsoUsableForAttribute", "UNSIGNED_BASE");
+            var backing = FindType(reader, "FIXED_ENUM").GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "value__");
+            Assert.Equal(architecture == "x86" ? "UInt32" : "UInt64",
+                backing.DecodeSignature(new SignatureNames(), null));
+            AssertMetadataClosure(reader);
+
+            FieldDefinition Value(string name) => FindType(reader, name).GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "Value");
+            void Check(string name, string expected)
+            {
+                Assert.Equal(expected, Value(name).DecodeSignature(new SignatureNames(), null));
+                AssertHasAttribute(reader, FindType(reader, name).GetCustomAttributes(), "NativeTypedefAttribute");
+            }
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
