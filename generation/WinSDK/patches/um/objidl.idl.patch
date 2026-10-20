@@ -55,6 +55,15 @@
  [
      object,
      uuid(00000010-0000-0000-C000-000000000046)
+@@ -398,7 +407,7 @@
+ 
+     HRESULT Register
+     (
+-        [in] DWORD grfFlags,
++        [annotation("_Win32_AssociatedEnum_(ROT_FLAGS)")] [in] DWORD grfFlags,
+         [in, unique] IUnknown *punkObject,
+         [in, unique] IMoniker *pmkObjectName,
+         [out] DWORD *pdwRegister
 @@ -445,6 +454,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")

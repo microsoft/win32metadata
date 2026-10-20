@@ -2995,31 +2995,6 @@
     ]
   },
   {
-    "name": "BG_TOKEN",
-    "members": [
-      {
-        "name": "BG_TOKEN_LOCAL_FILE",
-        "value": "1"
-      },
-      {
-        "name": "BG_TOKEN_NETWORK",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IBitsTokenOptions",
-        "method": "SetHelperTokenFlags",
-        "parameter": "UsageFlags"
-      },
-      {
-        "interface": "IBitsTokenOptions",
-        "method": "GetHelperTokenFlags",
-        "parameter": "pFlags"
-      }
-    ]
-  },
-  {
     "addUsesTo": "MSV_SUB_AUTHENTICATION_FILTER",
     "uses": []
   },
@@ -3211,10 +3186,6 @@
       {
         "method": "RegGetValueW",
         "parameter": "pdwType"
-      },
-      {
-        "method": "CryptSetOIDFunctionValue",
-        "parameter": "dwValueType"
       }
     ]
   },
@@ -3774,18 +3745,7 @@
     "uses": []
   },
   {
-    "name": "IMAGE_LIST_ITEM_FLAGS",
-    "namespace": "Windows.Win32.UI.Controls",
-    "members": [
-      {
-        "name": "ILIF_ALPHA",
-        "value": "1"
-      },
-      {
-        "name": "ILIF_LOWQUALITY",
-        "value": "2"
-      }
-    ],
+    "addUsesTo": "IMAGE_LIST_ITEM_FLAGS",
     "uses": [
       {
         "interface": "IImageList",
@@ -5077,13 +5037,7 @@
   {
     "addUsesTo": "STGM",
     "namespace": "Windows.Win32.System.Com",
-    "uses": [
-      {
-        "interface": "IFunctionInstance",
-        "method": "OpenPropertyStore",
-        "parameter": "dwStgAccess"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "STGFMT",
@@ -5092,13 +5046,7 @@
   },
   {
     "addUsesTo": "ROT_FLAGS",
-    "uses": [
-      {
-        "interface": "IRunningObjectTable",
-        "method": "Register",
-        "parameter": "grfFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "ISC_REQ_FLAGS",
@@ -5477,31 +5425,6 @@
     "addUsesTo": "LOAD_PICTURE_FLAGS",
     "namespace": "Windows.Win32.System.Ole",
     "uses": []
-  },
-  {
-    "name": "EMPTY_VOLUME_CACHE_FLAGS",
-    "autoPopulate": {
-      "filter": "EVCF_",
-      "header": "emptyvc.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "interface": "IEmptyVolumeCache2",
-        "method": "InitializeEx",
-        "parameter": "pdwFlags"
-      },
-      {
-        "interface": "IEmptyVolumeCache",
-        "method": "Initialize",
-        "parameter": "pdwFlags"
-      },
-      {
-        "interface": "IEmptyVolumeCache",
-        "method": "Deactivate",
-        "parameter": "pdwFlags"
-      }
-    ]
   },
   {
     "addUsesTo": "UIA_PATTERN_ID",

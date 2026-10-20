@@ -1,16 +1,17 @@
 diff --git a/um/bits4_0.idl b/um/bits4_0.idl
-index db102204..e9ff3e7e 100644
+index db102204..6a9905be 100644
 --- a/um/bits4_0.idl
 +++ b/um/bits4_0.idl
-@@ -13,6 +13,7 @@ Abstract:
+@@ -13,6 +13,8 @@ Abstract:
  
  --*/
  
 +#include <sal.h>
++cpp_quote("#include <sal.h>")
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -38,6 +39,7 @@ bb6df572-cace-11dc-9992-0019b93a3a84
+@@ -38,6 +40,7 @@ bb6df572-cace-11dc-9992-0019b93a3a84
  bb6df573-cace-11dc-9992-0019b93a3a84
  */
  
@@ -18,7 +19,7 @@ index db102204..e9ff3e7e 100644
  [
      uuid(9a2584c3-f7d2-457a-9a5e-22b67bffc7d2),
      helpstring("IBitsTokenOptions"),
-@@ -74,6 +76,7 @@ interface IBitsTokenOptions : IUnknown
+@@ -74,6 +77,7 @@ interface IBitsTokenOptions : IUnknown
  };
  
  
@@ -26,3 +27,15 @@ index db102204..e9ff3e7e 100644
  [
      uuid(ef7e0655-7888-4960-b0e5-730846e03492),
      helpstring("IBackgroundCopyFile4 interface"),
+@@ -114,6 +118,11 @@ library BackgroundCopyManager4_0
+     interface IEnumBitsPeers;
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_Enum_(BG_TOKEN, unsigned int, BG_TOKEN_LOCAL_FILE, BG_TOKEN_NETWORK);")
++cpp_quote("#endif")
++_Win32_AnnotateParameter_(IBitsTokenOptions::SetHelperTokenFlags, UsageFlags, _Win32_AssociatedEnum_(BG_TOKEN))
++_Win32_AnnotateParameter_(IBitsTokenOptions::GetHelperTokenFlags, pFlags, _Win32_AssociatedEnum_(BG_TOKEN))
+ cpp_quote("#include \"bits5_0.h\"")
+ 
+ 

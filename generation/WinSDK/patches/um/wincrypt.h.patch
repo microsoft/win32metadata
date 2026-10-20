@@ -1,5 +1,5 @@
 diff --git a/um/wincrypt.h b/um/wincrypt.h
-index 924c87c4..3fe0a3ae 100644
+index 924c87c4..d5641a61 100644
 --- a/um/wincrypt.h
 +++ b/um/wincrypt.h
 @@ -32,6 +32,15 @@
@@ -990,6 +990,15 @@ index 924c87c4..3fe0a3ae 100644
  WINCRYPT32API
  BOOL
  WINAPI
+@@ -6185,7 +6528,7 @@ CryptSetOIDFunctionValue(
+     _In_ LPCSTR pszFuncName,
+     _In_ LPCSTR pszOID,
+     _In_opt_ LPCWSTR pwszValueName,
+-    _In_ DWORD dwValueType,
++    _Win32_AssociatedEnum_(REG_VALUE_TYPE) _In_ DWORD dwValueType,
+     _In_reads_bytes_opt_(cbValueData) const BYTE *pbValueData,
+     _In_ DWORD cbValueData
+     );
 @@ -6205,6 +6548,8 @@ CryptSetOIDFunctionValue(
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -3553,6 +3562,15 @@ index 924c87c4..3fe0a3ae 100644
  WINCRYPT32API
  VOID
  WINAPI
+@@ -17279,7 +18244,7 @@ BOOL
+ WINAPI
+ CryptCreateAsyncHandle (
+     _In_ DWORD dwFlags,
+-    _Out_ PHCRYPTASYNC phAsync
++    _Win32_RAIIFree_(CryptCloseAsyncHandle, -1, 0) _Out_ PHCRYPTASYNC phAsync
+     );
+ 
+ WINCRYPT32API
 @@ -17732,6 +18697,7 @@ typedef struct _CRYPT_RETRIEVE_AUX_INFO {
  #pragma region Desktop Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -3688,7 +3706,7 @@ index 924c87c4..3fe0a3ae 100644
      _In_opt_ LPCSTR pszPubKeyOID,
      _In_reads_bytes_(cbPubKeyStruc) const PUBLICKEYSTRUC *pPubKeyStruc,
      _In_ DWORD cbPubKeyStruc,
-@@ -19525,6 +20524,8 @@ typedef struct _CERT_CHAIN_ENGINE_CONFIG {
+@@ -19525,19 +20524,22 @@ typedef struct _CERT_CHAIN_ENGINE_CONFIG {
  #define CERT_CHAIN_EXCLUSIVE_ENABLE_CA_FLAG                 0x00000001
  #endif
  
@@ -3697,7 +3715,14 @@ index 924c87c4..3fe0a3ae 100644
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -19538,6 +20539,7 @@ CertCreateCertificateChainEngine (
+ WINAPI
+ CertCreateCertificateChainEngine (
+     _In_ PCERT_CHAIN_ENGINE_CONFIG pConfig,
+-    _Out_ HCERTCHAINENGINE* phChainEngine
++    _Win32_RAIIFree_(CertFreeCertificateChainEngine, -1, 0) _Out_ HCERTCHAINENGINE* phChainEngine
+     );
+ 
+ //
  // Free a certificate trust engine
  //
  
