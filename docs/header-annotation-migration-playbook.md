@@ -94,6 +94,12 @@ The separately qualified placement repair adds no facts or retirements.
 
 ### Logical enum members and retained enum names
 
+Preserve materialized membership when replacing legacy auto-populated groups.
+The constants scraper assigns a macro to the first matching filter in JSON order.
+Expanding overlapping filters independently into header groups can add duplicate
+members that OLD never emitted. Keep the SDK macros and their existing owning
+group; compare complete ordered membership rather than filter text alone.
+
 An actual header-group member may share its name with an independent retained
 enum type. The constants stage recognizes producer-owned members in their
 resolved constant namespace while preserving both enum identities and normal
@@ -105,6 +111,17 @@ Checked primitive conversions preserve storage and expose overflow. Valid value
 bindings, foreign types, ambiguous groups and ordinary native enums remain
 unchanged. Include the complete normal constants scrape and emission: a small
 group-only image does not prove the residual constants closure.
+
+When a retained legacy or manual enum has the same fully qualified identity as a
+header-owned logical group, the emitter composes their temporary compiler-input
+definitions. It evaluates legacy literals, implicit storage and member aliases,
+preserves native member order and retained legacy members, and keeps the original
+manual source, JSON and consumer remaps. Storage, Flags, values and annotations
+must agree; conflicting facts remain explicit errors. Equivalent Flags spellings
+are combined only after checking that the legacy annotation resolves to
+`System.FlagsAttribute`. Different namespaces and legacy-only duplicate
+definitions are not normalized away. This is definition composition, not a
+source migration or authorization to retire retained uses.
 
 ### SDK-wide inventory and source queue
 
@@ -347,6 +364,15 @@ generation. Supply only source-owned definitions or separately reviewed context,
 not invented carriers. The existing crossarch task uses `-m32` for x86, `-m64`
 for x64 and `-m64` plus `_ARM64_` for arm64; three ordinary jobs do not constitute
 a new ARM64-target ABI qualification.
+
+An emitter-only repair may reuse completed, frozen `Headers` and `Constants`
+inputs without replaying unchanged upstream stages. Copy their exact source and
+response-file inputs into a new downstream directory, excluding the old derived
+`obj` tree: the emitter deletes and rewrites that tree. Keep the original inputs
+read-only, bind the copied hashes and captured normal invocation, and bind a new
+coherent repaired runtime separately. The repaired runtime is not identical to
+the original producer runtime. Successful emission still requires independent
+integrity, unsuppressed comparison and source-backed review before API acceptance.
 
 ### Lossless aggregate review batches
 
