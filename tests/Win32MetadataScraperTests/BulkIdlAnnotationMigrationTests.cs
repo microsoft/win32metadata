@@ -1577,6 +1577,347 @@ namespace Win32MetadataScraperTests
         private static object Floor(string symbol, string version = "windows6.1") =>
             new { category = "supportedOS", symbol, value = symbol + "=SupportedOSPlatform(\"" + version + "\")" };
 
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceParameterBatchPreservesActualDefaultAndNativeDeclarations(bool enabled)
+        {
+            (string Interface, string Method, string Parameter, string Attribute, string Prototype)[] parameters =
+            {
+                ("IAudioClient", "GetService", "ppv", "ComOutPtr",
+                    "HRESULT GetService([in, annotation(\"_In_\")] REFIID riid, [out, iid_is(riid), annotation(\"_Out_\")] void **ppv);"),
+                ("IMMDevice", "Activate", "ppInterface", "ComOutPtr",
+                    "HRESULT Activate([in] REFIID iid, [in] DWORD dwClsCtx, [in, unique] PROPVARIANT *pActivationParams, [out, iid_is(iid), annotation(\"_Out_\")] void **ppInterface);"),
+                ("ITfCandidateListUIElement", "GetPageIndex", "pIndex", "Optional",
+                    "HRESULT GetPageIndex([out, size_is(uSize), length_is(*puPageCnt)] UINT *pIndex, [in] UINT uSize, [out] UINT *puPageCnt);"),
+                ("IClassFactory2", "CreateInstanceLic", "ppvObj", "ComOutPtr",
+                    "[local] HRESULT CreateInstanceLic([in, unique] IUnknown *pUnkOuter, [in, unique] IUnknown *pUnkReserved, [in] REFIID riid, [in] BSTR bstrKey, [out, iid_is(riid), annotation(\"__RPC__deref_out_opt\")] PVOID *ppvObj);"),
+                ("IWICBitmapDecoderInfo", "CreateInstance", "ppIBitmapDecoder", "ComOutPtr",
+                    "HRESULT CreateInstance([out] IWICBitmapDecoder **ppIBitmapDecoder);"),
+                ("IWICBitmapEncoderInfo", "CreateInstance", "ppIBitmapEncoder", "ComOutPtr",
+                    "HRESULT CreateInstance([out] IWICBitmapEncoder **ppIBitmapEncoder);"),
+                ("IWICImagingFactory", "CreateDecoderFromFilename", "pguidVendor", "Optional",
+                    "HRESULT CreateDecoderFromFilename([in, string] LPCWSTR wzFilename, [in, unique] const GUID *pguidVendor, [in, annotation(\"_Win32_AssociatedEnum_(GENERIC_ACCESS_RIGHTS)\")] DWORD dwDesiredAccess, [in] WICDecodeOptions metadataOptions, [out] IWICBitmapDecoder **ppIDecoder);"),
+                ("IWICBitmapSource", "CopyPixels", "prc", "Optional",
+                    "HRESULT CopyPixels([in, unique] const WICRect *prc, [in] UINT cbStride, [in] UINT cbBufferSize, [out, size_is(cbBufferSize)] BYTE *pbBuffer);"),
+            };
+            string declarations = string.Concat(parameters.Select(value =>
+                $"interface {value.Interface} : IUnknown {{\n{value.Prototype}\n}}\n"));
+            string source = "#if FEATURE\ncpp_quote(\"#if NATIVE_FAMILY\")\n" + declarations +
+                "cpp_quote(\"#endif\")\n#endif\n#ifdef SAPI_AUTOMATION\n#include \"sapiaut.idl\"\n#endif\ninterface IAfter : IUnknown {\n};\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(parameters.Select(value => ParameterOverride(
+                $"{value.Interface}::{value.Method}::{value.Parameter}", value.Attribute))
+                .Append(ParameterOverride("ISpeechObjectToken::Object", "ComOutPtr")).ToArray());
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: enabled);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(enabled ? 8 : 0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(enabled ? 1 : 9, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            Assert.Equal(enabled ? "complete-top-level-interface" : "unchanged-default",
+                report.RootElement.GetProperty("parameterCarrierPolicy").GetString());
+            Assert.False(report.RootElement.GetProperty("normalParserActivation").GetProperty("applied").GetBoolean());
+            if (enabled)
+            {
+                string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+                Assert.DoesNotContain("win32metadata_annotations.h", authored);
+                foreach (var value in parameters)
+                {
+                    Assert.Contains(value.Prototype, authored);
+                    string carrier = $"_Win32_AnnotateParameter_({value.Interface}::{value.Method}, {value.Parameter}, _Win32_{value.Attribute}_(true))";
+                    Assert.Contains(carrier, authored);
+                    var declaration = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")
+                        .EnumerateArray().Single(row => row.GetProperty("fact").GetProperty("symbol").GetString() ==
+                            $"{value.Interface}::{value.Method}::{value.Parameter}").GetProperty("declaration");
+                    Assert.Equal($"{value.Interface}::{value.Method}::{value.Parameter}",
+                        declaration.GetProperty("nativeQualifiedName").GetString());
+                }
+                Assert.Equal(source, Regex.Replace(authored,
+                    "(?m)^(?:#include <sal\\.h>|cpp_quote\\(\"#include <sal\\.h>\"\\)|_Win32_AnnotateParameter_\\([^\\r\\n]*)\\r?\\n", ""));
+                var patch = Fixture.Command("git", fixture.RepositoryRoot, "apply", "--unsafe-paths", "-p1",
+                    "--directory=" + fixture.Sdk, "--whitespace=error-all", "--check", "--",
+                    Path.Combine(result.OutputDirectory, "patches", "um", "sample.idl.patch"));
+                Assert.True(patch.ExitCode == 0, patch.Error);
+            }
+            else
+                Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData("unique", 1, null)]
+        [InlineData("ambiguous", 0, "requires-one-original-native-parameter-found-2")]
+        [InlineData("property", 0, "requires-actual-native-property-method-identity")]
+        [InlineData("qualified-property", 0, "requires-actual-native-property-method-identity")]
+        [InlineData("missing", 0, "requires-one-original-native-parameter-found-0")]
+        public void CompleteInterfaceShortSelectorsRequireActualUniqueNonPropertyIdentity(string form, int authored, string reason)
+        {
+            const string create = "[id(DISPID_SOTCreateInstance)] HRESULT CreateInstance([in, defaultvalue(NULL)] IUnknown *pUnkOuter, " +
+                "[in, defaultvalue(STCAll)] SpeechTokenContext ClsContext, [out, retval] IUnknown **Object);\n";
+            const string display = "[id(DISPID_SOTDisplayUI)] HRESULT DisplayUI([in] long hWnd, [in] BSTR Title, [in] const BSTR TypeOfUI, " +
+                "[in, defaultvalue(NULL)] const VARIANT *ExtraData, [in, defaultvalue(NULL)] IUnknown *Object);\n";
+            string methods = form.Contains("property", StringComparison.Ordinal)
+                ? "[propget]\n#if FEATURE\nHRESULT Object([out, retval] IUnknown **Object);\n#endif\n"
+                : form == "missing" ? "HRESULT Read([out] IUnknown **Other);\n" : create + (form == "ambiguous" ? display : "");
+            string source = "interface ISpeechObjectToken : IDispatch {\n" + methods + "};\ninterface IAfter : IUnknown {\n};\n";
+            string symbol = form == "qualified-property" ? "ISpeechObjectToken::Object::Object" : "ISpeechObjectToken::Object";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { ParameterOverride(symbol, "ComOutPtr") });
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(authored, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            var disposition = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0];
+            if (reason != null)
+            {
+                Assert.Equal(reason, disposition.GetProperty("reason").GetString());
+                Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            }
+            else
+            {
+                Assert.Equal("ISpeechObjectToken::CreateInstance::Object",
+                    disposition.GetProperty("declaration").GetProperty("nativeQualifiedName").GetString());
+                Assert.DoesNotContain("get_Object", File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl")));
+            }
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData("library Context {\n", "};\n")]
+        [InlineData("cpp_quote(\"namespace Context {\")\n", "cpp_quote(\"}\")\n")]
+        [InlineData("cpp_quote(\"#if FEATURE\")\n", "")]
+        [InlineData("cpp_quote(\"}\")\n", "")]
+        public void CompleteInterfaceParameterPolicyRejectsOpenOrMismatchedScopes(string prefix, string suffix)
+        {
+            string source = prefix + "interface INative : IUnknown {\nHRESULT Read([out] void **value);\n};\n" +
+                suffix + "interface IAfter : IUnknown {\n};\n";
+            if (prefix.Contains("#if", StringComparison.Ordinal))
+                source = source.Replace("HRESULT Read([out] void **value);\n", "HRESULT Read([out] void **value);\ncpp_quote(\"#endif\")\n", StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "ComOutPtr") });
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal("requires-complete-interface-parameter-carrier-in-matching-global-conditional-scope",
+                report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0].GetProperty("reason").GetString());
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceParameterPolicyChecksTheParameterConditionalFrame(bool trailingRegion)
+        {
+            string source = "interface INative : IUnknown {\nHRESULT Read(\n#if FEATURE\n[out] void **value,\n#endif\n[in] long other);\n};\n" +
+                (trailingRegion ? "cpp_quote(\"/* existing global region */\")\n" : "");
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "ComOutPtr") });
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal("requires-complete-interface-parameter-carrier-in-matching-global-conditional-scope",
+                report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0].GetProperty("reason").GetString());
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceParameterPolicyUsesAnExistingGlobalRegionAfterAClosedLibrary(bool trailingRegion)
+        {
+            string source = "library Context {\ninterface INative : IUnknown {\nHRESULT Read([out] void **value);\n};\n};\n" +
+                (trailingRegion ? "cpp_quote(\"/* existing global region */\")\n" : "");
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "ComOutPtr") });
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(trailingRegion ? 1 : 0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            if (trailingRegion)
+                Assert.Contains("};\n};\n_Win32_AnnotateParameter_(INative::Read, value, _Win32_ComOutPtr_(true))\ncpp_quote(",
+                    File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl")));
+        }
+
+        [Theory]
+        [InlineData("Optional")]
+        [InlineData("ComOutPtr")]
+        [InlineData("AnnotateParameter")]
+        public void CompleteInterfaceParameterPolicyRequiresTheRealSelectedVocabulary(string missing)
+        {
+            const string source = "interface INative : IUnknown {\nHRESULT Read([out, annotation(\"_COM_Outptr_\")] void **value);\n};\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            string attribute = missing == "ComOutPtr" ? "ComOutPtr" : "Optional";
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", attribute) });
+            string header = Path.Combine(fixture.RepositoryRoot, "generation", "WinSDK", "RecompiledIdlHeaders", "shared", "win32metadata_annotations.h");
+            File.WriteAllText(fixture.AnnotationHeader, File.ReadAllText(header).Replace("_Win32_" + missing + "_",
+                "_Unavailable_" + missing + "_", StringComparison.Ordinal));
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true, annotationHeader: fixture.AnnotationHeader);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(missing == "AnnotateParameter" ? "parameter-carrier-not-in-selected-annotation-vocabulary" :
+                "parameter-override-not-in-selected-annotation-vocabulary",
+                report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0].GetProperty("reason").GetString());
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceParameterPolicyLeavesFieldsReturnsAndUnknownTargetsResidual(bool trailingRegion)
+        {
+            string source = "typedef struct RECORD { long value; } RECORD;\ninterface INative : IUnknown {\nHRESULT Read([out] long *value);\n};\n" +
+                (trailingRegion ? "cpp_quote(\"/* global region */\")\n" : "");
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            object[] facts =
+            {
+                ParameterOverride("RECORD::value", "Optional"),
+                ParameterOverride("INative::Read::return", "Optional"),
+                ParameterOverride("INative::Read::missing", "ComOutPtr"),
+                ParameterOverride("INative::Missing::value", "Optional"),
+                ParameterOverride("INative::Read::value", "UnknownAttribute"),
+            };
+            fixture.WriteMap(facts);
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(facts.Length, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            Assert.Equal(JsonSerializer.Serialize(facts), JsonSerializer.Serialize(report.RootElement.GetProperty("owners")[0]
+                .GetProperty("dispositions").EnumerateArray().Select(row => row.GetProperty("fact")).ToArray()));
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceParameterPolicyPreservesExistingMethodAndRetvalBehavior(bool enabled)
+        {
+            const string source = "interface INative : IUnknown {\nHRESULT Read([out] long *value);\n};\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[]
+            {
+                ParameterOverride("INative::Read", "CanReturnMultipleSuccessValues"),
+                ParameterOverride("INative::Read::value", "RetVal"),
+            });
+            var result = fixture.Run(allowCompleteInterfaceParameterCarriers: enabled);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(2, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            Assert.Contains("_Win32_AnnotateMethod_(INative::Read, _Win32_PreserveResult_)", authored);
+            Assert.Contains("[annotation(\"_Win32_Retval_\")] [out] long *value", authored);
+            Assert.DoesNotContain("cpp_quote", authored);
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Fact]
+        public void CompleteInterfaceParameterPolicyPreservesPositiveAndNegativeQuotedNativeOverrides()
+        {
+            const string source = "cpp_quote(\"STDAPI Native(_In_opt_ unsigned options, _Outptr_ void** output, _COM_Outptr_ void** nativeCom);\")\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[]
+            {
+                ParameterOverride("Native::options", "-Optional"),
+                ParameterOverride("Native::output", "ComOutPtr"),
+                ParameterOverride("Native::nativeCom", "-ComOutPtr"),
+            });
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(3, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            Assert.Contains("_Win32_Optional_(false) _In_opt_ unsigned options", authored);
+            Assert.Contains("_Win32_ComOutPtr_(true) _Outptr_ void** output", authored);
+            Assert.Contains("_Win32_ComOutPtr_(false) _COM_Outptr_ void** nativeCom", authored);
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceParameterPolicyPreservesCumulativeIncludesAndCarriers(bool sharedSal)
+        {
+            const string source = "#include <sal.h>\n#include <win32metadata_annotations.h>\n" +
+                "cpp_quote(\"#include <sal.h>\")\ninterface INative : IUnknown {\nHRESULT Read([in] long value);\n};\n" +
+                "_Win32_AnnotateMethod_(INative::Read, _Win32_PreserveResult_)\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "Optional") });
+            var result = fixture.Run(sharedSalBootstrap: sharedSal, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(1, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            Assert.Equal(source, authored.Replace("_Win32_AnnotateParameter_(INative::Read, value, _Win32_Optional_(true))\n",
+                "", StringComparison.Ordinal));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CompleteInterfaceSharedBootstrapReusesCumulativeSalAfterEarlierTokens(bool sharedSal)
+        {
+            const string source = "import \"unknwn.idl\";\n#include <sal.h>\ncpp_quote(\"#include \\\"sal.h\\\"\")\n" +
+                "interface INative : IUnknown {\nHRESULT Read([in] long value);\n};\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "Optional") });
+            var result = fixture.Run(sharedSalBootstrap: sharedSal, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            Assert.Equal(sharedSal ? 1 : 2, Regex.Matches(authored, "(?m)^#include <sal\\.h>$").Count);
+            Assert.Single(Regex.Matches(authored, "(?m)^cpp_quote\\(\"#include"));
+            Assert.Contains(source[..source.IndexOf("interface", StringComparison.Ordinal)], authored);
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        [Theory]
+        [InlineData("\n", false)]
+        [InlineData("\r\n", false)]
+        [InlineData("\n", true)]
+        [InlineData("\r\n", true)]
+        public void CompleteInterfaceParameterPolicyPreservesEofEncodingAndOriginalBytes(string newline, bool bom)
+        {
+            string source = ("// Copyright sample " + (char)0xA9 + "\ninterface INative : IUnknown {\nHRESULT Read([out] void **value);\n}")
+                .Replace("\n", newline, StringComparison.Ordinal);
+            byte[] bytes = Encoding.Latin1.GetBytes(source);
+            if (bom)
+                bytes = new byte[] { 239, 187, 191 }.Concat(bytes).ToArray();
+            using var fixture = new Fixture(bytes);
+            fixture.WriteMap(new[] { ParameterOverride("INative::Read::value", "ComOutPtr") });
+            var result = fixture.Run(sharedSalBootstrap: true, allowCompleteInterfaceParameterCarriers: true);
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = Encoding.Latin1.GetString(File.ReadAllBytes(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl")));
+            string recovered = authored.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
+                .Replace("cpp_quote(\"#include <sal.h>\")" + newline, "", StringComparison.Ordinal)
+                .Replace(newline + "_Win32_AnnotateParameter_(INative::Read, value, _Win32_ComOutPtr_(true))" + newline, "", StringComparison.Ordinal);
+            Assert.Equal(bytes, Encoding.Latin1.GetBytes(recovered));
+            Assert.Equal(bytes, File.ReadAllBytes(fixture.Source));
+        }
+
+        [Fact]
+        public void CompleteInterfaceParameterOptionsFollowEveryExistingPositionalParameter()
+        {
+            string script = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "scripts", "Convert-SdkIdlAnnotations.ps1").Replace("'", "''", StringComparison.Ordinal);
+            var result = Fixture.Command("pwsh", WinHttpMigrationTests.RepositoryRoot, "-NoProfile", "-NonInteractive", "-Command",
+                "$tokens=$null; $errors=$null; $ast=[Management.Automation.Language.Parser]::ParseFile('" + script +
+                "',[ref]$tokens,[ref]$errors); if($errors.Count){throw ($errors.Message -join '; ')}; " +
+                "ConvertTo-Json -Compress -InputObject @($ast.ParamBlock.Parameters | ForEach-Object {$_.Name.VariablePath.UserPath})");
+            Assert.True(result.ExitCode == 0, result.Error);
+            Assert.Equal(new[]
+            {
+                "InputMap", "SdkIncludeRoot", "OutputDirectory", "Original", "SdkProjectRoot", "Apply", "AnnotationHeader",
+                "SharedSalBootstrap", "AllowCompleteInterfaceParameterCarriers",
+            }, JsonSerializer.Deserialize<string[]>(result.Error));
+        }
+
+        private static object ParameterOverride(string symbol, string attribute) =>
+            new { category = "declaration-attribute-override", symbol, value = symbol + "=[" + attribute + "]" };
+
         private sealed class Fixture : IDisposable
         {
             private readonly string directory = Path.Combine(Path.GetTempPath(), "Win32MetadataIdl-" + Guid.NewGuid().ToString("N"));
@@ -1606,6 +1947,7 @@ namespace Win32MetadataScraperTests
             public string Sdk { get; }
             public string Source { get; }
             public string Project { get; }
+            public string AnnotationHeader => Path.Combine(this.directory, "annotation-input.h");
 
             public void WriteMap(object[] facts, string original = @"um\sample.idl", bool stale = false)
             {
@@ -1618,7 +1960,8 @@ namespace Win32MetadataScraperTests
                 }));
             }
 
-            public (int ExitCode, string Error, string OutputDirectory) Run(string output = null, bool apply = false)
+            public (int ExitCode, string Error, string OutputDirectory) Run(string output = null, bool apply = false,
+                bool sharedSalBootstrap = false, bool allowCompleteInterfaceParameterCarriers = false, string annotationHeader = null)
             {
                 output ??= Path.Combine(this.directory, "result-" + this.runs++);
                 var arguments = new List<string> { "-NoProfile", "-File",
@@ -1627,6 +1970,15 @@ namespace Win32MetadataScraperTests
                     "-OutputDirectory", output, "-SdkProjectRoot", this.Project };
                 if (apply)
                     arguments.Add("-Apply");
+                if (sharedSalBootstrap)
+                    arguments.Add("-SharedSalBootstrap");
+                if (allowCompleteInterfaceParameterCarriers)
+                    arguments.Add("-AllowCompleteInterfaceParameterCarriers");
+                if (annotationHeader != null)
+                {
+                    arguments.Add("-AnnotationHeader");
+                    arguments.Add(annotationHeader);
+                }
                 var result = Command("pwsh", this.RepositoryRoot, arguments.ToArray());
                 return (result.ExitCode, result.Error, output);
             }

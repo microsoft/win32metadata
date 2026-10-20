@@ -11,7 +11,39 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipIsEmptyRegion(GpRegion *region, GpGraphics *graphics,
-@@ -1337,7 +1338,7 @@ GdipCreateBitmapFromHBITMAP(HBITMAP hbm,
+@@ -1159,6 +1160,19 @@ GdipCloneImage(GpImage *image, GpImage **cloneImage);
+ GpStatus WINGDIPAPI
+ GdipDisposeImage(GpImage *image);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipLoadImageFromStream, image,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipLoadImageFromFile, image,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipLoadImageFromStreamICM, image,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipLoadImageFromFileICM, image,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneImage, cloneImage,
++    _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSaveImageToFile(GpImage *image, GDIPCONST WCHAR* filename,
+                     GDIPCONST CLSID* clsidEncoder, 
+@@ -1214,6 +1228,11 @@ GdipGetImageThumbnail(GpImage *image, UINT thumbWidth, UINT thumbHeight,
+                       GpImage **thumbImage,
+                       GetThumbnailImageAbort callback, VOID * callbackData);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetImageThumbnail, thumbImage,
++    _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetEncoderParameterListSize(GpImage *image, GDIPCONST CLSID* clsidEncoder,
+                                 UINT* size);
+@@ -1337,7 +1356,7 @@ GdipCreateBitmapFromHBITMAP(HBITMAP hbm,
  
  GpStatus WINGDIPAPI
  GdipCreateHBITMAPFromBitmap(GpBitmap* bitmap,
@@ -20,7 +52,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
                              ARGB background);
  
  GpStatus WINGDIPAPI
-@@ -1346,7 +1347,7 @@ GdipCreateBitmapFromHICON(HICON hicon,
+@@ -1346,7 +1365,7 @@ GdipCreateBitmapFromHICON(HICON hicon,
  
  GpStatus WINGDIPAPI
  GdipCreateHICONFromBitmap(GpBitmap* bitmap,
@@ -29,7 +61,55 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipCreateBitmapFromResource(HINSTANCE hInstance,
-@@ -1692,7 +1693,7 @@ GpStatus WINGDIPAPI
+@@ -1368,6 +1387,35 @@ GdipCloneBitmapAreaI(INT x,
+                      GpBitmap *srcBitmap,
+                      GpBitmap **dstBitmap);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromStream, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromFile, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromStreamICM, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromFileICM, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromScan0, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromGraphics, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromDirectDrawSurface, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromGdiDib, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromHBITMAP, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromHICON, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateBitmapFromResource, bitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneBitmapArea, dstBitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneBitmapAreaI, dstBitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipBitmapLockBits(GpBitmap* bitmap,
+                    GDIPCONST GpRect* rect,
+@@ -1438,6 +1486,11 @@ GdipBitmapCreateApplyEffect(
+     INT *auxDataSize
+ );
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipBitmapCreateApplyEffect, outputBitmap,
++    _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipBitmapGetHistogram(
+     GpBitmap* bitmap, 
+@@ -1692,7 +1745,7 @@ GpStatus WINGDIPAPI
  GdipGetNearestColor(GpGraphics *graphics, ARGB* argb);
  
  // Creates the Win9x Halftone Palette (even on NT) with correct Desktop colors
@@ -38,7 +118,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GdipCreateHalftonePalette();
  
  GpStatus WINGDIPAPI
-@@ -2247,7 +2248,7 @@ GpStatus
+@@ -2247,7 +2300,7 @@ GpStatus
  WINGDIPAPI
  GdipGetHemfFromMetafile(
      GpMetafile *        metafile,
@@ -47,7 +127,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
      );
  
  GpStatus WINGDIPAPI
-@@ -2357,7 +2358,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
+@@ -2357,7 +2410,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
  GpStatus WINGDIPAPI
  GdipGetImageDecoders(_In_ UINT numDecoders,
                       _In_ UINT size,
@@ -56,7 +136,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEncoders) * sizeof(ImageCodecInfo)) UINT *size);
-@@ -2365,7 +2366,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
+@@ -2365,7 +2418,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
  GpStatus WINGDIPAPI
  GdipGetImageEncoders(_In_ UINT numEncoders,
                       _In_ UINT size,

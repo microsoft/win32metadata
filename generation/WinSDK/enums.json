@@ -2489,29 +2489,7 @@
   {
     "name": "CERT_EXIT_EVENT_MASK",
     "flags": true,
-    "members": [
-      {
-        "name": "EXITEVENT_CERTDENIED"
-      },
-      {
-        "name": "EXITEVENT_CERTISSUED"
-      },
-      {
-        "name": "EXITEVENT_CERTPENDING"
-      },
-      {
-        "name": "EXITEVENT_CERTRETRIEVEPENDING"
-      },
-      {
-        "name": "EXITEVENT_CERTREVOKED"
-      },
-      {
-        "name": "EXITEVENT_CRLISSUED"
-      },
-      {
-        "name": "EXITEVENT_SHUTDOWN"
-      }
-    ],
+    "members": [],
     "uses": []
   },
   {
@@ -5153,12 +5131,7 @@
     "addUsesTo": "STGM",
     "flags": true,
     "members": [],
-    "uses": [
-      {
-        "struct": "STATSTG",
-        "field": "grfMode"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "POINTERINACTIVE",

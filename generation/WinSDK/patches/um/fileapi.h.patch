@@ -1,6 +1,6 @@
 --- a/um/fileapi.h
 +++ b/um/fileapi.h
-@@ -13,10 +13,28 @@
+@@ -13,10 +13,29 @@
  #ifndef _APISETFILE_
  #define _APISETFILE_
  
@@ -25,11 +25,12 @@
 +
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +typedef unsigned int DEFINE_DOS_DEVICE_FLAGS;
++typedef unsigned int FILE_FLAGS_AND_ATTRIBUTES;
 +#endif
  
  #ifdef __cplusplus
  extern "C" {
-@@ -34,10 +52,21 @@
+@@ -34,10 +53,21 @@
  #define OPEN_ALWAYS         4
  #define TRUNCATE_EXISTING   5
  
@@ -51,7 +52,7 @@
  WINBASEAPI
  LONG
  WINAPI
-@@ -46,6 +75,8 @@
+@@ -46,6 +76,8 @@
      _In_ CONST FILETIME* lpFileTime2
      );
  
@@ -60,7 +61,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -54,6 +85,8 @@
+@@ -54,6 +86,8 @@
      _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
      );
  
@@ -69,7 +70,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -74,29 +107,33 @@
+@@ -74,29 +108,33 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -109,7 +110,7 @@
      _In_opt_ HANDLE hTemplateFile
      );
  
-@@ -112,11 +149,13 @@
+@@ -112,11 +150,13 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -124,7 +125,7 @@
      _In_ LPCWSTR lpDeviceName,
      _In_opt_ LPCWSTR lpTargetPath
      );
-@@ -131,6 +170,8 @@
+@@ -131,6 +171,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -133,7 +134,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -138,6 +179,8 @@
+@@ -138,6 +180,8 @@
      _In_ LPCSTR lpFileName
      );
  
@@ -142,7 +143,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -157,6 +200,8 @@
+@@ -157,6 +201,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -151,7 +152,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -174,6 +219,8 @@
+@@ -174,6 +220,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -160,7 +161,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -188,6 +235,8 @@
+@@ -188,6 +236,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -169,7 +170,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -201,6 +250,8 @@
+@@ -201,6 +251,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -178,7 +179,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -208,22 +259,26 @@
+@@ -208,22 +260,26 @@
      _In_ HANDLE hChangeHandle
      );
  
@@ -211,7 +212,7 @@
      );
  
  #ifdef UNICODE
-@@ -238,7 +293,9 @@
+@@ -238,7 +294,9 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -222,7 +223,7 @@
  HANDLE
  WINAPI
  FindFirstFileA(
-@@ -246,7 +303,9 @@
+@@ -246,7 +304,9 @@
      _Out_ LPWIN32_FIND_DATAA lpFindFileData
      );
  
@@ -233,7 +234,7 @@
  HANDLE
  WINAPI
  FindFirstFileW(
-@@ -262,7 +321,9 @@
+@@ -262,7 +322,9 @@
  
  #if (_WIN32_WINNT >= 0x0400)
  
@@ -244,7 +245,7 @@
  HANDLE
  WINAPI
  FindFirstFileExA(
-@@ -271,10 +332,12 @@
+@@ -271,10 +333,12 @@
      _Out_writes_bytes_(sizeof(WIN32_FIND_DATAA)) LPVOID lpFindFileData,
      _In_ FINDEX_SEARCH_OPS fSearchOp,
      _Reserved_ LPVOID lpSearchFilter,
@@ -261,7 +262,7 @@
  HANDLE
  WINAPI
  FindFirstFileExW(
-@@ -283,7 +346,7 @@
+@@ -283,7 +347,7 @@
      _Out_writes_bytes_(sizeof(WIN32_FIND_DATAW)) LPVOID lpFindFileData,
      _In_ FINDEX_SEARCH_OPS fSearchOp,
      _Reserved_ LPVOID lpSearchFilter,
@@ -270,7 +271,7 @@
      );
  
  #ifdef UNICODE
-@@ -300,7 +363,9 @@
+@@ -300,7 +364,9 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -281,7 +282,7 @@
  HANDLE
  WINAPI
  FindFirstVolumeW(
-@@ -312,6 +377,8 @@
+@@ -312,6 +378,8 @@
  #define FindFirstVolume FindFirstVolumeW
  #endif // !UNICODE
  
@@ -290,7 +291,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -325,6 +392,8 @@
+@@ -325,6 +393,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -299,7 +300,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -333,6 +402,8 @@
+@@ -333,6 +403,8 @@
      _Out_ LPWIN32_FIND_DATAA lpFindFileData
      );
  
@@ -308,7 +309,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -353,6 +424,8 @@
+@@ -353,6 +425,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -317,7 +318,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -366,6 +439,8 @@
+@@ -366,6 +440,8 @@
  #define FindNextVolume FindNextVolumeW
  #endif
  
@@ -326,7 +327,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -379,6 +454,8 @@
+@@ -379,6 +455,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -335,7 +336,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -386,6 +463,8 @@
+@@ -386,6 +464,8 @@
      _In_ HANDLE hFile
      );
  
@@ -344,7 +345,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -397,6 +476,8 @@
+@@ -397,6 +477,8 @@
      _Out_opt_ LPDWORD lpTotalNumberOfClusters
      );
  
@@ -353,7 +354,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -414,6 +495,8 @@
+@@ -414,6 +496,8 @@
  #define GetDiskFreeSpace  GetDiskFreeSpaceA
  #endif // !UNICODE
  
@@ -362,7 +363,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -424,6 +507,8 @@
+@@ -424,6 +508,8 @@
      _Out_opt_ PULARGE_INTEGER lpTotalNumberOfFreeBytes
      );
  
@@ -371,7 +372,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -565,6 +650,7 @@
+@@ -565,6 +651,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -379,7 +380,7 @@
  WINBASEAPI
  UINT
  WINAPI
-@@ -572,6 +658,7 @@
+@@ -572,6 +659,7 @@
      _In_opt_ LPCSTR lpRootPathName
      );
  
@@ -387,7 +388,7 @@
  WINBASEAPI
  UINT
  WINAPI
-@@ -594,6 +681,8 @@
+@@ -594,6 +682,8 @@
      DWORD nFileSizeLow;
  } WIN32_FILE_ATTRIBUTE_DATA, *LPWIN32_FILE_ATTRIBUTE_DATA;
  
@@ -396,7 +397,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -601,6 +690,8 @@
+@@ -601,6 +691,8 @@
      _In_ LPCSTR lpFileName
      );
  
@@ -405,7 +406,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -614,6 +705,8 @@
+@@ -614,6 +706,8 @@
  #define GetFileAttributes  GetFileAttributesA
  #endif // !UNICODE
  
@@ -414,7 +415,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -623,6 +716,8 @@
+@@ -623,6 +717,8 @@
      _Out_writes_bytes_(sizeof(WIN32_FILE_ATTRIBUTE_DATA)) LPVOID lpFileInformation
      );
  
@@ -423,7 +424,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -651,6 +746,8 @@
+@@ -651,6 +747,8 @@
      DWORD nFileIndexLow;
  } BY_HANDLE_FILE_INFORMATION, *PBY_HANDLE_FILE_INFORMATION, *LPBY_HANDLE_FILE_INFORMATION;
  
@@ -432,7 +433,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -665,6 +762,8 @@
+@@ -665,6 +763,8 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -441,7 +442,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -679,6 +778,8 @@
+@@ -679,6 +779,8 @@
  #pragma region Application Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -450,7 +451,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -687,7 +788,9 @@
+@@ -687,7 +789,9 @@
      _Out_ PLARGE_INTEGER lpFileSize
      );
  
@@ -461,7 +462,7 @@
  DWORD
  WINAPI
  GetFileType(
-@@ -696,6 +799,8 @@
+@@ -696,6 +800,8 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -470,7 +471,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -703,9 +808,11 @@
+@@ -703,9 +809,11 @@
      _In_ HANDLE hFile,
      _Out_writes_(cchFilePath) LPSTR lpszFilePath,
      _In_ DWORD cchFilePath,
@@ -485,7 +486,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -713,7 +820,7 @@
+@@ -713,7 +821,7 @@
      _In_ HANDLE hFile,
      _Out_writes_(cchFilePath) LPWSTR lpszFilePath,
      _In_ DWORD cchFilePath,
@@ -494,7 +495,7 @@
      );
  
  #ifdef UNICODE
-@@ -724,6 +831,8 @@
+@@ -724,6 +832,8 @@
  
  #endif // (_WIN32_WINNT >= 0x0600)
  
@@ -503,7 +504,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -734,6 +843,8 @@
+@@ -734,6 +844,8 @@
      _Out_opt_ LPFILETIME lpLastWriteTime
      );
  
@@ -512,7 +513,7 @@
  WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
-@@ -749,6 +860,8 @@
+@@ -749,6 +861,8 @@
  #define GetFullPathName  GetFullPathNameW
  #endif
  
@@ -521,7 +522,7 @@
  WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
-@@ -764,6 +877,8 @@
+@@ -764,6 +878,8 @@
  #define GetFullPathName GetFullPathNameA
  #endif
  
@@ -530,7 +531,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -777,6 +892,8 @@
+@@ -777,6 +893,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -539,7 +540,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -795,6 +912,8 @@
+@@ -795,6 +913,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -548,7 +549,7 @@
  WINBASEAPI
  _Success_(return != 0 && return < cchBuffer)
  DWORD
-@@ -809,6 +928,8 @@
+@@ -809,6 +929,8 @@
  #define GetLongPathName GetLongPathNameA
  #endif
  
@@ -557,7 +558,7 @@
  WINBASEAPI
  _Success_(return != 0 && return < cchBuffer)
  DWORD
-@@ -841,6 +962,8 @@
+@@ -841,6 +963,8 @@
  
  #endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
  
@@ -566,7 +567,7 @@
  WINBASEAPI
  _Success_(return != 0 && return < cchBuffer)
  DWORD
-@@ -861,6 +984,8 @@
+@@ -861,6 +985,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -575,7 +576,7 @@
  WINBASEAPI
  UINT
  WINAPI
-@@ -883,6 +1008,8 @@
+@@ -883,6 +1009,8 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -584,7 +585,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -899,6 +1026,8 @@
+@@ -899,6 +1027,8 @@
  
  #endif /* _WIN32_WINNT >=  0x0600 */
  
@@ -593,7 +594,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -917,6 +1046,8 @@
+@@ -917,6 +1047,8 @@
  #define GetVolumeInformation  GetVolumeInformationW
  #endif
  
@@ -602,7 +603,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -930,6 +1061,8 @@
+@@ -930,6 +1062,8 @@
  #define GetVolumePathName  GetVolumePathNameW
  #endif
  
@@ -611,7 +612,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -938,6 +1071,8 @@
+@@ -938,6 +1072,8 @@
      _Out_ LPFILETIME lpFileTime
      );
  
@@ -620,7 +621,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -949,12 +1084,14 @@
+@@ -949,12 +1085,14 @@
      _In_ DWORD nNumberOfBytesToLockHigh
      );
  
@@ -636,7 +637,7 @@
      _Reserved_ DWORD dwReserved,
      _In_ DWORD nNumberOfBytesToLockLow,
      _In_ DWORD nNumberOfBytesToLockHigh,
-@@ -967,6 +1104,8 @@
+@@ -967,6 +1105,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -645,7 +646,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -986,6 +1125,8 @@
+@@ -986,6 +1126,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -654,7 +655,7 @@
  WINBASEAPI
  _Must_inspect_result_
  BOOL
-@@ -998,6 +1139,8 @@
+@@ -998,6 +1140,8 @@
      _Inout_opt_ LPOVERLAPPED lpOverlapped
      );
  
@@ -663,7 +664,7 @@
  WINBASEAPI
  _Must_inspect_result_
  BOOL
-@@ -1010,6 +1153,8 @@
+@@ -1010,6 +1154,8 @@
      _In_ LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
      );
  
@@ -672,7 +673,7 @@
  WINBASEAPI
  _Must_inspect_result_
  BOOL
-@@ -1022,6 +1167,8 @@
+@@ -1022,6 +1168,8 @@
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -681,7 +682,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1029,6 +1176,8 @@
+@@ -1029,6 +1177,8 @@
      _In_ LPCSTR lpPathName
      );
  
@@ -690,7 +691,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1042,6 +1191,8 @@
+@@ -1042,6 +1192,8 @@
  #define RemoveDirectory  RemoveDirectoryA
  #endif // !UNICODE
  
@@ -699,7 +700,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1049,20 +1200,24 @@
+@@ -1049,20 +1201,24 @@
      _In_ HANDLE hFile
      );
  
@@ -728,7 +729,7 @@
      );
  
  #ifdef UNICODE
-@@ -1073,6 +1228,8 @@
+@@ -1073,6 +1229,8 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -737,7 +738,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1085,6 +1242,8 @@
+@@ -1085,6 +1243,8 @@
  
  #endif
  
@@ -746,7 +747,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1092,9 +1251,11 @@
+@@ -1092,9 +1252,11 @@
      _In_ HANDLE hFile,
      _In_ LONG lDistanceToMove,
      _Inout_opt_ PLONG lpDistanceToMoveHigh,
@@ -761,7 +762,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1102,9 +1263,11 @@
+@@ -1102,9 +1264,11 @@
      _In_ HANDLE hFile,
      _In_ LARGE_INTEGER liDistanceToMove,
      _Out_opt_ PLARGE_INTEGER lpNewFilePointer,
@@ -776,7 +777,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1117,6 +1280,8 @@
+@@ -1117,6 +1281,8 @@
  
  #if _WIN32_WINNT >= 0x0501
  
@@ -785,7 +786,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1127,6 +1292,8 @@
+@@ -1127,6 +1293,8 @@
  
  #endif // (_WIN32_WINNT >= 0x0501)
  
@@ -794,7 +795,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1138,6 +1305,8 @@
+@@ -1138,6 +1306,8 @@
      _In_ DWORD nNumberOfBytesToUnlockHigh
      );
  
@@ -803,7 +804,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1149,6 +1318,8 @@
+@@ -1149,6 +1319,8 @@
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -812,7 +813,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1160,6 +1331,8 @@
+@@ -1160,6 +1332,8 @@
      _Inout_opt_ LPOVERLAPPED lpOverlapped
      );
  
@@ -821,7 +822,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1171,6 +1344,8 @@
+@@ -1171,6 +1345,8 @@
      _In_ LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
      );
  
@@ -830,7 +831,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1182,6 +1357,8 @@
+@@ -1182,6 +1358,8 @@
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -839,7 +840,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1200,6 +1377,8 @@
+@@ -1200,6 +1378,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -848,7 +849,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1221,6 +1400,8 @@
+@@ -1221,6 +1401,8 @@
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -857,7 +858,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1254,14 +1435,16 @@
+@@ -1254,14 +1436,16 @@
      HANDLE hTemplateFile;
  } CREATEFILE2_EXTENDED_PARAMETERS, *PCREATEFILE2_EXTENDED_PARAMETERS, *LPCREATEFILE2_EXTENDED_PARAMETERS;
  
@@ -876,7 +877,7 @@
      _In_opt_ LPCREATEFILE2_EXTENDED_PARAMETERS pCreateExParams
      );
  
-@@ -1275,6 +1458,8 @@
+@@ -1275,6 +1459,8 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -885,7 +886,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1288,6 +1473,8 @@
+@@ -1288,6 +1474,8 @@
  
  #if _WIN32_WINNT >= 0x0501
  
@@ -894,7 +895,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1296,6 +1483,8 @@
+@@ -1296,6 +1484,8 @@
      _Out_opt_ LPDWORD lpFileSizeHigh
      );
  
@@ -903,7 +904,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1328,7 +1517,9 @@
+@@ -1328,7 +1518,9 @@
  
  } WIN32_FIND_STREAM_DATA, *PWIN32_FIND_STREAM_DATA;
  
@@ -914,7 +915,7 @@
  HANDLE
  WINAPI
  FindFirstStreamW(
-@@ -1338,6 +1529,8 @@
+@@ -1338,6 +1530,8 @@
      _Reserved_ DWORD dwFlags
      );
  
@@ -923,7 +924,7 @@
  WINBASEAPI
  BOOL
  APIENTRY
-@@ -1354,6 +1547,7 @@
+@@ -1354,6 +1548,7 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -931,7 +932,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1367,6 +1561,8 @@
+@@ -1367,6 +1562,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -940,7 +941,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1387,7 +1583,9 @@
+@@ -1387,7 +1584,9 @@
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -951,7 +952,7 @@
  HANDLE
  WINAPI
  FindFirstFileNameW(
-@@ -1397,6 +1595,8 @@
+@@ -1397,6 +1596,8 @@
      _Out_writes_(*StringLength) PWSTR LinkName
      );
  
@@ -960,7 +961,7 @@
  WINBASEAPI
  BOOL
  APIENTRY
-@@ -1414,6 +1614,8 @@
+@@ -1414,6 +1615,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -969,7 +970,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1438,6 +1640,8 @@
+@@ -1438,6 +1641,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -978,7 +979,7 @@
  WINBASEAPI
  UINT
  WINAPI
-@@ -1457,6 +1661,7 @@
+@@ -1457,6 +1662,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -986,7 +987,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -1464,6 +1669,7 @@
+@@ -1464,6 +1670,7 @@
      VOID
      );
  

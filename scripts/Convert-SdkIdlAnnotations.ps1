@@ -1,5 +1,16 @@
 #Requires -Version 7.0
 
+<#
+.PARAMETER SharedSalBootstrap
+Adds the native sal.h bootstrap used by the selected shared SAL vocabulary policy.
+Existing includes are preserved; this does not activate or qualify the parser.
+.PARAMETER AllowCompleteInterfaceParameterCarriers
+Enables Optional/ComOutPtr parameter drafts using the selected vocabulary.
+Complete top-level interfaces need no trailing cpp_quote region. Native IDL and
+quoted-native conditional frames must match. Short Interface::parameter selectors
+must identify one actual non-property method parameter. Existing method/return
+placement and the default authoring behavior are unchanged.
+#>
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)][string]$InputMap,
@@ -8,7 +19,9 @@ param(
     [string[]]$Original,
     [string]$SdkProjectRoot = "$PSScriptRoot\..\generation\WinSDK",
     [switch]$Apply,
-    [string]$AnnotationHeader = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h"
+    [string]$AnnotationHeader = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h",
+    [switch]$SharedSalBootstrap,
+    [switch]$AllowCompleteInterfaceParameterCarriers
 )
 
 $ErrorActionPreference = 'Stop'
@@ -214,6 +227,8 @@ function Find-IdlField([string]$Text, [string]$Mask, [string]$Name) {
 function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [string]$Name) {
     $parts = $Name -split '::'
     if ($parts.Count -notin @(2, 3)) { return }
+    $methodPattern = if ($parts.Count -eq 3 -and $parts[1] -ceq '*') { '[A-Za-z_]\w*' }
+        else { [regex]::Escape($parts[1]) }
     foreach ($definition in @($Definitions | Where-Object { $_.Groups['name'].Value -ceq $parts[0] })) {
         $open = $definition.Index + $definition.Length - 1
         $close = Get-ClosingDelimiter $Mask $open '{' '}'
@@ -225,7 +240,7 @@ function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [s
         if ($lineEnd -lt 0) { $lineEnd = $Text.Length }
         if ($Mask.Substring($end, $lineEnd - $end).Trim()) { continue }
         $body = $Mask.Substring($open + 1, $close - $open - 1)
-        foreach ($method in [regex]::Matches($body, "\b$([regex]::Escape($parts[1]))\s*\(")) {
+        foreach ($method in [regex]::Matches($body, "\b(?<name>$methodPattern)\s*\(")) {
             $methodOffset = $open + 1 + $method.Index
             $preceding = $Mask.Substring($open + 1, $methodOffset - $open - 1)
             if ([regex]::Matches($preceding, '\{').Count -ne [regex]::Matches($preceding, '\}').Count -or
@@ -234,12 +249,18 @@ function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [s
             $parametersClose = Get-ClosingDelimiter $Mask $parametersOpen '(' ')'
             if ($parametersClose -lt 0 -or $parametersClose -ge $close -or
                 $Mask.Substring($parametersClose + 1, $close - $parametersClose - 1) -notmatch '^\s*;') { continue }
+            $methodName = "$($parts[0])::$($method.Groups['name'].Value)"
+            $attributes = Get-CodeMask $Text.Substring($open + 1, $methodOffset - $open - 1)
+            $attributes = [regex]::Replace($attributes, '(?m)^[ \t]*#(?:[^\r\n]*\\\r?\n)*[^\r\n]*', ' ')
+            $attributes = $attributes.Substring($attributes.LastIndexOf(';') + 1)
+            $property = $attributes -cmatch '\b(?:propget|propput|propputref)\b'
             if ($parts.Count -eq 2) {
                 [pscustomobject]@{
                     offset = $methodOffset; start = $methodOffset; end = $parametersClose + 1
                     insertionOffset = [Math]::Min($Text.Length, $lineEnd + 1)
                     needsNewline = $lineEnd -eq $Text.Length
                     nativeRetval = $false
+                    methodQualifiedName = $methodName; isProperty = $property
                 }
                 continue
             }
@@ -261,6 +282,7 @@ function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [s
                             annotationCount = $placement.annotationCount
                             appendToAnnotation = $placement.appendToAnnotation
                             nativeRetval = $placement.nativeRetval
+                            methodQualifiedName = $methodName; isProperty = $property
                         }
                     }
                     $start = $cursor + 1
@@ -273,6 +295,158 @@ function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [s
             }
         }
     }
+}
+
+function Find-AssociationTarget([string]$Text, [string]$Mask, [object[]]$Quotes, [object[]]$Definitions, [string]$Name) {
+    $parts = $Name -split '::'
+    if ($parts.Count -eq 2) {
+        foreach ($field in @(Find-IdlField $Text $Mask $Name)) {
+            $field | Add-Member NoteProperty kind 'FieldDecl'
+            $field | Add-Member NoteProperty sourceForm 'native-idl-field-or-interface-parameter'
+            $field
+        }
+        foreach ($function in @(Find-QuotedFunction $Text $Mask $Quotes $parts[0])) {
+            $quote = @($Quotes | Where-Object { $_.Index -eq $function.start -and $_.Index + $_.Length -eq $function.end })
+            if ($quote.Count -ne 1 -or $quote[0].Groups['code'].Value.Contains('\"')) { continue }
+            $body = $quote[0].Groups['code']
+            $code = Get-CodeMask $body.Value
+            $nameOffset = $function.offset - $body.Index
+            $open = $code.IndexOf('(', $nameOffset)
+            if ($open -lt 0) { continue }
+            $close = Get-ClosingDelimiter $code $open '(' ')'
+            if ($close -lt 0 -or $code.Substring($close + 1) -notmatch '^\s*;\s*$') { continue }
+            $round = 0
+            $square = 0
+            $start = $open + 1
+            for ($cursor = $start; $cursor -le $close; $cursor++) {
+                $character = $code[$cursor]
+                if ($cursor -eq $close -or ($character -eq ',' -and !$round -and !$square)) {
+                    $parameter = $code.Substring($start, $cursor - $start)
+                    $match = [regex]::Match($parameter, "\b(?<name>$([regex]::Escape($parts[1])))\s*(?:\[[^\]]*\]\s*)*$")
+                    if ($match.Success) {
+                        [pscustomobject]@{
+                            kind = 'ParmVarDecl'; sourceForm = 'quoted-native-function-parameter'; nativeQualifiedName = $Name
+                            offset = $body.Index + $start + $match.Groups['name'].Index
+                            start = $body.Index + $start; end = $body.Index + $cursor
+                            insertionOffset = $body.Index + $start + [regex]::Match($parameter, '\S').Index
+                            annotationCount = 0; appendToAnnotation = $false
+                        }
+                    }
+                    $start = $cursor + 1
+                    continue
+                }
+                if ($character -eq '(') { $round++ }
+                elseif ($character -eq ')') { $round-- }
+                elseif ($character -eq '[') { $square++ }
+                elseif ($character -eq ']') { $square-- }
+            }
+        }
+    }
+    elseif ($parts.Count -eq 3) {
+        $return = $parts[-1] -ceq 'return'
+        $targetName = if ($return) { $parts[0..1] -join '::' } else { $Name }
+        foreach ($method in @(Find-IdlMethod $Text $Mask $Definitions $targetName)) {
+            $method | Add-Member NoteProperty kind $(if ($return) { 'CXXMethodDecl' } else { 'ParmVarDecl' })
+            $method | Add-Member NoteProperty sourceForm $(if ($return) { 'native-idl-interface-return' } else { 'native-idl-field-or-interface-parameter' })
+            $method | Add-Member NoteProperty nativeQualifiedName $targetName
+            $method
+        }
+    }
+}
+
+function Get-ParameterOverride([object]$Fact) {
+    if ($Fact.category -cne 'declaration-attribute-override' -or $Fact.value -isnot [string]) { return }
+    $payload = [regex]::Match($Fact.value,
+        '^(?<target>[A-Za-z_]\w*(?:::[A-Za-z_]\w*){1,2})=\[(?<remove>-)?(?<name>Optional|ComOutPtr)\]$')
+    if (!$payload.Success -or $payload.Groups['target'].Value -cne $Fact.symbol) { return }
+    $value = if ($payload.Groups['remove'].Success) { 'false' } else { 'true' }
+    [pscustomobject]@{ name = $payload.Groups['name'].Value; macro = "_Win32_$($payload.Groups['name'].Value)_($value)" }
+}
+
+function Get-BraceScopes([string]$Mask) {
+    $scopes = [Collections.Generic.List[object]]::new()
+    $stack = [Collections.Generic.Stack[object]]::new()
+    $balanced = $true
+    foreach ($brace in [regex]::Matches($Mask, '[{}]')) {
+        if ($brace.Value -ceq '{') {
+            $declaration = [regex]::Match($Mask.Substring(0, $brace.Index),
+                '\b(?<kind>library|module)\s+(?<name>[A-Za-z_]\w*)\s*$')
+            $scope = [pscustomobject]@{ start = $brace.Index; end = $Mask.Length
+                kind = $(if ($declaration.Success) { $declaration.Groups['kind'].Value } else { 'opaque' })
+                name = $declaration.Groups['name'].Value }
+            $scopes.Add($scope)
+            $stack.Push($scope)
+        }
+        elseif ($stack.Count) { $stack.Pop().end = $brace.Index }
+        else { $balanced = $false }
+    }
+    [pscustomobject]@{ balanced = $balanced -and !$stack.Count; scopes = @($scopes) }
+}
+
+function Get-NativeQuoteDirectiveMask([string]$Mask, [object[]]$Quotes) {
+    $result = [Text.StringBuilder]::new([regex]::Replace($Mask, '[^\r\n]', ' '))
+    foreach ($quote in $Quotes) {
+        $code = $quote.Groups['code'].Value
+        if ($Mask.Substring($quote.Index, $quote.Length) -notmatch '^\s*cpp_quote\s*\(' -or
+            $code -notmatch '^\s*#') { continue }
+        for ($index = 0; $index -lt $code.Length; $index++) { $result[$quote.Index + $index] = $code[$index] }
+    }
+    $result.ToString()
+}
+
+function Get-IdlConditionalFrame([string]$Mask, [int]$Offset) {
+    $stack = [Collections.Generic.List[int]]::new()
+    foreach ($directive in [regex]::Matches($Mask.Substring(0, $Offset),
+        '(?m)^[ \t]*#[ \t]*(?<kind>if|ifdef|ifndef|elif|else|endif)\b')) {
+        switch ($directive.Groups['kind'].Value) {
+            { $_ -cin @('if', 'ifdef', 'ifndef') } { $stack.Add($directive.Index) }
+            { $_ -cin @('elif', 'else') } {
+                if (!$stack.Count) { throw 'Unbalanced original IDL conditional.' }
+                $stack[$stack.Count - 1] = $directive.Index
+            }
+            'endif' {
+                if (!$stack.Count) { throw 'Unbalanced original IDL conditional.' }
+                $stack.RemoveAt($stack.Count - 1)
+            }
+        }
+    }
+    $stack -join '|'
+}
+
+function Find-ExistingTrailingQuoteRegion([string]$Mask, [string]$DirectiveMask, [string]$QuoteRegionMask,
+    [object[]]$Quotes, [object]$Method) {
+    $frame = Get-IdlConditionalFrame $DirectiveMask $Method.offset
+    $nativeMask = Get-NativeQuoteDirectiveMask $Mask $Quotes
+    $nativeFrame = Get-IdlConditionalFrame $nativeMask $Method.offset
+    foreach ($quote in $Quotes) {
+        if ($quote.Index -lt $Method.insertionOffset -or
+            $Mask.Substring($quote.Index, $quote.Length) -notmatch '^\s*cpp_quote\s*\(' -or
+            $QuoteRegionMask.Substring($quote.Index) -notmatch '^[\s;]*$') { continue }
+        $prefix = $Mask.Substring(0, $quote.Index)
+        if ([regex]::Matches($prefix, '\{').Count -ne [regex]::Matches($prefix, '\}').Count -or
+            (Get-IdlConditionalFrame $DirectiveMask $quote.Index) -cne $frame -or
+            (Get-IdlConditionalFrame $nativeMask $quote.Index) -cne $nativeFrame) { continue }
+        return $quote.Index
+    }
+}
+
+function Find-CompleteInterfaceParameterRegion([string]$Mask, [string]$DirectiveMask,
+    [object[]]$Quotes, [object]$Method, [int]$ParameterOffset, [int]$CandidateOffset = -1) {
+    $offset = if ($CandidateOffset -ge 0) { $CandidateOffset } else { $Method.insertionOffset }
+    if (!(Get-BraceScopes $Mask.Substring(0, $offset)).balanced) { return }
+    $nativeMask = Get-NativeQuoteDirectiveMask $Mask $Quotes
+    if ((Get-IdlConditionalFrame $DirectiveMask $ParameterOffset) -cne (Get-IdlConditionalFrame $DirectiveMask $offset) -or
+        (Get-IdlConditionalFrame $nativeMask $ParameterOffset) -cne (Get-IdlConditionalFrame $nativeMask $offset)) { return }
+    $native = [Text.StringBuilder]::new()
+    foreach ($quote in $Quotes) {
+        if ($quote.Index -ge $offset) { break }
+        if ($Mask.Substring($quote.Index, $quote.Length) -notmatch '^\s*cpp_quote\s*\(') { continue }
+        [void]$native.AppendLine([regex]::Replace($quote.Groups['code'].Value, '\\(["\\])', '$1'))
+    }
+    $nativeCode = Get-CodeMask $native.ToString()
+    $nativeCode = [regex]::Replace($nativeCode, '(?m)^[ \t]*#(?:[^\r\n]*\\\r?\n)*[^\r\n]*', ' ')
+    if (!(Get-BraceScopes $nativeCode).balanced) { return }
+    $offset
 }
 
 function Write-Patch([string]$Before, [string]$After, [string]$Relative, [string]$Destination) {
@@ -336,6 +510,11 @@ foreach ($match in [regex]::Matches($annotationText, '(?m)^#define _WIN32META_OS
     $macros[$match.Groups[2].Value] = $macro
 }
 if (!$macros.Count) { throw 'No canonical public SupportedOS vocabulary was found.' }
+$parameterMacros = @{}
+foreach ($name in @('Optional', 'ComOutPtr')) {
+    $parameterMacros[$name] = [regex]::IsMatch($annotationText, "(?m)^#define _Win32_${name}_\(")
+}
+$parameterCarrier = [regex]::IsMatch($annotationText, '(?m)^#define _Win32_AnnotateParameter_\(')
 $globalSettings = Join-Path $SdkProjectRoot 'scraper.settings.rsp'
 $enumRemaps = @(if (Test-Path -LiteralPath $globalSettings -PathType Leaf) {
     Get-RspValues ([IO.File]::ReadAllText($globalSettings)) '--remap'
@@ -372,6 +551,7 @@ foreach ($owner in $owners) {
             $attributeMacros.Add($name) | Out-Null
         }
     }
+    $directiveMask = $mask
     # Directives are declaration boundaries, not whitespace before an attribute list.
     $mask = [regex]::Replace($mask, '(?m)^[ \t]*#(?:[^\r\n]*\\\r?\n)*[^\r\n]*', {
         param($match)
@@ -379,6 +559,10 @@ foreach ($owner in $owners) {
     })
     $definitions = @([regex]::Matches($mask, '\binterface\s+(?<name>[A-Za-z_]\w*)\s*:\s*[A-Za-z_]\w*(?:\s*::\s*[A-Za-z_]\w*)*\s*\{'))
     $quotes = @([regex]::Matches($text, '(?m)^[ \t]*cpp_quote\s*\(\s*"(?<code>(?:\\.|[^"\\\r\n])*)"\s*\)'))
+    $quoteRegionMask = [regex]::Replace($mask, '(?m)^[ \t]*cpp_quote\s*\([ \t]*\)', {
+        param($match)
+        ' ' * $match.Length
+    })
     $insertions = [Collections.Generic.List[object]]::new()
     $dispositions = [Collections.Generic.List[object]]::new()
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
@@ -392,6 +576,80 @@ foreach ($owner in $owners) {
         $declarations = @($definitions | Where-Object { $_.Groups['name'].Value -ceq $fact.symbol })
         $functions = @(Find-QuotedFunction $text $mask $quotes $fact.symbol)
         $reason = $null
+        $parameterOverride = if ($AllowCompleteInterfaceParameterCarriers) { Get-ParameterOverride $fact }
+        if ($parameterOverride) {
+            $parts = $fact.symbol -split '::'
+            $targets = @(Find-AssociationTarget $text $mask $quotes $definitions $fact.symbol)
+            if ($parts.Count -eq 2) {
+                $targets += @(foreach ($parameter in @(Find-IdlMethod $text $mask $definitions "$($parts[0])::*::$($parts[1])")) {
+                    $parameter | Add-Member NoteProperty kind 'ParmVarDecl'
+                    $parameter | Add-Member NoteProperty sourceForm 'native-idl-field-or-interface-parameter'
+                    $parameter | Add-Member NoteProperty nativeQualifiedName "$($parameter.methodQualifiedName)::$($parts[1])"
+                    $parameter
+                })
+            }
+            if (!$parameterMacros[$parameterOverride.name]) {
+                $reason = 'parameter-override-not-in-selected-annotation-vocabulary'
+            }
+            elseif ($targets.Count -ne 1 -or $targets[0].kind -cne 'ParmVarDecl') {
+                $reason = "requires-one-original-native-parameter-found-$($targets.Count)"
+            }
+            elseif ($targets[0].sourceForm -cne 'quoted-native-function-parameter' -and !$parameterCarrier) {
+                $reason = 'parameter-carrier-not-in-selected-annotation-vocabulary'
+            }
+            elseif ($targets[0].sourceForm -cne 'quoted-native-function-parameter' -and $targets[0].isProperty) {
+                $reason = 'requires-actual-native-property-method-identity'
+            }
+            $nativeParts = if (!$reason) { $targets[0].nativeQualifiedName -split '::' }
+            $methods = @(if (!$reason -and $nativeParts.Count -eq 3) {
+                Find-IdlMethod $text $mask $definitions ($nativeParts[0..1] -join '::')
+            })
+            if (!$reason -and $nativeParts.Count -eq 3 -and $methods.Count -ne 1) {
+                $reason = "requires-one-original-interface-method-found-$($methods.Count)"
+            }
+            $carrierOffset = if (!$reason -and $nativeParts.Count -eq 3) {
+                Find-ExistingTrailingQuoteRegion $mask $directiveMask $quoteRegionMask $quotes $methods[0]
+            }
+            if (!$reason -and $null -ne $carrierOffset) {
+                $carrierOffset = Find-CompleteInterfaceParameterRegion $mask $directiveMask $quotes $methods[0] $targets[0].offset $carrierOffset
+            }
+            $newCarrierRegion = $false
+            if (!$reason -and $nativeParts.Count -eq 3 -and $null -eq $carrierOffset) {
+                $carrierOffset = Find-CompleteInterfaceParameterRegion $mask $directiveMask $quotes $methods[0] $targets[0].offset
+                $newCarrierRegion = $null -ne $carrierOffset
+            }
+            if (!$reason -and $nativeParts.Count -eq 3 -and $null -eq $carrierOffset) {
+                $reason = 'requires-complete-interface-parameter-carrier-in-matching-global-conditional-scope'
+            }
+            if ($reason) {
+                $dispositions.Add([ordered]@{ fact = $fact; disposition = 'retained-legacy'; reason = $reason })
+                continue
+            }
+            $target = $targets[0]
+            $macro = $parameterOverride.macro
+            $insertion = if ($target.sourceForm -ceq 'quoted-native-function-parameter') {
+                [pscustomobject]@{ offset = $target.insertionOffset; text = "$macro " }
+            }
+            else {
+                [pscustomobject]@{
+                    offset = $carrierOffset
+                    text = $(if ($newCarrierRegion -and $methods[0].needsNewline) { $newline }) +
+                        "_Win32_AnnotateParameter_($($nativeParts[0..1] -join '::'), $($nativeParts[2]), $macro)$newline"
+                }
+            }
+            $insertions.Add($insertion)
+            $dispositions.Add([ordered]@{
+                fact = $fact; disposition = 'authored-original-idl'; macro = $macro
+                declaration = [ordered]@{
+                    name = $parts[-1]; qualifiedName = $fact.symbol; nativeQualifiedName = $target.nativeQualifiedName
+                    kind = 'ParmVarDecl'; sourceForm = $target.sourceForm; file = $relative
+                    line = 1 + [regex]::Matches($text.Substring(0, $target.offset), '\n').Count
+                    offset = $target.offset; start = $target.start; end = $target.end
+                    isDefinition = $false; sourceSha256 = Get-Hash $bytes
+                }
+            })
+            continue
+        }
         if ($fact.category -ceq 'associated-enum-use') {
             $association = [regex]::Match($fact.value,
                 '^([^=]+)=\[AssociatedEnum\("(?<enum>[A-Za-z_]\w*)"\)\]$')
@@ -558,8 +816,20 @@ foreach ($owner in $owners) {
         $bootstrap = $first.Index + $bom
         $line = $text.LastIndexOf("`n", [Math]::Max(0, $bootstrap - 1)) + 1
         if ($line -lt $bom) { $line = $bom }
-        if ($text.Substring($line) -notmatch '^#\s*include\s*[<"]sal\.h[>"]') {
-            $insertions.Add([pscustomobject]@{ offset = $line; text = "#include <sal.h>$newline" })
+        $hasIdlSal = $text.Substring($line) -match '^#\s*include\s*[<"]sal\.h[>"]'
+        if ($SharedSalBootstrap) {
+            $hasIdlSal = @([regex]::Matches($text.Substring($bom), '(?m)^[ \t]*#\s*include\s*[<"]sal\.h[>"]') |
+                Where-Object { $directiveMask.Substring($bom + $_.Index, $_.Length) -match '^[ \t]*#' }).Count -gt 0
+        }
+        $bootstrapText = if (!$hasIdlSal) { "#include <sal.h>$newline" } else { '' }
+        if ($SharedSalBootstrap -and !@($quotes | Where-Object {
+            $mask.Substring($_.Index, $_.Length) -match '^\s*cpp_quote\s*\(' -and
+                [regex]::Replace($_.Groups['code'].Value, '\\(["\\])', '$1') -match '^\s*#\s*include\s*[<"]sal\.h[>"]\s*$'
+        }).Count) {
+            $bootstrapText += "cpp_quote(`"#include <sal.h>`")$newline"
+        }
+        if ($bootstrapText) {
+            $insertions.Add([pscustomobject]@{ offset = $line; text = $bootstrapText })
         }
     }
     $after = $text
@@ -667,6 +937,8 @@ $report = [ordered]@{
     schemaVersion = 1; kind = 'original-idl-authoring-not-compile-or-full-sdk-acceptance'
     inputMapSha256 = Get-Hash ([IO.File]::ReadAllBytes([IO.Path]::GetFullPath($InputMap)))
     sdkIncludeRoot = $SdkIncludeRoot
+    bootstrapPolicy = if ($SharedSalBootstrap) { 'shared-sal' } else { 'existing-idl-sal' }
+    parameterCarrierPolicy = if ($AllowCompleteInterfaceParameterCarriers) { 'complete-top-level-interface' } else { 'unchanged-default' }
     originalIdlsPatched = @($results | Where-Object changed | ForEach-Object original)
     candidateGeneratedHeaders = @($results | Where-Object changed | ForEach-Object generatedHeaders | Sort-Object -Unique)
     authoredFacts = @($all | Where-Object disposition -eq 'authored-original-idl').Count

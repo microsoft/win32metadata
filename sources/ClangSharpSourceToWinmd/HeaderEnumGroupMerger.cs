@@ -105,7 +105,7 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
-        private static bool IsHeaderTypesFile(string path)
+        internal static bool IsHeaderTypesFile(string path)
         {
             string name = Path.GetFileName(path);
             return name == "header-types.modified.cs" || name.EndsWith(".header-types.modified.cs", StringComparison.Ordinal);

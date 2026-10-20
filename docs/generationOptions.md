@@ -184,6 +184,27 @@ payloads remain residuals. Only one complete native method/parameter can bind ea
 forwarded, ambiguous, unsupported and already-native `[retval]` contracts remain
 explicit residuals. Existing native facts do not earn new conversion credit.
 
+`-AllowCompleteInterfaceParameterCarriers` opts into the existing selected
+`_Win32_Optional_(true|false)` and `_Win32_ComOutPtr_(true|false)` transports for
+exact positive or negative parameter overrides. Interface parameters use
+`_Win32_AnnotateParameter_(Interface::Method, parameter, annotation)` after a
+complete interface at matching IDL and quoted-native global scope. An existing
+trailing `cpp_quote` region is preferred but is not required. Native declarations,
+parameter order, SAL and inline annotations are not rewritten. A short
+`Interface::parameter` selector must identify exactly one actual method parameter;
+ambiguous parameters and property methods remain residuals rather than guessing
+native `get_`/`put_` names. Native function parameters in one complete `cpp_quote`
+prototype use the same selected override macro without changing their native SAL.
+
+The option is additive to this authorer's existing default: without it, parameter
+overrides retain the prior disposition and existing method/retval placement is
+unchanged. The two new switches follow all existing positional parameters.
+`-SharedSalBootstrap` additionally supplies native `sal.h` through `cpp_quote`
+when absent, using the selected preparation policy's shared vocabulary. It does
+not add a per-original annotation-header include or remove existing includes.
+Neither switch activates the parser or qualifies a prepared SDK. Cumulative
+patches, exact input hashes and the normal `-Apply` admission checks still apply.
+
 Existing `associated-enum-use` rows can bind one original IDL struct field or
 interface method parameter. The authorer inserts
 `[annotation("_Win32_AssociatedEnum_(NativeEnum)")]`, or appends the token inside
@@ -213,6 +234,17 @@ are preserved; unconfigured owners fail rather than inventing namespace or
 traversal settings. `-SdkProjectRoot` selects an isolated SDK project for this
 step. The report's `normalParserActivation.ready` is false when recipe admission
 is missing, normal ownership is unresolved, or an actual owner is not enabled.
+
+Header-generated `[NativeTypedef]` wrappers can compose with retained AutoTypes
+wrappers of the same fully qualified identity and unmanaged `Value` storage.
+The emitter keeps one wrapper and unions compatible attributes, including a
+header-owned `AlsoUsableFor` and the complete retained cleanup/invalid-value set.
+Conflicting storage, annotations, ordinary declarations or incomplete retained
+cross-architecture coverage fail explicitly. This is wrapper metadata projection,
+not a type-level native cleanup carrier or permission to retire global policies.
+Producer-owned return/output annotations replace a legacy lifecycle policy only
+when they represent the same ownership contract and its complete invalid set;
+unresolved and invalid-only policies remain retained.
 Do not remove equivalent legacy rows or claim authoring acceptance until it is
 true, then verify actual normal generated declarations as well as native controls.
 
