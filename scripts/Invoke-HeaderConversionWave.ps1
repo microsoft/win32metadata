@@ -51,7 +51,7 @@ function Assert-WaveOutput([string]$Output, [string[]]$ProtectedPaths) {
 function Get-WaveCommands([string]$Output, [string]$Tools, [string]$Baseline, [int]$ShardSize, [string]$Blockers) {
     $obj = "$Output\obj"
     $image = "$Output\image\Windows.Win32.winmd"
-    $common = @('build', "$repo\generation\WinSDK", '-c', 'Release', '--no-restore', '--verbosity', 'minimal',
+    $common = @('build', "$repo\generation\WinSDK", '-c', 'Release', '--no-restore', '--verbosity', 'minimal', '-m:1', '-p:MaxProcessors=2',
         "-p:ObjDir=$obj", "-p:SdkHeaderOutputRoot=$Output\prepared-sdk",
         "-p:ToolsBinDir=$Tools", "-p:TaskBinDir=$Tools", "-p:LocalTaskBinDir=$Tools",
         "-p:Win32WinmdBinDir=$Output\image", "-p:OutputWinmd=$image", '-p:ScanArch=crossarch')

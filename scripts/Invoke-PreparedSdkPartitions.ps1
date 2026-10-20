@@ -100,7 +100,7 @@ if (!(Test-Path -LiteralPath $driver) -or !(Test-Path -LiteralPath $SdkTargetsFi
     throw 'The pinned adapter project and existing GeneratorSdk targets are both required.'
 }
 $target = @{ Headers = 'ScrapeHeaders'; Constants = 'ScrapeConstants'; Emit = 'EmitWinmd' }[$Stage]
-$arguments = @('msbuild', $driver, '-nologo', '-verbosity:minimal', "-target:$target",
+$arguments = @('msbuild', $driver, '-nologo', '-m:1', '-verbosity:minimal', "-target:$target",
     "-property:SdkProjectDirectory=$ProjectDirectory", "-property:PreparedIncludeRoot=$IncludeRoot",
     "-property:ExternalToolsDirectory=$ToolsDirectory", "-property:ExternalAssetsDirectory=$AssetsDirectory",
     "-property:ExternalOutputDirectory=$OutputDirectory", "-property:ExternalSdkTargetsFile=$SdkTargetsFile",

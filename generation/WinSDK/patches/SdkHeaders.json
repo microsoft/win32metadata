@@ -3999,6 +3999,18 @@
       "sourceSha256": "CAF915A318579B0B48D51271D457107CECD4042E01D0F3308E498A18DF24A546",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\dxcapi.h",
       "sdkSha256": "CAF915A318579B0B48D51271D457107CECD4042E01D0F3308E498A18DF24A546"
+    },
+    {
+      "path": "um\\winsock.h",
+      "sourceSha256": "F5D2165D8609DAF35BFC796846F67C8F6129E47B4C6536AEFBA90F9488520737",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsock.h",
+      "sdkSha256": "F5D2165D8609DAF35BFC796846F67C8F6129E47B4C6536AEFBA90F9488520737"
+    },
+    {
+      "path": "shared\\ntddtape.h",
+      "sourceSha256": "62A73169F77F9A8EACD955BF756744A1F1FBECB40E162340DCA08559174F8B3C",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntddtape.h",
+      "sdkSha256": "62A73169F77F9A8EACD955BF756744A1F1FBECB40E162340DCA08559174F8B3C"
     }
   ],
   "midl": {
@@ -6315,7 +6327,7 @@
       },
       {
         "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "71F94E882B3BB01825AC19191A4FE1707C0BBDD0539F5C3097043FA8F6F34196"
+        "sourceSha256": "A15C5FCC70606E51E61DC7F8BB671E4D1B6DC0174B859F2FBB9EFEF22CFE0188"
       }
     ],
     "outputs": [
@@ -8166,6 +8178,8 @@
     "shared\\fwpmtypes.idl.patch",
     "um\\oaidl.idl.patch",
     "um\\d3dcommon.idl.patch",
-    "um\\dxcapi.h.patch"
+    "um\\dxcapi.h.patch",
+    "um\\winsock.h.patch",
+    "shared\\ntddtape.h.patch"
   ]
 }

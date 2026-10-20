@@ -3280,39 +3280,6 @@
     ]
   },
   {
-    "name": "SET_COMPOSITION_STRING_TYPE",
-    "members": [
-      {
-        "name": "SCS_SETSTR",
-        "value": "(IME_COMPOSITION_STRING.GCS_COMPREADSTR|IME_COMPOSITION_STRING.GCS_COMPSTR)"
-      },
-      {
-        "name": "SCS_CHANGEATTR",
-        "value": "(IME_COMPOSITION_STRING.GCS_COMPREADATTR|IME_COMPOSITION_STRING.GCS_COMPATTR)"
-      },
-      {
-        "name": "SCS_CHANGECLAUSE",
-        "value": "(IME_COMPOSITION_STRING.GCS_COMPREADCLAUSE|IME_COMPOSITION_STRING.GCS_COMPCLAUSE)"
-      },
-      {
-        "name": "SCS_SETRECONVERTSTRING"
-      },
-      {
-        "name": "SCS_QUERYRECONVERTSTRING"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ImmSetCompositionStringW",
-        "parameter": "dwIndex"
-      },
-      {
-        "method": "ImmSetCompositionStringA",
-        "parameter": "dwIndex"
-      }
-    ]
-  },
-  {
     "name": "FONT_CLIP_PRECISION",
     "type": "byte",
     "flags": true,
@@ -4741,26 +4708,9 @@
     ]
   },
   {
-    "name": "GET_GUIDE_LINE_TYPE",
-    "members": [
-      {
-        "name": "GGL_LEVEL"
-      },
-      {
-        "name": "GGL_INDEX"
-      },
-      {
-        "name": "GGL_STRING"
-      },
-      {
-        "name": "GGL_PRIVATE"
-      }
-    ],
+    "addUsesTo": "GET_GUIDE_LINE_TYPE",
+    "members": [],
     "uses": [
-      {
-        "method": "ImmGetGuideLineA",
-        "parameter": "dwIndex"
-      },
       {
         "method": "ImmGetGuideLineW",
         "parameter": "dwIndex"
@@ -4856,10 +4806,6 @@
     "uses": [
       {
         "method": "EnumDateFormatsExEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "GetDateFormatEx",
         "parameter": "dwFlags"
       }
     ]
@@ -5121,29 +5067,6 @@
       {
         "method": "GetInheritanceSourceW",
         "parameter": "SecurityInfo"
-      }
-    ]
-  },
-  {
-    "name": "NOTIFY_IME_INDEX",
-    "members": [
-      {
-        "name": "CPS_CANCEL"
-      },
-      {
-        "name": "CPS_COMPLETE"
-      },
-      {
-        "name": "CPS_CONVERT"
-      },
-      {
-        "name": "CPS_REVERT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ImmNotifyIME",
-        "parameter": "dwIndex"
       }
     ]
   },
@@ -5597,10 +5520,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "GetTimeFormatEx",
-        "parameter": "dwFlags"
-      },
       {
         "method": "EnumTimeFormatsW",
         "parameter": "dwFlags"
@@ -6065,41 +5984,6 @@
     ]
   },
   {
-    "name": "NOTIFY_IME_ACTION",
-    "members": [
-      {
-        "name": "NI_CHANGECANDIDATELIST"
-      },
-      {
-        "name": "NI_CLOSECANDIDATE"
-      },
-      {
-        "name": "NI_COMPOSITIONSTR"
-      },
-      {
-        "name": "NI_IMEMENUSELECTED"
-      },
-      {
-        "name": "NI_OPENCANDIDATE"
-      },
-      {
-        "name": "NI_SELECTCANDIDATESTR"
-      },
-      {
-        "name": "NI_SETCANDIDATE_PAGESIZE"
-      },
-      {
-        "name": "NI_SETCANDIDATE_PAGESTART"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ImmNotifyIME",
-        "parameter": "dwAction"
-      }
-    ]
-  },
-  {
     "addUsesTo": "FORCE_LEVEL_FLAGS",
     "uses": [
       {
@@ -6113,23 +5997,9 @@
     ]
   },
   {
-    "name": "GET_CONVERSION_LIST_FLAG",
-    "members": [
-      {
-        "name": "GCL_CONVERSION"
-      },
-      {
-        "name": "GCL_REVERSECONVERSION"
-      },
-      {
-        "name": "GCL_REVERSE_LENGTH"
-      }
-    ],
+    "addUsesTo": "GET_CONVERSION_LIST_FLAG",
+    "members": [],
     "uses": [
-      {
-        "method": "ImmGetConversionListW",
-        "parameter": "uFlag"
-      },
       {
         "method": "ImmGetConversionListA",
         "parameter": "uFlag"
@@ -6300,24 +6170,6 @@
         }
       ]
     },
-  {
-    "name": "PROXY_AUTO_DETECT_TYPE",
-    "flags": true,
-    "members": [
-      {
-        "name": "PROXY_AUTO_DETECT_TYPE_DHCP"
-      },
-      {
-        "name": "PROXY_AUTO_DETECT_TYPE_DNS_A"
-      }
-    ],
-    "uses": [
-      {
-        "method": "DetectAutoProxyUrl",
-        "parameter": "dwDetectFlags"
-      }
-    ]
-  },
   {
     "name": "INSERT_TEXT_AT_SELECTION_FLAGS",
     "members": [

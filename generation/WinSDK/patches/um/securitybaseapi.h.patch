@@ -1,8 +1,6 @@
-diff --git a/um/securitybaseapi.h b/um/securitybaseapi.h
-index d9c3d103..58206518 100644
 --- a/um/securitybaseapi.h
 +++ b/um/securitybaseapi.h
-@@ -30,6 +30,8 @@ extern "C" {
+@@ -30,6 +30,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -11,7 +9,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -65,6 +67,8 @@ AccessCheckAndAuditAlarmW(
+@@ -65,6 +67,8 @@
  #define AccessCheckAndAuditAlarm  AccessCheckAndAuditAlarmW
  #endif
  
@@ -20,7 +18,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -82,6 +86,8 @@ AccessCheckByType(
+@@ -82,6 +86,8 @@
      _Out_ LPBOOL AccessStatus
      );
  
@@ -29,7 +27,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -184,6 +190,8 @@ AccessCheckByTypeResultListAndAuditAlarmByHandleW(
+@@ -184,6 +190,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -38,7 +36,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -194,6 +202,8 @@ AddAccessAllowedAce(
+@@ -194,6 +202,8 @@
      _In_ PSID pSid
      );
  
@@ -47,7 +45,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -211,6 +221,8 @@ AddAccessAllowedAceEx(
+@@ -211,6 +221,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -56,7 +54,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -224,6 +236,8 @@ AddAccessAllowedObjectAce(
+@@ -224,6 +236,8 @@
      _In_ PSID pSid
      );
  
@@ -65,7 +63,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -234,6 +248,8 @@ AddAccessDeniedAce(
+@@ -234,6 +248,8 @@
      _In_ PSID pSid
      );
  
@@ -74,7 +72,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -245,6 +261,8 @@ AddAccessDeniedAceEx(
+@@ -245,6 +261,8 @@
      _In_ PSID pSid
      );
  
@@ -83,7 +81,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -264,6 +282,8 @@ AddAccessDeniedObjectAce(
+@@ -264,6 +282,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -92,7 +90,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -281,6 +301,8 @@ AddAce(
+@@ -281,6 +301,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -101,7 +99,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -293,6 +315,8 @@ AddAuditAccessAce(
+@@ -293,6 +315,8 @@
      _In_ BOOL bAuditFailure
      );
  
@@ -110,7 +108,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -306,6 +330,8 @@ AddAuditAccessAceEx(
+@@ -306,6 +330,8 @@
      _In_ BOOL bAuditFailure
      );
  
@@ -119,7 +117,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -329,6 +355,8 @@ AddAuditAccessObjectAce(
+@@ -329,6 +355,8 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -128,7 +126,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -350,6 +378,8 @@ AddMandatoryAce(
+@@ -350,6 +378,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -137,7 +135,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -363,6 +393,8 @@ AddResourceAttributeAce(
+@@ -363,6 +393,8 @@
      _Out_ PDWORD pReturnLength
      );
  
@@ -146,7 +144,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -382,6 +414,8 @@ AddScopedPolicyIDAce(
+@@ -382,6 +414,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -155,7 +153,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -400,6 +434,8 @@ AdjustTokenGroups(
+@@ -400,6 +434,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -164,7 +162,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -418,6 +454,8 @@ AdjustTokenPrivileges(
+@@ -418,6 +454,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -173,7 +171,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -435,6 +473,8 @@ AllocateAndInitializeSid(
+@@ -435,6 +473,8 @@
      _Outptr_ PSID* pSid
      );
  
@@ -182,7 +180,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -448,6 +488,7 @@ AllocateLocallyUniqueId(
+@@ -448,6 +488,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -190,7 +188,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -456,6 +497,7 @@ AreAllAccessesGranted(
+@@ -456,6 +497,7 @@
      _In_ DWORD DesiredAccess
      );
  
@@ -198,7 +196,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -470,6 +512,8 @@ AreAnyAccessesGranted(
+@@ -470,6 +512,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -207,7 +205,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  APIENTRY
-@@ -487,6 +531,8 @@ CheckTokenMembership(
+@@ -487,6 +531,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -216,7 +214,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  APIENTRY
-@@ -512,6 +558,8 @@ GetAppContainerAce(
+@@ -512,6 +558,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -225,7 +223,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  APIENTRY
-@@ -530,6 +578,8 @@ CheckTokenMembershipEx(
+@@ -530,6 +578,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -234,7 +232,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -548,6 +598,8 @@ ConvertToAutoInheritPrivateObjectSecurity(
+@@ -548,6 +598,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -243,7 +241,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -563,6 +615,8 @@ CopySid(
+@@ -563,6 +615,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -252,7 +250,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -575,6 +629,8 @@ CreatePrivateObjectSecurity(
+@@ -575,6 +629,8 @@
      _In_ PGENERIC_MAPPING GenericMapping
      );
  
@@ -261,7 +259,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -589,6 +645,8 @@ CreatePrivateObjectSecurityEx(
+@@ -589,6 +645,8 @@
      _In_ PGENERIC_MAPPING GenericMapping
      );
  
@@ -270,7 +268,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -604,6 +662,8 @@ CreatePrivateObjectSecurityWithMultipleInheritance(
+@@ -604,6 +662,8 @@
      _In_ PGENERIC_MAPPING GenericMapping
      );
  
@@ -279,7 +277,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  APIENTRY
-@@ -627,6 +687,8 @@ CreateRestrictedToken(
+@@ -627,6 +687,8 @@
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -288,7 +286,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
-@@ -638,6 +700,8 @@ CreateWellKnownSid(
+@@ -638,6 +700,8 @@
      _Inout_ DWORD* cbSid
      );
  
@@ -297,7 +295,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
-@@ -650,6 +714,8 @@ EqualDomainSid(
+@@ -650,6 +714,8 @@
  
  #endif //(_WIN32_WINNT >= 0x0501)
  
@@ -306,7 +304,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -664,6 +730,8 @@ DeleteAce(
+@@ -664,6 +730,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -315,7 +313,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -677,6 +745,8 @@ DestroyPrivateObjectSecurity(
+@@ -677,6 +745,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -324,7 +322,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -686,6 +756,8 @@ DuplicateToken(
+@@ -686,6 +756,8 @@
      _Outptr_ PHANDLE DuplicateTokenHandle
      );
  
@@ -333,7 +331,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -704,6 +776,8 @@ DuplicateTokenEx(
+@@ -704,6 +776,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -342,7 +340,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -712,6 +786,8 @@ EqualPrefixSid(
+@@ -712,6 +786,8 @@
      _In_ PSID pSid2
      );
  
@@ -351,7 +349,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -720,6 +796,8 @@ EqualSid(
+@@ -720,6 +796,8 @@
      _In_ PSID pSid2
      );
  
@@ -360,7 +358,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -734,6 +812,7 @@ FindFirstFreeAce(
+@@ -734,6 +812,7 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -368,7 +366,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  PVOID
  WINAPI
-@@ -741,6 +820,8 @@ FreeSid(
+@@ -741,6 +820,8 @@
      _In_ PSID pSid
      );
  
@@ -377,7 +375,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -750,6 +831,8 @@ GetAce(
+@@ -750,6 +831,8 @@
      _Outptr_ LPVOID* pAce
      );
  
@@ -386,7 +384,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -787,6 +870,8 @@ GetFileSecurityW(
+@@ -787,6 +870,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -395,7 +393,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -798,6 +883,7 @@ GetKernelObjectSecurity(
+@@ -798,6 +883,7 @@
      _Out_ LPDWORD lpnLengthNeeded
      );
  
@@ -403,7 +401,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Post_satisfies_(return >= 8 && return <= SECURITY_MAX_SID_SIZE)
  _Success_(1)
-@@ -813,6 +899,8 @@ GetLengthSid(
+@@ -813,6 +899,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -412,7 +410,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
-@@ -831,6 +919,8 @@ GetPrivateObjectSecurity(
+@@ -831,6 +919,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -421,7 +419,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -840,6 +930,8 @@ GetSecurityDescriptorControl(
+@@ -840,6 +930,8 @@
      _Out_ LPDWORD lpdwRevision
      );
  
@@ -430,7 +428,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -850,6 +942,8 @@ GetSecurityDescriptorDacl(
+@@ -850,6 +942,8 @@
      _Out_ LPBOOL lpbDaclDefaulted
      );
  
@@ -439,7 +437,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -859,6 +953,7 @@ GetSecurityDescriptorGroup(
+@@ -859,6 +953,7 @@
      _Out_ LPBOOL lpbGroupDefaulted
      );
  
@@ -447,7 +445,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  DWORD
  WINAPI
-@@ -866,6 +961,8 @@ GetSecurityDescriptorLength(
+@@ -866,6 +961,8 @@
      _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
      );
  
@@ -456,7 +454,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -875,6 +972,7 @@ GetSecurityDescriptorOwner(
+@@ -875,6 +972,7 @@
      _Out_ LPBOOL lpbOwnerDefaulted
      );
  
@@ -464,7 +462,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  DWORD
  WINAPI
-@@ -883,6 +981,8 @@ GetSecurityDescriptorRMControl(
+@@ -883,6 +981,8 @@
      _Out_ PUCHAR RMControl
      );
  
@@ -473,7 +471,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -893,6 +993,8 @@ GetSecurityDescriptorSacl(
+@@ -893,6 +993,8 @@
      _Out_ LPBOOL lpbSaclDefaulted
      );
  
@@ -482,7 +480,15 @@ index d9c3d103..58206518 100644
  WINADVAPI
  PSID_IDENTIFIER_AUTHORITY
  WINAPI
-@@ -907,6 +1009,8 @@ GetSidLengthRequired(
+@@ -900,13 +1002,15 @@
+     _In_ PSID pSid
+     );
+ 
+-WINADVAPI
++_Win32_SupportedOS_WindowsXP_ WINADVAPI
+ DWORD
+ WINAPI
+ GetSidLengthRequired(
      _In_ UCHAR nSubAuthorityCount
      );
  
@@ -491,7 +497,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  PDWORD
  WINAPI
-@@ -915,6 +1019,8 @@ GetSidSubAuthority(
+@@ -915,6 +1019,8 @@
      _In_ DWORD nSubAuthority
      );
  
@@ -500,7 +506,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  PUCHAR
  WINAPI
-@@ -922,6 +1028,8 @@ GetSidSubAuthorityCount(
+@@ -922,6 +1028,8 @@
      _In_ PSID pSid
      );
  
@@ -509,7 +515,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -935,6 +1043,8 @@ GetTokenInformation(
+@@ -935,6 +1043,8 @@
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -518,7 +524,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
-@@ -953,6 +1063,8 @@ GetWindowsAccountDomainSid(
+@@ -953,6 +1063,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -527,7 +533,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  APIENTRY
-@@ -960,6 +1072,8 @@ ImpersonateAnonymousToken(
+@@ -960,6 +1072,8 @@
      _In_ HANDLE ThreadHandle
      );
  
@@ -536,7 +542,7 @@ index d9c3d103..58206518 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -968,6 +1082,8 @@ ImpersonateLoggedOnUser(
+@@ -968,6 +1082,8 @@
      _In_ HANDLE hToken
      );
  
@@ -545,7 +551,7 @@ index d9c3d103..58206518 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -982,6 +1098,8 @@ ImpersonateSelf(
+@@ -982,6 +1098,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -554,7 +560,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -991,6 +1109,8 @@ InitializeAcl(
+@@ -991,6 +1109,8 @@
      _In_ DWORD dwAclRevision
      );
  
@@ -563,7 +569,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -999,6 +1119,8 @@ InitializeSecurityDescriptor(
+@@ -999,6 +1119,8 @@
      _In_ DWORD dwRevision
      );
  
@@ -572,7 +578,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1014,6 +1136,8 @@ InitializeSid(
+@@ -1014,6 +1136,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -581,7 +587,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1027,6 +1151,7 @@ IsTokenRestricted(
+@@ -1027,6 +1151,7 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -589,7 +595,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1034,6 +1159,7 @@ IsValidAcl(
+@@ -1034,6 +1159,7 @@
      _In_ PACL pAcl
      );
  
@@ -597,7 +603,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1041,6 +1167,7 @@ IsValidSecurityDescriptor(
+@@ -1041,6 +1167,7 @@
      _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
      );
  
@@ -605,7 +611,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1050,6 +1177,7 @@ IsValidSid(
+@@ -1050,6 +1177,7 @@
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -613,7 +619,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1060,6 +1188,8 @@ IsWellKnownSid(
+@@ -1060,6 +1188,8 @@
  
  #endif // (_WIN32_WINNT >= 0x0501)
  
@@ -622,7 +628,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
-@@ -1078,6 +1208,8 @@ MakeAbsoluteSD(
+@@ -1078,6 +1208,8 @@
      _Inout_ LPDWORD lpdwPrimaryGroupSize
      );
  
@@ -631,7 +637,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
-@@ -1094,6 +1226,7 @@ MakeSelfRelativeSD(
+@@ -1094,6 +1226,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -639,7 +645,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  VOID
  WINAPI
-@@ -1166,6 +1299,8 @@ ObjectPrivilegeAuditAlarmW(
+@@ -1166,6 +1299,8 @@
  #define ObjectPrivilegeAuditAlarm  ObjectPrivilegeAuditAlarmW
  #endif
  
@@ -648,7 +654,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1192,6 +1327,7 @@ PrivilegedServiceAuditAlarmW(
+@@ -1192,6 +1327,7 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -656,7 +662,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  VOID
  WINAPI
-@@ -1202,6 +1338,8 @@ QuerySecurityAccessMask(
+@@ -1202,6 +1338,8 @@
  
  #endif // (_WIN32_WINNT >= 0x0600)
  
@@ -665,7 +671,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1209,6 +1347,8 @@ RevertToSelf(
+@@ -1209,6 +1347,8 @@
      VOID
      );
  
@@ -674,7 +680,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1238,6 +1378,8 @@ SetFileSecurityW(
+@@ -1238,6 +1378,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -683,7 +689,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1253,6 +1395,8 @@ SetKernelObjectSecurity(
+@@ -1253,6 +1395,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -692,7 +698,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1264,6 +1408,8 @@ SetPrivateObjectSecurity(
+@@ -1264,6 +1408,8 @@
      _In_opt_ HANDLE Token
      );
  
@@ -701,7 +707,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1278,6 +1424,7 @@ SetPrivateObjectSecurityEx(
+@@ -1278,6 +1424,7 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -709,7 +715,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  VOID
  WINAPI
-@@ -1294,6 +1441,8 @@ SetSecurityAccessMask(
+@@ -1294,6 +1441,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -718,7 +724,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1303,6 +1452,8 @@ SetSecurityDescriptorControl(
+@@ -1303,6 +1452,8 @@
      _In_ SECURITY_DESCRIPTOR_CONTROL ControlBitsToSet
      );
  
@@ -727,7 +733,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1313,6 +1464,8 @@ SetSecurityDescriptorDacl(
+@@ -1313,6 +1464,8 @@
      _In_ BOOL bDaclDefaulted
      );
  
@@ -736,7 +742,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1322,6 +1475,8 @@ SetSecurityDescriptorGroup(
+@@ -1322,6 +1475,8 @@
      _In_ BOOL bGroupDefaulted
      );
  
@@ -745,7 +751,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1331,6 +1486,7 @@ SetSecurityDescriptorOwner(
+@@ -1331,6 +1486,7 @@
      _In_ BOOL bOwnerDefaulted
      );
  
@@ -753,7 +759,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  DWORD
  WINAPI
-@@ -1339,6 +1495,8 @@ SetSecurityDescriptorRMControl(
+@@ -1339,6 +1495,8 @@
      _In_opt_ PUCHAR RMControl
      );
  
@@ -762,7 +768,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1349,6 +1507,8 @@ SetSecurityDescriptorSacl(
+@@ -1349,6 +1507,8 @@
      _In_ BOOL bSaclDefaulted
      );
  
@@ -771,7 +777,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1403,6 +1563,7 @@ GetCachedSigningLevel(
+@@ -1403,6 +1563,7 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -779,7 +785,7 @@ index d9c3d103..58206518 100644
  WINADVAPI
  LONG
  WINAPI
-@@ -1420,6 +1581,7 @@ CveEventWrite(
+@@ -1420,6 +1581,7 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  

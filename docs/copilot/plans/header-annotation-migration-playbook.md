@@ -1,17 +1,74 @@
 # SDK header-annotation migration playbook
 
-Use this procedure to extend the pilot in bounded batches. The
+Use this procedure to convert the SDK in substantial source batches. The
 [annotation specification](shift-left-annotation-spec.md) defines the vocabulary;
 this playbook defines artifact ownership, migration order, and acceptance evidence.
 Keep the C# pipeline. Do not introduce a second C++ parse, API-specific sidecars,
 copied native declarations, or a replacement annotation transport.
 
+## Parallel drafting and central integration
+
+Drafting does not wait for validation. Assign disjoint original headers and IDL
+families to parallel authors; collect their patches and proposed legacy removals,
+apply them to a combined candidate, then compile and iterate centrally.
+
+| Lane | Responsibility | Completion condition |
+| --- | --- | --- |
+| Patch authors | Convert the remaining API-specific facts in their owned originals; deliver patches and corresponding proposed sidecar removals. | A committed draft with fact IDs, source targets, and explicit residuals. No local compilation or qualification receipt is required. |
+| Source assembly | Merge draft cohorts, resolve ownership and patch conflicts, and produce named integration cuts. | An applied candidate with the draft-to-source mapping preserved. Applying a patch does not validate it. |
+| Integration and tooling | Prepare the combined SDK, regenerate IDL outputs, build the tools and metadata, compare results, and repair shared failures. | A qualified combined result; failures remain explicit until fixed. |
+
+For the local migration campaign, keep at most two agents compiling: the primary
+integration worker and, when needed, one tooling worker. Other authors must not run
+builds, MIDL regeneration, Clang/native
+parses, partition scrapes, WinMD emissions, tests, or producer replays. Existing
+text/metadata readers and patch-authoring helpers are fine. Split a helper's drafting
+and validation stages if it otherwise forces a compiler run before delivering a patch.
+Bound subprocess concurrency inside the compilation lanes as well.
+
+An author takes the next leased original after handing off a draft; it does not wait
+for the preceding draft's build or API review. Existing image reviews can continue
+read-only, but are not gates for drafting the rest of the SDK. Do not require a
+separate native-control matrix or image for every selector, original, or partition.
+
+### Authoring procedure
+
+1. **Claim an original or IDL family.** Use the shared remaining-fact inventory and
+   one writer per original. Include all owned facts in a substantial cohort rather
+   than selecting only the next fact with an already-green local probe.
+2. **Read the selected SDK's native declarations.** Identify the authored `.h` or
+   original `.idl`, its guards, and the declarations to annotate. The repository's
+   `RecompiledIdlHeaders` tree is generated output, not an unmodified shipped-SDK
+   source authority. Use the actual selected package's headers/IDL when they differ.
+3. **Write cumulative source patches.** Put them under
+   `generation\WinSDK\patches`, following the existing pre-MIDL/post-MIDL recipe.
+   Use the specification's vocabulary and the rules below. For IDL-owned declarations,
+   patch the original IDL and leave regeneration to integration. Preserve native
+   declarations, SAL, values, guards, storage, and ordinary-consumer behavior.
+4. **Draft the corresponding legacy removals.** Deliver the patch and removal
+   edits together, mapped to the original fact IDs/selectors. Preserve foreign
+   consumers and complete shared-object closure. Keep genuine global/parser controls
+   and unexpressed facts as explicit residuals. A parser that does not yet consume an
+   authored annotation is a tooling dependency for integration, not a reason to stop
+   drafting other source facts. Never remove a fact for which no replacement was
+   authored, except an explicitly classified intentional removal.
+5. **Commit and hand off without a build gate.** Give the source base and commit,
+   owned originals, fact-to-patch/removal mapping, and unresolved source or tooling
+   questions. Do not generate per-fact proof packets or claim validated migrations.
+   Continue with the allocator's next disjoint cohort while integration works.
+
+Track drafted, applied, and validated facts separately against the same fixed
+inventory. A draft is useful unfinished work; neither its existence nor deletion of
+a legacy row earns validation or API-acceptance credit.
+
 ## Start from a pinned control
 
-Record the qualified tooling and pilot commits, tree identities, shared annotation
-header hash, selected SDK package version, and same-SDK OLD image hash. A branch name
-or an earlier green run is not a qualification pin. Keep failed candidates and their
-raw output; do not overwrite them when a new candidate succeeds.
+The integration lane records the qualified tooling and pilot commits, tree
+identities, shared annotation header hash, selected SDK package version, and same-SDK
+OLD image hash for each combined candidate. Authors use the allocator's named source
+base; they do not need to build another control before drafting. A branch name or an
+earlier green run is not a qualification pin. Keep failed candidates and their raw
+output; do not overwrite them when a new candidate succeeds.
 
 Use the existing migration session and PR. Keep the tooling, pilot, and next-wave
 layers in their existing stack; synchronize exact commits in each owning worktree.
@@ -136,38 +193,49 @@ text alone. Adding quote regions between interfaces can also change MIDL's gener
 bookkeeping; reuse existing regions and compare actual RPC outputs.
 
 There is no qualified arbitrary non-local parameter carrier. If native MIDL/SAL and
-the existing helpers cannot express a required fact, keep that artifact blocked and
-report the exact target, diagnostic, and reproducer. Do not silently omit it, make
-the method local, invent a comment payload, or add an API-specific sidecar.
+the existing helpers cannot express a required fact, retain that fact as a residual
+and report its exact target and required transport to the tooling lane. Hand off the
+other authored facts without waiting for that fix. Do not silently omit the residual,
+make the method local, invent a comment payload, or add an API-specific sidecar.
 
-## Execute one bounded batch
+## Integrate and qualify a combined batch
 
-1. **Inventory and claim the owner.** Enumerate the selected partitions' effective
-   response-file, enum, handle, import, and availability facts. Map each fact to its
-   native declaration and original artifact. Expand shared-header and including-IDL
-   closure before choosing writers. Keep discovery work separate from admissions.
+These steps belong to central integration and acceptance. They are not prerequisites
+for an author to deliver a draft or start another owned original.
+
+1. **Assemble the drafts.** Join the cohorts' fact IDs, original owners, source
+   patches, proposed legacy removals, and explicit residuals. Resolve overlapping
+   edits through the original's owner. Apply the source changes and matching removal
+   edits to one named candidate; do not require a prevalidated result from each author.
 2. **Prepare exact private inputs.** Pin original SDK/IDL/header and tool identities;
    apply one cumulative patch per original artifact. Use the pilot preparer and
    manifest, with no fuzz, installed-SDK writes, ambient include fallback, or direct
    generated-header editing. The declared input set must equal the measured
    preprocessing closure, not merely contain it.
-3. **Prove native behavior first.** Regenerate pristine and patched IDL with the same
-   MIDL/MSVC arguments. Compile actual C and C++ consumption, including C-interface
+3. **Generate the combined metadata and iterate.** Enable annotation ingestion for
+   every affected consumer, not only the partition that owns a group definition.
+   Scrape the affected closure and include the normal constants stage and complete
+   emission, with no legacy fallback for the removed facts. Group failures by shared
+   cause and repair the source or tooling once. Do not send every author back to
+   reproduce the same compiler failure or require an image per patch.
+4. **Prove native behavior and grade the image.** Regenerate pristine and patched
+   IDL with the same MIDL/MSVC arguments. Compile actual C and C++ consumption, including C-interface
    forms where relevant, on x86/x64/ARM64 with metadata off and on. Compare native
    signatures/layout/vtables/symbols and actual compiler SAL facts. Compare warning
    contexts as well as counts. Compare RPC proxy, IID, dlldata, and TLB outputs
    against matched pristine regeneration; explain existing mirror-only differences
-   separately. Preserve the untouched raw logs.
-4. **Move the owned facts, not just their syntax.** Remove the migrated API facts
-   from every relevant sidecar surface. Keep only justified global/parser controls.
-   Verify first-parse annotation ingestion with no legacy fallback; then run a fresh
-   first and repeat scrape of the selected partitions. Compare generated bytes,
-   source facts, and diagnostics. An up-to-date MSBuild result is not a fresh scrape.
-5. **Emit and grade the complete image.** Reuse frozen unaffected partition sources,
-   replace the changed and affected closure sources, and emit the complete WinMD.
-   Run physical metadata checks for attributes, flags, types, signatures, constants,
-   availability, and metadata closure. Compare unfiltered OLD-to-NEW and
-   tooling-control-to-NEW output, retaining every raw difference.
+   separately. Batch these checks around shared transports and affected source
+   families instead of repeating the full matrix for each fact. Preserve raw logs,
+   including known pristine failures; do not claim those cases passed. Run physical
+   metadata checks for attributes, flags, types, signatures, constants, availability,
+   and closure. Compare unfiltered OLD-to-NEW and tooling-control-to-NEW output,
+   retaining every raw difference.
+5. **Check repeatability and remaining legacy use.** Run fresh first/repeat scrapes
+   for the changed closure and compare generated bytes, source facts, and diagnostics.
+   An up-to-date MSBuild result is not a fresh scrape. Verify that every applied
+   retirement has an ingested header replacement and that all retained API-specific
+   facts remain on the conversion queue. Reuse frozen unaffected sources only when
+   their producer and dependency identities still match.
 6. **Checkpoint each batch; qualify the published wave.** Account for every changed
    site using source evidence and commit the source. Before accepting a published
    wave, run exact-current-head CI, download its actual
@@ -177,13 +245,14 @@ the method local, invent a comment payload, or add an API-specific sidecar.
    producer's green run, report an unpushed candidate as published, or hide a failure
    in an allowlist.
 
-Use the existing build commands; do not create another build wrapper:
+The compilation lanes use the existing build commands; authors do not run these as
+handoff gates. Do not create another build wrapper:
 
 ```powershell
 .\scripts\Prepare-SdkHeaders.ps1 -Recipe .\generation\WinSDK\patches\SdkHeaders.json -SdkPackageRoot '<pinned-package-root>' -MidlPreprocessorPath '<pinned-cl.exe>' -OutputRoot '<fresh-private-root>'
-dotnet build BuildTools -c Release
-dotnet build generation\WinSDK -c Release -t:ScrapeHeaders -p:ScanArch=crossarch -p:ObjDir='<fresh-obj>' -p:PartitionFilter=Foundation
-dotnet build generation\WinSDK -c Release -t:EmitWinmd
+dotnet build BuildTools -c Release -m:1
+dotnet build generation\WinSDK -c Release -m:1 -t:ScrapeHeaders -p:MaxProcessors=2 -p:ScanArch=crossarch -p:ObjDir='<fresh-obj>' -p:PartitionFilter=Foundation
+dotnet build generation\WinSDK -c Release -m:1 -p:MaxProcessors=2 -t:EmitWinmd
 dotnet test tests\Win32MetadataScraperTests -c Release --filter "HeaderAnnotation"
 dotnet .\bin\Release\net10.0\WinmdUtils.dll compare --first <same-sdk-old.winmd> --second <candidate.winmd>
 ```
@@ -195,6 +264,11 @@ target invokes the same preparation stage; its override properties are
 `SdkHeaderSdkPackageRoot`. The standalone preparer returns `IncludeRoot`,
 `Manifest`, `Identity`, and `Reused`; record those identities rather than guessing a
 prepared path.
+
+`MaxProcessors` bounds the scraper task's own parallel partition/architecture jobs.
+MSBuild `-m` alone does not bound that internal concurrency. Set explicit bounds for
+MIDL and native-control runners too; do not use a nonpositive scraper limit, which
+requests unbounded task parallelism.
 
 Enable a migrated partition with `parse-win32-annotations` under its existing
 `--config`. There is no automatic annotation-admission command.
@@ -215,20 +289,23 @@ an arbitrary new API, enum member, signature change, floor, or missing annotatio
 Do not create checked-in expected-difference files, normalize away raw output,
 invent aliases, or weaken OLD snapshots to obtain a pass.
 
-When a batch is blocked, retain its failing image, raw comparison, native/MIDL
-logs, and minimal reproducer. Mark the affected artifact blocked rather than
-calling the whole partition migrated. Fix a shared parser issue once in the tooling
-layer, requalify its pin, then resume affected batches.
+When an integration candidate is blocked, retain its failing image, raw comparison,
+native/MIDL logs, and minimal reproducer. Keep its affected acceptance facts blocked
+rather than calling the whole partition migrated. Continue drafting other originals.
+Fix a shared parser issue once in the tooling lane, requalify its pin, then rerun the
+affected combined candidate.
 
-## Handoff required from each batch
+## Integration acceptance handoff
 
-Record original artifact owners and affected partitions; exact source/tool/SDK/
-helper identities; admitted input and output hashes; migrated and residual facts;
+For a qualified integration batch, record original artifact owners and affected
+partitions; exact source/tool/SDK/helper identities; admitted input and output hashes;
+migrated and residual facts;
 native/SAL/MIDL/RPC evidence; first/repeat source results; complete-image hash;
 physical checks; unfiltered comparisons with per-site dispositions; and the
 current-head CI URL and actual producers. Distinguish local, published, and
 CI-qualified evidence. Keep reports with the session/PR artifacts rather than
-adding planning journals to the repository.
+adding planning journals to the repository. This acceptance record is separate from
+the much smaller authoring handoff above.
 
 Work artifact by artifact within the existing migration effort. Parallel writers
 may own disjoint original artifacts only; they must not each patch a shared IDL or

@@ -1,5 +1,5 @@
 diff --git a/um/winbase.h b/um/winbase.h
-index 62b14502..ab17645a 100644
+index 62b14502..f50d478a 100644
 --- a/um/winbase.h
 +++ b/um/winbase.h
 @@ -12,6 +12,48 @@
@@ -1763,7 +1763,7 @@ index 62b14502..ab17645a 100644
  
  #if(_WIN32_WINNT >= 0x0400)
 -WINBASEAPI
-+_Win32_PreserveResult_ WINBASEAPI
++_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_PreserveResult_ WINBASEAPI
  DWORD
  WINAPI
  SignalObjectAndWait(
@@ -4156,6 +4156,78 @@ index 62b14502..ab17645a 100644
  WINBASEAPI
  BOOL
  WINAPI
+@@ -7910,7 +8970,7 @@ CancelTimerQueueTimer(
+ 
+ #if !defined(MIDL_PASS)
+ 
+-FORCEINLINE
++_Win32_SupportedOS_WindowsVista_ FORCEINLINE
+ VOID
+ InitializeThreadpoolEnvironment(
+     _Out_ PTP_CALLBACK_ENVIRON pcbe
+@@ -7919,7 +8979,7 @@ InitializeThreadpoolEnvironment(
+     TpInitializeCallbackEnviron(pcbe);
+ }
+ 
+-FORCEINLINE
++_Win32_SupportedOS_WindowsVista_ FORCEINLINE
+ VOID
+ SetThreadpoolCallbackPool(
+     _Inout_ PTP_CALLBACK_ENVIRON pcbe,
+@@ -7929,7 +8989,7 @@ SetThreadpoolCallbackPool(
+     TpSetCallbackThreadpool(pcbe, ptpp);
+ }
+ 
+-FORCEINLINE
++_Win32_SupportedOS_WindowsVista_ FORCEINLINE
+ VOID
+ SetThreadpoolCallbackCleanupGroup(
+     _Inout_  PTP_CALLBACK_ENVIRON              pcbe,
+@@ -7940,7 +9000,7 @@ SetThreadpoolCallbackCleanupGroup(
+     TpSetCallbackCleanupGroup(pcbe, ptpcg, pfng);
+ }
+ 
+-FORCEINLINE
++_Win32_SupportedOS_WindowsVista_ FORCEINLINE
+ VOID
+ SetThreadpoolCallbackRunsLong(
+     _Inout_ PTP_CALLBACK_ENVIRON pcbe
+@@ -7949,7 +9009,7 @@ SetThreadpoolCallbackRunsLong(
+     TpSetCallbackLongFunction(pcbe);
+ }
+ 
+-FORCEINLINE
++_Win32_SupportedOS_WindowsVista_ FORCEINLINE
+ VOID
+ SetThreadpoolCallbackLibrary(
+     _Inout_ PTP_CALLBACK_ENVIRON pcbe,
+@@ -7961,7 +9021,7 @@ SetThreadpoolCallbackLibrary(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
+-FORCEINLINE
++_Win32_SupportedOS_Windows7_ FORCEINLINE
+ VOID
+ SetThreadpoolCallbackPriority(
+     _Inout_ PTP_CALLBACK_ENVIRON pcbe,
+@@ -7973,7 +9033,7 @@ SetThreadpoolCallbackPriority(
+ 
+ #endif
+ 
+-FORCEINLINE
++_Win32_SupportedOS_WindowsVista_ FORCEINLINE
+ VOID
+ DestroyThreadpoolEnvironment(
+     _Inout_ PTP_CALLBACK_ENVIRON pcbe
+@@ -7997,7 +9057,7 @@ DestroyThreadpoolEnvironment(
+ 
+ #if !defined(MIDL_PASS)
+ 
+-FORCEINLINE
++_Win32_SupportedOS_Windows7_ FORCEINLINE
+ VOID
+ SetThreadpoolCallbackPersistent(
+     _Inout_ PTP_CALLBACK_ENVIRON pcbe
 @@ -8018,7 +9078,9 @@ SetThreadpoolCallbackPersistent(
  //  Private Namespaces support
  //
