@@ -29,7 +29,7 @@ index e3bee0ac..48c05524 100644
  extern "C" {
  #endif
 -
-+_Win32_RAIIFree_(closesocket, -1) 
++_Win32_RAIIFree_(closesocket, -1)
 +_Win32_SupportedOS_Windows81_
  SOCKET PASCAL FAR accept (
                            _In_ SOCKET s,

@@ -151,7 +151,7 @@ index 15570d3c..ce13b5ac 100644
  {
      DWORD                                           dwSize;			
 -    DWORD                                           dwSubjectChoice;	
-+    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT) DWORD                                           dwSubjectChoice;	
++    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT) DWORD                                           dwSubjectChoice;
      union
      {
          LPCWSTR                                     pwszFileName;	

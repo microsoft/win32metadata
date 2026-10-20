@@ -901,7 +901,7 @@
  
  #if INCL_WINSOCK_API_PROTOTYPES
 -
-+_Win32_RAIIFree_(closesocket, -1) 
++_Win32_RAIIFree_(closesocket, -1)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows81_
  _WINSOCK_DEPRECATED_BY("WSASocketW()")

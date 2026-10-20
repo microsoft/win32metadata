@@ -642,7 +642,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..cf2355f51c214dadea50050e53fe26b8
 +_Win32_SupportedOS_Windows7_
  BOOL WINAPI WTSSetListenerSecurityW(
 -  _In_          HANDLE hServer, 
-+  _Win32_Optional_(true) _Win32_Reserved_ _In_          HANDLE hServer, 
++  _Win32_Optional_(true) _Win32_Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,  
    _In_          DWORD Reserved, 
    _In_          LPWSTR pListenerName, 
@@ -653,7 +653,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..cf2355f51c214dadea50050e53fe26b8
 +_Win32_SupportedOS_Windows7_
  BOOL WINAPI WTSSetListenerSecurityA(
 -  _In_          HANDLE hServer, 
-+  _Win32_Optional_(true) _Win32_Reserved_ _In_          HANDLE hServer, 
++  _Win32_Optional_(true) _Win32_Reserved_ _In_          HANDLE hServer,
    _In_          PVOID pReserved,  
    _In_          DWORD Reserved, 
    _In_          LPSTR pListenerName, 

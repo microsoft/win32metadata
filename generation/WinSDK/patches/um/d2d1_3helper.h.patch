@@ -7,7 +7,7 @@ index d316c76d..ff954eb1 100644
      D2D1FORCEINLINE
      D2D1_GRADIENT_MESH_PATCH
 -    GradientMeshPatch( 
-+    _Win32_SupportedOS_Windows7_ GradientMeshPatch( 
++    _Win32_SupportedOS_Windows7_ GradientMeshPatch(
          D2D1_POINT_2F point00, 
          D2D1_POINT_2F point01, 
          D2D1_POINT_2F point02, 
@@ -25,7 +25,7 @@ index d316c76d..ff954eb1 100644
      D2D1FORCEINLINE
      D2D1_INK_POINT 
 -    InkPoint( 
-+    _Win32_SupportedOS_Windows7_ InkPoint( 
++    _Win32_SupportedOS_Windows7_ InkPoint(
          const D2D1_POINT_2F &point, 
          FLOAT radius 
          )
@@ -34,7 +34,7 @@ index d316c76d..ff954eb1 100644
      D2D1FORCEINLINE
      D2D1_INK_BEZIER_SEGMENT 
 -    InkBezierSegment( 
-+    _Win32_SupportedOS_Windows7_ InkBezierSegment( 
++    _Win32_SupportedOS_Windows7_ InkBezierSegment(
          const D2D1_INK_POINT &point1, 
          const D2D1_INK_POINT &point2, 
          const D2D1_INK_POINT &point3 
@@ -43,7 +43,7 @@ index d316c76d..ff954eb1 100644
      D2D1FORCEINLINE
      D2D1_INK_STYLE_PROPERTIES 
 -    InkStyleProperties( 
-+    _Win32_SupportedOS_Windows7_ InkStyleProperties( 
++    _Win32_SupportedOS_Windows7_ InkStyleProperties(
          D2D1_INK_NIB_SHAPE nibShape, 
          const D2D1_MATRIX_3X2_F &nibTransform 
          )

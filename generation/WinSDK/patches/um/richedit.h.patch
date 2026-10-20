@@ -271,7 +271,7 @@
  	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)	
  	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half twips)	
 -	WORD	wBorders;				// Border styles (nibble/border)		
-+	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)		
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)
  } PARAFORMAT2;
  
  #endif // C++	

@@ -16,7 +16,7 @@ index 1ed2c6be..d52eb482 100644
  ULONG
  APIENTRY
 -LPM_Deinitialize (    
-+_Win32_SupportedOS_Windows2000_ LPM_Deinitialize (    
++_Win32_SupportedOS_Windows2000_ LPM_Deinitialize (
      IN  LPM_HANDLE      LpmHandle );
              
  
