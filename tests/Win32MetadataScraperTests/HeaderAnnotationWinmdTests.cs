@@ -4210,7 +4210,7 @@ _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
         }
 
         [Fact]
-        public void LogicalGroupUnionDoesNotAbsorbLegacyOrNativeEnumDefinitions()
+        public void LogicalGroupUnionRejectsConflictingRetainedEnumValues()
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
 #define FIRST 1U
@@ -4220,9 +4220,15 @@ _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
             File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "Extra.header-types.cs"),
                 "namespace Test { public enum ERROR_GROUP : uint { EXTRA = unchecked((uint)2UL) } }");
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Residual.enums.cs"),
-                "namespace Test { public enum ERROR_GROUP : uint { EXTRA = 2 } }");
-            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
-            Assert.Contains("CS0101", exception.Message);
+                "namespace Test { public enum ERROR_GROUP : uint { EXTRA = 3 } }");
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+            {
+                using var unexpected = Emit(fixture, "x64");
+            });
+            Assert.Contains("WMA003", exception.Message);
+            Assert.Contains("Residual.enums.modified.cs", exception.Message);
+            Assert.Contains("ERROR_GROUP", exception.Message);
+            Assert.Contains("Conflicting logical group values for 'EXTRA'.", exception.Message);
         }
 
         [Fact]
