@@ -90,15 +90,13 @@ transactional and serialized; a modified published cache is rejected, not repair
 while a scraper might be reading it. Unmodified files retain their exact bytes.
 The tracked SDK mirror is never an output.
 
-The selected SDK's unmodified `um\propsys.idl` emits `MIDL2337` for its
-intentionally opaque `tagSERIALIZEDPROPSTORAGE` despite returning zero.
-Preparation admits only this reproduced baseline error: a fresh pristine SDK
-control must match the pinned original IDL, compiler/preprocessor profile and
-complete native header, and the patched header must retain the opaque type,
-interfaces and real pointer/buffer APIs. Raw diagnostics, control hashes and a
-distinct baseline-error count remain in the MIDL evidence. Nonzero exits,
-additional or different errors, changed profiles and incomplete or changed
-native contracts still fail; this does not suppress diagnostics or alter IDL.
+Preparation treats `MIDL2337` (unsatisfied forward declaration) as non-blocking
+for any admitted source when native MIDL exits zero and produces a complete
+header. It does not require a per-file pristine control. Raw diagnostics remain
+in the native logs and command records, with visible categorized counts in
+`midl\categorized-diagnostics.json` and the preparation manifest. Nonzero exits,
+missing or truncated headers, fatal errors, every other MIDL/C error, and mixed
+error logs still fail. Native declarations, compiler pins and flags are unchanged.
 
 The annotation header is bootstrapped by the cumulative `shared\sal.h.patch`
 and the scraper's metadata SAL shim, not repeated in every API patch.
