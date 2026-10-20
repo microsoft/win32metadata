@@ -364,7 +364,30 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  	ULONG dwFlags,
  	_Out_ BSTR *pbstrOut
  	);
-@@ -1042,8 +1218,8 @@ WINOLEAUTAPI VarTokenizeFormatString(
+@@ -1038,12 +1214,31 @@ WINOLEAUTAPI VarFormatFromTokens(
+ 	LCID lcid
+ 	);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(VarFormat, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarFormatDateTime, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarFormatNumber, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarFormatPercent, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarFormatCurrency, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarWeekdayName, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarMonthName, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++_WIN32META_ANNOTATE_PARAMETER_(VarFormatFromTokens, pbstrOut,
++    _Win32_RAIIFree_(SysFreeString));
++#endif
++
+ WINOLEAUTAPI VarTokenizeFormatString(
  	_In_opt_ LPOLESTR pstrFormat,
  	_Inout_updates_(cbTok) LPBYTE rgbTok,
  	int cbTok,
@@ -375,7 +398,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  	LCID lcid,
  	_In_opt_ int *pcbActual
  	);
-@@ -1084,6 +1260,20 @@ typedef DISPID MEMBERID;
+@@ -1084,6 +1279,20 @@ typedef DISPID MEMBERID;
  #define DISPATCH_PROPERTYPUT    0x4
  #define DISPATCH_PROPERTYPUTREF 0x8
  
@@ -396,7 +419,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
-@@ -1212,7 +1402,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
+@@ -1212,7 +1421,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
  
  typedef struct tagPARAMDATA {
      OLECHAR * szName;   /* parameter name */
@@ -405,7 +428,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  } PARAMDATA, * LPPARAMDATA;
  
  typedef struct tagMETHODDATA {
-@@ -1223,7 +1413,7 @@ typedef struct tagMETHODDATA {
+@@ -1223,7 +1432,7 @@ typedef struct tagMETHODDATA {
      CALLCONV cc;        /* calling convention */
      UINT cArgs;         /* count of arguments */
      WORD wFlags;        /* same wFlags as on IDispatch::Invoke() */
@@ -414,7 +437,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  } METHODDATA, * LPMETHODDATA;
  
  typedef struct tagINTERFACEDATA {
-@@ -1240,7 +1430,7 @@ _Check_return_
+@@ -1240,7 +1449,7 @@ _Check_return_
  WINOLEAUTAPI DispGetParam(
  	_In_ DISPPARAMS * pdispparams,
  	UINT position,
@@ -423,7 +446,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  	_Out_ VARIANT * pvarResult,
  	_Out_opt_ UINT * puArgErr
  	);
-@@ -1287,7 +1477,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
+@@ -1287,7 +1496,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
   * for customized Invoke().
   */
  WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV cc,
@@ -432,7 +455,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
              _In_reads_(cActuals) VARIANTARG ** prgpvarg, _Out_ VARIANT * pvargResult);
  
  
-@@ -1299,13 +1489,20 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+@@ -1299,13 +1508,20 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
  #define ACTIVEOBJECT_STRONG 0x0
  #define ACTIVEOBJECT_WEAK 0x1
  
