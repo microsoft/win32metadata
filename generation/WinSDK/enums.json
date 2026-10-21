@@ -70,25 +70,6 @@
     "uses": []
   },
   {
-    "name": "CFE_UNDERLINE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CFU_",
-      "header": "Richedit.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
-      "addUsesTo": "DDE_ENABLE_CALLBACK_CMD",
-      "uses": [
-        {
-          "method": "DdeEnableCallback",
-          "parameter": "wCmd"
-        }
-      ]
-    },
-  {
     "addUsesTo": "FILE_MAP",
     "uses": []
   },

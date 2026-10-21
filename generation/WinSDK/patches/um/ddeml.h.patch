@@ -1,5 +1,5 @@
 diff --git a/um/ddeml.h b/um/ddeml.h
-index a6276573..334b815b 100644
+index a6276573..40511fc3 100644
 --- a/um/ddeml.h
 +++ b/um/ddeml.h
 @@ -100,6 +100,27 @@ typedef struct tagCONVINFO {
@@ -148,7 +148,7 @@ index a6276573..334b815b 100644
  BOOL
  WINAPI
  DdePostAdvise(
-@@ -349,6 +396,7 @@ DdePostAdvise(
+@@ -349,13 +396,16 @@ DdePostAdvise(
      _In_ HSZ hszTopic,
      _In_ HSZ hszItem);
  
@@ -156,9 +156,10 @@ index a6276573..334b815b 100644
  BOOL
  WINAPI
  DdeEnableCallback(
-@@ -356,6 +404,8 @@ DdeEnableCallback(
+     _In_ DWORD idInst,
      _In_ HCONV hConv,
-     _In_ UINT wCmd);
+-    _In_ UINT wCmd);
++    _In_ _Win32_AssociatedEnum_(DDE_ENABLE_CALLBACK_CMD) UINT wCmd);
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_

@@ -1,3 +1,5 @@
+diff --git a/um/richedit.h b/um/richedit.h
+index 5bebec44..5587eadc 100644
 --- a/um/richedit.h
 +++ b/um/richedit.h
 @@ -9,6 +9,31 @@
@@ -32,7 +34,7 @@
  #pragma once
  #include <winapifamily.h>
  #include <wtypes.h>
-@@ -359,10 +384,15 @@
+@@ -359,11 +384,16 @@ typedef enum tagTextMode
  // EM_GETIMECOMPTEXT wparam structure
  typedef struct _imecomptext {
  	LONG	cb; 		// count of bytes in the output buffer.
@@ -41,15 +43,16 @@
  						//	Currently only support ICT_RESULTREADSTR
  } IMECOMPTEXT;
  #define ICT_RESULTREADSTR		1
-+
+ 
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(IMECOMPTEXT_FLAGS, unsigned int,
 +    ICT_RESULTREADSTR);
 +#endif
- 
++
  // Outline mode wparam values
  #define EMO_EXIT				0		// Enter normal mode,  lparam ignored
-@@ -548,12 +578,18 @@
+ #define EMO_ENTER				1		// Enter outline mode, lparam ignored
+@@ -548,12 +578,18 @@ typedef struct tagRICHEDIT_IMAGE_PARAMETERS
  typedef struct _endcomposition
  {
  	NMHDR	nmhdr;
@@ -69,7 +72,7 @@
  #endif
  
  // Event notification masks 
-@@ -674,12 +710,12 @@
+@@ -674,12 +710,12 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
  typedef struct _charformat
  {
  	UINT		cbSize;
@@ -85,7 +88,7 @@
  	BYTE		bPitchAndFamily;
  	char		szFaceName[LF_FACESIZE];
  } CHARFORMATA;
-@@ -687,12 +723,12 @@
+@@ -687,12 +723,12 @@ typedef struct _charformat
  typedef struct _charformatw
  {
  	UINT		cbSize;
@@ -101,7 +104,7 @@
  	BYTE		bPitchAndFamily;
  	WCHAR		szFaceName[LF_FACESIZE];
  } CHARFORMATW;
-@@ -889,6 +925,11 @@
+@@ -889,6 +925,11 @@ typedef struct _charformat2a
  #define CFM_UNDERLINETYPE	0x00800000		// Many displayed by 3.0 
  #if (_RICHEDIT_VER >= 0x0600)
  #define CFM_COOKIE			0x01000000		// RE 6.0
@@ -113,7 +116,7 @@
  #endif
  #define CFM_LCID			0x02000000
  #define CFM_BACKCOLOR		0x04000000		// Higher mask bits defined above
-@@ -911,10 +952,20 @@
+@@ -911,10 +952,20 @@ typedef struct _charformat2a
  					| CFM_UNDERLINETYPE | CFM_WEIGHT | CFM_REVAUTHOR \
  					| CFM_SPACING | CFM_KERNING | CFM_STYLE | CFM_ANIMATION \
  					| CFM_COOKIE)
@@ -134,7 +137,7 @@
  #endif
  
  #define CFE_SMALLCAPS		CFM_SMALLCAPS
-@@ -940,12 +991,86 @@
+@@ -940,6 +991,51 @@ typedef struct _charformat2a
  
  #define	CFM_ALLEFFECTS				(CFM_EFFECTS2 | CFM_FONTBOUND | CFM_EXTENDED | CFM_MATHNOBUILDUP | CFM_MATH | CFM_MATHORDINARY)
  
@@ -186,10 +189,10 @@
  #define CFE_FONTBOUND				0x00100000	// Font chosen by binder, not user
  #define	CFE_LINKPROTECTED			0x00800000
  #define CFE_EXTENDED				0x02000000
- #define CFE_MATHNOBUILDUP			0x08000000
+@@ -947,6 +1043,35 @@ typedef struct _charformat2a
  #define CFE_MATH					0x10000000
  #define CFE_MATHORDINARY			0x20000000
-+
+ 
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(CFE_EFFECTS, unsigned int,
 +    CFE_BOLD,
@@ -218,10 +221,46 @@
 +    CFE_MATH,
 +    CFE_MATHORDINARY);
 +#endif
- 
++
  // Underline types. RE 1.0 displays only CFU_UNDERLINE
  #define CFU_CF1UNDERLINE	0xFF	// Map charformat's bit underline to CF2
-@@ -1133,8 +1258,8 @@
+ #define CFU_INVERT			0xFE	// For IME composition fake a selection
+@@ -970,6 +1095,34 @@ typedef struct _charformat2a
+ #define CFU_UNDERLINE					1
+ #define CFU_UNDERLINENONE				0
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#pragma push_macro("CFE_UNDERLINE")
++#undef CFE_UNDERLINE
++_Win32_FlagsEnum_(CFE_UNDERLINE, unsigned int,
++    CFU_CF1UNDERLINE,
++    CFU_INVERT,
++    CFU_UNDERLINETHICKLONGDASH,
++    CFU_UNDERLINETHICKDOTTED,
++    CFU_UNDERLINETHICKDASHDOTDOT,
++    CFU_UNDERLINETHICKDASHDOT,
++    CFU_UNDERLINETHICKDASH,
++    CFU_UNDERLINELONGDASH,
++    CFU_UNDERLINEHEAVYWAVE,
++    CFU_UNDERLINEDOUBLEWAVE,
++    CFU_UNDERLINEHAIRLINE,
++    CFU_UNDERLINETHICK,
++    CFU_UNDERLINEWAVE,
++    CFU_UNDERLINEDASHDOTDOT,
++    CFU_UNDERLINEDASHDOT,
++    CFU_UNDERLINEDASH,
++    CFU_UNDERLINEDOTTED,
++    CFU_UNDERLINEDOUBLE,
++    CFU_UNDERLINEWORD,
++    CFU_UNDERLINE,
++    CFU_UNDERLINENONE);
++#pragma pop_macro("CFE_UNDERLINE")
++#endif
++
+ #define yHeightCharPtsMost 1638
+ 
+ // EM_SETCHARFORMAT wParam masks 
+@@ -1133,8 +1286,8 @@ typedef struct _formatrange
  typedef struct _paraformat
  {
  	UINT	cbSize;
@@ -232,7 +271,7 @@
  	union
  	{
  		WORD	wReserved;
-@@ -1143,7 +1268,7 @@
+@@ -1143,7 +1296,7 @@ typedef struct _paraformat
  	LONG	dxStartIndent;
  	LONG	dxRightIndent;
  	LONG	dxOffset;
@@ -241,7 +280,7 @@
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
-@@ -1158,13 +1283,13 @@
+@@ -1158,13 +1311,13 @@ struct PARAFORMAT2 : _paraformat
  	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)
  	BYTE	bOutlineLevel;			// Outline level
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
@@ -258,7 +297,7 @@
  };
  
  #else	// Regular C-style	
-@@ -1192,13 +1317,13 @@
+@@ -1192,13 +1345,13 @@ typedef struct _paraformat2
  	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)	
  	BYTE	bOutlineLevel;			// Outline Level						
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
@@ -275,7 +314,7 @@
  } PARAFORMAT2;
  
  #endif // C++	
-@@ -1256,6 +1381,44 @@
+@@ -1256,6 +1409,44 @@ typedef struct _paraformat2
  					| PFM_LINESPACING | PFM_STYLE | PFM_SHADING | PFM_BORDER \
  					| PFM_NUMBERINGTAB | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE)
  
@@ -320,7 +359,7 @@
  #define PFE_RTLPARA 			(PFM_RTLPARA		 >> 16)
  #define PFE_KEEP				(PFM_KEEP			 >> 16) // (*)	
  #define PFE_KEEPNEXT			(PFM_KEEPNEXT		 >> 16) // (*)	
-@@ -1282,6 +1445,16 @@
+@@ -1282,6 +1473,16 @@ typedef struct _paraformat2
  #define PFN_LCROMAN 	5		// tomListNumberAsLCRoman:	i, ii, iii, ...
  #define PFN_UCROMAN 	6		// tomListNumberAsUCRoman:	I, II, III, ...
  
@@ -337,7 +376,7 @@
  // PARAFORMAT2 wNumberingStyle options 
  #define PFNS_PAREN		0x000	// default, e.g.,				  1)	
  #define PFNS_PARENS 	0x100	// tomListParentheses/256, e.g., (1)	
-@@ -1290,6 +1463,16 @@
+@@ -1290,6 +1491,16 @@ typedef struct _paraformat2
  #define PFNS_NONUMBER	0x400	// Used for continuation w/o number
  
  #define PFNS_NEWNUMBER	0x8000	// Start new number with wNumberingStart		
@@ -354,7 +393,7 @@
  								// (can be combined with other PFNS_xxx)
  // PARAFORMAT alignment options 
  #define PFA_LEFT			 1
-@@ -1330,7 +1513,7 @@
+@@ -1330,7 +1541,7 @@ typedef struct _selchange
  {
  	NMHDR nmhdr;
  	CHARRANGE chrg;
@@ -363,11 +402,10 @@
  } SELCHANGE;
  
  #if (_RICHEDIT_VER >= 0x0800)
-@@ -1358,6 +1541,17 @@
- // a right-mouse drag drop should be generated.  The IOleObject parameter
+@@ -1359,6 +1570,17 @@ typedef struct _clipboardformat
  // will really be the IDataObject for the drop
  #define GCM_RIGHTMOUSEDROP	0x8000
-+
+ 
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef _WIN32META_ANNOTATION_("FlagsEnum(SEL_EMPTY, SEL_TEXT, SEL_OBJECT, SEL_MULTICHAR, SEL_MULTIOBJECT, GCM_RIGHTMOUSEDROP)",
 +    SEL_EMPTY,
@@ -378,10 +416,11 @@
 +    GCM_RIGHTMOUSEDROP)
 +    unsigned short RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE;
 +#endif
- 
++
  #if (_RICHEDIT_VER >= 0x0800)
  typedef struct _getcontextmenuex
-@@ -1439,7 +1633,7 @@
+ {
+@@ -1439,7 +1661,7 @@ typedef struct _encorrecttext
  {
  	NMHDR nmhdr;
  	CHARRANGE chrg;
@@ -390,7 +429,7 @@
  } ENCORRECTTEXT;
  
  // East Asia specific 
-@@ -1466,7 +1660,7 @@
+@@ -1466,7 +1688,7 @@ typedef struct _compcolor
  // Paste Special 
  typedef struct _repastespecial
  {
@@ -399,7 +438,7 @@
  	DWORD_PTR	dwParam;
  } REPASTESPECIAL;
  
-@@ -1506,11 +1700,20 @@
+@@ -1506,11 +1728,20 @@ typedef struct _settextex
  #define GT_RAWTEXT		4
  #define GT_NOHIDDENTEXT 8
  
@@ -421,7 +460,7 @@
  	UINT	codepage;		// Code page for translation (CP_ACP for sys default,
  							//	1200 for Unicode, -1 for control default)
  	LPCSTR	lpDefaultChar;	// Replacement for unmappable chars
-@@ -1525,10 +1728,20 @@
+@@ -1525,10 +1756,20 @@ typedef struct _gettextex
  #define GTL_NUMCHARS	8	// Return number of characters
  #define GTL_NUMBYTES	16	// Return number of _bytes_
  
@@ -443,7 +482,7 @@
  	UINT	codepage;		// Code page for translation (CP_ACP for default,
  							//	1200 for Unicode)
  } GETTEXTLENGTHEX;
-@@ -1600,6 +1813,7 @@
+@@ -1600,6 +1841,7 @@ typedef struct hyphresult
  	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
  } HYPHRESULT;
  
@@ -451,7 +490,7 @@
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
  typedef struct tagHyphenateInfo
  {
-@@ -1629,6 +1843,19 @@
+@@ -1629,6 +1871,19 @@ typedef struct tagHyphenateInfo
  #define PFA_FULL_SCALED 	 7	// Not implemented
  #define PFA_FULL_GLYPHS 	 8	// Not implemented
  
