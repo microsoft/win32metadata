@@ -74,7 +74,8 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
 ## Current state
 
 - The C# generator remains in use. The qualified tooling is ClangSharp 21.1.8.4
-  with libclang 21.1.8; this is not a Clang 23 qualification.
+  with libclang 21.1.8. This toolchain is fixed for the complete-image milestone;
+  no compiler upgrade is a prerequisite.
 - Source cut `57be4e4239abbb1c9239dedfa0d6b7ddf117a3f2` is integrated. It contains
   the corrected `GPFIDL_FLAGS` group, the `SERVICE_NOTIFY_FLAGS` rename, the
   `ASSOCF` header migration, four credential-group retirements, the bounded
