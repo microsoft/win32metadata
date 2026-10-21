@@ -1,8 +1,28 @@
 diff --git a/um/activprof.idl b/um/activprof.idl
-index 7e361c43..a79d61ca 100644
+index e1deaac9..5f31a397 100644
 --- a/um/activprof.idl
 +++ b/um/activprof.idl
-@@ -97,6 +97,9 @@ typedef DWORD_PTR PROFILER_HEAP_OBJECT_ID;
+@@ -56,6 +56,9 @@ typedef enum {
+     PROFILER_SCRIPT_TYPE_DOM
+ } PROFILER_SCRIPT_TYPE;
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum {
+     PROFILER_EVENT_MASK_TRACE_SCRIPT_FUNCTION_CALL = 0x00000001,
+     PROFILER_EVENT_MASK_TRACE_NATIVE_FUNCTION_CALL = 0x00000002,
+@@ -65,6 +68,9 @@ typedef enum {
+     PROFILER_EVENT_MASK_TRACE_ALL_WITH_DOM = PROFILER_EVENT_MASK_TRACE_ALL |
+                                              PROFILER_EVENT_MASK_TRACE_DOM_FUNCTION_CALL
+ } PROFILER_EVENT_MASK;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ typedef LONG PROFILER_TOKEN;
+ 
+@@ -97,6 +103,9 @@ typedef DWORD_PTR PROFILER_HEAP_OBJECT_ID;
  typedef UINT PROFILER_HEAP_OBJECT_NAME_ID;
  typedef void* PROFILER_EXTERNAL_OBJECT_ADDRESS;
  
@@ -12,7 +32,7 @@ index 7e361c43..a79d61ca 100644
  typedef [v1_enum] enum {
      PROFILER_HEAP_OBJECT_FLAGS_NEW_OBJECT            = 0x00000001,
      PROFILER_HEAP_OBJECT_FLAGS_IS_ROOT               = 0x00000002,
-@@ -112,6 +115,9 @@ typedef [v1_enum] enum {
+@@ -112,6 +121,9 @@ typedef [v1_enum] enum {
      PROFILER_HEAP_OBJECT_FLAGS_WINRT_DELEGATE        = 0x00000800,
      PROFILER_HEAP_OBJECT_FLAGS_WINRT_NAMESPACE       = 0x00001000,
  } PROFILER_HEAP_OBJECT_FLAGS;
@@ -22,7 +42,7 @@ index 7e361c43..a79d61ca 100644
  
  typedef [v1_enum] enum {
      PROFILER_HEAP_OBJECT_OPTIONAL_INFO_PROTOTYPE                    = 0x00000001,
-@@ -130,6 +136,9 @@ typedef [v1_enum] enum {
+@@ -130,6 +142,9 @@ typedef [v1_enum] enum {
      PROFILER_HEAP_OBJECT_OPTIONAL_INFO_MAX_VALUE                    = PROFILER_HEAP_OBJECT_OPTIONAL_INFO_SET_COLLECTION_LIST
  } PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE;
  
@@ -32,7 +52,7 @@ index 7e361c43..a79d61ca 100644
  typedef [v1_enum] enum {
      PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_NONE                    = 0x00000000,
      PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_IS_GET_ACCESSOR         = 0x00010000,
-@@ -137,7 +146,13 @@ typedef [v1_enum] enum {
+@@ -137,7 +152,13 @@ typedef [v1_enum] enum {
      PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_LET_VARIABLE            = 0x00040000,
      PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_CONST_VARIABLE          = 0x00080000,
  } PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS;
@@ -46,7 +66,7 @@ index 7e361c43..a79d61ca 100644
  typedef [v1_enum] enum {
      // Default enumeration behavior.
      PROFILER_HEAP_ENUM_FLAGS_NONE                                   = 0x00000000,
-@@ -152,6 +167,9 @@ typedef [v1_enum] enum {
+@@ -152,6 +173,9 @@ typedef [v1_enum] enum {
      PROFILER_HEAP_ENUM_FLAGS_RELATIONSHIP_SUBSTRINGS                = PROFILER_HEAP_ENUM_FLAGS_STORE_RELATIONSHIP_FLAGS | 
                                                                        PROFILER_HEAP_ENUM_FLAGS_SUBSTRINGS,
  } PROFILER_HEAP_ENUM_FLAGS;
