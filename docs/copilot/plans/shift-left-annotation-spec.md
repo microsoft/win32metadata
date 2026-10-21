@@ -24,7 +24,9 @@ ships in the SDK.
 1. Metadata must not change the native ABI: no layout, calling convention, mangling,
    parameter count, native type, vtable, or exported symbol changes.
 2. Ordinary SDK compilation sees every annotation macro as empty.
-3. Metadata-only declarations are guarded by `WIN32METADATA`.
+3. Metadata-only declarations are guarded by `WIN32METADATA`. Metadata-enabled
+   parsing is C++ only; ordinary native C compilation with metadata off must remain
+   unchanged.
 4. Existing genuine SDK typedefs may be annotated. New API-specific pseudo handles
    such as `PRINTER_HANDLE` must not be introduced.
 5. Resource producers carry cleanup and invalid-value metadata only on their return or
@@ -93,6 +95,16 @@ past that slot's `elementCount(1)` constraint to the usable postcondition count
 and preserve the count parameter's index in the projected method. A usable
 precondition capacity still takes precedence; unsupported counts must not be
 invented. This parameter handling does not enable deferred field-array inference.
+
+The genuine `typedef int GPFIDL_FLAGS` uses a matching global
+`_Win32_Enum_(GPFIDL_FLAGS, int, GPFIDL_DEFAULT, GPFIDL_ALTNAME, GPFIDL_UNCPRINTER)`
+group. Omit the redundant `AssociatedEnum` on `SHGetPathFromIDListEx::uOpts`: the
+existing emitter naturally uses the declared enum type without an explicit request
+for primitive storage plus an association. Its logical UInt32-to-Int32 correction
+is intentional, with values 0, 1 and 2 unchanged; this is not a global promotion rule.
+The logical `SERVICE_NOTIFY` group becomes `SERVICE_NOTIFY_FLAGS`, retaining all
+ten members, order, raw values, UInt32 storage and flags semantics without renaming
+native record aliases or constants. Keep these corrections visible in raw API diffs.
 
 ## Declaration placement
 

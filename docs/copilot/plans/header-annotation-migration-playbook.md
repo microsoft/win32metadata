@@ -163,7 +163,17 @@ source drafting while central coverage and output review remain pending.
 For an existing native enum with only a C tag, use its actual C type spelling in
 the association carrier: `_Win32_AssociatedEnum_(enum VARENUM)`, not the nonexistent
 C typedef `VARENUM`. The compiled target must still resolve to the same canonical
-enum; do not add a typedef or helper workaround. Test metadata-on C as well as C++.
+enum; do not add a typedef or helper workaround. `WIN32METADATA`-enabled parsing
+is C++ only; ordinary native C compatibility remains required with metadata off.
+
+For the genuine `typedef int GPFIDL_FLAGS`, use the matching global
+`_Win32_Enum_(GPFIDL_FLAGS, int, ...)` group and omit the redundant `AssociatedEnum`
+on `SHGetPathFromIDListEx::uOpts`. The existing emitter then uses the declared enum
+type, rather than primitive storage plus an association. Grade the intentional
+logical UInt32-to-Int32 correction openly. Rename the logical `SERVICE_NOTIFY`
+flags group to `SERVICE_NOTIFY_FLAGS`, preserving its ten members, order, raw
+values, UInt32 storage and flags semantics; do not rename native SDK record aliases.
+Retain both changes in unfiltered raw diffs, not a global typedef-promotion rule.
 
 The helper is an SDK asset. Exercise both packaged and repository-backed
 GeneratorSdk samples when changing the common bootstrap: a helper available through
@@ -287,7 +297,8 @@ for an author to deliver a draft or start another owned original.
    reproduce the same compiler failure or require an image per patch.
 4. **Prove native behavior and grade the image.** Regenerate pristine and patched
    IDL with the same MIDL/MSVC arguments. Compile actual C and C++ consumption, including C-interface
-   forms where relevant, on x86/x64/ARM64 with metadata off and on. Compare native
+   forms where relevant, on x86/x64/ARM64 with metadata off; exercise metadata-on
+   parsing as C++ only. Compare native
    signatures/layout/vtables/symbols and actual compiler SAL facts. Compare warning
    contexts as well as counts. Compare RPC proxy, IID, dlldata, and TLB outputs
    against matched pristine regeneration; explain existing mirror-only differences

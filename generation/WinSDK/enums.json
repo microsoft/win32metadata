@@ -3152,53 +3152,6 @@
     ]
   },
   {
-    "name": "SERVICE_NOTIFY",
-    "flags": true,
-    "members": [
-      {
-        "name": "SERVICE_NOTIFY_CREATED",
-        "value": "128"
-      },
-      {
-        "name": "SERVICE_NOTIFY_CONTINUE_PENDING",
-        "value": "16"
-      },
-      {
-        "name": "SERVICE_NOTIFY_DELETE_PENDING",
-        "value": "512"
-      },
-      {
-        "name": "SERVICE_NOTIFY_DELETED",
-        "value": "256"
-      },
-      {
-        "name": "SERVICE_NOTIFY_PAUSE_PENDING",
-        "value": "32"
-      },
-      {
-        "name": "SERVICE_NOTIFY_PAUSED",
-        "value": "64"
-      },
-      {
-        "name": "SERVICE_NOTIFY_RUNNING",
-        "value": "8"
-      },
-      {
-        "name": "SERVICE_NOTIFY_START_PENDING",
-        "value": "2"
-      },
-      {
-        "name": "SERVICE_NOTIFY_STOP_PENDING",
-        "value": "4"
-      },
-      {
-        "name": "SERVICE_NOTIFY_STOPPED",
-        "value": "1"
-      }
-    ],
-    "uses": []
-  },
-  {
     "addUsesTo": "ACE_REVISION",
     "uses": []
   },
