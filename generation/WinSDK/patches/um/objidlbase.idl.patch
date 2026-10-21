@@ -1,5 +1,5 @@
 diff --git a/um/objidlbase.idl b/um/objidlbase.idl
-index dd5ca29b..0e7ba1b2 100644
+index dd5ca29b..204ab2db 100644
 --- a/um/objidlbase.idl
 +++ b/um/objidlbase.idl
 @@ -1,3 +1,5 @@
@@ -101,13 +101,10 @@ index dd5ca29b..0e7ba1b2 100644
  [
      object,
      uuid(0c733a30-2a1c-11ce-ade5-00aa0044773d),
-@@ -471,9 +487,15 @@ interface ISequentialStream : IUnknown
+@@ -471,9 +487,12 @@ interface ISequentialStream : IUnknown
          [in] ULONG cb,
          [out] ULONG *pcbWritten);
  }
-+cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
-+cpp_quote("typedef unsigned long STGM;")
-+cpp_quote("#endif")
 +cpp_quote("/* Win32Metadata: method ::ISequentialStream::Write => PreserveResult */")
 +cpp_quote("/* Win32Metadata: method ::ISequentialStream::Read => PreserveResult */")
  
@@ -117,7 +114,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      object,
      uuid(0000000c-0000-0000-C000-000000000046),
-@@ -487,6 +509,7 @@ interface IStream : ISequentialStream
+@@ -487,6 +506,7 @@ interface IStream : ISequentialStream
  
      /* Storage stat buffer */
  
@@ -125,7 +122,7 @@ index dd5ca29b..0e7ba1b2 100644
      typedef struct tagSTATSTG
      {
          LPOLESTR pwcsName;
-@@ -578,12 +601,21 @@ interface IStream : ISequentialStream
+@@ -578,12 +598,21 @@ interface IStream : ISequentialStream
          [out] IStream **ppstm);
  
  }
@@ -147,7 +144,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -750,6 +782,7 @@ interface IRpcSyntaxNegotiate : IUnknown
+@@ -750,6 +779,7 @@ interface IRpcSyntaxNegotiate : IUnknown
  }
  
  
@@ -155,7 +152,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -776,6 +809,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -776,6 +806,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -163,7 +160,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -821,6 +855,7 @@ interface IRpcStubBuffer : IUnknown
+@@ -821,6 +852,7 @@ interface IRpcStubBuffer : IUnknown
  
  
  
@@ -171,7 +168,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -927,6 +962,7 @@ cpp_quote( "// This interface is only valid on Windows NT 4.0" )
+@@ -927,6 +959,7 @@ cpp_quote( "// This interface is only valid on Windows NT 4.0" )
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -179,7 +176,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1015,6 +1051,12 @@ interface IClientSecurity : IUnknown
+@@ -1015,6 +1048,12 @@ interface IClientSecurity : IUnknown
          [out, annotation("_Outptr_")] IUnknown **ppCopy
      );
  }
@@ -192,7 +189,7 @@ index dd5ca29b..0e7ba1b2 100644
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -1022,6 +1064,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -1022,6 +1061,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -200,7 +197,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1066,6 +1109,7 @@ typedef enum tagRPCOPT_SERVER_LOCALITY_VALUES
+@@ -1066,6 +1106,7 @@ typedef enum tagRPCOPT_SERVER_LOCALITY_VALUES
  } RPCOPT_SERVER_LOCALITY_VALUES;
  
  
@@ -208,7 +205,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
  object,
  local,
-@@ -1152,6 +1196,7 @@ typedef enum tagGLOBALOPT_UNMARSHALING_POLICY_VALUES
+@@ -1152,6 +1193,7 @@ typedef enum tagGLOBALOPT_UNMARSHALING_POLICY_VALUES
     COMGLB_UNMARSHALING_POLICY_HYBRID = 2
  } GLOBALOPT_UNMARSHALING_POLICY_VALUES;
  
@@ -216,7 +213,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      object,
      local,
-@@ -1174,6 +1219,7 @@ cpp_quote( "#endif //DCOM" )
+@@ -1174,6 +1216,7 @@ cpp_quote( "#endif //DCOM" )
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -224,7 +221,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
   uuid(00000022-0000-0000-C000-000000000046),
   version(1.0),
-@@ -1191,6 +1237,7 @@ interface ISurrogate : IUnknown
+@@ -1191,6 +1234,7 @@ interface ISurrogate : IUnknown
  }
  
  
@@ -232,7 +229,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1226,6 +1273,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -1226,6 +1270,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -240,7 +237,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      object,
      uuid(00000030-0000-0000-C000-000000000046)
-@@ -1239,6 +1287,7 @@ interface ISynchronize : IUnknown
+@@ -1239,6 +1284,7 @@ interface ISynchronize : IUnknown
  }
  
  
@@ -248,7 +245,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
   local,
   object,
-@@ -1250,6 +1299,7 @@ interface ISynchronizeHandle : IUnknown
+@@ -1250,6 +1296,7 @@ interface ISynchronizeHandle : IUnknown
  }
  
  
@@ -256,7 +253,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
   local,
   object,
-@@ -1261,6 +1311,7 @@ interface ISynchronizeEvent : ISynchronizeHandle
+@@ -1261,6 +1308,7 @@ interface ISynchronizeEvent : ISynchronizeHandle
  }
  
  
@@ -264,7 +261,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
   local,
   object,
-@@ -1290,6 +1341,7 @@ interface ISynchronizeMutex : ISynchronize
+@@ -1290,6 +1338,7 @@ interface ISynchronizeMutex : ISynchronize
  
  
  
@@ -272,7 +269,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
   local,
   object,
-@@ -1325,6 +1377,7 @@ interface IAsyncManager : IUnknown
+@@ -1325,6 +1374,7 @@ interface IAsyncManager : IUnknown
      HRESULT GetState      ( [out, annotation("_Out_")] ULONG *pulStateFlags);
  }
  
@@ -280,7 +277,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
   local,
   object,
-@@ -1470,6 +1523,7 @@ typedef struct tagContextProperty {
+@@ -1470,6 +1520,7 @@ typedef struct tagContextProperty {
  } ContextProperty;
  
  
@@ -288,7 +285,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1491,6 +1545,7 @@ interface IEnumContextProps : IUnknown
+@@ -1491,6 +1542,7 @@ interface IEnumContextProps : IUnknown
  }
  
  
@@ -296,7 +293,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1594,6 +1649,7 @@ typedef enum _THDTYPE
+@@ -1594,6 +1646,7 @@ typedef enum _THDTYPE
  
  typedef DWORD APARTMENTID;
  
@@ -304,7 +301,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1608,6 +1664,7 @@ interface IComThreadingInfo : IUnknown
+@@ -1608,6 +1661,7 @@ interface IComThreadingInfo : IUnknown
      HRESULT SetCurrentLogicalThreadId( [in, annotation("_In_")] REFGUID rguid );
  };
  
@@ -312,7 +309,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      object,
      pointer_default(unique),
-@@ -1619,6 +1676,7 @@ interface IProcessInitControl : IUnknown
+@@ -1619,6 +1673,7 @@ interface IProcessInitControl : IUnknown
  };
  
  // marker interface for objects that want to opt into the fast rundown feature.
@@ -320,7 +317,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      object,
      local,
-@@ -1653,6 +1711,7 @@ typedef enum CO_MARSHALING_CONTEXT_ATTRIBUTES
+@@ -1653,6 +1708,7 @@ typedef enum CO_MARSHALING_CONTEXT_ATTRIBUTES
      CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18 = 0x80000011,
  } CO_MARSHALING_CONTEXT_ATTRIBUTES;
  
@@ -328,7 +325,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1674,6 +1733,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -1674,6 +1730,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -336,7 +333,7 @@ index dd5ca29b..0e7ba1b2 100644
  [
      local,
      object,
-@@ -1693,6 +1753,7 @@ cpp_quote("        public:")
+@@ -1693,6 +1750,7 @@ cpp_quote("        public:")
  cpp_quote("            virtual HRESULT STDMETHODCALLTYPE Resolve( ")
  cpp_quote("                /* [in] */ REFIID riid,")
  cpp_quote("                /* [iid_is][retval][out] */ void **ppvObjectReference) = 0;")
@@ -344,7 +341,7 @@ index dd5ca29b..0e7ba1b2 100644
  cpp_quote("")
  cpp_quote("            template<class Q>")
  cpp_quote("            HRESULT")
-@@ -1712,6 +1773,7 @@ cpp_quote("#else")
+@@ -1712,6 +1770,7 @@ cpp_quote("#else")
     HRESULT Resolve([in] REFIID riid, 
                     [out, retval, iid_is(riid)] void **ppvObjectReference);
  };
