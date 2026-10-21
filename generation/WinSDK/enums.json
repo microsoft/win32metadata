@@ -207,51 +207,6 @@
     "uses": []
   },
   {
-      "addUsesTo": "CERT_QUERY_OBJECT_TYPE",
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "dwObjectType"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "CERT_QUERY_CONTENT_TYPE",
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "pdwContentType"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "CERT_QUERY_CONTENT_TYPE_FLAGS",
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "dwExpectedContentTypeFlags"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "CERT_QUERY_FORMAT_TYPE",
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "pdwFormatType"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "CERT_QUERY_FORMAT_TYPE_FLAGS",
-      "uses": [
-        {
-          "method": "CryptQueryObject",
-          "parameter": "dwExpectedFormatTypeFlags"
-        }
-      ]
-    },
-  {
     "addUsesTo": "CERT_QUERY_ENCODING_TYPE",
     "uses": [
       {
