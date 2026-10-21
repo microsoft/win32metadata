@@ -15,6 +15,10 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
 
+        internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
+            => node.Modifiers.ToString() == "public const" &&
+                enumMemberNames.Contains(node.Declaration.Variables.First().Identifier.ValueText);
+
         public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false)
         {
             TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo);
@@ -381,12 +385,9 @@ namespace ClangSharpSourceToWinmd
                 string localName = node.Declaration.Variables.First().Identifier.ValueText;
 
                 // If it's a constant, ignore it if it's already part of an enum
-                if (node.Modifiers.ToString() == "public const")
+                if (IsEnumMemberConstant(node, this.enumMemberNames))
                 {
-                    if (this.enumMemberNames.Contains(localName))
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 string fullName = GetFullNameWithoutArchSuffix(node);

@@ -82,6 +82,173 @@ namespace ClangSharpSourceToWinmdTests
         }
 
         [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
+        public void CapturedWinsockAliasesKeepTheirUsingStaticConstantContext(string architecture)
+        {
+            string[] names =
+            {
+                "WSA_IO_PENDING", "WSA_IO_INCOMPLETE", "WSA_INVALID_HANDLE", "WSA_INVALID_PARAMETER",
+                "WSA_NOT_ENOUGH_MEMORY", "WSA_OPERATION_ABORTED", "WSA_WAIT_EVENT_0", "WSA_WAIT_IO_COMPLETION",
+            };
+            int[] values = { 997, 996, 6, 87, 8, 995, 0, 192 };
+            Compile(new Dictionary<string, string>
+            {
+                ["Foundation.header-types.cs"] = @"
+namespace Windows.Win32.Foundation
+{
+    public enum WIN32_ERROR:uint
+    {
+        ERROR_IO_PENDING=unchecked((uint)997UL), ERROR_IO_INCOMPLETE=unchecked((uint)996UL),
+        ERROR_INVALID_HANDLE=unchecked((uint)6UL), ERROR_INVALID_PARAMETER=unchecked((uint)87UL),
+        ERROR_NOT_ENOUGH_MEMORY=unchecked((uint)8UL), ERROR_OPERATION_ABORTED=unchecked((uint)995UL)
+    }
+    public enum WAIT_EVENT:uint
+    {
+        WAIT_OBJECT_0=unchecked((uint)0UL), WAIT_IO_COMPLETION=unchecked((uint)192UL)
+    }
+    public enum WSA_ERROR:int
+    {
+        WSA_IO_PENDING=unchecked((int)997UL), WSA_IO_INCOMPLETE=unchecked((int)996UL),
+        WSA_INVALID_HANDLE=unchecked((int)6UL), WSA_INVALID_PARAMETER=unchecked((int)87UL),
+        WSA_NOT_ENOUGH_MEMORY=unchecked((int)8UL), WSA_OPERATION_ABORTED=unchecked((int)995UL),
+        WSA_WAIT_EVENT_0=unchecked((int)0UL), WSA_WAIT_IO_COMPLETION=unchecked((int)192UL)
+    }
+}",
+                ["System.SystemServices.enums.cs"] = @"
+using static Windows.Win32.Foundation.Apis;
+using static Windows.Win32.Foundation.WAIT_EVENT;
+using static Windows.Win32.Foundation.WIN32_ERROR;
+namespace Windows.Win32.Foundation
+{
+    public enum WSA_ERROR
+    {
+        WSA_IO_PENDING=(int)ERROR_IO_PENDING, WSA_IO_INCOMPLETE=(int)ERROR_IO_INCOMPLETE,
+        WSA_INVALID_HANDLE=(int)ERROR_INVALID_HANDLE, WSA_INVALID_PARAMETER=(int)ERROR_INVALID_PARAMETER,
+        WSA_NOT_ENOUGH_MEMORY=(int)ERROR_NOT_ENOUGH_MEMORY, WSA_OPERATION_ABORTED=(int)ERROR_OPERATION_ABORTED,
+        WSA_WAIT_EVENT_0=(int)WAIT_OBJECT_0, WSA_WAIT_IO_COMPLETION=(int)WAIT_IO_COMPLETION
+    }
+}",
+                ["Foundation.constants.cs"] = @"
+namespace Windows.Win32.Foundation
+{
+    public static partial class Apis
+    {
+        public const uint ERROR_IO_PENDING=997, ERROR_IO_INCOMPLETE=996, ERROR_INVALID_HANDLE=6,
+            ERROR_INVALID_PARAMETER=87, ERROR_NOT_ENOUGH_MEMORY=8, ERROR_OPERATION_ABORTED=995;
+        public const uint WAIT_OBJECT_0=0, WAIT_IO_COMPLETION=192;
+    }
+}",
+            }, compilation =>
+            {
+                AssertCompiles(compilation);
+                var type = compilation.GetTypeByMetadataName("Windows.Win32.Foundation.WSA_ERROR")!;
+                Assert.AreEqual(SpecialType.System_Int32, type.EnumUnderlyingType!.SpecialType);
+                var members = type.GetMembers().OfType<IFieldSymbol>().Where(field => field.HasConstantValue).ToArray();
+                CollectionAssert.AreEqual(names, members.Select(member => member.Name).ToArray());
+                CollectionAssert.AreEqual(values, members.Select(member => (int)member.ConstantValue!).ToArray());
+            }, architecture);
+        }
+
+        [DataTestMethod]
+        [DataRow("using static Support.Apis;", "VALUE")]
+        [DataRow("using Alias = Support.Apis;", "Alias.VALUE")]
+        [DataRow("", "global::Support.Apis.VALUE")]
+        public void LegacyValuesRetainExternalConstantsAliasChainsAndImplicitIncrements(string imports, string expression)
+        {
+            Compile(new Dictionary<string, string>
+            {
+                ["provider.header-types.cs"] = "namespace Test { public enum G:uint { A=unchecked((uint)7UL) } }",
+                ["legacy.enums.cs"] = $"{imports} namespace Test {{ public enum G:uint {{ A={expression}, Retained=({expression})+1, Next }} }}",
+                ["constants.cs"] = "namespace Support { public static partial class Apis { public const uint VALUE=BASE+3; public const uint BASE=4; } }",
+            }, compilation =>
+            {
+                AssertCompiles(compilation);
+                var members = compilation.GetTypeByMetadataName("Test.G")!.GetMembers().OfType<IFieldSymbol>()
+                    .Where(field => field.HasConstantValue).ToArray();
+                CollectionAssert.AreEqual(new[] { 7U, 8U, 9U }, members.Select(member => (uint)member.ConstantValue!).ToArray());
+            });
+        }
+
+        [TestMethod]
+        public void LegacyValuesUseOnlyTheCurrentArchitecturesConstantProviders()
+        {
+            var inputs = new Dictionary<string, string>
+            {
+                ["legacy.enums.cs"] = "using static Test.Apis; namespace Test { public enum G:uint { A=VALUE } }",
+            };
+            string[] architectures = { "x86", "x64", "arm64" };
+            for (int i = 0; i < architectures.Length; i++)
+            {
+                inputs[Path.Combine(architectures[i], "provider.header-types.cs")] =
+                    $"namespace Test {{ public enum G:uint {{ A=unchecked((uint){i + 1}UL) }} }}";
+                inputs[Path.Combine(architectures[i], "constants.cs")] =
+                    $"namespace Test {{ public static partial class Apis {{ public const uint VALUE={i + 1}; }} }}";
+            }
+            Compile(inputs, compilation =>
+            {
+                AssertCompiles(compilation);
+                var groups = compilation.GlobalNamespace.GetNamespaceMembers().Single(ns => ns.Name == "Test")
+                    .GetTypeMembers().Where(type => type.TypeKind == TypeKind.Enum).ToArray();
+                Assert.AreEqual(3, groups.Length);
+                foreach (var group in groups)
+                {
+                    uint value = (uint)group.GetMembers("A").OfType<IFieldSymbol>().Single().ConstantValue!;
+                    var attribute = group.GetAttributes().Single(attribute =>
+                        attribute.AttributeClass?.Name == "SupportedArchitectureAttribute");
+                    Assert.AreEqual(1 << ((int)value - 1), attribute.ConstructorArguments.Single().Value);
+                }
+            });
+        }
+
+        [TestMethod]
+        public void LegacyValuesCanReferenceAnotherComposedLogicalGroup()
+        {
+            Compile(new Dictionary<string, string>
+            {
+                ["first.header-types.cs"] = "namespace Test { public enum G:uint { A=unchecked((uint)7UL), Extra=unchecked((uint)8UL) } }",
+                ["second.header-types.cs"] = "namespace Test { public enum H:uint { B=unchecked((uint)7UL) } }",
+                ["first.enums.cs"] = "namespace Test { public enum G:uint { A=(uint)H.B, Extra=(uint)H.Retained } }",
+                ["second.enums.cs"] = "namespace Test { public enum H:uint { B=7, Retained=8 } }",
+            }, compilation =>
+            {
+                AssertCompiles(compilation);
+                var members = compilation.GetTypeByMetadataName("Test.G")!.GetMembers().OfType<IFieldSymbol>()
+                    .Where(field => field.HasConstantValue).ToArray();
+                CollectionAssert.AreEqual(new[] { 7U, 8U }, members.Select(member => (uint)member.ConstantValue!).ToArray());
+            });
+        }
+
+        [DataTestMethod]
+        [DataRow("Missing")]
+        [DataRow("4294967296UL")]
+        [DataRow("VALUE")]
+        public void InvalidExternalConstantDependenciesCannotProduceMergedValues(string expression)
+        {
+            var exception = Assert.ThrowsException<InvalidOperationException>(() => Compile(new Dictionary<string, string>
+            {
+                ["provider.header-types.cs"] = "namespace Test { public enum G:uint { A=unchecked((uint)1UL) } }",
+                ["legacy.enums.cs"] = "using static Support.Apis; namespace Test { public enum G:uint { A=VALUE } }",
+                ["constants.cs"] = $"namespace Support {{ public static partial class Apis {{ public const uint VALUE={expression}; }} }}",
+            }, _ => Assert.Fail("Invalid dependencies must not produce a successful composition.")));
+            StringAssert.Contains(exception.Message, "WMA003");
+        }
+
+        [TestMethod]
+        public void UnrelatedSourceErrorsRemainVisibleAfterEvaluatingValidLegacyValues()
+        {
+            Compile(new Dictionary<string, string>
+            {
+                ["provider.header-types.cs"] = "namespace Test { public enum G:uint { A=unchecked((uint)7UL) } }",
+                ["legacy.enums.cs"] = "using static Support.Apis; namespace Test { public enum G:uint { A=VALUE } }",
+                ["constants.cs"] = "namespace Support { public static partial class Apis { public const uint VALUE=7; public static Missing Broken; } }",
+            }, compilation => Assert.IsTrue(compilation.GetDiagnostics()
+                .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error && diagnostic.Id == "CS0246")));
+        }
+
+        [DataTestMethod]
         [DataRow("int", "", "A=1", "storage")]
         [DataRow("uint", "[System.Flags]", "A=1", "flags")]
         [DataRow("uint", "", "A=2", "values")]
@@ -194,9 +361,22 @@ namespace ClangSharpSourceToWinmdTests
             Directory.CreateDirectory(directory);
             try
             {
-                File.WriteAllText(Path.Combine(directory, "metadata.cs"), "namespace Windows.Win32.Foundation.Metadata { public class Fixture { } }");
+                File.WriteAllText(Path.Combine(directory, "metadata.cs"), @"
+namespace Windows.Win32.Foundation.Metadata
+{
+    public class Fixture { }
+    [System.Flags] public enum Architecture { X86=1, X64=2, Arm64=4 }
+    [System.AttributeUsage(System.AttributeTargets.All)]
+    public class SupportedArchitectureAttribute:System.Attribute
+    {
+        public SupportedArchitectureAttribute(Architecture architecture) { }
+    }
+}");
                 foreach (var input in inputs)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(Path.Combine(directory, input.Key))!);
                     File.WriteAllText(Path.Combine(directory, input.Key), input.Value);
+                }
                 var compilation = ClangSharpSourceCompilation.Create(directory, arch,
                     new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(),
                     Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(),

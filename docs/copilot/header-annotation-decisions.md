@@ -260,21 +260,50 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   preprocessed away before binding. The emitter scans all architecture
   directories before cleaning or import filtering; its rejection is correct,
   and an explicit auto-type namespace already exists.
-  Remove only Hypervisor from `ExcludeFromCrossarch`, preserving the native
+  Only Hypervisor was removed from `ExcludeFromCrossarch`, preserving the native
   header guard, normal adapter and qualified runtime. The corrected normal
   graph has 284 common owners and 37 architecture-specific owners, or 395
   profiles. Prior 393-profile results remain historical evidence, not a
-  successful complete surface. Resume with a fresh selected-project overlay
-  and isolated complete output; do not splice sources into frozen 063.
+  successful complete surface. Full `full-sdk-hypervisor-064` started at
+  22:26:07 UTC on 2026-10-21 with a fresh selected-project overlay and isolated
+  complete output; frozen 063 remains unchanged. Actual ordinary inputs confirm
+  321 owners, 395 profiles, normal crossarch scheduling and 32 workers.
   A regression using the real selected project reproduces the skipped x64
   profile before the policy change. After the change, all 40 prepared-include
   and scheduling tests pass, including Hypervisor's combined and individual
-  architecture schedules. Actual WHv bindings still require the corrected
-  complete SDK run.
+  architecture schedules. Actual 064 generated sources now contain
+  `WHvDeletePartition` in x64 and ARM64, with no x86 declaration, matching the
+  native guard. All 5,473 other selected source files and the qualified runtime
+  and prepared headers remain unchanged.
   Complete emission, ordinary integrity and the unsuppressed comparison
   remain outstanding; no additional approval gate is required.
   Raw Root parity evidence and frozen replacement are in session files
   `declaration-only-bindings-062`.
+- Full 064 completed all 395 header profiles and constants, then failed naturally
+  during emission at 22:36:48 UTC with WMA003: the retained `WSA_ERROR` group
+  could not evaluate `ERROR_IO_PENDING`. Driver time was 641.3407807 seconds;
+  wrapper time was 647.4454693 seconds. No NEW image was emitted.
+  The legacy reader compiled an isolated enum, discarding its original imports
+  and external constant declarations. Actual source has static imports of
+  Foundation's `Apis`, `WAIT_EVENT` and `WIN32_ERROR`, including the required
+  compiler-known values. The three relevant Root source hashes match frozen
+  emitter 74CC's portable PDB and compiled-source snapshot.
+  The replacement evaluates legacy groups in their original scopes with the
+  selected architecture's source context. It shares the existing cleaner's
+  loose-constant removal rule, composes referenced groups before dependent
+  values, and retains compiler checks for storage, overflow, missing or cyclic
+  dependencies and conflicting definitions. Final compilation still reports
+  unrelated source errors. No header, numeric-value or namespace workaround is
+  applied.
+  All seven captured import/external-constant regressions fail before the repair.
+  The complete emitter suite now passes 179 tests, including 32 composition cases
+  covering the captured Winsock aliases, aliases across files, implicit values,
+  architecture-specific providers, dependent groups and invalid dependencies.
+  The next ordinary emission uses the sealed complete 395-profile C#/constants
+  closure with a replacement emitter in isolated output and `SkipScraping=true`.
+  The failed 064 result remains failed; native scraping need not be repeated.
+  Actual NEW emission and the attached integrity and unsuppressed EDF069
+  comparison remain outstanding.
 - [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
   when preprocessing records reach generation with macro bindings disabled.
   Its reviewed condition is not used by the updated consumer. Per the user's

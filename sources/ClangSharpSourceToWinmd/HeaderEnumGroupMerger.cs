@@ -25,8 +25,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (declaration.Parent is not BaseNamespaceDeclarationSyntax and not CompilationUnitSyntax)
                         throw Error(file, declaration.Identifier.ValueText, "Logical groups must be namespace-level declarations.");
-                    string ns = string.Join(".", declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
-                        .Reverse().Select(parent => parent.Name.ToString()));
+                    string ns = GetNamespace(declaration);
                     if (!identities.Add((ns, declaration.Identifier.ValueText)))
                         throw Error(file, declaration.Identifier.ValueText, "Distinct native declarations project to the same logical group in one translation unit.");
                     fragments.Add(new Fragment(file, ns, declaration,
@@ -51,8 +50,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (declaration.Parent is not BaseNamespaceDeclarationSyntax and not CompilationUnitSyntax)
                         continue;
-                    string ns = string.Join(".", declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
-                        .Reverse().Select(parent => parent.Name.ToString()));
+                    string ns = GetNamespace(declaration);
                     if (!headerGroups.Contains((ns, declaration.Identifier.ValueText)))
                         continue;
                     if (!identities.Add((ns, declaration.Identifier.ValueText)))
@@ -72,6 +70,8 @@ namespace ClangSharpSourceToWinmd
             if (groups.Length == 0)
                 return;
 
+            var legacySources = groups.Any(group => group.Any(fragment => !fragment.HeaderDefined))
+                ? ReadLegacySources(files, roots) : null;
             var removed = groups.SelectMany(group => group).Select(fragment => fragment.Declaration).ToHashSet();
             foreach (var pair in roots)
             {
@@ -82,14 +82,48 @@ namespace ClangSharpSourceToWinmd
 
             foreach (var target in architecture == "crossarch" ? targets : new[] { Architecture.All })
             {
+                var legacyCompilation = legacySources == null ? null : CSharpCompilation.Create("LegacyHeaderEnumGroups",
+                    legacySources.Where(pair => target == Architecture.All || GetArchitectures(pair.Key, fileSet).HasFlag(target))
+                        .Select(pair => pair.Value),
+                    new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+                var pending = groups.Select(group => group.Where(fragment =>
+                        target == Architecture.All || fragment.Architectures.HasFlag(target))
+                    .OrderBy(fragment => fragment.HeaderDefined ? 0 : 1)
+                    .ThenBy(fragment => fragment.Architectures == Architecture.All ? 0 : 1).ToArray())
+                    .Where(group => group.Length != 0).ToList();
+                var merged = new Dictionary<(string Namespace, string Name), EnumDeclarationSyntax>();
+                while (pending.Count != 0)
+                {
+                    int countBefore = pending.Count;
+                    var failures = new List<LegacyValueEvaluationException>();
+                    foreach (var group in pending.ToArray())
+                    {
+                        EnumDeclarationSyntax declaration;
+                        try
+                        {
+                            declaration = MergeGroup(group, legacyCompilation);
+                        }
+                        catch (LegacyValueEvaluationException failure)
+                        {
+                            // A referenced logical group may still need composition.
+                            failures.Add(failure);
+                            continue;
+                        }
+                        merged.Add((group[0].Namespace, declaration.Identifier.ValueText), declaration);
+                        if (legacyCompilation != null)
+                            legacyCompilation = ReplaceGroup(legacyCompilation, group, group[0], declaration);
+                        pending.Remove(group);
+                    }
+                    if (pending.Count == countBefore)
+                        throw new InvalidOperationException(string.Join(Environment.NewLine, failures.Select(failure => failure.Message)),
+                            failures[0]);
+                }
                 var members = new List<MemberDeclarationSyntax>();
                 foreach (var ns in groups.GroupBy(group => group.Key.Namespace))
                 {
-                    var declarations = ns.Select(group => group.Where(fragment =>
-                            target == Architecture.All || fragment.Architectures.HasFlag(target))
-                        .OrderBy(fragment => fragment.HeaderDefined ? 0 : 1)
-                        .ThenBy(fragment => fragment.Architectures == Architecture.All ? 0 : 1).ToArray())
-                        .Where(group => group.Length != 0).Select(MergeGroup).ToArray();
+                    var declarations = ns.Where(group => merged.ContainsKey(group.Key))
+                        .Select(group => merged[group.Key]).ToArray();
                     if (ns.Key.Length == 0)
                         members.AddRange(declarations);
                     else
@@ -293,9 +327,34 @@ namespace ClangSharpSourceToWinmd
             return Architecture.All;
         }
 
-        private static EnumDeclarationSyntax MergeGroup(Fragment[] fragments)
+        private static string GetNamespace(EnumDeclarationSyntax declaration)
+            => string.Join(".", declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                .Reverse().Select(parent => parent.Name.ToString()));
+
+        private static Dictionary<string, SyntaxTree> ReadLegacySources(List<string> files, Dictionary<string, SyntaxNode> roots)
         {
-            fragments = fragments.Select(fragment => fragment.HeaderDefined ? fragment : ReadLegacyGroup(fragment)).ToArray();
+            var sources = files.ToDictionary(file => file,
+                file => roots.TryGetValue(file, out var root) ? root.SyntaxTree :
+                    CSharpSyntaxTree.ParseText(File.ReadAllText(file), path: file),
+                StringComparer.OrdinalIgnoreCase);
+            var enumMembers = sources.Values.SelectMany(tree => tree.GetRoot().DescendantNodes()
+                .OfType<EnumMemberDeclarationSyntax>()).Select(member => member.Identifier.ValueText).ToHashSet(StringComparer.Ordinal);
+            foreach (string file in files)
+            {
+                var tree = sources[file];
+                var root = tree.GetRoot();
+                var looseConstants = root.DescendantNodes().OfType<FieldDeclarationSyntax>()
+                    .Where(field => MetadataSyntaxTreeCleaner.IsEnumMemberConstant(field, enumMembers)).ToArray();
+                if (looseConstants.Length != 0)
+                    sources[file] = tree.WithRootAndOptions(root.RemoveNodes(looseConstants, SyntaxRemoveOptions.KeepExteriorTrivia), tree.Options);
+            }
+            return sources;
+        }
+
+        private static EnumDeclarationSyntax MergeGroup(Fragment[] fragments, CSharpCompilation legacyCompilation)
+        {
+            fragments = fragments.Select(fragment => fragment.HeaderDefined ? fragment :
+                ReadLegacyGroup(fragment, fragments, legacyCompilation)).ToArray();
             var first = fragments[0];
             string name = first.Declaration.Identifier.ValueText;
             string storage = first.Declaration.BaseList?.Types.Single().Type.WithoutTrivia().NormalizeWhitespace().ToFullString();
@@ -347,40 +406,55 @@ namespace ClangSharpSourceToWinmd
                 .WithMembers(SyntaxFactory.SeparatedList(members.Values.Select(member => member.WithoutTrivia())));
         }
 
-        private static Fragment ReadLegacyGroup(Fragment fragment)
+        private static CSharpCompilation ReplaceGroup(CSharpCompilation compilation, Fragment[] fragments,
+            Fragment selected, EnumDeclarationSyntax declaration)
+        {
+            var groupFiles = fragments.Select(part => part.File).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            foreach (var source in compilation.SyntaxTrees.Where(source => groupFiles.Contains(source.FilePath)).ToArray())
+            {
+                var root = source.GetRoot();
+                var declarations = root.DescendantNodes().OfType<EnumDeclarationSyntax>()
+                    .Where(node => node.Identifier.ValueText == declaration.Identifier.ValueText &&
+                        GetNamespace(node) == selected.Namespace).ToArray();
+                bool keep = string.Equals(source.FilePath, selected.File, StringComparison.OrdinalIgnoreCase);
+                var rewritten = source.WithRootAndOptions(keep ? root.ReplaceNode(declarations.Single(), declaration) :
+                    root.RemoveNodes(declarations, SyntaxRemoveOptions.KeepExteriorTrivia), source.Options);
+                compilation = compilation.ReplaceSyntaxTree(source, rewritten);
+            }
+            return compilation;
+        }
+
+        private static Fragment ReadLegacyGroup(Fragment fragment, Fragment[] fragments, CSharpCompilation compilation)
         {
             var declaration = fragment.Declaration;
-            var references = new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) };
-            var flags = declaration.AttributeLists.SelectMany(list => list.Attributes).Where(IsFlags).ToArray();
+            var probe = declaration.WithAttributeLists(SyntaxFactory.List(declaration.AttributeLists.Select(list =>
+                    list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes.Where(IsFlags))))
+                .Where(list => list.Attributes.Count != 0))).WithMembers(SyntaxFactory.SeparatedList(
+                    declaration.Members.Select(member => member.WithAttributeLists(default))));
+            compilation = ReplaceGroup(compilation, fragments, fragment, probe);
+            var tree = compilation.SyntaxTrees.Single(source =>
+                string.Equals(source.FilePath, fragment.File, StringComparison.OrdinalIgnoreCase));
+            probe = tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single(node =>
+                node.Identifier.ValueText == declaration.Identifier.ValueText && GetNamespace(node) == fragment.Namespace);
+            var model = compilation.GetSemanticModel(tree);
+            var flags = probe.AttributeLists.SelectMany(list => list.Attributes).Where(IsFlags).ToArray();
             if (flags.Length != 0)
             {
-                var attributeCompilation = CSharpCompilation.Create("LegacyHeaderEnumAttributes",
-                    new[] { declaration.SyntaxTree }, references);
-                var attributeModel = attributeCompilation.GetSemanticModel(declaration.SyntaxTree);
                 foreach (var attribute in flags)
                 {
-                    if (attributeModel.GetSymbolInfo(attribute).Symbol is not IMethodSymbol constructor ||
+                    if (model.GetSymbolInfo(attribute).Symbol is not IMethodSymbol constructor ||
                         constructor.ContainingType.ToDisplayString() != "System.FlagsAttribute" ||
                         !SymbolEqualityComparer.Default.Equals(constructor.ContainingAssembly,
-                            attributeCompilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly))
+                            compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly))
                         throw Error(fragment.File, declaration.Identifier.ValueText,
                             "A legacy Flags annotation must resolve to System.FlagsAttribute.");
                 }
             }
-            var probe = declaration.WithAttributeLists(default).WithMembers(SyntaxFactory.SeparatedList(
-                declaration.Members.Select(member => member.WithAttributeLists(default))));
-            MemberDeclarationSyntax probeRoot = fragment.Namespace.Length == 0 ? probe :
-                SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(fragment.Namespace)).AddMembers(probe);
-            var tree = CSharpSyntaxTree.Create(SyntaxFactory.CompilationUnit().AddMembers(probeRoot));
-            var compilation = CSharpCompilation.Create("LegacyHeaderEnumGroup", new[] { tree },
-                references,
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-            var error = compilation.GetDiagnostics().FirstOrDefault(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error);
+            // Other raw groups still need composition; the final compilation checks all source diagnostics.
+            var error = model.GetDiagnostics(probe.Span).FirstOrDefault(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error);
             if (error != null)
-                throw Error(fragment.File, declaration.Identifier.ValueText,
-                    $"Legacy group values could not be evaluated: {error.GetMessage()}");
-            var model = compilation.GetSemanticModel(tree);
-            probe = tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                throw new LegacyValueEvaluationException(Error(fragment.File, declaration.Identifier.ValueText,
+                    $"Legacy group values could not be evaluated: {error.GetMessage()}").Message);
             var symbol = model.GetDeclaredSymbol(probe) as INamedTypeSymbol;
             string storage = symbol?.EnumUnderlyingType?.SpecialType switch
             {
@@ -399,8 +473,8 @@ namespace ClangSharpSourceToWinmd
             {
                 var member = declaration.Members[i];
                 if (model.GetDeclaredSymbol(probe.Members[i]) is not IFieldSymbol { HasConstantValue: true } field)
-                    throw Error(fragment.File, declaration.Identifier.ValueText,
-                        $"Legacy group member '{member.Identifier.ValueText}' requires a compiled integral value.");
+                    throw new LegacyValueEvaluationException(Error(fragment.File, declaration.Identifier.ValueText,
+                        $"Legacy group member '{member.Identifier.ValueText}' requires a compiled integral value.").Message);
                 ulong value = field.ConstantValue switch
                 {
                     sbyte number => unchecked((ulong)number),
@@ -461,6 +535,11 @@ namespace ClangSharpSourceToWinmd
 
         private static InvalidOperationException Error(string file, string name, string message)
             => new($"{file}: error WMA003: Logical group '{name}': {message}");
+
+        private sealed class LegacyValueEvaluationException : InvalidOperationException
+        {
+            internal LegacyValueEvaluationException(string message) : base(message) { }
+        }
 
         private sealed record Fragment(string File, string Namespace, EnumDeclarationSyntax Declaration,
             Architecture Architectures, bool HeaderDefined = true);
