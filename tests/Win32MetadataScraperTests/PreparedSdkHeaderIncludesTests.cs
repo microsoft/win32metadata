@@ -141,6 +141,29 @@ namespace Win32MetadataScraperTests
                 .Any(pin => pin.GetProperty("path").GetString().EndsWith("Windows.Win32.proj")));
         }
 
+        [Theory]
+        [InlineData("crossarch")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void HypervisorIsScrapedPerArchitectureUsingTheSelectedSdkPolicy(string architecture)
+        {
+            using var result = Run("hypervisor-" + architecture, response: true, driver: true, scheduling: true);
+            Assert.False(result.RootElement.GetProperty("threw").GetBoolean(),
+                result.RootElement.TryGetProperty("error", out var error) ? error.GetString() : null);
+            Assert.True(result.RootElement.GetProperty("producerCalled").GetBoolean());
+            var ordinary = result.RootElement.GetProperty("ordinary");
+            var profiles = ordinary.GetProperty("headerProfiles").EnumerateArray().ToArray();
+            string[] expected = architecture == "crossarch" ? new[] { "x86", "x64", "arm64" } : new[] { architecture };
+            Assert.Equal(expected, profiles.Select(profile => profile.GetProperty("architecture").GetString()));
+            Assert.All(profiles, profile =>
+            {
+                Assert.Equal("Hypervisor", profile.GetProperty("partition").GetString());
+                Assert.Equal(profile.GetProperty("architecture").GetString(), profile.GetProperty("directory").GetString());
+            });
+            Assert.True(ordinary.GetProperty("preparedHeaderIncludeValidation").GetProperty("complete").GetBoolean());
+        }
+
         private static JsonDocument Run(string scenario, bool response, bool driver = false, bool scheduling = false)
         {
             string root = Path.Combine(Path.GetTempPath(), "PreparedIncludeTests-" + Guid.NewGuid().ToString("N"));
@@ -216,6 +239,16 @@ if ($data.driver) {
             [IO.File]::WriteAllText((Join-Path $project 'Windows.Win32.proj'),
                 ('<Project><PropertyGroup><ExcludeFromCrossarch>' + $common +
                 '</ExcludeFromCrossarch></PropertyGroup></Project>'))
+        }
+        if ($data.scenario.StartsWith('hypervisor-', [StringComparison]::Ordinal)) {
+            $architecture = $data.scenario.Substring(11)
+            $owners = @('Hypervisor')
+            $hypervisor = Join-Path $project 'Partitions\Hypervisor'
+            [IO.Directory]::CreateDirectory($hypervisor) | Out-Null
+            [IO.File]::WriteAllText((Join-Path $hypervisor 'main.cpp'), '#include <sample.h>')
+            [IO.File]::WriteAllText((Join-Path $hypervisor 'settings.rsp'), '--config')
+            [IO.File]::Copy((Join-Path $data.repo 'generation\WinSDK\Windows.Win32.proj'),
+                (Join-Path $project 'Windows.Win32.proj'), $true)
         }
     }
     $output = Join-Path $data.root 'ordinary'

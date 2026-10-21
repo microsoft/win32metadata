@@ -346,6 +346,11 @@ listed partitions once with x86 settings into `common`, and validates only the
 scheduled response files. Omit this switch for bounded checks that deliberately
 require every requested architecture, including architecture-independent owners.
 
+Only list a partition in `ExcludeFromCrossarch` when its x86 scan includes the
+complete native surface. Hypervisor is architecture-specific because the selected
+SDK's `WinHvPlatform.h` gates declarations to x64 and ARM64; a common-only x86 scan
+silently omits those APIs before binding generation.
+
 The runtime manifest binds relative file paths and SHA-256 hashes under the
 selected private tools root. SDK targets and assets default to that runtime;
 there is no ambient tool fallback. The standalone annotation header must match

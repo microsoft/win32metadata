@@ -239,9 +239,40 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   and 27.078125 seconds CPU (exit one). All six outputs remain byte-identical and
   original input pins unchanged. Unrequested macro warnings disappear because
   those records are no longer evaluated, not because diagnostics are suppressed.
-  The nine actual failed profiles must now validate this fix before the next
-  complete 393-profile graph. Both steps and the ordinary downstream integrity
-  and unsuppressed comparison are authorized without another approval gate.
+  All nine actual failed profiles now complete successfully on the unchanged
+  replacement: natural MSBuild exit zero, 53.0971514 seconds driver time, nine
+  nonempty main sources and no genuine error or fatal diagnostics. Original
+  response semantics are unchanged apart from fresh output roots.
+  The complete graph automatically resumed as `full-sdk-declarations-063`,
+  with MSBuild starting at 21:54:20 UTC on 2026-10-21. Actual ordinary inputs
+  confirm 321 owners, 393 normal profiles, 32 workers and `StageEmit`. The
+  runtime and prepared source/header inputs remain pinned as above.
+  All 393 header profiles and constants completed successfully. The graph then
+  failed naturally during emission at 22:02:44 UTC: auto-type generation could
+  not find `WHvDeletePartition` in the C# namespace index for
+  `WHV_PARTITION_HANDLE`. No NEW image was emitted. Stage times were 438.126
+  seconds for headers, 44.359 seconds for constants and 15.032 seconds for the
+  failed emission; driver time was 503.9102399 seconds and wrapper time was
+  511.631371 seconds. The selected pristine and prepared `WinHvPlatform.h`
+  gate those declarations to `_AMD64_` or `_ARM64_`, but the project's
+  `ExcludeFromCrossarch` list schedules Hypervisor only as x86/common.
+  The ordinary task correctly follows that policy and the declarations are
+  preprocessed away before binding. The emitter scans all architecture
+  directories before cleaning or import filtering; its rejection is correct,
+  and an explicit auto-type namespace already exists.
+  Remove only Hypervisor from `ExcludeFromCrossarch`, preserving the native
+  header guard, normal adapter and qualified runtime. The corrected normal
+  graph has 284 common owners and 37 architecture-specific owners, or 395
+  profiles. Prior 393-profile results remain historical evidence, not a
+  successful complete surface. Resume with a fresh selected-project overlay
+  and isolated complete output; do not splice sources into frozen 063.
+  A regression using the real selected project reproduces the skipped x64
+  profile before the policy change. After the change, all 40 prepared-include
+  and scheduling tests pass, including Hypervisor's combined and individual
+  architecture schedules. Actual WHv bindings still require the corrected
+  complete SDK run.
+  Complete emission, ordinary integrity and the unsuppressed comparison
+  remain outstanding; no additional approval gate is required.
   Raw Root parity evidence and frozen replacement are in session files
   `declaration-only-bindings-062`.
 - [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
