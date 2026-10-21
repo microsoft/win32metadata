@@ -41,6 +41,7 @@ namespace Win32MetadataScraper
         private readonly List<(NamedDecl Owner, NamedDecl Target, string Name, string[] Arguments, NativeLocation Location)> enumNameReferences = new();
         private readonly HashSet<(CXCursor Declaration, int Parameter)> invalidDeclarations = new();
         private readonly List<(HeaderAnnotationException Error, string Target)> annotationErrors = new();
+        private readonly Dictionary<CXFile, byte[]> parameterCommentSources = new();
         private NativeNameLookup nativeNames;
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
@@ -490,19 +491,18 @@ namespace Win32MetadataScraper
                 return;
             }
             var facts = new DeclarationFacts(declaration, location);
+            string parameterComment = declaration is ParmVarDecl ? GetLegacyParameterComment(declaration) : null;
             if (declaration is ParmVarDecl)
             {
-                string comment = GetLegacyParameterComment(declaration);
                 if (!HasSalParameterDirection(declaration))
-                    facts.MidlDirection = GetMidlDirection(comment);
+                    facts.MidlDirection = GetMidlDirection(parameterComment);
             }
             ReadAnnotations(declaration, facts);
             if (invalidDeclarations.Contains(GetNativeIdentity(declaration)))
                 return;
             if (declaration is ParmVarDecl)
             {
-                string comment = GetLegacyParameterComment(declaration);
-                if (comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
+                if (parameterComment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
                 {
                     var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
                     ValidateTarget(facts, retval, location);
@@ -1161,12 +1161,13 @@ namespace Win32MetadataScraper
         // MIDL does not emit SAL for every explicit direction or retval contract.
         private string GetLegacyParameterComment(NamedDecl declaration)
         {
-            var start = GetLocation(declaration.Extent.Start);
-            if (start.File.Length == 0)
+            declaration.Extent.Start.GetExpansionLocation(out var file, out _, out _, out uint offset);
+            if (file.Equals(default(CXFile)))
                 return string.Empty;
-            var file = declaration.TranslationUnit.Handle.GetFile(start.File);
-            var contents = declaration.TranslationUnit.Handle.GetFileContents(file, out _);
-            int position = checked((int)start.Offset);
+            if (!parameterCommentSources.TryGetValue(file, out var source))
+                parameterCommentSources[file] = source = declaration.TranslationUnit.Handle.GetFileContents(file, out _).ToArray();
+            ReadOnlySpan<byte> contents = source;
+            int position = checked((int)offset);
             var comments = new List<string>();
             while (position > 0)
             {

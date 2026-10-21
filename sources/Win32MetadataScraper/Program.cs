@@ -3,8 +3,9 @@
 // Hosts PInvokeGenerator as a library (via NuGet package references). Parses the
 // translation unit, walks the AST to discover typedef-tag remappings, merges them
 // with the configured --remap entries, then runs PInvokeGenerator.GenerateBindings
-// with the full merged remap set. Requested loose macro constants use ClangSharp's
-// existing compiler-backed macro-binding pass with an explicit name allowlist.
+// with the full merged remap set. Annotation parsing uses ClangSharp's supported
+// macro-binding mode; only requested loose macro constants are published unless
+// general macro generation was explicitly enabled.
 //
 // Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...
 
@@ -159,6 +160,9 @@ class Program
                 }).ToArray();
             }
             var configOptions = BuildOptionsFlags(settings);
+            bool generateAllMacros = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings);
+            if (parseHeaderAnnotations)
+                configOptions |= PInvokeGeneratorConfigurationOptions.GenerateMacroBindings;
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
                 settings.GetValueOrDefault("--exclude-auto-remap") ?? new List<string>(),
@@ -169,12 +173,12 @@ class Program
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
-            if (parseHeaderAnnotations)
+            if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings))
                 translationFlags |= CXTranslationUnit_DetailedPreprocessingRecord;
 
             // ── Parse translation unit ──
-            // We parse once with our own CXIndex, walk the AST to discover remaps,
-            // then pass the same TranslationUnit to PInvokeGenerator.GenerateBindings.
+            // Discovery and annotations share this original TU. In macro mode
+            // PInvokeGenerator reparses the source with synthesized macro values.
             using var index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
             var parseError = CXTranslationUnit.TryParse(
                 index, sourceFile, clangArgs, ReadOnlySpan<CXUnsavedFile>.Empty,
@@ -273,6 +277,7 @@ class Program
                 Console.WriteLine($"Processing '{sourceFile}'");
                 generator.GenerateBindings(translationUnit, sourceFile, clangArgs, translationFlags);
 
+                var bindingDiagnostics = generator.Diagnostics.ToArray();
                 generator.Close();
 
                 var generatedFiles = new Dictionary<string, string>();
@@ -290,19 +295,23 @@ class Program
                 }
                 string additionalTypes = annotations?.GetAdditionalTypes();
                 var associatedConstantSources = new List<string>();
-                if (annotations != null && !config.GenerateMacroBindings)
+                if (annotations != null && !generateAllMacros)
                 {
                     var macros = annotations.GetAssociatedConstantMacros();
-                    if (macros.Count != 0)
+                    associatedConstantSources.AddRange(SelectAssociatedConstantSources(generatedFiles,
+                        macros.Select(macro => macro.Name).ToHashSet(StringComparer.Ordinal), ns, config.DefaultClass,
+                        out var emittedMacros));
+                    var missingMacros = macros.Where(macro => !emittedMacros.Contains(macro.Name)).ToArray();
+                    if (missingMacros.Length != 0)
                     {
-                        // Macro fields share header-types.cs and have no native declaration facts to rewrite.
-                        var macroOptions = (configOptions | PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
+                        // A requested provider can be outside the declaration traversal.
+                        var macroOptions = configOptions
                             & ~PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute
                             & ~PInvokeGeneratorConfigurationOptions.GenerateFileScopedNamespaces;
                         var macroConfig = CreateConfig(settings, ns, outputFile, headerFile,
                             macroOptions, mergedRemaps, allExcludes,
-                            macros.Select(macro => macro.Name).ToArray(),
-                            macros.Select(macro =>
+                            missingMacros.Select(macro => macro.Name).ToArray(),
+                            missingMacros.Select(macro =>
                             {
                                 macro.Location.GetFileLocation(out var file, out _, out _, out _);
                                 return file.ToString();
@@ -315,8 +324,9 @@ class Program
                             return stream;
                         });
                         macroGenerator.GenerateBindings(translationUnit, sourceFile, clangArgs, translationFlags);
+                        var macroDiagnostics = macroGenerator.Diagnostics.ToArray();
                         macroGenerator.Close();
-                        foreach (var diagnostic in macroGenerator.Diagnostics)
+                        foreach (var diagnostic in macroDiagnostics)
                         {
                             Console.WriteLine($"    {diagnostic}");
                             if (diagnostic.Level == DiagnosticLevel.Error)
@@ -325,9 +335,9 @@ class Program
                         if (exitCode < 0)
                             return exitCode;
                         associatedConstantSources.AddRange(macroStreams.Values.Select(stream => Encoding.UTF8.GetString(stream.ToArray())));
-                        ValidateAssociatedConstantSources(associatedConstantSources, macros.Select(macro =>
-                            mergedRemaps.GetValueOrDefault(macro.Name) ?? macro.Name).ToArray(), macroConfig.DefaultClass);
                     }
+                    ValidateAssociatedConstantSources(associatedConstantSources, macros.Select(macro =>
+                        mergedRemaps.GetValueOrDefault(macro.Name) ?? macro.Name).ToArray(), config.DefaultClass);
                 }
                 if (associatedConstantSources.Count != 0)
                 {
@@ -348,7 +358,7 @@ class Program
                     generatedFiles[additionalTypesPath] = additionalTypes;
 
                 // Write diagnostics
-                foreach (var diag in generator.Diagnostics)
+                foreach (var diag in bindingDiagnostics)
                 {
                     Console.WriteLine($"    {diag}");
                     if (diag.Level == DiagnosticLevel.Warning && exitCode >= 0)
@@ -524,6 +534,63 @@ class Program
         foreach (var field in fields)
             if (!field.Modifiers.Any(SyntaxKind.ConstKeyword) || field.Declaration.Variables.Any(variable => variable.Initializer == null))
                 throw new InvalidOperationException("An AssociatedConstant macro must project to a constant field; readonly or pointer bindings cannot suppress the existing constant fallback.");
+    }
+
+    static List<string> SelectAssociatedConstantSources(Dictionary<string, string> generatedFiles,
+        ISet<string> requestedNames, string ns, string defaultClass, out HashSet<string> emittedMacros)
+    {
+        var selectedSources = new List<string>();
+        emittedMacros = new(StringComparer.Ordinal);
+        foreach (string path in generatedFiles.Keys.ToArray())
+        {
+            var root = SyntaxFactory.ParseCompilationUnit(generatedFiles[path]);
+            var macroBindings = root.DescendantNodes().OfType<MemberDeclarationSyntax>()
+                .Select(member => (Member: member, Name: GetMacroBindingName(member)))
+                .Where(binding => binding.Name != null).ToArray();
+            if (macroBindings.Length == 0)
+                continue;
+            var macroMembers = macroBindings.Select(binding => binding.Member).ToHashSet();
+            var emptyContainers = macroMembers.Select(member => member.Parent).OfType<ClassDeclarationSyntax>()
+                .Distinct().Where(container => container.Members.All(macroMembers.Contains)).ToHashSet();
+            var removedNodes = emptyContainers.Cast<SyntaxNode>().Concat(macroMembers.Where(member =>
+                member.Parent is not ClassDeclarationSyntax container || !emptyContainers.Contains(container)));
+            generatedFiles[path] = root.RemoveNodes(removedNodes, SyntaxRemoveOptions.KeepNoTrivia)
+                .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+            var selectedBindings = macroBindings.Where(binding => requestedNames.Contains(binding.Name)).ToArray();
+            emittedMacros.UnionWith(selectedBindings.Select(binding => binding.Name));
+            var selected = selectedBindings.Select(binding => binding.Member).ToArray();
+            if (selected.Length == 0)
+                continue;
+            if (selected[0].Parent is not ClassDeclarationSyntax originalContainer ||
+                originalContainer.Identifier.ValueText != defaultClass)
+                throw new InvalidOperationException("AssociatedConstant macros must be emitted in the configured global class.");
+            var container = originalContainer.WithMembers(SyntaxFactory.List(selected));
+            var namespaceUsings = (originalContainer.Parent as BaseNamespaceDeclarationSyntax)?.Usings ?? default;
+            selectedSources.Add(SyntaxFactory.CompilationUnit().WithUsings(root.Usings)
+                .AddMembers(SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(ns))
+                    .WithUsings(namespaceUsings).AddMembers(container))
+                .NormalizeWhitespace().ToFullString());
+        }
+        return selectedSources;
+    }
+
+    static string GetMacroBindingName(MemberDeclarationSyntax member)
+    {
+        var attributes = member switch
+        {
+            FieldDeclarationSyntax field => field.AttributeLists,
+            PropertyDeclarationSyntax property => property.AttributeLists,
+            _ => default,
+        };
+        foreach (var attribute in attributes.SelectMany(list => list.Attributes))
+            if (attribute.Name.GetLastToken().ValueText == "NativeTypeName" &&
+                attribute.ArgumentList?.Arguments.FirstOrDefault()?.Expression is LiteralExpressionSyntax literal)
+            {
+                var match = Regex.Match(literal.Token.ValueText, @"^#define\s+([A-Za-z_]\w*)\b");
+                if (match.Success)
+                    return match.Groups[1].Value;
+            }
+        return null;
     }
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)

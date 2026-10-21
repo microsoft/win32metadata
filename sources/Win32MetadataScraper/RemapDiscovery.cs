@@ -415,6 +415,7 @@ public static class RemapDiscovery
 
         if (decl is IDeclContext context)
         {
+            var directDeclarations = new HashSet<Decl>(context.Decls);
             // Walk Decls first (direct declarations)
             foreach (var child in context.Decls)
             {
@@ -425,7 +426,7 @@ public static class RemapDiscovery
             // headers that don't appear in Decls. PInvokeGenerator uses both traversals.
             foreach (var cursor in decl.CursorChildren)
             {
-                if (cursor is TypedefDecl && !context.Decls.Contains((Decl)cursor))
+                if (cursor is TypedefDecl && !directDeclarations.Contains((Decl)cursor))
                 {
                     WalkDecl((Decl)cursor, result);
                 }
@@ -434,5 +435,4 @@ public static class RemapDiscovery
     }
 }
 }
-
 

@@ -76,6 +76,167 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
 - The C# generator remains in use. The qualified tooling is ClangSharp 21.1.8.4
   with libclang 21.1.8. This toolchain is fixed for the complete-image milestone;
   no compiler upgrade is a prerequisite.
+- Complete-image and migration work is paused by user order to fix scraper
+  performance. The finite047 producer started at 16:52 UTC on 2026-10-21 and was
+  stopped with 201 profiles launched, 169 completed logs and 32 incomplete logs.
+  All owned processes are verified stopped. Partial outputs and stack samples
+  are preserved; there is no complete NEW WinMD or natural terminal result.
+- The prepared adapter omitted the normal `ExcludeFromCrossarch` policy,
+  scheduling 963 native jobs instead of 393. Its correction preserves deliberate
+  all-architecture controls and adds explicit normal-build scheduling with
+  matching `common` response-file accounting.
+- Three samples of one slow worker identify ClangSharp's linear diagnostic-list
+  membership scan as a CPU hot path. A small reproduction with 2,000 macros now
+  exposes 3,760 generator errors: preprocessing records enabled for annotation
+  parsing reach the declaration visitor as unsupported cursors. The wrapper
+  previously read diagnostics after `Close()` cleared them. Diagnostics are now
+  captured before close in both declaration and selective-macro generation.
+  The scheduling correction alone is not claimed to resolve the slowdown.
+- [dotnet/ClangSharp#846](https://github.com/dotnet/ClangSharp/issues/846)
+  contains a standalone reproduction requiring no SDK or win32metadata code.
+  Its 2,000-macro case reports zero errors without detailed preprocessing and
+  2,465 errors with it; generated bindings are byte-identical. At 32,000 macros,
+  binding generation takes 4.3 seconds and reports 32,465 errors. These are
+  single observations, not full SDK timings. The report now explicitly corrects
+  the original classification: these are expected diagnostics for our unsupported
+  caller configuration, not bogus errors.
+- The detailed-record/ordinary-generation combination was introduced by this
+  annotation migration in `b5b7b26e`, removed in `746d812d`, and reintroduced for
+  original-IDL comment ingestion in `62f92b07`. Baseline `origin/main` does not
+  request detailed preprocessing. The pinned ClangSharp CLI requests it only
+  with macro-binding generation. Its macro mode processes preprocessing records
+  and unconditionally reparses the source plus synthesized declarations.
+  There is no existing public declaration-only entry point that accepts the
+  detailed TU while avoiding macro generation and a second parse. The current
+  consumer instead uses that supported macro mode and accepts its second parse.
+  It does not publish every macro.
+- The supported-mode candidate uses the original published ClangSharp 21.1.8.4
+  generator, SHA256 `8AAD64A1AE97C2FEEA813F929F998F624A1E8FE18E82EB94F5DAE3BAD399CB44`.
+  Annotation mode enables macro bindings before parsing; explicit macro mode also
+  requests the detailed records even when annotation mode is off. Original-TU
+  annotation facts remain the source of metadata. The adapter identifies primary
+  generated macro fields/properties by their source `NativeTypeName("#define ...")`
+  provenance, keeps only existing annotation-requested constant fields in
+  `header-types.cs`, and leaves native declarations and the constants fallback
+  intact. This avoids shared name exclusions that could delete native enum members.
+  A requested provider outside the partition traversal retains the existing
+  exact-name macro pass only when its field was not already emitted.
+  All 54 focused tests pass on the published generator, including native-name
+  collisions, remaps, provider files, explicit general macro mode, comment transport,
+  physical cross-architecture fields, remap discovery and diagnostics. Warning
+  exits remain positive and visible; the physical Flags controls and an excluded
+  function-like macro control now assert that production success contract.
+  The two authorized real partition runs completed naturally, sequentially.
+  Controls/arm64 took 213.170 seconds wall and 213.047 seconds CPU, with
+  1,157 generator warnings and sampled peak working set 1,919,705,088 bytes.
+  Devices.Properties/arm64 took 132.190 seconds wall and 130.969 seconds CPU,
+  with four generator warnings and sampled peak 1,161,105,408 bytes.
+  Each also printed nine native Clang warning lines and no visible error lines.
+  All three outputs per partition are byte-identical to finite047 and all input
+  and runtime pins remain unchanged. Both targets are verified absent.
+  finite047 is an annotated output-parity reference, not a clean `main`
+  performance control. The paired main controls below establish that performance
+  is still unacceptable. The full SDK remains stopped.
+- The user requested an actual `main` versus updated-tool/patched-header timing
+  comparison. `main` is pinned to `2f767671802301cf043c717d66bf004ed7863487`,
+  matching the live remote. Its unmodified scraper builds in an isolated session
+  snapshot with the same published managed/native ClangSharp versions.
+  The main DLL hash is
+  `82739629862D5F9EB5624597DF10E6C62D28213EC34CB5EA26D68DAC3D3204EA`.
+  Exact committed main headers, settings and both partition sources are exported
+  separately. Both matched single-worker controls completed naturally:
+  Controls/arm64 took 8.9483924 seconds wall and 8.984375 seconds CPU, with
+  sampled peak working set 462,086,144 bytes; Devices.Properties/arm64 took
+  4.0022206 seconds wall and 4.125 seconds CPU, with peak 379,768,832 bytes.
+  Both exited zero, with no errors, timeout or retry. Main retains its original
+  diagnostic-lifetime bug, so its generator warning counts are unknown.
+  All 4,282 source/configuration pins and ten runtime hashes remained unchanged.
+  Main uses its committed `RecompiledIdlHeaders` tree `491aef01`; the candidate
+  uses prepared patched tree `9d5a9670`. The main SDK package reference alone
+  does not describe those actual header bytes.
+  The updated tool and patched-header profiles are 23.8 and 33.0 times slower
+  than their respective main controls. These ratios compare the intended tool,
+  headers and configuration together; they do not isolate a particular cause.
+  Those initial timings fail the reasonable-performance gate and required the
+  actual CPU attribution and fixes recorded below.
+  Once reasonable performance is established, the user has directed
+  resumption of the ordinary complete SDK graph: normal scheduling, constants,
+  WinMD emission, integrity checks and the unsuppressed OLD-to-NEW comparison.
+  Scraper isolation is temporary diagnosis of the stage where the full run
+  stopped; that run did not establish an emitter failure.
+- Three managed samples of an isolated F758 Devices.Properties replay, at
+  15, 40 and 75 seconds, all identify our `GetLegacyParameterComment` reader
+  before binding generation. The reader resolved each parameter's filename
+  back to a native file and reread its source, twice per parameter. It now uses
+  the expansion's native `CXFile`, caches that file's source bytes for the
+  original TU, and scans each parameter once. The first fix reduced the profile
+  to 35.863 seconds with byte-identical outputs.
+  The first attempted unprofiled observation was stopped at 0.17 seconds by
+  the observer's empty-array handling error; it is not a scraper timing or
+  correctness result. That observer error was corrected before the natural
+  observations reported here.
+  Subsequent samples identify `NativeNameLookup.GetWrittenFunctionName` while
+  indexing global functions. The lookup now indexes original preprocessing
+  expansion locations before invoking expensive native cursor lookup; ordinary
+  function locations cannot be macro renamers. All existing definition, spelling,
+  token and factory-rejection guards remain intact.
+  The final scraper is SHA256
+  `2F93F34DA1659E71F4DCB176A1D238C97B604D7E074FC1EB48686CC7DAF57FC6`,
+  still using the published `8AAD` generator. All 111 focused cases pass,
+  including physical MIDL directions/retval, object-macro selectors, factory
+  rejection and a new 1,000-parameter, two-file UTF-8 offset regression.
+  Four existing factory-control cases now assert the documented nonnegative
+  success exit and visible function-like macro warning; their invalid-selector
+  and generated-output checks remain intact.
+  Unprofiled Controls/arm64 now completes in 27.4923358 seconds wall and
+  29.5625 seconds CPU; Devices.Properties/arm64 completes in 15.6404833 seconds
+  wall and 16.875 seconds CPU. Both exit naturally, retain the same warning
+  counts (1,157 and four), leave original input pins unchanged and reproduce
+  all six retained output files byte-for-byte. These remain 3.1 and 3.9 times
+  main; historical full-pipeline performance is not established.
+  Post-fix representative samples show original-TU construction, annotation AST
+  traversal and the supported nested native parse instead of those reader
+  bottlenecks. With the pathological costs removed and the residual overhead
+  disclosed, the ordinary full graph is authorized to resume, using normal
+  scheduling (393 profiles), 32 workers and the final scraper. Its actual
+  end-to-end time, complete image, integrity results and raw OLD-to-NEW comparison
+  remain outstanding. No additional partition qualification is a prerequisite.
+  Raw Root evidence is in session files `supported-profile-diagnosis-060`.
+- [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
+  when preprocessing records reach generation with macro bindings disabled.
+  Its reviewed condition is not used by the updated consumer. Per the user's
+  conditional request, that PR has not been built or tested locally.
+- The local managed ClangSharp patch is committed as
+  `2c21756d022d75b357ce807f1f121a5365f27352` directly above release
+  `v21.1.8.4`. Its preprocessing filter adds support for our caller scenario;
+  it is a policy extension rather than a proved upstream correctness fix.
+  Its independent hash-based diagnostic membership change preserves ordering,
+  equality and reset behavior. All 32,000 genuine declaration errors remain
+  visible while their binding step drops from 4,947.1 to 425.9 milliseconds.
+  Native libraries and assembly identity remain unchanged.
+  All 54 focused library tests pass. An independent consumer measurement drops
+  the 32,000-macro binding step from 4,333.0 to 115.0 milliseconds, with zero
+  preprocessing errors under that extension and byte-identical output. This
+  measures the local extension and diagnostic optimization; it does not establish
+  that the original flag combination was supported or restore the full baseline.
+- Five focused consumer regressions pass, covering ordinary and selective macro
+  bindings, retained warnings, retained declaration errors and rejected invalid
+  selective macros. A wider selection has 804 passes, 54 failures and 20 skips.
+  Forty-eight failures demand a zero exit despite now-visible nonfatal warning
+  counts; the others concern exception/aggregation expectations and anonymous
+  namespace errors. These failures remain visible; the consumer suite is not
+  claimed all-green. The isolated Controls/arm64 timing hit its 120-second limit
+  before the logged GenerateBindings entry and emitted no candidate source.
+  A subsequent stack observation aborted because its observer incorrectly
+  compared timestamps from APIs with different precision; it yielded no stacks.
+  The observer is corrected but has not been rerun. The complete SDK graph remains
+  stopped and its end-to-end time is unmeasured.
+- A separate quadratic scan in our remap discovery is corrected without changing
+  traversal order: direct typedefs no longer repeatedly search the entire
+  declaration list. At 32,000 typedefs discovery drops from 28,665.5 to 766.9
+  milliseconds with identical mapping hashes. All 52 focused discovery,
+  macro/diagnostic and physical WinMD integration tests pass. This synthetic
+  result is not a measured attribution of the Controls timeout.
 - Source cut `57be4e4239abbb1c9239dedfa0d6b7ddf117a3f2` is integrated. It contains
   the corrected `GPFIDL_FLAGS` group, the `SERVICE_NOTIFY_FLAGS` rename, the
   `ASSOCF` header migration, four credential-group retirements, the bounded
@@ -105,8 +266,9 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   logical provider while removing three artificial scalar forwards.
   WeakReference retains the common Resolve ComOutPtr comment and removes only
   its duplicate inside the manual branch. Native declarations, SAL and guards
-  remain unchanged. WeakReference still needs affected IDL regeneration and
-  current-candidate replay; no new CINTERFACE or physical-output result is claimed.
+  remain unchanged. Affected IDL regeneration completed before the stopped run,
+  with all four native MIDL invocations exiting zero. Current-candidate replay
+  remains incomplete; no new CINTERFACE or physical-output result is claimed.
 - Runtime `71.0.340-preview+8d0cd24516` has 135
   focused checks including six physical ANSI/Unicode architecture cases. The
   earlier ordinary SDK results used `71.0.339-preview+03958d1bb5`; Controls and
@@ -115,7 +277,8 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   `71.0.341-preview+53f3459d5b`, with 60 executed focused checks and 18 physical
   output pairs. Its exact four-file source is integrated as
   `80deedfd20a9e709a738ea00b0e72702dd4c51c3`. Those identities remain distinct;
-  runtime341 has not yet been adopted by an ordinary SDK run.
+  runtime341 was used by the stopped ordinary SDK run, which does not establish
+  complete-image success.
 - The `GPFIDL_FLAGS` representation has a reduced physical WinMD proof on x86,
   x64, and arm64. Actual Controls/x64 replay clears all three previous GP/service
   binding errors. Its later IStream projection failure is fixed in runtime340;

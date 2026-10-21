@@ -340,6 +340,12 @@ fresh output directories for OLD, control and NEW.
     -Architecture crossarch -Stage Headers
 ```
 
+For complete SDK builds, add `-UseNormalBuildScheduling`. The driver reads and
+pins `ExcludeFromCrossarch` from the selected `Windows.Win32.proj`, generates
+listed partitions once with x86 settings into `common`, and validates only the
+scheduled response files. Omit this switch for bounded checks that deliberately
+require every requested architecture, including architecture-independent owners.
+
 The runtime manifest binds relative file paths and SHA-256 hashes under the
 selected private tools root. SDK targets and assets default to that runtime;
 there is no ambient tool fallback. The standalone annotation header must match

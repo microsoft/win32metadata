@@ -103,7 +103,45 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        private static JsonDocument Run(string scenario, bool response, bool driver = false)
+        [Theory]
+        [InlineData("normal-crossarch", 4, false, true)]
+        [InlineData("all-crossarch", 6, false, true)]
+        [InlineData("normal-x86", 2, false, true)]
+        [InlineData("normal-x64", 1, false, true)]
+        [InlineData("normal-arm64", 1, false, true)]
+        [InlineData("normal-missing-response", 4, true, true)]
+        [InlineData("normal-missing-policy", 0, true, false)]
+        [InlineData("normal-dynamic-policy", 0, true, false)]
+        [InlineData("normal-empty-selection", 0, true, false)]
+        public void NormalSchedulingUsesTheSelectedCommonPolicyAndValidatesOnlyScheduledResponses(
+            string scenario, int profileCount, bool throws, bool producerCalled)
+        {
+            using var result = Run(scenario, response: true, driver: true, scheduling: true);
+            Assert.Equal(throws, result.RootElement.GetProperty("threw").GetBoolean());
+            Assert.Equal(producerCalled, result.RootElement.GetProperty("producerCalled").GetBoolean());
+            Assert.Equal(producerCalled, result.RootElement.GetProperty("outputCreated").GetBoolean());
+            if (!producerCalled)
+                return;
+            var ordinary = result.RootElement.GetProperty("ordinary");
+            bool normal = scenario != "all-crossarch";
+            Assert.Equal(normal, ordinary.GetProperty("usesNormalBuildScheduling").GetBoolean());
+            var profiles = ordinary.GetProperty("headerProfiles").EnumerateArray().ToArray();
+            Assert.Equal(profileCount, profiles.Length);
+            Assert.Equal(profileCount, ordinary.GetProperty("preparedHeaderIncludeValidation")
+                .GetProperty("expectedResponses").GetInt32());
+            Assert.Equal(!throws, ordinary.GetProperty("preparedHeaderIncludeValidation").GetProperty("complete").GetBoolean());
+            Assert.All(profiles.Where(profile => profile.GetProperty("partition").GetString() == "Owner"), profile =>
+            {
+                Assert.Equal(normal ? "common" : profile.GetProperty("architecture").GetString(),
+                    profile.GetProperty("directory").GetString());
+                if (normal)
+                    Assert.Equal("x86", profile.GetProperty("architecture").GetString());
+            });
+            Assert.Equal(normal, result.RootElement.GetProperty("pins").EnumerateArray()
+                .Any(pin => pin.GetProperty("path").GetString().EndsWith("Windows.Win32.proj")));
+        }
+
+        private static JsonDocument Run(string scenario, bool response, bool driver = false, bool scheduling = false)
         {
             string root = Path.Combine(Path.GetTempPath(), "PreparedIncludeTests-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(root);
@@ -116,6 +154,7 @@ namespace Win32MetadataScraperTests
                     scenario,
                     response,
                     driver,
+                    scheduling,
                 })));
                 string script = "$data = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('" + data + @"')) | ConvertFrom-Json
 $ErrorActionPreference = 'Stop'
@@ -156,6 +195,29 @@ if ($data.driver) {
     [IO.Directory]::CreateDirectory($partition) | Out-Null
     [IO.File]::WriteAllText((Join-Path $partition 'main.cpp'), '#include <sample.h>')
     [IO.File]::WriteAllText((Join-Path $partition 'settings.rsp'), '--config')
+    $owners = @('Owner')
+    $architecture = 'x64'
+    $normalScheduling = $false
+    if ($data.scheduling) {
+        $specific = Join-Path $project 'Partitions\Specific'
+        [IO.Directory]::CreateDirectory($specific) | Out-Null
+        [IO.File]::WriteAllText((Join-Path $specific 'main.cpp'), '#include <sample.h>')
+        [IO.File]::WriteAllText((Join-Path $specific 'settings.rsp'), '--config')
+        $owners += 'Specific'
+        $architecture = 'crossarch'
+        if ($data.scenario -in @('normal-x86', 'normal-x64', 'normal-arm64')) {
+            $architecture = $data.scenario.Substring(7)
+        }
+        if ($data.scenario -eq 'normal-empty-selection') { $owners = @('Owner'); $architecture = 'x64' }
+        $normalScheduling = $data.scenario -ne 'all-crossarch'
+        $common = 'Owner'
+        if ($data.scenario -eq 'normal-dynamic-policy') { $common = '$(OtherSetting)' }
+        if ($data.scenario -ne 'normal-missing-policy') {
+            [IO.File]::WriteAllText((Join-Path $project 'Windows.Win32.proj'),
+                ('<Project><PropertyGroup><ExcludeFromCrossarch>' + $common +
+                '</ExcludeFromCrossarch></PropertyGroup></Project>'))
+        }
+    }
     $output = Join-Path $data.root 'ordinary'
     $global:guardProducerCalled = $false
     $global:guardContext = @{
@@ -166,14 +228,31 @@ if ($data.driver) {
         $global:guardProducerCalled = $true
         $global:LASTEXITCODE = 0
         $ctx = $global:guardContext
-        $scratch = Join-Path $ctx.output 'obj\scratch\x64'
-        [IO.Directory]::CreateDirectory($scratch) | Out-Null
         if ($ctx.scenario -eq 'missing-response') { return }
         $includes = @($ctx.project + '\inc') + $ctx.canonical + $ctx.fallbacks
         if ($ctx.scenario -eq 'rsp-fallback-first') { $includes = @($ctx.project + '\inc') + $ctx.fallbacks + $ctx.canonical }
         if ($ctx.scenario -eq 'rsp-unprepared-sdk') { $includes += $ctx.foreign }
-        [IO.File]::WriteAllLines((Join-Path $scratch 'Owner.settings.rsp'),
-            @('--include-directory') + $includes + @('--traverse', ($ctx.prepared + '\um\sample.h')))
+        $scan = @($args | Where-Object { $_ -like '-property:ScanArch=*' })[0].Split('=', 2)[1]
+        $arches = if ($scan -eq 'crossarch') { @('x86', 'x64', 'arm64') } else { @($scan) }
+        $owners = @($args | Where-Object { $_ -like '-property:PartitionFilter=*' })[0].Split('=', 2)[1].Replace('%3B', ';').Split(';')
+        $common = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+        foreach ($argument in @($args | Where-Object { $_ -like '-property:ExcludeFromCrossarch=*' })) {
+            foreach ($owner in $argument.Split('=', 2)[1].Replace('%3B', ';').Split(';')) { [void]$common.Add($owner) }
+        }
+        foreach ($arch in $arches) {
+            foreach ($owner in $owners) {
+                $directory = $arch
+                if ($common.Contains($owner)) {
+                    if ($arch -ne 'x86') { continue }
+                    $directory = 'common'
+                }
+                if ($ctx.scenario -eq 'normal-missing-response' -and $arch -eq 'x64' -and $owner -eq 'Specific') { continue }
+                $scratch = Join-Path $ctx.output ('obj\scratch\' + $directory)
+                [IO.Directory]::CreateDirectory($scratch) | Out-Null
+                [IO.File]::WriteAllLines((Join-Path $scratch ($owner + '.settings.rsp')),
+                    @('--include-directory') + $includes + @('--traverse', ($ctx.prepared + '\um\sample.h')))
+            }
+        }
     }
     $native = $fallbacks
     if ($data.scenario -eq 'invalid-fallback') { $native += $foreign }
@@ -181,8 +260,8 @@ if ($data.driver) {
         $null = & (Join-Path $data.repo 'scripts\Invoke-PreparedSdkPartitions.ps1') `
             -ProjectDirectory $project -IncludeRoot $prepared -ToolsDirectory $tools `
             -RuntimeManifest $manifest -RuntimeManifestSha256 (Get-FileHash -LiteralPath $manifest).Hash `
-            -AnnotationHeader $annotation -OutputDirectory $output -Partition Owner `
-            -NativeIncludeDirectory $native -Architecture x64
+            -AnnotationHeader $annotation -OutputDirectory $output -Partition $owners `
+            -NativeIncludeDirectory $native -Architecture $architecture -UseNormalBuildScheduling:$normalScheduling
         $result.threw = $false
     } catch { $result.threw = $true; $result.error = $_.ToString() }
     $result.producerCalled = $global:guardProducerCalled

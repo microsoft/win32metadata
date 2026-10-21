@@ -234,9 +234,15 @@ namespace Win32MetadataScraper
             private readonly ILookup<(CXCursor Function, string Name), ParmVarDecl> parametersByFunction;
             private readonly ILookup<CXCursor, FunctionDecl> functionsByScope;
             private readonly Dictionary<CXCursor, ILookup<string, FunctionDecl>> writtenFunctionsByScope = new();
+            private readonly HashSet<(CXFile File, uint Offset)> macroExpansionLocations = new();
 
             internal NativeNameLookup(IEnumerable<Cursor> visited)
             {
+                foreach (var expansion in visited.Where(cursor => cursor.CursorKind == CXCursorKind.CXCursor_MacroExpansion))
+                {
+                    expansion.Location.GetExpansionLocation(out var file, out _, out _, out uint offset);
+                    macroExpansionLocations.Add((file, offset));
+                }
                 var named = visited.OfType<NamedDecl>().Where(declaration => declaration is not IndirectFieldDecl &&
                     declaration.SemanticParentCursor != null &&
                     (declaration is ParmVarDecl || declaration.SemanticParentCursor is not FunctionDecl)).ToArray();
@@ -292,11 +298,11 @@ namespace Win32MetadataScraper
                 return scope is FunctionDecl ? scope.Handle : scope.Handle.CanonicalCursor;
             }
 
-            private static string GetWrittenFunctionName(FunctionDecl function)
+            private string GetWrittenFunctionName(FunctionDecl function)
             {
                 var unit = function.TranslationUnit.Handle;
                 function.Handle.Location.GetExpansionLocation(out var file, out _, out _, out var offset);
-                if (file.Equals(default(CXFile)))
+                if (file.Equals(default(CXFile)) || !macroExpansionLocations.Contains((file, offset)))
                     return null;
                 var expansion = unit.GetCursor(unit.GetLocationForOffset(file, offset));
                 if (expansion.Kind != CXCursorKind.CXCursor_MacroExpansion)
