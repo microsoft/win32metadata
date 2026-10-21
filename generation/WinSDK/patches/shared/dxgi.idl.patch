@@ -1,5 +1,5 @@
 diff --git a/shared/dxgi.idl b/shared/dxgi.idl
-index 1899f8f2..e64deba9 100644
+index 1899f8f2..aedd3208 100644
 --- a/shared/dxgi.idl
 +++ b/shared/dxgi.idl
 @@ -1,3 +1,4 @@
@@ -90,7 +90,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( 2411e7e1-12ac-4ccf-bd14-9798e8534dc0 ),
-@@ -341,16 +366,22 @@ interface IDXGIAdapter : IDXGIObject
+@@ -341,16 +366,21 @@ interface IDXGIAdapter : IDXGIObject
          [in, annotation("_In_")] REFGUID InterfaceName,
          [out, annotation("_Out_")] LARGE_INTEGER * pUMDVersion );
  };
@@ -100,7 +100,6 @@ index 1899f8f2..e64deba9 100644
  const UINT DXGI_ENUM_MODES_INTERLACED = 1UL;
  const UINT DXGI_ENUM_MODES_SCALING = 2UL;
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
-+cpp_quote("typedef unsigned int DXGI_ENUM_MODES;")
 +cpp_quote("#endif")
  
  // Additional mode enumerations in DXGI 1.2
@@ -113,7 +112,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( ae02eedb-c735-4690-8d52-5a8dc20213aa ),
-@@ -400,7 +431,13 @@ cpp_quote( "#define DXGI_PRESENT_RESTRICT_TO_OUTPUT        0x00000040UL" )
+@@ -400,7 +430,13 @@ cpp_quote( "#define DXGI_PRESENT_RESTRICT_TO_OUTPUT        0x00000040UL" )
  //cpp_quote( "#define DXGI_PRESENT_DDA_PROTECTED_CONTENT   0x00000080UL" ) reserved
  cpp_quote( "#define DXGI_PRESENT_USE_DURATION              0x00000100UL" )
  cpp_quote( "#define DXGI_PRESENT_ALLOW_TEARING             0x00000200UL" )
@@ -127,7 +126,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( 310d36a0-d2e7-4c0a-aa04-6a9d23b8886a ),
-@@ -428,6 +465,7 @@ interface IDXGISwapChain :
+@@ -428,6 +464,7 @@ interface IDXGISwapChain :
      HRESULT GetFrameStatistics( [out, annotation("_Out_")] DXGI_FRAME_STATISTICS *pStats );
      HRESULT GetLastPresentCount( [out, annotation("_Out_")] UINT *pLastPresentCount );
  };
@@ -135,7 +134,7 @@ index 1899f8f2..e64deba9 100644
  
  //--------------------------------------------------------------------------------------------------------
  // The DXGIFactory
-@@ -437,7 +475,11 @@ cpp_quote( "#define DXGI_MWA_NO_WINDOW_CHANGES      ( 1 << 0 )" )
+@@ -437,7 +474,11 @@ cpp_quote( "#define DXGI_MWA_NO_WINDOW_CHANGES      ( 1 << 0 )" )
  cpp_quote( "#define DXGI_MWA_NO_ALT_ENTER           ( 1 << 1 )" )
  cpp_quote( "#define DXGI_MWA_NO_PRINT_SCREEN        ( 1 << 2 )" )
  cpp_quote( "#define DXGI_MWA_VALID                  ( 0x7 )" )
@@ -147,7 +146,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( 7b7166ec-21c7-44ae-b21a-c9ae321ae369 ),
-@@ -460,6 +502,7 @@ interface IDXGIFactory :
+@@ -460,6 +501,7 @@ interface IDXGIFactory :
          [in] HMODULE Module,
          [out, annotation("_COM_Outptr_")] IDXGIAdapter **ppAdapter );
  };
@@ -155,7 +154,7 @@ index 1899f8f2..e64deba9 100644
  
  //--------------------------------------------------------------------------------------------------------
  // DXGI instantiation
-@@ -472,10 +515,12 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -472,10 +514,12 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion
  
  cpp_quote( "HRESULT WINAPI CreateDXGIFactory1(REFIID riid, _COM_Outptr_ void **ppFactory);" )
@@ -168,7 +167,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( 54ec77fa-1377-44e6-8c32-88fd5f44c84c ),
-@@ -507,6 +552,9 @@ interface IDXGIDevice :
+@@ -507,6 +551,9 @@ interface IDXGIDevice :
  
  
  //--------------------------------------------------------------------------------------------------------
@@ -178,7 +177,7 @@ index 1899f8f2..e64deba9 100644
  typedef enum DXGI_ADAPTER_FLAG
  {
      DXGI_ADAPTER_FLAG_NONE                      = 0,
-@@ -514,8 +562,12 @@ typedef enum DXGI_ADAPTER_FLAG
+@@ -514,8 +561,12 @@ typedef enum DXGI_ADAPTER_FLAG
      DXGI_ADAPTER_FLAG_SOFTWARE                  = 2,
      DXGI_ADAPTER_FLAG_FORCE_DWORD               = 0xFFFFFFFF,
  } DXGI_ADAPTER_FLAG;
@@ -191,7 +190,7 @@ index 1899f8f2..e64deba9 100644
  typedef struct DXGI_ADAPTER_DESC1
  {
      WCHAR Description[128];
-@@ -550,6 +602,7 @@ interface IDXGIAdapter1;
+@@ -550,6 +601,7 @@ interface IDXGIAdapter1;
  // The DXGIFactory1
  //--------------------------------------------------------------------------------------------------------
  
@@ -199,7 +198,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( 770aae78-f26f-4dba-a829-253c83d1b387 ),
-@@ -564,10 +617,13 @@ interface IDXGIFactory1 :
+@@ -564,10 +616,13 @@ interface IDXGIFactory1 :
          [out, annotation("_COM_Outptr_")] IDXGIAdapter1 **ppAdapter );
      BOOL IsCurrent();
  };
@@ -213,7 +212,7 @@ index 1899f8f2..e64deba9 100644
  [
      object,
      uuid( 29038f61-3839-4626-91fd-086879011a05 ),
-@@ -584,6 +640,7 @@ interface IDXGIAdapter1 :
+@@ -584,6 +639,7 @@ interface IDXGIAdapter1 :
  // The DXGIDevice1
  //--------------------------------------------------------------------------------------------------------
  
