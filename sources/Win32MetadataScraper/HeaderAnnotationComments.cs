@@ -180,10 +180,9 @@ namespace Win32MetadataScraper
             {
                 int separator = name.LastIndexOf("::", StringComparison.Ordinal);
                 var functions = nativeNames.Resolve(root, name[..separator], location);
-                functions = functions.Where(value => value is FunctionDecl function &&
-                    !(excludeFunctionsWithBody && function.HasBody)).ToArray();
+                functions = functions.Where(value => value is FunctionDecl).ToArray();
                 if (functions.Length != 1 || functions[0] is not FunctionDecl function)
-                    throw Error(location, $"Parameter target '{name}' must identify one projectable native function or method before its parameter name; found {functions.Length} candidates.");
+                    throw Error(location, $"Parameter target '{name}' must identify one native function or method before its parameter name; found {functions.Length} candidates.");
                 var parameters = nativeNames.ResolveParameters(function, name[(separator + 2)..]);
                 if (parameters.Length != 1)
                     throw Error(location, $"Parameter target '{name}' must identify one named native parameter; found {parameters.Length} candidates.");
@@ -197,9 +196,9 @@ namespace Win32MetadataScraper
                     UnwrapTypeDeclaration(alias) is NamedDecl underlying && alias.Name == underlying.Name ? underlying : value).ToArray();
             candidates = candidates.Where(value => kind switch
             {
-                "method" => value is CXXMethodDecl method && !(excludeFunctionsWithBody && method.HasBody),
-                "function" => value is FunctionDecl function and not CXXMethodDecl && !(excludeFunctionsWithBody && function.HasBody),
-                "return" => value is FunctionDecl function && !(excludeFunctionsWithBody && function.HasBody),
+                "method" => value is CXXMethodDecl,
+                "function" => value is FunctionDecl and not CXXMethodDecl,
+                "return" => value is FunctionDecl,
                 _ => true,
             }).GroupBy(value => value.Handle.CanonicalCursor).Select(group => group.First()).ToArray();
             if (candidates.Length != 1 || !(kind switch

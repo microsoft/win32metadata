@@ -68,6 +68,12 @@ directive/macro, malformed payload, unknown fact, missing reference, or ambiguou
 target fails with WMA001. Comments do not add declarations or change SAL.
 Adjacent native MIDL direction/retval blocks remain readable.
 
+Comment targets bind to actual native declarations independently of projection
+exclusions. With `exclude-funcs-with-body`, comments on native definitions and
+their parameters are still parsed and validated, but those definitions remain
+excluded from generated output. A body does not make a native target missing or
+resolve an ambiguous non-template overload set.
+
 The scraper reports independent WMA001 failures together for one partition,
 ordered by source file, line, column and native target. Invalid declaration facts
 are excluded from dependent checks to avoid cascaded errors. The complete report

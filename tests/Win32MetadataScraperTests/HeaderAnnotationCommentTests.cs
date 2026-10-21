@@ -304,6 +304,115 @@ struct I {
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void CommentsOnNativeDefinitionsHonorBodyProjectionExclusion(string architecture, string target, bool excluded)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+enum FLAGS { FIRST = 1 };
+int Imported(unsigned flags);
+/* Win32Metadata: parameter ::Imported::flags => AssociatedEnum(FLAGS) */
+inline int BodyFunction(unsigned flags) { return 0; }
+/* Win32Metadata: function ::BodyFunction => SupportedOSPlatform(""windows6.1"") */
+/* Win32Metadata: parameter ::BodyFunction::flags => AssociatedEnum(FLAGS) */
+inline unsigned BodyReturn() { return 1; }
+/* Win32Metadata: return ::BodyReturn => AssociatedEnum(FLAGS) */
+struct BODY_INTERFACE { virtual int BodyMethod(unsigned flags) { return 0; } };
+/* Win32Metadata: method ::BODY_INTERFACE::BodyMethod => PreserveResult */
+/* Win32Metadata: parameter ::BODY_INTERFACE::BodyMethod::flags => AssociatedEnum(FLAGS) */
+", extraSettings: excluded ? "--config\nexclude-funcs-with-body\n" : "");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            var imported = Assert.Single(methods.Where(method => method.Identifier.ValueText == "Imported"));
+            Assert.Contains("DllImport", imported.ToString());
+            Assert.Contains("AssociatedEnum(\"FLAGS\")", Assert.Single(imported.ParameterList.Parameters).ToString());
+            foreach (string name in new[] { "BodyFunction", "BodyReturn", "BodyMethod" })
+            {
+                if (excluded)
+                    Assert.DoesNotContain(methods, method => method.Identifier.ValueText == name);
+                else
+                {
+                    var method = Assert.Single(methods.Where(method => method.Identifier.ValueText == name));
+                    Assert.DoesNotContain("DllImport", method.ToString());
+                    Assert.Contains("AssociatedEnum(\"FLAGS\")", method.ToString());
+                    Assert.Contains(name == "BodyFunction" ? "SupportedOSPlatform(\"windows6.1\")" :
+                        name == "BodyMethod" ? "PreserveSig" : "return:", method.ToString());
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CommentsBindNativeDefinitionRedeclarationsCanonically(bool definitionFirst)
+        {
+            const string declaration = "int Body(unsigned original);\n";
+            const string definition = "inline int Body(unsigned renamed) { return 0; }\n";
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "enum FLAGS { FIRST = 1 };\n" + (definitionFirst ? definition + declaration : declaration + definition) + @"
+/* Win32Metadata: function ::Body => SupportedOSPlatform(""windows6.1"") */
+/* Win32Metadata: parameter ::Body::renamed => AssociatedEnum(FLAGS) */
+int Imported();", extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            Assert.Equal("Imported", Assert.Single(methods).Identifier.ValueText);
+        }
+
+        [Theory]
+        [InlineData("function ::Body => Unknown", "Unknown")]
+        [InlineData("parameter ::Body::flags => Retained", "pointer or reference")]
+        [InlineData("parameter ::Body::flags => ComOutPtr(true)", "writable output pointer storage")]
+        [InlineData("parameter ::Body::missing => Reserved", "named native parameter")]
+        [InlineData("function ::Missing => PreserveResult", "found 0")]
+        [InlineData("function ::RECORD => PreserveResult", "native function")]
+        [InlineData("method ::Body => PreserveResult", "native method")]
+        [InlineData("function ::RECORD::Method => PreserveResult", "native function")]
+        [InlineData("return ::Body => PreserveResult", "not a return annotation")]
+        [InlineData("function ::Overloaded => PreserveResult", "found 2")]
+        [InlineData("parameter ::Overloaded::value => Reserved", "found 2")]
+        public void NativeBodyCommentBindingRemainsStrict(string payload, string diagnostic)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+inline int Body(unsigned flags) { return 0; }
+struct RECORD { int Method(unsigned flags) { return 0; } };
+int Overloaded(unsigned value);
+inline int Overloaded(long value) { return 0; }
+/* Win32Metadata: " + payload + " */", extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void ExcludedNativeDefinitionCommentErrorsAreCollectedTogether()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+inline int BadParameter(unsigned flags) { return 0; }
+/* Win32Metadata: parameter ::BadParameter::flags => Retained */
+inline void* BadCleanup() { return 0; }
+/* Win32Metadata: return ::BadCleanup => RAIIFree(MissingCleanup, 0) */
+struct BAD_METHOD { int BadStorage(unsigned flags) { return 0; } };
+/* Win32Metadata: parameter ::BAD_METHOD::BadStorage::flags => ComOutPtr(true) */
+int Imported();", extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Equal(3, fixture.Diagnostics.Split("WMA001").Length - 1);
+            Assert.Contains("BadParameter::flags", fixture.Diagnostics);
+            Assert.Contains("BadCleanup", fixture.Diagnostics);
+            Assert.Contains("BAD_METHOD::BadStorage::flags", fixture.Diagnostics);
+            Assert.Contains("pointer or reference", fixture.Diagnostics);
+            Assert.Contains("declared native cleanup function", fixture.Diagnostics);
+            Assert.Contains("writable output pointer storage", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
         [InlineData("IWeakReference", "objectReference", false)]
         [InlineData("IWeakReference", "objectReference", true)]
         [InlineData("IAgileReference", "ppvObjectReference", false)]
