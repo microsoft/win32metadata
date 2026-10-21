@@ -41,7 +41,7 @@ namespace Win32MetadataScraperTests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void AnnotationBindingUsesSupportedMacroMode(bool associatedMacro)
+        public void AnnotationBindingPreservesOnlyRequestedMacroConstants(bool associatedMacro)
         {
             string macros = string.Join("\n", Enumerable.Range(0, 2000)
                 .Select(index => $"#define PROBE_{index} {index}"));
@@ -65,6 +65,22 @@ enum _Win32_AssociatedConstant_(EXTRA_PROBE_FLAG) PROBE_FLAGS { PROBE_FIRST = 1 
                 Assert.Contains("EXTRA_PROBE_FLAG", additionalTypes);
                 Assert.DoesNotContain("PROBE_1999", additionalTypes);
             }
+        }
+
+        [Theory]
+        [InlineData("#define __unaligned\n")]
+        [InlineData("#define __inline inline\n")]
+        public void AnnotationBindingDoesNotEvaluateUnrequestedKeywordMacros(string macro)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc", macro + @"
+#define EXTRA_PROBE_FLAG 4U
+enum _Win32_AssociatedConstant_(EXTRA_PROBE_FLAG) PROBE_FLAGS { PROBE_FIRST = 1 };
+_Win32_SetLastError_ int Probe();
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Contains("SetLastError = true", fixture.ReadSource());
+            Assert.Contains("EXTRA_PROBE_FLAG", fixture.ReadAdditionalTypes());
+            Assert.DoesNotContain("Unsupported macro definition record", fixture.Diagnostics);
         }
 
         [Theory]

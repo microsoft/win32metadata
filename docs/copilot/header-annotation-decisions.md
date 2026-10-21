@@ -76,11 +76,21 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
 - The C# generator remains in use. The qualified tooling is ClangSharp 21.1.8.4
   with libclang 21.1.8. This toolchain is fixed for the complete-image milestone;
   no compiler upgrade is a prerequisite.
-- Complete-image and migration work is paused by user order to fix scraper
-  performance. The finite047 producer started at 16:52 UTC on 2026-10-21 and was
-  stopped with 201 profiles launched, 169 completed logs and 32 incomplete logs.
-  All owned processes are verified stopped. Partial outputs and stack samples
-  are preserved; there is no complete NEW WinMD or natural terminal result.
+- The finite047 producer started at 16:52 UTC on 2026-10-21 and was stopped by
+  user order to fix scraper performance, with 201 profiles launched, 169 completed
+  logs and 32 incomplete logs. Its owned processes are verified stopped; partial
+  outputs and stack samples are preserved. After the fixes below, the complete
+  ordinary graph resumed as `full-sdk-supported-061`, with MSBuild starting at
+  21:21:29 UTC on 2026-10-21. Its actual ordinary-input manifest confirms 321
+  owners, 393 normal profiles, 32 workers and `StageEmit`. The frozen prepared
+  source/header inputs and constants/emitter runtime remain unchanged; only the
+  measured scraper and matching PDB replace the original runtime files.
+  That graph terminated naturally at 21:29:37 UTC with all 393 completion logs
+  and nine genuine failures across five owners. `ScrapeHeaders` took 475.307
+  seconds; the ordinary driver took 487.487 seconds and its wrapper 499.650
+  seconds. Constants and emission were not reached. There is no complete NEW
+  WinMD; integrity and comparison remain blocked. The failed run is preserved
+  unchanged.
 - The prepared adapter omitted the normal `ExcludeFromCrossarch` policy,
   scheduling 963 native jobs instead of 393. Its correction preserves deliberate
   all-architecture controls and adds explicit normal-build scheduling with
@@ -108,9 +118,10 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   and unconditionally reparses the source plus synthesized declarations.
   There is no existing public declaration-only entry point that accepts the
   detailed TU while avoiding macro generation and a second parse. The current
-  consumer instead uses that supported macro mode and accepts its second parse.
-  It does not publish every macro.
-- The supported-mode candidate uses the original published ClangSharp 21.1.8.4
+  replacement instead used that supported macro mode and accepted its second
+  parse without publishing every macro. The full 061 result below exposed the
+  cost of evaluating unrelated SDK macros even when their output is discarded.
+- The first supported-mode candidate uses the original published ClangSharp 21.1.8.4
   generator, SHA256 `8AAD64A1AE97C2FEEA813F929F998F624A1E8FE18E82EB94F5DAE3BAD399CB44`.
   Annotation mode enables macro bindings before parsing; explicit macro mode also
   requests the detailed records even when annotation mode is off. Original-TU
@@ -202,6 +213,37 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   end-to-end time, complete image, integrity results and raw OLD-to-NEW comparison
   remain outstanding. No additional partition qualification is a prerequisite.
   Raw Root evidence is in session files `supported-profile-diagnosis-060`.
+- Full 061 failures comprised Backup on all three architectures and Kernel/common
+  crashing in native `getFileContents` through `VisitVarDecl`; Rpc/common throwing
+  in `VisitCXXOperatorCallExpr`; and explicit macro-definition errors for
+  `__unaligned` in Shell.Common/common and `__inline` in WinProg on all three
+  architectures. The fatal stacks do not identify the offending variable or
+  macro. No SDK source workaround or guessed macro-name exclusion is applied.
+  The two named keyword-macro failures reproduce in standalone fixtures.
+  The replacement keeps the original detailed TU for all discovery, annotation
+  and written-name facts, but parses a separate ordinary TU without preprocessing
+  records for full native binding generation. It does not enable general macro
+  generation implicitly. Requested AssociatedConstant providers retain their
+  exact-name supported macro pass; explicit general macro mode is unchanged.
+  This retains two ordinary native parses while avoiding unrelated macro
+  evaluation. The primary-source macro-stripping adapter is no longer needed
+  and is removed. Diagnostics from both parses and both binding paths remain
+  visible; parse and generation errors prevent publication.
+  All 113 focused tests pass, including both keyword repros, native-name
+  collisions, provider fallback, macro selectors and physical annotation output.
+  The new scraper SHA256 is
+  `D15881F1B8516F764D46084509F631FD8913579E270EE0804650B712230EE5E8`,
+  still using published `8AAD`. Sequential real-header parity controls complete
+  naturally: Devices.Properties/arm64 takes 15.7461397 seconds wall and
+  16.671875 seconds CPU (exit zero); Controls/arm64 takes 25.6473213 seconds wall
+  and 27.078125 seconds CPU (exit one). All six outputs remain byte-identical and
+  original input pins unchanged. Unrequested macro warnings disappear because
+  those records are no longer evaluated, not because diagnostics are suppressed.
+  The nine actual failed profiles must now validate this fix before the next
+  complete 393-profile graph. Both steps and the ordinary downstream integrity
+  and unsuppressed comparison are authorized without another approval gate.
+  Raw Root parity evidence and frozen replacement are in session files
+  `declaration-only-bindings-062`.
 - [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
   when preprocessing records reach generation with macro bindings disabled.
   Its reviewed condition is not used by the updated consumer. Per the user's

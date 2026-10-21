@@ -283,7 +283,7 @@ void KeepNative(unsigned value);
                 "#define REQUESTED(index) (index)\nenum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };\n");
             Assert.True(fixture.Run() >= 0, fixture.Diagnostics);
             if (excluded)
-                Assert.Contains("Function like macro definition records are not supported", fixture.Diagnostics);
+                Assert.DoesNotContain("Function like macro definition records are not supported", fixture.Diagnostics);
             Assert.DoesNotContain("Flags", fixture.ReadSource());
             Assert.DoesNotContain("REQUESTED", fixture.ReadSource());
             Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));

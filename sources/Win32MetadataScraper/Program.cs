@@ -3,15 +3,14 @@
 // Hosts PInvokeGenerator as a library (via NuGet package references). Parses the
 // translation unit, walks the AST to discover typedef-tag remappings, merges them
 // with the configured --remap entries, then runs PInvokeGenerator.GenerateBindings
-// with the full merged remap set. Annotation parsing uses ClangSharp's supported
-// macro-binding mode; only requested loose macro constants are published unless
-// general macro generation was explicitly enabled.
+// with the full merged remap set. Annotation facts use the original detailed TU;
+// ordinary bindings use a declaration-only TU. Supported macro-binding mode is
+// used only for requested constants or explicit general macro generation.
 //
 // Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -161,8 +160,6 @@ class Program
             }
             var configOptions = BuildOptionsFlags(settings);
             bool generateAllMacros = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings);
-            if (parseHeaderAnnotations)
-                configOptions |= PInvokeGeneratorConfigurationOptions.GenerateMacroBindings;
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
                 settings.GetValueOrDefault("--exclude-auto-remap") ?? new List<string>(),
@@ -173,45 +170,15 @@ class Program
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
-            if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings))
+            if (parseHeaderAnnotations || generateAllMacros)
                 translationFlags |= CXTranslationUnit_DetailedPreprocessingRecord;
 
-            // ── Parse translation unit ──
-            // Discovery and annotations share this original TU. In macro mode
-            // PInvokeGenerator reparses the source with synthesized macro values.
+            // Discovery and annotations need preprocessing records, but ordinary
+            // binding generation must not evaluate unrelated SDK macros.
             using var index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
-            var parseError = CXTranslationUnit.TryParse(
-                index, sourceFile, clangArgs, ReadOnlySpan<CXUnsavedFile>.Empty,
-                translationFlags, out var cxHandle);
-
-            if (parseError != CXError_Success)
-            {
-                Console.Error.WriteLine($"Error: Failed to parse '{sourceFile}': {parseError}");
+            using var translationUnit = ParseTranslationUnit(index, sourceFile, clangArgs, translationFlags);
+            if (translationUnit == null)
                 return -1;
-            }
-
-            bool skipProcessing = false;
-            if (cxHandle.NumDiagnostics != 0)
-            {
-                Console.WriteLine($"Diagnostics for '{sourceFile}':");
-                for (uint i = 0; i < cxHandle.NumDiagnostics; i++)
-                {
-                    using var diag = cxHandle.GetDiagnostic(i);
-                    Console.Write("    ");
-                    Console.WriteLine(diag.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
-                    skipProcessing |= diag.Severity == CXDiagnostic_Error;
-                    skipProcessing |= diag.Severity == CXDiagnostic_Fatal;
-                }
-            }
-
-            if (skipProcessing)
-            {
-                Console.Error.WriteLine($"Skipping '{sourceFile}' due to one or more errors listed above.");
-                return -1;
-            }
-
-            using var translationUnit = TranslationUnit.GetOrCreate(cxHandle);
-            Debug.Assert(translationUnit is not null);
 
             if (declarationMap != null)
             {
@@ -252,7 +219,6 @@ class Program
                 .Concat(derivedSettings.GetValueOrDefault("--exclude") ?? new List<string>())
                 .Concat(fnPtrResult.FnPtrExcludes).Distinct(StringComparer.Ordinal).ToList();
 
-            // ── Run PInvokeGenerator with merged remaps on the same TranslationUnit ──
             var annotations = parseHeaderAnnotations
                 ? new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
                     settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
@@ -272,10 +238,19 @@ class Program
             };
 
             int exitCode = 0;
+            bool separateDeclarations = parseHeaderAnnotations && !generateAllMacros;
+            var bindingFlags = separateDeclarations
+                ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
+                : translationFlags;
+            using var declarationUnit = separateDeclarations
+                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags)
+                : null;
+            if (separateDeclarations && declarationUnit == null)
+                return -1;
             using (var generator = new PInvokeGenerator(config, streamFactory))
             {
                 Console.WriteLine($"Processing '{sourceFile}'");
-                generator.GenerateBindings(translationUnit, sourceFile, clangArgs, translationFlags);
+                generator.GenerateBindings(declarationUnit ?? translationUnit, sourceFile, clangArgs, bindingFlags);
 
                 var bindingDiagnostics = generator.Diagnostics.ToArray();
                 generator.Close();
@@ -298,20 +273,15 @@ class Program
                 if (annotations != null && !generateAllMacros)
                 {
                     var macros = annotations.GetAssociatedConstantMacros();
-                    associatedConstantSources.AddRange(SelectAssociatedConstantSources(generatedFiles,
-                        macros.Select(macro => macro.Name).ToHashSet(StringComparer.Ordinal), ns, config.DefaultClass,
-                        out var emittedMacros));
-                    var missingMacros = macros.Where(macro => !emittedMacros.Contains(macro.Name)).ToArray();
-                    if (missingMacros.Length != 0)
+                    if (macros.Count != 0)
                     {
-                        // A requested provider can be outside the declaration traversal.
-                        var macroOptions = configOptions
+                        var macroOptions = (configOptions | PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
                             & ~PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute
                             & ~PInvokeGeneratorConfigurationOptions.GenerateFileScopedNamespaces;
                         var macroConfig = CreateConfig(settings, ns, outputFile, headerFile,
                             macroOptions, mergedRemaps, allExcludes,
-                            missingMacros.Select(macro => macro.Name).ToArray(),
-                            missingMacros.Select(macro =>
+                            macros.Select(macro => macro.Name).ToArray(),
+                            macros.Select(macro =>
                             {
                                 macro.Location.GetFileLocation(out var file, out _, out _, out _);
                                 return file.ToString();
@@ -447,6 +417,36 @@ class Program
         }
     }
 
+    static TranslationUnit ParseTranslationUnit(CXIndex index, string sourceFile, string[] clangArgs,
+        CXTranslationUnit_Flags flags)
+    {
+        var parseError = CXTranslationUnit.TryParse(index, sourceFile, clangArgs,
+            ReadOnlySpan<CXUnsavedFile>.Empty, flags, out var handle);
+        if (parseError != CXError_Success)
+        {
+            Console.Error.WriteLine($"Error: Failed to parse '{sourceFile}': {parseError}");
+            return null;
+        }
+        bool skipProcessing = false;
+        if (handle.NumDiagnostics != 0)
+        {
+            Console.WriteLine($"Diagnostics for '{sourceFile}':");
+            for (uint i = 0; i < handle.NumDiagnostics; i++)
+            {
+                using var diagnostic = handle.GetDiagnostic(i);
+                Console.WriteLine($"    {diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString()}");
+                skipProcessing |= diagnostic.Severity is CXDiagnostic_Error or CXDiagnostic_Fatal;
+            }
+        }
+        if (skipProcessing)
+        {
+            Console.Error.WriteLine($"Skipping '{sourceFile}' due to one or more errors listed above.");
+            handle.Dispose();
+            return null;
+        }
+        return TranslationUnit.GetOrCreate(handle);
+    }
+
     static string NormalizeGeneratedSource(string source, string outputPath)
     {
         source = Regex.Replace(source, @"(?<=_Anonymous)-\d+(?=_e__Struct)", string.Empty);
@@ -534,63 +534,6 @@ class Program
         foreach (var field in fields)
             if (!field.Modifiers.Any(SyntaxKind.ConstKeyword) || field.Declaration.Variables.Any(variable => variable.Initializer == null))
                 throw new InvalidOperationException("An AssociatedConstant macro must project to a constant field; readonly or pointer bindings cannot suppress the existing constant fallback.");
-    }
-
-    static List<string> SelectAssociatedConstantSources(Dictionary<string, string> generatedFiles,
-        ISet<string> requestedNames, string ns, string defaultClass, out HashSet<string> emittedMacros)
-    {
-        var selectedSources = new List<string>();
-        emittedMacros = new(StringComparer.Ordinal);
-        foreach (string path in generatedFiles.Keys.ToArray())
-        {
-            var root = SyntaxFactory.ParseCompilationUnit(generatedFiles[path]);
-            var macroBindings = root.DescendantNodes().OfType<MemberDeclarationSyntax>()
-                .Select(member => (Member: member, Name: GetMacroBindingName(member)))
-                .Where(binding => binding.Name != null).ToArray();
-            if (macroBindings.Length == 0)
-                continue;
-            var macroMembers = macroBindings.Select(binding => binding.Member).ToHashSet();
-            var emptyContainers = macroMembers.Select(member => member.Parent).OfType<ClassDeclarationSyntax>()
-                .Distinct().Where(container => container.Members.All(macroMembers.Contains)).ToHashSet();
-            var removedNodes = emptyContainers.Cast<SyntaxNode>().Concat(macroMembers.Where(member =>
-                member.Parent is not ClassDeclarationSyntax container || !emptyContainers.Contains(container)));
-            generatedFiles[path] = root.RemoveNodes(removedNodes, SyntaxRemoveOptions.KeepNoTrivia)
-                .NormalizeWhitespace().ToFullString() + Environment.NewLine;
-            var selectedBindings = macroBindings.Where(binding => requestedNames.Contains(binding.Name)).ToArray();
-            emittedMacros.UnionWith(selectedBindings.Select(binding => binding.Name));
-            var selected = selectedBindings.Select(binding => binding.Member).ToArray();
-            if (selected.Length == 0)
-                continue;
-            if (selected[0].Parent is not ClassDeclarationSyntax originalContainer ||
-                originalContainer.Identifier.ValueText != defaultClass)
-                throw new InvalidOperationException("AssociatedConstant macros must be emitted in the configured global class.");
-            var container = originalContainer.WithMembers(SyntaxFactory.List(selected));
-            var namespaceUsings = (originalContainer.Parent as BaseNamespaceDeclarationSyntax)?.Usings ?? default;
-            selectedSources.Add(SyntaxFactory.CompilationUnit().WithUsings(root.Usings)
-                .AddMembers(SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(ns))
-                    .WithUsings(namespaceUsings).AddMembers(container))
-                .NormalizeWhitespace().ToFullString());
-        }
-        return selectedSources;
-    }
-
-    static string GetMacroBindingName(MemberDeclarationSyntax member)
-    {
-        var attributes = member switch
-        {
-            FieldDeclarationSyntax field => field.AttributeLists,
-            PropertyDeclarationSyntax property => property.AttributeLists,
-            _ => default,
-        };
-        foreach (var attribute in attributes.SelectMany(list => list.Attributes))
-            if (attribute.Name.GetLastToken().ValueText == "NativeTypeName" &&
-                attribute.ArgumentList?.Arguments.FirstOrDefault()?.Expression is LiteralExpressionSyntax literal)
-            {
-                var match = Regex.Match(literal.Token.ValueText, @"^#define\s+([A-Za-z_]\w*)\b");
-                if (match.Success)
-                    return match.Groups[1].Value;
-            }
-        return null;
     }
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
