@@ -4407,6 +4407,36 @@
       "sourceSha256": "2FC1A6AF02A01B2F8903F1AE07CE9F17D53CC1EB0C1621AB5876C74594CBDFD6",
       "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntiologc.h",
       "sdkSha256": "2FC1A6AF02A01B2F8903F1AE07CE9F17D53CC1EB0C1621AB5876C74594CBDFD6"
+    },
+    {
+      "path": "um\\activdbg.h",
+      "sourceSha256": "A35A28331B5F225B50097D7BA6E9DCCA5A044E5771A9CA6FC9743E12104CEE79",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\activdbg.idl",
+      "sdkSha256": "C63EDCEB9F0678E94AA19DD3683C9C2F1EAAD9BB38291274B85E228C6BCA0447"
+    },
+    {
+      "path": "um\\cmdtree.h",
+      "sourceSha256": "F3878DB669F51C94B9E68E38012FB26794A199F1077CDD4ADA44C9B9C5451862",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdtree.idl",
+      "sdkSha256": "D7AAA247E40AAA4DF6B564F74C32BA93029D723697D54C0EF2E4C1CA346B4B38"
+    },
+    {
+      "path": "um\\ddstream.h",
+      "sourceSha256": "3E07B2819FC4A3A1423E9DD5EC48C5FC9A5F71A6B19EC832F09C748F690044AC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ddstream.idl",
+      "sdkSha256": "D0D559F74149A353AAFF5D8E496D39B82FA13B008D3591991B39794601AF5934"
+    },
+    {
+      "path": "um\\txlogpub.h",
+      "sourceSha256": "2BACFFCE9E483BAA7149AB1B4ACC2BFB020EACEAE9EEF3AB0E3484A5184C4EFA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
+      "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
+    },
+    {
+      "path": "um\\Wsdxml.h",
+      "sourceSha256": "D18ADCC90FD1C0B64F5034BE72851DD687E113E2DA012739169DE470D60184DA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Wsdxml.idl",
+      "sdkSha256": "C8DC076719D7CD2BE8F2BF1B49ED32DE25F238244076304BBFCFE800F2975717"
     }
   ],
   "midl": {
@@ -6722,13 +6752,8 @@
         "sdkSha256": "880848DC653C5E72528A2B0DFC512EF595EB817A58B472CF25723B63C552BBE4"
       },
       {
-        "path": "winrt\\windows.applicationmodel.resources.core.idl",
-        "sdkPath": "c\\include\\10.0.26100.0\\winrt\\windows.applicationmodel.resources.core.idl",
-        "sdkSha256": "13FBD39B914B8FD7488AFF31EA6D03E736642E7CE32CD5D8B5FA24E32A9B502A"
-      },
-      {
         "path": "um\\wsdxml.idl",
-        "sdkPath": "c\\include\\10.0.26100.0\\um\\wsdxml.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\Wsdxml.idl",
         "sdkSha256": "C8DC076719D7CD2BE8F2BF1B49ED32DE25F238244076304BBFCFE800F2975717"
       },
       {
@@ -6759,6 +6784,11 @@
         "path": "um\\activdbg.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\activdbg.idl",
         "sdkSha256": "C63EDCEB9F0678E94AA19DD3683C9C2F1EAAD9BB38291274B85E228C6BCA0447"
+      },
+      {
+        "path": "um\\cmdtree.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdtree.idl",
+        "sdkSha256": "D7AAA247E40AAA4DF6B564F74C32BA93029D723697D54C0EF2E4C1CA346B4B38"
       }
     ],
     "outputs": [
@@ -7741,6 +7771,26 @@
       {
         "source": "shared\\ipsectypes.idl",
         "path": "shared\\ipsectypes.h"
+      },
+      {
+        "source": "um\\activdbg.idl",
+        "path": "um\\activdbg.h"
+      },
+      {
+        "source": "um\\cmdtree.idl",
+        "path": "um\\cmdtree.h"
+      },
+      {
+        "source": "um\\ddstream.idl",
+        "path": "um\\ddstream.h"
+      },
+      {
+        "source": "um\\txlogpub.idl",
+        "path": "um\\txlogpub.h"
+      },
+      {
+        "source": "um\\wsdxml.idl",
+        "path": "um\\Wsdxml.h"
       }
     ]
   },
@@ -8659,7 +8709,6 @@
     "shared\\clfs.h.patch",
     "um\\dimm.idl.patch",
     "um\\objidlbase.idl.patch",
-    "winrt\\windows.applicationmodel.resources.core.idl.patch",
     "shared\\guiddef.h.patch",
     "um\\msime.h.patch",
     "um\\reason.h.patch",

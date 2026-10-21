@@ -1,5 +1,5 @@
 diff --git a/um/qrybas.idl b/um/qrybas.idl
-index bfd327eb..214acf84 100644
+index bfd327eb..d4768c80 100644
 --- a/um/qrybas.idl
 +++ b/um/qrybas.idl
 @@ -13,6 +13,8 @@
@@ -11,11 +11,11 @@ index bfd327eb..214acf84 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -24,6 +26,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -21,6 +23,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ #include "idlmulti.h"
+ //  
+     
++cpp_quote("/* Win32Metadata: interface ::IQuery => SupportedOSPlatform(\"windows5.0\") */")
      LOCAL_INTERFACE(0c733a51-2a1c-11ce-ade5-00aa0044773d)
  
      
-+cpp_quote("/* Win32Metadata: interface ::IQuery => SupportedOSPlatform(\"windows5.0\") */")
- interface IQuery : ICommandTree {
- 
- 	HRESULT AddPostProcessing(
