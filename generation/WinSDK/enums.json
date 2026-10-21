@@ -2369,15 +2369,6 @@
       "uses": []
     },
   {
-      "addUsesTo": "CERT_CONTROL_STORE_FLAGS",
-      "uses": [
-        {
-          "method": "CertControlStore",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
-  {
     "addUsesTo": "IMAGE_DIRECTORY_ENTRY",
     "uses": []
   },
@@ -2862,15 +2853,6 @@
     ]
   },
   {
-      "addUsesTo": "CRYPT_DEFAULT_CONTEXT_FLAGS",
-      "uses": [
-        {
-          "method": "CryptInstallDefaultContext",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
-  {
     "name": "XEKL_KEYSPEC",
     "type": "int",
     "members": [
@@ -3228,28 +3210,10 @@
     "uses": []
   },
   {
-      "addUsesTo": "CERT_CREATE_SELFSIGN_FLAGS",
-      "uses": [
-        {
-          "method": "CertCreateSelfSignCertificate",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
-  {
     "addUsesTo": "NtmsObjectsTypes",
     "members": [],
     "uses": []
   },
-  {
-      "addUsesTo": "CRYPT_DEFAULT_CONTEXT_TYPE",
-      "uses": [
-        {
-          "method": "CryptInstallDefaultContext",
-          "parameter": "dwDefaultType"
-        }
-      ]
-    },
   {
     "addUsesTo": "PROCESSOR_FEATURE_ID",
     "uses": []
@@ -3268,15 +3232,6 @@
     "uses": []
   },
   {
-      "addUsesTo": "CERT_FIND_TYPE",
-      "uses": [
-        {
-          "method": "CertFindCTLInStore",
-          "parameter": "dwFindType"
-        }
-      ]
-    },
-  {
     "addUsesTo": "NtmsInjectOperation",
     "members": [],
     "uses": []
@@ -3285,15 +3240,6 @@
     "addUsesTo": "ERASE_TAPE_TYPE",
     "uses": []
   },
-  {
-      "addUsesTo": "CRYPT_FIND_FLAGS",
-      "uses": [
-        {
-          "method": "CryptFindCertificateKeyProvInfo",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
   {
       "addUsesTo": "AUTHZ_GENERATE_RESULTS",
       "uses": []
