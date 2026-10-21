@@ -19,8 +19,10 @@ namespace Win32MetadataScraperTests
         [InlineData("/* Win32Metadata: field ::S::shared => AssociatedEnum(E) */", "native field")]
         [InlineData("/* Win32Metadata: function ::S => RAIIFree(CloseThing) */", "native function")]
         [InlineData("/* Win32Metadata: parameter ::F::missing => AssociatedEnum(E) */", "named native parameter")]
-        [InlineData("/* Win32Metadata: field ::S::flags => AssociatedEnum(Missing) */", "found 0")]
-        [InlineData("/* Win32Metadata: field ::S::flags => AssociatedEnum(NOT_ENUM) */", "one native enum")]
+        [InlineData("/* Win32Metadata: field ::S::flags => AssociatedEnum(Native::Missing) */", "found 0")]
+        [InlineData("/* Win32Metadata: field ::S::flags => AssociatedEnum(NOT_ENUM) */", "requires a native enum")]
+        [InlineData("/* Win32Metadata: field ::S::flags => AssociatedEnum(S) */", "requires a native enum")]
+        [InlineData("/* Win32Metadata: field ::S::flags => AssociatedEnum(unsigned) */", "native enum or metadata group name")]
         [InlineData("/* Win32Metadata: field ::S::flags => SetLastError */", "not valid")]
         [InlineData("/* Win32Metadata: function ::Open => RAIIFree(Missing) */", "declared native cleanup")]
         [InlineData("/* Win32Metadata: function ::Open => RAIIFree(CloseThing, INVALID) */", "signed decimal Int64")]
@@ -54,6 +56,23 @@ void* Open();
             Assert.NotEqual(0, fixture.Run());
             Assert.Contains("WMA001", fixture.Diagnostics);
             Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void ScalarForwardAliasesDoNotBecomeEnumsThroughEitherAnnotationChannel(bool comment)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
+typedef unsigned long STGM;
+#endif
+struct STATSTG { " + (comment ? "" : "_Win32_AssociatedEnum_(STGM) ") + @"unsigned long grfMode; };
+" + (comment ? "/* Win32Metadata: field ::STATSTG::grfMode => AssociatedEnum(STGM) */" : ""));
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("AssociatedEnum requires a native enum or a _Win32_Enum_/_Win32_FlagsEnum_ group.", fixture.Diagnostics);
+            Assert.Contains("STATSTG::grfMode", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
         }
 

@@ -102,11 +102,11 @@ namespace Win32MetadataScraper
                 !nativeFacts.TryGetValue(GetNativeIdentity(target), out facts))
                 throw Error(location, $"Metadata target '{name}' has no original declaration facts.");
             CollectAnnotationErrors(target, () => ApplyResolvedCommentAnnotation(match.Groups["annotation"].Value,
-                kind, target, facts, location, nativeFacts));
+                kind, target, facts, location));
         }
 
         private void ApplyResolvedCommentAnnotation(string payload, string kind, NamedDecl target, DeclarationFacts facts,
-            NativeLocation location, IReadOnlyDictionary<(CXCursor Declaration, int Parameter), DeclarationFacts> nativeFacts)
+            NativeLocation location)
         {
             HeaderAnnotation annotation;
             try
@@ -142,17 +142,7 @@ namespace Win32MetadataScraper
             {
                 if (!Regex.IsMatch(annotation.Arguments[0], @"\A" + QualifiedNativeName + @"\z"))
                     throw Error(location, "Comment AssociatedEnum requires a native ::-qualified enum name.");
-                var candidates = nativeNames.Resolve(target, annotation.Arguments[0], location)
-                    .Select(UnwrapTypeDeclaration).GroupBy(value => value.Handle.CanonicalCursor)
-                    .Select(group => group.First()).ToArray();
-                if (candidates.Length != 1 || !(candidates[0] is EnumDecl ||
-                    nativeFacts.TryGetValue(GetNativeIdentity(candidates[0]), out var group) && group.LogicalEnumMembers != null))
-                    throw Error(location, $"AssociatedEnum reference '{annotation.Arguments[0]}' must identify one native enum or compiled metadata group; found {candidates.Length} candidates.");
-                var enumeration = candidates[0];
-                enumAssociations.Add((enumeration.Handle, facts.Declaration, location));
-                if (enumeration is EnumDecl nativeEnum && IsForwardEnumReference(nativeEnum))
-                    enumReferenceCarriers.Add(enumeration.Handle.CanonicalCursor);
-                AddAnnotation(facts, new HeaderAnnotation("AssociatedEnum", new[] { Remap(enumeration.Name) }), location);
+                AddAnnotation(facts, ReadEnumNameReference(target, facts, annotation.Arguments[0], location), location);
             }
             else if (annotation.Name is "AlsoUsableFor" or "AssociatedConstant")
             {

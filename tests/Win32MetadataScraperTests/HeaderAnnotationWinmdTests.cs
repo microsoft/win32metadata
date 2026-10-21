@@ -524,6 +524,105 @@ namespace Residual {
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void CommentAndMacroEnumNamesComposeWithExternalGroupsAndNativeForwards(string architecture, string target)
+        {
+            const string declarations = @"
+typedef unsigned long DWORD;
+typedef struct tagSTATSTG { DWORD type; DWORD grfMode; DWORD grfLocksSupported; } STATSTG;
+/* Win32Metadata: field ::STATSTG::grfMode => AssociatedEnum(STGM) */
+void MacroMode(_Win32_AssociatedEnum_(STGM) DWORD flags);
+void CommentMode(DWORD flags);
+/* Win32Metadata: parameter ::CommentMode::flags => AssociatedEnum(REFERENCED_MODE) */
+DWORD ReadMode();
+/* Win32Metadata: return ::ReadMode => AssociatedEnum(STGM) */
+enum FORWARD_FLAGS;
+struct FORWARD_HOLDER { DWORD flags; };
+/* Win32Metadata: field ::FORWARD_HOLDER::flags => AssociatedEnum(FORWARD_FLAGS) */
+";
+            const string settings = "--language=c++\n--std=c++17\n--remap\nREFERENCED_MODE=STGM\n";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations, extraSettings: settings);
+            using var external = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define STGM_READ 0U
+#define STGM_WRITE 1U
+#define STGM_CREATE 0x1000U
+_Win32_FlagsEnum_(STGM, unsigned long, STGM_READ, STGM_WRITE, STGM_CREATE);
+enum FORWARD_FLAGS { NATIVE_FIRST = 2, NATIVE_SECOND = 4 };
+", extraSettings: settings);
+            using var disabled = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                annotationsEnabled: false, extraSettings: settings);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.True(external.Run() == 0, external.Diagnostics);
+            Assert.True(disabled.Run() == 0, disabled.Diagnostics);
+            Assert.DoesNotContain("AssociatedEnum", disabled.ReadSource());
+            Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
+            File.Copy(external.Output, Path.Combine(fixture.DirectoryPath, "External.cs"));
+            File.Copy(Path.ChangeExtension(external.Output, ".header-types.cs"),
+                Path.Combine(fixture.DirectoryPath, "External.header-types.cs"));
+            using var image = Emit(fixture.DirectoryPath, architecture, requiredNamespaces:
+                new Dictionary<string, string> { ["STGM"] = "Windows.Win32.System.Com" });
+            var reader = image.Reader;
+            var statstg = FindType(reader, "STATSTG").GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "type", "grfMode", "grfLocksSupported" }, statstg.Select(field => reader.GetString(field.Name)));
+            Assert.All(statstg, field => Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null)));
+            AssertStringAttribute(reader, statstg[1].GetCustomAttributes(), "AssociatedEnumAttribute", "STGM");
+            foreach (string name in new[] { "MacroMode", "CommentMode", "ReadMode" })
+            {
+                var method = FindMethod(reader, "Apis", name);
+                AssertStringAttribute(reader, Assert.Single(method.GetParameters().Select(reader.GetParameter))
+                    .GetCustomAttributes(), "AssociatedEnumAttribute", "STGM");
+                var signature = method.DecodeSignature(new SignatureNames(), null);
+                if (name == "ReadMode")
+                    Assert.Equal("UInt32", signature.ReturnType);
+                else
+                    Assert.Equal(new[] { "UInt32" }, signature.ParameterTypes);
+            }
+            var group = FindType(reader, "STGM");
+            Assert.Equal("Windows.Win32.System.Com", reader.GetString(group.Namespace));
+            AssertHasAttribute(reader, group.GetCustomAttributes(), "FlagsAttribute");
+            AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "ScopedEnumAttribute");
+            var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(new[] { "STGM_READ", "STGM_WRITE", "STGM_CREATE" }, fields.Skip(1).Select(field => reader.GetString(field.Name)));
+            Assert.Equal(new uint[] { 0, 1, 0x1000 }, fields.Skip(1).Select(field =>
+            {
+                var value = reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
+                return reader.GetBlobReader(value.Value).ReadUInt32();
+            }));
+            var forward = FindType(reader, "FORWARD_FLAGS");
+            Assert.Equal(new[] { "value__", "NATIVE_FIRST", "NATIVE_SECOND" },
+                forward.GetFields().Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            AssertStringAttribute(reader, Assert.Single(FindType(reader, "FORWARD_HOLDER").GetFields().Select(reader.GetFieldDefinition))
+                .GetCustomAttributes(), "AssociatedEnumAttribute", "FORWARD_FLAGS");
+            AssertMetadataClosure(reader);
+
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_SYMBOLIC_ENUM_ARTIFACTS");
+            if (artifacts != null)
+            {
+                string destination = Path.Combine(artifacts, architecture);
+                Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
+                Directory.CreateDirectory(destination);
+                foreach (string path in new[] { fixture.Header, fixture.Output, Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                    Path.Combine(fixture.DirectoryPath, "External.cs"), Path.Combine(fixture.DirectoryPath, "External.header-types.cs"),
+                    Path.Combine(fixture.DirectoryPath, "Test.winmd") })
+                    if (File.Exists(path))
+                        File.Copy(path, Path.Combine(destination, Path.GetFileName(path)));
+                File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
+                {
+                    architecture, nativeField = "STATSTG::grfMode", nativeStorage = "UInt32",
+                    association = "STGM", owner = "Windows.Win32.System.Com", flags = true, scoped = false,
+                    names = new[] { "STGM_READ", "STGM_WRITE", "STGM_CREATE" }, values = new uint[] { 0, 1, 0x1000 },
+                    externalCompilerDerivedGroup = true, nativeForwardEnumPreserved = true,
+                    macroAndCommentUseSharedResolution = true, sourceGuardDoesNotBlessScalarAliases = true,
+                    nativeSurfaceUnchanged = true, requiredFinalResolution = "Exactly one emitted enum per applicable architecture.",
+                }, new JsonSerializerOptions { WriteIndented = true }));
+            }
+        }
+
+        [Theory]
         [InlineData("", "found 0", "none")]
         [InlineData("namespace First { public enum EXTERNAL { A = 1 } } namespace Second { public enum EXTERNAL { B = 2 } }",
             "found 2", "First.EXTERNAL, Second.EXTERNAL")]
@@ -534,7 +633,11 @@ namespace Residual {
                 @"void Use(_Win32_AssociatedEnum_(EXTERNAL) unsigned value);
 _Win32_AssociatedEnum_(EXTERNAL) unsigned Read();
 struct S { unsigned value; };
-_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(EXTERNAL));");
+_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(EXTERNAL));
+struct COMMENT_RECORD { unsigned flags; };
+/* Win32Metadata: field ::COMMENT_RECORD::flags => AssociatedEnum(EXTERNAL) */
+void CommentUse(unsigned value);
+/* Win32Metadata: parameter ::CommentUse::value => AssociatedEnum(EXTERNAL) */");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "External.enums.cs"), definitions);
             var exception = Assert.Throws<InvalidOperationException>(() =>
@@ -547,7 +650,7 @@ _Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(EXTERNAL));");
             Assert.Contains(count, exception.Message);
             Assert.Contains(detail, exception.Message);
             Assert.Contains("Bindings.modified.cs(", exception.Message);
-            Assert.Equal(3, exception.Message.Split("WMA003").Length - 1);
+            Assert.Equal(5, exception.Message.Split("WMA003").Length - 1);
             Assert.False(File.Exists(Path.Combine(fixture.DirectoryPath, "Test.winmd")));
         }
 

@@ -238,10 +238,12 @@ import overrides are typed annotation arguments from that first AST. No
 Cleanup references use a tagged expanded native name, bound to one actual function
 declaration after the complete translation unit is available. The cleanup prototype
 may follow the producer; unknown, non-function, and ambiguous references fail.
-Enum associations carry an internal tagged name without requiring a declaration
-before the native use. Visible native enums/groups retain their identity and remaps;
-cross-partition or retained definitions are checked after final composition. Every
-association must resolve to exactly one emitted enum or fail with WMA003.
+Macro and structured-comment enum associations share name resolution. An absent
+unqualified metadata name does not require a declaration before its native use;
+visible native enums/groups retain their identity and remaps, and visible scalar
+aliases are rejected. Cross-partition or retained definitions are checked after
+final composition. Every association must resolve to exactly one emitted enum per
+applicable architecture or fail with WMA003.
 Invalid-value expressions remain compiler-evaluated and input handles do not infer
 cleanup. The shared helper makes ignored metadata annotations
 errors locally without changing the native SDK/SAL warning policy.

@@ -83,15 +83,18 @@ forward's empty generated declaration; real empty enums, complete opaque enums,
 and unrelated same-name enums remain intact. Do not substitute a primitive alias
 or duplicate the members of a native enum.
 
-The native `_Win32_AssociatedEnum_(NAME)` macro carries an internal tagged name
-without requiring a declaration at that point. After the complete translation unit
-is parsed, visible native enums and logical groups retain their resolved identity
-and remappings. An unqualified metadata-only name may instead be supplied by another
-partition or retained enum source. The final emitter requires exactly one emitted
-enum after namespace assignment, remaps, group merging and enum additions; missing
-or ambiguous associations fail with WMA003. No native typedef or include is needed
-just to make an association parse. Existing typed association transports remain
-readable, and structured comments keep their native-reference validation.
+The native `_Win32_AssociatedEnum_(NAME)` macro and structured-comment
+`AssociatedEnum(NAME)` use the same name resolution after the complete translation
+unit is parsed. Visible native enums and logical groups retain their resolved
+identity and remappings. An absent unqualified metadata-only name may instead be
+supplied by another partition or retained enum source. A visible scalar alias does
+not become an enum, even inside a metadata-only guard; remove obsolete artificial
+scalar forwards from their owning source instead. Native comment target binding
+remains strict. The final emitter requires exactly one emitted enum per applicable
+architecture after namespace assignment, remaps, group merging and enum additions;
+missing or ambiguous associations fail with WMA003. No native typedef or include
+is needed just to make an association parse. Existing typed association transports
+remain readable.
 
 The repository annotation header is also a pinned MIDL input. Extending its
 vocabulary requires updating both `sourceGitTree` and that input's `sourceSha256`

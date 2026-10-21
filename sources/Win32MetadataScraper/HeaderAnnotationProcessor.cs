@@ -59,8 +59,8 @@ namespace Win32MetadataScraper
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
             ApplyFieldAnnotations();
-            ResolveEnumNameReferences();
             ApplyCommentAnnotations(translationUnit);
+            ResolveEnumNameReferences();
             foreach (var facts in declarations.Values.Where(value => value.HasMidlRetval))
                 CollectAnnotationErrors(facts.Declaration, () =>
                 {
@@ -189,15 +189,7 @@ namespace Win32MetadataScraper
                     string reference = ReadStringArgument(arguments[0], location);
                     if (!reference.StartsWith(EnumReferencePrefix, StringComparison.Ordinal))
                         throw Error(location, "AssociatedEnum requires a tagged enum name, not an untagged string.");
-                    string name = Regex.Replace(reference[EnumReferencePrefix.Length..].Trim(), @"\s*::\s*", "::");
-                    name = Regex.Replace(name, @"^enum\s+", "");
-                    if (!Regex.IsMatch(name, @"^(?:::)?[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*$") ||
-                        name is "void" or "bool" or "char" or "short" or "int" or "long" or "signed" or "unsigned" or
-                            "float" or "double" or "wchar_t" or "char8_t" or "char16_t" or "char32_t")
-                        throw Error(location, "AssociatedEnum requires a native enum or metadata group name.");
-                    var names = new[] { name };
-                    enumNameReferences.Add((owner, facts.Declaration, name, names, location));
-                    return new HeaderAnnotation("AssociatedEnum", names);
+                    return ReadEnumNameReference(owner, facts, reference[EnumReferencePrefix.Length..], location);
                 }
                 var declaration = clang.getTypeDeclaration(arguments[0].Handle.Type);
                 if (declaration.IsNull)
@@ -233,6 +225,19 @@ namespace Win32MetadataScraper
             else if (arguments.Length != 0 || annotation.Name is "RAIIFree" or "ImportLibrary" or "AssociatedEnum")
                 throw Error(location, $"'{annotation.Name}' requires compiler-parsed annotation arguments; include win32metadata_annotations.h.");
             return annotation;
+        }
+
+        private HeaderAnnotation ReadEnumNameReference(NamedDecl owner, DeclarationFacts facts, string name, NativeLocation location)
+        {
+            name = Regex.Replace(name.Trim(), @"\s*::\s*", "::");
+            name = Regex.Replace(name, @"^enum\s+", "");
+            if (!Regex.IsMatch(name, @"^(?:::)?[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*$") ||
+                name is "void" or "bool" or "char" or "short" or "int" or "long" or "signed" or "unsigned" or
+                    "float" or "double" or "wchar_t" or "char8_t" or "char16_t" or "char32_t")
+                throw Error(location, "AssociatedEnum requires a native enum or metadata group name.");
+            var arguments = new[] { name };
+            enumNameReferences.Add((owner, facts.Declaration, name, arguments, location));
+            return new HeaderAnnotation("AssociatedEnum", arguments);
         }
 
         private static Cursor UnwrapArgument(Cursor argument)
