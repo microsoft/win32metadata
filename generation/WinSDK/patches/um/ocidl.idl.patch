@@ -1,5 +1,5 @@
 diff --git a/um/ocidl.idl b/um/ocidl.idl
-index a775180c..9a14db9d 100644
+index a775180c..8f481052 100644
 --- a/um/ocidl.idl
 +++ b/um/ocidl.idl
 @@ -1,3 +1,9 @@
@@ -77,19 +77,16 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851),
-@@ -418,6 +434,11 @@ interface IProvideClassInfo2 : IProvideClassInfo
+@@ -418,6 +434,8 @@ interface IProvideClassInfo2 : IProvideClassInfo
  }
  
  
-+cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
-+cpp_quote("typedef unsigned int MULTICLASSINFO_FLAGS;")
-+cpp_quote("#endif")
 +cpp_quote("/* Win32Metadata: interface ::IProvideMultipleClassInfo => SupportedOSPlatform(\"windows5.0\") */")
 +cpp_quote("/* Win32Metadata: parameter ::IProvideMultipleClassInfo::GetInfoOfIndex::dwFlags => AssociatedEnum(MULTICLASSINFO_FLAGS) */")
  [
      object,
      uuid(A7ABA9C1-8983-11cf-8F20-00805F2CD064),
-@@ -448,8 +469,12 @@ interface IProvideMultipleClassInfo : IProvideClassInfo2
+@@ -448,8 +466,12 @@ interface IProvideMultipleClassInfo : IProvideClassInfo2
                  [out] IID   * piidSource
              );
  }
@@ -102,7 +99,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(B196B288-BAB4-101A-B69C-00AA00341D07),
-@@ -492,6 +517,9 @@ interface IOleControl : IUnknown
+@@ -492,6 +514,9 @@ interface IOleControl : IUnknown
  }
  
  
@@ -112,7 +109,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(B196B289-BAB4-101A-B69C-00AA00341D07),
-@@ -550,6 +578,7 @@ interface IOleControlSite : IUnknown
+@@ -550,6 +575,7 @@ interface IOleControlSite : IUnknown
  }
  
  
@@ -120,7 +117,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(B196B28D-BAB4-101A-B69C-00AA00341D07),
-@@ -620,6 +649,7 @@ interface IPropertyPage : IUnknown
+@@ -620,6 +646,7 @@ interface IPropertyPage : IUnknown
  }
  
  
@@ -128,7 +125,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(01E44665-24AC-101B-84ED-08002B2EC713),
-@@ -636,6 +666,8 @@ interface IPropertyPage2 : IPropertyPage
+@@ -636,6 +663,8 @@ interface IPropertyPage2 : IPropertyPage
  }
  
  
@@ -137,7 +134,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(B196B28C-BAB4-101A-B69C-00AA00341D07),
-@@ -670,6 +702,7 @@ interface IPropertyPageSite : IUnknown
+@@ -670,6 +699,7 @@ interface IPropertyPageSite : IUnknown
  }
  
  
@@ -145,7 +142,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(9BFBBC02-EFF1-101A-84ED-00AA00341D07),
-@@ -690,6 +723,7 @@ interface IPropertyNotifySink : IUnknown
+@@ -690,6 +720,7 @@ interface IPropertyNotifySink : IUnknown
  }
  
  
@@ -153,7 +150,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(B196B28B-BAB4-101A-B69C-00AA00341D07),
-@@ -761,8 +795,10 @@ interface IPersistMemory : IPersist
+@@ -761,8 +792,10 @@ interface IPersistMemory : IPersist
                  void
              );
  }
@@ -164,7 +161,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(7FD52380-4E07-101B-AE2D-08002B2EC713),
-@@ -794,6 +830,7 @@ interface IPersistStreamInit : IPersist
+@@ -794,6 +827,7 @@ interface IPersistStreamInit : IPersist
                  void
              );
  }
@@ -172,7 +169,7 @@ index a775180c..9a14db9d 100644
  
  
  [
-@@ -823,6 +860,7 @@ interface IPersistPropertyBag : IPersist
+@@ -823,6 +857,7 @@ interface IPersistPropertyBag : IPersist
  }
  
  
@@ -180,7 +177,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(742B0E01-14E6-101B-914E-00AA00300CAB),
-@@ -853,6 +891,7 @@ interface ISimpleFrameSite : IUnknown
+@@ -853,6 +888,7 @@ interface ISimpleFrameSite : IUnknown
  }
  
  
@@ -188,7 +185,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(BEF6E002-A874-101A-8BBA-00AA00300CAB),
-@@ -970,6 +1009,8 @@ cpp_quote("#endif")
+@@ -970,6 +1006,8 @@ cpp_quote("#endif")
  }
  
  
@@ -197,7 +194,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(7BF80980-BF32-101A-8BBB-00AA00300CAB),
-@@ -1172,6 +1213,7 @@ interface IFontEventsDisp : IDispatch
+@@ -1172,6 +1210,7 @@ interface IFontEventsDisp : IDispatch
      typedef IFontEventsDisp * LPFONTEVENTS;
  }
  
@@ -205,7 +202,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(BEF6E003-A874-101A-8BBA-00AA00300CAB),
-@@ -1184,6 +1226,7 @@ interface IFontDisp : IDispatch
+@@ -1184,6 +1223,7 @@ interface IFontDisp : IDispatch
  }
  
  
@@ -213,7 +210,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(7BF80981-BF32-101A-8BBB-00AA00300CAB),
-@@ -1203,6 +1246,7 @@ interface IPictureDisp : IDispatch
+@@ -1203,6 +1243,7 @@ interface IPictureDisp : IDispatch
  //----------------------------------------------------------------------------
  
  
@@ -221,7 +218,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1226,6 +1270,7 @@ interface IOleInPlaceObjectWindowless : IOleInPlaceObject
+@@ -1226,6 +1267,7 @@ interface IOleInPlaceObjectWindowless : IOleInPlaceObject
  }
  
  
@@ -229,7 +226,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1255,6 +1300,7 @@ interface IOleInPlaceSiteEx : IOleInPlaceSite
+@@ -1255,6 +1297,7 @@ interface IOleInPlaceSiteEx : IOleInPlaceSite
  }
  
  
@@ -237,7 +234,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1333,6 +1379,8 @@ midl_pragma warning (default: 2495)
+@@ -1333,6 +1376,8 @@ midl_pragma warning (default: 2495)
  }
  
  
@@ -246,7 +243,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1420,6 +1468,7 @@ interface IViewObjectEx : IViewObject2
+@@ -1420,6 +1465,7 @@ interface IViewObjectEx : IViewObject2
  }
  
  
@@ -254,7 +251,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1449,6 +1498,7 @@ interface IOleUndoUnit : IUnknown
+@@ -1449,6 +1495,7 @@ interface IOleUndoUnit : IUnknown
  }
  
  
@@ -262,7 +259,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1482,6 +1532,7 @@ interface IOleParentUndoUnit : IOleUndoUnit
+@@ -1482,6 +1529,7 @@ interface IOleParentUndoUnit : IOleUndoUnit
  }
  
  
@@ -270,7 +267,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1520,8 +1571,10 @@ interface IEnumOleUndoUnits : IUnknown
+@@ -1520,8 +1568,10 @@ interface IEnumOleUndoUnits : IUnknown
                  [out] IEnumOleUndoUnits ** ppEnum
              );
  }
@@ -281,7 +278,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1583,8 +1636,11 @@ cpp_quote("#define SID_SOleUndoManager IID_IOleUndoManager")
+@@ -1583,8 +1633,11 @@ cpp_quote("#define SID_SOleUndoManager IID_IOleUndoManager")
                  [in] BOOL fEnable
              );
  }
@@ -293,7 +290,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1622,6 +1678,7 @@ interface IPointerInactive : IUnknown
+@@ -1622,6 +1675,7 @@ interface IPointerInactive : IUnknown
  }
  
  
@@ -301,7 +298,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(FC4801A3-2BA9-11CF-A229-00AA003D7352),
-@@ -1654,6 +1711,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+@@ -1654,6 +1708,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  
  
  
@@ -309,7 +306,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      uuid(376BD3AA-3845-101B-84ED-08002B2EC713),
-@@ -1810,6 +1868,7 @@ interface IPersistPropertyBag2 : IPersist
+@@ -1810,6 +1865,7 @@ interface IPersistPropertyBag2 : IPersist
                  void
              );
  }
@@ -317,7 +314,7 @@ index a775180c..9a14db9d 100644
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */")
  #pragma endregion
-@@ -1823,6 +1882,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+@@ -1823,6 +1879,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  
  #if !defined(_DCOM_OC_REMOTING_)
  
@@ -325,7 +322,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1852,6 +1912,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -1852,6 +1909,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -333,7 +330,7 @@ index a775180c..9a14db9d 100644
  [
      object,
      pointer_default(unique),
-@@ -1875,6 +1936,7 @@ interface IQuickActivate : IUnknown
+@@ -1875,6 +1933,7 @@ interface IQuickActivate : IUnknown
  
      typedef [uuid(66504301-BE0F-101A-8BBB-00AA00300CAB), public] DWORD OLE_COLOR;
  
@@ -341,7 +338,7 @@ index a775180c..9a14db9d 100644
      typedef struct tagQACONTAINER {
          ULONG                   cbSize;
          IOleClientSite *        pClientSite;
-@@ -1894,6 +1956,9 @@ interface IQuickActivate : IUnknown
+@@ -1894,6 +1953,9 @@ interface IQuickActivate : IUnknown
          IServiceProvider *      pServiceProvider;
      } QACONTAINER;
  

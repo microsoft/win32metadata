@@ -1,5 +1,5 @@
 diff --git a/um/oleidl.idl b/um/oleidl.idl
-index 10d38014..76438521 100644
+index 10d38014..0a122a89 100644
 --- a/um/oleidl.idl
 +++ b/um/oleidl.idl
 @@ -7,6 +7,10 @@
@@ -188,16 +188,14 @@ index 10d38014..76438521 100644
  [
      local,
      object,
-@@ -1152,7 +1195,19 @@ interface IDropSource : IUnknown
+@@ -1152,7 +1195,16 @@ interface IDropSource : IUnknown
          [in, annotation("_In_")] DWORD dwEffect
      );
  }
+-
 +cpp_quote("/* Win32Metadata: method ::IDropSource::GiveFeedback => PreserveResult */")
 +cpp_quote("/* Win32Metadata: method ::IDropSource::QueryContinueDrag => PreserveResult */")
- 
-+cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
-+cpp_quote("typedef unsigned int DROPEFFECT;")
-+cpp_quote("#endif")
++
 +cpp_quote("/* Win32Metadata: interface ::IDropTarget => SupportedOSPlatform(\"windows5.0\") */")
 +cpp_quote("/* Win32Metadata: parameter ::IDropTarget::DragEnter::grfKeyState => AssociatedEnum(MODIFIERKEYS_FLAGS) */")
 +cpp_quote("/* Win32Metadata: parameter ::IDropTarget::DragEnter::pdwEffect => AssociatedEnum(DROPEFFECT) */")
@@ -208,7 +206,7 @@ index 10d38014..76438521 100644
  [
      object,
      uuid(00000122-0000-0000-C000-000000000046),    
-@@ -1222,7 +1277,11 @@ interface IDropTarget : IUnknown
+@@ -1222,7 +1274,11 @@ interface IDropTarget : IUnknown
          [in, out] DWORD *pdwEffect
      );
  }
@@ -220,7 +218,7 @@ index 10d38014..76438521 100644
  [
      local,
      object,
-@@ -1242,6 +1301,7 @@ interface IDropSourceNotify : IUnknown
+@@ -1242,6 +1298,7 @@ interface IDropSourceNotify : IUnknown
      );
  }
  
@@ -228,7 +226,7 @@ index 10d38014..76438521 100644
  [
      object,
      uuid(390E3878-FD55-4E18-819D-4682081C0CFD),
-@@ -1262,6 +1322,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -1262,6 +1319,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -236,7 +234,7 @@ index 10d38014..76438521 100644
  [
      object,
      uuid(00000104-0000-0000-C000-000000000046),
-@@ -1273,6 +1334,8 @@ interface IEnumOLEVERB : IUnknown
+@@ -1273,6 +1331,8 @@ interface IEnumOLEVERB : IUnknown
  
      typedef [unique] IEnumOLEVERB *LPENUMOLEVERB;
  
