@@ -210,24 +210,12 @@
     "addUsesTo": "CERT_QUERY_ENCODING_TYPE",
     "uses": [
       {
-        "struct": "CERT_CONTEXT",
-        "field": "dwCertEncodingType"
-      },
-      {
-        "struct": "CRL_CONTEXT",
-        "field": "dwCertEncodingType"
-      },
-      {
         "method": "CryptSIPGetSignedDataMsg",
         "parameter": "pdwEncodingType"
       },
       {
         "method": "CryptSIPPutSignedDataMsg",
         "parameter": "dwEncodingType"
-      },
-      {
-        "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
-        "field": "dwMsgAndCertEncodingType"
       }
     ]
   },
@@ -680,19 +668,6 @@
     ],
     "uses": []
   },
-  {
-      "addUsesTo": "CERT_STRING_TYPE",
-      "uses": [
-        {
-          "method": "CertNameToStrW",
-          "parameter": "dwStrType"
-        },
-        {
-          "method": "CertNameToStrA",
-          "parameter": "dwStrType"
-        }
-      ]
-    },
   {
     "name": "ACC_UTILITY_STATE_FLAGS"
   },
@@ -1440,27 +1415,6 @@
     "addUsesTo": "DPAMM_MESSAGE",
     "uses": []
   },
-  {
-      "addUsesTo": "CRYPT_STRING",
-      "uses": [
-        {
-          "method": "CryptBinaryToStringW",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "CryptBinaryToStringA",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "CryptStringToBinaryA",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "CryptStringToBinaryW",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
   {
     "addUsesTo": "NtmsMountOptions",
     "flags": true,
