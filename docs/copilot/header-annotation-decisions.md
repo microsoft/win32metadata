@@ -12,15 +12,20 @@ visible for review.
 
 - The C# generator remains in use. The qualified tooling is ClangSharp 21.1.8.4
   with libclang 21.1.8; this is not a Clang 23 qualification.
-- Source cut `451c2f700cdf7ce40e8151739b40c14e058aca3f` is integrated. It contains the
-  corrected `GPFIDL_FLAGS` group and the `SERVICE_NOTIFY_FLAGS` rename.
+- Source cut `f4f3e4d9ce4426ee5b59a8dd09ab19232182bccd` is integrated. It contains
+  the corrected `GPFIDL_FLAGS` group, the `SERVICE_NOTIFY_FLAGS` rename, the
+  `ASSOCF` header migration, and retirement of three already-authored credential
+  groups from the enum sidecar.
 - The executed scraper runtime remains
   `71.0.339-preview+03958d1bb5`. Source integration does not change that identity.
 - The `GPFIDL_FLAGS` representation has a reduced physical WinMD proof on x86,
-  x64, and arm64. Actual partition acceptance of the integrated source is pending.
-- Shell has exposed two further classes of failure: the missing header-owned
-  `ASSOCF` logical group, and a macro-expanded native method identity in WBEM.
-  Both are being repaired from native and OLD metadata evidence.
+  x64, and arm64. Actual Controls/x64 replay clears all three previous GP/service
+  binding errors, but a newly reached IStream projection failure still prevents output.
+- The `ASSOCF` source correction is integrated; actual Shell projection remains
+  pending. The WBEM macro-expanded method identity and IStream forward/definition
+  ownership failures are being repaired in the shared reader.
+- API-specific sidecars still remain active. Some already duplicate authored
+  header replacements; their retirement is a separate unfinished source task.
 - There is no complete successor WinMD yet. The complete integrity-test run,
   selected-SDK delta evaluation, and unfiltered complete OLD-to-NEW comparison
   remain outstanding.
@@ -41,11 +46,13 @@ C# files; it did not produce an accepted complete NEW image.
 | D05 | Macro and comment enum-name references did not consistently resolve against the complete native translation unit and final emitted enum set. | Use compiler-expanded tagged name transport and shared complete-TU resolution. Defer only absent unqualified names. Reject visible wrong kinds, ambiguity, and absent qualified names; require exactly one final emitted enum per architecture. | Shared transport, resolver, and deterministic WMA001 aggregation are implemented. Invalid facts abort before output; native parse success alone is insufficient. |
 | D06 | Twelve real inline function definitions were reported as missing annotation targets because output exclusion hid them from comment binding. | Bind and validate against real native definitions first. Keep output exclusion separately in `ShouldEmit`; do not edit declarations or comments to work around the binder. | Runtime039 contains the bounded correction. Focused controls passed, and the twelve false missing-target errors disappeared in actual Controls replay. |
 | D07 | Metadata-only enum carriers raised a C versus C++ compatibility question. | Metadata-enabled parsing is C++ only. Ordinary native C SDK compilation remains protected; C metadata-on parsing is not an acceptance requirement. | Recorded in the spec and playbook. Superseded namespace experiments were not adopted as production source. |
-| D08 | Native `GPFIDL_FLAGS` is `typedef int`; OLD metadata used a UInt32-backed logical enum. Its only external OLD signature use, `SHGetPathFromIDListEx::uOpts`, was already enum-typed. Values are only 0, 1, and 2. No unsigned-storage rationale was found in its original history. | Preserve the native int typedef and anonymous constants. Add a matching global `_Win32_Enum_(GPFIDL_FLAGS, int, ...)` group and omit redundant `AssociatedEnum` on `uOpts`. Accept the visible UInt32-to-Int32 enum-storage correction. | Source integrated in451. All-three-architecture reduced proofs produce an actual Int32-backed enum parameter with unchanged native ABI and `shell32!SHGetPathFromIDListEx` entrypoint. Ordinary integrated owner replay is pending. |
-| D09 | OLD logical enum `SERVICE_NOTIFY` collides with a genuine SDK service-record alias of the same name. | Rename the logical group to `SERVICE_NOTIFY_FLAGS`; preserve all ten members, order, values, UInt32 storage, and Flags semantics. Update both mask associations. Preserve native records, typedefs, DWORD parameters, and buffers. Do not hide the rename behind a remap or compatibility alias. | Source integrated in451. Both selected-header patches pass strict check/apply and exact native-byte inverse checks. Ordinary projection and complete-image grading remain pending. |
-| D10 | Eleven Shell annotation references target native scalar alias `ASSOCF`. The header has its genuine DWORD typedef and 19 constants, but no logical group. The existing manual C# enum and exact OLD image independently establish the intended UInt32 Flags group, including duplicate value2. | Move that exact existing group into its original header using matching unsigned-long/DWORD storage. Remove only its manual enum block. Inspect actual OLD parameter shapes before removing redundant associations; preserve native declarations and all 19 members. | Native and OLD provenance established. Bounded source authoring and parameter-shape review are assigned; no header-owned replacement has been accepted yet. |
+| D08 | Native `GPFIDL_FLAGS` is `typedef int`; OLD metadata used a UInt32-backed logical enum. Its only external OLD signature use, `SHGetPathFromIDListEx::uOpts`, was already enum-typed. Values are only 0, 1, and 2. No unsigned-storage rationale was found in its original history. | Preserve the native int typedef and anonymous constants. Add a matching global `_Win32_Enum_(GPFIDL_FLAGS, int, ...)` group and omit redundant `AssociatedEnum` on `uOpts`. Accept the visible UInt32-to-Int32 enum-storage correction. | Source integrated in451. All-three-architecture reduced proofs produce an actual Int32-backed enum parameter with unchanged native ABI and entrypoint. The changed-source ordinary Controls run clears the previous binding error; successful output remains blocked by D13. |
+| D09 | OLD logical enum `SERVICE_NOTIFY` collides with a genuine SDK service-record alias of the same name. | Rename the logical group to `SERVICE_NOTIFY_FLAGS`; preserve all ten members, order, values, UInt32 storage, and Flags semantics. Update both mask associations. Preserve native records, typedefs, DWORD parameters, and buffers. Do not hide the rename behind a remap or compatibility alias. | Source integrated in451. Both selected-header patches pass strict check/apply and exact native-byte inverse checks. The changed-source ordinary Controls run clears both mask-binding errors; successful output and complete-image grading remain pending. |
+| D10 | Eleven Shell annotation references target native scalar alias `ASSOCF`. The header has its genuine DWORD typedef and 19 constants, but no logical group. The existing manual C# enum and exact OLD image independently establish the intended UInt32 Flags group, including duplicate value2. All eleven OLD parameters are actual named enum types, not primitive-plus-association parameters. | Move that exact existing group into its original header using matching unsigned-long/DWORD storage. Remove only its manual enum block and eleven migration-added redundant associations, preserving native declarations and all 19 members. | Source integrated in02fc. Strict selected-SDK check/apply, exact native inverse, and exact manual-block inverse pass. Actual ordinary Shell output remains pending. |
 | D11 | The authored WBEM selector names `IWbemServices::GetObject::lFlags`, but an actual Shell native AST identifies `GetObjectA::lFlags`. Wingdi's active `GetObject` macro changes the native declaration name; UNICODE selects the W form. This is not a missing guard or function body. | Repair native target binding using compiler-proved declaration identity. Keep strict scope, kind, uniqueness, and parameter checks. Do not rename the native method, edit generated headers, drop the fact, execute macros in comments, or special-case this API spelling. | Shared-reader repair is assigned from the saved actual native map; no speculative SDK edit or repeated map run is needed. |
 | D12 | Some partitions did not actually enable annotation parsing through their ordinary accumulated response files. Including a header also did not prove that partition owned its projection. | Inspect the real ordered and nested response inputs, enable parsing in the owning settings, and require positive output from actual projection owners. Resolve nested response paths relative to process CWD. | Gdiplus and Hypervisor opt-in were repaired. Ownership now explicitly distinguishes MenuRc/Winuser, Shell/shlobj_core, and Services/winsvc. Wider ordinary acceptance is pending. |
+| D13 | After common enum-binding errors clear, ordinary Controls reports unprojected `IStream` facts at commctrl.h814. The saved native AST proves one canonical type: an unannotated forward inside traversal, but its actual full Objidl definition outside traversal. Eligibility is being evaluated through the wrong native declaration. The validator also reports only the first unused declaration. | Use compiler-proved actual-definition ownership for projection eligibility, preserving the existing output policy and all facts. Reuse the expected-error collector at this independent boundary to expose later unused facts together. Do not edit source facts or relax strict-unused validation. | Bounded shared eligibility and diagnostic repairs are assigned. The actual Controls run remains exit -1 with no generated C#. |
+| D14 | Retained API-specific sidecars still participate in generation, including duplicate header replacements. The original 441 enum items included 149 named groups and 378 actual use rows; an initial shell count also included null array entries and has been corrected. API-specific RSP inputs remain active. | Retire already-authored replacements in bounded coherent cuts using the existing fact ledger. Keep unmatched facts explicit; do not delete them wholesale, claim header-only coverage, or build a new inventory gate. Grade typed legacy remaps versus primitive-plus-association header output in the raw API diff. | f4 retires only CRED_FLAGS, CRED_TYPE, and CRED_PERSIST plus twelve uses; all 22 native group members remain header-owned. Current JSON has 438 items, 146 named groups, 292 added-use groups, 366 uses, 663 explicit members, and 44 auto-populate groups. Complete sidecar elimination and header-only complete-image proof remain open. |
 
 ## API differences to retain
 
@@ -66,11 +73,12 @@ incorrect annotations. Removed SDK APIs will not be recreated solely to match OL
 
 ## Remaining execution
 
-1. Complete the saved Controls-first ordinary replay with the integrated two-header
-   correction, then inspect positive affected-owner and architecture outputs.
+1. Resolve the newly reached Controls projection failures, then inspect positive
+   affected-owner and architecture outputs from the saved ordinary commands.
 2. Complete and qualify the `ASSOCF` source migration and the WBEM macro-identity
    reader repair. Resolve later located failures using the same native-source rule.
-3. Publish one coherent corrected SDK after targeted blockers clear. Reuse the
+3. Retire proven API-specific sidecar replacements and publish one coherent
+   corrected SDK after targeted blockers clear. Reuse the
    qualified native tooling and unaffected MIDL outputs; avoid full rebuilds for
    individual header failures.
 4. Produce a complete NEW WinMD with a resource-bounded full scrape. Run the actual
