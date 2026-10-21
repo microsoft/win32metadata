@@ -2576,19 +2576,6 @@
     ]
   },
   {
-      "addUsesTo": "DDE_INITIALIZE_COMMAND",
-      "uses": [
-        {
-          "method": "DdeInitializeW",
-          "parameter": "afCmd"
-        },
-        {
-          "method": "DdeInitializeA",
-          "parameter": "afCmd"
-        }
-      ]
-    },
-  {
     "name": "HEADER_CONTROL_NOTIFICATION_BUTTON",
     "type": "int",
     "members": [
@@ -2999,15 +2986,6 @@
     ]
   },
   {
-      "addUsesTo": "DDE_NAME_SERVICE_CMD",
-      "uses": [
-        {
-          "method": "DdeNameService",
-          "parameter": "afCmd"
-        }
-      ]
-    },
-  {
     "name": "TEXT_STORY_ACTIVE_STATE",
     "members": [
       {
@@ -3307,19 +3285,6 @@
       }
     ]
   },
-  {
-      "addUsesTo": "DDE_CLIENT_TRANSACTION_TYPE",
-      "uses": [
-        {
-          "method": "DdeClientTransaction",
-          "parameter": "wType"
-        },
-        {
-          "struct": "CONVINFO",
-          "field": "wType"
-        }
-      ]
-    },
   {
       "addUsesTo": "CERT_SYSTEM_STORE_FLAGS",
       "uses": []
@@ -4134,15 +4099,6 @@
       ]
     },
   {
-      "addUsesTo": "CONVINFO_CONVERSATION_STATE",
-      "uses": [
-        {
-          "struct": "CONVINFO",
-          "field": "wConvst"
-        }
-      ]
-    },
-  {
       "addUsesTo": "CERT_SELECT_CRITERIA_TYPE",
       "uses": []
     },
@@ -4401,15 +4357,6 @@
         {
           "struct": "BCRYPT_DH_KEY_BLOB",
           "field": "dwMagic"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "CONVINFO_STATUS",
-      "uses": [
-        {
-          "struct": "CONVINFO",
-          "field": "wStatus"
         }
       ]
     },
