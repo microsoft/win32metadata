@@ -1,5 +1,5 @@
 diff --git a/um/richedit.h b/um/richedit.h
-index 5bebec44..5587eadc 100644
+index 5bebec44..31efb02c 100644
 --- a/um/richedit.h
 +++ b/um/richedit.h
 @@ -9,6 +9,31 @@
@@ -225,14 +225,12 @@ index 5bebec44..5587eadc 100644
  // Underline types. RE 1.0 displays only CFU_UNDERLINE
  #define CFU_CF1UNDERLINE	0xFF	// Map charformat's bit underline to CF2
  #define CFU_INVERT			0xFE	// For IME composition fake a selection
-@@ -970,6 +1095,34 @@ typedef struct _charformat2a
+@@ -970,6 +1095,31 @@ typedef struct _charformat2a
  #define CFU_UNDERLINE					1
  #define CFU_UNDERLINENONE				0
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+#pragma push_macro("CFE_UNDERLINE")
-+#undef CFE_UNDERLINE
-+_Win32_FlagsEnum_(CFE_UNDERLINE, unsigned int,
++_Win32_FlagsEnum_(CFU_UNDERLINE_TYPE, unsigned int,
 +    CFU_CF1UNDERLINE,
 +    CFU_INVERT,
 +    CFU_UNDERLINETHICKLONGDASH,
@@ -254,13 +252,12 @@ index 5bebec44..5587eadc 100644
 +    CFU_UNDERLINEWORD,
 +    CFU_UNDERLINE,
 +    CFU_UNDERLINENONE);
-+#pragma pop_macro("CFE_UNDERLINE")
 +#endif
 +
  #define yHeightCharPtsMost 1638
  
  // EM_SETCHARFORMAT wParam masks 
-@@ -1133,8 +1286,8 @@ typedef struct _formatrange
+@@ -1133,8 +1283,8 @@ typedef struct _formatrange
  typedef struct _paraformat
  {
  	UINT	cbSize;
@@ -271,7 +268,7 @@ index 5bebec44..5587eadc 100644
  	union
  	{
  		WORD	wReserved;
-@@ -1143,7 +1296,7 @@ typedef struct _paraformat
+@@ -1143,7 +1293,7 @@ typedef struct _paraformat
  	LONG	dxStartIndent;
  	LONG	dxRightIndent;
  	LONG	dxOffset;
@@ -280,7 +277,7 @@ index 5bebec44..5587eadc 100644
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
-@@ -1158,13 +1311,13 @@ struct PARAFORMAT2 : _paraformat
+@@ -1158,13 +1308,13 @@ struct PARAFORMAT2 : _paraformat
  	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)
  	BYTE	bOutlineLevel;			// Outline level
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
@@ -297,7 +294,7 @@ index 5bebec44..5587eadc 100644
  };
  
  #else	// Regular C-style	
-@@ -1192,13 +1345,13 @@ typedef struct _paraformat2
+@@ -1192,13 +1342,13 @@ typedef struct _paraformat2
  	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)	
  	BYTE	bOutlineLevel;			// Outline Level						
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
@@ -314,7 +311,7 @@ index 5bebec44..5587eadc 100644
  } PARAFORMAT2;
  
  #endif // C++	
-@@ -1256,6 +1409,44 @@ typedef struct _paraformat2
+@@ -1256,6 +1406,44 @@ typedef struct _paraformat2
  					| PFM_LINESPACING | PFM_STYLE | PFM_SHADING | PFM_BORDER \
  					| PFM_NUMBERINGTAB | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE)
  
@@ -359,7 +356,7 @@ index 5bebec44..5587eadc 100644
  #define PFE_RTLPARA 			(PFM_RTLPARA		 >> 16)
  #define PFE_KEEP				(PFM_KEEP			 >> 16) // (*)	
  #define PFE_KEEPNEXT			(PFM_KEEPNEXT		 >> 16) // (*)	
-@@ -1282,6 +1473,16 @@ typedef struct _paraformat2
+@@ -1282,6 +1470,16 @@ typedef struct _paraformat2
  #define PFN_LCROMAN 	5		// tomListNumberAsLCRoman:	i, ii, iii, ...
  #define PFN_UCROMAN 	6		// tomListNumberAsUCRoman:	I, II, III, ...
  
@@ -376,7 +373,7 @@ index 5bebec44..5587eadc 100644
  // PARAFORMAT2 wNumberingStyle options 
  #define PFNS_PAREN		0x000	// default, e.g.,				  1)	
  #define PFNS_PARENS 	0x100	// tomListParentheses/256, e.g., (1)	
-@@ -1290,6 +1491,16 @@ typedef struct _paraformat2
+@@ -1290,6 +1488,16 @@ typedef struct _paraformat2
  #define PFNS_NONUMBER	0x400	// Used for continuation w/o number
  
  #define PFNS_NEWNUMBER	0x8000	// Start new number with wNumberingStart		
@@ -393,7 +390,7 @@ index 5bebec44..5587eadc 100644
  								// (can be combined with other PFNS_xxx)
  // PARAFORMAT alignment options 
  #define PFA_LEFT			 1
-@@ -1330,7 +1541,7 @@ typedef struct _selchange
+@@ -1330,7 +1538,7 @@ typedef struct _selchange
  {
  	NMHDR nmhdr;
  	CHARRANGE chrg;
@@ -402,7 +399,7 @@ index 5bebec44..5587eadc 100644
  } SELCHANGE;
  
  #if (_RICHEDIT_VER >= 0x0800)
-@@ -1359,6 +1570,17 @@ typedef struct _clipboardformat
+@@ -1359,6 +1567,17 @@ typedef struct _clipboardformat
  // will really be the IDataObject for the drop
  #define GCM_RIGHTMOUSEDROP	0x8000
  
@@ -420,7 +417,7 @@ index 5bebec44..5587eadc 100644
  #if (_RICHEDIT_VER >= 0x0800)
  typedef struct _getcontextmenuex
  {
-@@ -1439,7 +1661,7 @@ typedef struct _encorrecttext
+@@ -1439,7 +1658,7 @@ typedef struct _encorrecttext
  {
  	NMHDR nmhdr;
  	CHARRANGE chrg;
@@ -429,7 +426,7 @@ index 5bebec44..5587eadc 100644
  } ENCORRECTTEXT;
  
  // East Asia specific 
-@@ -1466,7 +1688,7 @@ typedef struct _compcolor
+@@ -1466,7 +1685,7 @@ typedef struct _compcolor
  // Paste Special 
  typedef struct _repastespecial
  {
@@ -438,7 +435,7 @@ index 5bebec44..5587eadc 100644
  	DWORD_PTR	dwParam;
  } REPASTESPECIAL;
  
-@@ -1506,11 +1728,20 @@ typedef struct _settextex
+@@ -1506,11 +1725,20 @@ typedef struct _settextex
  #define GT_RAWTEXT		4
  #define GT_NOHIDDENTEXT 8
  
@@ -460,7 +457,7 @@ index 5bebec44..5587eadc 100644
  	UINT	codepage;		// Code page for translation (CP_ACP for sys default,
  							//	1200 for Unicode, -1 for control default)
  	LPCSTR	lpDefaultChar;	// Replacement for unmappable chars
-@@ -1525,10 +1756,20 @@ typedef struct _gettextex
+@@ -1525,10 +1753,20 @@ typedef struct _gettextex
  #define GTL_NUMCHARS	8	// Return number of characters
  #define GTL_NUMBYTES	16	// Return number of _bytes_
  
@@ -482,7 +479,7 @@ index 5bebec44..5587eadc 100644
  	UINT	codepage;		// Code page for translation (CP_ACP for default,
  							//	1200 for Unicode)
  } GETTEXTLENGTHEX;
-@@ -1600,6 +1841,7 @@ typedef struct hyphresult
+@@ -1600,6 +1838,7 @@ typedef struct hyphresult
  	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
  } HYPHRESULT;
  
@@ -490,7 +487,7 @@ index 5bebec44..5587eadc 100644
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
  typedef struct tagHyphenateInfo
  {
-@@ -1629,6 +1871,19 @@ typedef struct tagHyphenateInfo
+@@ -1629,6 +1868,19 @@ typedef struct tagHyphenateInfo
  #define PFA_FULL_SCALED 	 7	// Not implemented
  #define PFA_FULL_GLYPHS 	 8	// Not implemented
  
