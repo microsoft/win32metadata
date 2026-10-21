@@ -315,6 +315,11 @@ for an author to deliver a draft or start another owned original.
 The compilation lanes use the existing build commands; authors do not run these as
 handoff gates. Do not create another build wrapper:
 
+For local repairs, reuse the prepared SDK and qualified tools. Replay the saved
+response files for one affected partition and architecture. Regenerate only the
+header outputs owned by a changed original IDL. Record diagnostic-only option
+changes separately from ordinary acceptance.
+
 ```powershell
 .\scripts\Prepare-SdkHeaders.ps1 -Recipe .\generation\WinSDK\patches\SdkHeaders.json -SdkPackageRoot '<pinned-package-root>' -MidlPreprocessorPath '<pinned-cl.exe>' -OutputRoot '<fresh-private-root>'
 dotnet build BuildTools -c Release -m:1
@@ -338,7 +343,9 @@ MIDL and native-control runners too; do not use a nonpositive scraper limit, whi
 requests unbounded task parallelism.
 
 Enable a migrated partition with `parse-win32-annotations` under its existing
-`--config`. There is no automatic annotation-admission command.
+`--config`. Verify the effective ordinary response chain, including inherited
+settings, before qualifying its header facts. Record annotation mode with each
+partition result. There is no automatic annotation-admission command.
 `Build-WinHttpMigrationImage.ps1` is the pilot's frozen complete-source
 overlay/repeat/comparison harness, not a general full-SDK admission shortcut.
 
