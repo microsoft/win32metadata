@@ -5781,25 +5781,6 @@
     ]
   },
   {
-    "type": "uint",
-    "name": "GPFIDL_FLAGS",
-    "members": [
-      {
-        "name": "GPFIDL_DEFAULT",
-        "value": "0x0000"
-      },
-      {
-        "name": "GPFIDL_ALTNAME",
-        "value": "0x0001"
-      },
-      {
-        "name": "GPFIDL_UNCPRINTER",
-        "value": "0x0002"
-      }
-    ],
-    "uses": []
-  },
-  {
     "addUsesTo": "FUNCFLAGS",
     "uses": [
       {
