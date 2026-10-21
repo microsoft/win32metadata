@@ -232,12 +232,16 @@ The shared `win32metadata_annotations.h` defines the `_Win32_*_` vocabulary usin
 Clang attributes owned by the `Win32Metadata.` payload prefix. The scraper opts in
 with `--config parse-win32-annotations`, defines `WIN32METADATA`, and uses the same
 translation unit for annotation extraction, remap discovery, and ClangSharp
-generation. Native macro RAII invalid values, group values, type associations, and optional
+generation. Native macro RAII invalid values, group values, and optional
 import overrides are typed annotation arguments from that first AST. No
 `WIN32METADATA_CSHARP` gate or second expression parse is used.
 Cleanup references use a tagged expanded native name, bound to one actual function
 declaration after the complete translation unit is available. The cleanup prototype
 may follow the producer; unknown, non-function, and ambiguous references fail.
+Enum associations carry an internal tagged name without requiring a declaration
+before the native use. Visible native enums/groups retain their identity and remaps;
+cross-partition or retained definitions are checked after final composition. Every
+association must resolve to exactly one emitted enum or fail with WMA003.
 Invalid-value expressions remain compiler-evaluated and input handles do not infer
 cleanup. The shared helper makes ignored metadata annotations
 errors locally without changing the native SDK/SAL warning policy.

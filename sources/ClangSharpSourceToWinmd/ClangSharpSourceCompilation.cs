@@ -321,6 +321,7 @@ namespace ClangSharpSourceToWinmd
 
             comp = HeaderTypedefMerger.Merge(comp);
             comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
+            HeaderEnumGroupMerger.ValidateAssociations(comp, arch);
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();

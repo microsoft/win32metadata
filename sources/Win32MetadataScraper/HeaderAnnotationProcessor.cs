@@ -18,6 +18,7 @@ namespace Win32MetadataScraper
     {
         private const string MetadataNamespace = "global::Windows.Win32.Foundation.Metadata.";
         private const string CleanupReferencePrefix = HeaderAnnotation.OwnerPrefix + "FunctionDecl:";
+        private const string EnumReferencePrefix = HeaderAnnotation.OwnerPrefix + "EnumName:";
         private readonly Dictionary<NamedDecl, DeclarationFacts> declarations = new();
         private readonly Dictionary<(string File, uint Line, uint Column), List<DeclarationFacts>> projectionLocations = new();
         private readonly Dictionary<string, string> remaps;
@@ -37,6 +38,7 @@ namespace Win32MetadataScraper
         private readonly List<(VarDecl Declaration, Attr Target)> fieldCarriers = new();
         private readonly HashSet<Cursor> visited = new();
         private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> cleanupReferences = new();
+        private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> enumNameReferences = new();
         private NativeNameLookup nativeNames;
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
@@ -55,6 +57,7 @@ namespace Win32MetadataScraper
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
             ApplyFieldAnnotations();
+            ResolveEnumNameReferences();
             ApplyCommentAnnotations(translationUnit);
             foreach (var facts in declarations.Values.Where(value => value.HasMidlRetval))
                 if (!facts.Annotations.Any(annotation => annotation.Name == "RetVal"))
@@ -171,6 +174,21 @@ namespace Win32MetadataScraper
             {
                 if (arguments.Length != 1)
                     throw Error(location, "AssociatedEnum requires one enum or metadata group type.");
+                if (UnwrapArgument(arguments[0]) is StringLiteral)
+                {
+                    string reference = ReadStringArgument(arguments[0], location);
+                    if (!reference.StartsWith(EnumReferencePrefix, StringComparison.Ordinal))
+                        throw Error(location, "AssociatedEnum requires a tagged enum name, not an untagged string.");
+                    string name = Regex.Replace(reference[EnumReferencePrefix.Length..].Trim(), @"\s*::\s*", "::");
+                    name = Regex.Replace(name, @"^enum\s+", "");
+                    if (!Regex.IsMatch(name, @"^(?:::)?[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*$") ||
+                        name is "void" or "bool" or "char" or "short" or "int" or "long" or "signed" or "unsigned" or
+                            "float" or "double" or "wchar_t" or "char8_t" or "char16_t" or "char32_t")
+                        throw Error(location, "AssociatedEnum requires a native enum or metadata group name.");
+                    var names = new[] { name };
+                    enumNameReferences.Add((owner, name, names, location));
+                    return new HeaderAnnotation("AssociatedEnum", names);
+                }
                 var declaration = clang.getTypeDeclaration(arguments[0].Handle.Type);
                 if (declaration.IsNull)
                     throw Error(location, "AssociatedEnum requires a named native enum or metadata group type.");
@@ -234,6 +252,32 @@ namespace Win32MetadataScraper
                 if (candidates.Length != 1 || candidates[0].Handle.Kind != CXCursorKind.CXCursor_FunctionDecl)
                     throw Error(reference.Location, $"RAIIFree cleanup '{reference.Name}' must identify one declared native cleanup function; found {candidates.Length} candidates.");
                 reference.Arguments[0] = candidates[0].Name;
+            }
+        }
+
+        private void ResolveEnumNameReferences()
+        {
+            if (enumNameReferences.Count == 0)
+                return;
+            nativeNames ??= new NativeNameLookup(visited);
+            foreach (var reference in enumNameReferences)
+            {
+                var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location)
+                    .Select(UnwrapTypeDeclaration).GroupBy(value => value.Handle.CanonicalCursor)
+                    .Select(group => group.First()).ToArray();
+                if (candidates.Length == 0 && !reference.Name.Contains("::", StringComparison.Ordinal))
+                {
+                    // Another partition or retained enum source supplies the final definition.
+                    reference.Arguments[0] = Remap(reference.Name);
+                    continue;
+                }
+                if (candidates.Length != 1)
+                    throw Error(reference.Location, $"AssociatedEnum reference '{reference.Name}' must identify one native enum or metadata group; found {candidates.Length} candidates.");
+                var declaration = candidates[0];
+                enumAssociations.Add((declaration.Handle, reference.Location));
+                if (declaration is EnumDecl nativeEnum && IsForwardEnumReference(nativeEnum))
+                    enumReferenceCarriers.Add(declaration.Handle.CanonicalCursor);
+                reference.Arguments[0] = Remap(declaration.Name);
             }
         }
 

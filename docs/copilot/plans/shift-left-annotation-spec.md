@@ -68,7 +68,7 @@ permitted, and annotations on unsupported targets are errors.
 | Reserved parameter | `_Win32_Reserved_` | Reserved pointer or scalar parameter. Records `[Reserved]` while preserving existing native types, direction SAL, and optionality. Valueless and non-repeatable. |
 | Interior pointers | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter. Returned absolute pointers may borrow storage inside that same allocation; keep it alive and at a stable address until all pointer use or copying ends. Valueless and non-repeatable. |
 | Compatible native typedef | `_Win32_AlsoUsableFor_(TYPE)` | Genuine native typedef, not a logical enum group. |
-| Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with an already declared native enum or metadata-only group. Keep its native declaration type. |
+| Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with a native enum or metadata-only group, including a later or cross-partition definition. Keep its native declaration type. |
 | Loose constant association | `_Win32_AssociatedConstant_(NAME)` | Enum. Associates an existing global constant without duplicating or renaming it. Repeatable. |
 | Logical enum | `_Win32_Enum_(name, storage, constants...)` | Metadata-only unscoped group of existing constants, using the specified native integral storage type of at most 64 bits. |
 | Logical flags enum | `_Win32_FlagsEnum_(name, storage, constants...)` | The same grouping contract with flags semantics. |
@@ -512,15 +512,10 @@ The current explicit-label encoding is described in
 [Logical enum encoding](#logical-enum-encoding). An existing reviewed zero/none member
 may supply literal `0`; that does not introduce a new native SDK constant.
 
-If an associated use precedes the native constants, add a metadata-only forward
-typedef with the same storage type and declaration scope. Keep the original constant
-block in place, and put the public group declaration after it:
+An associated use can precede the native constants. Keep the original constant
+block in place, and put the group declaration after it:
 
 ```cpp
-#ifdef WIN32METADATA
-typedef DWORD MODE;
-#endif
-
 void SetMode(_Win32_AssociatedEnum_(MODE) DWORD mode);
 
 #define MODE_A 1
@@ -528,8 +523,8 @@ void SetMode(_Win32_AssociatedEnum_(MODE) DWORD mode);
 _Win32_Enum_(MODE, DWORD, MODE_A, MODE_B);
 ```
 
-The forward typedef and complete group may be in different included headers. A
-traversed forward declaration projects its compiler-bound merged group even when
+The use and complete group may be in different headers or partitions. An existing
+traversed forward declaration still projects its compiler-bound merged group even when
 the contributing header is outside the partition's traversal list. Unrelated
 same-named typedefs do not establish a group; excluded or entirely untraversed
 groups remain unprojected.
@@ -551,9 +546,9 @@ The complete group is the union of those source-owned contributions, not an empt
 typedef or a replacement native enum. Repeated members must have identical compiled
 values after conversion to the group's storage. Conflicting values, storage, flags,
 or non-repeatable annotations are errors. Ordinary native enums and legacy enum
-definitions are not group contributions and are never merged this way. Keep the
-group declaration visible before an associated use; do not include an unrelated
-API surface merely to borrow its constants.
+definitions are not group contributions and are never merged this way. Do not add a
+forward typedef or include an unrelated API surface merely to make an association
+parse. Final composition must resolve each association to exactly one emitted enum.
 
 Rules:
 
@@ -896,8 +891,15 @@ Invalid values remain integral expression arguments from the first Clang parse;
 pointer-cast `INVALID_HANDLE_VALUE` is not a valid annotation constant. Emit one
 `RAIIFreeAttribute` and one `InvalidHandleValueAttribute` per supplied value.
 
-`AssociatedEnum` uses a typed expression to reference the already declared enum or
-group. `__typefix` is analyzer metadata, not a projection contract. DLL/export strings
+`AssociatedEnum` uses an internal tagged, macro-expanded name so the use does not
+require a visible enum declaration during native parsing. Complete-translation-unit
+lookup preserves native enum/group identity, including aliases and remappings, and
+rejects visible non-enums or ambiguous native names. An unavailable unqualified name
+is retained for cross-partition or retained enum composition, where it must resolve
+to exactly one emitted enum after namespace assignment, remaps and enum additions.
+Missing or ambiguous final definitions fail with WMA003. The previous compiler-typed
+transport remains readable; untagged strings are not an alternate transport.
+`__typefix` is analyzer metadata, not a projection contract. DLL/export strings
 and integral ordinals are also read from the original argument children. An import
 override is written to `ImplMap.ImportName` as the export name or `#ordinal`.
 

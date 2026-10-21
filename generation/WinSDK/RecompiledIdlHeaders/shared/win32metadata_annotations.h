@@ -11,7 +11,8 @@
 #define _Win32_RAIIFree_(cleanup, ...) \
     _WIN32META_ANNOTATION_("RAIIFree", "Win32Metadata.FunctionDecl:" _WIN32META_EXPAND_STRINGIFY_(cleanup), ##__VA_ARGS__)
 #define _Win32_ImportLibrary_(...) _WIN32META_ANNOTATION_("ImportLibrary", __VA_ARGS__)
-#define _Win32_AssociatedEnum_(name) _WIN32META_ANNOTATION_("AssociatedEnum", (name)0)
+#define _Win32_AssociatedEnum_(name) \
+    _WIN32META_ANNOTATION_("AssociatedEnum", "Win32Metadata.EnumName:" _WIN32META_EXPAND_STRINGIFY_(name))
 #define _Win32_Enum_(name, storage, ...) \
     typedef _WIN32META_ANNOTATION_("Enum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
 #define _Win32_FlagsEnum_(name, storage, ...) \

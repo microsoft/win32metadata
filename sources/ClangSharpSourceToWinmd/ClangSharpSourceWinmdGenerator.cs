@@ -240,7 +240,7 @@ namespace ClangSharpSourceToWinmd
             return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
         }
 
-        private static string FixArchSpecificName(string name)
+        internal static string FixArchSpecificName(string name)
         {
             if (name.EndsWith("____1") || name.EndsWith("____2"))
             {

@@ -111,6 +111,83 @@ namespace ClangSharpSourceToWinmd
             return name == "header-types.modified.cs" || name.EndsWith(".header-types.modified.cs", StringComparison.Ordinal);
         }
 
+        internal static void ValidateAssociations(CSharpCompilation compilation, string architecture)
+        {
+            var enums = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+            foreach (var tree in compilation.SyntaxTrees)
+            {
+                var model = compilation.GetSemanticModel(tree);
+                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
+                    if (model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol)
+                        enums.Add(symbol);
+            }
+            var simpleNames = enums.ToLookup(symbol => ClangSharpSourceWinmdGenerator.FixArchSpecificName(symbol.Name), StringComparer.Ordinal);
+            var fullNames = enums.ToLookup(symbol => ClangSharpSourceWinmdGenerator.FixArchSpecificName(symbol.ToDisplayString()), StringComparer.Ordinal);
+            var targets = architecture switch
+            {
+                "x86" => new[] { Architecture.X86 },
+                "x64" => new[] { Architecture.X64 },
+                "arm64" => new[] { Architecture.Arm64 },
+                _ => new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 },
+            };
+            var errors = new List<string>();
+            foreach (var tree in compilation.SyntaxTrees)
+            {
+                var model = compilation.GetSemanticModel(tree);
+                foreach (var attribute in tree.GetRoot().DescendantNodes().OfType<AttributeSyntax>())
+                {
+                    if (attribute.Name.ToString().Split('.').Last() is not "AssociatedEnum" and not "AssociatedEnumAttribute" ||
+                        model.GetSymbolInfo(attribute).Symbol is not IMethodSymbol constructor ||
+                        constructor.ContainingType.ToDisplayString() != "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute")
+                        continue;
+                    var arguments = attribute.ArgumentList?.Arguments;
+                    if (arguments?.Count != 1 || model.GetConstantValue(arguments.Value[0].Expression).Value is not string name ||
+                        name.Length == 0)
+                    {
+                        errors.Add(Error(tree.FilePath, attribute.Parent.Parent.ToString(),
+                            "AssociatedEnum requires one nonempty enum name.").Message);
+                        continue;
+                    }
+                    var declaration = attribute.Parent.Parent;
+                    var owner = declaration is FieldDeclarationSyntax field
+                        ? model.GetDeclaredSymbol(field.Declaration.Variables.First()) : model.GetDeclaredSymbol(declaration);
+                    if (owner == null)
+                        throw Error(tree.FilePath, name, "Cannot resolve the native association's emitted owner.");
+                    var candidates = (name.Contains('.', StringComparison.Ordinal) ? fullNames[name] : simpleNames[name]).ToArray();
+                    var ownerArchitectures = GetSupportedArchitectures(owner);
+                    foreach (var target in targets.Where(target => ownerArchitectures.HasFlag(target)))
+                    {
+                        var matching = candidates.Where(candidate => GetSupportedArchitectures(candidate).HasFlag(target)).ToArray();
+                        if (matching.Length == 1)
+                            continue;
+                        var location = attribute.GetLocation().GetLineSpan().StartLinePosition;
+                        string found = matching.Length == 0 ? "none" : string.Join(", ",
+                            matching.Select(candidate => candidate.ToDisplayString()).OrderBy(value => value, StringComparer.Ordinal));
+                        errors.Add(Error(tree.FilePath + $"({location.Line + 1},{location.Character + 1})", name,
+                            $"AssociatedEnum must identify exactly one emitted enum after composition for {target}; found {matching.Length}: {found}.").Message);
+                    }
+                }
+            }
+            if (errors.Count != 0)
+                throw new InvalidOperationException(string.Join(Environment.NewLine, errors));
+        }
+
+        private static Architecture GetSupportedArchitectures(ISymbol symbol)
+        {
+            var mask = Architecture.All;
+            for (var current = symbol; current != null; current = current.ContainingSymbol)
+                foreach (var attribute in current.GetAttributes().Where(attribute =>
+                    attribute.AttributeClass?.ToDisplayString() == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute"))
+                {
+                    if (attribute.ConstructorArguments.Length != 1 || attribute.ConstructorArguments[0].Value is not int value ||
+                        value <= 0 || (value & ~(int)Architecture.All) != 0)
+                        throw Error(symbol.Locations.FirstOrDefault()?.SourceTree?.FilePath ?? "", symbol.Name,
+                            "Invalid supported architecture mask on an enum association.");
+                    mask &= (Architecture)value;
+                }
+            return mask;
+        }
+
         internal static CSharpCompilation ConvertPrimitiveConstantAliases(CSharpCompilation compilation)
         {
             var groups = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);

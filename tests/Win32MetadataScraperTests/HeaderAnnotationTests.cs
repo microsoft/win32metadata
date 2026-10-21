@@ -90,7 +90,6 @@ _Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(E));
         [Theory]
         [InlineData("S::missing", "E")]
         [InlineData("Missing::value", "E")]
-        [InlineData("S::value", "Missing")]
         public void FieldTargetReferencesRemainCompilerBound(string field, string enumeration)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
@@ -330,6 +329,74 @@ void Initialize(_Win32_AssociatedEnum_(COINIT) unsigned long flags);
             Assert.Contains("AssociatedEnum(\"COINIT\")", source);
             Assert.Contains("uint flags", source);
             Assert.Empty(CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>());
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void AssociatedEnumsDoNotRequireDeclarationOrderOrPartitionVisibility(
+            string architecture, string target, string language, string standard)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+#define ASSOCIATION HANDLE_FLAGS
+void SetHandleInformation(_Win32_AssociatedEnum_(ASSOCIATION) unsigned flags);
+_Win32_AssociatedEnum_(FIRMWARE_TABLE_PROVIDER) unsigned ReadFirmware();
+struct S { _Win32_AssociatedEnum_(OS_PRODUCT_TYPE) unsigned product; };
+#define HANDLE_FLAG_INHERIT 1U
+#define HANDLE_FLAG_PROTECT_FROM_CLOSE 2U
+_Win32_FlagsEnum_(HANDLE_FLAGS, unsigned, HANDLE_FLAG_INHERIT, HANDLE_FLAG_PROTECT_FROM_CLOSE);
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            foreach (string name in new[] { "HANDLE_FLAGS", "FIRMWARE_TABLE_PROVIDER", "OS_PRODUCT_TYPE" })
+                Assert.Contains("AssociatedEnum(\"" + name + "\")", source);
+            Assert.Contains("uint flags", source);
+            Assert.Contains("uint ReadFirmware()", source);
+            Assert.DoesNotContain("struct FIRMWARE_TABLE_PROVIDER", source);
+            Assert.DoesNotContain("struct OS_PRODUCT_TYPE", source);
+            var group = Assert.Single(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<EnumDeclarationSyntax>());
+            Assert.Equal("HANDLE_FLAGS", group.Identifier.ValueText);
+            Assert.Equal(new[] { "HANDLE_FLAG_INHERIT", "HANDLE_FLAG_PROTECT_FROM_CLOSE" },
+                group.Members.Select(member => member.Identifier.ValueText));
+            Assert.Contains("HANDLE_FLAG_INHERIT = unchecked((uint)1UL)", group.ToString());
+            Assert.Contains("HANDLE_FLAG_PROTECT_FROM_CLOSE = unchecked((uint)2UL)", group.ToString());
+        }
+
+        [Theory]
+        [InlineData("c", "c11")]
+        [InlineData("c++", "c++17")]
+        public void AssociatedEnumsKeepTypedAndTaggedNativeIdentity(string language, string standard)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef enum tagNATIVE { FIRST = 1 } NATIVE;
+_Win32_AssociatedEnum_(enum tagNATIVE) unsigned Tagged();
+_WIN32META_ANNOTATION_(""AssociatedEnum"", (NATIVE)0) unsigned Typed();
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n--remap\ntagNATIVE=RENAMED\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(2, fixture.ReadSource().Split("AssociatedEnum(\"RENAMED\")").Length - 1);
+        }
+
+        [Theory]
+        [InlineData("_Win32_AssociatedEnum_(42) unsigned Bad();", "enum or metadata group name")]
+        [InlineData("_Win32_AssociatedEnum_(E + 1) unsigned Bad();", "enum or metadata group name")]
+        [InlineData("_Win32_AssociatedEnum_(unsigned) unsigned Bad();", "enum or metadata group name")]
+        [InlineData("_Win32_AssociatedEnum_(Missing::E) unsigned Bad();", "found 0")]
+        [InlineData("_WIN32META_ANNOTATION_(\"AssociatedEnum\", \"E\") unsigned Bad();", "untagged string")]
+        [InlineData("_WIN32META_ANNOTATION_(\"AssociatedEnum\", L\"Win32Metadata.EnumName:E\") unsigned Bad();", "ordinary narrow string")]
+        [InlineData("typedef unsigned E; _Win32_AssociatedEnum_(E) unsigned Bad();", "requires a native enum")]
+        [InlineData("namespace A { enum E { A = 1 }; } namespace B { enum E { B = 2 }; } using namespace A; using namespace B; _Win32_AssociatedEnum_(E) unsigned Bad();", "found 2")]
+        public void AssociatedEnumNamesDoNotBypassNativeValidation(string declaration, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declaration);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
         }
 
         [Fact]
@@ -1374,7 +1441,7 @@ _Win32_SupportedOS_END_()
         [InlineData("_Win32_ContainsInteriorPointers_ int Bad(void* buffer);")]
         [InlineData("struct Bad { _Win32_ContainsInteriorPointers_ void* field; };")]
         [InlineData("int Bad(_Win32_ContainsInteriorPointers_ int value);")]
-        [InlineData("struct S { unsigned _Win32_AssociatedEnum_(E) value; };")]
+        [InlineData("enum E { FIRST = 1 }; _Win32_AssociatedEnum_(E) typedef unsigned Bad;")]
         [InlineData("int Bad(_In_ _Win32_ContainsInteriorPointers_ void* value);")]
         [InlineData("int Bad(_In_reads_(count) _Win32_ContainsInteriorPointers_ void* value, unsigned count);")]
         [InlineData("int Bad(_Outptr_ _Win32_ContainsInteriorPointers_ void** value);")]

@@ -440,6 +440,172 @@ DXGI_USAGE LegacyUsage(DXGI_USAGE value, DXGI_USAGE* output);
             AssertMetadataClosure(reader);
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void DeferredEnumAssociationsResolveAfterPartitionAndRetainedComposition(
+            string architecture, string target, string language, string standard)
+        {
+            const string declarations = @"
+void SetHandleInformation(_Win32_AssociatedEnum_(HANDLE_FLAGS) unsigned flags);
+_Win32_AssociatedEnum_(FIRMWARE_TABLE_PROVIDER) unsigned ReadFirmware();
+struct DESCRIPTION { _Win32_AssociatedEnum_(PARTITION_PRODUCT) unsigned product; };
+#define HANDLE_FLAG_INHERIT 1U
+#define HANDLE_FLAG_PROTECT_FROM_CLOSE 2U
+_Win32_FlagsEnum_(HANDLE_FLAGS, unsigned, HANDLE_FLAG_INHERIT, HANDLE_FLAG_PROTECT_FROM_CLOSE);
+";
+            string settings = $"--language\n{language}\n--std\n{standard}\n--remap\nPARTITION_PRODUCT=OS_PRODUCT_TYPE\n";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                extraSettings: settings);
+            using var external = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define PRODUCT_FIRST 1U
+#define PRODUCT_SECOND 2U
+_Win32_Enum_(OS_PRODUCT_TYPE, unsigned, PRODUCT_FIRST, PRODUCT_SECOND);
+", extraSettings: settings);
+            using var disabled = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                annotationsEnabled: false, extraSettings: settings);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.True(external.Run() == 0, external.Diagnostics);
+            Assert.True(disabled.Run() == 0, disabled.Diagnostics);
+            Assert.DoesNotContain("AssociatedEnum", disabled.ReadSource());
+            Assert.Equal(NativeSurface(fixture, target, false, language), NativeSurface(fixture, target, true, language));
+            File.Copy(Path.ChangeExtension(external.Output, ".header-types.cs"),
+                Path.Combine(fixture.DirectoryPath, "External.header-types.cs"));
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Residual.enums.cs"), @"
+namespace Residual {
+    public enum FIRMWARE_TABLE_PROVIDER : uint { ACPI = 1094930505, FIRM = 1179210317, RSMB = 1381190978 }
+}");
+            using var image = Emit(fixture.DirectoryPath, architecture, requiredNamespaces: new Dictionary<string, string>
+            {
+                ["HANDLE_FLAGS"] = "Windows.Win32.Foundation",
+                ["OS_PRODUCT_TYPE"] = "Windows.Win32.System.SystemInformation",
+                ["FIRMWARE_TABLE_PROVIDER"] = "Windows.Win32.System.SystemInformation",
+            }, enumAdditions: new Dictionary<string, Dictionary<string, string>>
+            {
+                ["FIRMWARE_TABLE_PROVIDER"] = new() { ["EXTRA"] = "5" },
+            });
+            var reader = image.Reader;
+            var set = FindMethod(reader, "Apis", "SetHandleInformation");
+            Assert.Equal(new[] { "UInt32" }, set.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            AssertStringAttribute(reader, Assert.Single(set.GetParameters().Select(reader.GetParameter))
+                .GetCustomAttributes(), "AssociatedEnumAttribute", "HANDLE_FLAGS");
+            var read = FindMethod(reader, "Apis", "ReadFirmware");
+            Assert.Equal("UInt32", read.DecodeSignature(new SignatureNames(), null).ReturnType);
+            AssertStringAttribute(reader, Assert.Single(read.GetParameters().Select(reader.GetParameter))
+                .GetCustomAttributes(), "AssociatedEnumAttribute", "FIRMWARE_TABLE_PROVIDER");
+            var field = Assert.Single(FindType(reader, "DESCRIPTION").GetFields().Select(reader.GetFieldDefinition));
+            Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null));
+            AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "OS_PRODUCT_TYPE");
+            foreach (string name in new[] { "HANDLE_FLAGS", "OS_PRODUCT_TYPE", "FIRMWARE_TABLE_PROVIDER" })
+            {
+                var group = FindType(reader, name);
+                Assert.Equal(name == "HANDLE_FLAGS" ? "Windows.Win32.Foundation" : "Windows.Win32.System.SystemInformation",
+                    reader.GetString(group.Namespace));
+                Assert.Equal("UInt32", reader.GetFieldDefinition(group.GetFields().First())
+                    .DecodeSignature(new SignatureNames(), null));
+            }
+            var flags = FindType(reader, "HANDLE_FLAGS");
+            AssertHasAttribute(reader, flags.GetCustomAttributes(), "FlagsAttribute");
+            Assert.Equal(new[] { "value__", "HANDLE_FLAG_INHERIT", "HANDLE_FLAG_PROTECT_FROM_CLOSE" },
+                flags.GetFields().Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            Assert.Equal(new uint[] { 1, 2 }, flags.GetFields().Skip(1).Select(handle =>
+            {
+                var value = reader.GetConstant(reader.GetFieldDefinition(handle).GetDefaultValue());
+                return reader.GetBlobReader(value.Value).ReadUInt32();
+            }));
+            var extra = FindType(reader, "FIRMWARE_TABLE_PROVIDER").GetFields().Select(reader.GetFieldDefinition)
+                .Single(value => reader.GetString(value.Name) == "EXTRA");
+            Assert.Equal(5u, reader.GetBlobReader(reader.GetConstant(extra.GetDefaultValue()).Value).ReadUInt32());
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("", "found 0", "none")]
+        [InlineData("namespace First { public enum EXTERNAL { A = 1 } } namespace Second { public enum EXTERNAL { B = 2 } }",
+            "found 2", "First.EXTERNAL, Second.EXTERNAL")]
+        [InlineData("namespace Test { public struct EXTERNAL { public int value; } }", "found 0", "none")]
+        public void DeferredEnumAssociationsMustResolveExactlyOneFinalEnum(string definitions, string count, string detail)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                @"void Use(_Win32_AssociatedEnum_(EXTERNAL) unsigned value);
+_Win32_AssociatedEnum_(EXTERNAL) unsigned Read();
+struct S { unsigned value; };
+_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(EXTERNAL));");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "External.enums.cs"), definitions);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+            {
+                using var unexpected = Emit(fixture, "x64");
+            });
+            Assert.Contains("WMA003", exception.Message);
+            Assert.Contains("EXTERNAL", exception.Message);
+            Assert.Contains("AssociatedEnum must identify exactly one emitted enum after composition", exception.Message);
+            Assert.Contains(count, exception.Message);
+            Assert.Contains(detail, exception.Message);
+            Assert.Contains("Bindings.modified.cs(", exception.Message);
+            Assert.Equal(3, exception.Message.Split("WMA003").Length - 1);
+            Assert.False(File.Exists(Path.Combine(fixture.DirectoryPath, "Test.winmd")));
+        }
+
+        [Fact]
+        public void DeferredEnumAssociationFailuresAreReportedTogetherAfterRemaps()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+void Use(_Win32_AssociatedEnum_(MISSING_A) unsigned first, _Win32_AssociatedEnum_(MISSING_B) unsigned second);
+", extraSettings: "--remap\nMISSING_A=RENAMED_A\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+            {
+                using var unexpected = Emit(fixture, "x64");
+            });
+            Assert.Contains("'RENAMED_A'", exception.Message);
+            Assert.Contains("'MISSING_B'", exception.Message);
+            Assert.Equal(2, exception.Message.Split("WMA003").Length - 1);
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void DeferredEnumAssociationsRequireMatchingArchitectureCoverage(bool matchingOwner)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "void Use(_Win32_AssociatedEnum_(EXTERNAL) unsigned value);");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "External.enums.cs"), @"
+namespace Test {
+    [global::Windows.Win32.Foundation.Metadata.SupportedArchitecture(global::Windows.Win32.Foundation.Metadata.Architecture.X64)]
+    public enum EXTERNAL : uint { VALUE = 1 }
+}");
+            if (matchingOwner)
+            {
+                var root = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetCompilationUnitRoot();
+                var method = root.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                    .Single(value => value.Identifier.ValueText == "Use");
+                var attribute = SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Attribute(
+                    SyntaxFactory.ParseName("global::Windows.Win32.Foundation.Metadata.SupportedArchitecture"),
+                    SyntaxFactory.ParseAttributeArgumentList("(global::Windows.Win32.Foundation.Metadata.Architecture.X64)"))));
+                File.WriteAllText(fixture.Output, root.ReplaceNode(method, method.AddAttributeLists(attribute)).ToFullString());
+                using var image = Emit(fixture, "crossarch");
+                AssertStringAttribute(image.Reader, Assert.Single(FindMethod(image.Reader, "Apis", "Use")
+                    .GetParameters().Select(image.Reader.GetParameter)).GetCustomAttributes(),
+                    "AssociatedEnumAttribute", "EXTERNAL");
+            }
+            else
+            {
+                var exception = Assert.Throws<InvalidOperationException>(() =>
+                {
+                    using var unexpected = Emit(fixture, "crossarch");
+                });
+                Assert.Contains("composition for X86; found 0", exception.Message);
+                Assert.Contains("composition for Arm64; found 0", exception.Message);
+                Assert.Equal(2, exception.Message.Split("WMA003").Length - 1);
+            }
+        }
+
         private const string Declarations = @"
 typedef void* HANDLE;
 typedef int HRESULT;
@@ -5308,12 +5474,13 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
 
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
             bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
-            IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null)
+            IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
+            Dictionary<string, Dictionary<string, string>> enumAdditions = null)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
-                memberRemaps ?? new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                memberRemaps ?? new Dictionary<string, string>(), enumAdditions ?? new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
                 references ?? Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
