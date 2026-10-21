@@ -1,3 +1,5 @@
+diff --git a/um/ole2.h b/um/ole2.h
+index 241acea2..022f2ee3 100644
 --- a/um/ole2.h
 +++ b/um/ole2.h
 @@ -1,3 +1,4 @@
@@ -5,7 +7,25 @@
  #include <winapifamily.h>
  
  
-@@ -66,6 +67,13 @@
+@@ -57,6 +58,17 @@
+ #define OLEIVERB_INPLACEACTIVATE    (-5L)
+ #define OLEIVERB_DISCARDUNDOSTATE   (-6L)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_Enum_(OLEIVERB, int,
++    OLEIVERB_PRIMARY,
++    OLEIVERB_SHOW,
++    OLEIVERB_OPEN,
++    OLEIVERB_HIDE,
++    OLEIVERB_UIACTIVATE,
++    OLEIVERB_INPLACEACTIVATE,
++    OLEIVERB_DISCARDUNDOSTATE);
++#endif
++
+ // for OleCreateEmbeddingHelper flags; roles in low word; options in high word
+ #define EMBDHLP_INPROC_HANDLER   0x0000L
+ #define EMBDHLP_INPROC_SERVER    0x0001L
+@@ -66,6 +78,13 @@
  /* extended create function flags */
  #define OLECREATE_LEAVERUNNING	0x00000001
  
@@ -19,7 +39,7 @@
  #define OLESTREAM_CONVERSION_DEFAULT 0x00000000L
  #define OLESTREAM_CONVERSION_DISABLEOLELINK 0x00000001L
  
-@@ -87,186 +95,229 @@
+@@ -87,186 +106,229 @@
      || !ISOLATION_AWARE_ENABLED \
      || !defined(_OBJBASE_H_) \
      || !defined(CreateDataAdviseHolder)
@@ -163,12 +183,10 @@
  
 -WINOLEAPI  OleLoadFromStream( IN LPSTREAM pStm, IN REFIID iidInterface, OUT LPVOID FAR* ppvObj);
 -WINOLEAPI  OleSaveToStream( IN LPPERSISTSTREAM pPStm, IN LPSTREAM pStm );
--
--
 +WINOLEAPI  _Win32_SupportedOS_Windows2000_ OleLoadFromStream( IN LPSTREAM pStm, IN REFIID iidInterface, OUT LPVOID FAR* ppvObj);
 +WINOLEAPI  _Win32_SupportedOS_Windows2000_ OleSaveToStream( IN LPPERSISTSTREAM pPStm, IN LPSTREAM pStm );
-+
-+
+ 
+ 
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleSetContainedObject(IN LPUNKNOWN pUnknown, IN BOOL fContained);
 +_Win32_SupportedOS_Windows2000_
@@ -225,9 +243,11 @@
  
  /* Helper APIs */
  
+-WINOLEAPI_(HANDLE) OleDuplicateData (IN HANDLE hSrc, IN CLIPFORMAT cfFormat,
+-                        IN UINT uiFlags);
 +_Win32_SupportedOS_Windows2000_
- WINOLEAPI_(HANDLE) OleDuplicateData (IN HANDLE hSrc, IN CLIPFORMAT cfFormat,
-                         IN UINT uiFlags);
++WINOLEAPI_(HANDLE) OleDuplicateData (IN HANDLE hSrc, IN _Win32_AssociatedEnum_(CLIPBOARD_FORMAT) CLIPFORMAT cfFormat,
++                        IN _Win32_AssociatedEnum_(GLOBAL_ALLOC_FLAGS) UINT uiFlags);
  
  
  
@@ -274,7 +294,7 @@
  WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLESTR lpszLabel,
                                          _In_ LPOLESTR lpszSourceFile, IN UINT iIconIndex);
  
-@@ -274,15 +325,18 @@
+@@ -274,15 +336,18 @@ WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLEST
  
  /* Registration Database Helper APIs */
  
@@ -294,7 +314,7 @@
  WINOLEAPI OleRegEnumVerbs (IN REFCLSID clsid, _Outptr_ LPENUMOLEVERB FAR* ppenum);
  
  
-@@ -313,6 +367,7 @@
+@@ -313,6 +378,7 @@ typedef HRESULT(STDAPICALLTYPE *OLESTREAMQUERYCONVERTOLELINKCALLBACK)
      _In_opt_ ULONG      linkUpdatingOption,
      _In_opt_ PVOID      pvContext);
  
@@ -302,7 +322,7 @@
  WINOLEAPI OleConvertOLESTREAMToIStorage
      (IN LPOLESTREAM                lpolestream,
      OUT LPSTORAGE                   pstg,
-@@ -326,6 +381,7 @@
+@@ -326,6 +392,7 @@ WINOLEAPI OleConvertOLESTREAMToIStorage2
      _In_opt_ PVOID                      pvCallbackContext,
      _In_opt_ OLESTREAMQUERYCONVERTOLELINKCALLBACK pQueryConvertOLELinkCallback);
  
@@ -310,7 +330,7 @@
  WINOLEAPI OleConvertIStorageToOLESTREAM
      (IN LPSTORAGE      pstg,
      OUT LPOLESTREAM     lpolestream);
-@@ -333,13 +389,18 @@
+@@ -333,13 +400,18 @@ WINOLEAPI OleConvertIStorageToOLESTREAM
  
  /* ConvertTo APIS */
  
@@ -329,7 +349,7 @@
  WINOLEAPI OleConvertIStorageToOLESTREAMEx
      (IN LPSTORAGE          pstg,
                                      // Presentation data to OLESTREAM
-@@ -350,6 +411,7 @@
+@@ -350,6 +422,7 @@ WINOLEAPI OleConvertIStorageToOLESTREAMEx
       IN LPSTGMEDIUM        pmedium,    //      bits
       OUT LPOLESTREAM        polestm);
  

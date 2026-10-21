@@ -1,5 +1,5 @@
 diff --git a/um/oleidl.idl b/um/oleidl.idl
-index 10d38014..0a122a89 100644
+index 10d38014..74b0fdc7 100644
 --- a/um/oleidl.idl
 +++ b/um/oleidl.idl
 @@ -7,6 +7,10 @@
@@ -38,7 +38,26 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000128-0000-0000-C000-000000000046),
-@@ -194,6 +202,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -188,12 +196,26 @@ interface IOleCache2 : IOleCache
+ 
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(UPDFCACHE_FLAGS, unsigned long,")
++cpp_quote("    UPDFCACHE_ALL,")
++cpp_quote("    UPDFCACHE_ALLBUTNODATACACHE,")
++cpp_quote("    UPDFCACHE_NORMALCACHE,")
++cpp_quote("    UPDFCACHE_IFBLANK,")
++cpp_quote("    UPDFCACHE_ONLYIFBLANK,")
++cpp_quote("    UPDFCACHE_NODATACACHE,")
++cpp_quote("    UPDFCACHE_ONSAVECACHE,")
++cpp_quote("    UPDFCACHE_ONSTOPCACHE,")
++cpp_quote("    UPDFCACHE_IFBLANKORONSAVECACHE);")
++cpp_quote("#endif")
++
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */")
+ #pragma endregion
+ 
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
@@ -46,7 +65,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000129-0000-0000-C000-000000000046)
-@@ -215,6 +224,7 @@ interface IOleCacheControl : IUnknown
+@@ -215,6 +237,7 @@ interface IOleCacheControl : IUnknown
  
  }
  
@@ -54,7 +73,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(0000011a-0000-0000-C000-000000000046),
-@@ -236,6 +246,7 @@ interface IParseDisplayName : IUnknown
+@@ -236,6 +259,7 @@ interface IParseDisplayName : IUnknown
  
  }
  
@@ -62,7 +81,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(0000011b-0000-0000-C000-000000000046),
-@@ -258,7 +269,9 @@ interface IOleContainer : IParseDisplayName
+@@ -258,7 +282,9 @@ interface IOleContainer : IParseDisplayName
          [in] BOOL fLock
      );
  }
@@ -72,7 +91,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000118-0000-0000-C000-000000000046),
-@@ -303,7 +316,19 @@ interface IOleClientSite : IUnknown
+@@ -303,7 +329,19 @@ interface IOleClientSite : IUnknown
      );
  
  }
@@ -93,7 +112,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000112-0000-0000-C000-000000000046),
-@@ -568,6 +593,7 @@ interface IOLETypes
+@@ -568,6 +606,7 @@ interface IOLETypes
  
  }
  
@@ -101,7 +120,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000114-0000-0000-C000-000000000046),
-@@ -591,6 +617,7 @@ interface IOleWindow : IUnknown
+@@ -591,6 +630,7 @@ interface IOleWindow : IUnknown
      );
  }
  
@@ -109,7 +128,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(0000011d-0000-0000-C000-000000000046)
-@@ -677,6 +704,7 @@ interface IOleLink : IUnknown
+@@ -677,6 +717,7 @@ interface IOleLink : IUnknown
  
  }
  
@@ -117,7 +136,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(0000011c-0000-0000-C000-000000000046),
-@@ -721,6 +749,7 @@ interface IOleItemContainer : IOleContainer
+@@ -721,6 +762,7 @@ interface IOleItemContainer : IOleContainer
          [in] LPOLESTR pszItem);
  }
  
@@ -125,7 +144,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000115-0000-0000-C000-000000000046),
-@@ -765,6 +794,7 @@ interface IOleInPlaceUIWindow : IOleWindow
+@@ -765,6 +807,7 @@ interface IOleInPlaceUIWindow : IOleWindow
  
  }
  
@@ -133,7 +152,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000117-0000-0000-C000-000000000046)
-@@ -820,6 +850,7 @@ interface IOleInPlaceActiveObject : IOleWindow
+@@ -820,6 +863,7 @@ interface IOleInPlaceActiveObject : IOleWindow
  
  }
  
@@ -141,7 +160,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000116-0000-0000-C000-000000000046),
-@@ -887,6 +918,7 @@ typedef struct tagOleMenuGroupWidths
+@@ -887,6 +931,7 @@ typedef struct tagOleMenuGroupWidths
  
  }
  
@@ -149,7 +168,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000113-0000-0000-C000-000000000046),
-@@ -922,6 +954,7 @@ interface IOleInPlaceObject : IOleWindow
+@@ -922,6 +967,7 @@ interface IOleInPlaceObject : IOleWindow
      );
  }
  
@@ -157,7 +176,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000119-0000-0000-C000-000000000046),
-@@ -999,6 +1032,11 @@ interface IContinue : IUnknown
+@@ -999,6 +1045,11 @@ interface IContinue : IUnknown
      HRESULT FContinue();
  }
  
@@ -169,7 +188,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(0000010d-0000-0000-C000-000000000046)
-@@ -1109,6 +1147,8 @@ interface IViewObject : IUnknown
+@@ -1109,6 +1160,8 @@ interface IViewObject : IUnknown
  
  }
  
@@ -178,7 +197,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000127-0000-0000-C000-000000000046)
-@@ -1130,6 +1170,9 @@ interface IViewObject2 : IViewObject
+@@ -1130,6 +1183,9 @@ interface IViewObject2 : IViewObject
  }
  
  
@@ -188,7 +207,7 @@ index 10d38014..0a122a89 100644
  [
      local,
      object,
-@@ -1152,7 +1195,16 @@ interface IDropSource : IUnknown
+@@ -1152,7 +1208,16 @@ interface IDropSource : IUnknown
          [in, annotation("_In_")] DWORD dwEffect
      );
  }
@@ -206,7 +225,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000122-0000-0000-C000-000000000046),    
-@@ -1222,7 +1274,11 @@ interface IDropTarget : IUnknown
+@@ -1222,7 +1287,11 @@ interface IDropTarget : IUnknown
          [in, out] DWORD *pdwEffect
      );
  }
@@ -218,7 +237,7 @@ index 10d38014..0a122a89 100644
  [
      local,
      object,
-@@ -1242,6 +1298,7 @@ interface IDropSourceNotify : IUnknown
+@@ -1242,6 +1311,7 @@ interface IDropSourceNotify : IUnknown
      );
  }
  
@@ -226,7 +245,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(390E3878-FD55-4E18-819D-4682081C0CFD),
-@@ -1262,6 +1319,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -1262,6 +1332,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -234,7 +253,7 @@ index 10d38014..0a122a89 100644
  [
      object,
      uuid(00000104-0000-0000-C000-000000000046),
-@@ -1273,6 +1331,8 @@ interface IEnumOLEVERB : IUnknown
+@@ -1273,6 +1344,8 @@ interface IEnumOLEVERB : IUnknown
  
      typedef [unique] IEnumOLEVERB *LPENUMOLEVERB;
  

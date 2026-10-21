@@ -12,30 +12,11 @@
     "uses": []
   },
   {
-    "addUsesTo": "CLIPBOARD_FORMAT",
-    "uses": [
-      {
-        "method": "OleDuplicateData",
-        "parameter": "cfFormat"
-      }
-    ]
-  },
-  {
     "uses": [],
     "addUsesTo": "MESSAGEBOX_STYLE"
   },
   {
     "addUsesTo": "MENU_ITEM_FLAGS",
-    "uses": []
-  },
-  {
-    "name": "OLEIVERB",
-    "type": "int",
-    "autoPopulate": {
-      "filter": "OLEIVERB_",
-      "header": "Ole2.h"
-    },
-    "members": [],
     "uses": []
   },
   {
@@ -71,49 +52,6 @@
   },
   {
     "addUsesTo": "FILE_MAP",
-    "uses": []
-  },
-  {
-    "name": "UPDFCACHE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "UPDFCACHE_",
-      "header": "oleidl.h"
-    },
-    "members": [
-      {
-        "name": "UPDFCACHE_ALL",
-        "value": "~UPDFCACHE_ONLYIFBLANK"
-      },
-      {
-        "name": "UPDFCACHE_ALLBUTNODATACACHE",
-        "value": "UPDFCACHE_ALL & ~UPDFCACHE_NODATACACHE"
-      },
-      {
-        "name": "UPDFCACHE_NODATACACHE_"
-      },
-      {
-        "name": "UPDFCACHE_ONSAVECACHE_"
-      },
-      {
-        "name": "UPDFCACHE_ONSTOPCACHE_"
-      },
-      {
-        "name": "UPDFCACHE_NORMALCACHE"
-      },
-      {
-        "name": "UPDFCACHE_IFBLANK"
-      },
-      {
-        "name": "UPDFCACHE_ONLYIFBLANK"
-      },
-      {
-        "name": "UPDFCACHE__IFBLANKORONSAVECACHE"
-      },
-      {
-        "name": "UPDFCACHE__ALLBUTNODATACACHE"
-      }
-    ],
     "uses": []
   },
   {
@@ -3464,15 +3402,6 @@
         }
       ]
     },
-  {
-    "addUsesTo": "GLOBAL_ALLOC_FLAGS",
-    "uses": [
-      {
-        "method": "OleDuplicateData",
-        "parameter": "uiFlags"
-      }
-    ]
-  },
   {
     "addUsesTo": "NtmsInjectOperation",
     "members": [],
