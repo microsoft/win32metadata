@@ -256,38 +256,6 @@
       {
         "struct": "RPC_SECURITY_QOS",
         "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_A",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_W",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_A",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_W",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_A",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_W",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_A",
-        "field": "ImpersonationType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_W",
-        "field": "ImpersonationType"
       }
     ]
   },
