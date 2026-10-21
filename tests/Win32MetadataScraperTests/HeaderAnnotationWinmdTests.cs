@@ -3490,6 +3490,116 @@ struct HOLDER { _Win32_AssociatedEnum_(OPTIONS) unsigned options; unsigned after
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void AuthoredIntegralEnumValuePreservesNativePointerSentinel(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef void* HANDLE;
+#define GR_GDIOBJECTS 0
+#define GR_USEROBJECTS 1
+#define GR_GDIOBJECTS_PEAK 2
+#define GR_USEROBJECTS_PEAK 4
+#define GR_GLOBAL ((HANDLE)-2)
+static_assert(__is_same(decltype(GR_GLOBAL), HANDLE), ""GR_GLOBAL must remain a native pointer"");
+HANDLE NativeGlobal() { return GR_GLOBAL; }
+_Win32_Enum_(GET_GUI_RESOURCES_FLAGS, unsigned int,
+    GR_GDIOBJECTS, GR_USEROBJECTS, GR_GDIOBJECTS_PEAK, GR_USEROBJECTS_PEAK);
+#ifdef WIN32METADATA
+typedef _WIN32META_ANNOTATION_(""Enum(GR_GLOBAL)"", (unsigned int)-2) unsigned int GET_GUI_RESOURCES_FLAGS;
+#endif
+unsigned GetGuiResources(HANDLE process, _Win32_AssociatedEnum_(GET_GUI_RESOURCES_FLAGS) unsigned flags);
+", extraSettings: "--language=c++\n--std=c++17");
+            byte[] original = File.ReadAllBytes(fixture.Header);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(original, File.ReadAllBytes(fixture.Header));
+            Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
+
+            var arguments = new[]
+            {
+                "--language=c++", "--std=c++17", "--target=" + target,
+                "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
+                "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1", "-DWIN32METADATA",
+            };
+            using var index = CXIndex.Create(false, false);
+            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index,
+                Path.Combine(fixture.DirectoryPath, "test.cpp"), arguments, ReadOnlySpan<CXUnsavedFile>.Empty,
+                CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
+            using var unit = TranslationUnit.GetOrCreate(handle);
+            var native = unit.TranslationUnitDecl.CursorChildren.OfType<FunctionDecl>()
+                .Single(function => function.Name == "NativeGlobal");
+            var cast = Assert.Single(Descendants(native).OfType<Expr>()
+                .Where(expression => expression.CursorKind == CXCursorKind.CXCursor_CStyleCastExpr));
+            Assert.Equal(CXTypeKind.CXType_Pointer, cast.Type.CanonicalType.Kind);
+            Assert.Equal(architecture == "x86" ? 4 : 8, cast.Type.Handle.SizeOf);
+            var operand = Assert.Single(cast.CursorChildren.OfType<Expr>());
+            using var evaluation = operand.Handle.Evaluate;
+            Assert.NotEqual(IntPtr.Zero, evaluation.Handle);
+            Assert.Equal(CXEvalResultKind.CXEval_Int, evaluation.Kind);
+            Assert.Equal(-2, evaluation.AsLongLong);
+
+            using var image = Emit(fixture.DirectoryPath, architecture, requiredNamespaces:
+                new Dictionary<string, string> { ["GET_GUI_RESOURCES_FLAGS"] = "Windows.Win32.System.Threading" });
+            var reader = image.Reader;
+            var group = FindType(reader, "GET_GUI_RESOURCES_FLAGS");
+            Assert.Equal("Windows.Win32.System.Threading", reader.GetString(group.Namespace));
+            AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "FlagsAttribute");
+            AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "ScopedEnumAttribute");
+            var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("UInt32", fields.Single(field => reader.GetString(field.Name) == "value__")
+                .DecodeSignature(new SignatureNames(), null));
+            var members = fields.Where(field => reader.GetString(field.Name) != "value__").ToArray();
+            Assert.Equal(new[] { "GR_GDIOBJECTS", "GR_USEROBJECTS", "GR_GDIOBJECTS_PEAK", "GR_USEROBJECTS_PEAK", "GR_GLOBAL" },
+                members.Select(field => reader.GetString(field.Name)));
+            var values = members.Select(field =>
+            {
+                var constant = reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                return reader.GetBlobReader(constant.Value).ReadUInt32();
+            }).ToArray();
+            Assert.Equal(new uint[] { 0, 1, 2, 4, 4294967294 }, values);
+            byte[] blob = reader.GetBlobBytes(reader.GetConstant(members[^1].GetDefaultValue()).Value);
+            Assert.Equal(new byte[] { 0xFE, 0xFF, 0xFF, 0xFF }, blob);
+            var consumer = FindMethod(reader, "Apis", "GetGuiResources");
+            Assert.Equal(new[] { "Void*", "UInt32" }, consumer.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var flags = consumer.GetParameters().Select(reader.GetParameter)
+                .Single(parameter => reader.GetString(parameter.Name) == "flags");
+            AssertStringAttribute(reader, flags.GetCustomAttributes(), "AssociatedEnumAttribute", "GET_GUI_RESOURCES_FLAGS");
+            AssertMetadataClosure(reader);
+
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_POINTER_ENUM_ARTIFACTS");
+            if (artifacts != null)
+            {
+                string destination = Path.Combine(artifacts, architecture);
+                Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
+                Directory.CreateDirectory(destination);
+                foreach (string source in new[] { fixture.Header, fixture.Output,
+                    Path.ChangeExtension(fixture.Output, ".header-types.cs"), Path.Combine(fixture.DirectoryPath, "Test.winmd") })
+                    File.Copy(source, Path.Combine(destination, Path.GetFileName(source)));
+                File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
+                {
+                    architecture, nativeMacro = "#define GR_GLOBAL ((HANDLE)-2)", nativeOperand = evaluation.AsLongLong,
+                    nativePointerBytes = cast.Type.Handle.SizeOf, nativeSourceBytesUnchanged = true,
+                    representation = "Authored (unsigned int)-2 copied from the native operand; not evaluation of the HANDLE macro.",
+                    storage = "UInt32", names = members.Select(field => reader.GetString(field.Name)).ToArray(),
+                    values, grGlobalBlob = Convert.ToHexString(blob),
+                    association = "GET_GUI_RESOURCES_FLAGS", owner = "Windows.Win32.System.Threading",
+                }, new JsonSerializerOptions { WriteIndented = true }));
+            }
+
+            static IEnumerable<Cursor> Descendants(Cursor cursor)
+            {
+                foreach (var child in cursor.CursorChildren)
+                {
+                    yield return child;
+                    foreach (var descendant in Descendants(child))
+                        yield return descendant;
+                }
+            }
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
