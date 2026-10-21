@@ -80,17 +80,6 @@
     "uses": []
   },
   {
-    "name": "BCRYPT_OPERATION",
-    "flags": true,
-    "members": [],
-    "uses": [
-      {
-        "method": "BCryptEnumAlgorithms",
-        "parameter": "dwAlgOperations"
-      }
-    ]
-  },
-  {
       "addUsesTo": "DDE_ENABLE_CALLBACK_CMD",
       "uses": [
         {

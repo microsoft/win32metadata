@@ -1,3 +1,5 @@
+diff --git a/shared/bcrypt.h b/shared/bcrypt.h
+index c05c9ae0..a3fd7c99 100644
 --- a/shared/bcrypt.h
 +++ b/shared/bcrypt.h
 @@ -16,6 +16,7 @@
@@ -8,7 +10,7 @@
  
  #include <winapifamily.h>
  
-@@ -421,6 +422,15 @@
+@@ -421,6 +422,15 @@ typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
  #define BCRYPT_PAD_PKCS1            0x00000002  // BCryptEncrypt/Decrypt BCryptSignHash/VerifySignature
  #define BCRYPT_PAD_OAEP             0x00000004  // BCryptEncrypt/Decrypt
  #define BCRYPT_PAD_PSS              0x00000008  // BCryptSignHash/VerifySignature
@@ -24,7 +26,7 @@
  #if (NTDDI_VERSION >= NTDDI_WINBLUE)
  #define BCRYPT_PAD_PKCS1_OPTIONAL_HASH_OID  0x00000010   //BCryptVerifySignature
  #endif
-@@ -450,6 +460,7 @@
+@@ -450,6 +460,7 @@ typedef struct _BCryptBufferDesc {
  
  typedef PVOID BCRYPT_HANDLE;
  typedef PVOID BCRYPT_ALG_HANDLE;
@@ -32,21 +34,21 @@
  typedef PVOID BCRYPT_KEY_HANDLE;
  typedef PVOID BCRYPT_HASH_HANDLE;
  typedef PVOID BCRYPT_SECRET_HANDLE;
-@@ -506,6 +517,13 @@
- #define BCRYPT_RSAFULLPRIVATE_BLOB      L"RSAFULLPRIVATEBLOB"
+@@ -507,6 +518,13 @@ typedef struct _BCRYPT_RSAKEY_BLOB
  
  #define BCRYPT_RSAFULLPRIVATE_MAGIC     0x33415352  // RSA3
-+
+ 
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(BCRYPT_RSAKEY_BLOB_MAGIC, unsigned long,
 +    BCRYPT_RSAPUBLIC_MAGIC,
 +    BCRYPT_RSAPRIVATE_MAGIC,
 +    BCRYPT_RSAFULLPRIVATE_MAGIC);
 +#endif
- 
++
  //Properties of secret agreement algorithms
  #if (NTDDI_VERSION >= NTDDI_WIN8)
-@@ -616,6 +634,12 @@
+ #define BCRYPT_GLOBAL_PARAMETERS    L"SecretAgreementParam"
+@@ -616,6 +634,12 @@ typedef struct _BCRYPT_ECCFULLKEY_BLOB
  #define BCRYPT_DH_PUBLIC_MAGIC          0x42504844  // DHPB
  #define BCRYPT_DH_PRIVATE_MAGIC         0x56504844  // DHPV
  
@@ -59,20 +61,20 @@
  typedef struct _BCRYPT_DH_KEY_BLOB
  {
      ULONG   dwMagic;
-@@ -647,6 +671,12 @@
- 
+@@ -648,6 +672,12 @@ typedef _Struct_size_bytes_(cbLength) struct _BCRYPT_DH_PARAMETER_HEADER
  #define BCRYPT_DSA_PUBLIC_MAGIC             0x42505344  // DSPB
  #define BCRYPT_DSA_PRIVATE_MAGIC            0x56505344  // DSPV
-+
+ 
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(BCRYPT_DSA_MAGIC, unsigned long,
 +    BCRYPT_DSA_PUBLIC_MAGIC,
 +    BCRYPT_DSA_PRIVATE_MAGIC);
 +#endif
- 
++
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  #define BCRYPT_DSA_PUBLIC_MAGIC_V2          0x32425044  // DPB2
-@@ -1001,6 +1031,10 @@
+ #define BCRYPT_DSA_PRIVATE_MAGIC_V2         0x32565044  // DPV2
+@@ -1001,6 +1031,10 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
  #define BCRYPT_SIGNATURE_INTERFACE              0x00000005
  #define BCRYPT_RNG_INTERFACE                    0x00000006
  
@@ -83,7 +85,7 @@
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  #define BCRYPT_KEY_DERIVATION_INTERFACE         0x00000007
  #endif
-@@ -1118,6 +1152,13 @@
+@@ -1118,6 +1152,13 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
  #define BCRYPT_ALG_HANDLE_HMAC_FLAG             0x00000008
  #define BCRYPT_HASH_REUSABLE_FLAG               0x00000020
  
@@ -97,7 +99,7 @@
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  #define BCRYPT_CAPI_AES_FLAG                    0x00000010
  #endif
-@@ -1207,14 +1248,15 @@
+@@ -1207,14 +1248,15 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
  #define BCRYPT_ENABLE_INCOMPATIBLE_FIPS_CHECKS	0x00000100
  #endif
  
@@ -115,7 +117,45 @@
  
  
  
-@@ -1246,6 +1288,7 @@
+@@ -1234,6 +1276,37 @@ BCryptOpenAlgorithmProvider(
+ #define BCRYPT_KEY_ENCAPSULATION_OPERATION      0x00000080
+ #endif
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
++_Win32_FlagsEnum_(BCRYPT_OPERATION, unsigned long,
++    BCRYPT_CIPHER_OPERATION,
++    BCRYPT_HASH_OPERATION,
++    BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION,
++    BCRYPT_SECRET_AGREEMENT_OPERATION,
++    BCRYPT_SIGNATURE_OPERATION,
++    BCRYPT_RNG_OPERATION,
++    BCRYPT_KEY_DERIVATION_OPERATION,
++    BCRYPT_KEY_ENCAPSULATION_OPERATION);
++#elif (NTDDI_VERSION >= NTDDI_WIN8)
++_Win32_FlagsEnum_(BCRYPT_OPERATION, unsigned long,
++    BCRYPT_CIPHER_OPERATION,
++    BCRYPT_HASH_OPERATION,
++    BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION,
++    BCRYPT_SECRET_AGREEMENT_OPERATION,
++    BCRYPT_SIGNATURE_OPERATION,
++    BCRYPT_RNG_OPERATION,
++    BCRYPT_KEY_DERIVATION_OPERATION);
++#else
++_Win32_FlagsEnum_(BCRYPT_OPERATION, unsigned long,
++    BCRYPT_CIPHER_OPERATION,
++    BCRYPT_HASH_OPERATION,
++    BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION,
++    BCRYPT_SECRET_AGREEMENT_OPERATION,
++    BCRYPT_SIGNATURE_OPERATION,
++    BCRYPT_RNG_OPERATION);
++#endif
++#endif
++
+ // USE EXTREME CAUTION: editing comments that contain "certenrolls_*" tokens
+ // could break building CertEnroll idl files:
+ // certenrolls_begin -- BCRYPT_ALGORITHM_IDENTIFIER
+@@ -1246,11 +1319,12 @@ typedef struct _BCRYPT_ALGORITHM_IDENTIFIER
  } BCRYPT_ALGORITHM_IDENTIFIER;
  // certenrolls_end
  
@@ -123,7 +163,13 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1260,6 +1303,7 @@
+ BCryptEnumAlgorithms(
+-    _In_    ULONG   dwAlgOperations,
++    _In_    _Win32_AssociatedEnum_(BCRYPT_OPERATION) ULONG   dwAlgOperations,
+     _Out_   ULONG   *pAlgCount,
+     _Out_   BCRYPT_ALGORITHM_IDENTIFIER **ppAlgList,
+     _In_    ULONG   dwFlags);
+@@ -1260,6 +1334,7 @@ typedef struct _BCRYPT_PROVIDER_NAME
      LPWSTR  pszProviderName;
  } BCRYPT_PROVIDER_NAME;
  
@@ -131,7 +177,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1275,6 +1319,7 @@
+@@ -1275,6 +1350,7 @@ BCryptEnumProviders(
  #define BCRYPT_PUBLIC_KEY_FLAG                  0x00000001
  #define BCRYPT_PRIVATE_KEY_FLAG                 0x00000002
  
@@ -139,7 +185,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1287,6 +1332,7 @@
+@@ -1287,6 +1363,7 @@ BCryptGetProperty(
      _In_                                        ULONG   dwFlags);
  
  
@@ -147,7 +193,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1298,6 +1344,7 @@
+@@ -1298,6 +1375,7 @@ BCryptSetProperty(
      _In_                    ULONG   dwFlags);
  
  
@@ -155,7 +201,7 @@
  NTSTATUS
  WINAPI
  BCryptCloseAlgorithmProvider(
-@@ -1305,6 +1352,7 @@
+@@ -1305,6 +1383,7 @@ BCryptCloseAlgorithmProvider(
      _In_    ULONG   dwFlags);
  
  
@@ -163,7 +209,7 @@
  VOID
  WINAPI
  BCryptFreeBuffer(
-@@ -1314,12 +1362,13 @@
+@@ -1314,12 +1393,13 @@ BCryptFreeBuffer(
  //
  // Primitive encryption functions.
  //
@@ -178,7 +224,7 @@
      _Out_writes_bytes_all_opt_(cbKeyObject)  PUCHAR   pbKeyObject,
      _In_                                ULONG   cbKeyObject,
      _In_reads_bytes_(cbSecret)               PUCHAR   pbSecret,
-@@ -1327,16 +1376,18 @@
+@@ -1327,16 +1407,18 @@ BCryptGenerateSymmetricKey(
      _In_                                ULONG   dwFlags);
  
  
@@ -198,35 +244,31 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1350,9 +1401,10 @@
+@@ -1350,9 +1432,10 @@ BCryptEncrypt(
      _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
      _In_                                        ULONG   cbOutput,
      _Out_                                       ULONG   *pcbResult,
 -    _In_                                        ULONG   dwFlags);
--
--
 +    _In_                                        _Win32_AssociatedEnum_(BCRYPT_FLAGS) ULONG   dwFlags);
-+
-+
+ 
+ 
 +_Win32_SupportedOS_WindowsVista_
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1366,9 +1418,10 @@
+@@ -1366,9 +1449,10 @@ BCryptDecrypt(
      _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
      _In_                                        ULONG   cbOutput,
      _Out_                                       ULONG   *pcbResult,
 -    _In_                                        ULONG   dwFlags);
--
--
 +    _In_                                        _Win32_AssociatedEnum_(BCRYPT_FLAGS) ULONG   dwFlags);
-+
-+
+ 
+ 
 +_Win32_SupportedOS_WindowsVista_
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1382,6 +1435,7 @@
+@@ -1382,6 +1466,7 @@ BCryptExportKey(
      _In_                                        ULONG   dwFlags);
  
  
@@ -234,7 +276,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1389,7 +1443,7 @@
+@@ -1389,7 +1474,7 @@ BCryptImportKey(
      _In_                                BCRYPT_ALG_HANDLE hAlgorithm,
      _In_opt_                            BCRYPT_KEY_HANDLE hImportKey,
      _In_z_                              LPCWSTR pszBlobType,
@@ -243,7 +285,7 @@
      _Out_writes_bytes_all_opt_(cbKeyObject)  PUCHAR   pbKeyObject,
      _In_                                ULONG   cbKeyObject,
      _In_reads_bytes_(cbInput)                PUCHAR   pbInput,
-@@ -1405,6 +1459,7 @@
+@@ -1405,6 +1490,7 @@ BCryptImportKey(
  #define BCRYPT_KEY_VALIDATION_REGENERATE        0x00000020  // BCryptImportKeyPair
  #endif
  
@@ -251,7 +293,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1412,23 +1467,25 @@
+@@ -1412,23 +1498,25 @@ BCryptImportKeyPair(
      _In_                            BCRYPT_ALG_HANDLE hAlgorithm,
      _In_opt_                        BCRYPT_KEY_HANDLE hImportKey,
      _In_z_                          LPCWSTR pszBlobType,
@@ -279,7 +321,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1437,18 +1494,21 @@
+@@ -1437,18 +1525,21 @@ BCryptFinalizeKeyPair(
      _In_    ULONG   dwFlags);
  
  
@@ -301,35 +343,31 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1460,9 +1520,10 @@
+@@ -1460,9 +1551,10 @@ BCryptSignHash(
      _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PUCHAR   pbOutput,
      _In_                                        ULONG   cbOutput,
      _Out_                                       ULONG   *pcbResult,
 -    _In_                                        ULONG   dwFlags);
--
--
 +    _In_                                        _Win32_AssociatedEnum_(BCRYPT_FLAGS) ULONG   dwFlags);
-+
-+
+ 
+ 
 +_Win32_SupportedOS_WindowsVista_
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1473,9 +1534,10 @@
+@@ -1473,9 +1565,10 @@ BCryptVerifySignature(
      _In_                        ULONG   cbHash,
      _In_reads_bytes_(cbSignature)    PUCHAR   pbSignature,
      _In_                        ULONG   cbSignature,
 -    _In_                        ULONG   dwFlags);
--
--
 +    _In_                        _Win32_AssociatedEnum_(BCRYPT_FLAGS) ULONG   dwFlags);
-+
-+
+ 
+ 
 +_Win32_SupportedOS_WindowsVista_
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1486,6 +1548,7 @@
+@@ -1486,6 +1579,7 @@ BCryptSecretAgreement(
      _In_    ULONG                   dwFlags);
  
  
@@ -337,7 +375,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1500,6 +1563,7 @@
+@@ -1500,6 +1594,7 @@ BCryptDeriveKey(
  
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -345,7 +383,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1516,12 +1580,13 @@
+@@ -1516,12 +1611,13 @@ BCryptKeyDerivation(
  //
  // Primitive hashing functions.
  //
@@ -360,7 +398,7 @@
      _Out_writes_bytes_all_opt_(cbHashObject) PUCHAR   pbHashObject,
      _In_                                ULONG   cbHashObject,
      _In_reads_bytes_opt_(cbSecret)           PUCHAR   pbSecret,   // optional
-@@ -1529,6 +1594,7 @@
+@@ -1529,6 +1625,7 @@ BCryptCreateHash(
      _In_                                ULONG   dwFlags);
  
  
@@ -368,7 +406,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1539,6 +1605,7 @@
+@@ -1539,6 +1636,7 @@ BCryptHashData(
      _In_                    ULONG   dwFlags);
  
  
@@ -376,7 +414,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1550,12 +1617,13 @@
+@@ -1550,12 +1648,13 @@ BCryptFinishHash(
  
  
  #if (NTDDI_VERSION > NTDDI_WINBLUE || (NTDDI_VERSION == NTDDI_WINBLUE && defined(WINBLUE_KBSPRING14)))
@@ -391,7 +429,7 @@
      _In_                                        ULONG               nHashes,
      _Out_writes_bytes_all_opt_(cbHashObject)    PUCHAR              pbHashObject,
      _In_                                        ULONG               cbHashObject,
-@@ -1563,6 +1631,7 @@
+@@ -1563,6 +1662,7 @@ BCryptCreateMultiHash(
      _In_                                        ULONG               cbSecret,   // optional
      _In_                                        ULONG               dwFlags);
  
@@ -399,7 +437,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1575,17 +1644,19 @@
+@@ -1575,17 +1675,19 @@ BCryptProcessMultiOperations(
  #endif
  
  
@@ -420,7 +458,7 @@
  NTSTATUS
  WINAPI
  BCryptDestroyHash(
-@@ -1593,6 +1664,7 @@
+@@ -1593,6 +1695,7 @@ BCryptDestroyHash(
  
  
  #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
@@ -428,7 +466,7 @@
  NTSTATUS
  WINAPI
  BCryptHash(
-@@ -1615,6 +1687,13 @@
+@@ -1615,6 +1718,13 @@ BCryptHash(
  #define BCRYPT_RNG_USE_ENTROPY_IN_BUFFER    0x00000001
  #define BCRYPT_USE_SYSTEM_PREFERRED_RNG     0x00000002
  
@@ -442,7 +480,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1622,13 +1701,14 @@
+@@ -1622,13 +1732,14 @@ BCryptGenRandom(
      _In_opt_                        BCRYPT_ALG_HANDLE   hAlgorithm,
      _Out_writes_bytes_(cbBuffer)    PUCHAR  pbBuffer,
      _In_                            ULONG   cbBuffer,
@@ -458,7 +496,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1642,6 +1722,7 @@
+@@ -1642,6 +1753,7 @@ BCryptDeriveKeyCapi(
  
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -466,7 +504,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1746,6 +1827,12 @@
+@@ -1746,6 +1858,12 @@ typedef struct _BCRYPT_INTERFACE_VERSION
  #define CRYPT_MIN_DEPENDENCIES      (0x00000001)
  #define CRYPT_PROCESS_ISOLATE       (0x00010000) // User-mode only
  
@@ -479,7 +517,7 @@
  // Processor modes supported by a provider
  //
  // (Valid for BCryptQueryProviderRegistration and BCryptResolveProviders):
-@@ -1758,6 +1845,14 @@
+@@ -1758,6 +1876,14 @@ typedef struct _BCRYPT_INTERFACE_VERSION
  //
  #define CRYPT_ANY                   (0x00000004)    // Wildcard: Either UM, or KM, or both
  
@@ -494,7 +532,7 @@
  
  // Write behavior flags
  #define CRYPT_OVERWRITE             (0x00000001)
-@@ -1766,14 +1861,32 @@
+@@ -1766,14 +1892,32 @@ typedef struct _BCRYPT_INTERFACE_VERSION
  #define CRYPT_LOCAL                 (0x00000001)
  #define CRYPT_DOMAIN                (0x00000002)
  
@@ -527,7 +565,7 @@
  // Priority list positions
  #define CRYPT_PRIORITY_TOP          (0x00000000)
  #define CRYPT_PRIORITY_BOTTOM       (0xFFFFFFFF)
-@@ -1791,7 +1904,7 @@
+@@ -1791,7 +1935,7 @@ typedef struct _BCRYPT_INTERFACE_VERSION
  
  typedef struct _CRYPT_INTERFACE_REG
  {
@@ -536,7 +574,7 @@
      ULONG dwFlags;
  
      ULONG cFunctions;
-@@ -1918,16 +2031,18 @@
+@@ -1918,16 +2062,18 @@ CRYPT_PROVIDER_REFS, *PCRYPT_PROVIDER_REFS;
  #ifndef KERNEL_MODE_CNG
  
  
@@ -557,7 +595,7 @@
  _Must_inspect_result_
  NTSTATUS
  WINAPI
-@@ -1938,127 +2053,140 @@
+@@ -1938,127 +2084,140 @@ BCryptEnumRegisteredProviders(
  //
  // Context Configuration Functions
  //
@@ -719,7 +757,7 @@
      _In_z_ LPCWSTR pszFunction,
      _In_z_ LPCWSTR pszProperty,
      _Inout_ ULONG* pcbValue,
-@@ -2101,6 +2229,7 @@
+@@ -2101,6 +2260,7 @@ BCryptUnregisterConfigChangeNotify(
  //
  // Provider Resolution Functions
  //
@@ -727,7 +765,7 @@
  _Must_inspect_result_
  NTSTATUS WINAPI
  BCryptResolveProviders(
-@@ -2108,8 +2237,8 @@
+@@ -2108,8 +2268,8 @@ BCryptResolveProviders(
      _In_opt_ ULONG dwInterface,
      _In_opt_z_ LPCWSTR pszFunction,
      _In_opt_z_ LPCWSTR pszProvider,
@@ -738,7 +776,7 @@
      _Inout_ ULONG* pcbBuffer,
      _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDER_REFS *ppBuffer);
  
-@@ -2122,6 +2251,7 @@
+@@ -2122,6 +2282,7 @@ BCryptResolveProviders(
  //
  // Miscellaneous queries about the crypto environment
  //
