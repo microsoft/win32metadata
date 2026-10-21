@@ -1080,15 +1080,6 @@
     "uses": []
   },
   {
-    "addUsesTo": "CERT_KEY_SPEC",
-    "uses": [
-      {
-        "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
-        "field": "dwKeySpec"
-      }
-    ]
-  },
-  {
     "addUsesTo": "NtmsEjectOperation",
     "members": [],
     "uses": []
@@ -3398,19 +3389,6 @@
       ]
     },
   {
-      "addUsesTo": "CERT_REVOCATION_STATUS_REASON",
-      "uses": [
-        {
-          "struct": "CERT_REVOCATION_STATUS",
-          "field": "dwReason"
-        },
-        {
-          "struct": "OCSP_BASIC_REVOKED_INFO",
-          "field": "dwCrlReasonCode"
-        }
-      ]
-    },
-  {
     "name": "TVITEMEXW_CHILDREN",
     "members": [
       {
@@ -3425,15 +3403,6 @@
     "members": [],
     "uses": []
   },
-  {
-      "addUsesTo": "CERT_ROOT_PROGRAM_FLAGS",
-      "uses": [
-        {
-          "struct": "EV_EXTRA_CERT_CHAIN_POLICY_PARA",
-          "field": "dwRootProgramQualifierFlags"
-        }
-      ]
-    },
   {
     "addUsesTo": "IKEEXT_CERT_AUTH",
     "members": [
