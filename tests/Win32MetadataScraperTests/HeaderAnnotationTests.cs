@@ -1,10 +1,13 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using ClangSharp;
+using ClangSharp.Interop;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Win32MetadataScraper;
@@ -1731,6 +1734,137 @@ struct IProbe { METHODS };
 ");
             Assert.NotEqual(0, fixture.Run());
             Assert.Contains("were not projected", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IndependentPostProjectionErrorsAreReportedTogetherBeforeOutput(bool valid)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", valid ? @"
+struct IProbe {
+    virtual int First(_Win32_Retained_ void* first) = 0;
+    virtual int Second(_Win32_Retained_ void* second) = 0;
+};
+" : @"
+struct IProbe {
+    int (__stdcall* First)(_Win32_Retained_ void* first);
+    int (__stdcall* Second)(_Win32_Retained_ void* second);
+};
+");
+            int exitCode = fixture.Run();
+            Assert.Contains("Processing '", fixture.Diagnostics);
+            if (valid)
+            {
+                Assert.Equal(0, exitCode);
+                Assert.DoesNotContain("WMA001", fixture.Diagnostics);
+                var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                    .OfType<MethodDeclarationSyntax>().Where(method => method.Identifier.ValueText is "First" or "Second").ToArray();
+                Assert.Equal(2, methods.Length);
+                Assert.All(methods, method => Assert.Contains("Metadata.Retained", Assert.Single(method.ParameterList.Parameters).ToString()));
+                return;
+            }
+            Assert.NotEqual(0, exitCode);
+            string[] errors = fixture.Diagnostics.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(line => line.Contains("error WMA001:", StringComparison.Ordinal)).ToArray();
+            Assert.Equal(2, errors.Length);
+            Assert.Contains("Annotation facts for 'first' were not projected", errors[0]);
+            Assert.Contains("Annotation facts for 'second' were not projected", errors[1]);
+            Assert.All(errors, error => Assert.Contains("[native target:", error));
+            Assert.False(File.Exists(fixture.Output));
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            Assert.False(File.Exists(Path.Combine(fixture.DirectoryPath, "remaps.txt")));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void PostProjectionCollectionKeepsEligibleIncompleteRecordsAndUnexpectedExceptionsStrict(bool unexpected)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct _Win32_SupportedOS_WindowsVista_ Complete { int value; };
+struct _Win32_SupportedOS_WindowsVista_ Incomplete;
+_Win32_PreserveResult_ int Unprojected();
+");
+            using var index = CXIndex.Create(false, false);
+            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index,
+                Path.Combine(fixture.DirectoryPath, "test.cpp"), new[]
+                {
+                    "--language=c++", "--target=x86_64-pc-windows-msvc",
+                    "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
+                    "-DWIN32METADATA", "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1",
+                }, ReadOnlySpan<CXUnsavedFile>.Empty,
+                CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes |
+                    CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord, out var handle));
+            using var unit = TranslationUnit.GetOrCreate(handle);
+            for (uint i = 0; i < handle.NumDiagnostics; i++)
+            {
+                using var diagnostic = handle.GetDiagnostic(i);
+                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
+                    diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+            }
+            var processor = new HeaderAnnotationProcessor(unit, new Dictionary<string, string>(), "Test",
+                unexpected ? new[] { "\0" } : Array.Empty<string>(), new HashSet<string>(), false);
+            if (unexpected)
+                Assert.Throws<ArgumentException>(() => processor.ValidateProjection());
+            else
+            {
+                var error = Assert.Throws<HeaderAnnotationDiagnosticsException>(() => processor.ValidateProjection());
+                Assert.Equal(3, error.Message.Split("error WMA001:").Length - 1);
+                foreach (string name in new[] { "Complete", "Incomplete", "Unprojected" })
+                    Assert.Contains("Annotation facts for '" + name + "' were not projected", error.Message);
+            }
+        }
+
+        [Theory]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void RecordProjectionEligibilityUsesTheActualDefinitionNotInScopeForwards(bool definitionTraversed, bool annotationsEnabled)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#include ""forward.h""
+#include ""definition.h""
+int Imported();
+", annotationsEnabled: annotationsEnabled,
+                extraSettings: "--traverse\n" + (definitionTraversed ? "definition.h" : "forward.h") + "\n");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "forward.h"),
+                "struct IStream;\nstruct IStream;\ntypedef struct IStream IStream;\n");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "definition.h"),
+                "struct _Win32_SupportedOS_WindowsVista_ IStream { int value; };\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            var records = CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().Where(record => record.Identifier.ValueText == "IStream").ToArray();
+            Assert.Contains("Imported", source);
+            if (definitionTraversed)
+            {
+                Assert.Single(records);
+                AssertSupportedOS(source, "IStream", annotationsEnabled ? "windows6.0.6000" : null);
+            }
+            else
+            {
+                Assert.Empty(records);
+                Assert.DoesNotContain("windows6.0.6000", source);
+            }
+        }
+
+        [Fact]
+        public void RecordDefinitionsOutsideTraversalStillValidateAllNativeFacts()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct RECORD;
+#include ""definition.h""
+int Imported();
+");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "definition.h"),
+                "struct _Win32_SetLastError_ RECORD { int value; };\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("not valid on", fixture.Diagnostics);
+            Assert.DoesNotContain("Processing '", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
         }
 

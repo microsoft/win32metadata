@@ -23,6 +23,72 @@ namespace Win32MetadataScraperTests
     public partial class HeaderAnnotationWinmdTests
     {
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void CompilerExpandedCommentTargetsReachOnlyTheActualNativeMethod(
+            string architecture, string target, bool unicode)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                (unicode ? "#define UNICODE\n" : "") + HeaderAnnotationCommentTests.ObjectMacroMethodDeclarations);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var nativeOff = NativeSurface(fixture, target, false);
+            var nativeOn = NativeSurface(fixture, target, true);
+            Assert.Equal(nativeOff, nativeOn);
+            string actualName = unicode ? "GetObjectW" : "GetObjectA";
+            Assert.Contains(nativeOn, value => value.StartsWith("function " + actualName + " ", StringComparison.Ordinal));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var type = FindType(reader, "IWbemServices");
+            Assert.Equal(new[] { actualName, "Other" },
+                type.GetMethods().Select(handle => reader.GetString(reader.GetMethodDefinition(handle).Name)));
+            var method = FindMethod(reader, "IWbemServices", actualName);
+            var signature = method.DecodeSignature(new SignatureNames(), null);
+            Assert.Equal("Int32", signature.ReturnType);
+            Assert.Equal(new[] { "UInt16*", "Int32" }, signature.ParameterTypes);
+            Assert.False(method.Attributes.HasFlag(MethodAttributes.PinvokeImpl));
+            Assert.True(method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            var parameters = method.GetParameters().Select(reader.GetParameter).ToArray();
+            Assert.Equal(new[] { "path", "lFlags" }, parameters.Select(value => reader.GetString(value.Name)));
+            Assert.Equal(2, parameters[1].SequenceNumber);
+            AssertStringAttribute(reader, parameters[1].GetCustomAttributes(), "AssociatedEnumAttribute", "FLAGS");
+            AssertDoesNotHaveAttribute(reader, parameters[0].GetCustomAttributes(), "AssociatedEnumAttribute");
+            AssertDoesNotHaveAttribute(reader, Assert.Single(FindMethod(reader, "IWbemServices", "Other")
+                .GetParameters().Select(reader.GetParameter)).GetCustomAttributes(), "AssociatedEnumAttribute");
+            AssertMetadataClosure(reader);
+
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_MACRO_TARGET_ARTIFACTS");
+            if (artifacts != null)
+            {
+                string destination = Path.Combine(artifacts, architecture + (unicode ? "-unicode" : "-ansi"));
+                Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
+                Directory.CreateDirectory(destination);
+                foreach (string path in new[] { fixture.Header, fixture.Output,
+                    Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                    Path.ChangeExtension(fixture.Output, ".modified.cs"),
+                    Path.Combine(fixture.DirectoryPath, "Test.winmd") })
+                    if (File.Exists(path))
+                        File.Copy(path, Path.Combine(destination, Path.GetFileName(path)));
+                var scraper = typeof(global::Win32MetadataScraper.HeaderAnnotationProcessor).Assembly;
+                File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
+                {
+                    architecture, unicode, sourceTarget = "IWbemServices::GetObject::lFlags",
+                    actualNativeTarget = "IWbemServices::" + actualName + "::lFlags",
+                    parameterOrdinal = 1, metadataSequenceNumber = parameters[1].SequenceNumber,
+                    association = ReadStringAttribute(reader, parameters[1].GetCustomAttributes(), "AssociatedEnumAttribute"),
+                    returnType = signature.ReturnType, parameterTypes = signature.ParameterTypes.ToArray(),
+                    nativeOff, nativeOn, nativeAbiUnchanged = true, noInventedMethodOrImport = true,
+                    scraper = scraper.Location,
+                    scraperProductVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(scraper.Location).ProductVersion,
+                    scraperSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(scraper.Location))),
+                }, new JsonSerializerOptions { WriteIndented = true }));
+            }
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", 0)]
         [InlineData("x64", "x86_64-pc-windows-msvc", 0)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", 0)]

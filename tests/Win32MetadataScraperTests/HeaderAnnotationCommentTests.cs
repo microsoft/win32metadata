@@ -281,6 +281,227 @@ int F(unsigned renamed);
             Assert.Contains("AssociatedEnum(\"FLAGS\")", fixture.ReadSource());
         }
 
+        internal const string ObjectMacroMethodDeclarations = @"
+enum FLAGS { FIRST = 1 };
+#ifdef UNICODE
+#define GetObject GetObjectW
+#else
+#define GetObject GetObjectA
+#endif
+struct __declspec(uuid(""9556dc99-828c-11cf-a37e-00aa003240c7"")) IWbemServices {
+    virtual int __stdcall GetObject(const unsigned short* path, long lFlags) = 0;
+    virtual int __stdcall Other(long lFlags) = 0;
+};
+#undef GetObject
+#define GetObject NotADeclaration
+/* Win32Metadata: method ::IWbemServices::GetObject => PreserveResult */
+/* Win32Metadata: parameter ::IWbemServices::GetObject::lFlags => AssociatedEnum(FLAGS) */
+";
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void CommentTargetsBindCompilerExpandedObjectMacroNames(bool unicode)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                (unicode ? "#define UNICODE\n" : "") + ObjectMacroMethodDeclarations);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            var target = Assert.Single(methods.Where(method => method.Identifier.ValueText == (unicode ? "GetObjectW" : "GetObjectA")));
+            Assert.Contains("PreserveSig", target.AttributeLists.ToString());
+            Assert.Contains("AssociatedEnum(\"FLAGS\")", target.ParameterList.Parameters[1].ToString());
+            Assert.DoesNotContain("AssociatedEnum", Assert.Single(methods.Where(method => method.Identifier.ValueText == "Other")).ToString());
+            Assert.DoesNotContain("NotADeclaration", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData(false, false)]
+        [InlineData(true, false)]
+        [InlineData(false, true)]
+        [InlineData(true, true)]
+        public void CommentTargetsRetainExpandedNamesAndCanonicalMacroParameters(bool expandedNames, bool excluded)
+        {
+            string function = expandedNames ? "ReadNative" : "Read";
+            string method = expandedNames ? "BodyNative" : "Body";
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum FLAGS { FIRST = 1 };
+#define Read ReadNative
+unsigned Read(unsigned original);
+#undef Read
+unsigned ReadNative(unsigned renamed);
+#define Body BodyNative
+struct I { int Body(unsigned flags) { return 0; } };
+#undef Body
+/* Win32Metadata: function ::" + function + @" => SupportedOSPlatform(""windows6.1"") */
+/* Win32Metadata: return ::" + function + @" => AssociatedEnum(FLAGS) */
+/* Win32Metadata: parameter ::" + function + @"::renamed => Reserved */
+/* Win32Metadata: method ::I::" + method + @" => PreserveResult */
+/* Win32Metadata: parameter ::I::" + method + @"::flags => AssociatedEnum(FLAGS) */
+", extraSettings: excluded ? "--config\nexclude-funcs-with-body\n" : "");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            var reads = methods.Where(value => value.Identifier.ValueText == "ReadNative").ToArray();
+            Assert.NotEmpty(reads);
+            Assert.All(reads, read =>
+            {
+                Assert.Contains("SupportedOSPlatform(\"windows6.1\")", read.ToString());
+                Assert.Contains("return:", read.ToString());
+                Assert.Contains("AssociatedEnum(\"FLAGS\")", read.ToString());
+                Assert.Contains("Metadata.Reserved", Assert.Single(read.ParameterList.Parameters).ToString());
+            });
+            if (excluded)
+                Assert.DoesNotContain(methods, value => value.Identifier.ValueText == "BodyNative");
+            else
+            {
+                var body = Assert.Single(methods.Where(value => value.Identifier.ValueText == "BodyNative"));
+                Assert.Contains("PreserveSig", body.ToString());
+                Assert.Contains("AssociatedEnum(\"FLAGS\")", body.ToString());
+                Assert.DoesNotContain("DllImport", body.ToString());
+            }
+        }
+
+        [Fact]
+        public void CommentTargetsUseTheMacroDefinitionAtEachNativeDeclaration()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define Read ReadA
+namespace First { void Read(unsigned flags); }
+#undef Read
+#define Read ReadW
+namespace Second { void Read(unsigned flags); }
+#undef Read
+#define Read NotADeclaration
+/* Win32Metadata: parameter ::First::Read::flags => Reserved */
+/* Win32Metadata: parameter ::Second::Read::flags => Reserved */
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().Where(value => value.Identifier.ValueText is "ReadA" or "ReadW").ToArray();
+            Assert.Equal(2, methods.Length);
+            Assert.All(methods, method => Assert.Contains("Metadata.Reserved", Assert.Single(method.ParameterList.Parameters).ToString()));
+            Assert.DoesNotContain("NotADeclaration", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("parameter ::TARGET::Fetch::missing => Reserved", "named native parameter")]
+        [InlineData("parameter ::OTHER::Fetch::flags => Reserved", "found 0")]
+        [InlineData("parameter ::MISSING::Fetch::flags => Reserved", "found 0")]
+        [InlineData("function ::TARGET::Fetch => PreserveResult", "native function")]
+        [InlineData("method ::Ordinary => PreserveResult", "native method")]
+        [InlineData("method ::TARGET::Missing => PreserveResult", "found 0")]
+        [InlineData("return ::TARGET::Fetch => Retained", "not a return annotation")]
+        [InlineData("method ::TARGET::Fetch => Unknown", "Unknown")]
+        [InlineData("parameter ::TARGET::Fetch::flags => Retained", "pointer or reference")]
+        [InlineData("parameter ::TARGET::Fetch::flags => ComOutPtr(true)", "writable output pointer storage")]
+        [InlineData("parameter ::TARGET::Fetch::flags => AssociatedEnum(NOT_ENUM)", "enum")]
+        public void CompilerExpandedCommentTargetsRemainStrict(string payload, string diagnostic)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef int NOT_ENUM;
+#define Fetch FetchNative
+struct TARGET { virtual int Fetch(long flags) = 0; };
+#undef Fetch
+struct OTHER { virtual int Other(long flags) = 0; };
+void Ordinary(long flags);
+/* Win32Metadata: " + payload + " */");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("method ::TARGET::Fetch => PreserveResult")]
+        [InlineData("return ::TARGET::Fetch => AssociatedEnum(FLAGS)")]
+        [InlineData("parameter ::TARGET::Fetch::flags => Reserved")]
+        public void CompilerExpandedCommentTargetsKeepAllNativeCandidates(string payload)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum FLAGS { FIRST = 1 };
+struct TARGET {
+#define Fetch FetchA
+    virtual int Fetch(int flags) = 0;
+#undef Fetch
+#define Fetch FetchW
+    virtual int Fetch(long flags) = 0;
+#undef Fetch
+    virtual int Fetch(unsigned flags) = 0;
+};
+/* Win32Metadata: " + payload + " */");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("found 3", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void CompilerExpandedCommentParametersKeepCanonicalOrdinalAmbiguity()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define Read ReadNative
+int Read(int first, int second);
+#undef Read
+int ReadNative(int second, int first);
+/* Win32Metadata: parameter ::Read::first => Reserved */
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("named native parameter; found 2", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void CompilerExpandedAndWrittenSelectorsShareOneNativeFactIdentity()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define Fetch FetchNative
+struct TARGET { virtual int Fetch(long flags) = 0; };
+#undef Fetch
+/* Win32Metadata: method ::TARGET::Fetch => PreserveResult */
+/* Win32Metadata: method ::TARGET::FetchNative => PreserveResult */
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Duplicate 'PreserveResult'", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("#define Factory(name) virtual int name##Native(long flags) = 0;\nstruct TARGET { Factory(Fetch) };", "Factory")]
+        [InlineData("#define Factory(name) virtual int name##Native(long flags) = 0;\nstruct TARGET { Factory(Fetch) };", "Fetch")]
+        [InlineData("#define Factory virtual int FetchNative(long flags) = 0;\nstruct TARGET { Factory };", "Factory")]
+        [InlineData("#define Fetch() FetchNative\nstruct TARGET { virtual int Fetch()(long flags) = 0; };", "Fetch")]
+        [InlineData("#define FetchNative() virtual int FetchNative(long flags) = 0;\n#define Factory FetchNative\nstruct TARGET { Factory() };", "Factory")]
+        [InlineData("#define Inner FetchNative\n#define Outer Inner\nstruct TARGET { virtual int Outer(long flags) = 0; };", "Outer")]
+        public void CompilerExpandedCommentTargetsDoNotInventFactoryAliases(string declarations, string name)
+        {
+            using var bad = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations +
+                "\n/* Win32Metadata: method ::TARGET::" + name + " => PreserveResult */");
+            Assert.NotEqual(0, bad.Run());
+            Assert.Contains("WMA001", bad.Diagnostics);
+            Assert.Contains("found 0", bad.Diagnostics);
+            Assert.False(File.Exists(bad.Output));
+            using var good = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations +
+                "\n/* Win32Metadata: method ::TARGET::FetchNative => PreserveResult */");
+            Assert.True(good.Run() == 0, good.Diagnostics);
+            Assert.Contains("PreserveSig", good.ReadSource());
+        }
+
+        [Fact]
+        public void CompilerExpandedTargetAliasesDoNotExpandNativeCleanupReferences()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define Close CloseNative
+void Close(void* value);
+#undef Close
+void* Open();
+/* Win32Metadata: return ::Open => RAIIFree(Close, 0) */
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("declared native cleanup function", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
         [Fact]
         public void CommentsBindActualPropertyNamesAndIgnoreTemplateHelpers()
         {

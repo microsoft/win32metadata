@@ -418,9 +418,13 @@ namespace Win32MetadataScraper
         internal void ValidateProjection()
         {
             foreach (var facts in declarations.Values)
-                if ((facts.Annotations.Count != 0 || facts.MidlDirection != ParameterAttributes.None || facts.IsScopedEnum || facts.IsFlagsEnum) &&
-                    ShouldEmit(facts.Declaration, facts.Location) && !projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
-                    throw Error(facts.Location, $"Annotation facts for '{facts.Declaration.Name}' were not projected by ClangSharp.");
+                CollectAnnotationErrors(facts.Declaration, () =>
+                {
+                    if ((facts.Annotations.Count != 0 || facts.MidlDirection != ParameterAttributes.None || facts.IsScopedEnum || facts.IsFlagsEnum) &&
+                        ShouldEmit(facts.Declaration, facts.Location) && !projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
+                        throw Error(facts.Location, $"Annotation facts for '{facts.Declaration.Name}' were not projected by ClangSharp.");
+                });
+            ThrowAnnotationErrors();
         }
 
         private void Walk(Cursor cursor)
@@ -901,6 +905,11 @@ namespace Win32MetadataScraper
 
         private bool ShouldEmit(NamedDecl declaration, NativeLocation location)
         {
+            if (declaration is RecordDecl record && record.Definition is RecordDecl definition)
+            {
+                declaration = definition;
+                location = GetLocation(definition.Location);
+            }
             for (Cursor cursor = declaration; cursor is NamedDecl named; cursor = cursor.SemanticParentCursor)
                 if (excludedNames.Contains(named.Name) ||
                     named is FunctionDecl function &&

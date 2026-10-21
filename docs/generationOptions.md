@@ -74,12 +74,28 @@ their parameters are still parsed and validated, but those definitions remain
 excluded from generated output. A body does not make a native target missing or
 resolve an ambiguous non-template overload set.
 
+Canonical record facts use the compiler's complete definition for traversal
+eligibility when one exists. A traversed forward does not require projection of
+an untraversed definition. Incomplete records without a definition retain the
+normal eligibility and unused-fact checks. All native facts are still validated.
+
+Function/method targets and their return/parameter selectors can also use the
+source-written name of an object-like macro whose replacement is one identifier.
+The first translation unit must link both expansion and spelling locations of
+the declaration name to that exact replacement token and actual native name.
+Later macro changes do not affect binding. Expanded names remain valid; distinct native candidates
+remain ambiguous. Function-like or declaration-producing macros do not supply
+target aliases. This does not expand comment payloads or change native reference
+lookup, parameter identity, declarations, or projection rules.
+
 The scraper reports independent WMA001 failures together for one partition,
 ordered by source file, line, column and native target. Invalid declaration facts
 are excluded from dependent checks to avoid cascaded errors. The complete report
 is written to standard error, and any error prevents generated bindings and
-remap output. Unexpected implementation exceptions remain fatal. Fix the reported
-facts before checking later composition and projection stages.
+remap output. This includes independently unprojected facts at the final projection
+check; unused facts remain fatal. Unexpected implementation exceptions remain
+fatal. Fix the reported facts before checking later composition and projection
+stages.
 
 An enum association can use a metadata-only forward declaration of the original
 native enum tag and typedef when its definition is in another header or partition.

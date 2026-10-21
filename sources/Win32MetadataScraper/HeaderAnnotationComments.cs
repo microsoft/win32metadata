@@ -179,7 +179,7 @@ namespace Win32MetadataScraper
             if (kind == "parameter")
             {
                 int separator = name.LastIndexOf("::", StringComparison.Ordinal);
-                var functions = nativeNames.Resolve(root, name[..separator], location);
+                var functions = nativeNames.Resolve(root, name[..separator], location, writtenFunctionNames: true);
                 functions = functions.Where(value => value is FunctionDecl).ToArray();
                 if (functions.Length != 1 || functions[0] is not FunctionDecl function)
                     throw Error(location, $"Parameter target '{name}' must identify one native function or method before its parameter name; found {functions.Length} candidates.");
@@ -188,7 +188,8 @@ namespace Win32MetadataScraper
                     throw Error(location, $"Parameter target '{name}' must identify one named native parameter; found {parameters.Length} candidates.");
                 return parameters[0];
             }
-            var candidates = nativeNames.Resolve(root, name, location);
+            var candidates = nativeNames.Resolve(root, name, location,
+                writtenFunctionNames: kind is "function" or "method" or "return");
             if (kind is "record" or "interface" or "enum")
                 candidates = candidates.Select(UnwrapTypeDeclaration).ToArray();
             else if (kind == "type")
@@ -231,21 +232,17 @@ namespace Win32MetadataScraper
             private readonly ILookup<CXCursor, UsingDirectiveDecl> namespaceImports;
             private readonly ILookup<CXCursor, NamespaceDecl> implicitNamespaces;
             private readonly ILookup<(CXCursor Function, string Name), ParmVarDecl> parametersByFunction;
+            private readonly ILookup<CXCursor, FunctionDecl> functionsByScope;
+            private readonly Dictionary<CXCursor, ILookup<string, FunctionDecl>> writtenFunctionsByScope = new();
 
             internal NativeNameLookup(IEnumerable<Cursor> visited)
             {
                 var named = visited.OfType<NamedDecl>().Where(declaration => declaration is not IndirectFieldDecl &&
                     declaration.SemanticParentCursor != null &&
                     (declaration is ParmVarDecl || declaration.SemanticParentCursor is not FunctionDecl)).ToArray();
-                declarationsByScope = named.Where(declaration => declaration.Name.Length != 0).ToLookup(declaration =>
-                {
-                    Cursor scope = declaration.SemanticParentCursor;
-                    if (declaration is EnumConstantDecl && scope is EnumDecl enumeration && !enumeration.IsScoped)
-                        scope = enumeration.SemanticParentCursor;
-                    while (scope is LinkageSpecDecl)
-                        scope = scope.SemanticParentCursor;
-                    return (scope is FunctionDecl ? scope.Handle : scope.Handle.CanonicalCursor, declaration.Name);
-                });
+                declarationsByScope = named.Where(declaration => declaration.Name.Length != 0)
+                    .ToLookup(declaration => (GetScope(declaration), declaration.Name));
+                functionsByScope = named.OfType<FunctionDecl>().ToLookup(GetScope);
                 parametersByFunction = named.OfType<ParmVarDecl>()
                     .Where(parameter => parameter.SemanticParentCursor is FunctionDecl)
                     .ToLookup(parameter => (parameter.SemanticParentCursor.Handle.CanonicalCursor, parameter.Name));
@@ -258,7 +255,7 @@ namespace Win32MetadataScraper
                     .ToLookup(declaration => declaration.SemanticParentCursor.Handle.CanonicalCursor);
             }
 
-            internal NamedDecl[] Resolve(Cursor owner, string name, NativeLocation location)
+            internal NamedDecl[] Resolve(Cursor owner, string name, NativeLocation location, bool writtenFunctionNames = false)
             {
                 bool absolute = name.StartsWith("::", StringComparison.Ordinal);
                 string[] parts = (absolute ? name[2..] : name).Split(new[] { "::" }, StringSplitOptions.None);
@@ -266,7 +263,8 @@ namespace Win32MetadataScraper
                 NamedDecl[] candidates = Array.Empty<NamedDecl>();
                 while (scope != null)
                 {
-                    candidates = Lookup(scope is FunctionDecl ? scope.Handle : scope.Handle.CanonicalCursor, parts[0], location);
+                    candidates = Lookup(scope is FunctionDecl ? scope.Handle : scope.Handle.CanonicalCursor,
+                        parts[0], location, writtenFunctionNames);
                     if (candidates.Length != 0 || absolute)
                         break;
                     scope = scope.SemanticParentCursor;
@@ -276,7 +274,7 @@ namespace Win32MetadataScraper
                         .SelectMany(declaration => declaration is EnumDecl enumeration
                             ? enumeration.Enumerators.Where(value => value.Name == part).Cast<NamedDecl>()
                             : declaration is NamespaceDecl or RecordDecl
-                                ? Lookup(declaration.Handle.CanonicalCursor, part, location) : Array.Empty<NamedDecl>()).ToArray();
+                                ? Lookup(declaration.Handle.CanonicalCursor, part, location, writtenFunctionNames) : Array.Empty<NamedDecl>()).ToArray();
                 return candidates.GroupBy(declaration => declaration.Handle.CanonicalCursor).Select(group => group.First()).ToArray();
             }
 
@@ -284,7 +282,64 @@ namespace Win32MetadataScraper
                 => parametersByFunction[(function.Handle.CanonicalCursor, name)]
                     .GroupBy(GetNativeIdentity).Select(group => group.First()).ToArray();
 
-            private NamedDecl[] Lookup(CXCursor scope, string name, NativeLocation location)
+            private static CXCursor GetScope(NamedDecl declaration)
+            {
+                Cursor scope = declaration.SemanticParentCursor;
+                if (declaration is EnumConstantDecl && scope is EnumDecl enumeration && !enumeration.IsScoped)
+                    scope = enumeration.SemanticParentCursor;
+                while (scope is LinkageSpecDecl)
+                    scope = scope.SemanticParentCursor;
+                return scope is FunctionDecl ? scope.Handle : scope.Handle.CanonicalCursor;
+            }
+
+            private static string GetWrittenFunctionName(FunctionDecl function)
+            {
+                var unit = function.TranslationUnit.Handle;
+                function.Handle.Location.GetExpansionLocation(out var file, out _, out _, out var offset);
+                if (file.Equals(default(CXFile)))
+                    return null;
+                var expansion = unit.GetCursor(unit.GetLocationForOffset(file, offset));
+                if (expansion.Kind != CXCursorKind.CXCursor_MacroExpansion)
+                    return null;
+                var definition = expansion.Referenced;
+                if (definition.Kind != CXCursorKind.CXCursor_MacroDefinition || definition.IsMacroFunctionLike)
+                    return null;
+                var tokens = unit.Tokenize(definition.Extent);
+                try
+                {
+                    var identifiers = tokens.ToArray().Where(token => token.Kind != CXTokenKind.CXToken_Comment).ToArray();
+                    if (identifiers.Length != 2 || identifiers.Any(token => token.Kind != CXTokenKind.CXToken_Identifier))
+                        return null;
+                    function.Handle.Location.GetSpellingLocation(out var spellingFile, out _, out _, out var spellingOffset);
+                    identifiers[1].GetLocation(unit).GetSpellingLocation(out var replacementFile, out _, out _, out var replacementOffset);
+                    if (!spellingFile.Equals(replacementFile) || spellingOffset != replacementOffset)
+                        return null;
+                    using var name = identifiers[0].GetSpelling(unit);
+                    using var nativeName = identifiers[1].GetSpelling(unit);
+                    using var expanded = expansion.Spelling;
+                    string written = name.ToString();
+                    // Both compiler locations must identify this exact renamer, not a nested factory or later macro state.
+                    return written == expanded.ToString() && written != function.Name && nativeName.ToString() == function.Name
+                        ? written : null;
+                }
+                finally
+                {
+                    unit.DisposeTokens(tokens);
+                }
+            }
+
+            private IEnumerable<FunctionDecl> WrittenFunctions(CXCursor scope, string name)
+            {
+                if (!writtenFunctionsByScope.TryGetValue(scope, out var names))
+                {
+                    names = functionsByScope[scope].Select(function => (Function: function, Name: GetWrittenFunctionName(function)))
+                        .Where(value => value.Name != null).ToLookup(value => value.Name, value => value.Function);
+                    writtenFunctionsByScope.Add(scope, names);
+                }
+                return names[name];
+            }
+
+            private NamedDecl[] Lookup(CXCursor scope, string name, NativeLocation location, bool writtenFunctionNames)
             {
                 var candidates = new List<NamedDecl>();
                 var searched = new HashSet<CXCursor>();
@@ -294,7 +349,8 @@ namespace Win32MetadataScraper
                 {
                     if (!searched.Add(scope))
                         continue;
-                    var direct = declarationsByScope[(scope, name)].ToArray();
+                    var direct = declarationsByScope[(scope, name)]
+                        .Concat(writtenFunctionNames ? WrittenFunctions(scope, name) : Enumerable.Empty<NamedDecl>()).ToArray();
                     candidates.AddRange(direct.Select(declaration => declaration.UnderlyingDecl));
                     if (direct.Length == 0 && records.TryGetValue(scope, out var record))
                     {
