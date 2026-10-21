@@ -8,6 +8,58 @@ metadata faithfully in the selected SDK's original headers and IDL. A zero-diffe
 OLD-to-NEW WinMD is not a goal. Breaking changes and unexplained differences remain
 visible for review.
 
+## Completion plan and next review
+
+The next review milestone is one complete SDK-wide NEW WinMD, its full raw
+OLD-to-NEW comparison, and a categorized assessment with an action plan.
+Further annotation retirement and optional tooling research must not postpone it.
+
+The architecture remains the selected SDK originals plus authored patches,
+targeted MIDL regeneration, the compiler-backed C# scraper, constant extraction,
+and one namespace/architecture-composed WinMD. SDK sources own API-specific facts;
+the reader binds them to native declarations; the emitter preserves them in the
+complete image.
+
+1. Freeze a finite candidate from accepted source/config cut `4d857d46`, the
+   qualified runtime341/53f scraper, and the unchanged emitter74CC. Preserve all
+   manifests and the interrupted runtime340 capture. Pending source releases and
+   log-only commits do not silently change the candidate. Necessary compile
+   repairs produce explicitly pinned successors of that base.
+2. Complete all 321 owners on x86, x64, and arm64, regenerating affected IDL
+   closures and running constant extraction and full WinMD emission. Reuse a
+   prior output only with matching dependency and tooling evidence. Collect hard
+   failures together, repair shared compile blockers, and replay their affected
+   profiles. Do not add optional per-partition qualification gates or a blind
+   full-run retry loop.
+3. Run complete-image integrity checks, including NoSuggestedRemappings, and
+   retain every failure. Compare the pinned exact OLD first against this exact
+   NEW second, including signatures, constant values, enum/global placement,
+   namespaces, attributes, imports, and availability. Do not filter intended
+   differences out of the raw comparison.
+4. Deliver the complete image, raw comparison, and categorized issue report.
+   Each category needs counts, affected APIs, consumer consequences, evidence,
+   and a proposed action. Stop before broad remediation for the requested
+   discussion.
+
+| Review category | Required disposition |
+| --- | --- |
+| Intended representation changes | Explain the consumer impact and retain the raw difference, including primitive-plus-association signatures, storage corrections, logical names, and enum/global placement. |
+| Selected-SDK changes | Prove the change against the selected native source and available OLD provenance; do not infer removal from one missing token or header. |
+| Corrections to OLD | Show the native contract and why OLD was incorrect. |
+| Missing header facts or providers | Identify the exact missing fact and original owner; keep unproved replacements active. |
+| Reader, emitter, or composition defects | Group by shared cause and propose bounded fixes. Missing APIs and wrong namespaces are not accepted as intended changes. |
+| Unresolved provenance | State what remains unknown and the observation needed to decide it. |
+
+The first complete image is explicitly transitional: remaining API-specific
+sidecars stay active where their replacements are unproved. Its functional diff
+does not prove header-only coverage. The existing fact ledger records that
+remaining dependency separately; no new inventory project is required.
+
+After the full-delta review, complete the agreed original-source replacements and
+retire their matching API-specific sidecars. Global organization and parser fixups
+may remain. Final migration acceptance requires another complete image, integrity
+results, and an explained raw OLD-to-NEW comparison from that header-driven state.
+
 ## Current state
 
 - The C# generator remains in use. The qualified tooling is ClangSharp 21.1.8.4
@@ -103,9 +155,21 @@ visible for review.
 - Post-restart reconciliation confirms that the original producer is no longer
   running. Its terminal result was never persisted, so the native/driver exit
   remains unknown. There are 956 completed-case logs and 958 settings files;
-  exact profile gaps and per-case outcomes are being sealed before any scoped
-  recovery. This is not a completed 963-profile result, and no second full scrape
-  has started.
+  the final ledger records 912 nonempty main outputs without an error diagnostic,
+  six completed empty outputs, 38 task failures, two launched profiles without a
+  completion log, and five with no observed launch. These are evidenced profile
+  states, not reconstructed native exit codes. This is not a completed
+  963-profile result. The complete candidate in the plan above is the next
+  production milestone.
+  The 38 failures group into six shared families: SetupAPI (15 profiles), DXGI
+  (9), filesystem metadata (3), WeakReference (5), WDS (3), and a distinct native
+  Terminal Services parse error (3). SetupAPI's source correction is already
+  integrated; affected replay remains pending. These families are the current
+  compilation worklist, not a functional OLD-to-NEW assessment.
+  The Terminal Services native macro is missing two bitwise-OR operators across
+  continuation lines. A two-token original-source correction is approved, subject
+  to exact current-owner/native-preimage confirmation; it must remain visible as
+  a native SDK syntax correction in the comparison.
 - There is no complete successor WinMD yet. The complete integrity-test run,
   selected-SDK delta evaluation, and unfiltered complete OLD-to-NEW comparison
   remain outstanding.
@@ -149,7 +213,7 @@ C# files; it did not produce an accepted complete NEW image.
 | D28 | The selected msiquery.h native MSITRANSFORM_ERROR has seven explicit members and no NONE member, while the existing metadata row supplies MSITRANSFORM_ERROR_NONE=0. | Use the spec's explicit reviewed-zero exception. Add only that metadata-only zero under WIN32METADATA and not MIDL_PASS; preserve the native seven members, order, values, type, and ordinary/MIDL surface. | Systemf434 source, composed as5c1, is integrated with strict selected-SDK replay and an exact guarded-addition inverse. The matching enumAddition row remains for its owning retirement task. No additional retirement, new logical group, flags, use-site change, or SDK/compiler acceptance is claimed. |
 | D29 | MMSSF_GET_INFORMATION_FLAGS, OPM_HDCP_FLAGS, and PROFILER_EVENT_MASK are existing native enums whose Flags intent still lives in emitter rows. The first OPM owner packet also inherited four obsolete availability carriers that conflicted with qualified current source. | Add only guarded flag_enum bookends to original mmstream.idl, opmapi.idl, and activprof.idl. Require the same original owner to reconcile stale OPM context, preserving qualified windows6.0.6000 comments, native signatures, values, ordering, and generated-tag remaps. Regenerate the owning headers before claiming generated Flags transport. | Source 8bf41 composes MMstream048 and reconciled OPM048a; 1b8a254 adds the exact released Activprof source. Strict selected-SDK replay and bookend-only inverses recover the entire prior sources, including all three existing heap Flags scopes. Activprof preserves its five native members. The four OPM representation conflicts are resolved by its explicit owner successor; the rejected packet stays immutable. All three emitter rows remain active; owning MIDL/physical validation is pending outside frozen dd4. |
 | D30 | Frozen ordinary Direct2D x86/arm64 and Direct3D11on12 x86/x64 reject IDXGIOutput::GetDisplayModeList::Flags. Base dxgi.h has a metadata-only unsigned-int DXGI_ENUM_MODES forward and association; the complete UInt32 Flags group with values 1/2/4/8 is in dxgi1_2.h. The sealed packet lacks provider activity and canonical/group-fact observations from the failing TU. | Establish exact original-TU visibility and canonical identity before choosing a source or reader correction. Preserve all four member facts and native declarations. Do not infer an include fix, duplicate or split the group, relax validation, or patch generated headers. Original-source changes belong in shared dxgi.idl and dxgi1_2.idl. | The read-only trace confirms whole-TU collection and no source-offset cutoff. WMA001 proves a selected non-EnumDecl without matching same-canonical group facts. The existing declaration map returns before processor construction, so receipt17CC records zero diagnostic parses and no observer. A diagnostic-only8d copy with one opt-in read-only snapshot at the failing validation site is now approved, followed by the one exact x86/Direct3D11on12 parse. It must preserve WMA001/no-output behavior and record source delta, binary and original input pins. No production hook, source correction or extra profile sweep is approved. |
-| D31 | After the app restart, the original full963 producer is absent and ordinary-result.json was never persisted. The surviving ordinary.log has no terminal result; 956 completed-case logs and 958 settings files do not prove all requested profiles ran or succeeded. | Preserve the exact partial input/output/log capture and unknown terminal exit. Account for requested versus observed profiles and each evidenced outcome before authorizing scoped recovery; do not restart all profiles or relabel the interrupted run as complete. | The original producer has not been restarted. Immutable partial capture and exact gap/outcome accounting are in progress. Later accepted source and runtime341 remain separate refresh candidates; no complete NEW, integrity or API acceptance is claimed. |
+| D31 | After the app restart, the original full963 producer is absent and ordinary-result.json was never persisted. The surviving ordinary.log has no terminal result; 956 completed-case logs and 958 settings files do not prove all requested profiles ran or succeeded. | Preserve the exact partial input/output/log capture and unknown terminal exit. Use the completed profile accounting to drive the next finite candidate, without relabeling the interrupted run or making optional migration work a build prerequisite. | Receipt AB444403 seals 4,004 raw files, the exact 963-row ledger and portable archive. The ledger records 912 nonempty outputs without error diagnostics, six completed empty outputs, 38 task failures, two launched/incomplete profiles and five without an observed launch. The next production target is one coherent runtime341/74CC transitional image from accepted source, followed by the full raw OLD-to-NEW report. No complete NEW or API acceptance is claimed. |
 
 ## API differences to retain
 
@@ -292,6 +356,12 @@ the 18-pair physical verification has SHA256
 `60968DF818F97570E96E47D6C75D1D11E6438CCF7C8A2757158A641CEFC09410`.
 The resumed source036 handoff has SHA256
 `4498758B6C3EB3436931F0CB8448CD10E8B2BA386801FAA3069878BA88C22E5D`.
+The sealed interrupted-run receipt has SHA256
+`AB444403A4D3E3EF56934FA31C4FB161E325E189FFF9E392B9DA73AE14EE6D72`;
+its final 963-row profile accounting has SHA256
+`7209A16B01FD71FE0AE4DB25E2ACB0A7F49FE128F92C7A2FE691B89EBC5752CA`.
+The finite first-image source039 handoff has SHA256
+`BB0FCDE00A4C03638E5C42E6439D00404E7A9C63689F556D95F0C5CEA35B7625`.
 
 Source checks, reduced representation proofs, ordinary partition execution, and
 complete-image acceptance are separate claims. No successful earlier receipt is
