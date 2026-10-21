@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -1467,6 +1468,114 @@ _Win32_SupportedOS_END_()
             Assert.NotEqual(0, fixture.Run());
             Assert.Contains("error", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void IndependentAnnotationErrorsAreReportedTogetherBeforeOutput(bool valid)
+        {
+            string declarations = @"
+#define FIRST 1U
+_Win32_FlagsEnum_(OPTIONS, unsigned, FIRST);
+struct HOLDER { unsigned flags; };
+struct __declspec(uuid(""9a83b125-1fbd-4e61-9f22-2db3960d4634"")) IValid {
+    virtual int Run(void* value) = 0;
+};
+_WIN32META_ANNOTATE_METHOD_(IValid::Run, _Win32_PreserveResult_);
+_WIN32META_ANNOTATE_PARAMETER_(IValid::Run, value, _Win32_Retained_);
+_Win32_RAIIFree_(CloseThing, -1, 0) void* ValidProducer();
+unsigned ValidFlags(_Win32_AssociatedEnum_(OPTIONS) unsigned flags);
+/* Win32Metadata: field ::HOLDER::flags => AssociatedEnum(OPTIONS) */
+";
+            if (!valid)
+            {
+                declarations += string.Join("\n", Enumerable.Range(0, 32).Select(index => $@"
+void* WrongMethod{index}();
+_WIN32META_ANNOTATE_METHOD_(WrongMethod{index}, _Win32_RAIIFree_(CloseThing, -1, 0));"));
+                declarations += @"
+_Win32_SetLastError_ typedef int InvalidType;
+int WrongPointer(_Win32_ComOutPtr_(true) void* value);
+int WrongBoolean(_Win32_Optional_(maybe) void* value);
+_Win32_RAIIFree_(MissingCleanupA) void* MissingProducerA();
+_Win32_RAIIFree_(MissingCleanupB) void* MissingProducerB();
+typedef unsigned SCALAR;
+void WrongEnum(_Win32_AssociatedEnum_(SCALAR) unsigned value);
+/* Win32Metadata: field ::HOLDER::flags => SetLastError */
+/* Win32Metadata: field ::MissingRecord::value => Retained */
+_WIN32META_ANNOTATION_(""Alien"") void UnknownFact();
+_Win32_RAIIFree_(MissingCascade) _Win32_Reserved_ void* InvalidProducer();
+struct IBad {
+    virtual int Run(_Win32_ComOutPtr_(true) void* value) = 0;
+};
+_WIN32META_ANNOTATE_PARAMETER_(IBad::Run, value, _Win32_Retained_);
+/* Win32Metadata: parameter ::IBad::Run::value => Retained */
+_Win32_Enum_(GROUP_ONE, unsigned, FIRST);
+_Win32_Enum_(GROUP_TWO, unsigned, FIRST);
+#undef FIRST
+#define FIRST 2U
+_Win32_Enum_(GROUP_ONE, unsigned, FIRST);
+_Win32_Enum_(GROUP_TWO, unsigned, FIRST);
+";
+            }
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
+            int exitCode = fixture.Run();
+            if (valid)
+            {
+                Assert.Equal(0, exitCode);
+                Assert.DoesNotContain("WMA001", fixture.Diagnostics);
+                Assert.Contains("RAIIFree(\"CloseThing\")", fixture.ReadSource());
+                Assert.Contains("AssociatedEnum(\"OPTIONS\")", fixture.ReadSource());
+                Assert.Contains("PreserveSig", fixture.ReadSource());
+                return;
+            }
+
+            Assert.NotEqual(0, exitCode);
+            Assert.False(File.Exists(fixture.Output));
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            Assert.False(File.Exists(Path.Combine(fixture.DirectoryPath, "remaps.txt")));
+            Assert.DoesNotContain("Processing '", fixture.Diagnostics);
+            Assert.DoesNotContain("MissingCascade", fixture.Diagnostics);
+            string[] diagnostics = fixture.Diagnostics.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(line => line.Contains("error WMA001:", StringComparison.Ordinal)).ToArray();
+            Assert.Equal(45, diagnostics.Length);
+            Assert.All(diagnostics, diagnostic => Assert.Matches(
+                "^" + Regex.Escape(fixture.Header) + @"\([1-9][0-9]*,[1-9][0-9]*\): error WMA001: .+ \[native target: .+\]$", diagnostic));
+            foreach (int index in Enumerable.Range(0, 32))
+                Assert.Single(diagnostics.Where(diagnostic => diagnostic.EndsWith(
+                    $"[native target: ::WrongMethod{index}]", StringComparison.Ordinal)));
+            foreach (string target in new[] { "::InvalidType", "::WrongPointer::value", "::WrongBoolean::value",
+                "::MissingProducerA", "::MissingProducerB", "::WrongEnum::value", "::HOLDER::flags",
+                "field ::MissingRecord::value", "::UnknownFact", "::InvalidProducer", "::IBad::Run::value",
+                "::GROUP_ONE", "::GROUP_TWO" })
+                Assert.Single(diagnostics.Where(diagnostic => diagnostic.EndsWith(
+                    $"[native target: {target}]", StringComparison.Ordinal)));
+            var lines = diagnostics.Select(diagnostic => uint.Parse(Regex.Match(diagnostic,
+                @"\(([0-9]+),[0-9]+\): error WMA001:").Groups[1].Value, CultureInfo.InvariantCulture)).ToArray();
+            Assert.Equal(lines.OrderBy(line => line), lines);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Equal(diagnostics, fixture.Diagnostics.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries)
+                .Where(line => line.Contains("error WMA001:", StringComparison.Ordinal)));
+        }
+
+        [Fact]
+        public void IndependentEnumRedeclarationConflictsAreReportedTogether()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_Enum_(GROUP_ONE, unsigned, FIRST);
+_Win32_Enum_(GROUP_TWO, unsigned, FIRST);
+#undef FIRST
+#define FIRST 2U
+_Win32_Enum_(GROUP_ONE, unsigned, FIRST);
+_Win32_Enum_(GROUP_TWO, unsigned, FIRST);
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Conflicting enum group values for 'FIRST'. [native target: ::GROUP_ONE]", fixture.Diagnostics);
+            Assert.Contains("Conflicting enum group values for 'FIRST'. [native target: ::GROUP_TWO]", fixture.Diagnostics);
+            Assert.Equal(2, Regex.Matches(fixture.Diagnostics, "error WMA001:").Count);
+            Assert.False(File.Exists(fixture.Output));
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
         }
 
         [Fact]

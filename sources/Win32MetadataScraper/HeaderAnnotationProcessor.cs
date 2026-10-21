@@ -31,14 +31,16 @@ namespace Win32MetadataScraper
         private readonly bool excludeFunctionsWithBody;
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
-        private readonly List<(CXCursor Declaration, NativeLocation Location)> enumAssociations = new();
+        private readonly List<(CXCursor Declaration, NamedDecl Target, NativeLocation Location)> enumAssociations = new();
         private readonly HashSet<CXCursor> enumReferenceCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> methodCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> parameterCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> fieldCarriers = new();
         private readonly HashSet<Cursor> visited = new();
-        private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> cleanupReferences = new();
-        private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> enumNameReferences = new();
+        private readonly List<(NamedDecl Owner, NamedDecl Target, string Name, string[] Arguments, NativeLocation Location)> cleanupReferences = new();
+        private readonly List<(NamedDecl Owner, NamedDecl Target, string Name, string[] Arguments, NativeLocation Location)> enumNameReferences = new();
+        private readonly HashSet<(CXCursor Declaration, int Parameter)> invalidDeclarations = new();
+        private readonly List<(HeaderAnnotationException Error, string Target)> annotationErrors = new();
         private NativeNameLookup nativeNames;
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
@@ -60,15 +62,23 @@ namespace Win32MetadataScraper
             ResolveEnumNameReferences();
             ApplyCommentAnnotations(translationUnit);
             foreach (var facts in declarations.Values.Where(value => value.HasMidlRetval))
-                if (!facts.Annotations.Any(annotation => annotation.Name == "RetVal"))
-                    AddAnnotation(facts, new HeaderAnnotation("RetVal", Array.Empty<string>()), facts.Location);
+                CollectAnnotationErrors(facts.Declaration, () =>
+                {
+                    if (!facts.Annotations.Any(annotation => annotation.Name == "RetVal"))
+                        AddAnnotation(facts, new HeaderAnnotation("RetVal", Array.Empty<string>()), facts.Location);
+                });
             ResolveCleanupReferences();
-            MergeRedeclarationFacts();
             foreach (var association in enumAssociations)
-                if (association.Declaration.Kind != CXCursorKind.CXCursor_EnumDecl &&
-                    !declarations.Values.Any(facts => facts.LogicalEnumMembers != null &&
-                        facts.Declaration.Handle.CanonicalCursor == association.Declaration.CanonicalCursor))
-                    throw Error(association.Location, "AssociatedEnum requires a native enum or a _Win32_Enum_/_Win32_FlagsEnum_ group.");
+                CollectAnnotationErrors(association.Target, () =>
+                {
+                    if (!invalidDeclarations.Contains((association.Declaration.CanonicalCursor, -1)) &&
+                        association.Declaration.Kind != CXCursorKind.CXCursor_EnumDecl &&
+                        !declarations.Values.Any(facts => facts.LogicalEnumMembers != null &&
+                            facts.Declaration.Handle.CanonicalCursor == association.Declaration.CanonicalCursor))
+                        throw Error(association.Location, "AssociatedEnum requires a native enum or a _Win32_Enum_/_Win32_FlagsEnum_ group.");
+                });
+            MergeRedeclarationFacts();
+            ThrowAnnotationErrors();
             TransferRecordTypedefFacts();
             foreach (var facts in declarations.Values)
             {
@@ -146,7 +156,7 @@ namespace Win32MetadataScraper
                 var annotationArguments = new[] { cleanup }
                     .Concat(facts.InvalidValues.Select(value => value.ToString(CultureInfo.InvariantCulture))).ToArray();
                 if (deferred)
-                    cleanupReferences.Add((owner, cleanup, annotationArguments, location));
+                    cleanupReferences.Add((owner, facts.Declaration, cleanup, annotationArguments, location));
                 return new HeaderAnnotation("RAIIFree", annotationArguments);
             }
             if (payload == "ImportLibrary")
@@ -186,7 +196,7 @@ namespace Win32MetadataScraper
                             "float" or "double" or "wchar_t" or "char8_t" or "char16_t" or "char32_t")
                         throw Error(location, "AssociatedEnum requires a native enum or metadata group name.");
                     var names = new[] { name };
-                    enumNameReferences.Add((owner, name, names, location));
+                    enumNameReferences.Add((owner, facts.Declaration, name, names, location));
                     return new HeaderAnnotation("AssociatedEnum", names);
                 }
                 var declaration = clang.getTypeDeclaration(arguments[0].Handle.Type);
@@ -198,7 +208,7 @@ namespace Win32MetadataScraper
                     if (IsForwardEnumReference(nativeEnum.Decl))
                         enumReferenceCarriers.Add(declaration.CanonicalCursor);
                 }
-                enumAssociations.Add((declaration, location));
+                enumAssociations.Add((declaration, facts.Declaration, location));
                 return new HeaderAnnotation("AssociatedEnum", new[] { Remap(declaration.Spelling.ToString()) });
             }
             var annotation = HeaderAnnotation.Parse(payload);
@@ -247,12 +257,13 @@ namespace Win32MetadataScraper
                 return;
             nativeNames ??= new NativeNameLookup(visited);
             foreach (var reference in cleanupReferences)
-            {
-                var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location);
-                if (candidates.Length != 1 || candidates[0].Handle.Kind != CXCursorKind.CXCursor_FunctionDecl)
-                    throw Error(reference.Location, $"RAIIFree cleanup '{reference.Name}' must identify one declared native cleanup function; found {candidates.Length} candidates.");
-                reference.Arguments[0] = candidates[0].Name;
-            }
+                CollectAnnotationErrors(reference.Target, () =>
+                {
+                    var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location);
+                    if (candidates.Length != 1 || candidates[0].Handle.Kind != CXCursorKind.CXCursor_FunctionDecl)
+                        throw Error(reference.Location, $"RAIIFree cleanup '{reference.Name}' must identify one declared native cleanup function; found {candidates.Length} candidates.");
+                    reference.Arguments[0] = candidates[0].Name;
+                });
         }
 
         private void ResolveEnumNameReferences()
@@ -261,27 +272,36 @@ namespace Win32MetadataScraper
                 return;
             nativeNames ??= new NativeNameLookup(visited);
             foreach (var reference in enumNameReferences)
-            {
-                var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location)
-                    .Select(UnwrapTypeDeclaration).GroupBy(value => value.Handle.CanonicalCursor)
-                    .Select(group => group.First()).ToArray();
-                if (candidates.Length == 0 && !reference.Name.Contains("::", StringComparison.Ordinal))
+                CollectAnnotationErrors(reference.Target, () =>
                 {
-                    // Another partition or retained enum source supplies the final definition.
-                    reference.Arguments[0] = Remap(reference.Name);
-                    continue;
-                }
-                if (candidates.Length != 1)
-                    throw Error(reference.Location, $"AssociatedEnum reference '{reference.Name}' must identify one native enum or metadata group; found {candidates.Length} candidates.");
-                var declaration = candidates[0];
-                enumAssociations.Add((declaration.Handle, reference.Location));
-                if (declaration is EnumDecl nativeEnum && IsForwardEnumReference(nativeEnum))
-                    enumReferenceCarriers.Add(declaration.Handle.CanonicalCursor);
-                reference.Arguments[0] = Remap(declaration.Name);
-            }
+                    var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location)
+                        .Select(UnwrapTypeDeclaration).GroupBy(value => value.Handle.CanonicalCursor)
+                        .Select(group => group.First()).ToArray();
+                    if (candidates.Length == 0 && !reference.Name.Contains("::", StringComparison.Ordinal))
+                    {
+                        // Another partition or retained enum source supplies the final definition.
+                        reference.Arguments[0] = Remap(reference.Name);
+                        return;
+                    }
+                    if (candidates.Length != 1)
+                        throw Error(reference.Location, $"AssociatedEnum reference '{reference.Name}' must identify one native enum or metadata group; found {candidates.Length} candidates.");
+                    var declaration = candidates[0];
+                    enumAssociations.Add((declaration.Handle, reference.Target, reference.Location));
+                    if (declaration is EnumDecl nativeEnum && IsForwardEnumReference(nativeEnum))
+                        enumReferenceCarriers.Add(declaration.Handle.CanonicalCursor);
+                    reference.Arguments[0] = Remap(declaration.Name);
+                });
         }
 
         private static CXCursor ReadDeclarationReference(Cursor argument, CXCursorKind kind, NativeLocation location, string message)
+        {
+            var references = GetDeclarationReferences(argument);
+            if (references.Count != 1 || references.Single().Kind != kind)
+                throw Error(location, message);
+            return references.Single();
+        }
+
+        private static HashSet<CXCursor> GetDeclarationReferences(Cursor argument)
         {
             var references = new HashSet<CXCursor>();
             var pending = new Stack<Cursor>();
@@ -293,9 +313,7 @@ namespace Win32MetadataScraper
                 foreach (var child in cursor.CursorChildren)
                     pending.Push(child);
             }
-            if (references.Count != 1 || references.Single().Kind != kind)
-                throw Error(location, message);
-            return references.Single();
+            return references;
         }
 
         private static string ReadStringArgument(Cursor argument, NativeLocation location)
@@ -405,66 +423,7 @@ namespace Win32MetadataScraper
             if (!visited.Add(cursor))
                 return;
             if (cursor is NamedDecl declaration)
-            {
-                var location = GetLocation(declaration.Location);
-                var targets = declaration.Attrs.Where(attribute =>
-                    attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
-                    attribute.Spelling is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter" or
-                        HeaderAnnotation.OwnerPrefix + "Field").ToArray();
-                if (targets.Length != 0)
-                {
-                    string kind = HeaderAnnotation.RemoveOwnerPrefix(targets[0].Spelling);
-                    if (targets.Length != 1 || declaration is not VarDecl variable ||
-                        variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
-                        variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
-                        !variable.Type.Handle.IsConstQualified ||
-                        !variable.Name.StartsWith("_WIN32META_" + kind.ToUpperInvariant() + "_", StringComparison.Ordinal))
-                        throw Error(location, $"{kind} annotations require the metadata-only _Win32_Annotate{kind}_ carrier.");
-                    var carriers = kind switch
-                    {
-                        "Parameter" => parameterCarriers,
-                        "Field" => fieldCarriers,
-                        _ => methodCarriers,
-                    };
-                    carriers.Add((variable, targets[0]));
-                    return;
-                }
-                var facts = new DeclarationFacts(declaration, location);
-                if (declaration is ParmVarDecl)
-                {
-                    string comment = GetLegacyParameterComment(declaration);
-                    if (!HasSalParameterDirection(declaration))
-                        facts.MidlDirection = GetMidlDirection(comment);
-                }
-                ReadAnnotations(declaration, facts);
-                if (declaration is ParmVarDecl)
-                {
-                    string comment = GetLegacyParameterComment(declaration);
-                    if (comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
-                    {
-                        var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
-                        ValidateTarget(facts, retval, location);
-                        facts.HasMidlRetval = true;
-                    }
-                }
-                if (declaration is EnumDecl enumDeclaration)
-                {
-                    facts.IsScopedEnum = enumDeclaration.IsScoped;
-                    facts.IsFlagsEnum = declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_FlagEnum);
-                }
-                if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or EnumConstantDecl or TypedefNameDecl ||
-                    IsConstantVariable(declaration))
-                {
-                    declarations[declaration] = facts;
-                    if (declaration is TypedefNameDecl alias)
-                    {
-                        if (facts.Annotations.Count != 0)
-                            annotatedTypedefs.Add(facts);
-                        if (GetCallbackOrigin(alias) is TypedefNameDecl origin)
-                            callbackOrigins[alias] = origin;
-                    }
-                }
-            }
+                CollectAnnotationErrors(declaration, () => ReadDeclaration(declaration));
             foreach (var child in cursor.CursorChildren)
             {
                 if (!child.Handle.IsAttribute && !child.Handle.IsReference && !child.Handle.IsExpression)
@@ -472,73 +431,152 @@ namespace Win32MetadataScraper
             }
         }
 
+        private void ReadDeclaration(NamedDecl declaration)
+        {
+            var location = GetLocation(declaration.Location);
+            var targets = declaration.Attrs.Where(attribute =>
+                attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                attribute.Spelling is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter" or
+                    HeaderAnnotation.OwnerPrefix + "Field").ToArray();
+            if (targets.Length != 0)
+            {
+                string kind = HeaderAnnotation.RemoveOwnerPrefix(targets[0].Spelling);
+                if (targets.Length != 1 || declaration is not VarDecl variable ||
+                    variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
+                    variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
+                    !variable.Type.Handle.IsConstQualified ||
+                    !variable.Name.StartsWith("_WIN32META_" + kind.ToUpperInvariant() + "_", StringComparison.Ordinal))
+                    throw Error(location, $"{kind} annotations require the metadata-only _Win32_Annotate{kind}_ carrier.");
+                var carriers = kind switch
+                {
+                    "Parameter" => parameterCarriers,
+                    "Field" => fieldCarriers,
+                    _ => methodCarriers,
+                };
+                carriers.Add((variable, targets[0]));
+                return;
+            }
+            var facts = new DeclarationFacts(declaration, location);
+            if (declaration is ParmVarDecl)
+            {
+                string comment = GetLegacyParameterComment(declaration);
+                if (!HasSalParameterDirection(declaration))
+                    facts.MidlDirection = GetMidlDirection(comment);
+            }
+            ReadAnnotations(declaration, facts);
+            if (invalidDeclarations.Contains(GetNativeIdentity(declaration)))
+                return;
+            if (declaration is ParmVarDecl)
+            {
+                string comment = GetLegacyParameterComment(declaration);
+                if (comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
+                {
+                    var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
+                    ValidateTarget(facts, retval, location);
+                    facts.HasMidlRetval = true;
+                }
+            }
+            if (declaration is EnumDecl enumDeclaration)
+            {
+                facts.IsScopedEnum = enumDeclaration.IsScoped;
+                facts.IsFlagsEnum = declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_FlagEnum);
+            }
+            if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or EnumConstantDecl or TypedefNameDecl ||
+                IsConstantVariable(declaration))
+            {
+                declarations[declaration] = facts;
+                if (declaration is TypedefNameDecl alias)
+                {
+                    if (facts.Annotations.Count != 0)
+                        annotatedTypedefs.Add(facts);
+                    if (GetCallbackOrigin(alias) is TypedefNameDecl origin)
+                        callbackOrigins[alias] = origin;
+                }
+            }
+        }
+
         private void ApplyMethodAnnotations()
         {
             foreach (var carrier in methodCarriers)
-            {
-                var location = GetLocation(carrier.Target.Location);
-                var arguments = carrier.Target.CursorChildren.ToArray();
-                if (arguments.Length != 1)
-                    throw Error(location, "A method carrier requires one compiler-parsed native method reference.");
-                var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_CXXMethod, location,
-                    "A method carrier requires a reference to a declared native interface method.");
-                var facts = declarations.Values.FirstOrDefault(item => item.Declaration.Handle.CanonicalCursor == target);
-                if (facts == null)
-                    throw Error(location, "The referenced method was not found in the original Clang AST.");
-                if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
-                    attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Method" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
-                    throw Error(location, "A method carrier requires at least one metadata annotation.");
-                ReadAnnotations(carrier.Declaration, facts);
-            }
+                CollectAnnotationErrors(carrier.Declaration, () =>
+                {
+                    var location = GetLocation(carrier.Target.Location);
+                    var arguments = carrier.Target.CursorChildren.ToArray();
+                    if (arguments.Length != 1)
+                        throw Error(location, "A method carrier requires one compiler-parsed native method reference.");
+                    var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_CXXMethod, location,
+                        "A method carrier requires a reference to a declared native interface method.");
+                    if (invalidDeclarations.Contains((target, -1)))
+                        return;
+                    var facts = declarations.Values.FirstOrDefault(item => item.Declaration.Handle.CanonicalCursor == target);
+                    if (facts == null)
+                        throw Error(location, "The referenced method was not found in the original Clang AST.");
+                    if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                        attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Method" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
+                        throw Error(location, "A method carrier requires at least one metadata annotation.");
+                    ReadAnnotations(carrier.Declaration, facts);
+                }, () => GetCarrierTarget(carrier.Target));
         }
 
         private void ApplyParameterAnnotations()
         {
             foreach (var carrier in parameterCarriers)
-            {
-                var location = GetLocation(carrier.Target.Location);
-                var arguments = carrier.Target.CursorChildren.ToArray();
-                if (arguments.Length != 2)
-                    throw Error(location, "A parameter carrier requires a compiler-parsed method reference and native parameter name.");
-                var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_CXXMethod, location,
-                    "A parameter carrier requires a reference to a declared native interface method.");
-                string name = ReadStringArgument(arguments[1], location);
-                if (!Regex.IsMatch(name, @"^[A-Za-z_]\w*$"))
-                    throw Error(location, "A parameter carrier requires one native parameter identifier.");
-                var method = declarations.Keys.OfType<CXXMethodDecl>()
-                    .FirstOrDefault(declaration => declaration.Handle.CanonicalCursor == target);
-                var parameters = method?.Parameters.Where(parameter => parameter.Name == name).ToArray();
-                if (parameters?.Length != 1 || !declarations.TryGetValue(parameters[0], out var facts))
-                    throw Error(location, $"The native parameter '{name}' does not uniquely identify a parameter of the referenced method.");
-                if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
-                    attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Parameter" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
-                    throw Error(location, "A parameter carrier requires at least one metadata annotation.");
-                ReadAnnotations(carrier.Declaration, facts);
-            }
+                CollectAnnotationErrors(carrier.Declaration, () =>
+                {
+                    var location = GetLocation(carrier.Target.Location);
+                    var arguments = carrier.Target.CursorChildren.ToArray();
+                    if (arguments.Length != 2)
+                        throw Error(location, "A parameter carrier requires a compiler-parsed method reference and native parameter name.");
+                    var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_CXXMethod, location,
+                        "A parameter carrier requires a reference to a declared native interface method.");
+                    if (invalidDeclarations.Contains((target, -1)))
+                        return;
+                    string name = ReadStringArgument(arguments[1], location);
+                    if (!Regex.IsMatch(name, @"^[A-Za-z_]\w*$"))
+                        throw Error(location, "A parameter carrier requires one native parameter identifier.");
+                    var method = declarations.Keys.OfType<CXXMethodDecl>()
+                        .FirstOrDefault(declaration => declaration.Handle.CanonicalCursor == target);
+                    var parameters = method?.Parameters.Where(parameter => parameter.Name == name).ToArray();
+                    if (parameters?.Length == 1 && invalidDeclarations.Contains(GetNativeIdentity(parameters[0])))
+                        return;
+                    if (parameters?.Length != 1 || !declarations.TryGetValue(parameters[0], out var facts))
+                        throw Error(location, $"The native parameter '{name}' does not uniquely identify a parameter of the referenced method.");
+                    if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                        attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Parameter" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
+                        throw Error(location, "A parameter carrier requires at least one metadata annotation.");
+                    ReadAnnotations(carrier.Declaration, facts);
+                }, () => GetCarrierTarget(carrier.Target));
         }
 
         private void ApplyFieldAnnotations()
         {
             foreach (var carrier in fieldCarriers)
-            {
-                var location = GetLocation(carrier.Target.Location);
-                var arguments = carrier.Target.CursorChildren.ToArray();
-                if (arguments.Length != 1)
-                    throw Error(location, "A field carrier requires one compiler-parsed native field reference.");
-                var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_FieldDecl, location,
-                    "A field carrier requires a reference to a declared native instance field.");
-                var facts = declarations.Values.FirstOrDefault(item => item.Declaration is FieldDecl &&
-                    item.Declaration.Handle.CanonicalCursor == target);
-                if (facts == null)
-                    throw Error(location, "The referenced field was not found in the original Clang AST.");
-                if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
-                    attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Field" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
-                    throw Error(location, "A field carrier requires at least one metadata annotation.");
-                ReadAnnotations(carrier.Declaration, facts);
-            }
+                CollectAnnotationErrors(carrier.Declaration, () =>
+                {
+                    var location = GetLocation(carrier.Target.Location);
+                    var arguments = carrier.Target.CursorChildren.ToArray();
+                    if (arguments.Length != 1)
+                        throw Error(location, "A field carrier requires one compiler-parsed native field reference.");
+                    var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_FieldDecl, location,
+                        "A field carrier requires a reference to a declared native instance field.");
+                    if (invalidDeclarations.Contains((target, -1)))
+                        return;
+                    var facts = declarations.Values.FirstOrDefault(item => item.Declaration is FieldDecl &&
+                        item.Declaration.Handle.CanonicalCursor == target);
+                    if (facts == null)
+                        throw Error(location, "The referenced field was not found in the original Clang AST.");
+                    if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                        attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Field" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
+                        throw Error(location, "A field carrier requires at least one metadata annotation.");
+                    ReadAnnotations(carrier.Declaration, facts);
+                }, () => GetCarrierTarget(carrier.Target));
         }
 
         private void ReadAnnotations(NamedDecl declaration, DeclarationFacts facts)
+            => CollectAnnotationErrors(declaration, () => ReadAnnotationFacts(declaration, facts),
+                () => GetNativeTarget(facts.Declaration.Handle), facts.Declaration);
+
+        private void ReadAnnotationFacts(NamedDecl declaration, DeclarationFacts facts)
         {
             var occurrences = new HashSet<CXCursor>();
             // Group carriers must be known before validating annotations on the emitted enum.
@@ -596,65 +634,68 @@ namespace Win32MetadataScraper
         private void MergeRedeclarationFacts()
         {
             foreach (var group in declarations.Values.GroupBy(facts => GetNativeIdentity(facts.Declaration)))
+                CollectAnnotationErrors(group.First().Declaration, () => MergeRedeclarationGroup(group.ToArray()));
+        }
+
+        private void MergeRedeclarationGroup(DeclarationFacts[] group)
+        {
+            var osValues = group.SelectMany(facts => facts.Annotations)
+                .Where(annotation => annotation.Name == "SupportedOSPlatform").ToArray();
+            var supportedOS = osValues.FirstOrDefault();
+            if (osValues.Any(annotation => !annotation.Arguments.SequenceEqual(supportedOS.Arguments)))
+                throw Error(group.First().Location, $"Conflicting 'SupportedOSPlatform' annotations on redeclarations of '{group.First().Declaration.Name}'.");
+            var directions = group.Select(facts => facts.MidlDirection)
+                .Where(direction => direction != ParameterAttributes.None).Distinct().ToArray();
+            if (directions.Length > 1)
+                throw Error(group.First().Location, $"Conflicting MIDL parameter directions on redeclarations of '{group.First().Declaration.Name}'.");
+            foreach (var facts in group)
+                facts.Annotations.RemoveAll(annotation => annotation.Name == "SupportedOSPlatform");
+            var owner = group.FirstOrDefault(facts => facts.Annotations.Count != 0) ?? group.First();
+            foreach (var facts in group.Where(facts => facts != owner))
             {
-                var osValues = group.SelectMany(facts => facts.Annotations)
-                    .Where(annotation => annotation.Name == "SupportedOSPlatform").ToArray();
-                var supportedOS = osValues.FirstOrDefault();
-                if (osValues.Any(annotation => !annotation.Arguments.SequenceEqual(supportedOS.Arguments)))
-                    throw Error(group.First().Location, $"Conflicting 'SupportedOSPlatform' annotations on redeclarations of '{group.First().Declaration.Name}'.");
-                var directions = group.Select(facts => facts.MidlDirection)
-                    .Where(direction => direction != ParameterAttributes.None).Distinct().ToArray();
-                if (directions.Length > 1)
-                    throw Error(group.First().Location, $"Conflicting MIDL parameter directions on redeclarations of '{group.First().Declaration.Name}'.");
-                foreach (var facts in group)
-                    facts.Annotations.RemoveAll(annotation => annotation.Name == "SupportedOSPlatform");
-                var owner = group.FirstOrDefault(facts => facts.Annotations.Count != 0) ?? group.First();
-                foreach (var facts in group.Where(facts => facts != owner))
+                if (owner.LogicalEnumMembers != null && facts.LogicalEnumMembers != null &&
+                    owner.IsFlagsEnum != facts.IsFlagsEnum)
+                    throw Error(facts.Location, $"Conflicting enum group kinds on '{facts.Declaration.Name}'.");
+                foreach (var annotation in facts.Annotations)
                 {
-                    if (owner.LogicalEnumMembers != null && facts.LogicalEnumMembers != null &&
-                        owner.IsFlagsEnum != facts.IsFlagsEnum)
-                        throw Error(facts.Location, $"Conflicting enum group kinds on '{facts.Declaration.Name}'.");
-                    foreach (var annotation in facts.Annotations)
-                    {
-                        if (annotation.Name is "Enum" or "FlagsEnum" && owner.LogicalEnumMembers != null)
-                            continue;
-                        var matching = owner.Annotations.Where(existing => existing.Name == annotation.Name).ToArray();
-                        bool equal = matching.Any(existing => existing.Arguments.SequenceEqual(annotation.Arguments));
-                        if (matching.Length != 0 && !equal && annotation.Name != "AssociatedConstant")
-                            throw Error(facts.Location, $"Conflicting '{annotation.Name}' annotations on redeclarations of '{facts.Declaration.Name}'.");
-                        int count = facts.Annotations.Count(existing => existing.Name == annotation.Name &&
-                            existing.Arguments.SequenceEqual(annotation.Arguments));
-                        while (owner.Annotations.Count(existing => existing.Name == annotation.Name &&
-                            existing.Arguments.SequenceEqual(annotation.Arguments)) < count)
-                            owner.Annotations.Add(annotation);
-                    }
-                    owner.IsScopedEnum |= facts.IsScopedEnum;
-                    owner.IsFlagsEnum |= facts.IsFlagsEnum;
-                    if (facts.InvalidValues.Count != 0)
-                    {
-                        if (owner.InvalidValues.Count != 0 && !owner.InvalidValues.SequenceEqual(facts.InvalidValues))
-                            throw Error(facts.Location, $"Conflicting RAIIFree invalid values on redeclarations of '{facts.Declaration.Name}'.");
-                        if (owner.InvalidValues.Count == 0)
-                            owner.InvalidValues.AddRange(facts.InvalidValues);
-                    }
-                    if (facts.LogicalEnumMembers != null)
-                        owner.LogicalEnumMembers = MergeEnumMembers(owner.LogicalEnumMembers, facts.LogicalEnumMembers, facts.Location);
+                    if (annotation.Name is "Enum" or "FlagsEnum" && owner.LogicalEnumMembers != null)
+                        continue;
+                    var matching = owner.Annotations.Where(existing => existing.Name == annotation.Name).ToArray();
+                    bool equal = matching.Any(existing => existing.Arguments.SequenceEqual(annotation.Arguments));
+                    if (matching.Length != 0 && !equal && annotation.Name != "AssociatedConstant")
+                        throw Error(facts.Location, $"Conflicting '{annotation.Name}' annotations on redeclarations of '{facts.Declaration.Name}'.");
+                    int count = facts.Annotations.Count(existing => existing.Name == annotation.Name &&
+                        existing.Arguments.SequenceEqual(annotation.Arguments));
+                    while (owner.Annotations.Count(existing => existing.Name == annotation.Name &&
+                        existing.Arguments.SequenceEqual(annotation.Arguments)) < count)
+                        owner.Annotations.Add(annotation);
                 }
-                if (supportedOS != null)
-                    owner.Annotations.Add(supportedOS);
-                foreach (var facts in group)
+                owner.IsScopedEnum |= facts.IsScopedEnum;
+                owner.IsFlagsEnum |= facts.IsFlagsEnum;
+                if (facts.InvalidValues.Count != 0)
                 {
-                    facts.AnnotationOwner = owner;
-                    facts.Annotations = owner.Annotations;
-                    facts.InvalidValues = owner.InvalidValues;
-                    facts.IsScopedEnum = owner.IsScopedEnum;
-                    facts.IsFlagsEnum = owner.IsFlagsEnum;
-                    facts.LogicalEnumMembers = owner.LogicalEnumMembers;
-                    facts.MidlDirection = directions.SingleOrDefault();
-                    // A traversed forward typedef can inherit group facts from an untraversed redeclaration.
-                    if (facts.Declaration is TypedefNameDecl && facts.LogicalEnumMembers != null && !annotatedTypedefs.Contains(facts))
-                        annotatedTypedefs.Add(facts);
+                    if (owner.InvalidValues.Count != 0 && !owner.InvalidValues.SequenceEqual(facts.InvalidValues))
+                        throw Error(facts.Location, $"Conflicting RAIIFree invalid values on redeclarations of '{facts.Declaration.Name}'.");
+                    if (owner.InvalidValues.Count == 0)
+                        owner.InvalidValues.AddRange(facts.InvalidValues);
                 }
+                if (facts.LogicalEnumMembers != null)
+                    owner.LogicalEnumMembers = MergeEnumMembers(owner.LogicalEnumMembers, facts.LogicalEnumMembers, facts.Location);
+            }
+            if (supportedOS != null)
+                owner.Annotations.Add(supportedOS);
+            foreach (var facts in group)
+            {
+                facts.AnnotationOwner = owner;
+                facts.Annotations = owner.Annotations;
+                facts.InvalidValues = owner.InvalidValues;
+                facts.IsScopedEnum = owner.IsScopedEnum;
+                facts.IsFlagsEnum = owner.IsFlagsEnum;
+                facts.LogicalEnumMembers = owner.LogicalEnumMembers;
+                facts.MidlDirection = directions.SingleOrDefault();
+                // A traversed forward typedef can inherit group facts from an untraversed redeclaration.
+                if (facts.Declaration is TypedefNameDecl && facts.LogicalEnumMembers != null && !annotatedTypedefs.Contains(facts))
+                    annotatedTypedefs.Add(facts);
             }
         }
 
@@ -1066,14 +1107,14 @@ namespace Win32MetadataScraper
         {
             var direction = ParameterAttributes.None;
             foreach (Match block in Regex.Matches(comment, @"/\*\s*(\[[^\[\]]*\]\s*)+\*/"))
-            foreach (Match attributeList in Regex.Matches(block.Value, @"\[([^\[\]]*)\]"))
-                foreach (string attribute in attributeList.Groups[1].Value.Split(','))
-                {
-                    if (attribute.Trim().Equals("in", StringComparison.OrdinalIgnoreCase))
-                        direction |= ParameterAttributes.In;
-                    else if (attribute.Trim().Equals("out", StringComparison.OrdinalIgnoreCase))
-                        direction |= ParameterAttributes.Out;
-                }
+                foreach (Match attributeList in Regex.Matches(block.Value, @"\[([^\[\]]*)\]"))
+                    foreach (string attribute in attributeList.Groups[1].Value.Split(','))
+                    {
+                        if (attribute.Trim().Equals("in", StringComparison.OrdinalIgnoreCase))
+                            direction |= ParameterAttributes.In;
+                        else if (attribute.Trim().Equals("out", StringComparison.OrdinalIgnoreCase))
+                            direction |= ParameterAttributes.Out;
+                    }
             return direction;
         }
 
@@ -1114,7 +1155,62 @@ namespace Win32MetadataScraper
         }
 
         private static HeaderAnnotationException Error(NativeLocation location, string message)
-            => new($"{location.File}({location.Line},{location.Column})", message);
+            => new(location.File, location.Line, location.Column, message);
+
+        private void CollectAnnotationErrors(NamedDecl declaration, Action validate, Func<string> nativeTarget = null,
+            NamedDecl factsOwner = null)
+        {
+            if (declaration != null && invalidDeclarations.Contains(GetNativeIdentity(declaration)) ||
+                factsOwner != null && invalidDeclarations.Contains(GetNativeIdentity(factsOwner)))
+                return;
+            try
+            {
+                validate();
+            }
+            catch (HeaderAnnotationException exception)
+            {
+                if (declaration != null)
+                    invalidDeclarations.Add(GetNativeIdentity(declaration));
+                if (factsOwner != null)
+                    invalidDeclarations.Add(GetNativeIdentity(factsOwner));
+                string target = nativeTarget?.Invoke();
+                if (string.IsNullOrEmpty(target))
+                    target = declaration == null ? "metadata comment" : GetNativeTarget(declaration.Handle);
+                annotationErrors.Add((exception, target));
+            }
+        }
+
+        private void ThrowAnnotationErrors()
+        {
+            if (annotationErrors.Count != 0)
+                throw new HeaderAnnotationDiagnosticsException(annotationErrors
+                    .OrderBy(diagnostic => diagnostic.Error.File, StringComparer.OrdinalIgnoreCase)
+                    .ThenBy(diagnostic => diagnostic.Error.Line)
+                    .ThenBy(diagnostic => diagnostic.Error.Column)
+                    .ThenBy(diagnostic => diagnostic.Target, StringComparer.Ordinal)
+                    .ThenBy(diagnostic => diagnostic.Error.Message, StringComparer.Ordinal)
+                    .Select(diagnostic => $"{diagnostic.Error.Message} [native target: {diagnostic.Target}]"));
+        }
+
+        private static string GetNativeTarget(CXCursor declaration)
+        {
+            var names = new Stack<string>();
+            for (var cursor = declaration; !cursor.IsNull && cursor.Kind != CXCursorKind.CXCursor_TranslationUnit;
+                cursor = clang.getCursorSemanticParent(cursor))
+            {
+                string name = cursor.Spelling.ToString();
+                if (name.Length != 0)
+                    names.Push(name);
+            }
+            return names.Count == 0 ? declaration.Kind.ToString() : "::" + string.Join("::", names);
+        }
+
+        private static string GetCarrierTarget(Attr target)
+        {
+            string names = string.Join(", ", target.CursorChildren.SelectMany(GetDeclarationReferences)
+                .Select(GetNativeTarget).Distinct(StringComparer.Ordinal).OrderBy(name => name, StringComparer.Ordinal));
+            return names.Length == 0 ? target.Spelling : names;
+        }
 
         private sealed record NativeLocation(string File, uint Line, uint Column, uint Offset);
         private sealed record LogicalEnumMember(string Name, string Value, ulong StorageBits);

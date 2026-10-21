@@ -68,6 +68,13 @@ directive/macro, malformed payload, unknown fact, missing reference, or ambiguou
 target fails with WMA001. Comments do not add declarations or change SAL.
 Adjacent native MIDL direction/retval blocks remain readable.
 
+The scraper reports independent WMA001 failures together for one partition,
+ordered by source file, line, column and native target. Invalid declaration facts
+are excluded from dependent checks to avoid cascaded errors. The complete report
+is written to standard error, and any error prevents generated bindings and
+remap output. Unexpected implementation exceptions remain fatal. Fix the reported
+facts before checking later composition and projection stages.
+
 An enum association can use a metadata-only forward declaration of the original
 native enum tag and typedef when its definition is in another header or partition.
 The complete original definition must still participate in metadata generation.

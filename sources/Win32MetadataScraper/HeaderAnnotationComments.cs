@@ -64,12 +64,15 @@ namespace Win32MetadataScraper
                             lineStart = previous - 1;
                         } while (lineStart > 0);
                         string prefix = Encoding.UTF8.GetString(contents.Slice(lineStart, checked((int)location.Offset) - lineStart)).TrimStart();
-                        if (prefix.StartsWith("#", StringComparison.Ordinal))
-                            throw Error(location, "Metadata comments cannot be defined inside a preprocessor directive or macro.");
-                        nativeNames ??= new NativeNameLookup(visited);
-                        nativeFacts ??= declarations.Values.GroupBy(value => GetNativeIdentity(value.Declaration))
-                            .ToDictionary(group => group.Key, group => group.First());
-                        ApplyCommentAnnotation(text, location, unit.TranslationUnitDecl, nativeFacts);
+                        CollectAnnotationErrors(null, () =>
+                        {
+                            if (prefix.StartsWith("#", StringComparison.Ordinal))
+                                throw Error(location, "Metadata comments cannot be defined inside a preprocessor directive or macro.");
+                            nativeNames ??= new NativeNameLookup(visited);
+                            nativeFacts ??= declarations.Values.GroupBy(value => GetNativeIdentity(value.Declaration))
+                                .ToDictionary(group => group.Key, group => group.First());
+                            ApplyCommentAnnotation(text, location, unit.TranslationUnitDecl, nativeFacts);
+                        }, () => Regex.Match(text, @"\b(?:interface|record|method|function|return|parameter|field|type|enum|enumerator|constant)\s+::[^\s]+").Value);
                     }
                 }
                 finally
@@ -93,13 +96,22 @@ namespace Win32MetadataScraper
             string kind = match.Groups["kind"].Value;
             string name = match.Groups["target"].Value;
             var target = ResolveCommentTarget(root, kind, name, location);
+            if (invalidDeclarations.Contains(GetNativeIdentity(target)))
+                return;
             if (!declarations.TryGetValue(target, out var facts) &&
                 !nativeFacts.TryGetValue(GetNativeIdentity(target), out facts))
                 throw Error(location, $"Metadata target '{name}' has no original declaration facts.");
+            CollectAnnotationErrors(target, () => ApplyResolvedCommentAnnotation(match.Groups["annotation"].Value,
+                kind, target, facts, location, nativeFacts));
+        }
+
+        private void ApplyResolvedCommentAnnotation(string payload, string kind, NamedDecl target, DeclarationFacts facts,
+            NativeLocation location, IReadOnlyDictionary<(CXCursor Declaration, int Parameter), DeclarationFacts> nativeFacts)
+        {
             HeaderAnnotation annotation;
             try
             {
-                annotation = HeaderAnnotation.Parse(match.Groups["annotation"].Value.Trim());
+                annotation = HeaderAnnotation.Parse(payload.Trim());
             }
             catch (FormatException exception)
             {
@@ -124,7 +136,7 @@ namespace Win32MetadataScraper
                     value.ToString(CultureInfo.InvariantCulture))).ToArray();
                 AddAnnotation(facts, new HeaderAnnotation("RAIIFree", arguments), location);
                 facts.InvalidValues.AddRange(values);
-                cleanupReferences.Add((target, arguments[0], arguments, location));
+                cleanupReferences.Add((target, facts.Declaration, arguments[0], arguments, location));
             }
             else if (annotation.Name == "AssociatedEnum")
             {
@@ -137,7 +149,7 @@ namespace Win32MetadataScraper
                     nativeFacts.TryGetValue(GetNativeIdentity(candidates[0]), out var group) && group.LogicalEnumMembers != null))
                     throw Error(location, $"AssociatedEnum reference '{annotation.Arguments[0]}' must identify one native enum or compiled metadata group; found {candidates.Length} candidates.");
                 var enumeration = candidates[0];
-                enumAssociations.Add((enumeration.Handle, location));
+                enumAssociations.Add((enumeration.Handle, facts.Declaration, location));
                 if (enumeration is EnumDecl nativeEnum && IsForwardEnumReference(nativeEnum))
                     enumReferenceCarriers.Add(enumeration.Handle.CanonicalCursor);
                 AddAnnotation(facts, new HeaderAnnotation("AssociatedEnum", new[] { Remap(enumeration.Name) }), location);

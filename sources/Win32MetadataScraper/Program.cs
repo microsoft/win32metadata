@@ -369,6 +369,11 @@ class Program
 
             return exitCode;
         }
+        catch (HeaderAnnotationDiagnosticsException ex)
+        {
+            Console.Error.WriteLine(ex.Message);
+            return -1;
+        }
         catch (Exception ex)
         {
             Console.Error.WriteLine($"Error: {ex.Message}");

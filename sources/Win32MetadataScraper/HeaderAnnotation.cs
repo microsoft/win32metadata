@@ -222,8 +222,23 @@ namespace Win32MetadataScraper
 
     internal sealed class HeaderAnnotationException : Exception
     {
-        internal HeaderAnnotationException(string location, string message)
-            : base($"{location}: error WMA001: {message}")
+        internal HeaderAnnotationException(string file, uint line, uint column, string message)
+            : base($"{file}({line},{column}): error WMA001: {message}")
+        {
+            File = file;
+            Line = line;
+            Column = column;
+        }
+
+        internal string File { get; }
+        internal uint Line { get; }
+        internal uint Column { get; }
+    }
+
+    internal sealed class HeaderAnnotationDiagnosticsException : Exception
+    {
+        internal HeaderAnnotationDiagnosticsException(IEnumerable<string> diagnostics)
+            : base(string.Join(Environment.NewLine, diagnostics))
         {
         }
     }
