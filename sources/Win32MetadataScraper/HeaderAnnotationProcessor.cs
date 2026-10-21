@@ -424,6 +424,10 @@ namespace Win32MetadataScraper
                     projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     continue;
                 }
+                // ABI storage remaps do not rename annotated native wrappers.
+                if (GetNativeIntegerStorage(name) != null ||
+                    SyntaxFactory.ParseTypeName(name) is PredefinedTypeSyntax or PointerTypeSyntax)
+                    name = alias.Name;
                 string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");

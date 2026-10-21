@@ -2151,6 +2151,94 @@ int UseCallback(PFN_ALIAS callback);
             Assert.Contains("SupportedOSPlatform(\"windows6.1\")", source);
         }
 
+        internal static readonly (string Name, string Target)[] OpaqueHandleAliases =
+        {
+            ("HWND", "HANDLE"), ("HBITMAP", "HGDIOBJ"), ("HBRUSH", "HGDIOBJ"),
+            ("HFONT", "HGDIOBJ"), ("HPALETTE", "HGDIOBJ"), ("HPEN", "HGDIOBJ"), ("HCURSOR", "HICON"),
+        };
+
+        internal const string OpaqueHandleDeclarations = @"
+typedef void* HANDLE;
+typedef void* HGDIOBJ;
+typedef void* HICON;
+#define DECLARE_HANDLE(name) typedef struct name##__ { int unused; } *name
+DECLARE_HANDLE(HWND);
+DECLARE_HANDLE(HBITMAP);
+DECLARE_HANDLE(HBRUSH);
+DECLARE_HANDLE(HFONT);
+DECLARE_HANDLE(HPALETTE);
+DECLARE_HANDLE(HPEN);
+DECLARE_HANDLE(HCURSOR);
+_Win32_AlsoUsableFor_(HANDLE) typedef HWND HWND;
+_Win32_AlsoUsableFor_(HGDIOBJ) typedef HBITMAP HBITMAP;
+_Win32_AlsoUsableFor_(HGDIOBJ) typedef HBRUSH HBRUSH;
+_Win32_AlsoUsableFor_(HGDIOBJ) typedef HFONT HFONT;
+_Win32_AlsoUsableFor_(HGDIOBJ) typedef HPALETTE HPALETTE;
+_Win32_AlsoUsableFor_(HGDIOBJ) typedef HPEN HPEN;
+_Win32_AlsoUsableFor_(HICON) typedef HCURSOR HCURSOR;
+extern ""C"" HWND __stdcall UseWindow(HWND value);
+";
+
+        internal static string OpaqueHandleSettings(string storage) =>
+            "--remap\nHANDLE=IntPtr\nHGDIOBJ=IntPtr\nHICON=IntPtr\n" +
+            string.Join("\n", OpaqueHandleAliases.Select(alias =>
+                $"{alias.Name}={storage}\nP{alias.Name}={alias.Name}*\nLP{alias.Name}={alias.Name}*\n{alias.Name}__*={alias.Name}")) +
+            "\n--exclude\n" + string.Join("\n", OpaqueHandleAliases.Select(alias => alias.Name + "__")) + "\n";
+
+        [Theory]
+        [InlineData("IntPtr")]
+        [InlineData("System.IntPtr")]
+        [InlineData("global::System.IntPtr")]
+        [InlineData("nint")]
+        [InlineData("UIntPtr")]
+        [InlineData("System.UIntPtr")]
+        [InlineData("global::System.UIntPtr")]
+        [InlineData("nuint")]
+        public void BuiltinStorageRemapsDoNotRenameAnnotatedHandles(string storage)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", OpaqueHandleDeclarations,
+                extraSettings: OpaqueHandleSettings(storage));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var wrappers = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().ToArray();
+            Assert.Equal(OpaqueHandleAliases.Select(alias => alias.Name).OrderBy(name => name),
+                wrappers.Select(wrapper => wrapper.Identifier.ValueText).OrderBy(name => name));
+            foreach (var alias in OpaqueHandleAliases)
+            {
+                var wrapper = wrappers.Single(wrapper => wrapper.Identifier.ValueText == alias.Name);
+                Assert.Contains($"AlsoUsableFor(\"{alias.Target}\")", wrapper.ToString());
+                Assert.Equal(storage.Contains("UIntPtr", StringComparison.Ordinal) || storage == "nuint"
+                    ? "global::System.UIntPtr" : "global::System.IntPtr",
+                    wrapper.Members.OfType<FieldDeclarationSyntax>().Single().Declaration.Type.ToString());
+            }
+            if (storage == "IntPtr")
+            {
+                var method = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                    .OfType<MethodDeclarationSyntax>().Single(method => method.Identifier.ValueText == "UseWindow");
+                Assert.Equal("IntPtr", method.ReturnType.ToString());
+                Assert.Equal("IntPtr", Assert.Single(method.ParameterList.Parameters).Type.ToString());
+                Assert.Contains("NativeTypeName(\"HWND\")", method.ToString());
+            }
+        }
+
+        [Fact]
+        public void PrimitiveStorageRemapsDoNotRenameAnnotatedKeys()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef long long FIRST_KEY;
+typedef long long SECOND_KEY;
+_Win32_SupportedOS_10240_ typedef FIRST_KEY FIRST_KEY;
+_Win32_AlsoUsableFor_(FIRST_KEY) typedef SECOND_KEY SECOND_KEY;
+", extraSettings: "--remap\nFIRST_KEY=long\nSECOND_KEY=long\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var wrappers = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().ToArray();
+            Assert.Equal(new[] { "FIRST_KEY", "SECOND_KEY" },
+                wrappers.Select(wrapper => wrapper.Identifier.ValueText).OrderBy(name => name));
+            Assert.All(wrappers, wrapper => Assert.Equal("long",
+                wrapper.Members.OfType<FieldDeclarationSyntax>().Single().Declaration.Type.ToString()));
+        }
+
         internal const string PointerSizedTypedefDeclarations = @"
 #if defined(_WIN64)
 typedef unsigned long long ULONG_PTR;

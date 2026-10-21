@@ -359,6 +359,20 @@ replaces prepared inputs. Generated sources and actual settings, remaps and
 diagnostics are retained in `obj\generated` and `obj\scratch`, with input,
 command, log and output hashes.
 
+Build replacements for a pinned tools runtime against its retained dependency
+assemblies. Nerdbank.GitVersioning can change assembly identities between commits,
+even when the source interfaces are unchanged. Check the replacement's assembly
+references and run a cold emission in a private copy of the complete pinned
+runtime with only the intended overlays. Keep the other dependency hashes
+unchanged.
+
+For annotated typedef wrappers, generated autoTypes remaps such as `HWND=IntPtr`
+describe binding storage; the wrapper must retain its native name. When composing
+with a retained autotype, preserve its physical `Value` field encoding if the
+header uses the ABI-equivalent `IntPtr`/`void*` spelling. This does not permit
+fixed-width, unsigned, typed-pointer or annotation conflicts, or storage
+disagreements between header-only fragments.
+
 The driver prepends the canonical prepared `shared`, `um`, `ucrt` and `winrt`
 directories before the explicitly selected MSVC/UCRT fallbacks. It rejects
 unprepared SDK `shared`, `um` and `winrt` fallback directories before starting a

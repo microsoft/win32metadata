@@ -304,6 +304,43 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   The failed 064 result remains failed; native scraping need not be repeated.
   Actual NEW emission and the attached integrity and unsuppressed EDF069
   comparison remain outstanding.
+- Emitter-only 065 failed naturally before source processing in 1.3071151 seconds.
+  The first replacement referenced workspace `MetadataUtils` version
+  `71.0.391.57282`, while the qualified runtime retains `71.0.335.41385`
+  (SHA256 prefix `CAC2BB6D`). This was a replacement-build packaging error; the
+  logical-enum fix was not exercised and no NEW image was emitted.
+  Rebuild the unchanged `dfc225d1` source against the retained DLL with project
+  dependency builds disabled. The corrected emitter SHA256 is
+  `D53E2457D424A7014EE53D5341AD22868138C841AD706562C8540DFC1755A36C`.
+  Its assembly reference now matches the retained dependency, and all 17
+  portable-PDB source documents are individually checksum-verified and copied.
+  A cold copy of the qualified 250-file runtime with only the emitter DLL/PDB
+  replaced emits the captured alias fixture successfully in 1.5235003 seconds.
+  All 248 other files remain hash-identical, and the emitted WinMD physically
+  contains `WSA_ERROR.WSA_IO_PENDING` as Int32 value 997. This fixture image is
+  binding evidence, not the complete SDK NEW.
+  The frozen packet is in session files `legacy-enum-bound-runtime-066`.
+  A fresh ordinary emitter-only continuation is authorized on the same complete
+  395-profile producer closure, followed by the existing integrity and exact
+  EDF069 comparison. Failed 064 and 065 remain sealed; no native rescrape or
+  dependency substitution is required.
+- Emitter-only 066 passed loading and logical-enum composition, then failed
+  naturally after 275.7344505 seconds on duplicate Foundation `IntPtr` typedefs.
+  The raw producer source already collapsed seven native handle names through
+  generated autoTypes storage remaps. The scraper now retains the native wrapper
+  identity for storage remaps without changing normal API bindings. Composition
+  preserves the retained `Value` field encoding for `IntPtr`/`void*` pointer
+  spellings, including architecture variants; genuine type, annotation and
+  duplicate-name conflicts still fail.
+  All 12 new producer/physical regressions failed before the repair. The repaired
+  pipeline passes 32 targeted cases and all 186 emitter tests. Physical cases
+  preserve all seven handle identities, their relationships, invalid values and
+  retained pointer encodings on x86/x64/arm64.
+  A read-only inventory of all 131 raw header-types inputs finds exactly one
+  affected normal profile: Foundation/common, scheduled as x86. Refresh only that
+  profile with the corrected scraper, then compose it with the other 394 frozen
+  profile outputs and unchanged constants before ordinary emission. Preserve
+  failed 064/065/066; no complete NEW image or downstream comparison exists yet.
 - [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
   when preprocessing records reach generation with macro bindings disabled.
   Its reviewed condition is not used by the updated consumer. Per the user's

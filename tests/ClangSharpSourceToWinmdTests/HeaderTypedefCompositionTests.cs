@@ -93,6 +93,9 @@ namespace ClangSharpSourceToWinmdTests
 
         [DataTestMethod]
         [DataRow("uint", "", "", "Value storage")]
+        [DataRow("long", "", "", "Value storage")]
+        [DataRow("int*", "", "", "Value storage")]
+        [DataRow("global::System.UIntPtr", "", "", "Value storage")]
         [DataRow("void*", "[RAIIFree(\"DifferentClose\")]", "", "RAIIFreeAttribute")]
         [DataRow("void*", "[InvalidHandleValue(-1)]", "", "InvalidHandleValueAttribute")]
         [DataRow("void*", "", "[AlsoUsableFor(\"DifferentHandle\")]", "AlsoUsableForAttribute")]
@@ -105,6 +108,42 @@ namespace ClangSharpSourceToWinmdTests
             var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
             StringAssert.Contains(error.Message, diagnostic);
             StringAssert.Contains(error.Message, "Test.HANDLE");
+        }
+
+        [DataTestMethod]
+        [DataRow("void*", "global::System.IntPtr")]
+        [DataRow("global::System.IntPtr", "void*")]
+        public void RetainedNativePointerStorageIsPreserved(string retainedStorage, string headerStorage)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedAlias.Replace("public void* Value", $"public {retainedStorage} Value"));
+            fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("public void* Value", $"public {headerStorage} Value"));
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Test.HANDLE")!;
+            Assert.AreEqual(1, alias.DeclaringSyntaxReferences.Length);
+            Assert.AreEqual(4, alias.GetAttributes().Length);
+            string output = Path.Combine(fixture.DirectoryPath, "Pointer.winmd");
+            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var type = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(definition => reader.GetString(definition.Namespace) == "Test" && reader.GetString(definition.Name) == "HANDLE");
+            var field = reader.GetFieldDefinition(type.GetFields().Single());
+            CollectionAssert.AreEqual(retainedStorage == "void*" ? new byte[] { 0x06, 0x0f, 0x01 } : new byte[] { 0x06, 0x18 },
+                reader.GetBlobBytes(field.Signature));
+        }
+
+        [TestMethod]
+        public void HeaderOnlyPointerStorageDisagreementsFailClosed()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Other.header-types.cs", HeaderAlias.Replace("public void* Value", "public global::System.IntPtr Value"));
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
         [DataTestMethod]
@@ -239,6 +278,30 @@ namespace Test { public static class Apis {
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "arm64", "Bindings.header-types.cs"), "");
             var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
             StringAssert.Contains(error.Message, "complete x86/x64/arm64 coverage");
+        }
+
+        [TestMethod]
+        public void NativePointerStorageIsRetainedAcrossHeaderArchitectureVariants()
+        {
+            using var fixture = new Fixture("crossarch");
+            foreach (string architecture in new[] { "x86", "x64", "arm64" })
+                File.WriteAllText(Path.Combine(fixture.DirectoryPath, architecture, "Bindings.header-types.cs"),
+                    HeaderAlias.Replace("public void* Value", "public global::System.IntPtr Value")
+                        .Replace("OTHER_HANDLE", architecture));
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            string output = Path.Combine(fixture.DirectoryPath, "Variants.winmd");
+            ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var aliases = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(definition => reader.GetString(definition.Namespace) == "Test" && reader.GetString(definition.Name) == "HANDLE").ToArray();
+            Assert.AreEqual(3, aliases.Length);
+            foreach (var alias in aliases)
+                CollectionAssert.AreEqual(new byte[] { 0x06, 0x0f, 0x01 },
+                    reader.GetBlobBytes(reader.GetFieldDefinition(alias.GetFields().Single()).Signature));
         }
 
         private static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)

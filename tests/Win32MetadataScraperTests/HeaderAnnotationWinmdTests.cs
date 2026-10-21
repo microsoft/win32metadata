@@ -51,6 +51,45 @@ void KeepNative(unsigned value);
 ";
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void RemappedHeaderHandleFactsComposeWithRetainedNativeWrappers(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                HeaderAnnotationTests.OpaqueHandleDeclarations,
+                extraSettings: HeaderAnnotationTests.OpaqueHandleSettings("IntPtr"));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var aliases = HeaderAnnotationTests.OpaqueHandleAliases.ToDictionary(alias => alias.Name, alias => alias.Target);
+            var retained = new[] { "HANDLE", "HGDIOBJ", "HICON" }.Concat(aliases.Keys).Select(name => new ClangSharpSourceToWinmd.AutoType
+            {
+                Name = name,
+                Namespace = "Test",
+                ValueType = "DECLARE_HANDLE",
+                AlsoUsableFor = aliases.GetValueOrDefault(name),
+                InvalidHandleValues = name == "HWND" ? new long[] { 0 } : null,
+            }).ToArray();
+            using (var output = File.Create(Path.Combine(fixture.DirectoryPath, "autotypes.cs")))
+                NativeTypedefStructsCreator.WriteToStream(new(), retained, output);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            foreach (var alias in aliases)
+            {
+                var type = FindType(reader, alias.Key);
+                var field = reader.GetFieldDefinition(Assert.Single(type.GetFields()));
+                Assert.Equal("Value", reader.GetString(field.Name));
+                Assert.Equal(new byte[] { 0x06, 0x0f, 0x01 }, reader.GetBlobBytes(field.Signature));
+                AssertHasAttribute(reader, type.GetCustomAttributes(), "NativeTypedefAttribute");
+                AssertStringAttribute(reader, type.GetCustomAttributes(), "AlsoUsableForAttribute", alias.Value);
+                Assert.Single(type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "AlsoUsableForAttribute"));
+            }
+            Assert.Equal(new long[] { 0 }, ReadInvalidValues(reader, FindType(reader, "HWND").GetCustomAttributes()));
+            Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name)
+                is "IntPtr" or "UIntPtr" or "nint" or "nuint");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", 0)]
         [InlineData("x64", "x86_64-pc-windows-msvc", 0)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", 0)]

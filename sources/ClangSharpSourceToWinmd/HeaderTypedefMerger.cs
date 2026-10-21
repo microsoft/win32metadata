@@ -94,14 +94,22 @@ namespace ClangSharpSourceToWinmd
         private static StructDeclarationSyntax MergeAliases(CSharpCompilation compilation, Fragment[] aliases)
         {
             var first = aliases[0];
-            var valueType = GetValueType(first, compilation.GetSemanticModel(first.Tree));
+            // Keep the retained field encoding when header bindings spell void-pointer storage as IntPtr.
+            var retained = aliases.FirstOrDefault(alias => IsAutoTypesFile(alias.Tree.FilePath));
+            var storageOwner = retained ?? first;
+            var valueType = GetValueType(storageOwner, compilation.GetSemanticModel(storageOwner.Tree));
+            foreach (var alias in aliases)
+            {
+                var incomingType = GetValueType(alias, compilation.GetSemanticModel(alias.Tree));
+                if (!SymbolEqualityComparer.Default.Equals(valueType, incomingType) &&
+                    !(retained != null && IsEquivalentNativePointerStorage(valueType, incomingType)))
+                    throw Error(alias, "Conflicting native typedef Value storage types.");
+            }
             var attributesByType = first.Attributes.GroupBy(AttributeName, StringComparer.Ordinal)
                 .ToDictionary(attributes => attributes.Key, attributes => attributes.ToArray(), StringComparer.Ordinal);
             var added = new List<AttributeListSyntax>();
             foreach (var alias in aliases.Skip(1))
             {
-                if (!SymbolEqualityComparer.Default.Equals(valueType, GetValueType(alias, compilation.GetSemanticModel(alias.Tree))))
-                    throw Error(alias, "Conflicting native typedef Value storage types.");
                 foreach (var attributes in alias.Attributes.GroupBy(AttributeName, StringComparer.Ordinal))
                 {
                     var incoming = attributes.ToArray();
@@ -118,8 +126,23 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
             }
-            return first.Declaration.AddAttributeLists(added.ToArray());
+            var declaration = first.Declaration;
+            if (storageOwner != first)
+            {
+                var field = (FieldDeclarationSyntax)declaration.Members.Single();
+                declaration = declaration.ReplaceNode(field.Declaration.Type,
+                    SyntaxFactory.ParseTypeName(valueType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
+                        .WithTriviaFrom(field.Declaration.Type));
+            }
+            return declaration.AddAttributeLists(added.ToArray());
         }
+
+        private static bool IsEquivalentNativePointerStorage(ITypeSymbol left, ITypeSymbol right) =>
+            IsVoidPointer(left) && right.SpecialType == SpecialType.System_IntPtr ||
+            IsVoidPointer(right) && left.SpecialType == SpecialType.System_IntPtr;
+
+        private static bool IsVoidPointer(ITypeSymbol type) =>
+            type is IPointerTypeSymbol pointer && pointer.PointedAtType.SpecialType == SpecialType.System_Void;
 
         private static int GetArchitecture(Fragment fragment)
         {
