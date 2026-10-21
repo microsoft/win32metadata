@@ -26,6 +26,22 @@ semantics: supported OS, imports, ownership and invalid values, result and lifet
 behavior, logical enum groups and associations, and the rest of the supported
 vocabulary. Native declarations and existing SAL remain authoritative.
 
+`AssociatedConstant(NAME)` on a projected enum also requests an object-like macro
+constant when its definition is present in the original translation unit. A
+separate ClangSharp macro-binding pass includes only those requested names and
+their actual provider files; it does not enable macro generation for the
+ordinary partition output.
+The compiler supplies each constant's type, expression value and active guards.
+These remain global constants associated with the existing enum, without adding
+enum members or changing native declarations.
+
+Native constant declarations and names supplied by another partition retain
+their existing representation. A missing local macro provider does not invent a
+value. Multiple original-TU macro definition records, function-like providers and
+bindings that cannot produce constant fields fail explicitly, as do exclusions or
+remappings that prevent the requested distinct fields. Readonly/pointer
+macro bindings are not published as already-written constants.
+
 #### Original-IDL structured comments
 
 The same `parse-win32-annotations` option reads owned comments emitted by MIDL.

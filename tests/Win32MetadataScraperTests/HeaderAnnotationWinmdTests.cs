@@ -22,6 +22,317 @@ namespace Win32MetadataScraperTests
 {
     public partial class HeaderAnnotationWinmdTests
     {
+        private const string AssociatedConstantNativeDeclarations = @"
+typedef enum _Win32_AssociatedConstant_(CLSCTX_ALL) _Win32_AssociatedConstant_(CLSCTX_SERVER)
+__attribute__((flag_enum)) tagCLSCTX {
+    CLSCTX_INPROC_SERVER = 1,
+    CLSCTX_INPROC_HANDLER = 2,
+    CLSCTX_LOCAL_SERVER = 4,
+    CLSCTX_REMOTE_SERVER = 16
+} CLSCTX;
+#if (_WIN32_WINNT >= 0x0400) || defined(_WIN32_DCOM)
+#define CLSCTX_ALL (CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER)
+#define CLSCTX_SERVER (CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER | CLSCTX_REMOTE_SERVER)
+#else
+#define CLSCTX_ALL (CLSCTX_INPROC_SERVER | CLSCTX_INPROC_HANDLER | CLSCTX_LOCAL_SERVER)
+#define CLSCTX_SERVER (CLSCTX_INPROC_SERVER | CLSCTX_LOCAL_SERVER)
+#endif
+typedef enum _Win32_AssociatedConstant_(D3DTS_WORLD) _Win32_AssociatedConstant_(D3DTS_WORLD1)
+_Win32_AssociatedConstant_(D3DTS_WORLD2) _Win32_AssociatedConstant_(D3DTS_WORLD3)
+_D3DTRANSFORMSTATETYPE { D3DTS_VIEW = 2, D3DTS_PROJECTION = 3 } D3DTRANSFORMSTATETYPE;
+#define D3DTS_WORLDMATRIX(index) (D3DTRANSFORMSTATETYPE)(index + 256)
+#define D3DTS_WORLD D3DTS_WORLDMATRIX(0)
+#define D3DTS_WORLD1 D3DTS_WORLDMATRIX(1)
+#define D3DTS_WORLD2 D3DTS_WORLDMATRIX(2)
+#define D3DTS_WORLD3 D3DTS_WORLDMATRIX(3)
+#define UNRELATED_NUMBER 19U
+#define UNRELATED_POINTER ((void*)-1)
+void KeepNative(unsigned value);
+";
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", 0)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 0)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 0)]
+        [InlineData("x86", "i686-pc-windows-msvc", 1)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 1)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 1)]
+        [InlineData("x86", "i686-pc-windows-msvc", 2)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 2)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 2)]
+        public void AssociatedConstantMacrosPreservePhysicalNativeGuardsAndTypes(string architecture, string target, int profile)
+        {
+            string guards = profile == 0 ? "#define _WIN32_WINNT 0x0600\n" : "#define _WIN32_WINNT 0x0300\n";
+            if (profile == 2)
+                guards += "#define _WIN32_DCOM\n";
+            foreach (bool enabled in new[] { false, true })
+            {
+                using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                    guards + AssociatedConstantNativeDeclarations, annotationsEnabled: enabled,
+                    extraSettings: "--with-type\nCLSCTX=uint\n");
+                Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+                var nativeOff = NativeSurface(fixture, target, false);
+                var nativeOn = NativeSurface(fixture, target, true);
+                Assert.Equal(nativeOff, nativeOn);
+                using var image = Emit(fixture, architecture);
+                var reader = image.Reader;
+                var context = FindType(reader, "CLSCTX");
+                var transforms = FindType(reader, "D3DTRANSFORMSTATETYPE");
+                string[] contextMembers = { "CLSCTX_INPROC_SERVER", "CLSCTX_INPROC_HANDLER", "CLSCTX_LOCAL_SERVER", "CLSCTX_REMOTE_SERVER" };
+                string[] transformMembers = { "D3DTS_VIEW", "D3DTS_PROJECTION" };
+                foreach (var (type, names, storage, flags) in new[]
+                {
+                    (context, contextMembers, "UInt32", true),
+                    (transforms, transformMembers, "Int32", false),
+                })
+                {
+                    Assert.Equal("Test", reader.GetString(type.Namespace));
+                    var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                    Assert.Equal(storage, fields.Single(field => reader.GetString(field.Name) == "value__")
+                        .DecodeSignature(new SignatureNames(), null));
+                    Assert.Equal(names, fields.Where(field => reader.GetString(field.Name) != "value__")
+                        .Select(field => reader.GetString(field.Name)));
+                    Assert.Equal(flags ? new[] { 1, 2, 4, 16 } : new[] { 2, 3 },
+                        fields.Where(field => reader.GetString(field.Name) != "value__")
+                            .Select(field => reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32()));
+                    Assert.Equal(flags && enabled, type.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "FlagsAttribute"));
+                    AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "ScopedEnumAttribute");
+                }
+                var api = FindType(reader, "Apis");
+                Assert.Equal("Test", reader.GetString(api.Namespace));
+                var globals = api.GetFields().Select(reader.GetFieldDefinition)
+                    .ToDictionary(field => reader.GetString(field.Name));
+                Assert.DoesNotContain("UNRELATED_NUMBER", globals.Keys);
+                Assert.DoesNotContain("UNRELATED_POINTER", globals.Keys);
+                Assert.DoesNotContain("D3DTS_WORLD0", globals.Keys);
+                string[] contextNames = { "CLSCTX_ALL", "CLSCTX_SERVER" };
+                string[] worldNames = { "D3DTS_WORLD", "D3DTS_WORLD1", "D3DTS_WORLD2", "D3DTS_WORLD3" };
+                var expected = contextNames.Zip(profile == 1 ? new[] { 7, 5 } : new[] { 23, 21 }, (name, value) => (name, value, type: "Int32"))
+                    .Concat(worldNames.Select((name, index) => (name, value: 256 + index, type: "D3DTRANSFORMSTATETYPE"))).ToArray();
+                Assert.Equal(enabled ? expected.Select(value => value.name).OrderBy(name => name) : Enumerable.Empty<string>(),
+                    globals.Keys.OrderBy(name => name));
+                if (enabled)
+                    foreach (var value in expected)
+                    {
+                        var field = globals[value.name];
+                        Assert.True(field.Attributes.HasFlag(FieldAttributes.Literal | FieldAttributes.HasDefault | FieldAttributes.Static));
+                        Assert.Equal(value.type, field.DecodeSignature(new SignatureNames(), null));
+                        var constant = reader.GetConstant(field.GetDefaultValue());
+                        Assert.Equal(ConstantTypeCode.Int32, constant.TypeCode);
+                        Assert.Equal(value.value, reader.GetBlobReader(constant.Value).ReadInt32());
+                    }
+                foreach (var (type, names) in new[] { (context, contextNames), (transforms, worldNames) })
+                {
+                    var associations = type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "AssociatedConstantAttribute")
+                        .Select(handle =>
+                        {
+                            var blob = reader.GetBlobReader(reader.GetCustomAttribute(handle).Value);
+                            Assert.Equal(1, blob.ReadUInt16());
+                            return blob.ReadSerializedString();
+                        }).OrderBy(name => name);
+                    Assert.Equal(enabled ? names.OrderBy(name => name) : Enumerable.Empty<string>(), associations);
+                }
+                Assert.Equal(new[] { "UInt32" }, FindMethod(reader, "Apis", "KeepNative")
+                    .DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                AssertMetadataClosure(reader);
+
+                string artifacts = Environment.GetEnvironmentVariable("WIN32_ASSOCIATED_CONSTANT_ARTIFACTS");
+                if (artifacts != null)
+                {
+                    string destination = Path.Combine(artifacts, architecture + "-profile-" + profile + (enabled ? "-on" : "-off"));
+                    Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
+                    Directory.CreateDirectory(destination);
+                    File.Copy(Path.Combine(fixture.DirectoryPath, "Test.winmd"), Path.Combine(destination, "Test.winmd"));
+                    var scraper = typeof(global::Win32MetadataScraper.HeaderAnnotationProcessor).Assembly;
+                    var emitter = typeof(ClangSharpSourceWinmdGenerator).Assembly;
+                    File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
+                    {
+                        architecture, profile, annotationsEnabled = enabled, nativeOff, nativeOn, nativeAbiUnchanged = true,
+                        enums = new[] { context, transforms }.Select(type => new
+                        {
+                            nativeIdentity = reader.GetString(type.Name) == "CLSCTX" ? "tagCLSCTX" : "_D3DTRANSFORMSTATETYPE",
+                            name = reader.GetString(type.Name), @namespace = reader.GetString(type.Namespace),
+                            flags = type.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "FlagsAttribute"),
+                            scoped = type.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "ScopedEnumAttribute"),
+                            storage = reader.GetFieldDefinition(type.GetFields().Single(handle =>
+                                reader.GetString(reader.GetFieldDefinition(handle).Name) == "value__")).DecodeSignature(new SignatureNames(), null),
+                            members = type.GetFields().Select(reader.GetFieldDefinition)
+                                .Where(field => reader.GetString(field.Name) != "value__").Select(field => new
+                                {
+                                    name = reader.GetString(field.Name),
+                                    value = reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32(),
+                                }).ToArray(),
+                        }).ToArray(),
+                        globals = globals.Select(pair => new
+                        {
+                            name = pair.Key, @namespace = reader.GetString(api.Namespace),
+                            type = pair.Value.DecodeSignature(new SignatureNames(), null),
+                            literal = pair.Value.Attributes.HasFlag(FieldAttributes.Literal),
+                            hasDefault = pair.Value.Attributes.HasFlag(FieldAttributes.HasDefault),
+                            constantType = reader.GetConstant(pair.Value.GetDefaultValue()).TypeCode.ToString(),
+                            value = reader.GetBlobReader(reader.GetConstant(pair.Value.GetDefaultValue()).Value).ReadInt32(),
+                        }).ToArray(),
+                        associations = new[] { context, transforms }.SelectMany(type => type.GetCustomAttributes()
+                            .Where(handle => AttributeName(reader, handle) == "AssociatedConstantAttribute").Select(handle =>
+                            {
+                                var blob = reader.GetBlobReader(reader.GetCustomAttribute(handle).Value);
+                                blob.ReadUInt16();
+                                return new { target = reader.GetString(type.Name), constant = blob.ReadSerializedString() };
+                            })).ToArray(),
+                        scraper = scraper.Location,
+                        scraperProductVersion = System.Diagnostics.FileVersionInfo.GetVersionInfo(scraper.Location).ProductVersion,
+                        scraperSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(scraper.Location))),
+                        emitter = emitter.Location,
+                        emitterSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(emitter.Location))),
+                    }, new JsonSerializerOptions { WriteIndented = true }));
+                }
+            }
+        }
+
+        [Fact]
+        public void AssociatedConstantMacrosLeaveUnrelatedFieldsAndLegacyFallback()
+        {
+            const string native = @"
+#define REQUESTED 7U
+#define UNRELATED_NUMBER 19UL
+typedef const wchar_t* LPCWSTR;
+#define UNRELATED_POINTER ((LPCWSTR)19)
+struct VALUE { int field; };
+static const VALUE NativeReadonly = { 3 };
+void* const NativePointer = (void*)1;
+enum ANNOTATION Flags { NativeMember = 1 };
+";
+            using var original = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                native.Replace("ANNOTATION", ""));
+            using var selected = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                native.Replace("ANNOTATION", "_Win32_AssociatedConstant_(REQUESTED)"));
+            Assert.True(original.Run() == 0, original.Diagnostics);
+            Assert.True(selected.Run() == 0, selected.Diagnostics);
+            var selectedRoot = CSharpSyntaxTree.ParseText(selected.ReadSource()).GetRoot();
+            var association = Assert.Single(selectedRoot.DescendantNodes().OfType<AttributeListSyntax>()
+                .Where(list => list.Attributes.Any(attribute => attribute.Name.ToString().EndsWith("AssociatedConstant", StringComparison.Ordinal))));
+            Assert.Equal(CSharpSyntaxTree.ParseText(original.ReadSource()).GetRoot().NormalizeWhitespace().ToFullString(),
+                selectedRoot.RemoveNode(association, SyntaxRemoveOptions.KeepNoTrivia).NormalizeWhitespace().ToFullString());
+            Assert.Contains("NativeReadonly", selected.ReadSource());
+            Assert.Contains("NativePointer", selected.ReadSource());
+            var written = MetadataUtils.ScraperUtils.GetConstants(selected.DirectoryPath);
+            Assert.Contains("REQUESTED", written.Keys);
+            Assert.DoesNotContain("UNRELATED_NUMBER", written.Keys);
+            Assert.DoesNotContain("UNRELATED_POINTER", written.Keys);
+            foreach (var fixture in new[] { original, selected })
+                MetadataUtils.ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", fixture.DirectoryPath,
+                    File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "assets", "scraper.header.txt")),
+                    new(), new() { [fixture.Header] = "Test" }, new(), new(), new(), new());
+            string fallback = File.ReadAllText(Path.Combine(selected.DirectoryPath, "Test.constants.cs"));
+            Assert.Equal(File.ReadAllText(Path.Combine(original.DirectoryPath, "Test.constants.cs")), fallback);
+            Assert.Contains("UNRELATED_NUMBER", fallback);
+            Assert.Contains("UNRELATED_POINTER", fallback);
+            Assert.DoesNotContain(" REQUESTED ", fallback);
+            using var image = Emit(selected, "x64");
+            var reader = image.Reader;
+            var physical = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition)
+                .ToDictionary(field => reader.GetString(field.Name));
+            foreach (string name in new[] { "REQUESTED", "UNRELATED_NUMBER", "UNRELATED_POINTER" })
+                Assert.True(physical[name].Attributes.HasFlag(FieldAttributes.Literal | FieldAttributes.HasDefault));
+        }
+
+        [Theory]
+        [InlineData(false, false, false)]
+        [InlineData(false, true, false)]
+        [InlineData(true, false, false)]
+        [InlineData(true, true, false)]
+        [InlineData(false, false, true)]
+        [InlineData(true, true, true)]
+        public void AssociatedConstantMacrosKeepExactTypedTargetsAcrossProviderFilesAndRemaps(bool multipleFiles, bool remap, bool fileScoped)
+        {
+            string settings = (remap ? "--remap\nREQUESTED=RENAMED\n" : "") +
+                (fileScoped ? "--config\ngenerate-file-scoped-namespaces\n" : "");
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef enum _Win32_AssociatedConstant_(REQUESTED) tagOPTIONS { Member = 1 } OPTIONS;
+enum DISTRACTOR { EqualValue = 1 };
+#include ""provider.h""
+", multipleFiles: multipleFiles, extraSettings: settings);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "provider.h"), "#define REQUESTED ((OPTIONS)Member)\n#define UNRELATED 1\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            string name = remap ? "RENAMED" : "REQUESTED";
+            var type = FindType(reader, "OPTIONS");
+            AssertStringAttribute(reader, type.GetCustomAttributes(), "AssociatedConstantAttribute", name);
+            AssertDoesNotHaveAttribute(reader, FindType(reader, "DISTRACTOR").GetCustomAttributes(), "AssociatedConstantAttribute");
+            var field = Assert.Single(FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition));
+            Assert.Equal(name, reader.GetString(field.Name));
+            Assert.Equal("OPTIONS", field.DecodeSignature(new SignatureNames(), null));
+            Assert.True(field.Attributes.HasFlag(FieldAttributes.Literal | FieldAttributes.HasDefault));
+            Assert.Equal(1, reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32());
+            Assert.Equal(new[] { "value__", "Member" }, type.GetFields().Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void AssociatedConstantMacrosDoNotProjectUntraversedOrExcludedTargets(bool excluded)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#include ""provider.h""
+void KeepNative(unsigned value);
+", extraSettings: excluded ? "--traverse\nprovider.h\n--exclude\nFlags\n" : "");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "provider.h"),
+                "#define REQUESTED(index) (index)\nenum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("Flags", fixture.ReadSource());
+            Assert.DoesNotContain("REQUESTED", fixture.ReadSource());
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            using var image = Emit(fixture, "x64");
+            Assert.Empty(FindType(image.Reader, "Apis").GetFields());
+        }
+
+        [Fact]
+        public void AssociatedConstantMacrosDeferAbsentProvidersWithoutInventingFields()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum _Win32_AssociatedConstant_(EXTERNAL_PROVIDER) Flags { Member = 1 };
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            AssertStringAttribute(reader, FindType(reader, "Flags").GetCustomAttributes(), "AssociatedConstantAttribute", "EXTERNAL_PROVIDER");
+            Assert.DoesNotContain(reader.TypeDefinitions.SelectMany(handle => reader.GetTypeDefinition(handle).GetFields())
+                .Select(reader.GetFieldDefinition), field => reader.GetString(field.Name) == "EXTERNAL_PROVIDER");
+        }
+
+        [Fact]
+        public void AssociatedConstantMacrosPreserveExplicitGeneralMacroBinding()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define REQUESTED 7U
+#define UNRELATED 19U
+enum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };
+", extraSettings: "--config\ngenerate-macro-bindings\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            Assert.Equal(new[] { "REQUESTED", "UNRELATED" },
+                FindType(reader, "Apis").GetFields().Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)).OrderBy(name => name));
+            AssertStringAttribute(reader, FindType(reader, "Flags").GetCustomAttributes(), "AssociatedConstantAttribute", "REQUESTED");
+        }
+
+        [Theory]
+        [InlineData("#define REQUESTED 1\n#undef REQUESTED\n#define REQUESTED 2\n", "found 2 candidates", "")]
+        [InlineData("#define REQUESTED(index) (index)\n", "object-like constant", "")]
+        [InlineData("#define REQUESTED ((void*)0)\n", "constant field", "")]
+        [InlineData("#define REQUESTED 1\n", "only the requested global fields", "--exclude\nREQUESTED\n")]
+        public void AssociatedConstantMacrosRejectAmbiguousAndUnsupportedProviders(string provider, string diagnostic, string settings)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                provider + "enum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };\n", extraSettings: settings);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]

@@ -1,9 +1,10 @@
-// Win32MetadataScraper: Single-pass scraper that wraps ClangSharp PInvokeGenerator.
+// Win32MetadataScraper: Original-TU scraper that wraps ClangSharp PInvokeGenerator.
 //
 // Hosts PInvokeGenerator as a library (via NuGet package references). Parses the
 // translation unit, walks the AST to discover typedef-tag remappings, merges them
 // with the configured --remap entries, then runs PInvokeGenerator.GenerateBindings
-// with the full merged remap set — all in a single parse pass.
+// with the full merged remap set. Requested loose macro constants use ClangSharp's
+// existing compiler-backed macro-binding pass with an explicit name allowlist.
 //
 // Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...
 
@@ -17,6 +18,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using ClangSharp;
 using ClangSharp.Interop;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Win32MetadataScraper;
 using static ClangSharp.Interop.CXDiagnosticSeverity;
 using static ClangSharp.Interop.CXErrorCode;
@@ -285,6 +289,57 @@ class Program
                         generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
                 }
                 string additionalTypes = annotations?.GetAdditionalTypes();
+                var associatedConstantSources = new List<string>();
+                if (annotations != null && !config.GenerateMacroBindings)
+                {
+                    var macros = annotations.GetAssociatedConstantMacros();
+                    if (macros.Count != 0)
+                    {
+                        // Macro fields share header-types.cs and have no native declaration facts to rewrite.
+                        var macroOptions = (configOptions | PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
+                            & ~PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute
+                            & ~PInvokeGeneratorConfigurationOptions.GenerateFileScopedNamespaces;
+                        var macroConfig = CreateConfig(settings, ns, outputFile, headerFile,
+                            macroOptions, mergedRemaps, allExcludes,
+                            macros.Select(macro => macro.Name).ToArray(),
+                            macros.Select(macro =>
+                            {
+                                macro.Location.GetFileLocation(out var file, out _, out _, out _);
+                                return file.ToString();
+                            }).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+                        var macroStreams = new Dictionary<string, MemoryStream>();
+                        using var macroGenerator = new PInvokeGenerator(macroConfig, path =>
+                        {
+                            var stream = new MemoryStream();
+                            macroStreams[path] = stream;
+                            return stream;
+                        });
+                        macroGenerator.GenerateBindings(translationUnit, sourceFile, clangArgs, translationFlags);
+                        macroGenerator.Close();
+                        foreach (var diagnostic in macroGenerator.Diagnostics)
+                        {
+                            Console.WriteLine($"    {diagnostic}");
+                            if (diagnostic.Level == DiagnosticLevel.Error)
+                                exitCode = -1;
+                        }
+                        if (exitCode < 0)
+                            return exitCode;
+                        associatedConstantSources.AddRange(macroStreams.Values.Select(stream => Encoding.UTF8.GetString(stream.ToArray())));
+                        ValidateAssociatedConstantSources(associatedConstantSources, macros.Select(macro =>
+                            mergedRemaps.GetValueOrDefault(macro.Name) ?? macro.Name).ToArray(), macroConfig.DefaultClass);
+                    }
+                }
+                if (associatedConstantSources.Count != 0)
+                {
+                    if (!string.IsNullOrEmpty(additionalTypes))
+                        associatedConstantSources.Insert(0, additionalTypes);
+                    var units = associatedConstantSources.Select(source => SyntaxFactory.ParseCompilationUnit(source)).ToArray();
+                    additionalTypes = SyntaxFactory.CompilationUnit()
+                        .AddUsings(units.SelectMany(unit => unit.Usings).GroupBy(value => value.ToString())
+                            .Select(group => group.First()).ToArray())
+                        .AddMembers(units.SelectMany(unit => unit.Members).ToArray())
+                        .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+                }
                 annotations?.ValidateProjection();
                 string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
                     ? Path.Combine(outputFile, "header-types.cs")
@@ -418,7 +473,9 @@ class Program
         string ns, string outputFile, string headerFile,
         PInvokeGeneratorConfigurationOptions options,
         Dictionary<string, string> remaps,
-        List<string> excludes)
+        List<string> excludes,
+        IReadOnlyCollection<string> includedNames = null,
+        IReadOnlyCollection<string> traversalNames = null)
     {
         string defaultClass = null;
         if (settings.TryGetValue("--methodClassName", out var classNames) && classNames.Count > 0)
@@ -435,7 +492,8 @@ class Program
             PInvokeGeneratorOutputMode.CSharp, options)
         {
             DefaultClass = defaultClass ?? "Methods",
-            TraversalNames = settings.GetValueOrDefault("--traverse")?.ToArray() ?? Array.Empty<string>(),
+            TraversalNames = traversalNames ?? settings.GetValueOrDefault("--traverse")?.ToArray() ?? Array.Empty<string>(),
+            IncludedNames = includedNames ?? Array.Empty<string>(),
             ExcludedNames = excludes.ToArray(),
             RemappedNames = remaps,
             WithAttributes = ParseKeyValueMultiPairs(settings.GetValueOrDefault("--with-attribute")),
@@ -449,6 +507,23 @@ class Program
         };
 
         return config;
+    }
+
+    static void ValidateAssociatedConstantSources(IEnumerable<string> sources, string[] expectedNames, string defaultClass)
+    {
+        if (expectedNames.Distinct(StringComparer.Ordinal).Count() != expectedNames.Length)
+            throw new InvalidOperationException("AssociatedConstant macro remappings must preserve distinct constant names.");
+        var roots = sources.Select(source => SyntaxFactory.ParseCompilationUnit(source)).ToArray();
+        var fields = roots.SelectMany(root => root.DescendantNodes().OfType<FieldDeclarationSyntax>()).ToArray();
+        var names = fields.SelectMany(field => field.Declaration.Variables.Select(variable => variable.Identifier.ValueText)).ToArray();
+        if (!names.OrderBy(name => name, StringComparer.Ordinal).SequenceEqual(expectedNames.OrderBy(name => name, StringComparer.Ordinal)) ||
+            roots.SelectMany(root => root.DescendantNodes().OfType<BaseTypeDeclarationSyntax>())
+                .Any(type => type is not ClassDeclarationSyntax || type.Identifier.ValueText != defaultClass) ||
+            roots.Any(root => root.DescendantNodes().OfType<BaseMethodDeclarationSyntax>().Any()))
+            throw new InvalidOperationException("Selective AssociatedConstant macro binding must emit only the requested global fields.");
+        foreach (var field in fields)
+            if (!field.Modifiers.Any(SyntaxKind.ConstKeyword) || field.Declaration.Variables.Any(variable => variable.Initializer == null))
+                throw new InvalidOperationException("An AssociatedConstant macro must project to a constant field; readonly or pointer bindings cannot suppress the existing constant fallback.");
     }
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)

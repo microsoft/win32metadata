@@ -46,6 +46,30 @@ namespace Win32MetadataScraper
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
             .Select(carrier => carrier.Declaration.Name);
 
+        internal IReadOnlyList<MacroDefinitionRecord> GetAssociatedConstantMacros()
+        {
+            var macrosByName = visited.OfType<MacroDefinitionRecord>().ToLookup(macro => macro.Name, StringComparer.Ordinal);
+            var selected = new Dictionary<string, MacroDefinitionRecord>(StringComparer.Ordinal);
+            foreach (var facts in declarations.Values.Where(facts => facts.AnnotationOwner == facts &&
+                projectedDeclarations.Contains(facts.Declaration)))
+                foreach (var annotation in facts.Annotations.Where(annotation => annotation.Name == "AssociatedConstant"))
+                    CollectAnnotationErrors(facts.Declaration, () =>
+                    {
+                        string name = annotation.Arguments[0];
+                        var macros = macrosByName[name].ToArray();
+                        // A native constant or another partition can supply the associated name.
+                        if (macros.Length == 0)
+                            return;
+                        if (macros.Length != 1)
+                            throw Error(facts.Location, $"AssociatedConstant macro '{name}' must identify one original-TU definition; found {macros.Length} candidates.");
+                        if (macros[0].IsFunctionLike)
+                            throw Error(facts.Location, $"AssociatedConstant macro '{name}' must be an object-like constant.");
+                        selected.TryAdd(name, macros[0]);
+                    });
+            ThrowAnnotationErrors();
+            return selected.Values.OrderBy(macro => macro.Name, StringComparer.Ordinal).ToArray();
+        }
+
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody)
         {
@@ -880,9 +904,11 @@ namespace Win32MetadataScraper
                         break;
                     case "AlsoUsableFor":
                     case "AssociatedEnum":
-                    case "AssociatedConstant":
                     case "RAIIFree":
                         name += "(" + HeaderAnnotation.Quote(annotation.Arguments[0]) + ")";
+                        break;
+                    case "AssociatedConstant":
+                        name += "(" + HeaderAnnotation.Quote(Remap(annotation.Arguments[0])) + ")";
                         break;
                 }
                 yield return MakeAttribute(name, returnTarget);
