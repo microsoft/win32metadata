@@ -44,6 +44,8 @@
     <WinSDKScraperHeaderFile>$(WinSDKAssets)\scraper.header.txt</WinSDKScraperHeaderFile>
 
     <WithLibsRsp>$(GeneratedDir)\withLibs.generated.rsp</WithLibsRsp>
+    <PreserveOrdinalImports Condition="'$(PreserveOrdinalImports)' == ''">true</PreserveOrdinalImports>
+    <ImportEntryPointsRsp>$(GeneratedDir)\emitter.importEntryPoints.generated.rsp</ImportEntryPointsRsp>
 
     <FilteredRspForHeaders>$(GeneratedDir)\filtered.headers.generated.rsp</FilteredRspForHeaders>
     <FilteredRspForConstants>$(GeneratedDir)\filtered.constants.generated.rsp</FilteredRspForConstants>
@@ -145,6 +147,10 @@
       Libs="@(ImportLibs)"
       LibToolsBinDir="$(LibToolsBinDir)"
       WithLibsRsp="$(WithLibsRsp)"
+      ImportEntryPointsRsp="$(ImportEntryPointsRsp)"
+      PreserveOrdinalImports="$(PreserveOrdinalImports)"
+      TrustImportLibOrdinals="$(TrustImportLibOrdinals)"
+      DllSearchPaths="@(DllSearchPath)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </ScanLibs>
 
@@ -275,6 +281,7 @@
       <EmitterRsp Condition="'$(SkipScraping)' == 'true'" Include="$(GeneratedDir)\emitter.autoFnPtr.*.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsMakeFlags.generated.rsp"/>
       <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
+      <EmitterRsp Include="$(ImportEntryPointsRsp)"/>
     </ItemGroup>
 
     <Message Text="Writing winmd..." Importance="high"/>

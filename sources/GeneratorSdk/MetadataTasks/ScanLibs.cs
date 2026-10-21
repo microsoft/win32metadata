@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using Microsoft.Build.Framework;
@@ -20,6 +20,21 @@ namespace MetadataTasks
         [Required]
         public string MSBuildProjectDirectory { get; set; }
 
+        // Optional. Receives "--importEntryPoint" mappings for imports the DLL exports by ordinal only.
+        public string ImportEntryPointsRsp { get; set; }
+
+        // Directories searched for the DLLs the import libraries refer to. An import library marks an export as
+        // ordinal-type both for NONAME exports and for named exports that were given an explicit ordinal, so the
+        // DLL's export table decides: "#ordinal" is used only when the DLL does not export the name.
+        public ITaskItem[] DllSearchPaths { get; set; }
+
+        // When true, imports the import library marks ordinal-type are emitted as "#ordinal" even if the DLL
+        // can't be found to confirm it. Defaults to false, which keeps the by-name import in that case.
+        public bool TrustImportLibOrdinals { get; set; }
+
+        // Set to false to always emit imports by name.
+        public bool PreserveOrdinalImports { get; set; } = true;
+
         public override bool Execute()
         {
 #if DEBUG
@@ -32,6 +47,8 @@ namespace MetadataTasks
             string[] libFiles = this.GetLibs();
             var functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
             StringBuilder libLines = new StringBuilder();
+            StringBuilder entryPointLines = new StringBuilder();
+            var namedExportsByDll = new Dictionary<string, HashSet<string>>(System.StringComparer.OrdinalIgnoreCase);
             foreach (var lib in libFiles)
             {
                 var importInfos = LibScraper.GetImportInfos(lib);
@@ -49,6 +66,16 @@ namespace MetadataTasks
 
                         libLines.AppendLine($"{procName}={dllName}");
                         functionNames.Add(procName);
+
+                        if (this.PreserveOrdinalImports && importInfo.Ordinal.HasValue && this.IsOrdinalOnly(importInfo, namedExportsByDll))
+                        {
+                            if (entryPointLines.Length == 0)
+                            {
+                                entryPointLines.AppendLine("--importEntryPoint");
+                            }
+
+                            entryPointLines.AppendLine($"{procName}={importInfo.EntryPoint}");
+                        }
                     }
                 }
             }
@@ -68,7 +95,49 @@ namespace MetadataTasks
                 }
             }
 
+            if (!string.IsNullOrEmpty(this.ImportEntryPointsRsp))
+            {
+                if (entryPointLines.Length != 0)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(this.ImportEntryPointsRsp));
+                    File.WriteAllText(this.ImportEntryPointsRsp, entryPointLines.ToString());
+                }
+                else if (File.Exists(this.ImportEntryPointsRsp))
+                {
+                    File.Delete(this.ImportEntryPointsRsp);
+                }
+            }
+
             return true;
+        }
+
+        private bool IsOrdinalOnly(ImportInfo importInfo, Dictionary<string, HashSet<string>> namedExportsByDll)
+        {
+            if (!namedExportsByDll.TryGetValue(importInfo.Dll, out HashSet<string> namedExports))
+            {
+                namedExports = this.FindNamedExports(importInfo.Dll);
+                namedExportsByDll[importInfo.Dll] = namedExports;
+            }
+
+            return namedExports == null ? this.TrustImportLibOrdinals : !namedExports.Contains(importInfo.ProcName);
+        }
+
+        private HashSet<string> FindNamedExports(string dllName)
+        {
+            if (this.DllSearchPaths != null)
+            {
+                foreach (ITaskItem item in this.DllSearchPaths)
+                {
+                    string dir = Path.IsPathRooted(item.ItemSpec) ? item.ItemSpec : Path.Combine(this.MSBuildProjectDirectory, item.ItemSpec);
+                    string path = Path.Combine(dir, dllName);
+                    if (File.Exists(path))
+                    {
+                        return DllExports.GetNamedExports(path);
+                    }
+                }
+            }
+
+            return null;
         }
 
         private string[] GetLibs()

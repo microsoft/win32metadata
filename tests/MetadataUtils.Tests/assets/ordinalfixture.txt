@@ -1,0 +1,3 @@
+FixtureByName=OrdinalFixture.dll
+FixtureByOrdinal=OrdinalFixture.dll#7
+FixtureNamedWithOrdinal=OrdinalFixture.dll#9

@@ -1,0 +1,5 @@
+LIBRARY OrdinalFixture
+EXPORTS
+    FixtureByName
+    FixtureNamedWithOrdinal @9
+    FixtureByOrdinal @7 NONAME
