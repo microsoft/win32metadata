@@ -1,7 +1,8 @@
 diff --git a/um/oleauto.h b/um/oleauto.h
+index 7860ea3c..873d1aba 100644
 --- a/um/oleauto.h
 +++ b/um/oleauto.h
-@@ -68,6 +68,12 @@ typedef DWORD LCID;
+@@ -68,21 +68,40 @@ typedef DWORD LCID;
  /*                            BSTR API                                 */
  /*---------------------------------------------------------------------*/
  
@@ -14,9 +15,19 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-@@ -75,14 +81,21 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
+-WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
++WINOLEAUTAPI_(BSTR)
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ SysAllocString(_In_opt_z_ const OLECHAR * psz);
  WINOLEAUTAPI_(INT)  SysReAllocString(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(_String_length_(psz)+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz);
- WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
+-WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
++WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR)
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
  _Check_return_ WINOLEAUTAPI_(INT)  SysReAllocStringLen(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(len+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz, _In_ unsigned int len);
 +_Win32_SupportedOS_WindowsXP_
  WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
@@ -24,8 +35,6 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
  WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_METHOD_(SysAllocString, _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_METHOD_(SysAllocStringLen, _Win32_RAIIFree_(SysFreeString));
 +#endif
  WINOLEAUTAPI_(_Post_equal_to_(pbstr == NULL ? 0 : _String_length_(pbstr)) UINT) SysStringLen(_In_opt_ BSTR pbstr);
  
@@ -37,17 +46,35 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  
  #endif /* (defined (_WIN32) || defined (_WIN64)) */
  
-@@ -125,16 +138,19 @@ WINOLEAUTAPI_(INT) VariantTimeToSystemTime(_In_ DOUBLE vtime, _Out_ LPSYSTEMTIME
+@@ -124,18 +143,41 @@ WINOLEAUTAPI_(INT) VariantTimeToSystemTime(_In_ DOUBLE vtime, _Out_ LPSYSTEMTIME
+ #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- WINOLEAUTAPI SafeArrayAllocDescriptor(_In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
+-WINOLEAUTAPI SafeArrayAllocDescriptor(_In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
 -WINOLEAUTAPI SafeArrayAllocDescriptorEx(_In_ VARTYPE vt, _In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
-+WINOLEAUTAPI SafeArrayAllocDescriptorEx(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
++WINOLEAUTAPI SafeArrayAllocDescriptor(_In_ UINT cDims,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroyDescriptor)
++#endif
++ _Outptr_ SAFEARRAY ** ppsaOut);
++WINOLEAUTAPI SafeArrayAllocDescriptorEx(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ UINT cDims,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroyDescriptor)
++#endif
++ _Outptr_ SAFEARRAY ** ppsaOut);
  WINOLEAUTAPI SafeArrayAllocData(_In_ SAFEARRAY * psa);
 -WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound);
 -WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
-+WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound);
-+WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
++WINOLEAUTAPI_(SAFEARRAY *)
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroy, 0)
++#endif
++ SafeArrayCreate(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound);
++WINOLEAUTAPI_(SAFEARRAY *)
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroy, 0)
++#endif
++ SafeArrayCreateEx(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
  _Check_return_
  WINOLEAUTAPI SafeArrayCopyData(_In_ SAFEARRAY *psaSource, _In_ SAFEARRAY *psaTarget);
 +_Win32_SupportedOS_WindowsXP_
@@ -56,11 +83,28 @@ diff --git a/um/oleauto.h b/um/oleauto.h
 +_Win32_SupportedOS_WindowsXP_
  WINOLEAUTAPI_(void) SafeArrayReleaseData(_In_ PVOID pData);
  WINOLEAUTAPI SafeArrayDestroyData(_In_ SAFEARRAY * psa);
+-WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
 +_Win32_SupportedOS_WindowsXP_
- WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
++WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayReleaseData, 0)
++#endif
++ _Out_ PVOID *ppDataToRelease);
  WINOLEAUTAPI SafeArrayDestroy(_In_ SAFEARRAY * psa);
  WINOLEAUTAPI SafeArrayRedim(_Inout_ SAFEARRAY * psa, _In_ SAFEARRAYBOUND * psaboundNew);
-@@ -156,9 +172,28 @@ WINOLEAUTAPI SafeArraySetRecordInfo(_In_ SAFEARRAY * psa, _In_ IRecordInfo * pri
+ WINOLEAUTAPI_(UINT) SafeArrayGetDim(_In_ SAFEARRAY * psa);
+@@ -150,15 +192,30 @@ WINOLEAUTAPI SafeArrayGetElement(_In_ SAFEARRAY * psa, _In_reads_(_Inexpressible
+ _Check_return_
+ WINOLEAUTAPI SafeArrayPutElement(_In_ SAFEARRAY * psa, _In_reads_(_Inexpressible_(psa->cDims)) LONG * rgIndices, _In_ void * pv);
+ _Check_return_
+-WINOLEAUTAPI SafeArrayCopy(_In_ SAFEARRAY * psa, _Outptr_ SAFEARRAY ** ppsaOut);
++WINOLEAUTAPI SafeArrayCopy(_In_ SAFEARRAY * psa,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroy)
++#endif
++ _Outptr_ SAFEARRAY ** ppsaOut);
+ WINOLEAUTAPI SafeArrayPtrOfIndex(_In_ SAFEARRAY * psa, _In_reads_(psa->cDims) LONG * rgIndices, _Outptr_result_bytebuffer_(psa->cbElements) void ** ppvData);
+ WINOLEAUTAPI SafeArraySetRecordInfo(_In_ SAFEARRAY * psa, _In_ IRecordInfo * prinfo);
  WINOLEAUTAPI SafeArrayGetRecordInfo(_In_ SAFEARRAY * psa, _Outptr_ IRecordInfo ** prinfo);
  WINOLEAUTAPI SafeArraySetIID(_In_ SAFEARRAY * psa, _In_ REFGUID guid);
  WINOLEAUTAPI SafeArrayGetIID(_In_ SAFEARRAY * psa, _Out_ GUID * pguid);
@@ -68,31 +112,23 @@ diff --git a/um/oleauto.h b/um/oleauto.h
 -WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVector(_In_ VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements);
 -WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVectorEx(_In_ VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements, _In_ PVOID pvExtra);
 +WINOLEAUTAPI SafeArrayGetVartype(_In_ SAFEARRAY * psa, _Out_ _Win32_AssociatedEnum_(VARENUM) VARTYPE * pvt);
-+WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVector(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements);
-+WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVectorEx(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements, _In_ PVOID pvExtra);
++WINOLEAUTAPI_(SAFEARRAY *)
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroy, 0)
++#endif
++ SafeArrayCreateVector(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements);
++WINOLEAUTAPI_(SAFEARRAY *)
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SafeArrayDestroy, 0)
++#endif
++ SafeArrayCreateVectorEx(_In_ _Win32_AssociatedEnum_(VARENUM) VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements, _In_ PVOID pvExtra);
 +
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_PARAMETER_(SafeArrayAllocDescriptor, ppsaOut,
-+    _Win32_RAIIFree_(SafeArrayDestroyDescriptor));
-+_WIN32META_ANNOTATE_PARAMETER_(SafeArrayAllocDescriptorEx, ppsaOut,
-+    _Win32_RAIIFree_(SafeArrayDestroyDescriptor));
-+_WIN32META_ANNOTATE_METHOD_(SafeArrayCreate,
-+    _Win32_RAIIFree_(SafeArrayDestroy, 0));
-+_WIN32META_ANNOTATE_METHOD_(SafeArrayCreateEx,
-+    _Win32_RAIIFree_(SafeArrayDestroy, 0));
-+_WIN32META_ANNOTATE_METHOD_(SafeArrayCreateVector,
-+    _Win32_RAIIFree_(SafeArrayDestroy, 0));
-+_WIN32META_ANNOTATE_METHOD_(SafeArrayCreateVectorEx,
-+    _Win32_RAIIFree_(SafeArrayDestroy, 0));
-+_WIN32META_ANNOTATE_PARAMETER_(SafeArrayCopy, ppsaOut,
-+    _Win32_RAIIFree_(SafeArrayDestroy));
-+_WIN32META_ANNOTATE_PARAMETER_(SafeArrayAddRef, ppDataToRelease,
-+    _Win32_RAIIFree_(SafeArrayReleaseData, 0));
 +#endif
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
-@@ -179,10 +214,10 @@ _Check_return_
+@@ -179,10 +236,10 @@ _Check_return_
  WINOLEAUTAPI VariantCopyInd(_Inout_ VARIANT * pvarDest, _In_ const VARIANTARG * pvargSrc);
  _Check_return_
  WINOLEAUTAPI VariantChangeType(_Inout_ VARIANTARG * pvargDest,
@@ -105,7 +141,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
-@@ -202,6 +237,19 @@ WINOLEAUTAPI VariantChangeTypeEx(_Inout_ VARIANTARG * pvargDest,
+@@ -202,6 +259,19 @@ WINOLEAUTAPI VariantChangeTypeEx(_Inout_ VARIANTARG * pvargDest,
  #define VARIANT_CALENDAR_THAI		0x20  // SOUTHASIA calendar support
  #define VARIANT_CALENDAR_GREGORIAN	0x40  // SOUTHASIA calendar support
  #define VARIANT_USE_NLS                 0x80  // NLS function call support
@@ -125,47 +161,107 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  /*---------------------------------------------------------------------*/
  /*                Vector <-> Bstr conversion APIs                      */
  /*---------------------------------------------------------------------*/
-@@ -437,6 +485,39 @@ WINOLEAUTAPI VarBstrFromUI4(ULONG ulIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pb
- WINOLEAUTAPI VarBstrFromUI8(ULONG64 ui64In, LCID lcid, ULONG dwFlags, _Out_ BSTR FAR* pbstrOut);
- WINOLEAUTAPI VarBstrFromDec(_In_ const DECIMAL *pdecIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ BSTR *pbstrOut);
+@@ -421,21 +491,84 @@ WINOLEAUTAPI VarCyFromUI4(ULONG ulIn, _Out_ CY *pcyOut);
+ WINOLEAUTAPI VarCyFromUI8(ULONG64 ui64In, _Out_ CY FAR* pcyOut);
+ WINOLEAUTAPI VarCyFromDec(_In_ const DECIMAL *pdecIn, _Out_ CY *pcyOut);
  
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromUI1, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromI2, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromI4, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromI8, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromR4, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromR8, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromCy, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromDate, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromDisp, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromBool, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromI1, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromUI2, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromUI4, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromUI8, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrFromDec, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
+-WINOLEAUTAPI VarBstrFromUI1(BYTE bVal, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI2(SHORT iVal, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI4(LONG lIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI8(LONG64 i64In, LCID lcid, ULONG dwFlags, _Out_ BSTR FAR* pbstrOut);
+-WINOLEAUTAPI VarBstrFromR4(FLOAT fltIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromR8(DOUBLE dblIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromCy(CY cyIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromDate(_In_ DATE dateIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromDisp(IDispatch * pdispIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromBool(VARIANT_BOOL boolIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI1(CHAR cIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pbstrOut);
+-WINOLEAUTAPI VarBstrFromUI2(USHORT uiIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pbstrOut);
+-WINOLEAUTAPI VarBstrFromUI4(ULONG ulIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pbstrOut);
+-WINOLEAUTAPI VarBstrFromUI8(ULONG64 ui64In, LCID lcid, ULONG dwFlags, _Out_ BSTR FAR* pbstrOut);
+-WINOLEAUTAPI VarBstrFromDec(_In_ const DECIMAL *pdecIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI1(BYTE bVal, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
 +#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI2(SHORT iVal, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI4(LONG lIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI8(LONG64 i64In, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR FAR* pbstrOut);
++WINOLEAUTAPI VarBstrFromR4(FLOAT fltIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromR8(DOUBLE dblIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromCy(CY cyIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromDate(_In_ DATE dateIn, _In_ LCID lcid, _In_ ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromDisp(IDispatch * pdispIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromBool(VARIANT_BOOL boolIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI1(CHAR cIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI2(USHORT uiIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI4(ULONG ulIn, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI8(ULONG64 ui64In, LCID lcid, ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR FAR* pbstrOut);
++WINOLEAUTAPI VarBstrFromDec(_In_ const DECIMAL *pdecIn, _In_ LCID lcid, _In_ ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ BSTR *pbstrOut);
 +
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++#endif
+ 
  WINOLEAUTAPI VarBoolFromUI1(BYTE bIn, _Out_ VARIANT_BOOL * pboolOut);
  _Check_return_ WINOLEAUTAPI VarBoolFromI2(_In_ SHORT sIn, _Out_ VARIANT_BOOL * pboolOut);
- WINOLEAUTAPI VarBoolFromI4(LONG lIn, _Out_ VARIANT_BOOL * pboolOut);
-@@ -734,8 +815,8 @@ WINOLEAUTAPI VarI4FromUI8(ULONG64 ui64In, _Out_ LONG *plOut);
+@@ -734,8 +867,8 @@ WINOLEAUTAPI VarI4FromUI8(ULONG64 ui64In, _Out_ LONG *plOut);
  
  typedef struct {
      INT   cDig;
@@ -176,7 +272,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
      INT   cchUsed;
      INT   nBaseShift;
      INT   nPwr10;
-@@ -763,6 +844,27 @@ typedef struct {
+@@ -763,6 +896,27 @@ typedef struct {
  #define NUMPRS_NEG              0x10000
  #define NUMPRS_INEXACT          0x20000
  
@@ -204,7 +300,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  /* flags used by VarNumFromParseNum to indicate acceptable result types:
   */
  #define VTBIT_I1        (1 << VT_I1)
-@@ -823,6 +925,7 @@ STDAPI VarNot(_In_ LPVARIANT pvarIn, _Out_ LPVARIANT pvarResult);
+@@ -823,6 +977,7 @@ STDAPI VarNot(_In_ LPVARIANT pvarIn, _Out_ LPVARIANT pvarResult);
  STDAPI VarRound(_In_ LPVARIANT pvarIn, _In_ int cDecimals, _Out_ LPVARIANT pvarResult);
  
  // dwFlags passed to CompareString if a string compare
@@ -212,7 +308,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  STDAPI VarCmp(_In_ LPVARIANT pvarLeft, _In_ LPVARIANT pvarRight, _In_ LCID lcid, _In_ ULONG dwFlags);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
-@@ -869,7 +972,9 @@ STDAPI VarDecNeg(_In_ LPDECIMAL pdecIn, _Out_ LPDECIMAL pdecResult);
+@@ -869,7 +1024,9 @@ STDAPI VarDecNeg(_In_ LPDECIMAL pdecIn, _Out_ LPDECIMAL pdecResult);
  
  STDAPI VarDecRound(_In_ LPDECIMAL pdecIn, int cDecimals, _Out_ LPDECIMAL pdecResult);
  
@@ -222,7 +318,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  STDAPI VarDecCmpR8(_In_ LPDECIMAL pdecLeft, _In_ double dblRight);
  
  
-@@ -888,15 +993,24 @@ STDAPI VarCyNeg(_In_ CY cyIn, _Out_ LPCY pcyResult);
+@@ -888,15 +1045,26 @@ STDAPI VarCyNeg(_In_ CY cyIn, _Out_ LPCY pcyResult);
  
  STDAPI VarCyRound(_In_ CY cyIn, _In_ int cDecimals, _Out_ LPCY pcyResult);
  
@@ -234,11 +330,14 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  
  // Misc support functions
  //
- STDAPI VarBstrCat(_In_ BSTR bstrLeft, _In_ BSTR bstrRight, _Out_ LPBSTR pbstrResult);
+-STDAPI VarBstrCat(_In_ BSTR bstrLeft, _In_ BSTR bstrRight, _Out_ LPBSTR pbstrResult);
++STDAPI VarBstrCat(_In_ BSTR bstrLeft, _In_ BSTR bstrRight,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
++ _Out_ LPBSTR pbstrResult);
 +
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_PARAMETER_(VarBstrCat, pbstrResult,
-+    _Win32_RAIIFree_(SysFreeString));
 +#endif
 +
  STDAPI VarBstrCmp(_In_ BSTR bstrLeft, _In_ BSTR bstrRight, _In_ LCID lcid, _In_ ULONG dwFlags); // dwFlags passed to CompareString
@@ -247,7 +346,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  STDAPI VarR4CmpR8(_In_ float fltLeft, _In_ double dblRight);
  STDAPI VarR8Round(_In_ double dblIn, _In_ int cDecimals, _Out_ double *pdblResult);
  
-@@ -912,6 +1026,15 @@ STDAPI VarR8Round(_In_ double dblIn, _In_ int cDecimals, _Out_ double *pdblResul
+@@ -912,6 +1080,15 @@ STDAPI VarR8Round(_In_ double dblIn, _In_ int cDecimals, _Out_ double *pdblResul
  #define VARCMP_GT   2
  #define VARCMP_NULL 3
  
@@ -263,7 +362,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  // VT_HARDTYPE tells the compare routine that the argument is a literal or
  // otherwise declared of that specific type.  It causes comparison rules to
  // change. For example, if a hard-type string is compared to a variant (not hard
-@@ -968,18 +1091,71 @@ WINOLEAUTAPI GetAltMonthNames(LCID lcid, _Outptr_result_buffer_maybenull_(13) LP
+@@ -968,39 +1145,104 @@ WINOLEAUTAPI GetAltMonthNames(LCID lcid, _Outptr_result_buffer_maybenull_(13) LP
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -328,6 +427,9 @@ diff --git a/um/oleauto.h b/um/oleauto.h
 +	_Win32_AssociatedEnum_(VARFORMAT_FIRST_DAY) int iFirstDay,
 +	_Win32_AssociatedEnum_(VARFORMAT_FIRST_WEEK) int iFirstWeek,
  	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
  	_Out_ BSTR *pbstrOut
  	);
  
@@ -336,9 +438,12 @@ diff --git a/um/oleauto.h b/um/oleauto.h
 -	int iNamedFormat,
 +	_Win32_AssociatedEnum_(VARFORMAT_NAMED_FORMAT) int iNamedFormat,
  	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
  	_Out_ BSTR *pbstrOut
  	);
-@@ -987,9 +1163,9 @@ WINOLEAUTAPI VarFormatDateTime(
+ 
  WINOLEAUTAPI VarFormatNumber(
  	_In_ LPVARIANT pvarIn,
  	int iNumDig,
@@ -349,9 +454,12 @@ diff --git a/um/oleauto.h b/um/oleauto.h
 +	_Win32_AssociatedEnum_(VARFORMAT_PARENTHESES) int iUseParens,
 +	_Win32_AssociatedEnum_(VARFORMAT_GROUP) int iGroup,
  	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
  	_Out_ BSTR *pbstrOut
  	);
-@@ -997,9 +1173,9 @@ WINOLEAUTAPI VarFormatNumber(
+ 
  WINOLEAUTAPI VarFormatPercent(
  	_In_ LPVARIANT pvarIn,
  	int iNumDig,
@@ -362,29 +470,54 @@ diff --git a/um/oleauto.h b/um/oleauto.h
 +	_Win32_AssociatedEnum_(VARFORMAT_PARENTHESES) int iUseParens,
 +	_Win32_AssociatedEnum_(VARFORMAT_GROUP) int iGroup,
  	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
  	_Out_ BSTR *pbstrOut
  	);
-@@ -1038,12 +1214,31 @@ WINOLEAUTAPI VarFormatFromTokens(
+ 
+@@ -1011,6 +1253,9 @@ WINOLEAUTAPI VarFormatCurrency(
+ 	int iUseParens,
+ 	int iGroup,
+ 	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
+ 	_Out_ BSTR *pbstrOut
+ 	);
+ 
+@@ -1019,6 +1264,9 @@ WINOLEAUTAPI VarWeekdayName(
+ 	int fAbbrev,
+ 	int iFirstDay,
+ 	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
+ 	_Out_ BSTR *pbstrOut
+ 	);
+ 
+@@ -1026,6 +1274,9 @@ WINOLEAUTAPI VarMonthName(
+ 	int iMonth,
+ 	int fAbbrev,
+ 	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
+ 	_Out_ BSTR *pbstrOut
+ 	);
+ 
+@@ -1034,16 +1285,22 @@ WINOLEAUTAPI VarFormatFromTokens(
+ 	_In_opt_ LPOLESTR pstrFormat,
+ 	_In_reads_(_Inexpressible_("from VarTokenizeFormatString")) LPBYTE pbTokCur,
+ 	ULONG dwFlags,
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(SysFreeString)
++#endif
+ 	_Out_ BSTR *pbstrOut,
  	LCID lcid
  	);
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_PARAMETER_(VarFormat, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarFormatDateTime, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarFormatNumber, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarFormatPercent, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarFormatCurrency, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarWeekdayName, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarMonthName, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
-+_WIN32META_ANNOTATE_PARAMETER_(VarFormatFromTokens, pbstrOut,
-+    _Win32_RAIIFree_(SysFreeString));
 +#endif
 +
  WINOLEAUTAPI VarTokenizeFormatString(
@@ -398,7 +531,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  	LCID lcid,
  	_In_opt_ int *pcbActual
  	);
-@@ -1084,6 +1279,20 @@ typedef DISPID MEMBERID;
+@@ -1084,6 +1341,20 @@ typedef DISPID MEMBERID;
  #define DISPATCH_PROPERTYPUT    0x4
  #define DISPATCH_PROPERTYPUTREF 0x8
  
@@ -419,7 +552,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
-@@ -1212,7 +1421,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
+@@ -1212,7 +1483,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
  
  typedef struct tagPARAMDATA {
      OLECHAR * szName;   /* parameter name */
@@ -428,7 +561,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  } PARAMDATA, * LPPARAMDATA;
  
  typedef struct tagMETHODDATA {
-@@ -1223,7 +1432,7 @@ typedef struct tagMETHODDATA {
+@@ -1223,7 +1494,7 @@ typedef struct tagMETHODDATA {
      CALLCONV cc;        /* calling convention */
      UINT cArgs;         /* count of arguments */
      WORD wFlags;        /* same wFlags as on IDispatch::Invoke() */
@@ -437,7 +570,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  } METHODDATA, * LPMETHODDATA;
  
  typedef struct tagINTERFACEDATA {
-@@ -1240,7 +1449,7 @@ _Check_return_
+@@ -1240,7 +1511,7 @@ _Check_return_
  WINOLEAUTAPI DispGetParam(
  	_In_ DISPPARAMS * pdispparams,
  	UINT position,
@@ -446,7 +579,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
  	_Out_ VARIANT * pvarResult,
  	_Out_opt_ UINT * puArgErr
  	);
-@@ -1287,7 +1496,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
+@@ -1287,7 +1558,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
   * for customized Invoke().
   */
  WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV cc,
@@ -455,7 +588,7 @@ diff --git a/um/oleauto.h b/um/oleauto.h
              _In_reads_(cActuals) VARIANTARG ** prgpvarg, _Out_ VARIANT * pvargResult);
  
  
-@@ -1299,13 +1508,20 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+@@ -1299,13 +1570,20 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
  #define ACTIVEOBJECT_STRONG 0x0
  #define ACTIVEOBJECT_WEAK 0x1
  

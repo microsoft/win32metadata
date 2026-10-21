@@ -1,4 +1,5 @@
 diff --git a/um/prsht.h b/um/prsht.h
+index 9b253c6d..848d00ec 100644
 --- a/um/prsht.h
 +++ b/um/prsht.h
 @@ -101,8 +101,12 @@ struct _PROPSHEETPAGEA;
@@ -30,22 +31,24 @@ diff --git a/um/prsht.h b/um/prsht.h
  #ifdef _WIN32
  typedef LPCDLGTEMPLATE PROPSHEETPAGE_RESOURCE;
  #else
-@@ -582,12 +593,26 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
+@@ -582,12 +593,28 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
  #define PSCB_BUTTONPRESSED 3
  #endif  // NTDDI_VERSION >= NTDDI_WINXP
  
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0)
++#endif
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageA(LPCPROPSHEETPAGEA constPropSheetPagePointer);
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0)
++#endif
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI HPROPSHEETPAGE WINAPI CreatePropertySheetPageW(LPCPROPSHEETPAGEW constPropSheetPagePointer);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL           WINAPI DestroyPropertySheetPage(HPROPSHEETPAGE);
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_METHOD_(CreatePropertySheetPageA,
-+    _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0));
-+_WIN32META_ANNOTATE_METHOD_(CreatePropertySheetPageW,
-+    _Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0));
 +#endif
 +
 +_Win32_SetLastError_
@@ -57,7 +60,7 @@ diff --git a/um/prsht.h b/um/prsht.h
  WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
  
  #ifdef UNICODE
-@@ -908,4 +933,3 @@ typedef struct _PSHNOTIFY
+@@ -908,4 +935,3 @@ typedef struct _PSHNOTIFY
  #if defined(_MSC_VER) && (_MSC_VER >= 1200)
  #pragma warning(pop)
  #endif

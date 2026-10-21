@@ -1,4 +1,5 @@
 diff --git a/um/winddi.h b/um/winddi.h
+index 9580b341..77bfa1b7 100644
 --- a/um/winddi.h
 +++ b/um/winddi.h
 @@ -16,6 +16,8 @@ Abstract:
@@ -962,10 +963,13 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngLpkInstalled();
  
-@@ -4170,26 +4298,35 @@ BOOL APIENTRY EngLpkInstalled();
+@@ -4170,26 +4298,36 @@ BOOL APIENTRY EngLpkInstalled();
  
  DECLARE_HANDLE(HSEMAPHORE);
  
++#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
++_Win32_RAIIFree_(EngDeleteSemaphore, -1, 0)
++#endif
 +_Win32_SupportedOS_Windows2000_
  ENGAPI
  HSEMAPHORE APIENTRY EngCreateSemaphore(
@@ -991,14 +995,12 @@ diff --git a/um/winddi.h b/um/winddi.h
      );
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+_WIN32META_ANNOTATE_METHOD_(EngCreateSemaphore,
-+    _Win32_RAIIFree_(EngDeleteSemaphore, -1, 0));
 +#endif
 +
  #if (NTDDI_VERSION >= NTDDI_LONGHORN)
  ENGAPI
  VOID APIENTRY EngAcquireSemaphoreShared(
-@@ -4209,11 +4346,13 @@ BOOL APIENTRY EngAcquireSemaphoreSharedNoWait(
+@@ -4209,11 +4347,13 @@ BOOL APIENTRY EngAcquireSemaphoreSharedNoWait(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -1012,7 +1014,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngIsSemaphoreOwnedByCurrentThread(
      _In_                    HSEMAPHORE hsem
-@@ -4260,16 +4399,19 @@ typedef struct _ENGSAFESEMAPHORE
+@@ -4260,16 +4400,19 @@ typedef struct _ENGSAFESEMAPHORE
      LONG lCount;
  } ENGSAFESEMAPHORE;
  
@@ -1032,7 +1034,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngMultiByteToUnicodeN(
      _Out_writes_bytes_to_(MaxBytesInUnicodeString, *BytesInUnicodeString)   LPWSTR UnicodeString,
-@@ -4279,6 +4421,7 @@ VOID APIENTRY EngMultiByteToUnicodeN(
+@@ -4279,6 +4422,7 @@ VOID APIENTRY EngMultiByteToUnicodeN(
      _In_                                                                ULONG BytesInMultiByteString
      );
  
@@ -1040,7 +1042,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngUnicodeToMultiByteN(
      _Out_writes_bytes_to_(MaxBytesInMultiByteString, *BytesInMultiByteString)   PCHAR MultiByteString,
-@@ -4302,6 +4445,7 @@ VOID APIENTRY EngUnicodeToMultiByteN(
+@@ -4302,6 +4446,7 @@ VOID APIENTRY EngUnicodeToMultiByteN(
  
  #else // !USERMODE_DRIVER
  
@@ -1048,7 +1050,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetPrinterDriver(
      _In_                    HANDLE  hPrinter,
-@@ -4312,6 +4456,7 @@ BOOL APIENTRY EngGetPrinterDriver(
+@@ -4312,6 +4457,7 @@ BOOL APIENTRY EngGetPrinterDriver(
      _Out_                   DWORD  *pcbNeeded
      );
  
@@ -1056,7 +1058,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  DWORD APIENTRY EngGetPrinterData(
      _In_                    HANDLE   hPrinter,
-@@ -4322,6 +4467,7 @@ DWORD APIENTRY EngGetPrinterData(
+@@ -4322,6 +4468,7 @@ DWORD APIENTRY EngGetPrinterData(
      _Out_                   LPDWORD  pcbNeeded
      );
  
@@ -1064,7 +1066,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  DWORD APIENTRY EngSetPrinterData(
      _In_                        HANDLE   hPrinter,
-@@ -4331,6 +4477,7 @@ DWORD APIENTRY EngSetPrinterData(
+@@ -4331,6 +4478,7 @@ DWORD APIENTRY EngSetPrinterData(
      _In_                        DWORD    cjPrinterData
      );
  
@@ -1072,7 +1074,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetForm(
      _In_                    HANDLE  hPrinter,
-@@ -4341,6 +4488,7 @@ BOOL APIENTRY EngGetForm(
+@@ -4341,6 +4489,7 @@ BOOL APIENTRY EngGetForm(
      _Out_                   LPDWORD pcbNeeded
      );
  
@@ -1080,7 +1082,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngWritePrinter(
      _In_                    HANDLE  hPrinter,
-@@ -4349,6 +4497,7 @@ BOOL APIENTRY EngWritePrinter(
+@@ -4349,6 +4498,7 @@ BOOL APIENTRY EngWritePrinter(
      _Out_                   LPDWORD pcWritten
      );
  
@@ -1088,7 +1090,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetPrinter(
      _In_                    HANDLE  hPrinter,
-@@ -4358,6 +4507,7 @@ BOOL APIENTRY EngGetPrinter(
+@@ -4358,6 +4508,7 @@ BOOL APIENTRY EngGetPrinter(
      _Out_                   LPDWORD pcbNeeded
      );
  
@@ -1096,7 +1098,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngEnumForms(
      _In_                    HANDLE  hPrinter,
-@@ -4379,36 +4529,44 @@ BOOL APIENTRY EngEnumForms(
+@@ -4379,36 +4530,44 @@ BOOL APIENTRY EngEnumForms(
          ULONG ul2;
      } FLOATOBJ, *PFLOATOBJ;
  
@@ -1156,7 +1158,7 @@ diff --git a/um/winddi.h b/um/winddi.h
      BOOL APIENTRY FLOATOBJ_LessThan(PFLOATOBJ,PFLOATOBJ);
  
  #else
-@@ -4472,6 +4630,7 @@ typedef struct  tagFLOATOBJ_XFORM
+@@ -4472,6 +4631,7 @@ typedef struct  tagFLOATOBJ_XFORM
      FLOATOBJ eDy;
  } FLOATOBJ_XFORM, *PFLOATOBJ_XFORM, FAR *LPFLOATOBJ_XFORM;
  
@@ -1164,7 +1166,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
      XFORMOBJ *pxo,
      FLOATOBJ_XFORM * pfxo
-@@ -4484,6 +4643,7 @@ ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
+@@ -4484,6 +4644,7 @@ ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
  
  typedef int (__cdecl *SORTCOMP)(const void *pv1, const void *pv2);
  
@@ -1172,7 +1174,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngSort(
      _Inout_updates_bytes_(c * cjElem)  PBYTE pjBuf,
-@@ -4503,11 +4663,13 @@ typedef struct _ENG_TIME_FIELDS {
+@@ -4503,11 +4664,13 @@ typedef struct _ENG_TIME_FIELDS {
      USHORT usWeekday;     // range [0..6] == [Sunday..Saturday]
  } ENG_TIME_FIELDS, *PENG_TIME_FIELDS;
  
@@ -1186,7 +1188,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return != 0)
  ENGAPI
  FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
-@@ -4516,6 +4678,7 @@ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
+@@ -4516,6 +4679,7 @@ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
      _In_                    INT cChars
      );
  
@@ -1194,7 +1196,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  INT APIENTRY EngMultiByteToWideChar(
      _In_                                    UINT CodePage,
-@@ -4525,6 +4688,7 @@ INT APIENTRY EngMultiByteToWideChar(
+@@ -4525,6 +4689,7 @@ INT APIENTRY EngMultiByteToWideChar(
      _In_                                    INT BytesInMultiByteString
      );
  
@@ -1202,7 +1204,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  INT APIENTRY EngWideCharToMultiByte(
      _In_                                    UINT CodePage,
-@@ -4534,23 +4698,27 @@ INT APIENTRY EngWideCharToMultiByte(
+@@ -4534,23 +4699,27 @@ INT APIENTRY EngWideCharToMultiByte(
      _In_                                    INT BytesInMultiByteString
      );
  
@@ -1230,7 +1232,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return)
  ENGAPI
  BOOL APIENTRY EngGetFileChangeTime(
-@@ -4558,6 +4726,7 @@ BOOL APIENTRY EngGetFileChangeTime(
+@@ -4558,6 +4727,7 @@ BOOL APIENTRY EngGetFileChangeTime(
      _Out_   LARGE_INTEGER   *pChangeTime
      );
  
@@ -1238,7 +1240,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return)
  ENGAPI
  BOOL APIENTRY EngGetFilePath(
-@@ -4575,7 +4744,7 @@ _When_(pBuffer != NULL && cjBufferSize != 0 && return == 1,
+@@ -4575,7 +4745,7 @@ _When_(pBuffer != NULL && cjBufferSize != 0 && return == 1,
      _Kernel_float_saved_
      _At_(*pBuffer, _Post_valid_ _Kernel_acquires_resource_(EngFloatState))) 
  _On_failure_(_Post_satisfies_(return == 0))          
@@ -1247,7 +1249,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ULONG
  #pragma warning(suppress: 6001 6101 28104) // Suppress PREfast warnings for not acquiring EngFloatState and filling out pBuffer
  EngSaveFloatingPointState (
-@@ -4594,7 +4763,7 @@ _Success_(return)
+@@ -4594,7 +4764,7 @@ _Success_(return)
  _Kernel_float_restored_
  _At_(*pBuffer, _Kernel_requires_resource_held_(EngFloatState)
                 _Kernel_releases_resource_(EngFloatState))
@@ -1256,7 +1258,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  BOOL
  #pragma warning(suppress: 28103) // Suppress PREfast warning for not releasing EngFloatState
  EngRestoreFloatingPointState (
-@@ -4616,7 +4785,7 @@ _When_(pBuffer != NULL && cjBufferSize != 0 && return == 1,
+@@ -4616,7 +4786,7 @@ _When_(pBuffer != NULL && cjBufferSize != 0 && return == 1,
      _At_(*pBuffer, _Post_valid_ _Kernel_acquires_resource_(EngFloatState))) 
  _On_failure_(_Post_satisfies_(return == 0))          
  ENGAPI
@@ -1265,7 +1267,7 @@ diff --git a/um/winddi.h b/um/winddi.h
      _At_(*pBuffer, _Kernel_requires_resource_not_held_(EngFloatState)) 
      _Out_writes_bytes_opt_(cjBufferSize) 
                  VOID    *pBuffer, 
-@@ -4629,7 +4798,7 @@ _Kernel_float_restored_
+@@ -4629,7 +4799,7 @@ _Kernel_float_restored_
  _At_(*pBuffer, _Kernel_requires_resource_held_(EngFloatState)
                 _Kernel_releases_resource_(EngFloatState))
  ENGAPI
@@ -1274,7 +1276,7 @@ diff --git a/um/winddi.h b/um/winddi.h
      _In_reads_(_Inexpressible_(statesize))  
      VOID *pBuffer 
      );
-@@ -4640,11 +4809,13 @@ BOOL APIENTRY EngRestoreFloatingPointState(
+@@ -4640,11 +4810,13 @@ BOOL APIENTRY EngRestoreFloatingPointState(
  // DirectDraw surface locking
  //
  
@@ -1288,7 +1290,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngUnlockDirectDrawSurface(
          _In_    PDD_SURFACE_LOCAL pSurface
-@@ -4660,21 +4831,25 @@ BOOL APIENTRY EngUnlockDirectDrawSurface(
+@@ -4660,21 +4832,25 @@ BOOL APIENTRY EngUnlockDirectDrawSurface(
  
  typedef struct _ENG_EVENT *PEVENT;
  
@@ -1314,7 +1316,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  PEVENT APIENTRY EngMapEvent(
      _In_        HDEV            hDev,
-@@ -4684,24 +4859,28 @@ PEVENT APIENTRY EngMapEvent(
+@@ -4684,24 +4860,28 @@ PEVENT APIENTRY EngMapEvent(
      _Reserved_  PVOID           Reserved3
      );
  
@@ -1343,7 +1345,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  LONG APIENTRY
  EngReadStateEvent (
-@@ -4732,6 +4911,7 @@ typedef enum _ENG_SYSTEM_ATTRIBUTE {
+@@ -4732,6 +4912,7 @@ typedef enum _ENG_SYSTEM_ATTRIBUTE {
  #endif // (NTDDI_VERSION >= NTDDI_LONGHORN)
  
  
@@ -1351,7 +1353,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY
  EngQuerySystemAttribute(
-@@ -4741,6 +4921,7 @@ EngQuerySystemAttribute(
+@@ -4741,6 +4922,7 @@ EngQuerySystemAttribute(
  #define ENG_FNT_CACHE_READ_FAULT    0x1
  #define ENG_FNT_CACHE_WRITE_FAULT   0x2
  
@@ -1359,7 +1361,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return != nullptr)
  ENGAPI
  _Post_writable_byte_size_(*pulSize)
-@@ -4755,12 +4936,14 @@ BOOL WINAPI EngFntCacheFlush(
+@@ -4755,12 +4937,14 @@ BOOL WINAPI EngFntCacheFlush(
      _In_  BOOL  DiscardContent);
  #endif
  
@@ -1374,7 +1376,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID  APIENTRY  EngFntCacheFault(
      _In_    ULONG ulFastCheckSum, 
-@@ -4771,6 +4954,7 @@ typedef enum _ENG_DEVICE_ATTRIBUTE {
+@@ -4771,6 +4955,7 @@ typedef enum _ENG_DEVICE_ATTRIBUTE {
      QDA_ACCELERATION_LEVEL = 1
  } ENG_DEVICE_ATTRIBUTE;
  
