@@ -59,15 +59,6 @@
     "uses": []
   },
   {
-    "addUsesTo": "VER_FLAGS",
-    "uses": [
-      {
-        "method": "VerSetConditionMask",
-        "parameter": "TypeMask"
-      }
-    ]
-  },
-  {
     "addUsesTo": "GET_FILE_VERSION_INFO_FLAGS",
     "uses": []
   },
