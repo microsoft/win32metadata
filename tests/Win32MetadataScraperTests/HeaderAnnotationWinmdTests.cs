@@ -860,6 +860,112 @@ DXGI_USAGE LegacyUsage(DXGI_USAGE value, DXGI_USAGE* output);
         }
 
         [Fact]
+        public void DirectCompositionProviderIsAdmittedFromItsAuthoredSdkHeader()
+        {
+            string project = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            var header = Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray()
+                .Where(value => value.GetProperty("path").GetString() == "shared\\dcomptypes.h"));
+            const string originalHash = "447E4ADF411B9818D68BB6F5A0A9EF9F423B95CC2B10610F51936DC921135594";
+            Assert.Equal(originalHash, header.GetProperty("sourceSha256").GetString());
+            Assert.Equal(originalHash, header.GetProperty("sdkSha256").GetString());
+            Assert.Equal("c\\include\\10.0.26100.0\\shared\\dcomptypes.h", header.GetProperty("sdkPath").GetString());
+            Assert.Single(recipe.RootElement.GetProperty("patches").EnumerateArray()
+                .Where(value => value.GetString() == "shared\\dcomptypes.h.patch"));
+            string settings = Path.Combine(project, "Partitions", "DirectComp", "settings.rsp");
+            Assert.Contains("<IncludeRoot>/shared/dcomptypes.h", RspReader.GetSettingsValues(settings, "--traverse"));
+            Assert.Contains("parse-win32-annotations", RspReader.GetSettingsValues(settings, "--config"));
+            Assert.Single(Regex.Matches(File.ReadAllText(Path.Combine(project, "patches", "um", "dcomp.h.patch")),
+                @"_Win32_AssociatedEnum_\(DCOMP_SURFACE_HANDLE_ACCESS\)"));
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", 0)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", 0)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", 0)]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", 0)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", 0)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", 0)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", 1)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", 1)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", 2)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", 2)]
+        public void DirectCompositionHeaderProviderKeepsCurrentNativeConstantsAndGuards(
+            string architecture, string target, string language, int profile)
+        {
+            string patch = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "patches", "shared", "dcomptypes.h.patch");
+            string[] lines = File.ReadAllLines(patch);
+            int firstConstant = Array.FindIndex(lines, line =>
+                line.StartsWith(" #define COMPOSITIONOBJECT_READ ", StringComparison.Ordinal));
+            Assert.True(firstConstant >= 0);
+            string block = string.Join("\n", lines.Skip(firstConstant)
+                .TakeWhile(line => !line.StartsWith("@@", StringComparison.Ordinal))
+                .Where(line => line.Length > 0 && (line[0] == ' ' ||
+                    line[0] == '+' && !line.StartsWith("+++", StringComparison.Ordinal)))
+                .Select(line => line.Substring(1)));
+            Assert.DoesNotContain("COMPOSITIONSURFACE_", block);
+            Assert.Contains("_Win32_Enum_(DCOMP_SURFACE_HANDLE_ACCESS, unsigned long,", block);
+            string declarations = $@"
+#define WINAPI_PARTITION_DESKTOP 1
+#define WINAPI_FAMILY_PARTITION(partition) {(profile == 1 ? 0 : 1)}
+#define NTDDI_WIN8 0x06020000
+#define NTDDI_VERSION {(profile == 2 ? "0x06010000" : "0x06020000")}
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (NTDDI_VERSION >= NTDDI_WIN8)
+{block}
+typedef struct SECURITY_ATTRIBUTES {{ unsigned long nLength; void* lpSecurityDescriptor; int bInheritHandle; }} SECURITY_ATTRIBUTES;
+long __stdcall DCompositionCreateSurfaceHandle(
+    _Win32_AssociatedEnum_(DCOMP_SURFACE_HANDLE_ACCESS) unsigned long desiredAccess,
+    SECURITY_ATTRIBUTES* securityAttributes, void** surfaceHandle);
+#endif
+#endif
+";
+            foreach (bool enabled in new[] { false, true })
+            {
+                using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                    annotationsEnabled: enabled, libraryPath: "dcomp.dll",
+                    extraSettings: $"--language\n{language}\n--std\n{(language == "c" ? "c11" : "c++17")}\n");
+                Assert.True(fixture.Run() >= 0, fixture.Diagnostics);
+                Assert.Equal(NativeSurface(fixture, target, false, language), NativeSurface(fixture, target, true, language));
+                using var image = Emit(fixture, architecture);
+                var reader = image.Reader;
+                var groups = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => reader.GetString(type.Name) == "DCOMP_SURFACE_HANDLE_ACCESS").ToArray();
+                Assert.Equal(enabled && profile == 0 ? 1 : 0, groups.Length);
+                if (profile != 0)
+                {
+                    Assert.DoesNotContain(reader.MethodDefinitions, handle =>
+                        reader.GetString(reader.GetMethodDefinition(handle).Name) == "DCompositionCreateSurfaceHandle");
+                    continue;
+                }
+                var method = FindMethod(reader, "Apis", "DCompositionCreateSurfaceHandle");
+                var signature = method.DecodeSignature(new SignatureNames(), null);
+                Assert.Equal("Int32", signature.ReturnType);
+                Assert.Equal("UInt32", signature.ParameterTypes[0]);
+                Assert.Equal("dcomp.dll", reader.GetString(reader.GetModuleReference(method.GetImport().Module).Name));
+                var parameter = method.GetParameters().Select(reader.GetParameter)
+                    .Single(value => value.SequenceNumber == 1);
+                if (enabled)
+                {
+                    AssertStringAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", "DCOMP_SURFACE_HANDLE_ACCESS");
+                    var group = Assert.Single(groups);
+                    AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "FlagsAttribute");
+                    AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "ScopedEnumAttribute");
+                    var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                    Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+                    Assert.Equal(new[] { "COMPOSITIONOBJECT_READ", "COMPOSITIONOBJECT_WRITE", "COMPOSITIONOBJECT_ALL_ACCESS" },
+                        fields.Skip(1).Select(field => reader.GetString(field.Name)));
+                    Assert.Equal(new uint[] { 1, 2, 3 }, fields.Skip(1).Select(field =>
+                        reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadUInt32()));
+                }
+                else
+                    AssertDoesNotHaveAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute");
+                AssertMetadataClosure(reader);
+            }
+        }
+
+        [Fact]
         public void ShutdownPartitionReadsItsOriginalHeaderAnnotations()
         {
             string settings = Path.Combine(WinHttpMigrationTests.RepositoryRoot,

@@ -2027,6 +2027,12 @@
       "sdkSha256": "8B98A194569E52CA87266B5A8D676CCBA67538CE7851571003DB8F7A606B0D2B"
     },
     {
+      "path": "shared\\dcomptypes.h",
+      "sourceSha256": "447E4ADF411B9818D68BB6F5A0A9EF9F423B95CC2B10610F51936DC921135594",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\dcomptypes.h",
+      "sdkSha256": "447E4ADF411B9818D68BB6F5A0A9EF9F423B95CC2B10610F51936DC921135594"
+    },
+    {
       "path": "um\\dcomp.h",
       "sourceSha256": "09539255B912F1072B276C6E33DD55FA80EB1A5C953C465E89A960F6E1D881D6",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\dcomp.h",
@@ -8332,6 +8338,7 @@
     "um\\shellapi.h.patch",
     "um\\avrt.h.patch",
     "um\\commdlg.h.patch",
+    "shared\\dcomptypes.h.patch",
     "um\\dcomp.h.patch",
     "um\\d2d1.h.patch",
     "um\\debugapi.h.patch",

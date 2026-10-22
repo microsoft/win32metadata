@@ -367,9 +367,32 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   route from that map. Three existing association-negative native cases still
   demand zero despite a visible nonfatal `MSInheritance` warning; their failures
   remain recorded and those tests are not changed.
-  The DirectComposition annotation currently references a group with no selected
-  header provider. Native constant/contract evidence is required before choosing
-  its source repair; no absent SDK constants or baseline identity may be invented.
+  The remaining DirectComposition annotation referenced a group with no selected
+  header provider. All 3,443 prepared files confirm that its three legacy
+  `COMPOSITIONSURFACE_*` member names are absent. The selected SDK instead defines
+  `COMPOSITIONOBJECT_READ`, `COMPOSITIONOBJECT_WRITE` and
+  `COMPOSITIONOBJECT_ALL_ACCESS` in authored `shared\dcomptypes.h`, under the same
+  desktop/Windows 8 guards as `DCompositionCreateSurfaceHandle`. Their native
+  values are `0x0001L`, `0x0002L` and the original OR expression.
+  The [documented parameter contract](https://learn.microsoft.com/windows/win32/api/dcomp/nf-dcomp-dcompositioncreatesurfacehandle)
+  also names those current constants. The mirror and selected SDK original are
+  byte-identical, SHA256 `447E4ADF411B9818D68BB6F5A0A9EF9F423B95CC2B10610F51936DC921135594`;
+  this is an authored header, not an IDL-generated output.
+  Add the missing unscoped, non-Flags `DCOMP_SURFACE_HANDLE_ACCESS` group after
+  those definitions, with unsigned-long storage and the existing current names.
+  Preserve the macros, guards, API declaration, native UInt32 parameter and
+  existing association. Do not manufacture old-name aliases or restore missing
+  SDK constants. Admit this one original-header patch through the normal recipe.
+  Only DirectComp traverses this header. Its ordinary common/x86 profile must be
+  refreshed; the runtime and other successful profiles remain reusable.
+  All 11 focused cases pass: recipe/provider wiring, compiler-evaluated values,
+  physical storage/association, C and C++ on all three architectures, native ABI
+  with annotation mode off/on, and desktop/Windows 8 guard exclusions. Strict
+  standard patch application also succeeds against the exact original bytes.
+  Exact EDF069 OLD has no group and no attributes on `desiredAccess`; its first
+  parameter is UInt32. The actual NEW must therefore expose this as a source-backed
+  added enum and association, not an equivalence waiver. Leave the unused legacy
+  JSON entry and all frozen constants unchanged for this first-image continuation.
   No complete NEW or downstream comparison exists yet, and 067 remains failed.
 - [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
   when preprocessing records reach generation with macro bindings disabled.
