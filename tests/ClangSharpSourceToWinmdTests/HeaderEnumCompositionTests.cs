@@ -340,6 +340,43 @@ namespace Windows.Win32.Foundation
         }
 
         [TestMethod]
+        public void ExplicitNamespaceOrganizationPrecedesCompositionAndAssociationValidation()
+        {
+            var inputs = new Dictionary<string, string>
+            {
+                ["first.header-types.cs"] = "namespace First { public enum G:uint { A=unchecked((uint)1UL) } }",
+                ["second.header-types.cs"] = "namespace Second { public enum G:uint { B=unchecked((uint)2UL) } }",
+                ["legacy.enums.cs"] = "namespace Legacy { public enum G:uint { A=1, Retained=4 } }",
+                ["association.manual.cs"] = @"namespace Windows.Win32.Foundation.Metadata {
+                    [System.AttributeUsage(System.AttributeTargets.Field)]
+                    public sealed class AssociatedEnumAttribute:System.Attribute {
+                        public AssociatedEnumAttribute(string name) { }
+                    }
+                }",
+                ["consumer.cs"] = @"namespace Consumer { public struct S {
+                    [global::Windows.Win32.Foundation.Metadata.AssociatedEnum(""G"")] public uint Value;
+                } }",
+            };
+            var error = Assert.ThrowsException<InvalidOperationException>(() =>
+                Compile(inputs, _ => Assert.Fail("Unorganized namespaces must remain ambiguous.")));
+            StringAssert.Contains(error.Message, "found 3");
+            Compile(inputs, compilation =>
+            {
+                AssertCompiles(compilation);
+                var group = compilation.GetTypeByMetadataName("Canonical.G")!;
+                Assert.IsNotNull(group);
+                CollectionAssert.AreEquivalent(new[] { "A", "B", "Retained" }, group.GetMembers().OfType<IFieldSymbol>()
+                    .Where(field => field.HasConstantValue).Select(field => field.Name).ToArray());
+                Assert.IsNull(compilation.GetTypeByMetadataName("First.G"));
+                Assert.IsNull(compilation.GetTypeByMetadataName("Second.G"));
+                Assert.IsNull(compilation.GetTypeByMetadataName("Legacy.G"));
+                var field = compilation.GetTypeByMetadataName("Consumer.S")!.GetMembers("Value").OfType<IFieldSymbol>().Single();
+                Assert.AreEqual(SpecialType.System_UInt32, field.Type.SpecialType);
+                Assert.AreEqual("G", field.GetAttributes().Single().ConstructorArguments.Single().Value);
+            }, requiredNamespaces: new Dictionary<string, string> { ["G"] = "Canonical" });
+        }
+
+        [TestMethod]
         public void DistinctNativeDeclarationsInOneTranslationUnitRemainAnError()
         {
             var exception = Assert.ThrowsException<InvalidOperationException>(() => Compile(new Dictionary<string, string>
@@ -355,7 +392,8 @@ namespace Windows.Win32.Foundation
             Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
         }
 
-        private static void Compile(Dictionary<string, string> inputs, Action<CSharpCompilation> assert, string arch = "crossarch")
+        private static void Compile(Dictionary<string, string> inputs, Action<CSharpCompilation> assert, string arch = "crossarch",
+            Dictionary<string, string>? requiredNamespaces = null)
         {
             string directory = Path.Combine(Path.GetTempPath(), "header-enum-composition-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(directory);
@@ -379,7 +417,7 @@ namespace Windows.Win32.Foundation.Metadata
                 }
                 var compilation = ClangSharpSourceCompilation.Create(directory, arch,
                     new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(),
-                    Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(),
+                    Array.Empty<string>(), new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(),
                     new HashSet<string>(), Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
                 assert(compilation.CSharpCompilation);
                 foreach (var input in inputs)

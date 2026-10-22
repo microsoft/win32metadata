@@ -1,6 +1,6 @@
 # Header annotation migration: problems and decisions
 
-Updated: 2026-10-21 (UTC).
+Updated: 2026-10-22 (UTC).
 
 This is the running record of migration blockers, their evidence, and the decisions
 made while resolving them. The goal is to express win32metadata's intended API
@@ -341,6 +341,36 @@ results, and an explained raw OLD-to-NEW comparison from that header-driven stat
   profile with the corrected scraper, then compose it with the other 394 frozen
   profile outputs and unchanged constants before ordinary emission. Preserve
   failed 064/065/066; no complete NEW image or downstream comparison exists yet.
+- The authorized Foundation/common refresh completed naturally in 17.7315135
+  seconds with all seven original native identities and relationships. Composed
+  emission 067 used that fresh profile, the other 394 frozen profiles and unchanged
+  constants. It passed the typedef repair and failed naturally after 292.4277652
+  seconds at strict association validation: 30 logical names have two namespace
+  candidates, while `SHUTDOWN_REASON` and `DCOMP_SURFACE_HANDLE_ACCESS` have none.
+  All 357 distinct diagnostics and 713 printed lines remain preserved.
+  The bounded 32-name source/input table compares the actual providers with exact
+  EDF069 OLD. Thirty-one names exist in OLD; the DirectComposition group does not.
+  Preserve all 31 established FullNames through literal global namespace routes.
+  In particular, `ACE_FLAGS`, `RESOURCE_DISPLAY_TYPE`, `SHARE_INFO_PERMISSIONS`,
+  `VIRTUAL_KEY` and `WORD_BREAK_ACTION` must not inherit either current candidate
+  merely because it already exists. The retained `PROCESS_CREATION_*` wildcard
+  does not route a header enum through the emitter's literal-name declaration
+  mover, so `PROCESS_CREATION_FLAGS` needs its own exact entry.
+  Shutdown already includes and traverses the patched `reason.h`, containing its
+  complete 51-member unsigned-long group, but its normal response omitted
+  `parse-win32-annotations`. Enable that existing reader configuration; do not
+  recreate the group in JSON or generated C#. The qualified runtime is unchanged.
+  All 31 new namespace-policy cases fail before the route changes. After repair,
+  43 bounded physical/native cases and all 187 emitter tests pass. An initial
+  bounded fixture passed the entire SDK namespace map without the corresponding
+  SDK namespaces and failed on unrelated imports; it now selects its actual
+  route from that map. Three existing association-negative native cases still
+  demand zero despite a visible nonfatal `MSInheritance` warning; their failures
+  remain recorded and those tests are not changed.
+  The DirectComposition annotation currently references a group with no selected
+  header provider. Native constant/contract evidence is required before choosing
+  its source repair; no absent SDK constants or baseline identity may be invented.
+  No complete NEW or downstream comparison exists yet, and 067 remains failed.
 - [dotnet/ClangSharp#847](https://github.com/dotnet/ClangSharp/pull/847) warns once
   when preprocessing records reach generation with macro bindings disabled.
   Its reviewed condition is not used by the updated consumer. Per the user's

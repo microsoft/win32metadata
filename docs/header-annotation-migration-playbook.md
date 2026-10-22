@@ -517,6 +517,10 @@ existing global namespace-resolution configuration; do not retain a semantic
 fallback use, duplicate the enum or allow a namespace change in the grade.
 The same rule applies when the definition itself becomes source-owned: its
 header's partition namespace does not replace the existing logical identity.
+Use the group's literal name: the emitter's declaration mover does not expand
+constant-name wildcard routes. Enable `parse-win32-annotations` in the provider
+partition as well as traversing its original header; declaration generation alone
+does not project an annotation-only logical-group typedef.
 For a typed native constant that changes source-emission position, any physical
 comparison adjustment must name that exact static literal, assert its complete
 type/value/attribute shape, and preserve every other field's order and layout.

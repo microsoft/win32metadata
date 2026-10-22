@@ -859,6 +859,84 @@ DXGI_USAGE LegacyUsage(DXGI_USAGE value, DXGI_USAGE* output);
             AssertMetadataClosure(reader);
         }
 
+        [Fact]
+        public void ShutdownPartitionReadsItsOriginalHeaderAnnotations()
+        {
+            string settings = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "Partitions", "Shutdown", "settings.rsp");
+            Assert.Contains("parse-win32-annotations", RspReader.GetSettingsValues(settings, "--config"));
+            Assert.Contains("<IncludeRoot>/um/reason.h", RspReader.GetSettingsValues(settings, "--traverse"));
+        }
+
+        [Theory]
+        [InlineData("ACE_FLAGS", "Windows.Win32.Security")]
+        [InlineData("CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE", "Windows.Win32.Security.Cryptography.UI")]
+        [InlineData("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT", "Windows.Win32.Security.Cryptography.UI")]
+        [InlineData("CRYPTUI_WIZ_FLAGS", "Windows.Win32.Security.Cryptography.UI")]
+        [InlineData("DESKTOP_ACCESS_FLAGS", "Windows.Win32.System.StationsAndDesktops")]
+        [InlineData("DNS_QUERY_OPTIONS", "Windows.Win32.NetworkManagement.Dns")]
+        [InlineData("DRAWITEMSTRUCT_CTL_TYPE", "Windows.Win32.UI.Controls")]
+        [InlineData("FILE_CREATION_DISPOSITION", "Windows.Win32.Storage.FileSystem")]
+        [InlineData("FILE_SHARE_MODE", "Windows.Win32.Storage.FileSystem")]
+        [InlineData("IMAGE_FILE_MACHINE", "Windows.Win32.System.SystemInformation")]
+        [InlineData("MESSAGEBOX_RESULT", "Windows.Win32.UI.WindowsAndMessaging")]
+        [InlineData("MESSAGEBOX_STYLE", "Windows.Win32.UI.WindowsAndMessaging")]
+        [InlineData("MULTI_BYTE_TO_WIDE_CHAR_FLAGS", "Windows.Win32.Globalization")]
+        [InlineData("PRINTER_ACCESS_RIGHTS", "Windows.Win32.Graphics.Printing")]
+        [InlineData("PROCESS_CREATION_FLAGS", "Windows.Win32.System.Threading")]
+        [InlineData("PSPCB_MESSAGE", "Windows.Win32.UI.Controls")]
+        [InlineData("RAS_FLAGS", "Windows.Win32.NetworkManagement.Rras")]
+        [InlineData("REGISTER_NOTIFICATION_FLAGS", "Windows.Win32.UI.WindowsAndMessaging")]
+        [InlineData("RESOURCE_DISPLAY_TYPE", "Windows.Win32.Networking.WinSock")]
+        [InlineData("RPC_C_AUTHN_INFO_TYPE", "Windows.Win32.System.Rpc")]
+        [InlineData("SHARE_INFO_PERMISSIONS", "Windows.Win32.Storage.FileSystem")]
+        [InlineData("SHUTDOWN_FLAGS", "Windows.Win32.System.Shutdown")]
+        [InlineData("SHUTDOWN_REASON", "Windows.Win32.System.Shutdown")]
+        [InlineData("SYNCHRONIZATION_ACCESS_RIGHTS", "Windows.Win32.System.Threading")]
+        [InlineData("TASKDIALOG_COMMON_BUTTON_FLAGS", "Windows.Win32.UI.Controls")]
+        [InlineData("THREAD_CREATION_FLAGS", "Windows.Win32.System.Threading")]
+        [InlineData("TVITEMEXW_CHILDREN", "Windows.Win32.UI.Controls")]
+        [InlineData("VIRTUAL_FREE_TYPE", "Windows.Win32.System.Memory")]
+        [InlineData("VIRTUAL_KEY", "Windows.Win32.UI.Input.KeyboardAndMouse")]
+        [InlineData("WAIT_EVENT", "Windows.Win32.Foundation")]
+        [InlineData("WORD_BREAK_ACTION", "Windows.Win32.UI.Controls")]
+        public void CanonicalNamespacePolicyComposesHeaderAndRetainedGroups(string name, string expectedNamespace)
+        {
+            var namespaces = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                    "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
+                .Where(line => !line.StartsWith("#", StringComparison.Ordinal)).Select(line => line.Split('=', 2))
+                .Where(parts => parts[0] == name)
+                .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            Assert.True(namespaces.TryGetValue(name, out string actualNamespace), name);
+            Assert.Equal(expectedNamespace, actualNamespace);
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", "");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "First.header-types.cs"),
+                $"namespace First {{ [global::System.Flags] public enum {name}:uint {{ A=unchecked((uint)1UL) }} }}");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Second.header-types.cs"),
+                $"namespace Second {{ [global::System.Flags] public enum {name}:uint {{ B=unchecked((uint)2UL) }} }}");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Residual.enums.cs"),
+                $"namespace Residual {{ [global::System.Flags] public enum {name}:uint {{ A=1, Retained=4 }} }}");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Consumer.cs"),
+                $@"namespace Test {{ public struct CONSUMER {{
+                    [global::Windows.Win32.Foundation.Metadata.AssociatedEnum(""{name}"")] public uint Value;
+                }} }}");
+            using var image = Emit(fixture.DirectoryPath, "crossarch", requiredNamespaces: namespaces);
+            var reader = image.Reader;
+            var group = FindType(reader, name);
+            Assert.Equal(expectedNamespace, reader.GetString(group.Namespace));
+            AssertHasAttribute(reader, group.GetCustomAttributes(), "FlagsAttribute");
+            AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "ScopedEnumAttribute");
+            var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(new[] { "A", "B", "Retained" }, fields.Skip(1).Select(field => reader.GetString(field.Name)));
+            Assert.Equal(new uint[] { 1, 2, 4 }, fields.Skip(1).Select(field =>
+                reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadUInt32()));
+            var consumer = Assert.Single(FindType(reader, "CONSUMER").GetFields().Select(reader.GetFieldDefinition));
+            Assert.Equal("UInt32", consumer.DecodeSignature(new SignatureNames(), null));
+            AssertStringAttribute(reader, consumer.GetCustomAttributes(), "AssociatedEnumAttribute", name);
+            AssertMetadataClosure(reader);
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
         [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
