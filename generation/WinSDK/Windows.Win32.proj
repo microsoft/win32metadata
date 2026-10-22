@@ -34,7 +34,6 @@
   <ItemGroup>
     <EmitterRsp Include="emitter.settings.rsp"/>
     <EmitterRsp Include="requiredNamespacesForNames.rsp"/>
-    <EmitterRsp Include="documentationMappings.rsp"/>
   </ItemGroup>
 
   <PropertyGroup>
@@ -60,7 +59,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ManualCs Include="manual\*.cs"/>
+    <ManualCs Include="manual\Metadata.cs"/>
     <PartitionFiles Include="partitions\**\main.cpp"/>
     <Partition Include="@(PartitionFiles)">
       <Name>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName($([System.String]::Copy('%(Directory)'))))))</Name>

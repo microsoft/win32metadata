@@ -6,5 +6,3 @@ _GUID
 <IncludeRoot>/um/callobj.h
 --namespace
 Windows.Win32.System.Com.CallObj
---with-type
-STREAM_SEEK=uint

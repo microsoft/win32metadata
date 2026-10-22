@@ -1,6 +1,3 @@
---with-type
-HANDLE_OPTIONS=uint
---with-attribute
 --exclude
 RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration

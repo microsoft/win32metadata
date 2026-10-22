@@ -10,9 +10,11 @@ visible for review.
 
 ## Completion plan and next review
 
-The next review milestone is one complete SDK-wide NEW WinMD, its full raw
-OLD-to-NEW comparison, and a categorized assessment with an action plan.
-Further annotation retirement and optional tooling research must not postpone it.
+The next run is header-only, using the annotated SDK as it stands. The previous
+decision to pursue a transitional image with API-specific sidecars still active
+is withdrawn. That mixed ownership left logical enums partly in headers and
+partly in sidecars; `TVITEMEXW_CHILDREN` exposed the resulting storage conflict.
+Successful partition scraping did not establish a complete migration.
 
 The architecture remains the selected SDK originals plus authored patches,
 targeted MIDL regeneration, the compiler-backed C# scraper, constant extraction,
@@ -20,58 +22,38 @@ and one namespace/architecture-composed WinMD. SDK sources own API-specific fact
 the reader binds them to native declarations; the emitter preserves them in the
 complete image.
 
-1. Freeze a finite candidate from accepted source/config cut `4d857d46`, the
-   qualified runtime341/53f scraper, and the unchanged emitter74CC. Preserve all
-   manifests and the interrupted runtime340 capture. Pending source releases and
-   log-only commits do not silently change the candidate. Necessary compile
-   repairs produce explicitly pinned successors of that base.
-2. Complete all 321 owners on x86, x64, and arm64, regenerating affected IDL
-   closures and running constant extraction and full WinMD emission. Reuse a
-   prior output only with matching dependency and tooling evidence. Collect hard
-   failures together, repair shared compile blockers, and replay their affected
-   profiles. Do not add optional per-partition qualification gates or a blind
-   full-run retry loop.
-3. Run complete-image integrity checks, including NoSuggestedRemappings, and
-   retain every failure. Compare the pinned exact OLD first against this exact
-   NEW second, including signatures, constant values, enum/global placement,
-   namespaces, attributes, imports, and availability. Do not filter intended
-   differences out of the raw comparison.
-4. Deliver the complete image, raw comparison, and categorized issue report.
-   Each category needs counts, affected APIs, consumer consequences, evidence,
-   and a proposed action. Stop before broad remediation for the requested
-   discussion.
-
-The admitted finite source successor is packet047: SDK tree
-`9d5a9670830834fe2ceb7031d77ad90d75541a7f`, with exactly five original-source
-patch changes above base4d. JSON/RSP and tooling inputs remain unchanged.
-This closes the known source-correction handoff, not the current native replay,
-complete-image build or functional review.
+1. Remove authored API metadata from every active JSON/RSP input and handwritten
+   API source. Keep attribute definitions, namespace organization, documented
+   parser fixes and SDK-derived import discovery separately identified. Enable
+   header-annotation reading for every normal profile. Do not fill missing header
+   facts from a legacy fragment or a baseline assembly.
+2. Keep the current prepared headers, retained MIDL outputs and qualified tool
+   binaries unchanged. Run all 321 owners and 395 normal profiles into a fresh
+   output directory, followed by normal constant extraction and combined WinMD
+   emission. Do not seed this run with previous generated C#, constants or
+   filtered response files.
+3. Stop at the first compilation failure. Preserve its inputs and diagnostics,
+   diagnose the failure, and report it before any source repair, tool change or
+   retry. A failed run produces no NEW and cannot have an OLD-to-NEW comparison.
+4. If a complete NEW is emitted, compare exact EDF069 OLD against that image.
+   Preserve the full raw differences and integrity results, including
+   NoSuggestedRemappings. Missing header facts and intended representation
+   changes remain visible; neither is a reason to reactivate a sidecar.
 
 | Review category | Required disposition |
 | --- | --- |
 | Intended representation changes | Explain the consumer impact and retain the raw difference, including primitive-plus-association signatures, storage corrections, logical names, and enum/global placement. |
 | Selected-SDK changes | Prove the change against the selected native source and available OLD provenance; do not infer removal from one missing token or header. |
 | Corrections to OLD | Show the native contract and why OLD was incorrect. |
-| Missing header facts or providers | Identify the exact missing fact and original owner; keep unproved replacements active. |
+| Missing header facts or providers | Identify the exact missing fact and original owner. Do not restore non-header metadata to conceal it. |
 | Reader, emitter, or composition defects | Group by shared cause and propose bounded fixes. Missing APIs and wrong namespaces are not accepted as intended changes. |
 | Unresolved provenance | State what remains unknown and the observation needed to decide it. |
 
-The first complete image is explicitly transitional: remaining API-specific
-sidecars stay active where their replacements are unproved. Its functional diff
-does not prove header-only coverage. The existing fact ledger records that
-remaining dependency separately; no new inventory project is required.
-For WDS, the synthetic `CPU_ARCHITECTURE` definition and its two uses remain in
-JSON. Removing the unsupported migration-only scalar forward and its two compiled
-associations is an approved compile repair for this image. The source migration
-remains unresolved, and output preservation still requires the actual image and
-comparison.
+## Historical execution record
 
-After the full-delta review, complete the agreed original-source replacements and
-retire their matching API-specific sidecars. Global organization and parser fixups
-may remain. Final migration acceptance requires another complete image, integrity
-results, and an explained raw OLD-to-NEW comparison from that header-driven state.
-
-## Current state
+The following records preserve earlier attempts and decisions. Transitional-image
+instructions and execution authorizations in this history do not authorize the
+current run; the header-only plan above supersedes them.
 
 - The C# generator remains in use. The qualified tooling is ClangSharp 21.1.8.4
   with libclang 21.1.8. This toolchain is fixed for the complete-image milestone;

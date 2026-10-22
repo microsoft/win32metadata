@@ -21,5 +21,3 @@ _GUID
 <IncludeRoot>/um/servprov.h
 --namespace
 Windows.Win32.System.Com
---with-type
-STREAM_SEEK=uint
