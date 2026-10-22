@@ -1,8 +1,16 @@
 diff --git a/um/prsht.h b/um/prsht.h
-index 9b253c6d..848d00ec 100644
 --- a/um/prsht.h
 +++ b/um/prsht.h
-@@ -101,8 +101,12 @@ struct _PROPSHEETPAGEA;
+@@ -95,14 +95,21 @@
+ 
+ struct _PSP;
+ typedef struct _PSP * HPROPSHEETPAGE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HPROPSHEETPAGE HPROPSHEETPAGE;
++#endif
+ 
+ #ifndef MIDL_PASS
+ struct _PROPSHEETPAGEA;
  struct _PROPSHEETPAGEW;
  #endif
  
@@ -17,21 +25,21 @@ index 9b253c6d..848d00ec 100644
  
  #ifdef UNICODE
  #define LPFNPSPCALLBACK         LPFNPSPCALLBACKW
-@@ -136,6 +140,13 @@ typedef UINT (CALLBACK *LPFNPSPCALLBACKW)(HWND hwnd, UINT uMsg, struct _PROPSHEE
+@@ -135,6 +142,13 @@
+ #define PSPCB_ADDREF            0
  #define PSPCB_RELEASE           1
  #define PSPCB_CREATE            2
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(PSPCB_MESSAGE, unsigned int,
 +    PSPCB_ADDREF,
 +    PSPCB_CREATE,
 +    PSPCB_RELEASE);
 +#endif
-+
+ 
  #ifdef _WIN32
  typedef LPCDLGTEMPLATE PROPSHEETPAGE_RESOURCE;
- #else
-@@ -582,12 +593,28 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
+@@ -582,12 +596,28 @@
  #define PSCB_BUTTONPRESSED 3
  #endif  // NTDDI_VERSION >= NTDDI_WINXP
  
@@ -60,7 +68,7 @@ index 9b253c6d..848d00ec 100644
  WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
  
  #ifdef UNICODE
-@@ -908,4 +935,3 @@ typedef struct _PSHNOTIFY
+@@ -908,4 +938,3 @@
  #if defined(_MSC_VER) && (_MSC_VER >= 1200)
  #pragma warning(pop)
  #endif

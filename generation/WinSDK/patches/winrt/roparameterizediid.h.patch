@@ -1,5 +1,4 @@
 diff --git a/winrt/roparameterizediid.h b/winrt/roparameterizediid.h
-index 4ca62976..1ad6316f 100644
 --- a/winrt/roparameterizediid.h
 +++ b/winrt/roparameterizediid.h
 @@ -8,6 +8,7 @@
@@ -10,7 +9,17 @@ index 4ca62976..1ad6316f 100644
  #include <nt.h>
  #include <ntrtl.h>
  #include <nturtl.h>
-@@ -65,20 +66,23 @@ struct IRoMetaDataLocator
+@@ -18,6 +19,9 @@
+ #include <basetyps.h>
+ 
+ DECLARE_HANDLE(ROPARAMIIDHANDLE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef ROPARAMIIDHANDLE ROPARAMIIDHANDLE;
++#endif
+ //struct ROPARAMIIDHANDLE__; typedef struct ROPARAMIIDHANDLE__ *ROPARAMIIDHANDLE;
+ 
+ struct IRoSimpleMetaDataBuilder
+@@ -65,20 +69,23 @@
      ) const = 0;
  };
  

@@ -222,7 +222,7 @@ namespace ClangSharpSourceToWinmd
             return mask;
         }
 
-        internal static CSharpCompilation ConvertPrimitiveConstantAliases(CSharpCompilation compilation)
+        internal static CSharpCompilation ConvertPrimitiveConstantAliases(CSharpCompilation compilation, bool writeModifiedFiles = true)
         {
             var groups = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
             foreach (var tree in compilation.SyntaxTrees.Where(tree => IsHeaderTypesFile(tree.FilePath) ||
@@ -296,13 +296,14 @@ namespace ClangSharpSourceToWinmd
 
                 var rewritten = tree.WithRootAndOptions(root.ReplaceNodes(replacements.Keys,
                     (original, _) => replacements[original]), tree.Options);
-                File.WriteAllText(tree.FilePath, rewritten.GetText().ToString());
+                if (writeModifiedFiles)
+                    File.WriteAllText(tree.FilePath, rewritten.GetText().ToString());
                 converted = converted.ReplaceSyntaxTree(tree, rewritten);
             }
             return converted;
         }
 
-        private static Architecture GetArchitectures(string file, HashSet<string> files)
+        internal static Architecture GetArchitectures(string file, HashSet<string> files)
         {
             var architecture = ClangSharpSourceCompilation.GetArchitectureForFileName(file);
             if (architecture == Architecture.None)

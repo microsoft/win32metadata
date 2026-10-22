@@ -1,0 +1,12 @@
+diff --git a/um/windows.ui.xaml.hosting.referencetracker.idl b/um/windows.ui.xaml.hosting.referencetracker.idl
+index d22e7673..c96c1271 100644
+--- a/um/windows.ui.xaml.hosting.referencetracker.idl
++++ b/um/windows.ui.xaml.hosting.referencetracker.idl
+@@ -123,6 +123,7 @@
+ } TrackerHandle__;
+ 
+ typedef [unique] TrackerHandle__* TrackerHandle;
++cpp_quote("/* Win32Metadata: type ::TrackerHandle => NativeTypedef */")
+ 
+ [
+     object,

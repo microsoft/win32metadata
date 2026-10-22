@@ -1,0 +1,13 @@
+diff --git a/um/wincontypes.h b/um/wincontypes.h
+--- a/um/wincontypes.h
++++ b/um/wincontypes.h
+@@ -154,6 +154,9 @@
+ } CONSOLE_FONT_INFO, *PCONSOLE_FONT_INFO;
+ 
+ typedef VOID* HPCON;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HPCON HPCON;
++#endif
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion

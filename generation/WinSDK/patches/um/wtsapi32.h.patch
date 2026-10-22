@@ -13,7 +13,18 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -111,8 +115,8 @@
+@@ -55,6 +59,10 @@
+ #ifndef IDASYNC
+ #define IDASYNC   32001
+ #endif
++#ifdef WIN32METADATA
++_Win32_Enum_(MESSAGEBOX_RESULT, int, IDASYNC);
++#endif
++
+ 
+ #ifndef __HYDRIX_H__
+ #define USERNAME_LENGTH          20
+@@ -111,8 +119,8 @@
  
  #define WTS_SECURITY_USER_ACCESS              (WTS_SECURITY_CURRENT_GUEST_ACCESS | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_CONNECT )
  
@@ -24,7 +35,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
                                                 WTS_SECURITY_DISCONNECT)
  
  #define WTS_SECURITY_ALL_ACCESS               (STANDARD_RIGHTS_REQUIRED | WTS_SECURITY_QUERY_INFORMATION |       \
-@@ -121,6 +125,25 @@
+@@ -121,6 +129,25 @@
                                                 WTS_SECURITY_LOGON |                                              \
                                                 WTS_SECURITY_MESSAGE |                                            \
                                                 WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)
@@ -50,7 +61,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  
  /*===================================================================
  ==   WTS_CONNECTSTATE_CLASS - Session connect state
-@@ -800,11 +823,15 @@
+@@ -800,11 +827,15 @@
  ==   Windows Terminal Server public APIs
  =====================================================================*/
  
@@ -66,7 +77,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL WINAPI
  WTSStartRemoteControlSessionW(
      _In_ LPWSTR  pTargetServerName,
-@@ -813,6 +840,8 @@
+@@ -813,6 +844,8 @@
      IN USHORT  HotkeyModifiers
      );
  
@@ -75,7 +86,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL WINAPI
  WTSStartRemoteControlSessionA(
      _In_ LPSTR  pTargetServerName,
-@@ -827,6 +856,8 @@
+@@ -827,6 +860,8 @@
  #define WTSStartRemoteControlSession WTSStartRemoteControlSessionA
  #endif /* UNICODE */
  
@@ -84,7 +95,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSConnectSessionA(
-@@ -836,6 +867,8 @@
+@@ -836,6 +871,8 @@
      IN BOOL bWait
      );
  
@@ -93,7 +104,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSConnectSessionW(
-@@ -851,6 +884,8 @@
+@@ -851,6 +888,8 @@
  #define WTSConnectSession WTSConnectSessionA
  #endif
  
@@ -102,7 +113,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSEnumerateServersW(
-@@ -861,6 +896,8 @@
+@@ -861,6 +900,8 @@
      _Out_ DWORD * pCount
      );
  
@@ -111,7 +122,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSEnumerateServersA(
-@@ -879,24 +916,28 @@
+@@ -879,24 +920,28 @@
  
  /*------------------------------------------------*/
  
@@ -140,7 +151,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  HANDLE
  WINAPI
  WTSOpenServerExA(
-@@ -913,6 +954,7 @@
+@@ -913,6 +958,7 @@
  
  /*------------------------------------------------*/
  
@@ -148,7 +159,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  VOID
  WINAPI
  WTSCloseServer(
-@@ -921,39 +963,47 @@
+@@ -921,39 +967,47 @@
  
  /*------------------------------------------------*/
  
@@ -200,7 +211,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      _Inout_ DWORD *pLevel,
      _In_ DWORD Filter,
      _Outptr_result_buffer_(*pCount) PWTS_SESSION_INFO_1A * ppSessionInfo,
-@@ -969,20 +1019,24 @@
+@@ -969,20 +1023,24 @@
  
  /*------------------------------------------------*/
  
@@ -227,7 +238,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      IN DWORD Reserved,
      IN DWORD Version,
      OUT PWTS_PROCESS_INFOA * ppProcessInfo,
-@@ -997,10 +1051,12 @@
+@@ -997,10 +1055,12 @@
  
  /*------------------------------------------------*/
  
@@ -241,7 +252,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      IN DWORD ProcessId,
      IN DWORD ExitCode
      );
-@@ -1008,20 +1064,24 @@
+@@ -1008,20 +1068,24 @@
  
  /*------------------------------------------------*/
  
@@ -268,7 +279,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      IN DWORD SessionId,
      IN WTS_INFO_CLASS WTSInfoClass,
      _Outptr_result_bytebuffer_(*pBytesReturned) LPSTR * ppBuffer,
-@@ -1036,6 +1096,8 @@
+@@ -1036,6 +1100,8 @@
  
  /*------------------------------------------------*/
  
@@ -277,7 +288,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSQueryUserConfigW(
-@@ -1046,6 +1108,8 @@
+@@ -1046,6 +1112,8 @@
      _Out_ DWORD * pBytesReturned
      );
  
@@ -286,7 +297,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSQueryUserConfigA(
-@@ -1064,6 +1128,8 @@
+@@ -1064,6 +1132,8 @@
  
  /*------------------------------------------------*/
  
@@ -295,7 +306,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSSetUserConfigW(
-@@ -1074,6 +1140,8 @@
+@@ -1074,6 +1144,8 @@
      IN DWORD DataLength
      );
  
@@ -304,7 +315,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSSetUserConfigA(
-@@ -1092,31 +1160,35 @@
+@@ -1092,31 +1164,35 @@
  
  /*------------------------------------------------*/
  
@@ -344,7 +355,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      IN DWORD Timeout,
      _Out_ DWORD * pResponse,
      IN BOOL bWait
-@@ -1130,49 +1202,59 @@
+@@ -1130,49 +1206,59 @@
  
  /*------------------------------------------------*/
  
@@ -410,7 +421,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      IN DWORD SessionId,
      _In_ LPSTR pVirtualName   /* ascii name */
      );
-@@ -1184,7 +1266,9 @@
+@@ -1184,7 +1270,9 @@
  #define WTS_CHANNEL_OPTION_DYNAMIC_PRI_REAL 0x00000006
  #define WTS_CHANNEL_OPTION_DYNAMIC_NO_COMPRESS 0x00000008
  
@@ -421,7 +432,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  WINAPI
  WTSVirtualChannelOpenEx(
                       IN DWORD SessionId,
-@@ -1192,12 +1276,16 @@
+@@ -1192,12 +1280,16 @@
                       IN DWORD flags
                       );
  
@@ -438,7 +449,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSVirtualChannelRead(
-@@ -1208,6 +1296,8 @@
+@@ -1208,6 +1300,8 @@
      _Out_ PULONG pBytesRead
      );
  
@@ -447,7 +458,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSVirtualChannelWrite(
-@@ -1217,12 +1307,16 @@
+@@ -1217,12 +1311,16 @@
      _Out_ PULONG pBytesWritten
      );
  
@@ -464,7 +475,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSVirtualChannelPurgeOutput(
-@@ -1230,6 +1324,8 @@
+@@ -1230,6 +1328,8 @@
      );
  
  
@@ -473,7 +484,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSVirtualChannelQuery(
-@@ -1242,6 +1338,7 @@
+@@ -1242,6 +1342,7 @@
  /*------------------------------------------------*/
  
  
@@ -481,7 +492,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  VOID
  WINAPI
  WTSFreeMemory(
-@@ -1254,6 +1351,8 @@
+@@ -1254,6 +1355,8 @@
  #define NOTIFY_FOR_THIS_SESSION     0
  
  
@@ -490,7 +501,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSRegisterSessionNotification(
-@@ -1261,6 +1360,8 @@
+@@ -1261,6 +1364,8 @@
      DWORD dwFlags
      );
  
@@ -499,7 +510,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSUnRegisterSessionNotification(
-@@ -1268,21 +1369,27 @@
+@@ -1268,21 +1373,27 @@
      );
  
  
@@ -529,7 +540,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL
  WINAPI
  WTSQueryUserToken(
-@@ -1347,6 +1454,8 @@
+@@ -1347,6 +1458,8 @@
  #endif
  } WTS_TYPE_CLASS;
  
@@ -538,7 +549,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL WINAPI
  WTSFreeMemoryExW(
      _In_ WTS_TYPE_CLASS WTSTypeClass,
-@@ -1354,6 +1463,8 @@
+@@ -1354,6 +1467,8 @@
      _In_ ULONG   NumberOfEntries
  );
  
@@ -547,7 +558,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
  BOOL WINAPI
  WTSFreeMemoryExA(
      _In_ WTS_TYPE_CLASS WTSTypeClass,
-@@ -1369,20 +1480,24 @@
+@@ -1369,20 +1484,24 @@
  
  /*------------------------------------------------*/
  
@@ -574,7 +585,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
      _Inout_ DWORD *pLevel,
      _In_ DWORD SessionId,
      _Out_ LPSTR *ppProcessInfo,
-@@ -1412,18 +1527,22 @@
+@@ -1412,18 +1531,22 @@
  #define PWTSLISTENERNAME PWTSLISTENERNAMEA
  #endif
  
@@ -599,7 +610,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
    _In_                  PVOID pReserved,
    _In_                  DWORD Reserved,
    _Out_writes_opt_(*pCount) PWTSLISTENERNAMEA pListeners,
-@@ -1521,24 +1640,30 @@
+@@ -1521,24 +1644,30 @@
      CHAR InitialProgram[ MAX_PATH + 1 ];
  } WTSLISTENERCONFIGA, *PWTSLISTENERCONFIGA;
  
@@ -633,7 +644,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPWSTR pListenerName,
-@@ -1546,8 +1671,10 @@
+@@ -1546,8 +1675,10 @@
    _In_          DWORD flag
  );
  
@@ -645,7 +656,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPSTR pListenerName,
-@@ -1555,24 +1682,30 @@
+@@ -1555,24 +1686,30 @@
    _In_          DWORD flag
  );
  
@@ -679,7 +690,7 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPWSTR pListenerName, 
-@@ -1582,8 +1715,10 @@
+@@ -1582,8 +1719,10 @@
    _Out_         LPDWORD lpnLengthNeeded);
  
  
@@ -691,16 +702,19 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPSTR pListenerName,
-@@ -1597,7 +1732,7 @@
+@@ -1597,7 +1736,10 @@
  
  DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef WTS_CLOUD_AUTH_HANDLE WTS_CLOUD_AUTH_HANDLE;
++#endif
  
 -WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
 +_Win32_RAIIFree_(WTSCloudAuthClose, -1, 0) WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
      _In_ const GUID* activityId);
  
  void WINAPI WTSCloudAuthClose(
-@@ -1646,16 +1781,19 @@
+@@ -1646,16 +1788,19 @@
  #define WTSGetListenerSecurity WTSGetListenerSecurityA
  #endif
  

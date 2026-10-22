@@ -1,8 +1,7 @@
 diff --git a/um/resapi.h b/um/resapi.h
-index 0c6cddc5..cf93a6ac 100644
 --- a/um/resapi.h
 +++ b/um/resapi.h
-@@ -14,6 +14,7 @@ Revision History:
+@@ -14,6 +14,7 @@
  
  --*/
  
@@ -10,7 +9,7 @@ index 0c6cddc5..cf93a6ac 100644
  #include <winapifamily.h>
  
  #pragma region Desktop Family or FailoverCluster Package
-@@ -990,26 +991,31 @@ typedef struct _CLUSTER_HEALTH_FAULT_ARRAY
+@@ -990,26 +991,31 @@
  //
  //Health fault utility routines
  //
@@ -42,7 +41,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusGetClusterHealthFaults(
-@@ -1017,6 +1023,7 @@ ClusGetClusterHealthFaults(
+@@ -1017,6 +1023,7 @@
      _Out_ CLUSTER_HEALTH_FAULT_ARRAY* objects,
      _In_ DWORD flags);
  
@@ -50,7 +49,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusRemoveClusterHealthFault(
-@@ -1025,6 +1032,7 @@ ClusRemoveClusterHealthFault(
+@@ -1025,6 +1032,7 @@
      _In_ DWORD flags
  );
  
@@ -58,7 +57,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusAddClusterHealthFault(
-@@ -1037,6 +1045,7 @@ ClusAddClusterHealthFault(
+@@ -1037,6 +1045,7 @@
  // Resource Utility Routines
  //
  
@@ -66,7 +65,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilStartResourceService(
-@@ -1050,6 +1059,7 @@ typedef DWORD
+@@ -1050,6 +1059,7 @@
      OUT LPSC_HANDLE phServiceHandle
      );
  
@@ -74,7 +73,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilVerifyResourceService(
-@@ -1061,6 +1071,7 @@ typedef DWORD
+@@ -1061,6 +1071,7 @@
      IN LPCWSTR pszServiceName
      );
  
@@ -82,7 +81,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilStopResourceService(
-@@ -1072,6 +1083,7 @@ typedef DWORD
+@@ -1072,6 +1083,7 @@
      IN LPCWSTR pszServiceName
      );
  
@@ -90,7 +89,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilVerifyService(
-@@ -1083,6 +1095,7 @@ typedef DWORD
+@@ -1083,6 +1095,7 @@
      IN SC_HANDLE hServiceHandle
      );
  
@@ -98,7 +97,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilStopService(
-@@ -1094,6 +1107,7 @@ typedef DWORD
+@@ -1094,6 +1107,7 @@
      IN SC_HANDLE hServiceHandle
      );
  
@@ -106,7 +105,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilCreateDirectoryTree(
-@@ -1105,6 +1119,7 @@ typedef DWORD
+@@ -1105,6 +1119,7 @@
      IN LPCWSTR pszPath
      );
  
@@ -114,7 +113,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ResUtilIsPathValid(
-@@ -1116,6 +1131,7 @@ typedef BOOL
+@@ -1116,6 +1131,7 @@
      IN LPCWSTR pszPath
      );
  
@@ -122,7 +121,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilEnumProperties(
-@@ -1135,6 +1151,7 @@ typedef DWORD
+@@ -1135,6 +1151,7 @@
      _Out_ LPDWORD pcbRequired
      );
  
@@ -130,7 +129,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilEnumPrivateProperties(
-@@ -1154,6 +1171,7 @@ typedef DWORD
+@@ -1154,6 +1171,7 @@
      _Out_ LPDWORD pcbRequired
      );
  
@@ -138,7 +137,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetProperties(
-@@ -1175,6 +1193,7 @@ typedef DWORD
+@@ -1175,6 +1193,7 @@
      _Out_ LPDWORD pcbRequired
      );
  
@@ -146,7 +145,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetAllProperties(
-@@ -1196,6 +1215,7 @@ typedef DWORD
+@@ -1196,6 +1215,7 @@
      _Out_ LPDWORD pcbRequired
      );
  
@@ -154,7 +153,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetPrivateProperties(
-@@ -1215,6 +1235,7 @@ typedef DWORD
+@@ -1215,6 +1235,7 @@
      _Out_ LPDWORD pcbRequired
      );
  
@@ -162,7 +161,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetPropertySize(
-@@ -1232,6 +1253,7 @@ typedef DWORD
+@@ -1232,6 +1253,7 @@
      IN OUT LPDWORD pnPropertyCount
      );
  
@@ -170,7 +169,7 @@ index 0c6cddc5..cf93a6ac 100644
  _Success_( return == ERROR_SUCCESS )
  DWORD
  WINAPI
-@@ -1252,6 +1274,7 @@ DWORD
+@@ -1252,6 +1274,7 @@
      _Inout_ LPDWORD pcbOutPropertyItemSize
      );
  
@@ -178,7 +177,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilVerifyPropertyTable(
-@@ -1273,6 +1296,7 @@ typedef DWORD
+@@ -1273,6 +1296,7 @@
      _Out_opt_ LPBYTE pOutParams
      );
  
@@ -186,7 +185,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetPropertyTable(
-@@ -1296,6 +1320,7 @@ typedef DWORD
+@@ -1296,6 +1320,7 @@
      _Out_opt_ LPBYTE pOutParams
      );
  
@@ -194,7 +193,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetPropertyTableEx(
-@@ -1321,6 +1346,7 @@ typedef DWORD
+@@ -1321,6 +1346,7 @@
      OUT OPTIONAL LPBYTE pOutParams
      );
  
@@ -202,7 +201,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetPropertyParameterBlock(
-@@ -1344,6 +1370,7 @@ typedef DWORD
+@@ -1344,6 +1370,7 @@
      OUT OPTIONAL LPBYTE pOutParams
      );
  
@@ -210,7 +209,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetPropertyParameterBlockEx(
-@@ -1369,6 +1396,7 @@ typedef DWORD
+@@ -1369,6 +1396,7 @@
      OUT OPTIONAL LPBYTE pOutParams
      );
  
@@ -218,7 +217,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetUnknownProperties(
-@@ -1386,6 +1414,7 @@ typedef DWORD
+@@ -1386,6 +1414,7 @@
      _In_ DWORD cbInPropertyListSize
      );
  
@@ -226,7 +225,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetPropertiesToParameterBlock(
-@@ -1414,6 +1443,7 @@ typedef DWORD
+@@ -1414,6 +1443,7 @@
      OUT OPTIONAL LPWSTR * pszNameOfPropInError
      );
  
@@ -234,7 +233,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilPropertyListFromParameterBlock(
-@@ -1435,6 +1465,7 @@ typedef DWORD
+@@ -1435,6 +1465,7 @@
      _Out_ LPDWORD pcbRequired
      );
  
@@ -242,7 +241,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilDupParameterBlock(
-@@ -1450,6 +1481,7 @@ typedef DWORD
+@@ -1450,6 +1481,7 @@
      IN const PRESUTIL_PROPERTY_ITEM pPropertyTable
      );
  
@@ -250,7 +249,7 @@ index 0c6cddc5..cf93a6ac 100644
  void
  WINAPI
  ResUtilFreeParameterBlock(
-@@ -1465,6 +1497,7 @@ typedef void
+@@ -1465,6 +1497,7 @@
      IN const PRESUTIL_PROPERTY_ITEM pPropertyTable
      );
  
@@ -258,7 +257,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilAddUnknownProperties(
-@@ -1486,6 +1519,7 @@ typedef DWORD
+@@ -1486,6 +1519,7 @@
      IN OUT LPDWORD pcbRequired
      );
  
@@ -266,7 +265,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetPrivatePropertyList(
-@@ -1501,6 +1535,7 @@ typedef DWORD
+@@ -1501,6 +1535,7 @@
      _In_ DWORD cbInPropertyListSize
      );
  
@@ -274,7 +273,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilVerifyPrivatePropertyList(
-@@ -1514,6 +1549,8 @@ typedef DWORD
+@@ -1514,6 +1549,8 @@
      _In_ DWORD cbInPropertyListSize
      );
  
@@ -283,7 +282,7 @@ index 0c6cddc5..cf93a6ac 100644
  PWSTR
  WINAPI
  ResUtilDupString(
-@@ -1525,6 +1562,7 @@ typedef PWSTR
+@@ -1525,6 +1562,7 @@
      IN LPCWSTR pszInString
      );
  
@@ -291,7 +290,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetBinaryValue(
-@@ -1542,6 +1580,8 @@ typedef DWORD
+@@ -1542,6 +1580,8 @@
      _Out_ LPDWORD pcbOutValueSize
      );
  
@@ -300,7 +299,7 @@ index 0c6cddc5..cf93a6ac 100644
  LPWSTR
  WINAPI
  ResUtilGetSzValue(
-@@ -1555,6 +1595,8 @@ typedef LPWSTR
+@@ -1555,6 +1595,8 @@
      IN LPCWSTR pszValueName
      );
  
@@ -309,7 +308,7 @@ index 0c6cddc5..cf93a6ac 100644
  LPWSTR
  WINAPI
  ResUtilGetExpandSzValue(
-@@ -1573,7 +1615,7 @@ typedef LPWSTR
+@@ -1573,7 +1615,7 @@
  FORCEINLINE
  DWORD
  WINAPI_INLINE
@@ -318,7 +317,7 @@ index 0c6cddc5..cf93a6ac 100644
      _In_ HKEY hkeyClusterKey,
      _In_ LPCWSTR pszValueName,
      _Outptr_result_bytebuffer_to_maybenull_(*pcbOutValueSize, *pcbOutValueSize) LPWSTR *ppszOutValue,
-@@ -1583,6 +1625,7 @@ ResUtilGetMultiSzValue(
+@@ -1583,6 +1625,7 @@
      return ResUtilGetBinaryValue( hkeyClusterKey, pszValueName, (LPBYTE *) ppszOutValue, pcbOutValueSize );
  }
  
@@ -326,7 +325,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetDwordValue(
-@@ -1600,6 +1643,7 @@ typedef DWORD
+@@ -1600,6 +1643,7 @@
      _In_ DWORD dwDefaultValue
      );
  
@@ -334,7 +333,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetQwordValue(
-@@ -1617,6 +1661,7 @@ typedef DWORD
+@@ -1617,6 +1661,7 @@
      _In_ ULONGLONG qwDefaultValue
      );
  
@@ -342,7 +341,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetBinaryValue(
-@@ -1640,6 +1685,7 @@ typedef DWORD
+@@ -1640,6 +1685,7 @@
      _Inout_ LPDWORD pcbOutValueSize
      );
  
@@ -350,7 +349,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetSzValue(
-@@ -1657,6 +1703,7 @@ typedef DWORD
+@@ -1657,6 +1703,7 @@
      _Inout_opt_ LPWSTR *ppszOutString
      );
  
@@ -358,7 +357,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetExpandSzValue(
-@@ -1674,6 +1721,7 @@ typedef DWORD
+@@ -1674,6 +1721,7 @@
      _Inout_opt_ LPWSTR *ppszOutString
      );
  
@@ -366,7 +365,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetMultiSzValue(
-@@ -1695,6 +1743,7 @@ typedef DWORD
+@@ -1695,6 +1743,7 @@
      _Inout_opt_ LPDWORD pcbOutValueSize
      );
  
@@ -374,7 +373,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetDwordValue(
-@@ -1712,6 +1761,7 @@ typedef DWORD
+@@ -1712,6 +1761,7 @@
      IN OUT LPDWORD pdwOutValue
      );
  
@@ -382,7 +381,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetQwordValue(
-@@ -1729,6 +1779,7 @@ typedef DWORD
+@@ -1729,6 +1779,7 @@
      _Inout_opt_ PULONGLONG pqwOutValue
      );
  
@@ -390,7 +389,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetValueEx(
-@@ -1740,6 +1791,7 @@ ResUtilSetValueEx(
+@@ -1740,6 +1791,7 @@
      _In_ DWORD flags
      );
  
@@ -398,7 +397,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetBinaryProperty(
-@@ -1763,6 +1815,7 @@ typedef DWORD
+@@ -1763,6 +1815,7 @@
      _Inout_ LPDWORD pcbPropertyListSize
      );
  
@@ -406,7 +405,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetSzProperty(
-@@ -1782,6 +1835,7 @@ typedef DWORD
+@@ -1782,6 +1835,7 @@
      _Inout_ LPDWORD pcbPropertyListSize
      );
  
@@ -414,7 +413,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetMultiSzProperty(
-@@ -1805,6 +1859,7 @@ typedef DWORD
+@@ -1805,6 +1859,7 @@
      _Inout_ LPDWORD pcbPropertyListSize
      );
  
@@ -422,7 +421,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetDwordProperty(
-@@ -1828,6 +1883,7 @@ typedef DWORD
+@@ -1828,6 +1883,7 @@
      OUT LPDWORD pcbPropertyListSize
      );
  
@@ -430,7 +429,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetLongProperty(
-@@ -1851,6 +1907,7 @@ typedef DWORD
+@@ -1851,6 +1907,7 @@
      OUT LPDWORD pcbPropertyListSize
      );
  
@@ -438,7 +437,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetFileTimeProperty(
-@@ -1874,6 +1931,8 @@ typedef DWORD
+@@ -1874,6 +1931,8 @@
      OUT LPDWORD pcbPropertyListSize
      );
  
@@ -447,7 +446,7 @@ index 0c6cddc5..cf93a6ac 100644
  LPVOID
  WINAPI
  ResUtilGetEnvironmentWithNetName(
-@@ -1885,6 +1944,7 @@ typedef LPVOID
+@@ -1885,6 +1944,7 @@
      _In_ HRESOURCE hResource
      );
  
@@ -455,7 +454,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFreeEnvironment(
-@@ -1896,6 +1956,8 @@ typedef DWORD
+@@ -1896,6 +1956,8 @@
      IN LPVOID lpEnvironment
      );
  
@@ -464,7 +463,7 @@ index 0c6cddc5..cf93a6ac 100644
  LPWSTR
  WINAPI
  ResUtilExpandEnvironmentStrings(
-@@ -1907,6 +1969,7 @@ typedef LPWSTR
+@@ -1907,6 +1969,7 @@
      IN LPCWSTR pszSrc
      );
  
@@ -472,7 +471,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetResourceServiceEnvironment(
-@@ -1924,6 +1987,7 @@ typedef DWORD
+@@ -1924,6 +1987,7 @@
      IN RESOURCE_HANDLE hResourceHandle
      );
  
@@ -480,7 +479,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilRemoveResourceServiceEnvironment(
-@@ -1939,6 +2003,7 @@ typedef DWORD
+@@ -1939,6 +2003,7 @@
      IN  RESOURCE_HANDLE     hResourceHandle
      );
  
@@ -488,7 +487,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetResourceServiceStartParameters(
-@@ -1958,6 +2023,7 @@ typedef DWORD
+@@ -1958,6 +2023,7 @@
      IN RESOURCE_HANDLE hResourceHandle
      );
  
@@ -496,7 +495,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindSzProperty(
-@@ -1975,6 +2041,7 @@ typedef DWORD
+@@ -1975,6 +2041,7 @@
      _Outptr_opt_ LPWSTR *pszPropertyValue
      );
  
@@ -504,7 +503,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindExpandSzProperty(
-@@ -1992,6 +2059,7 @@ typedef DWORD
+@@ -1992,6 +2059,7 @@
      _Outptr_opt_ LPWSTR *pszPropertyValue
      );
  
@@ -512,7 +511,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindExpandedSzProperty(
-@@ -2009,6 +2077,7 @@ typedef DWORD
+@@ -2009,6 +2077,7 @@
      _Outptr_opt_ LPWSTR *pszPropertyValue
      );
  
@@ -520,7 +519,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindDwordProperty(
-@@ -2026,6 +2095,7 @@ typedef DWORD
+@@ -2026,6 +2095,7 @@
      _Out_ LPDWORD pdwPropertyValue
      );
  
@@ -528,7 +527,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindBinaryProperty(
-@@ -2045,6 +2115,7 @@ typedef DWORD
+@@ -2045,6 +2115,7 @@
      _Out_opt_ LPDWORD pcbPropertyValueSize
      );
  
@@ -536,7 +535,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindMultiSzProperty(
-@@ -2064,6 +2135,7 @@ typedef DWORD
+@@ -2064,6 +2135,7 @@
      _Out_ LPDWORD pcbPropertyValueSize
      );
  
@@ -544,7 +543,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindLongProperty(
-@@ -2081,6 +2153,7 @@ typedef DWORD
+@@ -2081,6 +2153,7 @@
      _Out_ LPLONG plPropertyValue
      );
  
@@ -552,7 +551,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindULargeIntegerProperty(
-@@ -2098,6 +2171,7 @@ typedef DWORD
+@@ -2098,6 +2171,7 @@
      _Out_ ULONGLONG *plPropertyValue
      );
  
@@ -560,7 +559,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilFindFileTimeProperty(
-@@ -2130,6 +2204,7 @@ typedef DWORD (WINAPI *PWORKER_START_ROUTINE)(
+@@ -2130,6 +2204,7 @@
      LPVOID lpThreadParameter
      );
  
@@ -568,7 +567,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusWorkerCreate(
-@@ -2145,6 +2220,7 @@ typedef DWORD
+@@ -2145,6 +2220,7 @@
      IN PVOID lpParameter
      );
  
@@ -576,7 +575,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ClusWorkerCheckTerminate(
-@@ -2167,6 +2243,7 @@ typedef VOID
+@@ -2167,6 +2243,7 @@
      _In_ PCLUS_WORKER lpWorker
      );
  
@@ -584,7 +583,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusWorkerTerminateEx(
-@@ -2175,6 +2252,7 @@ ClusWorkerTerminateEx(
+@@ -2175,6 +2252,7 @@
      _In_ BOOL WaitOnly
      );
  
@@ -592,7 +591,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  ClusWorkersTerminate(
      _Inout_updates_(ClusWorkersCount) PCLUS_WORKER * ClusWorkers,
-@@ -2191,6 +2269,7 @@ typedef   DWORD (*LPGROUP_CALLBACK_EX)( HCLUSTER, HGROUP, HGROUP , PVOID );
+@@ -2191,6 +2269,7 @@
  typedef   DWORD (*LPNODE_CALLBACK)( HCLUSTER, HNODE, CLUSTER_NODE_STATE, PVOID );
  
  
@@ -600,7 +599,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ResUtilResourcesEqual(
-@@ -2206,6 +2285,7 @@ typedef BOOL
+@@ -2206,6 +2285,7 @@
      );
  
  
@@ -608,7 +607,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ResUtilResourceTypesEqual(
-@@ -2220,6 +2300,7 @@ typedef BOOL
+@@ -2220,6 +2300,7 @@
      IN HRESOURCE    hResource
      );
  
@@ -616,7 +615,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ResUtilIsResourceClassEqual(
-@@ -2233,6 +2314,7 @@ typedef BOOL
+@@ -2233,6 +2314,7 @@
      IN HRESOURCE                    hResource
      );
  
@@ -624,7 +623,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilEnumResources(
-@@ -2250,6 +2332,7 @@ typedef DWORD
+@@ -2250,6 +2332,7 @@
      IN PVOID                pParameter
      );
  
@@ -632,7 +631,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilEnumResourcesEx(
-@@ -2269,6 +2352,8 @@ typedef DWORD
+@@ -2269,6 +2352,8 @@
      IN PVOID                    pParameter
      );
  
@@ -641,7 +640,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceDependency(
-@@ -2282,6 +2367,8 @@ typedef HRESOURCE
+@@ -2282,6 +2367,8 @@
      IN LPCWSTR      lpszResourceType
      );
  
@@ -650,7 +649,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceDependencyByName(
-@@ -2299,6 +2386,8 @@ typedef HRESOURCE
+@@ -2299,6 +2386,8 @@
      IN BOOL     bRecurse
      );
  
@@ -659,7 +658,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceDependencyByClass(
-@@ -2316,6 +2405,8 @@ typedef HRESOURCE
+@@ -2316,6 +2405,8 @@
      IN BOOL                         bRecurse
      );
  
@@ -668,7 +667,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceNameDependency(
-@@ -2329,6 +2420,7 @@ typedef HRESOURCE
+@@ -2329,6 +2420,7 @@
      IN LPCWSTR      lpszResourceType
      );
  
@@ -676,7 +675,7 @@ index 0c6cddc5..cf93a6ac 100644
  _Success_( return == ERROR_SUCCESS )
  DWORD
  WINAPI
-@@ -2355,6 +2447,8 @@ DWORD
+@@ -2355,6 +2447,8 @@
      _Inout_ DWORD *pcchNetwork
      );
  
@@ -685,7 +684,7 @@ index 0c6cddc5..cf93a6ac 100644
  _Success_( return == ERROR_SUCCESS )
  DWORD
  WINAPI
-@@ -2374,6 +2468,7 @@ _Success_( return == ERROR_SUCCESS ) DWORD
+@@ -2374,6 +2468,7 @@
      _Inout_ DWORD *pcchDriveLetter       // IN size of the pszDriveLetter buffer, OUT size of buffer required
      );
  
@@ -693,7 +692,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilTerminateServiceProcessFromResDll(
-@@ -2393,6 +2488,7 @@ typedef DWORD
+@@ -2393,6 +2488,7 @@
      _In_ RESOURCE_HANDLE hResourceHandle
      );
  
@@ -701,7 +700,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetPropertyFormats(
-@@ -2413,6 +2509,7 @@ typedef DWORD
+@@ -2413,6 +2509,7 @@
      );
  
  
@@ -709,7 +708,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetCoreClusterResources(
-@@ -2431,6 +2528,7 @@ typedef DWORD
+@@ -2431,6 +2528,7 @@
      _Out_ HRESOURCE *phClusterQuorumResource
      );
  
@@ -717,7 +716,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetResourceName(
-@@ -2488,6 +2586,8 @@ typedef enum _CLUSTER_ROLE_STATE {
+@@ -2488,6 +2586,8 @@
      ClusterRoleUnclustered
  } CLUSTER_ROLE_STATE;
  
@@ -726,7 +725,7 @@ index 0c6cddc5..cf93a6ac 100644
  _Success_(return >= 0) // != ClusterRoleUnknown
  CLUSTER_ROLE_STATE
  WINAPI
-@@ -2497,6 +2597,7 @@ ResUtilGetClusterRoleState(
+@@ -2497,6 +2597,7 @@
      );
  
  // TODO: should we implement versioning here like ClusApi - maybe overkill for now.
@@ -734,7 +733,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ClusterIsPathOnSharedVolume(
-@@ -2508,6 +2609,8 @@ typedef BOOL
+@@ -2508,6 +2609,8 @@
      _In_ LPCWSTR lpszPathName
      );
  
@@ -743,7 +742,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ClusterGetVolumePathName(
-@@ -2523,6 +2626,8 @@ typedef BOOL
+@@ -2523,6 +2626,8 @@
      _In_   DWORD cchBufferLength
      );
  
@@ -752,7 +751,7 @@ index 0c6cddc5..cf93a6ac 100644
  BOOL
  WINAPI
  ClusterGetVolumeNameForVolumeMountPoint(
-@@ -2538,6 +2643,7 @@ typedef BOOL
+@@ -2538,6 +2643,7 @@
      _In_   DWORD cchBufferLength
      );
  
@@ -760,7 +759,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusterPrepareSharedVolumeForBackup(
-@@ -2557,6 +2663,7 @@ typedef DWORD
+@@ -2557,6 +2663,7 @@
      _Inout_ LPDWORD lpcchVolumeName
      );
  
@@ -768,7 +767,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusterClearBackupStateForSharedVolume(
-@@ -2570,6 +2677,7 @@ typedef DWORD
+@@ -2570,6 +2677,7 @@
  
  // Begin updates to ResUtil functions that accept access level
  #if ( CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8 )
@@ -776,7 +775,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilSetResourceServiceStartParametersEx(
-@@ -2591,6 +2699,7 @@ typedef DWORD
+@@ -2591,6 +2699,7 @@
      IN      RESOURCE_HANDLE     hResourceHandle
      );
  
@@ -784,7 +783,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilEnumResourcesEx2(
-@@ -2612,6 +2721,8 @@ typedef DWORD
+@@ -2612,6 +2721,8 @@
      IN DWORD                    dwDesiredAccess
      );
  
@@ -793,7 +792,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceDependencyEx(
-@@ -2627,6 +2738,8 @@ typedef HRESOURCE
+@@ -2627,6 +2738,8 @@
      IN DWORD        dwDesiredAccess
      );
  
@@ -802,7 +801,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceDependencyByNameEx(
-@@ -2646,6 +2759,8 @@ typedef HRESOURCE
+@@ -2646,6 +2759,8 @@
      IN DWORD    dwDesiredAccess
      );
  
@@ -811,7 +810,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceDependencyByClassEx(
-@@ -2665,6 +2780,8 @@ typedef HRESOURCE
+@@ -2665,6 +2780,8 @@
      IN DWORD                        dwDesiredAccess
      );
  
@@ -820,7 +819,7 @@ index 0c6cddc5..cf93a6ac 100644
  HRESOURCE
  WINAPI
  ResUtilGetResourceNameDependencyEx(
-@@ -2680,6 +2797,7 @@ typedef HRESOURCE
+@@ -2680,6 +2797,7 @@
      IN DWORD        dwDesiredAccess
      );
  
@@ -828,15 +827,20 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ResUtilGetCoreClusterResourcesEx(
-@@ -2702,6 +2820,7 @@ typedef DWORD
+@@ -2701,7 +2819,11 @@
+ #define CLUS_CREATE_CRYPT_CONTAINER_NOT_FOUND       0x0001
  
  typedef struct _HCLUSCRYPTPROVIDER *HCLUSCRYPTPROVIDER;
- 
+-
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCLUSCRYPTPROVIDER HCLUSCRYPTPROVIDER;
++#endif
++
 +_Win32_SupportedOS_Server2012_
  HCLUSCRYPTPROVIDER
  WINAPI
  OpenClusterCryptProvider(
-@@ -2738,6 +2857,7 @@ typedef HCLUSCRYPTPROVIDER
+@@ -2738,6 +2860,7 @@
      _In_ DWORD dwFlags
      );
  
@@ -844,7 +848,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  CloseClusterCryptProvider(
-@@ -2749,6 +2869,7 @@ typedef DWORD
+@@ -2749,6 +2872,7 @@
      _In_ HCLUSCRYPTPROVIDER hClusCryptProvider
      );
  
@@ -852,7 +856,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusterEncrypt(
-@@ -2768,6 +2889,7 @@ typedef DWORD
+@@ -2768,6 +2892,7 @@
      _Out_ PDWORD pcbData
      );
  
@@ -860,7 +864,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  ClusterDecrypt(
-@@ -2787,6 +2909,7 @@ typedef DWORD
+@@ -2787,6 +2912,7 @@
      _Out_ PDWORD pcbCryptOutput
      );
  
@@ -868,7 +872,7 @@ index 0c6cddc5..cf93a6ac 100644
  DWORD
  WINAPI
  FreeClusterCrypt(
-@@ -2848,8 +2971,10 @@ typedef struct _WitnessTagHelper
+@@ -2848,8 +2974,10 @@
      PaxosTagCStruct paxosToValidate;
  }WitnessTagHelper;
  

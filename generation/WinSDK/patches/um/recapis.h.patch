@@ -1,6 +1,49 @@
+diff --git a/um/recapis.h b/um/recapis.h
 --- a/um/recapis.h
 +++ b/um/recapis.h
-@@ -70,49 +70,84 @@
+@@ -24,26 +24,41 @@
+ #ifndef __HRECOALT__
+ #define __HRECOALT__
+ DECLARE_HANDLE(HRECOALT); // definition of a handle for the alternate
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOALT HRECOALT;
++#endif
+ #endif
+ 
+ #ifndef __HRECOCONTEXT__
+ #define __HRECOCONTEXT__
+ DECLARE_HANDLE(HRECOCONTEXT); // definition of a handle for the reco context
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOCONTEXT HRECOCONTEXT;
++#endif
+ #endif
+ 
+ #ifndef __HRECOGNIZER__
+ #define __HRECOGNIZER__
+ DECLARE_HANDLE(HRECOGNIZER); // definition of a handle for the recognizer
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOGNIZER HRECOGNIZER;
++#endif
+ #endif
+ 
+ #ifndef __HRECOLATTICE__
+ #define __HRECOLATTICE__
+ DECLARE_HANDLE(HRECOLATTICE); // definition of a handle for the lattice
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOLATTICE HRECOLATTICE;
++#endif
+ #endif
+ 
+ #ifndef __HRECOWORDLIST__
+ #define __HRECOWORDLIST__
+ DECLARE_HANDLE(HRECOWORDLIST); // definition of a handle for the lattice
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOWORDLIST HRECOWORDLIST;
++#endif
+ #endif
+ 
+ typedef HRESULT (*PfnRecoCallback)(DWORD, LPBYTE, HRECOCONTEXT);
+@@ -70,49 +85,84 @@
  ////////////////////////
  // IRecognizer
  ////////////////////////
@@ -88,7 +131,49 @@
  HRESULT WINAPI MakeWordList(HRECOGNIZER hrec, _NullNull_terminated_ WCHAR *pBuffer, HRECOWORDLIST *phwl);
  
  #ifdef __cplusplus
-@@ -180,44 +215,70 @@
+@@ -134,26 +184,41 @@
+ #ifndef __HRECOALT__
+ #define __HRECOALT__
+     DECLARE_HANDLE(HRECOALT); // definition of a handle for the alternate
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOALT HRECOALT;
++#endif
+ #endif
+ 
+ #ifndef __HRECOCONTEXT__
+ #define __HRECOCONTEXT__
+     DECLARE_HANDLE(HRECOCONTEXT); // definition of a handle for the reco context
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOCONTEXT HRECOCONTEXT;
++#endif
+ #endif
+ 
+ #ifndef __HRECOGNIZER__
+ #define __HRECOGNIZER__
+     DECLARE_HANDLE(HRECOGNIZER); // definition of a handle for the recognizer
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOGNIZER HRECOGNIZER;
++#endif
+ #endif
+ 
+ #ifndef __HRECOLATTICE__
+ #define __HRECOLATTICE__
+     DECLARE_HANDLE(HRECOLATTICE); // definition of a handle for the lattice
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOLATTICE HRECOLATTICE;
++#endif
+ #endif
+ 
+ #ifndef __HRECOWORDLIST__
+ #define __HRECOWORDLIST__
+     DECLARE_HANDLE(HRECOWORDLIST); // definition of a handle for the lattice
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRECOWORDLIST HRECOWORDLIST;
++#endif
+ #endif
+ 
+     typedef HRESULT(*PfnRecoCallback)(DWORD, LPBYTE, HRECOCONTEXT);
+@@ -180,44 +245,70 @@
  ////////////////////////
  // IRecognizer
  ////////////////////////

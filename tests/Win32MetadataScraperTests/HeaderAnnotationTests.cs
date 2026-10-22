@@ -814,7 +814,8 @@ int F();
             Assert.Contains("enum OPTIONS", fixture.ReadAdditionalTypes());
             File.WriteAllText(fixture.Header, "int F();\n");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            Assert.Empty(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<MemberDeclarationSyntax>());
         }
 
         [Fact]
@@ -2496,12 +2497,12 @@ int Conflicting(/* [out] */ unsigned* value);
         internal sealed class NativeFixture : IDisposable
         {
             internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true,
-                string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "")
+                string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "", string directoryRoot = null)
             {
                 string annotations = Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h");
                 if (!File.Exists(annotations))
                     throw new FileNotFoundException("Annotation header not found.", annotations);
-                DirectoryPath = Path.Combine(Path.GetTempPath(), "win32-annotations-" + Guid.NewGuid().ToString("N"));
+                DirectoryPath = Path.Combine(directoryRoot ?? Path.GetTempPath(), "win32-annotations-" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(DirectoryPath);
                 Header = Path.Combine(DirectoryPath, "test.h");
                 string sal = Path.Combine(AppContext.BaseDirectory, "assets", "sal.h");

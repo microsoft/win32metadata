@@ -2,7 +2,15 @@ diff --git a/um/libloaderapi2.h b/um/libloaderapi2.h
 index c8e8e79c..3052cc17 100644
 --- a/um/libloaderapi2.h
 +++ b/um/libloaderapi2.h
-@@ -46,6 +46,8 @@ LoadPackagedLibrary(
+@@ -28,6 +28,7 @@
+ #if (_WIN32_WINNT >= 0x0602)
+ 
++_Win32_RAIIFree_(FreeLibrary, 0)
+ WINBASEAPI
+ _Ret_maybenull_
+ HMODULE
+ WINAPI
+@@ -46,6 +47,8 @@ LoadPackagedLibrary(
  
  #if (_WIN32_WINNT >= 0x0602)
  

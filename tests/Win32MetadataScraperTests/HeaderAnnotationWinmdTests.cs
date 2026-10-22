@@ -325,7 +325,7 @@ void KeepNative(unsigned value);
                 Assert.DoesNotContain("Function like macro definition records are not supported", fixture.Diagnostics);
             Assert.DoesNotContain("Flags", fixture.ReadSource());
             Assert.DoesNotContain("REQUESTED", fixture.ReadSource());
-            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            Assert.Empty(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetCompilationUnitRoot().Members);
             using var image = Emit(fixture, "x64");
             Assert.Empty(FindType(image.Reader, "Apis").GetFields());
         }
@@ -4990,6 +4990,8 @@ enum _Win32_AssociatedConstant_(SecondA) E { A = 1 };
                     string directory = Path.Combine(x86.DirectoryPath, architecture);
                     Directory.CreateDirectory(directory);
                     File.Copy(fixture.Output, Path.Combine(directory, "Bindings.cs"));
+                    File.Copy(Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                        Path.Combine(directory, "Bindings.header-types.cs"));
                 }
             }
             using var image = Emit(x86, "crossarch");
@@ -5293,10 +5295,13 @@ void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", true)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", false)]
         public void LogicalGroupUnionPreservesPrimitiveAliasesFromConstantsScraper(
             string architecture, string target, bool includeGroupImport)
         {
-            using var first = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+            string nativeArchitecture = architecture == "crossarch" ? "x86" : architecture;
+            using var first = new HeaderAnnotationTests.NativeFixture(nativeArchitecture, target, @"
 #define SUCCESS 0L
 #define NOT_SUPPORTED 50UL
 #define LOCAL_ZERO_1 SUCCESS
@@ -5307,7 +5312,7 @@ void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
 #define LOCAL_ALIAS_3 NOT_SUPPORTED
 _Win32_Enum_(ERROR_GROUP, unsigned, SUCCESS, NOT_SUPPORTED);
 ");
-            using var extra = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+            using var extra = new HeaderAnnotationTests.NativeFixture(nativeArchitecture, target, @"
 #define EXTRA 100U
 _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
 ");
@@ -5334,7 +5339,7 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
                 File.ReadAllText(Path.Combine(first.DirectoryPath, "Printing.constants.cs")));
             var originals = Directory.GetFiles(first.DirectoryPath, "*.cs", SearchOption.AllDirectories)
                 .ToDictionary(path => path, File.ReadAllBytes);
-            using var image = Emit(first, architecture);
+            using var image = EmitPrimitiveAliasesWithEvidence(first, extra, architecture, includeGroupImport);
             foreach (var original in originals)
                 Assert.Equal(original.Value, File.ReadAllBytes(original.Key));
             var reader = image.Reader;
@@ -5394,10 +5399,12 @@ _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", true)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", false)]
         public void LogicalGroupScalarAliasesPreserveIntegralStorageAndExpressions(
             string architecture, string target, bool includeGroupImport)
         {
-            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture == "crossarch" ? "x86" : architecture, target, @"
 #define ONE 1ULL
 #define BYTE_MAX 255ULL
 #define SHORT_MAX 32767ULL
@@ -6291,7 +6298,7 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
             bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
             IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
-            Dictionary<string, Dictionary<string, string>> enumAdditions = null)
+            Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd")
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
@@ -6300,7 +6307,7 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                 new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
                 references ?? Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
-            string path = Path.Combine(directory, "Test.winmd");
+            string path = Path.Combine(directory, winmdFileName);
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
                 new Dictionary<string, string>(), reducePointerLevels ?? new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
             Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));

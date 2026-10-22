@@ -21,6 +21,7 @@ using ClangSharp.Interop;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MetadataUtils;
 using Win32MetadataScraper;
 using static ClangSharp.Interop.CXDiagnosticSeverity;
 using static ClangSharp.Interop.CXErrorCode;
@@ -159,6 +160,11 @@ class Program
                 }).ToArray();
             }
             var configOptions = BuildOptionsFlags(settings);
+            string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
+                ? Path.Combine(outputFile, "header-types.cs")
+                : Path.ChangeExtension(outputFile, ".header-types.cs");
+            if (parseHeaderAnnotations && declarationMap == null && File.Exists(additionalTypesPath))
+                File.Delete(additionalTypesPath);
             bool generateAllMacros = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
@@ -269,6 +275,49 @@ class Program
                         generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
                 }
                 string additionalTypes = annotations?.GetAdditionalTypes();
+                if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords))
+                {
+                    var opaqueRecords = new OpaqueRecordProjection(translationUnit,
+                        generatedFiles.Values.Append(additionalTypes), config.RemappedNames);
+                    if (opaqueRecords.IncludedNames.Count != 0)
+                    {
+                        var opaqueOptions = (configOptions
+                            & ~PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords
+                            & ~PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
+                            | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
+                        var opaqueConfig = CreateConfig(settings, ns, outputFile, headerFile,
+                            opaqueOptions, mergedRemaps, allExcludes, opaqueRecords.IncludedNames,
+                            opaqueRecords.TraversalFiles.Concat(config.TraversalNames).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+                        var opaqueStreams = new Dictionary<string, MemoryStream>();
+                        using var opaqueGenerator = new PInvokeGenerator(opaqueConfig, path =>
+                        {
+                            var stream = new MemoryStream();
+                            opaqueStreams[path] = stream;
+                            return stream;
+                        });
+                        opaqueGenerator.GenerateBindings(declarationUnit ?? translationUnit, sourceFile, clangArgs, bindingFlags);
+                        var opaqueDiagnostics = opaqueGenerator.Diagnostics.ToArray();
+                        opaqueGenerator.Close();
+                        bindingDiagnostics = bindingDiagnostics.Concat(opaqueDiagnostics).ToArray();
+                        if (opaqueDiagnostics.Any(diagnostic => diagnostic.Level == DiagnosticLevel.Error))
+                        {
+                            foreach (var diagnostic in bindingDiagnostics)
+                                Console.WriteLine($"    {diagnostic}");
+                            return -1;
+                        }
+                        var opaqueSources = opaqueRecords.SelectRequiredBindings(opaqueStreams.ToDictionary(
+                            pair => pair.Key, pair => NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key)));
+                        foreach (var pair in opaqueSources)
+                        {
+                            string source = annotations != null ? annotations.Rewrite(pair.Value) : pair.Value;
+                            if (!configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
+                                source = new SourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(source))
+                                    .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+                            generatedFiles[pair.Key] = generatedFiles.TryGetValue(pair.Key, out var existing)
+                                ? MergeGeneratedSources(existing, source) : source;
+                        }
+                    }
+                }
                 var associatedConstantSources = new List<string>();
                 if (annotations != null && !generateAllMacros)
                 {
@@ -321,11 +370,9 @@ class Program
                         .NormalizeWhitespace().ToFullString() + Environment.NewLine;
                 }
                 annotations?.ValidateProjection();
-                string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
-                    ? Path.Combine(outputFile, "header-types.cs")
-                    : Path.ChangeExtension(outputFile, ".header-types.cs");
-                if (!string.IsNullOrEmpty(additionalTypes))
-                    generatedFiles[additionalTypesPath] = additionalTypes;
+                if (annotations != null)
+                    generatedFiles[additionalTypesPath] = HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine +
+                        (additionalTypes ?? string.Empty);
 
                 // Write diagnostics
                 foreach (var diag in bindingDiagnostics)
@@ -359,7 +406,7 @@ class Program
                             File.Delete(temporaryPath);
                     }
                 }
-                if (string.IsNullOrEmpty(additionalTypes) && File.Exists(additionalTypesPath))
+                if (annotations == null && File.Exists(additionalTypesPath))
                     File.Delete(additionalTypesPath);
             }
 
@@ -534,6 +581,59 @@ class Program
         foreach (var field in fields)
             if (!field.Modifiers.Any(SyntaxKind.ConstKeyword) || field.Declaration.Variables.Any(variable => variable.Initializer == null))
                 throw new InvalidOperationException("An AssociatedConstant macro must project to a constant field; readonly or pointer bindings cannot suppress the existing constant fallback.");
+    }
+
+    static string MergeGeneratedSources(string first, string second)
+    {
+        var roots = new[] { first, second }.Select(source =>
+            (CompilationUnitSyntax)new BlockNamespaceRewriter().Visit(SyntaxFactory.ParseCompilationUnit(source))).ToArray();
+        return roots[0].WithUsings(SyntaxFactory.List(roots.SelectMany(root => root.Usings)
+                .GroupBy(value => value.ToString()).Select(group => group.First())))
+            .WithMembers(MergeMemberScopes(roots[0].Members, roots[1].Members))
+            .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+    }
+
+    static SyntaxList<MemberDeclarationSyntax> MergeMemberScopes(
+        SyntaxList<MemberDeclarationSyntax> first, SyntaxList<MemberDeclarationSyntax> second)
+    {
+        var members = first.ToList();
+        foreach (var addition in second)
+        {
+            int index = members.FindIndex(existing => (existing, addition) switch
+            {
+                (NamespaceDeclarationSyntax left, NamespaceDeclarationSyntax right) => left.Name.ToString() == right.Name.ToString(),
+                (TypeDeclarationSyntax left, TypeDeclarationSyntax right) => left.Kind() == right.Kind() &&
+                    left.Identifier.ValueText == right.Identifier.ValueText &&
+                    (left.TypeParameterList?.Parameters.Count ?? 0) == (right.TypeParameterList?.Parameters.Count ?? 0),
+                _ => false,
+            });
+            if (index < 0)
+                members.Add(addition);
+            else if (members[index] is NamespaceDeclarationSyntax ns && addition is NamespaceDeclarationSyntax addedNamespace)
+                members[index] = ns.WithUsings(SyntaxFactory.List(ns.Usings.Concat(addedNamespace.Usings)
+                        .GroupBy(value => value.ToString()).Select(group => group.First())))
+                    .WithMembers(MergeMemberScopes(ns.Members, addedNamespace.Members));
+            else if (members[index] is TypeDeclarationSyntax type && addition is TypeDeclarationSyntax addedType)
+                members[index] = type.WithMembers(MergeMemberScopes(type.Members, addedType.Members));
+        }
+        return SyntaxFactory.List(members);
+    }
+
+    sealed class BlockNamespaceRewriter : CSharpSyntaxRewriter
+    {
+        public override SyntaxNode VisitFileScopedNamespaceDeclaration(FileScopedNamespaceDeclarationSyntax node)
+            => SyntaxFactory.NamespaceDeclaration(node.Name).WithExterns(node.Externs).WithUsings(node.Usings)
+                .WithMembers(node.Members).WithTriviaFrom(node);
+    }
+
+    sealed class SourceLocationRemover : CSharpSyntaxRewriter
+    {
+        public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
+        {
+            var retained = SyntaxFactory.SeparatedList(node.Attributes.Where(attribute =>
+                attribute.Name.ToString().Split('.').Last() is not "SourceLocation" and not "SourceLocationAttribute"));
+            return retained.Count == 0 ? null : node.WithAttributes(retained);
+        }
     }
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)

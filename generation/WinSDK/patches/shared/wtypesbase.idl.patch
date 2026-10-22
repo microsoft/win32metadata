@@ -1,6 +1,12 @@
 --- a/shared/wtypesbase.idl
 +++ b/shared/wtypesbase.idl
-@@ -337,6 +337,9 @@
+@@ -260,4 +260,5 @@
+ cpp_quote("typedef _Return_type_success_(return >= 0) LONG HRESULT;")
+ cpp_quote("#endif // __midl")
+ #endif // defined(_STRICT_HRESULT)
++cpp_quote("/* Win32Metadata: type ::HRESULT => NativeTypedef */")
+ cpp_quote("#endif // !_HRESULT_DEFINED")
+@@ -337,6 +338,9 @@
  
  // class context: used to determine what scope and kind of class object to use
  // NOTE: this is a bitwise enum
@@ -10,7 +16,7 @@
  typedef enum tagCLSCTX
  {
      CLSCTX_INPROC_SERVER = 0x01,     // server dll (runs in same process as caller)
-@@ -372,6 +375,10 @@
+@@ -372,6 +376,10 @@
      CLSCTX_DO_NOT_ELEVATE_SERVER = 0x10000000, // do not propagate the caller’s elevated privilege to the server
      CLSCTX_PS_DLL = 0x80000000, // Internal CLSCTX used for loading Proxy/Stub DLLs
   } CLSCTX;
@@ -21,3 +27,8 @@
  
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(CLSCTX);")
  
+@@ -506,3 +514,4 @@
+ typedef boolean BOOLEAN;
++cpp_quote("/* Win32Metadata: type ::BOOLEAN => NativeTypedef */")
+ 
+ cpp_quote("#ifndef _tagBLOB_DEFINED")

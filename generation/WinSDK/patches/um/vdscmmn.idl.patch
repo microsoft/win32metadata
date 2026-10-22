@@ -2,16 +2,18 @@ diff --git a/um/vdscmmn.idl b/um/vdscmmn.idl
 index ba77d985..7eafd12e 100644
 --- a/um/vdscmmn.idl
 +++ b/um/vdscmmn.idl
-@@ -11,6 +11,8 @@
+@@ -11,6 +11,10 @@
  //
  //----------------------------------------------------------------------------
  
 +#include <sal.h>
++cpp_quote("#ifndef __VDSCMMN_NATIVE_DECLARATIONS_DEFINED__")
++cpp_quote("#define __VDSCMMN_NATIVE_DECLARATIONS_DEFINED__")
 +cpp_quote("#include <sal.h>")
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -225,6 +227,7 @@ const ULONG VDS_NF_PACK_ARRIVE              = 1;
+@@ -225,6 +229,7 @@ const ULONG VDS_NF_PACK_ARRIVE              = 1;
  const ULONG VDS_NF_PACK_DEPART              = 2;
          // When a pack is deleted
  const ULONG VDS_NF_PACK_MODIFY              = 3;
@@ -19,7 +21,7 @@ index ba77d985..7eafd12e 100644
          // When a pack is modified(including online, offline)
  
  //
-@@ -250,6 +253,7 @@ const ULONG VDS_NF_DISK_DEPART              = 9;
+@@ -250,6 +255,7 @@ const ULONG VDS_NF_DISK_DEPART              = 9;
          // When a spindle is unplugged, or a RAID controller unbound a LUN
          // that was local to the host.
  const ULONG VDS_NF_DISK_MODIFY              = 10;
@@ -27,7 +29,7 @@ index ba77d985..7eafd12e 100644
          // When something changed in the disk's VDS_DISK_PROP structure.
  
  //
-@@ -304,6 +308,7 @@ const ULONG     VDS_NF_LUN_ARRIVE             = 108;
+@@ -304,6 +310,7 @@ const ULONG     VDS_NF_LUN_ARRIVE             = 108;
  const ULONG     VDS_NF_LUN_DEPART             = 109;
          // When a LUN is deleted.
  const ULONG     VDS_NF_LUN_MODIFY             = 110;
@@ -35,7 +37,7 @@ index ba77d985..7eafd12e 100644
          // When something changed in the LUN's VDS_LUN_PROP structure.
      // TODO: add VDS_NF_LUN_REBUILDING_PROGRESS?
  
-@@ -366,6 +371,7 @@ const ULONG       VDS_NF_FILE_SYSTEM_MODIFY     = 203;
+@@ -366,6 +373,7 @@ const ULONG       VDS_NF_FILE_SYSTEM_MODIFY     = 203;
          // When a volume gets a new label, or file system is extended or shrunk.
          // Note, this does not include change of file system comression flags.
  const ULONG       VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS = 204;
@@ -43,7 +45,7 @@ index ba77d985..7eafd12e 100644
          // When a file system is being formated.
  // NOTE: more file system notifications continue below starting at 206
  
-@@ -395,6 +401,7 @@ const ULONG     VDS_NF_SERVICE_OUT_OF_SYNC      = 301;
+@@ -395,6 +403,7 @@ const ULONG     VDS_NF_SERVICE_OUT_OF_SYNC      = 301;
  const ULONG     VDS_NF_CONTROLLER_MODIFY      = 350;
          // When something changed in controller's properties.
  const ULONG     VDS_NF_CONTROLLER_REMOVED     = 351;
@@ -51,7 +53,7 @@ index ba77d985..7eafd12e 100644
          // When a controller is removed.
  
  //
-@@ -403,6 +410,7 @@ const ULONG     VDS_NF_CONTROLLER_REMOVED     = 351;
+@@ -403,6 +412,7 @@ const ULONG     VDS_NF_CONTROLLER_REMOVED     = 351;
  const ULONG     VDS_NF_PORT_MODIFY            = 352;
          // When something changed in controller port's properties.
  const ULONG     VDS_NF_PORT_REMOVED           = 353;
@@ -59,7 +61,7 @@ index ba77d985..7eafd12e 100644
          // When a controller port is removed.
  
  
-@@ -410,12 +418,14 @@ const ULONG     VDS_NF_PORT_REMOVED           = 353;
+@@ -410,12 +420,14 @@ const ULONG     VDS_NF_PORT_REMOVED           = 353;
  // drive notifications
  //
  const ULONG     VDS_NF_DRIVE_REMOVED           = 354;
@@ -74,7 +76,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_PACK_NOTIFICATION
  {
      ULONG               ulEvent;
-@@ -423,6 +433,7 @@ typedef struct _VDS_PACK_NOTIFICATION
+@@ -423,6 +435,7 @@ typedef struct _VDS_PACK_NOTIFICATION
  
  } VDS_PACK_NOTIFICATION;
  
@@ -82,7 +84,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_DISK_NOTIFICATION
  {
      ULONG               ulEvent;  // arrival, departure, modified.
-@@ -467,6 +478,7 @@ typedef struct _VDS_DRIVE_LETTER_NOTIFICATION
+@@ -467,6 +480,7 @@ typedef struct _VDS_DRIVE_LETTER_NOTIFICATION
  
  } VDS_DRIVE_LETTER_NOTIFICATION;
  
@@ -90,7 +92,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_FILE_SYSTEM_NOTIFICATION
  {
      ULONG               ulEvent;  // created, format progress
-@@ -489,6 +501,7 @@ typedef struct _VDS_SUB_SYSTEM_NOTIFICATION
+@@ -489,6 +503,7 @@ typedef struct _VDS_SUB_SYSTEM_NOTIFICATION
  
  } VDS_SUB_SYSTEM_NOTIFICATION;
  
@@ -98,7 +100,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_CONTROLLER_NOTIFICATION
  {
      ULONG               ulEvent;
-@@ -496,6 +509,7 @@ typedef struct _VDS_CONTROLLER_NOTIFICATION
+@@ -496,6 +511,7 @@ typedef struct _VDS_CONTROLLER_NOTIFICATION
  
  } VDS_CONTROLLER_NOTIFICATION;
  
@@ -106,7 +108,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_DRIVE_NOTIFICATION
  {
      ULONG               ulEvent;
-@@ -503,6 +517,7 @@ typedef struct _VDS_DRIVE_NOTIFICATION
+@@ -503,6 +519,7 @@ typedef struct _VDS_DRIVE_NOTIFICATION
  
  } VDS_DRIVE_NOTIFICATION;
  
@@ -114,7 +116,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_LUN_NOTIFICATION
  {
      ULONG               ulEvent;
-@@ -510,6 +525,7 @@ typedef struct _VDS_LUN_NOTIFICATION
+@@ -510,6 +527,7 @@ typedef struct _VDS_LUN_NOTIFICATION
  
  } VDS_LUN_NOTIFICATION;
  
@@ -122,7 +124,7 @@ index ba77d985..7eafd12e 100644
  typedef struct _VDS_PORT_NOTIFICATION
  {
      ULONG               ulEvent;
-@@ -1177,6 +1193,7 @@ import "vdslun.idl";
+@@ -1177,6 +1195,7 @@ import "vdslun.idl";
  //   spindles. But different types of objects do not mix in a collection.
  // Implemented by: enum object
  //
@@ -130,7 +132,7 @@ index ba77d985..7eafd12e 100644
  [
      object,
      uuid(118610b7-8d94-4030-b5b8-500889788e4e),
-@@ -1213,6 +1230,7 @@ interface IEnumVdsObject : IUnknown
+@@ -1213,6 +1232,7 @@ interface IEnumVdsObject : IUnknown
  // IVdsAsync:
  // Implemented by: async object
  //
@@ -138,7 +140,7 @@ index ba77d985..7eafd12e 100644
  [
      object,
      uuid(d5d23b6d-5a55-4492-9889-397a3c2d2dbc),
-@@ -1257,6 +1275,7 @@ interface IVdsAsync : IUnknown
+@@ -1257,6 +1277,7 @@ interface IVdsAsync : IUnknown
  // Implemented by: callback object
  // Implemented where: application, common layer
  //
@@ -146,7 +148,7 @@ index ba77d985..7eafd12e 100644
  [
      object,
      uuid(8326cd1d-cf59-4936-b786-5efc08798e25),
-@@ -1279,6 +1298,7 @@ interface IVdsAdviseSink : IUnknown
+@@ -1279,6 +1300,7 @@ interface IVdsAdviseSink : IUnknown
  // Implemented where: providers, common layer
  // Accessed by: applications
  //
@@ -154,7 +156,7 @@ index ba77d985..7eafd12e 100644
  [
      object,
      uuid(10c5e575-7984-4e81-a56b-431f5f92ae42),
-@@ -1299,6 +1319,7 @@ interface IVdsProvider : IUnknown
+@@ -1299,6 +1321,7 @@ interface IVdsProvider : IUnknown
  // Implemented where: providers, common layer
  // Accessed by: applications
  //
@@ -162,3 +164,8 @@ index ba77d985..7eafd12e 100644
  [
      object,
      uuid(1732be13-e8f9-4a03-bfbc-5f616aa66ce1),
+@@ -1320,3 +1343,4 @@
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
++cpp_quote("#endif /* __VDSCMMN_NATIVE_DECLARATIONS_DEFINED__ */")

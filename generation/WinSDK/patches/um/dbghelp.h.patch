@@ -19,6 +19,15 @@ index 09bb15cb..066f6257 100644
  #define NONGAMESPARTITIONS WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WER
  
  #pragma region Desktop Family or WER Package
+@@ -99,7 +109,7 @@ typedef struct _LOADED_IMAGE {
+     PIMAGE_SECTION_HEADER LastRvaSection;
+     ULONG                 NumberOfSections;
+     PIMAGE_SECTION_HEADER Sections;
+-    ULONG                 Characteristics;
++    _Win32_AssociatedEnum_(IMAGE_FILE_CHARACTERISTICS2) ULONG                 Characteristics;
+     BOOLEAN               fSystemImage;
+     BOOLEAN               fDOSImage;
+     BOOLEAN               fReadOnly;
 @@ -140,7 +150,7 @@ typedef BOOL
  
  HANDLE

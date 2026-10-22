@@ -29,6 +29,7 @@ namespace Win32MetadataScraper
         private readonly IReadOnlyList<string> traversalNames;
         private readonly ISet<string> excludedNames;
         private readonly bool excludeFunctionsWithBody;
+        private readonly int nativePointerSize;
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
         private readonly List<(CXCursor Declaration, NamedDecl Target, NativeLocation Location)> enumAssociations = new();
@@ -80,6 +81,8 @@ namespace Win32MetadataScraper
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
             this.excludeFunctionsWithBody = excludeFunctionsWithBody;
+            using (var target = translationUnit.Handle.TargetInfo)
+                nativePointerSize = target.PointerWidth / 8;
             Walk(translationUnit.TranslationUnitDecl);
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
@@ -125,7 +128,13 @@ namespace Win32MetadataScraper
                     continue;
                 bool primaryRecord = alias.UnderlyingType.CanonicalType is RecordType record && Remap(record.Decl.Name) == Remap(alias.Name);
                 if ((GetFunctionType(alias.UnderlyingType) == null || alias is TypeAliasDecl) && !primaryRecord)
-                    remaps.TryAdd(alias.Name, alias.Name);
+                {
+                    if (facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef") &&
+                        remaps.TryGetValue(alias.Name, out string mapped) && IsStorageTypeName(mapped))
+                        remaps[alias.Name] = alias.Name;
+                    else
+                        remaps.TryAdd(alias.Name, alias.Name);
+                }
             }
         }
 
@@ -247,6 +256,8 @@ namespace Win32MetadataScraper
                 facts.LogicalEnumMembers = MergeEnumMembers(facts.LogicalEnumMembers, members, location);
                 facts.IsFlagsEnum = annotation.Name == "FlagsEnum";
             }
+            else if (annotation.Name == "NativeTypedef" && arguments.Length != 0)
+                throw Error(location, "Annotation 'NativeTypedef' expects no value or compiler arguments.");
             else if (arguments.Length != 0 || annotation.Name is "RAIIFree" or "ImportLibrary" or "AssociatedEnum")
                 throw Error(location, $"'{annotation.Name}' requires compiler-parsed annotation arguments; include win32metadata_annotations.h.");
             return annotation;
@@ -425,10 +436,10 @@ namespace Win32MetadataScraper
                     continue;
                 }
                 // ABI storage remaps do not rename annotated native wrappers.
-                if (GetNativeIntegerStorage(name) != null ||
-                    SyntaxFactory.ParseTypeName(name) is PredefinedTypeSyntax or PointerTypeSyntax)
+                if (IsStorageTypeName(name))
                     name = alias.Name;
-                string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true);
+                string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true,
+                    preserveNativeShape: facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef"));
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
                 declaration = declaration.AddAttributeLists(GetAttributes(facts).ToArray());
@@ -648,7 +659,7 @@ namespace Win32MetadataScraper
             }
         }
 
-        private static void AddAnnotation(DeclarationFacts facts, HeaderAnnotation annotation, NativeLocation location)
+        private void AddAnnotation(DeclarationFacts facts, HeaderAnnotation annotation, NativeLocation location)
         {
             ValidateTarget(facts, annotation, location);
             if (annotation.Name != "AssociatedConstant")
@@ -656,7 +667,7 @@ namespace Win32MetadataScraper
                 var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
                 if (existing != null)
                 {
-                    if (annotation.Name is "Enum" or "FlagsEnum")
+                    if (annotation.Name is "Enum" or "FlagsEnum" or "NativeTypedef")
                         return;
                     if (annotation.Name != "SupportedOSPlatform")
                         throw Error(location, $"Duplicate '{annotation.Name}' annotation.");
@@ -721,6 +732,8 @@ namespace Win32MetadataScraper
             }
             if (supportedOS != null)
                 owner.Annotations.Add(supportedOS);
+            if (owner.LogicalEnumMembers != null && owner.Annotations.Any(annotation => annotation.Name == "NativeTypedef"))
+                throw Error(owner.Location, "'NativeTypedef' is not valid on a logical enum group.");
             foreach (var facts in group)
             {
                 facts.AnnotationOwner = owner;
@@ -730,8 +743,10 @@ namespace Win32MetadataScraper
                 facts.IsFlagsEnum = owner.IsFlagsEnum;
                 facts.LogicalEnumMembers = owner.LogicalEnumMembers;
                 facts.MidlDirection = directions.SingleOrDefault();
-                // A traversed forward typedef can inherit group facts from an untraversed redeclaration.
-                if (facts.Declaration is TypedefNameDecl && facts.LogicalEnumMembers != null && !annotatedTypedefs.Contains(facts))
+                // Traversed typedefs can inherit group or explicit identity facts from another redeclaration.
+                if (facts.Declaration is TypedefNameDecl &&
+                    (facts.LogicalEnumMembers != null || facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef")) &&
+                    !annotatedTypedefs.Contains(facts))
                     annotatedTypedefs.Add(facts);
             }
         }
@@ -764,7 +779,7 @@ namespace Win32MetadataScraper
             return (declaration.Handle.CanonicalCursor, -1);
         }
 
-        private static void ValidateTarget(DeclarationFacts facts, HeaderAnnotation annotation, NativeLocation location)
+        private void ValidateTarget(DeclarationFacts facts, HeaderAnnotation annotation, NativeLocation location)
         {
             var declaration = facts.Declaration;
             bool function = declaration is FunctionDecl;
@@ -780,6 +795,7 @@ namespace Win32MetadataScraper
                 "AssociatedEnum" => function || parameter || field,
                 "AssociatedConstant" => declaration is EnumDecl || facts.LogicalEnumMembers != null,
                 "Enum" or "FlagsEnum" => typedef,
+                "NativeTypedef" => declaration is TypedefDecl && facts.LogicalEnumMembers == null,
                 "AlsoUsableFor" => typedef && facts.LogicalEnumMembers == null,
                 "RAIIFree" => function || parameter,
                 "Retained" or "ContainsInteriorPointers" or "RetVal" or "Reserved" or "Optional" or "ComOutPtr" => parameter,
@@ -787,6 +803,8 @@ namespace Win32MetadataScraper
             };
             if (!valid)
                 throw Error(location, $"'{annotation.Name}' is not valid on {declaration.Handle.DeclKind} '{declaration.Name}'.");
+            if (annotation.Name == "NativeTypedef")
+                ValidateNativeTypedefType(((TypedefDecl)declaration).UnderlyingType, location);
             if (annotation.Name == "ComOutPtr")
             {
                 var type = ((ParmVarDecl)declaration).Type.CanonicalType;
@@ -846,6 +864,36 @@ namespace Win32MetadataScraper
             => declaration is VarDecl variable and not ParmVarDecl &&
                 variable.Type.Handle.IsConstQualified && variable.SemanticParentCursor is not FunctionDecl;
 
+        private void ValidateNativeTypedefType(ClangSharp.Type type, NativeLocation location, bool pointee = false)
+        {
+            type = type.CanonicalType;
+            if (type is PointerType pointer)
+            {
+                long pointerSize = pointer.Handle.SizeOf;
+                if (pointerSize != nativePointerSize)
+                    throw Error(location, $"'NativeTypedef' requires ordinary target-width data pointers at every pointer level; " +
+                        $"pointer '{type.AsString}' has native size {pointerSize} bytes instead of the target's {nativePointerSize} bytes. " +
+                        "Non-default-width pointer storage is not supported.");
+                ValidateNativeTypedefType(pointer.PointeeType, location, pointee: true);
+                return;
+            }
+            if (pointee && (type.Kind == CXTypeKind.CXType_Void || type is RecordType or EnumType))
+                return;
+            int size = type.Kind switch
+            {
+                CXTypeKind.CXType_Bool or CXTypeKind.CXType_Char_S or CXTypeKind.CXType_SChar or
+                    CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar => 1,
+                CXTypeKind.CXType_Short or CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar => 2,
+                CXTypeKind.CXType_Int or CXTypeKind.CXType_UInt or CXTypeKind.CXType_Long or
+                    CXTypeKind.CXType_ULong or CXTypeKind.CXType_Float => 4,
+                CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong or CXTypeKind.CXType_Double => 8,
+                _ => 0,
+            };
+            if (size == 0 || type.Handle.SizeOf != size)
+                throw Error(location, $"'NativeTypedef' requires a supported native scalar or data-pointer alias; " +
+                    $"unsupported underlying type '{type.AsString}'. Record values (including incomplete records), enums, callbacks, arrays, and references are not supported.");
+        }
+
         private void TransferRecordTypedefFacts()
         {
             foreach (var facts in annotatedTypedefs)
@@ -900,6 +948,7 @@ namespace Win32MetadataScraper
                         continue;
                     case "SetLastError":
                     case "ImportLibrary":
+                    case "NativeTypedef":
                     case "Enum":
                     case "FlagsEnum":
                         continue;
@@ -1092,7 +1141,8 @@ namespace Win32MetadataScraper
             return template;
         }
 
-        private string GetSignatureType(ClangSharp.Type type, NativeLocation location, bool underlyingStorage = false)
+        private string GetSignatureType(ClangSharp.Type type, NativeLocation location, bool underlyingStorage = false,
+            bool preserveNativeShape = false)
         {
             type = RemapDiscovery.UnwrapType(type);
             if (type is TypedefType typedef)
@@ -1106,14 +1156,31 @@ namespace Win32MetadataScraper
                     // Nominal remaps name wrappers, not their underlying storage.
                     string storage = GetNativeIntegerStorage(mapped);
                     if (storage != null)
-                        return storage;
+                    {
+                        var native = alias.UnderlyingType.CanonicalType;
+                        if (!preserveNativeShape || native is not PointerType)
+                        {
+                            bool unsigned = native.Kind is CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
+                                CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or CXTypeKind.CXType_UInt or
+                                CXTypeKind.CXType_ULong or CXTypeKind.CXType_ULongLong;
+                            if (preserveNativeShape && (!IsEnumStorage(native.Kind) ||
+                                native.Handle.SizeOf != nativePointerSize ||
+                                storage != (unsigned ? "global::System.UIntPtr" : "global::System.IntPtr")))
+                                throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, signedness, and pointer depth.");
+                            return storage;
+                        }
+                    }
                 }
-                return GetSignatureType(alias.UnderlyingType, location, underlyingStorage);
+                return GetSignatureType(alias.UnderlyingType, location, underlyingStorage, preserveNativeShape);
             }
             if (type is PointerType pointer)
-                return GetSignatureType(pointer.PointeeType, location, underlyingStorage) + "*";
+                return GetSignatureType(pointer.PointeeType, location, underlyingStorage, preserveNativeShape) + "*";
             return GetManagedType(type, location);
         }
+
+        private static bool IsStorageTypeName(string name)
+            => GetNativeIntegerStorage(name) != null ||
+                SyntaxFactory.ParseTypeName(name) is PredefinedTypeSyntax or PointerTypeSyntax;
 
         private static string GetNativeIntegerStorage(string mapped)
         {
@@ -1310,10 +1377,7 @@ namespace Win32MetadataScraper
                 }
                 var args = location.ArgumentList.Arguments;
                 var fileToken = ((LiteralExpressionSyntax)args[0].Expression).Token;
-                // ClangSharp 21 inconsistently escapes the final Windows path separator.
-                string file = OperatingSystem.IsWindows()
-                    ? fileToken.Text[1..^1].Replace(@"\\", @"\", StringComparison.Ordinal)
-                    : fileToken.ValueText;
+                string file = DeclarationSourceMap.ReadFilePath(fileToken);
                 uint line = uint.Parse(args[1].Expression.ToString(), CultureInfo.InvariantCulture);
                 uint column = uint.Parse(args[2].Expression.ToString(), CultureInfo.InvariantCulture);
                 owner.projectionLocations.TryGetValue((file, line, column), out var candidates);

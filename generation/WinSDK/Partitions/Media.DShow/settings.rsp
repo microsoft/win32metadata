@@ -1,6 +1,7 @@
 --config
 parse-win32-annotations
 --traverse
+<IncludeRoot>/um/dshow.h
 <IncludeRoot>/um/audevcod.h
 <IncludeRoot>/um/evcode.h
 <IncludeRoot>/um/dvdevcod.h

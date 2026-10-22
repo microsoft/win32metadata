@@ -1,8 +1,38 @@
 diff --git a/um/msacm.h b/um/msacm.h
-index 2f68eb6c..ef7a3fc3 100644
 --- a/um/msacm.h
 +++ b/um/msacm.h
-@@ -210,6 +210,7 @@ typedef UINT                MMRESULT;
+@@ -136,18 +136,30 @@
+ //  that can accept two or more ACM handle types.
+ //
+ DECLARE_HANDLE(HACMDRIVERID);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HACMDRIVERID HACMDRIVERID;
++#endif
+ typedef HACMDRIVERID       *PHACMDRIVERID;
+ typedef HACMDRIVERID   FAR *LPHACMDRIVERID;
+ 
+ DECLARE_HANDLE(HACMDRIVER);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HACMDRIVER HACMDRIVER;
++#endif
+ typedef HACMDRIVER         *PHACMDRIVER;
+ typedef HACMDRIVER     FAR *LPHACMDRIVER;
+ 
+ DECLARE_HANDLE(HACMSTREAM);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HACMSTREAM HACMSTREAM;
++#endif
+ typedef HACMSTREAM         *PHACMSTREAM;
+ typedef HACMSTREAM     FAR *LPHACMSTREAM;
+ 
+ DECLARE_HANDLE(HACMOBJ);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HACMOBJ HACMOBJ;
++#endif
+ typedef HACMOBJ            *PHACMOBJ;
+ typedef HACMOBJ        FAR *LPHACMOBJ;
+ 
+@@ -210,6 +222,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -10,7 +40,7 @@ index 2f68eb6c..ef7a3fc3 100644
  DWORD ACMAPI acmGetVersion
  (
      void
-@@ -223,6 +224,7 @@ DWORD ACMAPI acmGetVersion
+@@ -223,6 +236,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -18,7 +48,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmMetrics
  (
      HACMOBJ                 hao,
-@@ -272,6 +274,7 @@ typedef BOOL (CALLBACK *ACMDRIVERENUMCB)
+@@ -272,6 +286,7 @@
      DWORD                   fdwSupport
  );
  
@@ -26,7 +56,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverEnum
  (
      ACMDRIVERENUMCB         fnCallback,
-@@ -289,6 +292,7 @@ MMRESULT ACMAPI acmDriverEnum
+@@ -289,6 +304,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -34,7 +64,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverID
  (
      HACMOBJ                 hao,
-@@ -305,6 +309,7 @@ MMRESULT ACMAPI acmDriverID
+@@ -305,6 +321,7 @@
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
  #ifdef _WIN32
@@ -42,7 +72,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverAddA
  (
      LPHACMDRIVERID          phadid,
-@@ -314,6 +319,7 @@ MMRESULT ACMAPI acmDriverAddA
+@@ -314,6 +331,7 @@
      DWORD                   fdwAdd
  );
  
@@ -50,7 +80,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverAddW
  (
      LPHACMDRIVERID          phadid,
-@@ -360,6 +366,7 @@ typedef ACMDRIVERPROC FAR *LPACMDRIVERPROC;
+@@ -360,6 +378,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -58,7 +88,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverRemove
  (
      HACMDRIVERID            hadid,
-@@ -374,6 +381,7 @@ MMRESULT ACMAPI acmDriverRemove
+@@ -374,6 +393,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -66,7 +96,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverOpen
  (
      LPHACMDRIVER            phad, 
-@@ -389,6 +397,7 @@ MMRESULT ACMAPI acmDriverOpen
+@@ -389,6 +409,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -74,7 +104,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverClose
  (
      HACMDRIVER              had,
-@@ -403,6 +412,7 @@ MMRESULT ACMAPI acmDriverClose
+@@ -403,6 +424,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -82,7 +112,7 @@ index 2f68eb6c..ef7a3fc3 100644
  LRESULT ACMAPI acmDriverMessage
  (
      HACMDRIVER              had,
-@@ -432,6 +442,7 @@ LRESULT ACMAPI acmDriverMessage
+@@ -432,6 +454,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -90,7 +120,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverPriority
  (
      HACMDRIVERID            hadid,
-@@ -625,6 +636,7 @@ typedef struct tACMDRIVERDETAILS
+@@ -625,6 +648,7 @@
  
  
  #ifdef _WIN32
@@ -98,7 +128,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverDetailsA
  (
      HACMDRIVERID            hadid,
-@@ -632,6 +644,7 @@ MMRESULT ACMAPI acmDriverDetailsA
+@@ -632,6 +656,7 @@
      DWORD                   fdwDetails
  );
  
@@ -106,7 +136,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmDriverDetailsW
  (
      HACMDRIVERID            hadid,
-@@ -722,6 +735,7 @@ typedef struct tACMFORMATTAGDETAILS
+@@ -722,6 +747,7 @@
  #endif
  
  #ifdef _WIN32
@@ -114,7 +144,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatTagDetailsA
  (
      HACMDRIVER              had,
-@@ -729,6 +743,7 @@ MMRESULT ACMAPI acmFormatTagDetailsA
+@@ -729,6 +755,7 @@
      DWORD                   fdwDetails
  );
  
@@ -122,7 +152,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatTagDetailsW
  (
      HACMDRIVER              had,
-@@ -773,6 +788,7 @@ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBA)
+@@ -773,6 +800,7 @@
      DWORD                   fdwSupport
  );
  
@@ -130,7 +160,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatTagEnumA
  (
      HACMDRIVER              had,
-@@ -789,6 +805,7 @@ typedef BOOL (CALLBACK *ACMFORMATTAGENUMCBW)
+@@ -789,6 +817,7 @@
      DWORD                   fdwSupport
  );
  
@@ -138,7 +168,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatTagEnumW
  (
      HACMDRIVER              had,
-@@ -893,6 +910,7 @@ typedef struct tACMFORMATDETAILS
+@@ -893,6 +922,7 @@
  
  
  #ifdef _WIN32
@@ -146,7 +176,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatDetailsA
  (
      HACMDRIVER              had,
-@@ -900,6 +918,7 @@ MMRESULT ACMAPI acmFormatDetailsA
+@@ -900,6 +930,7 @@
      DWORD                   fdwDetails
  );
  
@@ -154,7 +184,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatDetailsW
  (
      HACMDRIVER              had,
-@@ -942,6 +961,7 @@ typedef BOOL (CALLBACK *ACMFORMATENUMCBA)
+@@ -942,6 +973,7 @@
      DWORD                   fdwSupport
  );
  
@@ -162,7 +192,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatEnumA
  (
      HACMDRIVER              had,
-@@ -959,6 +979,7 @@ typedef BOOL (CALLBACK *ACMFORMATENUMCBW)
+@@ -959,6 +991,7 @@
      DWORD                   fdwSupport
  );
  
@@ -170,7 +200,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatEnumW
  (
      HACMDRIVER              had,
-@@ -1013,6 +1034,7 @@ MMRESULT ACMAPI acmFormatEnum
+@@ -1013,6 +1046,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -178,7 +208,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatSuggest
  (
      HACMDRIVER          had,
-@@ -1212,11 +1234,13 @@ typedef struct tACMFORMATCHOOSE
+@@ -1212,11 +1246,13 @@
  #define ACMFORMATCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
  
  #ifdef _WIN32
@@ -192,7 +222,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFormatChooseW
  (
      LPACMFORMATCHOOSEW      pafmtc
-@@ -1302,6 +1326,7 @@ typedef struct tACMFILTERTAGDETAILS
+@@ -1302,6 +1338,7 @@
  #endif
  
  #ifdef _WIN32
@@ -200,7 +230,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterTagDetailsA
  (
      HACMDRIVER              had,
-@@ -1309,6 +1334,7 @@ MMRESULT ACMAPI acmFilterTagDetailsA
+@@ -1309,6 +1346,7 @@
      DWORD                   fdwDetails
  );
  
@@ -208,7 +238,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterTagDetailsW
  (
      HACMDRIVER              had,
-@@ -1353,6 +1379,7 @@ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBA)
+@@ -1353,6 +1391,7 @@
      DWORD                   fdwSupport
  );
  
@@ -216,7 +246,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterTagEnumA
  (
      HACMDRIVER              had,
-@@ -1370,6 +1397,7 @@ typedef BOOL (CALLBACK *ACMFILTERTAGENUMCBW)
+@@ -1370,6 +1409,7 @@
      DWORD                   fdwSupport
  );
  
@@ -224,7 +254,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterTagEnumW
  (
      HACMDRIVER              had,
-@@ -1473,6 +1501,7 @@ typedef struct tACMFILTERDETAILS
+@@ -1473,6 +1513,7 @@
  #endif
  
  #ifdef _WIN32
@@ -232,7 +262,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterDetailsA
  (
      HACMDRIVER              had,
-@@ -1480,6 +1509,7 @@ MMRESULT ACMAPI acmFilterDetailsA
+@@ -1480,6 +1521,7 @@
      DWORD                   fdwDetails
  );
  
@@ -240,7 +270,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterDetailsW
  (
      HACMDRIVER              had,
-@@ -1521,6 +1551,7 @@ typedef BOOL (CALLBACK *ACMFILTERENUMCBA)
+@@ -1521,6 +1563,7 @@
      DWORD                   fdwSupport
  );
  
@@ -248,7 +278,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterEnumA
  (
      HACMDRIVER              had,
-@@ -1538,6 +1569,7 @@ typedef BOOL (CALLBACK *ACMFILTERENUMCBW)
+@@ -1538,6 +1581,7 @@
      DWORD                   fdwSupport
  );
  
@@ -256,7 +286,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterEnumW
  (
      HACMDRIVER              had,
-@@ -1736,11 +1768,13 @@ typedef struct tACMFILTERCHOOSE
+@@ -1736,11 +1780,13 @@
  #define ACMFILTERCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
  
  #ifdef _WIN32
@@ -270,7 +300,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmFilterChooseW
  (
      LPACMFILTERCHOOSEW      pafltrc
-@@ -1806,6 +1840,7 @@ typedef struct tACMSTREAMHEADER
+@@ -1806,6 +1852,7 @@
  #define ACMSTREAMHEADER_STATUSF_INQUEUE     0x00100000L
  
  
@@ -278,7 +308,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamOpen
  (
      LPHACMSTREAM            phas,       // pointer to stream handle
-@@ -1829,6 +1864,7 @@ MMRESULT ACMAPI acmStreamOpen
+@@ -1829,6 +1876,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -286,7 +316,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamClose
  (
      HACMSTREAM              has,
-@@ -1843,6 +1879,7 @@ MMRESULT ACMAPI acmStreamClose
+@@ -1843,6 +1891,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -294,7 +324,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamSize
  (
      HACMSTREAM              has,
-@@ -1863,6 +1900,7 @@ MMRESULT ACMAPI acmStreamSize
+@@ -1863,6 +1912,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -302,7 +332,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamReset
  (
      HACMSTREAM              has,
-@@ -1877,6 +1915,7 @@ MMRESULT ACMAPI acmStreamReset
+@@ -1877,6 +1927,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -310,7 +340,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamMessage
  (
      HACMSTREAM              has,
-@@ -1894,6 +1933,7 @@ MMRESULT ACMAPI acmStreamMessage
+@@ -1894,6 +1945,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -318,7 +348,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamConvert
  (
      HACMSTREAM              has, 
-@@ -1912,6 +1952,7 @@ MMRESULT ACMAPI acmStreamConvert
+@@ -1912,6 +1964,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -326,7 +356,7 @@ index 2f68eb6c..ef7a3fc3 100644
  MMRESULT ACMAPI acmStreamPrepareHeader
  (
      HACMSTREAM          has,
-@@ -1927,6 +1968,7 @@ MMRESULT ACMAPI acmStreamPrepareHeader
+@@ -1927,6 +1980,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  

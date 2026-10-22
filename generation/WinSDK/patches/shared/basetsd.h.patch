@@ -1,0 +1,31 @@
+diff --git a/shared/basetsd.h b/shared/basetsd.h
+--- a/shared/basetsd.h
++++ b/shared/basetsd.h
+@@ -167,7 +167,13 @@
+ #define ADDRESS_TAG_BIT 0x40000000000UI64
+ 
+ typedef __int64 SHANDLE_PTR;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef SHANDLE_PTR SHANDLE_PTR;
++#endif
+ typedef unsigned __int64 HANDLE_PTR;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HANDLE_PTR HANDLE_PTR;
++#endif
+ typedef unsigned int UHALF_PTR, *PUHALF_PTR;
+ typedef int HALF_PTR, *PHALF_PTR;
+ 
+@@ -347,7 +353,13 @@
+ typedef unsigned short UHALF_PTR, *PUHALF_PTR;
+ typedef short HALF_PTR, *PHALF_PTR;
+ typedef _W64 long SHANDLE_PTR;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef SHANDLE_PTR SHANDLE_PTR;
++#endif
+ typedef _W64 unsigned long HANDLE_PTR;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HANDLE_PTR HANDLE_PTR;
++#endif
+ 
+ #define HandleToULong( h ) ((ULONG)(ULONG_PTR)(h) )
+ #define HandleToLong( h )  ((LONG)(LONG_PTR) (h) )

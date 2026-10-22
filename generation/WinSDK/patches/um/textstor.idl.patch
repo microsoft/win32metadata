@@ -16,7 +16,37 @@ index e2e7f949..756f28cd 100644
  
  // bit values for TS_STATUS's dwDynamicFlags field
  const DWORD TS_SD_READONLY              = 0x001;   // if set, document is read only; writes will fail
-@@ -173,6 +176,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -76,14 +79,29 @@
+ const DWORD TS_SD_MASKALL = (TS_SD_READONLY | TS_SD_LOADING);
+ 
+ // SetText flags
+ const DWORD TS_ST_CORRECTION      = 0x1; // the replacement is a transform of existing content (correction), not new content
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef _WIN32META_ANNOTATION_(")
++cpp_quote("    \"FlagsEnum(TS_ST_NONE, TS_ST_CORRECTION)\",")
++cpp_quote("    0, TS_ST_CORRECTION) DWORD TEXT_STORE_TEXT_CHANGE_FLAGS;")
++cpp_quote("#endif")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreACP::SetText::dwFlags => AssociatedEnum(TEXT_STORE_TEXT_CHANGE_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreACP2::SetText::dwFlags => AssociatedEnum(TEXT_STORE_TEXT_CHANGE_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreAnchor::SetText::dwFlags => AssociatedEnum(TEXT_STORE_TEXT_CHANGE_FLAGS) */")
+ 
+ // InsertEmbedded flags
+ const DWORD TS_IE_CORRECTION      = 0x1;
+ const DWORD TS_IE_COMPOSITION     = 0x2;
+ 
+ // OnTextChange flags
+ const DWORD TS_TC_CORRECTION      = 0x1;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef _WIN32META_ANNOTATION_(")
++cpp_quote("    \"FlagsEnum(TS_TC_NONE, TS_TC_CORRECTION)\",")
++cpp_quote("    0, TS_TC_CORRECTION) DWORD TEXT_STORE_CHANGE_FLAGS;")
++cpp_quote("#endif")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreACPSink::OnTextChange::dwFlags => AssociatedEnum(TEXT_STORE_CHANGE_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::ITextStoreAnchorSink::OnTextChange::dwFlags => AssociatedEnum(TEXT_STORE_CHANGE_FLAGS) */")
+ 
+ // InsertTextAtSelection flags
+ const DWORD TS_IAS_NOQUERY        = 0x1;
+@@ -173,6 +191,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITextStoreACP
  //
@@ -24,7 +54,7 @@ index e2e7f949..756f28cd 100644
  [
    object,
    uuid(28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d),
-@@ -311,6 +315,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -311,6 +330,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITextStoreACP2
  //
@@ -32,7 +62,7 @@ index e2e7f949..756f28cd 100644
  [
    object,
    uuid(f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f),
-@@ -440,6 +445,8 @@ interface ITextStoreACP2 : IUnknown
+@@ -440,6 +460,8 @@ interface ITextStoreACP2 : IUnknown
  //
  // ITextStoreACPSink
  //
@@ -41,7 +71,7 @@ index e2e7f949..756f28cd 100644
  [
    object,
    uuid(22d44c94-a419-4542-a272-ae26093ececf),
-@@ -471,6 +478,7 @@ interface ITextStoreACPSink : IUnknown
+@@ -471,6 +493,7 @@ interface ITextStoreACPSink : IUnknown
  //
  // IAnchor
  //
@@ -49,7 +79,7 @@ index e2e7f949..756f28cd 100644
  [
    object,
    uuid(0feb7e34-5a60-4356-8ef7-abdec2ff7cf8),
-@@ -519,6 +527,10 @@ interface IAnchor : IUnknown
+@@ -519,6 +542,10 @@ interface IAnchor : IUnknown
      HRESULT Clone([out] IAnchor **ppaClone);
  };
  
@@ -60,7 +90,7 @@ index e2e7f949..756f28cd 100644
  [
    object,
    uuid(9b2077b0-5f18-4dec-bee9-3cc722f5dfe0),
-@@ -651,6 +663,8 @@ interface ITextStoreAnchor : IUnknown
+@@ -651,6 +678,8 @@ interface ITextStoreAnchor : IUnknown
  //
  // ITextStoreAnchorSink
  //

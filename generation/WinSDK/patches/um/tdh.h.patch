@@ -1,8 +1,7 @@
 diff --git a/um/tdh.h b/um/tdh.h
-index 8842ce31..db7655c2 100644
 --- a/um/tdh.h
 +++ b/um/tdh.h
-@@ -18,6 +18,7 @@ Abstract:
+@@ -18,6 +18,7 @@
  
  #ifndef __TDH_H__
  #define __TDH_H__
@@ -10,7 +9,17 @@ index 8842ce31..db7655c2 100644
  #include <winapifamily.h>
  
  #pragma region Desktop Family or OneCore Family
-@@ -720,6 +721,7 @@ typedef struct _PAYLOAD_FILTER_PREDICATE {
+@@ -43,6 +44,9 @@
+ #define TDHAPI TDHSTATUS __stdcall
+ 
+ typedef HANDLE TDH_HANDLE, *PTDH_HANDLE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef TDH_HANDLE TDH_HANDLE;
++#endif
+ 
+ typedef struct _EVENT_MAP_ENTRY {
+     ULONG OutputOffset;
+@@ -720,6 +724,7 @@
  
  #if (WINVER >= _WIN32_WINNT_WINBLUE)
  
@@ -18,7 +27,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhCreatePayloadFilter(
-@@ -731,12 +733,14 @@ TdhCreatePayloadFilter(
+@@ -731,12 +736,14 @@
      _Outptr_result_maybenull_ PVOID* PayloadFilter
      );
  
@@ -33,7 +42,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhAggregatePayloadFilters(
-@@ -746,6 +750,7 @@ TdhAggregatePayloadFilters(
+@@ -746,6 +753,7 @@
      _Out_ PEVENT_FILTER_DESCRIPTOR EventFilterDescriptor
      );
  
@@ -41,7 +50,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhCleanupPayloadEventFilterDescriptor(
-@@ -857,6 +862,7 @@ typedef struct _TDH_CONTEXT {
+@@ -857,6 +865,7 @@
  } TDH_CONTEXT;
  typedef TDH_CONTEXT *PTDH_CONTEXT;
  
@@ -49,7 +58,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetEventInformation(
-@@ -867,6 +873,7 @@ TdhGetEventInformation(
+@@ -867,6 +876,7 @@
      _Inout_ PULONG BufferSize
      );
  
@@ -57,7 +66,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetEventMapInformation(
-@@ -876,6 +883,7 @@ TdhGetEventMapInformation(
+@@ -876,6 +886,7 @@
      _Inout_ ULONG* pBufferSize
      );
  
@@ -65,7 +74,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetPropertySize(
-@@ -887,6 +895,7 @@ TdhGetPropertySize(
+@@ -887,6 +898,7 @@
      _Out_ ULONG* pPropertySize
      );
  
@@ -73,7 +82,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetProperty(
-@@ -899,6 +908,7 @@ TdhGetProperty(
+@@ -899,6 +911,7 @@
      _Out_writes_bytes_(BufferSize) PBYTE pBuffer
      );
  
@@ -81,7 +90,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhEnumerateProviders(
-@@ -929,6 +939,7 @@ TdhEnumerateProvidersForDecodingSource(
+@@ -929,6 +942,7 @@
      );
  #endif
  
@@ -89,7 +98,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhQueryProviderFieldInformation(
-@@ -939,6 +950,7 @@ TdhQueryProviderFieldInformation(
+@@ -939,6 +953,7 @@
      _Inout_ ULONG* pBufferSize
      );
  
@@ -97,7 +106,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhEnumerateProviderFieldInformation(
-@@ -955,6 +967,7 @@ TdhEnumerateProviderFieldInformation(
+@@ -955,6 +970,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
@@ -105,7 +114,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhEnumerateProviderFilters(
-@@ -973,6 +986,7 @@ TdhEnumerateProviderFilters(
+@@ -973,6 +989,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
@@ -113,7 +122,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhLoadManifest(
-@@ -990,6 +1004,7 @@ TdhLoadManifestFromMemory(
+@@ -990,6 +1007,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
@@ -121,7 +130,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhUnloadManifest(
-@@ -1007,6 +1022,7 @@ TdhUnloadManifestFromMemory(
+@@ -1007,6 +1025,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
@@ -129,7 +138,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhFormatProperty(
-@@ -1031,14 +1047,16 @@ TdhFormatProperty(
+@@ -1031,14 +1050,16 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -147,7 +156,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhSetDecodingParameter(
-@@ -1048,6 +1066,7 @@ TdhSetDecodingParameter(
+@@ -1048,6 +1069,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -155,7 +164,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetDecodingParameter(
-@@ -1057,6 +1076,7 @@ TdhGetDecodingParameter(
+@@ -1057,6 +1079,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -163,7 +172,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetWppProperty(
-@@ -1069,6 +1089,7 @@ TdhGetWppProperty(
+@@ -1069,6 +1092,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -171,7 +180,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhGetWppMessage(
-@@ -1080,6 +1101,7 @@ TdhGetWppMessage(
+@@ -1080,6 +1104,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -179,7 +188,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhCloseDecodingHandle(
-@@ -1088,6 +1110,7 @@ TdhCloseDecodingHandle(
+@@ -1088,6 +1113,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -187,7 +196,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhLoadManifestFromBinary(
-@@ -1102,6 +1125,7 @@ TdhLoadManifestFromBinary(
+@@ -1102,6 +1128,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if (WINVER >= _WIN32_WINNT_WINBLUE)
@@ -195,7 +204,7 @@ index 8842ce31..db7655c2 100644
  TDHSTATUS
  __stdcall
  TdhEnumerateManifestProviderEvents(
-@@ -1112,6 +1136,7 @@ TdhEnumerateManifestProviderEvents(
+@@ -1112,6 +1139,7 @@
  #endif
  
  #if (WINVER >= _WIN32_WINNT_WINBLUE)

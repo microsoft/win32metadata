@@ -1,8 +1,29 @@
 diff --git a/um/ddeml.h b/um/ddeml.h
-index a6276573..8c4352f3 100644
 --- a/um/ddeml.h
 +++ b/um/ddeml.h
-@@ -70,9 +70,9 @@ typedef struct tagCONVINFO {
+@@ -33,9 +33,21 @@
+ /******** public types ********/
+ 
+ DECLARE_HANDLE(HCONVLIST);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCONVLIST HCONVLIST;
++#endif
+ DECLARE_HANDLE(HCONV);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCONV HCONV;
++#endif
+ DECLARE_HANDLE(HSZ);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HSZ HSZ;
++#endif
+ DECLARE_HANDLE(HDDEDATA);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDDEDATA HDDEDATA;
++#endif
+ #define EXPENTRY        CALLBACK
+ 
+ /* the following structure is for use with XTYP_WILDCONNECT processing. */
+@@ -70,9 +82,9 @@
      HSZ     hszTopic;      /* Topic name for conversation  */
      HSZ     hszItem;       /* transaction item name or NULL if quiescent  */
      UINT    wFmt;          /* transaction format or NULL if quiescent  */
@@ -15,7 +36,7 @@ index a6276573..8c4352f3 100644
      UINT    wLastError;    /* last transaction error.  */
      HCONVLIST hConvList;   /* parent hConvList if this conversation is in a list */
      CONVCONTEXT ConvCtxt;  /* conversation context */
-@@ -100,6 +100,27 @@ typedef struct tagCONVINFO {
+@@ -100,6 +112,27 @@
  #define     XST_ADVDATASENT      15
  #define     XST_ADVDATAACKRCVD   16
  
@@ -43,10 +64,11 @@ index a6276573..8c4352f3 100644
  /* used in LOWORD(dwData1) of XTYP_ADVREQ callbacks... */
  #define     CADV_LATEACK         0xFFFF
  
-@@ -115,6 +136,19 @@ typedef struct tagCONVINFO {
+@@ -114,6 +147,19 @@
+ #define     ST_INLIST               0x0040
  #define     ST_BLOCKNEXT            0x0080
  #define     ST_ISSELF               0x0100
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(CONVINFO_STATUS, unsigned long,
 +    ST_ADVISE,
@@ -59,11 +81,10 @@ index a6276573..8c4352f3 100644
 +    ST_ISSELF,
 +    ST_TERMINATED);
 +#endif
-+
+ 
  /* DDE constants for wStatus field */
  
- #define DDE_FACK                0x8000
-@@ -218,19 +252,21 @@ typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
+@@ -218,19 +264,21 @@
  
  /* DLL registration functions */
  
@@ -87,7 +108,7 @@ index a6276573..8c4352f3 100644
      _Reserved_ DWORD ulRes);
  #ifdef UNICODE
  #define DdeInitialize  DdeInitializeW
-@@ -269,6 +305,7 @@ DdeInitializeW(
+@@ -269,6 +317,7 @@
  #define     APPCLASS_STANDARD            0x00000000L
  #define     APPCLASS_MASK                0x0000000FL
  
@@ -95,7 +116,7 @@ index a6276573..8c4352f3 100644
  BOOL
  WINAPI
  DdeUninitialize(
-@@ -277,6 +314,7 @@ DdeUninitialize(
+@@ -277,6 +326,7 @@
  /*
   * conversation enumeration functions
   */
@@ -103,7 +124,7 @@ index a6276573..8c4352f3 100644
  HCONVLIST
  WINAPI
  DdeConnectList(
-@@ -286,11 +324,13 @@ DdeConnectList(
+@@ -286,11 +336,13 @@
      _In_ HCONVLIST hConvList,
      _In_opt_ PCONVCONTEXT pCC);
  
@@ -117,7 +138,7 @@ index a6276573..8c4352f3 100644
  BOOL
  WINAPI
  DdeDisconnectList(
-@@ -299,6 +339,7 @@ DdeDisconnectList(
+@@ -299,6 +351,7 @@
  /*
   * conversation control functions
   */
@@ -125,7 +146,7 @@ index a6276573..8c4352f3 100644
  HCONV
  WINAPI
  DdeConnect(
-@@ -307,16 +348,19 @@ DdeConnect(
+@@ -307,16 +360,19 @@
      _In_ HSZ hszTopic,
      _In_opt_ PCONVCONTEXT pCC);
  
@@ -145,7 +166,7 @@ index a6276573..8c4352f3 100644
  UINT
  WINAPI
  DdeQueryConvInfo(
-@@ -324,6 +368,7 @@ DdeQueryConvInfo(
+@@ -324,6 +380,7 @@
      _In_ DWORD idTransaction,
      _Inout_ PCONVINFO pConvInfo);
  
@@ -153,7 +174,7 @@ index a6276573..8c4352f3 100644
  BOOL
  WINAPI
  DdeSetUserHandle(
-@@ -331,6 +376,7 @@ DdeSetUserHandle(
+@@ -331,6 +388,7 @@
      _In_ DWORD id,
      _In_ DWORD_PTR hUser);
  
@@ -161,7 +182,7 @@ index a6276573..8c4352f3 100644
  BOOL
  WINAPI
  DdeAbandonTransaction(
-@@ -342,6 +388,7 @@ DdeAbandonTransaction(
+@@ -342,6 +400,7 @@
  /*
   * app server interface functions
   */
@@ -169,7 +190,7 @@ index a6276573..8c4352f3 100644
  BOOL
  WINAPI
  DdePostAdvise(
-@@ -349,13 +396,16 @@ DdePostAdvise(
+@@ -349,13 +408,16 @@
      _In_ HSZ hszTopic,
      _In_ HSZ hszItem);
  
@@ -180,14 +201,15 @@ index a6276573..8c4352f3 100644
      _In_ DWORD idInst,
      _In_ HCONV hConv,
 -    _In_ UINT wCmd);
+-
 +    _In_ _Win32_AssociatedEnum_(DDE_ENABLE_CALLBACK_CMD) UINT wCmd);
- 
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  BOOL
  WINAPI
  DdeImpersonateClient(
-@@ -367,22 +417,40 @@ DdeImpersonateClient(
+@@ -367,22 +429,40 @@
  #define EC_DISABLE              ST_BLOCKED
  #define EC_QUERYWAITING         2
  
@@ -229,7 +251,7 @@ index a6276573..8c4352f3 100644
  HDDEDATA
  WINAPI
  DdeClientTransaction(
-@@ -391,7 +459,7 @@ DdeClientTransaction(
+@@ -391,7 +471,7 @@
      _In_ HCONV hConv,
      _In_opt_ HSZ hszItem,
      _In_ UINT wFmt,
@@ -238,7 +260,7 @@ index a6276573..8c4352f3 100644
      _In_ DWORD dwTimeout,
      _Out_opt_ LPDWORD pdwResult);
  
-@@ -400,6 +468,7 @@ DdeClientTransaction(
+@@ -400,6 +480,7 @@
   *data transfer functions
   */
  
@@ -246,7 +268,7 @@ index a6276573..8c4352f3 100644
  HDDEDATA
  WINAPI
  DdeCreateDataHandle(
-@@ -411,6 +480,7 @@ DdeCreateDataHandle(
+@@ -411,6 +492,7 @@
      _In_ UINT wFmt,
      _In_ UINT afCmd);
  
@@ -254,7 +276,7 @@ index a6276573..8c4352f3 100644
  HDDEDATA
  WINAPI
  DdeAddData(
-@@ -419,6 +489,7 @@ DdeAddData(
+@@ -419,6 +501,7 @@
      _In_ DWORD cb,
      _In_ DWORD cbOff);
  
@@ -262,7 +284,7 @@ index a6276573..8c4352f3 100644
  DWORD
  WINAPI
  DdeGetData(
-@@ -427,17 +498,20 @@ DdeGetData(
+@@ -427,17 +510,20 @@
      _In_ DWORD cbMax,
      _In_ DWORD cbOff);
  
@@ -283,7 +305,7 @@ index a6276573..8c4352f3 100644
  BOOL
  WINAPI
  DdeFreeDataHandle(
-@@ -446,6 +520,7 @@ DdeFreeDataHandle(
+@@ -446,6 +532,7 @@
  #define     HDATA_APPOWNED          0x0001
  
  
@@ -291,7 +313,7 @@ index a6276573..8c4352f3 100644
  UINT
  WINAPI
  DdeGetLastError(
-@@ -477,12 +552,14 @@ DdeGetLastError(
+@@ -477,12 +564,14 @@
  
  #define     DMLERR_LAST                        0x4011
  
@@ -306,7 +328,7 @@ index a6276573..8c4352f3 100644
  HSZ
  WINAPI
  DdeCreateStringHandleW(
-@@ -495,6 +572,7 @@ DdeCreateStringHandleW(
+@@ -495,6 +584,7 @@
  #define DdeCreateStringHandle  DdeCreateStringHandleA
  #endif // !UNICODE
  
@@ -314,7 +336,7 @@ index a6276573..8c4352f3 100644
  DWORD
  WINAPI
  DdeQueryStringA(
-@@ -503,6 +581,7 @@ DdeQueryStringA(
+@@ -503,6 +593,7 @@
      _Out_writes_opt_(cchMax) LPSTR psz,
      _In_ DWORD cchMax,
      _In_ int iCodePage);
@@ -322,7 +344,7 @@ index a6276573..8c4352f3 100644
  DWORD
  WINAPI
  DdeQueryStringW(
-@@ -517,18 +596,21 @@ DdeQueryStringW(
+@@ -517,18 +608,21 @@
  #define DdeQueryString  DdeQueryStringA
  #endif // !UNICODE
  
@@ -344,7 +366,7 @@ index a6276573..8c4352f3 100644
  int
  WINAPI
  DdeCmpStringHandles(
-@@ -643,6 +725,25 @@ typedef struct tagMONCONVSTRUCT {
+@@ -643,6 +737,25 @@
  #define     APPCLASS_MONITOR        0x00000001L
  #define     XTYP_MONITOR            (0x00F0 | XCLASS_NOTIFICATION | XTYPF_NOBLOCK)
  
@@ -370,7 +392,7 @@ index a6276573..8c4352f3 100644
  /*
   * Callback filter flags for use with MONITOR apps - 0 implies no monitor
   * callbacks.
-@@ -655,6 +756,33 @@ typedef struct tagMONCONVSTRUCT {
+@@ -655,6 +768,33 @@
  #define     MF_LINKS                     0x20000000
  #define     MF_CONV                      0x40000000
  

@@ -1,7 +1,17 @@
 diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
 --- a/um/ncryptprotect.h
 +++ b/um/ncryptprotect.h
-@@ -175,6 +175,7 @@
+@@ -130,6 +130,9 @@
+ // NCRYPT_DESCRIPTOR_HANDLE
+ // 
+ DECLARE_HANDLE( NCRYPT_DESCRIPTOR_HANDLE );
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef NCRYPT_DESCRIPTOR_HANDLE NCRYPT_DESCRIPTOR_HANDLE;
++#endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+@@ -175,6 +178,7 @@
  
  
  ****************************************************************************/
@@ -9,7 +19,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptRegisterProtectionDescriptorName(
-@@ -218,6 +219,7 @@
+@@ -218,6 +222,7 @@
      
  
  ****************************************************************************/
@@ -17,7 +27,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptQueryProtectionDescriptorName(
-@@ -261,6 +263,7 @@
+@@ -261,6 +266,7 @@
      NTE_BAD_TYPE
  
  ****************************************************************************/
@@ -25,7 +35,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptCreateProtectionDescriptor(
-@@ -294,6 +297,7 @@
+@@ -294,6 +300,7 @@
      NTE_INVALID_HANDLE
  
  ****************************************************************************/
@@ -33,7 +43,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptCloseProtectionDescriptor(
-@@ -355,6 +359,7 @@
+@@ -355,6 +362,7 @@
  //
  #define NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING   0x00000001  // LPWSTR
  
@@ -41,7 +51,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  _Success_(return == 0)
  _When_(dwInfoType == NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING,
         _At_((LPWSTR*)ppvInfo, _Outptr_result_nullonfailure_))
-@@ -420,6 +425,7 @@
+@@ -420,6 +428,7 @@
      NTE_BAD_TYPE
  
  ****************************************************************************/
@@ -49,7 +59,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptProtectSecret(
-@@ -498,11 +504,12 @@
+@@ -498,11 +507,12 @@
      no actual decryption will occur.
  
  ****************************************************************************/
@@ -63,7 +73,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
      _In_reads_bytes_(cbProtectedBlob)
                      const BYTE                          *pbProtectedBlob,
                      ULONG                               cbProtectedBlob,
-@@ -515,6 +522,10 @@
+@@ -515,6 +525,10 @@
  
  #define NCRYPT_UNPROTECT_NO_DECRYPT                     0x00000001
  
@@ -74,7 +84,17 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  /*--------------------------------------------------------------------------
  //
  //                               STREAM API
-@@ -627,6 +638,7 @@
+@@ -522,6 +536,9 @@
+ ---------------------------------------------------------------------------*/
+ 
+ DECLARE_HANDLE( NCRYPT_STREAM_HANDLE );
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef NCRYPT_STREAM_HANDLE NCRYPT_STREAM_HANDLE;
++#endif
+ 
+ 
+ /****************************************************************************
+@@ -627,6 +644,7 @@
      NTE_BAD_TYPE
  
  ****************************************************************************/
@@ -82,7 +102,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptStreamOpenToProtect(
-@@ -672,6 +684,7 @@
+@@ -672,6 +690,7 @@
      NTE_DECRYPTION_FAILURE
  
  ****************************************************************************/
@@ -90,7 +110,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptStreamOpenToUnprotect(
-@@ -837,6 +850,7 @@
+@@ -837,6 +856,7 @@
      NTE_DECRYPTION_FAILURE
  
  ****************************************************************************/
@@ -98,7 +118,7 @@ diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
  SECURITY_STATUS
  WINAPI
  NCryptStreamUpdate(
-@@ -863,6 +877,7 @@
+@@ -863,6 +883,7 @@
      NTE_INVALID_HANDLE
  
  ****************************************************************************/

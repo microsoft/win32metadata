@@ -465,7 +465,16 @@
  
  //
  // Flags for CM_Register_Device_Driver
-@@ -1388,6 +1591,7 @@
+@@ -1255,5 +1458,8 @@
+ //
+ 
+ DECLARE_HANDLE(HCMNOTIFICATION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCMNOTIFICATION HCMNOTIFICATION;
++#endif
+ typedef HCMNOTIFICATION *PHCMNOTIFICATION;
+ 
+@@ -1388,6 +1594,7 @@
  // Function prototypes
  //--------------------------------------------------------------
  
@@ -473,7 +482,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1398,6 +1602,7 @@
+@@ -1398,6 +1605,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -481,7 +490,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1418,6 +1623,7 @@
+@@ -1418,6 +1626,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -489,7 +498,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1437,6 +1643,7 @@
+@@ -1437,6 +1646,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -497,7 +506,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1465,6 +1672,7 @@
+@@ -1465,6 +1675,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -505,7 +514,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1477,6 +1685,7 @@
+@@ -1477,6 +1688,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -513,7 +522,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1498,6 +1707,7 @@
+@@ -1498,6 +1710,7 @@
      _Out_ PHMACHINE     phMachine
      );
  
@@ -521,7 +530,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1583,6 +1793,7 @@
+@@ -1583,6 +1796,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -529,7 +538,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1612,6 +1823,7 @@
+@@ -1612,6 +1826,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -537,7 +546,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1684,6 +1896,7 @@
+@@ -1684,6 +1899,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -545,7 +554,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1711,6 +1924,7 @@
+@@ -1711,6 +1927,7 @@
  
  #define CM_Disable_DevInst_Ex    CM_Disable_DevNode_Ex
  
@@ -553,7 +562,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1733,6 +1947,7 @@
+@@ -1733,6 +1950,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -561,7 +570,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1760,22 +1975,24 @@
+@@ -1760,22 +1978,24 @@
  
  #define CM_Enable_DevInst_Ex     CM_Enable_DevNode_Ex
  
@@ -590,7 +599,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -1789,6 +2006,7 @@
+@@ -1789,6 +2009,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -598,7 +607,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1810,6 +2028,7 @@
+@@ -1810,6 +2031,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -606,7 +615,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1853,6 +2072,7 @@
+@@ -1853,6 +2075,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -614,7 +623,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1861,6 +2081,7 @@
+@@ -1861,6 +2084,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -622,7 +631,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1870,6 +2091,7 @@
+@@ -1870,6 +2094,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -630,7 +639,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1885,6 +2107,7 @@
+@@ -1885,6 +2110,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -638,7 +647,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1894,6 +2117,7 @@
+@@ -1894,6 +2120,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -646,7 +655,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1904,6 +2128,7 @@
+@@ -1904,6 +2131,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -654,7 +663,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1917,6 +2142,7 @@
+@@ -1917,6 +2145,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -662,7 +671,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1932,6 +2158,7 @@
+@@ -1932,6 +2161,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -670,7 +679,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2048,6 +2275,7 @@
+@@ -2048,6 +2278,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -678,7 +687,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2063,6 +2291,7 @@
+@@ -2063,6 +2294,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -686,7 +695,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2089,6 +2318,7 @@
+@@ -2089,6 +2321,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -694,7 +703,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2122,6 +2352,7 @@
+@@ -2122,6 +2355,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -702,7 +711,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2145,6 +2376,7 @@
+@@ -2145,6 +2379,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -710,7 +719,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2155,6 +2387,7 @@
+@@ -2155,6 +2390,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -718,7 +727,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2188,6 +2421,7 @@
+@@ -2188,6 +2424,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -726,7 +735,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2211,6 +2445,7 @@
+@@ -2211,6 +2448,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -734,7 +743,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2220,6 +2455,7 @@
+@@ -2220,6 +2458,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -742,7 +751,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2251,6 +2487,7 @@
+@@ -2251,6 +2490,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -750,7 +759,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2273,6 +2510,7 @@
+@@ -2273,6 +2513,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -758,7 +767,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2288,6 +2526,7 @@
+@@ -2288,6 +2529,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -766,7 +775,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2306,6 +2545,7 @@
+@@ -2306,6 +2548,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -774,7 +783,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2328,6 +2568,7 @@
+@@ -2328,6 +2571,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -782,7 +791,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2351,6 +2592,7 @@
+@@ -2351,6 +2595,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -790,7 +799,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2367,6 +2609,7 @@
+@@ -2367,6 +2612,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -798,7 +807,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2398,6 +2641,7 @@
+@@ -2398,6 +2644,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -806,7 +815,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2536,12 +2780,13 @@
+@@ -2536,12 +2783,13 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -822,7 +831,7 @@
      _In_  DEVINST       dnDevInst,
      _In_  ULONG         ulFlags
      );
-@@ -2554,12 +2799,13 @@
+@@ -2554,12 +2802,13 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -838,7 +847,7 @@
      _In_  DEVINST       dnDevInst,
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
-@@ -2567,22 +2813,24 @@
+@@ -2567,22 +2816,24 @@
  
  #define CM_Get_DevInst_Status_Ex CM_Get_DevNode_Status_Ex
  
@@ -867,7 +876,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -2657,6 +2905,7 @@
+@@ -2657,6 +2908,7 @@
  #define CM_Get_Hardware_Profile_Info_Ex   CM_Get_Hardware_Profile_Info_ExA
  #endif // UNICODE
  
@@ -875,7 +884,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2667,6 +2916,7 @@
+@@ -2667,6 +2919,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -883,7 +892,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2677,6 +2927,7 @@
+@@ -2677,6 +2930,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -891,7 +900,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2688,6 +2939,7 @@
+@@ -2688,6 +2942,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -899,7 +908,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2718,6 +2970,7 @@
+@@ -2718,6 +2973,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -907,7 +916,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2767,6 +3020,7 @@
+@@ -2767,6 +3023,7 @@
  #pragma region Desktop Family, OneCore Family, or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -915,7 +924,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2775,9 +3029,10 @@
+@@ -2775,9 +3032,10 @@
      _In_opt_ DEVINSTID_A pDeviceID,
      _Out_writes_(BufferLen) PZZSTR Buffer,
      _In_  ULONG         BufferLen,
@@ -929,7 +938,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2786,7 +3041,7 @@
+@@ -2786,7 +3044,7 @@
      _In_opt_ DEVINSTID_W pDeviceID,
      _Out_writes_(BufferLen) PZZWSTR Buffer,
      _In_  ULONG         BufferLen,
@@ -938,7 +947,7 @@
      );
  
  #ifdef UNICODE
-@@ -2809,7 +3064,7 @@
+@@ -2809,7 +3067,7 @@
      _In_opt_ DEVINSTID_A pDeviceID,
      _Out_writes_(BufferLen) PZZSTR Buffer,
      _In_  ULONG         BufferLen,
@@ -947,7 +956,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -2821,7 +3076,7 @@
+@@ -2821,7 +3079,7 @@
      _In_opt_ DEVINSTID_W pDeviceID,
      _Out_writes_(BufferLen) PZZWSTR Buffer,
      _In_  ULONG         BufferLen,
@@ -956,7 +965,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  #ifdef UNICODE
-@@ -2836,6 +3091,7 @@
+@@ -2836,6 +3094,7 @@
  #pragma region Desktop Family, OneCore Family, or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -964,7 +973,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2843,9 +3099,10 @@
+@@ -2843,9 +3102,10 @@
      _Out_ PULONG        pulLen,
      _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_A pDeviceID,
@@ -978,7 +987,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2853,7 +3110,7 @@
+@@ -2853,7 +3113,7 @@
      _Out_ PULONG        pulLen,
      _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_W pDeviceID,
@@ -987,7 +996,7 @@
      );
  
  #ifdef UNICODE
-@@ -2875,7 +3132,7 @@
+@@ -2875,7 +3135,7 @@
      _Out_ PULONG        pulLen,
      _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_A pDeviceID,
@@ -996,7 +1005,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -2886,7 +3143,7 @@
+@@ -2886,7 +3146,7 @@
      _Out_ PULONG        pulLen,
      _In_  LPGUID        InterfaceClassGuid,
      _In_opt_ DEVINSTID_W pDeviceID,
@@ -1005,7 +1014,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -2904,6 +3161,7 @@
+@@ -2904,6 +3164,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1013,7 +1022,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2926,6 +3184,7 @@
+@@ -2926,6 +3187,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1021,7 +1030,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2949,6 +3208,7 @@
+@@ -2949,6 +3211,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1029,7 +1038,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2969,6 +3229,7 @@
+@@ -2969,6 +3232,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1037,7 +1046,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2992,6 +3253,7 @@
+@@ -2992,6 +3256,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1045,7 +1054,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3001,6 +3263,7 @@
+@@ -3001,6 +3266,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1053,7 +1062,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3011,22 +3274,24 @@
+@@ -3011,22 +3277,24 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1082,7 +1091,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
-@@ -3036,6 +3301,7 @@
+@@ -3036,6 +3304,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1090,7 +1099,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3051,6 +3317,7 @@
+@@ -3051,6 +3320,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1098,7 +1107,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3061,6 +3328,7 @@
+@@ -3061,6 +3331,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1106,7 +1115,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3071,6 +3339,7 @@
+@@ -3071,6 +3342,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1114,7 +1123,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3082,6 +3351,7 @@
+@@ -3082,6 +3354,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1122,7 +1131,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3091,6 +3361,7 @@
+@@ -3091,6 +3364,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1130,7 +1139,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3107,6 +3378,7 @@
+@@ -3107,6 +3381,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1138,7 +1147,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3122,6 +3394,7 @@
+@@ -3122,6 +3397,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1146,7 +1155,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3132,6 +3405,8 @@
+@@ -3132,6 +3408,8 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1155,7 +1164,7 @@
  CMAPI
  WORD
  WINAPI
-@@ -3139,6 +3414,8 @@
+@@ -3139,6 +3417,8 @@
      VOID
      );
  
@@ -1164,7 +1173,7 @@
  CMAPI
  WORD
  WINAPI
-@@ -3147,6 +3424,7 @@
+@@ -3147,6 +3427,7 @@
      );
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
@@ -1172,7 +1181,7 @@
  CMAPI
  BOOL
  WINAPI
-@@ -3154,6 +3432,7 @@
+@@ -3154,6 +3435,7 @@
      _In_  WORD          wVersion
      );
  
@@ -1180,7 +1189,7 @@
  CMAPI
  BOOL
  WINAPI
-@@ -3189,22 +3468,24 @@
+@@ -3189,22 +3471,24 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1209,7 +1218,7 @@
      );
  
  #define CM_Locate_DevInstA       CM_Locate_DevNodeA
-@@ -3232,6 +3513,7 @@
+@@ -3232,6 +3516,7 @@
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
@@ -1217,7 +1226,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3262,6 +3544,7 @@
+@@ -3262,6 +3547,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1225,7 +1234,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3274,6 +3557,7 @@
+@@ -3274,6 +3560,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1233,7 +1242,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3319,25 +3603,27 @@
+@@ -3319,25 +3606,27 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1268,7 +1277,7 @@
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
-@@ -3360,6 +3646,7 @@
+@@ -3360,6 +3649,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1276,7 +1285,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3422,6 +3709,7 @@
+@@ -3422,6 +3712,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1284,7 +1293,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3465,6 +3753,7 @@
+@@ -3465,6 +3756,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1292,7 +1301,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3476,6 +3765,7 @@
+@@ -3476,6 +3768,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1300,7 +1309,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3499,6 +3789,7 @@
+@@ -3499,6 +3792,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1308,7 +1317,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3511,6 +3802,7 @@
+@@ -3511,6 +3805,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1316,7 +1325,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3543,6 +3835,7 @@
+@@ -3543,6 +3838,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1324,7 +1333,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3563,6 +3856,7 @@
+@@ -3563,6 +3859,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1332,7 +1341,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3572,6 +3866,7 @@
+@@ -3572,6 +3869,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1340,7 +1349,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3673,6 +3968,7 @@
+@@ -3673,6 +3971,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1348,7 +1357,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3708,6 +4004,7 @@
+@@ -3708,6 +4007,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1356,7 +1365,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3749,6 +4046,7 @@
+@@ -3749,6 +4049,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1364,7 +1373,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3760,6 +4058,7 @@
+@@ -3760,6 +4061,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1372,7 +1381,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3780,14 +4079,16 @@
+@@ -3780,14 +4082,16 @@
  #define CM_Request_Device_Eject_Ex CM_Request_Device_Eject_ExA
  #endif // UNICODE
  
@@ -1392,7 +1401,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3857,6 +4158,7 @@
+@@ -3857,6 +4161,7 @@
  #define CM_Register_Device_Interface_Ex CM_Register_Device_Interface_ExA
  #endif // UNICODE
  
@@ -1400,7 +1409,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3867,6 +4169,7 @@
+@@ -3867,6 +4172,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1408,7 +1417,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3965,6 +4268,7 @@
+@@ -3965,6 +4271,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1416,7 +1425,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3987,6 +4291,7 @@
+@@ -3987,6 +4294,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1424,7 +1433,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4023,6 +4328,7 @@
+@@ -4023,6 +4331,7 @@
      _In_  ULONG         ulFlags
      );
  
@@ -1432,7 +1441,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4092,6 +4398,7 @@
+@@ -4092,6 +4401,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1440,7 +1449,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4114,6 +4421,7 @@
+@@ -4114,6 +4424,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1448,7 +1457,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4139,6 +4447,7 @@
+@@ -4139,6 +4450,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1456,7 +1465,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4146,6 +4455,7 @@
+@@ -4146,6 +4458,7 @@
      _Out_ PBOOL         pbPresent
      );
  
@@ -1464,7 +1473,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4154,6 +4464,7 @@
+@@ -4154,6 +4467,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1472,7 +1481,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4161,6 +4472,7 @@
+@@ -4161,6 +4475,7 @@
      VOID
      );
  
@@ -1480,7 +1489,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4224,6 +4536,7 @@
+@@ -4224,6 +4539,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1488,7 +1497,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4267,6 +4580,7 @@
+@@ -4267,6 +4583,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1496,7 +1505,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4383,19 +4697,21 @@
+@@ -4383,19 +4700,21 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1519,7 +1528,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4403,6 +4719,7 @@
+@@ -4403,6 +4722,7 @@
      _In_  CONFLICT_LIST clConflictList
      );
  
@@ -1527,7 +1536,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4420,6 +4737,7 @@
+@@ -4420,6 +4740,7 @@
      _Inout_ PCONFLICT_DETAILS_A pConflictDetails
      );
  
@@ -1535,7 +1544,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4443,6 +4761,7 @@
+@@ -4443,6 +4764,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1543,7 +1552,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4465,6 +4784,7 @@
+@@ -4465,6 +4787,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1551,7 +1560,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4488,6 +4808,7 @@
+@@ -4488,6 +4811,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1559,7 +1568,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4504,6 +4825,7 @@
+@@ -4504,6 +4828,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1567,7 +1576,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4521,6 +4843,7 @@
+@@ -4521,6 +4846,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1575,7 +1584,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4543,6 +4866,7 @@
+@@ -4543,6 +4869,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1583,7 +1592,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4582,6 +4906,7 @@
+@@ -4582,6 +4909,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1591,7 +1600,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4607,6 +4932,7 @@
+@@ -4607,6 +4935,7 @@
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -1599,7 +1608,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4636,6 +4962,8 @@
+@@ -4636,6 +4965,8 @@
  #if (WINVER >= _WIN32_WINNT_WIN2K)
  #define CM_WaitNoPendingInstallEvents CMP_WaitNoPendingInstallEvents
  
@@ -1608,7 +1617,7 @@
  DWORD
  WINAPI
  CM_WaitNoPendingInstallEvents(
-@@ -4651,6 +4979,15 @@
+@@ -4651,6 +4982,15 @@
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
  
@@ -1624,7 +1633,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4658,14 +4995,8 @@
+@@ -4658,14 +4998,8 @@
      _In_    PCM_NOTIFY_FILTER       pFilter,
      _In_opt_ PVOID                  pContext,
      _In_    PCM_NOTIFY_CALLBACK     pCallback,
@@ -1641,7 +1650,7 @@
      );
  
  #endif // (WINVER >= _WIN32_WINNT_WIN8)
-@@ -4676,6 +5007,7 @@
+@@ -4676,6 +5010,7 @@
  // CONFIGRET to Win32 error mapping routine
  //
  
@@ -1649,7 +1658,35 @@
  CMAPI
  DWORD
  WINAPI
-@@ -4765,4 +5097,3 @@
+@@ -4754,7 +5089,27 @@
+ #define CR_INVALID_CONFLICT_LIST    (0x00000039)
+ #define CR_INVALID_INDEX            (0x0000003A)
+ #define CR_INVALID_STRUCTURE_SIZE   (0x0000003B)
+ #define NUM_CR_RESULTS              (0x0000003C)
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(CONFIGRET, RETURN_TYPE,
++    CR_SUCCESS, CR_DEFAULT, CR_OUT_OF_MEMORY, CR_INVALID_POINTER,
++    CR_INVALID_FLAG, CR_INVALID_DEVNODE, CR_INVALID_DEVINST, CR_INVALID_RES_DES,
++    CR_INVALID_LOG_CONF, CR_INVALID_ARBITRATOR, CR_INVALID_NODELIST, CR_DEVNODE_HAS_REQS,
++    CR_DEVINST_HAS_REQS, CR_INVALID_RESOURCEID, CR_DLVXD_NOT_FOUND, CR_NO_SUCH_DEVNODE,
++    CR_NO_SUCH_DEVINST, CR_NO_MORE_LOG_CONF, CR_NO_MORE_RES_DES, CR_ALREADY_SUCH_DEVNODE,
++    CR_ALREADY_SUCH_DEVINST, CR_INVALID_RANGE_LIST, CR_INVALID_RANGE, CR_FAILURE,
++    CR_NO_SUCH_LOGICAL_DEV, CR_CREATE_BLOCKED, CR_NOT_SYSTEM_VM, CR_REMOVE_VETOED,
++    CR_APM_VETOED, CR_INVALID_LOAD_TYPE, CR_BUFFER_SMALL, CR_NO_ARBITRATOR,
++    CR_NO_REGISTRY_HANDLE, CR_REGISTRY_ERROR, CR_INVALID_DEVICE_ID, CR_INVALID_DATA,
++    CR_INVALID_API, CR_DEVLOADER_NOT_READY, CR_NEED_RESTART, CR_NO_MORE_HW_PROFILES,
++    CR_DEVICE_NOT_THERE, CR_NO_SUCH_VALUE, CR_WRONG_TYPE, CR_INVALID_PRIORITY,
++    CR_NOT_DISABLEABLE, CR_FREE_RESOURCES, CR_QUERY_VETOED, CR_CANT_SHARE_IRQ,
++    CR_NO_DEPENDENT, CR_SAME_RESOURCES, CR_NO_SUCH_REGISTRY_KEY, CR_INVALID_MACHINENAME,
++    CR_REMOTE_COMM_FAILURE, CR_MACHINE_UNAVAILABLE, CR_NO_CM_SERVICES, CR_ACCESS_DENIED,
++    CR_CALL_NOT_IMPLEMENTED, CR_INVALID_PROPERTY, CR_DEVICE_INTERFACE_ACTIVE, CR_NO_SUCH_DEVICE_INTERFACE,
++    CR_INVALID_REFERENCE_STRING, CR_INVALID_CONFLICT_LIST, CR_INVALID_INDEX, CR_INVALID_STRUCTURE_SIZE,
++    NUM_CR_RESULTS);
++#endif
+ 
+ 
+ #ifdef __cplusplus
+@@ -4765,4 +5120,3 @@
  #pragma endregion
  
  #endif // _CFGMGR32_H_

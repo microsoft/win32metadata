@@ -1,6 +1,6 @@
-diff --git a/um/uxtheme.h b/um/uxtheme.h
---- a/um/uxtheme.h
-+++ b/um/uxtheme.h
+diff --git a/um/Uxtheme.h b/um/Uxtheme.h
+--- a/um/Uxtheme.h
++++ b/um/Uxtheme.h
 @@ -8,6 +8,16 @@
  
  #ifndef _UXTHEME_H_
@@ -18,7 +18,17 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  
  #include <winapifamily.h>
  
-@@ -43,6 +53,7 @@
+@@ -28,6 +38,9 @@
+ #endif /* THEMEAPI */
+ 
+ typedef HANDLE HTHEME;          // handle to a section of theme data for class
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HTHEME HTHEME;
++#endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ #define MAX_THEMECOLOR  64
+@@ -43,6 +56,7 @@
  //  HWND hwnd - The handle to the Target window that will receive feedback
  //                                                                                                 
  //---------------------------------------------------------------------------
@@ -26,7 +36,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL) 
  BeginPanningFeedback(
  _In_ HWND hwnd); 
-@@ -74,6 +85,7 @@
+@@ -74,6 +88,7 @@
  //        the second call would be with the parameter as 20 pixels as opposed to 10
  //   Eg : UpdatePanningFeedback(hwnd, 10, 10, TRUE)
  // 
@@ -34,7 +44,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  UpdatePanningFeedback(
  	_In_ HWND hwnd,
-@@ -97,6 +109,7 @@
+@@ -97,6 +112,7 @@
  //                      Either ways the method will try to restore the moved window.
  //                      The latter case exists for compatibility with legacy apps. 
  //
@@ -42,7 +52,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  EndPanningFeedback(
  	_In_ HWND hwnd, 
-@@ -157,6 +170,7 @@
+@@ -157,6 +173,7 @@
  //  pcbSizeOut                  - pointer to a DWORD buffer to receive the returned 
  //                                byte size
  //
@@ -50,7 +60,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI GetThemeAnimationProperty(
      _In_ HTHEME hTheme,
      _In_ int iStoryboardId,
-@@ -252,6 +266,7 @@
+@@ -252,6 +269,7 @@
  //  pcbSizeOut                      - pointer to a DWORD buffer to receive returned
  //                                    byte-size of transform operation struct
  //
@@ -58,7 +68,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI GetThemeAnimationTransform(
      _In_ HTHEME hTheme,
      _In_ int iStoryboardId,
-@@ -298,6 +313,7 @@
+@@ -298,6 +316,7 @@
  //  pcbSizeOut                      - pointer to a DWORD buffer to receive byte-size of
  //                                    the timing function struct
  //                                      
@@ -66,7 +76,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI GetThemeTimingFunction(
      _In_ HTHEME hTheme,
      _In_ int iTimingFunctionId,
-@@ -312,6 +328,12 @@
+@@ -312,6 +331,12 @@
  // NOTE: PartId's and StateId's used in the theme API are defined in the 
  //       hdr file <vssym32.h> using the TM_PART and TM_STATE macros.  For
  //       example, "TM_PART(BP, PUSHBUTTON)" defines the PartId "BP_PUSHBUTTON".
@@ -79,7 +89,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  
  //---------------------------------------------------------------------------
  //  OpenThemeData()     - Open the theme data for the specified HWND and 
-@@ -343,6 +365,8 @@
+@@ -343,6 +368,8 @@
  //                        that will be used.  Otherwise, we fall back on 
  //                        the normal Button entry.
  //---------------------------------------------------------------------------
@@ -88,7 +98,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HTHEME)
  OpenThemeData(
      _In_opt_ HWND hwnd,
-@@ -351,9 +375,16 @@
+@@ -351,9 +378,16 @@
  
  #define OTD_FORCE_RECT_SIZING   0x00000001          // make all parts size to rect
  #define OTD_NONCLIENT           0x00000002          // set if hTheme to be used for nonclient area
@@ -105,7 +115,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HTHEME)
  OpenThemeDataForDpi(
      _In_opt_ HWND hwnd,
-@@ -395,11 +426,13 @@
+@@ -395,11 +429,13 @@
  //  dwFlags              - allows certain overrides of std features
  //                         (see OTD_XXX defines above)
  //---------------------------------------------------------------------------
@@ -120,7 +130,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      );
  
  //---------------------------------------------------------------------------
-@@ -412,11 +445,6 @@
+@@ -412,11 +448,6 @@
  //  hTheme              - open theme data handle (returned from prior call
  //                        to OpenThemeData() API).
  //---------------------------------------------------------------------------
@@ -132,7 +142,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  //---------------------------------------------------------------------------
  //    functions for basic drawing support 
  //---------------------------------------------------------------------------
-@@ -451,6 +479,7 @@
+@@ -451,6 +482,7 @@
  //  pRect               - defines the size/location of the part
  //  pClipRect           - optional clipping rect (don't draw outside it)
  //------------------------------------------------------------------------
@@ -140,7 +150,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeBackground(
      _In_ HTHEME hTheme,
-@@ -503,6 +532,7 @@
+@@ -503,6 +535,7 @@
  //  pRect               - defines the size/location of the part
  //  pOptions            - ptr to optional params
  //------------------------------------------------------------------------
@@ -148,7 +158,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeBackgroundEx(
      _In_ HTHEME hTheme,
-@@ -533,6 +563,7 @@
+@@ -533,6 +566,7 @@
  //  dwTextFlags2        - additional drawing options 
  //  pRect               - defines the size/location of the part
  //-------------------------------------------------------------------------
@@ -156,7 +166,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeText(
      _In_ HTHEME hTheme,
-@@ -541,7 +572,7 @@
+@@ -541,7 +575,7 @@
      _In_ int iStateId,
      _In_reads_(cchText) LPCWSTR pszText,
      _In_ int cchText,
@@ -165,7 +175,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _In_ DWORD dwTextFlags2,
      _In_ LPCRECT pRect
      );
-@@ -559,6 +590,7 @@
+@@ -559,6 +593,7 @@
  //      pBoundingRect   - the outer RECT of the part being drawn
  //      pContentRect    - RECT to receive the content area
  //-------------------------------------------------------------------------
@@ -173,7 +183,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeBackgroundContentRect(
      _In_ HTHEME hTheme,
-@@ -581,6 +613,7 @@
+@@ -581,6 +616,7 @@
  //      pContentRect    - RECT that defines the content area
  //      pBoundingRect   - RECT to receive the overall size/location of part
  //-------------------------------------------------------------------------
@@ -181,7 +191,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeBackgroundExtent(
      _In_ HTHEME hTheme,
-@@ -606,6 +639,7 @@
+@@ -606,6 +642,7 @@
  //  pRect               - the RECT used to draw the part
  //  pRegion             - receives handle to calculated region
  //-------------------------------------------------------------------------
@@ -189,7 +199,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeBackgroundRegion(
      _In_ HTHEME hTheme,
-@@ -634,6 +668,7 @@
+@@ -634,6 +671,7 @@
  //  eSize               - the type of size to be retreived
  //  psz                 - receives the specified size of the part 
  //-------------------------------------------------------------------------
@@ -197,7 +207,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemePartSize(
      _In_ HTHEME hTheme,
-@@ -659,6 +694,7 @@
+@@ -659,6 +697,7 @@
  //  pszBoundingRect     - optional: to control layout of text
  //  pszExtentRect       - receives the RECT for text size/location
  //-------------------------------------------------------------------------
@@ -205,7 +215,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeTextExtent(
      _In_ HTHEME hTheme,
-@@ -667,7 +703,7 @@
+@@ -667,7 +706,7 @@
      _In_ int iStateId,
      _In_reads_(cchCharCount) LPCWSTR pszText,
      _In_ int cchCharCount,
@@ -214,7 +224,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _In_opt_ LPCRECT pBoundingRect,
      _Out_ LPRECT pExtentRect
      );
-@@ -683,6 +719,7 @@
+@@ -683,6 +722,7 @@
  //  iStateId            - state number (of the part) 
  //  ptm                 - receives the font info
  //-------------------------------------------------------------------------
@@ -222,7 +232,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeTextMetrics(
      _In_ HTHEME hTheme,
-@@ -725,6 +762,19 @@
+@@ -725,6 +765,19 @@
  // Use system resizing border width rather than theme content margins.   
  // This option is mutually exclusive with HTTB_SIZINGTEMPLATE, which takes precedence.
  #define HTTB_SYSTEMSIZINGMARGINS    0x00000200
@@ -242,7 +252,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  
  //-------------------------------------------------------------------------
  //  HitTestThemeBackground()
-@@ -750,13 +800,14 @@
+@@ -750,13 +803,14 @@
  //                        HTRIGHT, HTTOPRIGHT, HTBOTTOMRIGHT,
  //                        HTTOP, HTBOTTOM, HTCLIENT
  //-------------------------------------------------------------------------
@@ -258,7 +268,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _In_ LPCRECT pRect,
      _In_opt_ HRGN hrgn,
      _In_ POINT ptTest,
-@@ -775,6 +826,7 @@
+@@ -775,6 +829,7 @@
  //  uFlags              - Same as DrawEdge() API
  //  pContentRect        - Receives the interior rect if (uFlags & BF_ADJUST)
  //------------------------------------------------------------------------
@@ -266,7 +276,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeEdge(
      _In_ HTHEME hTheme,
-@@ -782,8 +834,8 @@
+@@ -782,8 +837,8 @@
      _In_ int iPartId,
      _In_ int iStateId,
      _In_ LPCRECT pDestRect,
@@ -277,7 +287,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_opt_ LPRECT pContentRect
      );
  
-@@ -799,6 +851,7 @@
+@@ -799,6 +854,7 @@
  //  himl                - handle to IMAGELIST 
  //  iImageIndex         - index into IMAGELIST (which icon to draw)
  //------------------------------------------------------------------------
@@ -285,7 +295,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeIcon(
      _In_ HTHEME hTheme,
-@@ -818,6 +871,7 @@
+@@ -818,6 +874,7 @@
  //  iPartId             - part number to find definition for
  //  iStateId            - state number of part
  //---------------------------------------------------------------------------
@@ -293,7 +303,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  IsThemePartDefined(
      _In_ HTHEME hTheme,
-@@ -835,6 +889,7 @@
+@@ -835,6 +892,7 @@
  //  iPartId             - part number 
  //  iStateId            - state number of part
  //---------------------------------------------------------------------------
@@ -301,7 +311,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  IsThemeBackgroundPartiallyTransparent(
      _In_ HTHEME hTheme,
-@@ -868,12 +923,13 @@
+@@ -868,12 +926,13 @@
  //  iPropId             - the property number to get the value for
  //  pColor              - receives the value of the property
  //-----------------------------------------------------------------------
@@ -316,7 +326,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ COLORREF *pColor
      );
  
-@@ -888,13 +944,14 @@
+@@ -888,13 +947,14 @@
  //  iPropId             - the property number to get the value for
  //  piVal               - receives the value of the property
  //-----------------------------------------------------------------------
@@ -332,7 +342,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ int *piVal
      );
  
-@@ -908,6 +965,7 @@
+@@ -908,6 +968,7 @@
  //  pszBuff             - receives the string property value
  //  cchMaxBuffChars     - max. number of chars allowed in pszBuff
  //-----------------------------------------------------------------------
@@ -340,7 +350,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeString(
      _In_ HTHEME hTheme,
-@@ -927,12 +985,13 @@
+@@ -927,12 +988,13 @@
  //  iPropId             - the property number to get the value for
  //  pfVal               - receives the value of the property
  //-----------------------------------------------------------------------
@@ -355,7 +365,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ BOOL *pfVal
      );
  
-@@ -945,12 +1004,13 @@
+@@ -945,12 +1007,13 @@
  //  iPropId             - the property number to get the value for
  //  piVal               - receives the value of the property
  //-----------------------------------------------------------------------
@@ -370,7 +380,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ int *piVal
      );
  
-@@ -963,12 +1023,13 @@
+@@ -963,12 +1026,13 @@
  //  iPropId             - the property number to get the value for
  //  piVal               - receives the value of the enum (cast to int*)
  //-----------------------------------------------------------------------
@@ -385,7 +395,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ int *piVal
      );
  
-@@ -982,12 +1043,13 @@
+@@ -982,12 +1046,13 @@
  //  iPropId             - the property number to get the value for
  //  pPoint              - receives the value of the position property
  //-----------------------------------------------------------------------
@@ -400,7 +410,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ POINT *pPoint
      );
  
-@@ -1002,6 +1064,7 @@
+@@ -1002,6 +1067,7 @@
  //  pFont               - receives the value of the LOGFONT property
  //                        (scaled for the current logical screen dpi) 
  //-----------------------------------------------------------------------
@@ -408,7 +418,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeFont(
      _In_ HTHEME hTheme,
-@@ -1021,6 +1084,7 @@
+@@ -1021,6 +1087,7 @@
  //  iPropId             - the property number to get the value for
  //  pRect               - receives the value of the RECT property
  //-----------------------------------------------------------------------
@@ -416,7 +426,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeRect(
      _In_ HTHEME hTheme,
-@@ -1050,13 +1114,14 @@
+@@ -1050,13 +1117,14 @@
  //      prc             - RECT for area to be drawn into
  //      pMargins        - receives the value of the MARGINS property
  //-----------------------------------------------------------------------
@@ -432,7 +442,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _In_opt_ LPCRECT prc,
      _Out_ MARGINS *pMargins
      );
-@@ -1082,12 +1147,13 @@
+@@ -1082,12 +1150,13 @@
  //      iPropId         - the property number to get the value for
  //      pIntList        - receives the value of the INTLIST property
  //-----------------------------------------------------------------------
@@ -447,7 +457,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ INTLIST *pIntList
      );
  
-@@ -1112,6 +1178,7 @@
+@@ -1112,6 +1181,7 @@
  //  iPropId             - the property number to search for
  //  pOrigin             - receives the value of the property origin
  //-----------------------------------------------------------------------
@@ -455,7 +465,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemePropertyOrigin(
      _In_ HTHEME hTheme,
-@@ -1149,6 +1216,7 @@
+@@ -1149,6 +1219,7 @@
  // the specified window, you can pass an empty string (L"") so it 
  // won't match any section entries.
  //---------------------------------------------------------------------------
@@ -463,7 +473,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  SetWindowTheme(
      _In_ HWND hwnd,
-@@ -1167,12 +1235,13 @@
+@@ -1167,12 +1238,13 @@
  //  pszThemeFileName    - output buffer to receive the filename
  //  cchMaxBuffChars     - the size of the return buffer, in chars
  //---------------------------------------------------------------------------
@@ -478,7 +488,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_writes_(cchMaxBuffChars) LPWSTR pszThemeFileName,
      _In_ int cchMaxBuffChars
      );
-@@ -1186,6 +1255,7 @@
+@@ -1186,6 +1258,7 @@
  //
  //  iColorId            - the system color index defined in winuser.h
  //---------------------------------------------------------------------------
@@ -486,7 +496,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(COLORREF)
  GetThemeSysColor(
      _In_opt_ HTHEME hTheme,
-@@ -1203,10 +1273,11 @@
+@@ -1203,10 +1276,11 @@
  //
  //  iColorId            - the system color index defined in winuser.h
  //---------------------------------------------------------------------------
@@ -499,7 +509,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      );
  
  //---------------------------------------------------------------------------
-@@ -1219,10 +1290,11 @@
+@@ -1219,10 +1293,11 @@
  //  iBoolId             - the TMT_XXX BOOL number (first BOOL
  //                        is TMT_FLATMENUS)
  //---------------------------------------------------------------------------
@@ -512,7 +522,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      );
  
  //---------------------------------------------------------------------------
-@@ -1250,6 +1322,7 @@
+@@ -1250,6 +1325,7 @@
  //                        when hTheme is NULL, iSizeId is passed directly
  //                        to the GetSystemMetrics() function
  //---------------------------------------------------------------------------
@@ -520,7 +530,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(int)
  GetThemeSysSize(
      _In_opt_ HTHEME hTheme,
-@@ -1269,10 +1342,11 @@
+@@ -1269,10 +1345,11 @@
  //  plf                 - ptr to LOGFONT to receive the font value.
  //                        (scaled for the current logical screen dpi) 
  //---------------------------------------------------------------------------
@@ -533,7 +543,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ LOGFONTW *plf
      );
  
-@@ -1290,10 +1364,11 @@
+@@ -1290,10 +1367,11 @@
  //
  //  cchMaxStringChars   - max. number of chars that pszStringBuff can hold
  //---------------------------------------------------------------------------
@@ -546,7 +556,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_writes_(cchMaxStringChars) LPWSTR pszStringBuff,
      _In_ int cchMaxStringChars
      );
-@@ -1311,10 +1386,11 @@
+@@ -1311,10 +1389,11 @@
  //
  //  piValue             - ptr to int to receive value
  //---------------------------------------------------------------------------
@@ -559,7 +569,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ int *piValue
      );
  
-@@ -1325,6 +1401,7 @@
+@@ -1325,6 +1404,7 @@
  //                        use the API "IsAppThemed()" to test if a theme is
  //                        active for the calling process.
  //---------------------------------------------------------------------------
@@ -567,7 +577,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  IsThemeActive(
      VOID
-@@ -1334,6 +1411,7 @@
+@@ -1334,6 +1414,7 @@
  //  IsAppThemed()       - returns TRUE if a theme is active and available to
  //                        the current process
  //---------------------------------------------------------------------------
@@ -575,7 +585,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  IsAppThemed(
      VOID
-@@ -1346,6 +1424,7 @@
+@@ -1346,6 +1427,7 @@
  //
  //      hwnd            - the window to get the HTHEME of
  //---------------------------------------------------------------------------
@@ -583,7 +593,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HTHEME)
  GetWindowTheme(
      _In_ HWND hwnd
-@@ -1385,6 +1464,7 @@
+@@ -1385,6 +1467,7 @@
  //                     ETDT_ENABLETAB to enable the theme-defined background 
  //                          texturing using the Tab texture
  //---------------------------------------------------------------------------
@@ -591,7 +601,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  EnableThemeDialogTexture(
      _In_ HWND hwnd,
-@@ -1398,6 +1478,7 @@
+@@ -1398,6 +1481,7 @@
  //
  //      hdlg         - the window handle of the target dialog
  //---------------------------------------------------------------------------
@@ -599,7 +609,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  IsThemeDialogTextureEnabled(
      _In_ HWND hwnd
-@@ -1412,11 +1493,19 @@
+@@ -1412,11 +1496,19 @@
  #define STAP_VALIDBITS          (STAP_ALLOW_NONCLIENT | \
                                   STAP_ALLOW_CONTROLS | \
                                   STAP_ALLOW_WEBCONTENT)
@@ -619,7 +629,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(DWORD)
  GetThemeAppProperties(
      VOID
-@@ -1428,9 +1517,10 @@
+@@ -1428,9 +1520,10 @@
  //
  //      dwFlags         - the flag values to be set
  //---------------------------------------------------------------------------
@@ -631,7 +641,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      );
  
  //---------------------------------------------------------------------------
-@@ -1450,6 +1540,7 @@
+@@ -1450,6 +1543,7 @@
  //                        (not the display name)
  //  cchMaxSizeChars     - max chars allowed in pszSizeBuff
  //---------------------------------------------------------------------------
@@ -639,7 +649,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI GetCurrentThemeName(
      _Out_writes_(cchMaxNameChars) LPWSTR pszThemeFileName,
      _In_ int cchMaxNameChars,
-@@ -1464,6 +1555,7 @@
+@@ -1464,6 +1558,7 @@
  #define SZ_THDOCPROP_TOOLTIP        L"ToolTip"
  #define SZ_THDOCPROP_AUTHOR         L"author"
  
@@ -647,7 +657,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeDocumentationProperty(
      _In_ LPCWSTR pszThemeName,
-@@ -1500,6 +1592,7 @@
+@@ -1500,6 +1595,7 @@
  //  prc                 - (optional) rect that defines the area to be 
  //                        drawn (CHILD coordinates)
  //---------------------------------------------------------------------------
@@ -655,7 +665,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeParentBackground(
      _In_ HWND hwnd,
-@@ -1516,6 +1609,7 @@
+@@ -1516,6 +1612,7 @@
  //                      - if TRUE, enable themeing and, if user previously
  //                        had a theme active, make it active now.
  //---------------------------------------------------------------------------
@@ -663,7 +673,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  EnableTheming(
      _In_ BOOL fEnable
-@@ -1525,12 +1619,24 @@
+@@ -1525,12 +1622,24 @@
  #define GBF_COPY        0x00000002      // create a copy of the bitmap
  #define GBF_VALIDBITS   (GBF_DIRECT | \
                           GBF_COPY)
@@ -688,7 +698,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  
  //---------------------------------------------------------------------------
  // DrawThemeParentBackgroundEx()
-@@ -1559,11 +1665,12 @@
+@@ -1559,11 +1668,12 @@
  //
  //  Return value        - S_OK if something was painted, S_FALSE if not.
  //---------------------------------------------------------------------------
@@ -702,7 +712,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _In_opt_ const RECT* prc
      );
  
-@@ -1589,6 +1696,7 @@
+@@ -1589,6 +1699,7 @@
                                     WTNCA_NOSYSMENU | \
                                     WTNCA_NOMIRRORHELP)
  
@@ -710,7 +720,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  SetWindowThemeAttribute(
      _In_ HWND hwnd,
-@@ -1597,6 +1705,7 @@
+@@ -1597,6 +1708,7 @@
      _In_ DWORD cbAttribute
      );
  
@@ -718,7 +728,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  __inline HRESULT SetWindowThemeNonClientAttributes(HWND hwnd, DWORD dwMask, DWORD dwAttributes)    
  {
      WTA_OPTIONS wta;
-@@ -1655,15 +1764,33 @@
+@@ -1655,15 +1767,33 @@
                               DTT_APPLYOVERLAY | \
                               DTT_GLOWSIZE | \
                               DTT_COMPOSITED)
@@ -754,7 +764,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      POINT             ptShadowOffset;      // where shadow is drawn (relative to text)
      int               iBorderSize;         // Border radius around text
      int               iFontPropId;         // Font property to use for the text instead of TMT_FONT
-@@ -1677,6 +1804,7 @@
+@@ -1677,6 +1807,7 @@
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -762,7 +772,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeTextEx(
      _In_ HTHEME hTheme,
-@@ -1685,7 +1813,7 @@
+@@ -1685,7 +1816,7 @@
      _In_ int iStateId,
      _In_reads_(cchText) LPCWSTR pszText,
      _In_ int cchText,
@@ -771,7 +781,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Inout_ LPRECT pRect,
      _In_opt_ const DTTOPTS *pOptions
      );
-@@ -1704,13 +1832,14 @@
+@@ -1704,13 +1835,14 @@
  //                    file when iPropId==TMT_DISKSTREAM (use GetCurrentThemeName 
  //                    and LoadLibraryEx(LOAD_LIBRARY_AS_DATAFILE)
  //-----------------------------------------------------------------------
@@ -788,7 +798,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _Out_ HBITMAP* phBitmap
      );
  
-@@ -1727,6 +1856,7 @@
+@@ -1727,6 +1859,7 @@
  //                    file when iPropId==TMT_DISKSTREAM (use GetCurrentThemeName 
  //                    and LoadLibraryEx(LOAD_LIBRARY_AS_DATAFILE)
  //-----------------------------------------------------------------------
@@ -796,7 +806,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeStream(
      _In_ HTHEME hTheme,
-@@ -1744,6 +1874,7 @@
+@@ -1744,6 +1877,7 @@
  //                        Should be called prior to BeginBufferedPaint,
  //                        and should have a matching BufferedPaintUnInit.
  //------------------------------------------------------------------------
@@ -804,7 +814,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  BufferedPaintInit(
      VOID
-@@ -1754,6 +1885,7 @@
+@@ -1754,6 +1888,7 @@
  //                          Should be called once for each call to BufferedPaintInit,
  //                          when calls to BeginBufferedPaint are no longer needed.
  //------------------------------------------------------------------------
@@ -812,7 +822,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  BufferedPaintUnInit(
      VOID
-@@ -1806,17 +1938,25 @@
+@@ -1806,17 +1941,25 @@
  #define BPPF_ERASE               0x0001 // Empty the buffer during BeginBufferedPaint()
  #define BPPF_NOCLIP              0x0002 // Don't apply the target DC's clip region to the double buffer
  #define BPPF_NONCLIENT           0x0004 // Using a non-client DC
@@ -839,7 +849,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(_Success_(return != NULL) HPAINTBUFFER)
  BeginBufferedPaint(
      _In_ HDC hdcTarget,
-@@ -1833,6 +1973,7 @@
+@@ -1833,6 +1976,7 @@
  //    hBufferedPaint   - handle to buffered paint context
  //    fUpdateTarget    - update target DC
  //------------------------------------------------------------------------
@@ -847,7 +857,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  EndBufferedPaint(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1845,6 +1986,7 @@
+@@ -1845,6 +1989,7 @@
  //    hBufferedPaint             - handle to buffered paint context
  //    prc                        - pointer to receive target rectangle
  //------------------------------------------------------------------------
@@ -855,7 +865,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetBufferedPaintTargetRect(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1856,6 +1998,7 @@
+@@ -1856,6 +2001,7 @@
  //
  //    hBufferedPaint           - handle to buffered paint context
  //------------------------------------------------------------------------
@@ -863,7 +873,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HDC)
  GetBufferedPaintTargetDC(
      _In_ HPAINTBUFFER hBufferedPaint
-@@ -1866,6 +2009,7 @@
+@@ -1866,6 +2012,7 @@
  //
  //    hBufferedPaint     - handle to buffered paint context
  //------------------------------------------------------------------------
@@ -871,7 +881,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HDC)
  GetBufferedPaintDC(
      _In_ HPAINTBUFFER hBufferedPaint
-@@ -1879,6 +2023,7 @@
+@@ -1879,6 +2026,7 @@
  //    pcxRow               - pointer to receive width of buffer bitmap, in pixels;
  //                           this value may not necessarily be equal to the buffer width
  //------------------------------------------------------------------------
@@ -879,7 +889,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetBufferedPaintBits(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1892,6 +2037,7 @@
+@@ -1892,6 +2040,7 @@
  //    hBufferedPaint     - handle to buffered paint context
  //    prc                - rectangle to clear; NULL specifies entire buffer
  //------------------------------------------------------------------------
@@ -887,7 +897,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  BufferedPaintClear(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1905,6 +2051,7 @@
+@@ -1905,6 +2054,7 @@
  //    prc                   - rectangle to set alpha in; NULL specifies entire buffer
  //    alpha                 - alpha value to set in the given rectangle
  //------------------------------------------------------------------------
@@ -895,7 +905,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  BufferedPaintSetAlpha(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1920,6 +2067,7 @@
+@@ -1920,6 +2070,7 @@
  //
  //    hwnd                           - window on which to stop all animations
  //------------------------------------------------------------------------
@@ -903,7 +913,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  BufferedPaintStopAllAnimations(
      _In_ HWND hwnd
-@@ -1927,6 +2075,7 @@
+@@ -1927,6 +2078,7 @@
  
  typedef HANDLE HANIMATIONBUFFER;  // handle to a buffered paint animation
  
@@ -911,7 +921,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HANIMATIONBUFFER)
  BeginBufferedAnimation(
      _In_ HWND hwnd,
-@@ -1939,12 +2088,14 @@
+@@ -1939,12 +2091,14 @@
      _Out_ HDC *phdcTo
      );
  
@@ -926,7 +936,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  BufferedPaintRenderAnimation(
      _In_ HWND hwnd,
-@@ -1956,6 +2107,7 @@
+@@ -1956,6 +2110,7 @@
  // process (themes are active). 
  // Roughly equivalent to "DwmIsCompositionEnabled() && IsAppthemed()"
  //----------------------------------------------------------------------------
@@ -934,7 +944,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL) IsCompositionActive();
  
  //------------------------------------------------------------------------
-@@ -1969,6 +2121,7 @@
+@@ -1969,6 +2124,7 @@
  //  iPropId             - property id 
  //  pdwDuration         - receives the transition duration
  //------------------------------------------------------------------------

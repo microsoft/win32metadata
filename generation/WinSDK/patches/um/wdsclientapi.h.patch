@@ -106,7 +106,7 @@ index 1f3aeba9cdef1f1196ceeb5b24db255480b1cbf0..55a0059170cb4ac360dca69a1ca90ec3
  WdsCliInitializeLog(
      _In_ HANDLE hSession, 
 -    _In_ ULONG ulClientArchitecture,
-+    _In_ ULONG ulClientArchitecture,
++    _Win32_AssociatedEnum_(CPU_ARCHITECTURE) _In_ ULONG ulClientArchitecture,
      _In_ PWSTR pwszClientId,
      _In_ PWSTR pwszClientAddress );
  
@@ -176,7 +176,7 @@ index 1f3aeba9cdef1f1196ceeb5b24db255480b1cbf0..55a0059170cb4ac360dca69a1ca90ec3
      _In_ HANDLE hIfh,
 -    _Out_ PDWORD pdwValue );
 -
-+    _Out_ PDWORD pdwValue );
++    _Win32_AssociatedEnum_(CPU_ARCHITECTURE) _Out_ PDWORD pdwValue );
 +
 +_Win32_SupportedOS_WindowsVista_
  HRESULT

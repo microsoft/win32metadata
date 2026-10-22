@@ -1,5 +1,4 @@
 diff --git a/um/immdev.h b/um/immdev.h
-index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707ff61d4fb 100644
 --- a/um/immdev.h
 +++ b/um/immdev.h
 @@ -7,7 +7,7 @@
@@ -11,7 +10,30 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  
  #ifdef __cplusplus
  extern "C" {
-@@ -215,111 +215,111 @@
+@@ -28,10 +28,22 @@
+ 
+ #if (WINVER >= 0x040A)
+ DECLARE_HANDLE(HIMC);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIMC HIMC;
++#endif
+ DECLARE_HANDLE(HIMCC);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIMCC HIMCC;
++#endif
+ #else
+ typedef DWORD   HIMC;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIMC HIMC;
++#endif
+ typedef DWORD   HIMCC;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIMCC HIMCC;
++#endif
+ #endif /* WINVER >= 0x040A */
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+@@ -215,111 +227,111 @@
  #pragma endregion
  
  #endif /* WINVER >= 0x040A */
@@ -164,7 +186,7 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  #ifdef UNICODE
  #define ImmSetCompositionFont  ImmSetCompositionFontW
  #else
-@@ -327,48 +327,48 @@
+@@ -327,48 +339,48 @@
  #endif // !UNICODE
  #endif  // defined(_WINGDI_) && !defined(NOGDI)
  
@@ -231,7 +253,7 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  
  typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, LPVOID);
  typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, LPVOID);
-@@ -378,32 +378,32 @@
+@@ -378,32 +390,32 @@
  #define REGISTERWORDENUMPROC  REGISTERWORDENUMPROCA
  #endif // !UNICODE
  
@@ -272,7 +294,7 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  #ifdef UNICODE
  #define ImmEnumRegisterWord  ImmEnumRegisterWordW
  #else
-@@ -411,21 +411,21 @@
+@@ -411,21 +423,21 @@
  #endif // !UNICODE
  
  #if (WINVER >= 0x040A)
@@ -300,7 +322,7 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  #endif /* WINVER >= 0x0602 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -629,10 +629,10 @@
+@@ -629,10 +641,10 @@
  #define GCL_CONVERSION                  0x0001
  #define GCL_REVERSECONVERSION           0x0002
  #define GCL_REVERSE_LENGTH              0x0003
@@ -314,7 +336,7 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  // bit field for conversion mode
  // IME_CMODE_HANGEUL is old name of IME_CMODE_HANGUL. It will be gone eventually.
  #define IME_CMODE_HANGEUL               IME_CMODE_NATIVE
-@@ -764,10 +764,10 @@
+@@ -764,10 +776,10 @@
  #define SOFTKEYBOARD_TYPE_T1            0x0001
  // for Windows Simplified Chinese Edition
  #define SOFTKEYBOARD_TYPE_C1            0x0002
@@ -328,7 +350,7 @@ index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707
  #ifndef _IMM_DDK_DEFINED_
  #define _IMM_DDK_DEFINED_
  
-@@ -921,7 +921,9 @@
+@@ -921,7 +933,9 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  

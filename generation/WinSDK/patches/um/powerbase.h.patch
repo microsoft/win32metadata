@@ -1,7 +1,17 @@
 diff --git a/um/powerbase.h b/um/powerbase.h
 --- a/um/powerbase.h
 +++ b/um/powerbase.h
-@@ -44,6 +44,7 @@
+@@ -36,6 +36,9 @@
+ #define _HPOWERNOTIFY_DEF_
+ 
+ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HPOWERNOTIFY HPOWERNOTIFY;
++#endif
+ 
+ #endif // _HPOWERNOTIFY_DEF_
+ 
+@@ -44,6 +47,7 @@
  #define _OVERRIDE_NTSTATUS_
  #endif
  
@@ -9,7 +19,7 @@ diff --git a/um/powerbase.h b/um/powerbase.h
  NTSTATUS
  WINAPI
  CallNtPowerInformation(
-@@ -58,6 +59,8 @@
+@@ -58,6 +62,8 @@
  #undef NTSTATUS
  #endif
  
@@ -18,7 +28,7 @@ diff --git a/um/powerbase.h b/um/powerbase.h
  BOOLEAN
  WINAPI
  GetPwrCapabilities(
-@@ -65,6 +68,7 @@
+@@ -65,6 +71,7 @@
      );
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -26,7 +36,7 @@ diff --git a/um/powerbase.h b/um/powerbase.h
  POWER_PLATFORM_ROLE
  WINAPI
  PowerDeterminePlatformRoleEx(
-@@ -74,6 +78,8 @@
+@@ -74,6 +81,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -35,7 +45,7 @@ diff --git a/um/powerbase.h b/um/powerbase.h
  DWORD
  WINAPI
  PowerRegisterSuspendResumeNotification(
-@@ -85,6 +91,8 @@
+@@ -85,6 +94,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
