@@ -71,7 +71,7 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
-        private static Architecture GetArchitectureForFileName(string fileName)
+        internal static Architecture GetArchitectureForFileName(string fileName)
         {
             string potentialArch = Path.GetFileName(Path.GetDirectoryName(fileName));
 
@@ -130,7 +130,8 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             IEnumerable<string> addedRefs,
             Dictionary<string, string> staticLibs,
-            Dictionary<string, string> apiNamesToNamespaces)
+            Dictionary<string, string> apiNamesToNamespaces,
+            bool nativeFieldArrayInfo = false)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
@@ -199,6 +200,8 @@ namespace ClangSharpSourceToWinmd
 
             ShowMemory();
 
+            HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch);
+
             Console.WriteLine($"  Cleaning syntax trees...");
 
             watch.Restart();
@@ -206,7 +209,7 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath, nativeFieldArrayInfo);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
@@ -315,6 +318,8 @@ namespace ClangSharpSourceToWinmd
 
                 comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
             }
+
+            comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();

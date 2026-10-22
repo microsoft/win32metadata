@@ -163,28 +163,27 @@ flags attribute, member names/values, and which function parameters should use t
 The ConstantsScraper reads the JSON, matches `#define` names, generates C# enum files
 and remap entries.
 
-#### Proposed approach: conditional enum declarations
+#### Header annotations: metadata-only constant groups
 
-See `docs/copilot/plans/enum-remapping-proposal.md` for the full proposal.
-
-The `#define` groups are "lifted" into real C++ enums using conditional compilation:
+Keep the existing constants and native declaration types. The shared annotation
+header groups constants without `undef`, copied values, or native signature changes:
 
 ```cpp
-#ifdef _WIN32METADATA_
-enum class [[clang::flag_enum]] FILE_ATTRIBUTE_FLAGS : DWORD {
-    FILE_ATTRIBUTE_READONLY = 0x00000001,
-    FILE_ATTRIBUTE_HIDDEN   = 0x00000002,
-    FILE_ATTRIBUTE_SYSTEM   = 0x00000004,
-};
-DEFINE_ENUM_FLAG_OPERATORS(FILE_ATTRIBUTE_FLAGS)
-#else
-#define FILE_ATTRIBUTE_FLAGS DWORD
-#endif
+_Win32_FlagsEnum_(FILE_ATTRIBUTE_FLAGS, DWORD,
+    FILE_ATTRIBUTE_READONLY,
+    FILE_ATTRIBUTE_HIDDEN,
+    FILE_ATTRIBUTE_SYSTEM);
 ```
 
-When `_WIN32METADATA_` is defined (during metadata generation), ClangSharp sees a real
-C++ enum and processes it natively. The `#else` branch defines the name as a DWORD macro,
-allowing function signatures to use the enum name unconditionally.
+With `WIN32METADATA` and Clang, this is a typedef/annotation carrier. The scraper
+reads its storage and compiled expression values from the original AST and emits an
+unscoped logical enum. `_Win32_Enum_` is the non-flags form. Without metadata mode,
+both macros expand to nothing: no enum, typedef, or new ordinary-consumer symbol.
+Use `_Win32_AssociatedEnum_(FILE_ATTRIBUTE_FLAGS)` on a parameter/return/field while
+preserving its native `DWORD` type.
+
+See `docs/copilot/plans/shift-left-annotation-spec.md` for the authoring contract,
+including rare explicit name/value mappings.
 
 ---
 
@@ -209,27 +208,57 @@ are already in SDK headers. ClangSharp preserves them as `[CppAttributeList]` at
 (v17) or `[NativeAnnotation]` attributes (v18+). The emitter processes these to generate
 managed attributes like `[In]`, `[Out]`, etc.
 
-### Custom metadata annotations (`w32m:` prefix)
+Native field element-count inference is disabled by default. The emitter's global
+`--nativeFieldArrayInfo` option enables it for pointer and array fields, producing
+`[NativeArrayInfo(CountFieldName = "...")]` for sibling-field counts or
+`[NativeArrayInfo(CountConst = ...)]` for nonnegative constant counts. Scalar
+access spans do not become array attributes. Parameter SAL processing is unchanged.
 
-Additional metadata that isn't in the SDK headers today can be expressed as
-`__attribute__((annotate("w32m:...")))` (or the C++11 syntax
-`[[clang::annotate("w32m:...")]]`). These flow through ClangSharp v18+ as
-`[NativeAnnotation("w32m:...")]`. The emitter processes annotations with the `w32m:`
-prefix and converts them to the appropriate winmd attributes.
+### SupportedOS declaration placement
+
+The `_Win32_SupportedOS_*_` macros support individual enum members using postfix
+placement, for example `Value _Win32_SupportedOS_Windows8_ = 1`. Const-qualified
+native variables use prefix placement. A member's OS floor does not change the
+enum's floor or annotate its other members.
+
+`_Win32_SupportedOS_BEGIN_(os)`/`_Win32_SupportedOS_END_()` use native Clang
+lexical scope. Includes inherit it, nested/direct attributes accumulate, identical
+floors collapse, and distinct floors on one declaration/redeclaration are errors.
+Close a scope before changing its floor; there is no custom override precedence.
+
+### Custom metadata annotations
+
+The shared `win32metadata_annotations.h` defines the `_Win32_*_` vocabulary using
+Clang attributes owned by the `Win32Metadata.` payload prefix. The scraper opts in
+with `--config parse-win32-annotations`, defines `WIN32METADATA`, and uses the same
+translation unit for annotation extraction, remap discovery, and ClangSharp
+generation. RAII invalid values, group values, type associations, and optional
+import overrides are typed annotation arguments from that first AST. No
+`WIN32METADATA_CSHARP` gate or second expression parse is used.
+Cleanup references use an unevaluated address operand so `dllimport` functions do
+not need constant addresses. The shared helper makes ignored metadata annotations
+errors locally without changing the native SDK/SAL warning policy.
 
 Defined annotations:
 
 | Annotation | Target | Winmd effect |
 |---|---|---|
-| `_Sets_last_error_` | function | `[SetLastError]` on method |
-| `_Min_os_version_(ver)` | function | `[SupportedOSPlatform]` |
-| `_Must_close_with_(func)` | function | `[RAIIFree]` on return |
-| `_Enum_type_(name)` | parameter, field | Changes type to named enum |
-| `_Enum_return_(name)` | function | Changes return type to named enum |
-| `_Com_out_ptr_` | parameter | `[ComOutPtr]` |
-| `_Not_null_terminated_` | parameter, field | `[NotNullTerminated]` |
+| `_Win32_SetLastError_` | function | P/Invoke last-error flag |
+| `_Win32_SupportedOS_*_` | declaration | `[SupportedOSPlatform]` |
+| `_Win32_RAIIFree_(cleanup, invalid...)` | producer return/output | `[RAIIFree]` and repeated `[InvalidHandleValue]` |
+| `_Win32_RAIIFree_Handle_(cleanup)` | producer return/output | Cleanup plus integral invalid values `-1, 0` |
+| `_Win32_AssociatedEnum_(type)` | return, parameter, field | Association while preserving native declaration types |
+| `_Win32_ImportLibrary_(dll[, export or ordinal])` | function | Module and optional `ImplMap.ImportName` override |
+| `_Win32_Retained_` | parameter | Retained pointer metadata |
+| `_Win32_ContainsInteriorPointers_` | caller-owned output buffer | Same-allocation interior-pointer metadata |
 
-See `docs/copilot/plans/shift-left-metadata-plan.md` for the full annotation design.
+Prefer existing SAL/MIDL for counts, directions, COM outputs and retval. A prepared
+IDL `[retval]` becomes native retval SAL in the AST. A legacy generated-header
+comment bridge remains until all affected original IDLs are prepared; it is not
+the transport for new annotations.
+
+See `docs/copilot/plans/shift-left-annotation-spec.md` for the full vocabulary and
+original-SDK-artifact patching requirements.
 
 ---
 
@@ -252,11 +281,11 @@ Several sidecar files provide metadata that isn't (yet) expressible in headers:
 | File | Purpose | Shift-left status |
 |---|---|---|
 | `scraper.settings.rsp` | Type remaps, exclusions | Mostly auto-derived |
-| `enums.json` | Synthetic enum definitions | Proposed: conditional enums |
+| `enums.json` | Synthetic enum definitions | Header constant groups and native-typed associations |
 | `autoTypes.json` | Handle type definitions | Proposed: header annotations |
 | `emitter.settings.rsp` | Member remaps, enum additions | Proposed: header annotations |
-| `WithSetLastError.rsp` | SetLastError functions | Proposed: `_Sets_last_error_` |
-| `supportedOS.rsp` | OS version requirements | Proposed: `_Min_os_version_()` |
+| `WithSetLastError.rsp` | SetLastError functions | `_Win32_SetLastError_` |
+| `supportedOS.rsp` | OS version requirements | Fixed `_Win32_SupportedOS_*_` annotations/scopes |
 | `libMappings.rsp` | Function→DLL mappings | Auto-generated from .lib files |
 | `documentationMappings.rsp` | Documentation URLs | Stays (external data) |
 | `functionPointerFixups.json` | Fn ptr name fixes | Mostly auto-derived |

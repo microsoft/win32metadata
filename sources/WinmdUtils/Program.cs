@@ -1206,6 +1206,20 @@ namespace WinmdUtilsProgram
 
         private static void CompareFieldsOnTypes(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
+            var metadata1 = type1.ParentModule.PEFile.Metadata;
+            var metadata2 = type2.ParentModule.PEFile.Metadata;
+            var layout1 = metadata1.GetTypeDefinition((TypeDefinitionHandle)type1.MetadataToken).Attributes & TypeAttributes.LayoutMask;
+            var layout2 = metadata2.GetTypeDefinition((TypeDefinitionHandle)type2.MetadataToken).Attributes & TypeAttributes.LayoutMask;
+            if (layout1 == TypeAttributes.SequentialLayout || layout2 == TypeAttributes.SequentialLayout)
+            {
+                var fields1 = type1.Fields.Where(field => !field.IsStatic).Select(field => field.Name).ToArray();
+                var fields2 = type2.Fields.Where(field => !field.IsStatic).Select(field => field.Name).ToArray();
+                if (!fields1.SequenceEqual(fields2, StringComparer.Ordinal))
+                {
+                    writer.WriteDifference($"{type1.FullName} : instance field order...{string.Join(", ", fields1)} => {string.Join(", ", fields2)}");
+                }
+            }
+
             Dictionary<string, IField> type2Fields = new Dictionary<string, IField>();
             foreach (var field2 in type2.Fields)
             {
@@ -1350,14 +1364,14 @@ namespace WinmdUtilsProgram
         private static string ConvertAttributesToText(IEnumerable<IAttribute> attrs)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var attr in attrs.OrderBy(a => a.AttributeType.Name))
+            foreach (var attrText in attrs.Select(ConvertAttributeToText).OrderBy(text => text, StringComparer.Ordinal))
             {
                 if (stringBuilder.Length != 0)
                 {
                     stringBuilder.Append(',');
                 }
 
-                stringBuilder.Append(ConvertAttributeToText(attr));
+                stringBuilder.Append(attrText);
             }
 
             if (stringBuilder.Length == 0)
@@ -1418,38 +1432,38 @@ namespace WinmdUtilsProgram
             // Return param
             string returnFullName = $"{methodFullName} : return";
             CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), writer);
-            if (method1.ReturnType.Name != method2.ReturnType.Name)
+            if (method1.ReturnType.ReflectionName != method2.ReturnType.ReflectionName)
             {
-                writer.WriteDifference($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}");
+                writer.WriteDifference($"{returnFullName}...{method1.ReturnType.ReflectionName} => {method2.ReturnType.ReflectionName}");
             }
 
             // Params
-            foreach (var param1 in method1.Parameters)
+            for (int i = 0; i < Math.Min(method1.Parameters.Count, method2.Parameters.Count); i++)
             {
-                var param2 = method2.Parameters.FirstOrDefault(p => p.Name == param1.Name);
-                if (param2 == null)
+                var param1 = method1.Parameters[i];
+                var param2 = method2.Parameters[i];
+                string paramFullName = $"{methodFullName} : parameter {i + 1} ({param1.Name})";
+                if (param1.Name != param2.Name)
                 {
-                    writer.WriteDifference($"{methodFullName}, param {param1.Name} removed");
-                    continue;
+                    writer.WriteDifference($"{paramFullName} : name...{param1.Name} => {param2.Name}");
                 }
 
-                string paramFullName = $"{methodFullName} : {param1.Name}";
-                if (param1.Type.Name != param2.Type.Name)
+                if (param1.Type.ReflectionName != param2.Type.ReflectionName)
                 {
-                    writer.WriteDifference($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}");
+                    writer.WriteDifference($"{paramFullName}...{param1.Type.ReflectionName} => {param2.Type.ReflectionName}");
                 }
 
                 CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), writer);
             }
 
-            foreach (var param2 in method2.Parameters)
+            for (int i = method2.Parameters.Count; i < method1.Parameters.Count; i++)
             {
-                var found = method1.Parameters.Any(p => p.Name == param2.Name);
-                if (!found)
-                {
-                    string name = !string.IsNullOrEmpty(param2.Name) ? param2.Name : param2.Type.Name;
-                    writer.WriteDifference($"{methodFullName}, param {name} added");
-                }
+                writer.WriteDifference($"{methodFullName}, parameter {i + 1} ({method1.Parameters[i].Name}) removed");
+            }
+
+            for (int i = method1.Parameters.Count; i < method2.Parameters.Count; i++)
+            {
+                writer.WriteDifference($"{methodFullName}, parameter {i + 1} ({method2.Parameters[i].Name}) added");
             }
 
             return writer.DifferencesCount == before;
@@ -1458,6 +1472,20 @@ namespace WinmdUtilsProgram
         private static bool CompareMethodsOnType(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
             int before = writer.DifferencesCount;
+
+            if (type1.Kind == TypeKind.Interface || type2.Kind == TypeKind.Interface)
+            {
+                var methods1 = type1.Methods.Where(method => !method.IsStatic)
+                    .Select(method => $"{method.Name}({string.Join(",", method.Parameters.Select(parameter => parameter.Type.ReflectionName))})")
+                    .ToArray();
+                var methods2 = type2.Methods.Where(method => !method.IsStatic)
+                    .Select(method => $"{method.Name}({string.Join(",", method.Parameters.Select(parameter => parameter.Type.ReflectionName))})")
+                    .ToArray();
+                if (!methods1.SequenceEqual(methods2, StringComparer.Ordinal))
+                {
+                    writer.WriteDifference($"{type1.FullName} : interface method order...{string.Join(", ", methods1)} => {string.Join(", ", methods2)}");
+                }
+            }
 
             var type1Methods = GetMethodMap(type1);
             var type2Methods = GetMethodMap(type2);
@@ -1503,6 +1531,13 @@ namespace WinmdUtilsProgram
         private static bool CompareTypes(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
             int before = writer.DifferencesCount;
+
+            var bases1 = type1.DirectBaseTypes.Select(type => type.ReflectionName).ToArray();
+            var bases2 = type2.DirectBaseTypes.Select(type => type.ReflectionName).ToArray();
+            if (!bases1.SequenceEqual(bases2, StringComparer.Ordinal))
+            {
+                writer.WriteDifference($"{type1.FullName} : base types...{string.Join(", ", bases1)} => {string.Join(", ", bases2)}");
+            }
 
             CompareFieldsOnTypes(type1, type2, writer);
             CompareMethodsOnType(type1, type2, writer);
