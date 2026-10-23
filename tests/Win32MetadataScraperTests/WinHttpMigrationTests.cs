@@ -613,10 +613,25 @@ namespace Win32MetadataScraperTests
             foreach (string path in patches.Where(path => File.ReadAllText(Path.Combine(root, path))
                 .Contains("win32metadata_annotations.h", StringComparison.Ordinal)))
                 Assert.Contains("#include <win32metadata_annotations.h>", File.ReadAllText(Path.Combine(root, path)));
-            Assert.DoesNotContain(recipe.RootElement.GetProperty("midl").GetProperty("inputs").EnumerateArray(),
-                input => input.GetProperty("path").GetString() == @"shared\win32metadata_annotations.h");
-            Assert.Equal(File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h")),
+            var midlInputs = recipe.RootElement.GetProperty("midl").GetProperty("inputs").EnumerateArray().ToArray();
+            var helper = Assert.Single(midlInputs.Where(input => !input.TryGetProperty("sdkPath", out _)));
+            Assert.Equal(@"shared\win32metadata_annotations.h", helper.GetProperty("path").GetString());
+            Assert.Single(midlInputs.Where(input => string.Equals(input.GetProperty("path").GetString(),
+                @"shared\win32metadata_annotations.h", StringComparison.OrdinalIgnoreCase)));
+            Assert.Equal(new[] { "path", "sourceSha256" },
+                helper.EnumerateObject().Select(property => property.Name).OrderBy(name => name, StringComparer.Ordinal));
+            Assert.Equal("8654A090389AC88792F40FDEEBB9B298F2C8427136BB0D1B5E39E90D70D48B5D",
+                helper.GetProperty("sourceSha256").GetString());
+            byte[] helperBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h"));
+            Assert.Equal(helper.GetProperty("sourceSha256").GetString(), Convert.ToHexString(SHA256.HashData(helperBytes)));
+            Assert.Equal(helperBytes,
                 File.ReadAllBytes(Path.Combine(root, "..", "RecompiledIdlHeaders", "shared", "win32metadata_annotations.h")));
+            var oaidl = Assert.Single(midlInputs.Where(input => input.GetProperty("path").GetString() == @"um\oaidl.idl"));
+            Assert.Equal(oaidl.GetProperty("sdkSha256").GetString(), Convert.ToHexString(SHA256.HashData(
+                File.ReadAllBytes(Path.Combine(root, "..", "RecompiledIdlHeaders", "um", "oaidl.idl")))));
+            string[] oaidlAdditions = HeaderMigrationAssertions.AddedSource(@"um\oaidl.idl").Split('\n');
+            Assert.Contains("#include <win32metadata_annotations.h>", oaidlAdditions);
+            Assert.Contains("cpp_quote(\"#include <win32metadata_annotations.h>\")", oaidlAdditions);
             foreach (string idl in new[] { "waasapi", "propidlbase" })
             {
                 string text = File.ReadAllText(Path.Combine(root, @"um\" + idl + ".idl.patch"));
@@ -4529,16 +4544,28 @@ namespace Win32MetadataScraperTests
                 }
             }
             Assert.Empty(retained);
-            var missing = TemporaryPowerEnumUses.Where(use => use.Owner == "PowerSettingAccessCheckEx"
-                ? !Regex.IsMatch(HeaderMigrationAssertions.PatchedSource(@"um\powrprof.h"),
+            var missing = TemporaryPowerEnumUses.Where(use => use.Owner switch
+            {
+                "PowerDeterminePlatformRoleEx" => !Regex.IsMatch(HeaderMigrationAssertions.PatchedSource(@"um\powerbase.h"),
+                    @"\bPOWER_PLATFORM_ROLE\s+WINAPI\s+PowerDeterminePlatformRoleEx\s*\(\s*_In_\s+ULONG\s+" +
+                    Regex.Escape(use.Member) + @"\s*\)\s*;") ||
+                    !HeaderMigrationAssertions.AddedSource(@"um\powerbase.h").Split('\n').Contains(
+                        $"/* Win32Metadata: parameter ::{use.Owner}::{use.Member} => AssociatedEnum({use.Enum}) */",
+                        StringComparer.Ordinal),
+                "PowerSettingAccessCheckEx" => !Regex.IsMatch(HeaderMigrationAssertions.PatchedSource(@"um\powrprof.h"),
                     @"\bPowerSettingAccessCheckEx\s*\(\s*_In_\s+POWER_DATA_ACCESSOR\s+AccessFlags\s*,\s*" +
                     @"_In_opt_\s+CONST\s+GUID\s*\*\s*PowerGuid\s*,\s*" +
                     @"_Win32_AssociatedEnum_\(" + Regex.Escape(use.Enum) + @"\)\s+_In_\s+REGSAM\s+" +
-                    Regex.Escape(use.Member) + @"\s*\)\s*;")
-                : !HeaderMigrationAssertions.AddedSource(
+                    Regex.Escape(use.Member) + @"\s*\)\s*;"),
+                "PowerRegisterSuspendResumeNotification" => !Regex.IsMatch(HeaderMigrationAssertions.PatchedSource(@"um\powerbase.h"),
+                    @"\bPowerRegisterSuspendResumeNotification\s*\(\s*_Win32_AssociatedEnum_\(" +
+                    Regex.Escape(use.Enum) + @"\)\s+_In_\s+DWORD\s+" + Regex.Escape(use.Member) +
+                    @"\s*,\s*_In_\s+HANDLE\s+Recipient\s*,\s*_Out_\s+PHPOWERNOTIFY\s+RegistrationHandle\s*\)\s*;"),
+                _ => !HeaderMigrationAssertions.AddedSource(
                     use.Owner == "PowerDeterminePlatformRoleEx" ? @"um\powerbase.h" :
                         use.Owner.StartsWith("PowerSetting", StringComparison.Ordinal) ? @"um\powersetting.h" : @"um\powrprof.h")
-                    .Contains("_Win32_AssociatedEnum_(" + use.Enum + ")", StringComparison.Ordinal)).ToArray();
+                    .Contains("_Win32_AssociatedEnum_(" + use.Enum + ")", StringComparison.Ordinal),
+            }).ToArray();
             Assert.True(missing.Length == 0, "Header-only association coverage is incomplete: " +
                 string.Join(", ", missing.Select(use => use.Owner + "::" + use.Member + "=" + use.Enum)));
             string power = File.ReadAllText(Path.Combine(project, "patches", "um", "powrprof.h.patch"));
