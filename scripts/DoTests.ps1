@@ -20,4 +20,9 @@ Write-Host "*** Running scraper discovery tests..." -ForegroundColor Blue
 dotnet test "$PSScriptRoot\..\tests\Win32MetadataScraperTests" -c Release
 ThrowOnNativeProcessError
 
+Write-Host "*** Running C# source-to-WinMD emitter tests..." -ForegroundColor Blue
+
+dotnet test "$PSScriptRoot\..\tests\ClangSharpSourceToWinmdTests" -c Release
+ThrowOnNativeProcessError
+
 & $PSScriptRoot\TestWinmdBinary.ps1 -SkipInstallTools

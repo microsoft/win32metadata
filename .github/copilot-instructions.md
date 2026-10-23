@@ -22,14 +22,14 @@ dotnet build generation/WinSDK -c Release -p:ScanArch=crossarch -t:ScrapeHeaders
 ## Test Commands
 
 ```powershell
-# Run all tests
+# Run utility, scraper, emitter, and WinMD integrity suites
 ./scripts/DoTests.ps1
 
 # Individual test suites
 dotnet test tests/MetadataUtils.Tests -c Release
 dotnet test tests/Windows.Win32.Tests -c Release          # winmd integrity tests
 dotnet test tests/Win32MetadataScraperTests -c Release     # scraper heuristic tests
-dotnet test tests/ClangSharpSourceToWinmdTests -c Release
+dotnet test tests/ClangSharpSourceToWinmdTests -c Release    # C# source-to-WinMD emitter tests
 
 # Single test
 dotnet test tests/Win32MetadataScraperTests -c Release --filter "TransitiveInclude"
