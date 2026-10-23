@@ -33,7 +33,7 @@ struct Other { unsigned flags; };
 enum LATE_FLAGS { FLAG_FIRST = 1, FLAG_SECOND = 4 };
 " + $"_Win32_AnnotateField_({(cInterface ? "tagRecord" : "SameRecord")}::flags, _Win32_AssociatedEnum_(LATE_FLAGS));",
                 extraSettings: cInterface ? "--additional=-DCINTERFACE\n" : "");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("MSInheritance");
             string source = fixture.ReadSource();
             var root = CSharpSyntaxTree.ParseText(source).GetRoot();
             var fields = root.DescendantNodes().OfType<FieldDeclarationSyntax>()
@@ -586,7 +586,7 @@ enum NamedFlags { NamedNone = 0, NamedFirst = 1, NamedSecond = 2 };
 #pragma clang attribute pop
 enum Ordinary { OrdinaryFirst = 1 };
 ");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("FlagEnum", "FlagEnum");
             var enums = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot()
                 .DescendantNodes().OfType<EnumDeclarationSyntax>().ToArray();
             foreach (string name in new[] { "AnonymousFlags", "NamedFlags" })
@@ -814,7 +814,8 @@ int F();
             Assert.Contains("enum OPTIONS", fixture.ReadAdditionalTypes());
             File.WriteAllText(fixture.Header, "int F();\n");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            Assert.Empty(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<MemberDeclarationSyntax>());
         }
 
         [Fact]
@@ -914,20 +915,59 @@ void* __stdcall BorrowLater(void* value);
         }
 
         [Theory]
-        [InlineData("namespace Outer { _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenInScope(); int CloseLater(void*); }")]
-        [InlineData("_Win32_RAIIFree_(Outer::CloseLater, -1, 0) void* OpenQualified(); namespace Outer { int CloseLater(void*); }")]
-        [InlineData("namespace Outer { int CloseLater(void*); } using namespace Outer; _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenImported();")]
-        [InlineData("namespace Outer { inline namespace V1 { int CloseLater(void*); } _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenInline(); }")]
-        [InlineData("namespace { int CloseLater(void*); } _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenAnonymous();")]
-        [InlineData("_Win32_RAIIFree_(::CloseLater, -1, 0) void* OpenGlobal(); int CloseLater(void*);")]
-        public void RaiiCleanupNamesBindActualNativeScopes(string declarations)
+        [InlineData("namespace Outer { _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenInScope(); int CloseLater(void*); }", null)]
+        [InlineData("_Win32_RAIIFree_(Outer::CloseLater, -1, 0) void* OpenQualified(); namespace Outer { int CloseLater(void*); }", null)]
+        [InlineData("namespace Outer { int CloseLater(void*); } using namespace Outer; _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenImported();", "UsingDirective")]
+        [InlineData("namespace Outer { inline namespace V1 { int CloseLater(void*); } _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenInline(); }", null)]
+        [InlineData("namespace { int CloseLater(void*); } _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenAnonymous();", "Namespace")]
+        [InlineData("_Win32_RAIIFree_(::CloseLater, -1, 0) void* OpenGlobal(); int CloseLater(void*);", null)]
+        public void RaiiCleanupNamesBindActualNativeScopes(string declarations, string unsupportedNativeDeclaration)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations,
                 extraSettings: "--exclude\nCloseLater\n");
+            using (var index = CXIndex.Create(false, false))
+            {
+                Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index,
+                    Path.Combine(fixture.DirectoryPath, "test.cpp"), new[]
+                    {
+                        "--language=c++", "--target=x86_64-pc-windows-msvc",
+                        "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
+                        "-DWIN32METADATA", "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1",
+                    }, ReadOnlySpan<CXUnsavedFile>.Empty,
+                    CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes |
+                        CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord, out var handle));
+                using var unit = TranslationUnit.GetOrCreate(handle);
+                for (uint i = 0; i < handle.NumDiagnostics; i++)
+                {
+                    using var diagnostic = handle.GetDiagnostic(i);
+                    Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
+                        diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+                }
+                _ = new HeaderAnnotationProcessor(unit, new Dictionary<string, string>(), "Test",
+                    new[] { fixture.Header }, new HashSet<string> { "CloseLater" }, excludeFunctionsWithBody: false);
+            }
+            if (unsupportedNativeDeclaration != null)
+            {
+                using var control = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations,
+                    annotationsEnabled: false, extraSettings: "--exclude\nCloseLater\n");
+                AssertUnsupportedScope(control);
+                AssertUnsupportedScope(fixture);
+                return;
+            }
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             Assert.Contains("RAIIFree(\"CloseLater\")", fixture.ReadSource());
             Assert.Contains("InvalidHandleValue(-1L)", fixture.ReadSource());
             Assert.Contains("InvalidHandleValue(0L)", fixture.ReadSource());
+
+            void AssertUnsupportedScope(NativeFixture candidate)
+            {
+                Assert.True(candidate.Run() < 0, candidate.Diagnostics);
+                Assert.Contains($"Unsupported anonymous named declaration: '{unsupportedNativeDeclaration}'.",
+                    candidate.Diagnostics);
+                Assert.DoesNotContain("WMA001", candidate.Diagnostics);
+                Assert.False(File.Exists(candidate.Output));
+                Assert.False(File.Exists(Path.ChangeExtension(candidate.Output, ".header-types.cs")));
+            }
         }
 
         [Fact]
@@ -1135,7 +1175,7 @@ enum class [[clang::flag_enum]] ScopedFlags : unsigned { None = 0, A = 1 };
 _Win32_SupportedOS_10240_ typedef unsigned NATIVE_ALIAS;
 int __stdcall Retval(_Win32_Retval_ int* result);
 ");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("FlagEnum");
             string source = fixture.ReadSource();
             Assert.Contains("DllImport(\"header.dll\"", source);
             Assert.Contains("SetLastError = true", source);
@@ -1525,7 +1565,7 @@ _Win32_Enum_(GROUP_TWO, unsigned, FIRST);
             int exitCode = fixture.Run();
             if (valid)
             {
-                Assert.Equal(0, exitCode);
+                fixture.AssertGeneratorWarnings(exitCode, "MSInheritance");
                 Assert.DoesNotContain("WMA001", fixture.Diagnostics);
                 Assert.Contains("RAIIFree(\"CloseThing\")", fixture.ReadSource());
                 Assert.Contains("AssociatedEnum(\"OPTIONS\")", fixture.ReadSource());
@@ -1932,15 +1972,15 @@ _Win32_RAIIFree_(CloseThing, 0) void* Produce();
         }
 
         [Theory]
-        [InlineData("[[nodiscard]]")]
-        [InlineData("[[deprecated(\"legacy\")]]")]
-        [InlineData("__declspec(deprecated(\"legacy\"))")]
-        [InlineData("__attribute__((warn_unused_result))")]
-        public void OtherPrefixAttributesCanPrecedeMetadata(string prefix)
+        [InlineData("[[nodiscard]]", "WarnUnusedResult")]
+        [InlineData("[[deprecated(\"legacy\")]]", null)]
+        [InlineData("__declspec(deprecated(\"legacy\"))", null)]
+        [InlineData("__attribute__((warn_unused_result))", "WarnUnusedResult")]
+        public void OtherPrefixAttributesCanPrecedeMetadata(string prefix, string warning)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
                 $"{prefix} _Win32_RAIIFree_(CloseThing, 0) void* Produce();");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess(warning == null ? Array.Empty<string>() : new[] { warning });
             Assert.Contains("RAIIFree(\"CloseThing\")", fixture.ReadSource());
         }
 
@@ -1952,7 +1992,7 @@ _Win32_RAIIFree_(CloseThing, 0) void* Produce();
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "test.cpp"),
                 $"#include \"{annotations.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n#include \"test.h\"\n");
             File.WriteAllText(fixture.Header, "[[nodiscard]] _Win32_RAIIFree_(CloseThing, 0) void* Produce();");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("WarnUnusedResult");
             Assert.Contains("InvalidHandleValue(0L)", fixture.ReadSource());
         }
 
@@ -2496,12 +2536,12 @@ int Conflicting(/* [out] */ unsigned* value);
         internal sealed class NativeFixture : IDisposable
         {
             internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true,
-                string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "")
+                string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "", string directoryRoot = null)
             {
                 string annotations = Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h");
                 if (!File.Exists(annotations))
                     throw new FileNotFoundException("Annotation header not found.", annotations);
-                DirectoryPath = Path.Combine(Path.GetTempPath(), "win32-annotations-" + Guid.NewGuid().ToString("N"));
+                DirectoryPath = Path.Combine(directoryRoot ?? Path.GetTempPath(), "win32-annotations-" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(DirectoryPath);
                 Header = Path.Combine(DirectoryPath, "test.h");
                 string sal = Path.Combine(AppContext.BaseDirectory, "assets", "sal.h");
@@ -2547,6 +2587,21 @@ generate-cpp-attributes
             internal string Output { get; }
             private string[] Arguments { get; }
             internal string Diagnostics { get; private set; }
+            internal void AssertSuccess(params string[] warnings)
+                => AssertGeneratorWarnings(Run(), warnings);
+
+            internal void AssertGeneratorWarnings(int exitCode, params string[] warnings)
+            {
+                Assert.True(exitCode == warnings.Length, Diagnostics);
+                Assert.Equal(warnings.Select(warning =>
+                    $"Unsupported attribute: '{warning}'. Generated bindings may be incomplete."),
+                    Regex.Matches(Diagnostics, @"(?m)^\s*Warning \([^\r\n]+\): ([^\r\n]+)")
+                        .Select(match => match.Groups[1].Value.TrimEnd()));
+                Assert.DoesNotContain("Error (", Diagnostics);
+                Assert.DoesNotContain("error:", Diagnostics);
+                Assert.True(File.Exists(Output), Diagnostics);
+            }
+
             internal int Run()
             {
                 var start = new ProcessStartInfo("dotnet")

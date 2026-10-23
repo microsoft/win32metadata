@@ -1,3 +1,4 @@
+diff --git a/um/dpa_dsa.h b/um/dpa_dsa.h
 --- a/um/dpa_dsa.h
 +++ b/um/dpa_dsa.h
 @@ -15,6 +15,11 @@
@@ -12,17 +13,24 @@
  #if defined(_MSC_VER) && (_MSC_VER >= 1200)
  #pragma warning(push)
  #pragma warning(disable:4001) /* nonstandard extension : single line comment */
-@@ -71,7 +76,9 @@
+@@ -69,9 +74,14 @@
+ // Dynamic structure array
+ struct _DSA;
  typedef struct _DSA *HDSA;
- 
- 
+-
+-
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDSA HDSA;
++#endif
++
++
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI HDSA   WINAPI DSA_Create(int cbItem, int cItemGrow);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL   WINAPI DSA_Destroy(_Inout_opt_ HDSA hdsa);
  WINCOMMCTRLAPI void   WINAPI DSA_DestroyCallback(_Inout_opt_ HDSA hdsa, _In_ PFNDAENUMCALLBACK pfnCB, _In_opt_ void *pData);
  #ifdef __cplusplus
-@@ -80,7 +87,9 @@
+@@ -80,7 +90,9 @@
      DSA_DestroyCallback(hdsa, (PFNDAENUMCALLBACK)pfnCB, pData);
  }
  #endif
@@ -32,7 +40,7 @@
  WINCOMMCTRLAPI BOOL   WINAPI DSA_DeleteAllItems(_Inout_ HDSA hdsa);
  WINCOMMCTRLAPI void   WINAPI DSA_EnumCallback(_In_ HDSA hdsa, _In_ PFNDAENUMCALLBACK pfnCB, _In_opt_ void *pData);
  #ifdef __cplusplus
-@@ -89,15 +98,20 @@
+@@ -89,15 +101,20 @@
      DSA_EnumCallback(hdsa, (PFNDAENUMCALLBACK)pfnCB, pData);
  }
  #endif
@@ -54,10 +62,17 @@
  WINCOMMCTRLAPI ULONGLONG WINAPI DSA_GetSize(_In_opt_ HDSA hdsa);
  WINCOMMCTRLAPI BOOL   WINAPI DSA_Sort(_Inout_ HDSA pdsa, _In_ PFNDACOMPARE pfnCompare, _In_ LPARAM lParam);
  #ifdef __cplusplus
-@@ -121,9 +135,13 @@
+@@ -119,11 +136,18 @@
+ // Dynamic pointer array
+ struct _DPA;
  typedef struct _DPA *HDPA;
- 
- 
+-
+-
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDPA HDPA;
++#endif
++
++
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI HDPA   WINAPI DPA_Create(int cItemGrow);
 +_Win32_SupportedOS_WindowsVista_
@@ -68,7 +83,7 @@
  WINCOMMCTRLAPI BOOL   WINAPI DPA_Destroy(_Inout_opt_ HDPA hdpa);
  WINCOMMCTRLAPI void   WINAPI DPA_DestroyCallback(_Inout_opt_ HDPA hdpa, _In_ PFNDAENUMCALLBACK pfnCB, _In_opt_ void *pData);
  #ifdef __cplusplus
-@@ -132,7 +150,9 @@
+@@ -132,7 +156,9 @@
      DPA_DestroyCallback(hdpa, (PFNDAENUMCALLBACK)pfnCB, pData);
  }
  #endif
@@ -78,7 +93,7 @@
  WINCOMMCTRLAPI BOOL   WINAPI DPA_DeleteAllPtrs(_Inout_ HDPA hdpa);
  WINCOMMCTRLAPI void   WINAPI DPA_EnumCallback(_In_opt_ HDPA hdpa, _In_opt_ PFNDAENUMCALLBACK pfnCB, _In_opt_ void *pData);
  #ifdef __cplusplus
-@@ -141,10 +161,14 @@
+@@ -141,10 +167,14 @@
      DPA_EnumCallback(hdpa, (PFNDAENUMCALLBACK)pfnCB, pData);
  }
  #endif
@@ -94,7 +109,7 @@
  WINCOMMCTRLAPI int    WINAPI DPA_GetPtrIndex(_In_ HDPA hdpa, _In_opt_ const void *p);
  
  #define DPA_GetPtrCount(hdpa)       (*(int *)(hdpa))
-@@ -155,6 +179,7 @@
+@@ -155,6 +185,7 @@
  #define DPA_AppendPtr(hdpa, pitem)  DPA_InsertPtr(hdpa, DA_LAST, pitem)
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -102,7 +117,7 @@
  WINCOMMCTRLAPI ULONGLONG WINAPI DPA_GetSize(_In_opt_ HDPA hdpa);
  #endif  // NTDDI_VISTA
  
-@@ -190,7 +215,9 @@
+@@ -190,7 +221,9 @@
  struct IStream;
  typedef HRESULT (CALLBACK *PFNDPASTREAM)(_In_ DPASTREAMINFO * pinfo, _In_ struct IStream * pstream, _In_opt_ void *pvInstData);
  
@@ -112,7 +127,7 @@
  WINCOMMCTRLAPI HRESULT WINAPI DPA_SaveStream(_In_ HDPA hdpa, _In_ PFNDPASTREAM pfn, _In_ struct IStream * pstream, _In_opt_ void *pvInstData);
  
  // Merge two DPAs.  This takes two (optionally) presorted arrays and merges
-@@ -223,14 +250,21 @@
+@@ -223,14 +256,21 @@
  // the pointer of the merged item.  It's okay to simply use pvDest
  // as the returned pointer.
  //
@@ -136,7 +151,7 @@
  WINCOMMCTRLAPI BOOL WINAPI DPA_Merge(_Inout_ HDPA hdpaDest, _In_ HDPA hdpaSrc, _In_ DWORD dwFlags, _In_ PFNDACOMPARE pfnCompare, _In_ PFNDPAMERGE pfnMerge, _In_ LPARAM lParam);
  #ifdef __cplusplus
  extern "C++" __inline BOOL DPA_Merge(_Inout_ HDPA hdpaDest, _In_ HDPA hdpaSrc, _In_ DWORD dwFlags, _In_ PFNDACOMPARECONST pfnCompare, _In_ PFNDPAMERGECONST pfnMerge, _In_ LPARAM lParam)
-@@ -257,9 +291,9 @@
+@@ -257,9 +297,9 @@
  #define DPAS_INSERTBEFORE       0x0002
  #define DPAS_INSERTAFTER        0x0004
  
@@ -149,7 +164,7 @@
  {
      return DPA_Search(hdpa, const_cast<void *>(pFind), iStart, (PFNDACOMPARE)pfnCompare, lParam, options);
  }
-@@ -279,6 +313,7 @@
+@@ -279,6 +319,7 @@
  #endif // NO_COMMCTRL_DA
  
  

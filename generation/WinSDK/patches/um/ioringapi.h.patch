@@ -1,5 +1,4 @@
 diff --git a/um/ioringapi.h b/um/ioringapi.h
-index f7ec762e..f2a9ddf6 100644
 --- a/um/ioringapi.h
 +++ b/um/ioringapi.h
 @@ -9,6 +9,7 @@
@@ -10,7 +9,17 @@ index f7ec762e..f2a9ddf6 100644
  #include <apiset.h>
  #include <apisetcconv.h>
  #include <minwindef.h>
-@@ -205,7 +206,7 @@ CreateIoRing(
+@@ -26,6 +27,9 @@
+ // Opaque `HANDLE` for an IORING
+ // Release resources held by this using CloseIoRing(); [NOT CloseHandle()!]
+ DECLARE_HANDLE(HIORING);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIORING HIORING;
++#endif
+ 
+ // Flags to alter the behavior of the kernel for a submission queue entry
+ typedef enum IORING_SQE_FLAGS
+@@ -205,7 +209,7 @@
      IORING_CREATE_FLAGS flags,
      UINT32 submissionQueueSize,
      UINT32 completionQueueSize,
@@ -19,7 +28,7 @@ index f7ec762e..f2a9ddf6 100644
      );
  
  STDAPI GetIoRingInfo(_In_ HIORING ioRing, _Out_ IORING_INFO* info);
-@@ -214,7 +215,7 @@ STDAPI SubmitIoRing(_In_ HIORING ioRing, UINT32 waitOperations, UINT32 milliseco
+@@ -214,7 +218,7 @@
  
  STDAPI CloseIoRing(_In_ _Post_ptr_invalid_ HIORING ioRing);
  

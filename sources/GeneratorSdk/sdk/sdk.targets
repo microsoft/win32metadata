@@ -33,6 +33,7 @@
     <EmitterFunctionPointerFixupsRsp>$(GeneratedDir)\emitter.functionPointerFixups.generated.rsp</EmitterFunctionPointerFixupsRsp>
     <EmitterAutoFnPtrRsp>$(GeneratedDir)\emitter.autoFnPtr.$(ScanArch).generated.rsp</EmitterAutoFnPtrRsp>
     <ScraperAutoTypesRsp>$(GeneratedDir)\scraper.autoTypes.generated.rsp</ScraperAutoTypesRsp>
+    <GeneratedSourceInputsFile>$(GeneratedDir)\source-inputs.generated.txt</GeneratedSourceInputsFile>
     <ScraperAutoRemapsRsp>$(GeneratedDir)\scraper.autoRemaps.generated.rsp</ScraperAutoRemapsRsp>
     <FinalConstantsScraperHeaderFile>$(GeneratedDir)\ConstantsScraper.header.generated.txt</FinalConstantsScraperHeaderFile>
     <FinalScraperHeaderFile>$(GeneratedDir)\scraper.header.generated.txt</FinalScraperHeaderFile>
@@ -107,7 +108,31 @@
 
   </Target>
 
+  <Target Name="TrackGeneratedSourceInputs">
+    <ItemGroup>
+      <_CurrentGeneratedSourceInputs Include="@(AutoType -> 'AutoType:%(FullPath)');@(AutoTypesForSettingsOnly -> 'AutoTypesForSettingsOnly:%(FullPath)');@(ManualCs -> 'ManualCs:%(FullPath)')"/>
+      <_OwnedScrapedHeadersMarkers Include="$(GeneratedDir)\scannedheaders.*.txt"/>
+    </ItemGroup>
+    <ReadLinesFromFile File="$(GeneratedSourceInputsFile)" Condition="Exists('$(GeneratedSourceInputsFile)')">
+      <Output TaskParameter="Lines" ItemName="_PreviousGeneratedSourceInputs"/>
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <_GeneratedSourceInputsUnchanged>false</_GeneratedSourceInputsUnchanged>
+      <_GeneratedSourceInputsUnchanged Condition="Exists('$(GeneratedSourceInputsFile)') and '@(_PreviousGeneratedSourceInputs)' == '@(_CurrentGeneratedSourceInputs)'">true</_GeneratedSourceInputsUnchanged>
+    </PropertyGroup>
+    <Delete
+      Files="$(ScraperAutoTypesRsp);@(_OwnedScrapedHeadersMarkers);$(ScrapedConstantsMarker);$(OutputWinmd)"
+      Condition="'$(_GeneratedSourceInputsUnchanged)' != 'true'"/>
+    <MakeDir Directories="$(GeneratedDir)"/>
+    <WriteLinesToFile File="$(GeneratedSourceInputsFile)" Lines="@(_CurrentGeneratedSourceInputs)" Overwrite="true" WriteOnlyWhenDifferent="true"
+      Condition="'@(ManualCs)' == ''"/>
+    <WriteLinesToFile
+      File="$(ScraperAutoTypesRsp)" Overwrite="true" WriteOnlyWhenDifferent="true"
+      Condition="'@(AutoType);@(AutoTypesForSettingsOnly)' == ';'"/>
+  </Target>
+
   <Target Name="PrepSettingsForAutoTypes" BeforeTargets="Build"
+    DependsOnTargets="TrackGeneratedSourceInputs"
     Inputs="@(AutoType);@(AutoTypesForSettingsOnly)"
     Outputs="$(ScraperAutoTypesRsp)">
 
@@ -218,14 +243,21 @@
       ExcludeFromCrossarch="$(ExcludeFromCrossarch)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
       PartitionFilter="$(PartitionFilter)"
+      EvaluateNativeConstants="$(EvaluateNativeConstants)"
       NuGetPackageSource="$(NuGetPackageSource)"/>
 
   </Target>
 
   <Target Name="CopyManualFilesToScraped" BeforeTargets="Build"
-    Inputs="@(ManualCs)"
-    Outputs="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')">
-    <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')" />
+    DependsOnTargets="TrackGeneratedSourceInputs">
+    <ItemGroup>
+      <_CurrentManualCsOutputs Include="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')"/>
+      <_RetiredManualCsOutputs Include="$(GeneratedDir)\*.manual.cs" Exclude="@(_CurrentManualCsOutputs)"/>
+    </ItemGroup>
+    <Delete Files="@(_RetiredManualCsOutputs)"/>
+    <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(_CurrentManualCsOutputs)" SkipUnchangedFiles="$(_GeneratedSourceInputsUnchanged)" />
+    <!-- Commit manual identities only after their destination copies succeed. -->
+    <WriteLinesToFile File="$(GeneratedSourceInputsFile)" Lines="@(_CurrentGeneratedSourceInputs)" Overwrite="true" WriteOnlyWhenDifferent="true"/>
   </Target>
 
   <ItemGroup>
@@ -245,7 +277,7 @@
     </PropertyGroup>
 
     <ScrapeConstants
-      Condition="'$(SkipScraping)' != 'true'"
+      Condition="'$(SkipScraping)' != 'true' or '$(EvaluateNativeConstants)' == 'true'"
       DefaultNamespace="$(DefaultNamespace)"
       ScraperOutputDir="$(GeneratedDir)"
       ResponseFiles="@(ConstantsScraperRsp)"

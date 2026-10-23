@@ -1,5 +1,5 @@
 diff --git a/um/mstask.idl b/um/mstask.idl
-index 9a1d6382..e0a6cff1 100644
+index 9a1d6382..cc05ed8a 100644
 --- a/um/mstask.idl
 +++ b/um/mstask.idl
 @@ -12,6 +12,8 @@
@@ -11,7 +11,7 @@ index 9a1d6382..e0a6cff1 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -165,6 +167,7 @@ cpp_quote("// {148BD52B-A2AB-11CE-B11F-00AA00530503}")
+@@ -165,6 +167,7 @@
  cpp_quote("DEFINE_GUID(IID_ITaskTrigger, 0x148BD52BL, 0xA2AB, 0x11CE, 0xB1, 0x1F, 0x00, 0xAA, 0x00, 0x53, 0x05, 0x03);")
  
  interface ITaskTrigger;
@@ -19,7 +19,7 @@ index 9a1d6382..e0a6cff1 100644
  [
      local,
      object,
-@@ -196,6 +199,7 @@ cpp_quote("// {a6b952f0-a4b1-11d0-997d-00aa006887ec}")
+@@ -196,6 +199,7 @@
  cpp_quote("DEFINE_GUID(IID_IScheduledWorkItem, 0xa6b952f0L, 0xa4b1, 0x11d0, 0x99, 0x7d, 0x00, 0xaa, 0x00, 0x68, 0x87, 0xec);")
  
  interface IScheduledWorkItem;
@@ -27,7 +27,7 @@ index 9a1d6382..e0a6cff1 100644
  [
      local,
      object,
-@@ -311,6 +315,7 @@ cpp_quote("// {148BD524-A2AB-11CE-B11F-00AA00530503}")
+@@ -311,6 +315,7 @@
  cpp_quote("DEFINE_GUID(IID_ITask, 0x148BD524L, 0xA2AB, 0x11CE, 0xB1, 0x1F, 0x00, 0xAA, 0x00, 0x53, 0x05, 0x03);")
  
  interface ITask;
@@ -35,7 +35,7 @@ index 9a1d6382..e0a6cff1 100644
  [
      local,
      object,
-@@ -364,6 +369,7 @@ cpp_quote("// {148BD528-A2AB-11CE-B11F-00AA00530503}")
+@@ -364,6 +369,7 @@
  cpp_quote("DEFINE_GUID(IID_IEnumWorkItems, 0x148BD528L, 0xA2AB, 0x11CE, 0xB1, 0x1F, 0x00, 0xAA, 0x00, 0x53, 0x05, 0x03);")
  
  interface IEnumWorkItems;
@@ -43,7 +43,7 @@ index 9a1d6382..e0a6cff1 100644
  [
      local,
      object,
-@@ -401,6 +407,7 @@ cpp_quote("// {148BD527-A2AB-11CE-B11F-00AA00530503}")
+@@ -401,6 +407,7 @@
  cpp_quote("DEFINE_GUID(IID_ITaskScheduler, 0x148BD527L, 0xA2AB, 0x11CE, 0xB1, 0x1F, 0x00, 0xAA, 0x00, 0x53, 0x05, 0x03);")
  
  interface ITaskScheduler;
@@ -51,7 +51,15 @@ index 9a1d6382..e0a6cff1 100644
  [
      local,
      object,
-@@ -481,6 +488,7 @@ cpp_quote("// {4086658a-cbbb-11cf-b604-00c04fd8d565}")
+@@ -460,6 +467,7 @@
+ 
+ struct _PSP;
+ typedef struct _PSP * HPROPSHEETPAGE;
++cpp_quote("/* Win32Metadata: type ::HPROPSHEETPAGE => NativeTypedef */")
+ 
+ typedef enum _TASKPAGE {
+     TASKPAGE_TASK     = 0,
+@@ -481,6 +489,7 @@
  cpp_quote("DEFINE_GUID(IID_IProvideTaskPage, 0x4086658aL, 0xcbbb, 0x11cf, 0xb6, 0x04, 0x00, 0xc0, 0x4f, 0xd8, 0xd5, 0x65);")
  
  interface IProvideTaskPage;
@@ -59,7 +67,7 @@ index 9a1d6382..e0a6cff1 100644
  [
      local,
      object,
-@@ -496,6 +504,8 @@ interface IProvideTaskPage : IUnknown
+@@ -496,6 +505,8 @@
                  [out] HPROPSHEETPAGE * phPage);
  }
  

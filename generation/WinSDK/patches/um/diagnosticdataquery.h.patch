@@ -1,8 +1,36 @@
 diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
-index 9179f744..d7768ccd 100644
 --- a/um/diagnosticdataquery.h
 +++ b/um/diagnosticdataquery.h
-@@ -16,20 +16,25 @@ extern "C" {
+@@ -5,31 +5,54 @@
+ #include <diagnosticdataquerytypes.h>
+ 
+ DECLARE_HANDLE(HDIAGNOSTIC_DATA_QUERY_SESSION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDIAGNOSTIC_DATA_QUERY_SESSION HDIAGNOSTIC_DATA_QUERY_SESSION;
++#endif
+ DECLARE_HANDLE(HDIAGNOSTIC_REPORT);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDIAGNOSTIC_REPORT HDIAGNOSTIC_REPORT;
++#endif
+ DECLARE_HANDLE(HDIAGNOSTIC_EVENT_TAG_DESCRIPTION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDIAGNOSTIC_EVENT_TAG_DESCRIPTION HDIAGNOSTIC_EVENT_TAG_DESCRIPTION;
++#endif
+ DECLARE_HANDLE(HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION;
++#endif
+ DECLARE_HANDLE(HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION;
++#endif
+ DECLARE_HANDLE(HDIAGNOSTIC_RECORD);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDIAGNOSTIC_RECORD HDIAGNOSTIC_RECORD;
++#endif
+ 
+ #ifdef __cplusplus
+ extern "C" {
  #endif // __cplusplus
  
  // Caller is expected to destroy hSession with DdqCloseSession
@@ -10,8 +38,9 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqCreateSession(
      _In_ DdqAccessLevel accessLevel,
 -    _Out_ HDIAGNOSTIC_DATA_QUERY_SESSION* hSession);
+-
 +    _Win32_RAIIFree_Handle_(DdqCloseSession) _Out_ HDIAGNOSTIC_DATA_QUERY_SESSION* hSession);
- 
++
 +_Win32_SupportedOS_19041_
  STDAPI DdqCloseSession(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession);
@@ -29,7 +58,7 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqGetDiagnosticRecordStats(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ DIAGNOSTIC_DATA_SEARCH_CRITERIA const* searchCriteria,
-@@ -38,64 +43,78 @@ STDAPI DdqGetDiagnosticRecordStats(
+@@ -38,64 +61,78 @@
      _Out_ INT64* maxRowId);
  
  // Caller is expected to free payload with CoTaskMemFree()
@@ -45,8 +74,9 @@ index 9179f744..d7768ccd 100644
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ PCWSTR locale,
 -    _Out_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION* hTagDescription);
+-
 +    _Win32_RAIIFree_Handle_(DdqFreeDiagnosticRecordLocaleTags) _Out_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION* hTagDescription);
- 
++
 +_Win32_SupportedOS_19041_
  STDAPI DdqFreeDiagnosticRecordLocaleTags(
      _In_ HDIAGNOSTIC_EVENT_TAG_DESCRIPTION hTagDescription);
@@ -67,8 +97,9 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqGetDiagnosticRecordProducers(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
 -    _Out_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION* hProducerDescription);
+-
 +    _Win32_RAIIFree_Handle_(DdqFreeDiagnosticRecordProducers) _Out_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION* hProducerDescription);
- 
++
 +_Win32_SupportedOS_19041_
  STDAPI DdqFreeDiagnosticRecordProducers(
      _In_ HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION hProducerDescription);
@@ -90,8 +121,9 @@ index 9179f744..d7768ccd 100644
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ PCWSTR producerName,
 -    _Out_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION* hCategoryDescription);
+-
 +    _Win32_RAIIFree_Handle_(DdqFreeDiagnosticRecordProducerCategories) _Out_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION* hCategoryDescription);
- 
++
 +_Win32_SupportedOS_19041_
  STDAPI DdqFreeDiagnosticRecordProducerCategories(
      _In_ HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION hCategoryDescription);
@@ -111,7 +143,7 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqIsDiagnosticRecordSampledIn(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ const GUID* providerGroup,
-@@ -108,52 +127,63 @@ STDAPI DdqIsDiagnosticRecordSampledIn(
+@@ -108,52 +145,63 @@
      _Out_ BOOL* isSampledIn);
  
  // Invoke DdqFreeDiagnosticRecordPage() to free record
@@ -123,8 +155,9 @@ index 9179f744..d7768ccd 100644
      _In_ UINT32 pageRecordCount,
      _In_ INT64 baseRowId,
 -    _Out_ HDIAGNOSTIC_RECORD* hRecord);
+-
 +    _Win32_RAIIFree_Handle_(DdqFreeDiagnosticRecordPage) _Out_ HDIAGNOSTIC_RECORD* hRecord);
- 
++
 +_Win32_SupportedOS_19041_
  STDAPI DdqFreeDiagnosticRecordPage(
      _In_ HDIAGNOSTIC_RECORD hRecord);
@@ -156,8 +189,9 @@ index 9179f744..d7768ccd 100644
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ UINT32 reportStoreType,
 -    _Out_ HDIAGNOSTIC_REPORT* hReport);
+-
 +    _Win32_RAIIFree_Handle_(DdqFreeDiagnosticReport) _Out_ HDIAGNOSTIC_REPORT* hReport);
- 
++
 +_Win32_SupportedOS_19041_
  STDAPI DdqFreeDiagnosticReport(
      _In_ HDIAGNOSTIC_REPORT hReport);
@@ -177,7 +211,7 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqExtractDiagnosticReport(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ UINT32 reportStoreType,
-@@ -161,6 +191,7 @@ STDAPI DdqExtractDiagnosticReport(
+@@ -161,6 +209,7 @@
      _In_ PCWSTR destinationPath);
  
  // Caller is expected to free tagStats with CoTaskMemFree()
@@ -185,7 +219,7 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqGetDiagnosticRecordTagDistribution(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_reads_(producerNameCount) PCWSTR* producerNames,
-@@ -169,6 +200,7 @@ STDAPI DdqGetDiagnosticRecordTagDistribution(
+@@ -169,6 +218,7 @@
      _Out_ UINT32* statCount);
  
  // Caller is expected to free binaryStats with CoTaskMemFree()
@@ -193,7 +227,7 @@ index 9179f744..d7768ccd 100644
  STDAPI DdqGetDiagnosticRecordBinaryDistribution(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_reads_(producerNameCount) PCWSTR* producerNames,
-@@ -177,16 +209,19 @@ STDAPI DdqGetDiagnosticRecordBinaryDistribution(
+@@ -177,16 +227,19 @@
      _Outptr_result_buffer_all_(*statCount) DIAGNOSTIC_DATA_EVENT_BINARY_STATS** binaryStats,
      _Out_ UINT32* statCount);
  

@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="MetadataUtils.Tests" />
+    <InternalsVisibleTo Include="ClangSharpSourceToWinmdTests" />
   </ItemGroup>
 
 </Project>

@@ -1,8 +1,17 @@
 diff --git a/um/prntvpt.h b/um/prntvpt.h
-index a0807474..d12b8de3 100644
 --- a/um/prntvpt.h
 +++ b/um/prntvpt.h
-@@ -77,38 +77,44 @@ typedef enum
+@@ -26,6 +26,9 @@
+ #endif  /* __cplusplus */
+ 
+ DECLARE_HANDLE(HPTPROVIDER);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HPTPROVIDER HPTPROVIDER;
++#endif
+ 
+ #define PRINTTICKET_ISTREAM_APIS 1
+ 
+@@ -77,38 +80,44 @@
  } EPrintTicketScope;
  
  
@@ -54,7 +63,7 @@ index a0807474..d12b8de3 100644
  HRESULT WINAPI
  PTGetPrintCapabilities( 
              _In_            HPTPROVIDER         hProvider,
-@@ -117,6 +123,7 @@ PTGetPrintCapabilities(
+@@ -117,6 +126,7 @@
              _Out_opt_       BSTR               *pbstrErrorMessage
              );
  
@@ -62,7 +71,7 @@ index a0807474..d12b8de3 100644
  HRESULT WINAPI
  PTGetPrintDeviceCapabilities(
      _In_            HPTPROVIDER         hProvider,
-@@ -125,6 +132,7 @@ PTGetPrintDeviceCapabilities(
+@@ -125,6 +135,7 @@
      _Out_opt_       BSTR               *pbstrErrorMessage
      );
  
@@ -70,7 +79,7 @@ index a0807474..d12b8de3 100644
  HRESULT WINAPI
  PTGetPrintDeviceResources(
      _In_            HPTPROVIDER         hProvider,
-@@ -134,6 +142,7 @@ PTGetPrintDeviceResources(
+@@ -134,6 +145,7 @@
      _Out_opt_       BSTR               *pbstrErrorMessage
  );
  
@@ -78,7 +87,7 @@ index a0807474..d12b8de3 100644
  HRESULT WINAPI
  PTMergeAndValidatePrintTicket(
              _In_            HPTPROVIDER        hProvider,
-@@ -144,6 +153,7 @@ PTMergeAndValidatePrintTicket(
+@@ -144,6 +156,7 @@
              _Out_opt_       BSTR              *pbstrErrorMessage 
              );
  
@@ -86,7 +95,7 @@ index a0807474..d12b8de3 100644
  HRESULT WINAPI
  PTConvertPrintTicketToDevMode( 
              _In_                     HPTPROVIDER          hProvider,
-@@ -155,6 +165,7 @@ PTConvertPrintTicketToDevMode(
+@@ -155,6 +168,7 @@
              _Out_opt_                BSTR                *pbstrErrorMessage 
              );
          

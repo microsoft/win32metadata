@@ -11,6 +11,15 @@ index 8a77485d..786c39ba 100644
  #if _MSC_VER > 1000
  #pragma once
  #endif
+@@ -44,7 +46,7 @@ typedef LARGE_INTEGER CF_TRANSFER_KEY;
+ typedef LARGE_INTEGER CF_REQUEST_KEY;
+ 
+-#ifdef __cplusplus
++#if defined(__cplusplus) && !defined(WIN32METADATA)
+ 
+ #define DEFINE_USHORT_ENUM(ENUMTYPE)                                           \
+   struct ENUMTYPE##_USHORT {                                                   \
+     USHORT us;                                                                 \
 @@ -132,6 +134,7 @@ typedef struct CF_PLATFORM_INFO {
      DWORD IntegrationNumber;
  } CF_PLATFORM_INFO;

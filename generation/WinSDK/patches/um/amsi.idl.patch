@@ -1,8 +1,8 @@
 diff --git a/um/amsi.idl b/um/amsi.idl
-index f072bc93..a20a9aa2 100644
+index f072bc93..b9c518f1 100644
 --- a/um/amsi.idl
 +++ b/um/amsi.idl
-@@ -4,12 +4,17 @@
+@@ -4,11 +4,16 @@
   *                                                     *
   *******************************************************/
  
@@ -12,18 +12,22 @@ index f072bc93..a20a9aa2 100644
  
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
- 
++
 +cpp_quote("/* Win32Metadata: interface ::IAmsiStream => SupportedOSPlatform(\"windows10.0.10240\") */")
 +cpp_quote("/* Win32Metadata: interface ::IAntimalwareProvider => SupportedOSPlatform(\"windows10.0.10240\") */")
 +cpp_quote("/* Win32Metadata: interface ::IAntimalware => SupportedOSPlatform(\"windows10.0.10240\") */")
-+
+ 
  import "oaidl.idl";
  import "ocidl.idl";
- 
-@@ -313,21 +318,31 @@ cpp_quote("")
- cpp_quote("DECLARE_HANDLE(HAMSICONTEXT);")
- cpp_quote("DECLARE_HANDLE(HAMSISESSION);")
+@@ -311,23 +316,35 @@
+ cpp_quote("EXTERN_C const CLSID CLSID_Antimalware;")
  cpp_quote("")
+ cpp_quote("DECLARE_HANDLE(HAMSICONTEXT);")
++cpp_quote("/* Win32Metadata: type ::HAMSICONTEXT => NativeTypedef */")
+ cpp_quote("DECLARE_HANDLE(HAMSISESSION);")
+-cpp_quote("")
++cpp_quote("/* Win32Metadata: type ::HAMSISESSION => NativeTypedef */")
++cpp_quote("")
 +cpp_quote("")
 +cpp_quote("/* Win32Metadata: function ::AmsiInitialize => SupportedOSPlatform(\"windows10.0.10240\") */")
  cpp_quote("STDAPI AmsiInitialize(")
@@ -52,7 +56,7 @@ index f072bc93..a20a9aa2 100644
  cpp_quote("STDAPI AmsiScanBuffer(")
  cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
  cpp_quote("    _In_reads_bytes_(length) PVOID buffer,")
-@@ -343,6 +358,8 @@ cpp_quote("    _In_  ULONG length,")
+@@ -343,6 +360,8 @@
  cpp_quote("    _In_opt_  LPCWSTR contentName,")
  cpp_quote("    _Out_ AMSI_RESULT* result);")
  cpp_quote("")

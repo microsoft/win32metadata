@@ -1,8 +1,17 @@
 diff --git a/um/wabapi.h b/um/wabapi.h
-index 2f35e5fd..dcb515b2 100644
 --- a/um/wabapi.h
 +++ b/um/wabapi.h
-@@ -76,6 +76,9 @@ typedef struct _WABACTIONITEM * LPWABACTIONITEM;
+@@ -14,6 +14,9 @@
+ #endif
+ 
+ typedef struct _WABACTIONITEM * LPWABACTIONITEM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef LPWABACTIONITEM LPWABACTIONITEM;
++#endif
+ 
+ /* IWABObject Interface ---------------------------------------------------- */
+ 
+@@ -76,6 +79,9 @@
  
  #undef           INTERFACE
  #define          INTERFACE      IWABObject
@@ -12,7 +21,7 @@ index 2f35e5fd..dcb515b2 100644
  DECLARE_MAPI_INTERFACE_(IWABObject, IUnknown)
  {
          BEGIN_INTERFACE
-@@ -279,6 +282,9 @@ typedef struct _WABEXTDISPLAY
+@@ -279,6 +285,9 @@
  
  #undef           INTERFACE
  #define          INTERFACE      IWABExtInit

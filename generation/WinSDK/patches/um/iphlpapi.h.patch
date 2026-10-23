@@ -1,8 +1,7 @@
 diff --git a/um/iphlpapi.h b/um/iphlpapi.h
-index 15b1d4a0..314170eb 100644
 --- a/um/iphlpapi.h
 +++ b/um/iphlpapi.h
-@@ -18,6 +18,7 @@ Abstract:
+@@ -18,6 +18,7 @@
  #if _MSC_VER > 1000
  #pragma once
  #endif
@@ -10,7 +9,7 @@ index 15b1d4a0..314170eb 100644
  #include <winapifamily.h>
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -78,6 +79,7 @@ extern "C" {
+@@ -78,6 +79,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -18,7 +17,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -93,6 +95,7 @@ GetNumberOfInterfaces(
+@@ -93,6 +95,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -26,7 +25,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -106,6 +109,7 @@ GetIfEntry(
+@@ -106,6 +109,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -34,7 +33,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -121,6 +125,7 @@ GetIfTable(
+@@ -121,6 +125,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -42,7 +41,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -136,6 +141,7 @@ GetIpAddrTable(
+@@ -136,6 +141,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -50,7 +49,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -151,6 +157,7 @@ GetIpNetTable(
+@@ -151,6 +157,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -58,7 +57,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -172,6 +179,7 @@ GetIpForwardTable(
+@@ -172,6 +179,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -66,7 +65,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -181,6 +189,7 @@ GetTcpTable(
+@@ -181,6 +189,7 @@
      _In_                             BOOL          Order
      );
  
@@ -74,7 +73,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -211,13 +220,14 @@ GetExtendedTcpTable(
+@@ -211,13 +220,14 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -90,7 +89,7 @@ index 15b1d4a0..314170eb 100644
      _Inout_                PDWORD                        pdwSize
      );
  
-@@ -227,6 +237,7 @@ GetOwnerModuleFromTcpEntry(
+@@ -227,6 +237,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -98,7 +97,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -236,6 +247,7 @@ GetUdpTable(
+@@ -236,6 +247,7 @@
      _In_                             BOOL          Order
      );
  
@@ -106,7 +105,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -254,17 +266,19 @@ GetExtendedUdpTable(
+@@ -254,17 +266,19 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -127,7 +126,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -287,7 +301,7 @@ GetTcpTable2(
+@@ -287,7 +301,7 @@
  //
  
  DWORD
@@ -136,7 +135,7 @@ index 15b1d4a0..314170eb 100644
      _Outptr_ PVOID         *ppTcpTable,
      _In_        BOOL          bOrder,
      _In_        HANDLE        hHeap,
-@@ -296,7 +310,7 @@ AllocateAndGetTcpExTableFromStack(
+@@ -296,7 +310,7 @@
      );
  
  DWORD
@@ -145,7 +144,7 @@ index 15b1d4a0..314170eb 100644
      _Outptr_ PVOID         *ppUdpTable,
      _In_        BOOL          bOrder,
      _In_        HANDLE        hHeap,
-@@ -318,6 +332,7 @@ AllocateAndGetUdpExTableFromStack(
+@@ -318,6 +332,7 @@
  //
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -153,7 +152,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -327,6 +342,7 @@ GetTcp6Table(
+@@ -327,6 +342,7 @@
      _In_                         BOOL           Order
      );
  
@@ -161,7 +160,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -340,6 +356,7 @@ GetTcp6Table2(
+@@ -340,6 +356,7 @@
  
  #ifdef WINAPI
  
@@ -169,7 +168,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -357,6 +374,7 @@ GetPerTcpConnectionEStats(
+@@ -357,6 +374,7 @@
      _In_ ULONG RodSize
      );
  
@@ -177,7 +176,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -371,6 +389,7 @@ SetPerTcpConnectionEStats(
+@@ -371,6 +389,7 @@
  
  #ifdef _WS2IPDEF_
  
@@ -185,7 +184,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -388,6 +407,7 @@ GetPerTcp6ConnectionEStats(
+@@ -388,6 +407,7 @@
      _In_  ULONG RodSize
      );
  
@@ -193,7 +192,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -404,16 +424,18 @@ SetPerTcp6ConnectionEStats(
+@@ -404,16 +424,18 @@
  
  #endif // WINAPI
  
@@ -213,7 +212,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -423,13 +445,14 @@ GetUdp6Table(
+@@ -423,13 +445,14 @@
      _In_                         BOOL           Order
      );
  
@@ -229,7 +228,7 @@ index 15b1d4a0..314170eb 100644
      _Inout_                   PDWORD                        pdwSize
      );
  
-@@ -455,6 +478,7 @@ GetOwnerModuleFromPidAndInfo(
+@@ -455,6 +478,7 @@
  //////////////////////////////////////////////////////////////////////////////
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -237,7 +236,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -470,6 +494,7 @@ GetIpStatistics(
+@@ -470,6 +494,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -245,7 +244,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -485,6 +510,7 @@ GetIcmpStatistics(
+@@ -485,6 +510,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -253,7 +252,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -492,6 +518,7 @@ GetTcpStatistics(
+@@ -492,6 +518,7 @@
      _Out_ PMIB_TCPSTATS Statistics
      );
  
@@ -261,7 +260,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -501,6 +528,7 @@ GetUdpStatistics(
+@@ -501,6 +528,7 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -269,7 +268,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -517,6 +545,7 @@ SetIpStatisticsEx(
+@@ -517,6 +545,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -277,7 +276,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -525,6 +554,7 @@ GetIpStatisticsEx(
+@@ -525,6 +554,7 @@
      _In_  ULONG Family
      );
  
@@ -285,7 +284,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -533,6 +563,7 @@ GetIcmpStatisticsEx(
+@@ -533,6 +563,7 @@
      _In_  ULONG Family
      );
  
@@ -293,7 +292,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -541,6 +572,7 @@ GetTcpStatisticsEx(
+@@ -541,6 +572,7 @@
      _In_  ULONG Family
      );
  
@@ -301,7 +300,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -551,6 +583,7 @@ GetUdpStatisticsEx(
+@@ -551,6 +583,7 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -309,7 +308,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -559,6 +592,7 @@ GetTcpStatisticsEx2(
+@@ -559,6 +592,7 @@
      _In_  ULONG Family
      );
  
@@ -317,7 +316,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -583,6 +617,7 @@ GetUdpStatisticsEx2(
+@@ -583,6 +617,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -325,7 +324,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -600,6 +635,7 @@ SetIfEntry(
+@@ -600,6 +635,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -333,7 +332,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -607,6 +643,7 @@ CreateIpForwardEntry(
+@@ -607,6 +643,7 @@
      _In_ PMIB_IPFORWARDROW pRoute
      );
  
@@ -341,7 +340,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -614,6 +651,7 @@ SetIpForwardEntry(
+@@ -614,6 +651,7 @@
      _In_ PMIB_IPFORWARDROW pRoute
      );
  
@@ -349,7 +348,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -632,6 +670,7 @@ DeleteIpForwardEntry(
+@@ -632,6 +670,7 @@
  //////////////////////////////////////////////////////////////////////////////
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -357,7 +356,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -646,6 +685,7 @@ SetIpStatistics(
+@@ -646,6 +685,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -365,7 +364,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -661,6 +701,7 @@ SetIpTTL(
+@@ -661,6 +701,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -373,7 +372,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -668,6 +709,7 @@ CreateIpNetEntry(
+@@ -668,6 +709,7 @@
      _In_ PMIB_IPNETROW    pArpEntry
      );
  
@@ -381,7 +380,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -675,6 +717,7 @@ SetIpNetEntry(
+@@ -675,6 +717,7 @@
      _In_ PMIB_IPNETROW    pArpEntry
      );
  
@@ -389,7 +388,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -682,6 +725,7 @@ DeleteIpNetEntry(
+@@ -682,6 +725,7 @@
      _In_ PMIB_IPNETROW    pArpEntry
      );
  
@@ -397,7 +396,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -698,6 +742,7 @@ FlushIpNetTable(
+@@ -698,6 +742,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -405,7 +404,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -707,6 +752,7 @@ CreateProxyArpEntry(
+@@ -707,6 +752,7 @@
      _In_  DWORD   dwIfIndex
      );
  
@@ -413,7 +412,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -724,6 +770,7 @@ DeleteProxyArpEntry(
+@@ -724,6 +770,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -421,7 +420,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -731,6 +778,7 @@ SetTcpEntry(
+@@ -731,6 +778,7 @@
      _In_ PMIB_TCPROW pTcpRow
      );
  
@@ -429,7 +428,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -751,6 +799,7 @@ GetUniDirectionalAdapterInfo(
+@@ -751,6 +799,7 @@
  #ifndef NHPALLOCATEANDGETINTERFACEINFOFROMSTACK_DEFINED
  #define NHPALLOCATEANDGETINTERFACEINFOFROMSTACK_DEFINED
  
@@ -437,7 +436,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -771,6 +820,7 @@ NhpAllocateAndGetInterfaceInfoFromStack(
+@@ -771,6 +820,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -445,7 +444,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -787,6 +837,7 @@ GetBestInterface(
+@@ -787,6 +837,7 @@
  
  #pragma warning(push)
  #pragma warning(disable:4115)
@@ -453,7 +452,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -812,6 +863,7 @@ GetBestInterfaceEx(
+@@ -812,6 +863,7 @@
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -461,7 +460,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -821,6 +873,7 @@ GetBestRoute(
+@@ -821,6 +873,7 @@
      _Out_     PMIB_IPFORWARDROW   pBestRoute
      );
  
@@ -469,7 +468,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -829,6 +882,7 @@ NotifyAddrChange(
+@@ -829,6 +882,7 @@
      _In_  LPOVERLAPPED overlapped
      );
  
@@ -477,7 +476,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -837,6 +891,7 @@ NotifyRouteChange(
+@@ -837,6 +891,7 @@
      _In_  LPOVERLAPPED overlapped
      );
  
@@ -485,7 +484,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  BOOL
  WINAPI
-@@ -844,6 +899,7 @@ CancelIPChangeNotify(
+@@ -844,6 +899,7 @@
      _In_  LPOVERLAPPED notifyOverlapped
      );
  
@@ -493,7 +492,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -852,6 +908,7 @@ GetAdapterIndex(
+@@ -852,6 +908,7 @@
      _Inout_ PULONG IfIndex
      );
  
@@ -501,7 +500,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -863,6 +920,7 @@ AddIPAddress(
+@@ -863,6 +920,7 @@
      _Out_ PULONG  NTEInstance
      );
  
@@ -509,7 +508,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -877,6 +935,8 @@ DeleteIPAddress(
+@@ -877,6 +935,8 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2KSP1)
@@ -518,7 +517,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -892,14 +952,16 @@ GetNetworkParams(
+@@ -892,14 +952,16 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -536,7 +535,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  PIP_ADAPTER_ORDER_MAP
  WINAPI
-@@ -920,26 +982,28 @@ GetAdapterOrderMap(
+@@ -920,26 +982,28 @@
  // The following functions require Winsock2.
  //
  
@@ -568,7 +567,17 @@ index 15b1d4a0..314170eb 100644
      _Inout_                         PULONG               pOutBufLen
      );
  #endif
-@@ -1032,7 +1096,7 @@ WINAPI
+@@ -991,6 +1055,9 @@
+ } INTERFACE_HARDWARE_CROSSTIMESTAMP, *PINTERFACE_HARDWARE_CROSSTIMESTAMP;
+ 
+ DECLARE_HANDLE(HIFTIMESTAMPCHANGE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIFTIMESTAMPCHANGE HIFTIMESTAMPCHANGE;
++#endif
+ 
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+@@ -1032,7 +1099,7 @@
  RegisterInterfaceTimestampConfigChange(
      _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
      _In_opt_ PVOID CallerContext,
@@ -577,7 +586,7 @@ index 15b1d4a0..314170eb 100644
      );
  
  IPHLPAPI_DLL_LINKAGE
-@@ -1064,7 +1128,7 @@ WINAPI
+@@ -1064,7 +1131,7 @@
  NotifyIfTimestampConfigChange(
      _In_opt_ PVOID CallerContext,
      _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
@@ -586,7 +595,17 @@ index 15b1d4a0..314170eb 100644
      );
  
  IPHLPAPI_DLL_LINKAGE
-@@ -1160,7 +1224,7 @@ WINAPI
+@@ -1119,6 +1186,9 @@
+ } INTERFACE_HARDWARE_CROSSTIMESTAMP, *PINTERFACE_HARDWARE_CROSSTIMESTAMP;
+ 
+ DECLARE_HANDLE(HIFTIMESTAMPCHANGE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIFTIMESTAMPCHANGE HIFTIMESTAMPCHANGE;
++#endif
+ 
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+@@ -1160,7 +1230,7 @@
  NotifyIfTimestampConfigChange(
      _In_opt_ PVOID CallerContext,
      _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
@@ -595,7 +614,7 @@ index 15b1d4a0..314170eb 100644
      );
  
  IPHLPAPI_DLL_LINKAGE
-@@ -1178,6 +1242,7 @@ CancelIfTimestampConfigChange(
+@@ -1178,6 +1248,7 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -603,7 +622,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1185,6 +1250,7 @@ IpReleaseAddress(
+@@ -1185,6 +1256,7 @@
      _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
@@ -611,7 +630,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1192,6 +1258,7 @@ IpRenewAddress(
+@@ -1192,6 +1264,7 @@
      _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
@@ -619,7 +638,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1202,6 +1269,8 @@ SendARP(
+@@ -1202,6 +1275,8 @@
      _Inout_ PULONG  PhyAddrLen
      );
  
@@ -628,7 +647,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  BOOL
  WINAPI
-@@ -1212,6 +1281,7 @@ GetRTTAndHopCount(
+@@ -1212,6 +1287,7 @@
      _Out_ PULONG RTT
      );
  
@@ -636,7 +655,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1219,6 +1289,7 @@ GetFriendlyIfIndex(
+@@ -1219,6 +1295,7 @@
      _In_ DWORD IfIndex
      );
  
@@ -644,7 +663,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1227,6 +1298,7 @@ EnableRouter(
+@@ -1227,6 +1304,7 @@
      _Out_ OVERLAPPED* pOverlapped
      );
  
@@ -652,7 +671,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1235,6 +1307,7 @@ UnenableRouter(
+@@ -1235,6 +1313,7 @@
      _Out_opt_ LPDWORD lpdwEnableCount
      );
  
@@ -660,7 +679,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1243,6 +1316,7 @@ DisableMediaSense(
+@@ -1243,6 +1322,7 @@
      _In_  OVERLAPPED *pOverLapped
      );
  
@@ -668,7 +687,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1253,6 +1327,7 @@ RestoreMediaSense(
+@@ -1253,6 +1333,7 @@
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -676,7 +695,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1264,6 +1339,7 @@ GetIpErrorString(
+@@ -1264,6 +1345,7 @@
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #ifdef _WS2DEF_
@@ -684,7 +703,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1279,6 +1355,7 @@ ResolveNeighbor(
+@@ -1279,6 +1361,7 @@
  // Port reservation API routines.
  //
  
@@ -692,7 +711,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1288,6 +1365,7 @@ CreatePersistentTcpPortReservation(
+@@ -1288,6 +1371,7 @@
      _Out_ PULONG64 Token
      );
  
@@ -700,7 +719,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1297,6 +1375,7 @@ CreatePersistentUdpPortReservation(
+@@ -1297,6 +1381,7 @@
      _Out_ PULONG64 Token
      );
  
@@ -708,7 +727,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1305,6 +1384,7 @@ DeletePersistentTcpPortReservation(
+@@ -1305,6 +1390,7 @@
      _In_ USHORT NumberOfPorts
      );
  
@@ -716,7 +735,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1313,6 +1393,7 @@ DeletePersistentUdpPortReservation(
+@@ -1313,6 +1399,7 @@
      _In_ USHORT NumberOfPorts
      );
  
@@ -724,7 +743,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1322,6 +1403,7 @@ LookupPersistentTcpPortReservation(
+@@ -1322,6 +1409,7 @@
      _Out_ PULONG64 Token
      );
  
@@ -732,7 +751,7 @@ index 15b1d4a0..314170eb 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1427,6 +1509,7 @@ typedef struct NET_ADDRESS_INFO_
+@@ -1427,6 +1515,7 @@
  
  } NET_ADDRESS_INFO, *PNET_ADDRESS_INFO;
  

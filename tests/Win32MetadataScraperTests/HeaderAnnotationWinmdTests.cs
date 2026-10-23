@@ -39,7 +39,7 @@ __attribute__((flag_enum)) tagCLSCTX {
 #endif
 typedef enum _Win32_AssociatedConstant_(D3DTS_WORLD) _Win32_AssociatedConstant_(D3DTS_WORLD1)
 _Win32_AssociatedConstant_(D3DTS_WORLD2) _Win32_AssociatedConstant_(D3DTS_WORLD3)
-_D3DTRANSFORMSTATETYPE { D3DTS_VIEW = 2, D3DTS_PROJECTION = 3 } D3DTRANSFORMSTATETYPE;
+_D3DTRANSFORMSTATETYPE : int { D3DTS_VIEW = 2, D3DTS_PROJECTION = 3 } D3DTRANSFORMSTATETYPE;
 #define D3DTS_WORLDMATRIX(index) (D3DTRANSFORMSTATETYPE)(index + 256)
 #define D3DTS_WORLD D3DTS_WORLDMATRIX(0)
 #define D3DTS_WORLD1 D3DTS_WORLDMATRIX(1)
@@ -325,7 +325,7 @@ void KeepNative(unsigned value);
                 Assert.DoesNotContain("Function like macro definition records are not supported", fixture.Diagnostics);
             Assert.DoesNotContain("Flags", fixture.ReadSource());
             Assert.DoesNotContain("REQUESTED", fixture.ReadSource());
-            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+            Assert.Empty(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetCompilationUnitRoot().Members);
             using var image = Emit(fixture, "x64");
             Assert.Empty(FindType(image.Reader, "Apis").GetFields());
         }
@@ -361,11 +361,11 @@ enum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };
         }
 
         [Theory]
-        [InlineData("#define REQUESTED 1\n#undef REQUESTED\n#define REQUESTED 2\n", "found 2 candidates", "")]
         [InlineData("#define REQUESTED(index) (index)\n", "object-like constant", "")]
-        [InlineData("#define REQUESTED ((void*)0)\n", "constant field", "")]
-        [InlineData("#define REQUESTED 1\n", "only the requested global fields", "--exclude\nREQUESTED\n")]
-        public void AssociatedConstantMacrosRejectAmbiguousAndUnsupportedProviders(string provider, string diagnostic, string settings)
+        [InlineData("#define REQUESTED ((void*)0)\n", "pointer constant", "")]
+        [InlineData("#define REQUESTED 1\n#undef REQUESTED\n", "undefined in the final header environment", "")]
+        [InlineData("#define REQUESTED 1\n", "excluded by configuration", "--exclude\nREQUESTED\n")]
+        public void AssociatedConstantMacrosRejectUnsupportedProviders(string provider, string diagnostic, string settings)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
                 provider + "enum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };\n", extraSettings: settings);
@@ -373,6 +373,23 @@ enum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };
             Assert.Contains(diagnostic, fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
             Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+        }
+
+        [Fact]
+        public void AssociatedConstantMacrosUseTheActiveRedefinition()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define REQUESTED 1
+#undef REQUESTED
+#define REQUESTED 2
+enum _Win32_AssociatedConstant_(REQUESTED) Flags { Member = 1 };
+");
+            fixture.AssertSuccess();
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            var field = Assert.Single(FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition));
+            Assert.Equal("REQUESTED", reader.GetString(field.Name));
+            Assert.Equal(2, reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32());
         }
 
         [Theory]
@@ -566,7 +583,7 @@ _WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::BindToObject, result, _Win32
 _WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::GetPageIndex, pIndex, _Win32_Optional_(true));
 _WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::ReadRect, prc, _Win32_Optional_(true));
 ", annotationsEnabled: annotationsEnabled);
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess(annotationsEnabled ? new[] { "MSInheritance" } : Array.Empty<string>());
             Assert.DoesNotContain("_WIN32META_PARAMETER_", fixture.ReadSource());
             Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
             using var image = Emit(fixture, architecture);
@@ -631,7 +648,7 @@ struct Other { unsigned flags; };
 enum LATE_FLAGS { FLAG_FIRST = 1, FLAG_SECOND = 4 };
 _Win32_AnnotateField_(Record::flags, _Win32_AssociatedEnum_(LATE_FLAGS));
 ", annotationsEnabled: annotationsEnabled);
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess(annotationsEnabled ? new[] { "MSInheritance" } : Array.Empty<string>());
             Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
             Assert.DoesNotContain("_WIN32META_FIELD_", fixture.ReadSource());
             using var image = Emit(fixture, architecture);
@@ -1241,7 +1258,7 @@ struct COMMENT_RECORD { unsigned flags; };
 /* Win32Metadata: field ::COMMENT_RECORD::flags => AssociatedEnum(EXTERNAL) */
 void CommentUse(unsigned value);
 /* Win32Metadata: parameter ::CommentUse::value => AssociatedEnum(EXTERNAL) */");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("MSInheritance");
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "External.enums.cs"), definitions);
             var exception = Assert.Throws<InvalidOperationException>(() =>
             {
@@ -1281,6 +1298,8 @@ void Use(_Win32_AssociatedEnum_(MISSING_A) unsigned first, _Win32_AssociatedEnum
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
                 "void Use(_Win32_AssociatedEnum_(EXTERNAL) unsigned value);");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string common = Path.Combine(fixture.DirectoryPath, "common");
+            Directory.CreateDirectory(common);
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "External.enums.cs"), @"
 namespace Test {
     [global::Windows.Win32.Foundation.Metadata.SupportedArchitecture(global::Windows.Win32.Foundation.Metadata.Architecture.X64)]
@@ -1295,6 +1314,9 @@ namespace Test {
                     SyntaxFactory.ParseName("global::Windows.Win32.Foundation.Metadata.SupportedArchitecture"),
                     SyntaxFactory.ParseAttributeArgumentList("(global::Windows.Win32.Foundation.Metadata.Architecture.X64)"))));
                 File.WriteAllText(fixture.Output, root.ReplaceNode(method, method.AddAttributeLists(attribute)).ToFullString());
+                File.Move(fixture.Output, Path.Combine(common, "Bindings.cs"));
+                File.Move(Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                    Path.Combine(common, "Bindings.header-types.cs"));
                 using var image = Emit(fixture, "crossarch");
                 AssertStringAttribute(image.Reader, Assert.Single(FindMethod(image.Reader, "Apis", "Use")
                     .GetParameters().Select(image.Reader.GetParameter)).GetCustomAttributes(),
@@ -1302,6 +1324,9 @@ namespace Test {
             }
             else
             {
+                File.Move(fixture.Output, Path.Combine(common, "Bindings.cs"));
+                File.Move(Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                    Path.Combine(common, "Bindings.header-types.cs"));
                 var exception = Assert.Throws<InvalidOperationException>(() =>
                 {
                     using var unexpected = Emit(fixture, "crossarch");
@@ -1893,12 +1918,8 @@ unsigned long __stdcall NativeResourceType(
                     .Where(line => line.StartsWith("+" + group.Macro + "(" + group.Name + ",", StringComparison.Ordinal));
                 Assert.Single(carriers);
             }
-            var retained = Assert.Single(items.Where(item => item.TryGetProperty("addUsesTo", out var name) &&
-                name.GetString() == "OS_PRODUCT_TYPE"));
-            Assert.False(retained.TryGetProperty("autoPopulate", out _));
-            Assert.False(retained.TryGetProperty("members", out _));
-            Assert.Equal("Windows.Win32.System.SystemInformation", retained.GetProperty("namespace").GetString());
-            Assert.Empty(retained.GetProperty("uses").EnumerateArray());
+            Assert.DoesNotContain(items, item => item.TryGetProperty("addUsesTo", out var name) &&
+                name.GetString() == "OS_PRODUCT_TYPE");
             Assert.Contains("OS_PRODUCT_TYPE=Windows.Win32.System.SystemInformation",
                 File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
             string product = File.ReadAllText(Path.Combine(project, "patches", "um", "sysinfoapi.h.patch"));
@@ -2073,8 +2094,20 @@ unsigned long __stdcall NativeResourceType(
             {
                 Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) &&
                     name.GetString() == group.Name);
-                Assert.Contains(items, item => item.TryGetProperty("addUsesTo", out var name) &&
-                    name.GetString() == group.Name && item.GetProperty("namespace").GetString() == group.Namespace);
+                Assert.DoesNotContain(items, item => item.TryGetProperty("addUsesTo", out var name) &&
+                    name.GetString() == group.Name);
+                var namedRoutes = File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp"))
+                    .Where(row => row.StartsWith(group.Name + "=", StringComparison.Ordinal)).ToArray();
+                if (namedRoutes.Length != 0)
+                    Assert.Equal(group.Name + "=" + group.Namespace, Assert.Single(namedRoutes));
+                else
+                {
+                    string partition = group.Header == "coml2api.h" ? "Com.StructuredStorage" : "ComOle";
+                    string[] settings = File.ReadAllLines(Path.Combine(project, "Partitions", partition, "settings.rsp"));
+                    int name = Array.IndexOf(settings, "--namespace");
+                    Assert.True(name >= 0);
+                    Assert.Equal(group.Namespace, settings[name + 1]);
+                }
                 string macro = group.Flags ? "_Win32_FlagsEnum_" : "_Win32_Enum_";
                 Assert.Single(File.ReadAllLines(Path.Combine(project, "patches", "um", group.Header + ".patch"))
                     .Where(line => line.StartsWith("+" + macro + "(" + group.Name + ",", StringComparison.Ordinal)));
@@ -3593,15 +3626,23 @@ int __stdcall PreserveReserved(
             Assert.Single(Regex.Matches(wds,
                 @"(?m)^ \(WDSCLIAPI \*PFN_WdsCliCallback\)\(\r?\n-    DWORD dwMessageId,\r?\n" +
                 @"\+    _Win32_AssociatedEnum_\(PFN_WDS_CLI_CALLBACK_MESSAGE_ID\) DWORD dwMessageId,\r?$"));
-            Assert.Contains(items, item => item.TryGetProperty("name", out var name) &&
+            Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) &&
                 name.GetString() == "SI_OBJECT_INFO_FLAGS");
+            Assert.Contains("FlagsEnum(SI_ADVANCED_, SI_AUDITS_ELEVATION_REQUIRED, SI_CONTAINER_",
+                HeaderMigrationAssertions.AddedSource(@"um\aclui.h"));
+            Assert.Contains("_Win32_AssociatedEnum_(SI_OBJECT_INFO_FLAGS) DWORD       dwFlags;",
+                HeaderMigrationAssertions.AddedSource(@"um\aclui.h"));
             var rows = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
             foreach (string row in new[]
             {
                 "GetProcessHeap::return=[DoNotRelease]",
                 "GetProcessHeaps::ProcessHeaps=[DoNotRelease]",
             })
-                Assert.Contains(row, rows);
+                Assert.DoesNotContain(row, rows);
+            string heap = HeaderMigrationAssertions.PatchedSource(@"um\heapapi.h");
+            Assert.Contains("_Win32_RAIIFree_(HeapDestroy)", heap);
+            Assert.DoesNotMatch(@"_Win32_RAIIFree_\([^)]*\)\s*(?:HANDLE|DWORD)\s+WINAPI\s+GetProcessHeap",
+                heap);
             foreach (string row in new[]
             {
                 "OleCreatePropertyFrame::dwReserved=[Reserved]",
@@ -4013,7 +4054,7 @@ _WIN32META_ANNOTATE_METHOD_(IMethodReferences::Skip, _Win32_PreserveResult_);
 _Win32_SupportedOS_END_()
 _WIN32META_ANNOTATE_METHOD_(IMethodReferences::Skip, _Win32_SupportedOS_Windows8_);
 ", annotationsEnabled: annotationsEnabled, extraSettings: "--exclude\nIMethodAlias\n");
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess(annotationsEnabled ? new[] { "MSInheritance" } : Array.Empty<string>());
             Assert.DoesNotContain("_WIN32META_METHOD_", fixture.ReadSource());
             using var image = Emit(fixture, architecture);
             var reader = image.Reader;
@@ -4711,7 +4752,7 @@ struct DHCP_IP_ARRAY {
         public void NativeHeadersReachFinalWinmd(string architecture, string target)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, Declarations);
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("FlagEnum");
             var nativeCom = CSharpSyntaxTree.ParseText(File.ReadAllText(fixture.Output)).GetRoot().DescendantNodes()
                 .OfType<StructDeclarationSyntax>().Single(node => node.Identifier.ValueText == "IHeaderSample");
             var nativeBuffer = nativeCom.Members.OfType<MethodDeclarationSyntax>().Single(node => node.Identifier.ValueText == "Buffer");
@@ -4926,7 +4967,7 @@ struct __declspec(uuid(""5a076bce-18f2-49bb-861f-48850743e9d3"")) IRetvalSample 
             Assert.Contains(ordinarySurface, value => value.StartsWith("record IHeaderSample ", StringComparison.Ordinal));
             Assert.Equal(ordinarySurface, NativeSurface(fixture, target, metadataEnabled: true));
             using var ordinary = new HeaderAnnotationTests.NativeFixture(architecture, target, Declarations, annotationsEnabled: false);
-            Assert.True(ordinary.Run() == 0, ordinary.Diagnostics);
+            ordinary.AssertSuccess("FlagEnum");
             Assert.DoesNotContain("RAIIFree", File.ReadAllText(ordinary.Output));
             Assert.DoesNotContain("ContainsInteriorPointers", File.ReadAllText(ordinary.Output));
         }
@@ -4990,6 +5031,8 @@ enum _Win32_AssociatedConstant_(SecondA) E { A = 1 };
                     string directory = Path.Combine(x86.DirectoryPath, architecture);
                     Directory.CreateDirectory(directory);
                     File.Copy(fixture.Output, Path.Combine(directory, "Bindings.cs"));
+                    File.Copy(Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                        Path.Combine(directory, "Bindings.header-types.cs"));
                 }
             }
             using var image = Emit(x86, "crossarch");
@@ -5293,10 +5336,13 @@ void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", true)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", false)]
         public void LogicalGroupUnionPreservesPrimitiveAliasesFromConstantsScraper(
             string architecture, string target, bool includeGroupImport)
         {
-            using var first = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+            string nativeArchitecture = architecture == "crossarch" ? "x86" : architecture;
+            using var first = new HeaderAnnotationTests.NativeFixture(nativeArchitecture, target, @"
 #define SUCCESS 0L
 #define NOT_SUPPORTED 50UL
 #define LOCAL_ZERO_1 SUCCESS
@@ -5307,7 +5353,7 @@ void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
 #define LOCAL_ALIAS_3 NOT_SUPPORTED
 _Win32_Enum_(ERROR_GROUP, unsigned, SUCCESS, NOT_SUPPORTED);
 ");
-            using var extra = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+            using var extra = new HeaderAnnotationTests.NativeFixture(nativeArchitecture, target, @"
 #define EXTRA 100U
 _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
 ");
@@ -5334,7 +5380,7 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
                 File.ReadAllText(Path.Combine(first.DirectoryPath, "Printing.constants.cs")));
             var originals = Directory.GetFiles(first.DirectoryPath, "*.cs", SearchOption.AllDirectories)
                 .ToDictionary(path => path, File.ReadAllBytes);
-            using var image = Emit(first, architecture);
+            using var image = EmitPrimitiveAliasesWithEvidence(first, extra, architecture, includeGroupImport);
             foreach (var original in originals)
                 Assert.Equal(original.Value, File.ReadAllBytes(original.Key));
             var reader = image.Reader;
@@ -5369,12 +5415,14 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
         }
 
         [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
-        public void LogicalGroupsDoNotImplicitlyConvertOrdinaryNativeEnumConstants(bool unqualified)
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void LogicalGroupsDoNotImplicitlyConvertOrdinaryNativeEnumConstants(bool unqualified, bool scoped)
         {
-            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
-enum class NATIVE_GROUP : unsigned { FIRST = 2 };
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "enum " + (scoped ? "class " : "") + @"NATIVE_GROUP : unsigned { FIRST = 2 };
 #define FIRST 1U
 _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
 ");
@@ -5383,7 +5431,10 @@ _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
                 (unqualified ? "using static Test.NATIVE_GROUP;\n" : "") +
                 "namespace Test { public static partial class Apis { public const uint NativeAlias = " +
                 (unqualified ? "FIRST" : "NATIVE_GROUP.FIRST") + "; } }");
-            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
+            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() =>
+            {
+                using var image = Emit(fixture, "x64");
+            });
             Assert.Contains("CS0266", exception.Message);
         }
 
@@ -5394,10 +5445,12 @@ _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", true)]
+        [InlineData("crossarch", "i686-pc-windows-msvc", false)]
         public void LogicalGroupScalarAliasesPreserveIntegralStorageAndExpressions(
             string architecture, string target, bool includeGroupImport)
         {
-            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture == "crossarch" ? "x86" : architecture, target, @"
 #define ONE 1ULL
 #define BYTE_MAX 255ULL
 #define SHORT_MAX 32767ULL
@@ -5478,6 +5531,8 @@ public static partial class Apis {
         [InlineData("uint", "UNDECLARED", "CS0103")]
         [InlineData("uint", "FIRST", "CS0103")]
         [InlineData("uint", "Other", "CS0103")]
+        [InlineData("uint", "OTHER_GROUP.Other", "CS0266")]
+        [InlineData("uint", "(uint)Other", "CS0103")]
         [InlineData("bool", "TOO_LARGE", "CS0103")]
         [InlineData("OTHER_GROUP", "TOO_LARGE", "CS0103")]
         public void LogicalGroupScalarAliasConversionPreservesErrors(string type, string value, string diagnostic)
@@ -5492,7 +5547,10 @@ enum class OTHER_GROUP : unsigned { Other = 2 };
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Rejected.constants.cs"),
                 $"namespace Test {{ public static partial class Apis {{ public const {type} Rejected = {value}; }} }}");
-            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
+            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() =>
+            {
+                using var image = Emit(fixture, "x64");
+            });
             Assert.Contains(diagnostic, exception.Message);
         }
 
@@ -5721,7 +5779,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
                 + string.Join(", ", names.Zip(values, (name, value) => $"{name} = {value}")) + " };"
                 + " enum SIGNED_FLAGS : int { SIGNED_ALL = -1 };";
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            fixture.AssertSuccess("FlagEnum");
             if (common)
             {
                 string commonDirectory = Path.Combine(fixture.DirectoryPath, "common");
@@ -5760,7 +5818,7 @@ namespace Test { public static class Apis {
             AssertMetadataClosure(reader);
 
             using var aliases = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
-            Assert.True(aliases.Run() == 0, aliases.Diagnostics);
+            aliases.AssertSuccess("FlagEnum");
             if (common)
             {
                 string commonDirectory = Path.Combine(aliases.DirectoryPath, "common");
@@ -6291,7 +6349,7 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
             bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
             IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
-            Dictionary<string, Dictionary<string, string>> enumAdditions = null)
+            Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd")
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
@@ -6300,7 +6358,7 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                 new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
                 references ?? Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
-            string path = Path.Combine(directory, "Test.winmd");
+            string path = Path.Combine(directory, winmdFileName);
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
                 new Dictionary<string, string>(), reducePointerLevels ?? new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
             Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));

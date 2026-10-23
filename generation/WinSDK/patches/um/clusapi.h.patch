@@ -1,3 +1,4 @@
+diff --git a/um/clusapi.h b/um/clusapi.h
 --- a/um/clusapi.h
 +++ b/um/clusapi.h
 @@ -70,6 +70,7 @@
@@ -8,7 +9,125 @@
  
  
  
-@@ -645,6 +646,7 @@
+@@ -146,24 +147,81 @@
+ // Defined cluster handle types.
+ //
+ typedef struct _HCLUSTER *HCLUSTER;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCLUSTER HCLUSTER;
++#endif
+ typedef struct _HNODE *HNODE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNODE HNODE;
++#endif
+ typedef struct _HRESOURCE *HRESOURCE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRESOURCE HRESOURCE;
++#endif
+ typedef struct _HGROUP *HGROUP;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HGROUP HGROUP;
++#endif
+ typedef struct _HNETWORK *HNETWORK;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNETWORK HNETWORK;
++#endif
+ typedef struct _HNETINTERFACE *HNETINTERFACE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNETINTERFACE HNETINTERFACE;
++#endif
+ typedef struct _HCHANGE *HCHANGE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCHANGE HCHANGE;
++#endif
+ typedef struct _HCLUSENUM *HCLUSENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCLUSENUM HCLUSENUM;
++#endif
+ typedef struct _HGROUPENUM *HGROUPENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HGROUPENUM HGROUPENUM;
++#endif
+ typedef struct _HRESENUM *HRESENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRESENUM HRESENUM;
++#endif
+ typedef struct _HNETWORKENUM *HNETWORKENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNETWORKENUM HNETWORKENUM;
++#endif
+ typedef struct _HNODEENUM *HNODEENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNODEENUM HNODEENUM;
++#endif
+ typedef struct _HNETINTERFACEENUM *HNETINTERFACEENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNETINTERFACEENUM HNETINTERFACEENUM;
++#endif
+ typedef struct _HRESTYPEENUM *HRESTYPEENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRESTYPEENUM HRESTYPEENUM;
++#endif
+ typedef struct _HREGBATCH *HREGBATCH;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HREGBATCH HREGBATCH;
++#endif
+ typedef struct _HREGBATCHPORT *HREGBATCHPORT;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HREGBATCHPORT HREGBATCHPORT;
++#endif
+ typedef struct _HREGBATCHNOTIFICATION *HREGBATCHNOTIFICATION;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HREGBATCHNOTIFICATION HREGBATCHNOTIFICATION;
++#endif
+ typedef struct _HREGREADBATCH *HREGREADBATCH;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HREGREADBATCH HREGREADBATCH;
++#endif
+ typedef struct _HREGREADBATCHREPLY *HREGREADBATCHREPLY;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HREGREADBATCHREPLY HREGREADBATCHREPLY;
++#endif
+ typedef struct _HKEYVALUEBATCH *HKEYVALUEBATCH;
+ typedef struct _HKEYVALUEBATCHNOTIFICATION *HKEYVALUEBATCHNOTIFICATION;
+ typedef struct _HKEYVALUEREADBATCH *HKEYVALUEREADBATCH;
+@@ -172,17 +230,35 @@
+ 
+ #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
+ typedef struct _HNODEENUMEX *HNODEENUMEX;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HNODEENUMEX HNODEENUMEX;
++#endif
+ typedef struct _HCLUSENUMEX *HCLUSENUMEX;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCLUSENUMEX HCLUSENUMEX;
++#endif
+ #endif
+ 
+ #if(CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8)
+ typedef struct _HGROUPENUMEX *HGROUPENUMEX;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HGROUPENUMEX HGROUPENUMEX;
++#endif
+ typedef struct _HRESENUMEX *HRESENUMEX;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HRESENUMEX HRESENUMEX;
++#endif
+ #endif
+ 
+ #if(CLUSAPI_VERSION >= CLUSAPI_VERSION_WINTHRESHOLD)
+ typedef struct _HGROUPSET *HGROUPSET;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HGROUPSET HGROUPSET;
++#endif
+ typedef struct _HGROUPSETENUM *HGROUPSETENUM;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HGROUPSETENUM HGROUPSETENUM;
++#endif
+ #endif
+ 
+ #endif // _CLUSTER_API_TYPES_
+@@ -645,6 +721,7 @@
  
  #endif
  
@@ -16,7 +135,7 @@
  DWORD
  WINAPI
  GetNodeClusterState(
-@@ -658,6 +660,8 @@
+@@ -658,6 +735,8 @@
      _Out_       LPDWORD pdwClusterState
      );
  
@@ -25,7 +144,7 @@
  HCLUSTER
  WINAPI
  OpenCluster(
-@@ -670,6 +674,8 @@
+@@ -670,6 +749,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -34,7 +153,7 @@
  HCLUSTER
  WINAPI
  OpenClusterEx(
-@@ -686,6 +692,7 @@
+@@ -686,6 +767,7 @@
      );
  #endif
  
@@ -42,7 +161,7 @@
  BOOL
  WINAPI
  CloseCluster(
-@@ -697,6 +704,7 @@
+@@ -697,6 +779,7 @@
      _In_ HCLUSTER hCluster
      );
  
@@ -50,7 +169,7 @@
  DWORD
  WINAPI
  SetClusterName(
-@@ -730,6 +738,7 @@
+@@ -730,6 +813,7 @@
  
  #endif
  
@@ -58,7 +177,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -748,6 +757,7 @@
+@@ -748,6 +832,7 @@
      _Out_opt_ LPCLUSTERVERSIONINFO lpClusterInfo
      );
  
@@ -66,7 +185,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -770,6 +780,7 @@
+@@ -770,6 +855,7 @@
      _Out_ LPDWORD lpdwMaxQuorumLogSize
      );
  
@@ -74,7 +193,7 @@
  DWORD
  WINAPI
  SetClusterQuorumResource(
-@@ -807,6 +818,7 @@
+@@ -807,6 +893,7 @@
  
  #endif
  
@@ -82,7 +201,7 @@
  DWORD
  WINAPI
  BackupClusterDatabase(
-@@ -820,6 +832,7 @@
+@@ -820,6 +907,7 @@
      _In_ LPCWSTR  lpszPathName
      );
  
@@ -90,7 +209,7 @@
  DWORD
  WINAPI
  RestoreClusterDatabase(
-@@ -835,6 +848,7 @@
+@@ -835,6 +923,7 @@
      _In_opt_ LPCWSTR  lpszQuorumDriveLetter
      );
  
@@ -98,7 +217,7 @@
  DWORD
  WINAPI
  SetClusterNetworkPriorityOrder(
-@@ -850,6 +864,7 @@
+@@ -850,6 +939,7 @@
      _In_reads_( NetworkCount ) HNETWORK NetworkList[]
      );
  
@@ -106,7 +225,7 @@
  DWORD
  WINAPI
  SetClusterServiceAccountPassword(
-@@ -869,6 +884,7 @@
+@@ -869,6 +959,7 @@
      _Inout_ LPDWORD lpcbReturnStatusBufferSize
      );
  
@@ -114,7 +233,7 @@
  DWORD
  WINAPI
  ClusterControl(
-@@ -939,6 +955,7 @@
+@@ -939,6 +1030,7 @@
      CLUSTER_UPGRADE_PHASE eUpgradePhase
      );
  
@@ -122,7 +241,7 @@
  DWORD
  WINAPI
  ClusterUpgradeFunctionalLevel(
-@@ -1304,6 +1321,8 @@
+@@ -1304,6 +1396,8 @@
  //
  // V2 Notifications DLL Functions
  //
@@ -131,7 +250,7 @@
  HCHANGE
  WINAPI
  CreateClusterNotifyPortV2(
-@@ -1323,6 +1342,7 @@
+@@ -1323,6 +1417,7 @@
      _In_  DWORD_PTR dwNotifyKey
      );
  
@@ -139,7 +258,7 @@
  DWORD
  WINAPI
  RegisterClusterNotifyV2(
-@@ -1340,6 +1360,7 @@
+@@ -1340,6 +1435,7 @@
      _In_  DWORD_PTR dwNotifyKey
      );
  
@@ -147,7 +266,7 @@
  DWORD
  WINAPI
  GetNotifyEventHandle(
-@@ -1353,6 +1374,7 @@
+@@ -1353,6 +1449,7 @@
      _Out_ LPHANDLE lphTargetEvent
      );
  
@@ -155,7 +274,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -1397,6 +1419,8 @@
+@@ -1397,6 +1494,8 @@
  //
  // Begin original notification DLL function defs
  //
@@ -164,7 +283,7 @@
  HCHANGE
  WINAPI
  CreateClusterNotifyPort(
-@@ -1414,6 +1438,7 @@
+@@ -1414,6 +1513,7 @@
      _In_ DWORD_PTR dwNotifyKey
      );
  
@@ -172,7 +291,7 @@
  DWORD
  WINAPI
  RegisterClusterNotify(
-@@ -1431,6 +1456,7 @@
+@@ -1431,6 +1531,7 @@
      _In_ DWORD_PTR dwNotifyKey
      );
  
@@ -180,7 +299,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -1453,6 +1479,7 @@
+@@ -1453,6 +1554,7 @@
      _In_ DWORD dwMilliseconds
      );
  
@@ -188,7 +307,7 @@
  BOOL
  WINAPI
  CloseClusterNotifyPort(
-@@ -1500,6 +1527,8 @@
+@@ -1500,6 +1602,8 @@
  #endif // _CLUSTER_API_TYPES_
  
  #if ( !MIDL_PASS && !__midl )
@@ -197,7 +316,7 @@
  HCLUSENUM
  WINAPI
  ClusterOpenEnum(
-@@ -1513,6 +1542,7 @@
+@@ -1513,6 +1617,7 @@
      _In_ DWORD dwType
      );
  
@@ -205,7 +324,7 @@
  DWORD
  WINAPI
  ClusterGetEnumCount(
-@@ -1524,6 +1554,7 @@
+@@ -1524,6 +1629,7 @@
      _In_ HCLUSENUM hEnum
      );
  
@@ -213,7 +332,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -1544,6 +1575,7 @@
+@@ -1544,6 +1650,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -221,7 +340,7 @@
  DWORD
  WINAPI
  ClusterCloseEnum(
-@@ -1557,6 +1589,8 @@
+@@ -1557,6 +1664,8 @@
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
  
@@ -230,7 +349,7 @@
  HCLUSENUMEX
  WINAPI
  ClusterOpenEnumEx(
-@@ -1572,6 +1606,7 @@
+@@ -1572,6 +1681,7 @@
          _In_opt_ PVOID pOptions
          );
  
@@ -238,7 +357,7 @@
  DWORD
  WINAPI
  ClusterGetEnumCountEx(
-@@ -1583,6 +1618,7 @@
+@@ -1583,6 +1693,7 @@
      _In_ HCLUSENUMEX hClusterEnum
      );
  
@@ -246,7 +365,7 @@
  DWORD
  WINAPI
  ClusterEnumEx(
-@@ -1600,6 +1636,7 @@
+@@ -1600,6 +1711,7 @@
      _Inout_ LPDWORD cbItem
      );
  
@@ -254,7 +373,7 @@
  DWORD
  WINAPI
  ClusterCloseEnumEx(
-@@ -1622,6 +1659,8 @@
+@@ -1622,6 +1734,8 @@
  #define CLUSGROUPSET_STATUS_OS_HEARTBEAT                                            0x0000000000000004
  #define CLUSGROUPSET_STATUS_APPLICATION_READY                                       0x0000000000000008
  
@@ -263,7 +382,7 @@
  HGROUPSET
  WINAPI
  CreateClusterGroupSet(
-@@ -1635,6 +1674,8 @@
+@@ -1635,6 +1749,8 @@
      _In_ LPCWSTR lpszGroupSetName
      );
  
@@ -272,7 +391,7 @@
  HGROUPSET
  WINAPI
  OpenClusterGroupSet(
-@@ -1648,6 +1689,8 @@
+@@ -1648,6 +1764,8 @@
      _In_ LPCWSTR lpszGroupSetName
      );
  
@@ -281,7 +400,7 @@
  BOOL
  WINAPI
  CloseClusterGroupSet(
-@@ -1659,6 +1702,7 @@
+@@ -1659,6 +1777,7 @@
      _In_ HGROUPSET hGroupSet
      );
  
@@ -289,7 +408,7 @@
  DWORD
  WINAPI
  DeleteClusterGroupSet(
-@@ -1687,6 +1731,7 @@
+@@ -1687,6 +1806,7 @@
  
  #endif
  
@@ -297,7 +416,7 @@
  DWORD
  WINAPI
  ClusterAddGroupToGroupSet(
-@@ -1733,6 +1778,7 @@
+@@ -1733,6 +1853,7 @@
  
  #endif
  
@@ -305,7 +424,7 @@
  DWORD
  WINAPI
  ClusterRemoveGroupFromGroupSet(
-@@ -1761,6 +1807,7 @@
+@@ -1761,6 +1882,7 @@
  
  #endif
  
@@ -313,7 +432,7 @@
  DWORD
  WINAPI
  ClusterGroupSetControl(
-@@ -1818,6 +1865,7 @@
+@@ -1818,6 +1940,7 @@
  
  #endif
  
@@ -321,7 +440,7 @@
  DWORD
  WINAPI
  AddClusterGroupDependency(
-@@ -1850,6 +1898,7 @@
+@@ -1850,6 +1973,7 @@
  
  #endif
  
@@ -329,7 +448,7 @@
  DWORD
  WINAPI
  SetGroupDependencyExpression(
-@@ -1882,6 +1931,7 @@
+@@ -1882,6 +2006,7 @@
  
  #endif
  
@@ -337,7 +456,7 @@
  DWORD
  WINAPI
  RemoveClusterGroupDependency(
-@@ -1914,6 +1964,7 @@
+@@ -1914,6 +2039,7 @@
  
  #endif
  
@@ -345,7 +464,7 @@
  DWORD
  WINAPI
  AddClusterGroupSetDependency(
-@@ -1946,6 +1997,7 @@
+@@ -1946,6 +2072,7 @@
  
  #endif
  
@@ -353,7 +472,7 @@
  DWORD
  WINAPI
  SetClusterGroupSetDependencyExpression(
-@@ -1978,6 +2030,7 @@
+@@ -1978,6 +2105,7 @@
  
  #endif
  
@@ -361,7 +480,7 @@
  DWORD
  WINAPI
  RemoveClusterGroupSetDependency(
-@@ -2010,6 +2063,7 @@
+@@ -2010,6 +2138,7 @@
  
  #endif
  
@@ -369,7 +488,7 @@
  DWORD
  WINAPI
  AddClusterGroupToGroupSetDependency(
-@@ -2042,6 +2096,7 @@
+@@ -2042,6 +2171,7 @@
  
  #endif
  
@@ -377,7 +496,7 @@
  DWORD
  WINAPI
  RemoveClusterGroupToGroupSetDependency(
-@@ -2075,18 +2130,22 @@
+@@ -2075,18 +2205,22 @@
  
  #endif
  
@@ -400,7 +519,7 @@
  __success(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -2097,12 +2156,15 @@
+@@ -2097,12 +2231,15 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -416,7 +535,7 @@
  HCLUSTER
  WINAPI
  GetClusterFromGroupSet(
-@@ -2371,6 +2433,8 @@
+@@ -2371,6 +2508,8 @@
  //
  
  #if ( !MIDL_PASS && !__midl )
@@ -425,7 +544,7 @@
  HNODE
  WINAPI
  OpenClusterNode(
-@@ -2385,6 +2449,8 @@
+@@ -2385,6 +2524,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -434,7 +553,7 @@
  HNODE
  WINAPI
  OpenClusterNodeEx(
-@@ -2418,6 +2484,8 @@
+@@ -2418,6 +2559,8 @@
      );
  #endif
  
@@ -443,7 +562,7 @@
  BOOL
  WINAPI
  CloseClusterNode(
-@@ -2429,6 +2497,8 @@
+@@ -2429,6 +2572,8 @@
      _In_ HNODE hNode
      );
  
@@ -452,7 +571,7 @@
  CLUSTER_NODE_STATE
  WINAPI
  GetClusterNodeState(
-@@ -2459,6 +2529,8 @@
+@@ -2459,6 +2604,8 @@
  #define GetCurrentClusterNodeId(_lpszNodeId_, _lpcchName_) \
      GetClusterNodeId(NULL, (_lpszNodeId_), (_lpcchName_))
  
@@ -461,7 +580,7 @@
  HCLUSTER
  WINAPI
  GetClusterFromNode(
-@@ -2470,6 +2542,7 @@
+@@ -2470,6 +2617,7 @@
      _In_ HNODE hNode
      );
  
@@ -469,7 +588,7 @@
  DWORD
  WINAPI
  PauseClusterNode(
-@@ -2481,6 +2554,7 @@
+@@ -2481,6 +2629,7 @@
      _In_ HNODE hNode
      );
  
@@ -477,7 +596,7 @@
  DWORD
  WINAPI
  ResumeClusterNode(
-@@ -2492,6 +2566,7 @@
+@@ -2492,6 +2641,7 @@
      _In_ HNODE hNode
      );
  
@@ -485,7 +604,7 @@
  DWORD
  WINAPI
  EvictClusterNode(
-@@ -2503,6 +2578,8 @@
+@@ -2503,6 +2653,8 @@
      _In_ HNODE hNode
      );
  
@@ -494,7 +613,7 @@
  HNETINTERFACEENUM
  WINAPI
  ClusterNetInterfaceOpenEnum(
-@@ -2511,6 +2588,7 @@
+@@ -2511,6 +2663,7 @@
     _In_opt_ LPCWSTR lpszNetworkName
      );
  
@@ -502,7 +621,7 @@
  __success(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -2521,12 +2599,15 @@
+@@ -2521,12 +2674,15 @@
      _Inout_ LPDWORD lpcchName
  );
  
@@ -518,7 +637,7 @@
  HNODEENUM
  WINAPI
  ClusterNodeOpenEnum(
-@@ -2542,6 +2623,8 @@
+@@ -2542,6 +2698,8 @@
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
  
@@ -527,7 +646,7 @@
  HNODEENUMEX
  WINAPI
  ClusterNodeOpenEnumEx(
-@@ -2557,6 +2640,7 @@
+@@ -2557,6 +2715,7 @@
          _In_opt_ PVOID pOptions
          );
  
@@ -535,7 +654,7 @@
  DWORD
  WINAPI
  ClusterNodeGetEnumCountEx(
-@@ -2568,6 +2652,7 @@
+@@ -2568,6 +2727,7 @@
      _In_ HNODEENUMEX hNodeEnum
      );
  
@@ -543,7 +662,7 @@
  DWORD
  WINAPI
  ClusterNodeEnumEx(
-@@ -2585,6 +2670,7 @@
+@@ -2585,6 +2745,7 @@
      _Inout_ LPDWORD cbItem
      );
  
@@ -551,7 +670,7 @@
  DWORD
  WINAPI
  ClusterNodeCloseEnumEx(
-@@ -2598,6 +2684,7 @@
+@@ -2598,6 +2759,7 @@
  
  #endif
  
@@ -559,7 +678,7 @@
  DWORD
  WINAPI
  ClusterNodeGetEnumCount(
-@@ -2609,6 +2696,7 @@
+@@ -2609,6 +2771,7 @@
      _In_ HNODEENUM hNodeEnum
      );
  
@@ -567,7 +686,7 @@
  DWORD
  WINAPI
  ClusterNodeCloseEnum(
-@@ -2620,6 +2708,7 @@
+@@ -2620,6 +2783,7 @@
      _In_ HNODEENUM hNodeEnum
      );
  
@@ -575,7 +694,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -2640,6 +2729,7 @@
+@@ -2640,6 +2804,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -583,7 +702,7 @@
  DWORD
  WINAPI
  EvictClusterNodeEx(
-@@ -2684,6 +2774,8 @@
+@@ -2684,6 +2849,8 @@
  //
  
  #if ( !MIDL_PASS && !__midl )
@@ -592,7 +711,7 @@
  HKEY
  WINAPI
  GetClusterResourceTypeKey(
-@@ -2786,6 +2878,8 @@
+@@ -2786,6 +2953,8 @@
  #endif // _CLUSTER_API_TYPES_
  
  #if ( !MIDL_PASS && !__midl )
@@ -601,7 +720,7 @@
  HGROUP
  WINAPI
  CreateClusterGroup(
-@@ -2799,6 +2893,8 @@
+@@ -2799,6 +2968,8 @@
      _In_ LPCWSTR lpszGroupName
      );
  
@@ -610,7 +729,7 @@
  HGROUP
  WINAPI
  OpenClusterGroup(
-@@ -2813,6 +2909,8 @@
+@@ -2813,6 +2984,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -619,7 +738,7 @@
  HGROUP
  WINAPI
  OpenClusterGroupEx(
-@@ -2840,6 +2938,7 @@
+@@ -2840,6 +3013,7 @@
  #define CLUSAPI_NODE_PAUSE_RETRY_DRAIN_ON_FAILURE               0x00000004
  
  
@@ -627,7 +746,7 @@
  DWORD
  WINAPI
  PauseClusterNodeEx(
-@@ -2895,6 +2994,7 @@
+@@ -2895,6 +3069,7 @@
  #define CLUSAPI_NODE_RESUME_FAILBACK_VMS_FORCEFULLY            0x00000008
  
  
@@ -635,7 +754,7 @@
  DWORD
  WINAPI
  ResumeClusterNodeEx(
-@@ -2946,6 +3046,7 @@
+@@ -2946,6 +3121,7 @@
  #define CLUSGRP_STATUS_OFFLINE_NOT_LOCAL_DISK_OWNER                            0x0000000000000800
  #define CLUSGRP_STATUS_WAITING_FOR_DEPENDENCIES                                0x0000000000001000
  
@@ -643,7 +762,7 @@
  HGROUP
  WINAPI
  CreateClusterGroupEx(
-@@ -2961,6 +3062,7 @@
+@@ -2961,6 +3137,7 @@
      _In_opt_ PCLUSTER_CREATE_GROUP_INFO pGroupInfo
      );
  
@@ -651,7 +770,7 @@
  HGROUPENUMEX
  WINAPI
  ClusterGroupOpenEnumEx(
-@@ -2982,6 +3084,7 @@
+@@ -2982,6 +3159,7 @@
      _In_ DWORD dwFlags
      );
  
@@ -659,7 +778,7 @@
  DWORD
  WINAPI
  ClusterGroupGetEnumCountEx(
-@@ -2993,6 +3096,7 @@
+@@ -2993,6 +3171,7 @@
      _In_ HGROUPENUMEX hGroupEnumEx
      );
  
@@ -667,7 +786,7 @@
  DWORD
  WINAPI
  ClusterGroupEnumEx(
-@@ -3010,6 +3114,7 @@
+@@ -3010,6 +3189,7 @@
      _Inout_ LPDWORD cbItem
      );
  
@@ -675,7 +794,7 @@
  DWORD
  WINAPI
  ClusterGroupCloseEnumEx(
-@@ -3033,6 +3138,8 @@
+@@ -3033,6 +3213,8 @@
  #define CLUSRES_STATUS_APPLICATION_READY                                       0x0000000000000100
  #define CLUSRES_STATUS_OFFLINE_NOT_LOCAL_DISK_OWNER                            0x0000000000000200
  
@@ -684,7 +803,7 @@
  HRESENUMEX
  WINAPI
  ClusterResourceOpenEnumEx(
-@@ -3054,6 +3161,7 @@
+@@ -3054,6 +3236,7 @@
      _In_ DWORD dwFlags
      );
  
@@ -692,7 +811,7 @@
  DWORD
  WINAPI
  ClusterResourceGetEnumCountEx(
-@@ -3065,6 +3173,7 @@
+@@ -3065,6 +3248,7 @@
      _In_ HRESENUMEX hResourceEnumEx
      );
  
@@ -700,7 +819,7 @@
  DWORD
  WINAPI
  ClusterResourceEnumEx(
-@@ -3082,6 +3191,7 @@
+@@ -3082,6 +3266,7 @@
      _Inout_ LPDWORD cbItem
      );
  
@@ -708,7 +827,7 @@
  DWORD
  WINAPI
  ClusterResourceCloseEnumEx(
-@@ -3098,6 +3208,7 @@
+@@ -3098,6 +3283,7 @@
  #define CLUSAPI_GROUP_ONLINE_BEST_POSSIBLE_NODE     0x00000004
  #define CLUSAPI_GROUP_ONLINE_IGNORE_AFFINITY_RULE   0x00000008
  
@@ -716,7 +835,7 @@
  DWORD WINAPI OnlineClusterGroupEx(
      _In_       HGROUP hGroup,
      _In_opt_   HNODE  hDestinationNode,
-@@ -3109,6 +3220,7 @@
+@@ -3109,6 +3295,7 @@
  
  #define CLUSAPI_GROUP_OFFLINE_IGNORE_RESOURCE_STATUS 0x00000001
  
@@ -724,7 +843,7 @@
  DWORD WINAPI OfflineClusterGroupEx(
      _In_       HGROUP hGroup,
      _In_       DWORD  dwOfflineFlags,
-@@ -3151,6 +3263,7 @@
+@@ -3151,6 +3338,7 @@
  #define CLUSAPI_RESOURCE_ONLINE_IGNORE_AFFINITY_RULE            0x00000020
  
  
@@ -732,7 +851,7 @@
  DWORD WINAPI OnlineClusterResourceEx(
    _In_       HRESOURCE hResource,
    _In_       DWORD     dwOnlineFlags,
-@@ -3186,6 +3299,7 @@
+@@ -3186,6 +3374,7 @@
  #define CLUSAPI_RESOURCE_OFFLINE_REASON_PREEMPTED       0x00000020
  #define CLUSAPI_RESOURCE_OFFLINE_REASON_SHUTTING_DOWN   0x00000040
  
@@ -740,7 +859,7 @@
  DWORD WINAPI OfflineClusterResourceEx(
    _In_       HRESOURCE hResource,
    _In_       DWORD     dwOfflineFlags,
-@@ -3218,6 +3332,7 @@
+@@ -3218,6 +3407,7 @@
  #define CLUSAPI_CHANGE_RESOURCE_GROUP_FORCE_MOVE_TO_CSV     0x0000000000000001
  #define CLUSAPI_VALID_CHANGE_RESOURCE_GROUP_FLAGS           (CLUSAPI_CHANGE_RESOURCE_GROUP_FORCE_MOVE_TO_CSV)
  
@@ -748,7 +867,7 @@
  DWORD
  WINAPI
  MoveClusterGroupEx(
-@@ -3244,11 +3359,13 @@
+@@ -3244,11 +3434,13 @@
  #endif
  
  
@@ -762,7 +881,7 @@
  DWORD WINAPI RestartClusterResource(
      _In_ HRESOURCE hResource,
      _In_ DWORD dwFlags
-@@ -3280,6 +3397,8 @@
+@@ -3280,6 +3472,8 @@
  
  #endif // (CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8)
  
@@ -771,7 +890,7 @@
  BOOL
  WINAPI
  CloseClusterGroup(
-@@ -3291,6 +3410,8 @@
+@@ -3291,6 +3485,8 @@
      _In_ HGROUP hGroup
      );
  
@@ -780,7 +899,7 @@
  HCLUSTER
  WINAPI
  GetClusterFromGroup(
-@@ -3302,6 +3423,8 @@
+@@ -3302,6 +3498,8 @@
      _In_ HGROUP hGroup
      );
  
@@ -789,7 +908,7 @@
  _Success_(return >= 0) //!= ClusterGroupStateUnknown
  CLUSTER_GROUP_STATE
  WINAPI
-@@ -3318,6 +3441,7 @@
+@@ -3318,6 +3516,7 @@
      _Inout_opt_ LPDWORD lpcchNodeName
      );
  
@@ -797,7 +916,7 @@
  DWORD
  WINAPI
  SetClusterGroupName(
-@@ -3331,6 +3455,7 @@
+@@ -3331,6 +3530,7 @@
      LPCWSTR lpszGroupName
      );
  
@@ -805,7 +924,7 @@
  DWORD
  WINAPI
  SetClusterGroupNodeList(
-@@ -3382,6 +3507,7 @@
+@@ -3382,6 +3582,7 @@
  
  #endif
  
@@ -813,7 +932,7 @@
  DWORD
  WINAPI
  OnlineClusterGroup(
-@@ -3395,6 +3521,7 @@
+@@ -3395,6 +3596,7 @@
      _In_opt_ HNODE hDestinationNode
      );
  
@@ -821,7 +940,7 @@
  DWORD
  WINAPI
  MoveClusterGroup(
-@@ -3408,6 +3535,7 @@
+@@ -3408,6 +3610,7 @@
      _In_opt_ HNODE hDestinationNode
      );
  
@@ -829,7 +948,7 @@
  DWORD
  WINAPI
  OfflineClusterGroup(
-@@ -3419,6 +3547,7 @@
+@@ -3419,6 +3622,7 @@
      HGROUP hGroup
      );
  
@@ -837,7 +956,7 @@
  DWORD
  WINAPI
  DeleteClusterGroup(
-@@ -3430,6 +3559,7 @@
+@@ -3430,6 +3634,7 @@
      HGROUP hGroup
      );
  
@@ -845,7 +964,7 @@
  DWORD
  WINAPI
  DestroyClusterGroup(
-@@ -3471,6 +3601,8 @@
+@@ -3471,6 +3676,8 @@
  
  #endif
  
@@ -854,7 +973,7 @@
  HGROUPENUM
  WINAPI
  ClusterGroupOpenEnum(
-@@ -3484,6 +3616,7 @@
+@@ -3484,6 +3691,7 @@
      DWORD dwType
      );
  
@@ -862,7 +981,7 @@
  DWORD
  WINAPI
  ClusterGroupGetEnumCount(
-@@ -3495,6 +3628,7 @@
+@@ -3495,6 +3703,7 @@
      _In_ HGROUPENUM hGroupEnum
      );
  
@@ -870,7 +989,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -3515,6 +3649,7 @@
+@@ -3515,6 +3724,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -878,7 +997,7 @@
  DWORD
  WINAPI
  ClusterGroupCloseEnum(
-@@ -3585,6 +3720,8 @@
+@@ -3585,6 +3795,8 @@
  //
  
  #if ( !MIDL_PASS && !__midl )
@@ -887,7 +1006,7 @@
  HRESOURCE
  WINAPI
  CreateClusterResource(
-@@ -3625,6 +3762,8 @@
+@@ -3625,6 +3837,8 @@
  
  #endif
  
@@ -896,7 +1015,7 @@
  HRESOURCE
  WINAPI
  OpenClusterResource(
-@@ -3639,6 +3778,8 @@
+@@ -3639,6 +3853,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -905,7 +1024,7 @@
  HRESOURCE
  WINAPI
  OpenClusterResourceEx(
-@@ -3657,6 +3798,8 @@
+@@ -3657,6 +3873,8 @@
      );
  #endif
  
@@ -914,7 +1033,7 @@
  BOOL
  WINAPI
  CloseClusterResource(
-@@ -3668,6 +3811,8 @@
+@@ -3668,6 +3886,8 @@
      HRESOURCE hResource
      );
  
@@ -923,7 +1042,7 @@
  HCLUSTER
  WINAPI
  GetClusterFromResource(
-@@ -3679,6 +3824,7 @@
+@@ -3679,6 +3899,7 @@
      _In_ HRESOURCE hResource
      );
  
@@ -931,7 +1050,7 @@
  DWORD
  WINAPI
  DeleteClusterResource(
-@@ -3707,6 +3853,8 @@
+@@ -3707,6 +3928,8 @@
  
  #endif
  
@@ -940,7 +1059,7 @@
  _Success_(return >= 0) // != ClusterResourceStateUnknown
  CLUSTER_RESOURCE_STATE
  WINAPI
-@@ -3727,6 +3875,7 @@
+@@ -3727,6 +3950,7 @@
      _Inout_opt_ LPDWORD lpcchGroupName
      );
  
@@ -948,7 +1067,7 @@
  DWORD
  WINAPI
  SetClusterResourceName(
-@@ -3759,6 +3908,7 @@
+@@ -3759,6 +3983,7 @@
  
  #endif
  
@@ -956,7 +1075,7 @@
  DWORD
  WINAPI
  FailClusterResource(
-@@ -3787,6 +3937,7 @@
+@@ -3787,6 +4012,7 @@
  
  #endif
  
@@ -964,7 +1083,7 @@
  DWORD
  WINAPI
  OnlineClusterResource(
-@@ -3798,6 +3949,7 @@
+@@ -3798,6 +4024,7 @@
      HRESOURCE hResource
      );
  
@@ -972,7 +1091,7 @@
  DWORD
  WINAPI
  OfflineClusterResource(
-@@ -3809,6 +3961,7 @@
+@@ -3809,6 +4036,7 @@
      HRESOURCE hResource
      );
  
@@ -980,7 +1099,7 @@
  DWORD
  WINAPI
  ChangeClusterResourceGroup(
-@@ -3858,6 +4011,7 @@
+@@ -3858,6 +4086,7 @@
  
  #endif
  
@@ -988,7 +1107,7 @@
  DWORD
  WINAPI
  AddClusterResourceNode(
-@@ -3871,6 +4025,7 @@
+@@ -3871,6 +4100,7 @@
      HNODE hNode
      );
  
@@ -996,7 +1115,7 @@
  DWORD
  WINAPI
  RemoveClusterResourceNode(
-@@ -3918,6 +4073,7 @@
+@@ -3918,6 +4148,7 @@
  
  #endif
  
@@ -1004,7 +1123,7 @@
  DWORD
  WINAPI
  AddClusterResourceDependency(
-@@ -3931,6 +4087,7 @@
+@@ -3931,6 +4162,7 @@
      HRESOURCE hDependsOn
      );
  
@@ -1012,7 +1131,7 @@
  DWORD
  WINAPI
  RemoveClusterResourceDependency(
-@@ -3978,6 +4135,7 @@
+@@ -3978,6 +4210,7 @@
  
  #endif
  
@@ -1020,7 +1139,7 @@
  DWORD
  WINAPI
  SetClusterResourceDependencyExpression(
-@@ -3991,6 +4149,7 @@
+@@ -3991,6 +4224,7 @@
      _In_ LPCWSTR lpszDependencyExpression
      );
  
@@ -1028,7 +1147,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4010,6 +4169,7 @@
+@@ -4010,6 +4244,7 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1036,7 +1155,7 @@
  DWORD
  WINAPI
  AddResourceToClusterSharedVolumes(
-@@ -4024,6 +4184,7 @@
+@@ -4024,6 +4259,7 @@
  
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1044,7 +1163,7 @@
  DWORD
  WINAPI
  RemoveResourceFromClusterSharedVolumes(
-@@ -4037,6 +4198,7 @@
+@@ -4037,6 +4273,7 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1052,7 +1171,7 @@
  DWORD
  WINAPI
  IsFileOnClusterSharedVolume(
-@@ -4052,6 +4214,8 @@
+@@ -4052,6 +4289,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1061,7 +1180,7 @@
  DWORD
  WINAPI
  ClusterSharedVolumeSetSnapshotState(
-@@ -4068,6 +4232,7 @@
+@@ -4068,6 +4307,7 @@
      _In_ CLUSTER_SHARED_VOLUME_SNAPSHOT_STATE state
      );
  
@@ -1069,7 +1188,7 @@
  BOOL
  WINAPI
  CanResourceBeDependent(
-@@ -4081,6 +4246,7 @@
+@@ -4081,6 +4321,7 @@
      HRESOURCE hResourceDependent
      );
  
@@ -1077,7 +1196,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4107,6 +4273,7 @@
+@@ -4107,6 +4348,7 @@
      _Out_opt_ LPDWORD lpBytesReturned
      );
  
@@ -1085,7 +1204,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4121,6 +4288,7 @@
+@@ -4121,6 +4363,7 @@
      _Out_opt_ LPDWORD lpBytesReturned
      );
  
@@ -1093,7 +1212,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4149,6 +4317,7 @@
+@@ -4149,6 +4392,7 @@
      _Out_opt_ LPDWORD lpBytesReturned
      );
  
@@ -1101,7 +1220,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4164,6 +4333,7 @@
+@@ -4164,6 +4408,7 @@
      _Out_opt_ LPDWORD lpBytesReturned
      );
  
@@ -1109,7 +1228,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4338,6 +4508,7 @@
+@@ -4338,6 +4583,7 @@
  
  #endif
  
@@ -1117,7 +1236,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -4396,6 +4567,8 @@
+@@ -4396,6 +4642,8 @@
  
  #endif
  
@@ -1126,7 +1245,7 @@
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -6863,6 +7036,8 @@
+@@ -6863,6 +7111,8 @@
  #endif // _CLUSTER_API_TYPES_
  
  #if ( !MIDL_PASS && !__midl )
@@ -1135,7 +1254,7 @@
  HRESENUM
  WINAPI
  ClusterResourceOpenEnum(
-@@ -6876,6 +7051,7 @@
+@@ -6876,6 +7126,7 @@
      DWORD dwType
      );
  
@@ -1143,7 +1262,7 @@
  DWORD
  WINAPI
  ClusterResourceGetEnumCount(
-@@ -6887,6 +7063,7 @@
+@@ -6887,6 +7138,7 @@
      _In_ HRESENUM hResEnum
      );
  
@@ -1151,7 +1270,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -6907,6 +7084,7 @@
+@@ -6907,6 +7159,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -1159,7 +1278,7 @@
  DWORD
  WINAPI
  ClusterResourceCloseEnum(
-@@ -6918,6 +7096,7 @@
+@@ -6918,6 +7171,7 @@
      HRESENUM hResEnum
      );
  
@@ -1167,7 +1286,7 @@
  DWORD
  WINAPI
  CreateClusterResourceType(
-@@ -6939,6 +7118,7 @@
+@@ -6939,6 +7193,7 @@
      _In_ DWORD dwIsAlivePollInterval
      );
  
@@ -1175,7 +1294,7 @@
  DWORD
  WINAPI
  DeleteClusterResourceType(
-@@ -6994,6 +7174,8 @@
+@@ -6994,6 +7249,8 @@
  
  #endif
  
@@ -1184,7 +1303,7 @@
  HRESTYPEENUM
  WINAPI
  ClusterResourceTypeOpenEnum(
-@@ -7009,6 +7191,7 @@
+@@ -7009,6 +7266,7 @@
      _In_ DWORD dwType
      );
  
@@ -1192,7 +1311,7 @@
  DWORD
  WINAPI
  ClusterResourceTypeGetEnumCount(
-@@ -7020,6 +7203,7 @@
+@@ -7020,6 +7278,7 @@
      _In_ HRESTYPEENUM hResTypeEnum
      );
  
@@ -1200,7 +1319,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -7040,6 +7224,7 @@
+@@ -7040,6 +7299,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -1208,7 +1327,7 @@
  DWORD
  WINAPI
  ClusterResourceTypeCloseEnum(
-@@ -7092,6 +7277,8 @@
+@@ -7092,6 +7352,8 @@
  //
  
  #if ( !MIDL_PASS && !__midl )
@@ -1217,7 +1336,7 @@
  HNETWORK
  WINAPI
  OpenClusterNetwork(
-@@ -7106,6 +7293,8 @@
+@@ -7106,6 +7368,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1226,7 +1345,7 @@
  HNETWORK
  WINAPI
  OpenClusterNetworkEx(
-@@ -7124,6 +7313,8 @@
+@@ -7124,6 +7388,8 @@
      );
  #endif
  
@@ -1235,7 +1354,7 @@
  BOOL
  WINAPI
  CloseClusterNetwork(
-@@ -7135,6 +7326,8 @@
+@@ -7135,6 +7401,8 @@
      _In_ HNETWORK hNetwork
      );
  
@@ -1244,7 +1363,7 @@
  HCLUSTER
  WINAPI
  GetClusterFromNetwork(
-@@ -7146,6 +7339,8 @@
+@@ -7146,6 +7414,8 @@
      _In_ HNETWORK hNetwork
      );
  
@@ -1253,7 +1372,7 @@
  HNETWORKENUM
  WINAPI
  ClusterNetworkOpenEnum(
-@@ -7159,6 +7354,7 @@
+@@ -7159,6 +7429,7 @@
      _In_ DWORD dwType
      );
  
@@ -1261,7 +1380,7 @@
  DWORD
  WINAPI
  ClusterNetworkGetEnumCount(
-@@ -7170,6 +7366,7 @@
+@@ -7170,6 +7441,7 @@
      _In_ HNETWORKENUM hNetworkEnum
      );
  
@@ -1269,7 +1388,7 @@
  _Success_ (return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -7190,6 +7387,7 @@
+@@ -7190,6 +7462,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -1277,7 +1396,7 @@
  DWORD
  WINAPI
  ClusterNetworkCloseEnum(
-@@ -7201,6 +7399,8 @@
+@@ -7201,6 +7474,8 @@
      _In_ HNETWORKENUM hNetworkEnum
      );
  
@@ -1286,7 +1405,7 @@
  CLUSTER_NETWORK_STATE
  WINAPI
  GetClusterNetworkState(
-@@ -7212,6 +7412,7 @@
+@@ -7212,6 +7487,7 @@
      _In_ HNETWORK hNetwork
      );
  
@@ -1294,7 +1413,7 @@
  DWORD
  WINAPI
  SetClusterNetworkName(
-@@ -7244,6 +7445,7 @@
+@@ -7244,6 +7520,7 @@
  
  #endif
  
@@ -1302,7 +1421,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -7260,6 +7462,7 @@
+@@ -7260,6 +7537,7 @@
      _Inout_ LPDWORD lpcchName
      );
  
@@ -1310,7 +1429,7 @@
  DWORD
  WINAPI
  ClusterNetworkControl(
-@@ -7338,6 +7541,8 @@
+@@ -7338,6 +7616,8 @@
  //
  
  #if ( !MIDL_PASS && !__midl )
@@ -1319,7 +1438,7 @@
  HNETINTERFACE
  WINAPI
  OpenClusterNetInterface(
-@@ -7352,6 +7557,8 @@
+@@ -7352,6 +7632,8 @@
      );
  
  #if (CLUSAPI_VERSION >= CLUSAPI_VERSION_SERVER2008R2)
@@ -1328,7 +1447,7 @@
  HNETINTERFACE
  WINAPI
  OpenClusterNetInterfaceEx(
-@@ -7370,6 +7577,7 @@
+@@ -7370,6 +7652,7 @@
      );
  #endif
  
@@ -1336,7 +1455,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -7401,6 +7609,8 @@
+@@ -7401,6 +7684,8 @@
      _Inout_ LPDWORD lpcchInterfaceName
      );
  
@@ -1345,7 +1464,7 @@
  BOOL
  WINAPI
  CloseClusterNetInterface(
-@@ -7412,6 +7622,8 @@
+@@ -7412,6 +7697,8 @@
      _In_ HNETINTERFACE hNetInterface
      );
  
@@ -1354,7 +1473,7 @@
  HCLUSTER
  WINAPI
  GetClusterFromNetInterface(
-@@ -7423,6 +7635,8 @@
+@@ -7423,6 +7710,8 @@
      _In_ HNETINTERFACE hNetInterface
      );
  
@@ -1363,7 +1482,7 @@
  CLUSTER_NETINTERFACE_STATE
  WINAPI
  GetClusterNetInterfaceState(
-@@ -7434,6 +7648,7 @@
+@@ -7434,6 +7723,7 @@
      _In_ HNETINTERFACE hNetInterface
      );
  
@@ -1371,7 +1490,7 @@
  DWORD
  WINAPI
  ClusterNetInterfaceControl(
-@@ -7498,6 +7713,8 @@
+@@ -7498,6 +7788,8 @@
  //
  
  #if ( !MIDL_PASS && !__midl )
@@ -1380,7 +1499,7 @@
  HKEY
  WINAPI
  GetClusterKey(
-@@ -7511,6 +7728,8 @@
+@@ -7511,6 +7803,8 @@
       REGSAM samDesired
       );
  
@@ -1389,7 +1508,7 @@
  HKEY
  WINAPI
  GetClusterGroupKey(
-@@ -7524,6 +7743,8 @@
+@@ -7524,6 +7818,8 @@
      REGSAM samDesired
      );
  
@@ -1398,7 +1517,7 @@
  HKEY
  WINAPI
  GetClusterResourceKey(
-@@ -7537,6 +7758,8 @@
+@@ -7537,6 +7833,8 @@
      REGSAM samDesired
      );
  
@@ -1407,7 +1526,7 @@
  HKEY
  WINAPI
  GetClusterNodeKey(
-@@ -7550,6 +7773,8 @@
+@@ -7550,6 +7848,8 @@
      REGSAM samDesired
      );
  
@@ -1416,7 +1535,7 @@
  HKEY
  WINAPI
  GetClusterNetworkKey(
-@@ -7563,6 +7788,8 @@
+@@ -7563,6 +7863,8 @@
      _In_ REGSAM samDesired
      );
  
@@ -1425,7 +1544,7 @@
  HKEY
  WINAPI
  GetClusterNetInterfaceKey(
-@@ -7576,6 +7803,7 @@
+@@ -7576,6 +7878,7 @@
      _In_ REGSAM samDesired
      );
  
@@ -1433,7 +1552,7 @@
  LONG
  WINAPI
  ClusterRegCreateKey(
-@@ -7628,6 +7856,7 @@
+@@ -7628,6 +7931,7 @@
  
  #endif
  
@@ -1441,7 +1560,7 @@
  LONG
  WINAPI
  ClusterRegOpenKey(
-@@ -7645,6 +7874,7 @@
+@@ -7645,6 +7949,7 @@
      PHKEY phkResult
      );
  
@@ -1449,7 +1568,7 @@
  LONG
  WINAPI
  ClusterRegDeleteKey(
-@@ -7677,6 +7907,7 @@
+@@ -7677,6 +7982,7 @@
  
  #endif
  
@@ -1457,7 +1576,7 @@
  LONG
  WINAPI
  ClusterRegCloseKey(
-@@ -7688,6 +7919,7 @@
+@@ -7688,6 +7994,7 @@
      HKEY hKey
      );
  
@@ -1465,7 +1584,7 @@
  _Success_(return == ERROR_SUCCESS)
  LONG
  WINAPI
-@@ -7708,6 +7940,8 @@
+@@ -7708,6 +8015,8 @@
      _Out_ PFILETIME lpftLastWriteTime
      );
  
@@ -1474,7 +1593,7 @@
  DWORD
  WINAPI
  ClusterRegSetValue(
-@@ -7727,6 +7961,7 @@
+@@ -7727,6 +8036,7 @@
      DWORD cbData
      );
  
@@ -1482,7 +1601,7 @@
  DWORD
  WINAPI
  ClusterRegDeleteValue(
-@@ -7780,6 +8015,7 @@
+@@ -7780,6 +8090,7 @@
  
  #endif
  
@@ -1490,7 +1609,7 @@
  LONG
  WINAPI
  ClusterRegQueryValue(
-@@ -7799,6 +8035,7 @@
+@@ -7799,6 +8110,7 @@
      _Inout_opt_ LPDWORD lpcbData
      );
  
@@ -1498,7 +1617,7 @@
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -7823,6 +8060,7 @@
+@@ -7823,6 +8135,7 @@
      _Inout_opt_ LPDWORD lpcbData
      );
  
@@ -1506,7 +1625,7 @@
  LONG
  WINAPI
  ClusterRegQueryInfoKey(
-@@ -7848,6 +8086,7 @@
+@@ -7848,6 +8161,7 @@
      PFILETIME lpftLastWriteTime
      );
  
@@ -1514,7 +1633,7 @@
  LONG
  WINAPI
  ClusterRegGetKeySecurity (
-@@ -7865,6 +8104,7 @@
+@@ -7865,6 +8179,7 @@
      _Inout_ LPDWORD lpcbSecurityDescriptor
      );
  
@@ -1522,7 +1641,7 @@
  LONG
  WINAPI
  ClusterRegSetKeySecurity(
-@@ -7886,7 +8126,7 @@
+@@ -7886,7 +8201,7 @@
  WINAPI
  ClusterRegSetKeySecurityEx(
      _In_ HKEY hKey,
@@ -1531,7 +1650,7 @@
      _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor,
      _In_opt_ LPCWSTR lpszReason
      );
-@@ -7901,6 +8141,7 @@
+@@ -7901,6 +8216,7 @@
  
  #endif
  
@@ -1539,7 +1658,7 @@
  LONG
  WINAPI
  ClusterRegSyncDatabase(
-@@ -7914,6 +8155,7 @@
+@@ -7914,6 +8230,7 @@
      DWORD flags
      );
  
@@ -1547,7 +1666,7 @@
  LONG WINAPI ClusterRegCreateBatch(
      _In_opt_ HKEY hKey,
      _Out_ HREGBATCH* pHREGBATCH
-@@ -7925,6 +8167,7 @@
+@@ -7925,6 +8242,7 @@
      _Out_ HREGBATCH* pHREGBATCH
      );
  
@@ -1555,7 +1674,7 @@
  LONG WINAPI ClusterRegBatchAddCommand(
      _In_ HREGBATCH hRegBatch,
      _In_ CLUSTER_REG_COMMAND dwCommand,
-@@ -7944,12 +8187,14 @@
+@@ -7944,12 +8262,14 @@
      _In_ DWORD cbData
      );
  
@@ -1570,7 +1689,7 @@
  LONG WINAPI ClusterRegCloseBatchEx(
      _In_ HREGBATCH hRegBatch,
      _In_ DWORD flags,
-@@ -7963,6 +8208,7 @@
+@@ -7963,6 +8283,7 @@
      _Out_opt_ INT * failedCommandNumber
      );
  
@@ -1578,7 +1697,7 @@
  LONG WINAPI ClusterRegBatchReadCommand(
      _In_ HREGBATCHNOTIFICATION hBatchNotification,
      _Out_ CLUSTER_BATCH_COMMAND * pBatchCommand);
-@@ -7972,6 +8218,7 @@
+@@ -7972,6 +8293,7 @@
      _In_ HREGBATCHNOTIFICATION hBatchNotification,
      _Out_ CLUSTER_BATCH_COMMAND * pBatchCommand);
  
@@ -1586,7 +1705,7 @@
  LONG WINAPI ClusterRegBatchCloseNotification(
      _In_ HREGBATCHNOTIFICATION hBatchNotification);
  
-@@ -7979,6 +8226,7 @@
+@@ -7979,6 +8301,7 @@
  (WINAPI *PCLUSTER_REG_BATCH_CLOSE_NOTIFICATION)(
      _In_ HREGBATCHNOTIFICATION hBatchNotification);
  
@@ -1594,7 +1713,7 @@
  LONG WINAPI ClusterRegCreateBatchNotifyPort(
      _In_ HKEY hKey,
      _Out_ HREGBATCHPORT * phBatchNotifyPort);
-@@ -7988,6 +8236,7 @@
+@@ -7988,6 +8311,7 @@
      _In_ HKEY hKey,
      _Out_ HREGBATCHPORT * phBatchNotifyPort);
  
@@ -1602,7 +1721,7 @@
  LONG WINAPI ClusterRegCloseBatchNotifyPort(
      _In_ HREGBATCHPORT hBatchNotifyPort);
  
-@@ -7995,6 +8244,7 @@
+@@ -7995,6 +8319,7 @@
  (WINAPI *PCLUSTER_REG_CLOSE_BATCH_NOTIFY_PORT)(
      _In_ HREGBATCHPORT hBatchNotifyPort);
  
@@ -1610,7 +1729,7 @@
  LONG WINAPI ClusterRegGetBatchNotification(
      _In_ HREGBATCHPORT hBatchNotify,
      _Out_ HREGBATCHNOTIFICATION * phBatchNotification);
-@@ -8005,6 +8255,7 @@
+@@ -8005,6 +8330,7 @@
      _Out_ HREGBATCHNOTIFICATION * phBatchNotification);
  
  
@@ -1618,7 +1737,7 @@
  LONG WINAPI ClusterRegCreateReadBatch(
      _In_ HKEY hKey,
      _Out_ HREGREADBATCH* phRegReadBatch);
-@@ -8014,6 +8265,7 @@
+@@ -8014,6 +8340,7 @@
      _In_ HKEY hKey,
      _Out_ HREGREADBATCH* phRegReadBatch);
  
@@ -1626,7 +1745,7 @@
  LONG WINAPI ClusterRegReadBatchAddCommand(
      _In_ HREGREADBATCH hRegReadBatch,
      _In_ LPCWSTR wzSubkeyName,
-@@ -8025,6 +8277,7 @@
+@@ -8025,6 +8352,7 @@
      _In_ LPCWSTR wzSubkeyName,
      _In_ LPCWSTR wzValueName);
  
@@ -1634,7 +1753,7 @@
  LONG WINAPI ClusterRegCloseReadBatch(
      _In_ HREGREADBATCH hRegReadBatch,
      _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
-@@ -8034,6 +8287,7 @@
+@@ -8034,6 +8362,7 @@
      _In_ HREGREADBATCH hRegReadBatch,
      _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
  
@@ -1642,7 +1761,7 @@
  LONG WINAPI ClusterRegCloseReadBatchEx(
      _In_ HREGREADBATCH hRegReadBatch,
          _In_ DWORD flags,
-@@ -8045,6 +8299,7 @@
+@@ -8045,6 +8374,7 @@
          _In_ DWORD flags,
      _Out_ HREGREADBATCHREPLY * phRegReadBatchReply);
  
@@ -1650,7 +1769,7 @@
  LONG WINAPI ClusterRegReadBatchReplyNextCommand(
      _In_ HREGREADBATCHREPLY hRegReadBatchReply,
      _Out_ CLUSTER_READ_BATCH_COMMAND * pBatchCommand);
-@@ -8054,6 +8309,7 @@
+@@ -8054,6 +8384,7 @@
      _In_ HREGREADBATCHREPLY hRegReadBatchReply,
      _Out_ CLUSTER_READ_BATCH_COMMAND * pBatchCommand);
  
@@ -1658,7 +1777,7 @@
  LONG WINAPI ClusterRegCloseReadBatchReply(
      _In_ HREGREADBATCHREPLY hRegReadBatchReply);
  
-@@ -8061,6 +8317,7 @@
+@@ -8061,6 +8392,7 @@
  (WINAPI *PCLUSTER_REG_CLOSE_READ_BATCH_REPLY)(
      _In_ HREGREADBATCHREPLY hRegReadBatchReply);
  
@@ -1666,7 +1785,7 @@
  DWORD
  WINAPI
  ClusterSetAccountAccess(
-@@ -8161,6 +8418,8 @@
+@@ -8161,6 +8493,8 @@
      _In_opt_ PCWSTR                 lpszObjectName,
      DWORD                           dwStatus );
  
@@ -1675,7 +1794,7 @@
  HCLUSTER
  WINAPI
  CreateCluster(
-@@ -8176,6 +8435,8 @@
+@@ -8176,6 +8510,8 @@
      _In_opt_ PVOID              pvCallbackArg
      );
  
@@ -1684,7 +1803,7 @@
  HCLUSTER
  WINAPI
  CreateClusterCNOless(
-@@ -8191,6 +8452,7 @@
+@@ -8191,6 +8527,7 @@
      _In_opt_ PVOID              pvCallbackArg
      );
  
@@ -1692,7 +1811,7 @@
  DWORD
  WINAPI
  CreateClusterNameAccount(
-@@ -8270,6 +8532,7 @@
+@@ -8270,6 +8607,7 @@
      _In_ HCLUSTER    hCluster
  );
  
@@ -1700,7 +1819,7 @@
  DWORD
  WINAPI
  RegisterClusterResourceTypeNotifyV2 (
-@@ -8280,6 +8543,8 @@
+@@ -8280,6 +8618,8 @@
      __in  DWORD_PTR dwNotifyKey
      );
  
@@ -1709,7 +1828,7 @@
  HNODE
  WINAPI
  AddClusterNode(
-@@ -8336,6 +8601,7 @@
+@@ -8336,6 +8676,7 @@
      _In_opt_ PVOID   pvCallbackArg
      );
  

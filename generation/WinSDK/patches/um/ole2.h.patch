@@ -7,7 +7,7 @@ index 241acea2..022f2ee3 100644
  #include <winapifamily.h>
  
  
-@@ -57,6 +58,17 @@
+@@ -57,15 +58,37 @@
  #define OLEIVERB_INPLACEACTIVATE    (-5L)
  #define OLEIVERB_DISCARDUNDOSTATE   (-6L)
  
@@ -25,7 +25,13 @@ index 241acea2..022f2ee3 100644
  // for OleCreateEmbeddingHelper flags; roles in low word; options in high word
  #define EMBDHLP_INPROC_HANDLER   0x0000L
  #define EMBDHLP_INPROC_SERVER    0x0001L
-@@ -66,6 +78,13 @@
+ #define EMBDHLP_CREATENOW    0x00000000L
+ #define EMBDHLP_DELAYCREATE  0x00010000L
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(EMBDHLP_FLAGS, DWORD,
++    EMBDHLP_INPROC_HANDLER, EMBDHLP_INPROC_SERVER, EMBDHLP_CREATENOW, EMBDHLP_DELAYCREATE);
++#endif
+ 
  /* extended create function flags */
  #define OLECREATE_LEAVERUNNING	0x00000001
  
@@ -39,7 +45,7 @@ index 241acea2..022f2ee3 100644
  #define OLESTREAM_CONVERSION_DEFAULT 0x00000000L
  #define OLESTREAM_CONVERSION_DISABLEOLELINK 0x00000001L
  
-@@ -87,186 +106,229 @@
+@@ -87,186 +110,229 @@
      || !ISOLATION_AWARE_ENABLED \
      || !defined(_OBJBASE_H_) \
      || !defined(CreateDataAdviseHolder)
@@ -274,7 +280,8 @@ index 241acea2..022f2ee3 100644
  
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI          OleCreateEmbeddingHelper(IN REFCLSID clsid, IN LPUNKNOWN pUnkOuter,
-                     IN DWORD flags, IN LPCLASSFACTORY pCF,
+-                    IN DWORD flags, IN LPCLASSFACTORY pCF,
++                    _Win32_AssociatedEnum_(EMBDHLP_FLAGS) IN DWORD flags, IN LPCLASSFACTORY pCF,
                      IN REFIID riid, OUT LPVOID FAR* lplpObj);
  
 +_Win32_SupportedOS_Windows2000_
@@ -294,7 +301,7 @@ index 241acea2..022f2ee3 100644
  WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLESTR lpszLabel,
                                          _In_ LPOLESTR lpszSourceFile, IN UINT iIconIndex);
  
-@@ -274,15 +336,18 @@ WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLEST
+@@ -274,15 +340,18 @@ WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLEST
  
  /* Registration Database Helper APIs */
  
@@ -314,7 +321,7 @@ index 241acea2..022f2ee3 100644
  WINOLEAPI OleRegEnumVerbs (IN REFCLSID clsid, _Outptr_ LPENUMOLEVERB FAR* ppenum);
  
  
-@@ -313,6 +378,7 @@ typedef HRESULT(STDAPICALLTYPE *OLESTREAMQUERYCONVERTOLELINKCALLBACK)
+@@ -313,6 +382,7 @@ typedef HRESULT(STDAPICALLTYPE *OLESTREAMQUERYCONVERTOLELINKCALLBACK)
      _In_opt_ ULONG      linkUpdatingOption,
      _In_opt_ PVOID      pvContext);
  
@@ -322,7 +329,7 @@ index 241acea2..022f2ee3 100644
  WINOLEAPI OleConvertOLESTREAMToIStorage
      (IN LPOLESTREAM                lpolestream,
      OUT LPSTORAGE                   pstg,
-@@ -326,6 +392,7 @@ WINOLEAPI OleConvertOLESTREAMToIStorage2
+@@ -326,6 +396,7 @@ WINOLEAPI OleConvertOLESTREAMToIStorage2
      _In_opt_ PVOID                      pvCallbackContext,
      _In_opt_ OLESTREAMQUERYCONVERTOLELINKCALLBACK pQueryConvertOLELinkCallback);
  
@@ -330,7 +337,7 @@ index 241acea2..022f2ee3 100644
  WINOLEAPI OleConvertIStorageToOLESTREAM
      (IN LPSTORAGE      pstg,
      OUT LPOLESTREAM     lpolestream);
-@@ -333,13 +400,18 @@ WINOLEAPI OleConvertIStorageToOLESTREAM
+@@ -333,13 +404,18 @@ WINOLEAPI OleConvertIStorageToOLESTREAM
  
  /* ConvertTo APIS */
  
@@ -349,7 +356,7 @@ index 241acea2..022f2ee3 100644
  WINOLEAPI OleConvertIStorageToOLESTREAMEx
      (IN LPSTORAGE          pstg,
                                      // Presentation data to OLESTREAM
-@@ -350,6 +422,7 @@ WINOLEAPI OleConvertIStorageToOLESTREAMEx
+@@ -350,6 +426,7 @@ WINOLEAPI OleConvertIStorageToOLESTREAMEx
       IN LPSTGMEDIUM        pmedium,    //      bits
       OUT LPOLESTREAM        polestm);
  

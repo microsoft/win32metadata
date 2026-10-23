@@ -71,7 +71,35 @@ index dded3769..244b0809 100644
  
  #pragma once
  
-@@ -95,10 +157,35 @@ extern "C" {
+@@ -78,6 +140,27 @@ extern "C" {
+ #define R2_MERGEPEN         15  /* DPo      */
+ #define R2_WHITE            16  /*  1       */
+ #define R2_LAST             16
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(R2_MODE, int,
++    R2_BLACK,
++    R2_NOTMERGEPEN,
++    R2_MASKNOTPEN,
++    R2_NOTCOPYPEN,
++    R2_MASKPENNOT,
++    R2_NOT,
++    R2_XORPEN,
++    R2_NOTMASKPEN,
++    R2_MASKPEN,
++    R2_NOTXORPEN,
++    R2_NOP,
++    R2_MERGENOTPEN,
++    R2_COPYPEN,
++    R2_MERGEPENNOT,
++    R2_MERGEPEN,
++    R2_WHITE,
++    R2_LAST);
++#endif
++
+ /* Ternary raster operations */
+ #define SRCCOPY             (DWORD)0x00CC0020 /* dest = source                   */
+@@ -95,10 +178,35 @@ extern "C" {
  #define DSTINVERT           (DWORD)0x00550009 /* dest = (NOT dest)               */
  #define BLACKNESS           (DWORD)0x00000042 /* dest = BLACK                    */
  #define WHITENESS           (DWORD)0x00FF0062 /* dest = WHITE                    */
@@ -107,7 +135,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0500 */
  
  
-@@ -121,6 +208,14 @@ extern "C" {
+@@ -121,6 +229,14 @@ extern "C" {
  #define COMPLEXREGION       3
  #define RGN_ERROR ERROR
  
@@ -122,7 +150,7 @@ index dded3769..244b0809 100644
  /* CombineRgn() Styles */
  #define RGN_AND             1
  #define RGN_OR              2
-@@ -130,11 +225,29 @@ extern "C" {
+@@ -130,11 +246,29 @@ extern "C" {
  #define RGN_MIN             RGN_AND
  #define RGN_MAX             RGN_COPY
  
@@ -152,7 +180,7 @@ index dded3769..244b0809 100644
  #define MAXSTRETCHBLTMODE            4
  
  #if(WINVER >= 0x0400)
-@@ -143,11 +256,25 @@ extern "C" {
+@@ -143,11 +277,25 @@ extern "C" {
  #define STRETCH_ORSCANS     WHITEONBLACK
  #define STRETCH_DELETESCANS COLORONCOLOR
  #define STRETCH_HALFTONE    HALFTONE
@@ -178,7 +206,7 @@ index dded3769..244b0809 100644
  #define POLYFILL_LAST                2
  
  /* Layout Orientation Options */
-@@ -157,6 +284,12 @@ extern "C" {
+@@ -157,6 +305,12 @@ extern "C" {
  #define LAYOUT_VBH                         0x00000004 // Vertical before horizontal
  #define LAYOUT_ORIENTATIONMASK             (LAYOUT_RTL | LAYOUT_BTT | LAYOUT_VBH)
  #define LAYOUT_BITMAPORIENTATIONPRESERVED  0x00000008
@@ -191,7 +219,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0500 */
  
  /* Text Alignment Options */
-@@ -173,8 +306,19 @@ extern "C" {
+@@ -173,8 +327,19 @@ extern "C" {
  #if (WINVER >= 0x0400)
  #define TA_RTLREADING                256
  #define TA_MASK       (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING)
@@ -211,7 +239,7 @@ index dded3769..244b0809 100644
  #endif
  
  #define VTA_BASELINE TA_BASELINE
-@@ -184,6 +328,24 @@ extern "C" {
+@@ -184,6 +349,27 @@ extern "C" {
  #define VTA_BOTTOM   TA_RIGHT
  #define VTA_TOP      TA_LEFT
  
@@ -235,8 +263,39 @@ index dded3769..244b0809 100644
 +
  #define ETO_OPAQUE                   0x0002
  #define ETO_CLIPPED                  0x0004
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(ETO_OPTIONS, unsigned int, ETO_OPAQUE, ETO_CLIPPED);
++#endif
  #if(WINVER >= 0x0400)
-@@ -211,6 +373,14 @@ extern "C" {
+@@ -192,13 +378,27 @@ extern "C" {
+ #define ETO_NUMERICSLOCAL            0x0400
+ #define ETO_NUMERICSLATIN            0x0800
+ #define ETO_IGNORELANGUAGE           0x1000
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(ETO_OPTIONS, unsigned int,
++    ETO_GLYPH_INDEX,
++    ETO_RTLREADING,
++    ETO_NUMERICSLOCAL,
++    ETO_NUMERICSLATIN,
++    ETO_IGNORELANGUAGE);
++#endif
+ #endif /* WINVER >= 0x0400 */
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
+ #define ETO_PDY                      0x2000
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(ETO_OPTIONS, unsigned int, ETO_PDY);
++#endif
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
+ #if (_WIN32_WINNT >= _WIN32_WINNT_LONGHORN)
+ #define ETO_REVERSE_INDEX_MAP        0x10000
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(ETO_OPTIONS, unsigned int, ETO_REVERSE_INDEX_MAP);
++#endif
+ #endif
+ 
+ #define ASPECT_FILTERING             0x0001
+ 
+@@ -211,6 +411,14 @@ extern "C" {
  #define DCB_ENABLE      0x0004
  #define DCB_DISABLE     0x0008
  
@@ -251,7 +310,50 @@ index dded3769..244b0809 100644
  #ifndef NOMETAFILE
  
  /* Metafile Functions */
-@@ -582,6 +752,13 @@ typedef struct _PSFEATURE_CUSTPAPER {
+@@ -425,7 +633,7 @@
+ typedef struct _PSINJECTDATA {
+ 
+     DWORD   DataBytes;      /* number of raw data bytes (NOT including this header) */
+-    WORD    InjectionPoint; /* injection point */
++    _Win32_AssociatedEnum_(PSINJECT_POINT) WORD    InjectionPoint; /* injection point */
+     WORD    PageNumber;     /* page number to apply the injection */
+ 
+     /* Followed by raw data to be injected */
+@@ -474,7 +682,18 @@
+ #define PSINJECT_ENDPAGECOMMENTS            107
+ 
+ #define PSINJECT_VMSAVE                     200
+ #define PSINJECT_VMRESTORE                  201
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(PSINJECT_POINT, WORD,
++    PSINJECT_BEGINSTREAM, PSINJECT_PSADOBE, PSINJECT_PAGESATEND, PSINJECT_PAGES,
++    PSINJECT_DOCNEEDEDRES, PSINJECT_DOCSUPPLIEDRES, PSINJECT_PAGEORDER, PSINJECT_ORIENTATION,
++    PSINJECT_BOUNDINGBOX, PSINJECT_DOCUMENTPROCESSCOLORS, PSINJECT_COMMENTS, PSINJECT_BEGINDEFAULTS,
++    PSINJECT_ENDDEFAULTS, PSINJECT_BEGINPROLOG, PSINJECT_ENDPROLOG, PSINJECT_BEGINSETUP,
++    PSINJECT_ENDSETUP, PSINJECT_TRAILER, PSINJECT_EOF, PSINJECT_ENDSTREAM,
++    PSINJECT_DOCUMENTPROCESSCOLORSATEND, PSINJECT_PAGENUMBER, PSINJECT_BEGINPAGESETUP, PSINJECT_ENDPAGESETUP,
++    PSINJECT_PAGETRAILER, PSINJECT_PLATECOLOR, PSINJECT_SHOWPAGE, PSINJECT_PAGEBBOX,
++    PSINJECT_ENDPAGECOMMENTS, PSINJECT_VMSAVE, PSINJECT_VMRESTORE);
++#endif
+ 
+ /*
+  * InjectionPoint for publisher mode PScript5 OEM plugin to
+@@ -570,7 +789,14 @@
+ #define OBJ_EXTPEN          11
+ #define OBJ_ENHMETADC       12
+ #define OBJ_ENHMETAFILE     13
+ #define OBJ_COLORSPACE      14
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(OBJ_TYPE, DWORD,
++    OBJ_PEN, OBJ_BRUSH, OBJ_DC, OBJ_METADC,
++    OBJ_PAL, OBJ_FONT, OBJ_BITMAP, OBJ_REGION,
++    OBJ_METAFILE, OBJ_MEMDC, OBJ_EXTPEN, OBJ_ENHMETADC,
++    OBJ_ENHMETAFILE, OBJ_COLORSPACE);
++#endif
+ 
+ #define GDI_OBJ_LAST        OBJ_COLORSPACE
+ 
+@@ -582,6 +808,13 @@ typedef struct _PSFEATURE_CUSTPAPER {
  #define MWT_LEFTMULTIPLY    2
  #define MWT_RIGHTMULTIPLY   3
  
@@ -265,7 +367,7 @@ index dded3769..244b0809 100644
  #define MWT_MIN             MWT_IDENTITY
  #define MWT_MAX             MWT_RIGHTMULTIPLY
  
-@@ -660,6 +837,13 @@ typedef RGBQUAD FAR* LPRGBQUAD;
+@@ -660,6 +893,13 @@ typedef RGBQUAD FAR* LPRGBQUAD;
  #define CS_DISABLE                      0x00000002L
  #define CS_DELETE_TRANSFORM             0x00000003L
  
@@ -279,7 +381,7 @@ index dded3769..244b0809 100644
  /* Logcolorspace signature */
  
  #define LCS_SIGNATURE           'PSOC'
-@@ -669,6 +853,12 @@ typedef RGBQUAD FAR* LPRGBQUAD;
+@@ -669,6 +909,12 @@ typedef RGBQUAD FAR* LPRGBQUAD;
  #define LCS_sRGB                'sRGB'
  #define LCS_WINDOWS_COLOR_SPACE 'Win '  // Windows default color space
  
@@ -292,7 +394,7 @@ index dded3769..244b0809 100644
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
-@@ -676,6 +866,11 @@ typedef LONG   LCSCSTYPE;
+@@ -676,6 +922,11 @@ typedef LONG   LCSCSTYPE;
  
  #define LCS_CALIBRATED_RGB              0x00000000L
  
@@ -304,7 +406,7 @@ index dded3769..244b0809 100644
  typedef LONG    LCSGAMUTMATCH;
  
  #define LCS_GM_BUSINESS                 0x00000001L
-@@ -696,6 +891,17 @@ typedef LONG    LCSGAMUTMATCH;
+@@ -696,6 +947,17 @@ typedef LONG    LCSGAMUTMATCH;
  #define ICM_UNREGISTERICMATCHER         6
  #define ICM_QUERYMATCH                  7
  
@@ -322,7 +424,7 @@ index dded3769..244b0809 100644
  /* Macros to retrieve CMYK values from a COLORREF */
  #define GetKValue(cmyk)      ((BYTE)(cmyk))
  #define GetYValue(cmyk)      ((BYTE)((cmyk)>> 8))
-@@ -840,7 +1046,7 @@ typedef struct {
+@@ -840,7 +1102,7 @@ typedef struct {
          LONG         bV4Height;
          WORD         bV4Planes;
          WORD         bV4BitCount;
@@ -331,7 +433,7 @@ index dded3769..244b0809 100644
          DWORD        bV4SizeImage;
          LONG         bV4XPelsPerMeter;
          LONG         bV4YPelsPerMeter;
-@@ -871,7 +1077,7 @@ typedef struct {
+@@ -871,7 +1133,7 @@ typedef struct {
          LONG         bV5Height;
          WORD         bV5Planes;
          WORD         bV5BitCount;
@@ -340,7 +442,7 @@ index dded3769..244b0809 100644
          DWORD        bV5SizeImage;
          LONG         bV5XPelsPerMeter;
          LONG         bV5YPelsPerMeter;
-@@ -907,6 +1113,16 @@ typedef struct {
+@@ -907,6 +1169,16 @@ typedef struct {
  #define BI_BITFIELDS  3L
  #define BI_JPEG       4L
  #define BI_PNG        5L
@@ -357,7 +459,7 @@ index dded3769..244b0809 100644
  #if (_WIN32_WINNT >= _WIN32_WINNT_NT4)
  #endif
  
-@@ -983,8 +1199,20 @@ typedef struct tagCHARSETINFO
+@@ -983,8 +1255,20 @@ typedef struct tagCHARSETINFO
  #define TCI_SRCCHARSET  1
  #define TCI_SRCCODEPAGE 2
  #define TCI_SRCFONTSIG  3
@@ -378,7 +480,7 @@ index dded3769..244b0809 100644
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
  #pragma region Application Family
-@@ -1078,7 +1306,7 @@ typedef struct tagMETAHEADER UNALIGNED FAR *LPMETAHEADER;
+@@ -1078,7 +1362,7 @@ typedef struct tagMETAHEADER UNALIGNED FAR *LPMETAHEADER;
  /* Enhanced Metafile structures */
  typedef struct tagENHMETARECORD
  {
@@ -387,7 +489,7 @@ index dded3769..244b0809 100644
      DWORD   nSize;              // Record size in bytes
      DWORD   dParm[1];           // Parameters
  } ENHMETARECORD, *PENHMETARECORD, *LPENHMETARECORD;
-@@ -1131,6 +1359,14 @@ typedef struct tagENHMETAHEADER
+@@ -1131,6 +1415,14 @@ typedef struct tagENHMETAHEADER
  #define TMPF_DEVICE             0x08
  #define TMPF_TRUETYPE       0x04
  
@@ -402,7 +504,7 @@ index dded3769..244b0809 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -1173,7 +1409,7 @@ typedef struct tagTEXTMETRICA
+@@ -1173,7 +1465,7 @@ typedef struct tagTEXTMETRICA
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -411,7 +513,7 @@ index dded3769..244b0809 100644
      BYTE        tmCharSet;
  } TEXTMETRICA, *PTEXTMETRICA, NEAR *NPTEXTMETRICA, FAR *LPTEXTMETRICA;
  typedef struct tagTEXTMETRICW
-@@ -1196,7 +1432,7 @@ typedef struct tagTEXTMETRICW
+@@ -1196,7 +1488,7 @@ typedef struct tagTEXTMETRICW
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -420,7 +522,7 @@ index dded3769..244b0809 100644
      BYTE        tmCharSet;
  } TEXTMETRICW, *PTEXTMETRICW, NEAR *NPTEXTMETRICW, FAR *LPTEXTMETRICW;
  #ifdef UNICODE
-@@ -1256,7 +1492,7 @@ typedef struct tagNEWTEXTMETRICA
+@@ -1256,7 +1548,7 @@ typedef struct tagNEWTEXTMETRICA
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -429,7 +531,7 @@ index dded3769..244b0809 100644
      BYTE        tmCharSet;
      DWORD   ntmFlags;
      UINT    ntmSizeEM;
-@@ -1283,7 +1519,7 @@ typedef struct tagNEWTEXTMETRICW
+@@ -1283,7 +1575,7 @@ typedef struct tagNEWTEXTMETRICW
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -438,7 +540,7 @@ index dded3769..244b0809 100644
      BYTE        tmCharSet;
      DWORD   ntmFlags;
      UINT    ntmSizeEM;
-@@ -1357,14 +1593,14 @@ typedef struct tagPELARRAY
+@@ -1357,14 +1649,14 @@ typedef struct tagPELARRAY
  /* Logical Brush (or Pattern) */
  typedef struct tagLOGBRUSH
    {
@@ -455,7 +557,25 @@ index dded3769..244b0809 100644
      COLORREF    lbColor;
      ULONG       lbHatch;
    } LOGBRUSH32, *PLOGBRUSH32, NEAR *NPLOGBRUSH32, FAR *LPLOGBRUSH32;
-@@ -1565,6 +1801,21 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
+@@ -1462,7 +1754,7 @@ typedef struct tagLOGFONTA
+     BYTE      lfStrikeOut;
+     BYTE      lfCharSet;
+     BYTE      lfOutPrecision;
+-    BYTE      lfClipPrecision;
++    _Win32_AssociatedEnum_(FONT_CLIP_PRECISION) BYTE      lfClipPrecision;
+     BYTE      lfQuality;
+     BYTE      lfPitchAndFamily;
+     CHAR      lfFaceName[LF_FACESIZE];
+@@ -1479,7 +1771,7 @@ typedef struct tagLOGFONTW
+     BYTE      lfStrikeOut;
+     BYTE      lfCharSet;
+     BYTE      lfOutPrecision;
+-    BYTE      lfClipPrecision;
++    _Win32_AssociatedEnum_(FONT_CLIP_PRECISION) BYTE      lfClipPrecision;
+     BYTE      lfQuality;
+     BYTE      lfPitchAndFamily;
+     WCHAR     lfFaceName[LF_FACESIZE];
+@@ -1565,33 +1857,88 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
  #define OUT_SCREEN_OUTLINE_PRECIS   9
  #define OUT_PS_ONLY_PRECIS          10
  
@@ -477,7 +597,29 @@ index dded3769..244b0809 100644
  #define CLIP_DEFAULT_PRECIS     0
  #define CLIP_CHARACTER_PRECIS   1
  #define CLIP_STROKE_PRECIS      2
-@@ -1579,19 +1830,44 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
+ #define CLIP_MASK               0xf
+ #define CLIP_LH_ANGLES          (1<<4)
+ #define CLIP_TT_ALWAYS          (2<<4)
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(FONT_CLIP_PRECISION, unsigned char,
++    CLIP_DEFAULT_PRECIS, CLIP_CHARACTER_PRECIS, CLIP_STROKE_PRECIS,
++    CLIP_MASK, CLIP_LH_ANGLES, CLIP_TT_ALWAYS);
++#endif
+ #if (_WIN32_WINNT >= _WIN32_WINNT_LONGHORN)
+ #define CLIP_DFA_DISABLE        (4<<4)
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(FONT_CLIP_PRECISION, unsigned char, CLIP_DFA_DISABLE);
++#endif
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_LONGHORN)
+ #define CLIP_EMBEDDED           (8<<4)
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(FONT_CLIP_PRECISION, unsigned char, CLIP_EMBEDDED);
++#if (_WIN32_WINNT >= _WIN32_WINNT_LONGHORN)
++typedef _WIN32META_ANNOTATION_("FlagsEnum(CLIP_DFA_OVERRIDE)",
++    CLIP_DFA_DISABLE) unsigned char FONT_CLIP_PRECISION;
++#endif
++#endif
+ 
  #define DEFAULT_QUALITY         0
  #define DRAFT_QUALITY           1
  #define PROOF_QUALITY           2
@@ -522,7 +664,7 @@ index dded3769..244b0809 100644
  #if(WINVER >= 0x0400)
  #define MONO_FONT               8
  #endif /* WINVER >= 0x0400 */
-@@ -1605,6 +1881,19 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
+@@ -1605,6 +1952,19 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
  #define GB2312_CHARSET          134
  #define CHINESEBIG5_CHARSET     136
  #define OEM_CHARSET             255
@@ -542,7 +684,7 @@ index dded3769..244b0809 100644
  #if(WINVER >= 0x0400)
  #define JOHAB_CHARSET           130
  #define HEBREW_CHARSET          177
-@@ -1619,6 +1908,21 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
+@@ -1619,6 +1979,21 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
  #define MAC_CHARSET             77
  #define BALTIC_CHARSET          186
  
@@ -564,7 +706,7 @@ index dded3769..244b0809 100644
  #define FS_LATIN1               0x00000001L
  #define FS_LATIN2               0x00000002L
  #define FS_CYRILLIC             0x00000004L
-@@ -1648,6 +1952,16 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
+@@ -1648,6 +2023,16 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
  #define FF_SCRIPT           0x40    /* Cursive, etc. */
  #define FF_DECORATIVE       0x50    /* Old English, etc. */
  
@@ -581,7 +723,7 @@ index dded3769..244b0809 100644
  /* Font Weights */
  #define FW_DONTCARE         0
  #define FW_THIN             100
-@@ -1666,6 +1980,25 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
+@@ -1666,6 +2051,25 @@ typedef LPENUMLOGFONTEXA LPENUMLOGFONTEX;
  #define FW_ULTRABOLD        FW_EXTRABOLD
  #define FW_BLACK            FW_HEAVY
  
@@ -607,7 +749,64 @@ index dded3769..244b0809 100644
  #define PANOSE_COUNT               10
  #define PAN_FAMILYTYPE_INDEX        0
  #define PAN_SERIFSTYLE_INDEX        1
-@@ -1873,12 +2206,24 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -1686,16 +2090,16 @@
+ typedef struct tagPANOSE
+ {
+-    BYTE    bFamilyType;
+-    BYTE    bSerifStyle;
+-    BYTE    bWeight;
+-    BYTE    bProportion;
+-    BYTE    bContrast;
+-    BYTE    bStrokeVariation;
+-    BYTE    bArmStyle;
+-    BYTE    bLetterform;
+-    BYTE    bMidline;
+-    BYTE    bXHeight;
++    _Win32_AssociatedEnum_(PAN_FAMILY_TYPE) BYTE    bFamilyType;
++    _Win32_AssociatedEnum_(PAN_SERIF_STYLE) BYTE    bSerifStyle;
++    _Win32_AssociatedEnum_(PAN_WEIGHT) BYTE    bWeight;
++    _Win32_AssociatedEnum_(PAN_PROPORTION) BYTE    bProportion;
++    _Win32_AssociatedEnum_(PAN_CONTRAST) BYTE    bContrast;
++    _Win32_AssociatedEnum_(PAN_STROKE_VARIATION) BYTE    bStrokeVariation;
++    _Win32_AssociatedEnum_(PAN_ARM_STYLE) BYTE    bArmStyle;
++    _Win32_AssociatedEnum_(PAN_LETT_FORM) BYTE    bLetterform;
++    _Win32_AssociatedEnum_(PAN_MIDLINE) BYTE    bMidline;
++    _Win32_AssociatedEnum_(PAN_XHEIGHT) BYTE    bXHeight;
+ } PANOSE, * LPPANOSE;
+ 
+ #define PAN_ANY                         0 /* Any                            */
+ #define PAN_NO_FIT                      1 /* No Fit                         */
+@@ -1802,6 +2206,29 @@ typedef struct tagPANOSE
+ #define PAN_XHEIGHT_DUCKING_SMALL       5 /* Ducking/Small                  */
+ #define PAN_XHEIGHT_DUCKING_STD         6 /* Ducking/Standard               */
+ #define PAN_XHEIGHT_DUCKING_LARGE       7 /* Ducking/Large                  */
+ 
++#ifdef WIN32METADATA
++typedef _WIN32META_ANNOTATION_("Enum(PAN_FAMILY_ANY, PAN_FAMILY_NO_FIT, PAN_FAMILY_TEXT_DISPLAY, PAN_FAMILY_SCRIPT, PAN_FAMILY_DECORATIVE, PAN_FAMILY_PICTORIAL)",
++    PAN_ANY, PAN_NO_FIT, PAN_FAMILY_TEXT_DISPLAY, PAN_FAMILY_SCRIPT, PAN_FAMILY_DECORATIVE, PAN_FAMILY_PICTORIAL) unsigned char PAN_FAMILY_TYPE;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_SERIF_ANY, PAN_SERIF_NO_FIT, PAN_SERIF_COVE, PAN_SERIF_OBTUSE_COVE, PAN_SERIF_SQUARE_COVE, PAN_SERIF_OBTUSE_SQUARE_COVE, PAN_SERIF_SQUARE, PAN_SERIF_THIN, PAN_SERIF_BONE, PAN_SERIF_EXAGGERATED, PAN_SERIF_TRIANGLE, PAN_SERIF_NORMAL_SANS, PAN_SERIF_OBTUSE_SANS, PAN_SERIF_PERP_SANS, PAN_SERIF_FLARED, PAN_SERIF_ROUNDED)",
++    PAN_ANY, PAN_NO_FIT, PAN_SERIF_COVE, PAN_SERIF_OBTUSE_COVE, PAN_SERIF_SQUARE_COVE, PAN_SERIF_OBTUSE_SQUARE_COVE, PAN_SERIF_SQUARE, PAN_SERIF_THIN, PAN_SERIF_BONE, PAN_SERIF_EXAGGERATED, PAN_SERIF_TRIANGLE, PAN_SERIF_NORMAL_SANS, PAN_SERIF_OBTUSE_SANS, PAN_SERIF_PERP_SANS, PAN_SERIF_FLARED, PAN_SERIF_ROUNDED) unsigned char PAN_SERIF_STYLE;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_WEIGHT_ANY, PAN_WEIGHT_NO_FIT, PAN_WEIGHT_INDEX, PAN_WEIGHT_VERY_LIGHT, PAN_WEIGHT_LIGHT, PAN_WEIGHT_THIN, PAN_WEIGHT_BOOK, PAN_WEIGHT_MEDIUM, PAN_WEIGHT_DEMI, PAN_WEIGHT_BOLD, PAN_WEIGHT_HEAVY, PAN_WEIGHT_BLACK, PAN_WEIGHT_NORD)",
++    PAN_ANY, PAN_NO_FIT, PAN_WEIGHT_INDEX, PAN_WEIGHT_VERY_LIGHT, PAN_WEIGHT_LIGHT, PAN_WEIGHT_THIN, PAN_WEIGHT_BOOK, PAN_WEIGHT_MEDIUM, PAN_WEIGHT_DEMI, PAN_WEIGHT_BOLD, PAN_WEIGHT_HEAVY, PAN_WEIGHT_BLACK, PAN_WEIGHT_NORD) unsigned char PAN_WEIGHT;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_PROP_ANY, PAN_PROP_NO_FIT, PAN_PROP_OLD_STYLE, PAN_PROP_MODERN, PAN_PROP_EVEN_WIDTH, PAN_PROP_EXPANDED, PAN_PROP_CONDENSED, PAN_PROP_VERY_EXPANDED, PAN_PROP_VERY_CONDENSED, PAN_PROP_MONOSPACED)",
++    PAN_ANY, PAN_NO_FIT, PAN_PROP_OLD_STYLE, PAN_PROP_MODERN, PAN_PROP_EVEN_WIDTH, PAN_PROP_EXPANDED, PAN_PROP_CONDENSED, PAN_PROP_VERY_EXPANDED, PAN_PROP_VERY_CONDENSED, PAN_PROP_MONOSPACED) unsigned char PAN_PROPORTION;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_CONTRAST_ANY, PAN_CONTRAST_NO_FIT, PAN_CONTRAST_INDEX, PAN_CONTRAST_NONE, PAN_CONTRAST_VERY_LOW, PAN_CONTRAST_LOW, PAN_CONTRAST_MEDIUM_LOW, PAN_CONTRAST_MEDIUM, PAN_CONTRAST_MEDIUM_HIGH, PAN_CONTRAST_HIGH, PAN_CONTRAST_VERY_HIGH)",
++    PAN_ANY, PAN_NO_FIT, PAN_CONTRAST_INDEX, PAN_CONTRAST_NONE, PAN_CONTRAST_VERY_LOW, PAN_CONTRAST_LOW, PAN_CONTRAST_MEDIUM_LOW, PAN_CONTRAST_MEDIUM, PAN_CONTRAST_MEDIUM_HIGH, PAN_CONTRAST_HIGH, PAN_CONTRAST_VERY_HIGH) unsigned char PAN_CONTRAST;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_STROKE_ANY, PAN_STROKE_NO_FIT, PAN_STROKE_GRADUAL_DIAG, PAN_STROKE_GRADUAL_TRAN, PAN_STROKE_GRADUAL_VERT, PAN_STROKE_GRADUAL_HORZ, PAN_STROKE_RAPID_VERT, PAN_STROKE_RAPID_HORZ, PAN_STROKE_INSTANT_VERT)",
++    PAN_ANY, PAN_NO_FIT, PAN_STROKE_GRADUAL_DIAG, PAN_STROKE_GRADUAL_TRAN, PAN_STROKE_GRADUAL_VERT, PAN_STROKE_GRADUAL_HORZ, PAN_STROKE_RAPID_VERT, PAN_STROKE_RAPID_HORZ, PAN_STROKE_INSTANT_VERT) unsigned char PAN_STROKE_VARIATION;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_ARM_ANY, PAN_ARM_NO_FIT, PAN_STRAIGHT_ARMS_HORZ, PAN_STRAIGHT_ARMS_WEDGE, PAN_STRAIGHT_ARMS_VERT, PAN_STRAIGHT_ARMS_SINGLE_SERIF, PAN_STRAIGHT_ARMS_DOUBLE_SERIF, PAN_BENT_ARMS_HORZ, PAN_BENT_ARMS_WEDGE, PAN_BENT_ARMS_VERT, PAN_BENT_ARMS_SINGLE_SERIF, PAN_BENT_ARMS_DOUBLE_SERIF)",
++    PAN_ANY, PAN_NO_FIT, PAN_STRAIGHT_ARMS_HORZ, PAN_STRAIGHT_ARMS_WEDGE, PAN_STRAIGHT_ARMS_VERT, PAN_STRAIGHT_ARMS_SINGLE_SERIF, PAN_STRAIGHT_ARMS_DOUBLE_SERIF, PAN_BENT_ARMS_HORZ, PAN_BENT_ARMS_WEDGE, PAN_BENT_ARMS_VERT, PAN_BENT_ARMS_SINGLE_SERIF, PAN_BENT_ARMS_DOUBLE_SERIF) unsigned char PAN_ARM_STYLE;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_LETT_FORM_ANY, PAN_LETT_FORM_NO_FIT, PAN_LETT_NORMAL_CONTACT, PAN_LETT_NORMAL_WEIGHTED, PAN_LETT_NORMAL_BOXED, PAN_LETT_NORMAL_FLATTENED, PAN_LETT_NORMAL_ROUNDED, PAN_LETT_NORMAL_OFF_CENTER, PAN_LETT_NORMAL_SQUARE, PAN_LETT_OBLIQUE_CONTACT, PAN_LETT_OBLIQUE_WEIGHTED, PAN_LETT_OBLIQUE_BOXED, PAN_LETT_OBLIQUE_FLATTENED, PAN_LETT_OBLIQUE_ROUNDED, PAN_LETT_OBLIQUE_OFF_CENTER, PAN_LETT_OBLIQUE_SQUARE)",
++    PAN_ANY, PAN_NO_FIT, PAN_LETT_NORMAL_CONTACT, PAN_LETT_NORMAL_WEIGHTED, PAN_LETT_NORMAL_BOXED, PAN_LETT_NORMAL_FLATTENED, PAN_LETT_NORMAL_ROUNDED, PAN_LETT_NORMAL_OFF_CENTER, PAN_LETT_NORMAL_SQUARE, PAN_LETT_OBLIQUE_CONTACT, PAN_LETT_OBLIQUE_WEIGHTED, PAN_LETT_OBLIQUE_BOXED, PAN_LETT_OBLIQUE_FLATTENED, PAN_LETT_OBLIQUE_ROUNDED, PAN_LETT_OBLIQUE_OFF_CENTER, PAN_LETT_OBLIQUE_SQUARE) unsigned char PAN_LETT_FORM;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_MIDLINE_ANY, PAN_MIDLINE_NO_FIT, PAN_MIDLINE_INDEX, PAN_MIDLINE_STANDARD_TRIMMED, PAN_MIDLINE_STANDARD_POINTED, PAN_MIDLINE_STANDARD_SERIFED, PAN_MIDLINE_HIGH_TRIMMED, PAN_MIDLINE_HIGH_POINTED, PAN_MIDLINE_HIGH_SERIFED, PAN_MIDLINE_CONSTANT_TRIMMED, PAN_MIDLINE_CONSTANT_POINTED, PAN_MIDLINE_CONSTANT_SERIFED, PAN_MIDLINE_LOW_TRIMMED, PAN_MIDLINE_LOW_POINTED, PAN_MIDLINE_LOW_SERIFED)",
++    PAN_ANY, PAN_NO_FIT, PAN_MIDLINE_INDEX, PAN_MIDLINE_STANDARD_TRIMMED, PAN_MIDLINE_STANDARD_POINTED, PAN_MIDLINE_STANDARD_SERIFED, PAN_MIDLINE_HIGH_TRIMMED, PAN_MIDLINE_HIGH_POINTED, PAN_MIDLINE_HIGH_SERIFED, PAN_MIDLINE_CONSTANT_TRIMMED, PAN_MIDLINE_CONSTANT_POINTED, PAN_MIDLINE_CONSTANT_SERIFED, PAN_MIDLINE_LOW_TRIMMED, PAN_MIDLINE_LOW_POINTED, PAN_MIDLINE_LOW_SERIFED) unsigned char PAN_MIDLINE;
++typedef _WIN32META_ANNOTATION_("Enum(PAN_XHEIGHT_ANY, PAN_XHEIGHT_NO_FIT, PAN_XHEIGHT_INDEX, PAN_XHEIGHT_CONSTANT_SMALL, PAN_XHEIGHT_CONSTANT_STD, PAN_XHEIGHT_CONSTANT_LARGE, PAN_XHEIGHT_DUCKING_SMALL, PAN_XHEIGHT_DUCKING_STD, PAN_XHEIGHT_DUCKING_LARGE)",
++    PAN_ANY, PAN_NO_FIT, PAN_XHEIGHT_INDEX, PAN_XHEIGHT_CONSTANT_SMALL, PAN_XHEIGHT_CONSTANT_STD, PAN_XHEIGHT_CONSTANT_LARGE, PAN_XHEIGHT_DUCKING_SMALL, PAN_XHEIGHT_DUCKING_STD, PAN_XHEIGHT_DUCKING_LARGE) unsigned char PAN_XHEIGHT;
++#endif
++
+ 
+ #define ELF_VENDOR_SIZE     4
+@@ -1873,12 +2300,24 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  /* Background Modes */
  #define TRANSPARENT         1
  #define OPAQUE              2
@@ -632,7 +831,7 @@ index dded3769..244b0809 100644
  #define GM_LAST             2
  
  /* PolyDraw and GetPath point types */
-@@ -1897,6 +2242,18 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -1897,6 +2336,18 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define MM_ISOTROPIC        7
  #define MM_ANISOTROPIC      8
  
@@ -651,7 +850,7 @@ index dded3769..244b0809 100644
  /* Min and Max Mapping Mode values */
  #define MM_MIN              MM_TEXT
  #define MM_MAX              MM_ANISOTROPIC
-@@ -1925,13 +2282,45 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -1925,13 +2376,45 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define DEFAULT_PALETTE     15
  #define SYSTEM_FIXED_FONT   16
  
@@ -697,7 +896,7 @@ index dded3769..244b0809 100644
  #endif
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
-@@ -1957,6 +2346,21 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -1957,6 +2440,21 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define BS_DIBPATTERN8X8    8
  #define BS_MONOPATTERN      9
  
@@ -719,7 +918,7 @@ index dded3769..244b0809 100644
  /* Hatch Styles */
  #define HS_HORIZONTAL       0       /* ----- */
  #define HS_VERTICAL         1       /* ||||| */
-@@ -1964,6 +2368,16 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -1964,6 +2462,16 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define HS_BDIAGONAL        3       /* ///// */
  #define HS_CROSS            4       /* +++++ */
  #define HS_DIAGCROSS        5       /* xxxxx */
@@ -736,7 +935,7 @@ index dded3769..244b0809 100644
  #define HS_API_MAX          12
  
  /* Pen Styles */
-@@ -1992,9 +2406,40 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -1992,9 +2500,40 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define PS_GEOMETRIC        0x00010000
  #define PS_TYPE_MASK        0x000F0000
  
@@ -777,7 +976,7 @@ index dded3769..244b0809 100644
  /* Device Parameters for GetDeviceCaps() */
  #define DRIVERVERSION 0     /* Device driver version                    */
  #define TECHNOLOGY    2     /* Device classification                    */
-@@ -2046,9 +2491,57 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -2046,9 +2585,57 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
                               /* pixels                                  */
  #define BLTALIGNMENT    119  /* Preferred blt alignment                 */
  
@@ -835,7 +1034,17 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0500 */
  
  #ifndef NOGDICAPMASKS
-@@ -2177,6 +2670,13 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -2169,6 +2756,9 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+ 
+ #define DIB_RGB_COLORS      0 /* color table in RGBs */
+ #define DIB_PAL_COLORS      1 /* color table in palette indices */
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(DIB_USAGE, unsigned int, DIB_RGB_COLORS, DIB_PAL_COLORS);
++#endif
+ 
+ /* constants for Get/SetSystemPaletteUse() */
+ 
+@@ -2177,6 +2767,13 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define SYSPAL_NOSTATIC 2
  #define SYSPAL_NOSTATIC256 3
  
@@ -849,7 +1058,7 @@ index dded3769..244b0809 100644
  /* constants for CreateDIBitmap */
  #define CBM_INIT        0x04L   /* initialize bitmap */
  
-@@ -2185,6 +2685,12 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
+@@ -2185,6 +2782,12 @@ typedef LPEXTLOGFONTA LPEXTLOGFONT;
  #define  FLOODFILLBORDER   0
  #define  FLOODFILLSURFACE  1
  
@@ -862,7 +1071,7 @@ index dded3769..244b0809 100644
  /* size of a device name string */
  #define CCHDEVICENAME 32
  
-@@ -2201,7 +2707,7 @@ typedef struct _devicemodeA {
+@@ -2201,7 +2804,7 @@ typedef struct _devicemodeA {
      WORD dmDriverVersion;
      WORD dmSize;
      WORD dmDriverExtra;
@@ -871,7 +1080,7 @@ index dded3769..244b0809 100644
      union {
        /* printer only fields */
        struct {
-@@ -2221,11 +2727,11 @@ typedef struct _devicemodeA {
+@@ -2221,11 +2824,11 @@ typedef struct _devicemodeA {
          DWORD  dmDisplayFixedOutput;
        } DUMMYSTRUCTNAME2;
      } DUMMYUNIONNAME;
@@ -887,7 +1096,7 @@ index dded3769..244b0809 100644
      BYTE   dmFormName[CCHFORMNAME];
      WORD   dmLogPixels;
      DWORD  dmBitsPerPel;
-@@ -2255,7 +2761,7 @@ typedef struct _devicemodeW {
+@@ -2255,7 +2858,7 @@ typedef struct _devicemodeW {
      WORD dmDriverVersion;
      WORD dmSize;
      WORD dmDriverExtra;
@@ -896,7 +1105,7 @@ index dded3769..244b0809 100644
      union {
        /* printer only fields */
        struct {
-@@ -2275,11 +2781,11 @@ typedef struct _devicemodeW {
+@@ -2275,11 +2878,11 @@ typedef struct _devicemodeW {
          DWORD  dmDisplayFixedOutput;
        } DUMMYSTRUCTNAME2;
      } DUMMYUNIONNAME;
@@ -912,7 +1121,7 @@ index dded3769..244b0809 100644
      WCHAR  dmFormName[CCHFORMNAME];
      WORD   dmLogPixels;
      DWORD  dmBitsPerPel;
-@@ -2321,7 +2827,7 @@ typedef struct _devicemodeA {
+@@ -2321,7 +2924,7 @@ typedef struct _devicemodeA {
      WORD dmDriverVersion;
      WORD dmSize;
      WORD dmDriverExtra;
@@ -921,7 +1130,7 @@ index dded3769..244b0809 100644
      union {
        struct {
          short dmOrientation;
-@@ -2335,11 +2841,11 @@ typedef struct _devicemodeA {
+@@ -2335,11 +2938,11 @@ typedef struct _devicemodeA {
      short dmCopies;
      short dmDefaultSource;
      short dmPrintQuality;
@@ -937,7 +1146,7 @@ index dded3769..244b0809 100644
      BYTE   dmFormName[CCHFORMNAME];
      WORD   dmLogPixels;
      DWORD  dmBitsPerPel;
-@@ -2369,7 +2875,7 @@ typedef struct _devicemodeW {
+@@ -2369,7 +2972,7 @@ typedef struct _devicemodeW {
      WORD dmDriverVersion;
      WORD dmSize;
      WORD dmDriverExtra;
@@ -946,7 +1155,7 @@ index dded3769..244b0809 100644
      union {
        struct {
          short dmOrientation;
-@@ -2383,11 +2889,11 @@ typedef struct _devicemodeW {
+@@ -2383,11 +2986,11 @@ typedef struct _devicemodeW {
      short dmCopies;
      short dmDefaultSource;
      short dmPrintQuality;
@@ -962,7 +1171,7 @@ index dded3769..244b0809 100644
      WCHAR  dmFormName[CCHFORMNAME];
      WORD   dmLogPixels;
      DWORD  dmBitsPerPel;
-@@ -2430,10 +2936,25 @@ typedef LPDEVMODEA LPDEVMODE;
+@@ -2430,10 +3033,25 @@ typedef LPDEVMODEA LPDEVMODE;
  /* current version of specification */
  #if (WINVER >= 0x0500) || (_WIN32_WINNT >= _WIN32_WINNT_NT4)
  #define DM_SPECVERSION 0x0401
@@ -988,7 +1197,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER */
  
  /* field selection bits */
-@@ -2445,9 +2966,20 @@ typedef LPDEVMODEA LPDEVMODE;
+@@ -2445,9 +3063,20 @@ typedef LPDEVMODEA LPDEVMODE;
  #if(WINVER >= 0x0500)
  #define DM_POSITION             0x00000020L
  #define DM_NUP                  0x00000040L
@@ -1009,7 +1218,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0501 */
  #define DM_COPIES               0x00000100L
  #define DM_DEFAULTSOURCE        0x00000200L
-@@ -2471,9 +3003,24 @@ typedef LPDEVMODEA LPDEVMODE;
+@@ -2471,9 +3100,24 @@ typedef LPDEVMODEA LPDEVMODE;
  #define DM_DITHERTYPE           0x04000000L
  #define DM_PANNINGWIDTH         0x08000000L
  #define DM_PANNINGHEIGHT        0x10000000L
@@ -1034,7 +1243,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0501 */
  
  
-@@ -2647,23 +3194,54 @@ typedef LPDEVMODEA LPDEVMODE;
+@@ -2647,23 +3291,54 @@ typedef LPDEVMODEA LPDEVMODE;
  #define DMCOLOR_MONOCHROME  1
  #define DMCOLOR_COLOR       2
  
@@ -1089,7 +1298,7 @@ index dded3769..244b0809 100644
  #if(WINVER >= 0x0501)
  /* DEVMODE dmDisplayOrientation specifiations */
  #define DMDO_DEFAULT    0
-@@ -2671,10 +3249,25 @@ typedef LPDEVMODEA LPDEVMODE;
+@@ -2671,10 +3346,25 @@ typedef LPDEVMODEA LPDEVMODE;
  #define DMDO_180        2
  #define DMDO_270        3
  
@@ -1115,7 +1324,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0501 */
  
  /* DEVMODE dmDisplayFlags flags */
-@@ -2734,7 +3327,7 @@ typedef struct _DISPLAY_DEVICEA {
+@@ -2734,7 +3424,7 @@ typedef struct _DISPLAY_DEVICEA {
      DWORD  cb;
      CHAR   DeviceName[32];
      CHAR   DeviceString[128];
@@ -1124,7 +1333,7 @@ index dded3769..244b0809 100644
      CHAR   DeviceID[128];
      CHAR   DeviceKey[128];
  } DISPLAY_DEVICEA, *PDISPLAY_DEVICEA, *LPDISPLAY_DEVICEA;
-@@ -2742,7 +3335,7 @@ typedef struct _DISPLAY_DEVICEW {
+@@ -2742,7 +3432,7 @@ typedef struct _DISPLAY_DEVICEW {
      DWORD  cb;
      WCHAR  DeviceName[32];
      WCHAR  DeviceString[128];
@@ -1133,7 +1342,7 @@ index dded3769..244b0809 100644
      WCHAR  DeviceID[128];
      WCHAR  DeviceKey[128];
  } DISPLAY_DEVICEW, *PDISPLAY_DEVICEW, *LPDISPLAY_DEVICEW;
-@@ -2766,25 +3359,64 @@ typedef LPDISPLAY_DEVICEA LPDISPLAY_DEVICE;
+@@ -2766,25 +3456,64 @@ typedef LPDISPLAY_DEVICEA LPDISPLAY_DEVICE;
  #define DISPLAY_DEVICE_VGA_COMPATIBLE           0x00000010
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define DISPLAY_DEVICE_REMOVABLE                0x00000020
@@ -1198,7 +1407,7 @@ index dded3769..244b0809 100644
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  #if(WINVER >= 0x0601)
-@@ -3334,6 +3966,16 @@ typedef struct _DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION
+@@ -3334,6 +4063,16 @@ typedef struct _DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION
  #define QDC_INCLUDE_HMD                               0x00000020
  #define QDC_VIRTUAL_REFRESH_RATE_AWARE                0x00000040
  
@@ -1215,7 +1424,7 @@ index dded3769..244b0809 100644
  //
  // Definitions used by SetDisplayConfig.
  //
-@@ -3359,6 +4001,27 @@ typedef struct _DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION
+@@ -3359,6 +4098,27 @@ typedef struct _DISPLAYCONFIG_SET_MONITOR_SPECIALIZATION
  
  #define SDC_VIRTUAL_REFRESH_RATE_AWARE   0x00020000
  
@@ -1243,7 +1452,7 @@ index dded3769..244b0809 100644
  
  #endif /* WINVER >= 0x0601 */
  
-@@ -3585,15 +4248,36 @@ typedef struct _GLYPHMETRICS {
+@@ -3585,15 +4345,36 @@ typedef struct _GLYPHMETRICS {
  #define GGO_NATIVE         2
  #define GGO_BEZIER         3
  
@@ -1280,7 +1489,7 @@ index dded3769..244b0809 100644
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  #define TT_POLYGON_TYPE   24
-@@ -3654,6 +4338,25 @@ typedef struct tagTTPOLYGONHEADER
+@@ -3654,6 +4435,25 @@ typedef struct tagTTPOLYGONHEADER
  #define GCP_NUMERICSLATIN   0x04000000L
  #define GCP_NUMERICSLOCAL   0x08000000L
  
@@ -1306,7 +1515,7 @@ index dded3769..244b0809 100644
  #define GCPCLASS_LATIN                  1
  #define GCPCLASS_HEBREW                 2
  #define GCPCLASS_ARABIC                 2
-@@ -3735,8 +4438,8 @@ typedef struct tagPIXELFORMATDESCRIPTOR
+@@ -3735,8 +4535,8 @@ typedef struct tagPIXELFORMATDESCRIPTOR
  {
      WORD  nSize;
      WORD  nVersion;
@@ -1317,7 +1526,7 @@ index dded3769..244b0809 100644
      BYTE  cColorBits;
      BYTE  cRedBits;
      BYTE  cRedShift;
-@@ -3768,11 +4471,24 @@ typedef struct tagPIXELFORMATDESCRIPTOR
+@@ -3768,11 +4568,24 @@ typedef struct tagPIXELFORMATDESCRIPTOR
  #define PFD_TYPE_RGBA        0
  #define PFD_TYPE_COLORINDEX  1
  
@@ -1342,7 +1551,7 @@ index dded3769..244b0809 100644
  /* PIXELFORMATDESCRIPTOR flags */
  #define PFD_DOUBLEBUFFER            0x00000001
  #define PFD_STEREO                  0x00000002
-@@ -3796,6 +4512,29 @@ typedef struct tagPIXELFORMATDESCRIPTOR
+@@ -3796,6 +4609,29 @@ typedef struct tagPIXELFORMATDESCRIPTOR
  #define PFD_DOUBLEBUFFER_DONTCARE   0x40000000
  #define PFD_STEREO_DONTCARE         0x80000000
  
@@ -1372,7 +1581,7 @@ index dded3769..244b0809 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -3851,7 +4590,9 @@ typedef FARPROC LINEDDAPROC;
+@@ -3851,7 +4687,9 @@ typedef FARPROC LINEDDAPROC;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1382,7 +1591,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
  #ifdef UNICODE
  #define AddFontResource  AddFontResourceW
-@@ -3859,49 +4600,138 @@ WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
+@@ -3859,49 +4697,138 @@ WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
  #define AddFontResource  AddFontResourceA
  #endif // !UNICODE
  
@@ -1526,7 +1735,7 @@ index dded3769..244b0809 100644
  WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
                               _In_ DWORD bUnderline, _In_ DWORD bStrikeOut, _In_ DWORD iCharSet, _In_ DWORD iOutPrecision, _In_ DWORD iClipPrecision,
                               _In_ DWORD iQuality, _In_ DWORD iPitchAndFamily, _In_opt_ LPCWSTR pszFaceName);
-@@ -3911,44 +4741,106 @@ WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ in
+@@ -3911,44 +4838,106 @@ WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ in
  #define CreateFont  CreateFontA
  #endif // !UNICODE
  
@@ -1636,7 +1845,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int  WINAPI DescribePixelFormat(  _In_ HDC hdc,
                                              _In_ int iPixelFormat,
                                              _In_ UINT nBytes,
-@@ -3976,6 +4868,39 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
+@@ -3976,6 +4965,39 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
  #define DM_OUT_BUFFER       DM_COPY
  #define DM_OUT_DEFAULT      DM_UPDATE
  
@@ -1676,7 +1885,7 @@ index dded3769..244b0809 100644
  /* device capabilities indices */
  #define DC_FIELDS           1
  #define DC_PAPERS           2
-@@ -3995,11 +4920,38 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
+@@ -3995,11 +5017,38 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
  #define DC_PAPERNAMES       16
  #define DC_ORIENTATION      17
  #define DC_COPIES           18
@@ -1715,7 +1924,7 @@ index dded3769..244b0809 100644
  #define DC_MANUFACTURER         23
  #define DC_MODEL                24
  #endif /* WINVER >= 0x0400 */
-@@ -4018,9 +4970,28 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
+@@ -4018,9 +5067,28 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
  #define DC_PRINTRATEPPM         31
  #define DC_COLORDEVICE          32
  #define DC_NUP                  33
@@ -1744,7 +1953,7 @@ index dded3769..244b0809 100644
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #endif /* WINVER >= 0x0500 */
  
-@@ -4045,23 +5016,25 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
+@@ -4045,23 +5113,25 @@ typedef DWORD  (CALLBACK* LPFNDEVCAPS)(LPSTR, LPSTR, UINT, LPSTR, LPDEVMODE);
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1772,7 +1981,7 @@ index dded3769..244b0809 100644
      _Out_writes_opt_(_Inexpressible_(1)) LPWSTR          pOutput,
      _In_opt_            CONST DEVMODEW   *pDevMode
      );
-@@ -4071,15 +5044,18 @@ DeviceCapabilitiesW(
+@@ -4071,15 +5141,18 @@ DeviceCapabilitiesW(
  #define DeviceCapabilities  DeviceCapabilitiesA
  #endif // !UNICODE
  
@@ -1792,7 +2001,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
  #ifdef UNICODE
  #define EnumFontFamiliesEx  EnumFontFamiliesExW
-@@ -4088,14 +5064,18 @@ WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfo
+@@ -4088,14 +5161,18 @@ WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfo
  #endif // !UNICODE
  #endif /* WINVER >= 0x0400 */
  
@@ -1811,7 +2020,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
  #ifdef UNICODE
  #define EnumFonts  EnumFontsW
-@@ -4110,33 +5090,49 @@ WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPR
+@@ -4110,33 +5187,49 @@ WINGDIAPI int  WINAPI EnumObjects( _In_ HDC hdc, _In_ int nType, _In_ GOBJENUMPR
  #endif
  
  
@@ -1864,7 +2073,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  int
  WINAPI
-@@ -4144,6 +5140,7 @@ GetBkMode(
+@@ -4144,6 +5237,7 @@ GetBkMode(
      _In_ HDC hdc
      );
  
@@ -1872,7 +2081,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  LONG
  WINAPI
-@@ -4153,26 +5150,35 @@ GetBitmapBits(
+@@ -4153,26 +5247,35 @@ GetBitmapBits(
      _Out_writes_bytes_(cb) LPVOID lpvBits
      );
  
@@ -1908,7 +2117,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
  #ifdef UNICODE
  #define GetCharWidthFloat  GetCharWidthFloatW
-@@ -4180,10 +5186,12 @@ WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In
+@@ -4180,10 +5283,12 @@ WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In
  #define GetCharWidthFloat  GetCharWidthFloatA
  #endif // !UNICODE
  
@@ -1921,7 +2130,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
                                              _In_ UINT wFirst,
                                              _In_ UINT wLast,
-@@ -4194,22 +5202,32 @@ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
+@@ -4194,22 +5299,32 @@ WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
  #define GetCharABCWidths  GetCharABCWidthsA
  #endif // !UNICODE
  
@@ -1956,7 +2165,7 @@ index dded3769..244b0809 100644
  _Success_(return != GDI_ERROR)
  WINGDIAPI DWORD WINAPI GetFontData (    _In_ HDC     hdc,
                                          _In_ DWORD   dwTable,
-@@ -4218,17 +5236,19 @@ WINGDIAPI DWORD WINAPI GetFontData (    _In_ HDC     hdc,
+@@ -4218,17 +5333,19 @@ WINGDIAPI DWORD WINAPI GetFontData (    _In_ HDC     hdc,
                                          _In_ DWORD   cjBuffer
                                          );
  
@@ -1978,7 +2187,7 @@ index dded3769..244b0809 100644
                                              _Out_ LPGLYPHMETRICS lpgm,
                                              _In_ DWORD cjBuffer,
                                              _Out_writes_bytes_opt_(cjBuffer) LPVOID pvBuffer,
-@@ -4240,8 +5260,11 @@ WINGDIAPI DWORD WINAPI GetGlyphOutlineW(    _In_ HDC hdc,
+@@ -4240,8 +5357,11 @@ WINGDIAPI DWORD WINAPI GetGlyphOutlineW(    _In_ HDC hdc,
  #define GetGlyphOutline  GetGlyphOutlineA
  #endif // !UNICODE
  
@@ -1991,7 +2200,7 @@ index dded3769..244b0809 100644
  WINGDIAPI UINT  WINAPI GetMetaFileBitsEx(_In_ HMETAFILE hMF, _In_ UINT cbBuffer, _Out_writes_bytes_opt_(cbBuffer) LPVOID lpData);
  WINGDIAPI HMETAFILE   WINAPI GetMetaFileA( _In_ LPCSTR lpName);
  WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
-@@ -4250,16 +5273,21 @@ WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
+@@ -4250,16 +5370,21 @@ WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
  #else
  #define GetMetaFile  GetMetaFileA
  #endif // !UNICODE
@@ -2001,7 +2210,8 @@ index dded3769..244b0809 100644
  WINGDIAPI UINT  WINAPI GetNearestPaletteIndex( _In_ HPALETTE h, _In_ COLORREF color);
 +_Win32_SupportedOS_Windows2000_
  _Post_satisfies_((return == 0) || (return >= GDI_MIN_OBJ_TYPE && return <= GDI_MAX_OBJ_TYPE))
- WINGDIAPI DWORD WINAPI GetObjectType( _In_ HGDIOBJ h);
+-WINGDIAPI DWORD WINAPI GetObjectType( _In_ HGDIOBJ h);
++_Win32_AssociatedEnum_(OBJ_TYPE) WINGDIAPI DWORD WINAPI GetObjectType( _In_ HGDIOBJ h);
  
  #ifndef NOTEXTMETRIC
  
@@ -2013,7 +2223,7 @@ index dded3769..244b0809 100644
  WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
                                                  _In_ UINT cjCopy,
                                                  _Out_writes_bytes_opt_(cjCopy) LPOUTLINETEXTMETRICW potm);
-@@ -4271,24 +5299,36 @@ WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
+@@ -4271,24 +5396,36 @@ WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
  
  #endif /* NOTEXTMETRIC */
  
@@ -2052,7 +2262,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  UINT
  WINAPI
-@@ -4299,11 +5339,16 @@ GetSystemPaletteEntries(
+@@ -4299,11 +5436,16 @@ GetSystemPaletteEntries(
      _Out_writes_opt_(cEntries) LPPALETTEENTRY pPalEntries
      );
  
@@ -2070,7 +2280,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4313,6 +5358,7 @@ GetTextExtentPointA(
+@@ -4313,6 +5455,7 @@ GetTextExtentPointA(
      _In_ int c,
      _Out_ LPSIZE lpsz
      );
@@ -2078,7 +2288,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4328,6 +5374,7 @@ GetTextExtentPointW(
+@@ -4328,6 +5471,7 @@ GetTextExtentPointW(
  #define GetTextExtentPoint  GetTextExtentPointA
  #endif // !UNICODE
  
@@ -2086,7 +2296,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4337,6 +5384,7 @@ GetTextExtentPoint32A(
+@@ -4337,6 +5481,7 @@ GetTextExtentPoint32A(
      _In_ int c,
      _Out_ LPSIZE psizl
      );
@@ -2094,7 +2304,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4352,6 +5400,7 @@ GetTextExtentPoint32W(
+@@ -4352,6 +5497,7 @@ GetTextExtentPoint32W(
  #define GetTextExtentPoint32  GetTextExtentPoint32A
  #endif // !UNICODE
  
@@ -2102,7 +2312,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4364,6 +5413,7 @@ GetTextExtentExPointA(
+@@ -4364,6 +5510,7 @@ GetTextExtentExPointA(
      _Out_writes_to_opt_ (cchString, *lpnFit) LPINT lpnDx,
      _Out_ LPSIZE lpSize
      );
@@ -2110,7 +2320,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4383,12 +5433,19 @@ GetTextExtentExPointW(
+@@ -4383,12 +5530,19 @@ GetTextExtentExPointW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -2133,7 +2343,7 @@ index dded3769..244b0809 100644
  #ifdef UNICODE
  #define GetCharacterPlacement  GetCharacterPlacementW
  #else
-@@ -4428,15 +5485,20 @@ typedef struct tagGLYPHSET
+@@ -4428,15 +5582,20 @@ typedef struct tagGLYPHSET
  
  #define GGI_MARK_NONEXISTING_GLYPHS  0X0001
  
@@ -2154,7 +2364,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI GetTextExtentExPointI (  _In_ HDC hdc,
                                                  _In_reads_(cwchString) LPWORD lpwszString,
                                                  _In_ int cwchString,
-@@ -4446,6 +5508,7 @@ WINGDIAPI BOOL  WINAPI GetTextExtentExPointI (  _In_ HDC hdc,
+@@ -4446,6 +5605,7 @@ WINGDIAPI BOOL  WINAPI GetTextExtentExPointI (  _In_ HDC hdc,
                                                  _Out_ LPSIZE lpSize
                                                  );
  
@@ -2162,7 +2372,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI GetCharWidthI(   _In_ HDC hdc,
                                          _In_ UINT giFirst,
                                          _In_ UINT cgi,
-@@ -4453,6 +5516,7 @@ WINGDIAPI BOOL  WINAPI GetCharWidthI(   _In_ HDC hdc,
+@@ -4453,6 +5613,7 @@ WINGDIAPI BOOL  WINAPI GetCharWidthI(   _In_ HDC hdc,
                                          _Out_writes_(cgi) LPINT piWidths
                                          );
  
@@ -2170,7 +2380,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI GetCharABCWidthsI(   _In_ HDC    hdc,
                                              _In_ UINT   giFirst,
                                              _In_ UINT   cgi,
-@@ -4476,29 +5540,41 @@ typedef struct tagDESIGNVECTOR
+@@ -4476,29 +5637,41 @@ typedef struct tagDESIGNVECTOR
      LONG   dvValues[MM_MAX_NUMAXES];
  } DESIGNVECTOR, *PDESIGNVECTOR, FAR *LPDESIGNVECTOR;
  
@@ -2214,7 +2424,7 @@ index dded3769..244b0809 100644
  // The actual size of the DESIGNVECTOR and ENUMLOGFONTEXDV structures
  // is determined by dvNumAxes,
  // MM_MAX_NUMAXES only detemines the maximal size allowed
-@@ -4573,7 +5649,11 @@ typedef PENUMLOGFONTEXDVA PENUMLOGFONTEXDV;
+@@ -4573,7 +5746,11 @@ typedef PENUMLOGFONTEXDVA PENUMLOGFONTEXDV;
  typedef LPENUMLOGFONTEXDVA LPENUMLOGFONTEXDV;
  #endif // UNICODE
  
@@ -2226,7 +2436,7 @@ index dded3769..244b0809 100644
  WINGDIAPI HFONT  WINAPI CreateFontIndirectExW( _In_ CONST ENUMLOGFONTEXDVW *);
  #ifdef UNICODE
  #define CreateFontIndirectEx  CreateFontIndirectExW
-@@ -4611,66 +5691,107 @@ typedef LPENUMTEXTMETRICA LPENUMTEXTMETRIC;
+@@ -4611,66 +5788,107 @@ typedef LPENUMTEXTMETRICA LPENUMTEXTMETRIC;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2341,7 +2551,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  LONG WINAPI
  SetBitmapBits(
-@@ -4678,39 +5799,71 @@ SetBitmapBits(
+@@ -4678,39 +5896,71 @@ SetBitmapBits(
      _In_ DWORD cb,
      _In_reads_bytes_(cb) CONST VOID *pvBits);
  
@@ -2426,7 +2636,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI UpdateColors(_In_ HDC hdc);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4826,6 +5979,7 @@ typedef struct _BLENDFUNCTION
+@@ -4826,6 +6076,7 @@ typedef struct _BLENDFUNCTION
  
  #define AC_SRC_ALPHA                0x01
  
@@ -2434,7 +2644,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL WINAPI AlphaBlend(
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
-@@ -4839,6 +5993,7 @@ WINGDIAPI BOOL WINAPI AlphaBlend(
+@@ -4839,6 +6090,7 @@ WINGDIAPI BOOL WINAPI AlphaBlend(
      _In_ int hSrc,
      _In_ BLENDFUNCTION ftn);
  
@@ -2442,7 +2652,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL WINAPI TransparentBlt(
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
-@@ -4860,8 +6015,16 @@ WINGDIAPI BOOL WINAPI TransparentBlt(
+@@ -4860,8 +6112,16 @@ WINGDIAPI BOOL WINAPI TransparentBlt(
  #define GRADIENT_FILL_RECT_H    0x00000000
  #define GRADIENT_FILL_RECT_V    0x00000001
  #define GRADIENT_FILL_TRIANGLE  0x00000002
@@ -2459,7 +2669,7 @@ index dded3769..244b0809 100644
  WINGDIAPI
  BOOL
  WINAPI
-@@ -4871,7 +6034,7 @@ GradientFill(
+@@ -4871,7 +6131,7 @@ GradientFill(
      _In_ ULONG nVertex,
      _In_ PVOID pMesh,
      _In_ ULONG nMesh,
@@ -2468,7 +2678,7 @@ index dded3769..244b0809 100644
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4885,17 +6048,20 @@ GradientFill(
+@@ -4885,17 +6145,20 @@ GradientFill(
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  
@@ -2490,7 +2700,7 @@ index dded3769..244b0809 100644
  
  #endif
  
-@@ -4903,49 +6069,78 @@ WINGDIAPI BOOL  WINAPI GdiGradientFill( _In_ HDC hdc,
+@@ -4903,49 +6166,78 @@ WINGDIAPI BOOL  WINAPI GdiGradientFill( _In_ HDC hdc,
  
  #ifndef NOMETAFILE
  
@@ -2569,7 +2779,7 @@ index dded3769..244b0809 100644
  WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
                                                      _In_ UINT cchBuffer,
                                                      _Out_writes_opt_(cchBuffer) LPWSTR lpDescription);
-@@ -4954,34 +6149,52 @@ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
+@@ -4954,34 +6246,52 @@ WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
  #else
  #define GetEnhMetaFileDescription  GetEnhMetaFileDescriptionA
  #endif // !UNICODE
@@ -2622,7 +2832,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI GdiComment(_In_ HDC hdc, _In_ UINT nSize, _In_reads_bytes_(nSize) CONST BYTE *lpData);
  
  #endif  /* NOMETAFILE */
-@@ -5029,11 +6242,17 @@ typedef struct tagDIBSECTION {
+@@ -5029,11 +6339,17 @@ typedef struct tagDIBSECTION {
  } DIBSECTION, FAR *LPDIBSECTION, *PDIBSECTION;
  
  
@@ -2641,7 +2851,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL WINAPI CombineTransform( _Out_ LPXFORM lpxfOut, _In_ CONST XFORM *lpxf1, _In_ CONST XFORM *lpxf2);
  
  #define GDI_WIDTHBYTES(bits) ((DWORD)(((bits)+31) & (~31)) / 8)
-@@ -5041,10 +6260,13 @@ WINGDIAPI BOOL WINAPI CombineTransform( _Out_ LPXFORM lpxfOut, _In_ CONST XFORM
+@@ -5041,10 +6357,13 @@ WINGDIAPI BOOL WINAPI CombineTransform( _Out_ LPXFORM lpxfOut, _In_ CONST XFORM
  #define GDI__DIBSIZE(bi) (GDI_DIBWIDTHBYTES(bi) * (DWORD)(bi).biHeight)
  #define GDI_DIBSIZE(bi) ((bi).biHeight < 0 ? (-1)*(GDI__DIBSIZE(bi)) : GDI__DIBSIZE(bi))
  
@@ -2656,7 +2866,7 @@ index dded3769..244b0809 100644
      _When_((pbmi->bmiHeader.biBitCount != 0), _Outptr_result_bytebuffer_(_Inexpressible_(GDI_DIBSIZE((pbmi->bmiHeader)))))
      _When_((pbmi->bmiHeader.biBitCount == 0), _Outptr_result_bytebuffer_((pbmi->bmiHeader).biSizeImage))
                      VOID            **ppvBits,
-@@ -5052,11 +6274,13 @@ WINGDIAPI _Success_(return != NULL) HBITMAP WINAPI CreateDIBSection(
+@@ -5052,11 +6371,13 @@ WINGDIAPI _Success_(return != NULL) HBITMAP WINAPI CreateDIBSection(
      _In_            DWORD             offset);
  
  
@@ -2670,7 +2880,7 @@ index dded3769..244b0809 100644
  WINGDIAPI UINT WINAPI SetDIBColorTable( _In_ HDC  hdc,
                                          _In_ UINT iStart,
                                          _In_ UINT cEntries,
-@@ -5112,8 +6336,12 @@ typedef struct  tagCOLORADJUSTMENT {
+@@ -5112,8 +6433,12 @@ typedef struct  tagCOLORADJUSTMENT {
      SHORT  caRedGreenTint;
  } COLORADJUSTMENT, *PCOLORADJUSTMENT, FAR *LPCOLORADJUSTMENT;
  
@@ -2683,7 +2893,7 @@ index dded3769..244b0809 100644
  WINGDIAPI HPALETTE WINAPI CreateHalftonePalette( _In_opt_ HDC hdc);
  
  #ifdef STRICT
-@@ -5153,44 +6381,73 @@ typedef LPDOCINFOA LPDOCINFO;
+@@ -5153,44 +6478,73 @@ typedef LPDOCINFOA LPDOCINFO;
  #define DI_ROPS_READ_DESTINATION    0x00000002
  #endif /* WINVER >= 0x0400 */
  
@@ -2760,7 +2970,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int   WINAPI GetObjectW(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
  #ifdef UNICODE
  #define GetObject  GetObjectW
-@@ -5220,22 +6477,29 @@ GetObject(
+@@ -5220,22 +6574,29 @@ GetObject(
  #endif  /* _M_CEE */
  
  
@@ -2792,7 +3002,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
  #ifdef UNICODE
  #define PolyTextOut  PolyTextOutW
-@@ -5243,31 +6507,52 @@ WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POL
+@@ -5243,31 +6604,52 @@ WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POL
  #define PolyTextOut  PolyTextOutA
  #endif // !UNICODE
  
@@ -2846,7 +3056,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int   WINAPI GetTextFaceW( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPWSTR lpName);
  #ifdef UNICODE
  #define GetTextFace  GetTextFaceW
-@@ -5283,9 +6568,11 @@ typedef struct tagKERNINGPAIR {
+@@ -5283,9 +6665,11 @@ typedef struct tagKERNINGPAIR {
     int  iKernAmount;
  } KERNINGPAIR, *LPKERNINGPAIR;
  
@@ -2858,7 +3068,7 @@ index dded3769..244b0809 100644
  WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
-@@ -5296,12 +6583,17 @@ WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
+@@ -5296,12 +6680,17 @@ WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
  #endif // !UNICODE
  
  
@@ -2876,7 +3086,7 @@ index dded3769..244b0809 100644
  WINGDIAPI DWORD WINAPI GdiGetBatchLimit(void);
  
  #if(WINVER >= 0x0400)
-@@ -5311,6 +6603,14 @@ WINGDIAPI DWORD WINAPI GdiGetBatchLimit(void);
+@@ -5311,6 +6700,14 @@ WINGDIAPI DWORD WINAPI GdiGetBatchLimit(void);
  #define ICM_QUERY             3
  #define ICM_DONE_OUTSIDEDC    4
  
@@ -2891,7 +3101,7 @@ index dded3769..244b0809 100644
  typedef int (CALLBACK* ICMENUMPROCA)(LPSTR, LPARAM);
  typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
  #ifdef UNICODE
-@@ -5319,16 +6619,21 @@ typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
+@@ -5319,16 +6716,21 @@ typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
  #define ICMENUMPROC  ICMENUMPROCA
  #endif // !UNICODE
  
@@ -2914,7 +3124,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
-@@ -5338,18 +6643,34 @@ WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
+@@ -5338,18 +6740,34 @@ WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
  #define GetLogColorSpace  GetLogColorSpaceA
  #endif // !UNICODE
  
@@ -2949,7 +3159,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
-@@ -5359,17 +6680,24 @@ WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
+@@ -5359,17 +6777,24 @@ WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
  #define GetICMProfile  GetICMProfileA
  #endif // !UNICODE
  
@@ -2975,7 +3185,7 @@ index dded3769..244b0809 100644
  WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
  #ifdef UNICODE
  #define EnumICMProfiles  EnumICMProfilesW
-@@ -5377,9 +6705,11 @@ WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW p
+@@ -5377,9 +6802,11 @@ WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW p
  #define EnumICMProfiles  EnumICMProfilesA
  #endif // !UNICODE
  // The Win95 update API UpdateICMRegKeyA is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
@@ -2989,7 +3199,7 @@ index dded3769..244b0809 100644
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
-@@ -5394,6 +6724,7 @@ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ L
+@@ -5394,6 +6821,7 @@ WINGDIAPI BOOL        WINAPI UpdateICMRegKeyW( _Reserved_ DWORD reserved, _In_ L
  #endif /* WINVER >= 0x0400 */
  
  #if (WINVER >= 0x0500)
@@ -2997,7 +3207,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hPal, _In_ DWORD deFirst, _In_ DWORD num);
  #endif
  
-@@ -5522,6 +6853,17 @@ WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hP
+@@ -5522,6 +6950,17 @@ WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hP
  #define EMR_GLSRECORD                  102
  #define EMR_GLSBOUNDEDRECORD           103
  #define EMR_PIXELFORMAT                104
@@ -3015,7 +3225,7 @@ index dded3769..244b0809 100644
  #endif /* WINVER >= 0x0400 */
  
  #if(WINVER >= 0x0500)
-@@ -5539,29 +6881,171 @@ WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hP
+@@ -5539,29 +6978,171 @@ WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hP
  #define EMR_TRANSPARENTBLT             116
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define EMR_RESERVED_117               117
@@ -3188,7 +3398,7 @@ index dded3769..244b0809 100644
      DWORD   nSize;              // Length of the record in bytes.
                                  // This must be a multiple of 4.
  } EMR, *PEMR;
-@@ -5757,7 +7241,7 @@ typedef struct tagEMRMODIFYWORLDTRANSFORM
+@@ -5757,7 +7338,7 @@ typedef struct tagEMRMODIFYWORLDTRANSFORM
  {
      EMR     emr;
      XFORM   xform;
@@ -3197,7 +3407,7 @@ index dded3769..244b0809 100644
  } EMRMODIFYWORLDTRANSFORM, *PEMRMODIFYWORLDTRANSFORM;
  
  typedef struct tagEMRSETPIXELV
-@@ -6283,7 +7767,7 @@ typedef struct tagEMRGRADIENTFILL
+@@ -6283,7 +7864,7 @@ typedef struct tagEMRGRADIENTFILL
      RECTL     rclBounds;          // Inclusive-inclusive bounds in device units
      DWORD     nVer;
      DWORD     nTri;
@@ -3206,7 +3416,7 @@ index dded3769..244b0809 100644
      TRIVERTEX Ver[1];
  }EMRGRADIENTFILL,*PEMRGRADIENTFILL;
  
-@@ -6327,22 +7811,54 @@ typedef struct tagEMRTRANSPARENTBLT
+@@ -6327,22 +7908,54 @@ typedef struct tagEMRTRANSPARENTBLT
  
  // OpenGL wgl prototypes
  
@@ -3261,7 +3471,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI SwapBuffers(HDC);
  
  typedef struct _POINTFLOAT {
-@@ -6360,8 +7876,12 @@ typedef struct _GLYPHMETRICSFLOAT {
+@@ -6360,8 +7973,12 @@ typedef struct _GLYPHMETRICSFLOAT {
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
@@ -3274,7 +3484,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
-@@ -6446,13 +7966,22 @@ typedef struct tagLAYERPLANEDESCRIPTOR { // lpd
+@@ -6446,13 +8063,22 @@ typedef struct tagLAYERPLANEDESCRIPTOR { // lpd
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  
@@ -3297,7 +3507,7 @@ index dded3769..244b0809 100644
  WINGDIAPI BOOL  WINAPI wglSwapLayerBuffers(HDC, UINT);
  
  #if (WINVER >= 0x0500)
-@@ -6490,4 +8019,3 @@ WINGDIAPI DWORD WINAPI wglSwapMultipleBuffers(UINT, CONST WGLSWAP *);
+@@ -6490,4 +8116,3 @@ WINGDIAPI DWORD WINAPI wglSwapMultipleBuffers(UINT, CONST WGLSWAP *);
  #endif
  
  #endif /* _WINGDI_ */

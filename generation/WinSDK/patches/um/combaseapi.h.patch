@@ -1,5 +1,4 @@
 diff --git a/um/combaseapi.h b/um/combaseapi.h
-index dee3a821..f02cf246 100644
 --- a/um/combaseapi.h
 +++ b/um/combaseapi.h
 @@ -1,3 +1,4 @@
@@ -7,7 +6,7 @@ index dee3a821..f02cf246 100644
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
-@@ -379,7 +380,7 @@ extern "C++"
+@@ -379,7 +380,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -16,7 +15,7 @@ index dee3a821..f02cf246 100644
      _In_ DWORD dwMemContext,
      _Outptr_ LPMALLOC  FAR * ppMalloc
      );
-@@ -391,20 +392,21 @@ CoGetMalloc(
+@@ -391,20 +392,21 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  _Check_return_ WINOLEAPI
@@ -41,7 +40,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI_(void)
  CoUninitialize(
      void
-@@ -416,6 +418,7 @@ CoUninitialize(
+@@ -416,6 +418,7 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -49,25 +48,26 @@ index dee3a821..f02cf246 100644
  WINOLEAPI_(DWORD)
  CoGetCurrentProcess(
      void
-@@ -430,10 +433,14 @@ CoGetCurrentProcess(
+@@ -430,10 +433,14 @@
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
+-_Check_return_ WINOLEAPI
+-CoInitializeEx(
+-    _In_opt_ LPVOID pvReserved,
+-    _In_ DWORD dwCoInit
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef enum tagCOINIT COINIT;
 +#endif
 +
- _Check_return_ WINOLEAPI
--CoInitializeEx(
--    _In_opt_ LPVOID pvReserved,
--    _In_ DWORD dwCoInit
++_Check_return_ WINOLEAPI
 +_Win32_SupportedOS_Windows2000_ _Win32_PreserveResult_ CoInitializeEx(
 +    _In_opt_ _Win32_Reserved_ LPVOID pvReserved,
 +    _In_ _Win32_AssociatedEnum_(COINIT) DWORD dwCoInit
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-@@ -442,6 +449,7 @@ CoInitializeEx(
+@@ -442,6 +449,7 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -75,7 +75,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI
  CoGetCallerTID(
      _Out_ LPDWORD lpdwTID
-@@ -453,6 +461,7 @@ CoGetCallerTID(
+@@ -453,6 +461,7 @@
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -83,7 +83,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI
  CoGetCurrentLogicalThreadId(
      _Out_ GUID* pguid
-@@ -469,7 +478,7 @@ CoGetCurrentLogicalThreadId(
+@@ -469,7 +478,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  _Check_return_ WINOLEAPI
@@ -92,7 +92,7 @@ index dee3a821..f02cf246 100644
      _Out_ ULONG_PTR* pToken
      );
  
-@@ -480,7 +489,7 @@ CoGetContextToken(
+@@ -480,7 +489,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -101,7 +101,7 @@ index dee3a821..f02cf246 100644
      _In_ APTTYPE aptType,
      _In_ REFIID riid,
      _Outptr_ void** ppv
-@@ -499,7 +508,7 @@ CoGetDefaultContext(
+@@ -499,7 +508,7 @@
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  
  _Check_return_ WINOLEAPI
@@ -110,7 +110,17 @@ index dee3a821..f02cf246 100644
      _Out_ APTTYPE* pAptType,
      _Out_ APTTYPEQUALIFIER* pAptQualifier
      );
-@@ -560,6 +569,7 @@ CoDecrementMTAUsage(
+@@ -543,6 +552,9 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ DECLARE_HANDLE(CO_MTA_USAGE_COOKIE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef CO_MTA_USAGE_COOKIE CO_MTA_USAGE_COOKIE;
++#endif
+ 
+ _Check_return_ WINOLEAPI
+ CoIncrementMTAUsage(
+@@ -560,6 +572,7 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -118,7 +128,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI
  CoAllowUnmarshalerCLSID(
      _In_ REFCLSID clsid
-@@ -589,9 +599,9 @@ CoAllowUnmarshalerCLSID(
+@@ -589,9 +602,9 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -130,7 +140,7 @@ index dee3a821..f02cf246 100644
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-@@ -603,12 +613,12 @@ CoGetObjectContext(
+@@ -603,12 +616,12 @@
  /* register/revoke/get class objects */
  
  _Check_return_ WINOLEAPI
@@ -146,7 +156,7 @@ index dee3a821..f02cf246 100644
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-@@ -618,26 +628,27 @@ CoGetClassObject(
+@@ -618,26 +631,27 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  _Check_return_ WINOLEAPI
@@ -178,7 +188,7 @@ index dee3a821..f02cf246 100644
      void
      );
  
-@@ -647,31 +658,33 @@ CoSuspendClassObjects(
+@@ -647,31 +661,33 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -215,7 +225,7 @@ index dee3a821..f02cf246 100644
      _In_ LPSURROGATE pSurrogate
      );
  
-@@ -684,7 +697,7 @@ CoRegisterSurrogate(
+@@ -684,7 +700,7 @@
  /* marshaling interface pointers */
  
  _Check_return_ WINOLEAPI
@@ -224,7 +234,7 @@ index dee3a821..f02cf246 100644
      _Out_ ULONG* pulSize,
      _In_ REFIID riid,
      _In_ LPUNKNOWN pUnk,
-@@ -694,7 +707,7 @@ CoGetMarshalSizeMax(
+@@ -694,7 +710,7 @@
      );
  
  _Check_return_ WINOLEAPI
@@ -233,7 +243,7 @@ index dee3a821..f02cf246 100644
      _In_ LPSTREAM pStm,
      _In_ REFIID riid,
      _In_ LPUNKNOWN pUnk,
-@@ -704,7 +717,7 @@ CoMarshalInterface(
+@@ -704,7 +720,7 @@
      );
  
  _Check_return_ WINOLEAPI
@@ -242,7 +252,7 @@ index dee3a821..f02cf246 100644
      _In_ LPSTREAM pStm,
      _In_ REFIID riid,
      _COM_Outptr_ LPVOID  FAR * ppv
-@@ -716,12 +729,14 @@ CoUnmarshalInterface(
+@@ -716,12 +732,14 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -257,7 +267,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI
  CoUnmarshalHresult(
      _In_ LPSTREAM pstm,
-@@ -735,14 +750,14 @@ CoUnmarshalHresult(
+@@ -735,14 +753,14 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -275,7 +285,7 @@ index dee3a821..f02cf246 100644
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-@@ -752,7 +767,7 @@ CoDisconnectObject(
+@@ -752,7 +770,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -284,7 +294,7 @@ index dee3a821..f02cf246 100644
      _In_ LPUNKNOWN pUnk,
      _In_ BOOL fLock,
      _In_ BOOL fLastUnlockReleases
-@@ -765,7 +780,7 @@ CoLockObjectExternal(
+@@ -765,7 +783,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -293,7 +303,7 @@ index dee3a821..f02cf246 100644
      _In_ REFIID riid,
      _In_opt_ LPUNKNOWN pUnk,
      _In_ DWORD dwDestContext,
-@@ -781,7 +796,7 @@ CoGetStandardMarshal(
+@@ -781,7 +799,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -302,7 +312,7 @@ index dee3a821..f02cf246 100644
      _In_ LPUNKNOWN pUnkOuter,
      _In_ DWORD smexflags,
      _Outptr_ LPUNKNOWN  FAR * ppUnkInner
-@@ -806,6 +821,7 @@ typedef enum tagSTDMSHLFLAGS
+@@ -806,6 +824,7 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -310,7 +320,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI_(BOOL)
  CoIsHandlerConnected(
      _In_ LPUNKNOWN pUnk
-@@ -819,14 +835,14 @@ CoIsHandlerConnected(
+@@ -819,14 +838,14 @@
  
  // Apartment model inter-thread interface passing helpers
  _Check_return_ WINOLEAPI
@@ -327,7 +337,7 @@ index dee3a821..f02cf246 100644
      _In_ LPSTREAM pStm,
      _In_ REFIID iid,
      _COM_Outptr_ LPVOID  FAR * ppv
-@@ -839,7 +855,7 @@ CoGetInterfaceAndReleaseStream(
+@@ -839,7 +858,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  _Check_return_ WINOLEAPI
@@ -336,7 +346,7 @@ index dee3a821..f02cf246 100644
      _In_opt_ LPUNKNOWN punkOuter,
      _Outptr_ LPUNKNOWN* ppunkMarshal
      );
-@@ -850,16 +866,18 @@ CoCreateFreeThreadedMarshaler(
+@@ -850,16 +869,18 @@
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -356,7 +366,7 @@ index dee3a821..f02cf246 100644
      );
  
  #endif
-@@ -873,7 +891,7 @@ CoFreeUnusedLibrariesEx(
+@@ -873,7 +894,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -365,7 +375,7 @@ index dee3a821..f02cf246 100644
      DWORD dwTimeout
      );
  
-@@ -891,16 +909,16 @@ CoDisconnectContext(
+@@ -891,16 +912,16 @@
  /* Call Security. */
  
  _Check_return_ WINOLEAPI
@@ -388,7 +398,7 @@ index dee3a821..f02cf246 100644
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-@@ -910,13 +928,13 @@ CoInitializeSecurity(
+@@ -910,13 +931,13 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -396,16 +406,19 @@ index dee3a821..f02cf246 100644
 +_Win32_SupportedOS_Windows2000_ CoGetCallContext(
      _In_ REFIID riid,
 -    _Outptr_ void** ppInterface
-+    _Win32_ComOutPtr_(true) _Outptr_ void** ppInterface
-     );
- 
- _Check_return_ WINOLEAPI
+-    );
+-
+-_Check_return_ WINOLEAPI
 -CoQueryProxyBlanket(
++    _Win32_ComOutPtr_(true) _Outptr_ void** ppInterface
++    );
++
++_Check_return_ WINOLEAPI
 +_Win32_SupportedOS_Windows2000_ CoQueryProxyBlanket(
      _In_ IUnknown* pProxy,
      _Out_opt_ DWORD* pwAuthnSvc,
      _Out_opt_ DWORD* pAuthzSvc,
-@@ -928,25 +946,25 @@ CoQueryProxyBlanket(
+@@ -928,25 +949,25 @@
      );
  
  _Check_return_ WINOLEAPI
@@ -421,11 +434,14 @@ index dee3a821..f02cf246 100644
 +    _Win32_AssociatedEnum_(RPC_C_IMP_LEVEL) _In_ DWORD dwImpLevel,
      _In_opt_ RPC_AUTH_IDENTITY_HANDLE pAuthInfo,
 -    _In_ DWORD dwCapabilities
-+    _In_ _Win32_AssociatedEnum_(EOLE_AUTHENTICATION_CAPABILITIES) DWORD dwCapabilities
-     );
- 
- _Check_return_ WINOLEAPI
+-    );
+-
+-_Check_return_ WINOLEAPI
 -CoCopyProxy(
++    _In_ _Win32_AssociatedEnum_(EOLE_AUTHENTICATION_CAPABILITIES) DWORD dwCapabilities
++    );
++
++_Check_return_ WINOLEAPI
 +_Win32_SupportedOS_Windows2000_ CoCopyProxy(
      _In_ IUnknown* pProxy,
      _Outptr_ IUnknown** ppCopy
@@ -437,7 +453,7 @@ index dee3a821..f02cf246 100644
      _Out_opt_ DWORD* pAuthnSvc,
      _Out_opt_ DWORD* pAuthzSvc,
      _Outptr_opt_ LPOLESTR* pServerPrincName,
-@@ -957,17 +975,17 @@ CoQueryClientBlanket(
+@@ -957,17 +978,17 @@
      );
  
  _Check_return_ WINOLEAPI
@@ -458,7 +474,7 @@ index dee3a821..f02cf246 100644
      _Out_ DWORD* pcAuthSvc,
      _Outptr_result_buffer_(*pcAuthSvc) SOLE_AUTHENTICATION_SERVICE** asAuthSvc
      );
-@@ -979,7 +997,7 @@ CoQueryAuthenticationServices(
+@@ -979,7 +1000,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -467,7 +483,7 @@ index dee3a821..f02cf246 100644
      _In_opt_ IUnknown* pNewObject,
      _Outptr_ IUnknown** ppOldObject
      );
-@@ -1003,7 +1021,7 @@ CoSwitchCallContext(
+@@ -1003,7 +1024,7 @@
  /* helper for creating instances */
  
  _Check_return_ WINOLEAPI
@@ -476,7 +492,7 @@ index dee3a821..f02cf246 100644
      _In_ REFCLSID rclsid,
      _In_opt_ LPUNKNOWN pUnkOuter,
      _In_ DWORD dwClsContext,
-@@ -1021,7 +1039,7 @@ CoCreateInstance(
+@@ -1021,7 +1042,7 @@
  #if (_WIN32_WINNT >= 0x0400) || defined(_WIN32_DCOM)
  
  _Check_return_ WINOLEAPI
@@ -485,7 +501,7 @@ index dee3a821..f02cf246 100644
      _In_ REFCLSID Clsid,
      _In_opt_ IUnknown* punkOuter,
      _In_ DWORD dwClsCtx,
-@@ -1035,7 +1053,7 @@ CoCreateInstanceEx(
+@@ -1035,7 +1056,7 @@
  #if (_WIN32_WINNT >= 0x0602)
  
  _Check_return_ WINOLEAPI
@@ -494,7 +510,7 @@ index dee3a821..f02cf246 100644
      _In_ REFCLSID Clsid,
      _In_opt_ IUnknown* punkOuter,
      _In_ DWORD dwClsCtx,
-@@ -1052,6 +1070,7 @@ CoCreateInstanceFromApp(
+@@ -1052,6 +1073,7 @@
  #pragma region Desktop or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -502,7 +518,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI
  CoRegisterActivationFilter(
      _In_ IActivationFilter* pActivationFilter
-@@ -1068,36 +1087,36 @@ CoRegisterActivationFilter(
+@@ -1068,36 +1090,36 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -511,11 +527,14 @@ index dee3a821..f02cf246 100644
      _In_ DWORD dwThreadId,
      _In_ REFIID iid,
 -    _Outptr_ void** ppUnk
-+    _Win32_ComOutPtr_(true) _Outptr_ void** ppUnk
-     );
- 
- _Check_return_ WINOLEAPI
+-    );
+-
+-_Check_return_ WINOLEAPI
 -CoSetCancelObject(
++    _Win32_ComOutPtr_(true) _Outptr_ void** ppUnk
++    );
++
++_Check_return_ WINOLEAPI
 +_Win32_SupportedOS_Windows2000_ CoSetCancelObject(
      _In_opt_ IUnknown* pUnk
      );
@@ -536,19 +555,22 @@ index dee3a821..f02cf246 100644
  _Check_return_ WINOLEAPI
 -CoEnableCallCancellation(
 -    _In_opt_ LPVOID pReserved
-+_Win32_SupportedOS_Windows2000_ CoEnableCallCancellation(
-+    _In_opt_ _Win32_Reserved_ LPVOID pReserved
-     );
- 
- _Check_return_ WINOLEAPI
+-    );
+-
+-_Check_return_ WINOLEAPI
 -CoDisableCallCancellation(
 -    _In_opt_ LPVOID pReserved
++_Win32_SupportedOS_Windows2000_ CoEnableCallCancellation(
++    _In_opt_ _Win32_Reserved_ LPVOID pReserved
++    );
++
++_Check_return_ WINOLEAPI
 +_Win32_SupportedOS_Windows2000_ CoDisableCallCancellation(
 +    _In_opt_ _Win32_Reserved_ LPVOID pReserved
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-@@ -1111,25 +1130,25 @@ CoDisableCallCancellation(
+@@ -1111,25 +1133,25 @@
  /* other helpers */
  
  _Check_return_ WINOLEAPI
@@ -578,7 +600,7 @@ index dee3a821..f02cf246 100644
      _In_ LPCOLESTR lpsz,
      _Out_ LPIID lpiid
      );
-@@ -1141,13 +1160,13 @@ IIDFromString(
+@@ -1141,13 +1163,13 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  _Check_return_ WINOLEAPI
@@ -594,7 +616,7 @@ index dee3a821..f02cf246 100644
      _In_ LPCOLESTR lpszProgID,
      _Out_ LPCLSID lpclsid
      );
-@@ -1159,14 +1178,14 @@ CLSIDFromProgID(
+@@ -1159,14 +1181,14 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  _Check_return_ WINOLEAPI_(int)
@@ -611,7 +633,7 @@ index dee3a821..f02cf246 100644
      _Out_ GUID  FAR * pguid
      );
  
-@@ -1176,18 +1195,18 @@ typedef struct tagPROPVARIANT PROPVARIANT;
+@@ -1176,18 +1198,18 @@
  
  _Check_return_
  WINOLEAPI
@@ -633,7 +655,7 @@ index dee3a821..f02cf246 100644
      _In_ ULONG cVariants,
      _Inout_updates_(cVariants) PROPVARIANT* rgvars
      );
-@@ -1214,7 +1233,7 @@ FreePropVariantArray(
+@@ -1214,7 +1236,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -642,7 +664,7 @@ index dee3a821..f02cf246 100644
      _In_ DWORD dwFlags,
      _In_ DWORD dwTimeout,
      _In_ ULONG cHandles,
-@@ -1267,7 +1286,7 @@ CoWaitForMultipleObjects(
+@@ -1267,7 +1289,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -651,7 +673,7 @@ index dee3a821..f02cf246 100644
      _In_ REFCLSID clsidOld,
      _Out_ LPCLSID pClsidNew
      );
-@@ -1283,7 +1302,7 @@ CoGetTreatAsClass(
+@@ -1283,7 +1305,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  _Check_return_ WINOLEAPI
@@ -660,7 +682,7 @@ index dee3a821..f02cf246 100644
      _In_ LPOLESTR pszMachineName
      );
  
-@@ -1304,7 +1323,7 @@ enum AgileReferenceOptions
+@@ -1304,7 +1326,7 @@
  };
  
  _Check_return_ WINOLEAPI
@@ -669,7 +691,7 @@ index dee3a821..f02cf246 100644
      _In_ enum AgileReferenceOptions options,
      _In_ REFIID riid,
      _In_ IUnknown* pUnk,
-@@ -1328,23 +1347,28 @@ typedef HRESULT (STDAPICALLTYPE * LPFNGETCLASSOBJECT) (REFCLSID, REFIID, LPVOID
+@@ -1328,23 +1350,28 @@
  typedef HRESULT (STDAPICALLTYPE * LPFNCANUNLOADNOW)(void);
  
  _Check_return_
@@ -698,7 +720,7 @@ index dee3a821..f02cf246 100644
  WINOLEAPI_(void)
  CoTaskMemFree(
      _Frees_ptr_opt_ LPVOID pv
-@@ -1357,12 +1381,12 @@ CoTaskMemFree(
+@@ -1357,12 +1384,12 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  WINOLEAPI
@@ -713,3 +735,13 @@ index dee3a821..f02cf246 100644
      _In_ LPCOLESTR lpszProgID,
      _Out_ LPCLSID lpclsid
      );
+@@ -1374,6 +1401,9 @@
+ #endif
+ 
+ DECLARE_HANDLE(CO_DEVICE_CATALOG_COOKIE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef CO_DEVICE_CATALOG_COOKIE CO_DEVICE_CATALOG_COOKIE;
++#endif
+ 
+ _Check_return_
+ WINOLEAPI

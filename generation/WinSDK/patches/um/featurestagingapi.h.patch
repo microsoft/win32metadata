@@ -1,5 +1,4 @@
 diff --git a/um/featurestagingapi.h b/um/featurestagingapi.h
-index 35e58e4089323725b2b15484a10e43b9ff8efdc3..1a1b9b61d03cfd8b306b93e138211c31b889e860 100644
 --- a/um/featurestagingapi.h
 +++ b/um/featurestagingapi.h
 @@ -8,6 +8,8 @@
@@ -11,7 +10,17 @@ index 35e58e4089323725b2b15484a10e43b9ff8efdc3..1a1b9b61d03cfd8b306b93e138211c31
  
  #include <apiset.h>
  #include <apisetcconv.h>
-@@ -81,7 +83,7 @@
+@@ -52,6 +54,9 @@
+ } FEATURE_ERROR;
+ 
+ DECLARE_HANDLE(FEATURE_STATE_CHANGE_SUBSCRIPTION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef FEATURE_STATE_CHANGE_SUBSCRIPTION FEATURE_STATE_CHANGE_SUBSCRIPTION;
++#endif
+ typedef void WINAPI FEATURE_STATE_CHANGE_CALLBACK(_In_opt_ void* context);
+ typedef FEATURE_STATE_CHANGE_CALLBACK *PFEATURE_STATE_CHANGE_CALLBACK;
+ 
+@@ -81,7 +86,7 @@
  EXTERN_C
  void
  SubscribeFeatureStateChangeNotification(

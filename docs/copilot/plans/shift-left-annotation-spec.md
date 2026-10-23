@@ -69,6 +69,7 @@ permitted, and annotations on unsupported targets are errors.
 | Retained pointer | `_Win32_Retained_` | Pointer parameter retained by the API after the call. Follow the API's documented lifetime. |
 | Reserved parameter | `_Win32_Reserved_` | Reserved pointer or scalar parameter. Records `[Reserved]` while preserving existing native types, direction SAL, and optionality. Valueless and non-repeatable. |
 | Interior pointers | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter. Returned absolute pointers may borrow storage inside that same allocation; keep it alive and at a stable address until all pointer use or copying ends. Valueless and non-repeatable. |
+| Native typedef identity | `_Win32_NativeTypedef_` | Genuine native `typedef` of a supported scalar or data pointer. Emits a nominal native-typedef wrapper without implying cleanup, invalid values, compatibility, or an OS floor. Valueless. |
 | Compatible native typedef | `_Win32_AlsoUsableFor_(TYPE)` | Genuine native typedef, not a logical enum group. |
 | Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with a native enum or metadata-only group, including a later or cross-partition definition. Keep its native declaration type. |
 | Loose constant association | `_Win32_AssociatedConstant_(NAME)` | Enum. Associates an existing global constant without duplicating or renaming it. Repeatable. |
@@ -215,6 +216,50 @@ enum class _Win32_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long
 ### Typedefs and callback aliases
 
 Type metadata precedes the typedef.
+
+Use the neutral identity marker when an existing native scalar or data-pointer
+alias needs its own metadata identity but has no other annotation:
+
+```cpp
+_Win32_NativeTypedef_ typedef int BOOL;
+_Win32_NativeTypedef_ typedef long HRESULT;
+_Win32_NativeTypedef_ typedef void* HANDLE;
+```
+
+The canonical payload is `Win32Metadata.NativeTypedef`, with no parentheses,
+textual values, or compiler arguments. It uses the existing `[NativeTypedef]`
+wrapper projection and produces one `Value` field and one attribute per native
+identity, including repeated annotations/redeclarations. Distinct aliases remain
+distinct, and references retain their written typedef identity rather than an
+erasing primitive remap. Traversal and exclusion rules still decide which native
+declarations are emitted; the marker does not wrap unannotated typedefs.
+
+Supported storage preserves the target's native scalar width and signedness and
+every data-pointer level. Pointer-sized integral remaps must match that ABI.
+Each pointer level must have the target's ordinary pointer width. Non-default
+widths such as x64 `__ptr32` or x86 `__ptr64`, including beneath ordinary outer
+pointers or intervening typedefs, fail with WMA001 before output is committed.
+The reader does not erase the qualifier or substitute integer storage.
+Direct fixed-width integer storage is not made into a pointer because OLD used
+`IntPtr`. Genuine pointers to complete or incomplete native records are allowed;
+record **values**, including incomplete-record value aliases, are not. Native
+enum values, logical enum groups, callbacks/function pointers, arrays, references,
+C++ `using` declarations, and unsupported scalar representations fail explicitly.
+Do not invent an OS floor or a self-compatibility annotation merely to force a
+provider, and do not infer native pointer storage from historical metadata.
+
+For an IDL-owned typedef, use the existing selector-bound comment transport in
+the original IDL, for example:
+
+```idl
+cpp_quote("/* Win32Metadata: type ::BSTR => NativeTypedef */")
+```
+
+The same target and storage validation applies to that comment. Ordinary SDK
+consumers see an empty identity macro and unchanged native declarations.
+
+Callback aliases continue to use their own existing projection, not the neutral
+identity marker:
 
 ```cpp
 _Win32_SupportedOS_10240_
@@ -987,7 +1032,9 @@ is not an identity. Distinct typedef aliases remain distinct.
 
 The same canonical fact parser, validation, native cleanup resolution, projection
 and final emitter serve macros and comments. `return` accepts RAIIFree and
-AssociatedEnum. References use native lookup from the bound declaration.
+AssociatedEnum. A `type` selector can carry valueless `NativeTypedef` for a
+supported native scalar/data-pointer typedef; it does not turn a record or enum
+into a typedef wrapper. References use native lookup from the bound declaration.
 AssociatedEnum admits real enum declarations and already-compiled logical groups,
 including exact native `__MIDL_*` tags. AlsoUsableFor and AssociatedConstant must
 resolve actual native types/constants. ImportLibrary uses literal quoted strings.

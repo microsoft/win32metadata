@@ -2,6 +2,15 @@ diff --git a/um/imagehlp.h b/um/imagehlp.h
 index 1cdaaf10..5bb44717 100644
 --- a/um/imagehlp.h
 +++ b/um/imagehlp.h
+@@ -102,7 +102,7 @@ typedef struct _LOADED_IMAGE {
+     PIMAGE_SECTION_HEADER LastRvaSection;
+     ULONG                 NumberOfSections;
+     PIMAGE_SECTION_HEADER Sections;
+-    ULONG                 Characteristics;
++    _Win32_AssociatedEnum_(IMAGE_FILE_CHARACTERISTICS2) ULONG                 Characteristics;
+     BOOLEAN               fSystemImage;
+     BOOLEAN               fDOSImage;
+     BOOLEAN               fReadOnly;
 @@ -126,6 +126,8 @@ typedef struct _LOADED_IMAGE {
  #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
  

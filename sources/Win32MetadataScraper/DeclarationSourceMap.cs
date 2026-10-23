@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text.Json;
 using ClangSharp.Interop;
+using Microsoft.CodeAnalysis;
 
 namespace Win32MetadataScraper
 {
@@ -94,7 +95,7 @@ namespace Win32MetadataScraper
             }
         }
 
-        private static string QualifiedName(CXCursor cursor)
+        internal static string QualifiedName(CXCursor cursor)
         {
             var names = new List<string>();
             for (var current = cursor; !current.IsTranslationUnit && !current.Equals(default(CXCursor));
@@ -107,6 +108,14 @@ namespace Win32MetadataScraper
             }
             names.Reverse();
             return string.Join("::", names);
+        }
+
+        internal static string ReadFilePath(SyntaxToken fileToken)
+        {
+            // ClangSharp 21 inconsistently escapes the final Windows path separator.
+            return OperatingSystem.IsWindows()
+                ? fileToken.Text[1..^1].Replace(@"\\", @"\", StringComparison.Ordinal)
+                : fileToken.ValueText;
         }
 
         private sealed record Declaration(

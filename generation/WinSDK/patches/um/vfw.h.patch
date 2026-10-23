@@ -1,3 +1,4 @@
+diff --git a/um/vfw.h b/um/vfw.h
 --- a/um/vfw.h
 +++ b/um/vfw.h
 @@ -39,6 +39,8 @@
@@ -9,7 +10,17 @@
  
  #include <winapifamily.h>
  
-@@ -543,6 +545,7 @@
+@@ -128,6 +130,9 @@
+ #define ICVERSION       0x0104
+ 
+ DECLARE_HANDLE(HIC);     /* Handle to a Installable Compressor */
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HIC HIC;
++#endif
+ 
+ //
+ // this code in biCompression means the DIB must be accesed via
+@@ -543,6 +548,7 @@
  	
  ************************************************************************/
  
@@ -17,7 +28,7 @@
  BOOL
  VFWAPI
  ICInfo(
-@@ -551,6 +554,7 @@
+@@ -551,6 +557,7 @@
      _Out_ ICINFO FAR * lpicinfo
      );
  
@@ -25,7 +36,7 @@
  BOOL
  VFWAPI
  ICInstall(
-@@ -561,6 +565,7 @@
+@@ -561,6 +568,7 @@
      _In_ UINT wFlags
      );
  
@@ -33,7 +44,7 @@
  BOOL
  VFWAPI
  ICRemove(
-@@ -569,6 +574,7 @@
+@@ -569,6 +577,7 @@
      _In_ UINT wFlags
      );
  
@@ -41,7 +52,7 @@
  _Success_(return != 0)
  LRESULT
  VFWAPI
-@@ -578,7 +584,8 @@
+@@ -578,7 +587,8 @@
      _In_ DWORD cb
      );
  
@@ -51,7 +62,7 @@
  VFWAPI
  ICOpen(
      _In_ DWORD fccType,
-@@ -586,7 +593,8 @@
+@@ -586,7 +596,8 @@
      _In_ UINT wMode
      );
  
@@ -61,7 +72,7 @@
  VFWAPI
  ICOpenFunction(
      _In_ DWORD fccType,
-@@ -595,13 +603,14 @@
+@@ -595,13 +606,14 @@
      _In_ FARPROC lpfnHandler
      );
  
@@ -77,7 +88,7 @@
  VFWAPI
  ICSendMessage(
      _In_ HIC hic,
-@@ -691,6 +700,7 @@
+@@ -691,6 +703,7 @@
   *  compress a single frame
   *
   */
@@ -85,7 +96,7 @@
  DWORD
  VFWAPIV
  ICCompress(
-@@ -768,6 +778,7 @@
+@@ -768,6 +781,7 @@
   */
  #define ICDECOMPRESS_HURRYUP    0x80000000L     // don't draw just buffer (hurry up!)
  
@@ -93,7 +104,7 @@
  DWORD
  VFWAPIV
  ICDecompress(
-@@ -847,7 +858,7 @@
+@@ -847,7 +861,7 @@
   *  decompress a single frame
   *
   */
@@ -102,7 +113,7 @@
  ICDecompressEx(
              _In_ HIC hic,
              _In_ DWORD dwFlags,
-@@ -893,7 +904,7 @@
+@@ -893,7 +907,7 @@
   *  format (lpbiOutput) is supported.
   *
   */
@@ -111,7 +122,7 @@
  ICDecompressExBegin(
              _In_      HIC hic,
              _In_      DWORD dwFlags,
-@@ -935,7 +946,7 @@
+@@ -935,7 +949,7 @@
   *  ICDecompressExQuery()
   *
   */
@@ -120,7 +131,7 @@
  ICDecompressExQuery(
              _In_       HIC hic,
              _In_       DWORD dwFlags,
-@@ -996,6 +1007,7 @@
+@@ -996,6 +1010,7 @@
  #define ICDRAW_FULLSCREEN   0x00000002L   // draw to full screen
  #define ICDRAW_HDC          0x00000004L   // draw to a HDC/HWND
  
@@ -128,7 +139,7 @@
  DWORD
  VFWAPIV
  ICDrawBegin(
-@@ -1027,6 +1039,7 @@
+@@ -1027,6 +1042,7 @@
  #define ICDRAW_HURRYUP      0x80000000L   // don't draw just buffer (hurry up!)
  #define ICDRAW_UPDATE       0x40000000L   // don't draw just update screen
  
@@ -136,7 +147,7 @@
  DWORD
  VFWAPIV
  ICDraw(
-@@ -1041,7 +1054,7 @@
+@@ -1041,7 +1057,7 @@
  
  // ICMessage is not supported on Win32, so provide a static inline function
  // to do the same job
@@ -145,7 +156,7 @@
  ICDrawSuggestFormat(
              _In_  HIC hic,
              _In_  LPBITMAPINFOHEADER lpbiIn,
-@@ -1128,7 +1141,7 @@
+@@ -1128,7 +1144,7 @@
  
  
  // ICMessage is not supported on NT
@@ -154,7 +165,7 @@
  ICSetStatusProc(
              _In_ HIC hic,
              _In_ DWORD dwFlags,
-@@ -1159,7 +1172,7 @@
+@@ -1159,7 +1175,7 @@
  #define ICDrawOpen(fccType, fccHandler, lpbiIn) \
      ICLocate(fccType, fccHandler, lpbiIn, NULL, ICMODE_DRAW)
  
@@ -163,7 +174,7 @@
  VFWAPI
  ICLocate(
      _In_     DWORD fccType,
-@@ -1169,6 +1182,7 @@
+@@ -1169,6 +1185,7 @@
      _In_     WORD wFlags
      );
  
@@ -171,7 +182,7 @@
  HIC
  VFWAPI
  ICGetDisplayFormat(
-@@ -1184,6 +1198,7 @@
+@@ -1184,6 +1201,7 @@
  Higher level functions
  ************************************************************************/
  
@@ -179,7 +190,7 @@
  HANDLE
  VFWAPI
  ICImageCompress(
-@@ -1196,6 +1211,7 @@
+@@ -1196,6 +1214,7 @@
      _Inout_opt_  LONG FAR *          plSize      // compress to this size (0=whatever)
      );
  
@@ -187,7 +198,7 @@
  HANDLE
  VFWAPI
  ICImageDecompress(
-@@ -1238,6 +1254,7 @@
+@@ -1238,6 +1257,7 @@
  //
  //  allows user to choose compressor, quality etc...
  //
@@ -195,7 +206,7 @@
  BOOL
  VFWAPI
  ICCompressorChoose(
-@@ -1257,6 +1274,7 @@
+@@ -1257,6 +1277,7 @@
  						// can handle the input format
  						// or input data
  
@@ -203,7 +214,7 @@
  BOOL
  VFWAPI
  ICSeqCompressFrameStart(
-@@ -1264,12 +1282,14 @@
+@@ -1264,12 +1285,14 @@
      _In_ LPBITMAPINFO lpbiIn
      );
  
@@ -218,7 +229,7 @@
  LPVOID
  VFWAPI
  ICSeqCompressFrame(
-@@ -1280,6 +1300,7 @@
+@@ -1280,6 +1303,7 @@
      _Inout_opt_ LONG FAR               *plSize     // size to compress to/of returned image
      );
  
@@ -226,7 +237,7 @@
  void
  VFWAPI
  ICCompressorFree(
-@@ -1337,12 +1358,14 @@
+@@ -1337,12 +1361,14 @@
  **  DrawDibOpen()
  **
  */
@@ -241,7 +252,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1354,6 +1377,7 @@
+@@ -1354,6 +1380,7 @@
  ** DrawDibGetBuffer()
  **
  */
@@ -249,7 +260,7 @@
  extern
  LPVOID
  VFWAPI
-@@ -1375,6 +1399,7 @@
+@@ -1375,6 +1402,7 @@
  **  get the palette used for drawing DIBs
  **
  */
@@ -257,7 +268,7 @@
  extern
  HPALETTE
  VFWAPI
-@@ -1389,6 +1414,7 @@
+@@ -1389,6 +1417,7 @@
  **  get the palette used for drawing DIBs
  **
  */
@@ -265,7 +276,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1400,6 +1426,7 @@
+@@ -1400,6 +1429,7 @@
  /*
  **  DrawDibChangePalette()
  */
@@ -273,7 +284,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1416,6 +1443,7 @@
+@@ -1416,6 +1446,7 @@
  **  realize the palette in a HDD
  **
  */
@@ -281,7 +292,7 @@
  extern
  UINT
  VFWAPI
-@@ -1431,6 +1459,7 @@
+@@ -1431,6 +1462,7 @@
  **  start of streaming playback
  **
  */
@@ -289,7 +300,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1445,6 +1474,7 @@
+@@ -1445,6 +1477,7 @@
  **  start of streaming playback
  **
  */
@@ -297,7 +308,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1458,6 +1488,7 @@
+@@ -1458,6 +1491,7 @@
  **  prepare to draw
  **
  */
@@ -305,7 +316,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1478,6 +1509,7 @@
+@@ -1478,6 +1512,7 @@
  **  actualy draw a DIB to the screen.
  **
  */
@@ -313,7 +324,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1508,6 +1540,7 @@
+@@ -1508,6 +1543,7 @@
  /*
  **  DrawDibEnd()
  */
@@ -321,7 +332,7 @@
  extern
  BOOL
  VFWAPI
-@@ -1528,6 +1561,7 @@
+@@ -1528,6 +1564,7 @@
      LONG    timeSetDIBits;
  }   DRAWDIBTIME, FAR *LPDRAWDIBTIME;
  
@@ -329,7 +340,7 @@
  BOOL
  VFWAPI
  DrawDibTime(
-@@ -1542,6 +1576,7 @@
+@@ -1542,6 +1579,7 @@
  #define PD_STRETCHDIB_1_2_OK    0x0008      /* ... */
  #define PD_STRETCHDIB_1_N_OK    0x0010      /* ... */
  
@@ -337,7 +348,7 @@
  LRESULT
  VFWAPI
  DrawDibProfileDisplay(
-@@ -1550,7 +1585,7 @@
+@@ -1550,7 +1588,7 @@
  
  
  #ifdef DRAWDIB_INCLUDE_STRETCHDIB
@@ -346,7 +357,7 @@
  	_In_  LPBITMAPINFOHEADER biDst,
  	_Out_ LPVOID	lpDst,		
  	_In_  int	DstX,		
-@@ -2061,6 +2096,9 @@
+@@ -2061,6 +2099,9 @@
  #undef  INTERFACE
  #define INTERFACE   IAVIStream
  
@@ -356,7 +367,7 @@
  DECLARE_INTERFACE_(IAVIStream, IUnknown)
  {
      // *** IUnknown methods ***
-@@ -2105,6 +2143,9 @@
+@@ -2105,6 +2146,9 @@
  #undef  INTERFACE
  #define INTERFACE   IAVIStreaming
  
@@ -366,7 +377,7 @@
  DECLARE_INTERFACE_(IAVIStreaming, IUnknown)
  {
      // *** IUnknown methods ***
-@@ -2127,6 +2168,9 @@
+@@ -2127,6 +2171,9 @@
  #undef  INTERFACE
  #define INTERFACE   IAVIEditStream
  
@@ -376,7 +387,7 @@
  DECLARE_INTERFACE_(IAVIEditStream, IUnknown)
  {
      // *** IUnknown methods ***
-@@ -2170,6 +2214,9 @@
+@@ -2170,6 +2217,9 @@
  #define INTERFACE   IAVIFile
  #define PAVIFILE IAVIFile FAR*
  
@@ -386,7 +397,7 @@
  DECLARE_INTERFACE_(IAVIFile, IUnknown)
  {
      // *** IUnknown methods ***
-@@ -2211,6 +2258,9 @@
+@@ -2211,6 +2261,9 @@
  #define INTERFACE   IGetFrame
  #define PGETFRAME   IGetFrame FAR*
  
@@ -396,7 +407,7 @@
  DECLARE_INTERFACE_(IGetFrame, IUnknown)
  {
      // *** IUnknown methods ***
-@@ -2261,15 +2311,21 @@
+@@ -2261,15 +2314,21 @@
  // functions
  //
  
@@ -418,7 +429,7 @@
  STDAPI AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
  			  UINT uMode, _In_opt_ LPCLSID lpHandler);
  #ifdef UNICODE
-@@ -2284,7 +2340,9 @@
+@@ -2284,7 +2343,9 @@
  #endif
  
  #ifdef _WIN32
@@ -428,7 +439,7 @@
  STDAPI AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
  #ifdef UNICODE
  #define AVIFileInfo	AVIFileInfoW
-@@ -2297,11 +2355,14 @@
+@@ -2297,11 +2358,14 @@
  #endif
  
  
@@ -443,7 +454,7 @@
  STDAPI AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
  #ifdef UNICODE
  #define AVIFileCreateStream	AVIFileCreateStreamW
-@@ -2313,20 +2374,27 @@
+@@ -2313,20 +2377,27 @@
  #define AVIFileCreateStreamW AVIFileCreateStream	    /* ;Internal */
  #endif
  
@@ -471,7 +482,7 @@
  STDAPI AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
  #ifdef UNICODE
  #define AVIStreamInfo	AVIStreamInfoW
-@@ -2334,21 +2402,24 @@
+@@ -2334,21 +2405,24 @@
  #define AVIStreamInfo	AVIStreamInfoA
  #endif
  
@@ -501,7 +512,7 @@
  STDAPI AVIStreamWrite        (_In_ PAVISTREAM pavi,
  			      _In_ LONG lStart, _In_ LONG lSamples,
  			      _In_reads_bytes_(cbBuffer) LPVOID lpBuffer, _In_ LONG cbBuffer, _In_ DWORD dwFlags,
-@@ -2357,21 +2428,26 @@
+@@ -2357,21 +2431,26 @@
  
  // Right now, these just use AVIStreamInfo() to get information, then
  // return some of it.  Can they be more efficient?
@@ -534,7 +545,7 @@
  STDAPI AVIStreamGetFrameClose(_In_ PGETFRAME pg);
  
  
-@@ -2381,9 +2457,11 @@
+@@ -2381,9 +2460,11 @@
  
  
  // Shortcut function
@@ -546,7 +557,7 @@
  STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
  			     _In_ DWORD fccType, _In_ LONG lParam,
  			     _In_ UINT mode, _In_opt_ CLSID FAR *pclsidHandler);
-@@ -2394,6 +2472,7 @@
+@@ -2394,6 +2475,7 @@
  #endif
  
  // Use to create disembodied streams
@@ -554,7 +565,7 @@
  STDAPI AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ LONG lParam2,
  		       _In_opt_ CLSID FAR *pclsidHandler);
  
-@@ -2516,13 +2595,14 @@
+@@ -2516,13 +2598,14 @@
  #define comptypeDIB         mmioFOURCC('D', 'I', 'B', ' ')
  #endif
  
@@ -570,7 +581,7 @@
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
-@@ -2530,13 +2610,14 @@
+@@ -2530,13 +2613,14 @@
  		_In_ LPAVICOMPRESSOPTIONS lpOptions,
  		...);
  
@@ -586,7 +597,7 @@
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
  		_In_ int                 nStreams,
-@@ -2544,6 +2625,7 @@
+@@ -2544,6 +2628,7 @@
  		_In_ LPAVICOMPRESSOPTIONS lpOptions,
  		...);
  
@@ -594,7 +605,7 @@
  STDAPI AVISaveVW(LPCWSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
-@@ -2560,12 +2642,14 @@
+@@ -2560,12 +2645,14 @@
  
  
  
@@ -609,7 +620,7 @@
  STDAPI AVISaveOptionsFree(int nStreams,
  			     _In_reads_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
  
-@@ -2575,17 +2659,21 @@
+@@ -2575,17 +2662,21 @@
  // These determine what the compression options dialog for video streams
  // will look like.
  
@@ -631,7 +642,7 @@
  STDAPI AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ PAVISTREAM FAR *ppstream);
  
  /****************************************************************************
-@@ -2594,10 +2682,13 @@
+@@ -2594,10 +2685,13 @@
   *
   ***************************************************************************/
  
@@ -645,7 +656,7 @@
  STDAPI AVIClearClipboard(void);
  
  /****************************************************************************
-@@ -2605,22 +2696,31 @@
+@@ -2605,22 +2699,31 @@
   *  Editing routines
   *
   ***************************************************************************/
@@ -677,7 +688,7 @@
  STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
  #ifdef UNICODE
  #define EditStreamSetInfo	EditStreamSetInfoW
-@@ -2750,6 +2850,7 @@
+@@ -2750,6 +2853,7 @@
  #define MCIWndSM SendMessage    /* SendMessage in C */
  #endif  /* __cplusplus */
  #define MCIWND_WINDOW_CLASS TEXT("MCIWndClass")
@@ -685,7 +696,7 @@
  HWND
  VFWAPIV
  MCIWndCreateA(
-@@ -2759,6 +2860,7 @@
+@@ -2759,6 +2863,7 @@
      _In_opt_ LPCSTR szFile
      );
  
@@ -693,7 +704,7 @@
  HWND
  VFWAPIV
  MCIWndCreateW(
-@@ -2773,6 +2875,7 @@
+@@ -2773,6 +2878,7 @@
  #else
  #define MCIWndCreate    MCIWndCreateA
  #endif
@@ -701,7 +712,17 @@
  BOOL VFWAPIV MCIWndRegisterClass(void);
  
  // Flags for the MCIWndOpen command
-@@ -3647,22 +3750,26 @@
+@@ -3095,6 +3201,9 @@
+ 
+ /* video data types */
+ DECLARE_HANDLE(HVIDEO);                 // generic handle
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HVIDEO HVIDEO;
++#endif
+ typedef HVIDEO FAR * LPHVIDEO;
+ #endif                                  // ifndef RCINVOKED
+ 
+@@ -3647,22 +3756,26 @@
  //  The only exported functions from AVICAP.DLL
  // ------------------------------------------------------------------
  
@@ -728,7 +749,7 @@
  BOOL VFWAPI capGetDriverDescriptionW (UINT wDriverIndex,
          _Out_writes_(cbName) LPWSTR lpszName, _In_ int cbName,
          _Out_writes_(cbVer) LPWSTR lpszVer, _In_ int cbVer);
-@@ -3779,24 +3886,28 @@
+@@ -3779,24 +3892,28 @@
   ***************************************************************************/
  #ifdef OFN_READONLY
  

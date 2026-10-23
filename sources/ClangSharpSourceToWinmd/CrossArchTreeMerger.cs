@@ -14,10 +14,48 @@ namespace ClangSharpSourceToWinmd
     {
         private readonly CrossArchSyntaxMap map;
         private readonly HashSet<string> crossArchVisitedNames = new HashSet<string>();
+        private readonly HashSet<string> reservedIdentifiers;
+        private readonly Dictionary<string, string> fieldRenames = new(StringComparer.Ordinal);
 
-        public CrossArchTreeMerger(CrossArchSyntaxMap map)
+        public CrossArchTreeMerger(CrossArchSyntaxMap map, IEnumerable<SyntaxTree> sourceTrees = null)
         {
             this.map = map;
+            this.reservedIdentifiers = new HashSet<string>(map.GetSourceIdentifiers(), StringComparer.Ordinal);
+            foreach (var tree in sourceTrees ?? Array.Empty<SyntaxTree>())
+            {
+                foreach (var token in tree.GetRoot().DescendantTokens().Where(token => token.IsKind(SyntaxKind.IdentifierToken)))
+                    this.reservedIdentifiers.Add(token.ValueText);
+                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<MemberDeclarationSyntax>())
+                {
+                    string name = declaration switch
+                    {
+                        BaseTypeDeclarationSyntax type => type.Identifier.ValueText,
+                        DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
+                        MethodDeclarationSyntax method => method.Identifier.ValueText,
+                        _ => null,
+                    };
+                    if (name != null)
+                        for (int i = 1; i <= 2; i++)
+                            this.reservedIdentifiers.Add($"{name}____{i}");
+                }
+            }
+        }
+
+        internal IReadOnlyDictionary<string, string> FieldRenames => this.fieldRenames;
+
+        private string RenameField(FieldDeclarationSyntax field, string originalName, int ordinal)
+        {
+            lock (this)
+            {
+                string candidate = $"{originalName}____{ordinal}";
+                int collision = 0;
+                while (!this.reservedIdentifiers.Add(candidate))
+                    candidate = $"{originalName}____{ordinal}_{++collision}";
+                string identity = CrossArchSyntaxMap.GetFullName(field);
+                string renamedIdentity = identity.Substring(0, identity.LastIndexOf("::", StringComparison.Ordinal) + 2) + candidate;
+                this.fieldRenames.Add(renamedIdentity, originalName);
+                return candidate;
+            }
         }
 
         public SyntaxTree ProcessTree(SyntaxTree tree, out bool contributedToNonCommonTree)
@@ -95,14 +133,17 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
-                var modifiers = node.Modifiers.ToString();
-
-                // Get rid of constants on Apis classes when arch isn't x86
-                if (this.currentArch != Architecture.X86 && 
-                    (node.Parent is ClassDeclarationSyntax cDef && cDef.Identifier.ValueText == "Apis") &&
-                    (modifiers.Contains("const") || modifiers.Contains("static")))
+                if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
                 {
-                    return null;
+                    var variable = node.Declaration.Variables.First();
+                    string name = variable.Identifier.ValueText;
+                    this.HandleArchSpecific(node, out bool removeNode, out var attributes, ref name);
+                    if (removeNode)
+                        return null;
+                    if (name != variable.Identifier.ValueText)
+                        node = node.ReplaceNode(variable, variable.WithIdentifier(SyntaxFactory.Identifier(name)));
+                    if (attributes != null)
+                        node = node.AddAttributeLists(attributes);
                 }
 
                 return base.VisitFieldDeclaration(node);
@@ -239,7 +280,7 @@ namespace ClangSharpSourceToWinmd
                             ret.Append(" | ");
                         }
 
-                        ret.Append($"Windows.Win32.Foundation.Metadata.Architecture.{val}");
+                        ret.Append($"global::Windows.Win32.Foundation.Metadata.Architecture.{val}");
                     }
                 }
 
@@ -286,7 +327,9 @@ namespace ClangSharpSourceToWinmd
 
                         if (i != 0)
                         {
-                            name = $"{name}____{i}";
+                            name = node is FieldDeclarationSyntax field
+                                ? this.owner.RenameField(field, name, i)
+                                : $"{name}____{i}";
                         }
 
                         string archValues = FormatArch(archGroup);
@@ -295,7 +338,7 @@ namespace ClangSharpSourceToWinmd
                             SyntaxFactory.AttributeList(
                                 SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                     SyntaxFactory.Attribute(
-                                        SyntaxFactory.ParseName("SupportedArchitecture"),
+                                        SyntaxFactory.ParseName("global::Windows.Win32.Foundation.Metadata.SupportedArchitecture"),
                                         SyntaxFactory.ParseAttributeArgumentList(attributeArgs))));
 
                         return;
@@ -305,7 +348,7 @@ namespace ClangSharpSourceToWinmd
 
             private string GetFullNameWithArch(SyntaxNode node, Architecture arch)
             {
-                return GetUniqueNameWithArches(SyntaxUtils.GetFullName(node, true), arch);
+                return GetUniqueNameWithArches(CrossArchSyntaxMap.GetFullName(node), arch);
             }
         }
     }

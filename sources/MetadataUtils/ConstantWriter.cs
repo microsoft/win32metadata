@@ -10,11 +10,12 @@ namespace MetadataUtils
         private Stream outputStream;
         private string @namespace;
         private string headerText;
+        private string className;
         private StreamWriter writer;
         private Dictionary<string, string> namesToValues = new Dictionary<string, string>();
         private Dictionary<string, string> withAttributes;
 
-        public ConstantWriter(Stream outputStream, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes)
+        public ConstantWriter(Stream outputStream, string @namespace, string sourceHeaderText, Dictionary<string, string> withAttributes, string className = "Apis")
         {
             sourceHeaderText ??= string.Empty;
 
@@ -22,6 +23,7 @@ namespace MetadataUtils
             this.@namespace = @namespace;
             this.headerText = sourceHeaderText;
             this.withAttributes = withAttributes;
+            this.className = className;
 
             this.namesToValues["TRUE"] = "1";
             this.namesToValues["FALSE"] = "0";
@@ -84,13 +86,21 @@ $"        [{extraAttributes}]");
             if (type == "string" && context == "ansi")
             {
                 this.Writer.WriteLine(
-$"        [NativeEncoding(\"{context}\"]");
+$"        [NativeEncoding(\"{context}\")]");
             }
 
             this.Writer.WriteLine(
 $"        public const {type} {name} = {valueText};");
 
             this.Writer.WriteLine();
+        }
+
+        public void AddNativeInteger(NativeConstantValue value)
+        {
+            string name = Microsoft.CodeAnalysis.CSharp.SyntaxFacts.GetKeywordKind(value.Name) ==
+                Microsoft.CodeAnalysis.CSharp.SyntaxKind.None ? value.Name : "@" + value.Name;
+            this.Writer.WriteLine($"        [NativeTypeName({Microsoft.CodeAnalysis.CSharp.SymbolDisplay.FormatLiteral(value.NativeType, true)})]");
+            this.AddValue(value.StorageType, name, value.Value);
         }
 
         public static string FixIntValueText(bool forceUnsigned, ref string type, string valueText)
@@ -272,7 +282,7 @@ $"        [NativeTypeName(\"{nativeTypeName}\")]");
 @$"{this.headerText}
 namespace {this.@namespace}
 {{
-    public static partial class Apis
+    public static partial class {this.className}
     {{");
             }
         }

@@ -1,5 +1,4 @@
 diff --git a/um/winsock.h b/um/winsock.h
-index e3bee0ac..48c05524 100644
 --- a/um/winsock.h
 +++ b/um/winsock.h
 @@ -1,3 +1,4 @@
@@ -7,7 +6,17 @@ index e3bee0ac..48c05524 100644
  #include <winapifamily.h>
  
  
-@@ -71,6 +72,7 @@ typedef struct fd_set {
+@@ -49,6 +50,9 @@
+  */
+ 
+ typedef UINT_PTR        SOCKET;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef SOCKET SOCKET;
++#endif
+ 
+ /*
+  * Select uses arrays of SOCKETs.  These macros manipulate such
+@@ -71,6 +75,7 @@
  extern "C" {
  #endif
  
@@ -15,7 +24,7 @@ index e3bee0ac..48c05524 100644
  extern int PASCAL FAR __WSAFDIsSet(SOCKET, fd_set FAR *);
  
  #ifdef __cplusplus
-@@ -451,6 +453,8 @@ struct ip_mreq {
+@@ -451,6 +456,8 @@
  #define AF_UNSPEC       0               /* unspecified */
  #define AF_UNIX         1               /* local to host (pipes, portals) */
  #define AF_INET         2               /* internetwork: UDP, TCP, etc. */
@@ -24,7 +33,7 @@ index e3bee0ac..48c05524 100644
  #define AF_IMPLINK      3               /* arpanet imp addresses */
  #define AF_PUP          4               /* pup protocols: e.g. BSP */
  #define AF_CHAOS        5               /* mit CHAOS protocols */
-@@ -735,39 +739,53 @@ struct  linger {
+@@ -735,39 +742,53 @@
  #ifdef __cplusplus
  extern "C" {
  #endif
@@ -79,7 +88,7 @@ index e3bee0ac..48c05524 100644
  int PASCAL FAR getsockopt (
                             _In_ SOCKET s,
                             _In_ int level,
-@@ -775,28 +793,45 @@ int PASCAL FAR getsockopt (
+@@ -775,28 +796,45 @@
                             _Out_writes_bytes_(*optlen) char FAR * optval,
                             _Inout_ int FAR *optlen);
  
@@ -125,7 +134,7 @@ index e3bee0ac..48c05524 100644
  int PASCAL FAR recvfrom (
                           _In_ SOCKET s,
                           _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
-@@ -805,6 +840,7 @@ int PASCAL FAR recvfrom (
+@@ -805,6 +843,7 @@
                           _Out_writes_bytes_to_opt_(*fromlen, *fromlen) struct sockaddr FAR * from,
                           _Inout_opt_ int FAR * fromlen);
  
@@ -133,7 +142,7 @@ index e3bee0ac..48c05524 100644
  int PASCAL FAR select (
                          _In_ int nfds,
                          _Inout_opt_ fd_set FAR *readfds,
-@@ -812,12 +848,15 @@ int PASCAL FAR select (
+@@ -812,12 +851,15 @@
                          _Inout_opt_ fd_set FAR *exceptfds,
                          _In_opt_  const struct timeval FAR *timeout);
  
@@ -149,7 +158,7 @@ index e3bee0ac..48c05524 100644
  int PASCAL FAR sendto (
                         _In_ SOCKET s,
                         _In_reads_bytes_(len) const char FAR * buf,
-@@ -826,6 +865,8 @@ int PASCAL FAR sendto (
+@@ -826,6 +868,8 @@
                         _In_reads_bytes_opt_(tolen) const struct sockaddr FAR *to,
                         _In_ int tolen);
  
@@ -158,7 +167,7 @@ index e3bee0ac..48c05524 100644
  int PASCAL FAR setsockopt (
                             _In_ SOCKET s,
                             _In_ int level,
-@@ -833,50 +874,74 @@ int PASCAL FAR setsockopt (
+@@ -833,50 +877,74 @@
                             _In_reads_bytes_opt_(optlen) const char FAR * optval,
                             _In_ int optlen);
  
@@ -234,7 +243,7 @@ index e3bee0ac..48c05524 100644
  int PASCAL FAR WSAGetLastError(void);
  
  BOOL PASCAL FAR WSAIsBlocking(void);
-@@ -887,6 +952,8 @@ FARPROC PASCAL FAR WSASetBlockingHook(_In_ FARPROC lpBlockFunc);
+@@ -887,6 +955,8 @@
  
  int PASCAL FAR WSACancelBlockingCall(void);
  
@@ -243,7 +252,7 @@ index e3bee0ac..48c05524 100644
  HANDLE PASCAL FAR WSAAsyncGetServByName(
                                          _In_ HWND hWnd,
                                          _In_ u_int wMsg,
-@@ -895,6 +962,8 @@ HANDLE PASCAL FAR WSAAsyncGetServByName(
+@@ -895,6 +965,8 @@
                                          _Out_writes_bytes_(buflen) char FAR * buf,
                                          _In_ int buflen);
  
@@ -252,7 +261,7 @@ index e3bee0ac..48c05524 100644
  HANDLE PASCAL FAR WSAAsyncGetServByPort(
                                          _In_ HWND hWnd,
                                          _In_ u_int wMsg,
-@@ -903,6 +972,8 @@ HANDLE PASCAL FAR WSAAsyncGetServByPort(
+@@ -903,6 +975,8 @@
                                          _Out_writes_bytes_(buflen) char FAR * buf,
                                          _In_ int buflen);
  
@@ -261,7 +270,7 @@ index e3bee0ac..48c05524 100644
  HANDLE PASCAL FAR WSAAsyncGetProtoByName(
                                           _In_ HWND hWnd,
                                           _In_ u_int wMsg,
-@@ -910,6 +981,8 @@ HANDLE PASCAL FAR WSAAsyncGetProtoByName(
+@@ -910,6 +984,8 @@
                                           _Out_writes_bytes_(buflen) char FAR * buf,
                                           _In_ int buflen);
  
@@ -270,7 +279,7 @@ index e3bee0ac..48c05524 100644
  HANDLE PASCAL FAR WSAAsyncGetProtoByNumber(
                                             _In_ HWND hWnd,
                                             _In_ u_int wMsg,
-@@ -917,6 +990,8 @@ HANDLE PASCAL FAR WSAAsyncGetProtoByNumber(
+@@ -917,6 +993,8 @@
                                             _Out_writes_bytes_(buflen) char FAR * buf,
                                             _In_ int buflen);
  
@@ -279,7 +288,7 @@ index e3bee0ac..48c05524 100644
  HANDLE PASCAL FAR WSAAsyncGetHostByName(
                                          _In_ HWND hWnd,
                                          _In_ u_int wMsg,
-@@ -924,6 +999,8 @@ HANDLE PASCAL FAR WSAAsyncGetHostByName(
+@@ -924,6 +1002,8 @@
                                          _Out_writes_bytes_(buflen) char FAR * buf,
                                          _In_ int buflen);
  
@@ -288,7 +297,7 @@ index e3bee0ac..48c05524 100644
  HANDLE PASCAL FAR WSAAsyncGetHostByAddr(
                                          _In_ HWND hWnd,
                                          _In_ u_int wMsg,
-@@ -933,15 +1010,19 @@ HANDLE PASCAL FAR WSAAsyncGetHostByAddr(
+@@ -933,15 +1013,19 @@
                                          _Out_writes_bytes_(buflen) char FAR * buf,
                                          _In_ int buflen);
  
@@ -309,7 +318,7 @@ index e3bee0ac..48c05524 100644
                            _In_ SOCKET s,
                            _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
                            _In_ int len,
-@@ -958,7 +1039,7 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
+@@ -958,7 +1042,7 @@
  #define TF_REUSE_SOCKET     0x02
  #define TF_WRITE_BEHIND     0x04
  
@@ -318,7 +327,7 @@ index e3bee0ac..48c05524 100644
  PASCAL FAR
  TransmitFile (
      _In_ SOCKET hSocket,
-@@ -970,7 +1051,7 @@ TransmitFile (
+@@ -970,7 +1054,7 @@
      _In_ DWORD dwReserved
      );
  
@@ -327,7 +336,7 @@ index e3bee0ac..48c05524 100644
  PASCAL FAR
  AcceptEx (
      _In_ SOCKET sListenSocket,
-@@ -984,7 +1065,7 @@ AcceptEx (
+@@ -984,7 +1068,7 @@
      _Inout_ LPOVERLAPPED lpOverlapped
      );
  
@@ -336,7 +345,7 @@ index e3bee0ac..48c05524 100644
  PASCAL FAR
  GetAcceptExSockaddrs (
      _In_reads_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
-@@ -1086,4 +1167,3 @@ typedef struct timeval FAR *LPTIMEVAL;
+@@ -1086,4 +1170,3 @@
  #pragma endregion
  
  #endif  /* _WINSOCKAPI_ */

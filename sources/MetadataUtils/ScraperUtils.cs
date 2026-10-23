@@ -85,9 +85,13 @@ namespace MetadataUtils
             return GetNameToNamespaceMap(sourceFiles, nameOptions);
         }
 
-        public static Dictionary<string, string> GetConstants(string scraperOutputDir)
+        public static Dictionary<string, string> GetConstants(string scraperOutputDir) =>
+            GetConstants(scraperOutputDir, out _);
+
+        public static Dictionary<string, string> GetConstants(string scraperOutputDir, out HashSet<string> mutableGlobals)
         {
             Dictionary<string, string> namesAndTypes = new();
+            var mutableNames = new HashSet<string>(StringComparer.Ordinal);
 
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
 
@@ -101,7 +105,8 @@ namespace MetadataUtils
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
                 SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                Dictionary<string, string> currentNamesAndTypes = ConstantsFinder.GetConstantsNamesAndTypes(tree);
+                var currentMutableNames = new HashSet<string>(StringComparer.Ordinal);
+                Dictionary<string, string> currentNamesAndTypes = ConstantsFinder.GetConstantsNamesAndTypes(tree, currentMutableNames);
 
                 lock (namesAndTypes)
                 {
@@ -109,15 +114,18 @@ namespace MetadataUtils
                     {
                         namesAndTypes[item.Key] = item.Value;
                     }
+                    mutableNames.UnionWith(currentMutableNames);
                 }
             });
 
+            mutableGlobals = mutableNames;
             return namesAndTypes;
         }
 
         private static bool IsValidCsSourceFile(string fileName)
         {
-            if (fileName.EndsWith(".modified.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs"))
+            if (fileName.EndsWith(".modified.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs") ||
+                NativeConstantValues.IsGeneratedSource(fileName))
             {
                 return false;
             }
@@ -127,11 +135,11 @@ namespace MetadataUtils
 
         private class ConstantsFinder
         {
-            public static Dictionary<string, string> GetConstantsNamesAndTypes(SyntaxTree tree)
+            public static Dictionary<string, string> GetConstantsNamesAndTypes(SyntaxTree tree, HashSet<string> mutableGlobals)
             {
                 Dictionary<string, string> constantsNamesAndTypes = new();
 
-                new TreeWalker(tree, constantsNamesAndTypes);
+                new TreeWalker(tree, constantsNamesAndTypes, mutableGlobals);
 
                 return constantsNamesAndTypes;
             }
@@ -139,10 +147,12 @@ namespace MetadataUtils
             private class TreeWalker : CSharpSyntaxWalker
             {
                 Dictionary<string, string> constantsNamesAndTypes;
+                private readonly HashSet<string> mutableGlobals;
 
-                public TreeWalker(SyntaxTree tree, Dictionary<string, string> constantsNamesAndTypes)
+                public TreeWalker(SyntaxTree tree, Dictionary<string, string> constantsNamesAndTypes, HashSet<string> mutableGlobals)
                 {
                     this.constantsNamesAndTypes = constantsNamesAndTypes;
+                    this.mutableGlobals = mutableGlobals;
                     this.Visit(tree.GetRoot());
                 }
 
@@ -152,9 +162,8 @@ namespace MetadataUtils
                     {
                         foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
                         {
-                            string mods = field.Modifiers.ToString();
-                            
-                            if (mods.Contains("const") || mods.Contains("static readonly"))
+                            if (field.Modifiers.Any(SyntaxKind.ConstKeyword) ||
+                                field.Modifiers.Any(SyntaxKind.StaticKeyword))
                             {
                                 this.AddNameToMap(field);
                             }
@@ -175,6 +184,8 @@ namespace MetadataUtils
                             var typeName = node.Declaration.Type.ToString();
                             this.constantsNamesAndTypes.Add(name, typeName);
                         }
+                        if (!node.Modifiers.Any(SyntaxKind.ConstKeyword) && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
+                            this.mutableGlobals.Add(name);
                     }
                 }
             }
@@ -269,4 +280,3 @@ namespace MetadataUtils
         }
     }
 }
-

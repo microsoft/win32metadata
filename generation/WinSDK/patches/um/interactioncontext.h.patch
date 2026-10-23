@@ -1,5 +1,4 @@
 diff --git a/um/interactioncontext.h b/um/interactioncontext.h
-index 92d97789..db06f0b0 100644
 --- a/um/interactioncontext.h
 +++ b/um/interactioncontext.h
 @@ -5,6 +5,7 @@
@@ -10,7 +9,17 @@ index 92d97789..db06f0b0 100644
  
  #include <winapifamily.h>
  
-@@ -308,16 +309,19 @@ DECLARE_HANDLE(HINTERACTIONCONTEXT);
+@@ -282,6 +283,9 @@
+ #endif
+ 
+ DECLARE_HANDLE(HINTERACTIONCONTEXT);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HINTERACTIONCONTEXT HINTERACTIONCONTEXT;
++#endif
+ 
+ #define INTERACTION_CONTEXT_CONFIGURATION_DEFAULT                         \
+ {                                                                         \
+@@ -308,16 +312,19 @@
  
  #define INERTIA_PARAMETER_INVALID_VALUE    FLT_MAX
  
@@ -19,8 +28,9 @@ index 92d97789..db06f0b0 100644
  WINAPI
  CreateInteractionContext(
 -    _Out_writes_(1) HINTERACTIONCONTEXT *interactionContext);
+-
 +    _Win32_RAIIFree_(DestroyInteractionContext, -1, 0) _Out_writes_(1) HINTERACTIONCONTEXT *interactionContext);
- 
++
 +_Win32_SupportedOS_Windows8_
  HRESULT
  WINAPI
@@ -31,7 +41,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  RegisterOutputCallbackInteractionContext(
-@@ -334,6 +338,7 @@ RegisterOutputCallbackInteractionContext2(
+@@ -334,6 +341,7 @@
      _In_opt_ void *clientData);
  #endif
  
@@ -39,7 +49,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  SetInteractionConfigurationInteractionContext(
-@@ -341,6 +346,7 @@ SetInteractionConfigurationInteractionContext(
+@@ -341,6 +349,7 @@
      _In_ UINT32 configurationCount,
      _In_reads_(configurationCount) const INTERACTION_CONTEXT_CONFIGURATION *configuration);
  
@@ -47,7 +57,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  GetInteractionConfigurationInteractionContext(
-@@ -348,6 +354,7 @@ GetInteractionConfigurationInteractionContext(
+@@ -348,6 +357,7 @@
      _In_ UINT32 configurationCount,
      _Inout_updates_(configurationCount) INTERACTION_CONTEXT_CONFIGURATION *configuration);
  
@@ -55,7 +65,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  SetPropertyInteractionContext(
-@@ -355,6 +362,7 @@ SetPropertyInteractionContext(
+@@ -355,6 +365,7 @@
      _In_ INTERACTION_CONTEXT_PROPERTY contextProperty,
      _In_ UINT32 value);
  
@@ -63,7 +73,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  GetPropertyInteractionContext(
-@@ -362,6 +370,7 @@ GetPropertyInteractionContext(
+@@ -362,6 +373,7 @@
      _In_ INTERACTION_CONTEXT_PROPERTY contextProperty,
      _Out_writes_(1) UINT32 *value);
  
@@ -71,7 +81,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  SetInertiaParameterInteractionContext(
-@@ -369,6 +378,7 @@ SetInertiaParameterInteractionContext(
+@@ -369,6 +381,7 @@
      _In_ INERTIA_PARAMETER inertiaParameter,
      _In_ float value);
  
@@ -79,7 +89,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  GetInertiaParameterInteractionContext(
-@@ -376,6 +386,7 @@ GetInertiaParameterInteractionContext(
+@@ -376,6 +389,7 @@
      _In_ INERTIA_PARAMETER inertiaParameter,
      _Out_writes_(1) float *value);
  
@@ -87,7 +97,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  SetCrossSlideParametersInteractionContext(
-@@ -383,6 +394,7 @@ SetCrossSlideParametersInteractionContext(
+@@ -383,6 +397,7 @@
      _In_ UINT32 parameterCount,
      _In_reads_(parameterCount) CROSS_SLIDE_PARAMETER *crossSlideParameters);
  
@@ -95,7 +105,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
      GetCrossSlideParameterInteractionContext(
-@@ -434,6 +446,7 @@ GetTranslationParameterInteractionContext(
+@@ -434,6 +449,7 @@
      _Out_ float *value);
  #endif
  
@@ -103,7 +113,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  SetMouseWheelParameterInteractionContext(
-@@ -441,6 +454,7 @@ SetMouseWheelParameterInteractionContext(
+@@ -441,6 +457,7 @@
      _In_ MOUSE_WHEEL_PARAMETER parameter,
      _In_ float value);
  
@@ -111,7 +121,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  GetMouseWheelParameterInteractionContext(
-@@ -448,11 +462,13 @@ GetMouseWheelParameterInteractionContext(
+@@ -448,11 +465,13 @@
      _In_ MOUSE_WHEEL_PARAMETER parameter,
      _Out_writes_(1) float *value);
  
@@ -125,7 +135,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  GetStateInteractionContext(
-@@ -460,18 +476,21 @@ GetStateInteractionContext(
+@@ -460,18 +479,21 @@
      _In_opt_ const POINTER_INFO *pointerInfo,
      _Out_writes_(1) INTERACTION_STATE *state);
  
@@ -147,7 +157,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  ProcessPointerFramesInteractionContext(
-@@ -480,6 +499,7 @@ ProcessPointerFramesInteractionContext(
+@@ -480,6 +502,7 @@
      _In_ UINT32 pointerCount,
      _In_reads_(entriesCount * pointerCount) const POINTER_INFO *pointerInfo);
  
@@ -155,7 +165,7 @@ index 92d97789..db06f0b0 100644
  HRESULT
  WINAPI
  BufferPointerPacketsInteractionContext(
-@@ -487,21 +507,25 @@ BufferPointerPacketsInteractionContext(
+@@ -487,21 +510,25 @@
      _In_ UINT32 entriesCount,
      _In_reads_(entriesCount) const POINTER_INFO *pointerInfo);
  

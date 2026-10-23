@@ -11,7 +11,7 @@ namespace ClangSharpSourceToWinmd
 {
     internal static class HeaderEnumGroupMerger
     {
-        internal static void Merge(List<string> files, string objDir, string architecture)
+        internal static void Merge(List<string> files, string objDir, string architecture, HashSet<string> sourceEnumMembers)
         {
             var fileSet = files.ToHashSet(StringComparer.OrdinalIgnoreCase);
             var roots = new Dictionary<string, SyntaxNode>(StringComparer.OrdinalIgnoreCase);
@@ -71,7 +71,7 @@ namespace ClangSharpSourceToWinmd
                 return;
 
             var legacySources = groups.Any(group => group.Any(fragment => !fragment.HeaderDefined))
-                ? ReadLegacySources(files, roots) : null;
+                ? ReadLegacySources(files, roots, sourceEnumMembers) : null;
             var removed = groups.SelectMany(group => group).Select(fragment => fragment.Declaration).ToHashSet();
             foreach (var pair in roots)
             {
@@ -222,22 +222,32 @@ namespace ClangSharpSourceToWinmd
             return mask;
         }
 
-        internal static CSharpCompilation ConvertPrimitiveConstantAliases(CSharpCompilation compilation)
+        internal static CSharpCompilation ConvertPrimitiveConstantAliases(CSharpCompilation compilation, bool writeModifiedFiles = true)
         {
             var groups = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
-            foreach (var tree in compilation.SyntaxTrees.Where(tree => IsHeaderTypesFile(tree.FilePath) ||
-                Path.GetFileName(tree.FilePath) == "header-enum-groups.modified.cs"))
+            var constants = new List<IFieldSymbol>();
+            foreach (var tree in compilation.SyntaxTrees)
             {
                 var model = compilation.GetSemanticModel(tree);
-                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
-                    if (model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol)
+                bool headerGroup = IsHeaderTypesFile(tree.FilePath) ||
+                    Path.GetFileName(tree.FilePath) == "header-enum-groups.modified.cs";
+                foreach (var node in tree.GetRoot().DescendantNodes())
+                {
+                    if (headerGroup && node is EnumDeclarationSyntax declaration &&
+                        model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol &&
+                        !symbol.GetAttributes().Any(attribute =>
+                            attribute.AttributeClass?.ToDisplayString() == "Windows.Win32.Foundation.Metadata.ScopedEnumAttribute"))
                         groups.Add(symbol);
+                    if (node is FieldDeclarationSyntax field && field.Parent is ClassDeclarationSyntax owner &&
+                        owner.Identifier.ValueText == "Apis" && field.Modifiers.Any(SyntaxKind.ConstKeyword))
+                        foreach (var variable in field.Declaration.Variables)
+                            if (model.GetDeclaredSymbol(variable) is IFieldSymbol constant)
+                                constants.Add(constant);
+                }
             }
-            if (groups.Count == 0)
-                return compilation;
 
-            var members = groups.SelectMany(group => group.GetMembers().OfType<IFieldSymbol>())
-                .Where(member => member.HasConstantValue).ToLookup(member => member.Name, StringComparer.Ordinal);
+            var members = constants.Concat(groups.SelectMany(type => type.GetMembers().OfType<IFieldSymbol>())
+                .Where(member => member.HasConstantValue)).ToLookup(member => member.Name, StringComparer.Ordinal);
             var converted = compilation;
             foreach (var tree in compilation.SyntaxTrees)
             {
@@ -251,58 +261,90 @@ namespace ClangSharpSourceToWinmd
                 var replacements = new Dictionary<ExpressionSyntax, ExpressionSyntax>();
                 foreach (var alias in aliases)
                 {
-                    if (model.GetDeclaredSymbol(alias) is not IFieldSymbol field ||
-                        field.Type.SpecialType is not (SpecialType.System_SByte or SpecialType.System_Byte or
-                            SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char or
-                            SpecialType.System_Int32 or SpecialType.System_UInt32 or
-                            SpecialType.System_Int64 or SpecialType.System_UInt64))
+                    if (model.GetDeclaredSymbol(alias) is not IFieldSymbol field)
                         continue;
                     var value = alias.Initializer.Value;
-                    var expression = value;
-                    if (model.GetTypeInfo(value).Type is not INamedTypeSymbol source || !groups.Contains(source) ||
-                        !model.GetConstantValue(value).HasValue)
+                    bool integral = field.Type.SpecialType is SpecialType.System_SByte or SpecialType.System_Byte or
+                        SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char or
+                        SpecialType.System_Int32 or SpecialType.System_UInt32 or
+                        SpecialType.System_Int64 or SpecialType.System_UInt64;
+                    var operands = new Dictionary<ExpressionSyntax, ExpressionSyntax>();
+                    bool enumOperand = false;
+                    foreach (var operand in value.DescendantNodesAndSelf().OfType<ExpressionSyntax>()
+                        .Where(node => node is IdentifierNameSyntax or MemberAccessExpressionSyntax))
                     {
-                        while (expression is ParenthesizedExpressionSyntax parenthesized)
-                            expression = parenthesized.Expression;
-                        if (expression is not IdentifierNameSyntax identifier)
+                        if (operand is IdentifierNameSyntax name &&
+                            (name.Parent is MemberAccessExpressionSyntax or QualifiedNameSyntax or AliasQualifiedNameSyntax or
+                                TypeArgumentListSyntax or ArrayTypeSyntax or PointerTypeSyntax or NullableTypeSyntax or
+                                TypeOfExpressionSyntax or SizeOfExpressionSyntax ||
+                             name.Parent is CastExpressionSyntax cast && cast.Type == name))
                             continue;
-                        var info = model.GetSymbolInfo(identifier);
-                        var matches = members[identifier.Identifier.ValueText].ToArray();
-                        if (matches.Length != 1)
+                        var info = model.GetSymbolInfo(operand);
+                        var member = info.Symbol as IFieldSymbol;
+                        if (member == null)
+                        {
+                            if (operand is not IdentifierNameSyntax identifier)
+                                continue;
+                            var matches = members[identifier.Identifier.ValueText].ToArray();
+                            if (matches.Length != 1)
+                                continue;
+                            member = matches[0];
+                            var namedType = info.Symbol as INamedTypeSymbol;
+                            if (namedType == null && info.CandidateReason == CandidateReason.NotAValue &&
+                                info.CandidateSymbols.Length == 1)
+                                namedType = info.CandidateSymbols[0] as INamedTypeSymbol;
+                            bool groupNameInValueContext = groups.Contains(member.ContainingType) &&
+                                namedType?.TypeKind == TypeKind.Enum &&
+                                SymbolEqualityComparer.Default.Equals(namedType.ContainingNamespace, member.ContainingNamespace);
+                            if ((info.Symbol != null || info.CandidateSymbols.Length != 0) && !groupNameInValueContext)
+                                continue;
+                        }
+                        ExpressionSyntax replacement = SyntaxFactory.ParseExpression(QualifiedFieldName(member));
+                        if (member.ContainingType.TypeKind == TypeKind.Enum)
+                        {
+                            if (!integral || !member.HasConstantValue || !groups.Contains(member.ContainingType))
+                                continue;
+                            // Header-defined logical groups preserve native scalar arithmetic.
+                            var storage = SyntaxFactory.ParseTypeName(member.ContainingType.EnumUnderlyingType
+                                .ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+                            replacement = SyntaxFactory.ParenthesizedExpression(SyntaxFactory.CastExpression(storage, replacement));
+                            enumOperand = true;
+                        }
+                        else if (info.Symbol != null)
                             continue;
-
-                        // The cleaner removed the loose copy of this uniquely owned group member.
-                        var member = matches[0];
-                        var namedType = info.Symbol as INamedTypeSymbol;
-                        if (namedType == null && info.CandidateReason == CandidateReason.NotAValue && info.CandidateSymbols.Length == 1)
-                            namedType = info.CandidateSymbols[0] as INamedTypeSymbol;
-                        bool enumNameInValueContext = namedType?.TypeKind == TypeKind.Enum &&
-                            SymbolEqualityComparer.Default.Equals(namedType.ContainingNamespace, member.ContainingNamespace);
-                        if ((info.Symbol != null || info.CandidateSymbols.Length != 0) && !enumNameInValueContext)
-                            continue;
-                        string name = SyntaxFacts.GetKeywordKind(member.Name) == SyntaxKind.None ? member.Name : "@" + member.Name;
-                        expression = value.ReplaceNode(identifier, SyntaxFactory.ParseExpression(
-                            member.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + "." + name)
-                            .WithTriviaFrom(identifier));
+                        operands.Add(operand, replacement.WithTriviaFrom(operand));
                     }
-                    var type = ((VariableDeclarationSyntax)alias.Parent).Type.WithoutTrivia();
-                    // Metadata-only groups must not change scalar types or hide constant overflow.
-                    replacements.Add(value, SyntaxFactory.CheckedExpression(SyntaxKind.CheckedExpression,
-                        SyntaxFactory.CastExpression(type, SyntaxFactory.ParenthesizedExpression(expression.WithoutTrivia())))
-                        .WithTriviaFrom(value));
+                    if (operands.Count == 0)
+                        continue;
+                    var expression = value.ReplaceNodes(operands.Keys, (original, _) => operands[original]);
+                    if (enumOperand)
+                    {
+                        var type = ((VariableDeclarationSyntax)alias.Parent).Type.WithoutTrivia();
+                        // Lowering must not change scalar storage or hide constant overflow.
+                        expression = SyntaxFactory.CheckedExpression(SyntaxKind.CheckedExpression,
+                            SyntaxFactory.CastExpression(type, SyntaxFactory.ParenthesizedExpression(expression.WithoutTrivia())));
+                    }
+                    replacements.Add(value, expression.WithTriviaFrom(value));
                 }
                 if (replacements.Count == 0)
                     continue;
 
                 var rewritten = tree.WithRootAndOptions(root.ReplaceNodes(replacements.Keys,
                     (original, _) => replacements[original]), tree.Options);
-                File.WriteAllText(tree.FilePath, rewritten.GetText().ToString());
+                if (writeModifiedFiles)
+                    File.WriteAllText(tree.FilePath, rewritten.GetText().ToString());
                 converted = converted.ReplaceSyntaxTree(tree, rewritten);
             }
             return converted;
         }
 
-        private static Architecture GetArchitectures(string file, HashSet<string> files)
+        private static string QualifiedFieldName(IFieldSymbol field)
+        {
+            string name = SyntaxFacts.GetKeywordKind(field.Name) == SyntaxKind.None ? field.Name : "@" + field.Name;
+            return field.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + "." + name;
+        }
+
+        internal static Architecture GetArchitectures(string file, HashSet<string> files)
         {
             var architecture = ClangSharpSourceCompilation.GetArchitectureForFileName(file);
             if (architecture == Architecture.None)
@@ -331,14 +373,17 @@ namespace ClangSharpSourceToWinmd
             => string.Join(".", declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
                 .Reverse().Select(parent => parent.Name.ToString()));
 
-        private static Dictionary<string, SyntaxTree> ReadLegacySources(List<string> files, Dictionary<string, SyntaxNode> roots)
+        private static Dictionary<string, SyntaxTree> ReadLegacySources(List<string> files, Dictionary<string, SyntaxNode> roots,
+            HashSet<string> sourceEnumMembers)
         {
             var sources = files.ToDictionary(file => file,
                 file => roots.TryGetValue(file, out var root) ? root.SyntaxTree :
                     CSharpSyntaxTree.ParseText(File.ReadAllText(file), path: file),
                 StringComparer.OrdinalIgnoreCase);
             var enumMembers = sources.Values.SelectMany(tree => tree.GetRoot().DescendantNodes()
-                .OfType<EnumMemberDeclarationSyntax>()).Select(member => member.Identifier.ValueText).ToHashSet(StringComparer.Ordinal);
+                .OfType<EnumMemberDeclarationSyntax>()).Select(member =>
+                    MetadataSyntaxTreeCleaner.GetEnumMemberIdentity(member, member.Identifier.ValueText)).ToHashSet(StringComparer.Ordinal);
+            enumMembers.UnionWith(sourceEnumMembers);
             foreach (string file in files)
             {
                 var tree = sources[file];

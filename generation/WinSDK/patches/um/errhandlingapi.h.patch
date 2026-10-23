@@ -1,3 +1,5 @@
+diff --git a/um/errhandlingapi.h b/um/errhandlingapi.h
+index 073a04f..43f89bc 100644
 --- a/um/errhandlingapi.h
 +++ b/um/errhandlingapi.h
 @@ -12,6 +12,7 @@
@@ -8,7 +10,7 @@
  
  #include <apiset.h>
  #include <apisetcconv.h>
-@@ -38,6 +39,7 @@
+@@ -38,6 +39,7 @@ typedef PTOP_LEVEL_EXCEPTION_FILTER LPTOP_LEVEL_EXCEPTION_FILTER;
  // Prototypes
  //
  
@@ -16,7 +18,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -54,6 +56,7 @@
+@@ -54,6 +56,7 @@ RaiseException(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -24,7 +26,7 @@
  __callback
  WINBASEAPI
  LONG
-@@ -68,6 +71,7 @@
+@@ -68,6 +71,7 @@ UnhandledExceptionFilter(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -32,15 +34,15 @@
  WINBASEAPI
  LPTOP_LEVEL_EXCEPTION_FILTER
  WINAPI
-@@ -77,6 +81,7 @@
+@@ -77,6 +81,7 @@ SetUnhandledExceptionFilter(
  
  #ifndef _M_CEE_PURE
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_AssociatedEnum_(WIN32_ERROR) _Win32_SupportedOS_WindowsXP_
  WINBASEAPI
  _Check_return_
  _Post_equals_last_error_
-@@ -88,6 +93,8 @@
+@@ -88,11 +93,13 @@ GetLastError(
  
  #endif
  
@@ -49,7 +51,13 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -103,6 +110,7 @@
+ SetLastError(
+-    _In_ DWORD dwErrCode
++    _Win32_AssociatedEnum_(WIN32_ERROR) _In_ DWORD dwErrCode
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -103,6 +110,7 @@ SetLastError(
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -57,7 +65,7 @@
  WINBASEAPI
  UINT
  WINAPI
-@@ -112,11 +120,12 @@
+@@ -112,11 +120,12 @@ GetErrorMode(
  
  #endif // (_WIN32_WINNT >= 0x0600)
  
@@ -71,7 +79,7 @@
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-@@ -127,6 +136,7 @@
+@@ -127,6 +136,7 @@ SetErrorMode(
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -79,7 +87,7 @@
  WINBASEAPI
  _Ret_maybenull_
  PVOID
-@@ -136,6 +146,7 @@
+@@ -136,6 +146,7 @@ AddVectoredExceptionHandler(
      _In_ PVECTORED_EXCEPTION_HANDLER Handler
      );
  
@@ -87,7 +95,7 @@
  WINBASEAPI
  ULONG
  WINAPI
-@@ -143,6 +154,7 @@
+@@ -143,6 +154,7 @@ RemoveVectoredExceptionHandler(
      _In_ PVOID Handle
      );
  
@@ -95,7 +103,7 @@
  WINBASEAPI
  _Ret_maybenull_
  PVOID
-@@ -152,6 +164,7 @@
+@@ -152,6 +164,7 @@ AddVectoredContinueHandler(
      _In_ PVECTORED_EXCEPTION_HANDLER Handler
      );
  
@@ -103,7 +111,7 @@
  WINBASEAPI
  ULONG
  WINAPI
-@@ -187,6 +200,7 @@
+@@ -187,6 +200,7 @@ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -111,7 +119,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -202,6 +216,7 @@
+@@ -202,6 +216,7 @@ RaiseFailFastException(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -119,7 +127,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -210,6 +225,7 @@
+@@ -210,6 +225,7 @@ FatalAppExitA(
      _In_ LPCSTR lpMessageText
      );
  
@@ -127,7 +135,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -230,6 +246,7 @@
+@@ -230,6 +246,7 @@ FatalAppExitW(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -135,7 +143,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -237,12 +254,14 @@
+@@ -237,12 +254,14 @@ GetThreadErrorMode(
      VOID
      );
  

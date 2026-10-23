@@ -1,0 +1,12 @@
+diff --git a/um/d3dshadercacheregistration.idl b/um/d3dshadercacheregistration.idl
+index cae31e4f..f1f91359 100644
+--- a/um/d3dshadercacheregistration.idl
++++ b/um/d3dshadercacheregistration.idl
+@@ -127,6 +127,7 @@
+ };
+ 
+ typedef struct SC_HANDLE__ *SC_HANDLE;
++cpp_quote("/* Win32Metadata: type ::SC_HANDLE => NativeTypedef */")
+ [uuid(bbe30de1-6318-4526-ae17-776693191bb4), object, local, pointer_default(unique)]
+ interface ID3DShaderCacheInstaller : IUnknown
+ {

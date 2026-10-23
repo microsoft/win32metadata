@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
@@ -12,6 +13,146 @@ namespace ClangSharpSourceToWinmdTests
     [TestClass]
     public class HeaderTypedefCompositionTests
     {
+        [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
+        public void RepeatedNativeRecordsComposeAfterSharedNamespaceAssignment(string architecture)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            const string record = @"using System.Runtime.InteropServices;
+namespace First {
+    [StructLayout(LayoutKind.Sequential, Pack = 1)]
+    public partial struct NATIVE_RECORD { public int Value; public short Other; }
+}";
+            fixture.Write("Bindings.cs", record);
+            fixture.Write("Other.cs", record.Replace("namespace First", "namespace Second"));
+            var compilation = fixture.Compile(new() { ["NATIVE_RECORD"] = "Canonical" });
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var type = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.NATIVE_RECORD");
+            Assert.IsNotNull(type);
+            Assert.AreEqual(1, type!.DeclaringSyntaxReferences.Length);
+            Assert.AreEqual(2, type.GetMembers().OfType<IFieldSymbol>().Count(field => !field.IsImplicitlyDeclared));
+            string output = Path.Combine(fixture.DirectoryPath, "Records.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var physical = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(definition => reader.GetString(definition.Name) == "NATIVE_RECORD");
+            Assert.AreEqual("Canonical", reader.GetString(physical.Namespace));
+            Assert.AreEqual(1, (int)physical.GetLayout().PackingSize);
+            var fields = physical.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.AreEqual(2, fields.Length);
+            CollectionAssert.AreEqual(new byte[] { 0x06, 0x08 }, reader.GetBlobBytes(fields[0].Signature));
+            CollectionAssert.AreEqual(new byte[] { 0x06, 0x06 }, reader.GetBlobBytes(fields[1].Signature));
+        }
+
+        [TestMethod]
+        public void IdenticalRecordTextWithDifferentTypeBindingsRemainsACompilerError()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            const string source = @"using STORAGE = System.Int32;
+namespace Test { public partial struct NATIVE_RECORD { public STORAGE Value; } }";
+            fixture.Write("Bindings.cs", source);
+            fixture.Write("Other.cs", source.Replace("System.Int32", "System.UInt32"));
+            var compilation = fixture.Compile();
+            Assert.AreEqual(2, compilation.CSharpCompilation.GetTypeByMetadataName("Test.NATIVE_RECORD")!.DeclaringSyntaxReferences.Length);
+            Assert.IsTrue(compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0102"));
+        }
+
+        [TestMethod]
+        public void IdenticalRecordTextWithDifferentAttributeArgumentsRemainsACompilerError()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write("Packing.manual.cs", @"namespace First { public static class Packing { public const int Value = 1; } }
+namespace Second { public static class Packing { public const int Value = 2; } }");
+            const string source = @"using System.Runtime.InteropServices; using PACKING = First.Packing;
+namespace Test { [StructLayout(LayoutKind.Sequential, Pack = PACKING.Value)]
+public partial struct NATIVE_RECORD { public int Value; } }";
+            fixture.Write("Bindings.cs", source);
+            fixture.Write("Other.cs", source.Replace("PACKING = First.Packing", "PACKING = Second.Packing"));
+            var compilation = fixture.Compile();
+            Assert.AreEqual(2, compilation.CSharpCompilation.GetTypeByMetadataName("Test.NATIVE_RECORD")!.DeclaringSyntaxReferences.Length);
+            Assert.IsTrue(compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0102"));
+        }
+
+        [TestMethod]
+        public void DistinctPartialRecordMembersArePreserved()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct NATIVE_RECORD { public int First; } }");
+            fixture.Write("Other.cs", "namespace Test { public partial struct NATIVE_RECORD { public short Second; } }");
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var type = compilation.CSharpCompilation.GetTypeByMetadataName("Test.NATIVE_RECORD")!;
+            Assert.AreEqual(2, type.DeclaringSyntaxReferences.Length);
+            Assert.IsNotNull(type.GetMembers("First").SingleOrDefault());
+            Assert.IsNotNull(type.GetMembers("Second").SingleOrDefault());
+        }
+
+        [TestMethod]
+        public void DuplicateRecordDefinitionsInOneInputRemainACompilerError()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            const string record = "namespace Test { public partial struct NATIVE_RECORD { public int Value; } }";
+            fixture.Write("Bindings.cs", record + record);
+            var compilation = fixture.Compile();
+            Assert.AreEqual(2, compilation.CSharpCompilation.GetTypeByMetadataName("Test.NATIVE_RECORD")!.DeclaringSyntaxReferences.Length);
+            Assert.IsTrue(compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0102"));
+        }
+
+        [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
+        public void HeaderOnlyAliasesComposeAfterSharedNamespaceAssignment(string architecture)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("namespace Test", "namespace First"));
+            fixture.Write("Other.header-types.cs", HeaderAlias.Replace("namespace Test", "namespace Second"));
+            fixture.Write("Bindings.cs", @"using First; using Second; using Canonical;
+namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
+            var compilation = fixture.Compile(new() { ["HANDLE"] = "Canonical" });
+            var errors = compilation.CSharpCompilation.GetDiagnostics()
+                .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.HANDLE");
+            Assert.IsNotNull(alias);
+            Assert.AreEqual(1, alias!.DeclaringSyntaxReferences.Length);
+            Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("First.HANDLE"));
+            Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("Second.HANDLE"));
+            string output = Path.Combine(fixture.DirectoryPath, "Shared.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var physical = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Name) == "HANDLE");
+            Assert.AreEqual("Canonical", reader.GetString(physical.Namespace));
+            var field = reader.GetFieldDefinition(physical.GetFields().Single());
+            CollectionAssert.AreEqual(new byte[] { 0x06, 0x0f, 0x01 }, reader.GetBlobBytes(field.Signature));
+        }
+
         [DataTestMethod]
         [DataRow("x86")]
         [DataRow("x64")]
@@ -341,8 +482,8 @@ namespace Test { public static class Apis {
                     File.WriteAllText(Path.Combine(DirectoryPath, target, name), source);
             }
 
-            internal ClangSharpSourceCompilation Compile() => ClangSharpSourceCompilation.Create(
-                DirectoryPath, Architecture, new(), new(), Array.Empty<string>(), new(), new(), new(),
+            internal ClangSharpSourceCompilation Compile(Dictionary<string, string>? requiredNamespaces = null) => ClangSharpSourceCompilation.Create(
+                DirectoryPath, Architecture, new(), new(), Array.Empty<string>(), new(), requiredNamespaces ?? new(), new(),
                 Array.Empty<string>(), new(), new());
 
             public void Dispose() => Directory.Delete(DirectoryPath, recursive: true);

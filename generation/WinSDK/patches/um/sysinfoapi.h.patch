@@ -282,10 +282,15 @@ index f53062ca..35e32574 100644
      );
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
-@@ -514,20 +573,24 @@ GetOsSafeBootMode(
+@@ -514,20 +573,29 @@ GetOsSafeBootMode(
  #pragma region OneCore Family or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("Enum(ACPI, FIRM, RSMB)",
++    0x41435049, 0x4649524D, 0x52534D42) DWORD FIRMWARE_TABLE_PROVIDER;
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
  WINBASEAPI
@@ -309,7 +314,7 @@ index f53062ca..35e32574 100644
      _In_ DWORD FirmwareTableID,
      _Out_writes_bytes_to_opt_(BufferSize,return) PVOID pFirmwareTableBuffer,
      _In_ DWORD BufferSize
-@@ -549,6 +612,8 @@ DnsHostnameToComputerNameExW(
+@@ -549,6 +617,8 @@ DnsHostnameToComputerNameExW(
      _Inout_ LPDWORD nSize
      );
  
@@ -318,7 +323,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -572,6 +637,8 @@ SetComputerNameEx2W(
+@@ -572,6 +642,8 @@ SetComputerNameEx2W(
  #define SetComputerNameEx2 SetComputerNameEx2W
  #endif
  
@@ -327,7 +332,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -581,6 +648,8 @@ SetSystemTimeAdjustment(
+@@ -581,6 +653,8 @@ SetSystemTimeAdjustment(
      _In_ BOOL bTimeAdjustmentDisabled
      );
  
@@ -336,7 +341,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -590,6 +659,8 @@ SetSystemTimeAdjustmentPrecise(
+@@ -590,6 +664,8 @@ SetSystemTimeAdjustmentPrecise(
      _In_ BOOL bTimeAdjustmentDisabled
      );
  
@@ -345,7 +350,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -602,6 +673,8 @@ InstallELAMCertificateInfo(
+@@ -602,6 +678,8 @@ InstallELAMCertificateInfo(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
  
@@ -354,7 +359,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -635,6 +708,7 @@ GetOsManufacturingMode(
+@@ -635,6 +713,7 @@ GetOsManufacturingMode(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
  
@@ -362,7 +367,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  HRESULT
  WINAPI
-@@ -650,6 +724,8 @@ GetIntegratedDisplaySize(
+@@ -650,6 +729,8 @@ GetIntegratedDisplaySize(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -371,7 +376,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -657,6 +733,8 @@ SetComputerNameA(
+@@ -657,6 +738,8 @@ SetComputerNameA(
      _In_ LPCSTR lpComputerName
      );
  
@@ -380,7 +385,7 @@ index f53062ca..35e32574 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -670,6 +748,8 @@ SetComputerNameW(
+@@ -670,6 +753,8 @@ SetComputerNameW(
  #define SetComputerName  SetComputerNameA
  #endif // !UNICODE
  

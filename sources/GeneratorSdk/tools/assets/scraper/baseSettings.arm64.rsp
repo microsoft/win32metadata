@@ -1,4 +1,4 @@
---additional
+--additional=--target=aarch64-pc-windows-msvc
 -D_ARM64_=1
 --remap
 _KNONVOLATILE_CONTEXT_POINTERS_ARM64=KNONVOLATILE_CONTEXT_POINTERS

@@ -42,6 +42,45 @@ bindings that cannot produce constant fields fail explicitly, as do exclusions o
 remappings that prevent the requested distinct fields. Readonly/pointer
 macro bindings are not published as already-written constants.
 
+Successful annotation-enabled scrapes always publish a `.header-types.cs`
+companion (or `header-types.cs` in multi-file mode), including a declaration-free
+companion when that profile has no additional facts. Its first line is
+`// Win32Metadata.HeaderTypes.Success.v1`. Copy these actual companions along with
+the ordinary generated sources. Before an annotation-enabled parse, the scraper
+invalidates its previous companion; a failed parse is not a successful empty
+profile. Removing the last additional fact replaces the companion with the
+successful empty form instead of leaving stale declarations.
+
+For combined x86/x64/Arm64 emission, a marked architecture-specific source family
+must contain all three successful companions. Missing or mixed-contract profiles
+fail with `CSSW004`; the emitter never manufactures their contents. A deliberately
+x86-only partition remains the existing all-architecture common-input convention.
+Build orchestration must still propagate failed scrape jobs rather than present
+their absence as common scheduling.
+
+The emitter evaluates `Apis` constants in their original managed profile before
+text deduplication or architecture composition, preserving declared storage and
+constant value bits. Unresolved or invalid dependencies, unsupported constant
+storage, or a common constant whose storage/value differs between profiles fail
+with `CSSW003`, not an arbitrary profile's value. Architecture-varying globals
+retain their native name and physical `SupportedArchitecture` masks. Temporary
+field identifiers are collision-allocated and restored only from explicit
+rename provenance; genuine names ending in `____1` or `____2` remain unchanged,
+including their `AssociatedConstant` links.
+
+Before binding constants, each original profile applies the existing checked
+primitive-alias conversion against its actual logical-group providers. Retiring
+a loose `Apis` constant that is now an enum member does not invalidate its
+surviving primitive aliases. This lowering is profile-local and does not change
+the original input bytes or bypass missing, ambiguous, or overflowing providers.
+
+Enum-typed constants remain supported when their enum's underlying storage is
+invariant. If the same enum identity has different underlying storage in the
+available profiles, enum-typed constants fail with `CSSW003` before composition,
+even when a particular profile does not define the constant. This avoids
+silently binding a surviving field to an arbitrary profile's enum storage.
+Unrelated varying enum definitions do not cause primitive constants to fail.
+
 #### Original-IDL structured comments
 
 The same `parse-win32-annotations` option reads owned comments emitted by MIDL.
@@ -336,6 +375,31 @@ is missing, normal ownership is unresolved, or an actual owner is not enabled.
 
 Header-generated `[NativeTypedef]` wrappers can compose with retained AutoTypes
 wrappers of the same fully qualified identity and unmanaged `Value` storage.
+An existing native scalar/data-pointer `typedef` can request identity alone with
+valueless `_Win32_NativeTypedef_` (`Win32Metadata.NativeTypedef`). Original-IDL
+`cpp_quote("/* Win32Metadata: type ::Alias => NativeTypedef */")` uses the same
+reader path. No cleanup, invalid value, compatible type, or OS version is implied.
+The explicit marker preserves written alias binding, deduplicates native
+redeclarations, and emits one wrapper/`Value`/attribute only when that native
+identity is traversed and not excluded. Unannotated aliases are not promoted.
+Storage preserves actual native width, signedness, and data-pointer depth;
+pointer-sized integral remaps must match the target ABI. Each pointer level must
+have the target's ordinary pointer width. Non-default widths (for example x64
+`__ptr32` or x86 `__ptr64`), including beneath ordinary outer pointers and typedefs,
+fail with WMA001 before output rather than losing the qualifier or becoming an
+integer. Complete/incomplete record **pointers** are supported, not record **values**, native enum values,
+logical groups, callbacks, arrays, references, or C++ `using` aliases. Unsupported
+native scalar representations fail with WMA001 rather than producing recursive
+`Value` storage or guessing a pointer from an old `IntPtr` field.
+When a source-proven incomplete backing record is explicitly excluded, native
+typedef storage uses `void*`, preserving every outer pointer level and the
+typedef's strong identity. Otherwise the existing source-backed pointee projection
+is retained. Complete record pointees retain their typed pointers and original
+definitions; do not exclude a complete backing record needed by a header-owned
+wrapper. Ordinary bindings also use opaque pointer storage when an elaborated
+native type embeds an incomplete declaration in a different lexical record scope.
+Neither path erases a complete record or substitutes `void` for an unknown managed
+type.
 Wrapper storage honors ClangSharp's effective pointer-sized typedef remaps,
 including defaults and pointer aliases; logical enums keep fixed integral storage.
 The emitter keeps one wrapper and unions compatible attributes, including a
@@ -352,6 +416,88 @@ true, then verify actual normal generated declarations as well as native control
 Preparation accepts original CRLF line endings, including first-line insertions,
 while keeping strict rejection of trailing spaces/tabs and space-before-tab
 indentation errors.
+
+### Generation performance guards
+
+`tests\Win32MetadataScraperTests\GenerationPerformanceTests.cs` runs with the
+ordinary scraper suite, including `scripts\DoTests.ps1`; no environment variable,
+installed Windows SDK, or opt-in benchmark runner is required. The fixtures use
+the repository's copied headers and pinned native compiler packages.
+
+Each case validates a warm-up and five measured executions, then **fails if the
+median wall-clock time exceeds its fixed budget**. A single scheduling stall
+does not fail the median. The xUnit collection disables parallel execution with
+other collections in the same test process. Scrape timings include starting the
+real scraper process, native parsing/binding, and writing outputs; warming up
+does not remove per-process startup costs. Emitter timing includes actual
+compilation and physical WinMD generation. Fixture setup and output assertions
+are outside the timed region, but assertions run after **every** execution,
+including warm-up. Scrape outputs are deleted before each execution so stale
+files cannot satisfy the checks.
+
+Initial Release calibration on 2026-10-23 used .NET 10.0.13 on Windows x64 with
+32 logical processors. Budgets are rounded to approximately 2–3 times the
+observed medians for CI headroom, not intended as portable benchmark scores:
+
+| Workload and required output | Initial median | Failing median above |
+| --- | ---: | ---: |
+| Two UTF-8 includes, 2,000 declarations: all parameter directions and the single requested `SetLastError` | 2,982 ms | 6,000 ms |
+| 8,192 unrelated macros, no associated constant: one method, no generated fields | 997 ms | 3,000 ms |
+| 8,192 unrelated macros, one associated constant: one method, one enum/association, exactly one companion field with value 32 | 1,084 ms | 3,000 ms |
+| 1,028 native probes across batches of 512 + 512 + 4: exactly 1,025 typed integer values and three explicit rejections | 1,203 ms | 3,000 ms |
+| Three profiles, each with 256 header groups and 768 globals: 256 physical groups and 1,024 physical globals | 1,788 ms | 5,000 ms |
+| One 6,418-constant file, qualified in all three profiles: exactly 6,418 physical `uint` globals without architecture masks | 1,370 ms | 4,000 ms |
+
+Native extraction checks every value's storage, literal and provenance,
+including unsigned wraparound, signed 64-bit arithmetic and native `sizeof`.
+Emission checks every group's members/association and every constant's
+signature, value, alias result and architecture mask (x86 = 1, x64/Arm64 = 6).
+Dropping declarations, constants, profiles or unsupported-result reporting
+therefore cannot make a timing guard pass.
+
+The large-file workload matches the declaration count in a largest SDK native
+constant file and catches repeated per-initializer semantic-diagnostic work
+that smaller files do not expose. Its five-sample median was **20,168 ms before
+per-tree/per-profile error-span caching**, versus **1,370 ms after** (1,569 ms on
+repeat). The unfixed implementation failed even the initial, looser 6,000 ms
+guard; the final 4,000 ms budget retains approximately threefold headroom. The corresponding
+`HeaderConstantDiagnosticTests` verify that initializer errors still produce
+`CSSW003`, including zero-width boundary errors, while unrelated diagnostics
+and warnings do not become qualification errors.
+
+Run just these guards from the repository root:
+
+```powershell
+dotnet test tests\Win32MetadataScraperTests -c Release --filter "Category=Performance" `
+  --logger "console;verbosity=detailed" --logger "trx;LogFileName=generation-performance.trx" `
+  --results-directory artifacts\generation-performance-results
+```
+
+Each test attaches its warm-up, all five samples, median and budget to the test
+output/TRX, with a `PERF` summary for log searches. The default minimal console
+logger hides output from passing tests; the detailed logger above displays it.
+Retain the TRX as a CI artifact to compare successful measurements over time.
+The failure thresholds apply regardless of logger settings. Reproduce a breach
+in a quiet Release run before changing a budget; investigate sustained regressions
+rather than raising thresholds to conceal unrelated build load.
+These synthetic guards complement, rather than replace, full-SDK build timing.
+
+### Architecture-aware WinMD integrity checks
+
+Native constant values or storage can differ between architectures. The emitter
+then writes multiple fields with the same physical name and separate
+`SupportedArchitecture` masks. `WinmdUtils showDuplicateConstants` accepts these
+only when the owner and exact field spelling match and the masks do not overlap.
+Missing architecture attributes mean all architectures. Overlapping definitions,
+case-only name collisions, and different owners still fail the check.
+
+`WinmdUtils showBrokenArchTypes` follows the referenced type definition for each
+required architecture. It does not inspect the x64 version of a record when
+checking its ARM64 consumer. Invalid method parameters, method return types, and
+delegate return types cause a failing exit code. Recursive delegate signatures
+are checked without repeatedly walking the same definition and architecture.
+Physical WinMD fixtures cover both valid alternatives and unavailable types in
+`HeaderConstantIntegrityTests.cs`.
 
 ### Remapping
 

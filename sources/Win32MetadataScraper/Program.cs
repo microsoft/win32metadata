@@ -4,8 +4,8 @@
 // translation unit, walks the AST to discover typedef-tag remappings, merges them
 // with the configured --remap entries, then runs PInvokeGenerator.GenerateBindings
 // with the full merged remap set. Annotation facts use the original detailed TU;
-// ordinary bindings use a declaration-only TU. Supported macro-binding mode is
-// used only for requested constants or explicit general macro generation.
+// ordinary bindings use a declaration-only TU. Integer macros use native typed
+// probes; general macro binding remains opt-in.
 //
 // Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...
 
@@ -16,11 +16,13 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Text.Json;
 using ClangSharp;
 using ClangSharp.Interop;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MetadataUtils;
 using Win32MetadataScraper;
 using static ClangSharp.Interop.CXDiagnosticSeverity;
 using static ClangSharp.Interop.CXErrorCode;
@@ -141,6 +143,8 @@ class Program
 
             var clangArgs = BuildClangArgs(settings);
             bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
+            bool evaluateNativeConstants = settings.GetValueOrDefault("--config")?.Contains("native-constant-values") == true;
+            bool constantsOnly = settings.GetValueOrDefault("--config")?.Contains("native-constants-only") == true;
             var derivedSettings = LoadAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
             {
@@ -159,6 +163,16 @@ class Program
                 }).ToArray();
             }
             var configOptions = BuildOptionsFlags(settings);
+            string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
+                ? Path.Combine(outputFile, "header-types.cs")
+                : Path.ChangeExtension(outputFile, ".header-types.cs");
+            string nativeConstantsPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
+                ? Path.Combine(outputFile, "Bindings.native-constants.json")
+                : Path.ChangeExtension(outputFile, ".native-constants.json");
+            if (declarationMap == null && File.Exists(nativeConstantsPath))
+                File.Delete(nativeConstantsPath);
+            if (parseHeaderAnnotations && declarationMap == null && File.Exists(additionalTypesPath))
+                File.Delete(additionalTypesPath);
             bool generateAllMacros = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
@@ -170,19 +184,35 @@ class Program
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
-            if (parseHeaderAnnotations || generateAllMacros)
+            if (parseHeaderAnnotations || generateAllMacros || evaluateNativeConstants || constantsOnly)
                 translationFlags |= CXTranslationUnit_DetailedPreprocessingRecord;
 
             // Discovery and annotations need preprocessing records, but ordinary
             // binding generation must not evaluate unrelated SDK macros.
             using var index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
-            using var translationUnit = ParseTranslationUnit(index, sourceFile, clangArgs, translationFlags);
+            var reportedNativeDiagnostics = new HashSet<string>(StringComparer.Ordinal);
+            using var translationUnit = ParseTranslationUnit(index, sourceFile, clangArgs, translationFlags,
+                reportedNativeDiagnostics);
             if (translationUnit == null)
                 return -1;
 
             if (declarationMap != null)
             {
                 DeclarationSourceMap.Write(translationUnit.Handle.Cursor, sourceFile, clangArgs, declarationMap, declarationMapSymbols);
+                return 0;
+            }
+            if (settings.TryGetValue("--traverse", out var nativeTraversalFiles))
+                settings["--traverse"] = RemapDiscovery.ResolveTraversalFiles(
+                    translationUnit.TranslationUnitDecl, nativeTraversalFiles).ToList();
+            if (constantsOnly)
+            {
+                var constantConfig = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
+                    configuredRemaps, configuredExcludes.ToList());
+                var values = NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs,
+                    constantConfig, reportedNativeDiagnostics);
+                Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(nativeConstantsPath)));
+                File.WriteAllText(nativeConstantsPath, JsonSerializer.Serialize(values), new UTF8Encoding(false));
+                Console.WriteLine($"Native constants: {values.Constants.Count} integers; {values.Issues.Count} other definitions. Details: {nativeConstantsPath}");
                 return 0;
             }
 
@@ -210,6 +240,8 @@ class Program
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);
             foreach (var kv in fnPtrResult.FnPtrRemaps)
                 mergedRemaps[kv.Key] = kv.Value;
+            foreach (var kv in RemapDiscovery.FindEmbeddedIncompleteRecordPointerRemaps(translationUnit.TranslationUnitDecl))
+                mergedRemaps[kv.Key] = kv.Value;
             foreach (var kv in ParseKeyValuePairs(derivedSettings.GetValueOrDefault("--remap")))
                 mergedRemaps[kv.Key] = kv.Value;
             foreach (var kv in configuredRemaps)
@@ -218,6 +250,9 @@ class Program
             var allExcludes = (settings.GetValueOrDefault("--exclude") ?? new List<string>())
                 .Concat(derivedSettings.GetValueOrDefault("--exclude") ?? new List<string>())
                 .Concat(fnPtrResult.FnPtrExcludes).Distinct(StringComparer.Ordinal).ToList();
+            allExcludes.AddRange(RemapDiscovery.FindInaccessibleCopyMembers(
+                translationUnit.TranslationUnitDecl,
+                configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody)));
 
             var annotations = parseHeaderAnnotations
                 ? new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
@@ -228,6 +263,9 @@ class Program
             if (annotations != null)
                 allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
+            var nativeConstants = evaluateNativeConstants
+                ? NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config, reportedNativeDiagnostics)
+                : null;
 
             var capturedStreams = new Dictionary<string, MemoryStream>();
             Func<string, Stream> streamFactory = (path) =>
@@ -243,7 +281,7 @@ class Program
                 ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
                 : translationFlags;
             using var declarationUnit = separateDeclarations
-                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags)
+                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags, reportedNativeDiagnostics)
                 : null;
             if (separateDeclarations && declarationUnit == null)
                 return -1;
@@ -269,42 +307,91 @@ class Program
                         generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
                 }
                 string additionalTypes = annotations?.GetAdditionalTypes();
+                var nativeRecords = new OpaqueRecordProjection(translationUnit,
+                    generatedFiles.Values.Append(additionalTypes), config.RemappedNames, allExcludes);
+                var recordProjections = new List<(OpaqueRecordProjection Projection, Dictionary<string, string> Remaps)>();
+                if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords) &&
+                    nativeRecords.IncludedNames.Count != 0)
+                    recordProjections.Add((nativeRecords, mergedRemaps));
+                foreach (var alias in nativeRecords.RecordAliases)
+                {
+                    var aliasRemaps = new Dictionary<string, string>(mergedRemaps)
+                    {
+                        [alias.RecordName] = alias.ManagedName,
+                        [alias.Name] = alias.ManagedName
+                    };
+                    recordProjections.Add((nativeRecords.ForAlias(alias), aliasRemaps));
+                }
+                foreach (var projection in recordProjections)
+                {
+                    var opaqueRecords = projection.Projection;
+                    if (opaqueRecords.IncludedNames.Count != 0)
+                    {
+                        var opaqueOptions = (configOptions
+                            & ~PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords
+                            & ~PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
+                            | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
+                        var opaqueConfig = CreateConfig(settings, ns, outputFile, headerFile,
+                            opaqueOptions, projection.Remaps, allExcludes, opaqueRecords.IncludedNames,
+                            opaqueRecords.TraversalFiles.Concat(config.TraversalNames).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
+                        var opaqueStreams = new Dictionary<string, MemoryStream>();
+                        using var opaqueGenerator = new PInvokeGenerator(opaqueConfig, path =>
+                        {
+                            var stream = new MemoryStream();
+                            opaqueStreams[path] = stream;
+                            return stream;
+                        });
+                        opaqueGenerator.GenerateBindings(declarationUnit ?? translationUnit, sourceFile, clangArgs, bindingFlags);
+                        var opaqueDiagnostics = opaqueGenerator.Diagnostics.ToArray();
+                        opaqueGenerator.Close();
+                        bindingDiagnostics = bindingDiagnostics.Concat(opaqueDiagnostics).ToArray();
+                        if (opaqueDiagnostics.Any(diagnostic => diagnostic.Level == DiagnosticLevel.Error))
+                        {
+                            foreach (var diagnostic in bindingDiagnostics)
+                                Console.WriteLine($"    {diagnostic}");
+                            return -1;
+                        }
+                        var opaqueSources = opaqueRecords.SelectRequiredBindings(opaqueStreams.ToDictionary(
+                            pair => pair.Key, pair => NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key)));
+                        foreach (var pair in opaqueSources)
+                        {
+                            string source = annotations != null ? annotations.Rewrite(pair.Value) : pair.Value;
+                            if (!configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
+                                source = new SourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(source))
+                                    .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+                            generatedFiles[pair.Key] = generatedFiles.TryGetValue(pair.Key, out var existing)
+                                ? MergeGeneratedSources(existing, source) : source;
+                        }
+                    }
+                }
                 var associatedConstantSources = new List<string>();
                 if (annotations != null && !generateAllMacros)
                 {
                     var macros = annotations.GetAssociatedConstantMacros();
                     if (macros.Count != 0)
                     {
-                        var macroOptions = (configOptions | PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
-                            & ~PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute
-                            & ~PInvokeGeneratorConfigurationOptions.GenerateFileScopedNamespaces;
-                        var macroConfig = CreateConfig(settings, ns, outputFile, headerFile,
-                            macroOptions, mergedRemaps, allExcludes,
-                            macros.Select(macro => macro.Name).ToArray(),
-                            macros.Select(macro =>
-                            {
-                                macro.Location.GetFileLocation(out var file, out _, out _, out _);
-                                return file.ToString();
-                            }).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
-                        var macroStreams = new Dictionary<string, MemoryStream>();
-                        using var macroGenerator = new PInvokeGenerator(macroConfig, path =>
+                        string[] names = macros.Select(macro => macro.Name).ToArray();
+                        var recovered = nativeConstants?.Constants.Where(value => names.Contains(value.NativeName, StringComparer.Ordinal))
+                            .ToList() ?? new List<NativeConstantValue>();
+                        string[] missing = names.Except(recovered.Select(value => value.NativeName), StringComparer.Ordinal).ToArray();
+                        if (missing.Length != 0)
                         {
-                            var stream = new MemoryStream();
-                            macroStreams[path] = stream;
-                            return stream;
-                        });
-                        macroGenerator.GenerateBindings(translationUnit, sourceFile, clangArgs, translationFlags);
-                        var macroDiagnostics = macroGenerator.Diagnostics.ToArray();
-                        macroGenerator.Close();
-                        foreach (var diagnostic in macroDiagnostics)
-                        {
-                            Console.WriteLine($"    {diagnostic}");
-                            if (diagnostic.Level == DiagnosticLevel.Error)
-                                exitCode = -1;
+                            var selected = NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config,
+                                reportedNativeDiagnostics, missing);
+                            recovered.AddRange(selected.Constants);
+                            missing = missing.Except(selected.Constants.Select(value => value.NativeName), StringComparer.Ordinal).ToArray();
+                            if (missing.Length != 0)
+                                throw new InvalidOperationException("Associated constants have no valid native integer value: " +
+                                    string.Join("; ", missing.Select(name => name + ": " +
+                                        string.Join(", ", selected.Issues.Where(issue => issue.Name == name)
+                                            .Select(issue => issue.Reason + " " + string.Join(" ", issue.Diagnostics))))));
                         }
-                        if (exitCode < 0)
-                            return exitCode;
-                        associatedConstantSources.AddRange(macroStreams.Values.Select(stream => Encoding.UTF8.GetString(stream.ToArray())));
+                        using var stream = new MemoryStream();
+                        using (var writer = new ConstantWriter(stream, config.DefaultNamespace,
+                            "using Windows.Win32.Foundation.Metadata;", new Dictionary<string, string>(), config.DefaultClass))
+                            foreach (var value in recovered.OrderBy(value => value.Name, StringComparer.Ordinal))
+                                writer.AddNativeInteger(value);
+                        associatedConstantSources.Add(Encoding.UTF8.GetString(stream.ToArray()));
                     }
                     ValidateAssociatedConstantSources(associatedConstantSources, macros.Select(macro =>
                         mergedRemaps.GetValueOrDefault(macro.Name) ?? macro.Name).ToArray(), config.DefaultClass);
@@ -321,11 +408,9 @@ class Program
                         .NormalizeWhitespace().ToFullString() + Environment.NewLine;
                 }
                 annotations?.ValidateProjection();
-                string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
-                    ? Path.Combine(outputFile, "header-types.cs")
-                    : Path.ChangeExtension(outputFile, ".header-types.cs");
-                if (!string.IsNullOrEmpty(additionalTypes))
-                    generatedFiles[additionalTypesPath] = additionalTypes;
+                if (annotations != null)
+                    generatedFiles[additionalTypesPath] = HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine +
+                        (additionalTypes ?? string.Empty);
 
                 // Write diagnostics
                 foreach (var diag in bindingDiagnostics)
@@ -342,6 +427,11 @@ class Program
                 if (exitCode < 0)
                     return exitCode;
 
+                if (nativeConstants != null)
+                {
+                    generatedFiles[nativeConstantsPath] = JsonSerializer.Serialize(nativeConstants);
+                    Console.WriteLine($"Native constants: {nativeConstants.Constants.Count} integers; {nativeConstants.Issues.Count} other definitions. Details: {nativeConstantsPath}");
+                }
                 foreach (var file in generatedFiles)
                 {
                     string directory = Path.GetDirectoryName(file.Key);
@@ -359,7 +449,7 @@ class Program
                             File.Delete(temporaryPath);
                     }
                 }
-                if (string.IsNullOrEmpty(additionalTypes) && File.Exists(additionalTypesPath))
+                if (annotations == null && File.Exists(additionalTypesPath))
                     File.Delete(additionalTypesPath);
             }
 
@@ -418,7 +508,7 @@ class Program
     }
 
     static TranslationUnit ParseTranslationUnit(CXIndex index, string sourceFile, string[] clangArgs,
-        CXTranslationUnit_Flags flags)
+        CXTranslationUnit_Flags flags, HashSet<string> reportedDiagnostics)
     {
         var parseError = CXTranslationUnit.TryParse(index, sourceFile, clangArgs,
             ReadOnlySpan<CXUnsavedFile>.Empty, flags, out var handle);
@@ -428,13 +518,26 @@ class Program
             return null;
         }
         bool skipProcessing = false;
+        var previousDiagnostics = new HashSet<string>(reportedDiagnostics, StringComparer.Ordinal);
         if (handle.NumDiagnostics != 0)
         {
-            Console.WriteLine($"Diagnostics for '{sourceFile}':");
+            bool wroteHeading = false;
             for (uint i = 0; i < handle.NumDiagnostics; i++)
             {
                 using var diagnostic = handle.GetDiagnostic(i);
-                Console.WriteLine($"    {diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString()}");
+                string text = diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString();
+                // The declaration-only parse must still validate every diagnostic,
+                // but must not report the same native warning a second time.
+                if (!previousDiagnostics.Contains(text))
+                {
+                    if (!wroteHeading)
+                    {
+                        Console.WriteLine($"Diagnostics for '{sourceFile}':");
+                        wroteHeading = true;
+                    }
+                    Console.WriteLine($"    {text}");
+                }
+                reportedDiagnostics.Add(text);
                 skipProcessing |= diagnostic.Severity is CXDiagnostic_Error or CXDiagnostic_Fatal;
             }
         }
@@ -534,6 +637,59 @@ class Program
         foreach (var field in fields)
             if (!field.Modifiers.Any(SyntaxKind.ConstKeyword) || field.Declaration.Variables.Any(variable => variable.Initializer == null))
                 throw new InvalidOperationException("An AssociatedConstant macro must project to a constant field; readonly or pointer bindings cannot suppress the existing constant fallback.");
+    }
+
+    static string MergeGeneratedSources(string first, string second)
+    {
+        var roots = new[] { first, second }.Select(source =>
+            (CompilationUnitSyntax)new BlockNamespaceRewriter().Visit(SyntaxFactory.ParseCompilationUnit(source))).ToArray();
+        return roots[0].WithUsings(SyntaxFactory.List(roots.SelectMany(root => root.Usings)
+                .GroupBy(value => value.ToString()).Select(group => group.First())))
+            .WithMembers(MergeMemberScopes(roots[0].Members, roots[1].Members))
+            .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+    }
+
+    static SyntaxList<MemberDeclarationSyntax> MergeMemberScopes(
+        SyntaxList<MemberDeclarationSyntax> first, SyntaxList<MemberDeclarationSyntax> second)
+    {
+        var members = first.ToList();
+        foreach (var addition in second)
+        {
+            int index = members.FindIndex(existing => (existing, addition) switch
+            {
+                (NamespaceDeclarationSyntax left, NamespaceDeclarationSyntax right) => left.Name.ToString() == right.Name.ToString(),
+                (TypeDeclarationSyntax left, TypeDeclarationSyntax right) => left.Kind() == right.Kind() &&
+                    left.Identifier.ValueText == right.Identifier.ValueText &&
+                    (left.TypeParameterList?.Parameters.Count ?? 0) == (right.TypeParameterList?.Parameters.Count ?? 0),
+                _ => false,
+            });
+            if (index < 0)
+                members.Add(addition);
+            else if (members[index] is NamespaceDeclarationSyntax ns && addition is NamespaceDeclarationSyntax addedNamespace)
+                members[index] = ns.WithUsings(SyntaxFactory.List(ns.Usings.Concat(addedNamespace.Usings)
+                        .GroupBy(value => value.ToString()).Select(group => group.First())))
+                    .WithMembers(MergeMemberScopes(ns.Members, addedNamespace.Members));
+            else if (members[index] is TypeDeclarationSyntax type && addition is TypeDeclarationSyntax addedType)
+                members[index] = type.WithMembers(MergeMemberScopes(type.Members, addedType.Members));
+        }
+        return SyntaxFactory.List(members);
+    }
+
+    sealed class BlockNamespaceRewriter : CSharpSyntaxRewriter
+    {
+        public override SyntaxNode VisitFileScopedNamespaceDeclaration(FileScopedNamespaceDeclarationSyntax node)
+            => SyntaxFactory.NamespaceDeclaration(node.Name).WithExterns(node.Externs).WithUsings(node.Usings)
+                .WithMembers(node.Members).WithTriviaFrom(node);
+    }
+
+    sealed class SourceLocationRemover : CSharpSyntaxRewriter
+    {
+        public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
+        {
+            var retained = SyntaxFactory.SeparatedList(node.Attributes.Where(attribute =>
+                attribute.Name.ToString().Split('.').Last() is not "SourceLocation" and not "SourceLocationAttribute"));
+            return retained.Count == 0 ? null : node.WithAttributes(retained);
+        }
     }
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
@@ -636,7 +792,8 @@ class Program
 
     static void ParseRspFile(string path, Dictionary<string, List<string>> settings)
     {
-        if (!File.Exists(path)) return;
+        if (!File.Exists(path))
+            throw new FileNotFoundException($"Response file not found: '{path}'.", path);
         string currentSwitch = null;
         foreach (var rawLine in File.ReadLines(path))
         {

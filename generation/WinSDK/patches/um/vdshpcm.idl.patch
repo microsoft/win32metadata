@@ -1,0 +1,18 @@
+--- a/um/vdshpcm.idl
++++ b/um/vdshpcm.idl
+@@ -28,6 +28,7 @@
+ // Implemented where: hardware providers
+ // Accessed by: common layer
+ //
++cpp_quote("/* Win32Metadata: interface ::IVdsHwProviderPrivate => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(98f17bf3-9f33-4f12-8714-8b4075092c2e),
+@@ -60,6 +61,7 @@
+ // Implemented where: non-iSCSI hardware providers supporting MPIO
+ // Accessed by: common layer
+ //
++cpp_quote("/* Win32Metadata: interface ::IVdsHwProviderPrivateMpio => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(310a7715-ac2b-4c6f-9827-3d742f351676),

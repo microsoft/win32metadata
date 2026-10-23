@@ -6,6 +6,10 @@ using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Text.Json;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MetadataUtils
 {
@@ -85,13 +89,35 @@ namespace MetadataUtils
 
             private static readonly Regex ContainsLowerCase = new Regex(@"[a-z]+");
 
+            private const string StringLiteralPattern = @"(?<wide>L)?(?<literal>""(?:\\.|[^""\\])*"")";
+            private static readonly Regex StringTermRegex = new Regex(
+                @"\G\s*(?:(?<wrapper>TEXT|__TEXT|_T)\s*\(\s*" + StringLiteralPattern +
+                @"\s*\)|(?<wrapper>TEXT|_T)\s*\(\s*(?<name>[A-Za-z_]\w*)\s*\)|" +
+                StringLiteralPattern + @"|(?<name>[A-Za-z_]\w*))");
+            private static readonly HashSet<string> CppKeywords = new HashSet<string>(
+                ("alignas alignof and and_eq asm auto bitand bitor bool break case catch char " +
+                 "char8_t char16_t char32_t class co_await co_return co_yield compl concept const " +
+                 "consteval constexpr constinit const_cast continue decltype default delete do " +
+                 "double dynamic_cast else enum explicit export extern false float for friend " +
+                 "goto if inline int long mutable namespace new noexcept not not_eq nullptr " +
+                 "operator or or_eq private protected public register reinterpret_cast requires " +
+                 "return short signed sizeof static static_assert static_cast struct switch " +
+                 "template this thread_local throw true try typedef typeid typename union " +
+                 "unsigned using virtual void volatile wchar_t while xor xor_eq").Split(' '),
+                StringComparer.Ordinal);
+
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new();
             private Dictionary<string, IConstantWriter> namespacesToConstantWriters = new();
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants;
+            private HashSet<string> mutableGlobalNames = new(StringComparer.Ordinal);
             private HashSet<string> headerEnumMemberNames = new(StringComparer.Ordinal);
             private Dictionary<string, string> scrapedConstantNamespaces = new(StringComparer.Ordinal);
+            private readonly HashSet<string> nativeIntegerHeaders = new(StringComparer.OrdinalIgnoreCase);
+            private readonly HashSet<string> nativeIntegerNames = new(StringComparer.Ordinal);
+            private readonly HashSet<string> nativePointerNames = new(StringComparer.Ordinal);
+            private bool usesNativeIntegers;
 
             private List<EnumObject> enumObjectsFromJsons = new();
             private Dictionary<string, string> withTypes;
@@ -150,13 +176,14 @@ namespace MetadataUtils
 
                 this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(scraperOutputDir);
 
-                this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir);
+                this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir, out this.mutableGlobalNames);
                 this.headerEnumMemberNames = this.GetHeaderEnumMemberNames();
 
                 this.CleanExistingFiles();
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
+                this.WriteNativeConstants(traversedHeaderToNamespaceMap);
                 this.ScrapeConstantsFromTraversedFiles(traversedHeaderToNamespaceMap);
 
                 this.WriteEnumsAndRemaps(remaps);
@@ -240,6 +267,9 @@ namespace MetadataUtils
 
             private void CleanExistingFiles()
             {
+                foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                    "NativeConstants.*.header-types.cs", SearchOption.AllDirectories))
+                    this._fileSystem.File.Delete(file);
                 foreach (string file in Directory.GetFiles(this.scraperOutputDir).Where(f => f.EndsWith(".enums.cs") || f.EndsWith(".constants.cs")))
                 {
                     this._fileSystem.File.Delete(file);
@@ -335,7 +365,7 @@ namespace MetadataUtils
 
             private void AddCtlCodeConstant(string originalNamespace, string name, string deviceType, string function, string method, string access)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.usesNativeIntegers || this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -353,7 +383,8 @@ namespace MetadataUtils
 
             private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "")
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.ContainsKey(name) || this.usesNativeIntegers &&
+                    type is "bool" or "char" or "sbyte" or "byte" or "short" or "ushort" or "int" or "uint" or "long" or "ulong")
                 {
                     return;
                 }
@@ -417,7 +448,7 @@ namespace MetadataUtils
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.ContainsKey(name) || this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
                 {
                     return;
                 }
@@ -432,7 +463,7 @@ namespace MetadataUtils
 
             private void AddConstantShort(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.ContainsKey(name) || this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
                 {
                     return;
                 }
@@ -512,17 +543,171 @@ namespace MetadataUtils
                 return this.exclusionNames.Contains(constName);
             }
 
+            private void WriteNativeConstants(Dictionary<string, string> traversedFileMap)
+            {
+                var headers = traversedFileMap.ToDictionary(pair => Path.GetFullPath(pair.Key), pair => pair.Value,
+                    StringComparer.OrdinalIgnoreCase);
+                string[] paths = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                    "*.native-constants.json", SearchOption.AllDirectories);
+                var inputs = paths.OrderBy(path => path, StringComparer.Ordinal).Select(path =>
+                {
+                    var input = JsonSerializer.Deserialize<NativeConstantValues>(this._fileSystem.File.ReadAllText(path)) ??
+                        throw new InvalidDataException($"Invalid native constants file '{path}'.");
+                    input.Headers = input.Headers.Select(ResolveHeader).ToArray();
+                    input.Constants = input.Constants.Select(value => value with { Header = ResolveHeader(value.Header) }).ToList();
+                    return input;
+
+                    string ResolveHeader(string header)
+                    {
+                        string full = Path.GetFullPath(header);
+                        if (headers.ContainsKey(full))
+                            return full;
+                        string originalDirectory = input.BindingSource.EndsWith(".cs", StringComparison.Ordinal)
+                            ? Path.GetDirectoryName(input.BindingSource) : input.BindingSource;
+                        string relative = Path.GetRelativePath(originalDirectory, full);
+                        if (Path.IsPathRooted(relative))
+                            return full;
+                        string relocated = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), relative));
+                        return headers.ContainsKey(relocated) ? relocated : full;
+                    }
+                }).ToArray();
+                if (inputs.Length == 0)
+                    return;
+                foreach (var input in inputs)
+                {
+                    if (input.Architecture is not (Architecture.X86 or Architecture.X64 or Architecture.Arm64))
+                        throw new InvalidDataException($"Invalid native constant architecture '{input.Architecture}'.");
+                    this.nativeIntegerHeaders.UnionWith(input.Headers.Select(Path.GetFullPath));
+                    this.nativePointerNames.UnionWith(input.Issues.Where(issue => issue.Reason == "pointer constant").Select(issue => issue.Name));
+                }
+                var existing = new Dictionary<string, Architecture>(StringComparer.Ordinal);
+                foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*.cs", SearchOption.AllDirectories)
+                    .Where(file => !NativeConstantValues.IsGeneratedSource(file) &&
+                        !file.EndsWith(".modified.cs", StringComparison.Ordinal) &&
+                        !file.EndsWith(".constants.cs", StringComparison.Ordinal) &&
+                        !file.EndsWith(".enums.cs", StringComparison.Ordinal)))
+                {
+                    var architecture = Path.GetDirectoryName(file).Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                        .Select(part => part switch
+                        {
+                            "x86" => Architecture.X86, "x64" => Architecture.X64, "arm64" => Architecture.Arm64,
+                            _ => Architecture.None,
+                        }).LastOrDefault(value => value != Architecture.None);
+                    if (architecture == Architecture.None)
+                        architecture = Architecture.All;
+                    var root = SyntaxFactory.ParseCompilationUnit(this._fileSystem.File.ReadAllText(file));
+                    foreach (var field in root.DescendantNodes().OfType<FieldDeclarationSyntax>().Where(field =>
+                        field.Modifiers.Any(SyntaxKind.ConstKeyword) && field.Parent is ClassDeclarationSyntax type &&
+                        type.Identifier.ValueText == "Apis"))
+                        foreach (var variable in field.Declaration.Variables)
+                        {
+                            string ns = this.LookupNamespaceForName(variable.Identifier.ValueText) ??
+                                string.Join(".", field.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                                    .Reverse().Select(parent => parent.Name.ToString()));
+                            string key = ns + "." + variable.Identifier.ValueText;
+                            existing[key] = existing.GetValueOrDefault(key) | architecture;
+                        }
+                }
+                var constants = new Dictionary<(Architecture Architecture, string Namespace, string Name), NativeConstantValue>();
+                foreach (var input in inputs)
+                    foreach (var value in input.Constants)
+                    {
+                        if (!headers.TryGetValue(Path.GetFullPath(value.Header), out string ns) ||
+                            this.ShouldExclude(value.NativeName) || this.ShouldExclude(value.Name))
+                            continue;
+                        this.nativeIntegerNames.Add(value.NativeName);
+                        ns = this.LookupNamespaceForName(value.Name) ?? ns;
+                        if (this.headerEnumMemberNames.Contains(ns + "." + value.Name) ||
+                            existing.GetValueOrDefault(ns + "." + value.Name).HasFlag(input.Architecture))
+                            continue;
+                        var key = (input.Architecture, ns, value.Name);
+                        if (constants.TryGetValue(key, out var previous) &&
+                            (previous.StorageType != value.StorageType || previous.Value != value.Value || previous.NativeType != value.NativeType))
+                            throw new InvalidDataException($"Conflicting native values for '{ns}.{value.Name}' on {input.Architecture}: " +
+                                $"'{previous.Header}' and '{value.Header}'.");
+                        constants[key] = value;
+                    }
+                string[] namespaces = constants.Keys.Select(key => key.Namespace).Distinct(StringComparer.Ordinal)
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+                foreach (var architecture in inputs.Select(input => input.Architecture).Distinct())
+                    foreach (string ns in namespaces)
+                    {
+                        string directory = Path.Combine(this.scraperOutputDir, architecture.ToString().ToLowerInvariant());
+                        this._fileSystem.Directory.CreateDirectory(directory);
+                        string path = Path.Combine(directory, $"NativeConstants.{ns}.header-types.cs");
+                        using var stream = this._fileSystem.File.OpenWrite(path);
+                        byte[] marker = Encoding.UTF8.GetBytes(HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine);
+                        stream.Write(marker, 0, marker.Length);
+                        using var writer = new ConstantWriter(stream, ns, this.constantsHeaderText, this.withAttributes);
+                        foreach (var pair in constants.Where(pair => pair.Key.Architecture == architecture && pair.Key.Namespace == ns)
+                            .OrderBy(pair => pair.Key.Name, StringComparer.Ordinal))
+                        {
+                            writer.AddNativeInteger(pair.Value);
+                            this.writtenConstants.TryAdd(pair.Value.Name, pair.Value.StorageType);
+                            this.scrapedConstantNamespaces[pair.Value.Name] = ns;
+                        }
+                    }
+                this.output.Add($"Wrote {constants.Count} native integer constants from {inputs.Length} header compilations.");
+            }
+
+            private static bool TryTranslateStringConstant(
+                string value, string name, string header, out string expression, out bool isUtf16)
+            {
+                expression = null;
+                isUtf16 = false;
+                if (!value.Contains('"') && !value.Contains("TEXT") && !value.Contains("_T"))
+                    return false;
+                value = value.Trim();
+                var terms = new List<string>();
+                bool hasStringTerm = false;
+                int position = 0;
+                while (position < value.Length)
+                {
+                    Match term = StringTermRegex.Match(value, position);
+                    if (!term.Success)
+                    {
+                        if (hasStringTerm)
+                            throw new InvalidOperationException(
+                                $"Unsupported string expression for '{name}' in '{header}': {value}");
+                        return false;
+                    }
+                    isUtf16 |= term.Groups["wide"].Success || term.Groups["wrapper"].Success;
+                    hasStringTerm |= term.Groups["literal"].Success || term.Groups["wrapper"].Success;
+                    if (term.Groups["literal"].Success)
+                    {
+                        terms.Add(term.Groups["literal"].Value);
+                    }
+                    else
+                    {
+                        string identifier = term.Groups["name"].Value;
+                        if (CppKeywords.Contains(identifier))
+                            return false;
+                        if (SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None)
+                            identifier = "@" + identifier;
+                        // Unlike native adjacent strings, C# string + number would silently format the number.
+                        terms.Add("(string)" + identifier);
+                    }
+                    position += term.Length;
+                }
+                if (!hasStringTerm)
+                    return false;
+                expression = string.Join(" + ", terms);
+                return true;
+            }
+
             private void ScrapeConstantsFromTraversedFiles(Dictionary<string, string> traversedFileMap)
             {
                 Dictionary<string, string> autoReplacements = GetAutoValueReplacements();
 
                 HashSet<string> manualEnumMemberNames = this.GetManualEnumMemberNames();
+                var pendingAliases = new List<(string Namespace, string Name, string Target, bool NativeIntegers)>();
 
                 // For each traversed header, scrape the constants
                 foreach (KeyValuePair<string, string> item in traversedFileMap)
                 {
                     var header = item.Key;
                     var currentNamespace = item.Value;
+                    this.usesNativeIntegers = this.nativeIntegerHeaders.Contains(Path.GetFullPath(header));
 
                     if (!this._fileSystem.File.Exists(header))
                     {
@@ -694,6 +879,8 @@ namespace MetadataUtils
                         {
                             continue;
                         }
+                        if (this.usesNativeIntegers && this.nativeIntegerNames.Contains(name))
+                            continue;
 
 #if DEBUG
                         if (name == "SOME_CONST_NAME")
@@ -765,6 +952,12 @@ namespace MetadataUtils
 
                         if (this.regexConstHelper.TryProcessingLine(currentNamespace, name, fixedRawValue))
                         {
+                            continue;
+                        }
+
+                        if (TryTranslateStringConstant(fixedRawValue, name, header, out string stringExpression, out bool isUtf16))
+                        {
+                            this.AddConstantValue(currentNamespace, "string", name, stringExpression, isUtf16 ? "utf-16" : "ansi");
                             continue;
                         }
 
@@ -941,6 +1134,13 @@ namespace MetadataUtils
                             {
                                 string otherName = match.Groups[40].Value;
 
+                                if (this.mutableGlobalNames.Contains(otherName))
+                                {
+                                    this.output.Add($"warning: Macro '{name}' in '{item.Key}' refers to mutable global " +
+                                        $"'{otherName}', not a metadata constant.");
+                                    continue;
+                                }
+
                                 matchedToOtherName = true;
 
                                 // Only use a constant as the value if we have seen the constant before
@@ -965,34 +1165,6 @@ namespace MetadataUtils
                         else
                         {
                             valueText = rawValue;
-
-                            if (valueText.StartsWith("__TEXT("))
-                            {
-                                valueText = valueText.Substring(2);
-                            }
-
-                            bool isUtf16 = false;
-                            if (valueText.StartsWith("TEXT("))
-                            {
-                                isUtf16 = true;
-                                valueText = valueText.Substring("TEXT(".Length);
-                                if (valueText.EndsWith(')'))
-                                {
-                                    valueText = valueText.Substring(0, valueText.Length - 1);
-                                }
-                            }
-                            else if (valueText.StartsWith("L\""))
-                            {
-                                isUtf16 = true;
-                                valueText = valueText.Substring(1);
-                            }
-
-                            // Strings can't be part of enums so go ahead and add the constant directly
-                            if (valueText.StartsWith('"'))
-                            {
-                                this.AddConstantValue(currentNamespace, "string", name, valueText, isUtf16 ? "utf-16" : "ansi");
-                                continue;
-                            }
 
                             valueText = valueText.Replace("(DWORD)", "(uint)");
                             valueText = valueText.Replace("(ULONG)", "(uint)");
@@ -1047,18 +1219,42 @@ namespace MetadataUtils
                                 {
                                     this.AddConstantValue(currentNamespace, matchedConstantType, name, valueText);
                                 }
+                                else if (matchedToOtherName)
+                                {
+                                    pendingAliases.Add((currentNamespace, name, valueText, this.usesNativeIntegers));
+                                }
                                 else
                                 {
-                                    // Only add as an int if it didn't match some other constant/enum name
-                                    if (!matchedToOtherName)
-                                    {
-                                        this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
-                                    }
+                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                 }
                             }
                         }
+
                     }
                 }
+
+                // Preserve resolvable native definitions before processing deferred aliases.
+                bool resolvedAlias;
+                do
+                {
+                    resolvedAlias = false;
+                    for (int i = 0; i < pendingAliases.Count; i++)
+                    {
+                        var alias = pendingAliases[i];
+                        this.usesNativeIntegers = alias.NativeIntegers;
+                        if (this.writtenConstants.ContainsKey(alias.Name))
+                        {
+                            pendingAliases.RemoveAt(i--);
+                        }
+                        else if (this.writtenConstants.TryGetValue(alias.Target, out var type) && type != "Guid")
+                        {
+                            this.AddConstantValue(alias.Namespace, type, alias.Name, alias.Target);
+                            pendingAliases.RemoveAt(i--);
+                            resolvedAlias = true;
+                        }
+                    }
+                }
+                while (resolvedAlias);
             }
 
             private void TryScrapingEnumFlags(string line)

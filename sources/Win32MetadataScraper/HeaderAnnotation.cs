@@ -18,7 +18,7 @@ namespace Win32MetadataScraper
             "SetLastError", "ImportLibrary", "SupportedOSPlatform", "PreserveResult",
             "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal", "Reserved",
             "AlsoUsableFor", "AssociatedEnum", "AssociatedConstant", "Enum", "FlagsEnum",
-            "Optional", "ComOutPtr",
+            "Optional", "ComOutPtr", "NativeTypedef",
         };
 
         private static readonly HashSet<string> SupportedVersions = new(StringComparer.Ordinal)

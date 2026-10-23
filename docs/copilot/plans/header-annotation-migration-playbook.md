@@ -135,6 +135,7 @@ either output without claiming to have migrated their APIs.
 | Historical labels absent from native source | Require an exact qualification pin for an original-AST label/expression carrier compatible with the selected header/reader pair. If that pin is unavailable, retain the fact in the shared carrier-gap bucket. Do not invent a native alias or expose an ordinary-consumer symbol. |
 | Availability | Use the qualified Clang lexical OS scopes or explicit type carriers. Preserve actual floors and scope boundaries; do not invent floors for structs merely because a nearby interface has one. |
 | Cleanup and invalid values | Put resource ownership on producers' return values or output parameters. Resolve cleanup names against actual native function declarations after the complete translation-unit walk; declaration order must not require copied or moved prototypes. Preserve complete invalid sets. Do not create pseudo-handle types or move ownership onto an existing plain handle typedef. |
+| Native typedef identity | Use valueless `_Win32_NativeTypedef_` on an existing scalar/data-pointer `typedef`, or `type ::Alias => NativeTypedef` through original-IDL `cpp_quote`. It creates identity only; never fabricate cleanup, compatibility, or availability to trigger a wrapper. Preserve native width, signedness, and pointer depth. Reject incomplete record values instead of pretending OLD `IntPtr` proves native pointer storage. |
 | Compiler intrinsics | Preserve the generator's actual native-Builtin exclusion. Do not invent DLL APIs or require metadata projection for those excluded declarations; still parse and validate their authored annotations. |
 | Direction, buffers, counts, and retval | Prefer native SAL/MIDL semantics, preserving count expressions and units. Do not replace or silently discard existing SAL, or add redundant scalar direction annotations. |
 | Exact results | `_Win32_PreserveResult_`, legacy `CanReturnMultipleSuccessValues`, and legacy `CanReturnErrorsAsSuccess` converge on CLR `PreserveSig`. Do not introduce a separate multiple-success annotation or preserve the legacy custom-attribute instances. |
@@ -160,6 +161,21 @@ cleanup annotations. Assess independent typedef aliases against their own wrappe
 projection path; cleanup binding does not prove alias transport. Continue other
 source drafting while central coverage and output review remain pending.
 
+The identity marker reuses the existing ABI-preserving wrapper path and native
+redeclaration ownership. Annotate only the intended alias in a multi-alias native
+statement. A metadata-only same-native-name redeclaration can carry the marker
+for a macro-produced typedef without editing that declaration-producing macro.
+It must still denote the actual native scalar or data pointer. Logical enums,
+callbacks, record values, arrays, references, C++ `using` aliases, and unsupported
+scalar representations are not identity-marker targets. Genuine pointers to
+incomplete records are different from incomplete record **value** aliases.
+Every data-pointer level must match the target's ordinary pointer width;
+non-default `__ptr32`/`__ptr64` widths, even beneath ordinary outer pointers or
+typedefs, fail with WMA001 before output. Do not strip those qualifiers or
+replace the pointer with an integer to force a provider.
+Validate physical providers and written-alias uses on x86, x64, and arm64,
+including native C/C++ controls and previously working typedef providers.
+
 For an existing native enum with only a C tag, use its actual C type spelling in
 the association carrier: `_Win32_AssociatedEnum_(enum VARENUM)`, not the nonexistent
 C typedef `VARENUM`. The compiled target must still resolve to the same canonical
@@ -178,6 +194,11 @@ Retain both changes in unfiltered raw diffs, not a global typedef-promotion rule
 The helper is an SDK asset. Exercise both packaged and repository-backed
 GeneratorSdk samples when changing the common bootstrap: a helper available through
 the main SDK's include paths can still be missing from another asset layout.
+`RecompiledIdlHeaders\shared\win32metadata_annotations.h` is the authored,
+source-pinned repository helper despite the surrounding mirror directory name.
+Changes require separate admission of its source hash and the preparation recipe's
+mirror/source identity and MIDL input pin; do not silently update generated SDK
+headers or reuse a previously qualified runtime with an unsupported helper.
 
 Treat a global logical group as a dependency batch before admitting its use sites.
 `WIN32_ERROR`, for example, includes both WinError constants and SetupAPI-owned error

@@ -84,8 +84,14 @@ _Win32_SupportedOS_Windows7_ int __faststorefence(unsigned value);
             {
                 var processor = new HeaderAnnotationProcessor(unit, new Dictionary<string, string>(), "Test",
                     new[] { fixture.Header }, new HashSet<string>(), excludeFunctionsWithBody: false);
-                var error = Assert.Throws<HeaderAnnotationException>(() => processor.ValidateProjection());
-                Assert.Contains("Annotation facts for 'Ordinary' were not projected", error.Message);
+                var error = Assert.Throws<HeaderAnnotationDiagnosticsException>(() => processor.ValidateProjection());
+                var diagnostics = error.Message.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+                Assert.Equal(2, diagnostics.Length);
+                Assert.EndsWith("Annotation facts for 'Ordinary' were not projected by ClangSharp. [native target: ::Ordinary]",
+                    diagnostics[0]);
+                Assert.EndsWith("Annotation facts for 'context' were not projected by ClangSharp. [native target: ::Ordinary::context]",
+                    diagnostics[1]);
+                Assert.All(diagnostics, diagnostic => Assert.Contains("error WMA001:", diagnostic));
             });
         }
 

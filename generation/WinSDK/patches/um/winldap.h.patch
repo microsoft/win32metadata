@@ -1,8 +1,7 @@
 diff --git a/um/winldap.h b/um/winldap.h
-index 6db741e1..f1633622 100644
 --- a/um/winldap.h
 +++ b/um/winldap.h
-@@ -49,6 +49,7 @@ Environments :
+@@ -49,6 +49,7 @@
  #if _MSC_VER > 1000
  #pragma once
  #endif
@@ -10,7 +9,7 @@ index 6db741e1..f1633622 100644
  #include <winapifamily.h>
  
  #pragma region Desktop Family or OneCore Family
-@@ -596,13 +597,19 @@ typedef struct ldapmodA {
+@@ -596,13 +597,19 @@
  //  multi-thread: ldap_open*, ldap_init*, and ldap_sslinit* calls are safe.
  //
  
@@ -30,7 +29,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, int secure );
  
  //
-@@ -612,6 +619,7 @@ WINLDAPAPI LDAP * LDAPAPI ldap_sslinitA( _In_ PSTR HostName, ULONG PortNumber, i
+@@ -612,6 +619,7 @@
  //  will call it internally if it hasn't already been called.
  //
  
@@ -38,7 +37,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_connect(  LDAP *ld,
                                          struct l_timeval  *timeout
                                          );
-@@ -624,8 +632,11 @@ WINLDAPAPI ULONG LDAPAPI ldap_connect(  LDAP *ld,
+@@ -624,8 +632,11 @@
  
  #else
  
@@ -50,7 +49,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, int secure );
  
  #endif
-@@ -640,7 +651,11 @@ WINLDAPAPI LDAP * LDAPAPI ldap_sslinit( _In_ PSTR HostName, ULONG PortNumber, in
+@@ -640,7 +651,11 @@
  //  multi-thread: cldap_open* calls are safe.
  //
  
@@ -62,7 +61,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
  
  
-@@ -650,6 +665,8 @@ WINLDAPAPI LDAP * LDAPAPI cldap_openA( _In_ PSTR HostName, ULONG PortNumber );
+@@ -650,6 +665,8 @@
  
  #else
  
@@ -71,7 +70,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
  
  #endif
-@@ -667,7 +684,9 @@ WINLDAPAPI LDAP * LDAPAPI cldap_open( _In_ PSTR HostName, ULONG PortNumber );
+@@ -667,7 +684,9 @@
  //                stucture after it's been freed.
  //
  
@@ -81,7 +80,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_unbind_s( LDAP *ld ); // calls ldap_unbind
  
  //
-@@ -680,10 +699,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_unbind_s( LDAP *ld ); // calls ldap_unbind
+@@ -680,10 +699,14 @@
  //                connection as a whole.  beware if threads share connections.
  
  
@@ -96,7 +95,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *invalue );
  
  #if LDAP_UNICODE
-@@ -904,14 +927,22 @@ WINLDAPAPI ULONG LDAPAPI ldap_set_optionW( LDAP *ld, int option, const void *inv
+@@ -904,14 +927,22 @@
  //                and try to mulithread binds with other operations.
  
  
@@ -119,7 +118,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHAR cred, ULONG method );
  
  
-@@ -921,6 +952,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+@@ -921,6 +952,7 @@
  // sent back from the server.
  //
  
@@ -127,7 +126,7 @@ index 6db741e1..f1633622 100644
   WINLDAPAPI INT LDAPAPI ldap_sasl_bindA(
           LDAP  *ExternalHandle,
           _In_ const  PSTR DistName,
-@@ -931,6 +963,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+@@ -931,6 +963,7 @@
           int *MessageNumber
           );
  
@@ -135,7 +134,7 @@ index 6db741e1..f1633622 100644
   WINLDAPAPI INT LDAPAPI ldap_sasl_bindW(
           LDAP  *ExternalHandle,
           _In_ const PWSTR DistName,
-@@ -941,6 +974,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+@@ -941,6 +974,7 @@
           int *MessageNumber
           );
  
@@ -143,7 +142,7 @@ index 6db741e1..f1633622 100644
   WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sA(
           LDAP  *ExternalHandle,
           _In_ const PSTR DistName,
-@@ -951,6 +985,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+@@ -951,6 +985,7 @@
           PBERVAL *ServerData
           );
  
@@ -151,7 +150,7 @@ index 6db741e1..f1633622 100644
   WINLDAPAPI INT LDAPAPI ldap_sasl_bind_sW(
           LDAP  *ExternalHandle,
           _In_ const PWSTR DistName,
-@@ -975,10 +1010,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_sA( LDAP *ld, _In_opt_ PSTR dn, _In_opt_ PCHA
+@@ -975,10 +1010,14 @@
  
  #else
  
@@ -166,7 +165,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_ const PCHAR cred, ULONG method );
  
  #define ldap_sasl_bind ldap_sasl_bindA
-@@ -1009,6 +1048,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_bind_s( LDAP *ld, _In_opt_ const PSTR dn, _In_opt_
+@@ -1009,6 +1048,7 @@
  //                ldap_search_s and ldap_search_ext* calls are thread safe.
  //
  
@@ -174,7 +173,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_searchW(
          LDAP                  *ld,
          _In_opt_ const PWSTR  base,     // distinguished name or ""
-@@ -1017,6 +1057,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_searchW(
+@@ -1017,6 +1057,7 @@
          _In_ PZPWSTR          attrs,        // pointer to an array of PCHAR attribute names
          ULONG                 attrsonly       // boolean on whether to only return attr names
      );
@@ -182,7 +181,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_searchA(
          LDAP                  *ld,
          _In_opt_ const PSTR   base,     // distinguished name or ""
-@@ -1026,6 +1067,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_searchA(
+@@ -1026,6 +1067,7 @@
          ULONG                 attrsonly       // boolean on whether to only return attr names
      );
  
@@ -190,7 +189,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
-@@ -1035,6 +1077,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_sW(
+@@ -1035,6 +1077,7 @@
          ULONG                   attrsonly,
          _Outptr_result_maybenull_ LDAPMessage     **res
      );
@@ -198,7 +197,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
-@@ -1045,6 +1088,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_sA(
+@@ -1045,6 +1088,7 @@
          _Outptr_result_maybenull_ LDAPMessage     **res
      );
  
@@ -206,7 +205,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
-@@ -1055,6 +1099,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_stW(
+@@ -1055,6 +1099,7 @@
          struct l_timeval        *timeout,
          _Outptr_result_maybenull_ PLDAPMessage     *res
      );
@@ -214,7 +213,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
-@@ -1067,6 +1112,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_stA(
+@@ -1067,6 +1112,7 @@
      );
  
  
@@ -222,7 +221,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
-@@ -1081,6 +1127,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_extW(
+@@ -1081,6 +1127,7 @@
          ULONG                   *MessageNumber
      );
  
@@ -230,7 +229,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
-@@ -1095,6 +1142,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_extA(
+@@ -1095,6 +1142,7 @@
          ULONG                   *MessageNumber
      );
  
@@ -238,7 +237,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
          LDAP                    *ld,
          _In_opt_ const PWSTR    base,
-@@ -1109,6 +1157,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sW(
+@@ -1109,6 +1157,7 @@
          _Outptr_result_maybenull_ PLDAPMessage    *res
      );
  
@@ -246,7 +245,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
          LDAP                    *ld,
          _In_opt_ const PSTR     base,
-@@ -1134,6 +1183,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_sA(
+@@ -1134,6 +1183,7 @@
  
  #else
  
@@ -254,7 +253,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search(
          LDAP            *ld,
          _In_opt_ PSTR   base,           // distinguished name or ""
-@@ -1143,6 +1193,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search(
+@@ -1143,6 +1193,7 @@
          ULONG           attrsonly       // boolean on whether to only return attr names
      );
  
@@ -262,7 +261,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_s(
          LDAP            *ld,
          _In_opt_ PSTR   base,
-@@ -1153,6 +1204,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_s(
+@@ -1153,6 +1204,7 @@
          _Outptr_result_maybenull_ PLDAPMessage    *res
      );
  
@@ -270,7 +269,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_st(
          LDAP            *ld,
          _In_opt_ PSTR   base,
-@@ -1164,6 +1216,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_st(
+@@ -1164,6 +1216,7 @@
          _Outptr_result_maybenull_ PLDAPMessage    *res
      );
  
@@ -278,7 +277,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
          LDAP            *ld,
          _In_opt_ PSTR   base,
-@@ -1178,6 +1231,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext(
+@@ -1178,6 +1231,7 @@
          ULONG           *MessageNumber
      );
  
@@ -286,7 +285,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
          LDAP            *ld,
          _In_opt_ PSTR   base,
-@@ -1199,12 +1253,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_search_ext_s(
+@@ -1199,12 +1253,14 @@
  //  is invalid or LDAP_SUCCESS if it's ok.
  //
  
@@ -301,7 +300,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI
  ldap_check_filterA(
          LDAP    *ld,
-@@ -1233,12 +1289,17 @@ ldap_check_filterA(
+@@ -1233,12 +1289,17 @@
  //                ldap_modify_s and ldap_modify_ext* calls are thread safe.
  //
  
@@ -319,7 +318,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1248,6 +1309,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_extW(
+@@ -1248,6 +1309,7 @@
          ULONG           *MessageNumber
          );
  
@@ -327,7 +326,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1257,6 +1319,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_extA(
+@@ -1257,6 +1319,7 @@
          ULONG           *MessageNumber
          );
  
@@ -335,7 +334,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1265,6 +1328,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sW(
+@@ -1265,6 +1328,7 @@
          PLDAPControlW   *ClientControls
          );
  
@@ -343,7 +342,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1283,9 +1347,12 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_sA(
+@@ -1283,9 +1347,12 @@
  
  #else
  
@@ -356,7 +355,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
          LDAP *ld,
          const PSTR dn,
-@@ -1295,6 +1362,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext(
+@@ -1295,6 +1362,7 @@
          ULONG           *MessageNumber
          );
  
@@ -364,7 +363,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
          LDAP *ld,
          const PSTR dn,
-@@ -1340,12 +1408,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_modify_ext_s(
+@@ -1340,12 +1408,14 @@
  //                Use ldap_rename_ext instead, as these are thread safe.
  //
  
@@ -379,7 +378,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
-@@ -1357,23 +1427,27 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2A (
+@@ -1357,23 +1427,27 @@
  //  ldap_modrdn simply calls ldap_modrdn2 with a value of 1 for DeleteOldRdn.
  //
  
@@ -407,7 +406,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
-@@ -1381,11 +1455,13 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn2_sA (
+@@ -1381,11 +1455,13 @@
      INT     DeleteOldRdn
      );
  
@@ -421,7 +420,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
-@@ -1401,23 +1477,27 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_sA (
+@@ -1401,23 +1477,27 @@
  
  #else
  
@@ -449,7 +448,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
      LDAP    *ExternalHandle,
      _In_ const PSTR   DistinguishedName,
-@@ -1431,6 +1511,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_modrdn_s (
+@@ -1431,6 +1511,7 @@
  //  parent from the RDN, for clarity.
  //
  
@@ -457,7 +456,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1442,6 +1523,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_extW(
+@@ -1442,6 +1523,7 @@
          ULONG           *MessageNumber
          );
  
@@ -465,7 +464,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1453,6 +1535,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_extA(
+@@ -1453,6 +1535,7 @@
          ULONG           *MessageNumber
          );
  
@@ -473,7 +472,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1463,6 +1546,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sW(
+@@ -1463,6 +1546,7 @@
          PLDAPControlW   *ClientControls
          );
  
@@ -481,7 +480,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1492,6 +1576,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_sA(
+@@ -1492,6 +1576,7 @@
  
  #else
  
@@ -489,7 +488,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
          LDAP *ld,
          const PSTR dn,
-@@ -1503,6 +1588,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext(
+@@ -1503,6 +1588,7 @@
          ULONG           *MessageNumber
          );
  
@@ -497,7 +496,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
          LDAP *ld,
          const PSTR dn,
-@@ -1529,12 +1615,17 @@ WINLDAPAPI ULONG LDAPAPI ldap_rename_ext_s(
+@@ -1529,12 +1615,17 @@
  //                ldap_add_s and ldap_add_ext* calls are thread safe.
  //
  
@@ -515,7 +514,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1544,6 +1635,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_extW(
+@@ -1544,6 +1635,7 @@
          ULONG           *MessageNumber
          );
  
@@ -523,7 +522,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1553,6 +1645,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_extA(
+@@ -1553,6 +1645,7 @@
          ULONG           *MessageNumber
          );
  
@@ -531,7 +530,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1561,6 +1654,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sW(
+@@ -1561,6 +1654,7 @@
          PLDAPControlW   *ClientControls
          );
  
@@ -539,7 +538,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1579,9 +1673,12 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_sA(
+@@ -1579,9 +1673,12 @@
  
  #else
  
@@ -552,7 +551,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
          LDAP *ld,
          const PSTR dn,
-@@ -1591,6 +1688,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext(
+@@ -1591,6 +1688,7 @@
          ULONG           *MessageNumber
          );
  
@@ -560,7 +559,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
          LDAP *ld,
          const PSTR dn,
-@@ -1618,10 +1716,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_add_ext_s(
+@@ -1618,10 +1716,14 @@
  //
  
  
@@ -575,7 +574,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
  
  #if LDAP_UNICODE
-@@ -1631,7 +1733,9 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_sA( LDAP *ld, _In_ const PSTR dn, _In_ con
+@@ -1631,7 +1733,9 @@
  
  #else
  
@@ -585,7 +584,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ const PSTR attr, _In_ PSTR value );
  
  #endif
-@@ -1646,6 +1750,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_s( LDAP *ld, _In_ const PSTR dn, _In_ cons
+@@ -1646,6 +1750,7 @@
  //  berval Data will be used.
  //
  
@@ -593,7 +592,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1657,6 +1762,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_extW(
+@@ -1657,6 +1762,7 @@
          ULONG           *MessageNumber
          );
  
@@ -601,7 +600,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1668,6 +1774,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_extA(
+@@ -1668,6 +1774,7 @@
          ULONG           *MessageNumber
          );
  
@@ -609,7 +608,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1678,6 +1785,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sW(
+@@ -1678,6 +1785,7 @@
          PLDAPControlW   *ClientControls
          );
  
@@ -617,7 +616,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1695,6 +1803,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_sA(
+@@ -1695,6 +1803,7 @@
  
  #else
  
@@ -625,7 +624,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
          LDAP *ld,
          const PSTR dn,
-@@ -1706,6 +1815,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext(
+@@ -1706,6 +1815,7 @@
          ULONG           *MessageNumber
          );
  
@@ -633,7 +632,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
          LDAP *ld,
          const PSTR dn,
-@@ -1734,12 +1844,17 @@ WINLDAPAPI ULONG LDAPAPI ldap_compare_ext_s(
+@@ -1734,12 +1844,17 @@
  //
  
  
@@ -651,7 +650,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1748,6 +1863,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_extW(
+@@ -1748,6 +1863,7 @@
          ULONG           *MessageNumber
          );
  
@@ -659,7 +658,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1756,6 +1872,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_extA(
+@@ -1756,6 +1872,7 @@
          ULONG           *MessageNumber
          );
  
@@ -667,7 +666,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
          LDAP *ld,
          _In_ const PWSTR dn,
-@@ -1763,6 +1880,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sW(
+@@ -1763,6 +1880,7 @@
          PLDAPControlW   *ClientControls
          );
  
@@ -675,7 +674,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
          LDAP *ld,
          _In_ const PSTR dn,
-@@ -1779,9 +1897,12 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_sA(
+@@ -1779,9 +1897,12 @@
  
  #else
  
@@ -688,7 +687,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
          LDAP *ld,
          const PSTR dn,
-@@ -1790,6 +1911,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext(
+@@ -1790,6 +1911,7 @@
          ULONG           *MessageNumber
          );
  
@@ -696,7 +695,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
          LDAP *ld,
          const PSTR dn,
-@@ -1807,6 +1929,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_delete_ext_s(
+@@ -1807,6 +1929,7 @@
  
  //  multi-thread: ldap_abandon calls are thread safe
  
@@ -704,7 +703,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_abandon( LDAP *ld, ULONG msgid );
  
  
-@@ -1834,6 +1957,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_abandon( LDAP *ld, ULONG msgid );
+@@ -1834,6 +1957,7 @@
  
  //  multi-thread: ldap_result calls are thread safe
  
@@ -712,7 +711,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_result(
          LDAP                    *ld,
          ULONG                   msgid,
-@@ -1842,6 +1966,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_result(
+@@ -1842,6 +1966,7 @@
          _Outptr_result_maybenull_ PLDAPMessage     *res
      );
  
@@ -720,7 +719,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_msgfree( LDAPMessage *res );
  
  //
-@@ -1851,6 +1976,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_msgfree( LDAPMessage *res );
+@@ -1851,6 +1976,7 @@
  
  //  multi-thread: ldap_result2error call is thread safe
  
@@ -728,7 +727,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_result2error(
          LDAP            *ld,
          LDAPMessage     *res,
-@@ -1866,6 +1992,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_result2error(
+@@ -1866,6 +1992,7 @@
  
  //  multi-thread: ldap_parse_result call is thread safe
  
@@ -736,7 +735,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -1877,6 +2004,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultW (
+@@ -1877,6 +2004,7 @@
          BOOLEAN Freeit
          );
  
@@ -744,7 +743,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -1888,6 +2016,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_resultA (
+@@ -1888,6 +2016,7 @@
          BOOLEAN Freeit
          );
  
@@ -752,7 +751,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
          LDAP           *Connection,
          LDAPMessage    *ResultMessage,      // returned by server
-@@ -1896,6 +2025,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultA (
+@@ -1896,6 +2025,7 @@
          BOOLEAN         Freeit              // Don't need the message anymore
          );
  
@@ -760,7 +759,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
          LDAP           *Connection,
          LDAPMessage    *ResultMessage,      // returned by server
-@@ -1904,18 +2034,22 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_extended_resultW (
+@@ -1904,18 +2034,22 @@
          BOOLEAN         Freeit              // Don't need the message anymore
          );
  
@@ -783,7 +782,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
          LDAPControlW *Control
          );
-@@ -1924,10 +2058,12 @@ WINLDAPAPI ULONG LDAPAPI ldap_control_freeW (
+@@ -1924,10 +2058,12 @@
  // ldap_free_controls are old, use ldap_controls_free
  //
  
@@ -796,7 +795,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
          LDAPControlA **Controls
          );
-@@ -1944,6 +2080,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_free_controlsA (
+@@ -1944,6 +2080,7 @@
  
  #define ldap_parse_extended_result ldap_parse_extended_resultA
  
@@ -804,7 +803,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -1955,14 +2092,17 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_result (
+@@ -1955,14 +2092,17 @@
          BOOLEAN Freeit
          );
  
@@ -822,7 +821,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
          LDAPControlA **Controls
          );
-@@ -1974,7 +2114,9 @@ WINLDAPAPI ULONG LDAPAPI ldap_free_controls (
+@@ -1974,7 +2114,9 @@
  //  string should not be freed.
  //
  
@@ -832,7 +831,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
  
  #if LDAP_UNICODE
-@@ -1983,6 +2125,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_err2stringA( ULONG err );
+@@ -1983,6 +2125,7 @@
  
  #else
  
@@ -840,7 +839,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
  
  #endif
-@@ -1991,6 +2134,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_err2string( ULONG err );
+@@ -1991,6 +2134,7 @@
  //  ldap_perror does nothing and is here just for compatibility.
  //
  
@@ -848,7 +847,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI void LDAPAPI ldap_perror( LDAP *ld, _In_ const PCHAR msg );
  
  //
-@@ -1998,6 +2142,7 @@ WINLDAPAPI void LDAPAPI ldap_perror( LDAP *ld, _In_ const PCHAR msg );
+@@ -1998,6 +2142,7 @@
  //  freed so should not be freed explicitly.
  //
  
@@ -856,7 +855,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_entry( LDAP *ld, LDAPMessage *res );
  
  //
-@@ -2005,6 +2150,7 @@ WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_entry( LDAP *ld, LDAPMessage *res );
+@@ -2005,6 +2150,7 @@
  //  freed so should not be freed explicitly.
  //
  
@@ -864,7 +863,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_entry( LDAP *ld, LDAPMessage *entry );
  
  //
-@@ -2012,6 +2158,7 @@ WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_entry( LDAP *ld, LDAPMessage *entry );
+@@ -2012,6 +2158,7 @@
  //  to a server request.
  //
  
@@ -872,7 +871,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_count_entries( LDAP *ld, LDAPMessage *res );
  
  //
-@@ -2031,12 +2178,14 @@ typedef struct berelement {
+@@ -2031,12 +2178,14 @@
  //  multi-threaded apps) so it should not be freed.
  //
  
@@ -887,7 +886,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
          LDAP            *ld,
          LDAPMessage     *entry,
-@@ -2049,6 +2198,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_first_attributeA(
+@@ -2049,6 +2198,7 @@
  
  #else
  
@@ -895,7 +894,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
          LDAP            *ld,
          LDAPMessage     *entry,
-@@ -2061,12 +2211,14 @@ WINLDAPAPI PCHAR LDAPAPI ldap_first_attribute(
+@@ -2061,12 +2211,14 @@
  //  freed.
  //
  
@@ -910,7 +909,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
          LDAP            *ld,
          LDAPMessage     *entry,
-@@ -2080,6 +2232,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_next_attributeA(
+@@ -2080,6 +2232,7 @@
  
  #else
  
@@ -918,7 +917,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
          LDAP            *ld,
          LDAPMessage     *entry,
-@@ -2099,11 +2252,13 @@ WINLDAPAPI PCHAR LDAPAPI ldap_next_attribute(
+@@ -2099,11 +2252,13 @@
  //  ldap_value_free.
  //
  
@@ -932,7 +931,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
          LDAP            *ld,
          LDAPMessage     *entry,
-@@ -2116,6 +2271,7 @@ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_valuesA(
+@@ -2116,6 +2271,7 @@
  
  #else
  
@@ -940,7 +939,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
          LDAP            *ld,
          LDAPMessage     *entry,
-@@ -2138,11 +2294,13 @@ WINLDAPAPI _Ret_maybenull_ PCHAR *LDAPAPI ldap_get_values(
+@@ -2138,11 +2294,13 @@
  //  ldap_value_free_len.
  //
  
@@ -954,7 +953,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
      LDAP            *ExternalHandle,
      LDAPMessage     *Message,
-@@ -2155,6 +2313,7 @@ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_lenA (
+@@ -2155,6 +2313,7 @@
  
  #else
  
@@ -962,7 +961,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
      LDAP            *ExternalHandle,
      LDAPMessage     *Message,
-@@ -2168,7 +2327,9 @@ WINLDAPAPI struct berval **LDAPAPI ldap_get_values_len (
+@@ -2168,7 +2327,9 @@
  //  Return the number of values in a list returned by ldap_get_values.
  //
  
@@ -972,7 +971,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
  
  #if LDAP_UNICODE
-@@ -2177,6 +2338,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_count_valuesA( _In_opt_z_ PCHAR *vals );
+@@ -2177,6 +2338,7 @@
  
  #else
  
@@ -980,7 +979,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
  
  #endif
-@@ -2187,13 +2349,16 @@ WINLDAPAPI ULONG LDAPAPI ldap_count_values( _In_opt_z_ PCHAR *vals );
+@@ -2187,13 +2349,16 @@
  //  Return the number of values in a list returned by ldap_get_values_len.
  //
  
@@ -997,7 +996,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
  
  #if LDAP_UNICODE
-@@ -2202,6 +2367,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_value_freeA( _In_opt_z_ PCHAR *vals );
+@@ -2202,6 +2367,7 @@
  
  #else
  
@@ -1005,7 +1004,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
  
  #endif
-@@ -2212,6 +2378,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_value_free( _In_opt_z_ PCHAR *vals );
+@@ -2212,6 +2378,7 @@
  //  Free structures returned by ldap_get_values_len.
  //
  
@@ -1013,7 +1012,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_value_free_len( struct berval **vals );
  
  //
-@@ -2219,7 +2386,9 @@ WINLDAPAPI ULONG LDAPAPI ldap_value_free_len( struct berval **vals );
+@@ -2219,7 +2386,9 @@
  //  by calling ldap_memfree.
  //
  
@@ -1023,7 +1022,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
  
  #if LDAP_UNICODE
-@@ -2228,6 +2397,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_get_dnA( LDAP *ld, LDAPMessage *entry );
+@@ -2228,6 +2397,7 @@
  
  #else
  
@@ -1031,7 +1030,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
  
  #endif
-@@ -2238,7 +2408,9 @@ WINLDAPAPI PCHAR LDAPAPI ldap_get_dn( LDAP *ld, LDAPMessage *entry );
+@@ -2238,7 +2408,9 @@
  //  calling ldap_value_free.
  //
  
@@ -1041,7 +1040,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
  
  #if LDAP_UNICODE
-@@ -2247,6 +2419,7 @@ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dnA( _In_ const PSTR dn, ULONG notypes );
+@@ -2247,6 +2419,7 @@
  
  #else
  
@@ -1049,7 +1048,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
  
  #endif
-@@ -2257,7 +2430,9 @@ WINLDAPAPI PCHAR *LDAPAPI ldap_explode_dn( _In_ const PSTR dn, ULONG notypes );
+@@ -2257,7 +2430,9 @@
  //  ldap_memfree.
  //
  
@@ -1059,7 +1058,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
  
  #if LDAP_UNICODE
-@@ -2266,6 +2441,7 @@ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufnA( _In_ const PSTR dn );
+@@ -2266,6 +2441,7 @@
  
  #else
  
@@ -1067,7 +1066,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
  
  #endif
-@@ -2277,10 +2453,12 @@ WINLDAPAPI PCHAR LDAPAPI ldap_dn2ufn( _In_ const PSTR dn );
+@@ -2277,10 +2453,12 @@
  //  values that you've gotten from ldap_open, ldap_get_values, etc.
  //
  
@@ -1081,7 +1080,7 @@ index 6db741e1..f1633622 100644
  
  #if LDAP_UNICODE
  
-@@ -2288,6 +2466,7 @@ WINLDAPAPI VOID LDAPAPI ber_bvfree( struct berval *bv );
+@@ -2288,6 +2466,7 @@
  
  #else
  
@@ -1089,7 +1088,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
  
  #endif
-@@ -2304,10 +2483,12 @@ WINLDAPAPI VOID LDAPAPI ldap_memfree( _In_ PCHAR Block );
+@@ -2304,10 +2483,12 @@
  //  to ldap_memfree.
  //
  
@@ -1102,7 +1101,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
      _In_ const PSTR ufn,
      _Outptr_ PSTR *pDn
-@@ -2319,6 +2500,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_ufn2dnA (
+@@ -2319,6 +2500,7 @@
  
  #else
  
@@ -1110,7 +1109,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_ufn2dn (
      _In_ const PSTR ufn,
      _Outptr_ PSTR *pDn
-@@ -2426,6 +2608,7 @@ typedef struct ldap_apifeature_infoW {
+@@ -2426,6 +2608,7 @@
  //  free all resources)
  //
  
@@ -1118,7 +1117,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
      HANDLE hInstance
      );
-@@ -2458,12 +2641,14 @@ WINLDAPAPI ULONG LDAPAPI ldap_cleanup (
+@@ -2458,12 +2641,14 @@
  //  be used for attributes that really are raw binary.
  //
  
@@ -1133,7 +1132,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
     _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
     ULONG   sourceLength,
-@@ -2477,6 +2662,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_elementA (
+@@ -2477,6 +2662,7 @@
  
  #else
  
@@ -1141,7 +1140,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_escape_filter_element (
     _In_reads_bytes_(sourceLength) PCHAR   sourceFilterElement,
     ULONG   sourceLength,
-@@ -2505,6 +2691,8 @@ WINLDAPAPI VOID LDAPAPI ldap_set_dbg_routine( DBGPRINT DebugPrintRoutine );
+@@ -2505,6 +2691,8 @@
  //
  
  
@@ -1150,7 +1149,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI int LDAPAPI
  LdapUTF8ToUnicode(
      _In_reads_(cchSrc) LPCSTR lpSrcStr,
-@@ -2513,6 +2701,8 @@ LdapUTF8ToUnicode(
+@@ -2513,6 +2701,8 @@
      int cchDest
      );
  
@@ -1159,7 +1158,17 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI
  int LDAPAPI
  LdapUnicodeToUTF8(
-@@ -2570,6 +2760,7 @@ typedef struct ldapsortkeyA {
+@@ -2538,6 +2728,9 @@
+ #define LDAP_SERVER_RESP_SORT_OID_W L"1.2.840.113556.1.4.474"
+ 
+ typedef struct ldapsearch LDAPSearch, *PLDAPSearch;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PLDAPSearch PLDAPSearch;
++#endif
+ 
+ typedef struct ldapsortkeyW {
+ 
+@@ -2570,6 +2763,7 @@
  //  Use this one rather than ldap_encode_sort_control as this is per RFC.
  //
  
@@ -1167,7 +1176,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2577,6 +2768,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
+@@ -2577,6 +2771,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1175,7 +1184,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPSortKeyW  *SortKeys,
-@@ -2589,6 +2781,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
+@@ -2589,6 +2784,7 @@
  //  to free the attribute value, if it's returned.
  //
  
@@ -1183,7 +1192,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPControlA  *Control,
-@@ -2596,6 +2789,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
+@@ -2596,6 +2792,7 @@
          _Outptr_opt_result_maybenull_ PCHAR          *Attribute
          );
  
@@ -1191,7 +1200,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPControlW  *Control,
-@@ -2610,6 +2804,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
+@@ -2610,6 +2807,7 @@
  
  #else
  
@@ -1199,7 +1208,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2617,6 +2812,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
+@@ -2617,6 +2815,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1207,7 +1216,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
          PLDAP           ExternalHandle,
          PLDAPControlA  *Control,
-@@ -2634,6 +2830,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
+@@ -2634,6 +2833,7 @@
  //  ldap_create_sort_control defined above.
  //
  
@@ -1215,7 +1224,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPSortKeyW  *SortKeys,
-@@ -2641,6 +2838,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
+@@ -2641,6 +2841,7 @@
          BOOLEAN Criticality
          );
  
@@ -1223,7 +1232,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2654,6 +2852,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
+@@ -2654,6 +2855,7 @@
  
  #else
  
@@ -1231,7 +1240,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_control (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2668,6 +2867,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_control (
+@@ -2668,6 +2870,7 @@
  //  ldap_create_page_control.
  //
  
@@ -1239,7 +1248,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
-@@ -2676,6 +2876,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
+@@ -2676,6 +2879,7 @@
          PLDAPControlW  *Control
          );
  
@@ -1247,7 +1256,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
-@@ -2684,6 +2885,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
+@@ -2684,6 +2888,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1255,7 +1264,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
          PLDAP           ExternalHandle,
          PLDAPControlW  *ServerControls,
-@@ -2691,6 +2893,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
+@@ -2691,6 +2896,7 @@
          struct berval  **Cookie     // Use ber_bvfree to free
          );
  
@@ -1263,7 +1272,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
          PLDAP           ExternalHandle,
          PLDAPControlA  *ServerControls,
-@@ -2705,6 +2908,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
+@@ -2705,6 +2911,7 @@
  
  #else
  
@@ -1271,7 +1280,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
-@@ -2713,6 +2917,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
+@@ -2713,6 +2920,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1279,7 +1288,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
          PLDAP           ExternalHandle,
          PLDAPControlA  *ServerControls,
-@@ -2756,6 +2961,8 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
+@@ -2756,6 +2964,8 @@
  #define LDAP_PAGED_RESULT_OID_STRING "1.2.840.113556.1.4.319"
  #define LDAP_PAGED_RESULT_OID_STRING_W L"1.2.840.113556.1.4.319"
  
@@ -1288,7 +1297,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
          PLDAP           ExternalHandle,
          _In_ const PWSTR    DistinguishedName,
-@@ -2770,6 +2977,8 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
+@@ -2770,6 +2980,8 @@
          PLDAPSortKeyW  *SortKeys
      );
  
@@ -1297,7 +1306,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
          PLDAP           ExternalHandle,
          _In_ const PSTR     DistinguishedName,
-@@ -2790,6 +2999,8 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
+@@ -2790,6 +3002,8 @@
  
  #else
  
@@ -1306,7 +1315,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
          PLDAP           ExternalHandle,
          const PSTR      DistinguishedName,
-@@ -2806,6 +3017,7 @@ WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
+@@ -2806,6 +3020,7 @@
  
  #endif
  
@@ -1314,7 +1323,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_get_next_page(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchHandle,
-@@ -2813,6 +3025,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_get_next_page(
+@@ -2813,6 +3028,7 @@
          ULONG          *MessageNumber
      );
  
@@ -1322,7 +1331,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_get_next_page_s(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchHandle,
-@@ -2822,6 +3035,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_get_next_page_s(
+@@ -2822,6 +3038,7 @@
          LDAPMessage     **Results
      );
  
@@ -1330,7 +1339,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_get_paged_count(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchBlock,
-@@ -2829,6 +3043,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_get_paged_count(
+@@ -2829,6 +3046,7 @@
          PLDAPMessage    Results
      );
  
@@ -1338,7 +1347,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_search_abandon_page(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchBlock
-@@ -2872,6 +3087,7 @@ typedef struct ldapvlvinfo {
+@@ -2872,6 +3090,7 @@
  } LDAPVLVInfo, *PLDAPVLVInfo;
  
  
@@ -1346,7 +1355,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
          PLDAP             ExternalHandle,
          PLDAPVLVInfo      VlvInfo,
-@@ -2879,6 +3095,7 @@ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
+@@ -2879,6 +3098,7 @@
          PLDAPControlW    *Control
      );
  
@@ -1354,7 +1363,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
          PLDAP             ExternalHandle,
          PLDAPVLVInfo      VlvInfo,
-@@ -2886,6 +3103,7 @@ WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
+@@ -2886,6 +3106,7 @@
          PLDAPControlA    *Control
      );
  
@@ -1362,7 +1371,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
          PLDAP            ExternalHandle,
          PLDAPControlW   *Control,
-@@ -2895,6 +3113,7 @@ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
+@@ -2895,6 +3116,7 @@
          PINT             ErrCode
      );
  
@@ -1370,7 +1379,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
          PLDAP             ExternalHandle,
          PLDAPControlA    *Control,
-@@ -2940,6 +3159,7 @@ WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
+@@ -2940,6 +3162,7 @@
  // The operation has a default timeout of about 30 seconds.
  //
  
@@ -1378,7 +1387,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
      IN   PLDAP          ExternalHandle,
      OUT  PULONG         ServerReturnValue,
-@@ -2949,6 +3169,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
+@@ -2949,6 +3172,7 @@
  );
  
  
@@ -1386,7 +1395,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
      IN   PLDAP          ExternalHandle,
      OUT  PULONG         ServerReturnValue,
-@@ -2970,6 +3191,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
+@@ -2970,6 +3194,7 @@
  // The operation has a default timeout of about 30 seconds.
  //
  
@@ -1394,7 +1403,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI BOOLEAN LDAPAPI ldap_stop_tls_s (
      IN  PLDAP ExternalHandle
   );
-@@ -3009,6 +3231,7 @@ WINLDAPAPI BOOLEAN LDAPAPI ldap_stop_tls_s (
+@@ -3009,6 +3234,7 @@
  //  freed so should not be freed explicitly.
  //
  
@@ -1402,7 +1411,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_reference( LDAP *ld, LDAPMessage *res );
  
  //
-@@ -3016,6 +3239,7 @@ WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_reference( LDAP *ld, LDAPMessage *res
+@@ -3016,6 +3242,7 @@
  //  freed so should not be freed explicitly.
  //
  
@@ -1410,7 +1419,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_reference( LDAP *ld, LDAPMessage *entry );
  
  //
-@@ -3023,18 +3247,21 @@ WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_reference( LDAP *ld, LDAPMessage *entr
+@@ -3023,18 +3250,21 @@
  //  response to a search request.
  //
  
@@ -1432,7 +1441,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -3047,6 +3274,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
+@@ -3047,6 +3277,7 @@
  
  #else
  
@@ -1440,7 +1449,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -3066,6 +3294,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
+@@ -3066,6 +3297,7 @@
  //  These are thread safe.
  //
  
@@ -1448,7 +1457,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
          LDAP *ld,
          _In_ const PWSTR Oid,
-@@ -3075,6 +3304,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
+@@ -3075,6 +3307,7 @@
          ULONG           *MessageNumber
          );
  
@@ -1456,7 +1465,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
          LDAP *ld,
          _In_ const PSTR Oid,
-@@ -3084,6 +3314,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
+@@ -3084,6 +3317,7 @@
          ULONG           *MessageNumber
          );
  
@@ -1464,7 +1473,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
          LDAP            *ExternalHandle,
          _In_ PSTR           Oid,
-@@ -3094,6 +3325,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
+@@ -3094,6 +3328,7 @@
          struct berval   **ReturnedData
          );
  
@@ -1472,7 +1481,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
          LDAP            *ExternalHandle,
          _In_ PWSTR          Oid,
-@@ -3113,6 +3345,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
+@@ -3113,6 +3348,7 @@
  
  #else
  
@@ -1480,7 +1489,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
          LDAP *ld,
          const PSTR Oid,
-@@ -3126,6 +3359,7 @@ WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
+@@ -3126,6 +3362,7 @@
  
  #endif
  
@@ -1488,7 +1497,7 @@ index 6db741e1..f1633622 100644
  WINLDAPAPI ULONG LDAPAPI ldap_close_extended_op(
          LDAP    *ld,
          ULONG   MessageNumber
-@@ -3225,13 +3459,16 @@ typedef struct LdapReferralCallback {
+@@ -3225,13 +3462,16 @@
  //  LdapGetLastError();
  //
  
@@ -1506,7 +1515,7 @@ index 6db741e1..f1633622 100644
  
  //
  // This is an arrangement for specifying client certificates while establishing
-@@ -3289,6 +3526,7 @@ typedef BOOLEAN (_cdecl VERIFYSERVERCERT) (
+@@ -3289,6 +3529,7 @@
  //  came from.  It can return NULL if the connection has already been freed.
  //
  

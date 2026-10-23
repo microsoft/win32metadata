@@ -182,7 +182,13 @@
  //
  // HRESULT_FROM_WIN32(x) used to be a macro, however we now run it as an inline function
  // to prevent double evaluation of 'x'. If you still need the macro, you can use __HRESULT_FROM_WIN32(x)
-@@ -35862,6 +36009,111 @@
+@@ -30338,4 +30485,5 @@
+ #if !defined(_HRESULT_DEFINED) && !defined(__midl)
+ #define _HRESULT_DEFINED
++_Win32_NativeTypedef_
+ typedef _Return_type_success_(return >= 0) long HRESULT;
+ #endif
+@@ -35862,6 +36010,111 @@
  // OLE is waiting before retrying a request.
  //
  #define RPC_S_WAITONTIMER                _HRESULT_TYPEDEF_(0x80010116L)
@@ -294,7 +300,13 @@
  
  //
  // MessageId: RPC_E_CALL_COMPLETE
-@@ -66990,4 +67242,3295 @@
+@@ -39938,4 +40191,5 @@
+ #if !defined(_HRESULT_DEFINED) && !defined(__midl)
+ #define _HRESULT_DEFINED
++_Win32_NativeTypedef_
+ typedef _Return_type_success_(return >= 0) long HRESULT;
+ #endif
+@@ -66990,4 +67244,3295 @@
  //
  #define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT _HRESULT_TYPEDEF_(0xC9280004L)
  

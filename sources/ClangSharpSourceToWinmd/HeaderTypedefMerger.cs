@@ -14,6 +14,89 @@ namespace ClangSharpSourceToWinmd
         private const string NativeTypedefName = "global::Windows.Win32.Foundation.Metadata.NativeTypedefAttribute";
         private const string ArchitectureName = "global::Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute";
 
+        internal static CSharpCompilation LowerConstants(CSharpCompilation compilation, bool writeModifiedFiles = true)
+        {
+            var storageTypes = new Dictionary<ITypeSymbol, ITypeSymbol>(SymbolEqualityComparer.Default);
+            var rewritten = compilation;
+            foreach (var tree in compilation.SyntaxTrees)
+            {
+                var model = compilation.GetSemanticModel(tree);
+                var replacements = new Dictionary<TypeSyntax, TypeSyntax>();
+                foreach (var field in tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>()
+                    .Where(field => field.Modifiers.Any(SyntaxKind.ConstKeyword)))
+                {
+                    var storage = GetStorage(field.Declaration.Type);
+                    if (storage != null)
+                    {
+                        var symbol = model.GetDeclaredSymbol(field.Declaration.Variables.First());
+                        if (!symbol.GetAttributes().Any(attribute => attribute.AttributeClass?.Name == "NativeTypeNameAttribute"))
+                            throw new InvalidDataException($"Header native typedef constant '{symbol.ToDisplayString()}' " +
+                                "requires NativeTypeName to preserve its declared metadata type.");
+                        replacements.Add(field.Declaration.Type, StorageSyntax(storage, field.Declaration.Type));
+                    }
+                    foreach (var variable in field.Declaration.Variables)
+                        LowerCasts(variable.Initializer?.Value);
+                }
+                foreach (var member in tree.GetRoot().DescendantNodes().OfType<EnumMemberDeclarationSyntax>())
+                    LowerCasts(member.EqualsValue?.Value);
+                if (replacements.Count == 0)
+                    continue;
+                var replacement = tree.WithRootAndOptions(tree.GetRoot().ReplaceNodes(replacements.Keys,
+                    (original, _) => replacements[original]), tree.Options);
+                if (writeModifiedFiles)
+                    File.WriteAllText(tree.FilePath, replacement.GetText().ToString());
+                rewritten = rewritten.ReplaceSyntaxTree(tree, replacement);
+
+                void LowerCasts(ExpressionSyntax expression)
+                {
+                    if (expression == null)
+                        return;
+                    foreach (var cast in expression.DescendantNodesAndSelf().OfType<CastExpressionSyntax>())
+                    {
+                        var storage = GetStorage(cast.Type);
+                        if (storage != null)
+                            replacements.Add(cast.Type, StorageSyntax(storage, cast.Type));
+                    }
+                }
+
+                ITypeSymbol GetStorage(TypeSyntax syntax)
+                {
+                    if (model.GetTypeInfo(syntax).Type is not INamedTypeSymbol type || type.TypeKind != TypeKind.Struct ||
+                        !type.GetAttributes().Any(attribute => AttributeName(attribute) == NativeTypedefName))
+                        return null;
+                    if (storageTypes.TryGetValue(type, out var cached))
+                        return cached;
+                    var declarations = type.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
+                        .OfType<StructDeclarationSyntax>().ToArray();
+                    if (!declarations.Any(declaration => HeaderEnumGroupMerger.IsHeaderTypesFile(declaration.SyntaxTree.FilePath)))
+                        return null;
+                    ITypeSymbol valueType = null;
+                    foreach (var declaration in declarations)
+                    {
+                        var attributes = type.GetAttributes().Where(attribute =>
+                            attribute.ApplicationSyntaxReference?.SyntaxTree == declaration.SyntaxTree &&
+                            declaration.AttributeLists.Any(list => list.Span.Contains(attribute.ApplicationSyntaxReference.Span))).ToArray();
+                        var fragment = new Fragment(declaration.SyntaxTree, declaration, type, attributes);
+                        var incoming = GetValueType(fragment, compilation.GetSemanticModel(declaration.SyntaxTree));
+                        if (valueType != null && !SymbolEqualityComparer.Default.Equals(valueType, incoming))
+                            throw Error(fragment, "Conflicting native typedef constant storage types.");
+                        valueType = incoming;
+                    }
+                    if (valueType?.SpecialType is not (SpecialType.System_SByte or SpecialType.System_Byte or
+                        SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char or
+                        SpecialType.System_Int32 or SpecialType.System_UInt32 or
+                        SpecialType.System_Int64 or SpecialType.System_UInt64))
+                        valueType = null;
+                    storageTypes.Add(type, valueType);
+                    return valueType;
+                }
+            }
+            return rewritten;
+        }
+
+        private static TypeSyntax StorageSyntax(ITypeSymbol storage, TypeSyntax original) =>
+            SyntaxFactory.ParseTypeName(storage.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).WithTriviaFrom(original);
+
         internal static CSharpCompilation Merge(CSharpCompilation compilation)
         {
             var fragments = new List<Fragment>();

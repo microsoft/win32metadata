@@ -12,7 +12,6 @@ namespace Win32MetadataScraperTests
     public class DhcpMigrationTests
     {
         private const string Namespace = "Windows.Win32.NetworkManagement.Dhcp";
-        // Native SAL names NumElements; replacing this legacy index needs scoped field-array inference.
         private const string HeldArray = "DHCP_IP_ARRAY::Elements=[NativeArrayInfo(CountParamIndex=0)]";
 
         internal static IEnumerable<(string Header, string OS, string[] Functions)> HeaderContracts()
@@ -97,11 +96,13 @@ DhcpV4GetClientInfo DhcpV6CreateClientInfo DhcpV4GetFreeIPAddress DhcpV6GetFreeI
                 .Select(line => line.Split('=')[0]).ToHashSet(StringComparer.Ordinal);
             foreach (string function in contracts.SelectMany(contract => contract.Functions))
                 Assert.DoesNotContain(function, platforms);
-            Assert.Equal(1, File.ReadAllText(Path.Combine(sdk, "Partitions", "Dhcp", "settings.rsp"))
-                .Split("parse-win32-annotations").Length - 1);
+            HeaderMigrationAssertions.AssertAnnotationReaderEnabled("Dhcp");
             string emitter = File.ReadAllText(Path.Combine(sdk, "emitter.settings.rsp"));
-            Assert.Single(emitter.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
-                .Where(line => line == HeldArray));
+            Assert.DoesNotContain(HeldArray, emitter);
+            string native = File.ReadAllText(Path.Combine(sdk, "RecompiledIdlHeaders", "um", "dhcpsapi.h"));
+            Assert.Matches(@"typedef\s+struct\s+_DHCP_IP_ARRAY\s*\{\s*DWORD\s+NumElements;\s*" +
+                @"#if defined\(MIDL_PASS\)\s*\[size_is\(NumElements\)\]\s*#endif // MIDL_PASS\s*" +
+                @"_Field_size_\(NumElements\)\s+LPDHCP_IP_ADDRESS\s+Elements;\s*//array\s*\}", native);
             Assert.DoesNotContain("--nativeFieldArrayInfo", emitter);
         }
 

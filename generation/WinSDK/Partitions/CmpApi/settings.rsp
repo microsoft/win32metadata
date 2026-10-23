@@ -1,5 +1,3 @@
---exclude
-COMPRESSOR_HANDLE__
 --traverse
 <IncludeRoot>/um/compressapi.h
 --namespace

@@ -17,11 +17,14 @@ namespace ClangSharpSourceToWinmd
     {
         private CSharpCompilation compilation;
         private Dictionary<string, string> typeImports;
+        internal IReadOnlyDictionary<string, string> FieldRenames { get; }
 
-        private ClangSharpSourceCompilation(CSharpCompilation compilation, Dictionary<string, string> typeImports)
+        private ClangSharpSourceCompilation(CSharpCompilation compilation, Dictionary<string, string> typeImports,
+            IReadOnlyDictionary<string, string> fieldRenames)
         {
             this.compilation = compilation;
             this.typeImports = typeImports;
+            this.FieldRenames = fieldRenames;
         }
 
         public CSharpCompilation CSharpCompilation => this.compilation;
@@ -119,6 +122,32 @@ namespace ClangSharpSourceToWinmd
             return Path.GetFileName(fileName).Replace(".modified.cs", string.Empty);
         }
 
+        private static void ValidateHeaderTypesFamilies(IEnumerable<string> files)
+        {
+            var paths = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
+            foreach (string file in paths.Where(HeaderEnumGroupMerger.IsHeaderTypesFile))
+            {
+                if (GetArchitectureForFileName(file) == Architecture.None ||
+                    !File.ReadAllText(file).StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal))
+                    continue;
+                string parent = Path.GetDirectoryName(Path.GetDirectoryName(file));
+                string[] siblings = new[] { "x86", "x64", "arm64" }
+                    .Select(architecture => Path.Combine(parent, architecture, Path.GetFileName(file))).ToArray();
+                var present = siblings.Where(paths.Contains).ToArray();
+                if (present.Length == 3 && present.All(path =>
+                    File.ReadAllText(path).StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal)))
+                    continue;
+                bool common = present.Length == 1 && GetArchitectureForFileName(file) == Architecture.X86 &&
+                    !siblings.Skip(1).Any(sibling => Path.GetFileName(file) == "header-types.modified.cs"
+                        ? paths.Any(path => string.Equals(Path.GetDirectoryName(path), Path.GetDirectoryName(sibling),
+                            StringComparison.OrdinalIgnoreCase))
+                        : paths.Contains(sibling.Replace(".header-types.modified.cs", ".modified.cs", StringComparison.Ordinal)));
+                if (!common)
+                    throw new InvalidOperationException($"CSSW004: Incomplete successful header-types source family '{file}'. " +
+                        "Supply all three successfully generated companions, including successful empty outputs; missing or failed profiles are not empty outputs.");
+            }
+        }
+
         public static ClangSharpSourceCompilation Create(
             string sourceDirectory,
             string arch,
@@ -145,6 +174,7 @@ namespace ClangSharpSourceToWinmd
             Directory.CreateDirectory(objDir);
 
             var refs = (addedRefs ?? Enumerable.Empty<string>()).Select(r => MetadataReference.CreateFromFile(r)).ToArray();
+            IReadOnlyDictionary<string, string> fieldRenames = new Dictionary<string, string>();
 
             TreeInfoFinder infoFinder = new TreeInfoFinder();
 
@@ -179,6 +209,9 @@ namespace ClangSharpSourceToWinmd
                 modifiedFiles.Add(modifiedFile);
             }
 
+            if (arch == "crossarch")
+                ValidateHeaderTypesFamilies(modifiedFiles);
+
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
             Console.WriteLine($"  Moving names to correct namespaces...");
@@ -187,6 +220,8 @@ namespace ClangSharpSourceToWinmd
                 if (!treeFile.EndsWith(".manual.cs"))
                 {
                     var tree = ReadTree(treeFile);
+                    // Loose constants retain their source namespace when their owning enum is routed elsewhere.
+                    infoFinder.AnalyzeTree(tree);
                     tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, requiredNamespaces);
 
                     infoFinder.AnalyzeTree(tree);
@@ -200,7 +235,7 @@ namespace ClangSharpSourceToWinmd
 
             ShowMemory();
 
-            HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch);
+            HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch, infoFinder.EnumMemberNames);
 
             Console.WriteLine($"  Cleaning syntax trees...");
 
@@ -218,6 +253,8 @@ namespace ClangSharpSourceToWinmd
 
             if (arch == "crossarch")
             {
+                foreach (var tree in CrossArchConstantQualifier.Qualify(FilesToTrees(modifiedFiles).ToArray(), refs))
+                    WriteTree(tree, tree.FilePath);
                 List<string> partitionsNotNeedingCrossarch = new List<string>();
 
                 Console.WriteLine($"  Merging cross-arch items...");
@@ -253,7 +290,8 @@ namespace ClangSharpSourceToWinmd
                 CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(filesToMerge, opt);
                 HashSet<string> nonX86TreesUsedForX86 = crossArchSyntaxMap.Get64BitTreesUsedForX86();
 
-                CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap);
+                CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap,
+                    FilesToTrees(modifiedFiles.Where(File.Exists)));
                 System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Architecture.X86)), opt, (x86Tree) =>
                 {
                     string x64FileName = x86Tree.FilePath.Replace(@"\x86\", @"\x64\", StringComparison.OrdinalIgnoreCase);
@@ -284,6 +322,8 @@ namespace ClangSharpSourceToWinmd
 
                     WriteTree(fixed86Tree, fixed86Tree.FilePath);
                 });
+                fieldRenames = new ReadOnlyDictionary<string, string>(
+                    crossArchTreeMerger.FieldRenames.ToDictionary(pair => pair.Key, pair => pair.Value, StringComparer.Ordinal));
 
                 if (partitionsNotNeedingCrossarch.Count != 0)
                 {
@@ -307,7 +347,95 @@ namespace ClangSharpSourceToWinmd
                     refs,
                     compilationOptions);
 
-            // If netstandard.dll was not provided, inject it in.
+            comp = AddNetstandardReference(comp);
+
+            comp = MergeRepeatedStructs(comp);
+            comp = HeaderTypedefMerger.Merge(comp);
+            comp = HeaderTypedefMerger.LowerConstants(comp);
+            comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
+            HeaderEnumGroupMerger.ValidateAssociations(comp, arch);
+
+            Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
+            ShowMemory();
+
+            return new ClangSharpSourceCompilation(comp, typeImports, fieldRenames);
+        }
+
+        private static CSharpCompilation MergeRepeatedStructs(CSharpCompilation compilation)
+        {
+            var removals = new HashSet<StructDeclarationSyntax>();
+            var groups = compilation.SyntaxTrees.Where(tree =>
+                !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase) &&
+                !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
+                    declaration.Modifiers.Any(SyntaxKind.PartialKeyword) &&
+                    declaration.TypeParameterList == null && declaration.BaseList == null &&
+                    declaration.Members.All(member => member is FieldDeclarationSyntax field &&
+                        !field.Modifiers.Any(SyntaxKind.ConstKeyword) && !field.Modifiers.Any(SyntaxKind.StaticKeyword) &&
+                        field.Declaration.Variables.All(variable => variable.Initializer == null)))
+                .GroupBy(declaration => $"{SyntaxUtils.GetEnclosingNamespace(declaration)}.{declaration.Identifier.ValueText}",
+                    StringComparer.Ordinal).Where(group => group.Count() > 1);
+            foreach (var group in groups)
+            {
+                var copies = group.OrderBy(declaration => declaration.SyntaxTree.FilePath, StringComparer.Ordinal).ToArray();
+                if (copies.Select(declaration => declaration.SyntaxTree).Distinct().Count() != copies.Length ||
+                    copies.Skip(1).Any(declaration => !SyntaxFactory.AreEquivalent(copies[0], declaration)))
+                    continue;
+                var firstModel = compilation.GetSemanticModel(copies[0].SyntaxTree);
+                var firstSymbol = firstModel.GetDeclaredSymbol(copies[0]);
+                if (firstSymbol == null)
+                    continue;
+                // Identical text can refer to different field types or annotation arguments through using aliases.
+                if (copies.Skip(1).Any(declaration =>
+                {
+                    var model = compilation.GetSemanticModel(declaration.SyntaxTree);
+                    return !SymbolEqualityComparer.Default.Equals(firstSymbol, model.GetDeclaredSymbol(declaration)) ||
+                        !BindingsMatch(copies[0], firstModel, declaration, model);
+                }))
+                    continue;
+                removals.UnionWith(copies.Skip(1));
+            }
+            foreach (var group in removals.GroupBy(declaration => declaration.SyntaxTree))
+            {
+                var tree = group.Key;
+                var replacement = tree.WithRootAndOptions(
+                    tree.GetRoot().RemoveNodes(group, SyntaxRemoveOptions.KeepNoTrivia), tree.Options);
+                File.WriteAllText(tree.FilePath, replacement.GetText().ToString());
+                compilation = compilation.ReplaceSyntaxTree(tree, replacement);
+            }
+            return compilation;
+        }
+
+        private static bool BindingsMatch(StructDeclarationSyntax first, SemanticModel firstModel,
+            StructDeclarationSyntax second, SemanticModel secondModel)
+        {
+            var firstNodes = first.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax).ToArray();
+            var secondNodes = second.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax).ToArray();
+            if (firstNodes.Length != secondNodes.Length)
+                return false;
+            for (int i = 0; i < firstNodes.Length; i++)
+            {
+                var left = firstModel.GetSymbolInfo(firstNodes[i]);
+                var right = secondModel.GetSymbolInfo(secondNodes[i]);
+                if (left.CandidateReason != CandidateReason.None || right.CandidateReason != CandidateReason.None ||
+                    !SymbolEqualityComparer.Default.Equals(left.Symbol, right.Symbol))
+                    return false;
+                if (firstNodes[i] is ExpressionSyntax leftExpression && secondNodes[i] is ExpressionSyntax rightExpression)
+                {
+                    var leftType = firstModel.GetTypeInfo(leftExpression);
+                    var rightType = secondModel.GetTypeInfo(rightExpression);
+                    if (leftType.Type?.TypeKind == TypeKind.Error || rightType.Type?.TypeKind == TypeKind.Error ||
+                        !SymbolEqualityComparer.IncludeNullability.Equals(leftType.Type, rightType.Type) ||
+                        !SymbolEqualityComparer.IncludeNullability.Equals(leftType.ConvertedType, rightType.ConvertedType))
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        internal static CSharpCompilation AddNetstandardReference(CSharpCompilation comp)
+        {
             if (!comp.ReferencedAssemblyNames.Any(ran => ran.Name == "netstandard" && ran.Version.Major == 2 && ran.Version.Minor == 1))
             {
                 var netstandardPath = FindNetstandardDllPath();
@@ -318,15 +446,7 @@ namespace ClangSharpSourceToWinmd
 
                 comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
             }
-
-            comp = HeaderTypedefMerger.Merge(comp);
-            comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
-            HeaderEnumGroupMerger.ValidateAssociations(comp, arch);
-
-            Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
-            ShowMemory();
-
-            return new ClangSharpSourceCompilation(comp, typeImports);
+            return comp;
         }
 
         public ReadOnlyCollection<Diagnostic> GetDiagnostics()
@@ -459,7 +579,7 @@ namespace ClangSharpSourceToWinmd
             {
                 lock (this.EnumMemberNames)
                 {
-                    this.EnumMemberNames.Add(node.Identifier.ValueText);
+                    this.EnumMemberNames.Add(MetadataSyntaxTreeCleaner.GetEnumMemberIdentity(node, node.Identifier.ValueText));
                 }
 
                 base.VisitEnumMemberDeclaration(node);

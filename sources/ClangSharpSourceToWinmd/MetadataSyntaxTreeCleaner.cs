@@ -17,7 +17,17 @@ namespace ClangSharpSourceToWinmd
 
         internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
             => node.Modifiers.ToString() == "public const" &&
-                enumMemberNames.Contains(node.Declaration.Variables.First().Identifier.ValueText);
+                enumMemberNames.Contains(GetEnumMemberIdentity(node, node.Declaration.Variables.First().Identifier.ValueText));
+
+        internal static string GetEnumMemberIdentity(SyntaxNode node, string name)
+        {
+            string ns = string.Join(".", node.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                .Reverse().Select(declaration => declaration.Name.ToString()));
+            var owners = node.Ancestors().OfType<TypeDeclarationSyntax>()
+                .Where(owner => owner is not ClassDeclarationSyntax type || type.Identifier.ValueText != "Apis")
+                .Reverse().Select(owner => owner.Identifier.ValueText).Append(name);
+            return (ns.Length == 0 ? "" : ns + "::") + string.Join("::", owners);
+        }
 
         public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false)
         {

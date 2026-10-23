@@ -1,8 +1,22 @@
 diff --git a/um/projectedfslib.h b/um/projectedfslib.h
-index 2f8b77ff..338faf21 100644
 --- a/um/projectedfslib.h
 +++ b/um/projectedfslib.h
-@@ -140,6 +140,7 @@ typedef struct PRJ_STARTVIRTUALIZING_OPTIONS
+@@ -85,8 +85,14 @@
+ } PRJ_NOTIFICATION;
+ 
+ DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT;
++#endif
+ 
+ DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PRJ_DIR_ENTRY_BUFFER_HANDLE PRJ_DIR_ENTRY_BUFFER_HANDLE;
++#endif
+ 
+ typedef enum PRJ_EXT_INFO_TYPE {
+     PRJ_EXT_INFO_TYPE_SYMLINK = 1
+@@ -140,6 +146,7 @@
      UINT32 NotificationMappingsCount;
  } PRJ_STARTVIRTUALIZING_OPTIONS;
  
@@ -10,7 +24,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjStartVirtualizing(
      _In_ PCWSTR virtualizationRootPath,
-@@ -149,11 +150,13 @@ PrjStartVirtualizing(
+@@ -149,11 +156,13 @@
      _Outptr_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT* namespaceVirtualizationContext
      );
  
@@ -24,7 +38,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjClearNegativePathCache(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -166,6 +169,7 @@ typedef struct PRJ_VIRTUALIZATION_INSTANCE_INFO
+@@ -166,6 +175,7 @@
      UINT32 WriteAlignment;
  } PRJ_VIRTUALIZATION_INSTANCE_INFO;
  
@@ -32,7 +46,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjGetVirtualizationInstanceInfo(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -187,6 +191,7 @@ typedef struct PRJ_PLACEHOLDER_VERSION_INFO
+@@ -187,6 +197,7 @@
      UINT8 ContentID[PRJ_PLACEHOLDER_ID_LENGTH];
  } PRJ_PLACEHOLDER_VERSION_INFO;
  
@@ -40,7 +54,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjMarkDirectoryAsPlaceholder(
      _In_ PCWSTR rootPathName,
-@@ -231,6 +236,7 @@ typedef struct PRJ_PLACEHOLDER_INFO
+@@ -231,6 +242,7 @@
      UINT8 VariableData[1];
  } PRJ_PLACEHOLDER_INFO;
  
@@ -48,7 +62,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjWritePlaceholderInfo(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -239,6 +245,7 @@ PrjWritePlaceholderInfo(
+@@ -239,6 +251,7 @@
      _In_ UINT32 placeholderInfoSize
      );
  
@@ -56,7 +70,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjWritePlaceholderInfo2(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -273,6 +280,7 @@ typedef enum PRJ_UPDATE_FAILURE_CAUSES
+@@ -273,6 +286,7 @@
  
  DEFINE_ENUM_FLAG_OPERATORS(PRJ_UPDATE_FAILURE_CAUSES);
  
@@ -64,7 +78,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjUpdateFileIfNeeded(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -283,6 +291,7 @@ PrjUpdateFileIfNeeded(
+@@ -283,6 +297,7 @@
      _Out_opt_ PRJ_UPDATE_FAILURE_CAUSES* failureReason
      );
  
@@ -72,7 +86,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjDeleteFile(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -291,6 +300,7 @@ PrjDeleteFile(
+@@ -291,6 +306,7 @@
      _Out_opt_ PRJ_UPDATE_FAILURE_CAUSES* failureReason
     );
  
@@ -80,7 +94,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjWriteFileData(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -311,18 +321,21 @@ typedef enum PRJ_FILE_STATE
+@@ -311,18 +327,21 @@
  
  DEFINE_ENUM_FLAG_OPERATORS(PRJ_FILE_STATE);
  
@@ -102,7 +116,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI_(void)
  PrjFreeAlignedBuffer (
      _In_ void* buffer
-@@ -469,6 +482,7 @@ typedef struct PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS {
+@@ -469,6 +488,7 @@
  
  } PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS;
  
@@ -110,7 +124,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjCompleteCommand(
      _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
-@@ -481,6 +495,7 @@ PrjCompleteCommand(
+@@ -481,6 +501,7 @@
  
  #pragma region Enumeration APIs
  
@@ -118,7 +132,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjFillDirEntryBuffer(
      _In_ PCWSTR fileName,
-@@ -488,6 +503,7 @@ PrjFillDirEntryBuffer(
+@@ -488,6 +509,7 @@
      _In_ PRJ_DIR_ENTRY_BUFFER_HANDLE dirEntryBufferHandle
      );
  
@@ -126,7 +140,7 @@ index 2f8b77ff..338faf21 100644
  STDAPI
  PrjFillDirEntryBuffer2(
      _In_ PRJ_DIR_ENTRY_BUFFER_HANDLE dirEntryBufferHandle,
-@@ -496,18 +512,21 @@ PrjFillDirEntryBuffer2(
+@@ -496,18 +518,21 @@
      _In_opt_ PRJ_EXTENDED_INFO* extendedInfo
      );
  

@@ -1,8 +1,17 @@
 diff --git a/um/mmsyscom.h b/um/mmsyscom.h
-index 8a706a4f..6377ccbc 100644
 --- a/um/mmsyscom.h
 +++ b/um/mmsyscom.h
-@@ -293,6 +293,17 @@ DECLARE_HANDLE(HDRVR);
+@@ -273,6 +273,9 @@
+ 
+ #if (WINVER < 0x030a) || defined(_WIN32)
+ DECLARE_HANDLE(HDRVR);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDRVR HDRVR;
++#endif
+ #endif /* ifdef WINVER < 0x030a */
+ 
+ 
+@@ -293,6 +296,17 @@
  #ifdef _WIN32
  #define CALLBACK_THREAD     (CALLBACK_TASK)/* thread ID replaces 16 bit task */
  #define CALLBACK_EVENT      0x00050000l    /* dwCallback is an EVENT Handle */

@@ -1,6 +1,6 @@
 # Header annotation migration: problems and decisions
 
-Updated: 2026-10-22 (UTC).
+Updated: 2026-10-23 (UTC).
 
 This is the running record of migration blockers, their evidence, and the decisions
 made while resolving them. The goal is to express win32metadata's intended API
@@ -10,11 +10,299 @@ visible for review.
 
 ## Completion plan and next review
 
-The next run is header-only, using the annotated SDK as it stands. The previous
-decision to pursue a transitional image with API-specific sidecars still active
-is withdrawn. That mixed ownership left logical enums partly in headers and
-partly in sidecars; `TVITEMEXW_CHILDREN` exposed the resulting storage conflict.
+The next run follows a reviewed repair of the header-only source migration.
+The decision to pursue a transitional image with API-specific sidecars still
+active is withdrawn. That mixed ownership left logical enums partly in headers
+and partly in sidecars; `TVITEMEXW_CHILDREN` exposed the resulting storage conflict.
 Successful partition scraping did not establish a complete migration.
+
+Header-only attempt 070 completed all 395 native profiles and constant extraction,
+then failed combined emission. Its 362 association errors identify 33 missing
+logical enum providers. For `RPC_C_AUTHN_LEVEL`, the use annotations reached the
+generated source but the definition had remained only in the retired JSON
+auto-population rule. All seven native values survived as loose constants.
+The attempt is stopped and preserved. There is no complete NEW or OLD-to-NEW
+comparison. Subsequent user direction authorizes careful source-first repair and
+iteration, including demonstrated tooling fixes, rather than leaving work paused.
+
+The retained-source preflight also found 81 additional OLD enum identities without
+raw or processed providers, plus member gaps in 12 present groups. These require
+native-source classification, not automatic restoration. `SHARE_TYPE` is a
+confirmed unmigrated contract: the native `STYPE_*` constants remain in
+`LMShare.h`, but its group and uses were never authored there. At that preflight,
+only ten `NativeTypedef` providers appeared in the retained source; unannotated
+`BOOL` produced missing-type diagnostics. The source inventory now accounts for
+all 440 retired type contracts. Its latest static successor resolves the 56
+previously unqualified alias shapes, without treating record values or classes
+as pointer typedefs. Frozen source ports are not runtime or provider acceptance.
+
+The initial enum repair has 250 successful, sealed MIDL producers. Its bounded
+controls passed C compilation and surface checks on x86, x64 and arm64. All three
+C++ surface comparisons and the TreeView carrier-pattern check failed. Those
+inputs remain unchanged. The first C++ comparison fails between the OLD header's
+metadata-off and metadata-on modes because of an existing metadata-only anonymous
+enum; it does not reach the candidate comparison. TreeView's regex rejects a
+legitimate newline. These fixture defects require a test-only successor, not a
+header repair. VSTest also executed all seven cases despite the requested
+stop-on-failure setting. A separate SDK-free qualification now proves six exact
+singleton selections, rejection of a two-result selection, and stopping after an
+intentional first failure without launching the remaining cases. It used eight
+VSTest processes; both negative caller outcomes remain failures. The corrected
+test-only successor is separately admitted with this unchanged caller and exact
+seven-case catalog, reusing the sealed preparation.
+
+Live-checkout ordinary tests must preserve the existing native diagnostic policy:
+generator warning exits are positive successful outcomes when bindings exist,
+not an instruction to suppress `FlagEnum`, `MSInheritance` or `WarnUnusedResult`.
+The warning fixtures assert exact diagnostics and counts alongside the existing
+native-signature and physical-metadata assertions. The declaration-only parse
+still validates every diagnostic, but does not reprint a native diagnostic
+already reported by the original parse; duplicates within one parse remain
+visible. Unsupported native using-directive/anonymous-namespace errors remain
+errors, independently of successful native annotation-name binding.
+
+Real-MIDL test fixtures require a short workspace-local TEMP/TMP prefix. The same
+unchanged preparation test fails with MIDL9008 beneath the long session-artifact
+prefix and passes beneath `artifacts\t-002`; no preparation success policy or
+fixture spaces/quoting is changed. Source-state tests inspect effective global
+plus partition annotation settings and source-owned facts, not retired sidecar
+rows. Retiring a row does not prove source coverage: missing original-IDL floors
+and native associations remain explicit test failures, not accepted baselines.
+
+The manual-type inventory exposed replacement-era exclusions that survived
+deletion of their handwritten providers. The frozen source packet retires ten
+partition exclusions; four common exclusions have also been removed for
+`MONITORINFOEXA/W`, `SLIST_ENTRY`,
+`HSTRING_HEADER`, cluster records, `PROCESS_BASIC_INFORMATION` and
+`FILE_DISPOSITION_INFO`. Native fields, layout, guards and required annotations
+remain owned by the SDK originals. The original-IDL and include-selection repairs
+for HSTRING, EventRegistrationToken and four private VDS interfaces are frozen;
+regeneration and native/metadata qualification remain outstanding. Do not supply
+replacement structs from the emitter.
+
+Four complete-record color aliases and the x86 record-alias form of `SLIST_ENTRY`
+still need nominal-provider qualification. The GDI+ empty-class family now has
+the bounded producer qualification described below; whole-image qualification
+remains outstanding. Global empty-record filtering remains enabled. An OLD
+`IntPtr` field does not establish a native pointer typedef. Two power-information
+types have only qualified selected-SDK absence so far, not a proven removal
+decision.
+
+The inventory also separates 73 record-value/tag contracts from genuine pointer
+typedefs. A private synthetic diagnostic confirms that ordinary generation can
+emit fieldless nominal providers and preserve one- and two-pointer signatures.
+The physical TypeDefs have no fields or explicit ClassLayout row; this establishes
+no native object size. Empty-record exclusion removes their providers but leaves
+the references, causing compilation failure. Ordinary generation also retains
+unused forward declarations, so disabling the global filter is not approved.
+Referenced incomplete pointees, complete definitions, by-value uses and
+complete-empty classes need distinct treatment.
+
+The native `DECLARE_HANDLE` pattern also needs selective retention. Its complete
+`struct name__ { int unused; }` declaration has a real field in ordinary
+ClangSharp output. For referenced pointees with that exact native shape, retain
+the ordinary generated declaration, including its field and layout attributes.
+Do not replace it with an empty struct. Other complete storage definitions,
+by-value recovery and explicit exclusions stay outside this recovery path;
+unused handle declarations remain filtered.
+
+Complete native record aliases also need their own ordinary bindings when a
+retained signature names the alias rather than the primary record. The x86
+`SLIST_ENTRY` typedef aliases `_SINGLE_LIST_ENTRY`; a pointer remap alone leaves
+that alias undefined. A selective ordinary ClangSharp pass emits the referenced
+alias with its native fields and layout while retaining the primary provider.
+Native source coordinates and canonical identity select the result. Explicit
+exclusions, ambiguous aliases and already-resolved references remain protected.
+By-value aliases require ordinary generated instance storage; fieldless aliases
+cannot establish a new by-value contract.
+
+The global `exclude-empty-records` option dates to commit `d1402d9f` on
+2023-04-27. It was not introduced by this migration. Retiring the `autoTypes.json`
+and manual API replacements exposed the missing providers. The option filters
+binding generation, while the original record declarations and pointer references
+remain available in the Clang AST. The selected direction is to retain necessary
+source-derived nominal pointees, preserve complete-definition precedence and
+native pointer depths, and leave unrelated unused declarations excluded. This
+producer change is in the working tree and passes its bounded producer checks.
+It emits an
+ordinary empty struct for a referenced incomplete native record, without adding
+a `Value` field or `NativeTypedef`, changing pointer levels, or keeping unrelated
+empty records. No change to the native `UBiDi` declaration is needed.
+
+The 28 opaque-record regression cases now pass, including C and C++ pointer
+return/input/output/callback/field cases on x86, x64 and arm64, nested records in
+single-file and multi-file output, and the negative filtering/layout checks.
+The original selected-SDK ICU header also produces a fieldless `UBiDi` in a
+bounded physical WinMD on all three architectures. Its actual `ubidi_open`,
+`ubidi_close` and `ubidi_getLength` declaration nodes retain their pointer
+signatures and verified `icuuc.dll` imports. The SDK headers are unchanged.
+
+The implementation initially missed the existing decoder for ClangSharp's
+incorrectly escaped Windows source-location paths; it now shares that decoder
+with annotation processing. Appending a second partial enclosing struct could
+also lose a nested provider during WinMD emission. The merge now inserts it into
+the ordinary enclosing declaration. The missing VC include path, unrelated ICU
+enum imports copied into the bounded fixture, and incorrect OS-version and
+nested-name expectations were test/setup mistakes. They did not establish new
+limitations on empty structs.
+
+Private cohort `opaque-pointee-retention-001\after-007` records 31 passed opaque
+and SDK cases plus four passed existing annotation cases. Six other existing
+annotation cases fail on the generator's `FlagEnum` warning exit code; all six
+reproduce on the unchanged pre-fix runtime with identical fixture sources.
+The whole 41-case invocation therefore remains failed, not an all-green run.
+All seven implementation/test files match the frozen source, and the scraper,
+emitter and test portable PDBs bind to 69 verified SHA256 source documents.
+No production runtime has been replaced.
+
+The first actual-SDK consumer run failed during generation because the bounded
+fixture used the test assembly identity `Test.winmd`. CsWin32's normal C# 13
+friendly-overload polyfill path requires its primary `Windows.Win32` generator.
+Neither consumer compilation ran. The failed image and both generation failures
+remain preserved. The fixture now emits `Windows.Win32.winmd` through the
+unchanged emitter and asserts its embedded assembly identity. This is a fresh
+emission, not a file rename or binary rewrite.
+
+Private cohort `after-008` passes all 35 targeted opaque, SDK and related
+annotation cases, including the production-identity assertion on all three
+architectures. The actual x64 SDK declaration source is byte-identical to
+`after-007`, and the four producer source files are unchanged. All 69 current
+source/PDB document checks pass. The six separately established baseline warning
+failures were not selected again and remain unresolved. Consumer compilation
+against the corrected actual SDK-derived x64 image now succeeds with marshalling
+enabled and disabled. Both generation commands and both final compiler commands
+exit zero, with the same consumer, options, references and tools as the failed
+identity fixture. Root reverified all 41 new consumer artifacts and the actual
+command receipts, plus all 121 earlier consumer artifacts and their manifests.
+No native imports were executed. This completes the approved bounded `UBiDi`
+fix; it does not qualify the full SDK image.
+
+There is an existing metadata precedent. Exact OLD represents `GpCachedBitmap`
+as a fieldless ordinary value type with no custom attributes or explicit
+ClassLayout row. The selected SDK declares `class GpCachedBitmap;`, and its
+create/draw/delete APIs use `GpCachedBitmap**` and `GpCachedBitmap*`.
+The related fieldless `GpBitmap` and `GpGraphics` types originate from complete
+native type-checking classes; they are not evidence of incomplete declarations.
+
+The subsequent real-SDK GDI+ preflight confirmed that distinction matters to the
+producer. The incomplete-only recovery retained `GpCachedBitmap`, but ordinary
+empty-record filtering still removed the required complete definitions of
+`GpGraphics`, `GpImage` and `GpBitmap`. The same generated source contained the
+actual create/draw/delete declarations, so this was a missing-provider defect.
+
+Selective recovery now also admits source-empty definitions and recursively empty
+nonvirtual bases. A complete candidate cannot contain fields, methods, static
+members or other declarations apart from access labels. Its definition location,
+rather than an earlier forward declaration, identifies the supplemental output.
+The generated provider must still be fieldless and resolve an existing missing
+pointer reference. Explicit exclusions, native identity and scope checks remain
+active. Unused empty records and `DECLARE_HANDLE` sentinel bodies remain excluded;
+nonempty definitions are not replaced. Incomplete and complete-empty by-value
+uses remain errors. None of this establishes an allocation size or object layout.
+
+The final bounded cohort passes 46 selected cases. Eleven regression cases fail
+with the exact pre-correction producer and the same final fixtures. Actual
+selected-SDK GDI+ declarations now produce all four fieldless providers and the
+three verified `gdiplus.dll` imports in physical WinMDs on x86, x64 and arm64,
+preserving both pointer levels. SDK bytes are unchanged. The fixture initially
+omitted the `Status` definition's header, then attempted to generate unrelated
+C++ destructor bodies; it now traverses `gdiplustypes.h` and uses the production
+`exclude-funcs-with-body` setting. Those failed setup cohorts remain preserved.
+
+The separately combined tooling control passed all 380 required component cases
+and includes fresh production tools and the integrity-review runtime. It predates
+this complete-empty correction and remains a control, not the final SDK candidate.
+The fresh corrected tooling now passes the exact 395-case union, with no missing,
+unexpected, duplicate, failed or skipped cases. This retains 379 original case
+identities, explicitly replaces the renamed discovery case, adds 12 new cases and
+covers three existing associated-enum forward cases. Both test processes exited
+zero on their only attempt. The six selected-SDK ICU and GDI+ physical-image cases
+are included. The same frozen source graph produced all six production tools,
+their dependencies and assets, and the build-only integrity-review runtime; 207
+PDB/source/product bindings are verified. The earlier 380-case packets remain
+unchanged. This qualifies the combined tooling, not a complete SDK image.
+
+The combined source snapshot includes the current header and original-IDL patches.
+Its 3,443-file original mirror has a separately materialized Git subtree and exact
+Windows-byte inventory; the recipe binds that subtree rather than pretending the
+dirty worktree is HEAD. The generated SDK build configuration is separately taken
+from the qualified tooling source. Fresh SAL/MIDL preparation, ordinary full-SDK
+generation, definitive NEW integrity and the raw exact-OLD comparison remain ahead.
+
+CsWin32 consumer qualification confirms that ordinary fieldless pointees support
+raw typed-pointer interop. CsWin32 commit `6f333430` generated and compiled a frozen
+synthetic pointee and the existing GDI+ create/draw/delete family against its normal
+`71.0.37-preview` metadata, separately, with marshalling enabled and disabled.
+All four generation and four final consumer compiler invocations succeeded; no
+native import was executed. The normal consumer metadata is not exact OLD.
+The initial on-mode compiler harness omitted the SDK LibraryImport generator;
+those failures remain preserved alongside the corrected compiler invocations.
+Root reverified all 96 sealed consumer artifacts and the actual eight successful
+command receipts.
+
+This requires an ordinary struct without `NativeTypedef`, which CsWin32 expects
+to contain one field. CsWin32 preserves `T*` and `T**` but does not infer ownership
+or a SafeHandle from fieldlessness. It also emits some `ref T` friendly helpers:
+passing a default empty value through one does not create a native opaque object.
+Raw pointers are the demonstrated consumer surface; `ref T*` can represent an
+output pointer slot. No native allocation size, dereference or by-value layout
+is established. The separate actual-SDK consumer result is preserved in
+`sdk-ubidi-consumer-002`: the raw consumer acquires `UBiDi*`, calls
+`ubidi_getLength`, and explicitly calls `ubidi_close` in `finally`.
+
+### Remaining execution order
+
+1. Combine the separately checked tooling corrections and the authored header/IDL
+   repair packets. Resolve the remaining source-ownership, namespace and native
+   contract holds before treating that set as the next SDK build input.
+2. Run fresh SDK generation with that exact combined set and emit the ordinary
+   full WinMD. A successful small fixture is not acceptance of this step.
+3. Run whole-image integrity and `NoSuggestedRemappings`, then compare exact OLD
+   to NEW without suppressing differences. Classify intentional changes and fix
+   unexplained losses.
+
+The full header-only image and its final comparison have not completed, so
+further whole-image defects remain possible. Report each new failure as either
+a product defect or a test/setup error, state which step it blocks, and identify
+whether it changes this execution order.
+
+The three generic tooling repairs cover nominal scalar/data-pointer typedefs,
+cross-architecture macro composition and retirement of owned generated sources.
+Independent implementation review requested corrections to all three. The
+typedef reader must reject explicit pointer widths that it cannot preserve,
+including inner pointer levels. Macro composition must preserve genuine suffix
+names, successful empty profiles and architecture-dependent expression bindings.
+Retirement must support sparse source directories and replace same-basename manual
+inputs even when their lengths and timestamps match. None of these defects explains
+the missing enum definitions in attempt 070.
+
+One earlier compiled snapshot contains the first versions of all three repairs.
+Its focused qualification covers
+206 executed cases: 200 passed in the first invocation; six control checks initially
+failed because the runner selected a DLL/PDB archive without its runtime
+configuration. Those six passed in a preserved successor using the complete
+original control deployment and the unchanged compiled snapshot. No product
+change or weakened assertion was needed for that successor. This evidence does
+not close the subsequent implementation-review findings.
+
+The retirement corrections reproduced seven failures, then passed all 50 related
+cases. Missing profile directories are tolerated without hiding other deletion
+errors. Changed or first-untracked manual input sets force copying; their identity
+manifest is committed only after staging succeeds, so a failed copy cannot poison
+the next attempt. The typedef-width correction has 126 passing cases after
+six actual native/physical reproductions. Independent re-review accepts both
+bounded corrections, while retaining the retirement packet's missing before
+DLL/PDB limitation.
+
+The macro successor passed 152 cases and closes suffix-name and successful-empty
+profile defects. Independent review still requests two corrections: primitive
+alias lowering must precede per-profile constant binding, and enum underlying
+storage must survive composition or fail explicitly. The new counterexamples are
+source-traced, not claimed as executed failures. A coherent corrected test union,
+runtime admission and complete-image checks remain outstanding. The previous
+component selections share 30 typedef-composition cases; two distinct marker
+cases also have the same truncated display text, so display-name counts alone
+cannot establish coverage.
 
 The architecture remains the selected SDK originals plus authored patches,
 targeted MIDL regeneration, the compiler-backed C# scraper, constant extraction,
@@ -22,20 +310,28 @@ and one namespace/architecture-composed WinMD. SDK sources own API-specific fact
 the reader binds them to native declarations; the emitter preserves them in the
 complete image.
 
-1. Remove authored API metadata from every active JSON/RSP input and handwritten
-   API source. Keep attribute definitions, namespace organization, documented
-   parser fixes and SDK-derived import discovery separately identified. Enable
-   header-annotation reading for every normal profile. Do not fill missing header
-   facts from a legacy fragment or a baseline assembly.
-2. Keep the current prepared headers, retained MIDL outputs and qualified tool
-   binaries unchanged. Run all 321 owners and 395 normal profiles into a fresh
-   output directory, followed by normal constant extraction and combined WinMD
-   emission. Do not seed this run with previous generated C#, constants or
-   filtered response files.
-3. Stop at the first compilation failure. Preserve its inputs and diagnostics,
-   diagnose the failure, and report it before any source repair, tool change or
-   retry. A failed run produces no NEW and cannot have an OLD-to-NEW comparison.
-4. If a complete NEW is emitted, compare exact EDF069 OLD against that image.
+1. Keep authored API metadata retired from active JSON/RSP inputs and handwritten
+   API sources. Attribute definitions, namespace organization, documented parser
+   fixes and SDK-derived import discovery remain separately identified. Every
+   normal profile reads header annotations. Do not fill missing facts from a
+   legacy fragment or a baseline assembly.
+2. Independently review the complete migration tooling while repairing missing
+   logical groups, typedef contracts and incomplete member sets. Definitions,
+   members, storage, Flags, guards and uses belong together in the original
+   headers or IDL. Assign each shared original artifact to one author. A tooling
+   change requires a reproduced reader or emitter defect and regression coverage;
+   missing source facts do not justify weakening composition checks.
+3. Check retained compilation diagnostics and actual generated providers against
+   the retired definition inventory, including groups without failing references.
+   Prepare the corrected originals, regenerate every affected MIDL output and
+   exercise the changed source contracts before the next complete run.
+4. Freeze the reviewed source and runtime candidate. Run all 321 owners and 395
+   normal profiles into a fresh output directory, followed by constant extraction
+   and combined WinMD emission. Do not reuse stale generated C#, constants or
+   filtered response files. Stop on a compilation failure, preserve and report
+   it, and diagnose the shared cause before another coherent correction or run.
+   A failed run produces no NEW and cannot have an OLD-to-NEW comparison.
+5. If a complete NEW is emitted, compare exact EDF069 OLD against that image.
    Preserve the full raw differences and integrity results, including
    NoSuggestedRemappings. Missing header facts and intended representation
    changes remain visible; neither is a reason to reactivate a sidecar.
@@ -778,3 +1074,534 @@ rewritten to conceal that distinction.
 The [migration playbook](plans/header-annotation-migration-playbook.md) and
 [shift-left spec](plans/shift-left-annotation-spec.md) define the source ownership
 and annotation contracts used by these decisions.
+
+## Incremental complete-SDK compilation repairs
+
+The complete native preparation now succeeds using the installed PowerShell:
+256 actual MIDL invocations produced 256 complete outputs with 472 actual
+preprocessed inputs. PowerShell installation files are not preparation inputs.
+
+The first compilation exposed a migration-added forward declaration for
+`PROCESS_AFFINITY_AUTO_UPDATE_FLAGS` using `unsigned int`, while its existing
+native `DWORD` carrier uses `unsigned long`. The authored `processthreadsapi.h`
+patch now uses `unsigned long` consistently. Actual ordinary Backup scraping
+passes on x86, x64, and ARM64.
+
+Com defines `NONAMELESSUNION`, which names the native VARIANT wrapper fields.
+The comment selector `VARIANT::vt` therefore cannot identify its discriminator.
+Original `oaidl.idl` now annotates the actual field:
+
+```idl
+[annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vt;
+```
+
+Actual MIDL preserves that annotation on the generated field. All 217 outputs
+whose own preprocessing reads `oaidl.idl` were regenerated; the other 39 accepted
+outputs were retained unchanged. The complete actual preprocessing union remains
+472 inputs. The actual ordinary Com profile now succeeds with its existing
+`NONAMELESSUNION` configuration. No generated header, native layout, or field
+resolver was changed to accommodate the selector.
+
+The selected SDK defines Hypervisor emulation using x64-only native types.
+The partition now includes `WinHvEmulation.h` only for AMD64; its other headers
+remain included on their native architectures. Actual Hypervisor scraping
+succeeds on x86, x64, and ARM64.
+
+VirtualDiskService needs both `vds.h` and `vdshwprv.h`. The preparation recipe
+omitted the latter's original MIDL producer and four shipped original-IDL inputs.
+Those inputs, the output, and its admitted header are now configured. Fresh
+ordinary MIDL emits the existing shared declaration guards and all four private
+interfaces with their original OS floors. The complete native composition now
+has 257 outputs and 476 actual preprocessed inputs.
+
+The subsequent complete SDK run successfully scraped all 321 partitions across
+395 native profiles. Ordinary no-reference emission then stopped with CSSW003:
+`IOCTL_CDROM_UNLOAD_DRIVER` references `IOCTL_CDROM_BASE`, whose native definition
+aliases `FILE_DEVICE_CD_ROM`. The constants scraper had discarded that alias
+because it encountered the numeric provider later. It now resolves pending
+aliases after visiting all headers, including transitive aliases, without
+replacing already emitted definitions or inventing cyclic or absent providers.
+Regression coverage compiles the resulting CTL_CODE and checks its exact type
+and value in both header orders.
+
+The regenerated constants preserve all 100,540 previous declarations, namespaces,
+types, and expressions, and recover 169 native aliases. The next emission exposed
+`FO_TYPE_RASTER` in Display referring to `RASTER_FONTTYPE` in Gdi. The emitter now
+binds an unresolved simple constant alias only when its current profile contains
+one actual matching `Apis` constant. Existing bindings and ambiguous names are
+left intact; no values or providers are supplied. Physical regression cases cover
+signed, unsigned, and string alias chains, native-profile values, ambiguity,
+existing bindings, overflow, and common-source variation. All 253 emitter cases
+pass; the five previously failing regression rows are retained separately.
+
+A separate x86 diagnostic run retained the first 10,000 declaration errors, the
+CLI's reporting limit. Shared native typedefs appeared in partition-local
+namespaces and became ambiguous in combined bindings. Existing global namespace
+routing now assigns `BOOL`, `BOOLEAN`, `CHAR`, `HANDLE`, `HRESULT`, `NTSTATUS`,
+`PSTR`, and `PWSTR` to their established Foundation identities before composition.
+Their native annotations, storage, and original header owners are unchanged.
+The common scraper header also no longer imports the unproduced Hlsl namespace.
+This shared-header change requires freshly generated bindings; it is not applied
+by editing previously generated C#.
+
+A fresh complete run with that shared header again successfully scraped all 321
+partitions and 395 native profiles. Ordinary emission then reached
+`D3DRTYPECOUNT`, whose actual native expression is `D3DRTYPE_INDEXBUFFER+1`.
+The provider is a member of the original `D3DRESOURCETYPE` enum. Scalar constant
+expressions now bind unique actual `Apis` constants and enum operands from their
+current native profile. Enum operands use their actual underlying integral
+storage, and the result retains the constant's declared storage. Ambiguous or
+missing providers, overflow, and common-source value variation remain errors.
+Explicit unchecked arithmetic remains unchecked.
+
+Duplicate-constant removal also now respects namespace and containing-type
+identity. An enum member must not erase a distinct constant from another native
+scope before binding. The retained pre-fix control has 16 failures and four
+passes across 20 new cases. The complete corrected emitter suite passes all 279
+cases, including two additional nested-type and file-scoped-namespace controls.
+The fresh scraper suite has 1,626 passes, two original-IDL coverage failures, and
+161 skipped cases; those two source holds remain unwaived.
+
+These native repairs and partition results do not establish complete WinMD
+integrity or OLD-to-NEW equivalence. The complete SDK compilation and its raw
+comparison remain the acceptance boundary.
+
+### SDK017 composition failures
+
+SDK017 regenerated constants successfully but stopped during cross-architecture
+emission with CSSW003 on `UPNP_E_ROOT_ELEMENT_EXPECTED`. Its independent ordinary
+x86 diagnostic control reported 2,152 C# compiler errors, below the 10,000-error
+reporting limit. These are generated-declaration composition errors, not native
+header compilation failures or OLD-to-NEW differences. Both attempts preserved
+their retained native inputs and produced no accepted image.
+
+The local emitter successor records native enum identities before and after
+namespace routing, so moving a logical enum does not leave its original loose
+constant copies behind. `HPROPSHEETPAGE` and `SC_HANDLE` also receive their
+established global namespace routes. These routing settings are consumed by the
+constants scraper and emitter, not native header scraping.
+
+The same successor lowers integral header-native-typedef constant declarations
+and casts to their actual `Value` storage for intermediate C# compilation.
+`NativeTypeName` preserves the declared native typedef in physical metadata.
+This addresses generated `const HRESULT` declarations without changing the SDK
+typedef, adding conversion operators, or replacing native values. Conflicting
+storage, unsupported conversions, missing type-preservation attributes, and
+overflow remain errors. The complete local emitter suite passes 288 cases;
+full-SDK qualification of these changes remains outstanding.
+
+Historical source at `389dfa3f` establishes several exact compensations that were
+not visible in the post-retirement HEAD:
+
+- `manual\Wmp.cs` supplied WMP base expressions such as
+  `DISPID_WMPCORE_BASE + DISPID_DELTA`.
+- `manual\NativeWiFi.cs` supplied WLAN base, range, and connection expressions.
+- `manual\Controls.cs` supplied `NM_FIRST = 0` and its unsigned derived values.
+  The constants configuration excluded `NM_FIRST` to avoid that handwritten
+  provider. The stale exclusion has now been removed; recovery of the unsigned
+  derived expressions now has native compiler coverage described below.
+- `ConstantsScraper.settings.rsp` forced `SQL_DIAG_SS_*` to `int`, compensating
+  for unsigned inference on negative signed-base arithmetic.
+- `autoTypes.json` supplied the integral `HRESULT` native typedef wrapper.
+  Header-owned typedef projection must preserve that metadata identity while
+  producing legal intermediate C#.
+
+The selected native WMP and WLAN expressions are valid; they do not require
+rewritten SDK definitions. The failed regex arithmetic reproductions motivated
+the native implementation below. Their cases now run against actual compiler
+output, including signed types that the old unsigned-default expectations got
+wrong.
+
+The subsequent direction authorizes implementing the generic repairs and
+continuing through the full SDK, with the combined header and tooling changes
+reviewed afterward. The earlier requirement to stop before implementing macro
+recovery no longer applies. Authoritative SDK definitions and original IDL remain
+the source of API facts.
+
+### Clang-native integer recovery
+
+Native Clang type and value extraction replaces regex arithmetic for the SDK's
+integer macros, using the libraries
+already pinned in `sources\Win32MetadataScraper\Win32MetadataScraper.csproj`:
+managed ClangSharp 21.1.8.4, libclang 21.1.8, and libClangSharp 21.1.8.2.
+No native-library upgrade is needed to evaluate integer expressions.
+
+The header reader in the Rust pipeline is `windows-clang`, not
+`windows-bindgen`. PR #2303's manifest pins
+`jevansaks/windows-rs@3be3d29b2fc7ed974b46523acf5deda3c1ab5325`.
+Its extractor selects object-like macros, checks active definitions, appends
+typed declarations such as `const auto __clang_eval_NAME = (NAME);` to the
+original source, and reparses with the original compiler arguments. It reads
+the resulting native type and calls `clang_Cursor_Evaluate` for the value.
+The pinned implementation separates [probe construction](https://github.com/jevansaks/windows-rs/blob/3be3d29b2fc7ed974b46523acf5deda3c1ab5325/crates/libs/clang/src/extract.rs#L5133-L5152)
+from [typed value extraction](https://github.com/jevansaks/windows-rs/blob/3be3d29b2fc7ed974b46523acf5deda3c1ab5325/crates/libs/clang/src/extract.rs#L5155-L5253).
+
+Macro definition cursors are preprocessing records, not typed initializer ASTs.
+ClangSharp's existing macro mode synthesizes initializer declarations and
+normally translates the expanded expression to C#. It does not guarantee folded
+literal output. In the pinned managed source
+`da7e208a2788186726f56aa1c6ef1b86de355a48`, its [macro visitor](https://github.com/dotnet/ClangSharp/blob/da7e208a2788186726f56aa1c6ef1b86de355a48/sources/ClangSharp.PInvokeGenerator/PInvokeGenerator.VisitPreprocessedEntity.cs#L11-L61)
+copies historical replacement text, rather than probing the live macro name.
+General recovery must not resurrect undefined macros or choose an arbitrary
+definition from a redefine sequence.
+
+The bounded direct native proof is now executed, rather than inferred from
+translated C#. `artifacts\clang-native-constant-proof-030\Invoke-AstProof.ps1`
+uses the existing runtime008 Interop assembly and libclang with normal installed
+PowerShell. Its `native-ast-evaluated-values-003.json` records nine completed
+cases and 72 checked type-width, signedness, and numeric results across x86, x64,
+and ARM64:
+
+- A reduced SDK-expression fixture in its original macro form.
+- The same fixture with the explicitly permitted `WIN32METADATA`-guarded
+  `constexpr int SQL_DIAG_SS_BASE = -1150;` alternative.
+- The actual selected SDK `wmpids.h`, unchanged by this proof.
+
+On every target, WMP controls is signed 32-bit `50`, the WLAN connection base is
+signed 32-bit `163840`, SQL severity is signed 32-bit `-1151`, and `NM_CLICK` is
+unsigned 32-bit `4294967294`. The proof also checks U/LL/ULL typing and
+`18446744073709551615` through the unsigned 64-bit accessor. The two real WMP
+header values are `50` and `800`, both signed 32-bit. Native compile diagnostics,
+integer evaluation result kinds, and supported extraction widths are checked
+before accepting values. These are bounded native extraction results, not a
+complete SDK scrape, generated-C# readback, or physical WinMD qualification.
+The initial response-file matrix stopped at unsupported `--target` parsing and
+does not supply any native architecture evidence.
+
+Header-native signedness is permitted to differ from the old scraper's unsigned
+default. Preserve those differences in the raw comparison. An explicitly typed
+metadata-only header constant is permitted where needed.
+The two SQL fixture forms agree without a production header edit.
+
+The removal of the `NM_FIRST` exclusion has its own passing source-ownership
+regression in
+`artifacts\native-notification-base-recovery-031\ownership.trx`. That attempt's
+`utility.trx` retains the original regex overflow failures. The replacement
+computes unsigned wrapping in Clang and writes the resulting literal; it does
+not qualify or extend the old arithmetic path.
+
+HRESULT constants remain supported in WinMD. The existing emitter already
+combines a native-typedef field signature with an integral Constant-table
+payload. The local lowering repair only restores legal intermediate C# after
+header-owned typedef preservation exposed `const HRESULT` and HRESULT casts to
+the C# compiler. Native recovery must retain the nominal typedef independently
+of canonical scalar storage; permanently emitting an `int` field is not the
+intended fix.
+
+All supplemental API-specific C# files under `generation\WinSDK\manual` are
+already retired. The remaining `Metadata.cs` defines metadata infrastructure
+and is not an API provider. Definitions without an authoritative header recovery
+path still require review; `FSCTL_DFS_BASE` remains unresolved.
+
+The production scraper now probes live macro names in their actual compiler
+environment. In C++, `constexpr auto` also rejects invalid constant expressions,
+including signed overflow and division by zero. Each accepted value records its
+native type, scalar storage, literal, header, and definition line. Other results
+retain their reason and native diagnostics. Associated enum constants use the
+same extraction rather than a separate C# expression translator.
+
+The SDK task obtains integer values for x86, x64, and ARM64 even when ordinary
+declarations are shared through `common`. The constants stage writes separate
+source families for those targets. It runs again after separately scraped CI
+assets are combined, and tracks added, changed, and removed compiler outputs.
+It resolves relocated prepared-header paths when artifacts move between jobs.
+The existing GUID, string, and resource handling remains in place.
+
+`artifacts\native-constant-pipeline-046\native-pipeline.trx` records 65 passes and
+two selected-SDK-input skips. Its physical WinMD cases check HRESULT signatures
+with Int32 payloads, UInt64 maximum, unsigned wrapping, exact architecture masks,
+repeated generation, and preservation of GUID/string/resource providers.
+The utility suite passes 86 cases. The generic type-provider repairs also have
+their own 36-case isolated result under `artifacts\bounded-native-type-providers`.
+These are not full-SDK integrity or equivalence results.
+
+The corrected real-SDK extraction control under
+`artifacts\native-sdk-macro-control-045` recovers 10,141 integers across WMP,
+Native WiFi, UPnP, Direct3D9, and Foundation. The preceding control passed CLI
+options where response-file paths were required and did not exercise native
+extraction; its zero counts are not a successful result. Its ten earlier binding
+outputs still match their recorded hashes.
+
+### Full SDK018 run and corrected successor
+
+SDK018 requested all 321 partitions and 963 native integer contexts, using
+Source020 and Runtime009. It produced 954 native context files. Bluetooth, Hid,
+and WinHttp each failed on all three targets because Clang did not expose a
+source record for an active macro restored with `push_macro` / `pop_macro`.
+The failure names were `AF_BTH`, `HIDP_STATUS_I8242_TRANS_UNKNOWN`, and
+`INTERNET_DEFAULT_HTTPS_PORT`. No complete NEW image was produced.
+
+An evaluable macro without that source record is now recorded as unsupported
+instead of aborting the partition. The extractor does not guess which historical
+definition owns it. An existing header declaration can still supply the constant.
+The new tests cover both the presence and absence of that declaration.
+
+The old include validator also rejected the bare traversal name `excpt.h`.
+It now resolves bare traversal filenames from the actual compiler output before
+applying the existing include-root checks. The retained SDK018 outputs resolve
+it to the selected MSVC header, and all 963 emitted response files pass those
+checks. This does not change SDK018's failed generation result.
+
+Additional controls exposed an overly broad enum-expression repair: it could
+accept an unresolved ordinary enum member or an invalid enum-to-integer C#
+conversion. Special scalar conversion is now limited to header-defined logical
+groups. Ordinary enums must bind and convert legally. Native enum arithmetic,
+including promotions and wrapping, is evaluated by Clang before C# emission.
+
+The current native extraction tests pass 16 cases, and the complete current
+emitter suite passes 290 cases in `artifacts\native-toolchain-final-055`.
+BuildTools also builds with the corrected native-only success/failure handling.
+The earlier complete scraper result in `artifacts\native-toolchain-suites-050`
+has 13 failures; eleven have focused fixes, while the two original-IDL coverage
+holds remain unwaived. That earlier full result is not green.
+
+Source021 and Runtime010 capture the corrected tools for a fresh SDK019 run.
+All 4,219 header-preparation source inputs still match the retained preparation,
+so the actual MIDL outputs and prepared headers are reused without changing them.
+SDK019 starts from fresh generated output and does not use OLD as a compiler
+reference.
+
+### SDK019 compiler-target correction
+
+SDK019 completed all 395 ordinary binding outputs and all 963 requested native
+JSON outputs in 1,242.694 seconds. Constants composition then rejected conflicting
+`CONTEXT_ALL` values from `winnt.h`. The conflict check was correct: the ARM64
+response file defined `_ARM64_` but still compiled with the host's x86-64 target.
+Its ARM64 value, `4194527`, was therefore incorrectly recorded as x64 alongside
+the actual x64 value, `1048607`.
+
+The audit in `artifacts\coherent-full-sdk-019\actual-run-measurements.json`
+records all 963 outputs and the 321 architecture mismatches. Those files are
+completed extraction attempts, not evidence of three actual native compiler
+targets. The artifact also retains each observed task interval from response-file
+writing to captured tool output. These intervals include process startup and
+writing; they are not CPU measurements or CI performance limits.
+
+Each architecture response file now explicitly selects its native Windows MSVC
+target. A regression uses the real shared, width-specific, and architecture
+response files, then checks compiler-derived architecture and pointer width.
+Its pre-fix control fails on ARM64. With the corrected settings, all 19 native
+extraction tests pass in `artifacts\sdk-native-target-regression-057`.
+The unsuccessful intermediate response-file syntax is retained separately.
+The constants conflict check has not been relaxed.
+
+The complete scraper result in `artifacts\native-toolchain-full-056` is 1,683
+passes, two original-IDL coverage failures, and 163 skips across 1,848 cases.
+It ran before the target correction and the new performance tests. The two
+remaining source holds have not been removed or waived.
+
+SDK020 uses Source022 and Runtime011 with fresh output for all 321 partitions.
+Its response files select actual x86, x64, and ARM64 compiler targets.
+
+### SDK020 constants and XML header coverage
+
+SDK020 completed all 395 binding outputs and all 963 native integer outputs.
+The constants stage completed, including the previously conflicting `CONTEXT_ALL`
+values. Complete WinMD emission then failed with CSSW003 on
+`DISPID_XMLELEMENTCOLLECTION_LENGTH`.
+
+The MsXml partition listed `msxml6did.h` and `msxmldid.h` for traversal but did
+not include them in its translation unit. Traversal selects declarations to
+emit; it does not include headers. The actual native output contained only six
+integers and named only `msxml.h` and `msxml6.h` as its macro headers. Dispatch-ID
+expressions therefore still reached the old text-based constants path.
+The partition now includes both dispatch-ID headers explicitly.
+
+Source023 and Runtime012 capture this change. SDK021 recovered 551 native XML
+integers on x86, including signed `int` values 65537 and 65539 for the collection
+length and item IDs. Its orchestration script then constructed a remap filename
+with an extra period and stopped before composition. The failed attempt and
+its native output are retained.
+
+SDK022 uses the same captured inputs with the orchestration path corrected.
+Its incremental runner checks the source changes and production runtime before
+reusing SDK020's other 960 native contexts. It regenerates the three MsXml
+contexts and requires the ordinary declarations and discovered type remaps to
+remain unchanged before retaining the complete global remap files. Constants
+and complete cross-architecture emission then run again. This is a recorded
+incremental continuation, not a new claim that all 963 compiler processes ran.
+
+SDK022 completed that continuation after correcting a second orchestration
+assumption: native-only profiles intentionally do not emit type-remap files.
+All three XML contexts recovered 551 integers each, with unchanged declaration
+and remap output. All 963 actual response files passed the include checks.
+Emission then reached a new CSSW003 failure on `SPEAKER_MONO`.
+
+The Xaudio2 partition had the same missing-include problem with `x3daudio.h`.
+It now includes that header. DirectXMath's optional SIMD implementation required
+Clang resource headers absent from the existing scraper setup; the partition
+selects its supported `_XM_NO_INTRINSICS_` mode to parse the exported scalar
+declarations instead. The first failed native control and the corrected
+three-target control are retained under `artifacts\native-x3daudio-recovery-001`
+and `artifacts\native-x3daudio-recovery-002`.
+
+The corrected control recovers 162 integers per target, including signed
+`SPEAKER_MONO = 4`, and generates the actual X3DAudio structures and imported
+functions. Its discovered type remaps are byte-identical to the earlier complete
+run, so the complete global aggregates remain reusable.
+
+### Performance regression guards
+
+A separate implementation agent added six always-on performance tests for
+included-header annotation scanning, irrelevant macros with zero and one
+selected constants, batched native integer extraction, three-architecture
+composition, and a large constant file. Each checks its output, warms up, then
+enforces a median budget across five measured runs. The budgets and calibration
+are documented in `docs\generationOptions.md`.
+
+The first five passed through the ordinary test runner while SDK020 was running.
+`artifacts\performance-default-run-058\performance.trx` retains that result.
+All six subsequently passed through the ordinary runner in
+`artifacts\performance-default-run-062\performance.trx`.
+
+The agent also measured repeated compiler diagnostic work for every constant
+initializer. The emitter now collects diagnostics once per file and profile,
+then checks the relevant source spans without repeating compiler work.
+For 6,418 constants across three profiles, its measured median fell from
+20,167.9 milliseconds to 1,370.1 and 1,568.7 milliseconds in repeated isolated
+runs. The new guard enforces a 4,000-millisecond median. The ordinary runner
+recorded 1,358.4 milliseconds. All 303 emitter tests pass, including thirteen
+new cases preserving initializer-error and source-span behavior.
+
+The complete SDK020 emitter also recorded 65.27 seconds moving namespaces and
+63.72 seconds cleaning syntax trees. Its output was buffered by the task;
+the absence of live log lines was not evidence that emission had hung.
+The all-context audit in `artifacts\coherent-full-sdk-020\actual-run-measurements.json`
+finds no architecture mismatches. Its observed x86/x64 task medians are
+28.95/9.59 seconds, compared with 32.42/10.97 seconds in SDK019. These concurrent
+task intervals are observations, not CI budgets. The earlier ARM64 timings are
+not comparable because that run used the wrong compiler target.
+
+A complete NEW image, actual integrity results, and the unsuppressed OLD-to-NEW
+comparison remain outstanding.
+
+### SDK023 string constants and 1394 namespace
+
+SDK023 retained the complete generated graph, regenerated the three Xaudio2
+contexts, and validated all 963 actual include environments. Complete emission
+then stopped on `wszREGKEYNOSYSTEMCERTSVCPATH`. Its header concatenates a
+`TEXT(...)` literal with another string macro. The old string writer removed
+the opening wrapper and copied the remaining C++ expression into C#.
+
+The constants scraper now translates adjacent literal and identifier terms into
+C# string concatenation. It recognizes narrow and `L` literals, `TEXT`,
+`__TEXT`, and `_T`, including identifier-first expressions and forward references.
+Identifier terms must remain strings; they cannot acquire C#'s numeric-to-string
+formatting behavior. Unsupported arithmetic is reported with the macro name and
+header path. The ANSI encoding attribute also had a missing closing parenthesis;
+that generic writer defect is fixed.
+
+An audit of the 1,709 original generated sources found 1,343 syntax errors,
+including 1,319 missing-parenthesis errors and invalid
+`Windows.Win32.Devices.1394` namespaces. The partition default now uses
+`Windows.Win32.Devices`, where the exact OLD places its two public request
+structures. No generated C# or SDK declarations were edited for this correction.
+
+The complete utility suite passes 103 cases. The added string cases compile the
+generated constants and check their values and encoding, including escaped quotes,
+backslashes, empty literals, forward references, and rejected numeric operands.
+The failed controls and passing results are retained in
+`artifacts\native-string-concatenation-regression-064`. BuildTools also builds
+without warnings or errors.
+
+### Complete-SDK semantic repairs
+
+The subsequent constants control finishes with 1,712 original generated C# files
+and no syntax errors. Combined compilation reports 202 diagnostic lines but only
+101 distinct errors: 88 HRESULT enum casts, eleven missing native types and two
+duplicate declarations. The raw log is unchanged; the deduplicated inventory is
+retained in `artifacts\sdk-semantic-repairs-067\unique-errors-before.json`.
+
+The emitter now lowers enum initializer casts through the integer storage of
+header-defined native typedefs. Physical metadata retains the native typedef
+identity. Identical ordinary partial data records from different inputs can also
+compose after namespace assignment. Both syntax and semantic bindings must match,
+including field types and attribute arguments. Different partial members and
+conflicting definitions remain compiler errors. This handles the SDK's repeated
+complete `HSTRING__` dummy record without inventing a replacement record or
+editing generated MIDL headers.
+
+Existing native globals own their generated names, preventing duplicate loose
+constants. Mutable globals are not constant-alias sources. The first full-SDK
+rerun exposed this distinction with `MMC_TEXTCALLBACK`: its native target is a
+mutable pointer variable, not a constant. The inventory now records mutability in
+the same source walk, and unsupported aliases report their macro, target and
+header. Pointer, integer and string regression cases also preserve real constant
+aliases. Exact OLD contains `MMC_IMAGECALLBACK`, but neither `MMC_CALLBACK` nor
+`MMC_TEXTCALLBACK`.
+
+The authored `cfapi.h` patch selects its existing C USHORT typedef representation
+under `WIN32METADATA`; normal C++ retains the SDK's helper classes. Four obsolete
+helper-type exclusions are removed. All six actual native controls pass: normal
+C++ and metadata modes on x86, x64 and arm64. They check helper size/alignment and
+both policy structs' size, alignment and member offsets. Metadata fields remain
+USHORT with all four enum associations, and all six native integers are unchanged
+on every target. Preparation changes only authored `um\cfapi.h` among 3,443
+prepared headers; no generated MIDL header is patched. Inputs and results are in
+`artifacts\cfapi-c-abi-control-068`, with the passing controls in `attempt-004`.
+Earlier control setup failures remain preserved.
+
+The complete emitter suite passes 315 cases and the utility suite passes 120.
+These bounded results do not establish a complete NEW image, integrity result or
+OLD-to-NEW comparison.
+
+The separately implemented six performance guards also pass after these emitter
+and scraper changes through the normal runner (`performance-default-run-069`).
+The opaque-pointee repair passes eighteen focused and 140 existing cases, six
+actual SDK replays, and bounded physical WinMD checks on all three targets.
+It uses Clang's completeness and source-scope facts; complete backing records are
+not erased. UI Animation's backing record is complete, so its obsolete exclusion
+is removed and the real native integer field is generated.
+
+The next emission-only control reused stale constants because the incremental
+task did not track its own executable, helper library or generated source header.
+All six changed/deleted-input regression cases fail before the correction and
+pass afterward. Those producer inputs now invalidate the constants marker, so a
+tooling repair cannot leave the old generated alias in place.
+
+### Complete SDK image and validation
+
+SDK026 produces the first complete, freshly generated NEW image from Source027
+and Runtime016. The run finishes in 27 minutes 57 seconds with all 395 ordinary
+binding files, all 963 native integer contexts, and all 963 include environments
+validated. A separate check reads every native result's architecture mask and
+confirms the requested x86/x64/ARM64 targets: 1, 2, and 4. No earlier generated C#
+is reused and exact OLD is not a compiler reference.
+
+The image is `artifacts\coherent-full-sdk-026\image\Windows.Win32.winmd`, SHA256
+`33F0C23AEEE8ADC21A79BDED815438568D0CD0CEFE089DCE35DC9641B3C3BE89`.
+The unsuppressed OLD-to-NEW comparison completes and retains its 29,571,494-byte
+log. A completed build does not establish API equivalence.
+
+The initial integrity deployment omitted the six existing test assets and
+pointed the remapping check at the frozen source instead of the actual scrape
+logs. Separate deployments preserve that original failure and validate the same
+unchanged image with the original asset bytes. No allowlist entries are added.
+Interface layout discovery then runs successfully; the complete suite contains
+14 cases, rather than the initial 11.
+
+The integrity tools also needed two generic corrections. Constant variants with
+the same owner and exact name are valid when their architecture masks do not
+overlap; the old checker reported 434 such groups as duplicates. Different owners,
+case-only collisions, and overlapping masks remain errors. The architecture
+checker inspected x64 record fields while checking ARM64 consumers. It now
+follows each matching native type variant. Method parameter failures affect the
+exit code, and method and delegate return types are checked. Five physical
+regressions fail before these corrections; all nine integrity fixtures pass
+afterward, including rejection cases and recursive delegate signatures. The
+complete emitter suite passes 324 cases and the utility suite passes 120.
+
+The qualified actual-image run in `artifacts\actual-sdk-integrity-074` has nine
+passes and five failures, with no skips. Architecture integrity passes without
+changing the image. Remaining reports include three duplicated backing-record
+groups, 1,439 constant-name groups with different owners, nine suggested
+remappings, two Speech pointers to delegates, and namespace cycles. These are
+unresolved findings, not waived differences. The raw comparison is being graded
+separately against the native SDK and accepted migration policies.
+
+The six performance guards still have the passing combined-tool result in
+`artifacts\performance-default-run-069`. Its large 6,418-constant case has a
+1,333.7 ms median against the 4,000 ms failure budget. Full-SDK elapsed time is
+recorded separately; it is not a replacement for those isolated regression
+budgets. Original-IDL coverage holds and the two previously recorded full-scraper
+failures remain open.
