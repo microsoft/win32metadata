@@ -22,18 +22,24 @@ dotnet build generation/WinSDK -c Release -p:ScanArch=crossarch -t:ScrapeHeaders
 ## Test Commands
 
 ```powershell
-# Run all tests
+# Run all tests after generating the WinMD (requires Python 3)
 ./scripts/DoTests.ps1
 
 # Individual test suites
 dotnet test tests/MetadataUtils.Tests -c Release
 dotnet test tests/Windows.Win32.Tests -c Release          # winmd integrity tests
 dotnet test tests/Win32MetadataScraperTests -c Release     # scraper heuristic tests
-dotnet test tests/ClangSharpSourceToWinmdTests -c Release
+dotnet test tests/ClangSharpSourceToWinmdTests -c Release   # emitter and cross-architecture composition
+python -m unittest discover -s tests\SdkAnnotationCoverage.Tests -p "test_*.py"
 
 # Single test
 dotnet test tests/Win32MetadataScraperTests -c Release --filter "TransitiveInclude"
 ```
+
+`DoTests.ps1` runs the utility, emitter, SDK annotation coverage-auditor, scraper,
+and WinMD integrity suites. GitHub Actions and Azure Pipelines invoke this same
+runner after generating the WinMD. The Python suite uses the standard library
+and tests the annotation coverage auditor, not the separate Node workflow tests.
 
 ## Architecture
 

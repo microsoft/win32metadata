@@ -186,7 +186,9 @@ remains diagnostic; they do not count toward the header goal. Reported
 `reportedProductionGates` do not erase genuine source changes or imply producer
 acceptance. Compilation/qualification is separate from source conversion, and
 source conversion may retain explicit sidecar cleanup debt. Run the focused inventory controls with
-`python -m unittest discover -s tests\SdkAnnotationCoverage.Tests`.
+`python -m unittest discover -s tests\SdkAnnotationCoverage.Tests -p "test_*.py"`.
+These coverage-auditor tests also run through `scripts\DoTests.ps1`, which requires
+Python 3.
 
 Bind each physical header to one owner. Include all physical-header and semantic
 dependents in the validation closure, without migrating their unrelated facts.

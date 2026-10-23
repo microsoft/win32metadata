@@ -98,6 +98,14 @@ unused forward declarations, so disabling the global filter is not approved.
 Referenced incomplete pointees, complete definitions, by-value uses and
 complete-empty classes need distinct treatment.
 
+The native `DECLARE_HANDLE` pattern also needs selective retention. Its complete
+`struct name__ { int unused; }` declaration has a real field in ordinary
+ClangSharp output. For referenced pointees with that exact native shape, retain
+the ordinary generated declaration, including its field and layout attributes.
+Do not replace it with an empty struct. Other complete storage definitions,
+by-value recovery and explicit exclusions stay outside this recovery path;
+unused handle declarations remain filtered.
+
 The global `exclude-empty-records` option dates to commit `d1402d9f` on
 2023-04-27. It was not introduced by this migration. Retiring the `autoTypes.json`
 and manual API replacements exposed the missing providers. The option filters

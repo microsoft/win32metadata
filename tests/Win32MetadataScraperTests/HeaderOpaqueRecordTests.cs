@@ -202,6 +202,93 @@ void UseOpaque(HOPAQUE value);
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void NativeHandlePointeesMatchOrdinaryRecordEmission(string architecture, string target, bool multipleFiles)
+        {
+            const string declarations = @"
+struct NativeHandle__ { int unused; };
+struct UnusedHandle__ { int unused; };
+_Win32_NativeTypedef_ typedef struct NativeHandle__* HNATIVE;
+HNATIVE OpenNative(void);
+void UseNative(HNATIVE value);
+NativeHandle__* OpenRawNative(void);
+";
+            using var ordinary = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations, multipleFiles: multipleFiles);
+            using var filtered = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                multipleFiles: multipleFiles, extraSettings: "--config\nexclude-empty-records\n");
+            try
+            {
+                Assert.True(ordinary.Run() == 0, ordinary.Diagnostics);
+                var ordinaryProvider = Assert.Single(ReadOpaqueRecordSources(ordinary).SelectMany(root =>
+                    root.DescendantNodes().OfType<StructDeclarationSyntax>())
+                    .Where(type => type.Identifier.ValueText == "NativeHandle__"));
+                using var ordinaryImage = Emit(ordinary, architecture);
+                AssertMetadataClosure(ordinaryImage.Reader);
+
+                Assert.True(filtered.Run() == 0, filtered.Diagnostics);
+                var filteredDeclarations = ReadOpaqueRecordSources(filtered).SelectMany(root =>
+                    root.DescendantNodes().OfType<StructDeclarationSyntax>()).ToArray();
+                var filteredProvider = Assert.Single(filteredDeclarations
+                    .Where(type => type.Identifier.ValueText == "NativeHandle__"));
+                Assert.Equal(ordinaryProvider.Members.Select(member => member.NormalizeWhitespace().ToFullString()),
+                    filteredProvider.Members.Select(member => member.NormalizeWhitespace().ToFullString()));
+                Assert.DoesNotContain(filteredDeclarations, type => type.Identifier.ValueText == "UnusedHandle__");
+                using var image = Emit(filtered, architecture);
+                var reader = image.Reader;
+                var layout = FindType(reader, "NativeHandle__").GetLayout();
+                var ordinaryLayout = FindType(ordinaryImage.Reader, "NativeHandle__").GetLayout();
+                Assert.Equal(ordinaryLayout.IsDefault, layout.IsDefault);
+                Assert.Equal(ordinaryLayout.Size, layout.Size);
+                Assert.Equal(ordinaryLayout.PackingSize, layout.PackingSize);
+                var wrapper = FindType(reader, "HNATIVE");
+                AssertHasAttribute(reader, wrapper.GetCustomAttributes(), "NativeTypedefAttribute");
+                Assert.Equal("NativeHandle__*", reader.GetFieldDefinition(Assert.Single(wrapper.GetFields()))
+                    .DecodeSignature(new SignatureNames(), null));
+                Assert.Equal("HNATIVE", FindMethod(reader, "Apis", "OpenNative").DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "HNATIVE" }, FindMethod(reader, "Apis", "UseNative").DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                Assert.Equal("NativeHandle__*", FindMethod(reader, "Apis", "OpenRawNative").DecodeSignature(new SignatureNames(), null).ReturnType);
+                AssertMetadataClosure(reader);
+            }
+            finally
+            {
+                SaveOpaqueRecordArtifacts(ordinary, $"nominal-handle-ordinary-{architecture}-{multipleFiles}");
+                SaveOpaqueRecordArtifacts(filtered, $"nominal-handle-filtered-{architecture}-{multipleFiles}");
+            }
+        }
+
+        [Fact]
+        public void NominalHandleRetentionDoesNotRecoverByValueUses()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct ValueHandle__ { int unused; };
+ValueHandle__ ReadValue(void);
+", extraSettings: "--config\nexclude-empty-records\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("nominal handle native record 'ValueHandle__' is used by value", fixture.Diagnostics);
+            Assert.Empty(Directory.GetFiles(fixture.DirectoryPath, "*.cs", SearchOption.AllDirectories));
+            SaveOpaqueRecordArtifacts(fixture, "nominal-handle-by-value");
+        }
+
+        [Fact]
+        public void NominalHandleRetentionDoesNotOverrideExplicitExclusions()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct ExcludedHandle__ { int unused; };
+ExcludedHandle__* OpenExcluded(void);
+", extraSettings: "--config\nexclude-empty-records\n--exclude\nExcludedHandle__\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain(ReadOpaqueRecordSources(fixture).SelectMany(root =>
+                root.DescendantNodes().OfType<StructDeclarationSyntax>()),
+                type => type.Identifier.ValueText == "ExcludedHandle__");
+            SaveOpaqueRecordArtifacts(fixture, "nominal-handle-explicit-exclusion");
+        }
+
+        [Theory]
         [InlineData("Opaque")]
         [InlineData("OpenOpaque")]
         public void OpaqueRecordRetentionRespectsExplicitExclusions(string excluded)
@@ -368,7 +455,6 @@ struct Opaque;
 struct Empty {};
 struct Handle__ { int unused; };
 Opaque* OpenOpaque(void);
-Handle__* OpenHandle(void);
 ", extraSettings: "--config\nexclude-empty-records\n");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             var declarations = ReadOpaqueRecordSources(fixture).SelectMany(root => root.DescendantNodes().OfType<StructDeclarationSyntax>()).ToArray();

@@ -49,18 +49,22 @@ namespace Win32MetadataScraper
                     string managedName = remaps.GetValueOrDefault(qualifiedName) ?? remaps.GetValueOrDefault(record.Name) ?? record.Name;
                     managedName = managedName.Split(new[] { "::", "." }, StringSplitOptions.None).Last().TrimStart('@');
                     var declaration = record.Definition ?? record;
-                    if (missingNames.Contains(managedName) &&
-                        (!declaration.IsCompleteDefinition || IsEmptyDefinition(declaration, new HashSet<RecordDecl>())))
+                    if (missingNames.Contains(managedName))
                     {
-                        declaration.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
-                        if (file.ToString().Length != 0)
+                        bool isIncomplete = !declaration.IsCompleteDefinition;
+                        bool isNominalHandle = IsNominalHandleDefinition(declaration);
+                        if (isIncomplete || isNominalHandle || IsEmptyDefinition(declaration, new HashSet<RecordDecl>()))
                         {
-                            records[Location(file.ToString(), line, column)] = new NativeRecord(
-                                qualifiedName, declaration.Handle.CanonicalCursor, !declaration.IsCompleteDefinition);
-                            traversalFiles.Add(file.ToString());
-                            includedNames.Add(qualifiedName);
-                            for (var parent = declaration.SemanticParentCursor; parent is RecordDecl; parent = parent.SemanticParentCursor)
-                                includedNames.Add(DeclarationSourceMap.QualifiedName(parent.Handle));
+                            declaration.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
+                            if (file.ToString().Length != 0)
+                            {
+                                records[Location(file.ToString(), line, column)] = new NativeRecord(
+                                    qualifiedName, declaration.Handle.CanonicalCursor, isIncomplete, isNominalHandle);
+                                traversalFiles.Add(file.ToString());
+                                includedNames.Add(qualifiedName);
+                                for (var parent = declaration.SemanticParentCursor; parent is RecordDecl; parent = parent.SemanticParentCursor)
+                                    includedNames.Add(DeclarationSourceMap.QualifiedName(parent.Handle));
+                            }
                         }
                     }
                 }
@@ -90,7 +94,7 @@ namespace Win32MetadataScraper
                     var native = NativeRecordFor(node);
                     if (native == null)
                         continue;
-                    if (node.Members.Count != 0)
+                    if (node.Members.Count != 0 && !native.IsNominalHandle)
                         throw new InvalidOperationException($"Opaque native record '{native.Name}' acquired a generated body.");
                     var symbol = model.GetDeclaredSymbol(node);
                     if (!providers.TryGetValue(symbol, out var declarations))
@@ -152,7 +156,11 @@ namespace Win32MetadataScraper
                             if (declarations.Select(declaration => declaration.Identity).Distinct().Count() != 1)
                                 throw new InvalidOperationException($"Distinct opaque native records project to '{named.ToDisplayString()}'.");
                             if (!behindPointer)
-                                throw new InvalidOperationException($"An {(declarations[0].IsIncomplete ? "incomplete" : "empty")} native record '{declarations[0].Name}' is used by value; selective recovery only preserves pointee identity.");
+                            {
+                                string kind = declarations[0].IsIncomplete ? "An incomplete" :
+                                    declarations[0].IsNominalHandle ? "A nominal handle" : "An empty";
+                                throw new InvalidOperationException($"{kind} native record '{declarations[0].Name}' is used by value; selective recovery only preserves pointee identity.");
+                            }
                             required.Add(named);
                         }
                     }
@@ -245,6 +253,17 @@ namespace Win32MetadataScraper
         private static (string File, uint Line, uint Column) Location(string file, uint line, uint column)
             => (Path.GetFullPath(file).ToUpperInvariant(), line, column);
 
+        private static bool IsNominalHandleDefinition(RecordDecl record)
+        {
+            if (!record.IsCompleteDefinition || record.Handle.Kind != CXCursorKind.CXCursor_StructDecl ||
+                !record.Name.EndsWith("__", StringComparison.Ordinal) ||
+                record is CXXRecordDecl cpp && cpp.Bases.Any())
+                return false;
+            var declarations = record.CursorChildren.OfType<Decl>().Where(child => child is not AccessSpecDecl).ToArray();
+            return declarations.Length == 1 && declarations[0] is FieldDecl field &&
+                field.Name == "unused" && !field.IsBitField && field.Type.CanonicalType.Kind == CXTypeKind.CXType_Int;
+        }
+
         private static bool IsEmptyDefinition(RecordDecl record, ISet<RecordDecl> visiting)
         {
             var definition = record.Definition ?? record;
@@ -263,6 +282,6 @@ namespace Win32MetadataScraper
             }
         }
 
-        private sealed record NativeRecord(string Name, CXCursor Identity, bool IsIncomplete);
+        private sealed record NativeRecord(string Name, CXCursor Identity, bool IsIncomplete, bool IsNominalHandle);
     }
 }

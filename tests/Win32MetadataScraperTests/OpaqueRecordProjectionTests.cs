@@ -48,7 +48,6 @@ class VirtualBase : virtual public Empty {};
 class VirtualMethod { virtual void Call(); };
 class Method { void Call(); };
 class StaticMember { static int value; };
-struct Handle__ { int unused; };
 struct ForwardEmpty;
 struct ForwardEmpty {};
 ");
@@ -63,10 +62,41 @@ public static unsafe class Apis
     public static extern VirtualMethod* OpenVirtualMethod();
     public static extern Method* OpenMethod();
     public static extern StaticMember* OpenStaticMember();
-    public static extern Handle__* OpenHandle();
     public static extern ForwardEmpty* OpenForwardEmpty();
 }" }, new Dictionary<string, string>());
             Assert.Equal(new[] { "Derived", "Empty", "ForwardEmpty" }, projection.IncludedNames.OrderBy(name => name));
+        }
+
+        [Fact]
+        public void NominalHandleCandidatesRequireTheNativeSingleIntUnusedShape()
+        {
+            using var native = new NativeRecords(@"
+struct Handle__ { int unused; };
+struct NoSuffix { int unused; };
+struct DifferentField__ { int value; };
+struct ShortField__ { short unused; };
+struct ArrayField__ { int unused[1]; };
+struct BitField__ { int unused : 1; };
+struct ExtraField__ { int unused; int value; };
+struct Method__ { int unused; void Call(); };
+struct Derived__ : Handle__ { int unused; };
+union Union__ { int unused; };
+");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { @"
+public static unsafe class Apis
+{
+    public static extern Handle__* OpenHandle();
+    public static extern NoSuffix* OpenNoSuffix();
+    public static extern DifferentField__* OpenDifferentField();
+    public static extern ShortField__* OpenShortField();
+    public static extern ArrayField__* OpenArrayField();
+    public static extern BitField__* OpenBitField();
+    public static extern ExtraField__* OpenExtraField();
+    public static extern Method__* OpenMethod();
+    public static extern Derived__* OpenDerived();
+    public static extern Union__* OpenUnion();
+}" }, new Dictionary<string, string>());
+            Assert.Equal(new[] { "Handle__" }, projection.IncludedNames);
         }
 
         [Fact]
