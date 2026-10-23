@@ -132,6 +132,50 @@ int Probe();
             Assert.Contains("WarningProbe", fixture.ReadSource());
         }
 
+        [Theory]
+        [InlineData("enum __attribute__((flag_enum)) NativeFlags { First = 1, Second = 2 };", "FlagEnum")]
+        [InlineData("struct NativeRecord { unsigned flags; }; static_assert(sizeof(&NativeRecord::flags) > 0);", "MSInheritance")]
+        [InlineData("[[nodiscard]] int WarnUnused();", "WarnUnusedResult")]
+        public void NativeAttributeWarningsHaveTheSameExactPolicyWithoutTheAnnotationReader(string declaration, string warning)
+        {
+            foreach (bool annotationsEnabled in new[] { false, true })
+            {
+                using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                    declaration + "\nint WarningProbe();", annotationsEnabled: annotationsEnabled);
+                fixture.AssertSuccess(warning);
+                Assert.Contains("WarningProbe", fixture.ReadSource());
+            }
+        }
+
+        [Theory]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void NativeWarningsAreReportedOnceWithSelectiveAndExplicitMacroGeneration(bool allMacros, bool suppressWarnings)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+__attribute__((annotate(""NativeSAL""))) struct IGNORED_BEFORE { int value; };
+#define REQUESTED_VALUE 2U
+enum _Win32_AssociatedConstant_(REQUESTED_VALUE) E { FIRST = 1 };
+__attribute__((annotate(""NativeSAL""))) struct IGNORED_AFTER { int value; };
+int Probe();
+", extraSettings: (allMacros ? "--config\ngenerate-macro-bindings\n" : "") +
+                (suppressWarnings ? "--additional\n-Wno-ignored-attributes\n" : ""));
+            fixture.AssertSuccess();
+            Assert.Equal(suppressWarnings ? 0 : 2,
+                fixture.Diagnostics.Split("attribute 'annotate' is ignored").Length - 1);
+            string source = allMacros ? fixture.ReadSource() : fixture.ReadAdditionalTypes();
+            var field = Assert.Single(CSharpSyntaxTree.ParseText(source).GetRoot()
+                .DescendantNodes().OfType<FieldDeclarationSyntax>()
+                .Where(value => value.Declaration.Variables.Any(variable =>
+                    variable.Identifier.ValueText == "REQUESTED_VALUE")));
+            Assert.Equal("uint", field.Declaration.Type.ToString());
+            var value = Assert.IsType<LiteralExpressionSyntax>(
+                Assert.Single(field.Declaration.Variables).Initializer.Value);
+            Assert.Equal(2U, Convert.ToUInt32(value.Token.Value));
+        }
+
         [Fact]
         public void GeneratorErrorsRemainVisibleAndPreventOutput()
         {

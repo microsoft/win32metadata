@@ -73,12 +73,16 @@ namespace Win32MetadataScraperTests
             Assert.Equal(92, WinspoolConstParameters.Distinct(StringComparer.Ordinal).Count());
             foreach (string target in WinspoolConstParameters)
                 Assert.DoesNotContain(target + "=[Const]", settings);
-            Assert.Contains("AddPrinterA::return=PRINTER_HANDLE", settings);
-            Assert.Contains("AddPrinterW::return=PRINTER_HANDLE", settings);
+            Assert.DoesNotContain("AddPrinterA::return=PRINTER_HANDLE", settings);
+            Assert.DoesNotContain("AddPrinterW::return=PRINTER_HANDLE", settings);
             string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "um", "winspool.h.patch"));
             Assert.DoesNotContain("_Win32_Const_", patch);
-            Assert.DoesNotContain("_Win32_Enum_(PRINTER_ACCESS_RIGHTS", patch);
-            Assert.Contains("\"name\": \"PRINTER_ACCESS_RIGHTS\"",
+            foreach (string name in new[] { "AddPrinterA", "AddPrinterW" })
+                Assert.Matches(@"HANDLE\s+WINAPI\s+" + name + @"\(", patch);
+            Assert.Contains("_Win32_FlagsEnum_(PRINTER_ACCESS_RIGHTS, ULONG, PRINTER_ACCESS_MANAGE_LIMITED)", patch);
+            Assert.Contains("FlagsEnum(PRINTER_ALL_ACCESS, PRINTER_READ, PRINTER_WRITE", patch);
+            Assert.Equal(2, Regex.Matches(patch, @"_Win32_AssociatedEnum_\(PRINTER_ACCESS_RIGHTS\) ACCESS_MASK DesiredAccess;").Count);
+            Assert.DoesNotContain("\"name\": \"PRINTER_ACCESS_RIGHTS\"",
                 File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "enums.json")));
         }
 
@@ -1533,7 +1537,10 @@ static_assert(DISC_NO_FORCE == 64u);
                 @"_Win32_FlagsEnum_\(MIDI_WAVE_OPEN_TYPE, unsigned long,\n(?<members>[^)]+)\);\n#endif$"));
             Assert.Equal(MmeapiOpenFragmentMembers, group.Groups["members"].Value.Split(',').Select(member => member.Trim()));
             Assert.Single(Regex.Matches(additions, "_Win32_FlagsEnum_"));
-            Assert.DoesNotContain("_Win32_AssociatedEnum_", additions);
+            Assert.DoesNotContain("_Win32_AssociatedEnum_", group.Value);
+            foreach (string function in new[] { "waveOutOpen", "waveInOpen", "midiOutOpen", "midiInOpen" })
+                Assert.Matches(function + @"\([^;]*_Win32_AssociatedEnum_\(MIDI_WAVE_OPEN_TYPE\)[^;]*\bfdwOpen\b",
+                    HeaderMigrationAssertions.PatchedSource(@"um\mmeapi.h"));
             Assert.DoesNotContain("CALLBACK_", group.Value);
         }
 
@@ -1616,9 +1623,11 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 File.ReadLines(Path.Combine(root, "patches", "um", header + ".h.patch"))
                     .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
                     .Select(line => line.Substring(1).TrimEnd('\r'))));
-            var groups = Regex.Matches(additions,
+            var allGroups = Regex.Matches(additions,
                 @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
-            Assert.Equal(29, groups.Count);
+            string[] addedNames = { "RAS_FLAGS", "SNMP_PDU_TYPE", "DNS_QUERY_OPTIONS", "SHARE_TYPE" };
+            var groups = allGroups.Where(group => !addedNames.Contains(group.Groups["name"].Value)).ToArray();
+            Assert.Equal(29, groups.Length);
             Assert.Equal(29, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
             Assert.Equal(134, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
             Assert.Equal(new[]
@@ -1646,9 +1655,31 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             Assert.Contains("#define RASEDM_DialAsNeeded             2", additions);
             Assert.Equal(2, Regex.Matches(additions,
                 @"_Win32_AssociatedEnum_\(RASENTRY_DIAL_MODE\)\s+DWORD\s+dwDialMode;").Count);
-            Assert.Equal(68, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            HeaderMigrationAssertions.AssertContributions(
+                allGroups.Where(group => addedNames.Contains(group.Groups["name"].Value)),
+                "RAS_FLAGS|FlagsEnum|ULONG|RAS_FLAGS_PPP_CONNECTION,RAS_FLAGS_MESSENGER_PRESENT,RAS_FLAGS_QUARANTINE_PRESENT",
+                "RAS_FLAGS|FlagsEnum|ULONG|RAS_FLAGS_DORMANT",
+                "SNMP_PDU_TYPE|Enum|ULONG|SNMP_PDU_GET,SNMP_PDU_GETNEXT,SNMP_PDU_RESPONSE,SNMP_PDU_SET,SNMP_PDU_GETBULK,SNMP_PDU_TRAP",
+                "SNMP_PDU_TYPE|Enum|ULONG|SNMP_PDU_GET,SNMP_PDU_GETNEXT,SNMP_PDU_RESPONSE,SNMP_PDU_SET,SNMP_PDU_GETBULK,SNMP_PDU_TRAP",
+                "DNS_QUERY_OPTIONS|FlagsEnum|ULONG64|DNS_QUERY_PARSE_ALL_RECORDS,DNS_QUERY_STANDARD,DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE," +
+                    "DNS_QUERY_USE_TCP_ONLY,DNS_QUERY_NO_RECURSION,DNS_QUERY_BYPASS_CACHE,DNS_QUERY_NO_WIRE_QUERY,DNS_QUERY_NO_LOCAL_NAME," +
+                    "DNS_QUERY_NO_HOSTS_FILE,DNS_QUERY_NO_NETBT,DNS_QUERY_WIRE_ONLY,DNS_QUERY_RETURN_MESSAGE,DNS_QUERY_MULTICAST_ONLY," +
+                    "DNS_QUERY_NO_MULTICAST,DNS_QUERY_TREAT_AS_FQDN,DNS_QUERY_ADDRCONFIG,DNS_QUERY_DUAL_ADDR,DNS_QUERY_DONT_RESET_TTL_VALUES," +
+                    "DNS_QUERY_DISABLE_IDN_ENCODING,DNS_QUERY_APPEND_MULTILABEL,DNS_QUERY_DNSSEC_OK,DNS_QUERY_DNSSEC_CHECKING_DISABLED," +
+                    "DNS_QUERY_DNSSEC_REQUIRED,DNS_QUERY_RESERVED,DNS_QUERY_CACHE_ONLY",
+                "SHARE_TYPE|FlagsEnum|DWORD|STYPE_DISKTREE,STYPE_PRINTQ,STYPE_DEVICE,STYPE_IPC,STYPE_SPECIAL,STYPE_TEMPORARY,STYPE_MASK");
+            HeaderMigrationAssertions.AssertAssociationCounts(additions,
+                "CSBACKUP_TYPE=1", "DNS_QUERY_OPTIONS=9", "DNS_TYPE=3", "FILE_INFO_FLAGS_PERMISSIONS=1", "HTTP_INITIALIZE=2",
+                "HTTP_RECEIVE_HTTP_REQUEST_FLAGS=1", "MPR_ET=2", "MPR_INTERFACE_DIAL_MODE=2", "MPR_VS=2",
+                "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE=2", "PPP_LCP=5", "PPP_LCP_INFO_AUTH_DATA=5",
+                "RAS_FLAGS=3", "RASENTRY_DIAL_MODE=2", "RASIKEV_PROJECTION_INFO_FLAGS=1", "RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA=2",
+                "RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL=2", "RESTOREPOINTINFO_EVENT_TYPE=2", "RESTOREPOINTINFO_TYPE=2",
+                "SECURITY_MESSAGE_MSG_ID=1", "SESSION_INFO_USER_FLAGS=3", "SHARE_INFO_PERMISSIONS=3", "SHARE_TYPE=7",
+                "SNMP_API_TRANSLATE_MODE=4", "SNMP_ERROR=1", "SNMP_ERROR_STATUS=3", "SNMP_EXTENSION_REQUEST_TYPE=1",
+                "SNMP_GENERICTRAP=3", "SNMP_LOG=2", "SNMP_OUTPUT_LOG_TYPE=1", "SNMP_PDU_TYPE=2", "SNMP_STATUS=6",
+                "WIN32_ERROR=4", "WLAN_CONNECTION_NOTIFICATION_FLAGS=1", "WLAN_NOTIFICATION_SOURCES=2", "WLAN_SET_EAPHOST_FLAGS=2");
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
-            foreach (Match group in groups)
+            foreach (Match group in allGroups)
             {
                 string name = group.Groups["name"].Value;
                 var legacy = enums.RootElement.GetProperty("items").EnumerateArray().Where(item =>
@@ -1772,8 +1803,15 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 File.ReadLines(Path.Combine(root, "patches", original.Replace('\\', Path.DirectorySeparatorChar) + ".h.patch"))
                     .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
                     .Select(line => line.Substring(1).TrimEnd('\r'))));
-            var groups = Regex.Matches(additions,
-                @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
+            var allGroups = Regex.Matches(additions,
+                @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>[\w ]+),\s*(?<members>[^)]+)\);");
+            string[] addedNames =
+            {
+                "RPC_C_AUTHN_LEVEL", "RPC_C_IMP_LEVEL", "RPC_C_AUTHN_INFO_TYPE", "INTERNET_STATE",
+                "INTERNET_COOKIE_FLAGS", "INTERNET_AUTODIAL", "PROXY_AUTO_DETECT_TYPE", "INTERNET_CONNECTION",
+                "SEC_WINNT_AUTH_IDENTITY",
+            };
+            var groups = allGroups.Where(group => !addedNames.Contains(group.Groups["name"].Value)).ToArray();
             string[] expectedGroups =
             {
                 "FTP_FLAGS", "GOPHER_TYPE", "GPO_OPEN_FLAGS", "GPO_OPTIONS", "GPO_SECTION", "HTTP_ADDREQ_FLAG",
@@ -1796,7 +1834,30 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 foreach (string member in group.Groups["members"].Value.Split(',').Select(value => value.Trim()))
                     Assert.Matches(@"^[A-Za-z_]\w*$", member);
             }
-            Assert.Equal(55, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            HeaderMigrationAssertions.AssertContributions(
+                allGroups.Where(group => addedNames.Contains(group.Groups["name"].Value)),
+                "RPC_C_AUTHN_LEVEL|Enum|unsigned long|RPC_C_AUTHN_LEVEL_DEFAULT,RPC_C_AUTHN_LEVEL_NONE,RPC_C_AUTHN_LEVEL_CONNECT," +
+                    "RPC_C_AUTHN_LEVEL_CALL,RPC_C_AUTHN_LEVEL_PKT,RPC_C_AUTHN_LEVEL_PKT_INTEGRITY,RPC_C_AUTHN_LEVEL_PKT_PRIVACY",
+                "RPC_C_IMP_LEVEL|Enum|unsigned long|RPC_C_IMP_LEVEL_DEFAULT,RPC_C_IMP_LEVEL_ANONYMOUS,RPC_C_IMP_LEVEL_IDENTIFY," +
+                    "RPC_C_IMP_LEVEL_IMPERSONATE,RPC_C_IMP_LEVEL_DELEGATE",
+                "RPC_C_AUTHN_INFO_TYPE|Enum|ULONG|RPC_C_AUTHN_INFO_TYPE_HTTP",
+                "INTERNET_STATE|Enum|DWORD|INTERNET_STATE_CONNECTED,INTERNET_STATE_DISCONNECTED," +
+                    "INTERNET_STATE_DISCONNECTED_BY_USER,INTERNET_STATE_IDLE,INTERNET_STATE_BUSY",
+                "INTERNET_COOKIE_FLAGS|FlagsEnum|DWORD|INTERNET_COOKIE_HTTPONLY,INTERNET_COOKIE_THIRD_PARTY,INTERNET_FLAG_RESTRICTED_ZONE",
+                "INTERNET_AUTODIAL|Enum|DWORD|INTERNET_AUTODIAL_FAILIFSECURITYCHECK,INTERNET_AUTODIAL_FORCE_ONLINE," +
+                    "INTERNET_AUTODIAL_FORCE_UNATTENDED,INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT",
+                "PROXY_AUTO_DETECT_TYPE|FlagsEnum|DWORD|PROXY_AUTO_DETECT_TYPE_DHCP,PROXY_AUTO_DETECT_TYPE_DNS_A",
+                "INTERNET_CONNECTION|FlagsEnum|DWORD|INTERNET_CONNECTION_CONFIGURED,INTERNET_CONNECTION_LAN,INTERNET_CONNECTION_MODEM," +
+                    "INTERNET_CONNECTION_MODEM_BUSY,INTERNET_CONNECTION_OFFLINE,INTERNET_CONNECTION_PROXY,INTERNET_RAS_INSTALLED",
+                "SEC_WINNT_AUTH_IDENTITY|Enum|unsigned int|SEC_WINNT_AUTH_IDENTITY_ANSI,SEC_WINNT_AUTH_IDENTITY_UNICODE");
+            HeaderMigrationAssertions.AssertAssociationCounts(additions, "FTP_FLAGS=6", "GET_ADAPTERS_ADDRESSES_FLAGS=1",
+                "GOPHER_TYPE=2", "GPO_OPEN_FLAGS=3", "GPO_OPTIONS=2", "GPO_SECTION=1", "HTTP_ADDREQ_FLAG=2",
+                "INTERNET_ACCESS_TYPE=1", "INTERNET_AUTODIAL=1", "INTERNET_CONNECTION=4", "INTERNET_COOKIE_FLAGS=2",
+                "INTERNET_PER_CONN=2", "INTERNET_STATE=1", "LDAP_RETCODE=1", "PROXY_AUTO_DETECT_TYPE=1",
+                "RPC_BINDING_HANDLE_OPTIONS_FLAGS=1", "RPC_C_AUTHN_INFO_TYPE=8", "RPC_C_HTTP_AUTHN_TARGET=6",
+                "RPC_C_HTTP_FLAGS=6", "RPC_C_IMP_LEVEL=9", "RPC_C_QOS_CAPABILITIES=9", "RPC_C_QOS_IDENTITY=9",
+                "SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS=1", "SEC_WINNT_AUTH_IDENTITY=2", "WIN_HTTP_CREATE_URL_FLAGS=2",
+                "WIN32_ERROR=2", "WLX_SHUTDOWN_TYPE=1");
             Assert.Equal(27, Regex.Matches(additions, @"_Win32_ContainsInteriorPointers_").Count);
             Assert.Equal(4, Regex.Matches(additions, @"(?m)^typedef DWORD (?:INTERNET_ACCESS_TYPE|INTERNET_PER_CONN|GOPHER_TYPE|HTTP_ADDREQ_FLAG);$").Count);
             Assert.Contains("_In_ unsigned short *EntryName", additions);
@@ -1814,7 +1875,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "RPC_C_AUTHN_LEVEL", "RPC_C_IMP_LEVEL", "RPC_C_AUTHN_INFO_TYPE", "INTERNET_COOKIE_FLAGS",
                 "INTERNET_STATE", "PROXY_AUTO_DETECT_TYPE",
             })
-                Assert.Contains(retained, item => item.TryGetProperty("name", out var value) && value.GetString() == name);
+                Assert.DoesNotContain(retained, item => item.TryGetProperty("name", out var value) && value.GetString() == name);
             Assert.DoesNotContain(retained, item =>
                 item.TryGetProperty("name", out var value) && value.GetString() == "GET_ADAPTERS_ADDRESSES_FLAGS");
             Assert.Contains("_Win32_FlagsEnum_(GET_ADAPTERS_ADDRESSES_FLAGS, unsigned long,",
@@ -1828,12 +1889,16 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "SetLogFileSizeWithPolicy::pDesiredSize=[In]", "SetLogFileSizeWithPolicy::pResultingSize=[Out]",
             })
                 Assert.DoesNotContain(row, overrides);
-            var heldUrlUses = Assert.Single(retained.Where(item =>
-                item.TryGetProperty("addUsesTo", out var additional) && additional.GetString() == "WIN_HTTP_CREATE_URL_FLAGS"));
-            Assert.Equal(new[] { "InternetCrackUrlA::dwFlags", "InternetCrackUrlW::dwFlags" },
-                heldUrlUses.GetProperty("uses").EnumerateArray().Select(use =>
-                    use.GetProperty("method").GetString() + "::" + use.GetProperty("parameter").GetString()));
-            Assert.DoesNotContain("_Win32_RAIIFree_", additions);
+            Assert.DoesNotContain(retained, item => item.TryGetProperty("addUsesTo", out var additional) &&
+                additional.GetString() == "WIN_HTTP_CREATE_URL_FLAGS");
+            foreach (string method in new[] { "InternetCrackUrlA", "InternetCrackUrlW" })
+                Assert.Matches(method + @"\([^;]*_Win32_AssociatedEnum_\(WIN_HTTP_CREATE_URL_FLAGS\)[^;]*\bdwFlags\b",
+                    HeaderMigrationAssertions.PatchedSource(@"um\wininet.h"));
+            Assert.Equal(new[]
+            {
+                "UnregisterInterfaceTimestampConfigChange, -1, 0", "UnregisterInterfaceTimestampConfigChange, -1, 0",
+                "UnregisterInterfaceTimestampConfigChange, -1, 0", "WSACloseEvent, 0",
+            }, Regex.Matches(additions, @"_Win32_RAIIFree_\(([^)]+)\)").Select(match => match.Groups[1].Value));
         }
 
         [NativeMigrationTheory]

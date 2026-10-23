@@ -58,20 +58,29 @@ namespace Win32MetadataScraperTests
             string sdk = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
             string sidecar = File.ReadAllText(Path.Combine(sdk, "supportedOS.rsp"));
             foreach (var fact in Floors)
-            {
-                if (fact.Target is "DRendezvousSessionEvents" or "IRendezvousApplication" or "IRendezvousSession")
-                    Assert.Contains(fact.Target + "=SupportedOSPlatform(\"" + fact.OS + "\")", sidecar);
-                else
-                    Assert.DoesNotContain(fact.Target + "=SupportedOSPlatform(", sidecar);
-            }
+                Assert.DoesNotContain(fact.Target + "=SupportedOSPlatform(", sidecar);
             foreach (string partition in Namespaces.Keys)
-            {
-                string settings = File.ReadAllText(Path.Combine(sdk, "Partitions", partition, "settings.rsp"));
-                Assert.Equal(1, settings.Split("parse-win32-annotations").Length - 1);
-            }
+                HeaderMigrationAssertions.AssertAnnotationReaderEnabled(partition);
+            Assert.Matches(@"_Win32_SupportedOS_10240_\s+STDAPI\s+DMLCreateDevice",
+                HeaderMigrationAssertions.PatchedSource(@"um\DirectML.h"));
+            foreach (string name in new[] { "IDedupBackupSupport", "IDedupReadFileCallback" })
+                HeaderMigrationAssertions.AssertCommentFact(@"um\ddpbackup.idl", "interface", name,
+                    "SupportedOSPlatform(\"windowsserver2012\")");
+            foreach (string name in new[] { "IWsbApplicationAsync", "IWsbApplicationBackupSupport", "IWsbApplicationRestoreSupport" })
+                HeaderMigrationAssertions.AssertCommentFact(@"um\wsbapp.idl", "interface", name,
+                    "SupportedOSPlatform(\"windowsserver2008\")");
+            foreach (var fact in Floors.Skip(9))
+                Assert.Matches(@"_Win32_SupportedOS_Server2012_\s+HRESULT\s+WINAPI\s+" + fact.Target,
+                    HeaderMigrationAssertions.PatchedSource(@"um\wsbonline.h"));
             Assert.Contains("_DEDUP_SET_PARAM_TYPE=DEDUP_SET_PARAM_TYPE",
                 File.ReadAllText(Path.Combine(sdk, "scraper.settings.rsp")));
             Assert.DoesNotContain("--nativeFieldArrayInfo", File.ReadAllText(Path.Combine(sdk, "emitter.settings.rsp")));
+            string rendezvous = Path.Combine(sdk, "patches", "um", "rendezvoussession.idl.patch");
+            Assert.True(File.Exists(rendezvous),
+                "Header-only coverage is incomplete: the three retired rendezvous-session floors have no original-IDL patch.");
+            foreach (var fact in Floors.Skip(3).Take(3))
+                HeaderMigrationAssertions.AssertCommentFact(@"um\rendezvoussession.idl", "interface", fact.Target,
+                    "SupportedOSPlatform(\"" + fact.OS + "\")");
         }
 
         [ComponentMigrationTheory]

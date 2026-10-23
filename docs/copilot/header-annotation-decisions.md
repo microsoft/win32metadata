@@ -10,11 +10,281 @@ visible for review.
 
 ## Completion plan and next review
 
-The next run is header-only, using the annotated SDK as it stands. The previous
-decision to pursue a transitional image with API-specific sidecars still active
-is withdrawn. That mixed ownership left logical enums partly in headers and
-partly in sidecars; `TVITEMEXW_CHILDREN` exposed the resulting storage conflict.
+The next run follows a reviewed repair of the header-only source migration.
+The decision to pursue a transitional image with API-specific sidecars still
+active is withdrawn. That mixed ownership left logical enums partly in headers
+and partly in sidecars; `TVITEMEXW_CHILDREN` exposed the resulting storage conflict.
 Successful partition scraping did not establish a complete migration.
+
+Header-only attempt 070 completed all 395 native profiles and constant extraction,
+then failed combined emission. Its 362 association errors identify 33 missing
+logical enum providers. For `RPC_C_AUTHN_LEVEL`, the use annotations reached the
+generated source but the definition had remained only in the retired JSON
+auto-population rule. All seven native values survived as loose constants.
+The attempt is stopped and preserved. There is no complete NEW or OLD-to-NEW
+comparison. Subsequent user direction authorizes careful source-first repair and
+iteration, including demonstrated tooling fixes, rather than leaving work paused.
+
+The retained-source preflight also found 81 additional OLD enum identities without
+raw or processed providers, plus member gaps in 12 present groups. These require
+native-source classification, not automatic restoration. `SHARE_TYPE` is a
+confirmed unmigrated contract: the native `STYPE_*` constants remain in
+`LMShare.h`, but its group and uses were never authored there. At that preflight,
+only ten `NativeTypedef` providers appeared in the retained source; unannotated
+`BOOL` produced missing-type diagnostics. The source inventory now accounts for
+all 440 retired type contracts. Its latest static successor resolves the 56
+previously unqualified alias shapes, without treating record values or classes
+as pointer typedefs. Frozen source ports are not runtime or provider acceptance.
+
+The initial enum repair has 250 successful, sealed MIDL producers. Its bounded
+controls passed C compilation and surface checks on x86, x64 and arm64. All three
+C++ surface comparisons and the TreeView carrier-pattern check failed. Those
+inputs remain unchanged. The first C++ comparison fails between the OLD header's
+metadata-off and metadata-on modes because of an existing metadata-only anonymous
+enum; it does not reach the candidate comparison. TreeView's regex rejects a
+legitimate newline. These fixture defects require a test-only successor, not a
+header repair. VSTest also executed all seven cases despite the requested
+stop-on-failure setting. A separate SDK-free qualification now proves six exact
+singleton selections, rejection of a two-result selection, and stopping after an
+intentional first failure without launching the remaining cases. It used eight
+VSTest processes; both negative caller outcomes remain failures. The corrected
+test-only successor is separately admitted with this unchanged caller and exact
+seven-case catalog, reusing the sealed preparation.
+
+Live-checkout ordinary tests must preserve the existing native diagnostic policy:
+generator warning exits are positive successful outcomes when bindings exist,
+not an instruction to suppress `FlagEnum`, `MSInheritance` or `WarnUnusedResult`.
+The warning fixtures assert exact diagnostics and counts alongside the existing
+native-signature and physical-metadata assertions. The declaration-only parse
+still validates every diagnostic, but does not reprint a native diagnostic
+already reported by the original parse; duplicates within one parse remain
+visible. Unsupported native using-directive/anonymous-namespace errors remain
+errors, independently of successful native annotation-name binding.
+
+Real-MIDL test fixtures require a short workspace-local TEMP/TMP prefix. The same
+unchanged preparation test fails with MIDL9008 beneath the long session-artifact
+prefix and passes beneath `artifacts\t-002`; no preparation success policy or
+fixture spaces/quoting is changed. Source-state tests inspect effective global
+plus partition annotation settings and source-owned facts, not retired sidecar
+rows. Retiring a row does not prove source coverage: missing original-IDL floors
+and native associations remain explicit test failures, not accepted baselines.
+
+The manual-type inventory exposed replacement-era exclusions that survived
+deletion of their handwritten providers. The frozen source packet retires ten
+partition exclusions; four common exclusions have also been removed for
+`MONITORINFOEXA/W`, `SLIST_ENTRY`,
+`HSTRING_HEADER`, cluster records, `PROCESS_BASIC_INFORMATION` and
+`FILE_DISPOSITION_INFO`. Native fields, layout, guards and required annotations
+remain owned by the SDK originals. The original-IDL and include-selection repairs
+for HSTRING, EventRegistrationToken and four private VDS interfaces are frozen;
+regeneration and native/metadata qualification remain outstanding. Do not supply
+replacement structs from the emitter.
+
+Four complete-record color aliases and the x86 record-alias form of `SLIST_ENTRY`
+still need nominal-provider qualification. The GDI+ empty-class family now has
+the bounded producer qualification described below; whole-image qualification
+remains outstanding. Global empty-record filtering remains enabled. An OLD
+`IntPtr` field does not establish a native pointer typedef. Two power-information
+types have only qualified selected-SDK absence so far, not a proven removal
+decision.
+
+The inventory also separates 73 record-value/tag contracts from genuine pointer
+typedefs. A private synthetic diagnostic confirms that ordinary generation can
+emit fieldless nominal providers and preserve one- and two-pointer signatures.
+The physical TypeDefs have no fields or explicit ClassLayout row; this establishes
+no native object size. Empty-record exclusion removes their providers but leaves
+the references, causing compilation failure. Ordinary generation also retains
+unused forward declarations, so disabling the global filter is not approved.
+Referenced incomplete pointees, complete definitions, by-value uses and
+complete-empty classes need distinct treatment.
+
+The global `exclude-empty-records` option dates to commit `d1402d9f` on
+2023-04-27. It was not introduced by this migration. Retiring the `autoTypes.json`
+and manual API replacements exposed the missing providers. The option filters
+binding generation, while the original record declarations and pointer references
+remain available in the Clang AST. The selected direction is to retain necessary
+source-derived nominal pointees, preserve complete-definition precedence and
+native pointer depths, and leave unrelated unused declarations excluded. This
+producer change is in the working tree and passes its bounded producer checks.
+It emits an
+ordinary empty struct for a referenced incomplete native record, without adding
+a `Value` field or `NativeTypedef`, changing pointer levels, or keeping unrelated
+empty records. No change to the native `UBiDi` declaration is needed.
+
+The 28 opaque-record regression cases now pass, including C and C++ pointer
+return/input/output/callback/field cases on x86, x64 and arm64, nested records in
+single-file and multi-file output, and the negative filtering/layout checks.
+The original selected-SDK ICU header also produces a fieldless `UBiDi` in a
+bounded physical WinMD on all three architectures. Its actual `ubidi_open`,
+`ubidi_close` and `ubidi_getLength` declaration nodes retain their pointer
+signatures and verified `icuuc.dll` imports. The SDK headers are unchanged.
+
+The implementation initially missed the existing decoder for ClangSharp's
+incorrectly escaped Windows source-location paths; it now shares that decoder
+with annotation processing. Appending a second partial enclosing struct could
+also lose a nested provider during WinMD emission. The merge now inserts it into
+the ordinary enclosing declaration. The missing VC include path, unrelated ICU
+enum imports copied into the bounded fixture, and incorrect OS-version and
+nested-name expectations were test/setup mistakes. They did not establish new
+limitations on empty structs.
+
+Private cohort `opaque-pointee-retention-001\after-007` records 31 passed opaque
+and SDK cases plus four passed existing annotation cases. Six other existing
+annotation cases fail on the generator's `FlagEnum` warning exit code; all six
+reproduce on the unchanged pre-fix runtime with identical fixture sources.
+The whole 41-case invocation therefore remains failed, not an all-green run.
+All seven implementation/test files match the frozen source, and the scraper,
+emitter and test portable PDBs bind to 69 verified SHA256 source documents.
+No production runtime has been replaced.
+
+The first actual-SDK consumer run failed during generation because the bounded
+fixture used the test assembly identity `Test.winmd`. CsWin32's normal C# 13
+friendly-overload polyfill path requires its primary `Windows.Win32` generator.
+Neither consumer compilation ran. The failed image and both generation failures
+remain preserved. The fixture now emits `Windows.Win32.winmd` through the
+unchanged emitter and asserts its embedded assembly identity. This is a fresh
+emission, not a file rename or binary rewrite.
+
+Private cohort `after-008` passes all 35 targeted opaque, SDK and related
+annotation cases, including the production-identity assertion on all three
+architectures. The actual x64 SDK declaration source is byte-identical to
+`after-007`, and the four producer source files are unchanged. All 69 current
+source/PDB document checks pass. The six separately established baseline warning
+failures were not selected again and remain unresolved. Consumer compilation
+against the corrected actual SDK-derived x64 image now succeeds with marshalling
+enabled and disabled. Both generation commands and both final compiler commands
+exit zero, with the same consumer, options, references and tools as the failed
+identity fixture. Root reverified all 41 new consumer artifacts and the actual
+command receipts, plus all 121 earlier consumer artifacts and their manifests.
+No native imports were executed. This completes the approved bounded `UBiDi`
+fix; it does not qualify the full SDK image.
+
+There is an existing metadata precedent. Exact OLD represents `GpCachedBitmap`
+as a fieldless ordinary value type with no custom attributes or explicit
+ClassLayout row. The selected SDK declares `class GpCachedBitmap;`, and its
+create/draw/delete APIs use `GpCachedBitmap**` and `GpCachedBitmap*`.
+The related fieldless `GpBitmap` and `GpGraphics` types originate from complete
+native type-checking classes; they are not evidence of incomplete declarations.
+
+The subsequent real-SDK GDI+ preflight confirmed that distinction matters to the
+producer. The incomplete-only recovery retained `GpCachedBitmap`, but ordinary
+empty-record filtering still removed the required complete definitions of
+`GpGraphics`, `GpImage` and `GpBitmap`. The same generated source contained the
+actual create/draw/delete declarations, so this was a missing-provider defect.
+
+Selective recovery now also admits source-empty definitions and recursively empty
+nonvirtual bases. A complete candidate cannot contain fields, methods, static
+members or other declarations apart from access labels. Its definition location,
+rather than an earlier forward declaration, identifies the supplemental output.
+The generated provider must still be fieldless and resolve an existing missing
+pointer reference. Explicit exclusions, native identity and scope checks remain
+active. Unused empty records and `DECLARE_HANDLE` sentinel bodies remain excluded;
+nonempty definitions are not replaced. Incomplete and complete-empty by-value
+uses remain errors. None of this establishes an allocation size or object layout.
+
+The final bounded cohort passes 46 selected cases. Eleven regression cases fail
+with the exact pre-correction producer and the same final fixtures. Actual
+selected-SDK GDI+ declarations now produce all four fieldless providers and the
+three verified `gdiplus.dll` imports in physical WinMDs on x86, x64 and arm64,
+preserving both pointer levels. SDK bytes are unchanged. The fixture initially
+omitted the `Status` definition's header, then attempted to generate unrelated
+C++ destructor bodies; it now traverses `gdiplustypes.h` and uses the production
+`exclude-funcs-with-body` setting. Those failed setup cohorts remain preserved.
+
+The separately combined tooling control passed all 380 required component cases
+and includes fresh production tools and the integrity-review runtime. It predates
+this complete-empty correction and remains a control, not the final SDK candidate.
+The fresh corrected tooling now passes the exact 395-case union, with no missing,
+unexpected, duplicate, failed or skipped cases. This retains 379 original case
+identities, explicitly replaces the renamed discovery case, adds 12 new cases and
+covers three existing associated-enum forward cases. Both test processes exited
+zero on their only attempt. The six selected-SDK ICU and GDI+ physical-image cases
+are included. The same frozen source graph produced all six production tools,
+their dependencies and assets, and the build-only integrity-review runtime; 207
+PDB/source/product bindings are verified. The earlier 380-case packets remain
+unchanged. This qualifies the combined tooling, not a complete SDK image.
+
+The combined source snapshot includes the current header and original-IDL patches.
+Its 3,443-file original mirror has a separately materialized Git subtree and exact
+Windows-byte inventory; the recipe binds that subtree rather than pretending the
+dirty worktree is HEAD. The generated SDK build configuration is separately taken
+from the qualified tooling source. Fresh SAL/MIDL preparation, ordinary full-SDK
+generation, definitive NEW integrity and the raw exact-OLD comparison remain ahead.
+
+CsWin32 consumer qualification confirms that ordinary fieldless pointees support
+raw typed-pointer interop. CsWin32 commit `6f333430` generated and compiled a frozen
+synthetic pointee and the existing GDI+ create/draw/delete family against its normal
+`71.0.37-preview` metadata, separately, with marshalling enabled and disabled.
+All four generation and four final consumer compiler invocations succeeded; no
+native import was executed. The normal consumer metadata is not exact OLD.
+The initial on-mode compiler harness omitted the SDK LibraryImport generator;
+those failures remain preserved alongside the corrected compiler invocations.
+Root reverified all 96 sealed consumer artifacts and the actual eight successful
+command receipts.
+
+This requires an ordinary struct without `NativeTypedef`, which CsWin32 expects
+to contain one field. CsWin32 preserves `T*` and `T**` but does not infer ownership
+or a SafeHandle from fieldlessness. It also emits some `ref T` friendly helpers:
+passing a default empty value through one does not create a native opaque object.
+Raw pointers are the demonstrated consumer surface; `ref T*` can represent an
+output pointer slot. No native allocation size, dereference or by-value layout
+is established. The separate actual-SDK consumer result is preserved in
+`sdk-ubidi-consumer-002`: the raw consumer acquires `UBiDi*`, calls
+`ubidi_getLength`, and explicitly calls `ubidi_close` in `finally`.
+
+### Remaining execution order
+
+1. Combine the separately checked tooling corrections and the authored header/IDL
+   repair packets. Resolve the remaining source-ownership, namespace and native
+   contract holds before treating that set as the next SDK build input.
+2. Run fresh SDK generation with that exact combined set and emit the ordinary
+   full WinMD. A successful small fixture is not acceptance of this step.
+3. Run whole-image integrity and `NoSuggestedRemappings`, then compare exact OLD
+   to NEW without suppressing differences. Classify intentional changes and fix
+   unexplained losses.
+
+The full header-only image and its final comparison have not completed, so
+further whole-image defects remain possible. Report each new failure as either
+a product defect or a test/setup error, state which step it blocks, and identify
+whether it changes this execution order.
+
+The three generic tooling repairs cover nominal scalar/data-pointer typedefs,
+cross-architecture macro composition and retirement of owned generated sources.
+Independent implementation review requested corrections to all three. The
+typedef reader must reject explicit pointer widths that it cannot preserve,
+including inner pointer levels. Macro composition must preserve genuine suffix
+names, successful empty profiles and architecture-dependent expression bindings.
+Retirement must support sparse source directories and replace same-basename manual
+inputs even when their lengths and timestamps match. None of these defects explains
+the missing enum definitions in attempt 070.
+
+One earlier compiled snapshot contains the first versions of all three repairs.
+Its focused qualification covers
+206 executed cases: 200 passed in the first invocation; six control checks initially
+failed because the runner selected a DLL/PDB archive without its runtime
+configuration. Those six passed in a preserved successor using the complete
+original control deployment and the unchanged compiled snapshot. No product
+change or weakened assertion was needed for that successor. This evidence does
+not close the subsequent implementation-review findings.
+
+The retirement corrections reproduced seven failures, then passed all 50 related
+cases. Missing profile directories are tolerated without hiding other deletion
+errors. Changed or first-untracked manual input sets force copying; their identity
+manifest is committed only after staging succeeds, so a failed copy cannot poison
+the next attempt. The typedef-width correction has 126 passing cases after
+six actual native/physical reproductions. Independent re-review accepts both
+bounded corrections, while retaining the retirement packet's missing before
+DLL/PDB limitation.
+
+The macro successor passed 152 cases and closes suffix-name and successful-empty
+profile defects. Independent review still requests two corrections: primitive
+alias lowering must precede per-profile constant binding, and enum underlying
+storage must survive composition or fail explicitly. The new counterexamples are
+source-traced, not claimed as executed failures. A coherent corrected test union,
+runtime admission and complete-image checks remain outstanding. The previous
+component selections share 30 typedef-composition cases; two distinct marker
+cases also have the same truncated display text, so display-name counts alone
+cannot establish coverage.
 
 The architecture remains the selected SDK originals plus authored patches,
 targeted MIDL regeneration, the compiler-backed C# scraper, constant extraction,
@@ -22,20 +292,28 @@ and one namespace/architecture-composed WinMD. SDK sources own API-specific fact
 the reader binds them to native declarations; the emitter preserves them in the
 complete image.
 
-1. Remove authored API metadata from every active JSON/RSP input and handwritten
-   API source. Keep attribute definitions, namespace organization, documented
-   parser fixes and SDK-derived import discovery separately identified. Enable
-   header-annotation reading for every normal profile. Do not fill missing header
-   facts from a legacy fragment or a baseline assembly.
-2. Keep the current prepared headers, retained MIDL outputs and qualified tool
-   binaries unchanged. Run all 321 owners and 395 normal profiles into a fresh
-   output directory, followed by normal constant extraction and combined WinMD
-   emission. Do not seed this run with previous generated C#, constants or
-   filtered response files.
-3. Stop at the first compilation failure. Preserve its inputs and diagnostics,
-   diagnose the failure, and report it before any source repair, tool change or
-   retry. A failed run produces no NEW and cannot have an OLD-to-NEW comparison.
-4. If a complete NEW is emitted, compare exact EDF069 OLD against that image.
+1. Keep authored API metadata retired from active JSON/RSP inputs and handwritten
+   API sources. Attribute definitions, namespace organization, documented parser
+   fixes and SDK-derived import discovery remain separately identified. Every
+   normal profile reads header annotations. Do not fill missing facts from a
+   legacy fragment or a baseline assembly.
+2. Independently review the complete migration tooling while repairing missing
+   logical groups, typedef contracts and incomplete member sets. Definitions,
+   members, storage, Flags, guards and uses belong together in the original
+   headers or IDL. Assign each shared original artifact to one author. A tooling
+   change requires a reproduced reader or emitter defect and regression coverage;
+   missing source facts do not justify weakening composition checks.
+3. Check retained compilation diagnostics and actual generated providers against
+   the retired definition inventory, including groups without failing references.
+   Prepare the corrected originals, regenerate every affected MIDL output and
+   exercise the changed source contracts before the next complete run.
+4. Freeze the reviewed source and runtime candidate. Run all 321 owners and 395
+   normal profiles into a fresh output directory, followed by constant extraction
+   and combined WinMD emission. Do not reuse stale generated C#, constants or
+   filtered response files. Stop on a compilation failure, preserve and report
+   it, and diagnose the shared cause before another coherent correction or run.
+   A failed run produces no NEW and cannot have an OLD-to-NEW comparison.
+5. If a complete NEW is emitted, compare exact EDF069 OLD against that image.
    Preserve the full raw differences and integrity results, including
    NoSuggestedRemappings. Missing header facts and intended representation
    changes remain visible; neither is a reason to reactivate a sidecar.

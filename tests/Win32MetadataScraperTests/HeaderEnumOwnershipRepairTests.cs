@@ -41,7 +41,7 @@ namespace Win32MetadataScraperTests
                 && !line.StartsWith("+++", StringComparison.Ordinal)).Select(line => line.Substring(1)));
             Assert.Matches(
                 "\"Enum\\(I_ZERO, I_ONE_OR_MORE, I_CHILDRENCALLBACK, I_CHILDRENAUTO\\)\",\\s*" +
-                "0, 1, I_CHILDRENCALLBACK, I_CHILDRENAUTO\\) int TVITEMEXW_CHILDREN;", added);
+                "0, 1, I_CHILDRENCALLBACK, I_CHILDRENAUTO\\)\\s+int TVITEMEXW_CHILDREN;", added);
             Assert.DoesNotMatch(@"(?m)^\s*#\s*define\s+(?:I_ZERO|I_ONE_OR_MORE)\b", added);
             Assert.Equal(4, Regex.Matches(added,
                 @"_Win32_AssociatedEnum_\(TVITEMEXW_CHILDREN\)\s+int\s+cChildren\s*;").Count);

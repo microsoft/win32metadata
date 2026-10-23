@@ -608,10 +608,15 @@ namespace Win32MetadataScraperTests
             };
             Assert.All(pilotPatches, patch => Assert.Contains(patch, patches));
             string[] patchTexts = pilotPatches.Select(path => File.ReadAllText(Path.Combine(root, path)).Replace("\r\n", "\n")).ToArray();
-            Assert.Equal(new[] { @"shared\sal.h.patch" }, patches.Where(path =>
-                File.ReadAllText(Path.Combine(root, path)).Contains("win32metadata_annotations.h", StringComparison.Ordinal)));
             Assert.Contains("+#include <win32metadata_annotations.h>",
                 File.ReadAllText(Path.Combine(root, @"shared\sal.h.patch")));
+            foreach (string path in patches.Where(path => File.ReadAllText(Path.Combine(root, path))
+                .Contains("win32metadata_annotations.h", StringComparison.Ordinal)))
+                Assert.Contains("#include <win32metadata_annotations.h>", File.ReadAllText(Path.Combine(root, path)));
+            Assert.DoesNotContain(recipe.RootElement.GetProperty("midl").GetProperty("inputs").EnumerateArray(),
+                input => input.GetProperty("path").GetString() == @"shared\win32metadata_annotations.h");
+            Assert.Equal(File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h")),
+                File.ReadAllBytes(Path.Combine(root, "..", "RecompiledIdlHeaders", "shared", "win32metadata_annotations.h")));
             foreach (string idl in new[] { "waasapi", "propidlbase" })
             {
                 string text = File.ReadAllText(Path.Combine(root, @"um\" + idl + ".idl.patch"));
@@ -691,7 +696,7 @@ namespace Win32MetadataScraperTests
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
             var patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()).ToArray();
-            Assert.Equal(new[] { @"um\propidlbase.idl.patch" },
+            Assert.Equal(new[] { @"um\propidlbase.idl.patch", @"um\propidl.idl.patch" },
                 patches.Where(path => Path.GetFileName(path).StartsWith("propidl", StringComparison.OrdinalIgnoreCase)));
             foreach (var pair in new[] { ("propidlbase.idl", "PropIdlBase.h"), ("propidl.idl", "PropIdl.h") })
             {
@@ -716,16 +721,28 @@ namespace Win32MetadataScraperTests
 
             string patch = File.ReadAllText(Path.Combine(project, "patches", @"um\propidlbase.idl.patch"));
             Assert.Contains("+cpp_quote(\"_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);\")", patch);
-            Assert.Equal(2, Regex.Matches(patch, Regex.Escape("[annotation(\"_Win32_AssociatedEnum_(enum VARENUM)\")]")).Count);
+            HeaderMigrationAssertions.AssertCommentFact(@"um\propidlbase.idl", "field", "PROPVARIANT::vt",
+                "AssociatedEnum(VARENUM)");
+            HeaderMigrationAssertions.AssertCommentFact(@"um\propidlbase.idl", "field", "STATPROPSTG::vt",
+                "AssociatedEnum(VARENUM)");
             Assert.DoesNotContain("_Win32_AssociatedEnum_(VARENUM)", patch);
-            Assert.Equal(4, Regex.Matches(patch, @"(?m)^\+_Win32_AnnotateInterface_\(").Count);
-            Assert.Equal(4, Regex.Matches(patch, @"(?m)^\+_Win32_AnnotateMethod_\(").Count);
+            foreach (string name in new[] { "IPropertyStorage", "IPropertySetStorage", "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+                HeaderMigrationAssertions.AssertCommentFact(@"um\propidlbase.idl", "interface", name,
+                    "SupportedOSPlatform(\"windows5.0\")");
+            foreach (string name in new[] { "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+                foreach (string method in new[] { "Next", "Skip" })
+                    HeaderMigrationAssertions.AssertCommentFact(@"um\propidlbase.idl", "method", name + "::" + method,
+                        "PreserveResult");
             Assert.DoesNotContain("+    [local", patch);
             Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
             Assert.DoesNotContain("PRSPEC_INVALID);", patch);
-            Assert.Contains("VARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=VARENUM", emitter);
-            Assert.Contains("IEnumString::Next=[CanReturnMultipleSuccessValues]", emitter);
-            Assert.Contains("PropVariantInit=SupportedOSPlatform(\"windows5.0\")", os);
+            Assert.DoesNotContain("VARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=VARENUM", emitter);
+            HeaderMigrationAssertions.AssertCommentFact(@"um\oaidl.idl", "field", "VARIANT::vt", "AssociatedEnum(VARENUM)");
+            Assert.DoesNotContain("IEnumString::Next=[CanReturnMultipleSuccessValues]", emitter);
+            HeaderMigrationAssertions.AssertCommentFact(@"um\objidlbase.idl", "method", "IEnumString::Next", "PreserveResult");
+            Assert.DoesNotContain("PropVariantInit=SupportedOSPlatform(\"windows5.0\")", os);
+            HeaderMigrationAssertions.AssertCommentFact(@"um\propidl.idl", "function", "PropVariantInit",
+                "SupportedOSPlatform(\"windows5.0\")");
         }
 
         [MigrationTheory]
@@ -1087,7 +1104,8 @@ namespace Win32MetadataScraperTests
                 string text = File.ReadAllText(Path.Combine(root, "patches", path));
                 Assert.Contains("--- a/um/" + header, text);
                 Assert.DoesNotContain("RecompiledIdlHeaders", text);
-                Assert.DoesNotContain("+#include <win32metadata_annotations.h>", text);
+                foreach (Match include in Regex.Matches(text, @"(?m)^\+#include [^\r\n]*win32metadata_annotations\.h[^\r\n]*"))
+                    Assert.Equal("+#include <win32metadata_annotations.h>", include.Value);
             }
         }
 
@@ -1116,20 +1134,20 @@ namespace Win32MetadataScraperTests
                 string text = File.ReadAllText(Path.Combine(root, "patches", path));
                 Assert.Contains("--- a/" + header.Replace('\\', '/'), text);
                 Assert.DoesNotContain("RecompiledIdlHeaders", text);
-                Assert.DoesNotContain("+#include <win32metadata_annotations.h>", text);
+                foreach (Match include in Regex.Matches(text, @"(?m)^\+#include [^\r\n]*win32metadata_annotations\.h[^\r\n]*"))
+                    Assert.Equal("+#include <win32metadata_annotations.h>", include.Value);
                 Assert.Contains(text.Split('\n'), line => line.StartsWith("+", StringComparison.Ordinal) &&
                     (line.Contains("_Win32_SupportedOS_", StringComparison.Ordinal) ||
                         line.Contains("_Win32_SetLastError_", StringComparison.Ordinal)));
             }
             foreach (var owner in owners)
-                Assert.Contains("parse-win32-annotations",
-                    File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
+                HeaderMigrationAssertions.AssertAnnotationReaderEnabled(owner.Partition);
         }
 
         internal static IEnumerable<(string Partition, string[] Headers)> DeviceBulkOriginalHeaders()
         {
             yield return ("Audio", new[] { "mmeapi.h", "msacm.h" });
-            yield return ("Controls", new[] { "commctrl.h", "uxtheme.h" });
+            yield return ("Controls", new[] { "commctrl.h", "Uxtheme.h" });
             yield return ("Display", new[] { "winddi.h" });
             yield return ("DlgBox", new[] { "commdlg.h" });
             yield return ("Fax", new[] { "winfax.h", "faxdev.h", "faxroute.h", "faxext.h", "fxsutility.h" });
@@ -1187,23 +1205,27 @@ namespace Win32MetadataScraperTests
                 Assert.DoesNotContain("RecompiledIdlHeaders", patch);
                 foreach (string name in owner.Interfaces)
                 {
-                    Assert.Matches(@"\+_Win32_AnnotateInterface_\(" + Regex.Escape(name) +
-                        @", _Win32_SupportedOS_\w+_\)", patch);
+                    HeaderMigrationAssertions.AssertCommentFact(original, "interface", name,
+                        "SupportedOSPlatform(\"" + owner.OS + "\")");
                     Assert.DoesNotContain(name + "=SupportedOSPlatform(\"" + owner.OS + "\")", legacy);
                 }
                 Assert.Contains("parse-win32-annotations",
                     File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
             }
-            Assert.DoesNotContain("um\\txlogpub.idl.patch", patches);
-            Assert.DoesNotContain(outputs, output => output.GetProperty("path").GetString() == "um\\txlogpub.h");
-            Assert.False(File.Exists(Path.Combine(root, "patches", "um", "txlogpub.idl.patch")));
+            Assert.Contains("um\\txlogpub.idl.patch", patches);
+            Assert.Contains(outputs, output => output.GetProperty("path").GetString() == "um\\txlogpub.h");
             foreach (string retained in new[]
             {
                 "IUnknown=SupportedOSPlatform(\"windows5.0\")",
                 "IFileBasedLogInit=SupportedOSPlatform(\"windows5.1.2600\")",
                 "ILog=SupportedOSPlatform(\"windows5.1.2600\")",
             })
-                Assert.Single(legacy.Where(row => row == retained));
+                Assert.DoesNotContain(retained, legacy);
+            foreach (string name in new[] { "IFileBasedLogInit", "ILog" })
+                HeaderMigrationAssertions.AssertCommentFact(@"um\txlogpub.idl", "interface", name,
+                    "SupportedOSPlatform(\"windows5.1.2600\")");
+            HeaderMigrationAssertions.AssertCommentFact(@"um\unknwnbase.idl", "interface", "IUnknown",
+                "SupportedOSPlatform(\"windows5.0\")");
         }
 
         internal static IEnumerable<(string Header, string Partition, string OS, string[] Interfaces)> DeviceIdlOriginalHeaderContracts()
@@ -1268,10 +1290,14 @@ namespace Win32MetadataScraperTests
             var owners = DeviceFollowingOriginalHeaders().ToArray();
             Assert.Equal(22, owners.Sum(owner => owner.Headers.Length));
             int annotations = 0;
+            string[] recoveredReflectionFloors =
+            {
+                "ID3D11ShaderReflectionConstantBuffer", "ID3D11ShaderReflectionType", "ID3D11ShaderReflectionVariable",
+            };
+            var recovered = new HashSet<string>(StringComparer.Ordinal);
             foreach (var owner in owners)
             {
-                Assert.Contains("parse-win32-annotations",
-                    File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
+                HeaderMigrationAssertions.AssertAnnotationReaderEnabled(owner.Partition);
                 foreach (string original in owner.Headers)
                 {
                     Assert.Single(patches.Where(patch => patch == original + ".patch"));
@@ -1280,23 +1306,48 @@ namespace Win32MetadataScraperTests
                     string patch = File.ReadAllText(Path.Combine(root, "patches", original + ".patch"));
                     Assert.Contains("--- a/" + original.Replace('\\', '/'), patch);
                     Assert.DoesNotContain("RecompiledIdlHeaders", patch);
-                    annotations += Regex.Matches(patch, @"(?m)^\+(?!\+)[^\r\n]*_Win32_SupportedOS_\w+_").Count;
+                    foreach (Match annotation in Regex.Matches(patch, @"(?m)^\+(?!\+)[^\r\n]*_Win32_SupportedOS_\w+_[^\r\n]*"))
+                    {
+                        string target = recoveredReflectionFloors.SingleOrDefault(name =>
+                            Regex.IsMatch(annotation.Value, @"\b" + name + @"\b"));
+                        if (target == null)
+                            annotations++;
+                        else
+                        {
+                            Assert.Equal("um\\d3d11shader.h", original);
+                            Assert.Equal("+typedef _Win32_SupportedOS_Windows7_ struct " + target + " " + target + ";",
+                                annotation.Value);
+                            Assert.True(recovered.Add(target));
+                        }
+                    }
                 }
             }
             Assert.Equal(100, annotations);
+            Assert.Equal(recoveredReflectionFloors.OrderBy(value => value), recovered.OrderBy(value => value));
             foreach (string original in new[] { "shared\\d3d9.h", "um\\reconcil.h", "um\\scesvc.h" })
             {
-                Assert.DoesNotContain(original + ".patch", patches);
-                Assert.False(File.Exists(Path.Combine(root, "patches", original + ".patch")));
+                Assert.Contains(original + ".patch", patches);
+                Assert.True(File.Exists(Path.Combine(root, "patches", original + ".patch")));
             }
             string[] legacy = File.ReadAllLines(Path.Combine(root, "supportedOS.rsp"));
             foreach (string name in new[] { "ISceSvcAttachmentData", "ISceSvcAttachmentPersistInfo", "INotifyReplica",
                 "IReconcilableObject", "IReconcileInitiator" })
-                Assert.Single(legacy.Where(row => row == name + "=SupportedOSPlatform(\"windows5.1.2600\")"));
+            {
+                Assert.DoesNotContain(name + "=SupportedOSPlatform(\"windows5.1.2600\")", legacy);
+                string source = HeaderMigrationAssertions.AddedSource(
+                    name.StartsWith("ISceSvc", StringComparison.Ordinal) ? @"um\scesvc.h" : @"um\reconcil.h");
+                Assert.Matches(@"(?:typedef\s+_Win32_SupportedOS_WindowsXP_\s+struct|interface\s+_Win32_SupportedOS_WindowsXP_)\s+" +
+                    name + @"\b", source);
+            }
             foreach (string name in new[] { "IDirect3D9ExOverlayExtension", "IDirect3DAuthenticatedChannel9",
                 "IDirect3DCryptoSession9", "IDirect3DDevice9Video", "ID3D11ShaderReflectionConstantBuffer",
                 "ID3D11ShaderReflectionType", "ID3D11ShaderReflectionVariable" })
-                Assert.Single(legacy.Where(row => row == name + "=SupportedOSPlatform(\"windows6.1\")"));
+            {
+                Assert.DoesNotContain(name + "=SupportedOSPlatform(\"windows6.1\")", legacy);
+                Assert.Contains("typedef _Win32_SupportedOS_Windows7_ struct " + name + " " + name + ";",
+                    HeaderMigrationAssertions.AddedSource(name.StartsWith("IDirect3D", StringComparison.Ordinal)
+                        ? @"shared\d3d9.h" : @"um\d3d11shader.h"));
+            }
         }
 
         internal static IEnumerable<(string Partition, string[] Headers)> DeviceFollowingOriginalHeaders()
@@ -1735,13 +1786,9 @@ namespace Win32MetadataScraperTests
             using var types = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "autoTypes.json")));
             foreach (var family in DeviceProducerTransfers.DistinctBy(value => value.TypeName))
             {
-                var type = Assert.Single(types.RootElement.EnumerateArray()
-                    .Where(value => value.GetProperty("Name").GetString() == family.TypeName));
-                Assert.Equal(family.Namespace, type.GetProperty("Namespace").GetString());
-                Assert.Equal("DECLARE_HANDLE", type.GetProperty("ValueType").GetString());
-                Assert.True(type.GetProperty("NativeTypedef").GetBoolean());
-                Assert.False(type.TryGetProperty("CloseApi", out _));
-                Assert.False(type.TryGetProperty("InvalidHandleValues", out _));
+                Assert.DoesNotContain(types.RootElement.EnumerateArray(),
+                    value => value.GetProperty("Name").GetString() == family.TypeName);
+                HeaderMigrationAssertions.AssertNativeTypedef("um\\" + family.Header, family.TypeName);
             }
             foreach (var group in DeviceProducerTransfers.GroupBy(value => value.Header, StringComparer.Ordinal))
             {
@@ -1763,11 +1810,11 @@ namespace Win32MetadataScraperTests
                 "PTOpenProvider", "phProvider", "PTCloseProvider", new long[] { -1, 0 }),
             ("prntvpt.h", "PrintTicket", "Windows.Win32.Graphics.Printing.PrintTicket", "HPTPROVIDER",
                 "PTOpenProviderEx", "phProvider", "PTCloseProvider", new long[] { -1, 0 }),
-            ("uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
+            ("Uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
                 "OpenThemeData", "return", "CloseThemeData", new long[] { 0 }),
-            ("uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
+            ("Uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
                 "OpenThemeDataForDpi", "return", "CloseThemeData", new long[] { 0 }),
-            ("uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
+            ("Uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
                 "OpenThemeDataEx", "return", "CloseThemeData", new long[] { 0 }),
         };
 
@@ -1778,13 +1825,9 @@ namespace Win32MetadataScraperTests
             using var types = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "autoTypes.json")));
             foreach (var family in DeviceUiProducerTransfers.DistinctBy(value => value.TypeName))
             {
-                var type = Assert.Single(types.RootElement.EnumerateArray()
-                    .Where(value => value.GetProperty("Name").GetString() == family.TypeName));
-                Assert.Equal(family.Namespace, type.GetProperty("Namespace").GetString());
-                Assert.Equal(family.TypeName == "HTHEME" ? "IntPtr" : "DECLARE_HANDLE", type.GetProperty("ValueType").GetString());
-                Assert.True(type.GetProperty("NativeTypedef").GetBoolean());
-                Assert.False(type.TryGetProperty("CloseApi", out _));
-                Assert.False(type.TryGetProperty("InvalidHandleValues", out _));
+                Assert.DoesNotContain(types.RootElement.EnumerateArray(),
+                    value => value.GetProperty("Name").GetString() == family.TypeName);
+                HeaderMigrationAssertions.AssertNativeTypedef("um\\" + family.Header, family.TypeName);
             }
             foreach (var group in DeviceUiProducerTransfers.GroupBy(value => value.Header, StringComparer.Ordinal))
             {
@@ -1871,31 +1914,51 @@ namespace Win32MetadataScraperTests
             var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
             Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && names.Contains(name.GetString()));
             var residual = items.Where(item => item.TryGetProperty("addUsesTo", out var name) && names.Contains(name.GetString())).ToArray();
-            Assert.Equal(2, residual.Length);
-            Assert.Equal(DeviceInstallationUnboundUses.OrderBy(value => value, StringComparer.Ordinal),
-                residual.SelectMany(item => item.GetProperty("uses").EnumerateArray())
-                    .Select(use => use.GetProperty("method").GetString()).OrderBy(value => value, StringComparer.Ordinal));
-            Assert.All(residual.SelectMany(item => item.GetProperty("uses").EnumerateArray()),
-                use => Assert.Equal("ulFlags", use.GetProperty("parameter").GetString()));
+            Assert.Empty(residual);
+            foreach (string method in DeviceInstallationUnboundUses)
+                Assert.DoesNotMatch(@"\b" + Regex.Escape(method) + @"\s*\(",
+                    File.ReadAllText(Path.Combine(project, "RecompiledIdlHeaders", "um", "cfgmgr32.h")));
+            Assert.Contains("_Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags",
+                HeaderMigrationAssertions.AddedSource(@"um\cfgmgr32.h"));
+            Assert.Contains("_Win32_AssociatedEnum_(CM_REENUMERATE_FLAGS) ULONG         ulFlags",
+                HeaderMigrationAssertions.AddedSource(@"um\cfgmgr32.h"));
             foreach (string retained in new[] { "CM_DEVNODE_STATUS_FLAGS", "CM_PROB" })
-                Assert.Contains(items, item => item.TryGetProperty("name", out var name) && name.GetString() == retained);
+            {
+                Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && name.GetString() == retained);
+                Assert.Contains(retained == "CM_PROB" ? "_Win32_Enum_(CM_PROB, unsigned long," :
+                    "_Win32_FlagsEnum_(CM_DEVNODE_STATUS_FLAGS, unsigned long,",
+                    HeaderMigrationAssertions.AddedSource(@"shared\cfg.h"));
+            }
 
             string additions = string.Join("\n", new[] { "cfgmgr32.h", "newdev.h" }.SelectMany(header =>
                 File.ReadAllLines(Path.Combine(project, "patches", "um", header + ".patch"))
                     .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
                     .Select(line => line.Substring(1))));
-            var groups = Regex.Matches(additions, @"_Win32_(?<flags>Flags)?Enum_\((?<arguments>[^)]+)\);")
+            var allGroups = Regex.Matches(additions, @"_Win32_(?<flags>Flags)?Enum_\((?<arguments>[^)]+)\);")
                 .Select(match => new
                 {
                     Flags = match.Groups["flags"].Success,
                     Arguments = match.Groups["arguments"].Value.Split(',').Select(value => value.Trim()).ToArray(),
                 }).ToArray();
+            var mask = Assert.Single(allGroups.Where(group => group.Arguments.Length == 3 &&
+                group.Arguments[0] == "CM_REENUMERATE_FLAGS" && group.Arguments[2] == "CM_REENUMERATE_BITS"));
+            Assert.True(mask.Flags);
+            Assert.Equal("ULONG", mask.Arguments[1]);
+            var groups = allGroups.Where(group => group != mask).ToArray();
             Assert.Equal(27, groups.Length);
-            Assert.Equal(names.OrderBy(value => value, StringComparer.Ordinal),
+            Assert.Equal(names.Append("CONFIGRET").OrderBy(value => value, StringComparer.Ordinal),
                 groups.Select(group => group.Arguments[0]).Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            var returnCodes = Assert.Single(groups.Where(group => group.Arguments[0] == "CONFIGRET"));
+            Assert.False(returnCodes.Flags);
+            Assert.Equal("RETURN_TYPE", returnCodes.Arguments[1]);
+            var nativeReturnCodes = Regex.Matches(HeaderMigrationAssertions.PatchedSource(@"um\cfgmgr32.h"),
+                @"(?m)^#define[ \t]+(CR_\w+|NUM_CR_RESULTS)[ \t]+")
+                .Select(match => match.Groups[1].Value).ToArray();
+            Assert.Equal(65, nativeReturnCodes.Length);
+            Assert.Equal(nativeReturnCodes, returnCodes.Arguments.Skip(2));
             foreach (var contract in DeviceInstallationGroups)
             {
-                var contributions = groups.Where(group => group.Arguments[0] == contract.Name).ToArray();
+                var contributions = allGroups.Where(group => group.Arguments[0] == contract.Name).ToArray();
                 Assert.All(contributions, group => Assert.Equal(contract.Flags, group.Flags));
                 Assert.All(contributions, group => Assert.Contains(group.Arguments[1], new[] { "DWORD", "ULONG", "RESOURCEID" }));
                 Assert.Equal(contract.Members, contributions.SelectMany(group => group.Arguments.Skip(2))
@@ -3575,11 +3638,12 @@ namespace Win32MetadataScraperTests
                 foreach (string partition in partitions)
                 {
                     string settings = Path.Combine(project, "Partitions", partition, "settings.rsp");
-                    Assert.Single(File.ReadLines(settings).Where(line => line == "parse-win32-annotations"));
+                    HeaderMigrationAssertions.AssertAnnotationReaderEnabled(partition);
                     var filter = new FilterResponseFiles
                     {
                         ResponseFiles = new[]
                         {
+                            new Microsoft.Build.Utilities.TaskItem(Path.Combine(project, "scraper.settings.rsp")),
                             new Microsoft.Build.Utilities.TaskItem(settings),
                         },
                         OutputFileName = filtered,
@@ -3591,7 +3655,8 @@ namespace Win32MetadataScraperTests
                         missing.Add(partition);
                 }
                 Assert.True(missing.Count == 0,
-                    "Authored SDK partitions must explicitly enable the normal annotation reader: " + string.Join(", ", missing));
+                    "Every authored SDK partition must enable the normal annotation reader through its effective settings: " +
+                        string.Join(", ", missing));
                 this.output.WriteLine($"{partitions.Length} authored SDK partitions retain annotation activation after normal response-file filtering.");
             }
             finally
@@ -3608,8 +3673,11 @@ namespace Win32MetadataScraperTests
                 .Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
                     !line.StartsWith("+++", StringComparison.Ordinal))
                 .Select(line => line.Substring(1)).ToArray();
-            Assert.Equal("#if !defined(MIDL_PASS)", additions[0]);
-            Assert.Equal("_Win32_Enum_(WIN32_ERROR, unsigned long,", additions[1]);
+            Assert.Equal("#include <sal.h>", additions[0]);
+            Assert.Contains("#include <win32metadata_annotations.h>", additions);
+            Assert.Matches(@"(?m)^#if !defined\(MIDL_PASS\)\n_Win32_Enum_\(WIN32_ERROR, unsigned long,\n" +
+                @"(?:[^\n]*\n)*?    ERROR_QUERY_STORAGE_ERROR\);\n#endif$",
+                string.Join("\n", additions));
             Assert.Equal("    ERROR_QUERY_STORAGE_ERROR);", additions[^2]);
             Assert.Equal("#endif", additions[^1]);
         }
@@ -3684,16 +3752,23 @@ namespace Win32MetadataScraperTests
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
             var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
             Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && name.GetString() == "WIN32_ERROR");
-            var residual = Assert.Single(items.Where(item =>
-                item.TryGetProperty("addUsesTo", out var name) && name.GetString() == "WIN32_ERROR"));
-            Assert.Equal(new[]
+            Assert.DoesNotContain(items, item => item.TryGetProperty("addUsesTo", out var name) &&
+                name.GetString() == "WIN32_ERROR");
+            string errorHandling = HeaderMigrationAssertions.PatchedSource(@"um\errhandlingapi.h");
+            var missing = new List<string>();
+            if (!Regex.IsMatch(errorHandling,
+                @"_Win32_AssociatedEnum_\(WIN32_ERROR\)[^;{}]*\bDWORD\s+WINAPI\s+GetLastError\s*\("))
+                missing.Add("GetLastError return=WIN32_ERROR");
+            foreach (var use in new[]
             {
-                "GetLastError::return", "SetLastError::dwErrCode", "SetLastErrorEx::dwErrCode",
-            },
-                residual.GetProperty("uses").EnumerateArray()
-                    .Select(use => use.TryGetProperty("method", out var method)
-                        ? method.GetString() + "::" + use.GetProperty("parameter").GetString()
-                        : use.GetProperty("struct").GetString() + "::" + use.GetProperty("field").GetString()));
+                (Method: "SetLastError", Source: errorHandling),
+                (Method: "SetLastErrorEx", Source: HeaderMigrationAssertions.PatchedSource(@"um\WinUser.h")),
+            })
+                if (!Regex.IsMatch(use.Source, use.Method +
+                    @"\([^;]*_Win32_AssociatedEnum_\(WIN32_ERROR\)[^\r\n]*\bdwErrCode\b"))
+                    missing.Add(use.Method + "::dwErrCode=WIN32_ERROR");
+            Assert.True(missing.Count == 0, "Header-only association coverage is incomplete: " +
+                string.Join(", ", missing));
             Assert.Equal("WIN32_ERROR=Windows.Win32.Foundation",
                 Assert.Single(File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp"))
                     .Where(row => row.StartsWith("WIN32_ERROR=", StringComparison.Ordinal))));
@@ -3702,8 +3777,7 @@ namespace Win32MetadataScraperTests
             Assert.Single(patches.Where(path => path == @"shared\winerror.h.patch"));
             Assert.Single(patches.Where(path => path == @"um\SetupAPI.h.patch"));
             foreach (string partition in new[] { "Foundation", "DevInst" })
-                Assert.Single(File.ReadAllLines(Path.Combine(project, "Partitions", partition, "settings.rsp"))
-                    .Where(row => row == "parse-win32-annotations"));
+                HeaderMigrationAssertions.AssertAnnotationReaderEnabled(partition);
             Assert.DoesNotContain("setupapi", File.ReadAllText(Path.Combine(project, "Partitions", "Wnet", "main.cpp")),
                 StringComparison.OrdinalIgnoreCase);
         }
@@ -3889,7 +3963,15 @@ namespace Win32MetadataScraperTests
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             string[] emitter = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
             foreach (string name in new[] { "RPC_X_SS_CONTEXT_MISMATCH", "RPC_X_INVALID_BUFFER", "RPC_X_PIPE_APP_MEMORY" })
-                Assert.Single(emitter.Where(value => value == name + "=int"));
+            {
+                Assert.DoesNotContain(name + "=int", emitter);
+                Assert.Matches(@"(?m)^#define " + name + @"\s+" + (name switch
+                {
+                    "RPC_X_SS_CONTEXT_MISMATCH" => "ERROR_INVALID_HANDLE",
+                    "RPC_X_INVALID_BUFFER" => "ERROR_INVALID_USER_BUFFER",
+                    _ => "ERROR_OUTOFMEMORY",
+                }) + @"\s*$", File.ReadAllText(Path.Combine(project, "RecompiledIdlHeaders", "shared", "rpcnterr.h")));
+            }
             foreach (string name in new[] { "winnetwk.h", "Npapi.h" })
             {
                 string patch = File.ReadAllText(Path.Combine(project, "patches", "um", name + ".patch"));
@@ -3898,7 +3980,7 @@ namespace Win32MetadataScraperTests
                 Assert.Contains("_Win32_Enum_(", patch);
             }
             string[] settings = File.ReadAllLines(Path.Combine(project, "Partitions", "Wnet", "settings.rsp"));
-            Assert.Single(settings.Where(value => value == "parse-win32-annotations"));
+            HeaderMigrationAssertions.AssertAnnotationReaderEnabled("Wnet");
         }
 
         [MigrationFact]
@@ -3921,11 +4003,10 @@ namespace Win32MetadataScraperTests
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             string[] osRows = File.ReadAllLines(Path.Combine(project, "supportedOS.rsp"));
             foreach (var fact in SourceBlockedAvailability)
-                Assert.Equal(fact.Target + "=SupportedOSPlatform(\"" + fact.OS + "\")",
-                    Assert.Single(osRows.Where(row => row.StartsWith(fact.Target + "=", StringComparison.Ordinal))));
+                Assert.DoesNotContain(osRows, row => row.StartsWith(fact.Target + "=", StringComparison.Ordinal));
             string[] emitter = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
             foreach (string row in SourceBlockedAssociations.Append("IdentityUpdateEvent"))
-                Assert.Single(emitter.Where(value => value == row));
+                Assert.DoesNotContain(row, emitter);
             using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
             string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()).ToArray();
             foreach (string file in new[] { "iwscapi.h", "winsatcominterfacei.h", "locationapi.h", "WcnDevice.h",
@@ -3937,6 +4018,25 @@ namespace Win32MetadataScraperTests
                     .Split('\n').Any(line => line.StartsWith("+++ ", StringComparison.Ordinal) &&
                         line.TrimEnd('\r').EndsWith("/" + file, StringComparison.OrdinalIgnoreCase)));
             }
+            string authored = string.Join("\n", patches.Select(path => File.ReadAllText(Path.Combine(project, "patches", path))
+                .Split('\n').Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                    !line.StartsWith("+++", StringComparison.Ordinal))).SelectMany(lines => lines))
+                .Replace("\\\"", "\"", StringComparison.Ordinal);
+            string[] missingFloors = SourceBlockedAvailability.Where(fact => !Regex.IsMatch(authored,
+                @"/\* Win32Metadata: (?:interface|record) ::" + Regex.Escape(fact.Target) +
+                @" => SupportedOSPlatform\(""" + Regex.Escape(fact.OS) + @"""\) \*/"))
+                .Select(fact => fact.Target + "=" + fact.OS).ToArray();
+            string[] missingAssociations = SourceBlockedAssociations.Where(row =>
+            {
+                string target = row.Substring(0, row.IndexOf('='));
+                int quote = row.IndexOf('"');
+                string name = row.Substring(quote + 1, row.LastIndexOf('"') - quote - 1);
+                return !authored.Contains($"/* Win32Metadata: parameter ::{target} => AssociatedEnum({name}) */",
+                    StringComparison.Ordinal);
+            }).ToArray();
+            Assert.True(missingFloors.Length == 0 && missingAssociations.Length == 0,
+                "Header-only source coverage is incomplete; retired metadata is not a substitute for original-IDL facts: " +
+                string.Join(", ", missingFloors.Concat(missingAssociations)));
         }
 
         [MigrationTheory]
@@ -4428,8 +4528,19 @@ namespace Win32MetadataScraperTests
                     Assert.True(retained.Add(expected.Owner + "::" + expected.Member));
                 }
             }
-            Assert.Equal(TemporaryPowerEnumUses.Select(value => value.Owner + "::" + value.Member).OrderBy(value => value),
-                retained.OrderBy(value => value));
+            Assert.Empty(retained);
+            var missing = TemporaryPowerEnumUses.Where(use => use.Owner == "PowerSettingAccessCheckEx"
+                ? !Regex.IsMatch(HeaderMigrationAssertions.PatchedSource(@"um\powrprof.h"),
+                    @"\bPowerSettingAccessCheckEx\s*\(\s*_In_\s+POWER_DATA_ACCESSOR\s+AccessFlags\s*,\s*" +
+                    @"_In_opt_\s+CONST\s+GUID\s*\*\s*PowerGuid\s*,\s*" +
+                    @"_Win32_AssociatedEnum_\(" + Regex.Escape(use.Enum) + @"\)\s+_In_\s+REGSAM\s+" +
+                    Regex.Escape(use.Member) + @"\s*\)\s*;")
+                : !HeaderMigrationAssertions.AddedSource(
+                    use.Owner == "PowerDeterminePlatformRoleEx" ? @"um\powerbase.h" :
+                        use.Owner.StartsWith("PowerSetting", StringComparison.Ordinal) ? @"um\powersetting.h" : @"um\powrprof.h")
+                    .Contains("_Win32_AssociatedEnum_(" + use.Enum + ")", StringComparison.Ordinal)).ToArray();
+            Assert.True(missing.Length == 0, "Header-only association coverage is incomplete: " +
+                string.Join(", ", missing.Select(use => use.Owner + "::" + use.Member + "=" + use.Enum)));
             string power = File.ReadAllText(Path.Combine(project, "patches", "um", "powrprof.h.patch"));
             string winnt = File.ReadAllText(Path.Combine(project, "patches", "um", "winnt.h.patch"));
             Assert.Contains("_Win32_FlagsEnum_(DEVICE_POWER_CAPABILITIES, unsigned long,", power);
@@ -4472,20 +4583,23 @@ namespace Win32MetadataScraperTests
             {
                 var matches = types.RootElement.EnumerateArray()
                     .Where(value => value.GetProperty("Name").GetString() == transfer.Type).ToArray();
-                if (transfer.Synthetic)
-                    Assert.Empty(matches);
-                else
+                Assert.Empty(matches);
+                string original = transfer.Namespace switch
                 {
-                    var type = Assert.Single(matches);
-                    Assert.Equal("DECLARE_HANDLE", type.GetProperty("ValueType").GetString());
-                    Assert.True(type.GetProperty("NativeTypedef").GetBoolean());
-                    Assert.False(type.TryGetProperty("CloseApi", out _));
-                    Assert.False(type.TryGetProperty("InvalidHandleValues", out _));
-                }
+                    BluetoothNamespace => @"um\bluetoothapis.h",
+                    WerNamespace => @"um\werapi.h",
+                    WebSocketNamespace => @"um\websocket.h",
+                    FileHistoryNamespace => @"um\fhsvcctl.h",
+                    ProcessSnapshotNamespace => @"um\processsnapshot.h",
+                    _ => throw new InvalidOperationException("Unknown native lifecycle owner."),
+                };
+                Assert.Contains("_Win32_RAIIFree_(" + transfer.Cleanup + ", -1, 0)",
+                    HeaderMigrationAssertions.AddedSource(original));
+                if (!transfer.Synthetic)
+                    HeaderMigrationAssertions.AssertNativeTypedef(original, transfer.Type);
             }
-            var snapshot = types.RootElement.EnumerateArray().Single(value => value.GetProperty("Name").GetString() == "HPSS");
-            Assert.False(snapshot.TryGetProperty("CloseApi", out _));
-            Assert.Equal(new[] { -1, 0 }, snapshot.GetProperty("InvalidHandleValues").EnumerateArray().Select(value => value.GetInt32()));
+            Assert.DoesNotContain(types.RootElement.EnumerateArray(), value => value.GetProperty("Name").GetString() == "HPSS");
+            HeaderMigrationAssertions.AssertNativeTypedef(@"um\processsnapshot.h", "HPSS");
             Assert.Contains("POWER_PLATFORM_ROLE_VERSION=" + PowerNamespace,
                 File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
         }

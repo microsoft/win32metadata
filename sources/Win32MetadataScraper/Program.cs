@@ -182,7 +182,9 @@ class Program
             // Discovery and annotations need preprocessing records, but ordinary
             // binding generation must not evaluate unrelated SDK macros.
             using var index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
-            using var translationUnit = ParseTranslationUnit(index, sourceFile, clangArgs, translationFlags);
+            var reportedNativeDiagnostics = new HashSet<string>(StringComparer.Ordinal);
+            using var translationUnit = ParseTranslationUnit(index, sourceFile, clangArgs, translationFlags,
+                reportedNativeDiagnostics);
             if (translationUnit == null)
                 return -1;
 
@@ -249,7 +251,7 @@ class Program
                 ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
                 : translationFlags;
             using var declarationUnit = separateDeclarations
-                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags)
+                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags, reportedNativeDiagnostics)
                 : null;
             if (separateDeclarations && declarationUnit == null)
                 return -1;
@@ -465,7 +467,7 @@ class Program
     }
 
     static TranslationUnit ParseTranslationUnit(CXIndex index, string sourceFile, string[] clangArgs,
-        CXTranslationUnit_Flags flags)
+        CXTranslationUnit_Flags flags, HashSet<string> reportedDiagnostics)
     {
         var parseError = CXTranslationUnit.TryParse(index, sourceFile, clangArgs,
             ReadOnlySpan<CXUnsavedFile>.Empty, flags, out var handle);
@@ -475,13 +477,26 @@ class Program
             return null;
         }
         bool skipProcessing = false;
+        var previousDiagnostics = new HashSet<string>(reportedDiagnostics, StringComparer.Ordinal);
         if (handle.NumDiagnostics != 0)
         {
-            Console.WriteLine($"Diagnostics for '{sourceFile}':");
+            bool wroteHeading = false;
             for (uint i = 0; i < handle.NumDiagnostics; i++)
             {
                 using var diagnostic = handle.GetDiagnostic(i);
-                Console.WriteLine($"    {diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString()}");
+                string text = diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString();
+                // The declaration-only parse must still validate every diagnostic,
+                // but must not report the same native warning a second time.
+                if (!previousDiagnostics.Contains(text))
+                {
+                    if (!wroteHeading)
+                    {
+                        Console.WriteLine($"Diagnostics for '{sourceFile}':");
+                        wroteHeading = true;
+                    }
+                    Console.WriteLine($"    {text}");
+                }
+                reportedDiagnostics.Add(text);
                 skipProcessing |= diagnostic.Severity is CXDiagnostic_Error or CXDiagnostic_Fatal;
             }
         }
