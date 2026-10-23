@@ -261,6 +261,153 @@ NativeHandle__* OpenRawNative(void);
             }
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", false, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, true)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, true)]
+        public void NativeRecordAliasesRetainTheirOrdinaryStorage(string architecture, string target, bool excludeEmptyRecords, bool multipleFiles)
+        {
+            const string declarations = @"
+typedef struct _RECORD { struct _RECORD* Next; unsigned short Flags; } PRIMARY;
+typedef struct _RECORD SECONDARY, *PSECONDARY;
+typedef struct _RECORD UNUSED_ALIAS;
+PSECONDARY OpenAlias(void);
+void UseAlias(PSECONDARY value);
+SECONDARY EchoAlias(SECONDARY value);
+static_assert(sizeof(SECONDARY) == (sizeof(void*) == 8 ? 16 : 8), ""Native record alias layout"");
+";
+            string filter = excludeEmptyRecords ? "--config\nexclude-empty-records\n" : string.Empty;
+            using var control = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                multipleFiles: multipleFiles,
+                extraSettings: filter + "--remap\n_RECORD=SECONDARY\nSECONDARY=SECONDARY\nPSECONDARY=SECONDARY*\n");
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                multipleFiles: multipleFiles,
+                extraSettings: filter + "--remap\n_RECORD=PRIMARY\nSECONDARY=SECONDARY\nPSECONDARY=SECONDARY*\n");
+            try
+            {
+                Assert.True(control.Run() == 0, control.Diagnostics);
+                var controlProvider = Assert.Single(ReadOpaqueRecordSources(control).SelectMany(root =>
+                    root.DescendantNodes().OfType<StructDeclarationSyntax>())
+                    .Where(type => type.Identifier.ValueText == "SECONDARY"));
+                using var controlImage = Emit(control, architecture);
+                AssertMetadataClosure(controlImage.Reader);
+
+                Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+                var declarationsFromSource = ReadOpaqueRecordSources(fixture).SelectMany(root =>
+                    root.DescendantNodes().OfType<StructDeclarationSyntax>()).ToArray();
+                Assert.Single(declarationsFromSource.Where(type => type.Identifier.ValueText == "PRIMARY"));
+                var alias = Assert.Single(declarationsFromSource.Where(type => type.Identifier.ValueText == "SECONDARY"));
+                Assert.DoesNotContain(declarationsFromSource, type => type.Identifier.ValueText == "UNUSED_ALIAS");
+                Assert.Equal(controlProvider.Members.Select(member => member.NormalizeWhitespace().ToFullString()),
+                    alias.Members.Select(member => member.NormalizeWhitespace().ToFullString()));
+                using var image = Emit(fixture, architecture);
+                var reader = image.Reader;
+                var definition = FindType(reader, "SECONDARY");
+                var expectedDefinition = FindType(controlImage.Reader, "SECONDARY");
+                Assert.Equal(new[] { "Next", "Flags" }, definition.GetFields()
+                    .Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+                Assert.Equal(expectedDefinition.GetFields().Select(handle =>
+                    controlImage.Reader.GetFieldDefinition(handle).DecodeSignature(new SignatureNames(), null)),
+                    definition.GetFields().Select(handle =>
+                        reader.GetFieldDefinition(handle).DecodeSignature(new SignatureNames(), null)));
+                Assert.Equal(expectedDefinition.GetLayout().IsDefault, definition.GetLayout().IsDefault);
+                Assert.Equal(expectedDefinition.GetLayout().Size, definition.GetLayout().Size);
+                Assert.Equal(expectedDefinition.GetLayout().PackingSize, definition.GetLayout().PackingSize);
+                Assert.Equal("SECONDARY*", FindMethod(reader, "Apis", "OpenAlias").DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "SECONDARY*" }, FindMethod(reader, "Apis", "UseAlias").DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                Assert.Equal("SECONDARY", FindMethod(reader, "Apis", "EchoAlias").DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "SECONDARY" }, FindMethod(reader, "Apis", "EchoAlias").DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                AssertMetadataClosure(reader);
+            }
+            finally
+            {
+                SaveOpaqueRecordArtifacts(control, $"native-alias-control-{architecture}-{excludeEmptyRecords}-{multipleFiles}");
+                SaveOpaqueRecordArtifacts(fixture, $"native-alias-provider-{architecture}-{excludeEmptyRecords}-{multipleFiles}");
+            }
+        }
+
+        [Theory]
+        [InlineData("SECONDARY")]
+        [InlineData("_RECORD")]
+        public void NativeRecordAliasRetentionHonorsExplicitExclusions(string excluded)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct _RECORD { int value; } PRIMARY;
+typedef struct _RECORD SECONDARY, *PSECONDARY;
+PSECONDARY OpenAlias(void);
+", extraSettings: "--config\nexclude-empty-records\n--remap\n_RECORD=PRIMARY\nPSECONDARY=SECONDARY*\n--exclude\n" + excluded + "\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain(ReadOpaqueRecordSources(fixture).SelectMany(root =>
+                root.DescendantNodes().OfType<StructDeclarationSyntax>()),
+                type => type.Identifier.ValueText == "SECONDARY");
+            SaveOpaqueRecordArtifacts(fixture, "native-alias-exclusion-" + excluded);
+        }
+
+        [Fact]
+        public void NativeRecordAliasesCannotInventFieldlessByValueStorage()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct _RECORD {} PRIMARY;
+typedef struct _RECORD SECONDARY;
+SECONDARY ReadAlias(void);
+", extraSettings: "--remap\n_RECORD=PRIMARY\nSECONDARY=SECONDARY\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("no ordinary generated instance fields", fixture.Diagnostics);
+            Assert.Empty(Directory.GetFiles(fixture.DirectoryPath, "*.cs", SearchOption.AllDirectories));
+            SaveOpaqueRecordArtifacts(fixture, "native-alias-fieldless-by-value");
+        }
+
+        [Fact]
+        public void NativeRecordAliasesUseTheirQualifiedNativeDefinition()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+namespace Native { struct Record { int value; }; }
+typedef Native::Record ALIAS, *PALIAS;
+PALIAS OpenAlias(void);
+", extraSettings: "--config\nexclude-empty-records\n--remap\nNative::Record=PRIMARY\nPALIAS=ALIAS*\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            var alias = FindType(reader, "ALIAS");
+            Assert.Equal("value", reader.GetString(reader.GetFieldDefinition(Assert.Single(alias.GetFields())).Name));
+            Assert.Equal("ALIAS*", FindMethod(reader, "Apis", "OpenAlias").DecodeSignature(new SignatureNames(), null).ReturnType);
+            AssertMetadataClosure(reader);
+            SaveOpaqueRecordArtifacts(fixture, "native-alias-qualified-definition");
+        }
+
+        [Fact]
+        public void NativeRecordAliasRetentionPreservesItsExistingEnclosingRecord()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct Parent
+{
+    struct Record { int value; };
+    Record* field;
+    typedef Record Alias;
+};
+Parent::Alias* OpenAlias(void);
+", extraSettings: "--config\nexclude-empty-records\n--remap\nParent::Record=PRIMARY\nParent::Alias=Parent.Alias\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            var parent = FindType(reader, "Parent");
+            Assert.Single(parent.GetFields());
+            Assert.Equal(new[] { "Alias", "PRIMARY" }, parent.GetNestedTypes()
+                .Select(handle => reader.GetString(reader.GetTypeDefinition(handle).Name)).OrderBy(name => name));
+            Assert.Single(FindType(reader, "Alias").GetFields());
+            AssertMetadataClosure(reader);
+            SaveOpaqueRecordArtifacts(fixture, "native-alias-nested-record");
+        }
+
         [Fact]
         public void NominalHandleRetentionDoesNotRecoverByValueUses()
         {

@@ -100,6 +100,80 @@ public static unsafe class Apis
         }
 
         [Fact]
+        public void NativeRecordAliasDiscoveryRequiresAnUnresolvedCompleteNativeAlias()
+        {
+            using var native = new NativeRecords(@"
+struct Record { int value; };
+typedef Record Primary;
+typedef Record Secondary;
+typedef Record Unused;
+struct Forward;
+typedef Forward IncompleteAlias;
+");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { @"
+public struct Primary { public int value; }
+public static unsafe class Apis
+{
+    public static extern Secondary* Open();
+    public static extern IncompleteAlias* OpenIncomplete();
+}" }, new Dictionary<string, string> { ["Record"] = "Primary" });
+            var alias = Assert.Single(projection.RecordAliases);
+            Assert.Equal("Secondary", alias.Name);
+            Assert.Equal("Record", alias.RecordName);
+            Assert.True(alias.Declaration.IsCompleteDefinition);
+        }
+
+        [Fact]
+        public void NativeRecordAliasesCannotMergeDifferentNativeDefinitions()
+        {
+            using var native = new NativeRecords(@"
+namespace First { struct Record { int value; }; typedef Record Alias; }
+namespace Second { struct Record { short value; }; typedef Record Alias; }
+");
+            var error = Assert.Throws<InvalidOperationException>(() => new OpaqueRecordProjection(native.Unit,
+                new[] { "public static unsafe class Apis { public static extern Alias* Open(); }" },
+                new Dictionary<string, string>()));
+            Assert.Contains("Distinct native record aliases", error.Message);
+        }
+
+        [Fact]
+        public void NativeRecordAliasDiscoveryDeduplicatesTheSameNativeDefinition()
+        {
+            using var native = new NativeRecords(@"
+struct Record { int value; };
+typedef Record First;
+typedef Record Second;
+");
+            var projection = new OpaqueRecordProjection(native.Unit,
+                new[] { "public static unsafe class Apis { public static extern Alias* Open(); }" },
+                new Dictionary<string, string> { ["Record"] = "Primary", ["First"] = "Alias", ["Second"] = "Alias" });
+            Assert.Single(projection.RecordAliases);
+        }
+
+        [Fact]
+        public void NativeRecordAliasProvidersCannotShadowAnAlreadyResolvedType()
+        {
+            using var native = new NativeRecords("struct Record { int value; };\ntypedef Record IntPtr;\n");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { @"
+using System;
+namespace Test
+{
+    public static unsafe class Apis
+    {
+        public static extern IntPtr Existing();
+        public static extern global::Test.IntPtr* Missing();
+    }
+}" }, new Dictionary<string, string> { ["Record"] = "Primary" });
+            var alias = Assert.Single(projection.RecordAliases);
+            alias.Declaration.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
+            string source = "namespace Test { [SourceLocation(" + SyntaxFactory.Literal(file.ToString()).ToFullString() +
+                $", {line}, {column})] public partial struct IntPtr {{ public int value; }} }}";
+            var error = Assert.Throws<InvalidOperationException>(() => projection.ForAlias(alias).SelectRequiredBindings(
+                new Dictionary<string, string> { ["IntPtr.cs"] = source }));
+            Assert.Contains("already resolved", error.Message);
+        }
+
+        [Fact]
         public void SelectionUsesGeneratedSourceCoordinatesAndRetainedPointerReferences()
         {
             using var native = new NativeRecords("struct Opaque;\nstruct Unused;\n");

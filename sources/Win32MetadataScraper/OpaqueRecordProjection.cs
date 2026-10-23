@@ -18,8 +18,10 @@ namespace Win32MetadataScraper
         private readonly SyntaxTree[] originalTrees;
         private readonly HashSet<string> includedNames = new(StringComparer.Ordinal);
         private readonly HashSet<string> traversalFiles = new(StringComparer.OrdinalIgnoreCase);
+        private readonly List<RecordAlias> recordAliases = new();
 
-        internal OpaqueRecordProjection(TranslationUnit unit, IEnumerable<string> sources, IReadOnlyDictionary<string, string> remaps)
+        internal OpaqueRecordProjection(TranslationUnit unit, IEnumerable<string> sources, IReadOnlyDictionary<string, string> remaps,
+            IReadOnlyCollection<string> excludedNames = null)
         {
             originalTrees = sources.Where(source => !string.IsNullOrEmpty(source))
                 .Select(source => CSharpSyntaxTree.ParseText(source)).ToArray();
@@ -38,16 +40,34 @@ namespace Win32MetadataScraper
 
             var visited = new HashSet<Cursor>();
             Walk(unit.TranslationUnitDecl);
+            foreach (var group in recordAliases.GroupBy(alias => alias.ManagedName))
+                if (group.Select(alias => alias.Declaration.Handle.CanonicalCursor).Distinct().Count() != 1)
+                    throw new InvalidOperationException($"Distinct native record aliases project to '{group.Key}'.");
+            var uniqueAliases = recordAliases.GroupBy(alias => alias.ManagedName).Select(group => group.First()).ToArray();
+            recordAliases.Clear();
+            recordAliases.AddRange(uniqueAliases);
 
             void Walk(Cursor cursor)
             {
                 if (!visited.Add(cursor))
                     return;
+                if (cursor is TypedefNameDecl alias && alias.UnderlyingType.CanonicalType is RecordType type)
+                {
+                    var declaration = type.Decl.Definition ?? type.Decl;
+                    string qualifiedName = DeclarationSourceMap.QualifiedName(alias.Handle);
+                    string managedName = ManagedName(alias.Name, qualifiedName, remaps);
+                    string recordName = DeclarationSourceMap.QualifiedName(declaration.Handle);
+                    if (declaration.IsCompleteDefinition && !string.IsNullOrEmpty(declaration.Name) &&
+                        missingNames.Contains(managedName) &&
+                        managedName != ManagedName(declaration.Name, recordName, remaps) &&
+                        !new[] { alias.Name, qualifiedName, managedName, declaration.Name, recordName }
+                            .Any(name => excludedNames?.Contains(name, StringComparer.Ordinal) == true))
+                        recordAliases.Add(new RecordAlias(qualifiedName, managedName, declaration));
+                }
                 if (cursor is RecordDecl record && !string.IsNullOrEmpty(record.Name))
                 {
                     string qualifiedName = DeclarationSourceMap.QualifiedName(record.Handle);
-                    string managedName = remaps.GetValueOrDefault(qualifiedName) ?? remaps.GetValueOrDefault(record.Name) ?? record.Name;
-                    managedName = managedName.Split(new[] { "::", "." }, StringSplitOptions.None).Last().TrimStart('@');
+                    string managedName = ManagedName(record.Name, qualifiedName, remaps);
                     var declaration = record.Definition ?? record;
                     if (missingNames.Contains(managedName))
                     {
@@ -76,6 +96,26 @@ namespace Win32MetadataScraper
 
         internal IReadOnlyCollection<string> IncludedNames => includedNames;
         internal IReadOnlyCollection<string> TraversalFiles => traversalFiles;
+        internal IReadOnlyCollection<RecordAlias> RecordAliases => recordAliases;
+
+        internal OpaqueRecordProjection ForAlias(RecordAlias alias)
+            => new(originalTrees, originalCompilation, alias);
+
+        private OpaqueRecordProjection(SyntaxTree[] originalTrees, CSharpCompilation originalCompilation, RecordAlias alias)
+        {
+            this.originalTrees = originalTrees;
+            this.originalCompilation = originalCompilation;
+            var declaration = alias.Declaration;
+            declaration.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
+            if (!declaration.IsCompleteDefinition || file.ToString().Length == 0)
+                throw new InvalidOperationException($"Native record alias '{alias.Name}' needs an original complete definition and source coordinates.");
+            records.Add(Location(file.ToString(), line, column),
+                new NativeRecord(alias.Name, declaration.Handle.CanonicalCursor, false, false, IsRecordAlias: true));
+            traversalFiles.Add(file.ToString());
+            includedNames.Add(alias.RecordName);
+            for (var parent = declaration.SemanticParentCursor; parent is RecordDecl; parent = parent.SemanticParentCursor)
+                includedNames.Add(DeclarationSourceMap.QualifiedName(parent.Handle));
+        }
 
         internal Dictionary<string, string> SelectRequiredBindings(IReadOnlyDictionary<string, string> generated)
         {
@@ -94,8 +134,13 @@ namespace Win32MetadataScraper
                     var native = NativeRecordFor(node);
                     if (native == null)
                         continue;
-                    if (node.Members.Count != 0 && !native.IsNominalHandle)
+                    if (node.Members.Count != 0 && !native.IsNominalHandle && !native.IsRecordAlias)
                         throw new InvalidOperationException($"Opaque native record '{native.Name}' acquired a generated body.");
+                    native = native with
+                    {
+                        AllowsByValue = native.IsRecordAlias && node.Members.OfType<FieldDeclarationSyntax>()
+                            .Any(field => !field.Modifiers.Any(SyntaxKind.StaticKeyword) && !field.Modifiers.Any(SyntaxKind.ConstKeyword))
+                    };
                     var symbol = model.GetDeclaredSymbol(node);
                     if (!providers.TryGetValue(symbol, out var declarations))
                         providers[symbol] = declarations = new();
@@ -155,8 +200,10 @@ namespace Win32MetadataScraper
                         {
                             if (declarations.Select(declaration => declaration.Identity).Distinct().Count() != 1)
                                 throw new InvalidOperationException($"Distinct opaque native records project to '{named.ToDisplayString()}'.");
-                            if (!behindPointer)
+                            if (!behindPointer && !declarations.All(declaration => declaration.AllowsByValue))
                             {
+                                if (declarations[0].IsRecordAlias)
+                                    throw new InvalidOperationException($"Native record alias '{declarations[0].Name}' has no ordinary generated instance fields; by-value recovery cannot establish its storage.");
                                 string kind = declarations[0].IsIncomplete ? "An incomplete" :
                                     declarations[0].IsNominalHandle ? "A nominal handle" : "An empty";
                                 throw new InvalidOperationException($"{kind} native record '{declarations[0].Name}' is used by value; selective recovery only preserves pointee identity.");
@@ -253,6 +300,10 @@ namespace Win32MetadataScraper
         private static (string File, uint Line, uint Column) Location(string file, uint line, uint column)
             => (Path.GetFullPath(file).ToUpperInvariant(), line, column);
 
+        private static string ManagedName(string name, string qualifiedName, IReadOnlyDictionary<string, string> remaps)
+            => (remaps.GetValueOrDefault(qualifiedName) ?? remaps.GetValueOrDefault(name) ?? name)
+                .Split(new[] { "::", "." }, StringSplitOptions.None).Last().TrimStart('@');
+
         private static bool IsNominalHandleDefinition(RecordDecl record)
         {
             if (!record.IsCompleteDefinition || record.Handle.Kind != CXCursorKind.CXCursor_StructDecl ||
@@ -282,6 +333,12 @@ namespace Win32MetadataScraper
             }
         }
 
-        private sealed record NativeRecord(string Name, CXCursor Identity, bool IsIncomplete, bool IsNominalHandle);
+        internal sealed record RecordAlias(string Name, string ManagedName, RecordDecl Declaration)
+        {
+            internal string RecordName => DeclarationSourceMap.QualifiedName(Declaration.Handle);
+        }
+
+        private sealed record NativeRecord(string Name, CXCursor Identity, bool IsIncomplete, bool IsNominalHandle,
+            bool IsRecordAlias = false, bool AllowsByValue = false);
     }
 }

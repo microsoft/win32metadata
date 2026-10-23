@@ -277,10 +277,24 @@ class Program
                         generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
                 }
                 string additionalTypes = annotations?.GetAdditionalTypes();
-                if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords))
+                var nativeRecords = new OpaqueRecordProjection(translationUnit,
+                    generatedFiles.Values.Append(additionalTypes), config.RemappedNames, allExcludes);
+                var recordProjections = new List<(OpaqueRecordProjection Projection, Dictionary<string, string> Remaps)>();
+                if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords) &&
+                    nativeRecords.IncludedNames.Count != 0)
+                    recordProjections.Add((nativeRecords, mergedRemaps));
+                foreach (var alias in nativeRecords.RecordAliases)
                 {
-                    var opaqueRecords = new OpaqueRecordProjection(translationUnit,
-                        generatedFiles.Values.Append(additionalTypes), config.RemappedNames);
+                    var aliasRemaps = new Dictionary<string, string>(mergedRemaps)
+                    {
+                        [alias.RecordName] = alias.ManagedName,
+                        [alias.Name] = alias.ManagedName
+                    };
+                    recordProjections.Add((nativeRecords.ForAlias(alias), aliasRemaps));
+                }
+                foreach (var projection in recordProjections)
+                {
+                    var opaqueRecords = projection.Projection;
                     if (opaqueRecords.IncludedNames.Count != 0)
                     {
                         var opaqueOptions = (configOptions
@@ -288,7 +302,7 @@ class Program
                             & ~PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
                             | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
                         var opaqueConfig = CreateConfig(settings, ns, outputFile, headerFile,
-                            opaqueOptions, mergedRemaps, allExcludes, opaqueRecords.IncludedNames,
+                            opaqueOptions, projection.Remaps, allExcludes, opaqueRecords.IncludedNames,
                             opaqueRecords.TraversalFiles.Concat(config.TraversalNames).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
                         var opaqueStreams = new Dictionary<string, MemoryStream>();
                         using var opaqueGenerator = new PInvokeGenerator(opaqueConfig, path =>

@@ -106,6 +106,16 @@ Do not replace it with an empty struct. Other complete storage definitions,
 by-value recovery and explicit exclusions stay outside this recovery path;
 unused handle declarations remain filtered.
 
+Complete native record aliases also need their own ordinary bindings when a
+retained signature names the alias rather than the primary record. The x86
+`SLIST_ENTRY` typedef aliases `_SINGLE_LIST_ENTRY`; a pointer remap alone leaves
+that alias undefined. A selective ordinary ClangSharp pass emits the referenced
+alias with its native fields and layout while retaining the primary provider.
+Native source coordinates and canonical identity select the result. Explicit
+exclusions, ambiguous aliases and already-resolved references remain protected.
+By-value aliases require ordinary generated instance storage; fieldless aliases
+cannot establish a new by-value contract.
+
 The global `exclude-empty-records` option dates to commit `d1402d9f` on
 2023-04-27. It was not introduced by this migration. Retiring the `autoTypes.json`
 and manual API replacements exposed the missing providers. The option filters
