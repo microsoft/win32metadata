@@ -6927,6 +6927,10 @@
         "sdkSha256": "D0D559F74149A353AAFF5D8E496D39B82FA13B008D3591991B39794601AF5934"
       },
       {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "8654A090389AC88792F40FDEEBB9B298F2C8427136BB0D1B5E39E90D70D48B5D"
+      },
+      {
         "path": "um\\activdbg.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\activdbg.idl",
         "sdkSha256": "C63EDCEB9F0678E94AA19DD3683C9C2F1EAAD9BB38291274B85E228C6BCA0447"

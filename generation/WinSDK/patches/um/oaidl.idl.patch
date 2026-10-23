@@ -1,5 +1,5 @@
 diff --git a/um/oaidl.idl b/um/oaidl.idl
-index c39506fd..241cbcb9 100644
+index c39506f..7fe8405 100644
 --- a/um/oaidl.idl
 +++ b/um/oaidl.idl
 @@ -1,3 +1,7 @@
@@ -19,7 +19,15 @@ index c39506fd..241cbcb9 100644
  
  
  // #########################################################################
-@@ -503,6 +509,7 @@ const USHORT PARAMFLAG_FRETVAL      = 0x08;
+@@ -265,6 +271,7 @@ cpp_quote("#endif")
+ 
+ typedef [wire_marshal(wireVARIANT)] struct tagVARIANT VARIANT;
+ 
++cpp_quote("/* Win32Metadata: field ::VARIANT::vt => AssociatedEnum(VARENUM) */")
+ struct tagVARIANT {
+     union {
+         struct __tagVARIANT {
+@@ -503,6 +510,7 @@ const USHORT PARAMFLAG_FRETVAL      = 0x08;
  const USHORT PARAMFLAG_FOPT         = 0x10;
  const USHORT PARAMFLAG_FHASDEFAULT  = 0x20;
  const USHORT PARAMFLAG_FHASCUSTDATA = 0x40;
@@ -27,7 +35,7 @@ index c39506fd..241cbcb9 100644
  
  typedef struct tagIDLDESC {
      ULONG_PTR dwReserved;
-@@ -514,6 +521,7 @@ const USHORT IDLFLAG_FIN     = PARAMFLAG_FIN;
+@@ -514,6 +522,7 @@ const USHORT IDLFLAG_FIN     = PARAMFLAG_FIN;
  const USHORT IDLFLAG_FOUT    = PARAMFLAG_FOUT;
  const USHORT IDLFLAG_FLCID   = PARAMFLAG_FLCID;
  const USHORT IDLFLAG_FRETVAL = PARAMFLAG_FRETVAL;
@@ -35,7 +43,7 @@ index c39506fd..241cbcb9 100644
  
  cpp_quote("//;begin_internal")
  cpp_quote("#if 0")
-@@ -665,6 +673,7 @@ const USHORT IMPLTYPEFLAG_FDEFAULT      = 0x1;
+@@ -665,6 +674,7 @@ const USHORT IMPLTYPEFLAG_FDEFAULT      = 0x1;
  const USHORT IMPLTYPEFLAG_FSOURCE       = 0x2;
  const USHORT IMPLTYPEFLAG_FRESTRICTED   = 0x4;
  const USHORT IMPLTYPEFLAG_FDEFAULTVTABLE= 0x8;
@@ -43,7 +51,7 @@ index c39506fd..241cbcb9 100644
  
  typedef struct tagVARDESC {
      MEMBERID memid;
-@@ -754,6 +763,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -754,6 +764,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
@@ -51,7 +59,7 @@ index c39506fd..241cbcb9 100644
  [
      object,
      uuid(00020405-0000-0000-C000-000000000046),
-@@ -1056,6 +1066,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -1056,6 +1067,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -59,7 +67,7 @@ index c39506fd..241cbcb9 100644
  [
      object,
      uuid(00020400-0000-0000-C000-000000000046),
-@@ -1181,6 +1192,8 @@ interface IEnumVARIANT : IUnknown
+@@ -1181,6 +1193,8 @@ interface IEnumVARIANT : IUnknown
                  [out] IEnumVARIANT ** ppEnum
              );
  }
@@ -68,7 +76,7 @@ index c39506fd..241cbcb9 100644
  
  
  [
-@@ -1253,6 +1266,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -1253,6 +1267,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
