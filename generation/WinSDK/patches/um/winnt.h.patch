@@ -188,7 +188,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      );
  
 @@ -4253,5 +4306,21 @@
- #define CONTEXT_UNWOUND_TO_CALL     0x20000000
+ #define CONTEXT_UNWOUND_TO_CALL     0x20000000L
  
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef _WIN32META_ANNOTATION_(
@@ -249,7 +249,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      )
  {
 @@ -5229,4 +5302,13 @@
- #define CONTEXT_UNWOUND_TO_CALL 0x20000000
+ #define CONTEXT_UNWOUND_TO_CALL 0x20000000L
  
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef _WIN32META_ANNOTATION_(
@@ -1130,10 +1130,11 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  #define PF_FLOATING_POINT_PRECISION_ERRATA           0   
-@@ -14270,6 +14707,99 @@
+@@ -14270,7 +14707,100 @@
  #define PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE    86   
  #define PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE     87   
  #define PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE      88   
+ #define PF_UMONITOR_INSTRUCTION_AVAILABLE           89   
 +
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(PROCESSOR_FEATURE_ID, unsigned long,

@@ -2,10 +2,11 @@ diff --git a/shared/bugcodes.h b/shared/bugcodes.h
 index 35889c9f..fcfa9f2f 100644
 --- a/shared/bugcodes.h
 +++ b/shared/bugcodes.h
-@@ -4899,4 +4899,555 @@ Notes:
+@@ -4899,5 +4899,556 @@ Notes:
  #define WINLOGON_FATAL_ERROR ((ULONG)0xC000021AL)
  #define MANUALLY_INITIATED_CRASH1 ((ULONG)0xDEADDEAD)
  #define BUGCHECK_CONTEXT_MODIFIER 0x80000000
+ #define SMBD_BUGCHECK_CODE ((ULONG)0x534D4244)
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
 +#include <sal.h>
 +_Win32_Enum_(BUGCHECK_ERROR, unsigned long,

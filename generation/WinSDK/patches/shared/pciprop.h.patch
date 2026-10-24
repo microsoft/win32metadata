@@ -199,9 +199,10 @@ index 909fbc73..4ff7fee2 100644
  DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_InterruptSupport, 14);
  
  //
-@@ -452,6 +572,15 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_S0WakeupSupported, 25);
+@@ -452,7 +572,16 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_S0WakeupSupported, 25);
  #define DevProp_PciDevice_SriovSupport_NoBusResource               0x3
  #define DevProp_PciDevice_SriovSupport_DidntGetVfBarSpace          0x4
+ #define DevProp_PciDevice_SriovSupport_NoSriovCap                  0x5
  
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(DEVPROP_PCIDEVICE_SRIOVSUPPORT, unsigned long,

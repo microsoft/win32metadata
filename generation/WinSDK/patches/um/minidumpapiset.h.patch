@@ -15,7 +15,7 @@ index f3e7cbb5..98fee4f8 100644
  #ifdef _CONTRACT_GEN
  #include <nt.h>
  #include <ntrtl.h>
-@@ -238,7 +244,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
+@@ -239,7 +245,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
      // taken from the SYSTEM_INFO structure obtained by GetSystemInfo( ).
      //
  
@@ -24,7 +24,7 @@ index f3e7cbb5..98fee4f8 100644
      USHORT ProcessorLevel;
      USHORT ProcessorRevision;
  
-@@ -259,7 +265,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
+@@ -260,7 +266,7 @@ typedef struct _MINIDUMP_SYSTEM_INFO {
      ULONG32 MajorVersion;
      ULONG32 MinorVersion;
      ULONG32 BuildNumber;
@@ -33,7 +33,7 @@ index f3e7cbb5..98fee4f8 100644
  
      //
      // RVA to a CSDVersion string in the string table.
-@@ -576,6 +582,12 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
+@@ -577,6 +583,12 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
  
  #define MINIDUMP_MISC1_PROCESS_ID            0x00000001
  #define MINIDUMP_MISC1_PROCESS_TIMES         0x00000002
@@ -46,7 +46,7 @@ index f3e7cbb5..98fee4f8 100644
  #define MINIDUMP_MISC1_PROCESSOR_POWER_INFO  0x00000004
  #define MINIDUMP_MISC3_PROCESS_INTEGRITY     0x00000010
  #define MINIDUMP_MISC3_PROCESS_EXECUTE_FLAGS 0x00000020
-@@ -586,7 +598,7 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
+@@ -587,7 +599,7 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
  
  typedef struct _MINIDUMP_MISC_INFO {
      ULONG32 SizeOfInfo;
@@ -55,7 +55,7 @@ index f3e7cbb5..98fee4f8 100644
      ULONG32 ProcessId;
      ULONG32 ProcessCreateTime;
      ULONG32 ProcessUserTime;
-@@ -693,7 +705,7 @@ typedef struct _MINIDUMP_MEMORY_INFO {
+@@ -694,7 +706,7 @@ typedef struct _MINIDUMP_MEMORY_INFO {
      ULONG32 AllocationProtect;
      ULONG32 __alignment1;
      ULONG64 RegionSize;
@@ -64,7 +64,7 @@ index f3e7cbb5..98fee4f8 100644
      ULONG32 Protect;
      ULONG32 Type;
      ULONG32 __alignment2;
-@@ -741,9 +753,19 @@ typedef struct _MINIDUMP_THREAD_NAME_LIST {
+@@ -742,9 +754,19 @@ typedef struct _MINIDUMP_THREAD_NAME_LIST {
  #define MINIDUMP_THREAD_INFO_INVALID_CONTEXT 0x00000010
  #define MINIDUMP_THREAD_INFO_INVALID_TEB     0x00000020
  
@@ -85,7 +85,7 @@ index f3e7cbb5..98fee4f8 100644
      ULONG32 DumpError;
      ULONG32 ExitStatus;
      ULONG64 CreateTime;
-@@ -1362,6 +1384,9 @@ typedef struct _MINIDUMP_CALLBACK_OUTPUT {
+@@ -1382,6 +1404,9 @@ typedef struct _MINIDUMP_CALLBACK_OUTPUT {
  // with the virtual protection attribute of PAGE_WRITECOMBINE.
  //
  
@@ -95,9 +95,9 @@ index f3e7cbb5..98fee4f8 100644
  typedef enum _MINIDUMP_TYPE {
      MiniDumpNormal                         = 0x00000000,
      MiniDumpWithDataSegs                   = 0x00000001,
-@@ -1393,6 +1418,9 @@ typedef enum _MINIDUMP_TYPE {
+@@ -1414,6 +1439,9 @@ typedef enum _MINIDUMP_TYPE {
      MiniDumpNoIgnoreInaccessibleMemory     = 0x02000000,
-     MiniDumpValidTypeFlagsEx               = 0x03ffffff,
+     MiniDumpValidTypeFlagsEx               = 0x07ffffff,
  } MINIDUMP_TYPE;
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
 +#pragma clang attribute pop
@@ -105,7 +105,7 @@ index f3e7cbb5..98fee4f8 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
  #pragma endregion
-@@ -1469,6 +1497,7 @@ typedef struct _MINIDUMP_CALLBACK_INFORMATION {
+@@ -1490,6 +1518,7 @@ typedef struct _MINIDUMP_CALLBACK_INFORMATION {
  
  #define RVA_TO_ADDR(Mapping,Rva) ((PVOID)(((ULONG_PTR) (Mapping)) + (Rva)))
  

@@ -459,8 +459,9 @@ diff --git a/um/appmodel.h b/um/appmodel.h
  WINAPI
  FindPackagesByPackageFamily(
      _In_ PCWSTR packageFamilyName,
-@@ -480,10 +508,11 @@
-     PackageOrigin_LineOfBusiness    = 6
+@@ -480,11 +508,12 @@
+     PackageOrigin_LineOfBusiness    = 6,
+     PackageOrigin_SignedSBOM        = 7
  } PackageOrigin;
  
 -WINBASEAPI

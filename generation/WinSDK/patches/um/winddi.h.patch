@@ -1411,9 +1411,8 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return != nullptr)
  ENGAPI
  _Post_writable_byte_size_(*pulSize)
-@@ -4755,12 +4961,14 @@
+@@ -4755,11 +4961,13 @@
      _In_  BOOL  DiscardContent);
- #endif
  
 +_Win32_SupportedOS_WindowsXP_
  ENGAPI

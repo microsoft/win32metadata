@@ -27,7 +27,7 @@
  //
  // MessageId: ERROR_NO_MORE_ITEMS
  //
-@@ -25521,6 +25527,103 @@
+@@ -25593,6 +25599,103 @@
  // Name based IPSEC policy could not be added.
  //
  #define WSA_IPSEC_NAME_POLICY_ERROR      11033L
@@ -131,7 +131,7 @@
  
  #endif // defined(WSABASEERR)
  
-@@ -30329,6 +30432,50 @@
+@@ -30401,6 +30504,50 @@
  
  #define FACILITY_NT_BIT                 0x10000000
  
@@ -182,13 +182,13 @@
  //
  // HRESULT_FROM_WIN32(x) used to be a macro, however we now run it as an inline function
  // to prevent double evaluation of 'x'. If you still need the macro, you can use __HRESULT_FROM_WIN32(x)
-@@ -30338,4 +30485,5 @@
+@@ -30410,4 +30557,5 @@
  #if !defined(_HRESULT_DEFINED) && !defined(__midl)
  #define _HRESULT_DEFINED
 +_Win32_NativeTypedef_
  typedef _Return_type_success_(return >= 0) long HRESULT;
  #endif
-@@ -35862,6 +36010,111 @@
+@@ -35934,6 +36082,111 @@
  // OLE is waiting before retrying a request.
  //
  #define RPC_S_WAITONTIMER                _HRESULT_TYPEDEF_(0x80010116L)
@@ -300,15 +300,15 @@
  
  //
  // MessageId: RPC_E_CALL_COMPLETE
-@@ -39938,4 +40191,5 @@
+@@ -40019,4 +40272,5 @@
  #if !defined(_HRESULT_DEFINED) && !defined(__midl)
  #define _HRESULT_DEFINED
 +_Win32_NativeTypedef_
  typedef _Return_type_success_(return >= 0) long HRESULT;
  #endif
-@@ -66990,4 +67244,3295 @@
+@@ -67494,4 +67748,3295 @@
  //
- #define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT _HRESULT_TYPEDEF_(0xC9280004L)
+ #define PPF_E_JSONTX_EVENT_TYPE_ERROR    _HRESULT_TYPEDEF_(0xC928000DL)
  
 +#if !defined(MIDL_PASS)
 +_Win32_Enum_(WIN32_ERROR, unsigned long,

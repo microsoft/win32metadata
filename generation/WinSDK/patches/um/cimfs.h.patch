@@ -73,8 +73,11 @@ diff --git a/um/cimfs.h b/um/cimfs.h
  STDAPI_(void)
  CimCloseImage(_In_ CIMFS_IMAGE_HANDLE cimImageHandle);
  
-@@ -171,6 +180,7 @@
+@@ -171,9 +180,10 @@
  //  as a volume with the volume GUID specified by volumeId.
+ //  If this API is used to mount a sealed, verified CIM, the CIM
+ //  will be mounted in attest mode. The BlockDeviceHash will only
+ //  be validated against the hash stored in the CIM.
  //
  
 +_Win32_SupportedOS_19041_
