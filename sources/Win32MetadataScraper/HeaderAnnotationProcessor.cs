@@ -29,6 +29,7 @@ namespace Win32MetadataScraper
         private readonly IReadOnlyList<string> traversalNames;
         private readonly ISet<string> excludedNames;
         private readonly bool excludeFunctionsWithBody;
+        private readonly IReadOnlySet<CXCursor> includedDeclarations;
         private readonly int nativePointerSize;
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
@@ -72,7 +73,8 @@ namespace Win32MetadataScraper
         }
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
-            IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody)
+            IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody,
+            IReadOnlySet<CXCursor> includedDeclarations = null)
         {
             this.remaps = remaps;
             storageTypeRemaps = remaps;
@@ -80,6 +82,7 @@ namespace Win32MetadataScraper
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
             this.excludeFunctionsWithBody = excludeFunctionsWithBody;
+            this.includedDeclarations = includedDeclarations;
             using (var target = translationUnit.Handle.TargetInfo)
                 nativePointerSize = target.PointerWidth / 8;
             Walk(translationUnit.TranslationUnitDecl);
@@ -987,6 +990,9 @@ namespace Win32MetadataScraper
 
         private bool ShouldEmit(NamedDecl declaration, NativeLocation location)
         {
+            if (includedDeclarations != null &&
+                !includedDeclarations.Contains((declaration is ParmVarDecl ? declaration.SemanticParentCursor : declaration).Handle.CanonicalCursor))
+                return false;
             if (declaration is RecordDecl record && record.Definition is RecordDecl definition)
             {
                 declaration = definition;

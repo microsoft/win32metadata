@@ -300,38 +300,10 @@ namespace Win32MetadataScraper
 
             private string GetWrittenFunctionName(FunctionDecl function)
             {
-                var unit = function.TranslationUnit.Handle;
                 function.Handle.Location.GetExpansionLocation(out var file, out _, out _, out var offset);
                 if (file.Equals(default(CXFile)) || !macroExpansionLocations.Contains((file, offset)))
                     return null;
-                var expansion = unit.GetCursor(unit.GetLocationForOffset(file, offset));
-                if (expansion.Kind != CXCursorKind.CXCursor_MacroExpansion)
-                    return null;
-                var definition = expansion.Referenced;
-                if (definition.Kind != CXCursorKind.CXCursor_MacroDefinition || definition.IsMacroFunctionLike)
-                    return null;
-                var tokens = unit.Tokenize(definition.Extent);
-                try
-                {
-                    var identifiers = tokens.ToArray().Where(token => token.Kind != CXTokenKind.CXToken_Comment).ToArray();
-                    if (identifiers.Length != 2 || identifiers.Any(token => token.Kind != CXTokenKind.CXToken_Identifier))
-                        return null;
-                    function.Handle.Location.GetSpellingLocation(out var spellingFile, out _, out _, out var spellingOffset);
-                    identifiers[1].GetLocation(unit).GetSpellingLocation(out var replacementFile, out _, out _, out var replacementOffset);
-                    if (!spellingFile.Equals(replacementFile) || spellingOffset != replacementOffset)
-                        return null;
-                    using var name = identifiers[0].GetSpelling(unit);
-                    using var nativeName = identifiers[1].GetSpelling(unit);
-                    using var expanded = expansion.Spelling;
-                    string written = name.ToString();
-                    // Both compiler locations must identify this exact renamer, not a nested factory or later macro state.
-                    return written == expanded.ToString() && written != function.Name && nativeName.ToString() == function.Name
-                        ? written : null;
-                }
-                finally
-                {
-                    unit.DisposeTokens(tokens);
-                }
+                return NativeMacroNames.GetWrittenName(function, requireRecordedExpansion: true);
             }
 
             private IEnumerable<FunctionDecl> WrittenFunctions(CXCursor scope, string name)

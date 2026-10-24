@@ -6350,14 +6350,16 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
             bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
             IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
-            Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd")
+            Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd",
+            Dictionary<string, string> apiNamesToNamespaces = null)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
                 memberRemaps ?? new Dictionary<string, string>(), enumAdditions ?? new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
-                references ?? Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
+                references ?? Array.Empty<string>(), new Dictionary<string, string>(),
+                apiNamesToNamespaces ?? new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string path = Path.Combine(directory, winmdFileName);
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,

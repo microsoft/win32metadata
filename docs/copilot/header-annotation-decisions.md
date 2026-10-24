@@ -1681,6 +1681,126 @@ scrape declarations and native results before complete emission. Preparation,
 MIDL helpers, recipe and SDK pins are unchanged. Frozen OLD, SDK026 and their
 original ANSI-valued outputs and comparisons remain unchanged.
 
+### Guarded ANSI exports and authored member remaps
+
+The primary SDK context continues to define `UNICODE`. Selected SDK28000
+`Winldap.h` and `WinInet.h` also declare real unsuffixed ANSI exports inside
+their non-Unicode branches. These are additional native exports, not aliases to
+the explicit A/W declarations. The matched-SDK actual909/actual450 comparison
+identifies 59 LDAP and 13 WinInet removals at this boundary. Those frozen images,
+the unsuppressed comparison and its classification remain unchanged.
+
+The generic scraper recovers eligible imports through a conditional ANSI
+companion. An eligible name must have a nonempty existing import-library mapping,
+be absent from the primary global declarations, belong to an owned traversal
+header and survive exclusions. A source dependency preflight avoids extra
+parsing for unrelated version/family guards. The actual compiler's skipped
+ranges and a unique native declaration in the ANSI context establish recovery;
+the source scan cannot invent a declaration or export. Supplemental arguments
+preserve the primary context and append `-UUNICODE`.
+
+Only proved imports are merged. Each generated method must retain its exact
+native source coordinates, mapped DLL and unmangled export identity. Managed
+collisions and ambiguous providers fail. Alternate records, aliases, delegates
+and constants are not merged into the primary source family.
+
+Native dependency validation compares unique source providers recursively,
+including typedefs, pointees, field types, qualifiers, enum values, arrays,
+annotation arguments and callback signatures. Layout checks remain necessary
+but are insufficient: a same-size `TCHAR*` field can change its string contract,
+and an x86 callback can change calling convention without changing storage.
+Semantic attributed types use the compiler's `EquivalentType` rather than its
+`ModifiedType`. Type attributes whose compiled arguments cannot be compared
+fail closed. Incompatible providers retain native source and context evidence
+and fail the producer; an ANSI function is never bound to a same-layout
+wide-string neutral record.
+
+Existing authored remap intent is preserved separately. For example,
+`GetObjectA=GetObject` remains applicable to a source-spelled `GetObject` member
+whose primary compiler name is `GetObjectW`. The primary and ANSI declarations
+must share the exact native source identity and written token, with a direct
+macro replacement proved by compiler spelling/file locations. This also covers
+the actual name argument in `STDMETHOD(GetObject)` and methods inherited from
+native base providers. The generated remap is qualified to the proved owner;
+unrelated overloads and explicit global A/W imports cannot be renamed.
+Lexical candidates without an actual alternate member or an existing authored
+alternate-name mapping leave the primary name unchanged. Ambiguous actual pairs
+still fail.
+
+There is no global `GetObjectW=GetObject` setting, suffix stripping or new
+public-name policy. Other unconfigured macro-renamed members remain unchanged
+pending review. Their attributes remain visible too: a W-expanded method name
+can acquire `UnicodeAttribute` while its native parameter is still `PSTR`.
+Restoring an authored name does not establish acceptance of unrelated neutral
+TCHAR record changes. The strict compiler-recorded macro rules for original-IDL
+comment selectors are unchanged.
+
+Each Unicode production invocation writes a native-declaration receipt beside
+its bindings, recording primary and supplemental arguments, actual parse
+attempts, native source hashes, recovery/remap witnesses and projection status.
+Custom contexts without `UNICODE`, including an explicit later undefinition,
+perform no supplemental parsing. Preparation, MIDL, SDK data, import mappings
+and prepared-cache identities do not change.
+
+Fresh final-runtime production scrapes verify the exact native export set from
+the frozen matched-SDK removal inventory, not just the number of functions:
+
+| Fresh selected-SDK result | x86 | x64 | Arm64 |
+| --- | --- | --- | --- |
+| LDAP unsuffixed native exports recovered | 59 | 59 | 59 |
+| WinInet unsuffixed native exports recovered | 13 | 13 | 13 |
+| Authored IITDatabase::GetObject remap preserved | 1 | 1 | 1 |
+| Native integer results, Ldap / WinInet / HtmlHelp | 155 / 1070 / 228 | 155 / 1070 / 228 | 155 / 1070 / 228 |
+
+All nine contexts retain primary `-DUNICODE`, the correct target and completed
+projection; companion arguments differ only by the final `-UUNICODE`. The
+imports retain their existing WLDAP32/WinInet mappings and compiler source
+signatures. Explicit `ldap_initA/W`, `ldap_bindA/W` and
+`InternetSetStatusCallbackA/W` remain present. IITDatabase's written
+`STDMETHOD(GetObject)` argument is tied to the actual `infotech.h` member and
+direct `wingdi.h` replacement, then scoped to that native owner.
+
+A separate fresh invocation keeps the ordinary production defaults: these
+partitions are common/x86 and optional native integer evaluation is disabled.
+All three declaration files are byte-identical to the expanded proof's x86
+files, with the same 72 recovered exports and authored remap. Both invocations
+use the selected SDK28000 API mirror and VC 14.51.36231; the retained include
+environment also records the installed SDK26100 UCRT and fallback paths.
+
+The final focused run passes 226 cases, including all six unchanged performance
+guards; one recipe-only case is skipped in this tooling-only checkout. Native
+semantic controls reject same-size TCHAR-pointee and x86 callback-contract
+changes, and native fixtures reject compiler warnings or errors. Earlier failed
+callback, member-origin and candidate-applicability controls remain archived.
+
+The fresh receipts are `ansi-companion-sdk-final\native-export-receipt.json`
+(SHA256 `E912867515470C1EE8E10CCAFEF57931550B587130DB8390A8EBCCB6FF52211D`)
+and `ansi-companion-sdk-default-final\native-export-receipt.json`
+(SHA256 `1456AC3AEEAC3B1F3E24CC06B02229D75151086FFF2D68C55E53C3AB017777D1`).
+Source, runtime, compiler arguments, include environment, native results and
+actual producer logs are retained with them. These are bounded local producer
+proofs; they do not qualify a new published head or a complete migrated SDK.
+
+A complete private image replay combines the actual450 three-architecture
+source/log archives with only the fresh default Ldap, WinInet and HtmlHelp
+outputs. The actual450 and actual756 CI images first compare with no declaration
+differences. The replay image passes all 27 unchanged integrity tests using its
+actual complete staged producer logs. Its unsuppressed actual756 comparison has
+exactly 75 rows: the 72 recovered native exports, IITDatabase's restored method
+name, removal of its W-expanded name and the corresponding interface-order row.
+No other existing API, A/W signature, record ABI or constant differs in this
+replay. Other GetObject-owning partitions still require a fresh full scrape.
+
+Replay image SHA256 is
+`091373548FF51736EA5214EF346939BBCDB5AD98072F5A7FE94137B4C20F0272`;
+the raw comparison SHA256 is
+`7B2A65B9487C80E6594607DA1CE3CC95F0D4F5A3A51814F581200296CA2BA5DA`.
+The private replay retains pre/post manifests, regenerated compiler outputs and
+task-owned marker changes; all 240 frozen production runtime files are
+reverified. Original archives and earlier raw comparisons remain unchanged.
+This partial fresh producer overlay is separate from complete new-head CI and
+does not establish acceptance of the remaining public-name or TCHAR changes.
+
 ### Native remapping diagnostics and legacy binding decisions
 
 The pinned ClangSharp `Close()` clears its diagnostic collection. The historical

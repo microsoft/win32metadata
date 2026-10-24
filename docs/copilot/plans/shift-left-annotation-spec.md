@@ -889,6 +889,44 @@ existing projected names without introducing duplicate unscoped enumerators.
 These notes describe compiler encoding and metadata-tool implementation. They do not
 add public annotation syntax or change the authoring contract above.
 
+### Production character-set context
+
+The shared SDK scraper settings define `UNICODE` for x86, x64 and arm64. Header
+parsing, declaration binding, native integer evaluation and macro-recovery probes
+use the same effective arguments. Neutral A/W constants therefore use the native
+W selection. Explicit A/W declarations keep their native names, parameter types,
+record fields and ABI. The standalone scraper does not impose this SDK default:
+custom ANSI contexts and a later explicit `-UUNICODE` remain supported.
+
+Some selected-SDK headers declare genuine unsuffixed ANSI exports only outside
+the Unicode branch, in addition to their explicit A/W exports. The scraper can
+recover these declarations through a conditional ANSI companion. Candidate names
+must already have an import-library mapping and belong to an owned traversal
+header. A source dependency preflight limits additional parsing to possible
+Unicode-dependent branches; compiler skipped ranges and actual companion
+declarations establish eligibility. Source text alone cannot supply an export.
+The supplemental arguments preserve the primary context and append `-UUNICODE`.
+
+Only proved native imports enter the generated sources. Their DLL, unmangled
+entrypoint and source coordinates must match the existing mapping and compiler
+declaration. Supplemental types and constants do not replace or augment primary
+providers. Dependencies must resolve to unique primary native declarations with
+compatible recursive contracts: typedefs, pointees, fields, arrays, enums,
+annotations and function signatures as well as layout and calling convention.
+Equal size and offsets do not establish compatible string or callback contracts.
+Unsupported or incompatible providers fail with native source evidence; there is
+no fallback to an alternate neutral record body. The native declaration receipt
+records effective arguments, parse attempts, source hashes and projection status.
+
+Existing authored member remaps remain applicable across a compiler-proven
+neutral macro expansion. The primary and ANSI declarations must share the exact
+native source identity, written member token and direct macro replacement proof.
+This includes a member supplied as an argument to `STDMETHOD`. The resulting
+remap is scoped to the proved native owner and cannot rename unrelated overloads
+or explicit global A/W imports. No new suffix-stripping or neutral-name policy is
+inferred for members without an authored remap. The strict recorded-expansion
+rules for original-IDL comment selectors remain unchanged.
+
 ### Annotation encoding and diagnostic policy
 
 The shared header, `RecompiledIdlHeaders/shared/win32metadata_annotations.h`, uses
