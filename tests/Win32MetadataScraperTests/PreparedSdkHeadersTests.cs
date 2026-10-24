@@ -499,6 +499,46 @@ namespace Win32MetadataScraperTests
             Assert.Contains("/X", commands);
         }
 
+        [Fact]
+        public void RemoteMidlRegenerationPreservesSynthesizedDirectionsAndCounts()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            File.WriteAllText(fixture.MidlInput, File.ReadAllText(fixture.MidlInput).Replace(
+                "void Read([out][annotation(\"_Win32_Retval_\")] DEPENDENCY* result);",
+                "void Read([in] long count, [out, size_is(count), length_is(*read)] DEPENDENCY* values, [out] long* read);"));
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Fixture.Hash(File.ReadAllBytes(fixture.MidlInput));
+                recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                recipe["headers"][1]["sdkSha256"] = hash;
+            });
+
+            var prepared = fixture.Prepare();
+            string root = Path.GetDirectoryName(prepared.IncludeRoot);
+            string converted = File.ReadAllText(Path.Combine(root, "midl", "sal", "um", "generated.idl"));
+            Assert.Contains("[in][annotation(\"_In_\")] long count", converted);
+            Assert.Contains("[out, size_is(count), length_is(*read)][annotation(\"_Out_writes_to_(count,*read)\")]", converted);
+            Assert.Contains("[out][annotation(\"_Out_\")] long* read", converted);
+            string header = File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", "generated.h"));
+            Assert.Contains("_In_  long count", header);
+            Assert.Contains("_Out_writes_to_(count,*read)  DEPENDENCY *values", header);
+            Assert.Contains("_Out_  long *read", header);
+            Assert.DoesNotContain("__RPC__out_ecount_part", header);
+            using var commands = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "midl", "commands.json")));
+            var command = Assert.Single(commands.RootElement.EnumerateArray(),
+                value => value.GetProperty("source").GetString() == @"um\generated.idl");
+            Assert.Equal(0, command.GetProperty("exitCode").GetInt32());
+            Assert.Contains(command.GetProperty("warnings").EnumerateArray(),
+                value => value.GetString().Contains("MIDL2495", StringComparison.Ordinal));
+            Assert.Equal(Fixture.Hash(File.ReadAllBytes(Path.Combine(root, "midl", "generated", "generated.log"))),
+                command.GetProperty("logSha256").GetString());
+            string[] arguments = command.GetProperty("arguments").EnumerateArray()
+                .Select(value => value.GetString()).ToArray();
+            Assert.DoesNotContain("/no_warn", arguments);
+            Assert.DoesNotContain("/WX", arguments);
+        }
+
         [Theory]
         [InlineData("GeNeRaTeD.idl", "GeNeRaTeD.h")]
         [InlineData("GeNeRaTeD.idl", "generated.h")]
@@ -1226,9 +1266,8 @@ namespace Win32MetadataScraperTests
 
         private static void AssertRemoteRetvalParameter(string header)
         {
-            Assert.Contains("/* [annotation][out] */ \n    _Win32_Retval_  DEPENDENCY *result);",
+            Assert.Contains("/* [annotation][out] */ \n    _Out_ _Win32_Retval_  DEPENDENCY *result);",
                 header.Replace("\r\n", "\n"));
-            Assert.DoesNotContain("_Out_", header);
             Assert.DoesNotContain("_Out_retval_", header);
             Assert.DoesNotContain("_COM_Outptr_retval_", header);
         }

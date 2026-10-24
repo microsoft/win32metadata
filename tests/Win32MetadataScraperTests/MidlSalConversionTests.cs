@@ -42,14 +42,27 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
-        [InlineData("[object] interface I { HRESULT Remote([in] long count, [out, size_is(count)] long* values); };")]
-        [InlineData("[object]\ninterface I : IUnknown {\n HRESULT Remote([out, retval] long* result);\n};")]
-        [InlineData("/* [local] */ [object] interface I { HRESULT Remote([out] long* result); };")]
-        [InlineData("cpp_quote(\"[local] interface Fake {\")\n[object] interface I { HRESULT Remote([out] long* result); };")]
-        [InlineData("[object] interface I { HRESULT Remote([out, annotation(\"_Out_\")] long* result); };")]
-        public void RemoteMethodsPreserveNativeMidlSalWithoutSyntheticOverrides(string input)
+        [InlineData("[object] interface I { HRESULT Remote([in] long count, [out, size_is(count)] long* values); };",
+            "[object] interface I { HRESULT Remote([in][annotation(\"_In_\")] long count, [out, size_is(count)][annotation(\"_Out_writes_(count)\")] long* values); };")]
+        [InlineData("[object]\ninterface I : IUnknown {\n HRESULT Remote([out, retval] long* result);\n};",
+            "[object]\ninterface I : IUnknown {\n HRESULT Remote([out, retval][annotation(\"_Out_\")] long* result);\n};")]
+        [InlineData("/* [local] */ [object] interface I { HRESULT Remote([out] long* result); };",
+            "/* [local] */ [object] interface I { HRESULT Remote([out][annotation(\"_Out_\")] long* result); };")]
+        [InlineData("cpp_quote(\"[local] interface Fake {\")\n[object] interface I { HRESULT Remote([out] long* result); };",
+            "cpp_quote(\"[local] interface Fake {\")\n[object] interface I { HRESULT Remote([out][annotation(\"_Out_\")] long* result); };")]
+        [InlineData("[object] interface I { HRESULT Remote([out, annotation(\"_Out_\")] long* result); };",
+            "[object] interface I { HRESULT Remote([out, annotation(\"_Out_\")] long* result); };")]
+        [InlineData("[object] interface I { HRESULT Remote([in] long* value); };",
+            "[object] interface I { HRESULT Remote([in][annotation(\"_In_\")] long* value); };")]
+        [InlineData("[object] interface I { HRESULT Remote([in, unique] long* value); };",
+            "[object] interface I { HRESULT Remote([in, unique][annotation(\"_In_\")] long* value); };")]
+        [InlineData("[object] interface I { HRESULT Remote([in] long count, [out, size_is(count), length_is(*read)] long* values, [out] long* read); };",
+            "[object] interface I { HRESULT Remote([in][annotation(\"_In_\")] long count, [out, size_is(count), length_is(*read)][annotation(\"_Out_writes_to_(count,*read)\")] long* values, [out][annotation(\"_Out_\")] long* read); };")]
+        [InlineData("[object] interface I { HRESULT Remote([in][annotation(\"_In_opt_ _Win32_Retained_\")] long* value); };",
+            "[object] interface I { HRESULT Remote([in][annotation(\"_In_opt_ _Win32_Retained_\")] long* value); };")]
+        public void RemoteMethodsPreserveSynthesizedSalContracts(string input, string expected)
         {
-            Assert.Equal(input.Replace("\n", Environment.NewLine, StringComparison.Ordinal), Convert(input));
+            Assert.Equal(expected.Replace("\n", Environment.NewLine, StringComparison.Ordinal), Convert(input));
         }
 
         [Theory]
@@ -58,7 +71,9 @@ namespace Win32MetadataScraperTests
         [InlineData("[object] interface I { [local] HRESULT F([out, retval] long* value); };",
             "[object] interface I { [local] HRESULT F([out, retval][annotation(\"_Out_\")] long* value); };")]
         [InlineData("[object] interface I { [local] HRESULT F([in] long count, [out, size_is(count)] long* values); HRESULT Remote([out] long* result); };",
-            "[object] interface I { [local] HRESULT F([in][annotation(\"_In_\")] long count, [out, size_is(count)][annotation(\"_Out_writes_(count)\")] long* values); HRESULT Remote([out] long* result); };")]
+            "[object] interface I { [local] HRESULT F([in][annotation(\"_In_\")] long count, [out, size_is(count)][annotation(\"_Out_writes_(count)\")] long* values); HRESULT Remote([out][annotation(\"_Out_\")] long* result); };")]
+        [InlineData("[object] interface I { [local] HRESULT Local([in] long* value); HRESULT Remote([in] long* value); };",
+            "[object] interface I { [local] HRESULT Local([in] long* value); HRESULT Remote([in][annotation(\"_In_\")] long* value); };")]
         public void ExplicitLocalMethodsRetainStandardSalCountsAndNativeRetval(string input, string expected)
         {
             Assert.Equal(expected, Convert(input));

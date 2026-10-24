@@ -141,13 +141,10 @@ foreach ($line in $lines) {
         $attributeListIndex = $match.Groups[0].Index + $match.Groups[0].Length
         $nativeOffset = $offset + $match.Index - $inserted
         $remote = @($native.Ranges | Where-Object { $nativeOffset -gt $_.Begin -and $nativeOffset -lt $_.End })
+        $remoteMethod = $false
         if ($remote.Count -gt 0) {
             $previous = $native.Code.LastIndexOfAny([char[]]';{}', $nativeOffset - 1)
-            if (!(Test-NativeLocalAttribute $native.Code.Substring($previous + 1, $nativeOffset - $previous - 1))) {
-                # /sal derives remote RPC counts/directions; annotation would override it and cause MIDL2495.
-                $startAt = $attributeListIndex
-                continue
-            }
+            $remoteMethod = !(Test-NativeLocalAttribute $native.Code.Substring($previous + 1, $nativeOffset - $previous - 1))
         }
         $existingAnnotation = [regex]::Match($line.Substring($attributeListIndex), "^\s*$annotationPattern")
         if ($existingAnnotation.Success -and
@@ -191,8 +188,8 @@ foreach ($line in $lines) {
             continue
         }
 
-        # MIDL derives pointer optionality from its native type and pointer defaults.
-        if ($in -and !$out -and !$existingAnnotation.Success -and
+        # Remote methods retain the original recompiled mirror's synthesized SAL.
+        if (!$remoteMethod -and $in -and !$out -and !$existingAnnotation.Success -and
             $attributeList -match '^\s*(?:in|unique)(?:\s*,\s*(?:in|unique))*\s*$' -and
             $line.Substring($attributeListIndex) -match '^\s*[\w:]+(?:\s+[\w:]+)*\s*\*') {
             $startAt = $attributeListIndex

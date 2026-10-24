@@ -2074,6 +2074,15 @@ do not qualify a newly prepared full SDK or replace the successor's normal CI.
 
 ### Native comparison controls and preserved migration inputs
 
+Remote IDL methods retain the original recompiled mirror's synthesized SAL
+directions and size/length contracts. Additional RPC spellings from `/sal` do
+not establish equality with that frozen SAL surface. Existing SAL and metadata
+payloads remain combined; explicit local-method pointer behavior is unchanged.
+MIDL2495 warnings remain visible in raw logs and command provenance. They do not
+justify dropping SAL or adding `/no_warn`, `/WX` or a comparison allowance.
+Converter changes require fresh strict preparation identities and recipe pins.
+Historical failed SAL comparisons are not relabeled by the correction.
+
 Bulk native comparisons compile each original/prepared header owner in its own
 complete translation unit. All owners retain raw native, SAL and diagnostic
 rows, including duplicates. Native, SAL, diagnostic and metadata-leakage
