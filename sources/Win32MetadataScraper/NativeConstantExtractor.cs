@@ -14,7 +14,7 @@ namespace Win32MetadataScraper
     internal static unsafe class NativeConstantExtractor
     {
         private const string ProbePrefix = "__Win32MetadataConstant_";
-        private const int BatchSize = 512;
+        private const int BatchSize = 4096;
 
         internal static NativeConstantValues Extract(TranslationUnit original, string sourceFile,
             string[] arguments, PInvokeGeneratorConfiguration configuration, HashSet<string> reportedDiagnostics,
