@@ -237,6 +237,14 @@ namespace ClangSharpSourceToWinmd
 
             HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch, infoFinder.EnumMemberNames);
 
+            // Only retained ConstantsScraper enum bags own macros globally; composed header groups stay namespace-local.
+            foreach (var tree in FilesToTrees(modifiedFiles.Where(file =>
+                file.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase))))
+            {
+                foreach (var member in tree.GetRoot().DescendantNodes().OfType<EnumMemberDeclarationSyntax>())
+                    infoFinder.EnumMemberNames.Add(member.Identifier.ValueText);
+            }
+
             Console.WriteLine($"  Cleaning syntax trees...");
 
             watch.Restart();

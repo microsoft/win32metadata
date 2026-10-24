@@ -13,6 +13,51 @@ namespace ClangSharpSourceToWinmdTests
     public class HeaderEnumCompositionTests
     {
         [DataTestMethod]
+        [DataRow("x86", true)]
+        [DataRow("x64", true)]
+        [DataRow("arm64", true)]
+        [DataRow("crossarch", true)]
+        [DataRow("crossarch", false)]
+        public void LegacyMacroBagsOwnLooseCopiesBeforeBindingEnumAliases(string architecture, bool legacyBag)
+        {
+            Compile(new Dictionary<string, string>
+            {
+                [legacyBag ? "Foundation.enums.cs" : "Foundation.cs"] = @"
+namespace Windows.Win32.Foundation {
+    public enum WAIT_EVENT:uint { WAIT_OBJECT_0=0, WAIT_IO_COMPLETION=192 }
+}",
+                ["Threading.manual.cs"] = @"
+namespace Windows.Win32.System.Threading {
+    public static partial class Apis {
+        public const uint WAIT_OBJECT_0=0, WAIT_IO_COMPLETION=192;
+    }
+}",
+                ["WinSock.enums.cs"] = @"
+using static Windows.Win32.Foundation.WAIT_EVENT;
+using static Windows.Win32.System.Threading.Apis;
+namespace Windows.Win32.Networking.WinSock {
+    public enum WSA_ERROR {
+        WSA_WAIT_EVENT_0=(int)WAIT_OBJECT_0,
+        WSA_WAIT_IO_COMPLETION=(int)WAIT_IO_COMPLETION
+    }
+}",
+            }, compilation =>
+            {
+                if (!legacyBag)
+                {
+                    Assert.IsTrue(compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0229"));
+                    return;
+                }
+                AssertCompiles(compilation);
+                var fields = compilation.GetTypeByMetadataName("Windows.Win32.Networking.WinSock.WSA_ERROR")!
+                    .GetMembers().OfType<IFieldSymbol>().Where(field => field.HasConstantValue).ToArray();
+                CollectionAssert.AreEqual(new[] { 0, 192 }, fields.Select(field => (int)field.ConstantValue!).ToArray());
+                Assert.AreEqual(0, compilation.GetTypeByMetadataName("Windows.Win32.System.Threading.Apis")!
+                    .GetMembers().OfType<IFieldSymbol>().Count());
+            }, architecture);
+        }
+
+        [DataTestMethod]
         [DataRow("Windows.Win32.Graphics.Gdi", "RGN_COMBINE_MODE", "int",
             "RGN_AND=1,RGN_OR=2,RGN_XOR=3,RGN_DIFF=4,RGN_COPY=5,RGN_MIN=1,RGN_MAX=5",
             "RGN_AND=1,RGN_OR=2,RGN_XOR=3,RGN_DIFF=4,RGN_COPY=5,RGN_MIN=RGN_AND,RGN_MAX=RGN_COPY", 7)]
@@ -403,9 +448,9 @@ namespace Windows.Win32.Foundation
 namespace Windows.Win32.Foundation.Metadata
 {
     public class Fixture { }
-    [System.Flags] public enum Architecture { X86=1, X64=2, Arm64=4 }
-    [System.AttributeUsage(System.AttributeTargets.All)]
-    public class SupportedArchitectureAttribute:System.Attribute
+    [global::System.Flags] public enum Architecture { X86=1, X64=2, Arm64=4 }
+    [global::System.AttributeUsage(global::System.AttributeTargets.All)]
+    public class SupportedArchitectureAttribute:global::System.Attribute
     {
         public SupportedArchitectureAttribute(Architecture architecture) { }
     }

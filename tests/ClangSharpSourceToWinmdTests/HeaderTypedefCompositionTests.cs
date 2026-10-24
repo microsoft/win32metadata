@@ -18,6 +18,52 @@ namespace ClangSharpSourceToWinmdTests
         [DataRow("x64")]
         [DataRow("arm64")]
         [DataRow("crossarch")]
+        public void ManualForwardsComposeWithoutDiscardingCompleteEmptyRecords(string architecture)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write("Legacy.manual.cs", "namespace Test { public struct OPAQUE; }");
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct OPAQUE { } " +
+                "public partial struct COMPLETE_EMPTY { } }");
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var native = compilation.CSharpCompilation.GetTypeByMetadataName("Test.OPAQUE")!;
+            Assert.AreEqual(2, native.DeclaringSyntaxReferences.Length);
+            Assert.IsTrue(native.DeclaringSyntaxReferences.Any(reference =>
+                reference.SyntaxTree.FilePath.EndsWith("Bindings.modified.cs", StringComparison.OrdinalIgnoreCase)));
+            string output = Path.Combine(fixture.DirectoryPath, "EmptyRecords.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var records = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(definition => reader.GetString(definition.Namespace) == "Test").ToArray();
+            CollectionAssert.AreEquivalent(new[] { "OPAQUE", "COMPLETE_EMPTY" },
+                records.Select(definition => reader.GetString(definition.Name)).ToArray());
+            Assert.IsTrue(records.All(definition => definition.GetFields().Count == 0));
+        }
+
+        [TestMethod]
+        public void BraceBodiedManualEmptyRecordsAreNotTreatedAsForwardDeclarations()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write("Legacy.manual.cs", "namespace Test { public struct COMPLETE_EMPTY { } }");
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct COMPLETE_EMPTY { } }");
+            var compilation = fixture.Compile();
+            Assert.IsTrue(compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0260"));
+        }
+
+        [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
         public void RepeatedNativeRecordsComposeAfterSharedNamespaceAssignment(string architecture)
         {
             using var fixture = new Fixture(architecture);

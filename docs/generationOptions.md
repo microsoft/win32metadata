@@ -68,6 +68,15 @@ field identifiers are collision-allocated and restored only from explicit
 rename provenance; genuine names ending in `____1` or `____2` remain unchanged,
 including their `AssociatedConstant` links.
 
+Retained manual C# inputs keep the emitter's declaration-only diagnostic policy
+for parse recovery. Qualification still requires a bound constant value and
+rejects semantic initializer errors. Generated and header inputs retain
+syntax-error checks, including zero-width errors at initializer boundaries.
+Legacy manual `struct NAME;` forwards become partial declarations so an ordinary
+generated definition can complete them without discarding native records.
+Retained ConstantsScraper `.enums.cs` bags keep their global macro ownership;
+header-composed groups use namespace-local ownership after composition.
+
 Before binding constants, each original profile applies the existing checked
 primitive-alias conversion against its actual logical-group providers. Retiring
 a loose `Apis` constant that is now an enum member does not invalidate its
@@ -475,8 +484,9 @@ per-tree/per-profile error-span caching**, versus **1,370 ms after** (1,569 ms o
 repeat). The unfixed implementation failed even the initial, looser 6,000 ms
 guard; the final 4,000 ms budget retains approximately threefold headroom. The corresponding
 `HeaderConstantDiagnosticTests` verify that initializer errors still produce
-`CSSW003`, including zero-width boundary errors, while unrelated diagnostics
-and warnings do not become qualification errors.
+`CSSW003`, including zero-width boundary errors in generated sources, while
+legacy manual parse recovery remains compatible. Unrelated diagnostics and
+warnings do not become qualification errors.
 
 Run just these guards from the repository root:
 

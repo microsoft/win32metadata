@@ -95,9 +95,14 @@ namespace ClangSharpSourceToWinmd
 
         private static TextSpan[] GetErrorSpans(SemanticModel model)
         {
+            // Legacy emission validates declarations, so parse recovery must not become a new constant error.
+            var parseErrors = MetadataSyntaxTreeCleaner.IsLegacyManualSource(model.SyntaxTree.FilePath)
+                ? new HashSet<Diagnostic>(model.SyntaxTree.GetDiagnostics())
+                : null;
             var ordered = model.GetDiagnostics()
                 .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error &&
-                    diagnostic.Location.SourceTree == model.SyntaxTree)
+                    diagnostic.Location.SourceTree == model.SyntaxTree &&
+                    (parseErrors == null || !parseErrors.Contains(diagnostic)))
                 .Select(diagnostic => diagnostic.Location.SourceSpan)
                 .OrderBy(span => span.Start);
             var spans = new List<TextSpan>();
