@@ -14,6 +14,7 @@ namespace ClangSharpSourceToWinmd
     public static class MetadataSyntaxTreeCleaner
     {
         public const string ArgListVarName = "__arglist__";
+        internal const string RevertToTypeSuffix = "___";
 
         internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
             => node.Modifiers.ToString() == "public const" &&
@@ -1585,8 +1586,6 @@ namespace ClangSharpSourceToWinmd
                 {
                     // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
                     // to keep some typedefs from following down to their original type
-                    const string RevertToTypeSuffix = "___";
-
                     EncodeHelpers.SplitType(currentType, out var typeOnly, out var pointers);
                     if (typeOnly.EndsWith(RevertToTypeSuffix))
                     {

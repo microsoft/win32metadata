@@ -74,8 +74,15 @@ rejects semantic initializer errors. Generated and header inputs retain
 syntax-error checks, including zero-width errors at initializer boundaries.
 Legacy manual `struct NAME;` forwards become partial declarations so an ordinary
 generated definition can complete them without discarding native records.
-Retained ConstantsScraper `.enums.cs` bags keep their global macro ownership;
-header-composed groups use namespace-local ownership after composition.
+Retained ConstantsScraper `.enums.cs` bags keep global macro ownership. Ordinary
+native enums also own loose copies recorded in ConstantsScraper `.constants.cs`
+outputs, without removing independent constants from other source scopes.
+Header-composed groups use namespace-local ownership after composition.
+Generated record projections bearing the existing `___` typedef-reversion suffix
+coalesce only with an exact retained manual provider selected by the existing
+namespace route. Their declaration and semantic bindings must agree; the manual
+provider keeps its documentation. Conflicting storage or other attributes fail.
+Ordinary complete native records remain independent providers.
 
 Before binding constants, each original profile applies the existing checked
 primitive-alias conversion against its actual logical-group providers. Retiring

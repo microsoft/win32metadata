@@ -237,13 +237,21 @@ namespace ClangSharpSourceToWinmd
 
             HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch, infoFinder.EnumMemberNames);
 
-            // Only retained ConstantsScraper enum bags own macros globally; composed header groups stay namespace-local.
+            // Retained enum bags own macros globally; native enums also own ConstantsScraper copies.
+            var scrapedEnumMemberNames = new HashSet<string>(infoFinder.EnumMemberNames);
             foreach (var tree in FilesToTrees(modifiedFiles.Where(file =>
-                file.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase))))
+                !HeaderEnumGroupMerger.IsHeaderEnumSourceFile(file))))
             {
-                foreach (var member in tree.GetRoot().DescendantNodes().OfType<EnumMemberDeclarationSyntax>())
-                    infoFinder.EnumMemberNames.Add(member.Identifier.ValueText);
+                bool legacyBag = tree.FilePath.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase);
+                foreach (var member in tree.GetRoot().DescendantNodes().OfType<EnumMemberDeclarationSyntax>()
+                    .Where(member => member.Parent?.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
+                {
+                    scrapedEnumMemberNames.Add(member.Identifier.ValueText);
+                    if (legacyBag)
+                        infoFinder.EnumMemberNames.Add(member.Identifier.ValueText);
+                }
             }
+            scrapedEnumMemberNames.UnionWith(infoFinder.EnumMemberNames);
 
             Console.WriteLine($"  Cleaning syntax trees...");
 
@@ -252,7 +260,9 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath, nativeFieldArrayInfo);
+                var enumMemberNames = tree.FilePath.EndsWith(".constants.modified.cs", StringComparison.OrdinalIgnoreCase)
+                    ? scrapedEnumMemberNames : infoFinder.EnumMemberNames;
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, enumMemberNames, tree.FilePath, nativeFieldArrayInfo);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
@@ -358,6 +368,7 @@ namespace ClangSharpSourceToWinmd
             comp = AddNetstandardReference(comp);
 
             comp = MergeRepeatedStructs(comp);
+            comp = MergeLegacyTypedefProjections(comp, requiredNamespaces);
             comp = HeaderTypedefMerger.Merge(comp);
             comp = HeaderTypedefMerger.LowerConstants(comp);
             comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
@@ -404,6 +415,65 @@ namespace ClangSharpSourceToWinmd
                     continue;
                 removals.UnionWith(copies.Skip(1));
             }
+            return RemoveStructs(compilation, removals);
+        }
+
+        private static CSharpCompilation MergeLegacyTypedefProjections(CSharpCompilation compilation,
+            IReadOnlyDictionary<string, string> requiredNamespaces)
+        {
+            var removals = new HashSet<StructDeclarationSyntax>();
+            foreach (var tree in compilation.SyntaxTrees.Where(tree =>
+                !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) &&
+                !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath)))
+            {
+                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
+                        declaration.Identifier.ValueText.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, StringComparison.Ordinal)))
+                {
+                    string name = declaration.Identifier.ValueText[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length];
+                    string ns = requiredNamespaces.TryGetValue(name, out var owner) ? owner :
+                        SyntaxUtils.GetEnclosingNamespace(declaration);
+                    string identity = string.IsNullOrEmpty(ns) ? name : ns + "." + name;
+                    var provider = compilation.GetTypeByMetadataName(identity);
+                    if (provider?.DeclaringSyntaxReferences.Length != 1)
+                        continue;
+                    var reference = provider.DeclaringSyntaxReferences.Single();
+                    if (!MetadataSyntaxTreeCleaner.IsLegacyManualSource(reference.SyntaxTree.FilePath) ||
+                        reference.GetSyntax() is not StructDeclarationSyntax manual ||
+                        manual.OpenBraceToken.IsMissing || !manual.OpenBraceToken.IsKind(SyntaxKind.OpenBraceToken))
+                        continue;
+
+                    // The suffix requests the established manual typedef, not another native provider.
+                    var generatedModel = compilation.GetSemanticModel(tree);
+                    var manualModel = compilation.GetSemanticModel(reference.SyntaxTree);
+                    if (!SyntaxFactory.AreEquivalent(
+                            WithoutDocumentation(declaration, generatedModel).WithIdentifier(manual.Identifier),
+                            WithoutDocumentation(manual, manualModel)) ||
+                        !BindingsMatch(declaration, generatedModel, manual, manualModel, ignoreDocumentation: true))
+                        throw new InvalidOperationException($"Legacy typedef projection '{declaration.Identifier.ValueText}' " +
+                            $"conflicts with the established manual provider '{identity}'.");
+                    removals.Add(declaration);
+                }
+            }
+            return RemoveStructs(compilation, removals);
+        }
+
+        private static StructDeclarationSyntax WithoutDocumentation(StructDeclarationSyntax declaration, SemanticModel model)
+        {
+            var result = declaration.ReplaceNodes(declaration.DescendantNodes().OfType<AttributeListSyntax>(),
+                (list, _) => list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes
+                    .Where(attribute => !IsDocumentationAttribute(attribute, model)))));
+            return result.RemoveNodes(result.DescendantNodes().OfType<AttributeListSyntax>()
+                .Where(list => list.Attributes.Count == 0), SyntaxRemoveOptions.KeepNoTrivia);
+        }
+
+        private static bool IsDocumentationAttribute(AttributeSyntax attribute, SemanticModel model)
+            => model.GetSymbolInfo(attribute).Symbol is IMethodSymbol constructor &&
+                constructor.ContainingType.ToDisplayString() == "Windows.Win32.Foundation.Metadata.DocumentationAttribute";
+
+        private static CSharpCompilation RemoveStructs(CSharpCompilation compilation,
+            IEnumerable<StructDeclarationSyntax> removals)
+        {
             foreach (var group in removals.GroupBy(declaration => declaration.SyntaxTree))
             {
                 var tree = group.Key;
@@ -416,10 +486,14 @@ namespace ClangSharpSourceToWinmd
         }
 
         private static bool BindingsMatch(StructDeclarationSyntax first, SemanticModel firstModel,
-            StructDeclarationSyntax second, SemanticModel secondModel)
+            StructDeclarationSyntax second, SemanticModel secondModel, bool ignoreDocumentation = false)
         {
-            var firstNodes = first.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax).ToArray();
-            var secondNodes = second.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax).ToArray();
+            var firstNodes = first.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax)
+                .Where(node => !ignoreDocumentation || !node.AncestorsAndSelf().OfType<AttributeSyntax>()
+                    .Any(attribute => IsDocumentationAttribute(attribute, firstModel))).ToArray();
+            var secondNodes = second.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax)
+                .Where(node => !ignoreDocumentation || !node.AncestorsAndSelf().OfType<AttributeSyntax>()
+                    .Any(attribute => IsDocumentationAttribute(attribute, secondModel))).ToArray();
             if (firstNodes.Length != secondNodes.Length)
                 return false;
             for (int i = 0; i < firstNodes.Length; i++)

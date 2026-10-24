@@ -14,6 +14,120 @@ namespace ClangSharpSourceToWinmdTests
     public class HeaderTypedefCompositionTests
     {
         [DataTestMethod]
+        [DataRow("x86", false)]
+        [DataRow("x64", false)]
+        [DataRow("arm64", false)]
+        [DataRow("crossarch", false)]
+        [DataRow("x86", true)]
+        [DataRow("x64", true)]
+        [DataRow("arm64", true)]
+        [DataRow("crossarch", true)]
+        public void RetainedManualProvidersOwnLegacyRevertedRecordAliases(string architecture, bool headerInputs)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            if (!headerInputs)
+                foreach (string target in architecture == "crossarch" ? new[] { "x86", "x64", "arm64" } : new[] { architecture })
+                    File.Delete(Path.Combine(fixture.DirectoryPath, target, "Bindings.header-types.cs"));
+            const string body = "{ public float r; public float g; public float b; public float a; }";
+            fixture.Write("Legacy.manual.cs", "using Windows.Win32.Foundation.Metadata; namespace Original { " +
+                "[Documentation(\"retained type documentation\")] public partial struct COLOR " +
+                body.Replace("public float r;", "[Documentation(\"retained field documentation\")] public float r;") + " }");
+            const string source = "using Canonical; namespace First { public partial struct COLOR___ " + body +
+                " public struct Consumer { public COLOR___ Value; } }";
+            fixture.Write("Bindings.cs", source);
+            fixture.Write("Other.cs", source.Replace("namespace First", "namespace Second"));
+            var compilation = fixture.Compile(new() { ["COLOR"] = "Canonical" });
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var color = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.COLOR")!;
+            Assert.AreEqual(1, color.DeclaringSyntaxReferences.Length);
+            Assert.AreEqual("retained type documentation", color.GetAttributes().Single().ConstructorArguments.Single().Value);
+            Assert.AreEqual("retained field documentation",
+                color.GetMembers("r").Single().GetAttributes().Single().ConstructorArguments.Single().Value);
+            Assert.IsTrue(color.DeclaringSyntaxReferences.Single().SyntaxTree.FilePath
+                .EndsWith("Legacy.manual.modified.cs", StringComparison.OrdinalIgnoreCase));
+            foreach (string ns in new[] { "First", "Second" })
+            {
+                Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName(ns + ".COLOR___"));
+                var consumer = compilation.CSharpCompilation.GetTypeByMetadataName(ns + ".Consumer")!;
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(color,
+                    consumer.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+            }
+            string output = Path.Combine(fixture.DirectoryPath, "LegacyColors.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var colors = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(definition => reader.GetString(definition.Name).StartsWith("COLOR", StringComparison.Ordinal)).ToArray();
+            Assert.AreEqual(1, colors.Length);
+            Assert.AreEqual("Canonical", reader.GetString(colors[0].Namespace));
+            var fields = colors[0].GetFields().Select(reader.GetFieldDefinition).ToArray();
+            CollectionAssert.AreEqual(new[] { "r", "g", "b", "a" },
+                fields.Select(field => reader.GetString(field.Name)).ToArray());
+            foreach (var field in fields)
+                CollectionAssert.AreEqual(new byte[] { 0x06, 0x0c }, reader.GetBlobBytes(field.Signature));
+        }
+
+        [TestMethod]
+        public void CompleteEmptyNativeRecordsDoNotBecomeLegacyManualProviders()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct EMPTY { } public partial struct EMPTY___ { } }");
+            var compilation = fixture.Compile();
+            foreach (string name in new[] { "Test.EMPTY", "Test.EMPTY___" })
+            {
+                var record = compilation.CSharpCompilation.GetTypeByMetadataName(name);
+                Assert.IsNotNull(record);
+                Assert.AreEqual(1, record!.DeclaringSyntaxReferences.Length);
+            }
+            string output = Path.Combine(fixture.DirectoryPath, "CompleteEmpty.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var records = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(definition => reader.GetString(definition.Namespace) == "Test").ToArray();
+            CollectionAssert.AreEquivalent(new[] { "EMPTY", "EMPTY___" },
+                records.Select(definition => reader.GetString(definition.Name)).ToArray());
+            Assert.IsTrue(records.All(definition => definition.GetFields().Count == 0));
+        }
+
+        [DataTestMethod]
+        [DataRow("storage")]
+        [DataRow("binding")]
+        [DataRow("layout")]
+        [DataRow("documentation-shadow")]
+        public void ConflictingLegacyRecordStorageBindingsOrAttributesCannotReplaceManualProviders(string conflict)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write("Legacy.manual.cs", "using STORAGE = System.Int32; namespace Test { " +
+                "public partial struct COLOR { public STORAGE Value; } }");
+            fixture.Write("Bindings.cs", conflict switch
+            {
+                "binding" => "using STORAGE = System.UInt32; namespace Test { public partial struct COLOR___ { public STORAGE Value; } }",
+                "layout" => "using STORAGE = System.Int32; using System.Runtime.InteropServices; namespace Test { " +
+                    "[StructLayout(LayoutKind.Sequential, Pack=1)] public partial struct COLOR___ { public STORAGE Value; } }",
+                "documentation-shadow" => "using STORAGE = System.Int32; using Other; " +
+                    "namespace Other { public class DocumentationAttribute : System.Attribute { } } " +
+                    "namespace Test { [Documentation] public partial struct COLOR___ { public STORAGE Value; } }",
+                _ => "namespace Test { public partial struct COLOR___ { } }",
+            });
+            var error = Assert.ThrowsException<InvalidOperationException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "established manual provider 'Test.COLOR'");
+        }
+
+        [DataTestMethod]
         [DataRow("x86")]
         [DataRow("x64")]
         [DataRow("arm64")]
@@ -555,6 +669,8 @@ namespace Test {
         private const string Metadata = @"
 using System;
 namespace Windows.Win32.Foundation.Metadata {
+    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Field)]
+    public sealed class DocumentationAttribute : Attribute { public DocumentationAttribute(string url) { } }
     [Flags] public enum Architecture { None = 0, X86 = 1, X64 = 2, Arm64 = 4, All = 7 }
     [AttributeUsage(AttributeTargets.Struct)]
     public sealed class SupportedArchitectureAttribute : Attribute { public SupportedArchitectureAttribute(Architecture architecture) { } }
