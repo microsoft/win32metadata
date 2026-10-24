@@ -72,11 +72,11 @@ namespace Win32MetadataScraperTests
         }
 
         [HeaderMigrationDataFact]
-        public void SharedScraperImportsPreserveTheInheritedNamespaceSet()
+        public void SharedScraperImportsMatchTheSelectedSdkNamespaceSet()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
                 "generation", "WinSDK", "scraper.header.txt");
-            AssertInheritedImports(File.ReadAllLines(path));
+            AssertSelectedSdkImports(File.ReadAllLines(path));
         }
 
         [HeaderMigrationDataFact]
@@ -127,11 +127,11 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
-        public void RetainedHeaderMetadataSnapshotKeepsTheFullInheritedRecordsAndImports()
+        public void RetainedHeaderMetadataSnapshotKeepsTheFullInheritedRecordsAndSelectedSdkImports()
         {
             var snapshot = RetainedHeaderMetadata();
             AssertInheritedAutoTypes((JArray)snapshot["retained"]);
-            AssertInheritedImports(File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+            AssertSelectedSdkImports(File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
                 "generation", "WinSDK", "scraper.header.txt")));
         }
 
@@ -167,17 +167,39 @@ namespace Win32MetadataScraperTests
             Assert.ThrowsAny<Xunit.Sdk.XunitException>(() => AssertInheritedAutoTypes(records));
         }
 
+        [Fact]
+        public void HistoricalInheritedImportSnapshotRemainsPinned()
+        {
+            var imports = RetainedHeaderMetadata()["imports"];
+            Assert.Equal("4a6dd2d5f8fc5bec7a9f093f98a6a3a7fb4bc8ef", (string)imports["blob"]);
+            Assert.Equal(257, (int)imports["count"]);
+            Assert.Equal("E4F134E519BFC202F103384C9AE0E24EF5DE1782A28889621905C73653390C09",
+                (string)imports["sha256"]);
+        }
+
         [Theory]
-        [InlineData(false)]
-        [InlineData(true)]
-        public void RetainedHeaderMetadataRejectsMissingOrDuplicateHlslImports(bool duplicate)
+        [InlineData("missing")]
+        [InlineData("duplicate")]
+        [InlineData("added")]
+        [InlineData("changed")]
+        [InlineData("reordered")]
+        [InlineData("removed-hlsl")]
+        public void SelectedSdkImportsRejectMissingDuplicateChangedReorderedOrRemovedNamespaces(string mutation)
         {
             var imports = File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
-                "generation", "WinSDK", "scraper.header.txt")).ToList();
-            const string hlsl = "using Windows.Win32.Graphics.Hlsl;";
-            if (duplicate) imports.Add(hlsl);
-            else imports.Remove(hlsl);
-            Assert.ThrowsAny<Xunit.Sdk.XunitException>(() => AssertInheritedImports(imports));
+                "generation", "WinSDK", "scraper.header.txt"))
+                .Where(line => Regex.IsMatch(line, @"^using\s+.+;$")).ToList();
+            switch (mutation)
+            {
+                case "missing": imports.RemoveAt(0); break;
+                case "duplicate": imports.Add(imports[0]); break;
+                case "added": imports.Add("using Unexpected.Namespace;"); break;
+                case "changed": imports[0] = "using Unexpected.Namespace;"; break;
+                case "reordered": (imports[0], imports[1]) = (imports[1], imports[0]); break;
+                case "removed-hlsl": imports.Add("using Windows.Win32.Graphics.Hlsl;"); break;
+                default: throw new ArgumentOutOfRangeException(nameof(mutation));
+            }
+            Assert.ThrowsAny<Xunit.Sdk.XunitException>(() => AssertSelectedSdkImports(imports));
         }
 
         private static JObject RetainedHeaderMetadata() => JObject.Parse(File.ReadAllText(Path.Combine(
@@ -186,13 +208,12 @@ namespace Win32MetadataScraperTests
         private static JArray ReadAutoTypes(string text) => JArray.Parse(text,
             new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
 
-        private static void AssertInheritedImports(IEnumerable<string> lines)
+        private static void AssertSelectedSdkImports(IEnumerable<string> lines)
         {
             string[] imports = lines.Where(line => Regex.IsMatch(line, @"^using\s+.+;$")).ToArray();
-            Assert.Single(imports, line => line == "using Windows.Win32.Graphics.Hlsl;");
-            var expected = RetainedHeaderMetadata()["imports"];
-            Assert.Equal((int)expected["count"], imports.Length);
-            Assert.Equal((string)expected["sha256"],
+            Assert.DoesNotContain("using Windows.Win32.Graphics.Hlsl;", imports);
+            Assert.Equal(256, imports.Length);
+            Assert.Equal("F2FBE5708B94D81A172AF9EBAB520A168A9D5CEC9F75F8AF31DDEE3378E911CC",
                 Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(string.Join("\n", imports)))));
         }
 
