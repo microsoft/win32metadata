@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -9,6 +10,74 @@ namespace Win32MetadataScraperTests
 {
     public class NativeConstantExtractionTests
     {
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", Architecture.X86)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", Architecture.X64)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", Architecture.Arm64)]
+        public void RecursiveProbeIsolationPreservesFactsAcrossBatchesAndRejectsUnsupportedMacros(
+            string architecture, string target, Architecture expectedArchitecture)
+        {
+            const int constantCount = 8193;
+            string declarations = @"
+template<int N> constexpr int Poison() { static_assert(N > 0, ""forced isolated native diagnostic""); return N; }
+" + string.Join("\n", Enumerable.Range(0, constantCount).Select(index =>
+                $"#define CONTROL_INTEGER_{index:D5} ({index}U + 17U)")) + @"
+#define CONTROL_A_POISON Poison<-1>()
+#define CONTROL_DIVIDE_BY_ZERO (1 / 0)
+#define CONTROL_FLOAT 2.5F
+#define CONTROL_FUNCTION(x) ((x) + 1)
+#define CONTROL_MISSING (NOT_DEFINED + 1)
+#define CONTROL_POINTER ((void*)-1)
+#define CONTROL_SIGNED_OVERFLOW (2147483647 + 1)
+#define CONTROL_SYNTAX (1 + )
+#define CONTROL_TEXT ""text""
+#define CONTROL_UNSIGNED_WRAP (0xffffffffU + 1U)
+#define CONTROL_UNSIGNED_WIDE 0xffffffffffffffffULL
+";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                extraSettings: "--config\nnative-constants-only\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+            var values = Read(fixture);
+            Assert.Equal(expectedArchitecture, values.Architecture);
+            Assert.Equal(fixture.Output, values.BindingSource);
+            Assert.Equal("Test", values.Namespace);
+            Assert.Equal(fixture.Header, Assert.Single(values.Headers));
+            Assert.Equal(constantCount + 2, values.Constants.Count);
+            var constants = values.Constants.ToDictionary(value => value.NativeName, StringComparer.Ordinal);
+            for (int index = 0; index < constantCount; index++)
+            {
+                string name = $"CONTROL_INTEGER_{index:D5}";
+                var value = constants[name];
+                Assert.Equal(name, value.Name);
+                Assert.Equal(fixture.Header, value.Header);
+                Assert.True(value.Line > 0);
+                Assert.Equal("unsigned int", value.NativeType);
+                Assert.Equal("uint", value.StorageType);
+                Assert.Equal((index + 17).ToString(CultureInfo.InvariantCulture) + "U", value.Value);
+            }
+            Assert.Equal("0U", constants["CONTROL_UNSIGNED_WRAP"].Value);
+            Assert.Equal("18446744073709551615UL", constants["CONTROL_UNSIGNED_WIDE"].Value);
+            Assert.Equal("ulong", constants["CONTROL_UNSIGNED_WIDE"].StorageType);
+            Assert.Equal(8, values.Issues.Count);
+            foreach (var issue in values.Issues)
+                Assert.Equal(fixture.Header, issue.Header);
+            foreach (string name in new[] { "CONTROL_A_POISON", "CONTROL_DIVIDE_BY_ZERO", "CONTROL_MISSING",
+                "CONTROL_SIGNED_OVERFLOW", "CONTROL_SYNTAX" })
+            {
+                var issue = Assert.Single(values.Issues.Where(value => value.Name == name));
+                Assert.Equal("native diagnostic", issue.Reason);
+                Assert.NotEmpty(issue.Diagnostics);
+            }
+            Assert.Contains(values.Issues, issue => issue.Name == "CONTROL_A_POISON" &&
+                issue.Diagnostics.Any(message => message.Contains("forced isolated native diagnostic")));
+            Assert.Contains(values.Issues, issue => issue.Name == "CONTROL_FLOAT" && issue.Reason == "not a supported integer type");
+            Assert.Contains(values.Issues, issue => issue.Name == "CONTROL_POINTER" && issue.Reason == "pointer constant");
+            Assert.Contains(values.Issues, issue => issue.Name == "CONTROL_TEXT" && issue.Reason == "pointer constant");
+            Assert.DoesNotContain(values.Constants, value => value.NativeName == "CONTROL_FUNCTION");
+            Assert.DoesNotContain(values.Issues, issue => issue.Name == "CONTROL_FUNCTION");
+        }
+
         [Theory]
         [InlineData("x86", "32", Architecture.X86, "1U", "uint", "4U")]
         [InlineData("x64", "64", Architecture.X64, "2U", "ulong", "8UL")]

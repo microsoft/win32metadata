@@ -92,38 +92,110 @@ namespace Win32MetadataScraperTests
             string[] owners = Environment.GetEnvironmentVariable("SDK_BULK_HEADER_OWNERS")
                 .Split(';', StringSplitOptions.RemoveEmptyEntries);
             Assert.NotEmpty(owners);
+            int functions = 0;
+            var failures = new List<string>();
             foreach (string owner in owners)
             {
                 Assert.False(Path.IsPathRooted(owner));
                 Assert.DoesNotContain("..", owner.Split(Path.DirectorySeparatorChar));
                 Assert.True(File.Exists(Path.Combine(original, owner)), owner);
                 Assert.True(File.Exists(Path.Combine(prepared, owner)), owner);
+                string header = Path.GetFileName(owner);
+                string source = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n" +
+                    "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n" +
+                    (header.Equals("mscat.h", StringComparison.OrdinalIgnoreCase) ? "#include <wincrypt.h>\n" : "") +
+                    "#include <" + header + ">\n";
+                var beforeSal = new List<string>();
+                var afterSal = new List<string>();
+                var beforeRawSal = new List<string>();
+                var afterRawSal = new List<string>();
+                var beforeDiagnostics = new List<string>();
+                var afterDiagnostics = new List<string>();
+                var annotations = new List<string>();
+                var before = WinHttpNativeControlTests.Surface(root, original, "MenuRc", architecture, target,
+                    new[] { header }, "", sourceText: source, salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language,
+                    rawSalAnnotations: beforeRawSal);
+                var after = WinHttpNativeControlTests.Surface(root, prepared, "MenuRc", architecture, target,
+                    new[] { header }, "", sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language,
+                    annotations: annotations, rawSalAnnotations: afterRawSal);
+                this.output.WriteLine("raw per-owner comparison " + JsonSerializer.Serialize(new
+                {
+                    Owner = owner, Architecture = architecture, Language = language,
+                    BeforeNative = before, AfterNative = after, BeforeSal = beforeSal, AfterSal = afterSal,
+                    BeforeRawSal = beforeRawSal, AfterRawSal = afterRawSal,
+                    BeforeDiagnostics = beforeDiagnostics, AfterDiagnostics = afterDiagnostics,
+                }));
+                int precedingFailures = failures.Count;
+                if (before.Length == 0)
+                    failures.Add(owner + ": the ORIGINAL native surface is empty.");
+                functions += before.Count(value => value.StartsWith("function ", StringComparison.Ordinal));
+                Compare("native/layout", before, after);
+                Compare("SAL", beforeSal, afterSal);
+                Compare("diagnostics", beforeDiagnostics, afterDiagnostics);
+                if (annotations.Count != 0)
+                    failures.Add(owner + ": metadata annotations leaked into the disabled context.");
+                if (failures.Count == precedingFailures)
+                    this.output.WriteLine($"{owner}/{architecture}/{language}: independently valid ORIGINAL/NEW TUs; " +
+                        $"{before.Length} identical native facts, {beforeSal.Count} identical SAL attributes; no metadata leakage.");
+
+                void Compare(string kind, IEnumerable<string> left, IEnumerable<string> right)
+                {
+                    if (!left.OrderBy(value => value, StringComparer.Ordinal)
+                        .SequenceEqual(right.OrderBy(value => value, StringComparer.Ordinal)))
+                        failures.Add(owner + ": unqualified " + kind + " differences; the full raw comparison is retained.");
+                }
             }
-            string[] headers = owners.Select(Path.GetFileName).ToArray();
+            Assert.True(failures.Count == 0, string.Join(Environment.NewLine, failures));
+            Assert.True(functions > 0, "The complete selected owner set must retain its native function coverage.");
+        }
+
+        [NativeMigrationTheory("SDK_VDS_PREPARED_HEADERS")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++")]
+        public void OriginalVdsAggregateFailureRemainsExplicitAndNewCombinedGuardCompiles(
+            string architecture, string target, string language)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("SDK_VDS_PREPARED_HEADERS");
+            string[] headers = { "vds.h", "vdshwprv.h" };
             string source = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n" +
                 "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n" +
-                (headers.Contains("mscat.h", StringComparer.OrdinalIgnoreCase) ? "#include <wincrypt.h>\n" : "") +
                 string.Join("\n", headers.Select(header => "#include <" + header + ">"));
+            var originalDiagnostics = new List<string>();
+            var failure = Assert.Throws<WinHttpNativeControlTests.NativeCompilationException>(() =>
+                WinHttpNativeControlTests.Surface(root, original, "MenuRc", architecture, target,
+                    headers, "", sourceText: source, diagnostics: originalDiagnostics, language: language));
+            foreach (string diagnostic in failure.Diagnostics)
+                this.output.WriteLine("invalid ORIGINAL aggregate: " + diagnostic);
+            Assert.Contains(failure.Diagnostics, value => value.Contains("redefinition of '_VDS_OBJECT_TYPE'", StringComparison.Ordinal));
+            Assert.Contains(failure.Diagnostics, value => value.Contains("vds.h", StringComparison.OrdinalIgnoreCase));
+            Assert.Contains(failure.Diagnostics, value => value.Contains("vdshwprv.h", StringComparison.OrdinalIgnoreCase));
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
-            var before = WinHttpNativeControlTests.Surface(root, original, "MenuRc", architecture, target,
+            var before = WinHttpNativeControlTests.Surface(root, prepared, "MenuRc", architecture, target,
                 headers, "", sourceText: source, salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
             var after = WinHttpNativeControlTests.Surface(root, prepared, "MenuRc", architecture, target,
                 headers, "", sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language,
-                annotations: annotations);
+                metadataEnabled: true, annotations: annotations);
             Assert.NotEmpty(before);
-            Assert.Contains(before, value => value.StartsWith("function ", StringComparison.Ordinal));
-            Assert.Equal(before, after);
-            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
-                afterSal.OrderBy(value => value, StringComparer.Ordinal));
-            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
-                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
-            Assert.Empty(annotations);
-            this.output.WriteLine($"{owners.Length} original headers/{architecture}/{language}: " +
-                $"{before.Length} identical native facts, {beforeSal.Count} identical SAL attributes; no metadata leakage.");
+            Assert.NotEmpty(after);
+            this.output.WriteLine("raw NEW combined-guard contexts " + JsonSerializer.Serialize(new
+            {
+                Architecture = architecture, Language = language,
+                DisabledNative = before, EnabledNative = after, DisabledSal = beforeSal, EnabledSal = afterSal,
+                DisabledDiagnostics = beforeDiagnostics, EnabledDiagnostics = afterDiagnostics, Metadata = annotations,
+            }));
+            this.output.WriteLine($"VDS/{architecture}/{language}: ORIGINAL aggregate is invalid; " +
+                $"NEW combined guard compiles in both metadata contexts ({before.Length}/{after.Length} raw native facts). " +
+                "Per-owner equality and enabled metadata-carrier differences require separate qualification.");
         }
 
         [BulkNativeTheory]

@@ -1125,6 +1125,9 @@ static_assert(DISC_NO_FORCE == 64u);
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
             string assertion = language == "c" ? "_Static_assert" : "static_assert";
+            var beforeRawNative = new List<string>();
+            var afterRawNative = new List<string>();
+            var metadataSelfTypedefs = new List<NativeMetadataSelfTypedefProof>();
             string checks = string.Join("\n", new[]
             {
                 "sizeof(WEB_SOCKET_HANDLE) == sizeof(void*)", "WEB_SOCKET_MAX_CLOSE_REASON_LENGTH == 123",
@@ -1136,15 +1139,31 @@ static_assert(DISC_NO_FORCE == 64u);
             }.Select(check => $"{assertion}({check}, \"original WebSocket contract\");"));
             var before = Surface(root, original, "WebSock", architecture, target, new[] { "websocket.h" }, checks,
                 salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language,
-                rawSalAnnotations: beforeRawSal);
+                rawSalAnnotations: beforeRawSal, rawNativeFacts: beforeRawNative);
             var after = Surface(root, prepared, "WebSock", architecture, target, new[] { "websocket.h" }, checks,
                 metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
-                diagnostics: afterDiagnostics, language: language, rawSalAnnotations: afterRawSal);
+                diagnostics: afterDiagnostics, language: language, rawSalAnnotations: afterRawSal,
+                metadataSelfTypedefs: metadataSelfTypedefs, rawNativeFacts: afterRawNative);
             foreach (var side in new[] { ("before", beforeRawSal), ("after", afterRawSal) })
                 foreach (string fact in side.Item2)
                     this.output.WriteLine(side.Item1 + " raw SAL " + fact);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
+            Assert.Equal(beforeRawNative.OrderBy(value => value, StringComparer.Ordinal), before);
+            Assert.Equal(beforeRawNative.Concat(metadataSelfTypedefs.Select(proof => proof.NativeFact))
+                .OrderBy(value => value, StringComparer.Ordinal),
+                afterRawNative.OrderBy(value => value, StringComparer.Ordinal));
+            if (enabled && language == "c++")
+            {
+                var proof = Assert.Single(metadataSelfTypedefs);
+                Assert.Equal("WEB_SOCKET_HANDLE", proof.Alias);
+                Assert.Equal("::", proof.Scope);
+                Assert.Equal(1, proof.PointerDepth);
+                this.output.WriteLine("metadata self-redeclaration " + System.Text.Json.JsonSerializer.Serialize(proof));
+                Assert.True(annotations.Remove(proof.AnnotationOwner + "|NativeTypedef"));
+            }
+            else
+                Assert.Empty(metadataSelfTypedefs);
             Assert.Equal(13, before.Count(value => value.StartsWith("function WebSocket", StringComparison.Ordinal)));
             Assert.NotEmpty(beforeSal);
             Assert.Equal(beforeRawSal.Count, beforeSal.Count);
@@ -1155,16 +1174,18 @@ static_assert(DISC_NO_FORCE == 64u);
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             string[] expected = WinHttpMigrationTests.WebSocketFunctions
                 .Select(name => name + "|SupportedOSPlatform(\"windows8.0\")")
-                .Append("phWebSocket|RAIIFree").OrderBy(value => value, StringComparer.Ordinal).ToArray();
+                .Concat(new[] { "phWebSocket|RAIIFree", "phWebSocket|RAIIFree" })
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
             Assert.Equal(enabled ? expected : Array.Empty<string>(),
-                annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+                annotations.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(enabled ? 15 : 0, annotations.Count);
             foreach (var side in new[] { ("before", before), ("after", after) })
                 foreach (string fact in side.Item2)
                     this.output.WriteLine(side.Item1 + " " + fact);
             this.output.WriteLine($"WebSock/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical complete native facts, {beforeSal.Count} unchanged SAL attributes, " +
-                $"all five original enums and native handle widths; {annotations.Count} exact metadata occurrences.");
+                $"all five original enums and native handle widths; {annotations.Count} exact ordinary metadata occurrences; " +
+                $"{metadataSelfTypedefs.Count} compiler-proven annotated self-redeclarations recorded separately.");
         }
 
         public static IEnumerable<object[]> WebSocketOriginalHeaderControls()
@@ -3374,7 +3395,8 @@ void NetworkBroadSourceSalProbe(
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
             string language = "c++", bool cInterface = false, List<string> rawSalAnnotations = null,
-            bool includeCallableOwners = false, List<NativeParameter> parameters = null)
+            bool includeCallableOwners = false, List<NativeParameter> parameters = null,
+            List<NativeMetadataSelfTypedefProof> metadataSelfTypedefs = null, List<string> rawNativeFacts = null)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
@@ -3430,21 +3452,25 @@ void NetworkBroadSourceSalProbe(
                 new[] { unsaved }, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
             // Own raw cursors so earlier generator fixtures cannot supply a cached managed AST wrapper.
             using var unit = handle;
+            var nativeDiagnostics = new List<string>();
+            bool nativeError = false;
             for (uint i = 0; i < handle.NumDiagnostics; i++)
             {
                 using var diagnostic = handle.GetDiagnostic(i);
-                string text = Text(diagnostic.Format(CXDiagnostic.DefaultDisplayOptions));
-                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error, text);
-                diagnostics?.Add(Regex.Replace(text.Replace(includeRoot, "<headers>", StringComparison.OrdinalIgnoreCase),
-                    @":\d+:\d+:", ":<source-location>:"));
+                RecordDiagnostic(diagnostic);
             }
+            if (nativeError)
+                throw new NativeCompilationException(source, target, language, nativeDiagnostics);
             var result = new List<string>();
+            var metadataRows = new HashSet<int>();
             // Clang's anonymous names embed paths and line numbers; retain declaration identity without those incidental coordinates.
             const string anonymousLocationPattern = @"\((?:anonymous|unnamed)(?: (?:struct|union|enum))? at (?<location>[^)]+:\d+:\d+)\)";
             var anonymous = new Dictionary<string, string>(StringComparer.Ordinal);
             var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
             Walk(unit.Cursor, "");
-            return result.Select(DeclarationIdentity)
+            string[] raw = result.Select(DeclarationIdentity).ToArray();
+            rawNativeFacts?.AddRange(raw);
+            return raw.Where((_, index) => !metadataRows.Contains(index))
                 .OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
             string DeclarationIdentity(string value) => Regex.Replace(value, anonymousLocationPattern,
@@ -3499,7 +3525,16 @@ void NetworkBroadSourceSalProbe(
                     else if (record && cursor.IsCompleteDefinition)
                         result.Add("record " + owner + name + " " + cursor.Type.SizeOf + " " + cursor.Type.AlignOf);
                     else if (kind == CX_DeclKind.CX_DeclKind_Typedef)
-                        result.Add("typedef " + owner + name + " " + Text(cursor.TypedefDeclUnderlyingType.CanonicalType.Spelling));
+                    {
+                        string fact = "typedef " + owner + name + " " + Text(cursor.TypedefDeclUnderlyingType.CanonicalType.Spelling);
+                        int row = result.Count;
+                        result.Add(fact);
+                        if (metadataSelfTypedefs != null && NativeMetadataSelfTypedef.TryProve(cursor, out var proof))
+                        {
+                            metadataSelfTypedefs.Add(proof with { NativeFact = fact, AnnotationOwner = owner + name });
+                            metadataRows.Add(row);
+                        }
+                    }
                     else if (enumeration)
                         result.Add("enum " + owner + name + " " + Text(cursor.EnumDecl_IntegerType.Spelling));
                     else if (kind == CX_DeclKind.CX_DeclKind_EnumConstant)
@@ -3525,10 +3560,36 @@ void NetworkBroadSourceSalProbe(
                     return CXChildVisitResult.CXChildVisit_Continue;
                 }, default);
             }
+            void RecordDiagnostic(CXDiagnostic diagnostic)
+            {
+                string text = Text(diagnostic.Format(CXDiagnostic.DefaultDisplayOptions));
+                nativeDiagnostics.Add(text);
+                nativeError |= diagnostic.Severity >= CXDiagnosticSeverity.CXDiagnostic_Error;
+                diagnostics?.Add(Regex.Replace(text.Replace(includeRoot, "<headers>", StringComparison.OrdinalIgnoreCase),
+                    @":\d+:\d+:", ":<source-location>:"));
+                var children = diagnostic.ChildDiagnostics;
+                for (uint i = 0; i < children.NumDiagnostics; i++)
+                {
+                    using var child = children.GetDiagnostic(i);
+                    RecordDiagnostic(child);
+                }
+            }
+
             static string Text(CXString text)
             {
                 using (text) return text.ToString();
             }
+        }
+
+        internal sealed class NativeCompilationException : Exception
+        {
+            internal NativeCompilationException(string source, string target, string language, IReadOnlyList<string> diagnostics)
+                : base(source + " (" + target + ", " + language + ")" + Environment.NewLine + string.Join(Environment.NewLine, diagnostics))
+            {
+                Diagnostics = diagnostics;
+            }
+
+            public IReadOnlyList<string> Diagnostics { get; }
         }
     }
 

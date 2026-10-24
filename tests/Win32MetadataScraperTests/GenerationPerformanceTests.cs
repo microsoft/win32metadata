@@ -119,7 +119,7 @@ enum _Win32_AssociatedConstant_(PERF_REQUESTED) PERF_FLAGS { PERF_FIRST = 1 };
         [Fact]
         public void NativeIntegerExtractionAcrossProbeBatchesStaysWithinBudget()
         {
-            const int constantCount = 1025;
+            const int constantCount = 8193;
             string declarations = "constexpr unsigned PERF_DECLARED = 23U;\n" +
                 string.Join("\n", Enumerable.Range(0, constantCount).Select(index =>
                     $"#define PERF_INTEGER_{index:D4} " + ((index % 3) switch
@@ -137,7 +137,7 @@ int NativeConstantProbe();
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
                 declarations, extraSettings: "--config\nnative-constant-values\n", directoryRoot: directory);
             int exitCode = -1;
-            Measure("1,028 native probes (512 + 512 + 4) -> 1,025 integers / 3 rejected macros", 3000,
+            Measure("8,196 native probes (4096 + 4096 + 4) -> 8,193 integers / 3 rejected macros", 3000,
                 () => exitCode = fixture.Run(), () =>
                 {
                     fixture.AssertGeneratorWarnings(exitCode);

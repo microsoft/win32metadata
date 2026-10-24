@@ -5,12 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Newtonsoft.Json.Linq;
 using Xunit;
 
 namespace Win32MetadataScraperTests
@@ -70,11 +72,11 @@ namespace Win32MetadataScraperTests
         }
 
         [HeaderMigrationDataFact]
-        public void SharedScraperImportsDoNotRequireAnUnproducedHlslNamespace()
+        public void SharedScraperImportsPreserveTheInheritedNamespaceSet()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
                 "generation", "WinSDK", "scraper.header.txt");
-            Assert.DoesNotContain("using Windows.Win32.Graphics.Hlsl;", File.ReadAllText(path));
+            AssertInheritedImports(File.ReadAllLines(path));
         }
 
         [HeaderMigrationDataFact]
@@ -121,8 +123,107 @@ namespace Win32MetadataScraperTests
                 @"_Win32_AssociatedEnum_\(TVITEMEXW_CHILDREN\)\s+int\s+cChildren\s*;").Count);
             using var retired = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "enums.json")));
             Assert.Empty(retired.RootElement.GetProperty("items").EnumerateArray());
-            using var handles = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "autoTypes.json")));
-            Assert.Empty(handles.RootElement.EnumerateArray());
+            AssertInheritedAutoTypes(ReadAutoTypes(File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "autoTypes.json"))));
+        }
+
+        [Fact]
+        public void RetainedHeaderMetadataSnapshotKeepsTheFullInheritedRecordsAndImports()
+        {
+            var snapshot = RetainedHeaderMetadata();
+            AssertInheritedAutoTypes((JArray)snapshot["retained"]);
+            AssertInheritedImports(File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "scraper.header.txt")));
+        }
+
+        [Theory]
+        [InlineData("empty")]
+        [InlineData("missing")]
+        [InlineData("extra")]
+        [InlineData("retired")]
+        [InlineData("duplicate")]
+        [InlineData("namespace")]
+        [InlineData("storage")]
+        [InlineData("invalid")]
+        [InlineData("nativeTypedef")]
+        [InlineData("unknown")]
+        public void RetainedHeaderMetadataRejectsMissingChangedOrRetiredRecords(string mutation)
+        {
+            var snapshot = RetainedHeaderMetadata();
+            var records = (JArray)snapshot["retained"].DeepClone();
+            switch (mutation)
+            {
+                case "empty": records.Clear(); break;
+                case "missing": records.RemoveAt(0); break;
+                case "extra": records.Add(new JObject { ["Name"] = "Unexpected", ["ValueType"] = "DECLARE_HANDLE" }); break;
+                case "retired": records.Add(new JObject { ["Name"] = (string)snapshot["retired"][0], ["ValueType"] = "DECLARE_HANDLE" }); break;
+                case "duplicate": records.Add(records[0].DeepClone()); break;
+                case "namespace": records[0]["Namespace"] = "Wrong.Scope"; break;
+                case "storage": records[0]["ValueType"] = "DECLARE_HANDLE"; break;
+                case "invalid": records[0]["InvalidHandleValues"] = new JArray(-1); break;
+                case "nativeTypedef": records[0]["NativeTypedef"] = false; break;
+                case "unknown": records[0]["UnexpectedFact"] = true; break;
+                default: throw new ArgumentOutOfRangeException(nameof(mutation));
+            }
+            Assert.ThrowsAny<Xunit.Sdk.XunitException>(() => AssertInheritedAutoTypes(records));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void RetainedHeaderMetadataRejectsMissingOrDuplicateHlslImports(bool duplicate)
+        {
+            var imports = File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "scraper.header.txt")).ToList();
+            const string hlsl = "using Windows.Win32.Graphics.Hlsl;";
+            if (duplicate) imports.Add(hlsl);
+            else imports.Remove(hlsl);
+            Assert.ThrowsAny<Xunit.Sdk.XunitException>(() => AssertInheritedImports(imports));
+        }
+
+        private static JObject RetainedHeaderMetadata() => JObject.Parse(File.ReadAllText(Path.Combine(
+            WinHttpMigrationTests.RepositoryRoot, "tests", "Win32MetadataScraperTests", "RetainedHeaderMetadata.json")));
+
+        private static JArray ReadAutoTypes(string text) => JArray.Parse(text,
+            new JsonLoadSettings { DuplicatePropertyNameHandling = DuplicatePropertyNameHandling.Error });
+
+        private static void AssertInheritedImports(IEnumerable<string> lines)
+        {
+            string[] imports = lines.Where(line => Regex.IsMatch(line, @"^using\s+.+;$")).ToArray();
+            Assert.Single(imports, line => line == "using Windows.Win32.Graphics.Hlsl;");
+            var expected = RetainedHeaderMetadata()["imports"];
+            Assert.Equal((int)expected["count"], imports.Length);
+            Assert.Equal((string)expected["sha256"],
+                Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(string.Join("\n", imports)))));
+        }
+
+        private static void AssertInheritedAutoTypes(JArray records)
+        {
+            var snapshot = RetainedHeaderMetadata();
+            var retained = (JArray)snapshot["retained"];
+            string[] retired = snapshot["retired"].Values<string>().ToArray();
+            Assert.True(retained.Count == 8, "The inherited snapshot must preserve all eight full records.");
+            Assert.True(retired.Length == 436, "The retirement snapshot must retain every exact original identity.");
+            Assert.Equal(retired.Length, retired.Distinct(StringComparer.Ordinal).Count());
+            Assert.Equal((int)snapshot["originalCount"], retained.Count + retired.Length);
+            var expected = retained.ToDictionary(Identity, StringComparer.Ordinal);
+            Assert.Empty(expected.Keys.Intersect(retired, StringComparer.Ordinal));
+            Assert.Equal(records.Count, records.Select(Identity).Distinct(StringComparer.Ordinal).Count());
+            var actual = records.ToDictionary(Identity, StringComparer.Ordinal);
+            Assert.Equal(expected.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                actual.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (string identity in retired)
+                Assert.DoesNotContain(identity, actual.Keys);
+            foreach (var record in expected)
+                Assert.True(JToken.DeepEquals(record.Value, actual[record.Key]),
+                    "Retained native typedef facts changed: " + record.Key);
+
+            static string Identity(JToken record)
+            {
+                Assert.IsType<JObject>(record);
+                string name = (string)record["Name"];
+                Assert.False(string.IsNullOrEmpty(name));
+                return record["Namespace"] == null ? name : (string)record["Namespace"] + "." + name;
+            }
         }
 
         [Theory]
