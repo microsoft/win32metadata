@@ -1727,6 +1727,30 @@ The `93a1cc0b` normal CI run passed scraping, emission, packaging, samples and
 ordinary suites, but failed integrity on the 58 remapping recommendations.
 Local replay proof does not qualify a subsequently published head's normal CI.
 
+### SDK preparation diagnostics at the MSBuild boundary
+
+Preparation validates the native exit code, complete MIDL output, diagnostic
+category and pinned hashes before publishing a private include root. Some MIDL
+forward-declaration diagnostics are retained as categorized non-blocking warnings
+after these checks. Their raw text contains `error MIDL2337`; passing the warning
+stream through MSBuild `Exec` made MSBuild classify those already-validated lines
+as fresh errors despite PowerShell returning zero.
+
+The MSBuild invocation now records PowerShell's warning stream separately in
+`obj\prepared-sdk-provenance\<architecture>\preparation.warnings.log` and emits a
+build warning pointing to that evidence. Standard output still contains exactly
+one include root. Raw MIDL logs, categorized results and hashes remain in the
+published provenance. Native and script failures still fail `Exec`, whose normal
+error recognition remains enabled. No MIDL category, recipe, output or hash
+check is relaxed; preparation scripts and cache identities are unchanged.
+
+The old wrapper fails three architecture-specific controls on thirteen retained
+error-shaped diagnostic lines each. All seven new wrapper cases pass with the
+repair, including real stderr errors even with a zero process exit, nonzero
+failures, hash exceptions and the one-include-root contract. The existing ninety
+preparation/MIDL cases also passed during the bounded validation. These wrapper
+checks do not constitute a fresh complete migrated-SDK generation.
+
 ### Tooling and migration PR boundaries
 
 The tooling layer retains the existing sidecar and manual-source inputs and
