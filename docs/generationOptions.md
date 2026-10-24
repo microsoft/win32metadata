@@ -30,6 +30,18 @@ detailed preprocessing translation unit supplies native values; ordinary
 bindings use a declaration-only parse with the same compiler arguments.
 General macro binding remains opt-in.
 
+### Native typedef binding decisions
+
+Exported automatic remaps contain renames. The binding context also retains
+native self typedefs, explicit `--exclude-auto-remap` no-rename choices and the
+existing interface no-rename rule as identities. Authored remaps still win.
+
+Existing `___` typedef-reversion names remain authored temporary names. The
+scraper marks such a binding as intentional only when the unsuffixed target is
+a native typedef of the exact canonical source tag. Qualified and chained
+aliases are checked; pointers, unrelated tags and unknown aliases do not satisfy
+the proof. Other remapping diagnostics remain enabled.
+
 ### Header annotations
 
 ```text

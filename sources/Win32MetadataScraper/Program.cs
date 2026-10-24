@@ -262,7 +262,8 @@ class Program
             annotations?.PrepareTypedefs();
             if (annotations != null)
                 allExcludes.AddRange(annotations.AnnotationCarrierNames);
-            var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
+            var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
+                RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
             var nativeConstants = evaluateNativeConstants
                 ? NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config, reportedNativeDiagnostics)
                 : null;
@@ -332,7 +333,8 @@ class Program
                             & ~PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
                             | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
                         var opaqueConfig = CreateConfig(settings, ns, outputFile, headerFile,
-                            opaqueOptions, projection.Remaps, allExcludes, opaqueRecords.IncludedNames,
+                            opaqueOptions, RemapDiscovery.CreateBindingRemaps(discovery, projection.Remaps, configuredAutoRemapExcludes),
+                            allExcludes, opaqueRecords.IncludedNames,
                             opaqueRecords.TraversalFiles.Concat(config.TraversalNames).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
                         var opaqueStreams = new Dictionary<string, MemoryStream>();
                         using var opaqueGenerator = new PInvokeGenerator(opaqueConfig, path =>
