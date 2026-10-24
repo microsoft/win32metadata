@@ -198,6 +198,9 @@ void F();
 
         [Theory]
         [InlineData("SetLastError()")]
+        [InlineData("Flags()")]
+        [InlineData("Flags(true)")]
+        [InlineData("Flags(unsigned)")]
         [InlineData("Retained(1)")]
         [InlineData("Reserved()")]
         [InlineData("ContainsInteriorPointers=value")]
@@ -223,6 +226,16 @@ void F();
         public void RejectsMalformedPayload(string payload)
         {
             Assert.Throws<FormatException>(() => HeaderAnnotation.Parse(payload));
+        }
+
+        [Theory]
+        [InlineData("Flags")]
+        [InlineData("Win32Metadata.Flags")]
+        public void ExistingEnumFlagsRequireAValuelessFact(string payload)
+        {
+            var annotation = HeaderAnnotation.Parse(payload);
+            Assert.Equal("Flags", annotation.Name);
+            Assert.Empty(annotation.Arguments);
         }
 
         [Theory]
@@ -2536,7 +2549,8 @@ int Conflicting(/* [out] */ unsigned* value);
         internal sealed class NativeFixture : IDisposable
         {
             internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true,
-                string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "", string directoryRoot = null)
+                string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "", string directoryRoot = null,
+                string namespaceName = "Test")
             {
                 string annotations = Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h");
                 if (!File.Exists(annotations))
@@ -2557,7 +2571,7 @@ int Conflicting(/* [out] */ unsigned* value);
 --output
 {Output}
 --namespace
-Test
+{namespaceName}
 --headerFile
 {Path.Combine(AppContext.BaseDirectory, "assets", "scraper.header.txt")}
 --include-directory

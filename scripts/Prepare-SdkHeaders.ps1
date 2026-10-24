@@ -147,9 +147,9 @@ function Invoke-PreparedMidl([string]$Staging) {
             $commands += [pscustomobject][ordered]@{
                 source = $output.source
                 header = $output.path
-                arguments = @($arguments | ForEach-Object { $_.Replace($Staging, '<prepared>') })
+                arguments = @($arguments | ForEach-Object { $_.Replace($Staging, '<prepared>', [StringComparison]::OrdinalIgnoreCase) })
                 warnings = @([regex]::Matches($text, '(?im)^.*\bwarning\s+MIDL\d+.*$') |
-                    ForEach-Object { $_.Value.Replace($Staging, '<prepared>') })
+                    ForEach-Object { $_.Value.Replace($Staging, '<prepared>', [StringComparison]::OrdinalIgnoreCase) })
                 exitCode = $exitCode
                 logSha256 = Get-Sha256 $log
                 nonBlockingErrorCount = $diagnostics.nonBlockingErrorCount
