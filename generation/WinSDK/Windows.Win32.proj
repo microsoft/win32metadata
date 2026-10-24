@@ -75,12 +75,21 @@
   <Target Name="PrepareSdkHeaders" BeforeTargets="CompileIdls"
           Condition="'$(_SdkHeaderRecipeSpecified)' == 'true' or Exists('$(SdkHeaderRecipe)')">
     <Message Text="Preparing SDK headers..." Importance="high" />
-    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)').IncludeRoot&quot;"
+    <PropertyGroup>
+      <_SdkPreparationWarningsLog>$(ObjDir)\prepared-sdk-provenance\$(ScanArch)\preparation.warnings.log</_SdkPreparationWarningsLog>
+    </PropertyGroup>
+    <MakeDir Directories="$(ObjDir)\prepared-sdk-provenance\$(ScanArch)" />
+    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)' 3&gt; '$(_SdkPreparationWarningsLog)').IncludeRoot&quot;"
           ConsoleToMSBuild="true" StandardOutputImportance="low">
       <Output TaskParameter="ConsoleOutput" ItemName="_PreparedSdkIncludeRoot" />
     </Exec>
     <Error Condition="'@(_PreparedSdkIncludeRoot->Count())' != '1'"
            Text="Header preparation did not return exactly one private include root." />
+    <ReadLinesFromFile File="$(_SdkPreparationWarningsLog)">
+      <Output TaskParameter="Lines" ItemName="_SdkPreparationWarnings" />
+    </ReadLinesFromFile>
+    <Warning Condition="'@(_SdkPreparationWarnings->Count())' != '0'"
+             Text="SDK header preparation retained non-blocking diagnostic output in $(_SdkPreparationWarningsLog). Raw native diagnostics and categorized results are retained in the prepared SDK provenance." />
     <ReadLinesFromFile File="$(ObjDir)\prepared-sdk.txt" Condition="Exists('$(ObjDir)\prepared-sdk.txt')">
       <Output TaskParameter="Lines" ItemName="_PreviousSdkIncludeRoot" />
     </ReadLinesFromFile>

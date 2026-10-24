@@ -12,6 +12,62 @@ namespace Win32MetadataScraperTests
 {
     public class PreparedSdkHeadersTests
     {
+        [Theory]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void SdkBuildFramesRetainedNativeDiagnosticsWithoutReclassifyingThem(string architecture)
+        {
+            using var fixture = new Fixture();
+            fixture.UsePrivatePreparationScripts();
+            string diagnostic = "Retained categorized diagnostics:\n" + string.Join("\n",
+                Enumerable.Range(0, 13).Select(index =>
+                    $"native.idl({index + 1}): error MIDL2337 : unsatisfied forward declaration : FORWARD_{index}"));
+            fixture.InsertPreparationDiagnostic("Write-Warning '" + diagnostic + "'");
+
+            var result = fixture.RunSdkBuild("ScrapeConstants", "Sample", architecture);
+
+            Assert.True(result.ExitCode == 0, result.Error + result.Output);
+            Assert.Contains("retained non-blocking diagnostic output", result.Output);
+            string[][] events = File.ReadAllLines(fixture.BuildEvents).Select(line => line.Split('|')).ToArray();
+            Assert.Equal(new[] { "prepare", "idl", "headers", "constants" }, events.Select(entry => entry[0]));
+            Assert.All(events, entry => Assert.Equal(events[0][1], entry[1]));
+            string retained = File.ReadAllText(fixture.PreparationWarnings(architecture));
+            Assert.Contains(diagnostic, retained.Replace("\r\n", "\n"));
+            fixture.AssertPublishedProvenance(events[0][1], hasMidl: false, architecture);
+        }
+
+        [Theory]
+        [InlineData("Write-Error 'native.idl(1): error MIDL2025 : actual native failure'; exit 1", "MIDL2025")]
+        [InlineData("[Console]::Error.WriteLine('native.idl(1): error MIDL2025 : actual native failure')", "MIDL2025")]
+        [InlineData("throw 'native input hash changed'", "native input hash changed")]
+        public void SdkBuildStillRejectsErrorsAndNativeFailureWithTheDiagnosticEnvelope(string command, string diagnostic)
+        {
+            using var fixture = new Fixture();
+            fixture.UsePrivatePreparationScripts();
+            fixture.InsertPreparationDiagnostic(command);
+
+            var result = fixture.RunSdkBuild("ScrapeConstants", "Sample");
+
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains(diagnostic, result.Output + result.Error);
+            Assert.False(File.Exists(fixture.BuildEvents));
+        }
+
+        [Fact]
+        public void SdkBuildStillRequiresExactlyOnePreparedIncludeRoot()
+        {
+            using var fixture = new Fixture();
+            fixture.UsePrivatePreparationScripts();
+            fixture.InsertPreparationDiagnostic("[pscustomobject]@{ IncludeRoot = 'another-root' }");
+
+            var result = fixture.RunSdkBuild("ScrapeConstants", "Sample");
+
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("did not return exactly one private include root", result.Output + result.Error);
+            Assert.False(File.Exists(fixture.BuildEvents));
+        }
+
         [Fact]
         public void PreparationPreservesBytesAndReusesAnImmutableCacheFromAnyWorkingDirectory()
         {
@@ -1137,6 +1193,8 @@ namespace Win32MetadataScraperTests
             internal string AnnotationHeader => Path.Combine(this.source, "shared", "win32metadata_annotations.h");
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
             internal string MidlWarnings => Path.Combine(this.root, "midl-warnings.log");
+            internal string PreparationWarnings(string architecture) => Path.Combine(this.root,
+                "obj", "prepared-sdk-provenance", architecture, "preparation.warnings.log");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
                 "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }
                 .Select(name => Path.Combine(this.root, "obj", "generated", name)).ToArray();
@@ -1194,6 +1252,16 @@ namespace Win32MetadataScraperTests
                     start.ArgumentList.Add(argument);
                 var result = Execute(start);
                 Assert.True(result.ExitCode == 0, result.Error + result.Output);
+            }
+
+            internal void InsertPreparationDiagnostic(string command)
+            {
+                string path = PreparationScript("Prepare-SdkHeaders.ps1");
+                string text = File.ReadAllText(path);
+                string newline = text.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
+                string result = "    [pscustomobject]@{" + newline + "        IncludeRoot = \"$destination\\headers\"";
+                Assert.Contains(result, text);
+                File.WriteAllText(path, text.Replace(result, command + "\n" + result));
             }
 
             internal void AddMidlPreprocessorTrace(string relative)
@@ -1463,10 +1531,10 @@ namespace Win32MetadataScraperTests
                 return File.ReadAllText(target);
             }
 
-            internal void AssertPublishedProvenance(string includeRoot, bool hasMidl = false)
+            internal void AssertPublishedProvenance(string includeRoot, bool hasMidl = false, string architecture = "crossarch")
             {
                 string cache = Path.GetDirectoryName(includeRoot);
-                string published = Path.Combine(this.root, "obj", "prepared-sdk-provenance", "crossarch", Path.GetFileName(cache));
+                string published = Path.Combine(this.root, "obj", "prepared-sdk-provenance", architecture, Path.GetFileName(cache));
                 Assert.Equal(File.ReadAllBytes(Path.Combine(cache, "manifest.json")),
                     File.ReadAllBytes(Path.Combine(published, "manifest.json")));
                 string source = Path.Combine(cache, "midl");
@@ -1577,7 +1645,7 @@ namespace Win32MetadataScraperTests
                 return Execute(start);
             }
 
-            internal ProcessResult RunSdkBuild(string target, string filter)
+            internal ProcessResult RunSdkBuild(string target, string filter, string architecture = "crossarch")
             {
                 File.Delete(BuildEvents);
                 string project = Path.Combine(this.root, "fixture.proj");
@@ -1606,8 +1674,10 @@ namespace Win32MetadataScraperTests
                     RedirectStandardError = true,
                 };
                 foreach (string argument in new[] { "msbuild", project, "-nologo", "-v:minimal", "-t:" + target,
-                    "-p:PartitionFilter=" + filter })
+                    "-p:PartitionFilter=" + filter, "-p:ScanArch=" + architecture })
                     start.ArgumentList.Add(argument);
+                if (this.scripts != Path.Combine(RepositoryRoot, "scripts"))
+                    start.ArgumentList.Add("-p:RepoRootPath=" + Path.GetDirectoryName(this.scripts) + Path.DirectorySeparatorChar);
                 return Execute(start);
 
                 XElement Record(string name) => new XElement("WriteLinesToFile",
