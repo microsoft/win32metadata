@@ -276,7 +276,7 @@ class Program
             };
 
             int exitCode = 0;
-            bool separateDeclarations = parseHeaderAnnotations && !generateAllMacros;
+            bool separateDeclarations = (parseHeaderAnnotations || evaluateNativeConstants) && !generateAllMacros;
             var bindingFlags = separateDeclarations
                 ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
                 : translationFlags;

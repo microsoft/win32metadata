@@ -13,6 +13,23 @@ There are different options you can pass to the scraping and emitting stages to 
 
 Scraping options are passed to ClangSharp via .rsp files. For the Windows Win32 metadata project, all partitions share the [generation/WinSDK/scraper.settings.rsp](/generation/WinSDK/scraper.settings.rsp) file. This allows partitions to interpret the headers in the same way.
 
+### Production SDK character-set context
+
+The shared Windows SDK settings pass `-DUNICODE` through `--additional` on x86,
+x64 and Arm64. Header declarations and native integer/macro probes use the same
+compiler arguments, so neutral A/W constants select their W values. Explicit A
+and W declarations retain their native narrow/wide types.
+
+This is a Windows SDK project default, not an unconditional scraper CLI default.
+Custom contexts can remain ANSI; an explicit `--additional` value of `-UUNICODE`
+after the SDK settings overrides the definition. Unicode custom attributes and
+string-storage policies are separate from this compilation context.
+
+Native integer evaluation also works without header-annotation parsing. Its
+detailed preprocessing translation unit supplies native values; ordinary
+bindings use a declaration-only parse with the same compiler arguments.
+General macro binding remains opt-in.
+
 ### Header annotations
 
 ```text

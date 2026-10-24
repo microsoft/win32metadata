@@ -1611,7 +1611,8 @@ The raw comparison contains 170,964 differences. The inventory is complete;
 source-backed review of every difference is not. Of these rows, 112,334 remain
 unreviewed. The original log, OLD, NEW, and frozen producer inputs remain
 unchanged. Detailed evidence and proposed repairs are recorded in
-`artifacts\actual-sdk-review-073`; no repair in this table has been implemented.
+`artifacts\actual-sdk-review-073`. At that grading point, no repair in this table
+had been implemented. The subsequent Unicode context decision is recorded below.
 
 | Finding | Proposed change for discussion |
 | --- | --- |
@@ -1619,13 +1620,66 @@ unchanged. Detailed evidence and proposed repairs are recorded in
 | Four HSTRING marshaler OS-version attributes survive into generated C# but disappear from the physical WinMD. | Reproduce the loss in a small composition/emission case and fix the stage dropping the existing attributes. Another header annotation would not fix this loss. |
 | Nineteen buffer parameters lose ContainsInteriorPointers; their original Winsock, security, and service headers lack the annotations. | Restore the facts on the exact native buffer parameters after reviewing their storage contracts. Preserve the native types, SAL, and counts. |
 | The comparer omits a separate constant-value report when the field type also changes. Physical readback identifies 4,652 additional integer identities needing value or signedness review. | Compare field signatures and constant values independently. Keep raw bytes, signedness, width, numerical values, and architecture variants visible. |
-| 101 neutral Controls aliases change from their W values to their A values, matching the current native compilation context. | Decide whether neutral metadata must preserve Unicode compatibility, then use the same explicit context for declarations and native constant evaluation. Do not replace individual values with W literals. |
+| 101 neutral Controls aliases change from their W values to their A values, matching the original NEW image's native compilation context. | The production SDK now defines UNICODE for both declarations and native constant evaluation, preserving OLD W-valued neutral aliases. The original ANSI-valued image and raw observations remain unchanged; see the bounded proof below. |
 | Queue-status constants now include the native touch/pointer bits selected for modern Windows targets. | Establish the OLD producer's target context before deciding whether these are intended native-context corrections. Do not restore old numbers with overrides. |
 | Retained parameters and some named handle/type namespaces change independently of the accepted enum and cleanup policies. | Review the affected lifetime contracts and intended namespaces separately. RAIIFree relocation does not approve a changed handle identity. |
 
 Documentation-only changes and the intentional Agile retirement remain visible
 in the inventory. They do not approve other changes on the same declarations.
 There is no complete API-equivalence or migration-acceptance claim.
+
+### Production SDK Unicode context
+
+Production SDK parsing defines `UNICODE` on x86, x64 and Arm64 through the shared
+`generation\WinSDK\scraper.settings.rsp`. The original header parse, any separate
+declaration-only parse, ordinary native integer extraction and selected macro
+recovery receive the same effective Clang arguments. Native probes add only
+their existing error-limit option. No individual constant or header is rewritten.
+
+The scraper CLI does not impose this default on custom contexts. Explicit ANSI
+contexts remain supported, including a later `-UUNICODE` after the SDK settings.
+This decision selects neutral numeric aliases; it does not change Unicode
+custom-attribute retention, native string types, ABI or storage policy.
+
+Fresh production Shell and Controls scrapes pass for all three architectures
+with native integer evaluation enabled. They use the selected SDK28000 API
+headers, the repository-standard VC include environment and the existing
+compiler pins. The actual compiler-context receipts retain the response-file
+order and hashes, effective Clang arguments, include environment and native
+result hashes. All six contexts contain `-DUNICODE` and the expected target:
+`i686-pc-windows-msvc`, `x86_64-pc-windows-msvc` or `aarch64-pc-windows-msvc`.
+The real SDK parses also retain `CreateFileA`, `CreateFileW`,
+`WIN32_FIND_DATAA` and `WIN32_FIND_DATAW`.
+
+| Actual fresh native constant | x86 | x64 | Arm64 |
+| --- | --- | --- | --- |
+| SHCNF_PATH / SHCNF_PRINTER | 5 / 6 | 5 / 6 | 5 / 6 |
+| SHCNF_PATHA / SHCNF_PRINTERA | 1 / 2 | 1 / 2 | 1 / 2 |
+| SHCNF_PATHW / SHCNF_PRINTERW | 5 / 6 | 5 / 6 | 5 / 6 |
+| LVM_GETITEM | 4171 | 4171 | 4171 |
+| LVM_GETITEMA / LVM_GETITEMW | 4101 / 4171 | 4101 / 4171 | 4101 / 4171 |
+
+The regression fails on all three targets before the default is defined. Its
+header-parser enum values, native probe values and physical WinMD constants now
+agree. Twelve fresh physical images cover SDK defaults with and without header
+annotations, custom ANSI input and explicit ANSI opt-out on all three targets.
+Both A/W functions and records survive every context, with narrow/wide parameter
+and field types unchanged; native size, alignment and offsets are checked too.
+
+The real-header control also exposed native evaluation passing preprocessing
+cursors to ordinary binding generation when header annotations were disabled.
+That case now uses the same declaration-only binding path as annotation mode,
+without enabling annotations or general macro binding. Its separate failing
+control is retained. The combined native/recovery/selector/performance run passes
+52 tests with no skips; all six performance guards remain unchanged.
+
+Evidence is retained in `unicode-production-partitions-final`,
+`unicode-effective-native-context-receipts.json`, `unicode-context-physical-final`
+and `unicode-default-regression`. These bounded results do not qualify a complete
+new SDK image. The upper layer must inherit the tooling successor and freshly
+scrape declarations and native results before complete emission. Preparation,
+MIDL helpers, recipe and SDK pins are unchanged. Frozen OLD, SDK026 and their
+original ANSI-valued outputs and comparisons remain unchanged.
 
 ### Tooling and migration PR boundaries
 
