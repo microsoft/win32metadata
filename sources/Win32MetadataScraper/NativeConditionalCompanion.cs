@@ -18,6 +18,7 @@ namespace Win32MetadataScraper
         private readonly List<TranslationUnit> ownedUnits = new();
         private readonly List<object> evidence = new();
         private readonly List<ParseAttempt> parseAttempts = new();
+        private readonly List<NativeLegacyMember> legacyMembers = new();
         private readonly Dictionary<string, string> sourceHashes = new(StringComparer.OrdinalIgnoreCase);
         private readonly string evidencePath;
         private readonly string[] primaryArguments;
@@ -39,6 +40,7 @@ namespace Win32MetadataScraper
         internal TranslationUnit Unit { get; private set; }
         internal IReadOnlyList<FunctionDecl> Functions { get; private set; } = Array.Empty<FunctionDecl>();
         internal Dictionary<string, string> ScopedRemaps { get; } = new(StringComparer.Ordinal);
+        internal IReadOnlyList<NativeLegacyMember> LegacyMembers => legacyMembers;
 
         internal TranslationUnit BindingUnit
         {
@@ -128,7 +130,8 @@ namespace Win32MetadataScraper
                 .Where(declaration => files.Contains(NativeSourceIdentity.Of(declaration).File) ||
                     inheritedMethods.Contains(declaration.Handle.CanonicalCursor))
                 .Select(declaration => (Declaration: declaration, Written: NativeMacroNames.GetWrittenMemberName(declaration)))
-                .Where(value => value.Written != null && HasAuthoredAlternative(value.Declaration, value.Written, authoredRemaps))
+                .Where(value => value.Written != null && (IsLegacyMember(value.Declaration) ||
+                    HasAuthoredAlternative(value.Declaration, value.Written, authoredRemaps)))
                 .ToArray();
             if (candidates.Count == 0 && macroMembers.Length == 0)
                 return;
@@ -191,9 +194,34 @@ namespace Win32MetadataScraper
                         $"at {NativeSourceIdentity.Of(member.Declaration)}; found {corresponding.Length}.");
                 var alternate = corresponding[0];
                 string alternateName = DeclarationSourceMap.QualifiedName(alternate.Handle);
+                if (IsLegacyMember(member.Declaration) &&
+                    NativeMemberNameProjection.ParentIdentity(member.Declaration) != NativeMemberNameProjection.ParentIdentity(alternate))
+                    throw new InvalidOperationException($"Macro-selected member '{member.Written}' has different native parents " +
+                        $"at {NativeSourceIdentity.Of(member.Declaration)}.");
                 if (!authoredRemaps.TryGetValue(alternateName, out string target) &&
                     !authoredRemaps.TryGetValue(alternate.Name, out target))
                 {
+                    if (IsLegacyMember(member.Declaration) && member.Declaration.Name != alternate.Name &&
+                        !excludes.Contains(alternate.Name) && !excludes.Contains(alternateName))
+                    {
+                        legacyMembers.Add(new NativeLegacyMember(member.Declaration, alternate.Name));
+                        member.Declaration.Location.GetFileLocation(out var declarationFile, out _, out _, out _);
+                        RememberSource(primary, declarationFile);
+                        evidence.Add(new
+                        {
+                            kind = "legacy-member-name",
+                            source = NativeSourceIdentity.Of(member.Declaration).ToString(),
+                            parent = NativeMemberNameProjection.ParentIdentity(member.Declaration),
+                            written = member.Written,
+                            primaryName = DeclarationSourceMap.QualifiedName(member.Declaration.Handle),
+                            alternateName,
+                            primarySignature = ((ValueDecl)member.Declaration).Type.AsString,
+                            alternateSignature = ((ValueDecl)alternate).Type.AsString,
+                            primaryMacroReplacement = RememberMacroReplacement(member.Declaration),
+                            alternateMacroReplacement = RememberMacroReplacement(alternate),
+                        });
+                        continue;
+                    }
                     evidence.Add(new { kind = "remap-candidate-not-applicable",
                         source = NativeSourceIdentity.Of(alternate).ToString(), written = member.Written,
                         alternateName, reason = "The compiler-selected ANSI declaration has no authored remap." });
@@ -225,6 +253,22 @@ namespace Win32MetadataScraper
 
         private static bool IsGlobalFunction(FunctionDecl function)
             => function is not CXXMethodDecl && DeclarationSourceMap.QualifiedName(function.Handle) == function.Name;
+
+        private static bool IsLegacyMember(NamedDecl declaration)
+            => declaration is FieldDecl or CXXMethodDecl { IsVirtual: true };
+
+        private object RememberMacroReplacement(NamedDecl declaration)
+        {
+            declaration.Location.GetSpellingLocation(out var file, out uint line, out uint column, out uint offset);
+            return new { file = RememberSource(declaration.TranslationUnit, file), line, column, offset };
+        }
+
+        private string RememberSource(TranslationUnit unit, CXFile file)
+        {
+            string path = Path.GetFullPath(file.ToString());
+            sourceHashes[path] = Convert.ToHexString(SHA256.HashData(unit.Handle.GetFileContents(file, out _)));
+            return path;
+        }
 
         private static unsafe HashSet<string> ResolveFiles(TranslationUnit unit, IEnumerable<string> configured,
             out HashSet<string> includedFiles)

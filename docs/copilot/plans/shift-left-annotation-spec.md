@@ -258,6 +258,23 @@ conflicting, or ambiguous proofs fail closed; tag spelling, matching layout, and
 empty emitted records do not prove equivalence. Other pointer representations are
 not admitted by this rule, and complete native records remain intact.
 
+A separate source-kind rule covers an explicitly retained opaque
+`typedef struct TAG` factory whose authored `NativeTypedef` intent and invalid
+values must survive an annotated native `typedef struct TAG* ALIAS`. Both fresh
+providers must prove the same qualified alias and tag, explicit wrapper intent
+and exactly one ordinary, unqualified native pointer. The retained `IntPtr Value`
+and invalid-value metadata remain authoritative for that overlap. Ordinary
+records, a matching size or an unproved pointer representation do not supply
+these facts. Missing intent, a different tag, scope or provider, qualifiers and
+additional indirection cannot authorize composition.
+
+A whole-alias storage remap is not a name for the record that the alias points
+to. Header storage therefore keeps the native record pointer rather than
+applying an alias's `IntPtr` mapping to its pointee. This does not erase pointer
+levels from signatures: an `ALIAS*` parameter still projects as a pointer to the
+native typedef wrapper. The source-kind proofs are internal comments, distinct
+from `DECLARE_HANDLE` provenance and from public SDK annotation vocabulary.
+
 For an IDL-owned typedef, use the existing selector-bound comment transport in
 the original IDL, for example:
 
@@ -923,9 +940,23 @@ neutral macro expansion. The primary and ANSI declarations must share the exact
 native source identity, written member token and direct macro replacement proof.
 This includes a member supplied as an argument to `STDMETHOD`. The resulting
 remap is scoped to the proved native owner and cannot rename unrelated overloads
-or explicit global A/W imports. No new suffix-stripping or neutral-name policy is
-inferred for members without an authored remap. The strict recorded-expansion
-rules for original-IDL comment selectors remain unchanged.
+or explicit global A/W imports. For otherwise unconfigured macro-selected COM
+methods and record fields, the old public spelling comes from the actual ANSI
+declaration at the same source identity, direct macro token, kind and parent.
+This is the coordinator's conservative compatibility implementation under the
+existing OLD-API preservation requirement, not a new direct user policy choice.
+There is no suffix stripping or API-name list.
+
+Primary Unicode types, signatures and constants remain authoritative. Source-only
+member-name proofs are applied after authored naming and existing encoding
+inference. Restoring an A spelling cannot itself add ANSI metadata; existing
+encoding-attribute differences remain available for review. Field-count metadata
+references the final public field name. Real explicitly named A/W DLL exports
+remain unchanged. The internal proof is attached to declaration-trailing trivia
+so removing temporary source-location attributes cannot discard it. It is
+validated and removed before public metadata emission. The strict
+recorded-expansion rules for original-IDL comment
+selectors remain unchanged.
 
 ### Annotation encoding and diagnostic policy
 

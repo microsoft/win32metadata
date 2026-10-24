@@ -98,6 +98,18 @@ public static class RemapDiscovery
                 autoRemapExcludes.Contains(pair.Key) || IsLikelyComInterfaceTag(pair.Key))
                 result.TryAdd(pair.Key, pair.Key);
 
+        foreach (var group in discovery.NativeTypedefTags.GroupBy(pair => pair.Value, StringComparer.Ordinal))
+        {
+            string tag = group.Key;
+            string tagName = SimpleName(tag);
+            var aliases = group.Where(pair => pair.Key != tag).ToArray();
+            if (aliases.Length == 0 || result.ContainsKey(tag) || result.ContainsKey(tagName) ||
+                !aliases.All(pair => HasExplicitProjection(pair.Key, tag, tagName)))
+                continue;
+            // Explicit alias projections do not rename the underlying native tag.
+            result.Add(tag, tagName);
+        }
+
         foreach (var pair in remaps)
         {
             if (pair.Value.EndsWith("___", StringComparison.Ordinal) &&
@@ -110,6 +122,19 @@ public static class RemapDiscovery
             }
         }
         return result;
+
+        static string SimpleName(string name)
+        {
+            int separator = name.LastIndexOf("::", StringComparison.Ordinal);
+            return separator < 0 ? name : name.Substring(separator + 2);
+        }
+
+        bool HasExplicitProjection(string alias, string tag, string tagName)
+        {
+            string aliasName = SimpleName(alias);
+            return (remaps.TryGetValue(alias, out string target) || remaps.TryGetValue(aliasName, out target)) &&
+                target != alias && target != aliasName && target != tag && target != tagName;
+        }
     }
 
     internal static Dictionary<string, string> FindEmbeddedIncompleteRecordPointerRemaps(Decl rootDecl)

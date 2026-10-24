@@ -275,8 +275,10 @@ class Program
                     ParseTranslationUnit(index, sourceFile, arguments, flags, reportedNativeDiagnostics), nativeDeclarationsPath);
             foreach (var remap in companion.ScopedRemaps)
                 mergedRemaps[remap.Key] = remap.Value;
-            if (companion.ScopedRemaps.Count != 0)
-                config = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
+            var primaryOptions = companion.LegacyMembers.Count == 0 ? configOptions :
+                configOptions | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
+            if (companion.ScopedRemaps.Count != 0 || companion.LegacyMembers.Count != 0)
+                config = CreateConfig(settings, ns, outputFile, headerFile, primaryOptions,
                     RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
             var nativeConstants = evaluateNativeConstants
                 ? NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config, reportedNativeDiagnostics)
@@ -309,10 +311,13 @@ class Program
                 generator.Close();
 
                 var generatedFiles = new Dictionary<string, string>();
+                var memberNames = companion.LegacyMembers.Count == 0 ? null : new NativeMemberNameProjection(companion.LegacyMembers);
                 foreach (var kvp in capturedStreams)
                 {
                     string generatedSource = Encoding.UTF8.GetString(kvp.Value.ToArray());
                     generatedSource = NormalizeGeneratedSource(generatedSource, kvp.Key);
+                    if (memberNames != null)
+                        generatedSource = memberNames.Attach(generatedSource);
                     generatedFiles[kvp.Key] = generatedSource;
                 }
                 if (annotations != null)
@@ -321,6 +326,10 @@ class Program
                     foreach (string path in generatedFiles.Keys.ToArray())
                         generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
                 }
+                if (memberNames != null && !configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
+                    foreach (string path in generatedFiles.Keys.ToArray())
+                        generatedFiles[path] = new SourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(generatedFiles[path]))
+                            .NormalizeWhitespace().ToFullString() + Environment.NewLine;
                 string additionalTypes = annotations?.GetAdditionalTypes();
                 if (companion.Functions.Count != 0)
                 {

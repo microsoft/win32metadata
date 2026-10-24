@@ -23,6 +23,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<(string File, uint Line, uint Column), List<DeclarationFacts>> projectionLocations = new();
         private readonly Dictionary<string, string> remaps;
         private IReadOnlyDictionary<string, string> storageTypeRemaps;
+        private readonly Dictionary<CXCursor, string> nativeTypedefStorageRemaps = new();
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
         private readonly HashSet<NamedDecl> projectedDeclarations = new();
         private readonly string generatedNamespace;
@@ -133,7 +134,10 @@ namespace Win32MetadataScraper
                 {
                     if (facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef") &&
                         remaps.TryGetValue(alias.Name, out string mapped) && IsStorageTypeName(mapped))
+                    {
+                        nativeTypedefStorageRemaps[alias.Handle.CanonicalCursor] = mapped;
                         remaps[alias.Name] = alias.Name;
+                    }
                     else
                         remaps.TryAdd(alias.Name, alias.Name);
                 }
@@ -449,6 +453,11 @@ namespace Win32MetadataScraper
                     NativeHandleOrigins.IsDeclareHandle(alias, visited))
                     declaration = MetadataUtils.NativeHandleSourceProvenance.AttachHeaderDeclareHandle(
                         declaration, DeclarationSourceMap.QualifiedName(alias.Handle), valueType);
+                else if (SyntaxFactory.ParseTypeName(valueType) is PointerTypeSyntax { ElementType: NameSyntax } &&
+                    TryGetOpaqueStructPointer(facts, alias, out var nativeRecord))
+                    declaration = MetadataUtils.NativeHandleSourceProvenance.AttachHeaderOpaqueStructPointer(
+                        declaration, DeclarationSourceMap.QualifiedName(alias.Handle),
+                        DeclarationSourceMap.QualifiedName(nativeRecord.Decl.Handle), valueType, explicitWrapperIntent: true);
                 members.Add(declaration);
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
             }
@@ -1150,10 +1159,67 @@ namespace Win32MetadataScraper
             return template;
         }
 
+        private bool TryGetOpaqueStructPointer(DeclarationFacts facts, TypedefNameDecl alias, out RecordType record)
+        {
+            record = null;
+            if (!facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef") ||
+                !nativeTypedefStorageRemaps.TryGetValue(alias.Handle.CanonicalCursor, out string mapped) ||
+                GetNativeIntegerStorage(mapped) != "global::System.IntPtr")
+                return false;
+            var native = alias.UnderlyingType.CanonicalType;
+            if (HasOpaquePointerQualifiers(alias.UnderlyingType) ||
+                native is not PointerType pointer || pointer.Handle.SizeOf != nativePointerSize ||
+                pointer.Handle.AlignOf != nativePointerSize || alias.Handle.Type.SizeOf != nativePointerSize ||
+                alias.Handle.Type.AlignOf != nativePointerSize)
+                return false;
+            var pointee = pointer.PointeeType.CanonicalType;
+            if (pointee is not RecordType candidate ||
+                candidate.Decl.Handle.Kind != CXCursorKind.CXCursor_StructDecl || string.IsNullOrEmpty(candidate.Decl.Name) ||
+                HasTemplateContext(alias) || HasTemplateContext(candidate.Decl))
+                return false;
+            record = candidate;
+            return true;
+        }
+
+        private static bool HasTemplateContext(NamedDecl declaration)
+        {
+            for (Cursor cursor = declaration; cursor is NamedDecl; cursor = cursor.SemanticParentCursor)
+                if (cursor is ClassTemplateSpecializationDecl || cursor.Handle.Kind == CXCursorKind.CXCursor_ClassTemplate)
+                    return true;
+            return false;
+        }
+
+        private static bool HasOpaquePointerQualifiers(ClangSharp.Type type)
+        {
+            if (type.Handle.IsConstQualified || type.Handle.IsVolatileQualified || type.Handle.IsRestrictQualified ||
+                type.Handle.AddressSpace != 0 || type.Handle.Nullability != CXTypeNullabilityKind.CXTypeNullability_Invalid)
+                return true;
+            return type switch
+            {
+                TypedefType typedef => HasOpaquePointerQualifiers(typedef.Decl.UnderlyingType),
+                ElaboratedType elaborated => HasOpaquePointerQualifiers(elaborated.NamedType),
+                ParenType parentheses => HasOpaquePointerQualifiers(parentheses.InnerType),
+                AttributedType => true,
+                PointerType pointer => HasOpaquePointerQualifiers(pointer.PointeeType),
+                _ => false,
+            };
+        }
+
+        private string GetRecordPointeeName(RecordType record)
+        {
+            string name = Remap(record.Decl.Name);
+            // A whole-alias storage mapping is not a name for its native record pointee.
+            return IsStorageTypeName(name) || visited.OfType<TypedefNameDecl>().Any(alias =>
+                alias.UnderlyingType.CanonicalType is PointerType && Remap(alias.Name) == name)
+                ? record.Decl.Name : name;
+        }
+
         private string GetSignatureType(ClangSharp.Type type, NativeLocation location, bool underlyingStorage = false,
-            bool preserveNativeShape = false)
+            bool preserveNativeShape = false, bool recordPointee = false)
         {
             type = RemapDiscovery.UnwrapType(type);
+            if (underlyingStorage && preserveNativeShape && recordPointee && type.CanonicalType is RecordType nativeRecord)
+                return GetRecordPointeeName(nativeRecord);
             if (type is TypedefType typedef)
             {
                 var alias = (TypedefNameDecl)typedef.Decl;
@@ -1180,14 +1246,15 @@ namespace Win32MetadataScraper
                         }
                     }
                 }
-                return GetSignatureType(alias.UnderlyingType, location, underlyingStorage, preserveNativeShape);
+                return GetSignatureType(alias.UnderlyingType, location, underlyingStorage, preserveNativeShape, recordPointee);
             }
             if (type is PointerType pointer)
             {
                 if (underlyingStorage && pointer.PointeeType.CanonicalType is RecordType record &&
                     !(record.Decl.Definition ?? record.Decl).IsCompleteDefinition && IsExcludedRecord(record.Decl))
                     return "void*";
-                return GetSignatureType(pointer.PointeeType, location, underlyingStorage, preserveNativeShape) + "*";
+                return GetSignatureType(pointer.PointeeType, location, underlyingStorage, preserveNativeShape,
+                    recordPointee: true) + "*";
             }
             return GetManagedType(type, location);
         }

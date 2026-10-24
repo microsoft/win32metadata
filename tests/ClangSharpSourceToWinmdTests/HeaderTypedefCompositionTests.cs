@@ -15,7 +15,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ClangSharpSourceToWinmdTests
 {
     [TestClass]
-    public class HeaderTypedefCompositionTests
+    public partial class HeaderTypedefCompositionTests
     {
         [DataTestMethod]
         [DataRow("x86", false)]
