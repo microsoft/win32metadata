@@ -7,6 +7,9 @@ function Get-MidlHeaderArguments {
         [switch]$ClosedPreprocessing
     )
 
+    # Match the original recompiled mirror's compiler input and header spellings.
+    $InputFile = $InputFile.ToLowerInvariant()
+    $OutputHeader = $OutputHeader.ToLowerInvariant()
     $arguments = @(
         $InputFile, '/out', $OutputDirectory, '/header', $OutputHeader,
         '/DUNICODE', '/D_UNICODE', '/DWINVER=0x0A00', '/D_APISET_MINWIN_VERSION=0x010F',

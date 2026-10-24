@@ -500,6 +500,105 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
+        [InlineData("GeNeRaTeD.idl", "GeNeRaTeD.h")]
+        [InlineData("GeNeRaTeD.idl", "generated.h")]
+        [InlineData("generated.idl", "GeNeRaTeD.h")]
+        public void MidlCommandSpellingsPreserveTheOriginalRecompiledMirror(string input, string output)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            File.AppendAllText(fixture.MidlInput, "\r\ntypedef struct { long code; } ANONYMOUS_RECORD;\r\n");
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Fixture.Hash(File.ReadAllBytes(fixture.MidlInput));
+                recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                recipe["headers"][1]["sdkSha256"] = hash;
+            });
+            var original = fixture.Prepare();
+            byte[] header = File.ReadAllBytes(Path.Combine(original.IncludeRoot, "um", "generated.h"));
+            Assert.Contains("__MIDL___MIDL_itf_generated_", Encoding.UTF8.GetString(header));
+            fixture.MutateRecipe(recipe =>
+            {
+                recipe["midl"]["outputs"][1]["source"] = @"um\" + input;
+                recipe["midl"]["outputs"][1]["path"] = @"um\" + output;
+            });
+            var current = fixture.Prepare();
+            Assert.False(current.Reused);
+            Assert.False(current.MidlReused);
+            Assert.NotEqual(original.Identity, current.Identity);
+            Assert.Equal(header, File.ReadAllBytes(Path.Combine(current.IncludeRoot, "um", output)));
+            using var commands = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(current.IncludeRoot), "midl", "commands.json")));
+            var command = commands.RootElement.EnumerateArray().Single(item =>
+                item.GetProperty("source").GetString() == @"um\" + input);
+            string[] arguments = command.GetProperty("arguments").EnumerateArray().Select(value => value.GetString()).ToArray();
+            Assert.EndsWith(@"\generated.idl", arguments[0], StringComparison.Ordinal);
+            Assert.StartsWith("<prepared>", arguments[0], StringComparison.Ordinal);
+            Assert.EndsWith(@"\generated.h", arguments[Array.IndexOf(arguments, "/header") + 1], StringComparison.Ordinal);
+            Assert.DoesNotContain("staging-", command.GetRawText(), StringComparison.OrdinalIgnoreCase);
+            Assert.Equal(0, command.GetProperty("exitCode").GetInt32());
+            Assert.Equal(Fixture.Hash(header), command.GetProperty("headerSha256").GetString());
+            Assert.True(fixture.Prepare().Reused);
+        }
+
+        [Theory]
+        [InlineData("inputs")]
+        [InlineData("outputs")]
+        public void MidlCaseOnlyClosureAmbiguitiesFailBeforeProduction(string collection)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.MutateRecipe(recipe =>
+            {
+                var entries = recipe["midl"][collection].AsArray();
+                var duplicate = JsonNode.Parse(entries[0].ToJsonString());
+                duplicate["path"] = duplicate["path"].GetValue<string>().ToUpperInvariant();
+                entries.Add(duplicate);
+            });
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("MIDL", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("tagSTGC")]
+        [InlineData("STGC")]
+        public void ExistingEnumFlagsCommentsSurviveOriginalIdlAndInvalidatePreparation(string stgc)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            string declarations = HeaderAnnotationWinmdTests.ExistingEnumFlagDeclarations
+                .Replace("ENUM_FLAGS", "").Split("struct ENUM_STORAGE", StringSplitOptions.None)[0];
+            File.AppendAllText(fixture.MidlInput, declarations);
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Fixture.Hash(File.ReadAllBytes(fixture.MidlInput));
+                recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                recipe["headers"][1]["sdkSha256"] = hash;
+            });
+            var before = fixture.Prepare();
+            string[] facts = { $"/* Win32Metadata: enum ::{stgc} => Flags */", "/* Win32Metadata: enum ::VARENUM => Flags */" };
+            File.AppendAllText(fixture.MidlInput, string.Join("\r\n", facts.Select(fact => "cpp_quote(\"" + fact + "\")")) + "\r\n");
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Fixture.Hash(File.ReadAllBytes(fixture.MidlInput));
+                recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                recipe["headers"][1]["sdkSha256"] = hash;
+            });
+            var after = fixture.Prepare();
+            Assert.False(after.Reused);
+            Assert.False(after.MidlReused);
+            Assert.NotEqual(before.Identity, after.Identity);
+            string header = File.ReadAllText(Path.Combine(after.IncludeRoot, "um", "generated.h"));
+            Assert.All(facts, fact => Assert.Contains(fact, header));
+            Assert.DoesNotContain("flag_enum", header);
+            Assert.Contains("enum tagSTGC", header);
+            Assert.Contains("enum VARENUM", header);
+            Assert.Contains("VT_TYPEMASK", header);
+        }
+
+        [Theory]
         [InlineData(1)]
         [InlineData(2)]
         public void Midl2337PublishesVisibleCategorizedDiagnosticsWithoutAFileSpecificBaseline(int count)

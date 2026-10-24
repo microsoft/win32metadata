@@ -810,6 +810,7 @@ namespace Win32MetadataScraper
                 "AssociatedEnum" => function || parameter || field,
                 "AssociatedConstant" => declaration is EnumDecl || facts.LogicalEnumMembers != null,
                 "Enum" or "FlagsEnum" => typedef,
+                "Flags" => declaration is EnumDecl,
                 "NativeTypedef" => declaration is TypedefDecl && facts.LogicalEnumMembers == null,
                 "AlsoUsableFor" => typedef && facts.LogicalEnumMembers == null,
                 "RAIIFree" => function || parameter,
@@ -966,6 +967,7 @@ namespace Win32MetadataScraper
                     case "NativeTypedef":
                     case "Enum":
                     case "FlagsEnum":
+                    case "Flags":
                         continue;
                     case "SupportedOSPlatform":
                         name += "(" + HeaderAnnotation.Quote(HeaderAnnotation.ReadString(annotation.Arguments[0])) + ")";
@@ -986,7 +988,7 @@ namespace Win32MetadataScraper
                 yield return MakeAttribute(MetadataNamespace + $"InvalidHandleValue({value.ToString(CultureInfo.InvariantCulture)}L)", raiiReturn);
             if (facts.IsScopedEnum)
                 yield return MakeAttribute(MetadataNamespace + "ScopedEnum");
-            if (facts.IsFlagsEnum)
+            if (facts.IsFlagsEnum || facts.Annotations.Any(annotation => annotation.Name == "Flags"))
                 yield return MakeAttribute("global::System.Flags");
         }
 

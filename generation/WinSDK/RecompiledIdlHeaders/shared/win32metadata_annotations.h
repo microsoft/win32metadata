@@ -53,6 +53,7 @@
 #define _Win32_SetLastError_ _WIN32META_ANNOTATION_("SetLastError")
 #define _Win32_PreserveResult_ _WIN32META_ANNOTATION_("PreserveResult")
 #define _Win32_NativeTypedef_ _WIN32META_ANNOTATION_("NativeTypedef")
+#define _Win32_Flags_ _WIN32META_ANNOTATION_("Flags")
 #define _Win32_Retained_ _WIN32META_ANNOTATION_("Retained")
 #define _Win32_ContainsInteriorPointers_ _WIN32META_ANNOTATION_("ContainsInteriorPointers")
 #define _Win32_Retval_ _WIN32META_ANNOTATION_("RetVal")

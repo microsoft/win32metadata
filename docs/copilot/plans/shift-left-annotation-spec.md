@@ -75,6 +75,7 @@ permitted, and annotations on unsupported targets are errors.
 | Loose constant association | `_Win32_AssociatedConstant_(NAME)` | Enum. Associates an existing global constant without duplicating or renaming it. Repeatable. |
 | Logical enum | `_Win32_Enum_(name, storage, constants...)` | Metadata-only unscoped group of existing constants, using the specified native integral storage type of at most 64 bits. |
 | Logical flags enum | `_Win32_FlagsEnum_(name, storage, constants...)` | The same grouping contract with flags semantics. |
+| Existing enum flags | `_Win32_Flags_` | Existing native enum declaration only. Adds `System.Flags` metadata while preserving the compiler/configured enum storage, identity and ordered values. Valueless and non-repeatable. |
 | Projected return parameter | `_Win32_Retval_` | Output parameter in a C/C++-authored declaration, alongside direction SAL. Use native `[retval]` in IDL instead. |
 | Original-IDL metadata | `cpp_quote("/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(...) */")` | The same fact vocabulary and validation, with explicit native identity and no synthetic declaration. |
 
@@ -88,7 +89,7 @@ Use existing native syntax where it already expresses the contract:
 | COM output pointer | `_COM_Outptr_` and its standard SAL variants. |
 | Native constness | C/C++ `const`. |
 | Native scoped enum | `enum class`; do not make a logical constant group scoped. |
-| Native flags enum | Existing `[[clang::flag_enum]]`. Use `_Win32_FlagsEnum_` for metadata-only groups. |
+| Native flags enum | Existing `[[clang::flag_enum]]` retains its native diagnostic policy. Use `_Win32_Flags_` for metadata intent on an existing enum and `_Win32_FlagsEnum_` for a synthetic constant group. |
 
 For returned buffers, `_Outptr_result_buffer_(*count)` describes the pointee's
 element count, not the single outer pointer slot. The C# consumer must continue
@@ -361,10 +362,28 @@ the actual native parameter name to the method/function path. A method selector
 does not annotate C-interface vtable fields; the ordinary scraper uses C++ interface
 definitions. Native C/CINTERFACE consumption remains unchanged.
 
-For an existing IDL enum, emit a metadata/Clang-guarded `#pragma clang attribute`
-push/pop pair through `cpp_quote` around the original definition to apply
-`__attribute__((flag_enum))`. This preserves anonymous enum identity and native
-member names. Existing scalar typedefs can also back `_Win32_Enum_` or
+For flags metadata on an existing IDL enum, use its native enum identity:
+
+```idl
+cpp_quote("/* Win32Metadata: enum ::tagSTGC => Flags */")
+cpp_quote("/* Win32Metadata: enum ::VARENUM => Flags */")
+```
+
+The enum selector also accepts a genuine alias such as `::STGC` and resolves it
+to the compiler's underlying enum declaration. It does not annotate a scalar
+typedef or create another enum. In an authored C/C++ header, place
+`_Win32_Flags_` on that `EnumDecl`, for example `enum _Win32_Flags_ Flags`.
+The canonical payload is `Flags`, with no parentheses or arguments. Fields,
+enumerators, functions, records, parameters and direct typedef placement are
+invalid. Duplicate facts fail.
+
+This transport emits only the existing `System.Flags` attribute. It does not
+apply native `flag_enum`, change compiler diagnostics or select a backing type.
+Storage widths, signedness, namespaces, ordered constants and raw typed values
+remain governed by the existing native/configured enum model. The existing
+`STGC` Int32 and configured `VARENUM` UInt16 cases exercise both widths; the
+attribute does not authorize narrowing another enum to either model.
+Existing scalar typedefs can also back `_Win32_Enum_` or
 `_Win32_FlagsEnum_` groups using their original constants; do not replace the
 typedef or invent a scoped native enum.
 
@@ -1257,7 +1276,8 @@ candidate.
 Metadata emission uses the standard `Windows.Win32.Foundation.Metadata` vocabulary.
 `SetLastError` sets the ECMA-335 P/Invoke `SupportsLastError` flag; COM exact-result
 preservation uses `MethodImplAttributes.PreserveSig`. Native scoped enums retain
-`ScopedEnum`; logical flags groups emit `Flags`.
+`ScopedEnum`; logical flags groups and existing enums carrying the `Flags` fact
+emit the standard `System.Flags` attribute.
 
 During partial migration, a retained legacy `SupportedOSPlatform` alias can
 overlap the fully qualified header attribute. The cleaner removes only a known
