@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Win32MetadataScraperTests
@@ -9,6 +10,18 @@ namespace Win32MetadataScraperTests
     /// </summary>
     public class TagTypedefDiscoveryTests
     {
+        [Fact]
+        public void ManyDirectTypedefsKeepAliasOrderWithoutDuplicateDiscovery()
+        {
+            string declarations = string.Join("\n", Enumerable.Range(0, 2000).Select(index =>
+                $"typedef struct _TAG_{index} {{ int value; }} TYPE_{index};\n" +
+                $"typedef struct _TAG_{index} TYPE_ALIAS_{index};"));
+            var discovery = HeaderSnippetParser.ParseAndDiscover(declarations);
+
+            for (int index = 0; index < 2000; index++)
+                Assert.Equal(new[] { $"TYPE_{index}", $"TYPE_ALIAS_{index}" }, discovery.TagToTypedefs[$"_TAG_{index}"]);
+        }
+
         // ── Simple tag-typedef patterns ──────────────────────────────────────
 
         [Fact]

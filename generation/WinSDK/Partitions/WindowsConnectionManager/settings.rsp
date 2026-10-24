@@ -2,3 +2,5 @@
 <IncludeRoot>/um/ondemandconnroutehelper.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsConnectionManager
+--config
+parse-win32-annotations

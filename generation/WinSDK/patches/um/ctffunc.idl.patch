@@ -1,0 +1,193 @@
+diff --git a/um/ctffunc.idl b/um/ctffunc.idl
+index 2eb5d8e3..aa8acbeb 100644
+--- a/um/ctffunc.idl
++++ b/um/ctffunc.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+-------------------------------------------------------------------------
+@@ -71,6 +72,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfCandidateString
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfCandidateString => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(581f317e-fd9d-443f-b972-ed00467c5d40),
+@@ -86,6 +88,7 @@ interface ITfCandidateString : IUnknown
+ //
+ // IEnumTfCandidates
+ //
++cpp_quote("/* Win32Metadata: interface ::IEnumTfCandidates => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(defb1926-6c80-4ce8-87d4-d6b72b812bde),
+@@ -107,6 +110,7 @@ interface IEnumTfCandidates : IUnknown
+ //
+ // ITfCandidateList
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfCandidateList => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(a3ad50fb-9bdb-49e3-a843-6c76520fbf5d),
+@@ -137,6 +141,7 @@ interface ITfCandidateList : IUnknown
+ //
+ // ITfFnReconversion
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnReconversion => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(4cea93c0-0a58-11d3-8df0-00105a2799b5),
+@@ -187,6 +192,7 @@ cpp_quote("")
+ //
+ // ITfFnPlayBack
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnPlayBack => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(a3a416a4-0f64-11d3-b5b7-00c04fc324a1),
+@@ -204,6 +210,7 @@ interface ITfFnPlayBack : ITfFunction
+ //
+ // ITfLangProfileUtil
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnLangProfileUtil => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(A87A8574-A6C1-4E15-99F0-3D3965F548EB),
+@@ -220,6 +227,7 @@ interface ITfFnLangProfileUtil : ITfFunction
+ //
+ // ITfFnConfigure
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnConfigure => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(88f567c6-1757-49f8-a1b2-89234c1eeff9),
+@@ -238,6 +246,7 @@ interface ITfFnConfigure : ITfFunction
+ //
+ // ITfFnConfigureRegisterWord
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnConfigureRegisterWord => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(bb95808a-6d8f-4bca-8400-5390b586aedf),
+@@ -258,6 +267,7 @@ interface ITfFnConfigureRegisterWord : ITfFunction
+ //
+ // ITfFnConfigureRegisterEudc
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnConfigureRegisterEudc => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(b5e26ff5-d7ad-4304-913f-21a2ed95a1b0),
+@@ -278,6 +288,7 @@ interface ITfFnConfigureRegisterEudc : ITfFunction
+ //
+ // ITfFnShowHelp
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnShowHelp => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(5AB1D30C-094D-4C29-8EA5-0BF59BE87BF3),
+@@ -292,6 +303,7 @@ interface ITfFnShowHelp : ITfFunction
+ //
+ // ITfFnBalloon
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnBalloon => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(3BAB89E4-5FBE-45F4-A5BC-DCA36AD225A8),
+@@ -323,6 +335,7 @@ typedef [uuid(36adb6d9-da1f-45d8-a499-86167e0f936b)] enum
+     GETIF_RECOGNIZERNOINIT        = 0x5 , // for candidate UI
+ } TfSapiObject;
+ 
++cpp_quote("/* Win32Metadata: interface ::ITfFnGetSAPIObject => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(5c0ab7ea-167d-4f59-bfb5-4693755e90ca),
+@@ -343,6 +356,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfFnPropertyUIStatus
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnPropertyUIStatus => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(2338AC6E-2B9D-44C0-A75E-EE64F256B3BD),
+@@ -427,6 +441,7 @@ cpp_quote("EXTERN_C const GUID GUID_PROP_LMLATTICE;")
+ //
+ // ITfFnLMProcessor
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnLMProcessor => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(7AFBF8E7-AC4B-4082-B058-890899D3A010),
+@@ -463,6 +478,7 @@ interface ITfFnLMProcessor : ITfFunction
+ //
+ // ITfFnLMInternal
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnLMInternal => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(04B825B1-AC9A-4F7B-B5AD-C7168F1EE445),
+@@ -507,6 +523,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ // IEnumTfLatticeElements
+ //
+ //
++cpp_quote("/* Win32Metadata: interface ::IEnumTfLatticeElements => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(56988052-47DA-4A05-911A-E3D941F17145),
+@@ -529,6 +546,7 @@ interface IEnumTfLatticeElements : IUnknown
+ // ITfLMLattice
+ //
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLMLattice => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(D4236675-A5BF-4570-9D42-5D6D7B02D59B),
+@@ -546,6 +564,7 @@ interface ITfLMLattice : IUnknown
+ //
+ // ITfFnAdviseText
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnAdviseText => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(3527268B-7D53-4DD9-92B7-7296AE461249),
+@@ -565,6 +584,7 @@ interface ITfFnAdviseText : ITfFunction
+ //
+ // ITfFnSearchCandidateProvider
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnSearchCandidateProvider => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(87a2ad8f-f27b-4920-8501-67602280175d),
+@@ -598,6 +618,7 @@ typedef [uuid(AF8F5D86-0615-4af3-90FA-5DCBB407A5D4)]  enum
+ //  - Allows IMEs to adjust search keyboarding behavior
+ //  - Implemented by IME
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfIntegratableCandidateListUIElement => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(C7A6F54F-B180-416F-B2BF-7BF2E4683D7B),
+@@ -664,6 +685,7 @@ interface ITfIntegratableCandidateListUIElement : IUnknown
+ // depending on the langid with which it is associated.
+ // Additionally, a layout may only be valid for certain languages.
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfFnGetPreferredTouchKeyboardLayout => SupportedOSPlatform(\"windows8.0\") */")
+ [
+   object,
+   uuid(5F309A41-590A-4ACC-A97F-D8EFFF13FDFC),
+@@ -682,6 +704,7 @@ interface ITfFnGetPreferredTouchKeyboardLayout : ITfFunction
+ }
+ 
+ // ITfFnGetLinguisticAlternates
++cpp_quote("/* Win32Metadata: interface ::ITfFnGetLinguisticAlternates => SupportedOSPlatform(\"windows8.1\") */")
+ [
+   object, 
+   local,
+@@ -694,6 +717,7 @@ interface ITfFnGetLinguisticAlternates : ITfFunction
+ }
+ 
+ // IUIManagerEventSink
++cpp_quote("/* Win32Metadata: interface ::IUIManagerEventSink => SupportedOSPlatform(\"windows8.1\") */")
+ [
+   object, 
+   local,

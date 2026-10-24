@@ -1,0 +1,36 @@
+diff --git a/um/sporder.h b/um/sporder.h
+index 1fcca48d..d9c0cf13 100644
+--- a/um/sporder.h
++++ b/um/sporder.h
+@@ -33,6 +33,7 @@ Revision History:
+ extern "C" {
+ #endif
+ 
++_Win32_SupportedOS_Windows2000_
+ int
+ WSPAPI
+ WSCWriteProviderOrder (
+@@ -49,6 +50,7 @@ int
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+ #ifdef _WIN64
++_Win32_SupportedOS_WindowsVista_
+ int
+ WSPAPI
+ WSCWriteProviderOrder32 (
+@@ -58,6 +60,7 @@ WSCWriteProviderOrder32 (
+ #endif //_WIN64
+ #endif //_WIN32_WINNT >= 0x0501
+ 
++_Win32_SupportedOS_Windows2000_
+ int
+ WSPAPI
+ WSCWriteNameSpaceOrder (
+@@ -74,6 +77,7 @@ int
+ 
+ #if(_WIN32_WINNT >= 0x0501)
+ #ifdef _WIN64
++_Win32_SupportedOS_WindowsVista_
+ int
+ WSPAPI
+ WSCWriteNameSpaceOrder32 (

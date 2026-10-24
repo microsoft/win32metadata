@@ -1,0 +1,428 @@
+diff --git a/um/ddeml.h b/um/ddeml.h
+--- a/um/ddeml.h
++++ b/um/ddeml.h
+@@ -33,9 +33,21 @@
+ /******** public types ********/
+ 
+ DECLARE_HANDLE(HCONVLIST);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCONVLIST HCONVLIST;
++#endif
+ DECLARE_HANDLE(HCONV);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCONV HCONV;
++#endif
+ DECLARE_HANDLE(HSZ);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HSZ HSZ;
++#endif
+ DECLARE_HANDLE(HDDEDATA);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDDEDATA HDDEDATA;
++#endif
+ #define EXPENTRY        CALLBACK
+ 
+ /* the following structure is for use with XTYP_WILDCONNECT processing. */
+@@ -70,9 +82,9 @@
+     HSZ     hszTopic;      /* Topic name for conversation  */
+     HSZ     hszItem;       /* transaction item name or NULL if quiescent  */
+     UINT    wFmt;          /* transaction format or NULL if quiescent  */
+-    UINT    wType;         /* XTYP_ for current transaction  */
+-    UINT    wStatus;       /* ST_ constant for current conversation  */
+-    UINT    wConvst;       /* XST_ constant for current transaction  */
++    _Win32_AssociatedEnum_(DDE_CLIENT_TRANSACTION_TYPE) UINT    wType;         /* XTYP_ for current transaction  */
++    _Win32_AssociatedEnum_(CONVINFO_STATUS) UINT    wStatus;       /* ST_ constant for current conversation  */
++    _Win32_AssociatedEnum_(CONVINFO_CONVERSATION_STATE) UINT    wConvst;       /* XST_ constant for current transaction  */
+     UINT    wLastError;    /* last transaction error.  */
+     HCONVLIST hConvList;   /* parent hConvList if this conversation is in a list */
+     CONVCONTEXT ConvCtxt;  /* conversation context */
+@@ -100,6 +112,27 @@
+ #define     XST_ADVDATASENT      15
+ #define     XST_ADVDATAACKRCVD   16
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(CONVINFO_CONVERSATION_STATE, unsigned long,
++    XST_ADVACKRCVD,
++    XST_ADVDATAACKRCVD,
++    XST_ADVDATASENT,
++    XST_ADVSENT,
++    XST_CONNECTED,
++    XST_DATARCVD,
++    XST_EXECACKRCVD,
++    XST_EXECSENT,
++    XST_INCOMPLETE,
++    XST_INIT1,
++    XST_INIT2,
++    XST_NULL,
++    XST_POKEACKRCVD,
++    XST_POKESENT,
++    XST_REQSENT,
++    XST_UNADVACKRCVD,
++    XST_UNADVSENT);
++#endif
++
+ /* used in LOWORD(dwData1) of XTYP_ADVREQ callbacks... */
+ #define     CADV_LATEACK         0xFFFF
+ 
+@@ -114,6 +147,19 @@
+ #define     ST_INLIST               0x0040
+ #define     ST_BLOCKNEXT            0x0080
+ #define     ST_ISSELF               0x0100
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CONVINFO_STATUS, unsigned long,
++    ST_ADVISE,
++    ST_BLOCKED,
++    ST_BLOCKNEXT,
++    ST_CLIENT,
++    ST_CONNECTED,
++    ST_INLIST,
++    ST_ISLOCAL,
++    ST_ISSELF,
++    ST_TERMINATED);
++#endif
+ 
+ /* DDE constants for wStatus field */
+ 
+@@ -218,19 +264,21 @@
+ 
+ /* DLL registration functions */
+ 
++_Win32_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeInitializeA(
+     _Inout_ LPDWORD pidInst,
+     _In_ PFNCALLBACK pfnCallback,
+-    _In_ DWORD afCmd,
++    _In_ _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) DWORD afCmd,
+     _Reserved_ DWORD ulRes);
++_Win32_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeInitializeW(
+     _Inout_ LPDWORD pidInst,
+     _In_ PFNCALLBACK pfnCallback,
+-    _In_ DWORD afCmd,
++    _In_ _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) DWORD afCmd,
+     _Reserved_ DWORD ulRes);
+ #ifdef UNICODE
+ #define DdeInitialize  DdeInitializeW
+@@ -269,6 +317,7 @@
+ #define     APPCLASS_STANDARD            0x00000000L
+ #define     APPCLASS_MASK                0x0000000FL
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeUninitialize(
+@@ -277,6 +326,7 @@
+ /*
+  * conversation enumeration functions
+  */
++_Win32_SupportedOS_Windows2000_
+ HCONVLIST
+ WINAPI
+ DdeConnectList(
+@@ -286,11 +336,13 @@
+     _In_ HCONVLIST hConvList,
+     _In_opt_ PCONVCONTEXT pCC);
+ 
++_Win32_SupportedOS_Windows2000_
+ HCONV
+ WINAPI
+ DdeQueryNextServer(
+     _In_ HCONVLIST hConvList,
+     _In_ HCONV hConvPrev);
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeDisconnectList(
+@@ -299,6 +351,7 @@
+ /*
+  * conversation control functions
+  */
++_Win32_SupportedOS_Windows2000_
+ HCONV
+ WINAPI
+ DdeConnect(
+@@ -307,16 +360,19 @@
+     _In_ HSZ hszTopic,
+     _In_opt_ PCONVCONTEXT pCC);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeDisconnect(
+     _In_ HCONV hConv);
+ 
++_Win32_SupportedOS_Windows2000_
+ HCONV
+ WINAPI
+ DdeReconnect(
+     _In_ HCONV hConv);
+ 
++_Win32_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeQueryConvInfo(
+@@ -324,6 +380,7 @@
+     _In_ DWORD idTransaction,
+     _Inout_ PCONVINFO pConvInfo);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeSetUserHandle(
+@@ -331,6 +388,7 @@
+     _In_ DWORD id,
+     _In_ DWORD_PTR hUser);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeAbandonTransaction(
+@@ -342,6 +400,7 @@
+ /*
+  * app server interface functions
+  */
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdePostAdvise(
+@@ -349,13 +408,16 @@
+     _In_ HSZ hszTopic,
+     _In_ HSZ hszItem);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeEnableCallback(
+     _In_ DWORD idInst,
+     _In_ HCONV hConv,
+-    _In_ UINT wCmd);
+-
++    _In_ _Win32_AssociatedEnum_(DDE_ENABLE_CALLBACK_CMD) UINT wCmd);
++
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeImpersonateClient(
+@@ -367,22 +429,40 @@
+ #define EC_DISABLE              ST_BLOCKED
+ #define EC_QUERYWAITING         2
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DDE_ENABLE_CALLBACK_CMD, unsigned long,
++    EC_ENABLEALL,
++    EC_ENABLEONE,
++    EC_DISABLE,
++    EC_QUERYWAITING);
++#endif
++
++_Win32_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeNameService(
+     _In_ DWORD idInst,
+     _In_opt_ HSZ hsz1,
+     _In_opt_ HSZ hsz2,
+-    _In_ UINT afCmd);
++    _In_ _Win32_AssociatedEnum_(DDE_NAME_SERVICE_CMD) UINT afCmd);
+ 
+ #define DNS_REGISTER        0x0001
+ #define DNS_UNREGISTER      0x0002
+ #define DNS_FILTERON        0x0004
+ #define DNS_FILTEROFF       0x0008
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DDE_NAME_SERVICE_CMD, unsigned long,
++    DNS_REGISTER,
++    DNS_UNREGISTER,
++    DNS_FILTERON,
++    DNS_FILTEROFF);
++#endif
++
+ /*
+  * app client interface functions
+  */
++_Win32_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeClientTransaction(
+@@ -391,7 +471,7 @@
+     _In_ HCONV hConv,
+     _In_opt_ HSZ hszItem,
+     _In_ UINT wFmt,
+-    _In_ UINT wType,
++    _In_ _Win32_AssociatedEnum_(DDE_CLIENT_TRANSACTION_TYPE) UINT wType,
+     _In_ DWORD dwTimeout,
+     _Out_opt_ LPDWORD pdwResult);
+ 
+@@ -400,6 +480,7 @@
+  *data transfer functions
+  */
+ 
++_Win32_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeCreateDataHandle(
+@@ -411,6 +492,7 @@
+     _In_ UINT wFmt,
+     _In_ UINT afCmd);
+ 
++_Win32_SupportedOS_Windows2000_
+ HDDEDATA
+ WINAPI
+ DdeAddData(
+@@ -419,6 +501,7 @@
+     _In_ DWORD cb,
+     _In_ DWORD cbOff);
+ 
++_Win32_SupportedOS_Windows2000_
+ DWORD
+ WINAPI
+ DdeGetData(
+@@ -427,17 +510,20 @@
+     _In_ DWORD cbMax,
+     _In_ DWORD cbOff);
+ 
++_Win32_SupportedOS_Windows2000_
+ LPBYTE
+ WINAPI
+ DdeAccessData(
+     _In_ HDDEDATA hData,
+     _Out_opt_ LPDWORD pcbDataSize);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeUnaccessData(
+     _In_ HDDEDATA hData);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeFreeDataHandle(
+@@ -446,6 +532,7 @@
+ #define     HDATA_APPOWNED          0x0001
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ UINT
+ WINAPI
+ DdeGetLastError(
+@@ -477,12 +564,14 @@
+ 
+ #define     DMLERR_LAST                        0x4011
+ 
++_Win32_SupportedOS_Windows2000_
+ HSZ
+ WINAPI
+ DdeCreateStringHandleA(
+     _In_ DWORD idInst,
+     _In_ LPCSTR psz,
+     _In_ int iCodePage);
++_Win32_SupportedOS_Windows2000_
+ HSZ
+ WINAPI
+ DdeCreateStringHandleW(
+@@ -495,6 +584,7 @@
+ #define DdeCreateStringHandle  DdeCreateStringHandleA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_Windows2000_
+ DWORD
+ WINAPI
+ DdeQueryStringA(
+@@ -503,6 +593,7 @@
+     _Out_writes_opt_(cchMax) LPSTR psz,
+     _In_ DWORD cchMax,
+     _In_ int iCodePage);
++_Win32_SupportedOS_Windows2000_
+ DWORD
+ WINAPI
+ DdeQueryStringW(
+@@ -517,18 +608,21 @@
+ #define DdeQueryString  DdeQueryStringA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeFreeStringHandle(
+     _In_ DWORD idInst,
+     _In_ HSZ hsz);
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ WINAPI
+ DdeKeepStringHandle(
+     _In_ DWORD idInst,
+     _In_ HSZ hsz);
+ 
++_Win32_SupportedOS_Windows2000_
+ int
+ WINAPI
+ DdeCmpStringHandles(
+@@ -643,6 +737,25 @@
+ #define     APPCLASS_MONITOR        0x00000001L
+ #define     XTYP_MONITOR            (0x00F0 | XCLASS_NOTIFICATION | XTYPF_NOBLOCK)
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DDE_CLIENT_TRANSACTION_TYPE, unsigned long,
++    XTYP_ADVSTART,
++    XTYP_ADVSTOP,
++    XTYP_EXECUTE,
++    XTYP_POKE,
++    XTYP_REQUEST,
++    XTYP_ADVDATA,
++    XTYP_ADVREQ,
++    XTYP_CONNECT,
++    XTYP_CONNECT_CONFIRM,
++    XTYP_DISCONNECT,
++    XTYP_MONITOR,
++    XTYP_REGISTER,
++    XTYP_UNREGISTER,
++    XTYP_WILDCONNECT,
++    XTYP_XACT_COMPLETE);
++#endif
++
+ /*
+  * Callback filter flags for use with MONITOR apps - 0 implies no monitor
+  * callbacks.
+@@ -655,6 +768,33 @@
+ #define     MF_LINKS                     0x20000000
+ #define     MF_CONV                      0x40000000
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(DDE_INITIALIZE_COMMAND, unsigned long,
++    APPCLASS_MONITOR,
++    APPCLASS_STANDARD,
++    APPCMD_CLIENTONLY,
++    APPCMD_FILTERINITS,
++    CBF_FAIL_ALLSVRXACTIONS,
++    CBF_FAIL_ADVISES,
++    CBF_FAIL_CONNECTIONS,
++    CBF_FAIL_EXECUTES,
++    CBF_FAIL_POKES,
++    CBF_FAIL_REQUESTS,
++    CBF_FAIL_SELFCONNECTIONS,
++    CBF_SKIP_ALLNOTIFICATIONS,
++    CBF_SKIP_CONNECT_CONFIRMS,
++    CBF_SKIP_DISCONNECTS,
++    CBF_SKIP_REGISTRATIONS,
++    CBF_SKIP_UNREGISTRATIONS,
++    MF_CALLBACKS,
++    MF_CONV,
++    MF_ERRORS,
++    MF_HSZ_INFO,
++    MF_LINKS,
++    MF_POSTMSGS,
++    MF_SENDMSGS);
++#endif
++
+ #define     MF_MASK                      0xFF000000
+ #endif /* NODDEMLSPY */
+ 

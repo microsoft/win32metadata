@@ -1,0 +1,34 @@
+diff --git a/um/vpnotify.h b/um/vpnotify.h
+index e1d5d309..800aca17 100644
+--- a/um/vpnotify.h
++++ b/um/vpnotify.h
+@@ -20,6 +20,9 @@ extern "C" {
+ #endif
+ 
+ // interface IVPBaseNotify
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IVPBaseNotify IVPBaseNotify;
++#endif
+ DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
+ {
+ 	// this function initializes the reconnection to the decoder. 
+@@ -29,6 +32,9 @@ DECLARE_INTERFACE_(IVPBaseNotify, IUnknown)
+ };
+ 
+ // interface IVPNotify
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IVPNotify IVPNotify;
++#endif
+ DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
+ {
+     // function to set the mode (bob, weave etc)
+@@ -43,6 +49,9 @@ DECLARE_INTERFACE_(IVPNotify, IVPBaseNotify)
+ };
+ 
+ // interface IVPNotify
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IVPNotify2 IVPNotify2;
++#endif
+ DECLARE_INTERFACE_(IVPNotify2, IVPNotify)
+ {
+ // function to set the mode (bob, weave etc)

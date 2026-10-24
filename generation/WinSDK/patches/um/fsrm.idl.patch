@@ -1,0 +1,132 @@
+diff --git a/um/fsrm.idl b/um/fsrm.idl
+index 0406d56c..699e644e 100644
+--- a/um/fsrm.idl
++++ b/um/fsrm.idl
+@@ -2,6 +2,7 @@
+ //        Imports
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -131,6 +132,7 @@ const DISPID FSRM_DISPID_ADR                    = FSRM_DISPID_FEATURE_GENERAL
+ //        Interfaces
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmObject => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(22bcef93-4a3f-4183-89f9-2f8b8a628aee),
+@@ -167,6 +169,7 @@ interface IFsrmObject : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmCollection => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(f76fbf3b-8ddd-4b42-b05a-cb1c3ff1fee8),
+@@ -217,6 +220,7 @@ interface IFsrmCollection : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmMutableCollection => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(1bb617b8-3886-49dc-af82-a6c90fa35dda),
+@@ -246,6 +250,7 @@ interface IFsrmMutableCollection : IFsrmCollection
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmCommittableCollection => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(96deb3b5-8b91-4a2a-9d93-80a35d8aa847),
+@@ -268,6 +273,7 @@ interface IFsrmCommittableCollection : IFsrmMutableCollection
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmAction => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(6cd6408a-ae60-463b-9ef1-e117534d69dc),
+@@ -303,6 +309,7 @@ interface IFsrmAction : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmActionEmail => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(d646567d-26ae-4caa-9f84-4e0aad207fca),
+@@ -366,6 +373,7 @@ interface IFsrmActionEmail : IFsrmAction
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmActionEmail2 => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(8276702f-2532-4839-89bf-4872609a2ea4),
+@@ -383,6 +391,7 @@ interface IFsrmActionEmail2 : IFsrmActionEmail
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmActionReport => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(2dbe63c4-b340-48a0-a5b0-158e07fc567e),
+@@ -411,6 +420,7 @@ interface IFsrmActionReport : IFsrmAction
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmActionEventLog => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(4c8f96c3-5d94-4f37-a4f4-f56ab463546f),
+@@ -439,6 +449,7 @@ interface IFsrmActionEventLog : IFsrmAction
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmActionCommand => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(12937789-e247-4917-9c20-f3ee9c7ee783),
+@@ -502,6 +513,7 @@ interface IFsrmActionCommand : IFsrmAction
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmSetting => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(f411d4fd-14be-4260-8c40-03b7c95e608a),
+@@ -567,6 +579,7 @@ interface IFsrmSetting : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmPathMapper => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(6f4dbfff-6920-4821-a6c3-b7e94c1fd60c),
+@@ -587,6 +600,7 @@ interface IFsrmPathMapper : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmExportImport => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(efcb0ab1-16c4-4a79-812c-725614c3306b),
+@@ -640,6 +654,7 @@ interface IFsrmExportImport : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmDerivedObjectsResult => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(39322a2d-38ee-4d0d-8095-421a80849a82),
+@@ -662,6 +677,7 @@ interface IFsrmDerivedObjectsResult : IDispatch
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsrmAccessDeniedRemediationClient => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(40002314-590B-45A5-8E1B-8C05DA527E52),

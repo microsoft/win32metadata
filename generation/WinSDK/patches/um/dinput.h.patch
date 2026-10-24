@@ -1,0 +1,12 @@
+diff --git a/um/dinput.h b/um/dinput.h
+index 6b079b99..c14c1e57 100644
+--- a/um/dinput.h
++++ b/um/dinput.h
+@@ -4347,6 +4347,7 @@ extern "C" {
+  * and should be reloaded from the registery.
+  * dwFlags is reserved and should be set to zero
+  */
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI MMRESULT WINAPI joyConfigChanged( DWORD dwFlags );
+ 
+ #ifndef DIJ_RINGZERO

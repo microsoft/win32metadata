@@ -1,0 +1,1243 @@
+diff --git a/um/winreg.h b/um/winreg.h
+index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..7554ecdea7291a7c9b46857abbc0646e88891642 100644
+--- a/um/winreg.h
++++ b/um/winreg.h
+@@ -1,3 +1,6 @@
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++#include <winerror.h>
++#endif
+ /*++ BUILD Version: 0001    // Increment this if a change has global effects
+ 
+ Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -81,6 +84,25 @@
+ 
+ #define RRF_NOEXPAND           0x10000000  // do not automatically expand environment strings if value is of type REG_EXPAND_SZ
+ #define RRF_ZEROONFAILURE      0x20000000  // if pvData is not NULL, set content to all zeros on failure
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(REG_ROUTINE_FLAGS, unsigned long,
++    RRF_RT_DWORD,
++    RRF_RT_QWORD,
++    RRF_RT_REG_NONE,
++    RRF_RT_REG_SZ,
++    RRF_RT_REG_EXPAND_SZ,
++    RRF_RT_REG_BINARY,
++    RRF_RT_REG_DWORD,
++    RRF_RT_REG_MULTI_SZ,
++    RRF_RT_REG_QWORD,
++    RRF_RT_ANY,
++    RRF_SUBKEY_WOW6464KEY,
++    RRF_SUBKEY_WOW6432KEY,
++    RRF_WOW64_MASK,
++    RRF_NOEXPAND,
++    RRF_ZEROONFAILURE);
++#endif
+ 
+ //
+ // Flags for RegLoadAppKey
+@@ -239,7 +261,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCloseKey(
+     _In_ HKEY hKey
+@@ -251,61 +273,68 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOverridePredefKey (
+     _In_ HKEY hKey,
+     _In_opt_ HKEY hNewHKey
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenUserClassesRoot(
+     _In_ HANDLE hToken,
+     _Reserved_ DWORD dwOptions,
+     _In_ REGSAM samDesired,
+-    _Out_ PHKEY phkResult
+-    );
+-
+-WINADVAPI
+-LSTATUS
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult
++    );
++
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenCurrentUser(
+     _In_ REGSAM samDesired,
+-    _Out_ PHKEY phkResult
+-    );
+-
+-WINADVAPI
+-LSTATUS
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult
++    );
++
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDisablePredefinedCache(
+     VOID
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDisablePredefinedCacheEx(
+     VOID
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegConnectRegistryA (
+     _In_opt_ LPCSTR lpMachineName,
+     _In_ HKEY hKey,
+-    _Out_ PHKEY phkResult
+-    );
+-WINADVAPI
+-LSTATUS
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult
++    );
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegConnectRegistryW (
+     _In_opt_ LPCWSTR lpMachineName,
+     _In_ HKEY hKey,
+-    _Out_ PHKEY phkResult
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult
+     );
+ #ifdef UNICODE
+ #define RegConnectRegistry  RegConnectRegistryW
+@@ -326,7 +355,7 @@
+     _In_opt_ LPCSTR lpMachineName,
+     _In_ HKEY hKey,
+     _In_ ULONG Flags,
+-    _Out_ PHKEY phkResult
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult
+     );
+ WINADVAPI
+ LSTATUS
+@@ -335,7 +364,7 @@
+     _In_opt_ LPCWSTR lpMachineName,
+     _In_ HKEY hKey,
+     _In_ ULONG Flags,
+-    _Out_ PHKEY phkResult
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult
+     );
+ #ifdef UNICODE
+ #define RegConnectRegistryEx  RegConnectRegistryExW
+@@ -349,16 +378,18 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCreateKeyA (
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpSubKey,
+     _Out_ PHKEY phkResult
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCreateKeyW (
+     _In_ HKEY hKey,
+@@ -371,34 +402,36 @@
+ #define RegCreateKey  RegCreateKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCreateKeyExA(
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition
+-    );
+-
+-WINADVAPI
+-LSTATUS
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition
++    );
++
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCreateKeyExW(
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPWSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition
+     );
+ 
+ #ifdef UNICODE
+@@ -413,35 +446,37 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCreateKeyTransactedA (
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition,
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition,
+     _In_        HANDLE hTransaction,
+     _Reserved_ PVOID  pExtendedParemeter
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCreateKeyTransactedW (
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPWSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition,
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition,
+     _In_        HANDLE hTransaction,
+     _Reserved_ PVOID  pExtendedParemeter
+     );
+@@ -457,15 +492,17 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyA (
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpSubKey
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyW (
+     _In_ HKEY hKey,
+@@ -477,8 +514,9 @@
+ #define RegDeleteKey  RegDeleteKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyExA(
+     _In_ HKEY hKey,
+@@ -487,8 +525,9 @@
+     _Reserved_ DWORD Reserved
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyExW(
+     _In_ HKEY hKey,
+@@ -509,8 +548,9 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyTransactedA (
+     _In_ HKEY hKey,
+@@ -520,8 +560,9 @@
+     _In_        HANDLE hTransaction,
+     _Reserved_ PVOID  pExtendedParameter
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyTransactedW (
+     _In_ HKEY hKey,
+@@ -543,22 +584,25 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LONG
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LONG
+ APIENTRY
+ RegDisableReflectionKey (
+     _In_ HKEY hBase
+     );
+ 
+-WINADVAPI
+-LONG
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LONG
+ APIENTRY
+ RegEnableReflectionKey (
+     _In_ HKEY hBase
+     );
+ 
+-WINADVAPI
+-LONG
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LONG
+ APIENTRY
+ RegQueryReflectionKey (
+     _In_ HKEY hBase,
+@@ -571,16 +615,18 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteValueA(
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpValueName
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteValueW(
+     _In_ HKEY hKey,
+@@ -593,8 +639,9 @@
+ #define RegDeleteValue  RegDeleteValueA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegEnumKeyA (
+     _In_ HKEY hKey,
+@@ -602,8 +649,9 @@
+     _Out_writes_opt_(cchName) LPSTR lpName,
+     _In_ DWORD cchName
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegEnumKeyW (
+     _In_ HKEY hKey,
+@@ -617,8 +665,9 @@
+ #define RegEnumKey  RegEnumKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegEnumKeyExA(
+     _In_ HKEY hKey,
+@@ -631,8 +680,9 @@
+     _Out_opt_ PFILETIME lpftLastWriteTime
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegEnumKeyExW(
+     _In_ HKEY hKey,
+@@ -651,8 +701,9 @@
+ #define RegEnumKeyEx  RegEnumKeyExA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegEnumValueA(
+     _In_ HKEY hKey,
+@@ -666,7 +717,7 @@
+     );
+ 
+ WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegEnumValueW(
+     _In_ HKEY hKey,
+@@ -691,15 +742,17 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegFlushKey(
+     _In_ HKEY hKey
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsXP_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegGetKeySecurity(
+     _In_ HKEY hKey,
+@@ -708,8 +761,9 @@
+     _Inout_ LPDWORD lpcbSecurityDescriptor
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegLoadKeyA(
+     _In_ HKEY hKey,
+@@ -717,8 +771,9 @@
+     _In_ LPCSTR lpFile
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegLoadKeyW(
+     _In_ HKEY hKey,
+@@ -732,13 +787,14 @@
+ #define RegLoadKey  RegLoadKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegNotifyChangeKeyValue(
+     _In_ HKEY hKey,
+     _In_ BOOL bWatchSubtree,
+-    _In_ DWORD dwNotifyFilter,
++    _In_ _Win32_AssociatedEnum_(REG_NOTIFY_FILTER) DWORD dwNotifyFilter,
+     _In_opt_ HANDLE hEvent,
+     _In_ BOOL fAsynchronous
+     );
+@@ -749,16 +805,18 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenKeyA (
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpSubKey,
+     _Out_ PHKEY phkResult
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenKeyW (
+     _In_ HKEY hKey,
+@@ -771,25 +829,26 @@
+ #define RegOpenKey  RegOpenKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenKeyExA(
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult
+     );
+ 
+ WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenKeyExW(
+     _In_ HKEY hKey,
+     _In_opt_ LPCWSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult
+     );
+ 
+@@ -805,26 +864,28 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenKeyTransactedA (
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult,
+     _In_        HANDLE hTransaction,
+     _Reserved_ PVOID  pExtendedParemeter
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegOpenKeyTransactedW (
+     _In_ HKEY hKey,
+     _In_opt_ LPCWSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult,
+     _In_        HANDLE hTransaction,
+     _Reserved_ PVOID  pExtendedParemeter
+@@ -841,8 +902,9 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryInfoKeyA(
+     _In_ HKEY hKey,
+@@ -859,8 +921,9 @@
+     _Out_opt_ PFILETIME lpftLastWriteTime
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryInfoKeyW(
+     _In_ HKEY hKey,
+@@ -889,8 +952,9 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryValueA (
+     _In_ HKEY hKey,
+@@ -898,8 +962,9 @@
+     _Out_writes_bytes_to_opt_(*lpcbData, *lpcbData) __out_data_source(REGISTRY) LPSTR lpData,
+     _Inout_opt_ PLONG lpcbData
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryValueW (
+     _In_ HKEY hKey,
+@@ -915,8 +980,9 @@
+ 
+ #if(WINVER >= 0x0400)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryMultipleValuesA(
+     _In_ HKEY hKey,
+@@ -926,8 +992,9 @@
+     _Inout_opt_ LPDWORD ldwTotsize
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryMultipleValuesW(
+     _In_ HKEY hKey,
+@@ -951,8 +1018,9 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryValueExA(
+     _In_ HKEY hKey,
+@@ -964,7 +1032,7 @@
+     );
+ 
+ WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_ _Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegQueryValueExW(
+     _In_ HKEY hKey,
+@@ -987,8 +1055,9 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegReplaceKeyA (
+     _In_ HKEY hKey,
+@@ -996,8 +1065,9 @@
+     _In_ LPCSTR lpNewFile,
+     _In_ LPCSTR lpOldFile
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegReplaceKeyW (
+     _In_ HKEY hKey,
+@@ -1011,22 +1081,24 @@
+ #define RegReplaceKey  RegReplaceKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegRestoreKeyA(
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpFile,
+-    _In_ DWORD dwFlags
+-    );
+-
+-WINADVAPI
+-LSTATUS
++    _In_ _Win32_AssociatedEnum_(REG_RESTORE_KEY_FLAGS) DWORD dwFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegRestoreKeyW(
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpFile,
+-    _In_ DWORD dwFlags
++    _In_ _Win32_AssociatedEnum_(REG_RESTORE_KEY_FLAGS) DWORD dwFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -1044,7 +1116,7 @@
+ #if(WINVER >= 0x0600)
+ 
+ WINADVAPI
+-LSTATUS
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegRenameKey(
+     _In_ HKEY hKey,
+@@ -1060,16 +1132,18 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSaveKeyA (
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpFile,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSaveKeyW (
+     _In_ HKEY hKey,
+@@ -1082,8 +1156,9 @@
+ #define RegSaveKey  RegSaveKeyA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsXP_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetKeySecurity(
+     _In_ HKEY hKey,
+@@ -1091,8 +1166,9 @@
+     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetValueA (
+     _In_ HKEY hKey,
+@@ -1101,8 +1177,9 @@
+     _In_reads_bytes_opt_(cbData) LPCSTR lpData,
+     _In_ DWORD cbData
+     );
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetValueW (
+     _In_ HKEY hKey,
+@@ -1123,8 +1200,9 @@
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetValueExA(
+     _In_ HKEY hKey,
+@@ -1135,8 +1213,9 @@
+     _In_ DWORD cbData
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetValueExW(
+     _In_ HKEY hKey,
+@@ -1159,16 +1238,18 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegUnLoadKeyA(
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpSubKey
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_Windows2000_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegUnLoadKeyW(
+     _In_ HKEY hKey,
+@@ -1186,8 +1267,9 @@
+ //
+ #if _WIN32_WINNT >= 0x0600
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyValueA(
+     _In_ HKEY hKey,
+@@ -1195,8 +1277,9 @@
+     _In_opt_ LPCSTR lpValueName
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteKeyValueW(
+     _In_ HKEY hKey,
+@@ -1210,8 +1293,9 @@
+ #define RegDeleteKeyValue  RegDeleteKeyValueA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetKeyValueA(
+     _In_ HKEY hKey,
+@@ -1222,8 +1306,9 @@
+     _In_ DWORD cbData
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSetKeyValueW(
+     _In_ HKEY hKey,
+@@ -1240,16 +1325,18 @@
+ #define RegSetKeyValue  RegSetKeyValueA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteTreeA(
+     _In_ HKEY hKey,
+     _In_opt_ LPCSTR lpSubKey
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegDeleteTreeW(
+     _In_ HKEY hKey,
+@@ -1262,8 +1349,9 @@
+ #define RegDeleteTree  RegDeleteTreeA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCopyTreeA (
+     _In_        HKEY     hKeySrc,
+@@ -1278,15 +1366,16 @@
+ 
+ #if (_WIN32_WINNT >= 0x0502)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegGetValueA(
+     _In_ HKEY hkey,
+     _In_opt_ LPCSTR lpSubKey,
+     _In_opt_ LPCSTR lpValue,
+-    _In_ DWORD dwFlags,
+-    _Out_opt_ LPDWORD pdwType,
++    _In_ _Win32_AssociatedEnum_(REG_ROUTINE_FLAGS) DWORD dwFlags,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_VALUE_TYPE) LPDWORD pdwType,
+     _When_((dwFlags & 0x7F) == RRF_RT_REG_SZ ||
+                (dwFlags & 0x7F) == RRF_RT_REG_EXPAND_SZ ||
+                (dwFlags & 0x7F) == (RRF_RT_REG_SZ | RRF_RT_REG_EXPAND_SZ) ||
+@@ -1298,15 +1387,16 @@
+     _Inout_opt_ LPDWORD pcbData
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegGetValueW(
+     _In_ HKEY hkey,
+     _In_opt_ LPCWSTR lpSubKey,
+     _In_opt_ LPCWSTR lpValue,
+-    _In_ DWORD dwFlags,
+-    _Out_opt_ LPDWORD pdwType,
++    _In_ _Win32_AssociatedEnum_(REG_ROUTINE_FLAGS) DWORD dwFlags,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_VALUE_TYPE) LPDWORD pdwType,
+     _When_((dwFlags & 0x7F) == RRF_RT_REG_SZ ||
+                (dwFlags & 0x7F) == RRF_RT_REG_EXPAND_SZ ||
+                (dwFlags & 0x7F) == (RRF_RT_REG_SZ | RRF_RT_REG_EXPAND_SZ) ||
+@@ -1328,8 +1418,9 @@
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegCopyTreeW(
+     _In_ HKEY hKeySrc,
+@@ -1341,8 +1432,9 @@
+ #define RegCopyTree  RegCopyTreeW
+ #endif
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegLoadMUIStringA(
+     _In_ HKEY hKey,
+@@ -1355,7 +1447,7 @@
+     );
+ 
+ WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_ _Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegLoadMUIStringW(
+     _In_ HKEY hKey,
+@@ -1373,23 +1465,25 @@
+ #define RegLoadMUIString  RegLoadMUIStringA
+ #endif // !UNICODE
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegLoadAppKeyA(
+     _In_ LPCSTR lpFile,
+-    _Out_ PHKEY phkResult,
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
+     _In_ REGSAM samDesired,
+     _In_ DWORD dwOptions,
+     _Reserved_ DWORD Reserved
+     );
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsVista_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegLoadAppKeyW(
+     _In_ LPCWSTR lpFile,
+-    _Out_ PHKEY phkResult,
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
+     _In_ REGSAM samDesired,
+     _In_ DWORD dwOptions,
+     _Reserved_ DWORD Reserved
+@@ -1413,6 +1507,8 @@
+ // Remoteable System Shutdown APIs
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
+ WINADVAPI
+ BOOL
+@@ -1424,6 +1520,8 @@
+     _In_ BOOL bForceAppsClosed,
+     _In_ BOOL bRebootAfterShutdown
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ __drv_preferredFunction("InitiateSystemShutdownEx", "Legacy API. Rearchitect to avoid Reboot")
+ WINADVAPI
+ BOOL
+@@ -1441,12 +1539,16 @@
+ #define InitiateSystemShutdown  InitiateSystemShutdownA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL
+ APIENTRY
+ AbortSystemShutdownA(
+     _In_opt_ LPSTR lpMachineName
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL
+ APIENTRY
+@@ -1482,6 +1584,8 @@
+ //
+ #define MAX_SHUTDOWN_TIMEOUT (10*365*24*60*60)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
+ _When_(((dwReason==0 && lpMessage==0)) || dwReason>=0xd0000000,
+     __drv_reportError("Requires a valid dwReason or lpMessage"))
+@@ -1494,8 +1598,10 @@
+     _In_ DWORD dwTimeout,
+     _In_ BOOL bForceAppsClosed,
+     _In_ BOOL bRebootAfterShutdown,
+-    _In_ DWORD dwReason
+-    );
++    _In_ _Win32_AssociatedEnum_(SHUTDOWN_REASON) DWORD dwReason
++    );
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ __drv_preferredFunction("a design alternative", "Rearchitect to avoid Reboot")
+ _When_(((dwReason==0 && lpMessage==0)) || dwReason>=0xd0000000,
+     __drv_reportError("Requires a valid dwReason or lpMessage"))
+@@ -1508,7 +1614,7 @@
+     _In_ DWORD dwTimeout,
+     _In_ BOOL bForceAppsClosed,
+     _In_ BOOL bRebootAfterShutdown,
+-    _In_ DWORD dwReason
++    _In_ _Win32_AssociatedEnum_(SHUTDOWN_REASON) DWORD dwReason
+     );
+ #ifdef UNICODE
+ #define InitiateSystemShutdownEx  InitiateSystemShutdownExW
+@@ -1539,6 +1645,29 @@
+ #define SHUTDOWN_SYSTEM_INITIATED       0x00010000
+ #define SHUTDOWN_UPDATE_POWEROFF        0x00020000
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SHUTDOWN_FLAGS, unsigned long,
++    SHUTDOWN_FORCE_OTHERS,
++    SHUTDOWN_FORCE_SELF,
++    SHUTDOWN_RESTART,
++    SHUTDOWN_POWEROFF,
++    SHUTDOWN_NOREBOOT,
++    SHUTDOWN_GRACE_OVERRIDE,
++    SHUTDOWN_INSTALL_UPDATES,
++    SHUTDOWN_RESTARTAPPS,
++    SHUTDOWN_SKIP_SVC_PRESHUTDOWN,
++    SHUTDOWN_HYBRID,
++    SHUTDOWN_RESTART_BOOTOPTIONS,
++    SHUTDOWN_SOFT_REBOOT,
++    SHUTDOWN_MOBILE_UI,
++    SHUTDOWN_ARSO,
++    SHUTDOWN_CHECK_SAFE_FOR_SERVER,
++    SHUTDOWN_VAIL_CONTAINER,
++    SHUTDOWN_SYSTEM_INITIATED,
++    SHUTDOWN_UPDATE_POWEROFF);
++#endif
++
++_Win32_SupportedOS_WindowsVista_
+ WINADVAPI
+ DWORD
+ APIENTRY
+@@ -1546,9 +1675,10 @@
+     _In_opt_ LPSTR lpMachineName,
+     _In_opt_ LPSTR lpMessage,
+     _In_     DWORD dwGracePeriod,
+-    _In_     DWORD dwShutdownFlags,
+-    _In_     DWORD dwReason
+-    );
++    _In_     _Win32_AssociatedEnum_(SHUTDOWN_FLAGS) DWORD dwShutdownFlags,
++    _In_     _Win32_AssociatedEnum_(SHUTDOWN_REASON) DWORD dwReason
++    );
++_Win32_SupportedOS_WindowsVista_
+ WINADVAPI
+ DWORD
+ APIENTRY
+@@ -1556,8 +1686,8 @@
+     _In_opt_ LPWSTR lpMachineName,
+     _In_opt_ LPWSTR lpMessage,
+     _In_     DWORD dwGracePeriod,
+-    _In_     DWORD dwShutdownFlags,
+-    _In_     DWORD dwReason
++    _In_     _Win32_AssociatedEnum_(SHUTDOWN_FLAGS) DWORD dwShutdownFlags,
++    _In_     _Win32_AssociatedEnum_(SHUTDOWN_REASON) DWORD dwReason
+     );
+ #ifdef UNICODE
+ #define InitiateShutdown  InitiateShutdownW
+@@ -1579,24 +1709,26 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINADVAPI
+-LSTATUS
++_Win32_SupportedOS_WindowsXP_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSaveKeyExA(
+     _In_ HKEY hKey,
+     _In_ LPCSTR lpFile,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _In_ DWORD Flags
+-    );
+-
+-WINADVAPI
+-LSTATUS
++    _In_ _Win32_AssociatedEnum_(REG_SAVE_FORMAT) DWORD Flags
++    );
++
++_Win32_SupportedOS_WindowsXP_
++WINADVAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
+ APIENTRY
+ RegSaveKeyExW(
+     _In_ HKEY hKey,
+     _In_ LPCWSTR lpFile,
+     _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _In_ DWORD Flags
++    _In_ _Win32_AssociatedEnum_(REG_SAVE_FORMAT) DWORD Flags
+     );
+ 
+ #ifdef UNICODE

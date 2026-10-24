@@ -5,3 +5,5 @@
 <IncludeRoot>/um/winddi.h
 --namespace
 Windows.Win32.Devices.Display
+--config
+parse-win32-annotations

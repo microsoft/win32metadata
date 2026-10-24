@@ -76,24 +76,35 @@ namespace ClangSharpSourceToWinmd
             string archForAutoTypes = arch == "crossarch" ? "common" : arch;
             string archSourceDir = Path.Combine(sourceDirectory, archForAutoTypes);
 
-            Dictionary<string, string> apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
-
-            if (requiredNamespaceValuePairs != null)
-            {
-                // Merge the requiredNamespaceForName entries into what we found the scraped source files
-                foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
-                {
-                    if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
-                    {
-                        apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
-                    }
-                }
-            }
-
+            Dictionary<string, string> apiNamesToNamespaces;
             try
             {
-                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles);
-                if (autoTypes != null && autoTypes.Any())
+                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles)?.ToArray();
+                foreach (string generatedArchitecture in new[] { "common", "x86", "x64", "arm64" })
+                {
+                    try
+                    {
+                        File.Delete(Path.Combine(sourceDirectory, generatedArchitecture, "autotypes.cs"));
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        // Sparse source layouts need not contain every architecture.
+                    }
+                }
+
+                apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
+                if (requiredNamespaceValuePairs != null)
+                {
+                    foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
+                    {
+                        if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
+                        {
+                            apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
+                        }
+                    }
+                }
+
+                if (autoTypes != null && autoTypes.Length != 0)
                 {
                     var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
                     if (!Directory.Exists(Path.GetDirectoryName(outputFilePath)))

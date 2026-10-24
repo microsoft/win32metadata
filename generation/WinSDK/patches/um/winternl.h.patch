@@ -1,0 +1,114 @@
+diff --git a/um/winternl.h b/um/winternl.h
+index 5734a93b..bf199793 100644
+--- a/um/winternl.h
++++ b/um/winternl.h
+@@ -460,6 +460,7 @@ typedef struct __PUBLIC_OBJECT_TYPE_INFORMATION {
+ // use the Win32 API instead
+ //     CloseHandle
+ //
++_Win32_SupportedOS_Windows2000_
+ __kernel_entry NTSTATUS
+ NTAPI
+ NtClose (
+@@ -586,6 +587,7 @@ NtSetInformationKey (
+ // use the Win32 API instead
+ //     DeviceIoControl
+ //
++_Win32_SupportedOS_Windows2000_
+ __kernel_entry NTSTATUS
+ NTAPI
+ NtDeviceIoControlFile (
+@@ -605,6 +607,7 @@ NtDeviceIoControlFile (
+ // use the Win32 API instead
+ //     WaitForSingleObjectEx
+ //
++_Win32_SupportedOS_Windows2000_
+ NTSTATUS
+ NTAPI
+ NtWaitForSingleObject (
+@@ -629,6 +632,7 @@ RtlIsNameLegalDOS8Dot3 (
+ // This function might be needed for some of the internal Windows functions,
+ // defined in this header file.
+ //
++_Win32_SupportedOS_WindowsXP_
+ _When_(Status < 0, _Out_range_(>, 0))
+ _When_(Status >= 0, _Out_range_(==, 0))
+ ULONG
+@@ -760,18 +764,21 @@ RtlTimeToSecondsSince1970 (
+ // These APIs might be need for some of the internal Windows functions,
+ // defined in this header file.
+ //
++_Win32_SupportedOS_Windows2000_
+ VOID
+ NTAPI
+ RtlFreeAnsiString (
+     PANSI_STRING AnsiString
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ VOID
+ NTAPI
+ RtlFreeUnicodeString (
+     PUNICODE_STRING UnicodeString
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ VOID
+ NTAPI
+ RtlFreeOemString(
+@@ -806,6 +813,7 @@ RtlInitAnsiStringEx (
+     PCSZ SourceString
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ VOID
+ NTAPI
+ RtlInitUnicodeString (
+@@ -813,6 +821,7 @@ RtlInitUnicodeString (
+     PCWSTR SourceString
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NTSTATUS
+ NTAPI
+ RtlAnsiStringToUnicodeString (
+@@ -821,6 +830,7 @@ RtlAnsiStringToUnicodeString (
+     BOOLEAN AllocateDestinationString
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NTSTATUS
+ NTAPI
+ RtlUnicodeStringToAnsiString (
+@@ -829,6 +839,7 @@ RtlUnicodeStringToAnsiString (
+     BOOLEAN AllocateDestinationString
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NTSTATUS
+ NTAPI
+ RtlUnicodeStringToOemString(
+@@ -843,6 +854,7 @@ RtlUnicodeStringToOemString(
+ //     set CodePage to CP_ACP
+ //     set cbMultiByte to 0
+ //
++_Win32_SupportedOS_Windows2000_
+ NTSTATUS
+ NTAPI
+ RtlUnicodeToMultiByteSize(
+@@ -855,6 +867,7 @@ RtlUnicodeToMultiByteSize(
+ // Use the C runtime function instead
+ //     strtol
+ //
++_Win32_SupportedOS_Windows2000_
+ NTSTATUS
+ NTAPI
+ RtlCharToInteger (
+@@ -867,6 +880,7 @@ RtlCharToInteger (
+ // use the Win32 API instead
+ //     ConvertSidToStringSid
+ //
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ RtlConvertSidToUnicodeString (

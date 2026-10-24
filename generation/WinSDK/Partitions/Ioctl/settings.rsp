@@ -1,7 +1,11 @@
+--config
+parse-win32-annotations
 --exclude
 _VIRTUAL_STORAGE_TYPE
 --traverse
 <IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/winioctl.h
+# Newer upstream facts not covered by this frozen patch payload.
+<IncludeRoot>/shared/cxl.h
 --namespace
 Windows.Win32.System.Ioctl

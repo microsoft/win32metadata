@@ -25,12 +25,12 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <vcruntime_string.h>
-#if !defined(_M_CEE)
+#if !defined(_M_CEE) && !defined(__INTELLISENSE__)
 #include <intrin.h>
 #if defined(__clang__) && (defined(_M_ARM64) || defined(_M_ARM64EC))
 #include <arm_neon.h>
-#endif
-#endif
+#endif // defined(__clang__) && (defined(_M_ARM64) || defined(_M_ARM64EC))
+#endif // !defined(_M_CEE) && !defined(__INTELLISENSE__)
 
 #pragma warning(push)
 #pragma warning(disable: _UCRT_DISABLED_WARNINGS)
@@ -203,7 +203,7 @@ typedef wchar_t _Wint_t;
         return _P == NULL || _P->_Wchar == 0;
     }
 
-    #if !defined(_M_CEE)
+    #if !defined(_M_CEE) && !defined(__INTELLISENSE__)
     #if (defined(_M_IX86) && !defined(_M_HYBRID_X86_ARM64)) || (defined(_M_X64) && !defined(_M_ARM64EC))
     extern int _Avx2WmemEnabled;
     __declspec(selectany) int _Avx2WmemEnabledWeakValue = 0;
@@ -223,7 +223,7 @@ typedef wchar_t _Wint_t;
     {
         size_t __count = 0;
 
-    #if !defined(_M_CEE)
+    #if !defined(_M_CEE) && !defined(__INTELLISENSE__)
     #if defined(_M_ARM64) || defined(_M_ARM64EC) || defined(_M_HYBRID_X86_ARM64)
 
         unsigned long __index = 0;
@@ -328,7 +328,7 @@ typedef wchar_t _Wint_t;
         }
 
     #endif // (defined(_M_IX86) && _M_IX86_FP >= 2) || defined(_M_X64)
-    #endif // !defined(_M_CEE)
+    #endif // !defined(_M_CEE) && !defined(__INTELLISENSE__)
 
         for (; __count < _N; ++__count)
         {
@@ -349,7 +349,7 @@ typedef wchar_t _Wint_t;
     {
         size_t __count = 0;
 
-    #if !defined(_M_CEE)
+    #if !defined(_M_CEE) && !defined(__INTELLISENSE__)
     #if defined(_M_ARM64) || defined(_M_ARM64EC) || defined(_M_HYBRID_X86_ARM64)
 
         unsigned long __index = 0;
@@ -468,7 +468,7 @@ typedef wchar_t _Wint_t;
         }
     #endif // defined(_M_IX86)
     #endif // (defined(_M_IX86) && _M_IX86_FP >= 2) || defined(_M_X64)
-    #endif // !defined(_M_CEE)
+    #endif // !defined(_M_CEE) && !defined(__INTELLISENSE__)
 
         for (; __count < _N; ++__count)
         {

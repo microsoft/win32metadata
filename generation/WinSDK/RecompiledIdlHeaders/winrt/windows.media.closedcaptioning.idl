@@ -47,7 +47,13 @@ namespace Windows
 
             interface IClosedCaptionPropertiesStatics2;
 
+            interface IClosedCaptionTheme;
+
+            interface IClosedCaptionThemeStatics;
+
             runtimeclass ClosedCaptionProperties;
+
+            runtimeclass ClosedCaptionTheme;
         }
     }
 }
@@ -147,6 +153,41 @@ namespace Windows
                 [eventremove] HRESULT PropertiesChanged([in] EventRegistrationToken token);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.ClosedCaptioning.ClosedCaptionTheme)]
+            [uuid(D3974055-B9B5-52A4-B655-30661F73D1C1)]
+            interface IClosedCaptionTheme : IInspectable
+            {
+                [propget] HRESULT Id([out] [retval] HSTRING* value);
+                [propget] HRESULT DisplayName([out] [retval] HSTRING* value);
+                [propget] HRESULT FontColor([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionColor* value);
+                [propget] HRESULT ComputedFontColor([out] [retval] Windows.UI.Color* value);
+                [propget] HRESULT FontOpacity([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionOpacity* value);
+                [propget] HRESULT FontSize([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionSize* value);
+                [propget] HRESULT FontStyle([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionStyle* value);
+                [propget] HRESULT FontEffect([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionEdgeEffect* value);
+                [propget] HRESULT BackgroundColor([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionColor* value);
+                [propget] HRESULT ComputedBackgroundColor([out] [retval] Windows.UI.Color* value);
+                [propget] HRESULT BackgroundOpacity([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionOpacity* value);
+                [propget] HRESULT RegionColor([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionColor* value);
+                [propget] HRESULT ComputedRegionColor([out] [retval] Windows.UI.Color* value);
+                [propget] HRESULT RegionOpacity([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionOpacity* value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [exclusiveto(Windows.Media.ClosedCaptioning.ClosedCaptionTheme)]
+            [uuid(0938AE0F-214E-5760-88C9-BB3F1B54F3C7)]
+            interface IClosedCaptionThemeStatics : IInspectable
+            {
+                HRESULT GetAvailableThemes([out] UINT32* __resultSize, [out] [retval] [size_is(, *__resultSize)] Windows.Media.ClosedCaptioning.ClosedCaptionTheme*** result);
+                HRESULT GetSelectedTheme([out] [retval] Windows.Media.ClosedCaptioning.ClosedCaptionTheme** result);
+                HRESULT TrySetSelectedTheme([in] Windows.Media.ClosedCaptioning.ClosedCaptionTheme* value, [out] [retval] boolean* result);
+                [eventadd] HRESULT ThemesChanged([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT ThemesChanged([in] EventRegistrationToken token);
+                [eventadd] HRESULT SelectedThemeChanged([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT SelectedThemeChanged([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Media.ClosedCaptioning.IClosedCaptionPropertiesStatics, Windows.Foundation.UniversalApiContract, 1.0)]
@@ -154,6 +195,15 @@ namespace Windows
             [threading(both)]
             runtimeclass ClosedCaptionProperties
             {
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 15.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+            [threading(both)]
+            runtimeclass ClosedCaptionTheme
+            {
+                [default] interface Windows.Media.ClosedCaptioning.IClosedCaptionTheme;
             }
         }
     }

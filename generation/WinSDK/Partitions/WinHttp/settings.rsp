@@ -5,3 +5,7 @@
 Windows.Win32.Networking.WinHttp
 --config
 parse-win32-annotations
+--remap
+# Newer upstream facts not covered by this frozen patch payload.
+WINHTTP_STATUS_CALLBACK=WINHTTP_STATUS_CALLBACK
+LPWINHTTP_STATUS_CALLBACK=WINHTTP_STATUS_CALLBACK

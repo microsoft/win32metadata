@@ -32,3 +32,5 @@ DL_ADDRESS_TYPE
 <IncludeRoot>/shared/netiodef.h
 --namespace
 Windows.Win32.Networking.WinSock
+--config
+parse-win32-annotations

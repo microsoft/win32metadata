@@ -155,7 +155,12 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPT_LMS_ALGORITHM      BCRYPT_LMS_ALGORITHM
 #define NCRYPT_XMSS_ALGORITHM     BCRYPT_XMSS_ALGORITHM
 
-#endif
+// Composite-ML-DSA
+#define NCRYPT_COMPOSITE_MLDSA_ALGORITHM        BCRYPT_COMPOSITE_MLDSA_ALGORITHM
+
+// Composite-ML-KEM
+#define NCRYPT_COMPOSITE_MLKEM_ALGORITHM        BCRYPT_COMPOSITE_MLKEM_ALGORITHM
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 //
 // Interfaces
@@ -171,7 +176,7 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPT_KEY_DERIVATION_INTERFACE         BCRYPT_KEY_DERIVATION_INTERFACE
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define NCRYPT_KEY_ENCAPSULATION_INTERFACE      BCRYPT_KEY_ENCAPSULATION_INTERFACE
 #endif
 
@@ -207,6 +212,9 @@ typedef struct NCRYPT_ALLOC_PARA {
 #define NCRYPT_SLHDSA_ALGORITHM_GROUP           L"SLHDSA"
 #define NCRYPT_LMS_ALGORITHM_GROUP              NCRYPT_LMS_ALGORITHM
 #define NCRYPT_XMSS_ALGORITHM_GROUP             NCRYPT_XMSS_ALGORITHM
+
+#define NCRYPT_COMPOSITE_MLDSA_ALGORITHM_GROUP  L"CompositeMLDSA"
+#define NCRYPT_COMPOSITE_MLKEM_ALGORITHM_GROUP  L"CompositeMLKEM"
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 //
@@ -286,13 +294,13 @@ typedef struct NCRYPT_ALLOC_PARA {
 
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 #define NCRYPTBUFFER_PKCS_AES_KEY_BITS                              96
 #define NCRYPTBUFFER_PKCS_PADDING_ALGO                              97
 #define NCRYPTBUFFER_PKCS_PADDING_LABEL                             98
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 
 // NCRYPT shares the same BCRYPT definitions
@@ -635,7 +643,8 @@ typedef struct _NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT
 #define NCRYPT_PAD_CIPHER_FLAG                  0x00000010  // NCryptEncrypt/Decrypt
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
 #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
-#define NCRYPT_PAD_PQDSA_FLAG	                BCRYPT_PAD_PQDSA  // BCryptSignHash/VerifySignature NCryptSignHash/VerifySignature
+#define NCRYPT_PAD_PQDSA_FLAG	                0x00000020 // NCryptSignHash/VerifySignature
+#define NCRYPT_MLDSA_EXTERNAL_MU_FLAG           0x00000080 // NCryptSignHash/VerifySignature
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
@@ -663,6 +672,7 @@ typedef struct _NCRYPT_TPM_PLATFORM_ATTESTATION_STATEMENT
 #define NCRYPT_NO_CACHED_PASSWORD               0x00004000
 #define NCRYPT_PROTECT_TO_LOCAL_SYSTEM          0x00008000
 #endif // (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
+#define NCRYPT_USE_RECOVERY_LDAP_PORT           0x00010000
 #define NCRYPT_REQUIRE_KDS_LRPC_BIND_FLAG       0x20000000
 #define NCRYPT_PERSIST_ONLY_FLAG                0x40000000
 #define NCRYPT_PERSIST_FLAG                     0x80000000
@@ -711,9 +721,17 @@ NCryptOpenStorageProvider(
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define NCRYPT_KEY_DERIVATION_OPERATION         BCRYPT_KEY_DERIVATION_OPERATION
 #endif  // (NTDDI_VERSION >= NTDDI_WIN8)
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define NCRYPT_KEY_ENCAPSULATION_OPERATION      BCRYPT_KEY_ENCAPSULATION_OPERATION
 #endif
+
+//
+// Additional algorithm operations specific for the Platform Crypto Provider
+//
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_PCP_SDDIDK_OPERATION             0x10000000
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
 // USE EXTREME CAUTION: editing comments that contain "certenrolls_*" tokens
 // could break building CertEnroll idl files:
 // certenrolls_begin -- NCryptAlgorithmName
@@ -911,14 +929,14 @@ NCryptCreatePersistedKey(
 #define NCRYPT_CERTIFICATE_FROM_NVRAM_PROPERTY  L"KeyCertificateFromTpmNvram"
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_SV3)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 #define NCRYPT_PARAMETER_SET_NAME_PROPERTY        BCRYPT_PARAMETER_SET_NAME // For PQC keys
 
 #define NCRYPT_KEM_SHARED_SECRET_LENGTH_PROPERTY BCRYPT_KEM_SHARED_SECRET_LENGTH
 #define NCRYPT_KEM_CIPHERTEXT_LENGTH_PROPERTY    BCRYPT_KEM_CIPHERTEXT_LENGTH
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 //
 // Additional property strings specific for the Platform Crypto Provider
@@ -1019,6 +1037,12 @@ NCryptCreatePersistedKey(
 #define NCRYPT_PCP_SYMMETRIC_KEYBITS_PROPERTY              L"PCP_SYMMETRIC_KEYBITS"
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_PCP_AIKSTORE_PROPERTY                       L"PCP_AIKSTORE"
+#define NCRYPT_PCP_EKSTORE_PROPERTY                        L"PCP_EKSTORE"
+#define NCRYPT_PCP_SDDIDK_CONTEXT_PROPERTY                 L"PCP_SDDIDK_CONTEXT"
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+
 // TPM NCryptSignHash Flag
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
@@ -1039,6 +1063,10 @@ NCryptCreatePersistedKey(
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
 #define NCRYPT_PCP_HMACVERIFICATION_KEY        (0x00000010)
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS1)
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define NCRYPT_PCP_SDDIDK_KEY                  (0x00000020)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 //
 // Additional property strings specific for the Smart Card Key Storage Provider
@@ -1313,7 +1341,7 @@ NCryptDecrypt(
 
 
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 _Check_return_
 SECURITY_STATUS
@@ -1345,7 +1373,7 @@ NCryptDecapsulate(
     _In_                              ULONG                   dwFlags);
 
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 
@@ -1399,7 +1427,7 @@ typedef struct NCRYPT_TPM_PERSISTENT_KEY_BLOB_HEADER
 #define NCRYPT_ISOLATED_KEY_ENVELOPE_BLOB   L"ISOLATED_KEY_ENVELOPE"
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 typedef struct _NCRYPT_PQ_BLOB
 {
@@ -1416,7 +1444,7 @@ typedef struct _NCRYPT_PQ_BLOB
 #define NCRYPT_PQ_PUBLIC_KEY_BLOB      BCRYPT_PUBLIC_KEY_BLOB
 
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_DT)
 
 // NCryptImportKey flags
 #define NCRYPT_MACHINE_KEY_FLAG         0x00000020

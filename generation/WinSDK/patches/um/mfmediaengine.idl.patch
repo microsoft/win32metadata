@@ -1,0 +1,289 @@
+diff --git a/um/mfmediaengine.idl b/um/mfmediaengine.idl
+index 2c392d5d..cda1a373 100644
+--- a/um/mfmediaengine.idl
++++ b/um/mfmediaengine.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //*@@@+++@@@@******************************************************************
+@@ -48,6 +49,7 @@ typedef enum MF_MEDIA_ENGINE_ERR
+ //
+ //  See http://dev.w3.org/html5/spec/video.html#mediaerror for details
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaError => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(fc0e10d2-ab2a-4501-a951-06bb1075184c),
+@@ -70,6 +72,7 @@ interface IMFMediaError : IUnknown
+ //
+ //  See http://dev.w3.org/html5/spec/video.html#timeranges for details            
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaTimeRange => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(db71a2fc-078a-414e-9df9-8c2531b0aa6c),
+@@ -171,6 +174,7 @@ typedef enum MF_MEDIA_ENGINE_EVENT
+ //
+ //  This interface is implemented by the component using IMFMediaEngine
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineNotify => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(fee7c112-e776-42b5-9bbf-0048524e2bd5),
+@@ -194,6 +198,7 @@ interface IMFMediaEngineNotify : IUnknown
+ //
+ //  See http://dev.w3.org/html5/spec/video.html#the-source-element for details
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineSrcElements => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(7a5e5354-b114-4c72-b991-3131d75032ea),
+@@ -319,6 +324,7 @@ cpp_quote("#endif")
+ //
+ //  See http://dev.w3.org/html5/spec/video.html#video for details
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngine => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(98a1b0bb-03eb-4935-ae7c-93c1fa0e1c93),
+@@ -504,6 +510,7 @@ typedef enum MF_MEDIA_ENGINE_SEEK_MODE
+ //              specification of the HTML5 <audio> and <video> elements.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineEx => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(83015ead-b1e6-40d0-a98a-37145ffe1ad1),
+@@ -707,6 +714,7 @@ typedef enum MF_MEDIA_ENGINE_EXTENSION_TYPE
+ //              with a mechanism to load custom MF Media Sources.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineExtension => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(2f69d622-20b5-41e9-afdf-89ced1dda04e),
+@@ -756,6 +764,7 @@ enum MF_MEDIA_ENGINE_FRAME_PROTECTION_FLAGS
+ //              with a mechanism to load custom MF Media Sources.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineProtectedContent => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(9f8021e8-9c8c-487e-bb5c-79aa4779938c),
+@@ -925,6 +934,7 @@ typedef enum MF_MSE_OPUS_SUPPORT_TYPE
+ //              events within the MSE.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSourceExtensionNotify => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(a7901327-05dd-4469-a7b7-0e01979e361d),
+@@ -947,6 +957,7 @@ interface IMFMediaSourceExtensionNotify : IUnknown
+ //              about important events associated with the buffer list.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFBufferListNotify => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(24cd47f7-81d8-4785-adb2-af697a963cd2),
+@@ -968,6 +979,7 @@ interface IMFBufferListNotify : IUnknown
+ //              about important events associated with the buffer list.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFSourceBufferNotify => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(87e47623-2ceb-45d6-9b88-d8520c4dcbbc),
+@@ -992,6 +1004,7 @@ interface IMFSourceBufferNotify : IUnknown
+ //  Synopsis:   interface to a Source Buffer
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFSourceBuffer => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(e2cd3a4b-af25-4d3d-9110-da0e6f8ee877),
+@@ -1078,6 +1091,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+ //                  onRemoveSourceBuffer
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFSourceBufferList => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(249981f8-8325-41f3-b80c-3b9e3aad0cbe),
+@@ -1137,6 +1151,7 @@ typedef enum MF_MSE_ERROR
+ //                  onSourceClose
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaSourceExtension => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(e467b94e-a713-4562-a802-816a42e9008a),
+@@ -1225,6 +1240,7 @@ interface IMFCdmSuspendNotify;
+ //  Synopsis:   Extensions to the media engine for EME extensions
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineEME => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(50dc93e4-ba4f-4275-ae66-83e836e57469),
+@@ -1241,6 +1257,7 @@ interface IMFMediaEngineEME : IUnknown
+        );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineSrcElementsEx => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(654a6bb3-e1a3-424a-9908-53a43a0dfda0),
+@@ -1276,6 +1293,7 @@ cpp_quote("0x7ea80843, 0xb6e4, 0x432c, 0x8e, 0xa4, 0x78, 0x48, 0xff, 0xe4, 0x22,
+ //  Synopsis:   Implement NeedKey
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineNeedKeyNotify => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(46a30204-a696-4b18-8804-246b8f031bb1),
+@@ -1297,6 +1315,7 @@ interface IMFMediaEngineNeedKeyNotify : IUnknown
+ //  Synopsis:   Media Keys interface for EME
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaKeys => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(5cb31c05-61ff-418f-afda-caaf41421a38),
+@@ -1343,6 +1362,7 @@ typedef enum _MF_MEDIA_ENGINE_KEYERR {
+ //  Synopsis:   Media Key Session interface for EME
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaKeySession => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(24fa67d5-d1d0-4dc5-995c-c0efdc191fb5),
+@@ -1374,6 +1394,7 @@ interface IMFMediaKeySession : IUnknown
+ //  Synopsis:   Events for MediaKeySession
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaKeySessionNotify => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(6a0083f9-8947-4c1d-9ce0-cdee22b23135),
+@@ -1405,6 +1426,7 @@ interface IMFMediaKeySessionNotify : IUnknown
+ //  Synopsis:   Events for MediaKeySession
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFCdmSuspendNotify => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(7a5645d2-43bd-47fd-87b7-dcd24cc7d692),
+@@ -1491,6 +1513,7 @@ typedef enum MF_MEDIA_ENGINE_OPM_STATUS
+ //  Synopsis:   Interface to get OPM information and constriction status
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineOPMInfo => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(765763e6-6c01-4b01-bb0f-b829f60ed28c),
+@@ -1716,6 +1739,7 @@ typedef enum MF_MEDIA_ENGINE_PROTECTION_FLAGS
+ //              prior to using this interface.
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineClassFactory => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(4D645ACE-26AA-4688-9BE1-DF3516990B93),
+@@ -1745,6 +1769,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineClassFactoryEx => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(c56156c6-ea5b-48a5-9df8-fbe035d0929e),
+@@ -1772,6 +1797,7 @@ interface IMFMediaEngineClassFactoryEx : IMFMediaEngineClassFactory
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineClassFactory2 => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(09083cef-867f-4bf6-8776-dee3a7b42fca),
+@@ -1803,6 +1829,7 @@ interface IMFExtendedDRMTypeSupport : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFMediaEngineSupportsSourceTransfer => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(a724b056-1b2e-4642-a6f3-db9420c52908),
+@@ -2046,6 +2073,7 @@ interface IMFTimedTextRegion;
+ interface IMFTimedTextStyle;
+ interface IMFTimedTextFormattedText;
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedText => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(1f2a94c9-a3df-430d-9d0f-acd85ddc29af),
+@@ -2121,6 +2149,7 @@ interface IMFTimedText : IUnknown
+     BOOL IsInBandEnabled();
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextNotify => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(df6b87b6-ce12-45db-aba7-432fe054e57d),
+@@ -2161,6 +2190,7 @@ interface IMFTimedTextNotify : IUnknown
+     void Reset();
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextTrack => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(8822c32d-654e-4233-bf21-d7f2e67d30d4),
+@@ -2204,6 +2234,7 @@ interface IMFTimedTextTrack : IUnknown
+     HRESULT GetCueList([out, annotation("_COM_Outptr_")] IMFTimedTextCueList** cues);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextTrackList => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(23ff334c-442c-445f-bccc-edc438aa11e2),
+@@ -2225,6 +2256,7 @@ interface IMFTimedTextTrackList : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextCue => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(1e560447-9a2b-43e1-a94c-b0aaabfbfbc9),
+@@ -2267,6 +2299,7 @@ interface IMFTimedTextCue : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextFormattedText => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(e13af3c1-4d47-4354-b1f5-e83ae0ecae60),
+@@ -2289,6 +2322,7 @@ interface IMFTimedTextFormattedText : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextStyle => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(09b2455d-b834-4f01-a347-9052e21c450e),
+@@ -2352,6 +2386,7 @@ interface IMFTimedTextStyle : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextRegion => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(c8d22afc-bc47-4bdf-9b04-787e49ce3f58),
+@@ -2418,6 +2453,7 @@ interface IMFTimedTextRegion : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMFTimedTextBinary => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(4ae3a412-0545-43c4-bf6f-6b97a5c6c432),

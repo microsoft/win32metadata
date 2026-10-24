@@ -1,0 +1,20 @@
+diff --git a/um/mfmp2dlna.idl b/um/mfmp2dlna.idl
+index cd50b2c0..c23ed592 100644
+--- a/um/mfmp2dlna.idl
++++ b/um/mfmp2dlna.idl
+@@ -6,6 +6,7 @@
+ //*@@@---@@@@******************************************************************
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -22,6 +23,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ ///     Initialize Media Foundation MPEG-2 sink
+ /// </summary>
+ //////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IMFDLNASinkInit => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(0c012799-1b61-4c10-bda9-04445be5f561),

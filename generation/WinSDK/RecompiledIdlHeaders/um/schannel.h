@@ -412,8 +412,8 @@ typedef struct _SCHANNEL_CRED
     // or include Ntdef.h, SubAuth.h or Winternl.h.
 
 // These values distinguish between the different RSA padding modes and can
-// be specified in the CRYPTO_SETTINGS strCngAlgId field, in addition to the
-// CNG algorithm identifiers.
+// be specified in the CRYPTO_SETTINGS strCngAlgId field, in lieu of a
+// CNG algorithm identifier.
 #define SCHANNEL_RSA_PSS_PADDING_ALGORITHM L"SCH_RSA_PSS_PAD"
 #define SCHANNEL_RSA_PKCS_PADDING_ALGORITHM L"SCH_RSA_PKCS_PAD"
 

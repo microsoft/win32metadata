@@ -2,3 +2,5 @@
 <IncludeRoot>/um/cfapi.h
 --namespace
 Windows.Win32.Storage.CloudFilters
+--config
+parse-win32-annotations

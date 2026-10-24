@@ -1,0 +1,164 @@
+diff --git a/um/projectedfslib.h b/um/projectedfslib.h
+--- a/um/projectedfslib.h
++++ b/um/projectedfslib.h
+@@ -85,8 +85,14 @@
+ } PRJ_NOTIFICATION;
+ 
+ DECLARE_HANDLE(PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT;
++#endif
+ 
+ DECLARE_HANDLE(PRJ_DIR_ENTRY_BUFFER_HANDLE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PRJ_DIR_ENTRY_BUFFER_HANDLE PRJ_DIR_ENTRY_BUFFER_HANDLE;
++#endif
+ 
+ typedef enum PRJ_EXT_INFO_TYPE {
+     PRJ_EXT_INFO_TYPE_SYMLINK = 1
+@@ -140,6 +146,7 @@
+     UINT32 NotificationMappingsCount;
+ } PRJ_STARTVIRTUALIZING_OPTIONS;
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjStartVirtualizing(
+     _In_ PCWSTR virtualizationRootPath,
+@@ -149,11 +156,13 @@
+     _Outptr_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT* namespaceVirtualizationContext
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI_(void)
+ PrjStopVirtualizing(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjClearNegativePathCache(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -166,6 +175,7 @@
+     UINT32 WriteAlignment;
+ } PRJ_VIRTUALIZATION_INSTANCE_INFO;
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjGetVirtualizationInstanceInfo(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -187,6 +197,7 @@
+     UINT8 ContentID[PRJ_PLACEHOLDER_ID_LENGTH];
+ } PRJ_PLACEHOLDER_VERSION_INFO;
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjMarkDirectoryAsPlaceholder(
+     _In_ PCWSTR rootPathName,
+@@ -231,6 +242,7 @@
+     UINT8 VariableData[1];
+ } PRJ_PLACEHOLDER_INFO;
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjWritePlaceholderInfo(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -239,6 +251,7 @@
+     _In_ UINT32 placeholderInfoSize
+     );
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ PrjWritePlaceholderInfo2(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -273,6 +286,7 @@
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(PRJ_UPDATE_FAILURE_CAUSES);
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjUpdateFileIfNeeded(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -283,6 +297,7 @@
+     _Out_opt_ PRJ_UPDATE_FAILURE_CAUSES* failureReason
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjDeleteFile(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -291,6 +306,7 @@
+     _Out_opt_ PRJ_UPDATE_FAILURE_CAUSES* failureReason
+    );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjWriteFileData(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -311,18 +327,21 @@
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(PRJ_FILE_STATE);
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjGetOnDiskFileState(
+     _In_ PCWSTR destinationFileName,
+     _Out_ PRJ_FILE_STATE* fileState
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI_(void*)
+ PrjAllocateAlignedBuffer (
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+     _In_ size_t size
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI_(void)
+ PrjFreeAlignedBuffer (
+     _In_ void* buffer
+@@ -469,6 +488,7 @@
+ 
+ } PRJ_COMPLETE_COMMAND_EXTENDED_PARAMETERS;
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjCompleteCommand(
+     _In_ PRJ_NAMESPACE_VIRTUALIZATION_CONTEXT namespaceVirtualizationContext,
+@@ -481,6 +501,7 @@
+ 
+ #pragma region Enumeration APIs
+ 
++_Win32_SupportedOS_17763_
+ STDAPI
+ PrjFillDirEntryBuffer(
+     _In_ PCWSTR fileName,
+@@ -488,6 +509,7 @@
+     _In_ PRJ_DIR_ENTRY_BUFFER_HANDLE dirEntryBufferHandle
+     );
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ PrjFillDirEntryBuffer2(
+     _In_ PRJ_DIR_ENTRY_BUFFER_HANDLE dirEntryBufferHandle,
+@@ -496,18 +518,21 @@
+     _In_opt_ PRJ_EXTENDED_INFO* extendedInfo
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI_(BOOLEAN)
+ PrjFileNameMatch (
+     _In_ PCWSTR fileNameToCheck,
+     _In_ PCWSTR pattern
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI_(int)
+ PrjFileNameCompare (
+     _In_ PCWSTR fileName1,
+     _In_ PCWSTR fileName2
+     );
+ 
++_Win32_SupportedOS_17763_
+ STDAPI_(BOOLEAN)
+ PrjDoesNameContainWildCards (
+     _In_ LPCWSTR fileName

@@ -566,7 +566,7 @@ data_seg (for uniqueVarName) and/or the const segment via #pragma const_seg
 (for g_hMyProvider) before invoking the TRACELOGGING_DEFINE_PROVIDER macro.
 */
 #define TRACELOGGING_DEFINE_PROVIDER(handleVariable, providerName, providerId, ...) \
-    _tlg_DefineProvider_annotation(handleVariable, _Tlg##handleVariable##Prov, 1, providerName); \
+    _tlg_DefineProvider_annotation(handleVariable, _Tlg##handleVariable##Prov, 1, providerName) \
     _tlgProviderStorage_imp(_Tlg##handleVariable##Prov, providerName, providerId, 1, __VA_ARGS__); \
     _tlg_EXTERN_C_CONST TraceLoggingHProvider handleVariable = &_Tlg##handleVariable##Prov
 
@@ -2871,6 +2871,7 @@ TraceLoggingRegisterEx(
     TLG_STATUS status;
     struct _tlgProvider_t* pProvider = (struct _tlgProvider_t*)hProvider;
     GUID const providerId = TraceLoggingProviderId(pProvider);
+    (void)providerId; // providerId is not used in some configurations
     TLG_PAGED_CODE();
 
     if (pProvider->RegHandle != 0)

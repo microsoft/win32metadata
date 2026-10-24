@@ -158,6 +158,8 @@ extern "C" {
 
 #define OPTION_IPV6_ONLY_PREFERRED      108
 
+#define OPTION_CAPTIVE_PORTAL           114
+
 #define OPTION_DNR                      162
 
 #define OPTION_MSFT_IE_PROXY            252

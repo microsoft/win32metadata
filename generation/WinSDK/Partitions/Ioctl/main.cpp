@@ -9,3 +9,4 @@
 #include <minwinbase.h>
 #include <winioctl.h>
 #include <ntddstor.h>
+#include <cxl.h>

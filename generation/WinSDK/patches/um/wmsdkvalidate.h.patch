@@ -1,0 +1,36 @@
+diff --git a/um/wmsdkvalidate.h b/um/wmsdkvalidate.h
+index 7cafa96e..2bc12872 100644
+--- a/um/wmsdkvalidate.h
++++ b/um/wmsdkvalidate.h
+@@ -24,6 +24,7 @@
+ // handle a particular URL, as this cannot be known until the URL is opened.
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ HRESULT STDMETHODCALLTYPE WMCheckURLExtension( /* [in] */ LPCWSTR pwszURL );
+ 
+ //
+@@ -36,6 +37,7 @@ HRESULT STDMETHODCALLTYPE WMCheckURLExtension( /* [in] */ LPCWSTR pwszURL );
+ // handle a particular URL, as this cannot be known until the URL is opened.
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ HRESULT STDMETHODCALLTYPE WMCheckURLScheme( /* [in] */ LPCWSTR pwszURLScheme );
+ 
+ //
+@@ -44,6 +46,7 @@ HRESULT STDMETHODCALLTYPE WMCheckURLScheme( /* [in] */ LPCWSTR pwszURLScheme );
+ // This routine may return a false positive, but will not return a false negative.
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ HRESULT STDMETHODCALLTYPE WMValidateData(
+     /* [in] */ BYTE *pbData,
+     /* [in, out] */ DWORD *pdwDataSize
+@@ -57,6 +60,7 @@ HRESULT STDMETHODCALLTYPE WMValidateData(
+ // played in Offline mode.
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ HRESULT STDMETHODCALLTYPE WMIsAvailableOffline(
+     /* [in] */ LPCWSTR pwszURL,
+     /* [in] */ LPCWSTR pwszLanguage,

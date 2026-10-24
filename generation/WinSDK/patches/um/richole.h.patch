@@ -1,0 +1,131 @@
+diff --git a/um/richole.h b/um/richole.h
+--- a/um/richole.h
++++ b/um/richole.h
+@@ -1,5 +1,11 @@
+ #ifndef _RICHOLE_
+ #define _RICHOLE_
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long RICH_EDIT_GET_OBJECT_FLAGS;
++typedef unsigned long REOBJECT_FLAGS;
++typedef unsigned long RECO_FLAGS;
++#endif
+ 
+ #if _MSC_VER > 1000
+ #pragma once
+@@ -25,7 +31,7 @@
+ 	LPOLECLIENTSITE	polesite;			// Associated client site interface
+ 	SIZEL			sizel;				// Size of object (may be 0,0)
+ 	DWORD			dvaspect;			// Display aspect to use
+-	DWORD			dwFlags;			// Object status flags
++	_Win32_AssociatedEnum_(REOBJECT_FLAGS) DWORD			dwFlags;			// Object status flags
+ 	DWORD			dwUser;				// Dword for user's use
+ } REOBJECT;
+ 
+@@ -35,6 +41,14 @@
+ #define REO_GETOBJ_PSTG				(0x00000002L)
+ #define REO_GETOBJ_POLESITE			(0x00000004L)
+ #define REO_GETOBJ_ALL_INTERFACES	(0x00000007L)
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(RICH_EDIT_GET_OBJECT_FLAGS, unsigned long,
++    REO_GETOBJ_POLEOBJ,
++    REO_GETOBJ_PSTG,
++    REO_GETOBJ_POLESITE,
++    REO_GETOBJ_NO_INTERFACES,
++    REO_GETOBJ_ALL_INTERFACES);
++#endif
+ 
+ // Place object at selection
+ #define REO_CP_SELECTION ((ULONG) -1L)
+@@ -67,6 +81,28 @@
+ #define REO_HILITED			(0x01000000L)	// Object is to be hilited (RO)
+ #define REO_LINKAVAILABLE	(0x00800000L)	// Link believed available (RO)
+ #define REO_GETMETAFILE		(0x00400000L)	// Object requires metafile (RO)
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(REOBJECT_FLAGS, unsigned long,
++    REO_ALIGNTORIGHT,
++    REO_BELOWBASELINE,
++    REO_BLANK,
++    REO_CANROTATE,
++    REO_DONTNEEDPALETTE,
++    REO_DYNAMICSIZE,
++    REO_GETMETAFILE,
++    REO_HILITED,
++    REO_INPLACEACTIVE,
++    REO_INVERTEDSELECT,
++    REO_LINK,
++    REO_LINKAVAILABLE,
++    REO_OPEN,
++    REO_OWNERDRAWSELECT,
++    REO_RESIZABLE,
++    REO_SELECTED,
++    REO_STATIC,
++    REO_USEASBACKGROUND,
++    REO_WRAPTEXTAROUND);
++#endif
+ 
+ // Flags for IRichEditOle::GetClipboardData(),
+ // IRichEditOleCallback::GetClipboardData() and
+@@ -76,6 +112,14 @@
+ #define RECO_COPY			(0x00000002L)	// copy to the clipboard
+ #define RECO_CUT			(0x00000003L)	// cut to the clipboard
+ #define RECO_DRAG			(0x00000004L)	// drag
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(RECO_FLAGS, unsigned long,
++    RECO_PASTE,
++    RECO_DROP,
++    RECO_COPY,
++    RECO_CUT,
++    RECO_DRAG);
++#endif
+ 
+ /*
+  *	IRichEditOle
+@@ -90,6 +134,9 @@
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOle
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IRichEditOle IRichEditOle;
++#endif
+ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+ {
+     // *** IUnknown methods ***
+@@ -102,7 +149,7 @@
+ 	STDMETHOD_(LONG,GetObjectCount) (THIS) PURE;
+ 	STDMETHOD_(LONG,GetLinkCount) (THIS) PURE;
+ 	STDMETHOD(GetObject) (THIS_ LONG iob, REOBJECT FAR * lpreobject,
+-						  DWORD dwFlags) PURE;
++						  _Win32_AssociatedEnum_(RICH_EDIT_GET_OBJECT_FLAGS) DWORD dwFlags) PURE;
+     STDMETHOD(InsertObject) (THIS_ REOBJECT FAR * lpreobject) PURE;
+ 	STDMETHOD(ConvertObject) (THIS_ LONG iob, REFCLSID rclsidNew,
+ 							  LPCSTR lpstrUserTypeNew) PURE;
+@@ -132,6 +179,9 @@
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOleCallback
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IRichEditOleCallback IRichEditOleCallback;
++#endif
+ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ {
+     // *** IUnknown methods ***
+@@ -149,14 +199,14 @@
+ 									LONG cp) PURE;
+ 	STDMETHOD(DeleteObject) (THIS_ LPOLEOBJECT lpoleobj) PURE;
+ 	STDMETHOD(QueryAcceptData) (THIS_ LPDATAOBJECT lpdataobj,
+-								CLIPFORMAT FAR * lpcfFormat, DWORD reco,
++								CLIPFORMAT FAR * lpcfFormat, _Win32_AssociatedEnum_(RECO_FLAGS) DWORD reco,
+ 								BOOL fReally, HGLOBAL hMetaPict) PURE;
+ 	STDMETHOD(ContextSensitiveHelp) (THIS_ BOOL fEnterMode) PURE;
+ 	STDMETHOD(GetClipboardData) (THIS_ CHARRANGE FAR * lpchrg, DWORD reco,
+ 									LPDATAOBJECT FAR * lplpdataobj) PURE;
+-	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, DWORD grfKeyState,
+-									LPDWORD pdwEffect) PURE;
+-	STDMETHOD(GetContextMenu) (THIS_ WORD seltype, LPOLEOBJECT lpoleobj,
++	STDMETHOD(GetDragDropEffect) (THIS_ BOOL fDrag, _Win32_AssociatedEnum_(MODIFIERKEYS_FLAGS) DWORD grfKeyState,
++									_Win32_AssociatedEnum_(DROPEFFECT) LPDWORD pdwEffect) PURE;
++	STDMETHOD(GetContextMenu) (THIS_ _Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltype, LPOLEOBJECT lpoleobj,
+ 									CHARRANGE FAR * lpchrg,
+ 									HMENU FAR * lphmenu) PURE;
+ };

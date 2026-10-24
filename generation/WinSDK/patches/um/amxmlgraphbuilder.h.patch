@@ -1,0 +1,13 @@
+diff --git a/um/amxmlgraphbuilder.h b/um/amxmlgraphbuilder.h
+index eaa7d872..032b1678 100644
+--- a/um/amxmlgraphbuilder.h
++++ b/um/amxmlgraphbuilder.h
+@@ -9,7 +9,7 @@
+ DEFINE_GUID(IID_IXMLGraphBuilder, 
+ 0x1bb05960, 0x5fbf, 0x11d2, 0xa5, 0x21, 0x44, 0xdf, 0x7, 0xc1, 0x0, 0x0);
+ 
+-interface IXMLGraphBuilder : IUnknown
++interface _Win32_SupportedOS_Windows2000_ IXMLGraphBuilder : IUnknown
+ {
+     STDMETHOD(BuildFromXML) (IGraphBuilder *pGraph, IXMLElement *pxml) = 0;
+     STDMETHOD(SaveToXML) (IGraphBuilder *pGraph, BSTR *pbstrxml) = 0;

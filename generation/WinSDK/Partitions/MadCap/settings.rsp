@@ -2,3 +2,5 @@
 <IncludeRoot>/um/madcapcl.h
 --namespace
 Windows.Win32.NetworkManagement.Multicast
+--config
+parse-win32-annotations

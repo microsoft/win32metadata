@@ -1,0 +1,181 @@
+diff --git a/um/mileffects.idl b/um/mileffects.idl
+index e2c75533..6e94e6bb 100644
+--- a/um/mileffects.idl
++++ b/um/mileffects.idl
+@@ -13,6 +13,8 @@ Abstract:
+ 
+ --*/
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -131,6 +133,7 @@ typedef [public] struct MILMatrixF
+     look like).
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectConnectorInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(F66D2E4B-B46B-42FC-859E-3DA0ECDB3C43)
+@@ -151,6 +154,7 @@ interface IMILBitmapEffectConnectorInfo : IUnknown
+     there is 1 input and 1 output both of type 32bit RGBA.
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectConnectionsInfo => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(476B538A-C765-4237-BA4A-D6A880FF0CFC)
+@@ -171,6 +175,7 @@ interface IMILBitmapEffectConnectionsInfo : IUnknown
+     most uses is adequate).
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectConnections => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(C2B5D861-9B1A-4374-89B0-DEC4874D6A81)
+@@ -194,6 +199,7 @@ interface IMILBitmapEffectConnections : IUnknown
+     must implement this functionality themselves.
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffect => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(8A6FF321-C944-4A1B-9944-9954AF301258)
+@@ -214,6 +220,7 @@ interface IMILBitmapEffect : IUnknown
+     effects should not access these methods.
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectImpl => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(CC2468F2-9936-47BE-B4AF-06B5DF5DBCBB)
+@@ -240,6 +247,7 @@ interface IMILBitmapEffectImpl : IUnknown
+     IMILBitmapEffectFactory -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectFactory => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(33A9DF34-A403-4EC7-B07E-BC0682370845)
+@@ -256,6 +264,7 @@ interface IMILBitmapEffectFactory : IUnknown
+     IMILBitmapEffectRenderContext -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectRenderContext => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(12A2EC7E-2D33-44b2-B334-1ABB7846E390)
+@@ -279,6 +288,7 @@ interface IMILBitmapEffectRenderContext : IUnknown
+     the real effect (versus IMILBitmapEffect which is on the wrapper object).
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectPrimitive => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(67E31025-3091-4dfc-98D6-DD494551461D)
+@@ -310,6 +320,7 @@ interface IMILBitmapEffectPrimitive : IUnknown
+     IMILBitmapEffects -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffects => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(51AC3DCE-67C5-448b-9180-AD3EABDDD5DD)
+@@ -328,6 +339,7 @@ interface IMILBitmapEffects : IUnknown
+     IMILBitmapEffectGroup -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectGroup => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(2F952360-698A-4ac6-81A1-BCFDF08EB8E8)
+@@ -343,6 +355,7 @@ interface IMILBitmapEffectGroup : IUnknown
+     IMILBitmapEffectConnector -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectConnector => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(F59567B3-76C1-4d47-BA1E-79F955E350EF)
+@@ -357,6 +370,7 @@ interface IMILBitmapEffectConnector : IMILBitmapEffectConnectorInfo
+     IMILBitmapEffectInputConnector -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectInputConnector => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(A9B4ECAA-7A3C-45e7-8573-F4B81B60DD6C)
+@@ -372,6 +386,7 @@ interface IMILBitmapEffectInputConnector : IMILBitmapEffectConnector
+     IMILBitmapEffectOutputConnector -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectOutputConnector => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(92957AAD-841B-4866-82EC-8752468B07FD)
+@@ -382,6 +397,7 @@ interface IMILBitmapEffectOutputConnector : IMILBitmapEffectConnector
+     HRESULT GetConnection([in] ULONG uiIndex, [out, retval] IMILBitmapEffectInputConnector **ppConnection);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectInteriorOutputConnector => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(00BBB6DC-ACC9-4bfc-B344-8BEE383DFEFA)
+@@ -391,6 +407,7 @@ interface IMILBitmapEffectInteriorOutputConnector : IUnknown
+     HRESULT GetOutputConnector([out, retval] IMILBitmapEffectOutputConnector **pOutputConnector);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectInteriorInputConnector => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(20287E9E-86A2-4e15-953D-EB1438A5B842)
+@@ -405,6 +422,7 @@ interface IMILBitmapEffectInteriorInputConnector : IUnknown
+     IMILBitmapEffectEvents -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectEvents => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(2E880DD8-F8CE-457b-8199-D60BB3D7EF98)
+@@ -424,6 +442,7 @@ interface IMILBitmapEffectEvents : IUnknown
+     IMILBitmapEffectRenderContextImpl -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectRenderContextImpl => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(4D25ACCB-797D-4fd2-B128-DFFEFF84FCC3)
+@@ -441,6 +460,7 @@ interface IMILBitmapEffectRenderContextImpl : IUnknown
+     IMILBitmapEffectPrimitiveImpl -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectPrimitiveImpl => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(CE41E00B-EFA6-44e7-B007-DD042E3AE126)
+@@ -455,6 +475,7 @@ interface IMILBitmapEffectPrimitiveImpl : IUnknown
+     IMILBitmapEffectGroupImpl -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectGroupImpl => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(78FED518-1CFC-4807-8B85-6B6E51398F62)
+@@ -470,6 +491,7 @@ interface IMILBitmapEffectGroupImpl : IUnknown
+     IMILBitmapEffectOutputConnectorImpl -  
+ \*=========================================================================*/
+ 
++cpp_quote("/* Win32Metadata: interface ::IMILBitmapEffectOutputConnectorImpl => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+    object,
+    uuid(21FAE777-8B39-4bfa-9F2D-F3941ED36913)
+@@ -483,6 +505,7 @@ interface IMILBitmapEffectOutputConnectorImpl : IUnknown
+ 
+ };
+ 
++cpp_quote("/* Win32Metadata: method ::IMILBitmapEffectPrimitiveImpl::IsDirty => PreserveResult */")
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
+ 

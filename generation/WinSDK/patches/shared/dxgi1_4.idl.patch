@@ -1,0 +1,60 @@
+diff --git a/shared/dxgi1_4.idl b/shared/dxgi1_4.idl
+index cac1fa60..4863bc5e 100644
+--- a/shared/dxgi1_4.idl
++++ b/shared/dxgi1_4.idl
+@@ -1,5 +1,7 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ import "dxgi1_3.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -12,15 +14,24 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+ //  Return flags from CheckColorSpaceSupport
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG
+ {
+     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT         = 0x00000001,
+     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT = 0x00000002
+ } DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGISwapChain3 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDXGISwapChain3 => SupportedOSPlatform(\"windows10.0.10240\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGISwapChain3::CheckColorSpaceSupport::pColorSpaceSupport => AssociatedEnum(DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG) */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGISwapChain3::ResizeBuffers1::SwapChainFlags => AssociatedEnum(DXGI_SWAP_CHAIN_FLAG) */")
+ [
+     object,
+     uuid( 94d99bdb-f1f8-4ab0-b236-7da0170edab1 ),
+@@ -50,14 +61,22 @@ interface IDXGISwapChain3 :
+ //  Return flags from CheckOverlayColorSpaceSupport
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
+ {
+     DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT = 0x00000001,
+ } DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput4 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDXGIOutput4 => SupportedOSPlatform(\"windows10.0.10240\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGIOutput4::CheckOverlayColorSpaceSupport::pFlags => AssociatedEnum(DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG) */")
+ [
+     object,
+     uuid(dc7dca35-2196-414d-9F53-617884032a60),

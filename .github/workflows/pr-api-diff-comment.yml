@@ -20,7 +20,81 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Check API diff artifact
+        id: artifact
+        uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
+        with:
+          script: |
+            const workflowRun = context.payload.workflow_run;
+            if (!Number.isSafeInteger(workflowRun.id) || workflowRun.id < 1 ||
+                !Number.isSafeInteger(workflowRun.run_attempt) || workflowRun.run_attempt < 1 ||
+                typeof workflowRun.head_sha !== 'string' || !workflowRun.head_sha) {
+              throw new Error('Workflow run is missing its ID, attempt, or head SHA.');
+            }
+
+            const run = {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: workflowRun.id
+            };
+            const artifacts = await github.paginate(github.rest.actions.listWorkflowRunArtifacts, {
+              ...run,
+              per_page: 100
+            });
+            const apiDiffArtifacts = artifacts.filter(artifact => artifact.name === 'api-diff');
+            if (apiDiffArtifacts.length > 1) {
+              throw new Error(`Expected at most one api-diff artifact for run ${workflowRun.id}.`);
+            }
+            const artifact = apiDiffArtifacts[0];
+            if (artifact && artifact.expired !== false) {
+              throw new Error('The api-diff artifact is expired or has no expiration status.');
+            }
+
+            const jobs = await github.paginate(github.rest.actions.listJobsForWorkflowRunAttempt, {
+              ...run,
+              attempt_number: workflowRun.run_attempt,
+              per_page: 100
+            });
+            const buildJobs = jobs.filter(job => job.name === 'Build, test, package');
+            if (buildJobs.length !== 1) {
+              throw new Error(`Expected one build job for run ${workflowRun.id}, attempt ${workflowRun.run_attempt}.`);
+            }
+            const buildJob = buildJobs[0];
+            if (buildJob.run_id !== workflowRun.id || buildJob.run_attempt !== workflowRun.run_attempt ||
+                buildJob.head_sha !== workflowRun.head_sha || buildJob.status !== 'completed' ||
+                buildJob.conclusion !== 'success' || !Array.isArray(buildJob.steps)) {
+              throw new Error('The API diff producer job has incomplete or mismatched execution metadata.');
+            }
+
+            const expectedSteps = [
+              ['Documentation-only change', artifact ? 'skipped' : 'success'],
+              ['Generate API surface diff', artifact ? 'success' : 'skipped'],
+              ['Upload API diff', artifact ? 'success' : 'skipped']
+            ];
+            const hasExpectedSteps = expectedSteps.every(([name, conclusion]) => {
+              const steps = buildJob.steps.filter(step => step.name === name);
+              return steps.length === 1 && steps[0].status === 'completed' && steps[0].conclusion === conclusion;
+            });
+            if (!hasExpectedSteps) {
+              throw new Error(artifact
+                ? 'The api-diff artifact does not have the expected producer steps.'
+                : 'No api-diff artifact exists and the producer is not a confirmed documentation-only build.');
+            }
+
+            if (artifact) {
+              // Run artifacts span attempts; reject output left over from an earlier build.
+              const createdAt = Date.parse(artifact.created_at);
+              if (!(Date.parse(buildJob.started_at) <= createdAt && createdAt <= Date.parse(buildJob.completed_at))) {
+                throw new Error('The api-diff artifact was not created during the triggering build attempt.');
+              }
+              core.setOutput('available', 'true');
+            } else {
+              core.info(`Skipping API diff comment for documentation-only run ${workflowRun.id}, attempt ${workflowRun.run_attempt}.`);
+              core.setOutput('available', 'false');
+            }
+
       - name: Download API diff artifact
+        if: steps.artifact.outputs.available == 'true'
         uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
           name: api-diff
@@ -29,6 +103,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Post API diff comment
+        if: steps.artifact.outputs.available == 'true'
         uses: actions/github-script@f28e40c7f34bde8b3046d885e986cb6290c5673b # v7.1.0
         with:
           script: |
@@ -84,10 +159,16 @@ jobs:
               const diffLines = diff.split(/\r?\n/);
               const additions = diffLines.filter(line => /^\+[^+]/.test(line)).length;
               const deletions = diffLines.filter(line => /^-[^-]/.test(line)).length;
-              const longestBacktickRun = Math.max(0, ...Array.from(diff.matchAll(/`+/g), match => match[0].length));
-              const fence = '`'.repeat(Math.max(3, longestBacktickRun + 1));
+              const maxCommentLength = 65536;
+              const truncationNotice = `\n\n> Diff truncated to fit this comment. Download the complete \`api-diff.patch\` from the [api-diff artifact](${runUrl}#artifacts).`;
+              const renderComment = (preview, notice = '') => {
+                let longestBacktickRun = 0;
+                for (const match of preview.matchAll(/`+/g)) {
+                  longestBacktickRun = Math.max(longestBacktickRun, match[0].length);
+                }
+                const fence = '`'.repeat(Math.max(3, longestBacktickRun + 1));
 
-              body = `${marker}
+                return `${marker}
             ## 📋 API Surface Diff
 
             **+${additions} additions / -${deletions} deletions** vs main branch ([full validation run](${runUrl}))
@@ -96,12 +177,19 @@ jobs:
             <summary>Click to expand API diff</summary>
 
             ${fence}diff
-            ${diff}
+            ${preview}
             ${fence}
 
-            </details>
+            </details>${notice}
 
             > This comment is automatically updated on each push.`;
+              };
+              body = renderComment(diff);
+              if (body.length > maxCommentLength) {
+                // Reserve space for the wrapper, both fences, and the truncation notice.
+                const previewLength = Math.max(0, maxCommentLength - (body.length - diff.length) - truncationNotice.length);
+                body = renderComment(diff.slice(0, previewLength), truncationNotice);
+              }
             }
 
             const comments = await github.paginate(github.rest.issues.listComments, {

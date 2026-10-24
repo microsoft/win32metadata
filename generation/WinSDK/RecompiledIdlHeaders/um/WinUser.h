@@ -49,6 +49,7 @@ extern "C" {
 #pragma warning(disable:4309) // truncation of constant value
 #endif
 #pragma warning(disable:4820) // padding added after data member
+#pragma warning(disable:4201) // nonstandard extension used: nameless struct/union
 #endif
 
 #ifndef WINVER
@@ -961,8 +962,6 @@ typedef struct tagWTSSESSION_NOTIFICATION
 
 #if(_WIN32_WINNT >= 0x0602)
 #define HSHELL_MONITORCHANGED            16
-
-// Deprecated by Feature_NoMoreSwpIamNotifyPosChanged
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS3
 
@@ -2403,7 +2402,11 @@ typedef struct {
 #define WM_POINTERDEVICEOUTOFRANGE      0x23A
 #endif /* WINVER >= 0x0602 */
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#define WM_STOPINERTIA                  0x023B
+#define WM_ENDINERTIA                   0x023C
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+
 
 #if(WINVER >= 0x0601)
 #define WM_TOUCH                        0x0240
@@ -4901,7 +4904,7 @@ IsZoomed(
 
 #if(WINVER >= 0x0400)
 #define SWP_DEFERERASE      0x2000 // same as SWP_DEFERDRAWING
-#define SWP_ASYNCWINDOWPOS  0x4000 // same as SWP_CREATESPB
+#define SWP_ASYNCWINDOWPOS  0x4000
 #endif /* WINVER >= 0x0400 */
 
 
@@ -6633,7 +6636,42 @@ GetPointerFramePenInfoHistory(
     _Inout_ UINT32 *pointerCount,
     _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_PEN_INFO *penInfo);
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+WINUSERAPI
+BOOL
+WINAPI
+GetPointerTouchpadInfo(
+    _In_ UINT32 pointerId,
+    _Out_writes_(1) POINTER_TOUCH_INFO *touchpadInfo);
+
+WINUSERAPI
+BOOL
+WINAPI
+GetPointerTouchpadInfoHistory(
+    _In_ UINT32 pointerId,
+    _Inout_ UINT32 *entriesCount,
+    _Out_writes_opt_(*entriesCount) POINTER_TOUCH_INFO *touchpadInfo);
+
+WINUSERAPI
+BOOL
+WINAPI
+GetPointerFrameTouchpadInfo(
+    _In_ UINT32 pointerId,
+    _Inout_ UINT32 *pointerCount,
+    _Out_writes_opt_(*pointerCount) POINTER_TOUCH_INFO *touchpadInfo);
+
+WINUSERAPI
+BOOL
+WINAPI
+GetPointerFrameTouchpadInfoHistory(
+    _In_ UINT32 pointerId,
+    _Inout_ UINT32 *entriesCount,
+    _Inout_ UINT32 *pointerCount,
+    _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_TOUCH_INFO *touchpadInfo);
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
 
 WINUSERAPI
 BOOL
@@ -6695,7 +6733,63 @@ DestroySyntheticPointerDevice(
     _In_ HSYNTHETICPOINTERDEVICE device);
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+typedef enum tagSYNTHETIC_DEVICE_CREATION_OPTIONS
+{
+    SDCO_NONE                  = 0x0,
+    SDCO_PHYSICAL_SIZE         = 0x1,
+    SDCO_TOUCHPAD_GESTURE_ONLY = 0x2,
+} SYNTHETIC_DEVICE_CREATION_OPTIONS;
+
+#ifndef MIDL_PASS
+// Don't define this for MIDL compiler passes over winuser.h. Some of them
+// don't include winnt.h (where DEFINE_ENUM_FLAG_OPERATORS is defined) and
+// get compile errors.
+DEFINE_ENUM_FLAG_OPERATORS(SYNTHETIC_DEVICE_CREATION_OPTIONS)
+#endif
+
+typedef struct tagSYNTHETIC_DEVICE_CREATION_PARAMS
+{
+    POINTER_INPUT_TYPE pointerType;
+    ULONG maxCount;
+    POINTER_FEEDBACK_MODE feedbackMode;
+    HMONITOR hMonitor;
+    ULONG deviceWidth;
+    ULONG deviceHeight;
+    SYNTHETIC_DEVICE_CREATION_OPTIONS options;
+} SYNTHETIC_DEVICE_CREATION_PARAMS;
+
+WINUSERAPI
+HSYNTHETICPOINTERDEVICE
+WINAPI
+CreateSyntheticPointerDevice2(
+    _In_ SYNTHETIC_DEVICE_CREATION_PARAMS* pParams);
+
+typedef enum tagTOUCHPAD_ACTION
+{
+    TA_3FINGER_TAP,
+    TA_3FINGER_PRESS,
+    TA_3FINGER_RELEASE,
+    TA_4FINGER_TAP,
+    TA_4FINGER_PRESS,
+    TA_4FINGER_RELEASE,
+    TA_5FINGER_TAP,
+    TA_5FINGER_PRESS,
+    TA_5FINGER_RELEASE,
+    TA_INERTIA_STOP,
+    TA_INERTIA_END,
+} TOUCHPAD_ACTION;
+
+WINUSERAPI
+BOOL
+WINAPI
+InjectTouchpadAction(
+    HSYNTHETICPOINTERDEVICE hDevice,
+    TOUCHPAD_ACTION action);
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
 
 WINUSERAPI
 BOOL
@@ -6865,7 +6959,17 @@ GetPointerInputTransform(
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+WINUSERAPI
+BOOL
+WINAPI
+ReportWindowContentInertia(
+    HWND hWnd,
+    BOOL bStartInertia);
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -15605,7 +15709,28 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 
-// TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+WINUSERAPI
+BOOL
+WINAPI
+RegisterTouchpadCapableWindow(
+    _In_ HWND hWnd,
+    _In_ BOOL fEnable);
+
+WINUSERAPI
+BOOL
+WINAPI
+RegisterTouchpadCapableThread(
+    _In_ BOOL fEnable);
+
+WINUSERAPI
+BOOL
+WINAPI
+SetMaxTouchpadSensitivity(BOOL maxSensitivity);
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
+#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

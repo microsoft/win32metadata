@@ -15,5 +15,5 @@ CreateDataAdviseHolder
 <IncludeRoot>/um/DispEx.h
 --namespace
 Windows.Win32.System.Ole
---with-type
-STREAM_SEEK=uint
+--config
+parse-win32-annotations

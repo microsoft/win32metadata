@@ -1,0 +1,64 @@
+diff --git a/um/lmwksta.h b/um/lmwksta.h
+index 7191233a..6f07d00a 100644
+--- a/um/lmwksta.h
++++ b/um/lmwksta.h
+@@ -30,6 +30,7 @@ Notes:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -52,6 +53,7 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaGetInfo (
+     _In_opt_ LMSTR   servername OPTIONAL,
+@@ -59,6 +61,7 @@ NetWkstaGetInfo (
+     _Outptr_opt_result_buffer_(_Inexpressible_("size varies with level")) OUT LPBYTE  *bufptr
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaSetInfo (
+     _In_opt_  LMSTR   servername OPTIONAL,
+@@ -67,6 +70,7 @@ NetWkstaSetInfo (
+     _Out_opt_ OUT LPDWORD parm_err OPTIONAL
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaUserGetInfo (
+     _In_opt_ LMSTR  reserved,
+@@ -74,6 +78,7 @@ NetWkstaUserGetInfo (
+     _Outptr_result_buffer_(_Inexpressible_("varies")) OUT LPBYTE  *bufptr
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaUserSetInfo (
+     _In_opt_  LMSTR  reserved,
+@@ -82,6 +87,7 @@ NetWkstaUserSetInfo (
+     _Out_opt_ LPDWORD parm_err OPTIONAL
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaUserEnum (
+     _In_opt_ LMSTR       servername OPTIONAL,
+@@ -106,9 +112,10 @@ NET_API_STATUS NET_API_FUNCTION
+ NetWkstaTransportDel (
+     _In_opt_ IN  LMSTR   servername OPTIONAL,
+     _In_opt_ IN  LMSTR   transportname,
+-    IN  DWORD   ucond
++    _Win32_AssociatedEnum_(FORCE_LEVEL_FLAGS) IN  DWORD   ucond
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ _Success_( return == NERR_Success || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION

@@ -1,0 +1,60 @@
+diff --git a/um/vsprov.idl b/um/vsprov.idl
+index 07c4f236..fd8f050b 100644
+--- a/um/vsprov.idl
++++ b/um/vsprov.idl
+@@ -10,6 +10,7 @@
+ //
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -36,6 +37,7 @@ typedef VSS_PWSZ *PVSS_PWSZ;
+ //      Interfaces
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssSoftwareSnapshotProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+         object,
+         uuid(609e123e-2c5a-44d3-8f01-0b1d9a47d1ff),        
+@@ -113,6 +115,7 @@ interface IVssSoftwareSnapshotProvider : IUnknown
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssProviderCreateSnapshotSet => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+         object,
+         uuid(5F894E5B-1E39-4778-8E23-9ABAD9F0E08C),        
+@@ -159,6 +162,7 @@ interface IVssProviderCreateSnapshotSet : IUnknown
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssProviderNotifications => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+         object,
+         uuid(E561901F-03A5-4afe-86D0-72BAEECE7004),
+@@ -179,6 +183,7 @@ interface IVssProviderNotifications : IUnknown
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssHardwareSnapshotProvider => SupportedOSPlatform(\"windowsserver2003\") */")
+ [
+         object,
+         uuid(9593A157-44E9-4344-BBEB-44FBF9B06B10),
+@@ -240,6 +245,7 @@ interface IVssHardwareSnapshotProvider : IUnknown
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssHardwareSnapshotProviderEx => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+         object,
+         uuid(7F5BA925-CDB1-4d11-A71F-339EB7E709FD),
+@@ -282,6 +288,7 @@ interface IVssHardwareSnapshotProviderEx : IVssHardwareSnapshotProvider
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssFileShareSnapshotProvider => SupportedOSPlatform(\"windows8.1\") */")
+ [
+         object,
+         uuid(c8636060-7c2e-11df-8c4a-0800200c9a66),        

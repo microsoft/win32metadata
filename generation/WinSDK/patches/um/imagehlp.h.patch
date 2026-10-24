@@ -1,0 +1,338 @@
+diff --git a/um/imagehlp.h b/um/imagehlp.h
+index 1cdaaf10..5bb44717 100644
+--- a/um/imagehlp.h
++++ b/um/imagehlp.h
+@@ -102,7 +102,7 @@ typedef struct _LOADED_IMAGE {
+     PIMAGE_SECTION_HEADER LastRvaSection;
+     ULONG                 NumberOfSections;
+     PIMAGE_SECTION_HEADER Sections;
+-    ULONG                 Characteristics;
++    _Win32_AssociatedEnum_(IMAGE_FILE_CHARACTERISTICS2) ULONG                 Characteristics;
+     BOOLEAN               fSystemImage;
+     BOOLEAN               fDOSImage;
+     BOOLEAN               fReadOnly;
+@@ -126,6 +126,8 @@ typedef struct _LOADED_IMAGE {
+ #if WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS)
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ BindImage(
+@@ -188,6 +190,8 @@ BOOL
+     );
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ BindImageEx(
+@@ -206,6 +210,8 @@ BindImageEx(
+                                                 //  (same as NT 3.1->NT 4.0)
+ #define BIND_REPORT_64BIT_VA   0x00000010
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ ReBaseImage(
+@@ -223,6 +229,8 @@ ReBaseImage(
+     _In_ ULONG TimeStamp             // new timestamp for image, if non-zero
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ ReBaseImage64(
+@@ -271,6 +279,8 @@ ReBaseImage64(
+ // Define checksum function prototypes.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ PIMAGE_NT_HEADERS
+ IMAGEAPI
+ CheckSumMappedFile (
+@@ -280,6 +290,7 @@ CheckSumMappedFile (
+     _Out_ PDWORD CheckSum
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ IMAGEAPI
+ MapFileAndCheckSumA (
+@@ -288,6 +299,7 @@ MapFileAndCheckSumA (
+     _Out_ PDWORD CheckSum
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ IMAGEAPI
+ MapFileAndCheckSumW (
+@@ -302,6 +314,8 @@ MapFileAndCheckSumW (
+ #define MapFileAndCheckSum  MapFileAndCheckSumA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ GetImageConfigInformation(
+@@ -309,6 +323,8 @@ GetImageConfigInformation(
+     _Out_ PIMAGE_LOAD_CONFIG_DIRECTORY ImageConfigInformation
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ IMAGEAPI
+ GetImageUnusedHeaderBytes(
+@@ -316,6 +332,8 @@ GetImageUnusedHeaderBytes(
+     _Out_ PDWORD SizeUnusedHeaderBytes
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ SetImageConfigInformation(
+@@ -336,6 +354,8 @@ typedef PVOID DIGEST_HANDLE;
+ 
+ typedef BOOL (WINAPI *DIGEST_FUNCTION) (DIGEST_HANDLE refdata, PBYTE pData, DWORD dwLength);
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ ImageGetDigestStream(
+@@ -345,6 +365,8 @@ ImageGetDigestStream(
+     _In_ DIGEST_HANDLE DigestHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ IMAGEAPI
+@@ -354,6 +376,8 @@ ImageAddCertificate(
+     _Out_ PDWORD Index
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ ImageRemoveCertificate(
+@@ -361,6 +385,8 @@ ImageRemoveCertificate(
+     _In_ DWORD Index
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ IMAGEAPI
+@@ -372,6 +398,8 @@ ImageEnumerateCertificates(
+     _In_opt_ DWORD IndexCount
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ IMAGEAPI
+@@ -382,6 +410,8 @@ ImageGetCertificateData(
+     _Inout_ PDWORD RequiredLength
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ ImageGetCertificateHeader(
+@@ -390,6 +420,8 @@ ImageGetCertificateHeader(
+     _Inout_ LPWIN_CERTIFICATE Certificateheader
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ PLOADED_IMAGE
+ IMAGEAPI
+ ImageLoad(
+@@ -397,12 +429,16 @@ ImageLoad(
+     _In_opt_ PCSTR DllPath
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ ImageUnload(
+     _Inout_ PLOADED_IMAGE LoadedImage
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ MapAndLoad(
+@@ -413,12 +449,16 @@ MapAndLoad(
+     _In_ BOOL ReadOnly
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ UnMapAndLoad(
+     _Inout_ PLOADED_IMAGE LoadedImage
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ TouchFileTimes (
+@@ -426,6 +466,8 @@ TouchFileTimes (
+     _In_opt_ PSYSTEMTIME pSystemTime
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ SplitSymbols (
+@@ -435,6 +477,8 @@ SplitSymbols (
+     _In_ ULONG Flags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ UpdateDebugInfoFile(
+@@ -444,6 +488,7 @@ UpdateDebugInfoFile(
+     _In_ PIMAGE_NT_HEADERS32 NtHeaders
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ IMAGEAPI
+ UpdateDebugInfoFileEx(
+@@ -845,6 +890,12 @@ UnDecorateSymbolNameW(
+ 
+ #define DBHHEADER_DEBUGDIRS     0x1
+ #define DBHHEADER_CVMISC        0x2
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(MODLOAD_DATA_TYPE, unsigned int,
++    DBHHEADER_DEBUGDIRS,
++    DBHHEADER_CVMISC);
++#endif
+ #define DBHHEADER_PDBGUID       0x3
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+@@ -1611,6 +1662,27 @@ enum SymTagEnum
+ #define SYMFLAG_ILREL               0x00010000
+ #define SYMFLAG_METADATA            0x00020000
+ #define SYMFLAG_CLR_TOKEN           0x00040000
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SYMBOL_INFO_FLAGS, unsigned int,
++    SYMFLAG_CLR_TOKEN,
++    SYMFLAG_CONSTANT,
++    SYMFLAG_EXPORT,
++    SYMFLAG_FORWARDER,
++    SYMFLAG_FRAMEREL,
++    SYMFLAG_FUNCTION,
++    SYMFLAG_ILREL,
++    SYMFLAG_LOCAL,
++    SYMFLAG_METADATA,
++    SYMFLAG_PARAMETER,
++    SYMFLAG_REGISTER,
++    SYMFLAG_REGREL,
++    SYMFLAG_SLOT,
++    SYMFLAG_THUNK,
++    SYMFLAG_TLSREL,
++    SYMFLAG_VALUEPRESENT,
++    SYMFLAG_VIRTUAL);
++#endif
+ #define SYMFLAG_NULL                0x00080000
+ #define SYMFLAG_FUNC_NO_RETURN      0x00100000
+ #define SYMFLAG_SYNTHETIC_ZEROBASE  0x00200000
+@@ -1949,6 +2021,14 @@ enum {
+     sevFatal,
+     sevMax  // unused
+ };
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGEHLP_CBA_EVENT_SEVERITY, unsigned int,
++    sevInfo,
++    sevProblem,
++    sevAttn,
++    sevFatal);
++#endif
++
+ 
+ #define EVENT_SRCSPEW_START 100
+ #define EVENT_SRCSPEW       100
+@@ -3024,6 +3104,14 @@ SymSetSearchPathW(
+ #define SLMFLAG_ALT_INDEX   0x2
+ #define SLMFLAG_NO_SYMBOLS  0x4
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Retain the existing logical zero label without adding a native constant.
++typedef _WIN32META_ANNOTATION_(
++    "FlagsEnum(SLMFLAG_NONE, SLMFLAG_VIRTUAL, SLMFLAG_ALT_INDEX, SLMFLAG_NO_SYMBOLS)",
++    0, SLMFLAG_VIRTUAL, SLMFLAG_ALT_INDEX, SLMFLAG_NO_SYMBOLS)
++    unsigned int SYM_LOAD_FLAGS;
++#endif
++
+ DWORD64
+ IMAGEAPI
+ SymLoadModuleEx(
+@@ -3614,6 +3702,12 @@ SymGetTypeInfo(
+ #define IMAGEHLP_GET_TYPE_INFO_UNCACHED 0x00000001
+ #define IMAGEHLP_GET_TYPE_INFO_CHILDREN 0x00000002
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGEHLP_GET_TYPE_INFO_FLAGS, unsigned int,
++    IMAGEHLP_GET_TYPE_INFO_CHILDREN,
++    IMAGEHLP_GET_TYPE_INFO_UNCACHED);
++#endif
++
+ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
+     IN  ULONG    SizeOfStruct;
+     IN  ULONG    Flags;
+@@ -4163,6 +4257,13 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+ #define SSRVOPT_DWORD               0x00000002
+ #define SSRVOPT_DWORDPTR            0x00000004
+ #define SSRVOPT_GUIDPTR             0x00000008
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SYM_FIND_ID_OPTION, unsigned int,
++    SSRVOPT_DWORD,
++    SSRVOPT_DWORDPTR,
++    SSRVOPT_GUIDPTR);
++#endif
+ #define SSRVOPT_OLDGUIDPTR          0x00000010
+ #define SSRVOPT_UNATTENDED          0x00000020
+ #define SSRVOPT_NOCOPY              0x00000040
+@@ -4239,6 +4340,15 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+  #define SYMSTOREOPT_UNICODE         0x20
+  #define SYMSTOREOPT_PASS_IF_EXISTS  0x40
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SYM_SRV_STORE_FILE_FLAGS, unsigned int,
++    SYMSTOREOPT_COMPRESS,
++    SYMSTOREOPT_OVERWRITE,
++    SYMSTOREOPT_PASS_IF_EXISTS,
++    SYMSTOREOPT_POINTER,
++    SYMSTOREOPT_RETURNINDEX);
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 

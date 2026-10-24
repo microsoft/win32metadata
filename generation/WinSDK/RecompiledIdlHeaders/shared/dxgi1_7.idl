@@ -1,0 +1,185 @@
+// Copyright (c) Microsoft Corporation.  All Rights Reserved
+cpp_quote("// Copyright (c) Microsoft Corporation.  All Rights Reserved")
+
+import "dxgi1_6.idl";
+
+cpp_quote("#include <winapifamily.h>")
+
+#pragma region App Family
+cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+
+//--------------------------------------------------------------------------------------------------------
+// IDXGIAdapter5 structures
+//--------------------------------------------------------------------------------------------------------
+typedef enum DXGI_SINGLE_ADAPTER_HYBRID_MODE
+{
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_UNSPECIFIED = 0,
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_MINIMUM_POWER = 1,
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_HIGH_PERFORMANCE = 2,
+    DXGI_SINGLE_ADAPTER_HYBRID_MODE_FORCE_DWORD = 0xFFFFFFFF,
+} DXGI_SINGLE_ADAPTER_HYBRID_MODE;
+
+typedef enum DXGI_ADAPTER_FLAG4
+{
+    DXGI_ADAPTER_FLAG4_NONE                         = 0,
+    DXGI_ADAPTER_FLAG4_REMOTE                       = 1,
+    DXGI_ADAPTER_FLAG4_SOFTWARE                     = 2,
+    DXGI_ADAPTER_FLAG4_ACG_COMPATIBLE               = 4,
+    DXGI_ADAPTER_FLAG4_SUPPORT_MONITORED_FENCES     = 8,
+    DXGI_ADAPTER_FLAG4_SUPPORT_NON_MONITORED_FENCES = 0x10,
+    DXGI_ADAPTER_FLAG4_KEYED_MUTEX_CONFORMANCE      = 0x20,
+    DXGI_ADAPTER_FLAG4_SUPPORT_SINGLE_ADAPTER_HYBRID_MODE = 0x40,
+    DXGI_ADAPTER_FLAG4_FORCE_DWORD                  = 0xFFFFFFFF,
+} DXGI_ADAPTER_FLAG4;
+cpp_quote( "DEFINE_ENUM_FLAG_OPERATORS( DXGI_ADAPTER_FLAG4 );" )
+
+typedef struct DXGI_ADAPTER_DESC4
+{
+    WCHAR Description[128];
+
+    UINT VendorId;
+    UINT DeviceId;
+    UINT SubSysId;
+    UINT Revision;
+
+    SIZE_T DedicatedVideoMemory;
+    SIZE_T DedicatedSystemMemory;
+    SIZE_T SharedSystemMemory;
+
+    LUID AdapterLuid;
+
+    DXGI_ADAPTER_FLAG4 Flags;
+
+    DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
+    DXGI_COMPUTE_PREEMPTION_GRANULARITY ComputePreemptionGranularity;
+} DXGI_ADAPTER_DESC4;
+
+//--------------------------------------------------------------------------------------------------------
+// IDXGIAdapter5 interface
+//--------------------------------------------------------------------------------------------------------
+[
+    object,
+    uuid(9464643c-c95b-4674-8a7d-ee0548e8c022),
+    local,
+    pointer_default(unique)
+]
+interface IDXGIAdapter5 :
+    IDXGIAdapter4
+{
+    HRESULT GetDesc4( [out, annotation("_Out_")] DXGI_ADAPTER_DESC4 *pDesc );
+
+    HRESULT GetSingleAdapterHybridMode(
+        [out, annotation("_Out_")] DXGI_SINGLE_ADAPTER_HYBRID_MODE *pSingleAdapterHybridMode
+        );
+    HRESULT SetSingleAdapterHybridMode(
+        [in, annotation("_In_")] DXGI_SINGLE_ADAPTER_HYBRID_MODE SingleAdapterHybridMode
+        );
+};
+
+//--------------------------------------------------------------------------------------------------------
+// DXGI_SWAP_CHAIN_DESC2 structure
+//--------------------------------------------------------------------------------------------------------
+typedef struct DXGI_SWAP_CHAIN_DESC2
+{
+    UINT              Width;
+    UINT              Height;
+    DXGI_FORMAT       Format;
+    BOOL              Stereo;
+    DXGI_SAMPLE_DESC  SampleDesc;
+    DXGI_USAGE        BufferUsage;
+    UINT              BufferCount;
+    DXGI_SCALING      Scaling;
+    DXGI_SWAP_EFFECT  SwapEffect;
+    DXGI_ALPHA_MODE   AlphaMode;
+    UINT  Flags; // DXGI_SWAP_CHAIN_FLAG
+
+    DXGI_COLOR_SPACE_TYPE ColorSpace;
+} DXGI_SWAP_CHAIN_DESC2;
+
+//--------------------------------------------------------------------------------------------------------
+// IDXGISwapChain5 interface
+//--------------------------------------------------------------------------------------------------------
+[
+    object,
+    uuid( 9086bf22-9338-43bb-87ce-7790b6438a7f ),
+    local,
+    pointer_default(unique)
+]
+interface IDXGISwapChain5 :
+    IDXGISwapChain4
+{
+    HRESULT GetDesc2( [out, annotation("_Out_")] DXGI_SWAP_CHAIN_DESC2 *pDesc );
+    DXGI_COLOR_SPACE_TYPE GetColorSpace1( );
+    HRESULT ResizeBuffers2(
+        [in, annotation("_In_")] UINT BufferCount,
+        [in, annotation("_In_")] UINT Width,
+        [in, annotation("_In_")] UINT Height,
+        [in, annotation("_In_")] DXGI_FORMAT Format,
+        [in, annotation("_In_")] UINT SwapChainFlags,
+        [in, annotation("_In_reads_opt_(BufferCount)")] const UINT* pCreationNodeMask,
+        [in, annotation("_In_reads_opt_(BufferCount)")] IUnknown* const* ppPresentQueue,
+        [in, annotation("_In_")] DXGI_COLOR_SPACE_TYPE ColorSpace
+        );
+};
+
+//--------------------------------------------------------------------------------------------------------
+// IDXGIFactory8 interface
+//--------------------------------------------------------------------------------------------------------
+[
+    object,
+    uuid( 693c45c1-39a7-4c1f-bdd3-d9a3229b8321 ),
+    local,
+    pointer_default(unique)
+]
+interface IDXGIFactory8 :
+    IDXGIFactory7
+{
+    HRESULT CreateSwapChainForHwnd1(
+        [in, annotation("_In_")] IUnknown *pDevice,
+        [in, annotation("_In_")] HWND hWnd,
+        [in, annotation("_In_")] const DXGI_SWAP_CHAIN_DESC2 *pDesc,
+        [in, annotation("_In_opt_")] const DXGI_SWAP_CHAIN_FULLSCREEN_DESC *pFullscreenDesc,
+        [in, annotation("_In_opt_")] IDXGIOutput *pRestrictToOutput,
+        [out, annotation("_COM_Outptr_")] IDXGISwapChain5 **ppSwapChain );
+
+    HRESULT CreateSwapChainForCoreWindow1(
+        [in, annotation("_In_")] IUnknown *pDevice,
+        [in, annotation("_In_")] IUnknown *pWindow,
+        [in, annotation("_In_")] const DXGI_SWAP_CHAIN_DESC2 *pDesc,
+        [in, annotation("_In_opt_")] IDXGIOutput *pRestrictToOutput,
+        [out, annotation("_COM_Outptr_")] IDXGISwapChain5 **ppSwapChain );
+        
+    HRESULT CreateSwapChainForComposition1(
+        [in, annotation("_In_")] IUnknown *pDevice,
+        [in, annotation("_In_")] const DXGI_SWAP_CHAIN_DESC2 *pDesc,
+        [in, annotation("_In_opt_")] IDXGIOutput *pRestrictToOutput,
+        [out, annotation("_COM_Outptr_")] IDXGISwapChain5 **ppSwapChain );
+};
+
+//--------------------------------------------------------------------------------------------------------
+// IDXGIFactoryMedia2 interface
+//--------------------------------------------------------------------------------------------------------
+[
+    object,
+    uuid( 98ec0b90-2b18-42a6-9fcf-43b46f654022 ),
+    local,
+    pointer_default(unique)
+]
+interface IDXGIFactoryMedia2 :
+    IDXGIFactoryMedia
+{
+    HRESULT CreateSwapChainForCompositionSurfaceHandle1(
+        [in, annotation("_In_")] IUnknown *pDevice,
+        [in, annotation("_In_opt_")] HANDLE hSurface,
+        [in, annotation("_In_")] const DXGI_SWAP_CHAIN_DESC2 *pDesc,
+        [in, annotation("_In_opt_")] IDXGIOutput *pRestrictToOutput,
+        [out, annotation("_COM_Outptr_")] IDXGISwapChain5 **ppSwapChain );
+};
+
+cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
+#pragma endregion
+
+cpp_quote( "DEFINE_GUID(IID_IDXGIAdapter5,0x9464643c,0xc95b,0x4674,0x8a,0x7d,0xee,0x05,0x48,0xe8,0xc0,0x22);" )
+cpp_quote( "DEFINE_GUID(IID_IDXGISwapChain5,0x9086bf22,0x9338,0x43bb,0x87,0xce,0x77,0x90,0xb6,0x43,0x8a,0x7f);" )
+cpp_quote( "DEFINE_GUID(IID_IDXGIFactory8,0x693c45c1,0x39a7,0x4c1f,0xbd,0xd3,0xd9,0xa3,0x22,0x9b,0x83,0x21);" )
+cpp_quote( "DEFINE_GUID(IID_IDXGIFactoryMedia2,0x98ec0b90,0x2b18,0x42a6,0x9f,0xcf,0x43,0xb4,0x6f,0x65,0x40,0x22);" )

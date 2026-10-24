@@ -95,6 +95,7 @@ typedef enum X509SCEPMessageType    // szOIDVerisign_MessageType
 
     SCEPMessageGetCRL         = 22, // Retrieve a CRL (not supported)
     SCEPMessageClaimChallengeAnswer = 41, // Challenge answer
+    SCEPMessageGetCertifier = 198,	// EnrollforAIK V2: EK info only
 } X509SCEPMessageType;
 
 typedef enum X509SCEPDisposition    // szOIDVerisign_PkiStatus

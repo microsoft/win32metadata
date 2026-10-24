@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1038,6 +1038,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationManagerStatics5 ABI::Windows::UI::Notifications::IToastNotificationManagerStatics5
 
 #endif // ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationManagerStatics5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Notifications {
+                interface IToastNotificationStatics;
+            } /* Notifications */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics ABI::Windows::UI::Notifications::IToastNotificationStatics
+
+#endif // ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CNotifications_CIToastNotifier_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CNotifications_CIToastNotifier_FWD_DEFINED__
@@ -6344,6 +6359,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CNotifications_CIToastNotificationMa
 
 /*
  *
+ * Interface Windows.UI.Notifications.IToastNotificationStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Notifications.ToastNotification
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Notifications_IToastNotificationStatics[] = L"Windows.UI.Notifications.IToastNotificationStatics";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Notifications {
+                MIDL_INTERFACE("2aa8f213-d8c9-48fe-b641-4a63d69ce079")
+                IToastNotificationStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsExpandableContentSupported(
+                        boolean* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IToastNotificationStatics = __uuidof(IToastNotificationStatics);
+            } /* Notifications */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.UI.Notifications.IToastNotifier
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -7168,6 +7219,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.UI.Notifications.IToastNotificationFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
  * Class implements the following interfaces:
  *    Windows.UI.Notifications.IToastNotification ** Default Interface **
  *    Windows.UI.Notifications.IToastNotification2
@@ -7253,10 +7307,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -7717,6 +7771,12 @@ typedef interface __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationManager
 typedef interface __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationManagerStatics5 __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationManagerStatics5;
 
 #endif // ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationManagerStatics5_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics;
+
+#endif // ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CNotifications_CIToastNotifier_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CNotifications_CIToastNotifier_FWD_DEFINED__
@@ -16533,6 +16593,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CNotifications_CIToastNotificationMa
 
 /*
  *
+ * Interface Windows.UI.Notifications.IToastNotificationStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Notifications.ToastNotification
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Notifications_IToastNotificationStatics[] = L"Windows.UI.Notifications.IToastNotificationStatics";
+typedef struct __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsExpandableContentSupported)(__x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStaticsVtbl;
+
+interface __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_get_IsExpandableContentSupported(This, value) \
+    ((This)->lpVtbl->get_IsExpandableContentSupported(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CNotifications_CIToastNotificationStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.UI.Notifications.IToastNotifier
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -17544,6 +17673,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * RuntimeClass can be activated.
  *   Type can be activated via the Windows.UI.Notifications.IToastNotificationFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
  * Class implements the following interfaces:
  *    Windows.UI.Notifications.IToastNotification ** Default Interface **
  *    Windows.UI.Notifications.IToastNotification2
@@ -17629,10 +17761,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *

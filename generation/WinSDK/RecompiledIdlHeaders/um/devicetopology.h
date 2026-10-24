@@ -3383,11 +3383,11 @@ EXTERN_C const IID IID_IConnector;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetConnectorIdConnectedTo( 
             /* [annotation][out] */ 
-            _Outptr_  LPWSTR *ppwstrConnectorId) = 0;
+            _Outptr_result_z_  LPWSTR *ppwstrConnectorId) = 0;
         
         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetDeviceIdConnectedTo( 
             /* [annotation][out] */ 
-            _Outptr_  LPWSTR *ppwstrDeviceId) = 0;
+            _Outptr_result_z_  LPWSTR *ppwstrDeviceId) = 0;
         
     };
     
@@ -3452,13 +3452,13 @@ EXTERN_C const IID IID_IConnector;
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetConnectorIdConnectedTo )( 
             IConnector * This,
             /* [annotation][out] */ 
-            _Outptr_  LPWSTR *ppwstrConnectorId);
+            _Outptr_result_z_  LPWSTR *ppwstrConnectorId);
         
         DECLSPEC_XFGVIRT(IConnector, GetDeviceIdConnectedTo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDeviceIdConnectedTo )( 
             IConnector * This,
             /* [annotation][out] */ 
-            _Outptr_  LPWSTR *ppwstrDeviceId);
+            _Outptr_result_z_  LPWSTR *ppwstrDeviceId);
         
         END_INTERFACE
     } IConnectorVtbl;

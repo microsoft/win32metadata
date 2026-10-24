@@ -1085,13 +1085,13 @@
 #define WU_E_INSTALL_USERCONTEXT_ACCESSDENIED _HRESULT_TYPEDEF_(0x80240066L)
 
 //
-// MessageId: WU_E_STANDBY_ACTIVITY_NOT_ALLOWED
+// MessageId: WU_E_FEATURE_CONTAINMENT_NOT_ENABLED
 //
 // MessageText:
 //
-// Operation is not allowed because the device is in DC (Direct Current) and DS (Disconnected Standby).
+// Unexpected code execution when feature is not enabled.
 //
-#define WU_E_STANDBY_ACTIVITY_NOT_ALLOWED _HRESULT_TYPEDEF_(0x80240067L)
+#define WU_E_FEATURE_CONTAINMENT_NOT_ENABLED _HRESULT_TYPEDEF_(0x80240067L)
 
 //
 // MessageId: WU_E_COULD_NOT_EVALUATE_PROPERTY
@@ -1128,6 +1128,15 @@
 // Operation did not complete because the service is disabled and re-enabling it has failed as the access was denied.
 //
 #define WU_E_SERVICE_REENABLE_ACCESS_DENIED _HRESULT_TYPEDEF_(0x8024006BL)
+
+//
+// MessageId: WU_E_UPDATE_SESSIONDATA_CONFLICT
+//
+// MessageText:
+//
+// The specified session data conflicts with the existing value.
+//
+#define WU_E_UPDATE_SESSIONDATA_CONFLICT _HRESULT_TYPEDEF_(0x8024006CL)
 
 //
 // MessageId: WU_E_UNEXPECTED
@@ -2723,6 +2732,33 @@
 #define WU_E_DS_NODATA_TMI               _HRESULT_TYPEDEF_(0x80248029L)
 
 //
+// MessageId: WU_E_DS_UNKNOWNSERVICE_NOTFOUND
+//
+// MessageText:
+//
+// An operation did not complete because the service was not found in the data store.
+//
+#define WU_E_DS_UNKNOWNSERVICE_NOTFOUND  _HRESULT_TYPEDEF_(0x8024802AL)
+
+//
+// MessageId: WU_E_DS_UNKNOWNSERVICE_DELETEPENDING
+//
+// MessageText:
+//
+// An operation did not complete because the service is pending deletion from the data store.
+//
+#define WU_E_DS_UNKNOWNSERVICE_DELETEPENDING _HRESULT_TYPEDEF_(0x8024802BL)
+
+//
+// MessageId: WU_E_DS_UNKNOWNSERVICE_REMOVED
+//
+// MessageText:
+//
+// An operation did not complete because the service has been removed from the data store.
+//
+#define WU_E_DS_UNKNOWNSERVICE_REMOVED   _HRESULT_TYPEDEF_(0x8024802CL)
+
+//
 // MessageId: WU_E_DS_UNEXPECTED
 //
 // MessageText:
@@ -3216,6 +3252,33 @@
 // This operation cannot be completed. You must install the baseline update(s) before you can install this update.
 //
 #define WU_E_UH_RESERVICING_REQUIRED_BASELINE _HRESULT_TYPEDEF_(0x80242026L)
+
+//
+// MessageId: WU_E_UH_TIMEOUT
+//
+// MessageText:
+//
+// The update handler operation did not complete because it timed out.
+//
+#define WU_E_UH_TIMEOUT                  _HRESULT_TYPEDEF_(0x80242027L)
+
+//
+// MessageId: WU_E_UH_DRV_PREINSTALL_OPERATION_FAILED
+//
+// MessageText:
+//
+// The driver update handler's pre-install operation failed.
+//
+#define WU_E_UH_DRV_PREINSTALL_OPERATION_FAILED _HRESULT_TYPEDEF_(0x80242028L)
+
+//
+// MessageId: WU_E_UH_DRV_INSTALL_REJECTED_REBOOT_LEVEL
+//
+// MessageText:
+//
+// The driver update was rejected because the queried reboot level exceeds the caller's requested reboot level.
+//
+#define WU_E_UH_DRV_INSTALL_REJECTED_REBOOT_LEVEL _HRESULT_TYPEDEF_(0x80242029L)
 
 //
 // MessageId: WU_E_UH_UNEXPECTED

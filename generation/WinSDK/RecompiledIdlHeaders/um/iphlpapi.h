@@ -782,23 +782,6 @@ GetBestInterface(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Application Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
-
-#pragma warning(push)
-#pragma warning(disable:4115)
-IPHLPAPI_DLL_LINKAGE
-DWORD
-WINAPI
-GetBestInterfaceEx(
-    _In_  struct sockaddr *pDestAddr,
-    _Out_ PDWORD           pdwBestIfIndex
-    );
-#pragma warning(pop)
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
 #pragma region Desktop Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
@@ -1409,6 +1392,9 @@ typedef enum NET_ADDRESS_FORMAT_
 #if defined (_WS2DEF_) && defined (_WS2IPDEF_) && defined(_WINDNS_INCLUDED_)
 	// app must include winsock2.h, ws2ipdef.h, and windns.h to use this API
 
+#pragma warning(push)
+#pragma warning(disable: 4201) // nonstandard extension used: nameless struct/union
+
 typedef struct NET_ADDRESS_INFO_
 {
    NET_ADDRESS_FORMAT Format;
@@ -1426,6 +1412,8 @@ typedef struct NET_ADDRESS_INFO_
    };
 
 } NET_ADDRESS_INFO, *PNET_ADDRESS_INFO;
+
+#pragma warning(pop) // 4201 nonstandard extension used: nameless struct/union
 
 IPHLPAPI_DLL_LINKAGE
 DWORD

@@ -2,3 +2,5 @@
 <IncludeRoot>/um/SrRestorePtApi.h
 --namespace
 Windows.Win32.System.Restore
+--config
+parse-win32-annotations

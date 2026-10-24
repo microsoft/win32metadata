@@ -1994,12 +1994,16 @@ typedef struct _POLICY_PRIVILEGE_DEFINITION {
 //
 
 //
-// This flag controls LsaLookupNames2 such that isolated names, including
+// This flag controls LsaLookupNames2 and above such that isolated names, including
 // UPN's are not searched for off the machine.  Composite names
 // (domain\username) are still sent off machine if necessary.
 //
 #define LSA_LOOKUP_ISOLATED_AS_LOCAL  0x80000000
 
+// This flag controls LsaLookupNames2 and above such that shadow admin account names
+// will be mapped to their external Sid stored in the SAM SAMP_USER_EXTERNAL_SID attribute.
+//
+#define LSA_LOOKUP_PREFER_EXTERNAL_SID  0x40000000
 
 //
 // System Flags for LsaLookupSids2
@@ -2011,7 +2015,7 @@ typedef struct _POLICY_PRIVILEGE_DEFINITION {
 //
 
 //
-// This flag controls LsaLookupSids2 such that for internet SIDs 
+// This flag controls LsaLookupSids2 such that for internet SIDs
 // from identity providers for connected accounts are disallowed
 // connected accounts are those accounts which have a corresponding
 // shadow account in the local SAM database connected to
@@ -2022,9 +2026,9 @@ typedef struct _POLICY_PRIVILEGE_DEFINITION {
 
 // This flag returns the internet names. Otherwise the NT4 style name eg. domain\username
 // will be returned. The exception is if the MSA internet SID is specified
-// then the internet name will be returned unless LSA_LOOKUP_DISALLOW_NON_WINDOWS_INTERNET_SID  
+// then the internet name will be returned unless LSA_LOOKUP_DISALLOW_NON_WINDOWS_INTERNET_SID
 // is specified
-#define LSA_LOOKUP_PREFER_INTERNET_NAMES  0x40000000 
+#define LSA_LOOKUP_PREFER_INTERNET_NAMES  0x40000000
 
 // begin_ntsecapi
 
@@ -2714,7 +2718,6 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
 #define TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION 0x00000200  // do not forward TGT to the other side of the trust which is not part of this enterprise
 #define TRUST_ATTRIBUTE_PIM_TRUST                     0x00000400  // Outgoing trust to a PIM forest.
 #endif
-
 #if (_WIN32_WINNT >= 0x0603)
 // Forward the TGT to the other side of the trust which is not part of this enterprise
 // This flag has the opposite meaning of TRUST_ATTRIBUTE_CROSS_ORGANIZATION_NO_TGT_DELEGATION which is now deprecated.
@@ -4188,6 +4191,73 @@ NTSTATUS
 SeciIsProtectedUser(
     __out PBOOLEAN ProtectedUser
     );
+
+////////////////////////////////////////////////////////////////////////////
+//
+// Agent account model APIs
+//
+////////////////////////////////////////////////////////////////////////////
+
+NTSTATUS
+NTAPI
+LsaCreateAgentAccount(
+    _In_ PSID OwningUser,
+    _In_ PUNICODE_STRING OwningAppPackage,
+    _In_ PUNICODE_STRING AgentName);
+
+typedef struct _LSA_AGENT_LOGON_CREDENTIAL {
+    ULONG Size;
+    PVOID Credential;
+} LSA_AGENT_LOGON_CREDENTIAL, *PLSA_AGENT_LOGON_CREDENTIAL;
+
+NTSTATUS
+NTAPI
+LsaRetrieveAgentLogonCredential(
+    _In_ PSID OwningUser,
+    _In_ PUNICODE_STRING OwningAppPackage,
+    _In_ PUNICODE_STRING AgentName,
+    _Out_ PLSA_AGENT_LOGON_CREDENTIAL Credential);
+
+NTSTATUS
+NTAPI
+LsaRetrieveCloudAgentLogonCredential(
+    _In_ PSID OwningUser,
+    _In_ PUNICODE_STRING OwningAppPackage,
+    _In_ PUNICODE_STRING AgentName,
+    _In_reads_bytes_(WamTokenSize) PVOID WamToken,  // UTF-16 encoded WAM token string
+    _In_ ULONG WamTokenSize,
+    _Out_ PLSA_AGENT_LOGON_CREDENTIAL Credential);
+
+typedef struct _LSA_AGENT_ACCOUNT_INFO {
+    PSID AgentSid;
+    UNICODE_STRING OwningAppPackage;
+    UNICODE_STRING AgentName;
+    UNICODE_STRING UserName;
+} LSA_AGENT_ACCOUNT_INFO, *PLSA_AGENT_ACCOUNT_INFO;
+
+typedef struct _LSA_AGENT_ACCOUNT_LIST {
+    ULONG Count;
+    LSA_AGENT_ACCOUNT_INFO* Agents;
+} LSA_AGENT_ACCOUNT_LIST, *PLSA_AGENT_ACCOUNT_LIST;
+
+NTSTATUS
+NTAPI
+LsaEnumerateAgentAccounts(
+    _In_ PSID OwningUser,
+    _Out_ PLSA_AGENT_ACCOUNT_LIST AgentList);
+
+NTSTATUS
+NTAPI
+LsaDeleteAgentAccount(
+    _In_ PSID OwningUser,
+    _In_ PUNICODE_STRING OwningAppPackage,
+    _In_ PUNICODE_STRING AgentName);
+
+NTSTATUS
+NTAPI
+LsaGetAgentOwner(
+    _In_ PSID AgentSid,
+    _Outptr_ PSID* OwnerSid);
 
 ////////////////////////////////////////////////////////////////////////////
 //

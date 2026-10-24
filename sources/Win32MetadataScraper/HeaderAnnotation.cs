@@ -16,8 +16,9 @@ namespace Win32MetadataScraper
         private static readonly HashSet<string> Names = new(StringComparer.Ordinal)
         {
             "SetLastError", "ImportLibrary", "SupportedOSPlatform", "PreserveResult",
-            "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal",
+            "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal", "Reserved",
             "AlsoUsableFor", "AssociatedEnum", "AssociatedConstant", "Enum", "FlagsEnum",
+            "Optional", "ComOutPtr", "NativeTypedef",
         };
 
         private static readonly HashSet<string> SupportedVersions = new(StringComparer.Ordinal)
@@ -76,6 +77,8 @@ namespace Win32MetadataScraper
                 case "AlsoUsableFor":
                 case "AssociatedEnum":
                 case "AssociatedConstant":
+                case "Optional":
+                case "ComOutPtr":
                     minimum = maximum = 1;
                     break;
                 default:
@@ -92,7 +95,12 @@ namespace Win32MetadataScraper
                     "a cleanup name and optional invalid values."));
             }
 
-            if (name == "SupportedOSPlatform")
+            if (name is "Optional" or "ComOutPtr")
+            {
+                if (arguments[0] is not "true" and not "false")
+                    throw new FormatException($"Annotation '{name}' requires exactly true or false.");
+            }
+            else if (name == "SupportedOSPlatform")
             {
                 string version = ReadString(arguments[0], requireQuotes: true);
                 if (!SupportedVersions.Contains(version))
@@ -214,8 +222,23 @@ namespace Win32MetadataScraper
 
     internal sealed class HeaderAnnotationException : Exception
     {
-        internal HeaderAnnotationException(string location, string message)
-            : base($"{location}: error WMA001: {message}")
+        internal HeaderAnnotationException(string file, uint line, uint column, string message)
+            : base($"{file}({line},{column}): error WMA001: {message}")
+        {
+            File = file;
+            Line = line;
+            Column = column;
+        }
+
+        internal string File { get; }
+        internal uint Line { get; }
+        internal uint Column { get; }
+    }
+
+    internal sealed class HeaderAnnotationDiagnosticsException : Exception
+    {
+        internal HeaderAnnotationDiagnosticsException(IEnumerable<string> diagnostics)
+            : base(string.Join(Environment.NewLine, diagnostics))
         {
         }
     }

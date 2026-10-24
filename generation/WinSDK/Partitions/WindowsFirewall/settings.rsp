@@ -6,3 +6,5 @@
 <IncludeRoot>/um/networkisolation.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsFirewall
+--config
+parse-win32-annotations

@@ -1,0 +1,31 @@
+diff --git a/um/mmsyscom.h b/um/mmsyscom.h
+--- a/um/mmsyscom.h
++++ b/um/mmsyscom.h
+@@ -273,6 +273,9 @@
+ 
+ #if (WINVER < 0x030a) || defined(_WIN32)
+ DECLARE_HANDLE(HDRVR);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HDRVR HDRVR;
++#endif
+ #endif /* ifdef WINVER < 0x030a */
+ 
+ 
+@@ -293,6 +296,17 @@
+ #ifdef _WIN32
+ #define CALLBACK_THREAD     (CALLBACK_TASK)/* thread ID replaces 16 bit task */
+ #define CALLBACK_EVENT      0x00050000l    /* dwCallback is an EVENT Handle */
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MIDI_WAVE_OPEN_TYPE, unsigned long,
++    CALLBACK_TYPEMASK,
++    CALLBACK_NULL,
++    CALLBACK_WINDOW,
++    CALLBACK_TASK,
++    CALLBACK_FUNCTION,
++    CALLBACK_THREAD,
++    CALLBACK_EVENT);
++#endif
+ #endif
+ typedef void (CALLBACK DRVCALLBACK)(HDRVR hdrvr, UINT uMsg, DWORD_PTR dwUser, DWORD_PTR dw1, DWORD_PTR dw2);
+ 

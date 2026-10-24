@@ -1,0 +1,41 @@
+diff --git a/um/dbgprop.idl b/um/dbgprop.idl
+index 3a8845f8..a78d6784 100644
+--- a/um/dbgprop.idl
++++ b/um/dbgprop.idl
+@@ -101,11 +101,17 @@ enum
+     DBGPROP_ATTRIB_VALUE_PENDING_MUTATION = 0x10000000,
+ };
+ typedef DWORD DBGPROP_ATTRIB_FLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("_Win32_FlagsEnum_(DBGPROP_ATTRIB_FLAGS, DWORD, DBGPROP_ATTRIB_NO_ATTRIB, DBGPROP_ATTRIB_VALUE_IS_INVALID, DBGPROP_ATTRIB_VALUE_IS_EXPANDABLE, DBGPROP_ATTRIB_VALUE_IS_FAKE, DBGPROP_ATTRIB_VALUE_IS_METHOD, DBGPROP_ATTRIB_VALUE_IS_EVENT, DBGPROP_ATTRIB_VALUE_IS_RAW_STRING, DBGPROP_ATTRIB_VALUE_READONLY, DBGPROP_ATTRIB_ACCESS_PUBLIC, DBGPROP_ATTRIB_ACCESS_PRIVATE, DBGPROP_ATTRIB_ACCESS_PROTECTED, DBGPROP_ATTRIB_ACCESS_FINAL, DBGPROP_ATTRIB_STORAGE_GLOBAL, DBGPROP_ATTRIB_STORAGE_STATIC, DBGPROP_ATTRIB_STORAGE_FIELD, DBGPROP_ATTRIB_STORAGE_VIRTUAL, DBGPROP_ATTRIB_TYPE_IS_CONSTANT, DBGPROP_ATTRIB_TYPE_IS_SYNCHRONIZED, DBGPROP_ATTRIB_TYPE_IS_VOLATILE, DBGPROP_ATTRIB_HAS_EXTENDED_ATTRIBS, DBGPROP_ATTRIB_FRAME_INTRYBLOCK, DBGPROP_ATTRIB_FRAME_INCATCHBLOCK, DBGPROP_ATTRIB_FRAME_INFINALLYBLOCK, DBGPROP_ATTRIB_VALUE_IS_RETURN_VALUE, DBGPROP_ATTRIB_VALUE_PENDING_MUTATION);")
++cpp_quote("#endif")
+ 
+ // -----------------------------------------------------------------------
+ // DebugPropertyInfo
+ // Basic info that all IDebugProperty implementations must support
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum
+ {
+ 	// Flags used to specify DebugPropertyInfo (and ExtendedDebugPropertyInfo) fields
+@@ -121,6 +127,9 @@ enum
+ 
+ 	DBGPROP_INFO_AUTOEXPAND =	0x8000000,	// make the Value result auto-expand
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ typedef DWORD DBGPROP_INFO_FLAGS;
+ 
+ const DBGPROP_INFO_FLAGS DBGPROP_INFO_STANDARD =	DBGPROP_INFO_NAME | DBGPROP_INFO_TYPE | DBGPROP_INFO_VALUE | DBGPROP_INFO_ATTRIBUTES;
+@@ -336,7 +345,7 @@ interface IEnumDebugPropertyInfo : IUnknown
+ 	[local]
+     HRESULT Next(
+         [in] ULONG celt,
+-		[out] DebugPropertyInfo *pi,
++		[out, annotation("_Out_writes_to_(celt, *pcEltsfetched)")] DebugPropertyInfo *pi,
+ 		[out] ULONG *pcEltsfetched
+ 		);
+ 

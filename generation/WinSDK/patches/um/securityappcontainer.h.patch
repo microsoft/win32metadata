@@ -1,0 +1,13 @@
+diff --git a/um/securityappcontainer.h b/um/securityappcontainer.h
+index 34cde711..058926b9 100644
+--- a/um/securityappcontainer.h
++++ b/um/securityappcontainer.h
+@@ -32,6 +32,8 @@ extern "C" {
+ // Token Extension APIs
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ GetAppContainerNamedObjectPath(

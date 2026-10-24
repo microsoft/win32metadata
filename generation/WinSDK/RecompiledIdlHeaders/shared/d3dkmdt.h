@@ -1981,7 +1981,8 @@ typedef struct _DXGK_NODEMETADATA_FLAGS
             UINT UserModeSubmission         :  1;
 #if (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_2)
             UINT SupportBuildTestCommandBuffer :  1;
-            UINT Reserved                   : 11;
+            UINT SupportFaultAndStall       :  1;
+            UINT Reserved                   : 10;
 #else
             UINT Reserved                   : 12;
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM3_2)
@@ -1998,6 +1999,7 @@ typedef struct _DXGK_NODEMETADATA_FLAGS
         UINT32 Value;
     };
 } DXGK_NODEMETADATA_FLAGS;
+
 
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_2)
 
@@ -2208,8 +2210,8 @@ typedef struct _D3DKMT_WDDM_3_1_CAPS
     {
         struct
         {
-            UINT    NativeGpuFenceSupported :   1;    // Specifies whether native GPU fence is supported by this GPU
-            UINT    Reserved                :  31;
+            UINT    NativeGpuFenceSupported     :   1;    // Specifies whether native GPU fence is supported by this GPU
+            UINT    Reserved                    :  31;
         };
         UINT Value;
     };
@@ -2325,8 +2327,16 @@ typedef enum _DXGK_PAGE_FAULT_FLAGS
                                                     // but process handle that submitted the faulted buffer was.
 
 #endif // (DXGKDDI_INTERFACE_VERSION >= DXGKDDI_INTERFACE_VERSION_WDDM2_2)
+    DXGK_PAGE_FAULT_AND_STALL               = 0x100,// when set, indicates that the faul can be replayed by hardware after the fault is handled
+
+    DXGK_PAGE_FAULT_FIRST_INVALID           = 0x200
 
 } DXGK_PAGE_FAULT_FLAGS;
+
+#define DXGK_VALID_FAULT_AND_STALL_FLAGS (      \
+    DXGK_PAGE_FAULT_AND_STALL |                 \
+    DXGK_PAGE_FAULT_ADAPTER_RESET_REQUIRED |    \
+    DXGK_PAGE_FAULT_ENGINE_RESET_REQUIRED)
 
 typedef enum _DXGK_GENERAL_ERROR_CODE
 {

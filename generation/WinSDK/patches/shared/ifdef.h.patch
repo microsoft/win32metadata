@@ -1,0 +1,13 @@
+diff --git a/shared/ifdef.h b/shared/ifdef.h
+--- a/shared/ifdef.h
++++ b/shared/ifdef.h
+@@ -21,6 +21,9 @@
+ // Define compartment ID type:
+ //
+ typedef UINT32 NET_IF_COMPARTMENT_ID, *PNET_IF_COMPARTMENT_ID;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef NET_IF_COMPARTMENT_ID NET_IF_COMPARTMENT_ID;
++#endif
+ 
+ #define NET_IF_COMPARTMENT_ID_UNSPECIFIED       (NET_IF_COMPARTMENT_ID)0
+ #define NET_IF_COMPARTMENT_ID_PRIMARY           (NET_IF_COMPARTMENT_ID)1

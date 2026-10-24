@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --exclude
 _DL_EUI48
 --traverse

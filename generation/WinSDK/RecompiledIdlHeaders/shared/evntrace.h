@@ -2484,6 +2484,8 @@ TraceQueryInformation (
     );
 #endif
 
+// Not present in GE RTM. Support added via Windows Update.
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
 EXTERN_C
 _Success_(return == ERROR_SUCCESS)
 ULONG
@@ -2493,6 +2495,7 @@ TraceConfigureLastBranchRecord (
     _In_reads_(EventCount) CLASSIC_EVENT_ID const* Events,
     _In_ ULONG EventCount
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN11_GE
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -2684,6 +2687,7 @@ CloseTrace (
     _In_ PROCESSTRACE_HANDLE TraceHandle
     );
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
@@ -2694,7 +2698,9 @@ OpenTraceFromBufferStream(
     _In_ PETW_BUFFER_COMPLETION_CALLBACK BufferCompletionCallback,
     _In_opt_ void* BufferCompletionContext
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
@@ -2705,7 +2711,9 @@ OpenTraceFromRealTimeLogger(
     _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
     _Out_opt_ TRACE_LOGFILE_HEADER* LogFileHeader
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
@@ -2718,7 +2726,9 @@ OpenTraceFromRealTimeLoggerWithAllocationOptions(
     _In_opt_ HANDLE MemoryPartitionHandle,
     _Out_opt_ TRACE_LOGFILE_HEADER* LogFileHeader
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return != INVALID_PROCESSTRACE_HANDLE)
@@ -2729,7 +2739,9 @@ OpenTraceFromFile(
     _In_ const ETW_OPEN_TRACE_OPTIONS* Options,
     _Out_opt_ TRACE_LOGFILE_HEADER* LogFileHeader
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return == ERROR_SUCCESS)
@@ -2739,7 +2751,9 @@ ProcessTraceBufferIncrementReference(
     _In_ PROCESSTRACE_HANDLE TraceHandle,
     _In_ const ETW_BUFFER_HEADER* Buffer
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return == ERROR_SUCCESS)
@@ -2748,7 +2762,9 @@ WMIAPI
 ProcessTraceBufferDecrementReference(
     _In_ const ETW_BUFFER_HEADER* Buffer
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 _Success_(return == ERROR_SUCCESS)
@@ -2759,6 +2775,7 @@ ProcessTraceAddBufferToBufferStream(
     _In_reads_bytes_(BufferSize) const ETW_BUFFER_HEADER* Buffer,
     _In_ ULONG BufferSize
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_NI
 
 //
 // Structures and enums for QueryTraceProcessingHandle
@@ -2786,7 +2803,7 @@ typedef struct _ETW_TRACE_PARTITION_INFORMATION_V2 {
     PWSTR ParentId;
 } ETW_TRACE_PARTITION_INFORMATION_V2, *PETW_TRACE_PARTITION_INFORMATION_V2;
 
-
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 EXTERN_C
 ETW_APP_DECLSPEC_DEPRECATED
 ULONG
@@ -2800,6 +2817,7 @@ QueryTraceProcessingHandle (
     _In_ ULONG OutBufferSize,
     _Inout_ PULONG ReturnLength
     );
+#endif // NTDDI_VERSION >= NTDDI_WIN10_RS3
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion

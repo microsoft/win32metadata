@@ -86,6 +86,8 @@ namespace Windows
 
             interface IRetailInfoStatics;
 
+            interface IRetailInfoStatics2;
+
             interface ISharedModeSettingsStatics;
 
             interface ISharedModeSettingsStatics2;
@@ -175,7 +177,7 @@ namespace Windows
             {
             }
 
-            [contractversion(1.0)]
+            [contractversion(2.0)]
             apicontract ProfileRetailInfoContract
             {
             }
@@ -353,6 +355,14 @@ namespace Windows
                 [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
             }
 
+            [contract(Windows.System.Profile.ProfileRetailInfoContract, 2.0)]
+            [exclusiveto(Windows.System.Profile.RetailInfo)]
+            [uuid(A3B5D762-9E04-4F4C-B8E2-7A3C5D6E8F01)]
+            interface IRetailInfoStatics2 : IInspectable
+            {
+                [propget] HRESULT IsDemoModeEnabledEx([out] [retval] boolean* value);
+            }
+
             [contract(Windows.System.Profile.ProfileSharedModeContract, 1.0)]
             [exclusiveto(Windows.System.Profile.SharedModeSettings)]
             [uuid(893DF40E-CAD6-4D50-8C49-6FCFC03EDB29)]
@@ -503,6 +513,7 @@ namespace Windows
             [contract(Windows.System.Profile.ProfileRetailInfoContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.System.Profile.IRetailInfoStatics, Windows.System.Profile.ProfileRetailInfoContract, 1.0)]
+            [static(Windows.System.Profile.IRetailInfoStatics2, Windows.System.Profile.ProfileRetailInfoContract, 2.0)]
             [threading(both)]
             runtimeclass RetailInfo
             {

@@ -11,13 +11,10 @@ _D3DCOLORVALUE
 <IncludeRoot>/shared/dxgi1_5.h
 <IncludeRoot>/um/dxgimessages.h
 <IncludeRoot>/um/dxprogrammablecapture.h
+# Newer upstream facts not covered by this frozen patch payload.
+<IncludeRoot>/shared/dxgi1_7.h
 --namespace
 Windows.Win32.Graphics.Dxgi
+--config
+parse-win32-annotations
 --with-attribute
-DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS=Flags
-DXGI_OFFER_RESOURCE_FLAGS=Flags
-DXGI_OUTDUPL_FLAG=Flags
-DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG=Flags
-DXGI_OVERLAY_SUPPORT_FLAG=Flags
-DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG=Flags
-DXGI_SWAP_CHAIN_FLAG=Flags

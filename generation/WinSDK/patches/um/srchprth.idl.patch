@@ -1,0 +1,36 @@
+diff --git a/um/srchprth.idl b/um/srchprth.idl
+index bd5ecf7f..1983dca0 100644
+--- a/um/srchprth.idl
++++ b/um/srchprth.idl
+@@ -20,6 +20,7 @@
+ //
+ //+----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -115,6 +116,7 @@ interface IProtocolHandlerSite;
+ //
+ //+----------------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::ISearchProtocol => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -154,6 +156,7 @@ interface ISearchProtocol : IUnknown
+ //
+ //+----------------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::ISearchProtocol2 => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -184,6 +187,7 @@ interface ISearchProtocol2 : ISearchProtocol
+ //  History:    02/18/00    mcheng      Created
+ //
+ //+----------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IProtocolHandlerSite => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,

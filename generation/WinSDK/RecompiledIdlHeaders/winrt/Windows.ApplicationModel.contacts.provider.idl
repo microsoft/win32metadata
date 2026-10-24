@@ -48,6 +48,8 @@ namespace Windows
 
                 interface IContactPickerUI2;
 
+                interface IContactProvider;
+
                 interface IContactRemovedEventArgs;
 
                 runtimeclass ContactPickerUI;
@@ -114,6 +116,14 @@ namespace Windows
                 {
                     HRESULT AddContact([in] Windows.ApplicationModel.Contacts.Contact* contact, [out] [retval] Windows.ApplicationModel.Contacts.Provider.AddContactResult* result);
                     [propget] HRESULT DesiredFieldsWithContactFieldType([out] [retval] Windows.Foundation.Collections.IVector<Windows.ApplicationModel.Contacts.ContactFieldType>** value);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [uuid(C44BB54B-732F-5004-8CD7-65D90CF25F42)]
+                interface IContactProvider : IInspectable
+                {
+                    HRESULT GetContactFromRemoteIdAsync([in] HSTRING contactRemoteId, [out] [retval] Windows.Foundation.IAsyncOperation<Windows.ApplicationModel.Contacts.Contact*>** operation);
+                    [propget] HRESULT ContactListId([out] [retval] HSTRING* value);
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]

@@ -1,5 +1,5 @@
 diff --git a/um/waasapi.idl b/um/waasapi.idl
-index b1de0c62..6ddd4689 100644
+index b1de0c62..d1701053 100644
 --- a/um/waasapi.idl
 +++ b/um/waasapi.idl
 @@ -15,12 +15,15 @@ cpp_quote("#pragma once")
@@ -13,7 +13,7 @@ index b1de0c62..6ddd4689 100644
  
  import "WaaSAPITypes.idl";
  
-+_Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)
++cpp_quote("/* Win32Metadata: interface ::IWaaSAssessor => SupportedOSPlatform(\"windows10.0.15063\") */")
 +
  [
      object,

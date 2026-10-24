@@ -31,6 +31,8 @@ Abstract:
 
 #include <WinHvPlatformDefs.h>
 
+#if defined(_AMD64_)
+
 typedef union WHV_EMULATOR_STATUS
 {
     struct
@@ -120,6 +122,8 @@ typedef struct WHV_EMULATOR_CALLBACKS
 
 typedef VOID* WHV_EMULATOR_HANDLE;
 
+#endif
+
 //
 // Public callable functions
 //
@@ -179,6 +183,10 @@ WHvEmulatorTryMmioEmulation(
 
 #ifdef __cplusplus
 extern "C" {
+#endif
+
+#if defined(_AMD64_)
+
 #endif
 
 BOOLEAN

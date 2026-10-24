@@ -139,6 +139,10 @@ namespace Windows
 
             interface IEdgeGestureStatics;
 
+            interface IGamepadNavigationConfiguration;
+
+            interface IGamepadNavigationConfigurationStatics;
+
             interface IGestureRecognizer;
 
             interface IGestureRecognizer2;
@@ -276,6 +280,8 @@ namespace Windows
             runtimeclass EdgeGesture;
 
             runtimeclass EdgeGestureEventArgs;
+
+            runtimeclass GamepadNavigationConfiguration;
 
             runtimeclass GestureRecognizer;
 
@@ -574,22 +580,20 @@ namespace Windows
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-            [experimental]
             enum TouchpadGlobalAction
             {
-                ThreeFingerTap       = 0,
-                FourFingerTap        = 1,
-                FiveFingerTap        = 2,
-                ThreeFingerPressDown = 3,
-                FourFingerPressDown  = 4,
-                FiveFingerPressDown  = 5,
-                ThreeFingerPressUp   = 6,
-                FourFingerPressUp    = 7,
-                FiveFingerPressUp    = 8
+                ThreeFingerTap     = 0,
+                FourFingerTap      = 1,
+                FiveFingerTap      = 2,
+                ThreeFingerPress   = 3,
+                FourFingerPress    = 4,
+                FiveFingerPress    = 5,
+                ThreeFingerRelease = 6,
+                FourFingerRelease  = 7,
+                FiveFingerRelease  = 8
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-            [experimental]
             [flags]
             enum TouchpadGlobalGestureKinds
             {
@@ -705,6 +709,26 @@ namespace Windows
             interface IEdgeGestureStatics : IInspectable
             {
                 HRESULT GetForCurrentView([out] [retval] Windows.UI.Input.EdgeGesture** current);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.GamepadNavigationConfiguration)]
+            [experimental]
+            [uuid(B8ABAB2D-E7F5-59A7-A3D5-9746BFBF224D)]
+            interface IGamepadNavigationConfiguration : IInspectable
+            {
+                [propget] HRESULT NavigationEnabled([out] [retval] boolean* value);
+                HRESULT TrySetNavigationEnabled([in] boolean enabled, [out] [retval] boolean* result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Input.GamepadNavigationConfiguration)]
+            [experimental]
+            [uuid(9C7C3E1D-2AFF-5DE0-88F1-904ACC561F68)]
+            interface IGamepadNavigationConfigurationStatics : IInspectable
+            {
+                HRESULT TryGetForCurrentProcess([out] [retval] Windows.UI.Input.GamepadNavigationConfiguration** result);
+                [propget] HRESULT IsSupported([out] [retval] boolean* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -949,7 +973,6 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
             [exclusiveto(Windows.UI.Input.PhysicalGestureRecognizer)]
-            [experimental]
             [uuid(79A29F4D-32A6-5AA5-A999-42B0B420C66D)]
             interface IPhysicalGestureRecognizer : IInspectable
             {
@@ -1443,7 +1466,6 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
             [exclusiveto(Windows.UI.Input.TouchpadGesturesController)]
-            [experimental]
             [uuid(28C13CDD-E068-549F-89C6-1A440C6FC327)]
             interface ITouchpadGesturesController : IInspectable
             {
@@ -1463,7 +1485,6 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
             [exclusiveto(Windows.UI.Input.TouchpadGesturesController)]
-            [experimental]
             [uuid(207EF171-1A73-51CD-A694-8840E09DBAFA)]
             interface ITouchpadGesturesControllerStatics : IInspectable
             {
@@ -1473,7 +1494,6 @@ namespace Windows
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
             [exclusiveto(Windows.UI.Input.TouchpadGlobalActionEventArgs)]
-            [experimental]
             [uuid(6EDAD206-E4E3-5F39-9D13-8575E8E2A12B)]
             interface ITouchpadGlobalActionEventArgs : IInspectable
             {
@@ -1521,6 +1541,16 @@ namespace Windows
             runtimeclass EdgeGestureEventArgs
             {
                 [default] interface Windows.UI.Input.IEdgeGestureEventArgs;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [experimental]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Input.IGamepadNavigationConfigurationStatics, Windows.Foundation.UniversalApiContract, 19.0)]
+            [threading(both)]
+            runtimeclass GamepadNavigationConfiguration
+            {
+                [default] [experimental] interface Windows.UI.Input.IGamepadNavigationConfiguration;
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1605,12 +1635,11 @@ namespace Windows
 
             [activatable(Windows.Foundation.UniversalApiContract, 19.0)]
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-            [experimental]
             [marshaling_behavior(none)]
             [threading(both)]
             runtimeclass PhysicalGestureRecognizer
             {
-                [default] [experimental] interface Windows.UI.Input.IPhysicalGestureRecognizer;
+                [default] interface Windows.UI.Input.IPhysicalGestureRecognizer;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1619,7 +1648,7 @@ namespace Windows
             runtimeclass PointerPoint
             {
                 [default] interface Windows.UI.Input.IPointerPoint;
-                [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.UI.Input.IPointerPointPhysicalPosition;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.UI.Input.IPointerPointPhysicalPosition;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1795,21 +1824,19 @@ namespace Windows
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-            [experimental]
             [marshaling_behavior(agile)]
             [static(Windows.UI.Input.ITouchpadGesturesControllerStatics, Windows.Foundation.UniversalApiContract, 19.0)]
             [threading(both)]
             runtimeclass TouchpadGesturesController
             {
-                [default] [experimental] interface Windows.UI.Input.ITouchpadGesturesController;
+                [default] interface Windows.UI.Input.ITouchpadGesturesController;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-            [experimental]
             [marshaling_behavior(agile)]
             runtimeclass TouchpadGlobalActionEventArgs
             {
-                [default] [experimental] interface Windows.UI.Input.ITouchpadGlobalActionEventArgs;
+                [default] interface Windows.UI.Input.ITouchpadGlobalActionEventArgs;
             }
         }
     }

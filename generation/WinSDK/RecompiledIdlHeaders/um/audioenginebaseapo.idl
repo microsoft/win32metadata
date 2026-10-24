@@ -1473,7 +1473,6 @@ cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_RequestSetAsDefaultPriority, 0xD04E05A6, 
 // {D04E05A6-594B-4FB6-A80D-01AF5EED7D1D},36
 cpp_quote ("DEFINE_PROPERTYKEY(PKEY_FX_OEM_Preferred_EffectPack_Id, 0xD04E05A6, 0x594B, 0x4fb6, 0xA8, 0x0D, 0x01, 0xAF, 0x5E, 0xED, 0x7D, 0x1D, 36);")
 
-
 // PKEY_SFX_ProcessingModes_Supported_For_Streaming:
 // vartype = VT_VECTOR | VT_LPWSTR
 // {D3993A3F-99C2-4402-B5EC-A92A0367664B},5

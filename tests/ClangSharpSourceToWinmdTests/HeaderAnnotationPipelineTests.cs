@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using ClangSharpSourceToWinmd;
 using MetadataUtils;
@@ -13,6 +14,132 @@ namespace ClangSharpSourceToWinmdTests
     [TestClass]
     public class HeaderAnnotationPipelineTests
     {
+        [DataTestMethod]
+        [DataRow("Optional", true, false)]
+        [DataRow("Optional", true, true)]
+        [DataRow("Optional", false, false)]
+        [DataRow("Optional", false, true)]
+        [DataRow("ComOutPtr", true, false)]
+        [DataRow("ComOutPtr", true, true)]
+        [DataRow("ComOutPtr", false, false)]
+        [DataRow("ComOutPtr", false, true)]
+        public void ParameterOverridesApplyAfterNativeAttributesWithoutChangingOtherFacts(
+            string name, bool enabled, bool alreadyPresent)
+        {
+            string existing = alreadyPresent ? $"[{name}]" : "";
+            var tree = Clean($@"
+namespace Test {{ public unsafe delegate int F(
+    [NativeAnnotation(""Win32Metadata.{name}({enabled.ToString().ToLowerInvariant()})"")]
+    {existing}
+    [In, Out, NativeArrayInfo(CountParamIndex = 1), Other.Optional, Other.ComOutPtr]
+    void** value, uint count); }}");
+            var parameter = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().First();
+            var actual = parameter.AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(enabled ? 1 : 0, actual.Count(attribute =>
+                attribute.Name.ToString() == name || attribute.Name.ToString().EndsWith("." + name) &&
+                !attribute.Name.ToString().StartsWith("Other.", StringComparison.Ordinal)));
+            foreach (string retained in new[] { "In", "Out", "NativeArrayInfo", "Other.Optional", "Other.ComOutPtr" })
+                Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == retained));
+            Assert.AreEqual("void**", parameter.Type?.ToString());
+            Assert.IsFalse(actual.Any(attribute => attribute.Name.ToString() == "NativeAnnotation"));
+            Assert.AreEqual(tree.GetRoot().ToFullString(), Clean(tree.GetRoot().ToFullString()).GetRoot().ToFullString());
+        }
+
+        [TestMethod]
+        public void ParameterOverridesComposeWithDerivedSalInsteadOfReplacingIt()
+        {
+            var tree = Clean(@"
+namespace Test { public unsafe delegate int F(
+    [CppAttributeList(""Name=SAL_name;p1=\""_In_opt_\""^Name=SAL_pre^Name=SAL_valid"")]
+    [NativeAnnotation(""Win32Metadata.Optional(false)"")] uint scalar,
+    [CppAttributeList(""Name=SAL_name;p1=\""_Outptr_\""^Name=SAL_post^Name=SAL_valid"")]
+    [NativeAnnotation(""Win32Metadata.ComOutPtr(true)"")] void** result); }");
+            var parameters = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().ToArray();
+            CollectionAssert.AreEqual(new[] { "In" }, parameters[0].AttributeLists.SelectMany(list => list.Attributes)
+                .Select(attribute => attribute.Name.ToString()).ToArray());
+            CollectionAssert.AreEquivalent(new[] { "Out", "global::Windows.Win32.Foundation.Metadata.ComOutPtr" },
+                parameters[1].AttributeLists.SelectMany(list => list.Attributes).Select(attribute => attribute.Name.ToString()).ToArray());
+        }
+
+        [TestMethod]
+        public void RemovingComOutPtrPreservesItsImplicitPhysicalOutFlag()
+        {
+            var tree = Clean(@"
+namespace Test { public unsafe delegate int F(
+    [ComOutPtr, NativeAnnotation(""Win32Metadata.ComOutPtr(false)"")] void** value); }");
+            var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.AreEqual("global::System.Runtime.InteropServices.Out", attributes[0].Name.ToString());
+        }
+
+        [DataTestMethod]
+        [DataRow("NativeAnnotation")]
+        [DataRow("NativeAnnotationAttribute")]
+        [DataRow("global::NativeAnnotation")]
+        [DataRow("global::NativeAnnotationAttribute")]
+        public void RecognizedParameterOverrideTransportCannotLeakIntoFinalSource(string attributeName)
+        {
+            var tree = Clean($@"namespace Test {{ public delegate void F(
+                [{attributeName}(""Win32Metadata.Optional(false)"")] [Optional, In] int value); }}");
+            var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, attributes.Length);
+            Assert.AreEqual("In", attributes[0].Name.ToString());
+        }
+
+        [DataTestMethod]
+        [DataRow("Optional", false, "[-Optional]", false)]
+        [DataRow("Optional", true, "[Optional]", false)]
+        [DataRow("ComOutPtr", true, "[ComOutPtr]", false)]
+        [DataRow("Optional", false, "[Optional]", true)]
+        [DataRow("Optional", true, "[-Optional]", true)]
+        [DataRow("ComOutPtr", true, "[-ComOutPtr]", true)]
+        public void ParameterOverridesDoNotPermitContradictoryLegacyRemaps(
+            string name, bool enabled, string remap, bool conflict)
+        {
+            string source = $@"
+namespace Test {{ public unsafe delegate int F(
+    [NativeAnnotation(""Win32Metadata.{name}({enabled.ToString().ToLowerInvariant()})"")]
+    [In, Out] void** value); }}";
+            var remaps = new Dictionary<string, string> { ["F::value"] = remap };
+            if (conflict)
+            {
+                var error = Assert.ThrowsException<InvalidOperationException>(() => Clean(source, remaps));
+                StringAssert.Contains(error.Message, "WMA002");
+            }
+            else
+            {
+                var tree = Clean(source, remaps);
+                var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                    .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+                Assert.AreEqual(enabled ? 3 : 2, attributes.Length);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("Optional")]
+        [DataRow("Optional(1)")]
+        [DataRow("ComOutPtr(TRUE)")]
+        [DataRow("ComOutPtr(false, true)")]
+        public void MalformedParameterOverridesCannotBeSilentlyDropped(string payload)
+        {
+            var error = Assert.ThrowsException<InvalidOperationException>(() =>
+                Clean($@"namespace Test {{ public delegate void F([NativeAnnotation(""Win32Metadata.{payload}"")] int value); }}"));
+            StringAssert.Contains(error.Message, "WMA001");
+        }
+
+        [DataTestMethod]
+        [DataRow("[NativeAnnotation(\"Win32Metadata.Optional(true)\")] public int value;")]
+        [DataRow("[return: NativeAnnotation(\"Win32Metadata.ComOutPtr(false)\")] public int F() => 0;")]
+        [DataRow("public extern void F([NativeAnnotation(\"Win32Metadata.Optional(true)\"), NativeAnnotation(\"Win32Metadata.Optional(false)\")] int value);")]
+        public void ParameterOverridesRejectWrongTargetsAndDuplicates(string declaration)
+        {
+            var error = Assert.ThrowsException<InvalidOperationException>(() =>
+                Clean("namespace Test { public class S { " + declaration + " } }"));
+            StringAssert.Contains(error.Message, "WMA001");
+        }
+
         [TestMethod]
         public void CleanerHandlesMixedAttributeListsAndReturnTargets()
         {
@@ -122,6 +249,78 @@ namespace Test { public unsafe delegate int D(
         }
 
         [DataTestMethod]
+        [DataRow("[SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\"), SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatformAttribute(\"windows5.0\"), global::Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute(\"windows5.0\")]")]
+        [DataRow("[Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(@\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"\\u0077indows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        public void IdenticalProducerAndLegacyAvailabilityAliasesAreDeduplicated(string attributes)
+        {
+            var tree = Clean($@"
+namespace Test {{ public abstract class Apis {{
+    {attributes} [Obsolete(""keep"")]
+    public abstract int F();
+}} }}");
+            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var actual = method.AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, actual.Count(attribute => attribute.Name.ToString().Contains("SupportedOSPlatform")));
+            Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString().StartsWith("global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform", StringComparison.Ordinal)));
+            Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == "Obsolete"));
+            Assert.AreEqual(tree.GetRoot().ToFullString(), Clean(tree.GetRoot().ToFullString()).GetRoot().ToFullString());
+        }
+
+        [DataTestMethod]
+        [DataRow("[SupportedOSPlatform(\"windows6.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"windows5.00\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[Other.SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.Other.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"windows5.0\"), SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\"), global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[return: SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        public void AvailabilityDeduplicationPreservesConflictsOtherNamesAndTargets(string attributes)
+        {
+            var tree = Clean($@"
+namespace Test {{ public abstract class Apis {{
+    {attributes}
+    public abstract int F();
+}} }}");
+            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            Assert.AreEqual(2, method.AttributeLists.SelectMany(list => list.Attributes)
+                .Count(attribute => attribute.Name.ToString().Contains("SupportedOSPlatform")));
+            if (attributes.Contains("return:"))
+                Assert.IsTrue(method.AttributeLists.Any(list => list.Target?.Identifier.ValueText == "return"));
+        }
+
+        [DataTestMethod]
+        [DataRow("windows5.0", true)]
+        [DataRow("windows6.0", false)]
+        public void AvailabilityAliasDeduplicationAllowsOnlyIdenticalPayloadsToCompile(string legacyPlatform, bool success)
+        {
+            var tree = Clean($@"
+using Windows.Win32.Foundation.Metadata;
+namespace Windows.Win32.Foundation.Metadata {{
+    public sealed class SupportedOSPlatformAttribute : System.Attribute {{
+        public SupportedOSPlatformAttribute(string platform) {{ }}
+    }}
+}}
+namespace Test {{ public abstract class Apis {{
+    [SupportedOSPlatform(""{legacyPlatform}"")]
+    [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(""windows5.0"")]
+    public abstract int F();
+}} }}");
+            var compilation = CSharpCompilation.Create("AvailabilityAliases", new[] { tree },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            using var output = new MemoryStream();
+            var result = compilation.Emit(output);
+            Assert.AreEqual(success, result.Success, string.Join(Environment.NewLine, result.Diagnostics));
+            if (!success)
+                Assert.IsTrue(result.Diagnostics.Any(diagnostic => diagnostic.Id == "CS0579"));
+        }
+
+        [DataTestMethod]
         [DataRow("[RAIIFree(\"Other\")]")]
         [DataRow("[InvalidHandleValue(7L)]")]
         public void ConflictingLegacyFactsCannotOverwriteHeaders(string remap)
@@ -164,6 +363,28 @@ namespace Test { public class Apis {
         {
             var tree = Clean("namespace Test { [global::System.Flags] public enum E { A = 1 } }", flags: new HashSet<string> { "E" });
             Assert.AreEqual(1, tree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().Count(attribute => attribute.Name.ToString().Contains("Flags")));
+        }
+
+        [TestMethod]
+        public void SourceOwnedGroupKeepsItsNamespaceWithoutAnAuthoredUse()
+        {
+            var tree = CSharpSyntaxTree.ParseText(@"
+namespace Windows.Win32.System.SystemServices {
+[global::System.Flags] public enum ROT_FLAGS : uint {
+    ROTFLAGS_REGISTRATIONKEEPSALIVE = 1,
+    ROTFLAGS_ALLOWANYCLIENT = 2
+}}", path: "winnt.header-types.cs");
+            var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, new Dictionary<string, string>
+            {
+                ["ROT_FLAGS"] = "Windows.Win32.System.Com",
+            });
+            var group = moved.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+            Assert.AreEqual("Windows.Win32.System.Com",
+                group.Ancestors().OfType<NamespaceDeclarationSyntax>().Single().Name.ToString());
+            Assert.AreEqual("uint", group.BaseList!.Types.Single().Type.ToString());
+            Assert.AreEqual("global::System.Flags", group.AttributeLists.Single().Attributes.Single().Name.ToString());
+            CollectionAssert.AreEqual(new[] { "ROTFLAGS_REGISTRATIONKEEPSALIVE=1", "ROTFLAGS_ALLOWANYCLIENT=2" },
+                group.Members.Select(member => member.Identifier.ValueText + "=" + member.EqualsValue!.Value).ToArray());
         }
 
         [DataTestMethod]

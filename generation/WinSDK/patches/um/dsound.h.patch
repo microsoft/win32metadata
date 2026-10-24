@@ -1,0 +1,13 @@
+diff --git a/um/dsound.h b/um/dsound.h
+index 4a688113bc0a98ac4bce866990de061e75002515..ef5be2596904b7ebf0f3d089f50a589b481dc074 100644
+--- a/um/dsound.h
++++ b/um/dsound.h
+@@ -494,7 +494,7 @@
+ );
+ #define DirectSoundFullDuplexCreate8 DirectSoundFullDuplexCreate
+ 
+-extern HRESULT WINAPI GetDeviceID(_In_opt_ LPCGUID pGuidSrc, _Out_ LPGUID pGuidDest);
++_Win32_ImportLibrary_("DSOUND.dll") extern HRESULT WINAPI GetDeviceID(_In_opt_ LPCGUID pGuidSrc, _Out_ LPGUID pGuidDest);
+ #endif // DIRECTSOUND_VERSION >= 0x0800
+ 
+ #ifdef UNICODE

@@ -232,11 +232,20 @@ The shared `win32metadata_annotations.h` defines the `_Win32_*_` vocabulary usin
 Clang attributes owned by the `Win32Metadata.` payload prefix. The scraper opts in
 with `--config parse-win32-annotations`, defines `WIN32METADATA`, and uses the same
 translation unit for annotation extraction, remap discovery, and ClangSharp
-generation. RAII invalid values, group values, type associations, and optional
+generation. Native macro RAII invalid values, group values, and optional
 import overrides are typed annotation arguments from that first AST. No
 `WIN32METADATA_CSHARP` gate or second expression parse is used.
-Cleanup references use an unevaluated address operand so `dllimport` functions do
-not need constant addresses. The shared helper makes ignored metadata annotations
+Cleanup references use a tagged expanded native name, bound to one actual function
+declaration after the complete translation unit is available. The cleanup prototype
+may follow the producer; unknown, non-function, and ambiguous references fail.
+Macro and structured-comment enum associations share name resolution. An absent
+unqualified metadata name does not require a declaration before its native use;
+visible native enums/groups retain their identity and remaps, and visible scalar
+aliases are rejected. Cross-partition or retained definitions are checked after
+final composition. Every association must resolve to exactly one emitted enum per
+applicable architecture or fail with WMA003.
+Invalid-value expressions remain compiler-evaluated and input handles do not infer
+cleanup. The shared helper makes ignored metadata annotations
 errors locally without changing the native SDK/SAL warning policy.
 
 Defined annotations:
@@ -250,12 +259,23 @@ Defined annotations:
 | `_Win32_AssociatedEnum_(type)` | return, parameter, field | Association while preserving native declaration types |
 | `_Win32_ImportLibrary_(dll[, export or ordinal])` | function | Module and optional `ImplMap.ImportName` override |
 | `_Win32_Retained_` | parameter | Retained pointer metadata |
+| `_Win32_Reserved_` | parameter | Reserved metadata; preserves existing native direction and optionality |
 | `_Win32_ContainsInteriorPointers_` | caller-owned output buffer | Same-allocation interior-pointer metadata |
 
-Prefer existing SAL/MIDL for counts, directions, COM outputs and retval. A prepared
-IDL `[retval]` becomes native retval SAL in the AST. A legacy generated-header
-comment bridge remains until all affected original IDLs are prepared; it is not
-the transport for new annotations.
+Prefer existing SAL/MIDL for counts, directions, COM outputs and retval. Native
+IDL `[retval]` survives in MIDL's parameter comments and is read alongside adjacent
+direction blocks. Native SDK SAL uses `_Out_`/`_COM_Outptr_`, not generator-only
+retval macros. Nonlocal methods retain `/sal`-generated RPC annotations.
+
+Original IDL transports additional facts with standard `cpp_quote` emitting
+`/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(arguments) */`.
+This uses the same opt-in, facts, target validation and emitter as native macros.
+Clang's active comment tokens, included files and skipped ranges supply source
+scope; strings are not comments. Explicit native identities bind interfaces,
+methods, parameters, fields, types, functions/returns and enum/constants without
+synthetic declarations. Cleanup/type/enum references resolve natively; comment
+RAIIFree invalids support signed decimal Int64 literals. Compiled logical groups
+and native C/C++ expressions retain their existing macro path.
 
 See `docs/copilot/plans/shift-left-annotation-spec.md` for the full vocabulary and
 original-SDK-artifact patching requirements.

@@ -1073,7 +1073,7 @@ typedef struct _DNS_SVCB_PARAM
         PVOID                    pReserved;
     };
 } DNS_SVCB_PARAM;
-#pragma warning(pop)
+#pragma warning(pop) // 4201 nonstandard extension used: nameless struct/union
 
 typedef struct _DNS_SVCB_DATA
 {

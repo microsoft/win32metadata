@@ -533,15 +533,6 @@ typedef struct FWPM_FILTER_SUBSCRIPTION0_
     GUID sessionKey;
     } 	FWPM_FILTER_SUBSCRIPTION0;
 
-typedef struct FWPM_LAYER_STATISTICS0_
-    {
-    GUID layerId;
-    UINT32 classifyPermitCount;
-    UINT32 classifyBlockCount;
-    UINT32 classifyVetoCount;
-    UINT32 numCacheEntries;
-    } 	FWPM_LAYER_STATISTICS0;
-
 typedef struct FWPM_LAYER_STATISTICS1_
     {
     GUID layerId;
@@ -552,46 +543,6 @@ typedef struct FWPM_LAYER_STATISTICS1_
     UINT32 filterCount;
     UINT32 totalFilterSize;
     } 	FWPM_LAYER_STATISTICS1;
-
-typedef struct FWPM_STATISTICS0_
-    {
-    UINT32 numLayerStatistics;
-    /* [ref][size_is] */ FWPM_LAYER_STATISTICS0 *layerStatistics;
-    UINT32 inboundAllowedConnectionsV4;
-    UINT32 inboundBlockedConnectionsV4;
-    UINT32 outboundAllowedConnectionsV4;
-    UINT32 outboundBlockedConnectionsV4;
-    UINT32 inboundAllowedConnectionsV6;
-    UINT32 inboundBlockedConnectionsV6;
-    UINT32 outboundAllowedConnectionsV6;
-    UINT32 outboundBlockedConnectionsV6;
-    UINT32 inboundActiveConnectionsV4;
-    UINT32 outboundActiveConnectionsV4;
-    UINT32 inboundActiveConnectionsV6;
-    UINT32 outboundActiveConnectionsV6;
-    UINT64 reauthDirInbound;
-    UINT64 reauthDirOutbound;
-    UINT64 reauthFamilyV4;
-    UINT64 reauthFamilyV6;
-    UINT64 reauthProtoOther;
-    UINT64 reauthProtoIPv4;
-    UINT64 reauthProtoIPv6;
-    UINT64 reauthProtoICMP;
-    UINT64 reauthProtoICMP6;
-    UINT64 reauthProtoUDP;
-    UINT64 reauthProtoTCP;
-    UINT64 reauthReasonPolicyChange;
-    UINT64 reauthReasonNewArrivalInterface;
-    UINT64 reauthReasonNewNextHopInterface;
-    UINT64 reauthReasonProfileCrossing;
-    UINT64 reauthReasonClassifyCompletion;
-    UINT64 reauthReasonIPSecPropertiesChanged;
-    UINT64 reauthReasonMidStreamInspection;
-    UINT64 reauthReasonSocketPropertyChanged;
-    UINT64 reauthReasonNewInboundMCastBCastPacket;
-    UINT64 reauthReasonEDPPolicyChanged;
-    UINT64 reauthReasonProxyHandleChanged;
-    } 	FWPM_STATISTICS0;
 
 typedef struct FWPM_STATISTICS1_
     {

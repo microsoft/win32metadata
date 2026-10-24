@@ -34,6 +34,17 @@ env:
   BUILD_CONFIGURATION: Release
 
 jobs:
+  workflow-tests:
+    name: Workflow regression tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          persist-credentials: false
+
+      - name: Test API diff comment workflow
+        run: node --test .github/tests/pr-api-diff-comment.test.cjs
+
   changes:
     name: Detect build changes
     runs-on: ubuntu-latest
@@ -324,14 +335,6 @@ jobs:
             "deletions=$deletions" | Out-File -FilePath $env:GITHUB_OUTPUT -Append
 
             Write-Host "+$additions additions / -$deletions deletions"
-
-            # Truncate if too large for a GH comment
-            $diffText = $diffLines -join "`n"
-            $maxLen = 60000
-            if ($diffText.Length -gt $maxLen) {
-              $diffText = $diffText.Substring(0, $maxLen) + "`n`n... (diff truncated - see full artifact)"
-              Set-Content -Path bin\api-diff.patch -Value $diffText -Encoding UTF8
-            }
           }
 
           # Reset LASTEXITCODE so GitHub Actions doesn't treat this step as failed

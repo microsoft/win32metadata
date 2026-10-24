@@ -1,0 +1,67 @@
+diff --git a/um/amsi.idl b/um/amsi.idl
+index f072bc93..b9c518f1 100644
+--- a/um/amsi.idl
++++ b/um/amsi.idl
+@@ -4,11 +4,16 @@
+  *                                                     *
+  *******************************************************/
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ cpp_quote("")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
++
++cpp_quote("/* Win32Metadata: interface ::IAmsiStream => SupportedOSPlatform(\"windows10.0.10240\") */")
++cpp_quote("/* Win32Metadata: interface ::IAntimalwareProvider => SupportedOSPlatform(\"windows10.0.10240\") */")
++cpp_quote("/* Win32Metadata: interface ::IAntimalware => SupportedOSPlatform(\"windows10.0.10240\") */")
+ 
+ import "oaidl.idl";
+ import "ocidl.idl";
+@@ -311,23 +316,35 @@
+ cpp_quote("EXTERN_C const CLSID CLSID_Antimalware;")
+ cpp_quote("")
+ cpp_quote("DECLARE_HANDLE(HAMSICONTEXT);")
++cpp_quote("/* Win32Metadata: type ::HAMSICONTEXT => NativeTypedef */")
+ cpp_quote("DECLARE_HANDLE(HAMSISESSION);")
+-cpp_quote("")
++cpp_quote("/* Win32Metadata: type ::HAMSISESSION => NativeTypedef */")
++cpp_quote("")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::AmsiInitialize => SupportedOSPlatform(\"windows10.0.10240\") */")
+ cpp_quote("STDAPI AmsiInitialize(")
+ cpp_quote("    _In_  LPCWSTR appName,")
+ cpp_quote("    _Outptr_ HAMSICONTEXT* amsiContext);")
+ cpp_quote("")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::AmsiUninitialize => SupportedOSPlatform(\"windows10.0.10240\") */")
+ cpp_quote("STDAPI_(VOID) AmsiUninitialize(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext);")
+ cpp_quote("")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::AmsiOpenSession => SupportedOSPlatform(\"windows10.0.10240\") */")
+ cpp_quote("STDAPI AmsiOpenSession(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _Out_ HAMSISESSION* amsiSession);")
+ cpp_quote("")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::AmsiCloseSession => SupportedOSPlatform(\"windows10.0.10240\") */")
+ cpp_quote("STDAPI_(VOID) AmsiCloseSession(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _In_  HAMSISESSION amsiSession);")
+ cpp_quote("")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::AmsiScanBuffer => SupportedOSPlatform(\"windows10.0.10240\") */")
+ cpp_quote("STDAPI AmsiScanBuffer(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _In_reads_bytes_(length) PVOID buffer,")
+@@ -343,6 +360,8 @@
+ cpp_quote("    _In_opt_  LPCWSTR contentName,")
+ cpp_quote("    _Out_ AMSI_RESULT* result);")
+ cpp_quote("")
++cpp_quote("")
++cpp_quote("/* Win32Metadata: function ::AmsiScanString => SupportedOSPlatform(\"windows10.0.10240\") */")
+ cpp_quote("STDAPI AmsiScanString(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _In_  LPCWSTR string,")

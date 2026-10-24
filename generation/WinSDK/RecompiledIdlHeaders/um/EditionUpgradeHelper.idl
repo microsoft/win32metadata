@@ -112,11 +112,7 @@ interface IClipServiceNotificationHelper: IUnknown
 {
     HRESULT
     ShowToast(
-        [in, string]                    BSTR                                titleText,
-        [in, string]                    BSTR                                bodyText,
-        [in, string]                    BSTR                                packageName,
-        [in, string]                    BSTR                                appId,
-        [in, string]                    BSTR                                launchCommand
+        void
     );
 };
 

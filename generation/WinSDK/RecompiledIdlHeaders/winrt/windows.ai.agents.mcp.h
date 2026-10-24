@@ -121,6 +121,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace AI {
+            namespace Agents {
+                namespace Mcp {
+                    interface IMcpMessageFilterExperimental2;
+                } /* Mcp */
+            } /* Agents */
+        } /* AI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2 ABI::Windows::AI::Agents::Mcp::IMcpMessageFilterExperimental2
+
+#endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
 #define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
 namespace ABI {
@@ -274,6 +291,56 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental;
 #endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental_INTERFACE_DEFINED__) */
+#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.AI.Agents.Mcp.IMcpMessageFilterExperimental2
+ *
+ * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
+#if !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_AI_Agents_Mcp_IMcpMessageFilterExperimental2[] = L"Windows.AI.Agents.Mcp.IMcpMessageFilterExperimental2";
+namespace ABI {
+    namespace Windows {
+        namespace AI {
+            namespace Agents {
+                namespace Mcp {
+                    MIDL_INTERFACE("8127e075-4652-5645-b2eb-0e5772ee5c6f")
+                    IMcpMessageFilterExperimental2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE Initialize(
+                            HSTRING clientProcessIdentifier,
+                            UINT32 clientProcessId,
+                            HSTRING serverProcessIdentifier,
+                            UINT32 serverProcessId,
+                            HSTRING serverId,
+                            boolean* result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE OnMessage(
+                            HSTRING message,
+                            ABI::Windows::AI::Agents::Mcp::McpMessageDirection direction,
+                            ABI::Windows::AI::Agents::Mcp::IMcpMessageFilterResponse* filterResponse
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IMcpMessageFilterExperimental2 = __uuidof(IMcpMessageFilterExperimental2);
+                } /* Mcp */
+            } /* Agents */
+        } /* AI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2;
+#endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
@@ -437,6 +504,12 @@ typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperiment
 
 #endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2 __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2;
+
+#endif // ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
 #define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse;
@@ -559,6 +632,89 @@ interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental
 
 EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental;
 #endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental_INTERFACE_DEFINED__) */
+#endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.AI.Agents.Mcp.IMcpMessageFilterExperimental2
+ *
+ * Introduced to Windows.AI.Agents.AgentsContract in version 2.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
+#if !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_AI_Agents_Mcp_IMcpMessageFilterExperimental2[] = L"Windows.AI.Agents.Mcp.IMcpMessageFilterExperimental2";
+typedef struct __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* Initialize)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This,
+        HSTRING clientProcessIdentifier,
+        UINT32 clientProcessId,
+        HSTRING serverProcessIdentifier,
+        UINT32 serverProcessId,
+        HSTRING serverId,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* OnMessage)(__x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2* This,
+        HSTRING message,
+        enum __x_ABI_CWindows_CAI_CAgents_CMcp_CMcpMessageDirection direction,
+        __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterResponse* filterResponse);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2Vtbl;
+
+interface __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_Initialize(This, clientProcessIdentifier, clientProcessId, serverProcessIdentifier, serverProcessId, serverId, result) \
+    ((This)->lpVtbl->Initialize(This, clientProcessIdentifier, clientProcessId, serverProcessIdentifier, serverProcessId, serverId, result))
+
+#define __x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_OnMessage(This, message, direction, filterResponse) \
+    ((This)->lpVtbl->OnMessage(This, message, direction, filterResponse))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2;
+#endif /* !defined(____x_ABI_CWindows_CAI_CAgents_CMcp_CIMcpMessageFilterExperimental2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_AI_AGENTS_AGENTSCONTRACT_VERSION >= 0x20000
 #endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 

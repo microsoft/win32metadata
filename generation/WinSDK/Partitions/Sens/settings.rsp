@@ -4,3 +4,5 @@
 <IncludeRoot>/um/sens.h
 --namespace
 Windows.Win32.System.EventNotificationService
+--config
+parse-win32-annotations

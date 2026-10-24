@@ -1,0 +1,13 @@
+diff --git a/um/ddraw.h b/um/ddraw.h
+--- a/um/ddraw.h
++++ b/um/ddraw.h
+@@ -132,6 +132,9 @@
+ typedef struct IDirectDrawGammaControl          FAR *LPDIRECTDRAWGAMMACONTROL;
+ 
+ typedef struct _DDFXROP                 FAR *LPDDFXROP;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef LPDDFXROP LPDDFXROP;
++#endif
+ 
+ 
+ typedef struct _DDSURFACEDESC           FAR *LPDDSURFACEDESC;

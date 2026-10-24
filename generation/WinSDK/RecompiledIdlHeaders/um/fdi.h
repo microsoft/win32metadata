@@ -406,6 +406,8 @@ typedef enum {
     fdidtDECRYPT,                       // Decrypt a data block
 } FDIDECRYPTTYPE; /* fdidt */
 
+#pragma warning(push)
+#pragma warning(disable: 4201) //nonstandard extension used: nameless struct/union
 
 /***    FDIDECRYPT - Data for PFNFDIDECRYPT function
  *
@@ -441,6 +443,8 @@ typedef struct {
     };
 } FDIDECRYPT; /* fdid */
 typedef FDIDECRYPT FAR *PFDIDECRYPT; /* pfdid */
+
+#pragma warning(pop) // 4201: nonstandard extension used: nameless struct/union
 
 
 /***    FNALLOC - Memory Allocation

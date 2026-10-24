@@ -15,6 +15,7 @@ namespace ClangSharpSourceToWinmd
         private readonly Dictionary<string, List<CrossArchInfo>> namesToInfos = new();
         private readonly Dictionary<string, StructDeclarationSyntax> namesTo64BitStructs = new();
         private readonly HashSet<string> x86StructsNeed64BitAttrs = new();
+        private readonly HashSet<string> sourceIdentifiers = new(StringComparer.Ordinal);
         private readonly object syncObj = new();
 
         public CrossArchSyntaxMap()
@@ -81,6 +82,27 @@ namespace ClangSharpSourceToWinmd
             return false;
         }
 
+        public static bool IsPotentialCrossArch(FieldDeclarationSyntax node)
+        {
+            return node.Parent is ClassDeclarationSyntax declaration && declaration.Identifier.ValueText == "Apis" &&
+                node.Modifiers.Any(modifier => modifier.IsKind(SyntaxKind.ConstKeyword) || modifier.IsKind(SyntaxKind.StaticKeyword));
+        }
+
+        internal static string GetFullName(SyntaxNode node)
+        {
+            if (node is FieldDeclarationSyntax field)
+            {
+                string ns = string.Join(".", field.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                    .Reverse().Select(declaration => declaration.Name.ToString()));
+                var names = field.Ancestors().OfType<TypeDeclarationSyntax>().Reverse()
+                    .Select(declaration => declaration.Identifier.ValueText)
+                    .Append(field.Declaration.Variables.First().Identifier.ValueText);
+                return string.Join("::", (ns.Length == 0 ? Enumerable.Empty<string>() : new[] { ns }).Concat(names));
+            }
+
+            return SyntaxUtils.GetFullName(node, true);
+        }
+
         public StructDeclarationSyntax FixX86Struct(StructDeclarationSyntax x86Node)
         {
             string name = SyntaxUtils.GetFullName(x86Node, true);
@@ -122,8 +144,19 @@ namespace ClangSharpSourceToWinmd
 
         public void AddTree(SyntaxTree tree)
         {
+            lock (this.syncObj)
+            {
+                foreach (var token in tree.GetRoot().DescendantTokens().Where(token => token.IsKind(SyntaxKind.IdentifierToken)))
+                    this.sourceIdentifiers.Add(token.ValueText);
+            }
             CrossArchSyntaxWalker walker = new CrossArchSyntaxWalker(this);
             walker.WalkTree(tree);
+        }
+
+        internal IEnumerable<string> GetSourceIdentifiers()
+        {
+            lock (this.syncObj)
+                return this.sourceIdentifiers.ToArray();
         }
 
         public IEnumerable<Architecture> GetSignatureArchGroupings(string name)
@@ -146,7 +179,7 @@ namespace ClangSharpSourceToWinmd
 
         public IEnumerable<Architecture> GetSignatureArchGroupings(SyntaxNode node)
         {
-            string name = SyntaxUtils.GetFullName(node, true);
+            string name = GetFullName(node);
             return this.GetSignatureArchGroupings(name);
         }
 
@@ -321,13 +354,21 @@ namespace ClangSharpSourceToWinmd
             {
                 return GetMethodSignature(d.Identifier.ValueText, d.AttributeLists, d.ReturnType, d.ParameterList);
             }
+            else if (node is FieldDeclarationSyntax field)
+            {
+                StringBuilder ret = new StringBuilder();
+                AppendAttributes(ret, field.AttributeLists);
+                // The managed storage and initializer are significant even when NativeTypeName is identical.
+                ret.Append(field.WithAttributeLists(default).NormalizeWhitespace().ToFullString());
+                return ret.ToString();
+            }
 
             return node.ToString();
         }
 
         private void AddNode(Architecture arch, SyntaxNode node)
         {
-            string name = SyntaxUtils.GetFullName(node, true);
+            string name = GetFullName(node);
             string fullSignature = GetFullSignature(node);
             string altSignatureForX86 = string.Empty;
 
@@ -439,8 +480,18 @@ namespace ClangSharpSourceToWinmd
             public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
                 if (IsPotentialCrossArch(node))
+                {
                     this.map.AddNode(this.currentArch, node);
+                }
+
                 base.VisitEnumDeclaration(node);
+            }
+
+            public override void VisitFieldDeclaration(FieldDeclarationSyntax node)
+            {
+                if (IsPotentialCrossArch(node))
+                    this.map.AddNode(this.currentArch, node);
+                base.VisitFieldDeclaration(node);
             }
         }
     }

@@ -1,0 +1,42 @@
+diff --git a/um/lowlevelmonitorconfigurationapi.h b/um/lowlevelmonitorconfigurationapi.h
+index 38f5623b..cffe4dea 100644
+--- a/um/lowlevelmonitorconfigurationapi.h
++++ b/um/lowlevelmonitorconfigurationapi.h
+@@ -32,6 +32,8 @@ typedef enum _MC_VCP_CODE_TYPE
+ 
+ } MC_VCP_CODE_TYPE, *LPMC_VCP_CODE_TYPE;
+ 
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ _BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
+     (
+     HANDLE hMonitor,
+@@ -41,12 +43,19 @@ _BOOL WINAPI GetVCPFeatureAndVCPFeatureReply
+     _Out_opt_ LPDWORD pdwMaximumValue
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _BOOL WINAPI SetVCPFeature( HANDLE hMonitor, BYTE bVCPCode, DWORD dwNewValue );
+ 
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ _BOOL WINAPI SaveCurrentSettings( HANDLE hMonitor );
+ 
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ _BOOL WINAPI GetCapabilitiesStringLength( HANDLE hMonitor, _Out_ LPDWORD pdwCapabilitiesStringLengthInCharacters );
+ 
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ _BOOL WINAPI CapabilitiesRequestAndCapabilitiesReply 
+     (
+     HANDLE hMonitor, 
+@@ -54,6 +63,8 @@ _BOOL WINAPI CapabilitiesRequestAndCapabilitiesReply
+     DWORD dwCapabilitiesStringLengthInCharacters
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ _BOOL WINAPI GetTimingReport( HANDLE hMonitor, _Out_ LPMC_TIMING_REPORT pmtrMonitorTimingReport );
+ 
+ #pragma pack( pop )

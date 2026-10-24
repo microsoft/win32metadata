@@ -1,0 +1,22 @@
+diff --git a/um/credssp.h b/um/credssp.h
+index abdb9f66..71949025 100644
+--- a/um/credssp.h
++++ b/um/credssp.h
+@@ -50,6 +50,17 @@ typedef struct _SecPkgContext_ClientCreds
+ #define SECPKG_ATTR_C_FULL_IDENT_TOKEN  0x80000085UL
+ #define SECPKG_ATTR_CREDS_2             0x80000086UL
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(SECPKG_ATTR, unsigned long,
++    SECPKG_ATTR_C_ACCESS_TOKEN,
++    SECPKG_ATTR_C_FULL_ACCESS_TOKEN,
++    SECPKG_ATTR_CERT_TRUST_STATUS,
++    SECPKG_ATTR_CREDS,
++    SECPKG_ATTR_CREDS_2,
++    SECPKG_ATTR_NEGOTIATION_PACKAGE,
++    SECPKG_ATTR_SERVER_AUTH_FLAGS);
++#endif
++
+ 
+ typedef enum _CREDSSP_SUBMIT_TYPE {
+     CredsspPasswordCreds = 2,

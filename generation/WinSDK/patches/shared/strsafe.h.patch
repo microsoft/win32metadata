@@ -1,0 +1,697 @@
+diff --git a/shared/strsafe.h b/shared/strsafe.h
+index 658a5d7e..d668360d 100644
+--- a/shared/strsafe.h
++++ b/shared/strsafe.h
+@@ -10,6 +10,8 @@
+ ******************************************************************/
+ #ifndef _STRSAFE_H_INCLUDED_
+ #define _STRSAFE_H_INCLUDED_
++
++#include <sal.h>
+ #if (_MSC_VER > 1000)
+ #pragma once
+ #endif
+@@ -534,7 +536,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -562,7 +564,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -673,7 +675,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -705,7 +707,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -846,7 +848,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -968,7 +970,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -1200,7 +1202,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyExA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -1327,7 +1329,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyExW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -1537,7 +1539,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyNA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -1575,7 +1577,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyNW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -1699,7 +1701,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyNA(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -1739,7 +1741,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_POTENTIAL_BUFFER_OVERFLOW_HIGH_PRIORITY)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyNW(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -1897,7 +1899,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyNExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -2020,7 +2022,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCopyNExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -2260,7 +2262,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyNExA(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -2385,7 +2387,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_POTENTIAL_BUFFER_OVERFLOW_HIGH_PRIORITY)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCopyNExW(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -2584,7 +2586,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatA(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -2612,7 +2614,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatW(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -2717,7 +2719,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatA(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -2746,7 +2748,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatW(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -2888,7 +2890,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatExA(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -2999,7 +3001,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatExW(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -3223,7 +3225,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatExA(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -3331,7 +3333,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatExW(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -3520,7 +3522,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatNA(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -3556,7 +3558,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatNW(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -3675,7 +3677,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatNA(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -3714,7 +3716,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatNW(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -3869,7 +3871,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatNExA(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -3981,7 +3983,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchCatNExW(
+             _Inout_updates_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -4209,7 +4211,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatNExA(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -4322,7 +4324,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_POTENTIAL_BUFFER_OVERFLOW_HIGH_PRIORITY)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbCatNExW(
+             _Inout_updates_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -4516,7 +4518,7 @@ return value of this function
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchVPrintfA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -4550,7 +4552,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchVPrintfW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -4619,7 +4621,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchVPrintf_lA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -4651,7 +4653,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchVPrintf_lW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -4762,7 +4764,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbVPrintfA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -4795,7 +4797,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbVPrintfW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -4865,7 +4867,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbVPrintf_lA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -4895,7 +4897,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbVPrintf_lW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -5006,7 +5008,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchPrintfA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -5041,7 +5043,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchPrintfW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -5114,7 +5116,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchPrintf_lA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -5152,7 +5154,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchPrintf_lW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -5269,7 +5271,7 @@ return value of this function
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbPrintfA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -5308,7 +5310,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbPrintfW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -5384,7 +5386,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbPrintf_lA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -5420,7 +5422,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbPrintf_lW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -5571,7 +5573,7 @@ return value of this function
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchPrintfExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -5704,7 +5706,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchPrintfExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -5875,7 +5877,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchPrintf_lExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -6006,7 +6008,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchPrintf_lExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -6251,7 +6253,7 @@ return value of this function
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbPrintfExA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -6387,7 +6389,7 @@ STRSAFEAPI
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbPrintfExW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -6558,7 +6560,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbPrintf_lExA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -6686,7 +6688,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbPrintf_lExW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -6930,7 +6932,7 @@ return value of this function
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchVPrintfExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -7059,7 +7061,7 @@ STRSAFEAPI
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchVPrintfExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -7225,7 +7227,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchVPrintf_lExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -7351,7 +7353,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCchVPrintf_lExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -7591,7 +7593,7 @@ return value of this function
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbVPrintfExA(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -7717,7 +7719,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable : __WARNING_INCORRECT_ANNOTATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbVPrintfExW(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -7876,7 +7878,7 @@ STRSAFEAPI
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbVPrintf_lExA(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -7997,7 +7999,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsVista_ STRSAFEAPI
+     StringCbVPrintf_lExW(
+             _Out_writes_bytes_(cbDest) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -8193,7 +8195,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchGetsA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest)
+@@ -8216,7 +8218,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchGetsW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest)
+@@ -8315,7 +8317,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbGetsA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest)
+@@ -8339,7 +8341,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbGetsW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest)
+@@ -8466,7 +8468,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchGetsExA(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cchDest,
+@@ -8569,7 +8571,7 @@ STRSAFEAPI
+ 
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchGetsExW(
+             _Out_writes_(cchDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cchDest,
+@@ -8775,7 +8777,7 @@ return value of this function.
+ #endif // !UNICODE
+ 
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbGetsExA(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPSTR pszDest,
+             _In_ size_t cbDest,
+@@ -8878,7 +8880,7 @@ STRSAFEAPI
+ #pragma warning(push)
+ #pragma warning(disable: __WARNING_POSTCONDITION_NULLTERMINATION_VIOLATION)
+ 
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbGetsExW(
+             _Out_writes_bytes_(cbDest) _Always_(_Post_z_) STRSAFE_LPWSTR pszDest,
+             _In_ size_t cbDest,
+@@ -9049,7 +9051,7 @@ return value of this function.
+ #pragma warning(disable:__WARNING_POTENTIAL_RANGE_POSTCONDITION_VIOLATION)
+ 
+ _Must_inspect_result_
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchLengthA(
+             _In_reads_or_z_(cchMax) STRSAFE_PCNZCH psz,
+             _In_ _In_range_(1, STRSAFE_MAX_CCH) size_t cchMax,
+@@ -9082,7 +9084,7 @@ STRSAFEAPI
+ #pragma warning(disable:__WARNING_POTENTIAL_RANGE_POSTCONDITION_VIOLATION)
+ 
+ _Must_inspect_result_
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCchLengthW(
+             _In_reads_or_z_(cchMax) STRSAFE_PCNZWCH psz,
+             _In_ _In_range_(1, STRSAFE_MAX_CCH) size_t cchMax,
+@@ -9178,7 +9180,7 @@ return value of this function.
+ 
+ 
+ _Must_inspect_result_
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbLengthA(
+             _In_reads_or_z_(cbMax) STRSAFE_PCNZCH psz,
+             _In_ _In_range_(1, STRSAFE_MAX_CCH * sizeof(char)) size_t cbMax,
+@@ -9216,7 +9218,7 @@ STRSAFEAPI
+ 
+ 
+ _Must_inspect_result_
+-STRSAFEAPI
++_Win32_SupportedOS_WindowsXP_ STRSAFEAPI
+     StringCbLengthW(
+             _In_reads_or_z_(cbMax / sizeof(wchar_t)) STRSAFE_PCNZWCH psz,
+             _In_ _In_range_(1, STRSAFE_MAX_CCH * sizeof(wchar_t)) size_t cbMax,

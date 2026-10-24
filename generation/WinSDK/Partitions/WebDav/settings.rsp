@@ -2,3 +2,5 @@
 <IncludeRoot>/um/davclnt.h
 --namespace
 Windows.Win32.NetworkManagement.WebDav
+--config
+parse-win32-annotations

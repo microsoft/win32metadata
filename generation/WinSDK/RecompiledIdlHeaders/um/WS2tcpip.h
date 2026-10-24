@@ -735,7 +735,7 @@ setipv4sourcefilter(
     _In_reads_(SourceCount) CONST IN_ADDR *SourceList
     )
 {
-    int Error;
+    int iError;
     DWORD Size, Returned;
     PIP_MSFILTER Filter;
 
@@ -761,12 +761,12 @@ setipv4sourcefilter(
                    SourceCount * sizeof(*SourceList));
     }
 
-    Error = WSAIoctl(Socket, SIOCSIPMSFILTER, Filter, Size, NULL, 0,
+    iError = WSAIoctl(Socket, SIOCSIPMSFILTER, Filter, Size, NULL, 0,
                      &Returned, NULL, NULL);
 
     HeapFree(GetProcessHeap(), 0, Filter);
 
-    return Error;
+    return iError;
 }
 
 _Success_(return == 0)
@@ -781,7 +781,7 @@ getipv4sourcefilter(
     _Out_writes_(*SourceCount) IN_ADDR *SourceList
     )
 {
-    int Error;
+    int iError;
     DWORD Size, Returned;
     PIP_MSFILTER Filter;
 
@@ -802,10 +802,10 @@ getipv4sourcefilter(
     Filter->imsf_interface = Interface;
     Filter->imsf_numsrc = *SourceCount;
 
-    Error = WSAIoctl(Socket, SIOCGIPMSFILTER, Filter, Size, Filter, Size,
+    iError = WSAIoctl(Socket, SIOCGIPMSFILTER, Filter, Size, Filter, Size,
                      &Returned, NULL, NULL);
 
-    if (Error == 0) {
+    if (iError == 0) {
         if (*SourceCount > 0) {
             CopyMemory(SourceList, Filter->imsf_slist,
                        *SourceCount * sizeof(*SourceList));
@@ -816,7 +816,7 @@ getipv4sourcefilter(
 
     HeapFree(GetProcessHeap(), 0, Filter);
 
-    return Error;
+    return iError;
 }
 
 #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -832,7 +832,7 @@ setsourcefilter(
     _In_reads_(SourceCount) CONST SOCKADDR_STORAGE *SourceList
     )
 {
-    int Error;
+    int iError;
     DWORD Size, Returned;
     PGROUP_FILTER Filter;
 
@@ -859,12 +859,12 @@ setsourcefilter(
                    SourceCount * sizeof(*SourceList));
     }
 
-    Error = WSAIoctl(Socket, SIOCSMSFILTER, Filter, Size, NULL, 0,
+    iError = WSAIoctl(Socket, SIOCSMSFILTER, Filter, Size, NULL, 0,
                      &Returned, NULL, NULL);
 
     HeapFree(GetProcessHeap(), 0, Filter);
 
-    return Error;
+    return iError;
 }
 
 _Success_(return == 0)
@@ -880,7 +880,7 @@ getsourcefilter(
     _Out_writes_(*SourceCount) SOCKADDR_STORAGE *SourceList
     )
 {
-    int Error;
+    int iError;
     DWORD Size, Returned;
     PGROUP_FILTER Filter;
 
@@ -902,10 +902,10 @@ getsourcefilter(
     CopyMemory(&Filter->gf_group, Group, GroupLength);
     Filter->gf_numsrc = *SourceCount;
 
-    Error = WSAIoctl(Socket, SIOCGMSFILTER, Filter, Size, Filter, Size,
+    iError = WSAIoctl(Socket, SIOCGMSFILTER, Filter, Size, Filter, Size,
                      &Returned, NULL, NULL);
 
-    if (Error == 0) {
+    if (iError == 0) {
         if (*SourceCount > 0) {
             CopyMemory(SourceList, Filter->gf_slist,
                        *SourceCount * sizeof(*SourceList));
@@ -916,7 +916,7 @@ getsourcefilter(
 
     HeapFree(GetProcessHeap(), 0, Filter);
 
-    return Error;
+    return iError;
 }
 #endif
 
@@ -973,25 +973,25 @@ WSAGetIPUserMtu(
     WSAPROTOCOL_INFOW Info;
     INT InfoSize = sizeof(Info);
     INT OptSize = sizeof(*Mtu);
-    INT Error;
+    INT iError;
 
-    Error = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
-    if (Error != SOCKET_ERROR) {
+    iError = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
+    if (iError != SOCKET_ERROR) {
         if (Info.iAddressFamily == AF_INET) {
-            Error =
+            iError =
                 getsockopt(Socket, IPPROTO_IP, IP_USER_MTU, (PCHAR)Mtu, &OptSize);
 #if(_WIN32_WINNT >= 0x0501)
         } else if (Info.iAddressFamily == AF_INET6) {
-            Error =
+            iError =
                 getsockopt(Socket, IPPROTO_IPV6, IPV6_USER_MTU, (PCHAR)Mtu, &OptSize);
 #endif //(_WIN32_WINNT >= 0x0501)
         } else {
-            Error = SOCKET_ERROR;
+            iError = SOCKET_ERROR;
             WSASetLastError(WSAEAFNOSUPPORT);
         }
     }
 
-    return Error;
+    return iError;
 }
 
 WS2TCPIP_INLINE
@@ -1003,25 +1003,25 @@ WSASetIPUserMtu(
 {
     WSAPROTOCOL_INFOW Info;
     INT InfoSize = sizeof(Info);
-    INT Error;
+    INT iError;
 
-    Error = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
-    if (Error != SOCKET_ERROR) {
+    iError = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
+    if (iError != SOCKET_ERROR) {
         if (Info.iAddressFamily == AF_INET) {
-            Error =
+            iError =
                 setsockopt(Socket, IPPROTO_IP, IP_USER_MTU, (PCHAR)&Mtu, sizeof(Mtu));
 #if(_WIN32_WINNT >= 0x0501)
         } else if (Info.iAddressFamily == AF_INET6) {
-            Error =
+            iError =
                 setsockopt(Socket, IPPROTO_IPV6, IPV6_USER_MTU, (PCHAR)&Mtu, sizeof(Mtu));
 #endif //(_WIN32_WINNT >= 0x0501)
         } else {
-            Error = SOCKET_ERROR;
+            iError = SOCKET_ERROR;
             WSASetLastError(WSAEAFNOSUPPORT);
         }
     }
 
-    return Error;
+    return iError;
 }
 
 //
@@ -1059,17 +1059,17 @@ WSAGetIcmpErrorInfo(
     _Out_ ICMP_ERROR_INFO *Info
     )
 {
-    INT Error;
+    INT iError;
     INT OptSize = sizeof(*Info);
 
-    Error = getsockopt(Socket, IPPROTO_TCP, TCP_ICMP_ERROR_INFO, (CHAR*)Info,
+    iError = getsockopt(Socket, IPPROTO_TCP, TCP_ICMP_ERROR_INFO, (CHAR*)Info,
                        &OptSize);
-    if (Error != SOCKET_ERROR && OptSize == 0) {
-        Error = SOCKET_ERROR;
+    if (iError != SOCKET_ERROR && OptSize == 0) {
+        iError = SOCKET_ERROR;
         WSASetLastError(WSANO_DATA);
     }
 
-    return Error;
+    return iError;
 }
 
 //
@@ -1141,25 +1141,25 @@ WSAGetRecvIPEcn(
     WSAPROTOCOL_INFOW Info;
     INT InfoSize = sizeof(Info);
     INT OptSize = sizeof(*Enabled);
-    INT Error;
+    INT iError;
 
-    Error = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
-    if (Error != SOCKET_ERROR) {
+    iError = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
+    if (iError != SOCKET_ERROR) {
         if (Info.iAddressFamily == AF_INET) {
-            Error =
+            iError =
                 getsockopt(Socket, IPPROTO_IP, IP_RECVECN, (PCHAR)Enabled, &OptSize);
 #if(_WIN32_WINNT >= 0x0501)
         } else if (Info.iAddressFamily == AF_INET6) {
-            Error =
+            iError =
                 getsockopt(Socket, IPPROTO_IPV6, IPV6_RECVECN, (PCHAR)Enabled, &OptSize);
 #endif //(_WIN32_WINNT >= 0x0501)
         } else {
-            Error = SOCKET_ERROR;
+            iError = SOCKET_ERROR;
             WSASetLastError(WSAEAFNOSUPPORT);
         }
     }
 
-    return Error;
+    return iError;
 }
 
 WS2TCPIP_INLINE
@@ -1171,25 +1171,25 @@ WSASetRecvIPEcn(
 {
     WSAPROTOCOL_INFOW Info;
     INT InfoSize = sizeof(Info);
-    INT Error;
+    INT iError;
 
-    Error = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
-    if (Error != SOCKET_ERROR) {
+    iError = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
+    if (iError != SOCKET_ERROR) {
         if (Info.iAddressFamily == AF_INET) {
-            Error =
+            iError =
                 setsockopt(Socket, IPPROTO_IP, IP_RECVECN, (PCHAR)&Enabled, sizeof(Enabled));
 #if(_WIN32_WINNT >= 0x0501)
         } else if (Info.iAddressFamily == AF_INET6) {
-            Error =
+            iError =
                 setsockopt(Socket, IPPROTO_IPV6, IPV6_RECVECN, (PCHAR)&Enabled, sizeof(Enabled));
 #endif //(_WIN32_WINNT >= 0x0501)
         } else {
-            Error = SOCKET_ERROR;
+            iError = SOCKET_ERROR;
             WSASetLastError(WSAEAFNOSUPPORT);
         }
     }
 
-    return Error;
+    return iError;
 }
 #endif // NTDDI_VERSION >= NTDDI_WIN10_FE
 

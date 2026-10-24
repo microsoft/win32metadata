@@ -1090,6 +1090,8 @@ typedef union _WHEA_MEMORY_ERROR_EXT_SECTION_FLAGS {
     UINT64 AsUINT64;
 } WHEA_MEMORY_ERROR_EXT_SECTION_FLAGS, *PWHEA_MEMORY_ERROR_EXT_SECTION_FLAGS;
 
+//----------------------------------------- WHEA_MEMORY_ERROR_EXT_SECTION_INTEL
+
 typedef union _WHEA_MEMORY_ERROR_EXT_SECTION_INTEL_VALIDBITS {
     struct {
         UINT64 MemDef : 1;
@@ -1161,6 +1163,63 @@ typedef struct _WHEA_MEMORY_ERROR_EXT_SECTION_INTEL {
     WHEA_MEMORY_HARDWARE_ADDRESS_INTEL HardwareAddress;
     UINT8 Reserved[40];
 } WHEA_MEMORY_ERROR_EXT_SECTION_INTEL, *PWHEA_MEMORY_ERROR_EXT_SECTION_INTEL;
+
+//------------------------------------------- WHEA_MEMORY_ERROR_EXT_SECTION_AMD
+
+typedef union _WHEA_MEMORY_ERROR_EXT_SECTION_AMD_VALIDBITS {
+    struct {
+        UINT64 SystemPhysicalAddress : 1;
+        UINT64 NormalizedAddress : 1;
+        UINT64 UmcBankInstanceId : 1;
+        UINT64 SocketNumber : 1;
+        UINT64 ChipSelect : 1;
+        UINT64 BankGroup : 1;
+        UINT64 BankAddress : 1;
+        UINT64 RowAddress : 1;
+        UINT64 ColumnAddress : 1;
+        UINT64 RankMultiplier : 1;
+        UINT64 SubChannel : 1;
+        UINT64 ChannelId : 1;
+        UINT64 Reserved : 52;
+    } DUMMYSTRUCTNAME;
+
+    UINT64 ValidBits;
+} WHEA_MEMORY_ERROR_EXT_SECTION_AMD_VALIDBITS,
+  *PWHEA_MEMORY_ERROR_EXT_SECTION_AMD_VALIDBITS;
+
+typedef struct _WHEA_MEMORY_HARDWARE_ADDRESS_AMD {
+    UINT64 SystemPhysicalAddress;
+    UINT64 NormalizedAddress;
+    UINT64 UmcBankInstanceId;
+    UINT8 SocketNumber;
+    UINT8 ChipSelect;
+    UINT8 BankGroup;
+    UINT8 BankAddress;
+    UINT32 RowAddress;
+    UINT16 ColumnAddress;
+    UINT8 RankMultiplier;
+    UINT8 SubChannel;
+    UINT8 ChannelId;
+    UINT8 Reserved[40];
+} WHEA_MEMORY_HARDWARE_ADDRESS_AMD, *PWHEA_MEMORY_HARDWARE_ADDRESS_AMD;
+
+typedef struct _WHEA_MEMORY_ERROR_EXT_SECTION_AMD {
+    WHEA_MEMORY_ERROR_EXT_SECTION_FLAGS Flags;
+    WHEA_MEMORY_ERROR_EXT_SECTION_AMD_VALIDBITS ValidBits;
+    WHEA_MEMORY_HARDWARE_ADDRESS_AMD HardwareAddress;
+    UINT8 Reserved[40];
+} WHEA_MEMORY_ERROR_EXT_SECTION_AMD, *PWHEA_MEMORY_ERROR_EXT_SECTION_AMD;
+
+//---------------------------------------------------- WHEA_EXTENDED_RAS_SECTION
+
+typedef struct _WHEA_EXTENDED_RAS { 
+
+    UINT32 Flag; 
+    UINT32 DimmLocation; 
+    UINT64 SectionLength;  
+    UINT64 SectionData[1];
+
+} WHEA_EXTENDED_RAS, *PWHEA_EXTENDED_RAS; 
 
 //----------------------------------------------------- WHEA_PMEM_ERROR_SECTION
 
@@ -1682,9 +1741,10 @@ typedef enum _WHEA_CPU_VENDOR {
 #define WHEA_XPF_MCA_SECTION_VERSION_2           2
 #define WHEA_XPF_MCA_SECTION_VERSION_3           3
 #define WHEA_XPF_MCA_SECTION_VERSION_4           4
-#define WHEA_XPF_MCA_SECTION_VERSION             WHEA_XPF_MCA_SECTION_VERSION_4
+#define WHEA_XPF_MCA_SECTION_VERSION_5           5
+#define WHEA_XPF_MCA_SECTION_VERSION             WHEA_XPF_MCA_SECTION_VERSION_5
 #define WHEA_AMD_EXT_REG_NUM                     10
-#define WHEA_XPF_MCA_EXBANK_COUNT                32
+#define WHEA_XPF_MCA_EXBANK_COUNT                64
 
 //
 // NOTE: You must update WHEA_AMD_EXT_REG_NUM if you add additional registers
@@ -1762,7 +1822,9 @@ typedef struct _WHEA_XPF_MCA_SECTION {
     XPF_RECOVERY_INFO RecoveryInfo;
 
     //
-    // Version 4 Fields follow.
+    // Version 4 & 5 Fields follow.
+    // For Version 4, WHEA_XPF_MCA_EXBANK_COUNT = 32
+    // For Version 5, WHEA_XPF_MCA_EXBANK_COUNT = 64
     //
 
     ULONG ExBankCount;
@@ -1897,6 +1959,221 @@ typedef struct _WHEA_ERROR_RECOVERY_INFO_SECTION {
     WHEA_RECOVERY_FAILURE_REASON FailureReason;
     CCHAR ProcessName[20];
 } WHEA_ERROR_RECOVERY_INFO_SECTION, *PWHEA_ERROR_RECOVERY_INFO_SECTION;
+
+//----------------------------------------------- WHEA_CXL_PROTOCOL_ERROR_SECTION
+
+typedef union _WHEA_CXL_PROTOCOL_ERROR_SECTION_VALIDBITS {
+    struct {
+        ULONGLONG CxlAgentType:1;
+        ULONGLONG CxlAgentAddress:1;
+        ULONGLONG DeviceID:1;
+        ULONGLONG DeviceSerialNumber:1;
+        ULONGLONG CapabilityStructure:1;
+        ULONGLONG CxlDvsec:1;
+        ULONGLONG CxlErrorLog:1;
+        ULONGLONG Reserved:57;
+    } DUMMYSTRUCTNAME;
+    ULONGLONG ValidBits;
+} WHEA_CXL_PROTOCOL_ERROR_SECTION_VALIDBITS,
+  *PWHEA_CXL_PROTOCOL_ERROR_SECTION_VALIDBITS;
+
+typedef enum _WHEA_CXL_AGENT_TYPE {
+    CxlAgentType_CxlRcdRCiEP,
+    CxlAgentType_CxlRchDownstreamPortRCRB,
+    CxlAgentType_EndpointDevice,
+    CxlAgentType_LogicalDevice,
+    CxlAgentType_FabricManagerManagedLogicalDevice,
+    CxlAgentType_RootPort,
+    CxlAgentType_DownstreamSwitchPort,
+    CxlAgentType_UpstreamSwitchPort,
+    CxlAgentType_Max
+} WHEA_CXL_AGENT_TYPE, *PWHEA_CXL_AGENT_TYPE;
+
+typedef union _WHEA_CXL_AGENT_ADDRESS {
+    struct {
+        UCHAR FunctionNumber;
+        UCHAR DeviceNumber;
+        UCHAR BusNumber;
+        USHORT SegmentNumber;
+        UCHAR Reserved[3];
+    } DUMMYSTRUCTNAME;
+
+    struct {
+        UCHAR CxlPortRcrbBaseAddress[8];
+    } DUMMYSTRUCTNAME2;
+} WHEA_CXL_AGENT_ADDRES, *PWHEA_CXL_AGENT_ADDRESS;
+
+typedef struct _WHEA_CXL_DEVICE_ID {
+    USHORT VendorID;
+    USHORT DeviceID;
+    USHORT SubsystemVendorID;
+    USHORT SubsystemDeviceID;
+    USHORT ClassCode;
+    struct {
+        USHORT Reserved:3;
+        USHORT SlotNumber:13;
+    } DUMMYSTRUCTNAME;
+    UCHAR Reserved2[4];
+} WHEA_CXL_DEVICE_ID, *PWEHA_CXL_DEVICE_ID;
+
+typedef union _WHEA_CXL_DEVICE_SERIAL_NUMBER {
+    struct {
+        ULONG CxlDeviceSerialNumberLowerDW;
+        ULONG CxlDeviceSerialNumberUpperDW;
+    } DUMMYSTRUCTNAME;
+
+    ULONGLONG AsUlonglong;
+} WHEA_CXL_DEVICE_SERIAL_NUMBER, *PWHEA_CXL_DEVICE_SERIAL_NUMBER;
+
+typedef struct _WHEA_CXL_PROTOCOL_ERROR_SECTION {
+    WHEA_CXL_PROTOCOL_ERROR_SECTION_VALIDBITS ValidBits;
+    UCHAR CxlAgentType;     // WHEA_CXL_AGENT_TYPE
+    UCHAR Reserved[7];
+    WHEA_CXL_AGENT_ADDRES CxlAgentAddress;
+    WHEA_CXL_DEVICE_ID DeviceID;
+    WHEA_CXL_DEVICE_SERIAL_NUMBER DeviceSerialNumber;
+    UCHAR CapabilityStructure[60];
+    USHORT CxlDvsecLength;
+    USHORT CxlErrorLogLength;
+    UCHAR Reserved2[4];
+    _Field_size_(CxlDvsecLength + CxlErrorLogLength) UCHAR CxlDvsecAndErrorLog[ANYSIZE_ARRAY];
+} WHEA_CXL_PROTOCOL_ERROR_SECTION, *PWHEA_CXL_PROTOCOL_ERROR_SECTION;
+
+#if WHEA_DOWNLEVEL_TYPE_NAMES
+
+typedef WHEA_CXL_PROTOCOL_ERROR_SECTION_VALIDBITS
+    WHEA_CXL_PROTOCOL_ERROR_VALIDBITS, *PWHEA_CXL_PROTOCOL_ERROR_VALIDBITS;
+
+typedef WHEA_CXL_PROTOCOL_ERROR_SECTION
+    WHEA_CXL_PROTOCOL_ERROR, *PWHEA_CXL_PROTOCOL_ERROR;
+
+#endif
+
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, ValidBits,                  0,  8);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, CxlAgentType,               8,  1);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, CxlAgentAddress,            16, 8);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, DeviceID,                   24, 16);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, DeviceSerialNumber,         40, 8);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, CapabilityStructure,        48, 60);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, CxlDvsecLength,             108, 2);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, CxlErrorLogLength,          110, 2);
+CPER_FIELD_CHECK(WHEA_CXL_PROTOCOL_ERROR_SECTION, CxlDvsecAndErrorLog,        116, ANYSIZE_ARRAY);
+
+//----------------------------------------------- WHEA_CXL_COMPONENT_EVENTS_SECTION
+
+typedef union _WHEA_CXL_COMPONENT_EVENTS_SECTION_VALIDBITS {
+    struct {
+        ULONGLONG DeviceID:1;
+        ULONGLONG DeviceSerialNumber:1;
+        ULONGLONG CxlComponentEventLog:1;
+        ULONGLONG Reserved:61;
+    } DUMMYSTRUCTNAME;
+    ULONGLONG ValidBits;
+} WHEA_CXL_COMPONENT_EVENTS_SECTION_VALIDBITS,
+  *PWHEA_CXL_COMPONENT_EVENTS_SECTION_VALIDBITS;
+
+typedef struct _WHEA_CXL_PCIE_DEVICE_ID {
+    USHORT VendorID;
+    USHORT DeviceID;
+    UCHAR FunctionNumber;
+    UCHAR DeviceNumber;
+    UCHAR BusNumber;
+    USHORT SegmentNumber;
+    struct {
+        USHORT Reserved:3;
+        USHORT SlotNumber:13;
+    } DUMMYSTRUCTNAME;
+    UCHAR Reserved2;
+} WHEA_CXL_PCIE_DEVICE_ID, *PWEHA_CXL_PCIE_DEVICE_ID;
+
+typedef struct _WHEA_CXL_COMPONENT_EVENTS_SECTION {
+    ULONG Length;
+    WHEA_CXL_COMPONENT_EVENTS_SECTION_VALIDBITS ValidBits;
+    WHEA_CXL_PCIE_DEVICE_ID DeviceID;
+    WHEA_CXL_DEVICE_SERIAL_NUMBER DeviceSerialNumber;
+    UCHAR CxlComponentEventLog[ANYSIZE_ARRAY];
+} WHEA_CXL_COMPONENT_EVENTS_SECTION, *PWHEA_CXL_COMPONENT_EVENTS_SECTION;
+
+#if WHEA_DOWNLEVEL_TYPE_NAMES
+
+typedef WHEA_CXL_COMPONENT_EVENTS_SECTION_VALIDBITS
+    WHEA_CXL_COMPONENT_EVENTS_VALIDBITS, *PWHEA_CXL_COMPONENT_EVENTS_VALIDBITS;
+
+typedef WHEA_CXL_COMPONENT_EVENTS_SECTION
+    WHEA_CXL_COMPONENT_EVENTS, *PWHEA_CXL_COMPONENT_EVENTS;
+
+#endif
+
+CPER_FIELD_CHECK(WHEA_CXL_COMPONENT_EVENTS_SECTION, Length,                 0,  4);
+CPER_FIELD_CHECK(WHEA_CXL_COMPONENT_EVENTS_SECTION, ValidBits,              4,  8);
+CPER_FIELD_CHECK(WHEA_CXL_COMPONENT_EVENTS_SECTION, DeviceID,               12, 12);
+CPER_FIELD_CHECK(WHEA_CXL_COMPONENT_EVENTS_SECTION, DeviceSerialNumber,     24, 8);
+CPER_FIELD_CHECK(WHEA_CXL_COMPONENT_EVENTS_SECTION, CxlComponentEventLog,   32, ANYSIZE_ARRAY);
+
+//----------------------------------------------- WHEA_MEMORY_RANGE_ERROR_SECTION
+
+typedef union _WHEA_MEMORY_RANGE_ERROR_SECTION_VALIDBITS {
+    struct {
+        ULONGLONG Version:1;
+        ULONGLONG DeviceInfo:1;
+        ULONGLONG DeviceType:1;
+        ULONGLONG RangeCount:1;
+        ULONGLONG Ranges:1;
+        ULONGLONG Reserved:59;
+    } DUMMYSTRUCTNAME;
+    ULONGLONG ValidBits;
+} WHEA_MEMORY_RANGE_ERROR_SECTION_VALIDBITS,
+  *PWHEA_MEMORY_RANGE_ERROR_SECTION_VALIDBITS;
+
+typedef enum _WHEA_DEVICE_TYPE {
+    WheaDeviceType_Cxl = 0,
+    WheaDeviceType_Max
+} WHEA_DEVICE_TYPE,
+  *PWHEA_DEVICE_TYPE;
+
+typedef union _WHEA_DEVICE_INFO {
+    struct {
+        WHEA_CXL_PCIE_DEVICE_ID DeviceID;
+        WHEA_CXL_DEVICE_SERIAL_NUMBER DeviceSerialNumber;
+    } CXL;
+    UCHAR AsUCHAR[72];
+} WHEA_DEVICE_INFO,
+  *PWHEA_DEVICE_INFO;
+
+typedef struct _WHEA_MEMORY_RANGE {
+    ULONGLONG StartSystemPhysicalAddress;
+    ULONGLONG LengthInBytes;
+} WHEA_MEMORY_RANGE,
+  *PWHEA_MEMORY_RANGE;
+
+#define WHEA_MEMORY_RANGE_ERROR_SECTION_VERSION 1
+
+typedef struct _WHEA_MEMORY_RANGE_ERROR_SECTION {
+    WHEA_MEMORY_RANGE_ERROR_SECTION_VALIDBITS ValidBits;
+    ULONG Version;  // WHEA_MEMORY_RANGE_ERROR_SECTION_VERSION
+    WHEA_DEVICE_INFO DeviceInfo;
+    UCHAR DeviceType;   // WHEA_DEVICE_TYPE
+    UCHAR Reserved;
+    USHORT RangeCount;
+    WHEA_MEMORY_RANGE Ranges[ANYSIZE_ARRAY];
+} WHEA_MEMORY_RANGE_ERROR_SECTION, *PWHEA_MEMORY_RANGE_ERROR_SECTION;
+
+#if WHEA_DOWNLEVEL_TYPE_NAMES
+
+typedef WHEA_MEMORY_RANGE_ERROR_SECTION_VALIDBITS
+    WHEA_MEMORY_RANGE_ERROR_VALIDBITS, *PWHEA_MEMORY_RANGE_ERROR_VALIDBITS;
+
+typedef WHEA_MEMORY_RANGE_ERROR_SECTION
+    WHEA_MEMORY_RANGE_ERROR, *PWHEA_MEMORY_RANGE_ERROR;
+
+#endif
+
+CPER_FIELD_CHECK(WHEA_MEMORY_RANGE_ERROR_SECTION, ValidBits,            0,  8);
+CPER_FIELD_CHECK(WHEA_MEMORY_RANGE_ERROR_SECTION, Version,              8,  4);
+CPER_FIELD_CHECK(WHEA_MEMORY_RANGE_ERROR_SECTION, DeviceInfo,           12, 72);
+CPER_FIELD_CHECK(WHEA_MEMORY_RANGE_ERROR_SECTION, DeviceType,           84, 1);
+CPER_FIELD_CHECK(WHEA_MEMORY_RANGE_ERROR_SECTION, RangeCount,           86, 2);
+CPER_FIELD_CHECK(WHEA_MEMORY_RANGE_ERROR_SECTION, Ranges,               88, 16);
 
 //------------------------------------------------------ WHEA_ARM_PROCESSOR_ERROR_INFORMATION
 
@@ -2287,6 +2564,8 @@ typedef enum _WHEA_PCI_RECOVERY_STATUS {
     WheaPciRecoveryStatusDeviceNotFound,
     WheaPciRecoveryStatusDdaAerNotRecoverable,
     WheaPciRecoveryStatusFailedRecovery,
+    WheaPciRecoveryStatusRecoveredNoDevices,
+    WheaPciRecoveryStatusCxlAerNotRecoverable
 }WHEA_PCI_RECOVERY_STATUS,  *PWHEA_PCI_RECOVERY_STATUS;
 
 typedef struct _WHEA_PCI_RECOVERY_SECTION {

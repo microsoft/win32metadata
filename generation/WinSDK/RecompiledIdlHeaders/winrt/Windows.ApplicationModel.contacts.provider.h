@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -144,6 +144,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactPickerUI2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Contacts {
+                namespace Provider {
+                    interface IContactProvider;
+                } /* Provider */
+            } /* Contacts */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider ABI::Windows::ApplicationModel::Contacts::Provider::IContactProvider
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactRemovedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactRemovedEventArgs_FWD_DEFINED__
 namespace ABI {
@@ -164,6 +181,85 @@ namespace ABI {
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Contacts {
+                class Contact;
+            } /* Contacts */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Contacts {
+                interface IContact;
+            } /* Contacts */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CIContact ABI::Windows::ApplicationModel::Contacts::IContact
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("857db963-f62c-53c4-a3a0-f6bf0c8fd3d3"))
+IAsyncOperation<ABI::Windows::ApplicationModel::Contacts::Contact*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::Contacts::Contact*, ABI::Windows::ApplicationModel::Contacts::IContact*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.Contacts.Contact>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::ApplicationModel::Contacts::Contact*> __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("a1d09bee-c181-5419-bd14-8223b95f29a1"))
+IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::Contacts::Contact*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::Contacts::Contact*, ABI::Windows::ApplicationModel::Contacts::IContact*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.Contacts.Contact>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::Contacts::Contact*> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
 
 #ifndef DEF___FIIterator_1_HSTRING_USE
 #define DEF___FIIterator_1_HSTRING_USE
@@ -414,31 +510,6 @@ namespace ABI {
     namespace Windows {
         namespace ApplicationModel {
             namespace Contacts {
-                class Contact;
-            } /* Contacts */
-        } /* ApplicationModel */
-    } /* Windows */
-} /* ABI */
-
-#ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
-#define ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
-namespace ABI {
-    namespace Windows {
-        namespace ApplicationModel {
-            namespace Contacts {
-                interface IContact;
-            } /* Contacts */
-        } /* ApplicationModel */
-    } /* Windows */
-} /* ABI */
-#define __x_ABI_CWindows_CApplicationModel_CContacts_CIContact ABI::Windows::ApplicationModel::Contacts::IContact
-
-#endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
-
-namespace ABI {
-    namespace Windows {
-        namespace ApplicationModel {
-            namespace Contacts {
                 typedef enum ContactSelectionMode : int ContactSelectionMode;
             } /* Contacts */
         } /* ApplicationModel */
@@ -593,6 +664,46 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CI
 
 /*
  *
+ * Interface Windows.ApplicationModel.Contacts.Provider.IContactProvider
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Contacts_Provider_IContactProvider[] = L"Windows.ApplicationModel.Contacts.Provider.IContactProvider";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Contacts {
+                namespace Provider {
+                    MIDL_INTERFACE("c44bb54b-732f-5004-8cd7-65d90cf25f42")
+                    IContactProvider : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE GetContactFromRemoteIdAsync(
+                            HSTRING contactRemoteId,
+                            __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact** operation
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE get_ContactListId(
+                            HSTRING* value
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IContactProvider = __uuidof(IContactProvider);
+                } /* Provider */
+            } /* Contacts */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Interface Windows.ApplicationModel.Contacts.Provider.IContactRemovedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -678,6 +789,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIConta
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactPickerUI2_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactRemovedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactRemovedEventArgs_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactRemovedEventArgs __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactRemovedEventArgs;
@@ -687,6 +804,137 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIConta
 // Parameterized interface forward declarations (C)
 
 // Collection interface definitions
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CContacts_CIContact __x_ABI_CWindows_CApplicationModel_CContacts_CIContact;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContactVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* This,
+        __x_ABI_CWindows_CApplicationModel_CContacts_CIContact** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContactVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContactVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContactVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContactVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContactVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CContacts__CContact_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 #if !defined(____FIIterator_1_HSTRING_INTERFACE_DEFINED__)
 #define ____FIIterator_1_HSTRING_INTERFACE_DEFINED__
@@ -1321,12 +1569,6 @@ interface __FITypedEventHandler_2_Windows__CApplicationModel__CContacts__CProvid
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
-#ifndef ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
-#define ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
-typedef interface __x_ABI_CWindows_CApplicationModel_CContacts_CIContact __x_ABI_CWindows_CApplicationModel_CContacts_CIContact;
-
-#endif // ____x_ABI_CWindows_CApplicationModel_CContacts_CIContact_FWD_DEFINED__
-
 typedef enum __x_ABI_CWindows_CApplicationModel_CContacts_CContactSelectionMode __x_ABI_CWindows_CApplicationModel_CContacts_CContactSelectionMode;
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CAddContactResult __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CAddContactResult;
@@ -1536,6 +1778,79 @@ interface __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactPicker
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactPickerUI2;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactPickerUI2_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Contacts.Provider.IContactProvider
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Contacts_Provider_IContactProvider[] = L"Windows.ApplicationModel.Contacts.Provider.IContactProvider";
+typedef struct __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProviderVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetContactFromRemoteIdAsync)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This,
+        HSTRING contactRemoteId,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CContacts__CContact** operation);
+    HRESULT (STDMETHODCALLTYPE* get_ContactListId)(__x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProviderVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProviderVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_GetContactFromRemoteIdAsync(This, contactRemoteId, operation) \
+    ((This)->lpVtbl->GetContactFromRemoteIdAsync(This, contactRemoteId, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_get_ContactListId(This, value) \
+    ((This)->lpVtbl->get_ContactListId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CContacts_CProvider_CIContactProvider_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *

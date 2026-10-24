@@ -6,3 +6,5 @@
 <IncludeRoot>/um/PeerDist.h
 --namespace
 Windows.Win32.NetworkManagement.P2P
+--config
+parse-win32-annotations

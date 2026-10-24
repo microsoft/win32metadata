@@ -241,6 +241,8 @@ namespace Windows
 
             interface IToastNotificationManagerStatics5;
 
+            interface IToastNotificationStatics;
+
             interface IToastNotifier;
 
             interface IToastNotifier2;
@@ -1440,6 +1442,14 @@ namespace Windows
                 HRESULT GetDefault([out] [retval] Windows.UI.Notifications.ToastNotificationManagerForUser** result);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.UI.Notifications.ToastNotification)]
+            [uuid(2AA8F213-D8C9-48FE-B641-4A63D69CE079)]
+            interface IToastNotificationStatics : IInspectable
+            {
+                [propget] HRESULT IsExpandableContentSupported([out] [retval] boolean* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.UI.Notifications.ToastNotifier)]
             [uuid(75927B93-03F3-41EC-91D3-6E5BAC1B38E7)]
@@ -1723,6 +1733,7 @@ namespace Windows
             [activatable(Windows.UI.Notifications.IToastNotificationFactory, Windows.Foundation.UniversalApiContract, 1.0)]
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
+            [static(Windows.UI.Notifications.IToastNotificationStatics, Windows.Foundation.UniversalApiContract, 19.0)]
             [threading(mta)]
             runtimeclass ToastNotification
             {

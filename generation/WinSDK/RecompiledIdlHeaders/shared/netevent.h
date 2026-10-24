@@ -1159,8 +1159,8 @@ Notes:
 //
 // MessageText:
 //
-// TCP/IP has chosen to restrict the scale factor due to a network condition. 
-// This could be related to a problem in a network device and will cause 
+// TCP/IP has chosen to restrict the scale factor due to a network condition.
+// This could be related to a problem in a network device and will cause
 // degraded throughput.
 //
 #define EVENT_TCPIP_TCP_WSD_WS_RESTRICTED 0x80001084L
@@ -1170,8 +1170,8 @@ Notes:
 //
 // MessageText:
 //
-// TCP/IP has detected high memory utilization and has terminated some existing connections to 
-// maintain system stability.  
+// TCP/IP has detected high memory utilization and has terminated some existing connections to
+// maintain system stability.
 //
 #define EVENT_TCPIP_TCP_MPP_ATTACKS_DETECTED 0x80001085L
 
@@ -1180,9 +1180,9 @@ Notes:
 //
 // MessageText:
 //
-// TCP/IP has chosen to restrict the congestion window for several connections due to a network condition. 
-// This could be related to a problem in the TCP global or supplemental configuration and will cause 
-// degraded throughput. 
+// TCP/IP has chosen to restrict the congestion window for several connections due to a network condition.
+// This could be related to a problem in the TCP global or supplemental configuration and will cause
+// degraded throughput.
 //
 #define EVENT_TCPIP_TCP_CONNECTIONS_PERF_IMPACTED 0x80001086L
 
@@ -1396,9 +1396,9 @@ Notes:
 //
 // Initialization failed because the driver device could not be created.
 // Use the string "%2" to identify the interface for which initialization
-// failed. It represents the MAC address of the failed interface or the 
-// Globally Unique Interface Identifier (GUID) if NetBT was unable to 
-// map from GUID to MAC address. If neither the MAC address nor the GUID were 
+// failed. It represents the MAC address of the failed interface or the
+// Globally Unique Interface Identifier (GUID) if NetBT was unable to
+// map from GUID to MAC address. If neither the MAC address nor the GUID were
 // available, the string represents a cluster device name.
 // 
 //
@@ -1718,7 +1718,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The specified registry entry MaxReceives is out of range. Using 
+// %2 : The specified registry entry MaxReceives is out of range. Using
 // default value.
 //
 #define EVENT_NDIS_MAXRECEIVES_ERROR     0x8000139DL
@@ -1728,7 +1728,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The specified registry entry MaxTransmits is out of range. Using 
+// %2 : The specified registry entry MaxTransmits is out of range. Using
 // default value
 //
 #define EVENT_NDIS_MAXTRANSMITS_ERROR    0x8000139EL
@@ -1738,7 +1738,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The specified registry entry MaxFrameSize is out of range. Using 
+// %2 : The specified registry entry MaxFrameSize is out of range. Using
 // default value.
 //
 #define EVENT_NDIS_MAXFRAMESIZE_ERROR    0x8000139FL
@@ -1748,7 +1748,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The specified registry entry MaxInternalBufs is out of range. Using 
+// %2 : The specified registry entry MaxInternalBufs is out of range. Using
 // default value.
 //
 #define EVENT_NDIS_MAXINTERNALBUFS_ERROR 0x800013A0L
@@ -1758,7 +1758,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The specified registry entry MaxMulticast is out of range. Using 
+// %2 : The specified registry entry MaxMulticast is out of range. Using
 // default value.
 //
 #define EVENT_NDIS_MAXMULTICAST_ERROR    0x800013A1L
@@ -1768,7 +1768,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The specified registry entry ProductId is out of range. Using 
+// %2 : The specified registry entry ProductId is out of range. Using
 // default value.
 //
 #define EVENT_NDIS_PRODUCTID_ERROR       0x800013A2L
@@ -1778,7 +1778,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : A Token Ring Lobe Wire Fault has occurred. Verify cable connections. 
+// %2 : A Token Ring Lobe Wire Fault has occurred. Verify cable connections.
 // The network adapter will continue to try to reinsert into the ring.
 //
 #define EVENT_NDIS_LOBE_FAILUE_ERROR     0x800013A3L
@@ -1817,7 +1817,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The network adapter has detected an Adapter Check as a result of 
+// %2 : The network adapter has detected an Adapter Check as a result of
 // an unrecoverable hardware or software error.
 //
 #define EVENT_NDIS_ADAPTER_CHECK_ERROR   0xC00013A7L
@@ -1827,7 +1827,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The network adapter failed to reset within a specified time, which could 
+// %2 : The network adapter failed to reset within a specified time, which could
 // be caused by a hardware failure. The network adapter will continue to try to reset.
 //
 #define EVENT_NDIS_RESET_FAILURE_ERROR   0x800013A8L
@@ -1837,7 +1837,7 @@ Notes:
 //
 // MessageText:
 //
-// %2 : The network adapter has detected that the token ring cable is disconnected 
+// %2 : The network adapter has detected that the token ring cable is disconnected
 // from the network adapter. Please reconnect the cable.
 //
 #define EVENT_NDIS_CABLE_DISCONNECTED_ERROR 0x800013A9L
@@ -3492,7 +3492,7 @@ Notes:
 // MessageText:
 //
 // Unable to start DNS Client service. Can not find entry %3 in DLL %2.
-// Please reinstall this DLL from installation CD. See event details 
+// Please reinstall this DLL from installation CD. See event details
 // for specific error code information.
 //
 #define EVENT_DNS_CACHE_START_FAILURE_NO_ENTRY 0xC0002AF9L
@@ -3504,7 +3504,7 @@ Notes:
 //
 // Unable to start the DNS Client service. The system could not register a
 // service control handler and could be out of resources. Close any
-// applications not in use or reboot the computer. See event details for 
+// applications not in use or reboot the computer. See event details for
 // specific error code information.
 //
 #define EVENT_DNS_CACHE_START_FAILURE_NO_CONTROL 0xC0002AFAL
@@ -3517,7 +3517,7 @@ Notes:
 // Unable to start DNS Client service. The system could
 // not create a termination event for this service and
 // could be out of resources. Close any applications not
-// in use or reboot the computer. See event details for 
+// in use or reboot the computer. See event details for
 // specific error code information.
 //
 #define EVENT_DNS_CACHE_START_FAILURE_NO_DONE_EVENT 0xC0002AFBL
@@ -3532,7 +3532,7 @@ Notes:
 // To correct the problem, you may restart the RPC and DNS
 // Client services. To do so, use the following commands at a command
 // prompt: (1) type "net start rpc" to start the RPC service, and (2)
-// type "net start dnscache" to start the DNS Client service. 
+// type "net start dnscache" to start the DNS Client service.
 // See event details for specific error code information.
 //
 #define EVENT_DNS_CACHE_START_FAILURE_NO_RPC 0xC0002AFCL
@@ -3557,7 +3557,7 @@ Notes:
 // Service Control Manager. To correct the problem, you may restart
 // the RPC and DNS Client services. To do so, use the following commands
 // at a command prompt: (1) type "net start rpc" to start the RPC service,
-// and (2) type "net start dnscache" to start the DNS Client service. 
+// and (2) type "net start dnscache" to start the DNS Client service.
 // See event details for specific error code information.
 //
 #define EVENT_DNS_CACHE_START_FAILURE_NO_UPDATE 0xC0002AFEL
@@ -3569,7 +3569,7 @@ Notes:
 //
 // Unable to start DNS Client service because the system failed to allocate
 // memory and may be out of available memory. Try closing any applications not
-// in use or reboot the computer. See event details for specific error code 
+// in use or reboot the computer. See event details for specific error code
 // information.
 //
 #define EVENT_DNS_CACHE_START_FAILURE_LOW_MEMORY 0xC0002AFFL
@@ -3672,7 +3672,7 @@ Notes:
 // The reason it could not register was because either: (a) the DNS server
 // does not support the DNS dynamic update protocol, or (b) the primary zone
 // authoritative for the registering names does not currently accept dynamic
-// updates.%n%n To add or register a DNS host (A or AAAA) resource record using 
+// updates.%n%n To add or register a DNS host (A or AAAA) resource record using
 // the specific DNS name for this adapter, contact your DNS server or network
 // systems administrator.
 //
@@ -3698,7 +3698,7 @@ Notes:
 // the DNS domain name configured for this adapter, or (b) the authoritative
 // DNS server for this DNS domain name does not support the DNS dynamic update
 // protocol.%n%n
-// To register a DNS host (A or AAAA) resource record using the specific DNS 
+// To register a DNS host (A or AAAA) resource record using the specific DNS
 // domain name for this adapter, contact your DNS server or network systems
 // administrator.
 //
@@ -3749,7 +3749,7 @@ Notes:
 // of a system problem. You can manually retry DNS registration of the
 // network adapter and its settings by typing "ipconfig /registerdns"
 // at the command prompt. If problems still persist, contact your DNS
-// server or network systems administrator. See event details for 
+// server or network systems administrator. See event details for
 // specific error code information.
 //
 #define EVENT_DNSAPI_REGISTRATION_FAILED_OTHER 0x80002B93L
@@ -3774,7 +3774,7 @@ Notes:
 // registered is not running.%n%n You can manually retry DNS registration
 // of the network adapter and its settings by typing "ipconfig /registerdns"
 // at the command prompt. If problems still persist, contact your DNS
-// server or network systems administrator. See event details for specific 
+// server or network systems administrator. See event details for specific
 // error code information.
 //
 #define EVENT_DNSAPI_PTR_REGISTRATION_FAILED_TIMEOUT 0x80002B94L
@@ -3798,9 +3798,9 @@ Notes:
 // update. In most cases, this is a minor problem because it does not
 // affect normal (forward) name resolution.%n%n If reverse (address-to-name)
 // resolution is required for your computer, you can manually retry DNS
-// registration of the network adapter and its settings by typing 
-// "ipconfig /registerdns" at the command prompt. If problems still 
-// persist, contact your DNS server or network systems administrator. 
+// registration of the network adapter and its settings by typing
+// "ipconfig /registerdns" at the command prompt. If problems still
+// persist, contact your DNS server or network systems administrator.
 // See event details for specific error code information.
 //
 #define EVENT_DNSAPI_PTR_REGISTRATION_FAILED_SERVERFAIL 0x80002B95L
@@ -3962,7 +3962,7 @@ Notes:
 //
 // MessageText:
 //
-// The system failed to register host (A or AAAA) resource records for 
+// The system failed to register host (A or AAAA) resource records for
 // network adapter%nwith settings:%n%n
 //   Adapter Name : %1%n
 //   Host Name : %2%n
@@ -3972,11 +3972,11 @@ Notes:
 //   Sent update to server : %5%n
 //   IP Address(es) :%n
 //     %6%n%n
-// Either the DNS server does not support the DNS dynamic update protocol 
-// or the authoritative zone for the specified DNS domain name does not 
+// Either the DNS server does not support the DNS dynamic update protocol
+// or the authoritative zone for the specified DNS domain name does not
 // accept dynamic updates.%n%n
 // To register the DNS host (A or AAAA) resource records using the specific
-// DNS domain name and IP addresses for this adapter, contact your DNS 
+// DNS domain name and IP addresses for this adapter, contact your DNS
 // server or network systems administrator.
 //
 #define EVENT_DNSAPI_REGISTRATION_FAILED_NOTSUPP_PRIMARY_DN 0x80002B9CL
@@ -4339,7 +4339,7 @@ Notes:
 //   Sent update to server : %5%n
 //   IP Address(es) :%n
 //     %6%n%n
-// The system could not remove these host (A or AAAA) RRs because the update request 
+// The system could not remove these host (A or AAAA) RRs because the update request
 // timed out while awaiting a response from the DNS server. This is probably because
 // the DNS server authoritative for the zone where these RRs need to be updated
 // is either not currently running or reachable on the network.
@@ -6536,8 +6536,8 @@ Notes:
 //
 // MessageText:
 //
-// DFS was unable to resynchronize this root target for root: %1. This may lead to inaccessability of portions of the DFS namespace. 
-// Please verify the share %1 has all the link directories created for the DFS links. This error may occur if there are directories 
+// DFS was unable to resynchronize this root target for root: %1. This may lead to inaccessability of portions of the DFS namespace.
+// Please verify the share %1 has all the link directories created for the DFS links. This error may occur if there are directories
 // on this share that may be preventing creation of links.
 //
 #define DFS_ERROR_RESYNCHRONIZE_FAILED   0xC00038CBL
@@ -6547,7 +6547,7 @@ Notes:
 //
 // MessageText:
 //
-// DFS was unable to delete link: %2  for root: %1 during a link move operation. 
+// DFS was unable to delete link: %2  for root: %1 during a link move operation.
 //
 #define DFS_ERROR_REMOVE_LINK_FAILED     0xC00038CCL
 
@@ -6928,9 +6928,27 @@ Notes:
 //
 // MessageText:
 //
-// Closing a %2 socket with local port number %3 in process %4 is taking longer than expected. The local port number may not be available until the close operation is completed. This happens typically due to misbehaving network drivers. Ensure latest updates are installed for Windows and any third-party networking software including NIC drivers, firewalls, or other security products.  
+// Closing a %2 socket with local port number %3 in process %4 is taking longer than expected. The local port number may not be available until the close operation is completed. This happens typically due to misbehaving network drivers. Ensure latest updates are installed for Windows and any third-party networking software including NIC drivers, firewalls, or other security products.
 //
 #define EVENT_WINSOCK_CLOSESOCKET_STUCK  0x80003E82L
+
+//
+// MessageId: EVENT_WINSOCK_TDI_PROVIDER_DETECTED
+//
+// MessageText:
+//
+// An unregistered TDI provider (%2) was detected.
+//
+#define EVENT_WINSOCK_TDI_PROVIDER_DETECTED 0x80003E83L
+
+//
+// MessageId: EVENT_WINSOCK_TDI_PROVIDER_BLOCKED
+//
+// MessageText:
+//
+// An unregistered TDI provider (%2) was blocked by policy.
+//
+#define EVENT_WINSOCK_TDI_PROVIDER_BLOCKED 0x80003E84L
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -6985,7 +7003,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed. 
+// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed.
 // Setting value is not specified by any QoS policy. Local computer default will be applied.
 //
 #define EVENT_EQOS_INFO_TCP_AUTOTUNING_NOT_CONFIGURED 0x40004078L
@@ -6995,7 +7013,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed. 
+// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed.
 // Setting value is Level 0 (minimum throughput).
 //
 #define EVENT_EQOS_INFO_TCP_AUTOTUNING_OFF 0x40004079L
@@ -7005,7 +7023,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed. 
+// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed.
 // Setting value is Level 1.
 //
 #define EVENT_EQOS_INFO_TCP_AUTOTUNING_HIGHLY_RESTRICTED 0x4000407AL
@@ -7015,7 +7033,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed. 
+// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed.
 // Setting value is Level 2.
 //
 #define EVENT_EQOS_INFO_TCP_AUTOTUNING_RESTRICTED 0x4000407BL
@@ -7025,7 +7043,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed. 
+// The Advanced QoS Setting for inbound TCP throughput level successfully refreshed.
 // Setting value is Level 3 (maximum throughput).
 //
 #define EVENT_EQOS_INFO_TCP_AUTOTUNING_NORMAL 0x4000407CL
@@ -7035,7 +7053,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for DSCP marking overrides successfully refreshed. 
+// The Advanced QoS Setting for DSCP marking overrides successfully refreshed.
 // Setting value is not specified by any QoS policy. Local computer default will be applied. By default, applications can set DSCP values independently of QoS policies.
 //
 #define EVENT_EQOS_INFO_APP_MARKING_NOT_CONFIGURED 0x4000407DL
@@ -7045,7 +7063,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for DSCP marking overrides successfully refreshed. 
+// The Advanced QoS Setting for DSCP marking overrides successfully refreshed.
 // Application DSCP marking requests will be ignored. Only QoS policies can set DSCP values.
 //
 #define EVENT_EQOS_INFO_APP_MARKING_IGNORED 0x4000407EL
@@ -7055,7 +7073,7 @@ Notes:
 //
 // MessageText:
 //
-// The Advanced QoS Setting for DSCP marking overrides successfully refreshed. 
+// The Advanced QoS Setting for DSCP marking overrides successfully refreshed.
 // Applications can set DSCP values independently of QoS policies.
 //
 #define EVENT_EQOS_INFO_APP_MARKING_ALLOWED 0x4000407FL
@@ -7066,7 +7084,7 @@ Notes:
 // MessageText:
 //
 // Selective application of QoS policies based on domain or non-domain network category has been disabled on this machine.
-// QoS policies will be applied to all network interfaces.    
+// QoS policies will be applied to all network interfaces.
 //
 #define EVENT_EQOS_INFO_LOCAL_SETTING_DONT_USE_NLA 0x40004080L
 
@@ -7143,7 +7161,7 @@ Notes:
 //
 // MessageText:
 //
-// Exceeded the maximum number of computer QoS policies. 
+// Exceeded the maximum number of computer QoS policies.
 // The computer QoS policy "%2" and subsequent computer QoS policies will not be applied.
 //
 #define EVENT_EQOS_WARNING_MACHINE_POLICY_QUOTA_EXCEEDED 0x800040DEL
@@ -7153,7 +7171,7 @@ Notes:
 //
 // MessageText:
 //
-// Exceeded the maximum number of user QoS policies. 
+// Exceeded the maximum number of user QoS policies.
 // The user QoS policy "%2" and subsequent user QoS policies will not be applied.
 //
 #define EVENT_EQOS_WARNING_USER_POLICY_QUOTA_EXCEEDED 0x800040DFL
@@ -7163,7 +7181,7 @@ Notes:
 //
 // MessageText:
 //
-// A computer QoS policy "%2" potentially conflicts with other QoS policies. 
+// A computer QoS policy "%2" potentially conflicts with other QoS policies.
 // See documentation for rules about which policy will be applied at packet send time.
 //
 #define EVENT_EQOS_WARNING_MACHINE_POLICY_CONFLICT 0x800040E0L
@@ -7173,7 +7191,7 @@ Notes:
 //
 // MessageText:
 //
-// A user QoS policy "%2" potentially conflicts with other QoS policies. 
+// A user QoS policy "%2" potentially conflicts with other QoS policies.
 // See documentation for rules about which policy will be applied at packet send time.
 //
 #define EVENT_EQOS_WARNING_USER_POLICY_CONFLICT 0x800040E1L
@@ -7183,7 +7201,7 @@ Notes:
 //
 // MessageText:
 //
-// A computer QoS policy "%2" was ignored because the application path cannot be processed.  
+// A computer QoS policy "%2" was ignored because the application path cannot be processed.
 // The application path may be totally invalid, or has an invalid drive letter, or contains network-mapped drive letter.
 //
 #define EVENT_EQOS_WARNING_MACHINE_POLICY_NO_FULLPATH_APPNAME 0x800040E2L
@@ -7193,7 +7211,7 @@ Notes:
 //
 // MessageText:
 //
-// A user QoS policy "%2" was ignored because the application path cannot be processed.  
+// A user QoS policy "%2" was ignored because the application path cannot be processed.
 // The application path may be totally invalid, or has an invalid drive letter, or contains network-mapped drive letter.
 //
 #define EVENT_EQOS_WARNING_USER_POLICY_NO_FULLPATH_APPNAME 0x800040E3L
@@ -7244,8 +7262,8 @@ Notes:
 //
 // MessageText:
 //
-// A computer QoS policy exceeds the maximum allowed name length. 
-// The offending policy is listed under the computer-level QoS policy root key, with index %2. 
+// A computer QoS policy exceeds the maximum allowed name length.
+// The offending policy is listed under the computer-level QoS policy root key, with index %2.
 //
 #define EVENT_EQOS_ERROR_MACHINE_POLICY_KEYNAME_TOO_LONG 0xC0004140L
 
@@ -7254,8 +7272,8 @@ Notes:
 //
 // MessageText:
 //
-// A user QoS policy exceeds the maximum allowed name length. 
-// The offending policy is listed under the user-level QoS policy root key, with index %2. 
+// A user QoS policy exceeds the maximum allowed name length.
+// The offending policy is listed under the user-level QoS policy root key, with index %2.
 //
 #define EVENT_EQOS_ERROR_USER_POLICY_KEYNAME_TOO_LONG 0xC0004141L
 
@@ -7264,7 +7282,7 @@ Notes:
 //
 // MessageText:
 //
-// A computer QoS policy has a zero length name. 
+// A computer QoS policy has a zero length name.
 // The offending policy is listed under the computer-level QoS policy root key, with index %2.
 //
 #define EVENT_EQOS_ERROR_MACHINE_POLICY_KEYNAME_SIZE_ZERO 0xC0004142L
@@ -7274,7 +7292,7 @@ Notes:
 //
 // MessageText:
 //
-// A user QoS policy has a zero length name. 
+// A user QoS policy has a zero length name.
 // The offending policy is listed under the user-level QoS policy root key, with index %2.
 //
 #define EVENT_EQOS_ERROR_USER_POLICY_KEYNAME_SIZE_ZERO 0xC0004143L
@@ -7284,8 +7302,8 @@ Notes:
 //
 // MessageText:
 //
-// QoS failed to open the registry subkey for a computer QoS policy. 
-// The policy is listed under the computer-level QoS policy root key, with index %2. 
+// QoS failed to open the registry subkey for a computer QoS policy.
+// The policy is listed under the computer-level QoS policy root key, with index %2.
 //
 #define EVENT_EQOS_ERROR_OPENING_MACHINE_POLICY_SUBKEY 0xC0004144L
 
@@ -7294,8 +7312,8 @@ Notes:
 //
 // MessageText:
 //
-// QoS failed to open the registry subkey for a user QoS policy. 
-// The policy is listed under the user-level QoS policy root key, with index %2. 
+// QoS failed to open the registry subkey for a user QoS policy.
+// The policy is listed under the user-level QoS policy root key, with index %2.
 //
 #define EVENT_EQOS_ERROR_OPENING_USER_POLICY_SUBKEY 0xC0004145L
 
@@ -7352,7 +7370,7 @@ Notes:
 //
 // MessageText:
 //
-// WinNat session limit has been reached. 
+// WinNat session limit has been reached.
 //
 #define EVENT_WINNAT_SESSION_LIMIT_REACHED 0x80004268L
 

@@ -1,0 +1,44 @@
+diff --git a/um/urlaccsdk.idl b/um/urlaccsdk.idl
+index 347067ad..24855f76 100644
+--- a/um/urlaccsdk.idl
++++ b/um/urlaccsdk.idl
+@@ -13,6 +13,7 @@
+ //
+ //+----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -20,6 +21,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ import "propsys.idl";
+ 
++cpp_quote("/* Win32Metadata: interface ::IUrlAccessor => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(0b63e318-9ccc-11d0-bcdb-00805fccce04),
+@@ -66,6 +68,7 @@ interface IUrlAccessor: IUnknown
+     HRESULT BindToFilter([out] IFilter **ppFilter);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUrlAccessor2 => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(c7310734-ac80-11d1-8df3-00c04fb6ef4f),
+@@ -87,6 +90,7 @@ interface IUrlAccessor2: IUrlAccessor
+                             [out] DWORD *pdwLength);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUrlAccessor3 => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(6FBC7005-0455-4874-B8FF-7439450241A3),
+@@ -100,6 +104,7 @@ interface IUrlAccessor3: IUrlAccessor2
+     HRESULT GetImpersonationSidBlobs([in] LPCWSTR pcwszURL, [out] DWORD *pcSidCount, [out] BLOB **ppSidBlobs);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUrlAccessor4 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(5CC51041-C8D2-41d7-BCA3-9E9E286297DC),

@@ -1,0 +1,80 @@
+diff --git a/um/windowsstoragecom.idl b/um/windowsstoragecom.idl
+index 435f2a19..cba972d1 100644
+--- a/um/windowsstoragecom.idl
++++ b/um/windowsstoragecom.idl
+@@ -4,6 +4,7 @@
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ //
+ //--------------------------------------------------------------------------
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -12,6 +13,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ import "oaidl.idl";
+ import "shobjidl_core.idl";
+ 
++cpp_quote("/* Win32Metadata: interface ::IRandomAccessStreamFileAccessMode => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(332E5848-2E15-458E-85C4-C911C0C3D6F4),
+@@ -21,6 +23,7 @@ interface IRandomAccessStreamFileAccessMode : IUnknown
+     HRESULT GetMode([out] DWORD* fileAccessMode); // Windows::Storage::FileAccessMode
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IUnbufferedFileHandleOplockCallback => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     uuid(D1019A0E-6243-4329-8497-2E75894D7710),
+     object,
+@@ -31,6 +34,7 @@ interface IUnbufferedFileHandleOplockCallback : IUnknown
+     HRESULT OnBrokenCallback();
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IUnbufferedFileHandleProvider => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(A65C9109-42AB-4B94-A7B1-DD2E4E68515E),
+@@ -50,6 +54,9 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ // This enum is a subset of the FILE_FLAG_* constants that are valid for use inside an app-container setting.
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum HANDLE_OPTIONS
+ {
+     HO_NONE                  = 0x00000000,
+@@ -61,6 +68,9 @@ typedef [v1_enum] enum HANDLE_OPTIONS
+     HO_OVERLAPPED            = 0x40000000,
+     HO_WRITE_THROUGH         = 0x80000000,
+ } HANDLE_OPTIONS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(HANDLE_OPTIONS);")
+ 
+ typedef [v1_enum] enum HANDLE_ACCESS_OPTIONS
+@@ -91,6 +101,7 @@ typedef [v1_enum] enum HANDLE_CREATION_OPTIONS
+     HCO_TRUNCATE_EXISTING = 0x5,
+ } HANDLE_CREATION_OPTIONS;
+ 
++cpp_quote("/* Win32Metadata: interface ::IOplockBreakingHandler => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(826ABE3D-3ACD-47D3-84F2-88AAEDCF6304),
+@@ -100,6 +111,7 @@ interface IOplockBreakingHandler : IUnknown
+     HRESULT OplockBreaking();
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IStorageItemHandleAccess => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(5CA296B2-2C25-4D22-B785-B885C8201E6A),
+@@ -115,6 +127,7 @@ interface IStorageItemHandleAccess : IUnknown
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IStorageFolderHandleAccess => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(DF19938F-5462-48A0-BE65-D2A3271A08D6),

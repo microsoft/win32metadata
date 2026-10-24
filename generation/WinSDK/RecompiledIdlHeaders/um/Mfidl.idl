@@ -132,6 +132,23 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma region Application or Games Family
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
 
+/// <summary>
+///  A Normalized relative rectangle where the coordinates exist in the rate [0,1].
+///  When the rectangle refers to a video stream, the following restrictions apply
+///  o  left <= right.
+///  o  top <= bottom.
+/// </summary>
+cpp_quote("#ifndef _MFVideoNormalizedRect_")
+cpp_quote("#define _MFVideoNormalizedRect_")
+typedef struct MFVideoNormalizedRect
+{
+    float left;
+    float top;
+    float right;
+    float bottom;
+} MFVideoNormalizedRect;
+cpp_quote("#endif")
+
 interface IMFClock;
 interface IMFPresentationTimeSource;
 

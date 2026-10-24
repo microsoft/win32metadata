@@ -1,6 +1,3 @@
---with-type
-_tagSLDATATYPE=uint
-SLDATATYPE=uint
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD
@@ -9,3 +6,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/securitybaseapi.h
 --namespace
 Windows.Win32.Security
+--config
+parse-win32-annotations

@@ -1,0 +1,12 @@
+diff --git a/um/prsht.idl b/um/prsht.idl
+index 4b135a35..126e4468 100644
+--- a/um/prsht.idl
++++ b/um/prsht.idl
+@@ -29,6 +29,7 @@
+ #endif
+ 
+ typedef void* HPROPSHEETPAGE;
++cpp_quote("/* Win32Metadata: type ::HPROPSHEETPAGE => NativeTypedef */")
+ typedef BOOL (* LPFNADDPROPSHEETPAGE)(HPROPSHEETPAGE, LPARAM);
+ typedef BOOL (* LPFNADDPROPSHEETPAGES)(LPVOID, LPFNADDPROPSHEETPAGE, LPARAM);
+ 

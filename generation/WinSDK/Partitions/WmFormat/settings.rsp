@@ -8,3 +8,5 @@
 <IncludeRoot>/um/wmsinternaladminnetsource.h
 --namespace
 Windows.Win32.Media.WindowsMediaFormat
+--config
+parse-win32-annotations

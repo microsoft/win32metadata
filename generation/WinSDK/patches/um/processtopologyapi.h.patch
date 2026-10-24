@@ -1,0 +1,28 @@
+diff --git a/um/processtopologyapi.h b/um/processtopologyapi.h
+index c58b6ea9..1dc9241f 100644
+--- a/um/processtopologyapi.h
++++ b/um/processtopologyapi.h
+@@ -27,6 +27,7 @@ extern "C" {
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -46,6 +47,7 @@ GetProcessGroupAffinity(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -54,6 +56,7 @@ GetThreadGroupAffinity(
+     _Out_ PGROUP_AFFINITY GroupAffinity
+     );
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI

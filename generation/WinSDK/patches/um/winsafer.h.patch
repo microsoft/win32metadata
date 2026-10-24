@@ -1,0 +1,114 @@
+diff --git a/um/winsafer.h b/um/winsafer.h
+--- a/um/winsafer.h
++++ b/um/winsafer.h
+@@ -35,6 +35,9 @@
+ //
+ 
+ DECLARE_HANDLE(SAFER_LEVEL_HANDLE);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef SAFER_LEVEL_HANDLE SAFER_LEVEL_HANDLE;
++#endif
+ 
+ 
+ //
+@@ -78,6 +81,8 @@
+ #define SAFER_TOKEN_COMPARE_ONLY    0x00000002
+ #define SAFER_TOKEN_MAKE_INERT      0x00000004
+ #define SAFER_TOKEN_WANT_FLAGS      0x00000008
++
++_Win32_FlagsEnum_(SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS, DWORD, SAFER_TOKEN_NULL_IF_EQUAL, SAFER_TOKEN_COMPARE_ONLY, SAFER_TOKEN_MAKE_INERT, SAFER_TOKEN_WANT_FLAGS);
+ 
+ //
+ // Flags for specifying what criteria within SAFER_CODE_PROPERTIES to evaluate
+@@ -619,6 +624,8 @@
+ // enumeration operations.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferGetPolicyInformation(
+@@ -630,6 +637,8 @@
+     _Reserved_ LPVOID            lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferSetPolicyInformation(
+@@ -644,6 +653,8 @@
+ // Functions to open or close a handle to a Safer Level.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferCreateLevel(
+@@ -654,12 +665,16 @@
+     _Reserved_ LPVOID               lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferCloseLevel(
+     _In_ SAFER_LEVEL_HANDLE hLevelHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferIdentifyLevel(
+@@ -669,16 +684,20 @@
+     _In_opt_ LPVOID         lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferComputeTokenFromLevel(
+     _In_ SAFER_LEVEL_HANDLE LevelHandle,
+     _In_opt_ HANDLE         InAccessToken,
+     _Out_ PHANDLE           OutAccessToken,
+-    _In_ DWORD              dwFlags,
++    _In_ _Win32_AssociatedEnum_(SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS) DWORD             dwFlags,
+     _Inout_opt_ LPVOID      lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferGetLevelInformation(
+@@ -689,6 +708,8 @@
+         _Out_ LPDWORD                           lpdwOutBufferSize
+         );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferSetLevelInformation(
+@@ -704,6 +725,8 @@
+ // ShellExecute and cmd when a lower trust evaluation result occurs.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferRecordEventLogEntry(
+@@ -713,6 +736,7 @@
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferiIsExecutableFileType(

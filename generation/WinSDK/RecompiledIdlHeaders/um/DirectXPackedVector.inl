@@ -15,7 +15,7 @@
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline float XMConvertHalfToFloat(HALF Value) noexcept
 {
@@ -48,7 +48,8 @@ inline float XMConvertHalfToFloat(HALF Value) noexcept
         {
             Exponent--;
             Mantissa <<= 1;
-        } while ((Mantissa & 0x0400) == 0);
+        }
+        while ((Mantissa & 0x0400) == 0);
 
         Mantissa &= 0x03FF;
     }
@@ -1186,7 +1187,8 @@ inline XMVECTOR XM_CALLCONV XMLoadFloat3PK(const XMFLOAT3PK* pSource) noexcept
             {
                 Exponent--;
                 Mantissa <<= 1;
-            } while ((Mantissa & 0x40) == 0);
+            }
+            while ((Mantissa & 0x40) == 0);
 
             Mantissa &= 0x3F;
         }
@@ -1220,7 +1222,8 @@ inline XMVECTOR XM_CALLCONV XMLoadFloat3PK(const XMFLOAT3PK* pSource) noexcept
             {
                 Exponent--;
                 Mantissa <<= 1;
-            } while ((Mantissa & 0x40) == 0);
+            }
+            while ((Mantissa & 0x40) == 0);
 
             Mantissa &= 0x3F;
         }
@@ -1254,7 +1257,8 @@ inline XMVECTOR XM_CALLCONV XMLoadFloat3PK(const XMFLOAT3PK* pSource) noexcept
             {
                 Exponent--;
                 Mantissa <<= 1;
-            } while ((Mantissa & 0x20) == 0);
+            }
+            while ((Mantissa & 0x20) == 0);
 
             Mantissa &= 0x1F;
         }
@@ -1506,6 +1510,11 @@ inline XMVECTOR XM_CALLCONV XMLoadXDecN4(const XMXDECN4* pSource) noexcept
 // C4996: ignore deprecation warning
 #endif
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -1559,6 +1568,9 @@ inline XMVECTOR XM_CALLCONV XMLoadXDec4(const XMXDEC4* pSource) noexcept
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic pop
 #endif
 #ifdef _MSC_VER
 #pragma warning(pop)
@@ -1705,6 +1717,11 @@ inline XMVECTOR XM_CALLCONV XMLoadUDec4(const XMUDEC4* pSource) noexcept
 // C4996: ignore deprecation warning
 #endif
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -1805,6 +1822,9 @@ inline XMVECTOR XM_CALLCONV XMLoadDec4(const XMDEC4* pSource) noexcept
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic pop
 #endif
 #ifdef _MSC_VER
 #pragma warning(pop)
@@ -1984,7 +2004,7 @@ inline XMVECTOR XM_CALLCONV XMLoadUNibble4(const XMUNIBBLE4* pSource) noexcept
     static const XMVECTORF32 UNibble4Mul = { { { 1.0f, 1.0f / 16.f, 1.0f / 256.f, 1.0f / 4096.f } } };
     // Get the 16 bit value and splat it
     __m128i vInt = XM_LOADU_SI16(&pSource->v);
-    XMVECTOR vResult = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0,0,0,0));
+    XMVECTOR vResult = XM_PERMUTE_PS(_mm_castsi128_ps(vInt), _MM_SHUFFLE(0, 0, 0, 0));
     // Mask off x, y and z
     vResult = _mm_and_ps(vResult, UNibble4And);
     // Convert to float
@@ -2644,9 +2664,9 @@ inline void XM_CALLCONV XMStoreFloat3SE
     fi.i = static_cast<int32_t>(0x83000000 - (exp << 23));
     float ScaleR = fi.f;
 
-    pDestination->xm = static_cast<uint32_t>(Internal::round_to_nearest(x * ScaleR));
-    pDestination->ym = static_cast<uint32_t>(Internal::round_to_nearest(y * ScaleR));
-    pDestination->zm = static_cast<uint32_t>(Internal::round_to_nearest(z * ScaleR));
+    pDestination->xm = static_cast<uint32_t>(MathInternal::round_to_nearest(x * ScaleR));
+    pDestination->ym = static_cast<uint32_t>(MathInternal::round_to_nearest(y * ScaleR));
+    pDestination->zm = static_cast<uint32_t>(MathInternal::round_to_nearest(z * ScaleR));
 }
 
 //------------------------------------------------------------------------------
@@ -2915,6 +2935,11 @@ inline void XM_CALLCONV XMStoreXDecN4
 // C4996: ignore deprecation warning
 #endif
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -2989,6 +3014,9 @@ inline void XM_CALLCONV XMStoreXDec4
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic pop
 #endif
 #ifdef _MSC_VER
 #pragma warning(pop)
@@ -3209,6 +3237,11 @@ inline void XM_CALLCONV XMStoreUDec4
 // C4996: ignore deprecation warning
 #endif
 
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+#endif
+
 #ifdef __GNUC__
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
@@ -3337,6 +3370,9 @@ inline void XM_CALLCONV XMStoreDec4
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
+#endif
+#ifdef __clang__
+#pragma clang diagnostic pop
 #endif
 #ifdef _MSC_VER
 #pragma warning(pop)
@@ -3684,7 +3720,7 @@ inline void XM_CALLCONV XMStoreU555
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMCOLOR::XMCOLOR
 (
@@ -3710,7 +3746,7 @@ inline XMCOLOR::XMCOLOR(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMHALF2::XMHALF2
 (
@@ -3737,7 +3773,7 @@ inline XMHALF2::XMHALF2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMSHORTN2::XMSHORTN2
 (
@@ -3761,7 +3797,7 @@ inline XMSHORTN2::XMSHORTN2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMSHORT2::XMSHORT2
 (
@@ -3785,7 +3821,7 @@ inline XMSHORT2::XMSHORT2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUSHORTN2::XMUSHORTN2
 (
@@ -3809,7 +3845,7 @@ inline XMUSHORTN2::XMUSHORTN2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUSHORT2::XMUSHORT2
 (
@@ -3833,7 +3869,7 @@ inline XMUSHORT2::XMUSHORT2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMBYTEN2::XMBYTEN2
 (
@@ -3857,7 +3893,7 @@ inline XMBYTEN2::XMBYTEN2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMBYTE2::XMBYTE2
 (
@@ -3881,7 +3917,7 @@ inline XMBYTE2::XMBYTE2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUBYTEN2::XMUBYTEN2
 (
@@ -3905,7 +3941,7 @@ inline XMUBYTEN2::XMUBYTEN2(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUBYTE2::XMUBYTE2
 (
@@ -3995,7 +4031,7 @@ inline XMFLOAT3SE::XMFLOAT3SE(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMHALF4::XMHALF4
 (
@@ -4025,7 +4061,7 @@ inline XMHALF4::XMHALF4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMSHORTN4::XMSHORTN4
 (
@@ -4051,7 +4087,7 @@ inline XMSHORTN4::XMSHORTN4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMSHORT4::XMSHORT4
 (
@@ -4077,7 +4113,7 @@ inline XMSHORT4::XMSHORT4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUSHORTN4::XMUSHORTN4
 (
@@ -4103,7 +4139,7 @@ inline XMUSHORTN4::XMUSHORTN4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUSHORT4::XMUSHORT4
 (
@@ -4129,7 +4165,7 @@ inline XMUSHORT4::XMUSHORT4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMXDECN4::XMXDECN4
 (
@@ -4157,7 +4193,12 @@ inline XMXDECN4::XMXDECN4(const float* pArray) noexcept
 #ifdef _MSC_VER
 #pragma warning(push)
 #pragma warning(disable : 4996)
- // C4996: ignore deprecation warning
+// C4996: ignore deprecation warning
+#endif
+
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 #endif
 
 #ifdef __GNUC__
@@ -4165,7 +4206,7 @@ inline XMXDECN4::XMXDECN4(const float* pArray) noexcept
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
 #endif
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMXDEC4::XMXDEC4
 (
@@ -4191,7 +4232,7 @@ inline XMXDEC4::XMXDEC4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMDECN4::XMDECN4
 (
@@ -4217,7 +4258,7 @@ inline XMDECN4::XMDECN4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMDEC4::XMDEC4
 (
@@ -4240,6 +4281,9 @@ inline XMDEC4::XMDEC4(const float* pArray) noexcept
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 #ifdef _MSC_VER
 #pragma warning(pop)
 #endif
@@ -4250,7 +4294,7 @@ inline XMDEC4::XMDEC4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUDECN4::XMUDECN4
 (
@@ -4276,7 +4320,7 @@ inline XMUDECN4::XMUDECN4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUDEC4::XMUDEC4
 (
@@ -4302,7 +4346,7 @@ inline XMUDEC4::XMUDEC4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMBYTEN4::XMBYTEN4
 (
@@ -4328,7 +4372,7 @@ inline XMBYTEN4::XMBYTEN4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMBYTE4::XMBYTE4
 (
@@ -4354,7 +4398,7 @@ inline XMBYTE4::XMBYTE4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUBYTEN4::XMUBYTEN4
 (
@@ -4380,7 +4424,7 @@ inline XMUBYTEN4::XMUBYTEN4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUBYTE4::XMUBYTE4
 (
@@ -4406,7 +4450,7 @@ inline XMUBYTE4::XMUBYTE4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMUNIBBLE4::XMUNIBBLE4
 (
@@ -4432,7 +4476,7 @@ inline XMUNIBBLE4::XMUNIBBLE4(const float* pArray) noexcept
  *
  ****************************************************************************/
 
- //------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 inline XMU555::XMU555
 (

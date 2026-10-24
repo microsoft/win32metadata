@@ -1,0 +1,28 @@
+diff --git a/um/minschannel.h b/um/minschannel.h
+index 1e7c3f29..1f8782ca 100644
+--- a/um/minschannel.h
++++ b/um/minschannel.h
+@@ -63,6 +63,23 @@
+ #define SECPKG_ATTR_UI_INFO              0x68   // sets SEcPkgContext_UiInfo
+ #define SECPKG_ATTR_EARLY_START          0x69   // sets SecPkgContext_EarlyStart
+ #define SECPKG_ATTR_KEYING_MATERIAL_INFO 0x6a   // sets SecPkgContext_KeyingMaterialInfo
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(SECPKG_ATTR, unsigned long,
++    SECPKG_ATTR_APP_DATA,
++    SECPKG_ATTR_EAP_PRF_INFO,
++    SECPKG_ATTR_EARLY_START,
++    SECPKG_ATTR_KEYING_MATERIAL_INFO,
++    SECPKG_ATTR_CONNECTION_INFO,
++    SECPKG_ATTR_EAP_KEY_BLOCK,
++    SECPKG_ATTR_ISSUER_LIST_EX,
++    SECPKG_ATTR_LOCAL_CERT_CONTEXT,
++    SECPKG_ATTR_LOCAL_CRED,
++    SECPKG_ATTR_REMOTE_CERT_CONTEXT,
++    SECPKG_ATTR_ROOT_STORE,
++    SECPKG_ATTR_SESSION_INFO,
++    SECPKG_ATTR_SUPPORTED_SIGNATURES);
++#endif
+ #define SECPKG_ATTR_KEYING_MATERIAL      0x6b   // returns SecPkgContext_KeyingMaterial
+ #define SECPKG_ATTR_SRTP_PARAMETERS      0x6c   // returns negotiated SRTP parameters
+ #define SECPKG_ATTR_TOKEN_BINDING        0x6d   // returns SecPkgContext_TokenBinding

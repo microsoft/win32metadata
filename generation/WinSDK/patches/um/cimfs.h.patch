@@ -1,0 +1,91 @@
+diff --git a/um/cimfs.h b/um/cimfs.h
+--- a/um/cimfs.h
++++ b/um/cimfs.h
+@@ -70,6 +70,7 @@
+ //  location.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimCreateImage(_In_ PCWSTR imageContainingPath,
+                _In_opt_ PCWSTR existingImageName,
+@@ -96,6 +97,7 @@
+ //  which can be used to write data to the stream.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimCreateFile(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
+               _In_ PCWSTR imageRelativePath,
+@@ -109,6 +111,7 @@
+ //  data to the stream.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimCreateAlternateStream(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
+                          _In_ PCWSTR imageRelativePath,
+@@ -120,6 +123,7 @@
+ //  represented by the image handle.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimCreateHardLink(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
+                   _In_ PCWSTR imageRelativePath,
+@@ -130,6 +134,7 @@
+ //  by the stream handle.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimWriteStream(_In_ CIMFS_STREAM_HANDLE cimStreamHandle,
+                _In_reads_bytes_(bufferSize) const void* buffer,
+@@ -139,6 +144,7 @@
+ //  Frees resources associated with the stream handle.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI_(void)
+ CimCloseStream(_In_ CIMFS_STREAM_HANDLE cimStreamHandle);
+ 
+@@ -147,6 +153,7 @@
+ //  relative to the image represented by the image handle.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimDeletePath(_In_ CIMFS_IMAGE_HANDLE cimImageHandle,
+               _In_ PCWSTR imageRelativePath);
+@@ -156,6 +163,7 @@
+ //  becomes invalid for further operations on the image.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimCommitImage(_In_ CIMFS_IMAGE_HANDLE cimImageHandle);
+ 
+@@ -163,6 +171,7 @@
+ //  Frees resources associated with the image handle.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI_(void)
+ CimCloseImage(_In_ CIMFS_IMAGE_HANDLE cimImageHandle);
+ 
+@@ -171,6 +180,7 @@
+ //  as a volume with the volume GUID specified by volumeId.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimMountImage(_In_ PCWSTR imageContainingPath,
+               _In_ PCWSTR imageName,
+@@ -181,6 +191,7 @@
+ //  Dismounts an image mounted with volumeId as the volume GUID.
+ //
+ 
++_Win32_SupportedOS_19041_
+ STDAPI
+ CimDismountImage(_In_ const GUID* volumeId);
+ 

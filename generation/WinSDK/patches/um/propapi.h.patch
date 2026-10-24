@@ -1,0 +1,12 @@
+diff --git a/um/propapi.h b/um/propapi.h
+index 858a29db..3b367e5d 100644
+--- a/um/propapi.h
++++ b/um/propapi.h
+@@ -31,6 +31,7 @@ typedef VOID* NTPROP;
+ #include <propidl.h>
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ _Success_(TRUE)  /* Raises status on failure */
+ ULONG __stdcall
+ StgPropertyLengthAsVariant(

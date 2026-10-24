@@ -4109,7 +4109,7 @@ typedef DWORD SHCONTF;
 #define SFGAO_FILESYSTEM        0x40000000L     // Is a win32 file system object (file/folder/root)
 #define SFGAO_HASSUBFOLDER      0x80000000L     // May contain children with SFGAO_FOLDER (may be slow)
 #define SFGAO_CONTENTSMASK      0x80000000L
-#define SFGAO_VALIDATE          0x01000000L     // Invalidate cached information (may be slow)
+#define SFGAO_VALIDATE          0x01000000L     // Check whether item exists. Result returned as failure code, not attribute flag. For filesystem folder, invalidate cached information. For drive, verify that drive is formatted. (may be slow)
 #define SFGAO_REMOVABLE         0x02000000L     // Is this removeable media?
 #define SFGAO_COMPRESSED        0x04000000L     // Object is compressed (use alt color)
 #define SFGAO_BROWSABLE         0x08000000L     // Supports IShellFolder, but only implements CreateViewObject() (non-folder view)

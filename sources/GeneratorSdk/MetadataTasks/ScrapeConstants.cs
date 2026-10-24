@@ -73,6 +73,10 @@ namespace MetadataTasks
             if (ret)
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
+                string nativeInputs = Path.Combine(this.ScraperOutputDir, "native-constant-inputs.txt");
+                string[] paths = this.GetNativeConstantInputs();
+                if (paths.Length != 0 || File.Exists(nativeInputs))
+                    File.WriteAllLines(nativeInputs, paths);
             }
 
             return ret;
@@ -124,8 +128,29 @@ namespace MetadataTasks
                 files = files.Concat(new string[] { TaskUtils.GetFullPath(this.EnumsJson, this.MSBuildProjectDirectory) });
             }
 
-            return TaskUtils.IsUpToDate(files, this.MarkerFileName);
+            var producerInputs = new List<string>
+            {
+                Path.Combine(this.ToolsBinDir, "ConstantsScraper.dll"),
+                Path.Combine(this.ToolsBinDir, "MetadataUtils.dll"),
+            };
+            if (!string.IsNullOrEmpty(this.HeaderTextFile))
+                producerInputs.Add(TaskUtils.GetFullPath(this.HeaderTextFile, this.MSBuildProjectDirectory));
+            if (producerInputs.Any(file => !File.Exists(file)))
+                return false;
+            files = files.Concat(producerInputs);
+
+            string[] nativePaths = this.GetNativeConstantInputs();
+            string nativeInputs = Path.Combine(this.ScraperOutputDir, "native-constant-inputs.txt");
+            if (nativePaths.Length != 0 || File.Exists(nativeInputs))
+                if (!File.Exists(nativeInputs) || !File.ReadAllLines(nativeInputs).SequenceEqual(nativePaths, System.StringComparer.OrdinalIgnoreCase))
+                    return false;
+            return TaskUtils.IsUpToDate(files.Concat(nativePaths), this.MarkerFileName);
         }
+
+        private string[] GetNativeConstantInputs() => Directory.Exists(this.ScraperOutputDir)
+            ? Directory.GetFiles(this.ScraperOutputDir, "*.native-constants.json", SearchOption.AllDirectories)
+                .OrderBy(path => path, System.StringComparer.OrdinalIgnoreCase).ToArray()
+            : System.Array.Empty<string>();
 
         private void AppendTraversedFilesAndNamespaces(StringBuilder rsp)
         {

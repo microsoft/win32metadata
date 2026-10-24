@@ -1,6 +1,3 @@
---with-type
-_tagSLDATATYPE=uint
-SLDATATYPE=uint
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD
@@ -10,3 +7,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/isolatedwindowsenvironmentutils.h
 --namespace
 Windows.Win32.Security.Isolation
+--config
+parse-win32-annotations

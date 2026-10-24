@@ -1,0 +1,540 @@
+diff --git a/shared/netioapi.h b/shared/netioapi.h
+index ca51682f..1b598a28 100644
+--- a/shared/netioapi.h
++++ b/shared/netioapi.h
+@@ -223,6 +223,7 @@ typedef struct _MIB_IF_TABLE2 {
+     MIB_IF_ROW2 Table[ANY_SIZE];
+ } MIB_IF_TABLE2, *PMIB_IF_TABLE2;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -270,6 +271,7 @@ typedef enum _MIB_IF_ENTRY_LEVEL {
+     MibIfEntryNormalWithoutStatistics = 2
+ } MIB_IF_ENTRY_LEVEL, *PMIB_IF_ENTRY_LEVEL;
+ 
++_Win32_SupportedOS_15063_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -312,6 +314,7 @@ Notes:
+ --*/
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -350,6 +353,7 @@ typedef enum _MIB_IF_TABLE_LEVEL {
+     #endif
+ } MIB_IF_TABLE_LEVEL, *PMIB_IF_TABLE_LEVEL;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -496,6 +500,7 @@ typedef struct _MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
+ } MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES,
+   *PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -504,6 +509,7 @@ GetIfStackTable(
+     _Outptr_ PMIB_IFSTACK_TABLE *Table
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -512,6 +518,7 @@ GetInvertedIfStackTable(
+     _Outptr_ PMIB_INVERTEDIFSTACK_TABLE *Table
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -547,6 +554,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -586,6 +594,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ VOID
+@@ -615,6 +624,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -667,6 +677,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -703,6 +714,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_Windows8_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -793,6 +805,7 @@ VOID
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -829,6 +842,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -860,6 +874,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -900,6 +915,7 @@ Notes:
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -946,6 +962,7 @@ Notes:
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ VOID
+@@ -983,6 +1000,7 @@ Notes:
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1042,6 +1060,7 @@ VOID
+     _In_ PMIB_UNICASTIPADDRESS_TABLE AddressTable
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1060,6 +1079,7 @@ NotifyStableUnicastIpAddressTable(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1119,6 +1139,7 @@ typedef struct _MIB_ANYCASTIPADDRESS_TABLE {
+     MIB_ANYCASTIPADDRESS_ROW Table[ANY_SIZE];
+ } MIB_ANYCASTIPADDRESS_TABLE, *PMIB_ANYCASTIPADDRESS_TABLE;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1150,6 +1171,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1181,6 +1203,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1215,6 +1238,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1278,6 +1302,7 @@ typedef struct _MIB_MULTICASTIPADDRESS_TABLE {
+     MIB_MULTICASTIPADDRESS_ROW Table[ANY_SIZE];
+ } MIB_MULTICASTIPADDRESS_TABLE, *PMIB_MULTICASTIPADDRESS_TABLE;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1312,6 +1337,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1416,6 +1442,7 @@ VOID
+     _In_ MIB_NOTIFICATION_TYPE NotificationType
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1453,6 +1480,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1491,6 +1519,7 @@ Notes:
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1548,6 +1577,7 @@ Notes:
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1590,6 +1620,7 @@ Notes:
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1635,6 +1666,7 @@ Notes:
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ VOID
+@@ -1664,6 +1696,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1716,6 +1749,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1809,6 +1843,7 @@ typedef struct _MIB_IPPATH_TABLE {
+ } MIB_IPPATH_TABLE, *PMIB_IPPATH_TABLE;
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1840,6 +1875,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1874,6 +1910,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1955,6 +1992,7 @@ typedef struct _MIB_IPNET_TABLE2 {
+     MIB_IPNET_ROW2 Table[ANY_SIZE];
+ } MIB_IPNET_TABLE2, *PMIB_IPNET_TABLE2;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -1987,6 +2025,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2019,6 +2058,7 @@ Notes:
+ --*/
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2056,6 +2096,7 @@ Return Value:
+ --*/
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2090,6 +2131,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2129,6 +2171,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2170,6 +2213,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2221,6 +2265,7 @@ VOID
+     _Inout_ MIB_NOTIFICATION_TYPE NotificationType
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2232,6 +2277,7 @@ NotifyTeredoPortChange(
+     _Inout_ HANDLE *NotificationHandle
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2279,6 +2325,7 @@ Return Value:
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ NETIOAPI_API
+@@ -2308,6 +2355,7 @@ Notes:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ IPHLPAPI_DLL_LINKAGE
+ VOID
+ NETIOAPI_API_
+@@ -2336,6 +2384,7 @@ Return Value:
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2457,6 +2506,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2485,6 +2535,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2513,6 +2564,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2544,6 +2596,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2575,6 +2628,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2603,6 +2657,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2631,6 +2686,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2662,6 +2718,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2690,6 +2747,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2718,6 +2776,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -2748,6 +2807,7 @@ Return Value:
+ 
+ #define IF_NAMESIZE NDIS_IF_MAX_STRING_SIZE
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ NET_IFINDEX
+@@ -2771,6 +2831,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ PCHAR
+@@ -3021,6 +3082,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_10240_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ NET_IF_COMPARTMENT_ID
+@@ -3111,6 +3173,7 @@ Return Value:
+ 
+ #pragma warning(pop)
+ 
++_Win32_SupportedOS_WindowsVista_
+ IPHLPAPI_DLL_LINKAGE
+ NETIOAPI_API
+ ConvertLengthToIpv4Mask(
+@@ -3137,6 +3200,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_WindowsVista_
+ IPHLPAPI_DLL_LINKAGE
+ NETIOAPI_API
+ ConvertIpv4MaskToLength(
+@@ -3518,6 +3582,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_19041_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -3544,6 +3609,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SupportedOS_19041_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+@@ -3582,6 +3648,7 @@ VOID
+     _In_ NL_NETWORK_CONNECTIVITY_HINT ConnectivityHint
+     );
+ 
++_Win32_SupportedOS_19041_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_

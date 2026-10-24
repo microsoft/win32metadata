@@ -214,7 +214,9 @@ Win32 Metadata depends on the following:
 
 ### Windows SDK
 
-To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.22621.2428).
+To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.28000.2705).
+
+Some older headers are intentionally restored by `RecompileIdlFilesForScraping.ps1` for compatibility. Preserve these inputs and their library mappings during SDK updates; removing their metadata requires a separate compatibility decision.
 
 Run a [full build](#full-builds), fix any metadata issues that surface, address failures from tests, then update the baseline.
 
@@ -251,6 +253,22 @@ If CI builds pass but local builds of the same commit fail with cryptic error me
 Run `./DoAll.ps1 -ExcludePackages -ExcludeSamples` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes. Building NuGet packages and WinmdGenerator samples isn't usually necessary for local builds, so excluding them with `ExcludePackages` and `ExcludeSamples` will provide the fastest build times.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
+
+### Running tests
+
+After building the metadata, run `.\scripts\DoTests.ps1` in PowerShell 7 with Python 3 on `PATH` to run the metadata utility, scraper, C# source-to-WinMD emitter, SDK annotation coverage-auditor, and WinMD integrity suites. The full build and both CI pipelines use this runner.
+
+To run the existing emitter suite on its own:
+
+```powershell
+dotnet test tests\ClangSharpSourceToWinmdTests -c Release
+```
+
+The coverage-auditor suite uses Python's standard library:
+
+```powershell
+python -m unittest discover -s tests\SdkAnnotationCoverage.Tests -p "test_*.py"
+```
 
 ### Reviewing API changes
 

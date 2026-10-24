@@ -1,0 +1,27 @@
+diff --git a/shared/hidpi.h b/shared/hidpi.h
+--- a/shared/hidpi.h
++++ b/shared/hidpi.h
+@@ -241,6 +241,9 @@
+ 
+ typedef PUCHAR  PHIDP_REPORT_DESCRIPTOR;
+ typedef struct _HIDP_PREPARSED_DATA * PHIDP_PREPARSED_DATA;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PHIDP_PREPARSED_DATA PHIDP_PREPARSED_DATA;
++#endif
+ 
+ typedef struct _HIDP_CAPS
+ {
+@@ -2031,6 +2034,13 @@
+ //
+ #define HIDP_STATUS_I8242_TRANS_UNKNOWN HIDP_STATUS_I8042_TRANS_UNKNOWN
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("HIDP_STATUS_I8242_TRANS_UNKNOWN")
++#undef HIDP_STATUS_I8242_TRANS_UNKNOWN
++const NTSTATUS HIDP_STATUS_I8242_TRANS_UNKNOWN = HIDP_STATUS_I8042_TRANS_UNKNOWN;
++#pragma pop_macro("HIDP_STATUS_I8242_TRANS_UNKNOWN")
++#endif
++
+ #ifndef _KERNEL_MODE
+ 
+ typedef NTSTATUS
