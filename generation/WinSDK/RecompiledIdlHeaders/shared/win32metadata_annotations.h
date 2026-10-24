@@ -9,21 +9,33 @@
 #define _WIN32META_STRINGIFY_(...) #__VA_ARGS__
 #define _WIN32META_EXPAND_STRINGIFY_(...) _WIN32META_STRINGIFY_(__VA_ARGS__)
 #define _Win32_RAIIFree_(cleanup, ...) \
-    _WIN32META_ANNOTATION_("RAIIFree", sizeof(&(cleanup)), ##__VA_ARGS__)
+    _WIN32META_ANNOTATION_("RAIIFree", "Win32Metadata.FunctionDecl:" _WIN32META_EXPAND_STRINGIFY_(cleanup), ##__VA_ARGS__)
 #define _Win32_ImportLibrary_(...) _WIN32META_ANNOTATION_("ImportLibrary", __VA_ARGS__)
-#define _Win32_AssociatedEnum_(name) _WIN32META_ANNOTATION_("AssociatedEnum", (name)0)
+#define _Win32_AssociatedEnum_(name) \
+    _WIN32META_ANNOTATION_("AssociatedEnum", "Win32Metadata.EnumName:" _WIN32META_EXPAND_STRINGIFY_(name))
 #define _Win32_Enum_(name, storage, ...) \
     typedef _WIN32META_ANNOTATION_("Enum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
 #define _Win32_FlagsEnum_(name, storage, ...) \
     typedef _WIN32META_ANNOTATION_("FlagsEnum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
-#if defined(__cplusplus) && !defined(CINTERFACE)
+#if defined(__cplusplus)
 #define _WIN32META_JOIN_RAW_(left, right) left##right
 #define _WIN32META_JOIN_(left, right) _WIN32META_JOIN_RAW_(left, right)
+#define _WIN32META_ANNOTATE_FIELD_(field, annotation) \
+    _WIN32META_ANNOTATION_("Field", sizeof(&field)) annotation \
+    static const unsigned char _WIN32META_JOIN_(_WIN32META_FIELD_, __COUNTER__) = 0
+#else
+#define _WIN32META_ANNOTATE_FIELD_(field, annotation)
+#endif
+#if defined(__cplusplus) && !defined(CINTERFACE)
 #define _WIN32META_ANNOTATE_METHOD_(method, annotation) \
     _WIN32META_ANNOTATION_("Method", sizeof(&method)) annotation \
     static const unsigned char _WIN32META_JOIN_(_WIN32META_METHOD_, __COUNTER__) = 0
+#define _WIN32META_ANNOTATE_PARAMETER_(method, parameter, annotation) \
+    _WIN32META_ANNOTATION_("Parameter", sizeof(&method), #parameter) annotation \
+    static const unsigned char _WIN32META_JOIN_(_WIN32META_PARAMETER_, __COUNTER__) = 0
 #else
 #define _WIN32META_ANNOTATE_METHOD_(method, annotation)
+#define _WIN32META_ANNOTATE_PARAMETER_(method, parameter, annotation)
 #endif
 #else
 #define _WIN32META_ANNOTATION_(...)
@@ -33,24 +45,32 @@
 #define _Win32_Enum_(name, storage, ...)
 #define _Win32_FlagsEnum_(name, storage, ...)
 #define _WIN32META_ANNOTATE_METHOD_(method, annotation)
+#define _WIN32META_ANNOTATE_PARAMETER_(method, parameter, annotation)
+#define _WIN32META_ANNOTATE_FIELD_(field, annotation)
 #endif
 
 #define _Win32_RAIIFree_Handle_(cleanup) _Win32_RAIIFree_(cleanup, -1, 0)
 #define _Win32_SetLastError_ _WIN32META_ANNOTATION_("SetLastError")
 #define _Win32_PreserveResult_ _WIN32META_ANNOTATION_("PreserveResult")
+#define _Win32_NativeTypedef_ _WIN32META_ANNOTATION_("NativeTypedef")
 #define _Win32_Retained_ _WIN32META_ANNOTATION_("Retained")
 #define _Win32_ContainsInteriorPointers_ _WIN32META_ANNOTATION_("ContainsInteriorPointers")
 #define _Win32_Retval_ _WIN32META_ANNOTATION_("RetVal")
+#define _Win32_Reserved_ _WIN32META_ANNOTATION_("Reserved")
+#define _Win32_Optional_(value) _WIN32META_ANNOTATION_("Optional(" #value ")")
+#define _Win32_ComOutPtr_(value) _WIN32META_ANNOTATION_("ComOutPtr(" #value ")")
 #define _Win32_AlsoUsableFor_(name) _WIN32META_ANNOTATION_("AlsoUsableFor(" #name ")")
 #define _Win32_AssociatedConstant_(name) _WIN32META_ANNOTATION_("AssociatedConstant(" #name ")")
 
 #if defined(MIDL_PASS)
-#define _Win32_AnnotateInterface_(name, annotation) \
-    cpp_quote("#if defined(__cplusplus)") \
-    cpp_quote("struct " #annotation " " #name ";") \
-    cpp_quote("#endif")
 #define _Win32_AnnotateMethod_(method, annotation) \
     cpp_quote("_WIN32META_ANNOTATE_METHOD_(" #method ", " #annotation ");")
+#define _Win32_AnnotateParameter_(method, parameter, annotation) \
+    cpp_quote("_WIN32META_ANNOTATE_PARAMETER_(" #method ", " #parameter ", " #annotation ");")
+#define _Win32_AnnotateField_(field, annotation) \
+    cpp_quote("_WIN32META_ANNOTATE_FIELD_(" #field ", " #annotation ");")
+#else
+#define _Win32_AnnotateField_(field, annotation) _WIN32META_ANNOTATE_FIELD_(field, annotation)
 #endif
 
 #define _WIN32META_OS_VERSION_Windows2000 "SupportedOSPlatform(\"windows5.0\")"

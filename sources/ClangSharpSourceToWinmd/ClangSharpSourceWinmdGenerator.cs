@@ -42,6 +42,7 @@ namespace ClangSharpSourceToWinmd
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
+        private readonly IReadOnlyDictionary<string, string> fieldRenames;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -74,9 +75,11 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             HashSet<string> forceGuidConsts,
             Version assemblyVersion, 
-            string assemblyName)
+            string assemblyName,
+            IReadOnlyDictionary<string, string> fieldRenames)
         {
             this.compilation = compilation;
+            this.fieldRenames = fieldRenames;
             this.reducePointerLevels = reducePointerLevels;
             this.forceGuidConsts = forceGuidConsts;
 
@@ -176,7 +179,8 @@ namespace ClangSharpSourceToWinmd
                     reducePointerLevels,
                     forceGuidConsts,
                     version, 
-                    Path.GetFileName(outputFileName));
+                    Path.GetFileName(outputFileName),
+                    compilation.FieldRenames);
 
             generator.PopulateMetadataBuilder();
 
@@ -240,7 +244,7 @@ namespace ClangSharpSourceToWinmd
             return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
         }
 
-        private static string FixArchSpecificName(string name)
+        internal static string FixArchSpecificName(string name)
         {
             if (name.EndsWith("____1") || name.EndsWith("____2"))
             {
@@ -1285,7 +1289,8 @@ namespace ClangSharpSourceToWinmd
             {
                 var fieldVariable = field.Declaration.Variables.First();
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
-                string name = FixFinalName(fieldSymbol.Name);
+                string name = FixFinalName(this.fieldRenames.TryGetValue(CrossArchSyntaxMap.GetFullName(field), out var originalName)
+                    ? originalName : fieldSymbol.Name);
 
                 FieldAttributes fieldAttributes;
 

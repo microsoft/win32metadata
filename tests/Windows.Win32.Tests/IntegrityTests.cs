@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
@@ -60,8 +61,12 @@ namespace Windows.Win32.Tests
         public void NoSuggestedRemappings()
         {
             string suggestedRemappingsFileName = TestUtils.GetAssetFile("suggestedRemappingsAllowList.rsp");
-            string projectRoot = Path.GetFullPath(Path.Combine(TestUtils.Win32WinmdPath, "../../generation/WinSDK"));
-            string args = $"showSuggestedRemappings --winmd \"{TestUtils.Win32WinmdPath}\" \"@{suggestedRemappingsFileName}\" --projectRoot {projectRoot}";
+            string projectRoot = Environment.GetEnvironmentVariable("WIN32_METADATA_TEST_PROJECT");
+            if (string.IsNullOrEmpty(projectRoot))
+                projectRoot = Path.GetFullPath(Path.Combine(TestUtils.Win32WinmdPath, "../../generation/WinSDK"));
+            if (!Directory.Exists(projectRoot))
+                throw new DirectoryNotFoundException("The explicitly selected integrity-test SDK project does not exist: " + projectRoot);
+            string args = $"showSuggestedRemappings --winmd \"{TestUtils.Win32WinmdPath}\" \"@{suggestedRemappingsFileName}\" --projectRoot \"{projectRoot}\"";
             this.ExecWinmdUtils(args);
         }
 

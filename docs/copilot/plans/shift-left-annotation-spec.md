@@ -24,7 +24,9 @@ ships in the SDK.
 1. Metadata must not change the native ABI: no layout, calling convention, mangling,
    parameter count, native type, vtable, or exported symbol changes.
 2. Ordinary SDK compilation sees every annotation macro as empty.
-3. Metadata-only declarations are guarded by `WIN32METADATA`.
+3. Metadata-only declarations are guarded by `WIN32METADATA`. Metadata-enabled
+   parsing is C++ only; ordinary native C compilation with metadata off must remain
+   unchanged.
 4. Existing genuine SDK typedefs may be annotated. New API-specific pseudo handles
    such as `PRINTER_HANDLE` must not be introduced.
 5. Resource producers carry cleanup and invalid-value metadata only on their return or
@@ -65,26 +67,45 @@ permitted, and annotations on unsupported targets are errors.
 | Producer cleanup | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer return or output parameter. Names its cleanup function and optional integral invalid values. |
 | HANDLE cleanup shorthand | `_Win32_RAIIFree_Handle_(CloseX)` | Producer return or output parameter whose invalid set is exactly `-1, 0`. |
 | Retained pointer | `_Win32_Retained_` | Pointer parameter retained by the API after the call. Follow the API's documented lifetime. |
+| Reserved parameter | `_Win32_Reserved_` | Reserved pointer or scalar parameter. Records `[Reserved]` while preserving existing native types, direction SAL, and optionality. Valueless and non-repeatable. |
 | Interior pointers | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter. Returned absolute pointers may borrow storage inside that same allocation; keep it alive and at a stable address until all pointer use or copying ends. Valueless and non-repeatable. |
+| Native typedef identity | `_Win32_NativeTypedef_` | Genuine native `typedef` of a supported scalar or data pointer. Emits a nominal native-typedef wrapper without implying cleanup, invalid values, compatibility, or an OS floor. Valueless. |
 | Compatible native typedef | `_Win32_AlsoUsableFor_(TYPE)` | Genuine native typedef, not a logical enum group. |
-| Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with an already declared native enum or metadata-only group. Keep its native declaration type. |
+| Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with a native enum or metadata-only group, including a later or cross-partition definition. Keep its native declaration type. |
 | Loose constant association | `_Win32_AssociatedConstant_(NAME)` | Enum. Associates an existing global constant without duplicating or renaming it. Repeatable. |
 | Logical enum | `_Win32_Enum_(name, storage, constants...)` | Metadata-only unscoped group of existing constants, using the specified native integral storage type of at most 64 bits. |
 | Logical flags enum | `_Win32_FlagsEnum_(name, storage, constants...)` | The same grouping contract with flags semantics. |
 | Projected return parameter | `_Win32_Retval_` | Output parameter in a C/C++-authored declaration, alongside direction SAL. Use native `[retval]` in IDL instead. |
-| IDL interface annotation | `_Win32_AnnotateInterface_(name, annotation)` | Before the original IDL interface declaration. Supplies a public annotation such as `_Win32_SupportedOS_15063_` without editing the generated header. |
+| Original-IDL metadata | `cpp_quote("/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(...) */")` | The same fact vocabulary and validation, with explicit native identity and no synthetic declaration. |
 
 Use existing native syntax where it already expresses the contract:
 
 | Intent | Existing syntax |
 | --- | --- |
 | Input/output/optional/reserved | SAL/MIDL direction, optionality, and reserved-parameter annotations. |
-| Array count/capacity/byte size | Native array declarations and SAL such as `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, and their byte-count variants. |
+| Array count/capacity/byte size | Native array declarations and SAL such as `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, `_Outptr_result_buffer_`, and their byte-count variants. |
 | Double-NUL string | `_NullNull_terminated_`. |
 | COM output pointer | `_COM_Outptr_` and its standard SAL variants. |
 | Native constness | C/C++ `const`. |
 | Native scoped enum | `enum class`; do not make a logical constant group scoped. |
 | Native flags enum | Existing `[[clang::flag_enum]]`. Use `_Win32_FlagsEnum_` for metadata-only groups. |
+
+For returned buffers, `_Outptr_result_buffer_(*count)` describes the pointee's
+element count, not the single outer pointer slot. The C# consumer must continue
+past that slot's `elementCount(1)` constraint to the usable postcondition count
+and preserve the count parameter's index in the projected method. A usable
+precondition capacity still takes precedence; unsupported counts must not be
+invented. This parameter handling does not enable deferred field-array inference.
+
+The genuine `typedef int GPFIDL_FLAGS` uses a matching global
+`_Win32_Enum_(GPFIDL_FLAGS, int, GPFIDL_DEFAULT, GPFIDL_ALTNAME, GPFIDL_UNCPRINTER)`
+group. Omit the redundant `AssociatedEnum` on `SHGetPathFromIDListEx::uOpts`: the
+existing emitter naturally uses the declared enum type without an explicit request
+for primitive storage plus an association. Its logical UInt32-to-Int32 correction
+is intentional, with values 0, 1 and 2 unchanged; this is not a global promotion rule.
+The logical `SERVICE_NOTIFY` group becomes `SERVICE_NOTIFY_FLAGS`, retaining all
+ten members, order, raw values, UInt32 storage and flags semantics without renaming
+native record aliases or constants. Keep these corrections visible in raw API diffs.
 
 ## Declaration placement
 
@@ -196,6 +217,50 @@ enum class _Win32_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long
 
 Type metadata precedes the typedef.
 
+Use the neutral identity marker when an existing native scalar or data-pointer
+alias needs its own metadata identity but has no other annotation:
+
+```cpp
+_Win32_NativeTypedef_ typedef int BOOL;
+_Win32_NativeTypedef_ typedef long HRESULT;
+_Win32_NativeTypedef_ typedef void* HANDLE;
+```
+
+The canonical payload is `Win32Metadata.NativeTypedef`, with no parentheses,
+textual values, or compiler arguments. It uses the existing `[NativeTypedef]`
+wrapper projection and produces one `Value` field and one attribute per native
+identity, including repeated annotations/redeclarations. Distinct aliases remain
+distinct, and references retain their written typedef identity rather than an
+erasing primitive remap. Traversal and exclusion rules still decide which native
+declarations are emitted; the marker does not wrap unannotated typedefs.
+
+Supported storage preserves the target's native scalar width and signedness and
+every data-pointer level. Pointer-sized integral remaps must match that ABI.
+Each pointer level must have the target's ordinary pointer width. Non-default
+widths such as x64 `__ptr32` or x86 `__ptr64`, including beneath ordinary outer
+pointers or intervening typedefs, fail with WMA001 before output is committed.
+The reader does not erase the qualifier or substitute integer storage.
+Direct fixed-width integer storage is not made into a pointer because OLD used
+`IntPtr`. Genuine pointers to complete or incomplete native records are allowed;
+record **values**, including incomplete-record value aliases, are not. Native
+enum values, logical enum groups, callbacks/function pointers, arrays, references,
+C++ `using` declarations, and unsupported scalar representations fail explicitly.
+Do not invent an OS floor or a self-compatibility annotation merely to force a
+provider, and do not infer native pointer storage from historical metadata.
+
+For an IDL-owned typedef, use the existing selector-bound comment transport in
+the original IDL, for example:
+
+```idl
+cpp_quote("/* Win32Metadata: type ::BSTR => NativeTypedef */")
+```
+
+The same target and storage validation applies to that comment. Ordinary SDK
+consumers see an empty identity macro and unchanged native declarations.
+
+Callback aliases continue to use their own existing projection, not the neutral
+identity marker:
+
 ```cpp
 _Win32_SupportedOS_10240_
 typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
@@ -205,68 +270,87 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 
 Patch the original SDK IDL, not its generated header. Ordinary C/C++ prefix macros
 do not automatically survive MIDL. Use native IDL attributes for direction, counts,
-and retval; use MIDL's `[annotation("...")]` transport on fields and local
-methods/parameters for metadata that those native attributes cannot express.
+and retval. Additional metadata uses standard `cpp_quote` emitting an owned comment,
+outside parameter/field lists and inside the declaration's native conditional region.
 
 For example, a field can carry its enum association:
 
 ```idl
 typedef struct DESCRIPTION {
-    [annotation("_Win32_AssociatedEnum_(DESCRIPTION_KIND)")]
     long kind;
 } DESCRIPTION;
+cpp_quote("/* Win32Metadata: field ::DESCRIPTION::kind => AssociatedEnum(DESCRIPTION_KIND) */")
 ```
 
-On an already-local method, combine additional metadata with the parameter's
-native SAL in one annotation payload:
+Native callable attributes and SAL stay unchanged:
 
 ```idl
-[annotation("_Win32_PreserveResult_")]
 HRESULT Read(
-    [in, annotation("_In_ _Win32_Retained_")] byte* input,
-    [out, retval, annotation("_Out_retval_")] long* result);
+    [in] byte* input,
+    [out, retval] long* result);
+cpp_quote("/* Win32Metadata: method ::IReader::Read => PreserveResult */")
+cpp_quote("/* Win32Metadata: parameter ::IReader::Read::input => Retained */")
 ```
 
-The shared SAL bootstrap supplies the annotation definitions; do not add an
+The shared SAL bootstrap supplies native macro definitions when required; do not add an
 annotation-header include to each API header or emit one through `cpp_quote`.
 An original IDL preprocessing stream that does not already include SAL must
 include `<sal.h>` before using the helpers. An IDL `import` does not establish
 CPP macro visibility.
 
-Do not use `[annotation]` as a blanket substitute for native MIDL attributes or
-assume it supports every IDL target. In particular, interfaces need the dedicated
-helper before the interface declaration:
+Do not use `[annotation]` as a metadata channel. It overrides native SAL, rejects
+interface/enumerator positions and restricts nonlocal callables. Interface facts
+instead bind the original native record:
 
-```cpp
-_Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)
+```idl
+cpp_quote("/* Win32Metadata: interface ::IWaaSAssessor => SupportedOSPlatform(\"windows10.0.15063\") */")
 ```
 
 Keep native interface attributes, methods, and vtables unchanged. MIDL has additional
-limitations for type-level annotations and non-local methods; see the
+limitations for type-level annotations and nonlocal methods; see the
 [verified transport limits](#native-idl-annotation-limits) before migrating another
 IDL declaration kind.
 
-For a non-local method, use the method helper **after the interface definition**:
+A nonlocal method uses the same comment transport:
 
 ```idl
-_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Skip, _Win32_PreserveResult_)
+cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSTG::Skip => PreserveResult */")
 ```
 
-Group these helpers with an existing trailing `cpp_quote` section when possible,
-after all referenced interfaces are complete.
+Reuse existing quote regions where possible and preserve raw generated-header/RPC
+differences if removing a carrier changes MIDL's implicit bookkeeping.
 
 The method must already be declared, and the annotation must be valid on that
 method. This preserves the native RPC contract and SAL without adding a MIDL SAL
-override. The helper can also target a local method when its metadata must not
+override. A comment can also target a local method when its metadata must not
 propagate to the generated proxy function:
 
 ```idl
-_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Next, _Win32_PreserveResult_)
+cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSTG::Next => PreserveResult */")
 ```
 
-These helpers do not create symbols for ordinary SDK consumers. The method helper
-does not annotate parameters or the C-interface vtable fields; those remain
-separate targets.
+Comments do not create symbols for any SDK consumer. Parameter comments append
+the actual native parameter name to the method/function path. A method selector
+does not annotate C-interface vtable fields; the ordinary scraper uses C++ interface
+definitions. Native C/CINTERFACE consumption remains unchanged.
+
+For an existing IDL enum, emit a metadata/Clang-guarded `#pragma clang attribute`
+push/pop pair through `cpp_quote` around the original definition to apply
+`__attribute__((flag_enum))`. This preserves anonymous enum identity and native
+member names. Existing scalar typedefs can also back `_Win32_Enum_` or
+`_Win32_FlagsEnum_` groups using their original constants; do not replace the
+typedef or invent a scoped native enum.
+
+For declarations authored in an included IDL fragment, patch that physical
+fragment while keeping the generated output pinned to its unchanged generation
+root. Preserve every native conditional declaration variant and admit the root's
+actual MIDL input closure.
+
+An omitted outer `Pack` is not by itself an ABI difference: packed child records
+can already force byte alignment. Retire such an override only after comparing
+the actual physical metadata and native size, alignment, and field offsets with
+the same-MIDL control. Keep the explicit metadata packing difference in the
+receipt; this is not a waiver for unrelated packing facts.
 
 For a C/C++-authored declaration, combine direction SAL with `_Win32_Retval_`:
 
@@ -438,7 +522,7 @@ cases pass; see [current Clang scope transport](#current-clang-scope-transport).
 | `IgnoreIfReturn` | Not included. No supported projection behavior requires it. |
 | `FreeWith` | Not included. Allocated producer outputs use `RAIIFree`; cleanup is not attached to pointer typedefs. |
 | `DoNotRelease` | Not included. Plain handles are borrowed unless a producer site carries ownership metadata. |
-| `Agile` | Intentionally jettisoned. Existing annotations asserted that selected non-WinRT COM interfaces were always thread-safe, but that guarantee was repeatedly violated. COM does not have WinRT's exclusive/agile interface contract, so no `_Win32_Agile_` replacement is defined. |
+| `Agile` | Intentionally jettisoned. Existing annotations asserted that selected non-WinRT COM interfaces were always thread-safe, but that guarantee was repeatedly violated. COM does not have WinRT's exclusive/agile interface contract, so no `_Win32_Agile_` replacement is defined. The legacy Direct2D, DirectWrite, DXGI, and `IRestrictedErrorInfo` emitter rules are removed rather than migrated. |
 | custom COM out-pointer annotation | Not included. Use `_COM_Outptr_`, its standard variants, IID/PPV conventions, or explicit existing SAL. |
 | `NotNullTerminated` | Not included. Declarations that use a string typedef for non-string data require an appropriately typed pointer plus ordinary SAL count/byte-count annotations. |
 | `NativeArrayInfo` and `MemorySize` fallbacks | Not included. SAL expresses buffer counts, capacities, and byte sizes; the consumer must preserve that SAL instead of introducing duplicate metadata annotations. |
@@ -485,21 +569,22 @@ The current explicit-label encoding is described in
 [Logical enum encoding](#logical-enum-encoding). An existing reviewed zero/none member
 may supply literal `0`; that does not introduce a new native SDK constant.
 
-If an associated use precedes the native constants, add a metadata-only forward
-typedef with the same storage type and declaration scope. Keep the original constant
-block in place, and put the public group declaration after it:
+An associated use can precede the native constants. Keep the original constant
+block in place, and put the group declaration after it:
 
 ```cpp
-#ifdef WIN32METADATA
-typedef DWORD MODE;
-#endif
-
 void SetMode(_Win32_AssociatedEnum_(MODE) DWORD mode);
 
 #define MODE_A 1
 #define MODE_B 2
 _Win32_Enum_(MODE, DWORD, MODE_A, MODE_B);
 ```
+
+The use and complete group may be in different headers or partitions. An existing
+traversed forward declaration still projects its compiler-bound merged group even when
+the contributing header is outside the partition's traversal list. Unrelated
+same-named typedefs do not establish a group; excluded or entirely untraversed
+groups remain unprojected.
 
 A group whose constants have multiple original-header owners may repeat
 `_Win32_Enum_` or `_Win32_FlagsEnum_` on the same native typedef, with the same
@@ -509,17 +594,24 @@ translation unit; the emitter combines the generated `.header-types.cs` contribu
 by qualified metadata identity after namespace assignment. Keep those producer
 filenames when staging sources for emission.
 
+When partitions initially emit the same group in different namespaces, use the
+existing global `--requiredNamespaceForName` organization to preserve its established
+physical FullName before merging. Check the combined owning-partition outputs;
+individually valid fragments must not leave extra wrong-namespace copies.
+
 The complete group is the union of those source-owned contributions, not an empty
 typedef or a replacement native enum. Repeated members must have identical compiled
 values after conversion to the group's storage. Conflicting values, storage, flags,
 or non-repeatable annotations are errors. Ordinary native enums and legacy enum
-definitions are not group contributions and are never merged this way. Keep the
-group declaration visible before an associated use; do not include an unrelated
-API surface merely to borrow its constants.
+definitions are not group contributions and are never merged this way. Do not add a
+forward typedef or include an unrelated API surface merely to make an association
+parse. Final composition must resolve each association to exactly one emitted enum.
 
 Rules:
 
-- Use the original underlying integral type, not a type chosen to reproduce a sidecar.
+- Choose a logical group's integral storage from the native API uses it describes,
+  rather than mechanically reproducing a sidecar or inferring storage from one
+  constant literal. Keep native enum and use-site declarations unchanged.
 - Do not `push_macro`, `undef`, copy values, or change native signatures for grouping.
 - Use `AssociatedEnum` for the use-site relationship while retaining the native type.
 - Preserve complete existing constant names as unscoped enum members so generated
@@ -531,6 +623,27 @@ Rules:
   intentionally defines scoped semantics; do not use it merely to wrap constants.
 - Other metadata-only constants use guarded annotated `constexpr`/`const` declarations while
   preserving the ordinary macro.
+
+### Enum associations and storage compatibility
+
+An `AssociatedEnum` annotation preserves the relationship to a particular enum;
+it does not require that enum's storage to equal every associated native type.
+Move each existing association to the same return, parameter, or field and retain
+its resolved enum identity. A lost or incorrectly retargeted association is a
+migration defect, not an intentional enum-storage correction.
+
+Choose metadata enum storage from the consuming API contracts. Correct a clearly
+single-use legacy storage error when its values and native use support the change.
+For shared enums, select the most appropriate representation across their uses
+without changing native declarations to make every association match. Preserve
+narrow structure fields and pointer element widths; an advisory association must
+not silently become an ABI-changing direct enum substitution. Signedness and width
+differences can be intentional, as documented in
+[#2371](https://github.com/microsoft/win32metadata/issues/2371).
+
+An enum-storage correction is a concrete metadata compatibility change to record
+and cover with regression tests. It is not a reason to block an otherwise correct
+header association, restore an API-specific sidecar, or retype the native enum.
 
 ## HANDLE ownership
 
@@ -549,8 +662,9 @@ Do not create `PRINTER_HANDLE`, `HEAP_HANDLE`, or similar metadata-only pseudo t
 Absence of `RAIIFree` means borrowed. `GetProcessHeap`, for example, requires no custom
 annotation because its returned `HANDLE` is not automatically closed.
 
-The first argument names an already declared cleanup function. Optional remaining
-arguments are the API's invalid values:
+The first argument names a cleanup function declared in the same native translation
+unit. Its prototype may follow the producer; do not copy or reorder API declarations.
+Optional remaining arguments are the API's invalid values:
 
 ```cpp
 _Win32_RAIIFree_(SysFreeString)
@@ -558,11 +672,19 @@ _Win32_RAIIFree_Handle_(CloseHandle)
 _Win32_RAIIFree_(WinHttpCloseHandle, 0)
 ```
 
-The cleanup name must denote a function, not an integer or function-pointer variable.
+The cleanup name must resolve to one actual native function declaration, not an
+integer, function-pointer variable, or ambiguous overload. Unresolved cleanup names
+are errors even on excluded declarations. Input handle types do not infer cleanup.
 Invalid values are API-specific rather than a fixed global set. Supply compile-time
 integral expressions such as `-1` and `0`, not pointer-cast `INVALID_HANDLE_VALUE`.
 Nonintegral, unresolved, and nonconstant values are errors. The shorthand is only for
 the exact HANDLE contract `-1, 0`; null-only handles retain `_Win32_RAIIFree_(CloseX, 0)`.
+
+A unary cleanup may accept the address of the produced pointer.
+`GdipNewPrivateFontCollection::fontCollection` can name
+`GdipDeletePrivateFontCollection`; its sole `GpFontCollection**` parameter receives
+the address of the produced `GpFontCollection*`. The cleanup's native signature
+determines the required indirection.
 
 Consumer/freeing APIs such as `LocalFree` retain their raw native signature. Do not use
 generic invalid-handle success logic for them: `LocalFree` returns `NULL` on success and
@@ -810,20 +932,31 @@ The lifecycle definitions are:
 
 ```cpp
 #define _Win32_RAIIFree_(cleanup, ...) \
-    _WIN32META_ANNOTATION_("RAIIFree", sizeof(&(cleanup)), ##__VA_ARGS__)
+    _WIN32META_ANNOTATION_("RAIIFree", "Win32Metadata.FunctionDecl:" _WIN32META_EXPAND_STRINGIFY_(cleanup), ##__VA_ARGS__)
 #define _Win32_RAIIFree_Handle_(cleanup) \
     _Win32_RAIIFree_(cleanup, -1, 0)
 ```
 
-The unevaluated `sizeof` operand preserves the cleanup's `DeclRefExpr` and compiler
-name/type checking without requiring a constant imported function address: Windows
-`dllimport` addresses are not constant annotation arguments. Extract the referenced
-function declaration, not the size. Invalid values remain integral expression
-arguments; pointer-cast `INVALID_HANDLE_VALUE` is not a valid annotation constant.
-Emit one `RAIIFreeAttribute` and one `InvalidHandleValueAttribute` per supplied value.
+The internal tagged cleanup name preserves declaration-time macro expansion without
+requiring the cleanup prototype before the producer or a constant imported function
+address. After walking the complete original translation unit, the reader binds it
+to one actual native `FunctionDecl` in the annotation's scope. Canonical redeclarations
+share an identity; unknown names, non-functions, ambiguous lookups, and untagged string
+arguments fail. The earlier typed `sizeof` transport remains readable. A raw
+`RAIIFree(CloseX, ...)` annotation string is not a supported bypass.
+Invalid values remain integral expression arguments from the first Clang parse;
+pointer-cast `INVALID_HANDLE_VALUE` is not a valid annotation constant. Emit one
+`RAIIFreeAttribute` and one `InvalidHandleValueAttribute` per supplied value.
 
-`AssociatedEnum` uses a typed expression to reference the already declared enum or
-group. `__typefix` is analyzer metadata, not a projection contract. DLL/export strings
+`AssociatedEnum` uses an internal tagged, macro-expanded name so the use does not
+require a visible enum declaration during native parsing. Complete-translation-unit
+lookup preserves native enum/group identity, including aliases and remappings, and
+rejects visible non-enums or ambiguous native names. An unavailable unqualified name
+is retained for cross-partition or retained enum composition, where it must resolve
+to exactly one emitted enum after namespace assignment, remaps and enum additions.
+Missing or ambiguous final definitions fail with WMA003. The previous compiler-typed
+transport remains readable; untagged strings are not an alternate transport.
+`__typefix` is analyzer metadata, not a projection contract. DLL/export strings
 and integral ordinals are also read from the original argument children. An import
 override is written to `ImplMap.ImportName` as the export name or `#ordinal`.
 
@@ -877,22 +1010,64 @@ transport tests must not be counted as qualification of that contract.
 
 ### Original-IDL preparation
 
-Under `MIDL_PASS`, `_Win32_AnnotateInterface_` emits an annotated C++ forward declaration
-through `cpp_quote`. Clang inherits its attribute onto the real interface definition.
-Clang supports annotating that definition directly; this forward-declaration encoding
-is needed only because native MIDL does not emit an arbitrary interface `[annotation]`
-on that C++ definition.
+Original-IDL facts use one block comment per fact:
+
+```text
+/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(arguments) */
+```
+
+Use standard `cpp_quote` with quotes/backslashes escaped for its ordinary string
+literal. MIDL removes ordinary IDL source comments; quoted comments survive.
+The reader examines actual Clang comment tokens, not marker text inside strings.
+No special MIDL attribute, annotated forward typedef, copied native signature,
+or compiler-expression carrier is required.
+
+Selectors are `interface`/`record`, `method`, `function`, `return`, `parameter`,
+`field`, `type`, `enum`, `enumerator`, and `constant`. Targets are absolute native
+identifiers separated by `::`. Parameters append their native name to the callable.
+Use actual emitted `get_`/`put_` names for properties and free-function names for
+non-object RPC interfaces. Record aliases resolve their native fields, including
+anonymous-member injection such as `::PROPVARIANT::vt`; a macro-erased inner tag
+is not an identity. Distinct typedef aliases remain distinct.
+
+The same canonical fact parser, validation, native cleanup resolution, projection
+and final emitter serve macros and comments. `return` accepts RAIIFree and
+AssociatedEnum. A `type` selector can carry valueless `NativeTypedef` for a
+supported native scalar/data-pointer typedef; it does not turn a record or enum
+into a typedef wrapper. References use native lookup from the bound declaration.
+AssociatedEnum admits real enum declarations and already-compiled logical groups,
+including exact native `__MIDL_*` tags. AlsoUsableFor and AssociatedConstant must
+resolve actual native types/constants. ImportLibrary uses literal quoted strings.
+Comment RAIIFree invalids are signed decimal Int64 literals, preserving their order
+and sign; symbols, hexadecimal/suffixed literals, casts and expressions fail.
+Existing native C/C++ macros retain compiler-evaluated arguments and Enum/FlagsEnum
+groups keep their compiled-value transport.
+
+The existing annotation option enables this path. Clang's detailed preprocessing
+record supplies included files and skipped ranges. Disabled branches do not apply;
+active comments in directives/macros, malformed or unknown payloads, missing names,
+and ambiguous native targets/references produce WMA001. Template helper bodies
+excluded from ordinary projection do not create false method overloads; two real
+non-template overloads remain ambiguous. Adjacent native direction/retval comment
+blocks remain readable, without treating arbitrary comments as native direction.
+
+Metadata-only C/C++ enum grouping invocations must be excluded from `MIDL_PASS`,
+including their trailing semicolon. An empty `_Win32_Enum_` expansion leaves a
+naked semicolon that MIDL rejects. The canonical WinError patch guards the
+complete group without changing its constants or ordinary C/C++ behavior.
 
 Pin the helper and original import/preprocessor closure alongside the SDK source IDL,
 and explicitly pass the necessary preprocessor defines/includes when MIDL `cpp_opt`
 overrides normal forwarding. Preserve ordinary MIDL diagnostics and native C/C++
 declarations.
 
-Prepare native IDL `[retval]` as `_Out_retval_` or `_COM_Outptr_retval_` SAL, producing
-`SAL_retval` in the first Clang AST. The C# reader retains a compatibility bridge for
-legacy generated SDK headers whose retval appears only in MIDL comments. Remove that
-bridge only when original-IDL preparation supplies native SAL for every affected
-declaration and equivalence is established.
+Preserve native `[retval]` and read MIDL's emitted parameter comment. The selected
+native SDK SAL has no `_Out_retval_`/`_COM_Outptr_retval_`; local conversion uses
+standard `_Out_`/`_COM_Outptr_`. Remote interface methods retain `/sal`-generated
+RPC direction/count annotations without synthetic `[annotation]` overrides.
+Explicit native SAL and local-method count conversion remain intact. Native
+retval, SAL and an explicit metadata RetVal converge once; duplicate authored
+metadata facts still fail.
 
 #### Native IDL annotation limits
 
@@ -901,23 +1076,21 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 
 | IDL target | Native transport and qualification limit |
 | --- | --- |
-| Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies the C++ forward declaration instead. |
-| Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type and is read from the field AST normally. |
+| Interface | `[annotation]` is rejected with MIDL2072. A quoted owned comment binds the original native record without a typedef. |
+| Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type. If the enum is declared later, `_Win32_AnnotateField_` instead targets the original field after both native definitions. |
 | Method | `[annotation("...")]` emits a prefix and can also annotate the generated proxy prototype. On non-local methods it produces MIDL2495. `_Win32_AnnotateMethod_` instead targets the actual C++ method from a helper after the interface definition, without changing RPC/SAL or the proxy. |
 | Parameter | `[annotation("...")]` emits the requested prefix. Non-local parameters produce MIDL2495; the method helper does not provide parameter transport. Do not change RPC locality or suppress the warning just to carry metadata. |
 | Scalar typedef | `typedef [annotation("...")]` emits an annotated typedef, with MIDL2525 warning that a SAL override on a typedef is not recommended. |
 | Struct or enum written as a typedef | MIDL emits the annotation on the typedef, not directly on the tag, and produces MIDL2525. The C# reader transfers primary-record typedef facts to the record; do not infer arbitrary type/tag coverage from that compatibility behavior. |
 
 `[annotation]` is a SAL override, not an automatically composed list of independent
-metadata and native SAL facts. Preserve the declaration's native SAL in the same
-payload or through the qualified preparation converter; a separate metadata-only
-payload can replace it. The interface carrier does not solve these other IDL
-grammar, placement, or SAL-composition issues.
+metadata and native SAL facts. Preserve authored native SAL; a separate
+metadata-only payload can replace it. Structured comments avoid that override and
+the native attribute placement restrictions.
 
-The existing interface pilot is qualified; this is not blanket admission of every
-IDL target. A type-level migration that cannot use a warning-free native form needs
-an explicitly qualified source-IDL carrier before admission, not a generated-header
-patch or a new warning suppression.
+The native-attribute table describes MIDL's restrictions, not the production
+structured-comment target surface. Comment recognition does not waive original
+source, native layout/RPC, physical metadata or complete-image equivalence checks.
 
 #### Original-AST method references
 
@@ -929,7 +1102,7 @@ and field lists. Successful MIDL compilation alone does not prove attachment.
 Creating a new quote region can also introduce MIDL's standard-interface
 bookkeeping; reusing an existing trailing region avoids that unrelated churn.
 
-`_Win32_AnnotateMethod_` emits a metadata-only C++ carrier after the complete
+For native-authored C/C++, `_Win32_AnnotateMethod_` emits a metadata-only carrier after the complete
 interface. Its annotation arguments contain `sizeof(&Interface::Method)`, so
 Clang resolves the actual method in the original translation unit. The reader
 applies the ordinary attributes to that declaration and excludes the private
@@ -943,6 +1116,33 @@ This transport is empty without `WIN32METADATA`, under a non-Clang compiler, or 
 the C-interface view. Referencing an undeclared or non-method target fails rather
 than producing unbound metadata.
 
+#### Original-AST field references
+
+`_Win32_AnnotateField_` applies an existing annotation to a compiler-resolved
+instance field after its native record and referenced enum are complete:
+
+```cpp
+struct Record { unsigned flags; };
+enum FLAGS { FIRST = 1, SECOND = 4 };
+_Win32_AnnotateField_(Record::flags, _Win32_AssociatedEnum_(FLAGS));
+```
+
+Existing native carriers remain supported; original-IDL migration uses comments.
+Place it at native global scope after both definitions, preserving their
+conditional frames. It references `sizeof(&Record::flags)` and the unchanged
+typed `(FLAGS)0` annotation argument. The reader resolves the canonical
+`FieldDecl`, applies the annotation before projection and redeclaration merging,
+and excludes the private carrier from generated bindings. Native field storage,
+record layout, unrelated fields and enum members are unchanged.
+
+This field transport remains active in metadata-enabled Clang C++ with
+`CINTERFACE` defined; method carriers retain their C++ interface requirement.
+It is empty in C, ordinary metadata-off builds and non-Clang builds. Undeclared
+targets fail in the compiler. Non-field targets, static members, malformed or
+unannotated carriers, duplicate/conflicting facts and string-substituted targets
+fail in the reader. `Field` is a private target marker, not a semantic annotation
+or a new lifetime contract.
+
 #### Upstream MIDL comment recovery
 
 The upstream `windows-clang` implementation in `microsoft/windows-rs` does read
@@ -954,24 +1154,37 @@ with parameter positions. Its
 recognizes `in`, `out`, `optional`, `retval`, and `iid_is`; it is not a generic
 transport for new type, field, or method attributes. Property accessor markers
 are a separate fixed case. This is useful legacy-marker recovery, but does not
-solve the quoted-comment placement problem or preserve arbitrary new metadata
-through MIDL. The C# pipeline therefore keeps its existing retval compatibility
-bridge without adding a new source-token parser for this pilot.
+solve arbitrary metadata transport through MIDL. The C# reader preserves native
+marker recovery alongside its explicit owned-comment parser and native identity
+binding.
 
 ### C# integration and compatibility bridges
 
 The C# scraper opts in with `--config parse-win32-annotations` and uses
 `WIN32METADATA` as the public header feature gate. Its private transport override
 supplies diagnostic policy as described above. There is no backend-specific header
-gate, private expanded-expression payload, second parse, or
-detailed-preprocessing-record dependency. Header annotation ingestion is implemented;
+gate, private expanded-expression payload or second parse. Comment ingestion uses
+the first translation unit's detailed preprocessing record. Header annotation ingestion is implemented;
 remaining sidecar migrations must still be qualified against their actual headers and
 output.
+
+Source coordinates are transport, not declaration identity: macro-expanded methods
+and parameters can share them. Resolve facts within the native owning record and
+function, including synthesized virtual-method callbacks, before selecting a
+parameter's annotations. Remaining ambiguity and annotated declarations that are
+not projected remain hard errors; do not merge unrelated owners or pick the first
+candidate.
 
 Metadata emission uses the standard `Windows.Win32.Foundation.Metadata` vocabulary.
 `SetLastError` sets the ECMA-335 P/Invoke `SupportsLastError` flag; COM exact-result
 preservation uses `MethodImplAttributes.PreserveSig`. Native scoped enums retain
 `ScopedEnum`; logical flags groups emit `Flags`.
+
+During partial migration, a retained legacy `SupportedOSPlatform` alias can
+overlap the fully qualified header attribute. The cleaner removes only a known
+legacy alias with the same target and normalized literal payload, keeping the
+header attribute. Different floors, different targets, unrelated qualified
+attributes, and duplicate attributes from the same source remain visible.
 
 Both legacy input attributes, `CanReturnErrorsAsSuccess` and
 `CanReturnMultipleSuccessValues`, also lower to `MethodImplAttributes.PreserveSig`.
@@ -1139,7 +1352,20 @@ identity or namespace partitioning. For each API/type, compare:
 - callback canonical names;
 - repeatable metadata such as invalid handle values.
 
-Any difference affecting generated bindings or safe resource use is a functional gap and
+Keep enum association identity, native use-site storage, and metadata enum storage
+as separate checks. Existing advisory associations may legitimately join different
+storage types. Expected handle/enum projection changes and justified corrections to
+incorrect legacy metadata must be classified by the affected API and behavior,
+not treated as unexplained migration failures.
+
+Raw comparer output remains evidence, not a count of independent defects: one enum
+storage correction can also change the reported constant types of all its members.
+Metadata type-table positions and synthetic enum declaration order alone are not
+functional compatibility failures. Preserve ABI-relevant structure field order and
+interface/vtable method order, and keep raw reports unchanged rather than sorting
+or suppressing their differences.
+
+Any unexplained difference affecting generated bindings or safe resource use is a functional gap and
 requires a source syntax, consumer behavior, patch, and regression test.
 
 ### Migration and validation plan

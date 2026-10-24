@@ -256,12 +256,18 @@ Note that stale artifacts on your system may sometimes result in cryptic errors 
 
 ### Running tests
 
-After building the metadata, run `.\scripts\DoTests.ps1` in PowerShell 7 to run the metadata utility, scraper, C# source-to-WinMD emitter, and WinMD integrity suites. The full build and both CI pipelines use this runner.
+After building the metadata, run `.\scripts\DoTests.ps1` in PowerShell 7 with Python 3 on `PATH` to run the metadata utility, scraper, C# source-to-WinMD emitter, SDK annotation coverage-auditor, and WinMD integrity suites. The full build and both CI pipelines use this runner.
 
 To run the existing emitter suite on its own:
 
 ```powershell
 dotnet test tests\ClangSharpSourceToWinmdTests -c Release
+```
+
+The coverage-auditor suite uses Python's standard library:
+
+```powershell
+python -m unittest discover -s tests\SdkAnnotationCoverage.Tests -p "test_*.py"
 ```
 
 ### Reviewing API changes
