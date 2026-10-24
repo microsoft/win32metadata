@@ -117,6 +117,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        id: checkout
         with:
           lfs: true
           fetch-depth: 0
@@ -145,7 +146,7 @@ jobs:
 
       - name: Upload build logs
         uses: ./.github/actions/upload-artifact-with-retry
-        if: always()
+        if: always() && steps.checkout.outcome == 'success'
         with:
           name: scrape_logs_${{ matrix.arch }}
           path: bin/logs
@@ -174,6 +175,7 @@ jobs:
         run: throw 'One or more header scrape jobs did not succeed.'
 
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        id: checkout
         if: needs.changes.outputs.build_needed == 'true'
         with:
           lfs: true
@@ -350,7 +352,7 @@ jobs:
 
       - name: Upload winmd and API dump
         uses: ./.github/actions/upload-artifact-with-retry
-        if: always() && needs.changes.outputs.build_needed == 'true'
+        if: always() && needs.changes.outputs.build_needed == 'true' && steps.checkout.outcome == 'success'
         with:
           name: winmd
           path: |
@@ -362,7 +364,7 @@ jobs:
 
       - name: Upload build logs
         uses: ./.github/actions/upload-artifact-with-retry
-        if: always() && needs.changes.outputs.build_needed == 'true'
+        if: always() && needs.changes.outputs.build_needed == 'true' && steps.checkout.outcome == 'success'
         with:
           name: build_logs
           path: bin/logs

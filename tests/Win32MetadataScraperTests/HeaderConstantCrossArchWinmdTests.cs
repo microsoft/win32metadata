@@ -108,7 +108,8 @@ enum _Win32_AssociatedConstant_(EXTRA) E { E_ZERO = 0 };
             return value;
         }
 
-        private static void ArchiveCombinedHeaderConstants(string artifacts, string name, string directory, MetadataReader reader)
+        private static void ArchiveCombinedHeaderConstants(string artifacts, string name, string directory, MetadataReader reader,
+            string architecture = "crossarch")
         {
             string destination = Path.Combine(artifacts, name);
             Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
@@ -121,7 +122,7 @@ enum _Win32_AssociatedConstant_(EXTRA) E { E_ZERO = 0 };
             }
             File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
             {
-                architecture = "crossarch",
+                architecture,
                 image = "Test.winmd",
                 imageSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(directory, "Test.winmd")))),
                 fields = reader.TypeDefinitions.Select(reader.GetTypeDefinition)

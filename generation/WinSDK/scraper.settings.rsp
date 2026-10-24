@@ -1,3 +1,5 @@
+--additional
+-DUNICODE
 --config
 exclude-empty-records
 parse-win32-annotations
