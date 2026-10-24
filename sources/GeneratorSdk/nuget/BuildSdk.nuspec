@@ -52,8 +52,14 @@
     <file src="bin\release\net10.0\TestableIO.System.IO.Abstractions.dll" target="tools\net10.0"/>
     <file src="bin\release\net10.0\TestableIO.System.IO.Abstractions.Wrappers.dll" target="tools\net10.0"/>
     <file src="bin\release\net10.0\win-x64\ClangSharp*.dll" target="tools\net10.0\win-x64\" />
+    <file src="bin\release\net10.0\win-x64\ICSharpCode.Decompiler.dll" target="tools\net10.0\win-x64\" />
+    <file src="bin\release\net10.0\win-x64\MetadataUtils.dll" target="tools\net10.0\win-x64\" />
     <file src="bin\release\net10.0\win-x64\Microsoft.CodeAnalysis.dll" target="tools\net10.0\win-x64\" />
     <file src="bin\release\net10.0\win-x64\Microsoft.CodeAnalysis.CSharp.dll" target="tools\net10.0\win-x64\" />
+    <file src="bin\release\net10.0\win-x64\Newtonsoft.Json.dll" target="tools\net10.0\win-x64\" />
+    <file src="bin\release\net10.0\win-x64\System.IO.Abstractions.dll" target="tools\net10.0\win-x64\" />
+    <file src="bin\release\net10.0\win-x64\TestableIO.System.IO.Abstractions.dll" target="tools\net10.0\win-x64\" />
+    <file src="bin\release\net10.0\win-x64\TestableIO.System.IO.Abstractions.Wrappers.dll" target="tools\net10.0\win-x64\" />
     <file src="bin\release\net10.0\win-x64\libclang.dll" target="tools\net10.0\win-x64\" />
     <file src="bin\release\net10.0\win-x64\libClangSharp.dll" target="tools\net10.0\win-x64\" />
     <file src="bin\release\net10.0\win-x64\Win32MetadataScraper.deps.json" target="tools\net10.0\win-x64\" />
