@@ -1,4 +1,8 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using TestCommon;
 using Xunit;
 using Xunit.Abstractions;
@@ -57,8 +61,12 @@ namespace Windows.Win32.Tests
         public void NoSuggestedRemappings()
         {
             string suggestedRemappingsFileName = TestUtils.GetAssetFile("suggestedRemappingsAllowList.rsp");
-            string projectRoot = Path.GetFullPath(Path.Combine(TestUtils.Win32WinmdPath, "../../generation/WinSDK"));
-            string args = $"showSuggestedRemappings --winmd \"{TestUtils.Win32WinmdPath}\" \"@{suggestedRemappingsFileName}\" --projectRoot {projectRoot}";
+            string projectRoot = Environment.GetEnvironmentVariable("WIN32_METADATA_TEST_PROJECT");
+            if (string.IsNullOrEmpty(projectRoot))
+                projectRoot = Path.GetFullPath(Path.Combine(TestUtils.Win32WinmdPath, "../../generation/WinSDK"));
+            if (!Directory.Exists(projectRoot))
+                throw new DirectoryNotFoundException("The explicitly selected integrity-test SDK project does not exist: " + projectRoot);
+            string args = $"showSuggestedRemappings --winmd \"{TestUtils.Win32WinmdPath}\" \"@{suggestedRemappingsFileName}\" --projectRoot \"{projectRoot}\"";
             this.ExecWinmdUtils(args);
         }
 
@@ -74,6 +82,26 @@ namespace Windows.Win32.Tests
         {
             string args = $"showNamespaceCycles --winmd \"{TestUtils.Win32WinmdPath}\"";
             this.ExecWinmdUtils(args);
+        }
+
+        [Fact]
+        public void ConstructorsHaveInstanceSignatures()
+        {
+            using var image = new PEReader(File.OpenRead(TestUtils.Win32WinmdPath));
+            var reader = image.GetMetadataReader(MetadataReaderOptions.None);
+            int constructorCount = 0;
+            foreach (var handle in reader.MethodDefinitions)
+            {
+                var method = reader.GetMethodDefinition(handle);
+                if (reader.GetString(method.Name) != ".ctor")
+                    continue;
+                constructorCount++;
+                var signature = reader.GetBlobReader(method.Signature);
+                string typeName = reader.GetString(reader.GetTypeDefinition(method.GetDeclaringType()).Name);
+                Assert.True(signature.ReadSignatureHeader().IsInstance, $"Constructor of '{typeName}' lacks HASTHIS.");
+                Assert.False(method.Attributes.HasFlag(MethodAttributes.Static));
+            }
+            Assert.True(constructorCount > 0);
         }
 
         private void ExecWinmdUtils(string args)

@@ -26,6 +26,7 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--outputFileName", "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option<string>("--memberRemap", "Remaps fields and parameters by adding attributes or changing the type.", ArgumentArity.OneOrMore),
+                new Option<bool>("--nativeFieldArrayInfo", "Opt in to NativeArrayInfo inference for native SAL pointer/array fields."),
 
                 new Option<string>("--enumAddition", "Add a member to an enum.", ArgumentArity.OneOrMore),
                 new Option<string>("--ref", "The path to a referenced binary.", ArgumentArity.OneOrMore),
@@ -50,6 +51,7 @@ namespace ClangSharpSourceToWinmd
             string outputFileName = context.ParseResult.ValueForOption<string>("--outputFileName");
             string version = context.ParseResult.ValueForOption<string>("--version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
+            bool nativeFieldArrayInfo = context.ParseResult.ValueForOption<bool>("--nativeFieldArrayInfo");
             var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("--enumAddition");
             var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("--enumMakeFlags");
             var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("--reducePointerLevel");
@@ -74,24 +76,35 @@ namespace ClangSharpSourceToWinmd
             string archForAutoTypes = arch == "crossarch" ? "common" : arch;
             string archSourceDir = Path.Combine(sourceDirectory, archForAutoTypes);
 
-            Dictionary<string, string> apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
-
-            if (requiredNamespaceValuePairs != null)
-            {
-                // Merge the requiredNamespaceForName entries into what we found the scraped source files
-                foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
-                {
-                    if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
-                    {
-                        apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
-                    }
-                }
-            }
-
+            Dictionary<string, string> apiNamesToNamespaces;
             try
             {
-                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles);
-                if (autoTypes != null && autoTypes.Any())
+                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles)?.ToArray();
+                foreach (string generatedArchitecture in new[] { "common", "x86", "x64", "arm64" })
+                {
+                    try
+                    {
+                        File.Delete(Path.Combine(sourceDirectory, generatedArchitecture, "autotypes.cs"));
+                    }
+                    catch (DirectoryNotFoundException)
+                    {
+                        // Sparse source layouts need not contain every architecture.
+                    }
+                }
+
+                apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
+                if (requiredNamespaceValuePairs != null)
+                {
+                    foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
+                    {
+                        if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
+                        {
+                            apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
+                        }
+                    }
+                }
+
+                if (autoTypes != null && autoTypes.Length != 0)
                 {
                     var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
                     if (!Directory.Exists(Path.GetDirectoryName(outputFilePath)))
@@ -116,7 +129,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces);
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces, nativeFieldArrayInfo);
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");

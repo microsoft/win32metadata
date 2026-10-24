@@ -40,6 +40,8 @@ namespace MetadataTasks
 
         public ITaskItem[] ResponseFiles { get; set; }
 
+        public string AutoRemapsResponseFile { get; set; }
+
         [Required]
         public string ScraperFunctionPointerFixupsRsp { get; set; }
 
@@ -84,6 +86,8 @@ namespace MetadataTasks
 
         public string PartitionFilter { get; set; }
 
+        public bool EvaluateNativeConstants { get; set; }
+
         [Required]
         public string ScriptsDir { get; set; }
 
@@ -98,11 +102,20 @@ namespace MetadataTasks
             }
 #endif
 
+            string nativeConstantState = this.MarkerFileName + ".native-constants";
+            bool nativeConstantStateChanged = this.EvaluateNativeConstants || File.Exists(nativeConstantState)
+                ? !File.Exists(nativeConstantState) || File.ReadAllText(nativeConstantState) != this.EvaluateNativeConstants.ToString()
+                : false;
+            bool globalSettingsChanged = !this.AreNonPartitionFilesUpToDate() || nativeConstantStateChanged;
+            var partitions = this.GetPartitions();
+            if (globalSettingsChanged)
+                foreach (var partition in partitions)
+                    partition.ForceOutOfDate = true;
             bool needsBuild = !File.Exists(this.MarkerFileName);
             string[] arches = this.ScanArch == "crossarch" ? allArches : new string[] { this.ScanArch };
-            var items = this.GetPartitions().Where(p => !p.IsUpToDate(this.MarkerFileName)).SelectMany(p => arches, (p, a) => new { Partition = p, Arch = a });
+            var items = partitions.Where(p => !p.IsUpToDate(this.MarkerFileName)).SelectMany(p => arches, (p, a) => new { Partition = p, Arch = a });
             needsBuild |= items.Any();
-            needsBuild |= !this.AreNonPartitionFilesUpToDate();
+            needsBuild |= globalSettingsChanged;
 
             if (!needsBuild)
             {
@@ -197,6 +210,8 @@ namespace MetadataTasks
             if (ret && string.IsNullOrEmpty(this.PartitionFilter))
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
+                if (this.EvaluateNativeConstants || File.Exists(nativeConstantState))
+                    File.WriteAllText(nativeConstantState, this.EvaluateNativeConstants.ToString());
             }
 
             return ret;
@@ -232,6 +247,11 @@ namespace MetadataTasks
         private bool AreNonPartitionFilesUpToDate()
         {
             IEnumerable<string> files = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
+            string autoRemaps = this.GetAbsolutePath(this.AutoRemapsResponseFile);
+            if (File.Exists(autoRemaps))
+            {
+                files = files.Append(autoRemaps);
+            }
 
             return TaskUtils.IsUpToDate(files, this.MarkerFileName);
         }
@@ -281,14 +301,21 @@ namespace MetadataTasks
             string archDirName = arch;
 
             bool excludeFromCrossarch = this.partitionsToExcludeFromCrossarch.Contains(partitionName) || partition.ExcludeFromCrossarch;
+            bool constantsOnly = excludeFromCrossarch && arch != "x86" && this.EvaluateNativeConstants;
             if (excludeFromCrossarch)
             {
                 if (arch == "x64" || arch == "arm64")
                 {
-                    return true;
+                    if (!this.EvaluateNativeConstants)
+                    {
+                        string staleConstants = Path.Combine(this.GeneratedDir, arch, partitionName + ".native-constants.json");
+                        if (File.Exists(staleConstants))
+                            File.Delete(staleConstants);
+                        return true;
+                    }
                 }
-
-                archDirName = "common";
+                else
+                    archDirName = "common";
             }
 
             string infoPrefix = $"{partitionName}:{archDirName}";
@@ -372,6 +399,18 @@ $@"--file
                 foreach (var traverseFile in traverseFiles)
                 {
                     rspWriter.WriteLine(traverseFile);
+                }
+
+                string autoRemaps = this.GetAbsolutePath(this.AutoRemapsResponseFile);
+                if (File.Exists(autoRemaps))
+                {
+                    rspWriter.WriteLine("--auto-remaps-file");
+                    rspWriter.WriteLine(autoRemaps);
+                }
+                if (this.EvaluateNativeConstants)
+                {
+                    rspWriter.WriteLine("--config");
+                    rspWriter.WriteLine(constantsOnly ? "native-constants-only" : "native-constant-values");
                 }
 
                 var settingsFile = partition.SettingsFile;
@@ -463,7 +502,8 @@ $@"--file
 
             char[] lineChars = new char[] { '\r', '\n' };
 
-            if (exitCode < 0 || !File.Exists(outputFileName))
+            string expectedOutput = constantsOnly ? Path.ChangeExtension(outputFileName, ".native-constants.json") : outputFileName;
+            if (exitCode < 0 || !File.Exists(expectedOutput))
             {
                 this.Log.LogError($"{infoPrefix} - ClangSharpPInvokeGenerator failed. Full output at {scrapeToolOutput}.");
 
@@ -507,6 +547,9 @@ $@"--file
                         }
                     }
                 }
+
+                if (constantsOnly)
+                    return true;
 
                 // Read discovered remaps from sidecar file (written by Win32MetadataScraper)
                 if (File.Exists(remapsFile))

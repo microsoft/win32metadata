@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp;
@@ -43,6 +44,23 @@ namespace WinmdUtilsProgram
             };
 
             compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, string, IConsole>(CompareWinmds);
+
+            var reviewBatchCommand = new Command("review-batch", "Create lossless review inventory and disjoint shards from an existing unsuppressed comparison.")
+            {
+                new Option<FileInfo>("--comparisonLog") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--first") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--second") { IsRequired = true }.ExistingOnly(),
+                new Option<DirectoryInfo>("--outputDirectory") { IsRequired = true },
+                new Option<DirectoryInfo>("--generatedDirectory").ExistingOnly(),
+                new Option<string[]>("--scratchDirectory", "Actual native-job scratch directories.", ArgumentArity.ZeroOrMore),
+                new Option<FileInfo>("--jobBindings").ExistingOnly(),
+                new Option<FileInfo>("--blockers").ExistingOnly(),
+                new Option<FileInfo>("--boundary").ExistingOnly(),
+                new Option<string>("--purpose", getDefaultValue: () => "prototype"),
+                new Option<int>("--shardSize", getDefaultValue: () => 750),
+            };
+            reviewBatchCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, DirectoryInfo, DirectoryInfo,
+                string[], FileInfo, FileInfo, FileInfo, string, int, IConsole>(CreateReviewBatch);
 
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
@@ -153,6 +171,7 @@ namespace WinmdUtilsProgram
                 showPointersToDelegates,
                 showSuggestedRemappings,
                 compareCommand,
+                reviewBatchCommand,
                 dumpCommand,
                 showLibImports,
                 createLibRsp,
@@ -162,6 +181,36 @@ namespace WinmdUtilsProgram
             };
 
             return rootCommand.Invoke(args);
+        }
+
+        private static int CreateReviewBatch(FileInfo comparisonLog, FileInfo first, FileInfo second, DirectoryInfo outputDirectory,
+            DirectoryInfo generatedDirectory, string[] scratchDirectory, FileInfo jobBindings, FileInfo blockers,
+            FileInfo boundary, string purpose, int shardSize, IConsole console)
+        {
+            try
+            {
+                string manifest = WinmdReviewBatch.Create(new WinmdReviewBatch.Options
+                {
+                    ComparisonLog = comparisonLog.FullName,
+                    First = first.FullName,
+                    Second = second.FullName,
+                    OutputDirectory = outputDirectory.FullName,
+                    GeneratedDirectory = generatedDirectory?.FullName,
+                    ScratchDirectories = scratchDirectory ?? Array.Empty<string>(),
+                    JobBindings = jobBindings?.FullName,
+                    Blockers = blockers?.FullName,
+                    Boundary = boundary?.FullName,
+                    Purpose = purpose,
+                    ShardSize = shardSize,
+                });
+                console.Out.WriteLine(manifest);
+                return 0;
+            }
+            catch (Exception exception) when (exception is IOException || exception is ArgumentException || exception is JsonException)
+            {
+                console.Error.WriteLine("Review batch failed: " + exception.Message);
+                return 1;
+            }
         }
 
         private static bool TypeIsPointerToOneOfNames(HashSet<string> names, string type)
@@ -564,7 +613,8 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in nameToOwner)
             {
-                if (allowTable.Contains(pair.Key))
+                string ownedName = $"{pair.Key}={string.Join(",", pair.Value.Select(owner => owner.Owner).OrderBy(owner => owner, StringComparer.Ordinal))}";
+                if (allowTable.Contains(pair.Key) || allowTable.Contains(ownedName))
                 {
                     continue;
                 }
@@ -585,10 +635,8 @@ namespace WinmdUtilsProgram
                         console.Out.Write("Duplicate constants/enum names detected:\r\n");
                     }
 
-                    pair.Value.Sort();
-
                     console?.Out.Write($"{pair.Key}\r\n");
-                    foreach (var owner in pair.Value)
+                    foreach (var owner in pair.Value.OrderBy(owner => owner.Owner, StringComparer.Ordinal))
                     {
                         console?.Out.Write($"  {owner.Owner} ({owner.Architectures})\r\n");
                     }
@@ -743,12 +791,6 @@ namespace WinmdUtilsProgram
             return emptyFound ? -1 : 0;
         }
 
-        private static Architecture GetSupportedArchitectures(IEnumerable<IAttribute> attributes)
-        {
-            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
-            return archAttr != null ? (Architecture)archAttr.FixedArguments[0].Value : Architecture.All;
-        }
-
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
             var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
@@ -761,14 +803,22 @@ namespace WinmdUtilsProgram
             return string.Empty;
         }
 
+        private static Architecture GetSupportedArchitectures(IEnumerable<IAttribute> attributes)
+        {
+            var attribute = attributes.FirstOrDefault(a =>
+                a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
+            return attribute == null ? Architecture.All : (Architecture)attribute.FixedArguments[0].Value;
+        }
+
         private static bool VerifyTypeHasRightArch(
             Dictionary<string, List<ITypeDefinition>> namesToArchDefs,
             IEntity owner,
             IType type,
             Architecture requiredArch,
-            IConsole console)
+            IConsole console,
+            HashSet<(IType Type, Architecture Architectures)> visited = null)
         {
-            bool success = true;
+            visited ??= new();
 
             if (owner != type)
             {
@@ -791,57 +841,52 @@ namespace WinmdUtilsProgram
                     return true;
                 }
 
-                Architecture typeArches = Architecture.None;
+                bool success = true;
+                Architecture covered = Architecture.None;
+                Architecture available = Architecture.None;
                 foreach (var archType in foundArchTypes)
                 {
-                    typeArches |= GetSupportedArchitectures(archType.GetAttributes());
+                    var typeArch = GetSupportedArchitectures(archType.GetAttributes());
+                    available |= typeArch;
+                    var applicable = typeArch & requiredArch;
+                    if (applicable == Architecture.None)
+                        continue;
+                    covered |= applicable;
+                    success &= VerifyMembers(archType, applicable);
                 }
 
-                if ((typeArches & requiredArch) != requiredArch)
+                if ((covered & requiredArch) != requiredArch)
                 {
-                    console.Out.Write($"{owner.FullName} supports '{requiredArch}' but referenced type {type.FullName} only supports '{typeArches}'\r\n");
+                    console.Out.Write($"{owner.FullName} supports '{requiredArch}' but referenced type {type.FullName} only supports '{available}'\r\n");
                     success = false;
-                }
-
-                if (type.Kind == TypeKind.Struct || type.Kind == TypeKind.Delegate)
-                {
-                    foreach (var archType in foundArchTypes)
-                    {
-                        Architecture matchingArch = requiredArch & GetSupportedArchitectures(archType.GetAttributes());
-                        if (matchingArch != Architecture.None &&
-                            !VerifyTypeHasRightArch(namesToArchDefs, archType, archType, matchingArch, console))
-                        {
-                            success = false;
-                        }
-                    }
                 }
 
                 return success;
             }
 
-            if (type.Kind == TypeKind.Struct)
-            {
-                foreach (var field in type.GetFields())
-                {
-                    if (!VerifyTypeHasRightArch(namesToArchDefs, owner, field.Type, requiredArch, console))
-                    {
-                        success = false;
-                    }
-                }
-            }
-            else if (type.Kind == TypeKind.Delegate)
-            {
-                var invoke = type.GetMethods(m => m.Name == "Invoke").Single();
-                foreach (var param in invoke.Parameters)
-                {
-                    if (!VerifyTypeHasRightArch(namesToArchDefs, owner, param.Type, requiredArch, console))
-                    {
-                        success = false;
-                    }
-                }
-            }
+            return VerifyMembers(type, requiredArch);
 
-            return success;
+            bool VerifyMembers(IType definition, Architecture architectures)
+            {
+                if (type.Kind is not (TypeKind.Struct or TypeKind.Delegate))
+                    return true;
+                if (!visited.Add((definition, architectures)))
+                    return true;
+                bool success = true;
+                if (type.Kind == TypeKind.Struct)
+                {
+                    foreach (var field in definition.GetFields())
+                        success &= VerifyTypeHasRightArch(namesToArchDefs, owner, field.Type, architectures, console, visited);
+                }
+                else if (type.Kind == TypeKind.Delegate)
+                {
+                    var invoke = definition.GetMethods(m => m.Name == "Invoke").Single();
+                    success &= VerifyTypeHasRightArch(namesToArchDefs, owner, invoke.ReturnType, architectures, console, visited);
+                    foreach (var param in invoke.Parameters)
+                        success &= VerifyTypeHasRightArch(namesToArchDefs, owner, param.Type, architectures, console, visited);
+                }
+                return success;
+            }
         }
 
         public static int ShowBrokenArchTypes(FileInfo winmd, IConsole console)
@@ -884,10 +929,11 @@ namespace WinmdUtilsProgram
                     var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
                     Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
 
+                    bool valid = VerifyTypeHasRightArch(namesToArchDefs, method, method.ReturnType, arch, console);
                     foreach (var param in method.Parameters)
-                    {
-                        VerifyTypeHasRightArch(namesToArchDefs, method, param.Type, arch, console);
-                    }
+                        valid &= VerifyTypeHasRightArch(namesToArchDefs, method, param.Type, arch, console);
+                    if (!valid)
+                        badTopLevelTypes++;
                 }
             }
 
@@ -1206,6 +1252,20 @@ namespace WinmdUtilsProgram
 
         private static void CompareFieldsOnTypes(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
+            var metadata1 = type1.ParentModule.PEFile.Metadata;
+            var metadata2 = type2.ParentModule.PEFile.Metadata;
+            var layout1 = metadata1.GetTypeDefinition((TypeDefinitionHandle)type1.MetadataToken).Attributes & TypeAttributes.LayoutMask;
+            var layout2 = metadata2.GetTypeDefinition((TypeDefinitionHandle)type2.MetadataToken).Attributes & TypeAttributes.LayoutMask;
+            if (layout1 == TypeAttributes.SequentialLayout || layout2 == TypeAttributes.SequentialLayout)
+            {
+                var fields1 = type1.Fields.Where(field => !field.IsStatic).Select(field => field.Name).ToArray();
+                var fields2 = type2.Fields.Where(field => !field.IsStatic).Select(field => field.Name).ToArray();
+                if (!fields1.SequenceEqual(fields2, StringComparer.Ordinal))
+                {
+                    writer.WriteDifference($"{type1.FullName} : instance field order...{string.Join(", ", fields1)} => {string.Join(", ", fields2)}");
+                }
+            }
+
             Dictionary<string, IField> type2Fields = new Dictionary<string, IField>();
             foreach (var field2 in type2.Fields)
             {
@@ -1350,14 +1410,14 @@ namespace WinmdUtilsProgram
         private static string ConvertAttributesToText(IEnumerable<IAttribute> attrs)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var attr in attrs.OrderBy(a => a.AttributeType.Name))
+            foreach (var attrText in attrs.Select(ConvertAttributeToText).OrderBy(text => text, StringComparer.Ordinal))
             {
                 if (stringBuilder.Length != 0)
                 {
                     stringBuilder.Append(',');
                 }
 
-                stringBuilder.Append(ConvertAttributeToText(attr));
+                stringBuilder.Append(attrText);
             }
 
             if (stringBuilder.Length == 0)
@@ -1418,38 +1478,38 @@ namespace WinmdUtilsProgram
             // Return param
             string returnFullName = $"{methodFullName} : return";
             CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), writer);
-            if (method1.ReturnType.Name != method2.ReturnType.Name)
+            if (method1.ReturnType.ReflectionName != method2.ReturnType.ReflectionName)
             {
-                writer.WriteDifference($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}");
+                writer.WriteDifference($"{returnFullName}...{method1.ReturnType.ReflectionName} => {method2.ReturnType.ReflectionName}");
             }
 
             // Params
-            foreach (var param1 in method1.Parameters)
+            for (int i = 0; i < Math.Min(method1.Parameters.Count, method2.Parameters.Count); i++)
             {
-                var param2 = method2.Parameters.FirstOrDefault(p => p.Name == param1.Name);
-                if (param2 == null)
+                var param1 = method1.Parameters[i];
+                var param2 = method2.Parameters[i];
+                string paramFullName = $"{methodFullName} : parameter {i + 1} ({param1.Name})";
+                if (param1.Name != param2.Name)
                 {
-                    writer.WriteDifference($"{methodFullName}, param {param1.Name} removed");
-                    continue;
+                    writer.WriteDifference($"{paramFullName} : name...{param1.Name} => {param2.Name}");
                 }
 
-                string paramFullName = $"{methodFullName} : {param1.Name}";
-                if (param1.Type.Name != param2.Type.Name)
+                if (param1.Type.ReflectionName != param2.Type.ReflectionName)
                 {
-                    writer.WriteDifference($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}");
+                    writer.WriteDifference($"{paramFullName}...{param1.Type.ReflectionName} => {param2.Type.ReflectionName}");
                 }
 
                 CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), writer);
             }
 
-            foreach (var param2 in method2.Parameters)
+            for (int i = method2.Parameters.Count; i < method1.Parameters.Count; i++)
             {
-                var found = method1.Parameters.Any(p => p.Name == param2.Name);
-                if (!found)
-                {
-                    string name = !string.IsNullOrEmpty(param2.Name) ? param2.Name : param2.Type.Name;
-                    writer.WriteDifference($"{methodFullName}, param {name} added");
-                }
+                writer.WriteDifference($"{methodFullName}, parameter {i + 1} ({method1.Parameters[i].Name}) removed");
+            }
+
+            for (int i = method1.Parameters.Count; i < method2.Parameters.Count; i++)
+            {
+                writer.WriteDifference($"{methodFullName}, parameter {i + 1} ({method2.Parameters[i].Name}) added");
             }
 
             return writer.DifferencesCount == before;
@@ -1458,6 +1518,20 @@ namespace WinmdUtilsProgram
         private static bool CompareMethodsOnType(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
             int before = writer.DifferencesCount;
+
+            if (type1.Kind == TypeKind.Interface || type2.Kind == TypeKind.Interface)
+            {
+                var methods1 = type1.Methods.Where(method => !method.IsStatic)
+                    .Select(method => $"{method.Name}({string.Join(",", method.Parameters.Select(parameter => parameter.Type.ReflectionName))})")
+                    .ToArray();
+                var methods2 = type2.Methods.Where(method => !method.IsStatic)
+                    .Select(method => $"{method.Name}({string.Join(",", method.Parameters.Select(parameter => parameter.Type.ReflectionName))})")
+                    .ToArray();
+                if (!methods1.SequenceEqual(methods2, StringComparer.Ordinal))
+                {
+                    writer.WriteDifference($"{type1.FullName} : interface method order...{string.Join(", ", methods1)} => {string.Join(", ", methods2)}");
+                }
+            }
 
             var type1Methods = GetMethodMap(type1);
             var type2Methods = GetMethodMap(type2);
@@ -1503,6 +1577,13 @@ namespace WinmdUtilsProgram
         private static bool CompareTypes(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
             int before = writer.DifferencesCount;
+
+            var bases1 = type1.DirectBaseTypes.Select(type => type.ReflectionName).ToArray();
+            var bases2 = type2.DirectBaseTypes.Select(type => type.ReflectionName).ToArray();
+            if (!bases1.SequenceEqual(bases2, StringComparer.Ordinal))
+            {
+                writer.WriteDifference($"{type1.FullName} : base types...{string.Join(", ", bases1)} => {string.Join(", ", bases2)}");
+            }
 
             CompareFieldsOnTypes(type1, type2, writer);
             CompareMethodsOnType(type1, type2, writer);

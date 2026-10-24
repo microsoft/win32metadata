@@ -14,11 +14,32 @@ namespace ClangSharpSourceToWinmd
     public static class MetadataSyntaxTreeCleaner
     {
         public const string ArgListVarName = "__arglist__";
+        internal const string RevertToTypeSuffix = "___";
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
+            => node.Modifiers.ToString() == "public const" &&
+                (enumMemberNames.Contains(node.Declaration.Variables.First().Identifier.ValueText) ||
+                enumMemberNames.Contains(GetEnumMemberIdentity(node, node.Declaration.Variables.First().Identifier.ValueText)));
+
+        internal static bool IsLegacyManualSource(string path)
+            => path.EndsWith(".manual.cs", StringComparison.OrdinalIgnoreCase) ||
+                path.EndsWith(".manual.modified.cs", StringComparison.OrdinalIgnoreCase);
+
+        internal static string GetEnumMemberIdentity(SyntaxNode node, string name)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames);
+            string ns = string.Join(".", node.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                .Reverse().Select(declaration => declaration.Name.ToString()));
+            var owners = node.Ancestors().OfType<TypeDeclarationSyntax>()
+                .Where(owner => owner is not ClassDeclarationSyntax type || type.Identifier.ValueText != "Apis")
+                .Reverse().Select(owner => owner.Identifier.ValueText).Append(name);
+            return (ns.Length == 0 ? "" : ns + "::") + string.Join("::", owners);
+        }
+
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false)
+        {
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
+            newRoot = NativeMemberNameProvenance.Project(newRoot);
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
         }
@@ -28,6 +49,7 @@ namespace ClangSharpSourceToWinmd
             private static readonly Regex NativeTypeNameArrayRegex = new Regex(@"\[\s*(\d+)\s*\]$");
             private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
             private static readonly Regex IsRegex = new Regex(@"[^\w::]");
+            private static readonly Regex ParameterOverrideRegex = new Regex(@"^Win32Metadata\.(Optional|ComOutPtr)\((true|false)\)$");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
@@ -42,8 +64,9 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
+            private readonly bool nativeFieldArrayInfo;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, bool nativeFieldArrayInfo)
             {
                 this.remaps = remaps;
                 this.InitRegexRemaps();
@@ -55,6 +78,7 @@ namespace ClangSharpSourceToWinmd
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
+                this.nativeFieldArrayInfo = nativeFieldArrayInfo;
             }
 
             private void InitRegexRemaps()
@@ -116,16 +140,34 @@ namespace ClangSharpSourceToWinmd
                 foreach (var attrNode in remappedListAttributes)
                 {
                     var attrName = attrNode.Name.ToString();
+                    bool remove = attrName.EndsWith(EncodeHelpers.AttributeToRemoveSuffix);
+                    string semanticName = GetAttributeName(attrNode);
+                    if (remove)
+                    {
+                        semanticName = semanticName[..^EncodeHelpers.AttributeToRemoveSuffix.Length];
+                        if (semanticName.EndsWith("Attribute", StringComparison.Ordinal))
+                            semanticName = semanticName[..^"Attribute".Length];
+                    }
+                    var headerAttributes = existingAttrList
+                        .Where(list => list.Target?.Identifier.ValueText == target?.Identifier.ValueText)
+                        .SelectMany(list => list.Attributes)
+                        .Where(attribute => IsHeaderAttribute(attribute) && GetAttributeName(attribute) == semanticName)
+                        .ToArray();
+                    if (headerAttributes.Length != 0)
+                    {
+                        if (remove || !headerAttributes.Any(attribute =>
+                            NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(attrNode)))
+                            throw new InvalidOperationException($"WMA002: Legacy remapping '{attrNode}' conflicts with header annotation '{headerAttributes[0]}'.");
+                        continue;
+                    }
                     if (attrName.EndsWith(EncodeHelpers.AttributeToRemoveSuffix))
                     {
-                        var attrNameToRemove = attrName.Substring(0, attrName.Length - EncodeHelpers.AttributeToRemoveSuffix.Length);
-
-                        existingAttrList = SyntaxUtils.RemoveAttribute(existingAttrList, attrNameToRemove);
+                        existingAttrList = RemoveTargetAttributes(existingAttrList, semanticName, target);
                     }
                     else
                     {
                         // Remove any existing attribute with the same name
-                        existingAttrList = SyntaxUtils.RemoveAttribute(existingAttrList, attrName);
+                        existingAttrList = RemoveTargetAttributes(existingAttrList, GetAttributeName(attrNode), target);
 
                         var attrListNode =
                             SyntaxFactory.AttributeList(
@@ -142,6 +184,40 @@ namespace ClangSharpSourceToWinmd
                 return existingAttrList;
             }
 
+            private static string GetAttributeName(AttributeSyntax attribute)
+            {
+                string name = attribute.Name.ToString().Split('.').Last().Replace("global::", string.Empty);
+                return name.EndsWith("Attribute", StringComparison.Ordinal) ? name[..^"Attribute".Length] : name;
+            }
+
+            private static bool IsHeaderAttribute(AttributeSyntax attribute)
+                => attribute.Name.ToString().StartsWith("global::Windows.Win32.Foundation.Metadata.", StringComparison.Ordinal) ||
+                    attribute.Name.ToString() is "global::System.Runtime.InteropServices.PreserveSig" or "global::System.Flags";
+
+            private static string NormalizeAttributeArguments(AttributeSyntax attribute)
+                => new AttributeLiteralNormalizer().Visit(attribute.ArgumentList)?.NormalizeWhitespace().ToString();
+
+            private static SyntaxList<AttributeListSyntax> RemoveTargetAttributes(
+                SyntaxList<AttributeListSyntax> lists, string name, AttributeTargetSpecifierSyntax target)
+                => SyntaxFactory.List(lists.Select(list =>
+                    list.Target?.Identifier.ValueText == target?.Identifier.ValueText
+                        ? list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes.Where(attribute => GetAttributeName(attribute) != name)))
+                        : list).Where(list => list.Attributes.Count != 0));
+
+            private sealed class AttributeLiteralNormalizer : CSharpSyntaxRewriter
+            {
+                public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
+                {
+                    if (node.IsKind(SyntaxKind.StringLiteralExpression))
+                        return node.WithToken(SyntaxFactory.Literal(node.Token.ValueText));
+                    if (node.IsKind(SyntaxKind.NumericLiteralExpression) &&
+                        node.Token.Value is byte or sbyte or short or ushort or int or uint or long or ulong)
+                        return SyntaxFactory.ParseExpression(Convert.ToDecimal(node.Token.Value, System.Globalization.CultureInfo.InvariantCulture)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    return base.VisitLiteralExpression(node);
+                }
+            }
+
             public override SyntaxNode VisitParameter(ParameterSyntax node)
             {
                 if (node.Identifier.Text == "__arglist")
@@ -156,27 +232,59 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
-
-                if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName))
+                var overrides = new Dictionary<string, bool>(StringComparer.Ordinal);
+                foreach (var attribute in node.AttributeLists.SelectMany(list => list.Attributes))
                 {
-
-                    node = (ParameterSyntax)base.VisitParameter(node);
-                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
-
-                    if (newName != null)
+                    if (TryReadParameterOverride(attribute, out string name, out bool enabled) && !overrides.TryAdd(name, enabled))
+                        throw new InvalidOperationException($"WMA001: Duplicate '{name}' parameter override on '{fullName}'.");
+                }
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName);
+                node = (ParameterSyntax)base.VisitParameter(node);
+                foreach (var pair in overrides)
+                {
+                    if (listAttributes != null)
                     {
-                        node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
+                        listAttributes = listAttributes.Where(attribute =>
+                        {
+                            string name = attribute.Name.ToString();
+                            bool remove = name.EndsWith(EncodeHelpers.AttributeToRemoveSuffix, StringComparison.Ordinal);
+                            if (remove)
+                                name = name[..^EncodeHelpers.AttributeToRemoveSuffix.Length];
+                            if (!IsParameterMetadataAttribute(name, pair.Key))
+                                return true;
+                            if (pair.Value == remove)
+                                throw new InvalidOperationException($"WMA002: Legacy remapping '{attribute}' conflicts with header parameter override '{pair.Key}({pair.Value.ToString().ToLowerInvariant()})' on '{fullName}'.");
+                            return false;
+                        }).ToList();
                     }
-
-                    if (newType != null)
+                    if (pair.Key == "ComOutPtr" && !pair.Value &&
+                        node.AttributeLists.SelectMany(list => list.Attributes)
+                            .Any(attribute => IsParameterMetadataAttribute(attribute.Name.ToString(), "ComOutPtr")) &&
+                        !node.AttributeLists.SelectMany(list => list.Attributes)
+                            .Any(attribute => IsParameterMetadataAttribute(attribute.Name.ToString(), "Out")))
                     {
-                        node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+                        // Keep the Out flag the emitter otherwise derives from ComOutPtr.
+                        node = node.AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.Attribute(SyntaxFactory.ParseName("global::System.Runtime.InteropServices.Out")))));
+                    }
+                    node = node.WithAttributeLists(SyntaxFactory.List(node.AttributeLists.Select(list =>
+                        list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes.Where(attribute =>
+                            pair.Value || !IsParameterMetadataAttribute(attribute.Name.ToString(), pair.Key)))))
+                        .Where(list => list.Attributes.Count != 0)));
+                    if (pair.Value && !node.AttributeLists.SelectMany(list => list.Attributes)
+                        .Any(attribute => IsParameterMetadataAttribute(attribute.Name.ToString(), pair.Key)))
+                    {
+                        string name = pair.Key == "Optional" ? "global::System.Runtime.InteropServices.Optional" :
+                            "global::Windows.Win32.Foundation.Metadata.ComOutPtr";
+                        node = node.AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.Attribute(SyntaxFactory.ParseName(name)))));
                     }
                 }
-                else
-                {
-                    node = (ParameterSyntax)base.VisitParameter(node);
-                }
+                node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+                if (newName != null)
+                    node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
+                if (newType != null)
+                    node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
 
                 // Get rid of default parameter values
                 if (node.Default != null)
@@ -187,12 +295,51 @@ namespace ClangSharpSourceToWinmd
                 return node;
             }
 
+            private static bool TryReadParameterOverride(AttributeSyntax attribute, out string name, out bool enabled)
+            {
+                name = null;
+                enabled = false;
+                if (GetAttributeName(attribute) != "NativeAnnotation" ||
+                    attribute.ArgumentList?.Arguments.FirstOrDefault()?.Expression is not LiteralExpressionSyntax literal ||
+                    !literal.IsKind(SyntaxKind.StringLiteralExpression))
+                    return false;
+                string payload = literal.Token.ValueText;
+                if (!payload.StartsWith("Win32Metadata.Optional", StringComparison.Ordinal) &&
+                    !payload.StartsWith("Win32Metadata.ComOutPtr", StringComparison.Ordinal))
+                    return false;
+                var match = ParameterOverrideRegex.Match(payload);
+                if (attribute.ArgumentList.Arguments.Count != 1 || !match.Success)
+                    throw new InvalidOperationException($"WMA001: Malformed parameter override '{payload}'; expected Optional(true|false) or ComOutPtr(true|false).");
+                name = match.Groups[1].Value;
+                enabled = match.Groups[2].Value == "true";
+                return true;
+            }
+
+            private static bool IsParameterMetadataAttribute(string name, string semanticName)
+            {
+                name = name.Replace("global::", string.Empty, StringComparison.Ordinal);
+                if (name.EndsWith("Attribute", StringComparison.Ordinal))
+                    name = name[..^"Attribute".Length];
+                string qualified = semanticName is "Optional" or "Out" ? "System.Runtime.InteropServices." + semanticName :
+                    "Windows.Win32.Foundation.Metadata.ComOutPtr";
+                return name == semanticName || name == qualified;
+            }
+
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 // If the struct is empty and we found a non-empty struct in all the source files, delete it
                 if (SyntaxUtils.IsEmptyStruct(node) && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
                 {
                     return null;
+                }
+
+                // Authored forward declarations can acquire an ordinary generated definition.
+                if (IsLegacyManualSource(node.SyntaxTree.FilePath) &&
+                    node.SemicolonToken.IsKind(SyntaxKind.SemicolonToken) &&
+                    !node.Modifiers.Any(SyntaxKind.PartialKeyword))
+                {
+                    node = node.AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword)
+                        .WithTrailingTrivia(SyntaxFactory.Space));
                 }
 
                 string name = node.Identifier.Text;
@@ -264,12 +411,9 @@ namespace ClangSharpSourceToWinmd
                 string localName = node.Declaration.Variables.First().Identifier.ValueText;
 
                 // If it's a constant, ignore it if it's already part of an enum
-                if (node.Modifiers.ToString() == "public const")
+                if (IsEnumMemberConstant(node, this.enumMemberNames))
                 {
-                    if (this.enumMemberNames.Contains(localName))
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
@@ -293,7 +437,7 @@ namespace ClangSharpSourceToWinmd
 
                     node = node.WithModifiers(newModifiers).WithLeadingTrivia(node.GetLeadingTrivia());
 
-                    return node;
+                    return base.VisitFieldDeclaration(node);
                 }
 
                 if (node.Modifiers.ToString() == "public static readonly")
@@ -337,7 +481,7 @@ namespace ClangSharpSourceToWinmd
                             }
                         }
 
-                        return node;
+                        return base.VisitFieldDeclaration(node);
                     }
                     // Some constants get scraped as public static readonly.
                     // If we see the prefix, force it to be a const
@@ -354,7 +498,7 @@ namespace ClangSharpSourceToWinmd
                         variable = variable.WithIdentifier(SyntaxFactory.ParseToken(localName.Substring(ForceConstPrefix.Length)));
                         node = node.WithDeclaration(node.Declaration.WithVariables(SyntaxFactory.SingletonSeparatedList(variable)));
 
-                        return node;
+                        return base.VisitFieldDeclaration(node);
                     }
                 }
 
@@ -399,8 +543,38 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
             {
-                var firstAttr = node.Attributes[0];
+                var attributes = new List<AttributeSyntax>();
+                foreach (var attribute in node.Attributes)
+                {
+                    var result = this.ProcessAttribute(node, attribute) as AttributeListSyntax;
+                    if (result != null)
+                        attributes.AddRange(result.Attributes);
+                }
+                return attributes.Count == 0 ? null : node.WithAttributes(SyntaxFactory.SeparatedList(attributes));
+            }
+
+            private SyntaxNode ProcessAttribute(AttributeListSyntax node, AttributeSyntax firstAttr)
+            {
                 var attrName = firstAttr.Name.ToString();
+
+                if (TryReadParameterOverride(firstAttr, out _, out _))
+                {
+                    if (node.Parent is not ParameterSyntax || node.Target?.Identifier.ValueText is not (null or "param"))
+                        throw new InvalidOperationException("WMA001: Optional/ComOutPtr overrides are valid only on parameters.");
+                    return null;
+                }
+
+                if ((attrName is "SupportedOSPlatform" or "SupportedOSPlatformAttribute" or
+                    "Windows.Win32.Foundation.Metadata.SupportedOSPlatform" or
+                    "Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute") &&
+                    node.Parent.ChildNodes().OfType<AttributeListSyntax>()
+                        .Where(list => list.Target?.Identifier.ValueText == node.Target?.Identifier.ValueText)
+                        .SelectMany(list => list.Attributes)
+                        .Any(attribute => (attribute.Name.ToString() is
+                            "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform" or
+                            "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute") &&
+                            NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(firstAttr)))
+                    return null;
 
                 switch (attrName)
                 {
@@ -458,13 +632,19 @@ namespace ClangSharpSourceToWinmd
 
                     case "NativeTypeName":
                     {
-                        bool alreadyConst = 
-                            node.Parent is FieldDeclarationSyntax parentField &&
-                            parentField.Modifiers.Any(m => m.ToString() == "const");
+                        bool alreadyConst =
+                            (node.Parent is FieldDeclarationSyntax parentField &&
+                             (parentField.Modifiers.Any(m => m.ToString() == "const") ||
+                              parentField.AttributeLists.SelectMany(list => list.Attributes)
+                                  .Any(attribute => GetAttributeName(attribute) == "Guid"))) ||
+                            node.Parent.ChildNodes().OfType<AttributeListSyntax>()
+                                .Where(list => list.Target?.Identifier.ValueText == node.Target?.Identifier.ValueText)
+                                .SelectMany(list => list.Attributes)
+                                .Any(attribute => GetAttributeName(attribute) == "Const");
 
                         var ret = this.ProcessNativeTypeNameAttr(alreadyConst, firstAttr);
 
-                        return ret == null ? node : ret;
+                        return ret ?? SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(firstAttr));
                     }
 
                     case "NativeAnnotation":
@@ -474,11 +654,11 @@ namespace ClangSharpSourceToWinmd
 
                     case "CppAttributeList":
                     {
-                        return this.CreateAttributeListForSal(node);
+                        return this.CreateAttributeListForSal(node, firstAttr);
                     }
                 }
 
-                return base.VisitAttributeList(node);
+                return SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(firstAttr));
             }
 
             public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
@@ -509,7 +689,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (this.enumsToMakeFlags.Contains(enumName))
                 {
-                    bool hasFlags = SyntaxUtils.GetAttribute(node.AttributeLists, "Flags") != null;
+                    bool hasFlags = node.AttributeLists.SelectMany(list => list.Attributes).Any(attribute => GetAttributeName(attribute) == "Flags");
                     if (!hasFlags)
                     {
                         node =
@@ -894,8 +1074,13 @@ namespace ClangSharpSourceToWinmd
                 return ret;
             }
 
-            private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList)
+            private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList, AttributeSyntax cppAttr)
             {
+                if (this.nativeFieldArrayInfo && cppAttrList.Parent is FieldDeclarationSyntax fieldNode)
+                {
+                    return this.CreateAttributeListForFieldSal(fieldNode, cppAttr);
+                }
+
                 if (cppAttrList.Parent is not ParameterSyntax paramNode)
                 {
                     return null;
@@ -903,11 +1088,7 @@ namespace ClangSharpSourceToWinmd
 
                 bool marshalAsAdded = this.nodesWithMarshalAs.Contains(paramNode);
 
-                AttributeSyntax cppAttr = cppAttrList.Attributes[0];
                 List<AttributeSyntax> attributesList = new List<AttributeSyntax>();
-
-                string salText = cppAttr.ArgumentList.Arguments[0].ToString();
-                salText = salText.Substring(1, salText.Length - 2);
 
                 string nativeArrayInfoParams = null;
                 bool isIn = false;
@@ -921,7 +1102,7 @@ namespace ClangSharpSourceToWinmd
                 bool? pre = null;
                 bool? post = null;
 
-                var salAttrs = GetSalAttributes(salText);
+                var salAttrs = GetSalAttributes(cppAttr);
                 isNullNullTerminated = salAttrs.Any(a => a.Name == "SAL_name" && a.P1 == "_NullNull_terminated_");
 
                 foreach (var salAttr in salAttrs)
@@ -1056,13 +1237,13 @@ namespace ClangSharpSourceToWinmd
                 // If we didn't add marshal as yet, try again without using pre
                 if (!marshalAsAdded && !isByteBuffer)
                 {
-                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo");
-                    if (salAttr != null)
+                    foreach (var salAttr in salAttrs.Where(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo"))
                     {
                         nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
                         if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                         {
                             marshalAsAdded = true;
+                            break;
                         }
                     }
                 }
@@ -1121,7 +1302,8 @@ namespace ClangSharpSourceToWinmd
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("NullNullTerminated")));
                 }
 
-                if (isRetVal)
+                if (isRetVal && !paramNode.AttributeLists.SelectMany(list => list.Attributes)
+                    .Any(attribute => GetAttributeName(attribute) == "RetVal"))
                 {
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("RetVal")));
                 }
@@ -1196,16 +1378,123 @@ namespace ClangSharpSourceToWinmd
 
                 }
 
-                IEnumerable<SalAttribute> GetSalAttributes(string salArgsText)
+            }
+
+            private SyntaxNode CreateAttributeListForFieldSal(FieldDeclarationSyntax fieldNode, AttributeSyntax cppAttr)
+            {
+                if (fieldNode.Parent is not TypeDeclarationSyntax containingType)
                 {
-                    foreach (var attr in salArgsText.Split('^'))
+                    return null;
+                }
+
+                string nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists(fieldNode.AttributeLists);
+                if (fieldNode.Declaration.Type is not PointerTypeSyntax and not ArrayTypeSyntax
+                    && (nativeTypeName == null || !NativeTypeNameArrayRegex.IsMatch(nativeTypeName)))
+                {
+                    return null;
+                }
+
+                var cppAttributes = fieldNode.AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(attribute => GetAttributeName(attribute) == "CppAttributeList").ToArray();
+                if (cppAttributes[0] != cppAttr)
+                {
+                    return null;
+                }
+
+                AttributeSyntax arrayInfo = null;
+                foreach (var salAttr in cppAttributes.SelectMany(GetSalAttributes))
+                {
+                    if (salAttr.Name != "SAL_readableTo" && salAttr.Name != "SAL_writableTo")
                     {
-                        var salAttr = SalAttribute.CreateFromCppAttribute(attr);
-                        if (salAttr != null)
+                        continue;
+                    }
+
+                    string countExpression = salAttr.P1;
+                    if (countExpression == null || !countExpression.StartsWith("elementCount(", StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    var match = ElementCountRegex.Match(countExpression);
+                    string count = match.Success && match.Length == countExpression.Length
+                        && !countExpression.StartsWith("elementCount(_Old_(", StringComparison.Ordinal)
+                        ? match.Groups[1].Value.Trim()
+                        : null;
+                    AttributeArgumentSyntax argument = null;
+                    if (int.TryParse(count, out int size) && size >= 0)
+                    {
+                        argument = SyntaxFactory.AttributeArgument(
+                            SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(size)))
+                            .WithNameEquals(SyntaxFactory.NameEquals("CountConst"));
+                    }
+                    else
+                    {
+                        var countField = containingType.Members.OfType<FieldDeclarationSyntax>()
+                            .FirstOrDefault(field => !field.Modifiers.Any(SyntaxKind.StaticKeyword)
+                                && !field.Modifiers.Any(SyntaxKind.ConstKeyword)
+                                && field.Declaration.Variables.Count == 1
+                                && field.Declaration.Variables[0].Identifier.ValueText == count);
+                        if (countField != null)
                         {
-                            yield return salAttr;
+                            this.GetRemapInfo(GetFullNameWithoutArchSuffix(countField), countField.AttributeLists,
+                                out _, countField.Declaration.Type.ToString(), out _, out string newName);
+                            string countFieldName = newName ?? NativeMemberNameProvenance.GetProjectedFieldName(countField, count);
+                            argument = SyntaxFactory.AttributeArgument(
+                                SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(countFieldName)))
+                                .WithNameEquals(SyntaxFactory.NameEquals("CountFieldName"));
                         }
                     }
+
+                    if (argument == null)
+                    {
+                        ReportUnsupportedCount(countExpression);
+                        return null;
+                    }
+
+                    var attribute = SyntaxFactory.Attribute(SyntaxFactory.ParseName("NativeArrayInfo"),
+                        SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(argument)));
+                    if (arrayInfo != null && NormalizeAttributeArguments(arrayInfo) != NormalizeAttributeArguments(attribute))
+                    {
+                        ReportUnsupportedCount("multiple distinct element counts");
+                        return null;
+                    }
+
+                    arrayInfo = attribute;
+                }
+
+                if (arrayInfo == null)
+                {
+                    return null;
+                }
+
+                var existing = fieldNode.AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(attribute => GetAttributeName(attribute) == "NativeArrayInfo").ToArray();
+                if (existing.Length != 0)
+                {
+                    if (existing.All(attribute => NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(arrayInfo)))
+                    {
+                        return null;
+                    }
+
+                    throw new InvalidOperationException($"WMA002: Native SAL array count on '{GetFullNameWithoutArchSuffix(fieldNode)}' conflicts with '{existing[0]}'.");
+                }
+
+                return SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(arrayInfo));
+
+                void ReportUnsupportedCount(string expression)
+                {
+                    Console.WriteLine($"ClangSharpSourceToWinmd : warning CSSW002: Cannot represent native SAL element count '{expression}' on field '{GetFullNameWithoutArchSuffix(fieldNode)}'.");
+                }
+            }
+
+            private static IEnumerable<SalAttribute> GetSalAttributes(AttributeSyntax cppAttr)
+            {
+                string salText = cppAttr.ArgumentList.Arguments[0].ToString();
+                salText = salText.Substring(1, salText.Length - 2);
+
+                foreach (var attr in salText.Split('^'))
+                {
+                    yield return SalAttribute.CreateFromCppAttribute(attr);
                 }
             }
 
@@ -1298,8 +1587,6 @@ namespace ClangSharpSourceToWinmd
                 {
                     // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
                     // to keep some typedefs from following down to their original type
-                    const string RevertToTypeSuffix = "___";
-
                     EncodeHelpers.SplitType(currentType, out var typeOnly, out var pointers);
                     if (typeOnly.EndsWith(RevertToTypeSuffix))
                     {
@@ -1320,7 +1607,7 @@ namespace ClangSharpSourceToWinmd
                 var parts = attr.Split(';');
                 foreach (var part in parts)
                 {
-                    var nameAndValue = part.Split('=');
+                    var nameAndValue = part.Split('=', 2);
                     var name = nameAndValue[0].Trim();
                     var value = nameAndValue[1].Replace("\\\"", string.Empty);
                     switch (name)

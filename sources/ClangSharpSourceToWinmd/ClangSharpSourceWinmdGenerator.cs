@@ -42,6 +42,7 @@ namespace ClangSharpSourceToWinmd
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
+        private readonly IReadOnlyDictionary<string, string> fieldRenames;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -74,9 +75,11 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             HashSet<string> forceGuidConsts,
             Version assemblyVersion, 
-            string assemblyName)
+            string assemblyName,
+            IReadOnlyDictionary<string, string> fieldRenames)
         {
             this.compilation = compilation;
+            this.fieldRenames = fieldRenames;
             this.reducePointerLevels = reducePointerLevels;
             this.forceGuidConsts = forceGuidConsts;
 
@@ -176,7 +179,8 @@ namespace ClangSharpSourceToWinmd
                     reducePointerLevels,
                     forceGuidConsts,
                     version, 
-                    Path.GetFileName(outputFileName));
+                    Path.GetFileName(outputFileName),
+                    compilation.FieldRenames);
 
             generator.PopulateMetadataBuilder();
 
@@ -240,7 +244,7 @@ namespace ClangSharpSourceToWinmd
             return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
         }
 
-        private static string FixArchSpecificName(string name)
+        internal static string FixArchSpecificName(string name)
         {
             if (name.EndsWith("____1") || name.EndsWith("____2"))
             {
@@ -1036,8 +1040,8 @@ namespace ClangSharpSourceToWinmd
 
             this.EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType, out var wasEnum);
 
-            // Don't try to fix up an enum
-            if (wasEnum)
+            // AssociatedEnum describes values without replacing the declared native type.
+            if (wasEnum || ownerAttributes.Any(attribute => attribute.AttributeClass.Name == "AssociatedEnumAttribute"))
             {
                 return;
             }
@@ -1241,6 +1245,7 @@ namespace ClangSharpSourceToWinmd
             bool instanceMethod,
             bool thisCall)
         {
+            methodImplAttrs |= GetResultPreservationFlags(methodSymbol);
             var returnType = methodSymbol.ReturnType;
             this.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, "return", methodSymbol.GetReturnTypeAttributes(), ref returnType);
 
@@ -1252,6 +1257,11 @@ namespace ClangSharpSourceToWinmd
 
             return this.AddMethodViaParams(methodSymbol, methodSymbol.Name, returnType, parameters, methodAttrs, methodImplAttrs, instanceMethod, thisCall);
         }
+
+        private static MethodImplAttributes GetResultPreservationFlags(ISymbol symbol)
+            => symbol.GetAttributes().Any(attribute => attribute.AttributeClass.Name is
+                "PreserveSigAttribute" or "CanReturnErrorsAsSuccessAttribute" or "CanReturnMultipleSuccessValuesAttribute")
+                ? MethodImplAttributes.PreserveSig : 0;
 
         private INamedTypeSymbol GetTypeByMetadataName(string typeName)
         {
@@ -1279,7 +1289,8 @@ namespace ClangSharpSourceToWinmd
             {
                 var fieldVariable = field.Declaration.Variables.First();
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
-                string name = FixFinalName(fieldSymbol.Name);
+                string name = FixFinalName(this.fieldRenames.TryGetValue(CrossArchSyntaxMap.GetFullName(field), out var originalName)
+                    ? originalName : fieldSymbol.Name);
 
                 FieldAttributes fieldAttributes;
 
@@ -1389,7 +1400,7 @@ namespace ClangSharpSourceToWinmd
                         symbol,
                         MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
                         methodImplAttributes,
-                        false,
+                        !symbol.IsStatic,
                         false);
 
                 if (firstMethod.IsNil)
@@ -1417,10 +1428,6 @@ namespace ClangSharpSourceToWinmd
                 methodName = FixArchSpecificName(methodName);
 
                 MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
-                if (symbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
-                {
-                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
-                }
 
                 var methodDef =
                     this.AddMethodViaSymbol(
@@ -1582,7 +1589,7 @@ namespace ClangSharpSourceToWinmd
             this.AddMethodViaSymbol(
                 (IMethodSymbol)invokeMethodSymbol,
                 MethodAttributes.Public | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.Virtual,
-                MethodImplAttributes.Managed | MethodImplAttributes.Runtime,
+                MethodImplAttributes.Managed | MethodImplAttributes.Runtime | GetResultPreservationFlags(symbol),
                 true,
                 false);
 
@@ -1988,6 +1995,8 @@ namespace ClangSharpSourceToWinmd
                     case "DllImportAttribute":
                     case "NativeInheritanceAttribute":
                     case "PreserveSigAttribute":
+                    case "CanReturnErrorsAsSuccessAttribute":
+                    case "CanReturnMultipleSuccessValuesAttribute":
                         continue;
                 }
 
@@ -2125,11 +2134,6 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
-
-                if (methodSymbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
-                {
-                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
-                }
 
                 var methodDef =
                     this.AddMethodViaSymbol(

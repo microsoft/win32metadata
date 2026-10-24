@@ -9,8 +9,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using ClangSharp;
+using ClangSharp.Interop;
 
 namespace Win32MetadataScraper
 {
@@ -23,6 +25,9 @@ public class DiscoveryResult
 {
     /// <summary>Tag name → list of typedef names. One tag may have multiple typedefs.</summary>
     public Dictionary<string, List<string>> TagToTypedefs { get; } = new();
+
+    /// <summary>Qualified typedef name to its canonical tag, including same-level aliases.</summary>
+    public Dictionary<string, string> NativeTypedefTags { get; } = new();
 
     /// <summary>Names of tags that are enums.</summary>
     public HashSet<string> EnumTags { get; } = new();
@@ -81,6 +86,184 @@ public static class RemapDiscovery
         var result = new DiscoveryResult();
         WalkDecl(rootDecl, result);
         return result;
+    }
+
+    internal static Dictionary<string, string> CreateBindingRemaps(
+        DiscoveryResult discovery, IReadOnlyDictionary<string, string> remaps, ISet<string> autoRemapExcludes)
+    {
+        var result = new Dictionary<string, string>(remaps);
+        // Native identity and existing no-rename choices are binding decisions.
+        foreach (var pair in discovery.TagToTypedefs)
+            if (pair.Value.Contains(pair.Key, StringComparer.Ordinal) ||
+                autoRemapExcludes.Contains(pair.Key) || IsLikelyComInterfaceTag(pair.Key))
+                result.TryAdd(pair.Key, pair.Key);
+
+        foreach (var group in discovery.NativeTypedefTags.GroupBy(pair => pair.Value, StringComparer.Ordinal))
+        {
+            string tag = group.Key;
+            string tagName = SimpleName(tag);
+            var aliases = group.Where(pair => pair.Key != tag).ToArray();
+            if (aliases.Length == 0 || result.ContainsKey(tag) || result.ContainsKey(tagName) ||
+                !aliases.All(pair => HasExplicitProjection(pair.Key, tag, tagName)))
+                continue;
+            // Explicit alias projections do not rename the underlying native tag.
+            result.Add(tag, tagName);
+        }
+
+        foreach (var pair in remaps)
+        {
+            if (pair.Value.EndsWith("___", StringComparison.Ordinal) &&
+                discovery.NativeTypedefTags.TryGetValue(pair.Value[..^3], out string tag) &&
+                tag == pair.Key)
+            {
+                // ClangSharp's force marker preserves the authored temporary name;
+                // the native alias proof does not authorize an arbitrary remap.
+                result[pair.Key] = "@" + pair.Value;
+            }
+        }
+        return result;
+
+        static string SimpleName(string name)
+        {
+            int separator = name.LastIndexOf("::", StringComparison.Ordinal);
+            return separator < 0 ? name : name.Substring(separator + 2);
+        }
+
+        bool HasExplicitProjection(string alias, string tag, string tagName)
+        {
+            string aliasName = SimpleName(alias);
+            return (remaps.TryGetValue(alias, out string target) || remaps.TryGetValue(aliasName, out target)) &&
+                target != alias && target != aliasName && target != tag && target != tagName;
+        }
+    }
+
+    internal static Dictionary<string, string> FindEmbeddedIncompleteRecordPointerRemaps(Decl rootDecl)
+    {
+        var declarations = EnumerateDeclarations(rootDecl).ToArray();
+        var declaredRecords = declarations.OfType<RecordDecl>()
+            .Where(record => record.LexicalParentCursor is not RecordDecl ||
+                record.LexicalParentCursor == record.SemanticParentCursor)
+            .Select(record => record.Handle.CanonicalCursor).ToHashSet();
+        var pending = new Stack<(ClangSharp.Type Type, bool ValueUse, bool BehindPointer)>();
+        var visited = new HashSet<(ClangSharp.Type Type, bool ValueUse, bool BehindPointer)>();
+        var byValue = new HashSet<string>(StringComparer.Ordinal);
+        var result = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var declaration in declarations)
+        {
+            if (declaration is ValueDecl value)
+                pending.Push((value.Type, true, false));
+            else if (declaration is TypedefNameDecl alias)
+                pending.Push((alias.UnderlyingType, false, false));
+        }
+        while (pending.Count != 0)
+        {
+            var (type, valueUse, behindPointer) = pending.Pop();
+            type = type.CanonicalType;
+            if (!visited.Add((type, valueUse, behindPointer)))
+                continue;
+            if (type is PointerType pointer)
+                pending.Push((pointer.PointeeType, valueUse, true));
+            else if (type is RecordType record && !(record.Decl.Definition ?? record.Decl).IsCompleteDefinition &&
+                !declaredRecords.Contains(record.Decl.Handle.CanonicalCursor))
+            {
+                // Elaborated field/parameter types can introduce a record
+                // without a declaration that ClangSharp can emit.
+                string name = DeclarationSourceMap.QualifiedName(record.Decl.Handle);
+                if (name.Length != 0)
+                {
+                    if (behindPointer)
+                        result.TryAdd(name, "void");
+                    else if (valueUse)
+                        byValue.Add(name);
+                }
+            }
+            else if (type is FunctionType function)
+            {
+                pending.Push((function.ReturnType, true, false));
+                if (function is FunctionProtoType prototype)
+                    foreach (var parameter in prototype.ParamTypes)
+                        pending.Push((parameter, true, false));
+            }
+            else if (type is ArrayType array)
+                pending.Push((array.ElementType, valueUse, behindPointer));
+            else if (type is ReferenceType reference)
+                pending.Push((reference.PointeeType, valueUse, false));
+        }
+        foreach (string name in byValue)
+            if (result.ContainsKey(name))
+                throw new InvalidOperationException($"Incomplete native record '{name}' is used by value; opaque pointer storage cannot establish its layout.");
+        return result;
+    }
+
+    public static HashSet<string> FindInaccessibleCopyMembers(Decl rootDecl, bool excludeFunctionsWithBody)
+    {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var record in EnumerateDeclarations(rootDecl).OfType<CXXRecordDecl>().Where(record => record.IsCompleteDefinition))
+        {
+            foreach (var group in record.Methods.GroupBy(method => method.Name))
+            {
+                // Exclusion keys do not distinguish overloads. Do not hide a
+                // callable overload or change a virtual table to omit a private copy member.
+                if (!record.CursorChildren.OfType<FunctionTemplateDecl>().Any(template => template.Name == group.Key) &&
+                    group.Any(IsInaccessibleCopyMember) && group.All(method =>
+                    !method.IsVirtual && (IsInaccessibleCopyMember(method) || excludeFunctionsWithBody && method.HasBody)))
+                    result.Add(DeclarationSourceMap.QualifiedName(group.First().Handle));
+            }
+        }
+        return result;
+
+        static bool IsInaccessibleCopyMember(CXXMethodDecl method)
+            => method.Access is CX_CXXAccessSpecifier.CX_CXXPrivate or CX_CXXAccessSpecifier.CX_CXXProtected &&
+                (method is CXXConstructorDecl constructor && constructor.IsCopyOrMoveConstructor ||
+                    method.IsCopyAssignmentOperator || method.IsMoveAssignmentOperator);
+    }
+
+    public static string[] ResolveTraversalFiles(Decl rootDecl, IEnumerable<string> configuredFiles)
+    {
+        var files = configuredFiles.ToArray();
+        var unresolved = new HashSet<string>(files.Where(file =>
+            Path.GetFileName(file) == file && !File.Exists(file)), StringComparer.OrdinalIgnoreCase);
+        if (unresolved.Count == 0)
+            return files;
+
+        var candidates = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        foreach (var declaration in EnumerateDeclarations(rootDecl))
+        {
+            declaration.Location.GetFileLocation(out var source, out _, out _, out _);
+            string path = source.ToString();
+            string name = Path.GetFileName(path);
+            if (name != null && unresolved.Contains(name))
+            {
+                if (!candidates.TryGetValue(name, out var paths))
+                    candidates[name] = paths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                paths.Add(Path.GetFullPath(path));
+            }
+        }
+        return files.Select(file =>
+        {
+            if (!unresolved.Contains(file) || !candidates.TryGetValue(file, out var paths))
+                return file;
+            if (paths.Count != 1)
+                throw new InvalidOperationException($"Traversal header '{file}' matches distinct native source files: " +
+                    string.Join(", ", paths.OrderBy(path => path, StringComparer.OrdinalIgnoreCase)));
+            return paths.Single();
+        }).ToArray();
+    }
+
+    private static IEnumerable<Decl> EnumerateDeclarations(Decl rootDecl)
+    {
+        var visited = new HashSet<Cursor>();
+        var pending = new Stack<Decl>();
+        pending.Push(rootDecl);
+        while (pending.Count != 0)
+        {
+            var declaration = pending.Pop();
+            if (!visited.Add(declaration))
+                continue;
+            yield return declaration;
+            foreach (var child in declaration.CursorChildren.OfType<Decl>())
+                pending.Push(child);
+        }
     }
 
     /// <summary>
@@ -329,6 +512,12 @@ public static class RemapDiscovery
     {
         if (decl is TypedefDecl typedefDecl)
         {
+            if (typedefDecl.UnderlyingType.CanonicalType is TagType canonicalTag &&
+                !string.IsNullOrEmpty(canonicalTag.Decl.Name))
+            {
+                result.NativeTypedefTags[DeclarationSourceMap.QualifiedName(typedefDecl.Handle)] =
+                    DeclarationSourceMap.QualifiedName(canonicalTag.Decl.Handle);
+            }
             var underlyingType = UnwrapType(typedefDecl.UnderlyingType);
 
             if (underlyingType is TagType tagType)
@@ -415,6 +604,7 @@ public static class RemapDiscovery
 
         if (decl is IDeclContext context)
         {
+            var directDeclarations = new HashSet<Decl>(context.Decls);
             // Walk Decls first (direct declarations)
             foreach (var child in context.Decls)
             {
@@ -425,7 +615,7 @@ public static class RemapDiscovery
             // headers that don't appear in Decls. PInvokeGenerator uses both traversals.
             foreach (var cursor in decl.CursorChildren)
             {
-                if (cursor is TypedefDecl && !context.Decls.Contains((Decl)cursor))
+                if (cursor is TypedefDecl && !directDeclarations.Contains((Decl)cursor))
                 {
                     WalkDecl((Decl)cursor, result);
                 }
@@ -434,5 +624,3 @@ public static class RemapDiscovery
     }
 }
 }
-
-

@@ -254,6 +254,22 @@ Run `./DoAll.ps1 -ExcludePackages -ExcludeSamples` in [PowerShell 7](https://aka
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 
+### Running tests
+
+After building the metadata, run `.\scripts\DoTests.ps1` in PowerShell 7 with Python 3 on `PATH` to run the metadata utility, scraper, C# source-to-WinMD emitter, SDK annotation coverage-auditor, and WinMD integrity suites. The full build and both CI pipelines use this runner.
+
+To run the existing emitter suite on its own:
+
+```powershell
+dotnet test tests\ClangSharpSourceToWinmdTests -c Release
+```
+
+The coverage-auditor suite uses Python's standard library:
+
+```powershell
+python -m unittest discover -s tests\SdkAnnotationCoverage.Tests -p "test_*.py"
+```
+
 ### Reviewing API changes
 
 API differences between your build and the last release are automatically detected during the build. When you submit a PR, the CI pipeline posts a comment showing the full API diff as decompiled C# declarations, making it easy for reviewers to see exactly what changed.
