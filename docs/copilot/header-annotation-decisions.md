@@ -30,6 +30,15 @@ without turning each investigation into a prerequisite for the next full image.
 After establishing green normal CI, make further repairs with focused regression
 coverage and a fresh normal CI run.
 
+For original IDL unavailable in the shipped SDK, ordinary tests enforce exact
+deferred-fact accounting rather than unconditional migration completion. The
+report-only `tests\SdkAnnotationCoverage.Tests\SourceBlockedMetadata.json` ledger
+retains all 30 historical units: 26 availability values, three associations and
+`IdentityUpdateEvent` Flags. It supplies no emitter input or semantic fallback.
+Missing entries, altered values, generated-header patches and false coverage or
+preservation claims remain failures. Current physical projection is unqualified;
+raw losses remain visible in the bulk comparison.
+
 ## Completion plan and next review
 
 The next run follows a reviewed repair of the header-only source migration.
@@ -88,8 +97,10 @@ unchanged preparation test fails with MIDL9008 beneath the long session-artifact
 prefix and passes beneath `artifacts\t-002`; no preparation success policy or
 fixture spaces/quoting is changed. Source-state tests inspect effective global
 plus partition annotation settings and source-owned facts, not retired sidecar
-rows. Retiring a row does not prove source coverage: missing original-IDL floors
-and native associations remain explicit test failures, not accepted baselines.
+rows. Retiring a row does not prove source coverage. Missing original-IDL floors,
+native associations and Flags remain exactly inventoried, deferred and
+unqualified; ordinary accounting regressions reject unaccounted changes or false
+coverage claims without making incomplete migration a generation prerequisite.
 
 The manual-type inventory exposed replacement-era exclusions that survived
 deletion of their handwritten providers. The frozen source packet retires ten

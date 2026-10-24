@@ -1,0 +1,82 @@
+{
+  "schemaVersion": 1,
+  "sdkPackageVersion": "10.0.28000.2705",
+  "sdkArchiveSha256": "A74CA8F9AF98BD61925D9E2932AD98F746306123167B8F0BBA99CD9EA9F03807",
+  "sourceState": "original-unavailable",
+  "migrationState": "deferred-unqualified",
+  "currentProjectionState": "unqualified",
+  "headers": [
+    {
+      "path": "um\\IdentityProvider.h",
+      "sha256": "24A3462C7B117F8D3C59382E0F94F911FF764C20182936EF2CDCA5EF9D7E77BE",
+      "facts": [
+        { "category": "supportedOS", "target": "IAssociatedIdentityProvider", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "IConnectedIdentityProvider", "value": "windows8.0" },
+        { "category": "supportedOS", "target": "IIdentityAdvise", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "IIdentityProvider", "value": "windows6.1" },
+        { "category": "associated-enum-use", "target": "IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents", "value": "IdentityUpdateEvent" },
+        { "category": "associated-enum-use", "target": "IIdentityProvider::Advise::dwIdentityUpdateEvents", "value": "IdentityUpdateEvent" },
+        { "category": "enum-flags", "target": "IdentityUpdateEvent", "value": "Flags" }
+      ]
+    },
+    {
+      "path": "um\\IdentityStore.h",
+      "sha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774",
+      "facts": [
+        { "category": "supportedOS", "target": "IIdentityStore", "value": "windows6.1" }
+      ]
+    },
+    {
+      "path": "um\\iwscapi.h",
+      "sha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8",
+      "facts": [
+        { "category": "supportedOS", "target": "IWscProduct", "value": "windows8.0" },
+        { "category": "supportedOS", "target": "IWSCProductList", "value": "windows8.0" },
+        { "category": "associated-enum-use", "target": "IWSCProductList::Initialize::provider", "value": "WSC_SECURITY_PROVIDER" }
+      ]
+    },
+    {
+      "path": "um\\locationapi.h",
+      "sha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471",
+      "facts": [
+        { "category": "supportedOS", "target": "ICivicAddressReport", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "IDefaultLocation", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "ILatLongReport", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "ILocation", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "ILocationEvents", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "ILocationPower", "value": "windows8.0" },
+        { "category": "supportedOS", "target": "ILocationReport", "value": "windows6.1" }
+      ]
+    },
+    {
+      "path": "um\\rendezvoussession.h",
+      "sha256": "D681E95EC4C9F227060ABBC7C4C1A907CA848F0558A0A2CE55A51ECCFCE24925",
+      "facts": [
+        { "category": "supportedOS", "target": "DRendezvousSessionEvents", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IRendezvousApplication", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IRendezvousSession", "value": "windows6.0.6000" }
+      ]
+    },
+    {
+      "path": "um\\WcnDevice.h",
+      "sha256": "54AD4BAD1B3326E46E6CAB2DDDEDA117B9AC6749BEDB234B11E78CC935225588",
+      "facts": [
+        { "category": "supportedOS", "target": "IWCNConnectNotify", "value": "windows6.1" },
+        { "category": "supportedOS", "target": "IWCNDevice", "value": "windows6.1" }
+      ]
+    },
+    {
+      "path": "um\\winsatcominterfacei.h",
+      "sha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3",
+      "facts": [
+        { "category": "supportedOS", "target": "IInitiateWinSATAssessment", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IProvideWinSATAssessmentInfo", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IProvideWinSATResultsInfo", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IProvideWinSATVisuals", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IQueryAllWinSATAssessments", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IQueryRecentWinSATAssessment", "value": "windows6.0.6000" },
+        { "category": "supportedOS", "target": "IWinSATInitiateEvents", "value": "windows6.0.6000" }
+      ]
+    }
+  ]
+}

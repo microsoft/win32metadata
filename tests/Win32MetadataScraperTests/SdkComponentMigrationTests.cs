@@ -53,7 +53,7 @@ namespace Win32MetadataScraperTests
         public SdkComponentMigrationTests(ITestOutputHelper output) => this.output = output;
 
         [HeaderMigrationDataFact]
-        public void OwnedFloorsKeepOnlyTheExplicitSourceBlockedResidualsAndParserConfiguration()
+        public void AvailableSourceFloorsAndDeferredRendezvousFactsKeepExactAccounting()
         {
             string sdk = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
             string sidecar = File.ReadAllText(Path.Combine(sdk, "supportedOS.rsp"));
@@ -75,12 +75,15 @@ namespace Win32MetadataScraperTests
             Assert.Contains("_DEDUP_SET_PARAM_TYPE=DEDUP_SET_PARAM_TYPE",
                 File.ReadAllText(Path.Combine(sdk, "scraper.settings.rsp")));
             Assert.DoesNotContain("--nativeFieldArrayInfo", File.ReadAllText(Path.Combine(sdk, "emitter.settings.rsp")));
-            string rendezvous = Path.Combine(sdk, "patches", "um", "rendezvoussession.idl.patch");
-            Assert.True(File.Exists(rendezvous),
-                "Header-only coverage is incomplete: the three retired rendezvous-session floors have no original-IDL patch.");
-            foreach (var fact in Floors.Skip(3).Take(3))
-                HeaderMigrationAssertions.AssertCommentFact(@"um\rendezvoussession.idl", "interface", fact.Target,
-                    "SupportedOSPlatform(\"" + fact.OS + "\")");
+            using var deferred = WinHttpMigrationTests.ReadSourceBlockedInventory();
+            WinHttpMigrationTests.AssertSourceBlockedInventory(deferred.RootElement);
+            var rendezvous = Assert.Single(deferred.RootElement.GetProperty("headers").EnumerateArray()
+                .Where(header => header.GetProperty("path").GetString() == @"um\rendezvoussession.h"));
+            Assert.Equal(Floors.Skip(3).Take(3).Select(fact => fact.Target + "=" + fact.OS)
+                    .OrderBy(value => value, StringComparer.Ordinal),
+                rendezvous.GetProperty("facts").EnumerateArray()
+                    .Select(fact => fact.GetProperty("target").GetString() + "=" + fact.GetProperty("value").GetString())
+                    .OrderBy(value => value, StringComparer.Ordinal));
         }
 
         [ComponentMigrationTheory]
