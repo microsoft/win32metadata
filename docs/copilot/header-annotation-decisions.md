@@ -1,12 +1,34 @@
 # Header annotation migration: problems and decisions
 
-Updated: 2026-10-23 (UTC).
+Updated: 2026-10-24 (UTC).
 
 This is the running record of migration blockers, their evidence, and the decisions
 made while resolving them. The goal is to express win32metadata's intended API
 metadata faithfully in the selected SDK's original headers and IDL. A zero-difference
 OLD-to-NEW WinMD is not a goal. Breaking changes and unexplained differences remain
 visible for review.
+
+## Full generation and green PR gates
+
+Produce the complete ordinary SDK image and its unfiltered same-SDK OLD-to-NEW
+comparison using one coherent published toolchain and prepared-header identity.
+Do not wait for individual native or physical investigations, projected-storage
+changes, or character-projection fixes before running the full scrape, constant
+extraction, manual-source composition, and emission.
+
+Both stacked PRs must pass their exact-head normal CI gates. Parser, compiler,
+emitter, integrity, and regression-test failures remain blocking and require
+repairs. Do not disable jobs, blanket-skip tests, suppress diagnostics, or report
+an incomplete image as successful.
+
+Keep the migration-difference report separate from those build gates. Known
+`PSTR` versus `CHAR*` projection and `VARENUM` storage differences are nonblocking
+follow-up findings for image production; they are not equality or qualified
+compatibility. Preserve the full raw differences and independent Const, import,
+flag, and parameter-sequence evidence. Retain native, SAL, and coverage findings
+without turning each investigation into a prerequisite for the next full image.
+After establishing green normal CI, make further repairs with focused regression
+coverage and a fresh normal CI run.
 
 ## Completion plan and next review
 

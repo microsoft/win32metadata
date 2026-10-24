@@ -395,6 +395,21 @@ ran. Do not treat an old output's existence as a result.
 
 ## Grade differences, not expectations
 
+Produce a complete ordinary SDK image and the unfiltered same-SDK OLD-to-NEW
+comparison before requiring individual migration-difference investigations.
+Use one coherent published toolchain, recipe, and prepared-header identity.
+Keep both stacked PRs green on their exact-head normal CI gates. Parser,
+compiler, emitter, integrity, and genuine regression-test failures still block;
+fix them without disabling jobs, blanket-skipping tests, or suppressing diagnostics.
+
+Known projection and metadata-storage differences, including `PSTR` versus
+`CHAR*` and `VARENUM`, remain visible nonblocking follow-ups for image production.
+They are not equality, acceptance, or permission to alter native contracts.
+Preserve raw comparison rows and separate Const, import, flag, and
+parameter-sequence checks. Native, SAL, and coverage investigations continue
+without becoming serial prerequisites for full generation. Each subsequent
+repair needs focused regression coverage and fresh normal CI.
+
 Native storage plus `AssociatedEnum` and canonical result preservation are
 intentional representation changes, not blanket waivers. Review the exact affected
 sites and physical facts for each candidate. A known category does not authorize
@@ -402,9 +417,10 @@ an arbitrary new API, enum member, signature change, floor, or missing annotatio
 Do not create checked-in expected-difference files, normalize away raw output,
 invent aliases, or weaken OLD snapshots to obtain a pass.
 
-When an integration candidate is blocked, retain its failing image, raw comparison,
-native/MIDL logs, and minimal reproducer. Keep its affected acceptance facts blocked
-rather than calling the whole partition migrated. Continue drafting other originals.
+When an integration candidate has unresolved differences, retain its image, raw
+comparison, native/MIDL logs, and minimal reproducer. Keep its affected acceptance
+facts open rather than calling the whole partition migrated. Continue full
+generation and drafting other originals.
 Fix a shared parser issue once in the tooling lane, requalify its pin, then rerun the
 affected combined candidate.
 
