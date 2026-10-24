@@ -21,16 +21,20 @@ namespace ClangSharpSourceToWinmdTests
             .GetType("ClangSharpSourceToWinmd.CrossArchConstantQualifier", throwOnError: true)!;
 
         [DataTestMethod]
-        [DataRow(false, false)]
-        [DataRow(true, false)]
-        [DataRow(false, true)]
-        [DataRow(true, true)]
-        public void InitializerErrorsRejectOtherwiseFoldableConstants(bool multipleDeclarators, bool mappedLines)
+        [DataRow(false, false, false)]
+        [DataRow(true, false, false)]
+        [DataRow(false, true, false)]
+        [DataRow(true, true, false)]
+        [DataRow(false, false, true)]
+        [DataRow(true, false, true)]
+        [DataRow(false, true, true)]
+        [DataRow(true, true, true)]
+        public void InitializerErrorsRejectOtherwiseFoldableConstants(bool multipleDeclarators, bool mappedLines, bool legacyManual)
         {
             string declarations = "[System.Obsolete(\"legacy\", true)] public const int LEGACY = 1;\n" +
                 (mappedLines ? "#line 200 \"mapped-constants.h\"\n" : "") +
                 "public const int " + (multipleDeclarators ? "FIRST = 0, " : "") + "VALUE = LEGACY;";
-            var tree = Parse(declarations);
+            var tree = Parse(declarations, legacyManual ? "Constants.manual.modified.cs" : "Constants.cs");
             var model = Compile(tree).GetSemanticModel(tree);
             var variable = Variable(tree, "VALUE");
             AssertFoldedValue(model, variable, 1);
@@ -94,6 +98,24 @@ namespace ClangSharpSourceToWinmdTests
 
             var error = Assert.ThrowsException<InvalidOperationException>(() => Qualify(tree));
             StringAssert.Contains(error.Message, "CSSW003: Cannot qualify 'VALUE'");
+        }
+
+        [DataTestMethod]
+        [DataRow("Constants.manual.cs")]
+        [DataRow("Constants.manual.modified.cs")]
+        public void LegacyManualParseRecoveryPreservesItsBoundConstant(string fileName)
+        {
+            var tree = Parse("public const int BASE = 7;\npublic const int VALUE = (BASE + 1)\n" +
+                "public const int NEXT = 9;", fileName);
+            var model = Compile(tree).GetSemanticModel(tree);
+            AssertFoldedValue(model, Variable(tree, "VALUE"), 8);
+            Assert.IsTrue(tree.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS1002"));
+            Assert.IsFalse(Compile(tree).GetDeclarationDiagnostics()
+                .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+
+            var qualified = Qualify(tree).Single();
+            AssertFoldedValue(Compile(qualified).GetSemanticModel(qualified), Variable(qualified, "VALUE"), 8);
+            Assert.IsTrue(qualified.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS1002"));
         }
 
         [TestMethod]
@@ -173,9 +195,9 @@ namespace ClangSharpSourceToWinmdTests
                 }
         }
 
-        private static SyntaxTree Parse(string declarations) => CSharpSyntaxTree.ParseText(
+        private static SyntaxTree Parse(string declarations, string fileName = "Constants.cs") => CSharpSyntaxTree.ParseText(
             "namespace Test { public static class Apis {\n" + declarations + "\n} }",
-            path: Path.Combine("fixtures", "common", "Constants.cs"));
+            path: Path.Combine("fixtures", "common", fileName));
 
         private static CSharpCompilation Compile(params SyntaxTree[] trees) => CSharpCompilation.Create("DiagnosticOracle", trees,
             new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },

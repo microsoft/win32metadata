@@ -3111,7 +3111,6 @@ MSV_SUBAUTH_LOGON_PARAMETER_CONTROL=Windows.Win32.Security.Authentication.Identi
 MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS=Windows.Win32.Security.Authentication.Identity
 ISC_REQ_HIGH_FLAGS=Windows.Win32.Security.Authentication.Identity
 ASC_REQ_HIGH_FLAGS=Windows.Win32.Security.Authentication.Identity
-SEC_WINNT_AUTH_IDENTITY=Windows.Win32.Security.Authentication.Identity
 CONSOLE_MODE=Windows.Win32.System.Console
 FIND_FIRST_EX_FLAGS=Windows.Win32.Storage.FileSystem
 DEFINE_DOS_DEVICE_FLAGS=Windows.Win32.Storage.FileSystem

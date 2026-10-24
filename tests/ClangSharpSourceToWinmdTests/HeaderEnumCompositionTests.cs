@@ -13,6 +13,92 @@ namespace ClangSharpSourceToWinmdTests
     public class HeaderEnumCompositionTests
     {
         [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
+        public void ComposedHeaderGroupsDoNotAcquireGlobalMacroOwnership(string architecture)
+        {
+            Compile(new Dictionary<string, string>
+            {
+                ["First.header-types.cs"] = "namespace Owner { public enum GROUP:int { SHARED=unchecked((int)1UL) } }",
+                ["Second.header-types.cs"] = "namespace Owner { public enum GROUP:int { OTHER=unchecked((int)2UL) } }",
+                ["Foreign.constants.cs"] = "namespace Foreign { public static class Apis { public const int SHARED=9; } }",
+            }, compilation =>
+            {
+                AssertCompiles(compilation);
+                Assert.AreEqual(9, compilation.GetTypeByMetadataName("Foreign.Apis")!
+                    .GetMembers("SHARED").OfType<IFieldSymbol>().Single().ConstantValue);
+                var group = compilation.GetTypeByMetadataName("Owner.GROUP")!;
+                CollectionAssert.AreEqual(new[] { "SHARED", "OTHER" },
+                    group.GetMembers().OfType<IFieldSymbol>().Where(field => field.HasConstantValue)
+                        .Select(field => field.Name).ToArray());
+            }, architecture);
+        }
+
+        [DataTestMethod]
+        [DataRow("x86", true, false, true)]
+        [DataRow("x64", true, false, true)]
+        [DataRow("arm64", true, false, true)]
+        [DataRow("crossarch", true, false, true)]
+        [DataRow("x86", false, false, false)]
+        [DataRow("x64", false, false, false)]
+        [DataRow("arm64", false, false, false)]
+        [DataRow("crossarch", false, false, false)]
+        [DataRow("x86", true, true, true)]
+        [DataRow("x64", true, true, true)]
+        [DataRow("arm64", true, true, true)]
+        [DataRow("crossarch", true, true, true)]
+        [DataRow("x86", false, true, false)]
+        [DataRow("x64", false, true, false)]
+        [DataRow("arm64", false, true, false)]
+        [DataRow("crossarch", false, true, false)]
+        [DataRow("crossarch", false, false, true)]
+        [DataRow("crossarch", false, true, true)]
+        public void LegacyEnumOwnersKeepTheirInputContractBeforeBindingAliases(
+            string architecture, bool legacyBag, bool headerInputs, bool manualCopies)
+        {
+            var sources = new Dictionary<string, string>
+            {
+                [legacyBag ? "Foundation.enums.cs" : "Foundation.cs"] = @"
+namespace Windows.Win32.Foundation {
+    public enum WAIT_EVENT:uint { WAIT_OBJECT_0=0, WAIT_IO_COMPLETION=192 }
+}",
+                [manualCopies ? "Threading.manual.cs" : "Threading.constants.cs"] = @"
+namespace Windows.Win32.System.Threading {
+    public static partial class Apis {
+        public const uint WAIT_OBJECT_0=0, WAIT_IO_COMPLETION=192;
+    }
+}",
+                ["WinSock.enums.cs"] = @"
+using static Windows.Win32.Foundation.WAIT_EVENT;
+using static Windows.Win32.System.Threading.Apis;
+namespace Windows.Win32.Networking.WinSock {
+    public enum WSA_ERROR {
+        WSA_WAIT_EVENT_0=(int)WAIT_OBJECT_0,
+        WSA_WAIT_IO_COMPLETION=(int)WAIT_IO_COMPLETION
+    }
+}",
+            };
+            if (headerInputs)
+                sources["Unrelated.header-types.cs"] = "namespace Other {}";
+            Compile(sources, compilation =>
+            {
+                if (!legacyBag && manualCopies)
+                {
+                    Assert.IsTrue(compilation.GetDiagnostics().Any(diagnostic => diagnostic.Id == "CS0229"));
+                    return;
+                }
+                AssertCompiles(compilation);
+                var fields = compilation.GetTypeByMetadataName("Windows.Win32.Networking.WinSock.WSA_ERROR")!
+                    .GetMembers().OfType<IFieldSymbol>().Where(field => field.HasConstantValue).ToArray();
+                CollectionAssert.AreEqual(new[] { 0, 192 }, fields.Select(field => (int)field.ConstantValue!).ToArray());
+                Assert.AreEqual(0, compilation.GetTypeByMetadataName("Windows.Win32.System.Threading.Apis")!
+                    .GetMembers().OfType<IFieldSymbol>().Count());
+            }, architecture);
+        }
+
+        [DataTestMethod]
         [DataRow("Windows.Win32.Graphics.Gdi", "RGN_COMBINE_MODE", "int",
             "RGN_AND=1,RGN_OR=2,RGN_XOR=3,RGN_DIFF=4,RGN_COPY=5,RGN_MIN=1,RGN_MAX=5",
             "RGN_AND=1,RGN_OR=2,RGN_XOR=3,RGN_DIFF=4,RGN_COPY=5,RGN_MIN=RGN_AND,RGN_MAX=RGN_COPY", 7)]
@@ -403,9 +489,9 @@ namespace Windows.Win32.Foundation
 namespace Windows.Win32.Foundation.Metadata
 {
     public class Fixture { }
-    [System.Flags] public enum Architecture { X86=1, X64=2, Arm64=4 }
-    [System.AttributeUsage(System.AttributeTargets.All)]
-    public class SupportedArchitectureAttribute:System.Attribute
+    [global::System.Flags] public enum Architecture { X86=1, X64=2, Arm64=4 }
+    [global::System.AttributeUsage(global::System.AttributeTargets.All)]
+    public class SupportedArchitectureAttribute:global::System.Attribute
     {
         public SupportedArchitectureAttribute(Architecture architecture) { }
     }

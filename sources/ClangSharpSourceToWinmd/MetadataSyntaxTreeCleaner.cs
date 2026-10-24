@@ -14,10 +14,16 @@ namespace ClangSharpSourceToWinmd
     public static class MetadataSyntaxTreeCleaner
     {
         public const string ArgListVarName = "__arglist__";
+        internal const string RevertToTypeSuffix = "___";
 
         internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
             => node.Modifiers.ToString() == "public const" &&
-                enumMemberNames.Contains(GetEnumMemberIdentity(node, node.Declaration.Variables.First().Identifier.ValueText));
+                (enumMemberNames.Contains(node.Declaration.Variables.First().Identifier.ValueText) ||
+                enumMemberNames.Contains(GetEnumMemberIdentity(node, node.Declaration.Variables.First().Identifier.ValueText)));
+
+        internal static bool IsLegacyManualSource(string path)
+            => path.EndsWith(".manual.cs", StringComparison.OrdinalIgnoreCase) ||
+                path.EndsWith(".manual.modified.cs", StringComparison.OrdinalIgnoreCase);
 
         internal static string GetEnumMemberIdentity(SyntaxNode node, string name)
         {
@@ -324,6 +330,15 @@ namespace ClangSharpSourceToWinmd
                 if (SyntaxUtils.IsEmptyStruct(node) && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
                 {
                     return null;
+                }
+
+                // Authored forward declarations can acquire an ordinary generated definition.
+                if (IsLegacyManualSource(node.SyntaxTree.FilePath) &&
+                    node.SemicolonToken.IsKind(SyntaxKind.SemicolonToken) &&
+                    !node.Modifiers.Any(SyntaxKind.PartialKeyword))
+                {
+                    node = node.AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword)
+                        .WithTrailingTrivia(SyntaxFactory.Space));
                 }
 
                 string name = node.Identifier.Text;
@@ -1571,8 +1586,6 @@ namespace ClangSharpSourceToWinmd
                 {
                     // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
                     // to keep some typedefs from following down to their original type
-                    const string RevertToTypeSuffix = "___";
-
                     EncodeHelpers.SplitType(currentType, out var typeOnly, out var pointers);
                     if (typeOnly.EndsWith(RevertToTypeSuffix))
                     {

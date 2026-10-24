@@ -145,6 +145,9 @@ namespace ClangSharpSourceToWinmd
             return name == "header-types.modified.cs" || name.EndsWith(".header-types.modified.cs", StringComparison.Ordinal);
         }
 
+        internal static bool IsHeaderEnumSourceFile(string path)
+            => IsHeaderTypesFile(path) || Path.GetFileName(path) == "header-enum-groups.modified.cs";
+
         internal static void ValidateAssociations(CSharpCompilation compilation, string architecture)
         {
             var enums = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
@@ -229,8 +232,7 @@ namespace ClangSharpSourceToWinmd
             foreach (var tree in compilation.SyntaxTrees)
             {
                 var model = compilation.GetSemanticModel(tree);
-                bool headerGroup = IsHeaderTypesFile(tree.FilePath) ||
-                    Path.GetFileName(tree.FilePath) == "header-enum-groups.modified.cs";
+                bool headerGroup = IsHeaderEnumSourceFile(tree.FilePath);
                 foreach (var node in tree.GetRoot().DescendantNodes())
                 {
                     if (headerGroup && node is EnumDeclarationSyntax declaration &&
