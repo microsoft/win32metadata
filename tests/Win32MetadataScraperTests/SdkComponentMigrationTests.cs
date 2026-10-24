@@ -52,6 +52,16 @@ namespace Win32MetadataScraperTests
 
         public SdkComponentMigrationTests(ITestOutputHelper output) => this.output = output;
 
+        [Fact]
+        public void ScraperPreambleDoesNotImportTheRemovedHlslNamespace()
+        {
+            string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "scraper.header.txt");
+            var root = (CompilationUnitSyntax)CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetRoot();
+            Assert.DoesNotContain(root.Usings,
+                directive => directive.Name.ToString() == "Windows.Win32.Graphics.Hlsl");
+        }
+
         [HeaderMigrationDataFact]
         public void AvailableSourceFloorsAndDeferredRendezvousFactsKeepExactAccounting()
         {
