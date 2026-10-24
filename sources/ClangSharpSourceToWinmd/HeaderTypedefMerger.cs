@@ -184,15 +184,16 @@ namespace ClangSharpSourceToWinmd
             var valueTypes = aliases.ToDictionary(alias => alias,
                 alias => GetValueType(alias, compilation.GetSemanticModel(alias.Tree)));
             var valueType = valueTypes[storageOwner];
-            bool? provenDeclareHandle = null;
+            bool? provenNativeStorage = null;
             foreach (var alias in aliases)
             {
                 var incomingType = valueTypes[alias];
                 if (!SymbolEqualityComparer.Default.Equals(valueType, incomingType) &&
                     !(retained != null && IsEquivalentNativePointerStorage(valueType, incomingType)))
                 {
-                    provenDeclareHandle ??= CanPreserveDeclaredHandleStorage(compilation, aliases, retained, valueTypes);
-                    if (!provenDeclareHandle.Value)
+                    provenNativeStorage ??= CanPreserveDeclaredHandleStorage(compilation, aliases, retained, valueTypes) ||
+                        CanPreserveOpaqueStructPointerStorage(compilation, aliases, retained, valueTypes);
+                    if (!provenNativeStorage.Value)
                         throw Error(alias, "Conflicting native typedef Value storage types.");
                 }
             }
@@ -226,7 +227,7 @@ namespace ClangSharpSourceToWinmd
                         .WithTriviaFrom(field.Declaration.Type));
             }
             declaration = declaration.AddAttributeLists(added.ToArray());
-            return provenDeclareHandle == true ? NativeHandleSourceProvenance.Remove(declaration) : declaration;
+            return provenNativeStorage == true ? NativeHandleSourceProvenance.Remove(declaration) : declaration;
         }
 
         private static bool CanPreserveDeclaredHandleStorage(CSharpCompilation compilation, Fragment[] aliases, Fragment retained,
@@ -235,15 +236,40 @@ namespace ClangSharpSourceToWinmd
             if (retained == null || aliases.Count(alias => IsAutoTypesFile(alias.Tree.FilePath)) != 1 ||
                 !IsVoidPointer(valueTypes[retained]) ||
                 !retained.Attributes.Any(attribute => AttributeName(attribute) == InvalidHandleValueName) ||
-                !TryGetDeclareHandleProof(retained, NativeHandleSourceProvider.Retained, out var retainedProof))
+                !TryGetNativeHandleProof(retained, NativeHandleSourceProvider.Retained,
+                    NativeHandleSourceProvenance.DeclareHandleKind, out var retainedProof))
+                return false;
+            return CanComposeProvenHeaderPointers(compilation, aliases, retained, valueTypes, retainedProof);
+        }
+
+        private static bool CanPreserveOpaqueStructPointerStorage(CSharpCompilation compilation, Fragment[] aliases,
+            Fragment retained, IReadOnlyDictionary<Fragment, ITypeSymbol> valueTypes)
+        {
+            if (retained == null || aliases.Count(alias => IsAutoTypesFile(alias.Tree.FilePath)) != 1 ||
+                valueTypes[retained].SpecialType != SpecialType.System_IntPtr ||
+                !retained.Attributes.Any(attribute => AttributeName(attribute) == InvalidHandleValueName) ||
+                !TryGetNativeHandleProof(retained, NativeHandleSourceProvider.Retained,
+                    NativeHandleSourceProvenance.OpaqueStructPointerKind, out var retainedProof) ||
+                !retainedProof.WrapperIntent || retainedProof.PointerDepth != 1)
+                return false;
+            return CanComposeProvenHeaderPointers(compilation, aliases, retained, valueTypes, retainedProof);
+        }
+
+        private static bool CanComposeProvenHeaderPointers(CSharpCompilation compilation, Fragment[] aliases,
+            Fragment retained, IReadOnlyDictionary<Fragment, ITypeSymbol> valueTypes, NativeHandleSourceProof retainedProof)
+        {
+            if (aliases.Length < 2)
                 return false;
             ITypeSymbol nativeStorage = null;
             string nativeStorageSyntax = null;
             foreach (var alias in aliases.Where(alias => alias != retained))
             {
                 if (!HeaderEnumGroupMerger.IsHeaderTypesFile(alias.Tree.FilePath) ||
-                    !TryGetDeclareHandleProof(alias, NativeHandleSourceProvider.Header, out var headerProof) ||
+                    !TryGetNativeHandleProof(alias, NativeHandleSourceProvider.Header, retainedProof.Kind, out var headerProof) ||
                     !StringComparer.Ordinal.Equals(retainedProof.NativeAlias, headerProof.NativeAlias) ||
+                    !StringComparer.Ordinal.Equals(retainedProof.NativeTag, headerProof.NativeTag) ||
+                    retainedProof.WrapperIntent != headerProof.WrapperIntent ||
+                    retainedProof.PointerDepth != headerProof.PointerDepth ||
                     valueTypes[alias] is not IPointerTypeSymbol pointer || !IsUnambiguousHandlePointee(pointer.PointedAtType))
                     return false;
                 if (nativeStorage is IPointerTypeSymbol previous)
@@ -271,7 +297,7 @@ namespace ClangSharpSourceToWinmd
 
         private static bool IsUnambiguousHandlePointee(ITypeSymbol pointee)
         {
-            // Retained auto-type preparation intentionally excludes native DECLARE_HANDLE tags.
+            // Retained auto-type preparation can intentionally exclude the proven native tag.
             if (pointee is IErrorTypeSymbol missing)
                 return missing.CandidateReason == CandidateReason.None && missing.CandidateSymbols.IsEmpty;
             return pointee is INamedTypeSymbol record && record.TypeKind == TypeKind.Struct &&
@@ -281,10 +307,11 @@ namespace ClangSharpSourceToWinmd
                     "global::Windows.Win32.Foundation.Metadata.MetadataTypedefAttribute");
         }
 
-        private static bool TryGetDeclareHandleProof(Fragment fragment, NativeHandleSourceProvider provider,
-            out NativeHandleSourceProof proof)
+        private static bool TryGetNativeHandleProof(Fragment fragment, NativeHandleSourceProvider provider,
+            string kind, out NativeHandleSourceProof proof)
         {
-            if (!NativeHandleSourceProvenance.TryRead(fragment.Declaration, out proof) || proof.Provider != provider)
+            if (!NativeHandleSourceProvenance.TryRead(fragment.Declaration, out proof) ||
+                proof.Provider != provider || proof.Kind != kind)
                 return false;
             string fullName = fragment.Symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
             string originalName = GetIdentity(fragment).Substring(fullName.Length - fragment.Symbol.Name.Length);

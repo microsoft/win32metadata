@@ -1723,17 +1723,38 @@ macro replacement proved by compiler spelling/file locations. This also covers
 the actual name argument in `STDMETHOD(GetObject)` and methods inherited from
 native base providers. The generated remap is qualified to the proved owner;
 unrelated overloads and explicit global A/W imports cannot be renamed.
-Lexical candidates without an actual alternate member or an existing authored
-alternate-name mapping leave the primary name unchanged. Ambiguous actual pairs
+Lexical authored-remap candidates without an applicable compiler-selected
+alternate mapping cannot manufacture a scoped remap. Ambiguous actual pairs
 still fail.
 
-There is no global `GetObjectW=GetObject` setting, suffix stripping or new
-public-name policy. Other unconfigured macro-renamed members remain unchanged
-pending review. Their attributes remain visible too: a W-expanded method name
-can acquire `UnicodeAttribute` while its native parameter is still `PSTR`.
-Restoring an authored name does not establish acceptance of unrelated neutral
-TCHAR record changes. The strict compiler-recorded macro rules for original-IDL
-comment selectors are unchanged.
+For otherwise unconfigured macro-selected COM methods and record fields, preserve
+the old public spelling selected by the ANSI compiler at that exact declaration.
+Source identity, direct macro replacement, declaration kind and native parent
+must match. Explicit authored names remain authoritative. This does not rename
+real explicitly named A/W DLL exports or replace primary Unicode types,
+signatures or constants. There is no suffix stripping or API-name list.
+
+This is the coordinator's conservative compatibility implementation under the
+existing requirement to preserve OLD APIs except intentional changes. An earlier
+report attributed the decision to a fresh user selection; that attribution was
+corrected. It is not a new user policy or permission to reinterpret native ABI.
+
+The scraper transports a source-only proof on each matched generated member.
+The emitter restores its spelling after authored remaps and existing encoding
+inference, and native array count references use the final field name. A restored
+A suffix therefore cannot create a new ANSI fact. Existing encoding differences
+remain visible: a W-expanded method name can acquire `UnicodeAttribute` while its
+native parameter is still `PSTR`, and some A-spelled fields and methods were
+already wide. Restoring a public name does not approve those encoding differences
+or unrelated neutral TCHAR record changes. The strict compiler-recorded macro
+rules for original-IDL comment selectors are unchanged.
+
+Method and field proofs use declaration-trailing trivia. Removing a temporary
+`SourceLocation` attribute can otherwise discard a leading proof when that
+attribute is the first or only attribute. Controls cover both scalar fields and
+methods, attribute removal and addition, and final count-field references. The
+reader still accepts preserved valid leading proofs; malformed or duplicate
+proofs fail.
 
 Each Unicode production invocation writes a native-declaration receipt beside
 its bindings, recording primary and supplemental arguments, actual parse
@@ -1741,6 +1762,10 @@ attempts, native source hashes, recovery/remap witnesses and projection status.
 Custom contexts without `UNICODE`, including an explicit later undefinition,
 perform no supplemental parsing. Preparation, MIDL, SDK data, import mappings
 and prepared-cache identities do not change.
+
+The following producer and image results are the preserved pre-rule checkpoint
+published as `2b750f6eff287dc7839013c7959dfc1dea56b87b`. They do not qualify the
+subsequent generic member-name implementation.
 
 Fresh final-runtime production scrapes verify the exact native export set from
 the frozen matched-SDK removal inventory, not just the number of functions:
@@ -1820,6 +1845,18 @@ previously omitted: original native self typedefs, explicit
 rule. Authored remaps remain authoritative. This does not choose a different
 alias when discovery is ambiguous or change an API-specific ownership rule.
 
+The same binding decision now accounts for an existing explicit projection of
+every native alias of a tag. For example, the selected SDK's
+`typedef DirectX::XMFLOAT3 X3DAUDIO_VECTOR` already has the authored
+`X3DAUDIO_VECTOR=Vector3` projection. Its fields correctly use `Vector3`; proposing
+to rename the underlying native tag to the alias would not repair an unresolved
+type. Exact compiler-discovered alias/tag identity and explicit projections
+allow the binding configuration to retain the tag's existing generated name.
+An authored tag mapping still wins. An undecided alias, identity alias mapping or
+unrelated qualified name does not establish this decision. Diagnostic capture
+and the ordinary remapping checker remain unchanged; no API-specific mapping or
+checker allowance is added.
+
 The remaining legacy color warning came from explicit `___` typedef-reversion
 names used by selective record generation. The scraper uses ClangSharp's
 intentional-remap marker only when the unsuffixed target is proven to be a native
@@ -1831,7 +1868,9 @@ No remapping allowlist or integrity check is weakened, and no API-name mapping o
 SDK header is added to resolve these diagnostics. Historical raw images, logs,
 comparisons and failed controls remain unchanged.
 
-The final focused run passes 77 discovery, native-provider, Unicode/ANSI, ABI,
+The following results are the preserved remapping checkpoint preceding the
+new explicit-alias and member-name repairs. Its focused run passes 77 discovery,
+native-provider, Unicode/ANSI, ABI,
 diagnostic and performance cases, including all six unchanged performance
 guards. Fresh affected SDK producer outputs cover 21 partition/architecture
 combinations. Replaying the actual `93a1cc0b` three-architecture CI artifacts
@@ -1901,6 +1940,83 @@ Authored-header path checks derive the SDK include directory from the selected
 recipe package version. They continue to require the exact `Wscapi.h` spelling,
 DirectComposition input hashes and authored patch paths; neither SDK pins nor
 migration data change.
+
+### Explicit retained opaque-struct pointer factories
+
+The separate opaque-factory repair preserves existing authored facts for
+`RO_REGISTRATION_COOKIE`. Its native C++ declaration is a pointer to the complete
+empty `_RO_REGISTRATION_COOKIE` struct, followed by an explicit annotated
+self-typedef. It is not a `DECLARE_HANDLE` expansion. The retained record
+explicitly specifies `typedef struct _RO_REGISTRATION_COOKIE`, `NativeTypedef`
+and invalid zero; its generated storage is `IntPtr`.
+
+The previous header projection leaked the whole-alias `IntPtr` remap onto the
+record pointee and emitted `IntPtr*`. The repair keeps those two operations
+separate. A header provider uses the native record-pointer spelling. It can
+compose with retained storage only when both newly generated source proofs
+identify the same qualified native alias and tag, explicit wrapper intent and
+one unqualified ordinary native pointer. Retained storage and invalid-value
+metadata survive. This is not an equivalence between arbitrary `IntPtr*` and
+`IntPtr` values.
+
+The proof rejects mismatched tags, namespaces and providers, absent retained or
+native intent, qualifiers, unsupported native kinds and additional indirection.
+A real `RO_REGISTRATION_COOKIE*` out parameter keeps its extra pointer. Native
+and retained proofs must come from fresh producers; historical 93/2b fragments
+and the observed upper RO failure remain unchanged.
+
+### Fresh member-name, opaque-factory and explicit-alias qualification
+
+The final ordinary suites passed: 1,743 scraper tests with 231 existing
+recipe-absent skips, 538 emitter tests, 120 utility tests, 26 Python coverage
+auditor tests and 47 workflow tests. The focused source/provenance/physical
+regressions passed all 67 cases. No suite filter or new skip was used for the
+ordinary runs.
+
+Fresh real providers cover x86, x64 and arm64. These include the actual
+`ImagingDevice` and `Mi` owners of the affected Fax and Wmi declarations,
+alongside the other affected partitions. The complete private replay physically
+contains all 53 frozen OLD member identities. Their primary pre-rule Unicode
+signatures and encoding facts are unchanged. Existing differences from the
+older image's encoding attributes remain reviewable; an A public spelling
+supplies no additional encoding fact.
+
+Three fresh complete WinRT producers use the supplied hash-bound annotated
+`roapi.h` and fresh retained intent. The merged cookie has `IntPtr Value`,
+`NativeTypedef` and invalid zero. `RoRegisterActivationFactories` still takes
+`RO_REGISTRATION_COOKIE*`; `RoRevokeActivationFactories` takes the value.
+The shared physical definitions have no architecture restriction. This private
+annotation-enabled WinRT context also produces ten raw `Out` to `Out,RetVal`
+differences, retained separately from the bounded cookie repair.
+
+The explicit-alias probe reproduces the frozen upper translation unit's
+`_XM_NO_INTRINSICS_` and `x3daudio.h` context on all three targets. Its eight
+`X3DAUDIO_VECTOR` fields use the existing
+`Windows.Win32.Media.Audio.XAudio2.Vector3` projection, whose three `Single`
+fields are `x`, `y` and `z`. That declaration already exists in the frozen
+upper generated source. Raw producer logs contain no redundant missing-remap
+recommendation. No math remap, production include or API patch is added.
+
+The complete private image has SHA-256
+`E277BF6E987A012840F8892E8159FB693EAF8731E9B8E0D3EF23997FDD2E68FF`.
+All 27 unchanged image-integrity tests passed. Its unsuppressed comparison to
+the actual pre-rule tooling CI image retains 107 raw rows: 64 member-name
+add/remove rows, 24 corresponding member-order rows, nine additions from the
+explicit private X3DAudio include and the ten private WinRT `RetVal` changes.
+The raw comparison hash is
+`28B12612EC8F1BB2F9E153FCE7425F6498E7969F9C76F8A73EF4689E7CC162AB`.
+No `knownDiffs` file is applied.
+
+The pre-rule CI was run 40083485264, event head
+`2b750f6eff287dc7839013c7959dfc1dea56b87b`. Its actual synthetic merge checkout
+was `7f1ba60abda76e635e465c21c6aec802fc06afd9`, with parents
+`2f767671802301cf043c717d66bf004ed7863487` and that event head; its image hash is
+`9F46243DE73D8CB178D749A2F11E1A439286E04D44582ACAE8F5D832411BBB81`.
+That green remains a separate pre-rule checkpoint. The new published head
+requires its own normal three-architecture and build/test/package CI.
+The private replay does not qualify a complete migrated SDK or native consumer
+compatibility. Preparation helpers, recipes, SDK patches and cache inputs are
+unchanged by this release.
 
 ### Tooling and migration PR boundaries
 

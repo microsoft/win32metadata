@@ -128,7 +128,7 @@ ExcludedExport
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]
-        public void AuthoredMacroRemapsRemainScopedAndDoNotRenameOtherExpandedMembers(string architecture, string target)
+        public void AuthoredMacroRemapsAndLegacyNamesRemainScopedToCompilerProvenMembers(string architecture, string target)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
 #ifdef UNICODE
@@ -162,9 +162,10 @@ extern ""C"" int GetClassNameW(unsigned short* text, unsigned count);
                 .DecodeSignature(new SignatureNames(), null).ParameterTypes);
             Assert.Equal("GetObject", reader.GetString(reader.GetFieldDefinition(
                 Assert.Single(FindType(reader, "FieldOwner").GetFields())).Name));
-            var unconfigured = FindMethod(reader, "UnconfiguredOwner", "GetClassNameW");
+            var unconfigured = FindMethod(reader, "UnconfiguredOwner", "GetClassNameA");
             Assert.Equal(new[] { "SByte*" }, unconfigured.DecodeSignature(new SignatureNames(), null).ParameterTypes);
             AssertHasAttribute(reader, unconfigured.GetCustomAttributes(), "UnicodeAttribute");
+            AssertDoesNotHaveAttribute(reader, unconfigured.GetCustomAttributes(), "AnsiAttribute");
             Assert.Equal("GetObjectA", reader.GetString(FindMethod(reader, "Apis", "GetObject").GetImport().Name));
             Assert.Equal("GetObjectW", reader.GetString(FindMethod(reader, "Apis", "GetObjectW").GetImport().Name));
             AssertMetadataClosure(reader);

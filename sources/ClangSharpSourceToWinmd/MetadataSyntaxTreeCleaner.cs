@@ -39,6 +39,7 @@ namespace ClangSharpSourceToWinmd
         {
             TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
+            newRoot = NativeMemberNameProvenance.Project(newRoot);
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
         }
@@ -1437,7 +1438,7 @@ namespace ClangSharpSourceToWinmd
                         {
                             this.GetRemapInfo(GetFullNameWithoutArchSuffix(countField), countField.AttributeLists,
                                 out _, countField.Declaration.Type.ToString(), out _, out string newName);
-                            string countFieldName = newName ?? count;
+                            string countFieldName = newName ?? NativeMemberNameProvenance.GetProjectedFieldName(countField, count);
                             argument = SyntaxFactory.AttributeArgument(
                                 SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(countFieldName)))
                                 .WithNameEquals(SyntaxFactory.NameEquals("CountFieldName"));

@@ -23,28 +23,30 @@ using Windows.Win32.Foundation.Metadata;
 
             foreach (AutoType item in items.OrderBy(a => a.Namespace))
             {
+                bool explicitWrapperIntent = item.NativeTypedef;
+                bool nativeTypedef = item.NativeTypedef;
                 string safety = item.ValueType.Contains("*") ? "unsafe " : string.Empty;
                 var valueType = item.ValueType;
                 if (valueType == "DECLARE_HANDLE")
                 {
                     safety = "unsafe ";
                     valueType = "void*";
-                    item.NativeTypedef = true;
+                    nativeTypedef = true;
                 }
                 else if (valueType == "AllJoynHandle")
                 {
                     valueType = "IntPtr";
-                    item.NativeTypedef = true;
+                    nativeTypedef = true;
                 }
                 else if (valueType == "DECLARE_OPAQUE_KEY")
                 {
                     valueType = "long";
-                    item.NativeTypedef = true;
+                    nativeTypedef = true;
                 }
                 else if (valueType.StartsWith("typedef struct"))
                 {
                     valueType = "IntPtr";
-                    item.NativeTypedef = true;
+                    nativeTypedef = true;
                 }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
@@ -92,6 +94,15 @@ $@"namespace {currentNamespace}
                     var proven = NativeHandleSourceProvenance.AttachRetainedDeclareHandle(declaration, item.Name);
                     writer.WriteLine("    " + proven.GetLeadingTrivia().ToFullString().Trim());
                 }
+                else if (explicitWrapperIntent &&
+                    NativeHandleSourceProvenance.TryParseRetainedOpaqueStructFactory(item.ValueType, out string nativeTag))
+                {
+                    var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
+                        $"public struct {item.Name} {{ public IntPtr Value; }}");
+                    var proven = NativeHandleSourceProvenance.AttachRetainedOpaqueStructPointer(
+                        declaration, item.Name, nativeTag, explicitWrapperIntent);
+                    writer.WriteLine("    " + proven.GetLeadingTrivia().ToFullString().Trim());
+                }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
                 {
@@ -112,7 +123,7 @@ $@"namespace {currentNamespace}
                 }
 
                 writer.WriteLine(
-$@"    [{(item.NativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
+$@"    [{(nativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
     public {safety}struct {item.Name}
     {{
         public {valueType} Value;
