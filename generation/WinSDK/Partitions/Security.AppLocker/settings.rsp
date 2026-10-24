@@ -1,3 +1,6 @@
+--with-type
+_tagSLDATATYPE=uint
+SLDATATYPE=uint
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD
@@ -5,5 +8,6 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/winsafer.h
 --namespace
 Windows.Win32.Security.AppLocker
+
 --config
 parse-win32-annotations

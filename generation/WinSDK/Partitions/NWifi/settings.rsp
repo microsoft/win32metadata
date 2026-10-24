@@ -1,5 +1,3 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/dot1x.h
 <IncludeRoot>/um/l2cmn.h
@@ -13,3 +11,5 @@ parse-win32-annotations
 <IncludeRoot>/um/wlclient.h
 --namespace
 Windows.Win32.NetworkManagement.WiFi
+--config
+parse-win32-annotations

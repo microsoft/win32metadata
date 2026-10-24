@@ -1,8 +1,8 @@
---config
-parse-win32-annotations
 --exclude
 _DL_EUI48
 --traverse
 <IncludeRoot>/um/wnvapi.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsNetworkVirtualization
+--config
+parse-win32-annotations

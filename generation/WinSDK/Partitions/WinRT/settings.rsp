@@ -1,4 +1,9 @@
+--with-type
+HANDLE_OPTIONS=uint
+--with-attribute
+HANDLE_OPTIONS=Flags
 --exclude
+RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration
 RoErrorReportingFlags
 IDesktopWindowTarget
@@ -24,7 +29,6 @@ ID2D1Factory
 <IncludeRoot>/um/WebAuthenticationCoreManagerInterop.h
 <IncludeRoot>/winrt/activation.h
 <IncludeRoot>/winrt/corewindow.h
-<IncludeRoot>/winrt/eventtoken.h
 <IncludeRoot>/winrt/hstring.h
 <IncludeRoot>/winrt/inspectable.h
 <IncludeRoot>/winrt/memorybuffer.h
@@ -39,3 +43,5 @@ ID2D1Factory
 Windows.Win32.System.WinRT
 --config
 parse-win32-annotations
+--traverse
+<IncludeRoot>/winrt/eventtoken.h

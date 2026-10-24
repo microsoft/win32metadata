@@ -7,8 +7,9 @@ _FLOAT128
 _OBJECT_ATTRIBUTES
 --traverse
 <IncludeRoot>/shared/ntdef.h
-excpt.h
 --namespace
 Windows.Win32.System.Kernel
 --config
 parse-win32-annotations
+--traverse
+excpt.h

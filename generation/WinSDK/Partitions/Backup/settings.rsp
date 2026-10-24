@@ -1,6 +1,5 @@
 --config
 exclude-empty-records
-parse-win32-annotations
 --exclude
 _LIST_ENTRY
 LIST_ENTRY32
@@ -42,3 +41,5 @@ LPENCLAVE_TARGET_FUNCTION
 <IncludeRoot>/um/winnt.h
 --namespace
 Windows.Win32.System.SystemServices
+--config
+parse-win32-annotations

@@ -1,3 +1,6 @@
+--with-type
+_tagSLDATATYPE=uint
+SLDATATYPE=uint
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD

@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/NotificationActivationCallback.h
 --namespace
 Windows.Win32.UI.Notifications
+--config
+parse-win32-annotations

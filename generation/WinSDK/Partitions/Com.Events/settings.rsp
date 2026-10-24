@@ -1,8 +1,9 @@
---config
-parse-win32-annotations
 --exclude
 IResourceManagerXXX
 --traverse
 <IncludeRoot>/um/EventSys.h
 --namespace
 Windows.Win32.System.Com.Events
+
+--config
+parse-win32-annotations

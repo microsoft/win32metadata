@@ -4,3 +4,5 @@ _GUID
 <IncludeRoot>/um/ichannelcredentials.h
 --namespace
 Windows.Win32.System.Com.ChannelCredentials
+--with-type
+STREAM_SEEK=uint

@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/wcmapi.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsConnectionManager
+--config
+parse-win32-annotations

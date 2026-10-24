@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/NetSh.h
 --namespace
 Windows.Win32.NetworkManagement.NetShell
+--config
+parse-win32-annotations

@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/RadialControllerInterop.h
 --namespace
 Windows.Win32.UI.Input.Radial
+--config
+parse-win32-annotations

@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/ProcessSnapshot.h
 --namespace
 Windows.Win32.System.Diagnostics.ProcessSnapshotting
+--config
+parse-win32-annotations

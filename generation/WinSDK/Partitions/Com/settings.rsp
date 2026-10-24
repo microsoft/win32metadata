@@ -1,6 +1,5 @@
 --config
 exclude-empty-records
-parse-win32-annotations
 --exclude
 _GUID
 --traverse
@@ -21,3 +20,7 @@ _GUID
 <IncludeRoot>/um/servprov.h
 --namespace
 Windows.Win32.System.Com
+--with-type
+STREAM_SEEK=uint
+--config
+parse-win32-annotations

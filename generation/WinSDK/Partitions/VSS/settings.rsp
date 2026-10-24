@@ -1,5 +1,3 @@
---config
-parse-win32-annotations
 --exclude
 CVssWriter
 CreateWriter
@@ -19,3 +17,5 @@ ShouldBlockRevert
 <IncludeRoot>/um/vsserror.h
 --namespace
 Windows.Win32.Storage.Vss
+--config
+parse-win32-annotations

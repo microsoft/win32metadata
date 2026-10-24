@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/reason.h
 --namespace
 Windows.Win32.System.Shutdown
+--config
+parse-win32-annotations

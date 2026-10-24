@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/msrdc.h
 --namespace
 Windows.Win32.Networking.RemoteDifferentialCompression
+--config
+parse-win32-annotations

@@ -1,5 +1,3 @@
---config
-parse-win32-annotations
 --exclude
 _DDPIXELFORMAT
 IKsControl
@@ -10,3 +8,5 @@ _DDVIDEOPORTCONNECT
 <IncludeRoot>/um/endpointvolume.h
 --namespace
 Windows.Win32.Media.Audio.Endpoints
+--config
+parse-win32-annotations

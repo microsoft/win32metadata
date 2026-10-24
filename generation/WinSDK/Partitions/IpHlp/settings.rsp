@@ -1,5 +1,3 @@
---config
-parse-win32-annotations
 --exclude
 RtlIpv4AddressToStringA
 RtlIpv6AddressToStringA
@@ -40,3 +38,5 @@ _DL_EUI48
 <IncludeRoot>/um/ipinfoid.h
 --namespace
 Windows.Win32.NetworkManagement.IpHelper
+--config
+parse-win32-annotations

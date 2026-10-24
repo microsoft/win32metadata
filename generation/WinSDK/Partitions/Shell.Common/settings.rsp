@@ -1,10 +1,11 @@
---config
-parse-win32-annotations
 --remap
 _NavigateToPidl=_NavigateToPidl2
 --traverse
 <IncludeRoot>/um/shtypes.h
 <IncludeRoot>/um/ObjectArray.h
 --with-attribute
+SIIGBF=Flags
 --namespace
 Windows.Win32.UI.Shell.Common
+--config
+parse-win32-annotations

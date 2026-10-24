@@ -1,8 +1,8 @@
---config
-parse-win32-annotations
 --exclude
 IKsPropertySet
 --traverse
 <IncludeRoot>/um/amxmlgraphbuilder.h
 --namespace
 Windows.Win32.Media.DirectShow.Xml
+--config
+parse-win32-annotations

@@ -1,5 +1,3 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/shared/ioevent.h
 <IncludeRoot>/shared/strsafe.h
@@ -21,3 +19,5 @@ DESKTOPENUMPROCW
 PROPENUMPROC
 PROPENUMPROCEX
 EDITWORDBREAKPROC
+--config
+parse-win32-annotations

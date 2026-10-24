@@ -1,6 +1,6 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/netlistmgr.h
 --namespace
 Windows.Win32.Networking.NetworkListManager
+--config
+parse-win32-annotations

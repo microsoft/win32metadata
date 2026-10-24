@@ -3,6 +3,5 @@
 <IncludeRoot>/um/HolographicSpaceInterop.h
 --namespace
 Windows.Win32.System.WinRT
-
 --config
 parse-win32-annotations

@@ -1,5 +1,3 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/um/wtsdefs.h
 <IncludeRoot>/um/SessdirPublicTypes.h
@@ -24,3 +22,5 @@ parse-win32-annotations
 <IncludeRoot>/um/remotesystemadditionalinfo.h
 --namespace
 Windows.Win32.System.RemoteDesktop
+--config
+parse-win32-annotations

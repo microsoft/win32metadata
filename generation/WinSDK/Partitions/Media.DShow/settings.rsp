@@ -1,7 +1,4 @@
---config
-parse-win32-annotations
 --traverse
-<IncludeRoot>/um/dshow.h
 <IncludeRoot>/um/audevcod.h
 <IncludeRoot>/um/evcode.h
 <IncludeRoot>/um/dvdevcod.h
@@ -52,3 +49,7 @@ Windows.Win32.Media.DirectShow
 _DVD_REGION
 --std
 c++20
+--config
+parse-win32-annotations
+--traverse
+<IncludeRoot>/um/dshow.h

@@ -1,8 +1,8 @@
---config
-parse-win32-annotations
 --traverse
 <IncludeRoot>/shared/dcomptypes.h
 <IncludeRoot>/um/dcomp.h
 <IncludeRoot>/um/dcompanimation.h
 --namespace
 Windows.Win32.Graphics.DirectComposition
+--config
+parse-win32-annotations
