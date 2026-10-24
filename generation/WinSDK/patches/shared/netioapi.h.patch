@@ -1,8 +1,8 @@
 diff --git a/shared/netioapi.h b/shared/netioapi.h
-index ca51682f..1b598a28 100644
+index c3ae36f..5835f76 100644
 --- a/shared/netioapi.h
 +++ b/shared/netioapi.h
-@@ -223,6 +223,7 @@ typedef struct _MIB_IF_TABLE2 {
+@@ -225,6 +225,7 @@ typedef struct _MIB_IF_TABLE2 {
      MIB_IF_ROW2 Table[ANY_SIZE];
  } MIB_IF_TABLE2, *PMIB_IF_TABLE2;
  
@@ -10,7 +10,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -270,6 +271,7 @@ typedef enum _MIB_IF_ENTRY_LEVEL {
+@@ -272,6 +273,7 @@ typedef enum _MIB_IF_ENTRY_LEVEL {
      MibIfEntryNormalWithoutStatistics = 2
  } MIB_IF_ENTRY_LEVEL, *PMIB_IF_ENTRY_LEVEL;
  
@@ -18,7 +18,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -312,6 +314,7 @@ Notes:
+@@ -314,6 +316,7 @@ Notes:
  --*/
  #endif
  
@@ -26,7 +26,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -350,6 +353,7 @@ typedef enum _MIB_IF_TABLE_LEVEL {
+@@ -352,6 +355,7 @@ typedef enum _MIB_IF_TABLE_LEVEL {
      #endif
  } MIB_IF_TABLE_LEVEL, *PMIB_IF_TABLE_LEVEL;
  
@@ -34,7 +34,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -496,6 +500,7 @@ typedef struct _MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
+@@ -498,6 +502,7 @@ typedef struct _MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES {
  } MIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES,
    *PMIB_IP_NETWORK_CONNECTION_BANDWIDTH_ESTIMATES;
  
@@ -42,7 +42,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -504,6 +509,7 @@ GetIfStackTable(
+@@ -506,6 +511,7 @@ GetIfStackTable(
      _Outptr_ PMIB_IFSTACK_TABLE *Table
      );
  
@@ -50,7 +50,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -512,6 +518,7 @@ GetInvertedIfStackTable(
+@@ -514,6 +520,7 @@ GetInvertedIfStackTable(
      _Outptr_ PMIB_INVERTEDIFSTACK_TABLE *Table
      );
  
@@ -58,7 +58,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -547,6 +554,7 @@ Notes:
+@@ -549,6 +556,7 @@ Notes:
  
  --*/
  
@@ -66,7 +66,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -586,6 +594,7 @@ Notes:
+@@ -588,6 +596,7 @@ Notes:
  
  --*/
  
@@ -74,7 +74,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  VOID
-@@ -615,6 +624,7 @@ Notes:
+@@ -617,6 +626,7 @@ Notes:
  
  --*/
  
@@ -82,7 +82,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -667,6 +677,7 @@ Notes:
+@@ -669,6 +679,7 @@ Notes:
  
  --*/
  
@@ -90,7 +90,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -703,6 +714,7 @@ Notes:
+@@ -705,6 +716,7 @@ Notes:
  
  --*/
  
@@ -98,7 +98,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -793,6 +805,7 @@ VOID
+@@ -795,6 +807,7 @@ VOID
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -106,7 +106,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -829,6 +842,7 @@ Notes:
+@@ -831,6 +844,7 @@ Notes:
  
  --*/
  
@@ -114,7 +114,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -860,6 +874,7 @@ Notes:
+@@ -862,6 +876,7 @@ Notes:
  
  --*/
  
@@ -122,7 +122,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -900,6 +915,7 @@ Notes:
+@@ -902,6 +917,7 @@ Notes:
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -130,7 +130,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -946,6 +962,7 @@ Notes:
+@@ -948,6 +964,7 @@ Notes:
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -138,7 +138,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  VOID
-@@ -983,6 +1000,7 @@ Notes:
+@@ -985,6 +1002,7 @@ Notes:
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -146,7 +146,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1042,6 +1060,7 @@ VOID
+@@ -1044,6 +1062,7 @@ VOID
      _In_ PMIB_UNICASTIPADDRESS_TABLE AddressTable
      );
  
@@ -154,7 +154,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1060,6 +1079,7 @@ NotifyStableUnicastIpAddressTable(
+@@ -1062,6 +1081,7 @@ NotifyStableUnicastIpAddressTable(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -162,7 +162,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1119,6 +1139,7 @@ typedef struct _MIB_ANYCASTIPADDRESS_TABLE {
+@@ -1121,6 +1141,7 @@ typedef struct _MIB_ANYCASTIPADDRESS_TABLE {
      MIB_ANYCASTIPADDRESS_ROW Table[ANY_SIZE];
  } MIB_ANYCASTIPADDRESS_TABLE, *PMIB_ANYCASTIPADDRESS_TABLE;
  
@@ -170,7 +170,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1150,6 +1171,7 @@ Notes:
+@@ -1152,6 +1173,7 @@ Notes:
  
  --*/
  
@@ -178,7 +178,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1181,6 +1203,7 @@ Notes:
+@@ -1183,6 +1205,7 @@ Notes:
  
  --*/
  
@@ -186,7 +186,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1215,6 +1238,7 @@ Notes:
+@@ -1217,6 +1240,7 @@ Notes:
  
  --*/
  
@@ -194,7 +194,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1278,6 +1302,7 @@ typedef struct _MIB_MULTICASTIPADDRESS_TABLE {
+@@ -1280,6 +1304,7 @@ typedef struct _MIB_MULTICASTIPADDRESS_TABLE {
      MIB_MULTICASTIPADDRESS_ROW Table[ANY_SIZE];
  } MIB_MULTICASTIPADDRESS_TABLE, *PMIB_MULTICASTIPADDRESS_TABLE;
  
@@ -202,7 +202,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1312,6 +1337,7 @@ Notes:
+@@ -1314,6 +1339,7 @@ Notes:
  
  --*/
  
@@ -210,7 +210,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1416,6 +1442,7 @@ VOID
+@@ -1418,6 +1444,7 @@ VOID
      _In_ MIB_NOTIFICATION_TYPE NotificationType
      );
  
@@ -218,7 +218,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1453,6 +1480,7 @@ Notes:
+@@ -1455,6 +1482,7 @@ Notes:
  
  --*/
  
@@ -226,7 +226,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1491,6 +1519,7 @@ Notes:
+@@ -1493,6 +1521,7 @@ Notes:
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -234,7 +234,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1548,6 +1577,7 @@ Notes:
+@@ -1550,6 +1579,7 @@ Notes:
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -242,7 +242,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1590,6 +1620,7 @@ Notes:
+@@ -1592,6 +1622,7 @@ Notes:
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -250,7 +250,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1635,6 +1666,7 @@ Notes:
+@@ -1637,6 +1668,7 @@ Notes:
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -258,7 +258,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  VOID
-@@ -1664,6 +1696,7 @@ Notes:
+@@ -1666,6 +1698,7 @@ Notes:
  
  --*/
  
@@ -266,7 +266,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1716,6 +1749,7 @@ Notes:
+@@ -1718,6 +1751,7 @@ Notes:
  
  --*/
  
@@ -274,7 +274,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1809,6 +1843,7 @@ typedef struct _MIB_IPPATH_TABLE {
+@@ -1811,6 +1845,7 @@ typedef struct _MIB_IPPATH_TABLE {
  } MIB_IPPATH_TABLE, *PMIB_IPPATH_TABLE;
  
  
@@ -282,7 +282,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1840,6 +1875,7 @@ Return Value:
+@@ -1842,6 +1877,7 @@ Return Value:
  
  --*/
  
@@ -290,7 +290,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1874,6 +1910,7 @@ Notes:
+@@ -1876,6 +1912,7 @@ Notes:
  
  --*/
  
@@ -298,7 +298,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1955,6 +1992,7 @@ typedef struct _MIB_IPNET_TABLE2 {
+@@ -1957,6 +1994,7 @@ typedef struct _MIB_IPNET_TABLE2 {
      MIB_IPNET_ROW2 Table[ANY_SIZE];
  } MIB_IPNET_TABLE2, *PMIB_IPNET_TABLE2;
  
@@ -306,7 +306,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -1987,6 +2025,7 @@ Notes:
+@@ -1989,6 +2027,7 @@ Notes:
  
  --*/
  
@@ -314,7 +314,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2019,6 +2058,7 @@ Notes:
+@@ -2021,6 +2060,7 @@ Notes:
  --*/
  
  
@@ -322,7 +322,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2056,6 +2096,7 @@ Return Value:
+@@ -2058,6 +2098,7 @@ Return Value:
  --*/
  
  
@@ -330,7 +330,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2090,6 +2131,7 @@ Notes:
+@@ -2092,6 +2133,7 @@ Notes:
  
  --*/
  
@@ -338,7 +338,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2129,6 +2171,7 @@ Notes:
+@@ -2131,6 +2173,7 @@ Notes:
  
  --*/
  
@@ -346,7 +346,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2170,6 +2213,7 @@ Notes:
+@@ -2172,6 +2215,7 @@ Notes:
  
  --*/
  
@@ -354,7 +354,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2221,6 +2265,7 @@ VOID
+@@ -2223,6 +2267,7 @@ VOID
      _Inout_ MIB_NOTIFICATION_TYPE NotificationType
      );
  
@@ -362,7 +362,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2232,6 +2277,7 @@ NotifyTeredoPortChange(
+@@ -2234,6 +2279,7 @@ NotifyTeredoPortChange(
      _Inout_ HANDLE *NotificationHandle
      );
  
@@ -370,7 +370,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2279,6 +2325,7 @@ Return Value:
+@@ -2281,6 +2327,7 @@ Return Value:
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -378,7 +378,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  NETIOAPI_API
-@@ -2308,6 +2355,7 @@ Notes:
+@@ -2310,6 +2357,7 @@ Notes:
  
  --*/
  
@@ -386,7 +386,7 @@ index ca51682f..1b598a28 100644
  IPHLPAPI_DLL_LINKAGE
  VOID
  NETIOAPI_API_
-@@ -2336,6 +2384,7 @@ Return Value:
+@@ -2338,6 +2386,7 @@ Return Value:
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -394,7 +394,17 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2457,6 +2506,7 @@ Return Value:
+@@ -2405,6 +2454,9 @@ Return Value:
+ 
+ struct sockaddr;
+ 
++#ifdef __IPHLPAPI_H__
++_Win32_SupportedOS_WindowsXP_
++#endif
+ IPHLPAPI_DLL_LINKAGE
+ _NETIOAPI_SUCCESS_
+ NETIOAPI_API
+@@ -2470,6 +2522,7 @@ Return Value:
  
  --*/
  
@@ -402,7 +412,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2485,6 +2535,7 @@ Return Value:
+@@ -2498,6 +2551,7 @@ Return Value:
  
  --*/
  
@@ -410,7 +420,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2513,6 +2564,7 @@ Return Value:
+@@ -2526,6 +2580,7 @@ Return Value:
  
  --*/
  
@@ -418,7 +428,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2544,6 +2596,7 @@ Return Value:
+@@ -2554,6 +2609,7 @@ Return Value:
  
  --*/
  
@@ -426,7 +436,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2575,6 +2628,7 @@ Return Value:
+@@ -2585,6 +2641,7 @@ Return Value:
  
  --*/
  
@@ -434,7 +444,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2603,6 +2657,7 @@ Return Value:
+@@ -2616,6 +2673,7 @@ Return Value:
  
  --*/
  
@@ -442,7 +452,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2631,6 +2686,7 @@ Return Value:
+@@ -2644,6 +2702,7 @@ Return Value:
  
  --*/
  
@@ -450,7 +460,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2662,6 +2718,7 @@ Return Value:
+@@ -2672,6 +2731,7 @@ Return Value:
  
  --*/
  
@@ -458,7 +468,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2690,6 +2747,7 @@ Return Value:
+@@ -2703,6 +2763,7 @@ Return Value:
  
  --*/
  
@@ -466,7 +476,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2718,6 +2776,7 @@ Return Value:
+@@ -2731,6 +2792,7 @@ Return Value:
  
  --*/
  
@@ -474,7 +484,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -2748,6 +2807,7 @@ Return Value:
+@@ -2789,6 +2851,7 @@ Return Value:
  
  #define IF_NAMESIZE NDIS_IF_MAX_STRING_SIZE
  
@@ -482,7 +492,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  NET_IFINDEX
-@@ -2771,6 +2831,7 @@ Return Value:
+@@ -2812,6 +2875,7 @@ Return Value:
  
  --*/
  
@@ -490,7 +500,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  PCHAR
-@@ -3021,6 +3082,7 @@ Return Value:
+@@ -3011,6 +3075,7 @@ Permissions:
  
  --*/
  
@@ -498,7 +508,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  NET_IF_COMPARTMENT_ID
-@@ -3111,6 +3173,7 @@ Return Value:
+@@ -3152,6 +3217,7 @@ Return Value:
  
  #pragma warning(pop)
  
@@ -506,7 +516,7 @@ index ca51682f..1b598a28 100644
  IPHLPAPI_DLL_LINKAGE
  NETIOAPI_API
  ConvertLengthToIpv4Mask(
-@@ -3137,6 +3200,7 @@ Return Value:
+@@ -3178,6 +3244,7 @@ Return Value:
  
  --*/
  
@@ -514,7 +524,7 @@ index ca51682f..1b598a28 100644
  IPHLPAPI_DLL_LINKAGE
  NETIOAPI_API
  ConvertIpv4MaskToLength(
-@@ -3518,6 +3582,7 @@ Return Value:
+@@ -3559,6 +3626,7 @@ Return Value:
  
  --*/
  
@@ -522,7 +532,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -3544,6 +3609,7 @@ Return Value:
+@@ -3585,6 +3653,7 @@ Return Value:
  
  --*/
  
@@ -530,7 +540,7 @@ index ca51682f..1b598a28 100644
  _IRQL_requires_max_(PASSIVE_LEVEL)
  IPHLPAPI_DLL_LINKAGE
  _NETIOAPI_SUCCESS_
-@@ -3582,6 +3648,7 @@ VOID
+@@ -3623,6 +3692,7 @@ VOID
      _In_ NL_NETWORK_CONNECTIVITY_HINT ConnectivityHint
      );
  
