@@ -1681,6 +1681,52 @@ scrape declarations and native results before complete emission. Preparation,
 MIDL helpers, recipe and SDK pins are unchanged. Frozen OLD, SDK026 and their
 original ANSI-valued outputs and comparisons remain unchanged.
 
+### Native remapping diagnostics and legacy binding decisions
+
+The pinned ClangSharp `Close()` clears its diagnostic collection. The historical
+`c915725e` scraper read that collection after closing the generator, so its green
+`NoSuggestedRemappings` result did not establish the absence of recommendations.
+The integrated scraper correctly snapshots diagnostics before closing, including
+selective record passes. That ordering remains required; diagnostics are not
+discarded to restore a historical green result.
+
+Actual `a73bff9f` producer logs exposed nine recommendations. The approved UNICODE
+context in `93a1cc0b` exposed 49 more, chiefly W-tag/neutral aliases. These findings
+are kept separate from the raw API-image differences.
+
+The binding context now retains existing decisions that exported rename output
+previously omitted: original native self typedefs, explicit
+`--exclude-auto-remap` compatibility pins and the existing interface no-rename
+rule. Authored remaps remain authoritative. This does not choose a different
+alias when discovery is ambiguous or change an API-specific ownership rule.
+
+The remaining legacy color warning came from explicit `___` typedef-reversion
+names used by selective record generation. The scraper uses ClangSharp's
+intentional-remap marker only when the unsuffixed target is proven to be a native
+typedef of the exact qualified canonical source tag. The generated temporary
+name is unchanged. Unknown, pointer and different-tag aliases do not qualify;
+emitter storage, binding and manual-provider checks remain strict.
+
+No remapping allowlist or integrity check is weakened, and no API-name mapping or
+SDK header is added to resolve these diagnostics. Historical raw images, logs,
+comparisons and failed controls remain unchanged.
+
+The final focused run passes 77 discovery, native-provider, Unicode/ANSI, ABI,
+diagnostic and performance cases, including all six unchanged performance
+guards. Fresh affected SDK producer outputs cover 21 partition/architecture
+combinations. Replaying the actual `93a1cc0b` three-architecture CI artifacts
+with those outputs passes all 27 integrity tests, including the unchanged
+producer-log remapping check. Its unsuppressed comparison against the actual
+`93a1cc0b` CI image reports no declaration differences.
+
+The separate raw c915 comparison now has 1,367 declaration rows: 606 additions,
+125 removals and 636 changes, plus two Fax string-value rows. This includes the
+approved UNICODE context and is not API-equivalence or migration-acceptance
+proof. The original 921-row and later 885-row comparisons remain frozen.
+The `93a1cc0b` normal CI run passed scraping, emission, packaging, samples and
+ordinary suites, but failed integrity on the 58 remapping recommendations.
+Local replay proof does not qualify a subsequently published head's normal CI.
+
 ### Tooling and migration PR boundaries
 
 The tooling layer retains the existing sidecar and manual-source inputs and

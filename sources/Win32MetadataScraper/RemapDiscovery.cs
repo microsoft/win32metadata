@@ -26,6 +26,9 @@ public class DiscoveryResult
     /// <summary>Tag name → list of typedef names. One tag may have multiple typedefs.</summary>
     public Dictionary<string, List<string>> TagToTypedefs { get; } = new();
 
+    /// <summary>Qualified typedef name to its canonical tag, including same-level aliases.</summary>
+    public Dictionary<string, string> NativeTypedefTags { get; } = new();
+
     /// <summary>Names of tags that are enums.</summary>
     public HashSet<string> EnumTags { get; } = new();
 
@@ -82,6 +85,30 @@ public static class RemapDiscovery
     {
         var result = new DiscoveryResult();
         WalkDecl(rootDecl, result);
+        return result;
+    }
+
+    internal static Dictionary<string, string> CreateBindingRemaps(
+        DiscoveryResult discovery, IReadOnlyDictionary<string, string> remaps, ISet<string> autoRemapExcludes)
+    {
+        var result = new Dictionary<string, string>(remaps);
+        // Native identity and existing no-rename choices are binding decisions.
+        foreach (var pair in discovery.TagToTypedefs)
+            if (pair.Value.Contains(pair.Key, StringComparer.Ordinal) ||
+                autoRemapExcludes.Contains(pair.Key) || IsLikelyComInterfaceTag(pair.Key))
+                result.TryAdd(pair.Key, pair.Key);
+
+        foreach (var pair in remaps)
+        {
+            if (pair.Value.EndsWith("___", StringComparison.Ordinal) &&
+                discovery.NativeTypedefTags.TryGetValue(pair.Value[..^3], out string tag) &&
+                tag == pair.Key)
+            {
+                // ClangSharp's force marker preserves the authored temporary name;
+                // the native alias proof does not authorize an arbitrary remap.
+                result[pair.Key] = "@" + pair.Value;
+            }
+        }
         return result;
     }
 
@@ -460,6 +487,12 @@ public static class RemapDiscovery
     {
         if (decl is TypedefDecl typedefDecl)
         {
+            if (typedefDecl.UnderlyingType.CanonicalType is TagType canonicalTag &&
+                !string.IsNullOrEmpty(canonicalTag.Decl.Name))
+            {
+                result.NativeTypedefTags[DeclarationSourceMap.QualifiedName(typedefDecl.Handle)] =
+                    DeclarationSourceMap.QualifiedName(canonicalTag.Decl.Handle);
+            }
             var underlyingType = UnwrapType(typedefDecl.UnderlyingType);
 
             if (underlyingType is TagType tagType)

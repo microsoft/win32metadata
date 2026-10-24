@@ -10,6 +10,114 @@ namespace Win32MetadataScraperTests
     /// </summary>
     public class TagTypedefDiscoveryTests
     {
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void CanonicalIdentityTypedefDoesNotRecommendReplacingItsNativeName(
+            string architecture, string target, bool explicitIdentity)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef union NATIVE_FEATURES { unsigned long long Bits; } NATIVE_FEATURES;
+typedef NATIVE_FEATURES FEATURES;
+NATIVE_FEATURES GetNativeFeatures(void);
+FEATURES GetFeatures(void);
+", annotationsEnabled: false, extraSettings: "--config\nlog-potential-typedef-remappings\n" +
+                (explicitIdentity ? "--remap\nNATIVE_FEATURES=NATIVE_FEATURES\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("Recommended remapping: 'NATIVE_FEATURES=FEATURES'", fixture.Diagnostics);
+            Assert.Contains("struct NATIVE_FEATURES", fixture.ReadSource());
+            Assert.DoesNotContain("struct FEATURES", fixture.ReadSource());
+            Assert.Contains("NATIVE_FEATURES GetNativeFeatures()", fixture.ReadSource());
+            Assert.Contains("NATIVE_FEATURES GetFeatures()", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void ExplicitAutoRemapOptOutKeepsNativeIdentityUnlessAuthoredRemapWins(bool manualRemap)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct _RECORD { int Value; } RECORD;
+RECORD ReadRecord(void);
+", annotationsEnabled: false, extraSettings:
+                "--config\nlog-potential-typedef-remappings\n--exclude-auto-remap\n_RECORD\n" +
+                (manualRemap ? "--remap\n_RECORD=RECORD\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("Recommended remapping: '_RECORD=RECORD'", fixture.Diagnostics);
+            string name = manualRemap ? "RECORD" : "_RECORD";
+            Assert.Contains("struct " + name, fixture.ReadSource());
+            Assert.Contains(name + " ReadRecord()", fixture.ReadSource());
+        }
+
+        [Fact]
+        public void ExistingInterfaceNoRenameRuleReachesTheBindingContext()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct IResource { virtual int Open(void) = 0; };
+typedef IResource ResourceClass;
+IResource* OpenResource(void);
+ResourceClass* OpenAlias(void);
+", annotationsEnabled: false, extraSettings: "--config\nlog-potential-typedef-remappings\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("Recommended remapping: 'IResource=ResourceClass'", fixture.Diagnostics);
+            Assert.Contains("IResource* OpenResource()", fixture.ReadSource());
+            Assert.Contains("IResource* OpenAlias()", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("COLOR_ALIAS", true)]
+        [InlineData("CHAINED_ALIAS", true)]
+        [InlineData("Other::COLOR_ALIAS", false)]
+        [InlineData("UNKNOWN_ALIAS", false)]
+        public void LegacyTypedefReversionRequiresTheExactNativeAlias(string name, bool valid)
+        {
+            const string declarations = @"
+typedef struct _COLOR { float Red; } COLOR;
+typedef COLOR COLOR_ALIAS;
+typedef COLOR_ALIAS CHAINED_ALIAS;
+namespace Other { typedef struct _OTHER { int Other; } COLOR_ALIAS; }
+COLOR ReadColor(void);
+";
+            string target = name + "___";
+            string remap = "--remap\n_COLOR=" + target + "\n";
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations,
+                annotationsEnabled: false, extraSettings: remap + "--config\nlog-potential-typedef-remappings\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            if (valid)
+                Assert.DoesNotContain("Recommended remapping: '_COLOR=COLOR'", fixture.Diagnostics);
+            else
+                Assert.Contains("Recommended remapping: '_COLOR=COLOR'", fixture.Diagnostics);
+            using var control = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations,
+                annotationsEnabled: false, extraSettings: remap);
+            Assert.True(control.Run() == 0, control.Diagnostics);
+            Assert.Equal(control.ReadSource(), fixture.ReadSource());
+        }
+
+        [Fact]
+        public void NativeAliasProofRetainsQualificationAndCanonicalTagIdentity()
+        {
+            var discovery = HeaderSnippetParser.ParseAndDiscover(@"
+typedef struct _COLOR { float Red; } COLOR;
+typedef COLOR COLOR_ALIAS;
+typedef COLOR_ALIAS CHAINED_ALIAS;
+typedef COLOR* COLOR_POINTER;
+namespace Other { typedef struct _COLOR { int Other; } COLOR_ALIAS; }
+");
+            Assert.Equal("_COLOR", discovery.NativeTypedefTags["COLOR"]);
+            Assert.Equal("_COLOR", discovery.NativeTypedefTags["COLOR_ALIAS"]);
+            Assert.Equal("_COLOR", discovery.NativeTypedefTags["CHAINED_ALIAS"]);
+            Assert.Equal("Other::_COLOR", discovery.NativeTypedefTags["Other::COLOR_ALIAS"]);
+            Assert.False(discovery.NativeTypedefTags.ContainsKey("COLOR_POINTER"));
+            var configured = new Dictionary<string, string> { ["_COLOR"] = "CHAINED_ALIAS___" };
+            Assert.Equal("@CHAINED_ALIAS___", Win32MetadataScraper.RemapDiscovery.CreateBindingRemaps(
+                discovery, configured, new HashSet<string>())["_COLOR"]);
+            Assert.Equal("CHAINED_ALIAS___", configured["_COLOR"]);
+        }
+
         [Fact]
         public void ManyDirectTypedefsKeepAliasOrderWithoutDuplicateDiscovery()
         {
