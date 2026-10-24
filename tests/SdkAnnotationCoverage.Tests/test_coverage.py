@@ -100,6 +100,42 @@ class SourceBlockedAccountingTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "selected SDK"):
             coverage.source_blocked_accounting(self.inventory(), "10.0.26100.7705")
 
+    def test_refresh_replaces_the_old_preservation_claim_without_rescanning_sources(self):
+        report = report_fixture()
+        report["snapshot"].update({
+            "configurationGitTree": "frozen-tree", "sdkPackageVersion": "10.0.28000.2705",
+            "sdkIncludeVersion": "10.0.28000.0",
+        })
+        report["scope"] = {}
+        report["additionalSelectedSourceProviders"] = [{"publicIncludeFiles": []}]
+        report["sourceProgressScoreboard"] = {
+            "committedPatchInputs": True, "strictApplyRows": [],
+            "committedNonBootstrapNativeHeaderCount": 0, "goalEligibleCommittedNativeHeaderCount": 0,
+            "actuallyAffectedGeneratedHeaderCount": None, "goalEligibleObservedGeneratedHeaderCount": None,
+            "eligiblePatchedHeaderCountKnown": None, "newNativeHeaderPathsBeyondSnapshot": [],
+            "receiptStrictApplyStatusCounts": {},
+        }
+        report["missingOriginalSourceMigrations"] = {"preservedLegacyFacts": 30}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "c" / "include" / "10.0.28000.0").mkdir(parents=True)
+            output = root / "inventory.json"
+            output.write_text(json.dumps(report), encoding="utf-8")
+            with (
+                patch("sys.argv", ["coverage", "--refresh", "--output", str(output),
+                                   "--sdk-package-root", str(root)]),
+                patch.object(coverage, "git", side_effect=lambda repo, *args:
+                             "" if args[0] == "diff" else "frozen-tree"),
+                patch.object(coverage, "update_source_receipts"),
+                patch.object(coverage, "update_generated_observations"),
+                patch.object(coverage, "write_operational_outputs"),
+                patch("builtins.print"),
+            ):
+                coverage.main()
+            refreshed = json.loads(output.read_text(encoding="utf-8"))
+        self.assertEqual(refreshed["missingOriginalSourceMigrations"],
+                         coverage.source_blocked_accounting(self.inventory(), "10.0.28000.2705"))
+
 
 class ConfigurationTests(unittest.TestCase):
     def test_response_sections_keep_exact_lines_and_duplicate_rules(self):

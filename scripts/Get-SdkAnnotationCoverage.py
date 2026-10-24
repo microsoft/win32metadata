@@ -746,6 +746,9 @@ def main():
             raise ValueError("A dirty-input inventory cannot supply committed baseline counts")
         if campaign.get("sourceReceipts") and not report["sourceProgressScoreboard"]["strictApplyRows"]:
             raise ValueError("Committed source receipts require a strictly applied baseline inventory")
+        report["missingOriginalSourceMigrations"] = source_blocked_accounting(
+            json.loads(text(repo / SOURCE_BLOCKED_INVENTORY)), version
+        )
         report["selectedProviderOverlayOriginals"] = selected_overlay_originals(
             [item["original"] for item in report["selectedSdkOriginals"]],
             report["additionalSelectedSourceProviders"][0]["publicIncludeFiles"],
