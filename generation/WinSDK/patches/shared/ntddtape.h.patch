@@ -1,0 +1,181 @@
+diff --git a/shared/ntddtape.h b/shared/ntddtape.h
+index fb92fdeb..7a1995b4 100644
+--- a/shared/ntddtape.h
++++ b/shared/ntddtape.h
+@@ -16,6 +16,18 @@ Abstract:
+ #ifndef _NTDDTAPE_
+ #define _NTDDTAPE_
+ 
++#include <sal.h>
++#include <win32metadata_annotations.h>
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int CREATE_TAPE_PARTITION_METHOD;
++typedef unsigned int ERASE_TAPE_TYPE;
++typedef unsigned int PREPARE_TAPE_OPERATION;
++typedef unsigned int TAPEMARK_TYPE;
++typedef unsigned int TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH;
++typedef unsigned int TAPE_POSITION_METHOD;
++typedef unsigned int TAPE_POSITION_TYPE;
++#endif
++
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
+@@ -102,8 +114,14 @@ extern "C" {
+ #define TAPE_ERASE_SHORT            0L
+ #define TAPE_ERASE_LONG             1L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ERASE_TAPE_TYPE, unsigned int,
++    TAPE_ERASE_LONG,
++    TAPE_ERASE_SHORT);
++#endif
++
+ typedef struct _TAPE_ERASE {
+-    ULONG Type;
++    _Win32_AssociatedEnum_(ERASE_TAPE_TYPE) ULONG Type;
+     BOOLEAN Immediate;
+ } TAPE_ERASE, *PTAPE_ERASE;
+ 
+@@ -118,8 +136,18 @@ typedef struct _TAPE_ERASE {
+ #define TAPE_UNLOCK                 4L
+ #define TAPE_FORMAT                 5L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(PREPARE_TAPE_OPERATION, unsigned int,
++    TAPE_FORMAT,
++    TAPE_LOAD,
++    TAPE_LOCK,
++    TAPE_TENSION,
++    TAPE_UNLOAD,
++    TAPE_UNLOCK);
++#endif
++
+ typedef struct _TAPE_PREPARE {
+-    ULONG Operation;
++    _Win32_AssociatedEnum_(PREPARE_TAPE_OPERATION) ULONG Operation;
+     BOOLEAN Immediate;
+ } TAPE_PREPARE, *PTAPE_PREPARE;
+ 
+@@ -132,8 +160,16 @@ typedef struct _TAPE_PREPARE {
+ #define TAPE_SHORT_FILEMARKS        2L
+ #define TAPE_LONG_FILEMARKS         3L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(TAPEMARK_TYPE, unsigned int,
++    TAPE_FILEMARKS,
++    TAPE_LONG_FILEMARKS,
++    TAPE_SETMARKS,
++    TAPE_SHORT_FILEMARKS);
++#endif
++
+ typedef struct _TAPE_WRITE_MARKS {
+-    ULONG Type;
++    _Win32_AssociatedEnum_(TAPEMARK_TYPE) ULONG Type;
+     ULONG Count;
+     BOOLEAN Immediate;
+ } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
+@@ -144,10 +180,16 @@ typedef struct _TAPE_WRITE_MARKS {
+ 
+ #define TAPE_ABSOLUTE_POSITION       0L
+ #define TAPE_LOGICAL_POSITION        1L
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(TAPE_POSITION_TYPE, unsigned int,
++    TAPE_ABSOLUTE_POSITION,
++    TAPE_LOGICAL_POSITION);
++#endif
+ #define TAPE_PSEUDO_LOGICAL_POSITION 2L
+ 
+ typedef struct _TAPE_GET_POSITION {
+-    ULONG Type;
++    _Win32_AssociatedEnum_(TAPE_POSITION_TYPE) ULONG Type;
+     ULONG Partition;
+     LARGE_INTEGER Offset;
+ } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
+@@ -167,8 +209,21 @@ typedef struct _TAPE_GET_POSITION {
+ #define TAPE_SPACE_SETMARKS         8L
+ #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(TAPE_POSITION_METHOD, unsigned int,
++    TAPE_ABSOLUTE_BLOCK,
++    TAPE_LOGICAL_BLOCK,
++    TAPE_REWIND,
++    TAPE_SPACE_END_OF_DATA,
++    TAPE_SPACE_FILEMARKS,
++    TAPE_SPACE_RELATIVE_BLOCKS,
++    TAPE_SPACE_SEQUENTIAL_FMKS,
++    TAPE_SPACE_SEQUENTIAL_SMKS,
++    TAPE_SPACE_SETMARKS);
++#endif
++
+ typedef struct _TAPE_SET_POSITION {
+-    ULONG Method;
++    _Win32_AssociatedEnum_(TAPE_POSITION_METHOD) ULONG Method;
+     ULONG Partition;
+     LARGE_INTEGER Offset;
+     BOOLEAN Immediate;
+@@ -256,6 +311,39 @@ typedef struct _TAPE_SET_POSITION {
+ #define TAPE_DRIVE_WRITE_LONG_FMKS  0x88000000
+ 
+ #define TAPE_DRIVE_WRITE_MARK_IMMED 0x90000000
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH, unsigned int,
++    TAPE_DRIVE_ABS_BLK_IMMED,
++    TAPE_DRIVE_ABSOLUTE_BLK,
++    TAPE_DRIVE_END_OF_DATA,
++    TAPE_DRIVE_FILEMARKS,
++    TAPE_DRIVE_LOAD_UNLOAD,
++    TAPE_DRIVE_LOAD_UNLD_IMMED,
++    TAPE_DRIVE_LOCK_UNLOCK,
++    TAPE_DRIVE_LOCK_UNLK_IMMED,
++    TAPE_DRIVE_LOG_BLK_IMMED,
++    TAPE_DRIVE_LOGICAL_BLK,
++    TAPE_DRIVE_RELATIVE_BLKS,
++    TAPE_DRIVE_REVERSE_POSITION,
++    TAPE_DRIVE_REWIND_IMMEDIATE,
++    TAPE_DRIVE_SEQUENTIAL_FMKS,
++    TAPE_DRIVE_SEQUENTIAL_SMKS,
++    TAPE_DRIVE_SET_BLOCK_SIZE,
++    TAPE_DRIVE_SET_COMPRESSION,
++    TAPE_DRIVE_SET_ECC,
++    TAPE_DRIVE_SET_PADDING,
++    TAPE_DRIVE_SET_REPORT_SMKS,
++    TAPE_DRIVE_SETMARKS,
++    TAPE_DRIVE_SPACE_IMMEDIATE,
++    TAPE_DRIVE_TENSION,
++    TAPE_DRIVE_TENSION_IMMED,
++    TAPE_DRIVE_WRITE_FILEMARKS,
++    TAPE_DRIVE_WRITE_LONG_FMKS,
++    TAPE_DRIVE_WRITE_MARK_IMMED,
++    TAPE_DRIVE_WRITE_SETMARKS,
++    TAPE_DRIVE_WRITE_SHORT_FMKS);
++#endif
+ #define TAPE_DRIVE_FORMAT           0xA0000000
+ #define TAPE_DRIVE_FORMAT_IMMEDIATE 0xC0000000
+ #define TAPE_DRIVE_HIGH_FEATURES    0x80000000  //mask for high features flag
+@@ -270,7 +358,7 @@ typedef struct _TAPE_GET_DRIVE_PARAMETERS {
+     ULONG MinimumBlockSize;
+     ULONG MaximumPartitionCount;
+     ULONG FeaturesLow;
+-    ULONG FeaturesHigh;
++    _Win32_AssociatedEnum_(TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH) ULONG FeaturesHigh;
+     ULONG EOTWarningZoneSize;
+ } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
+ 
+@@ -314,6 +402,13 @@ typedef struct _TAPE_SET_MEDIA_PARAMETERS {
+ #define TAPE_SELECT_PARTITIONS      1L
+ #define TAPE_INITIATOR_PARTITIONS   2L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(CREATE_TAPE_PARTITION_METHOD, unsigned int,
++    TAPE_FIXED_PARTITIONS,
++    TAPE_INITIATOR_PARTITIONS,
++    TAPE_SELECT_PARTITIONS);
++#endif
++
+ typedef struct _TAPE_CREATE_PARTITION {
+     ULONG Method;
+     ULONG Count;

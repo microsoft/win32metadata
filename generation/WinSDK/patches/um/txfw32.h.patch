@@ -1,0 +1,74 @@
+diff --git a/um/txfw32.h b/um/txfw32.h
+--- a/um/txfw32.h
++++ b/um/txfw32.h
+@@ -29,6 +29,10 @@
+ 
+ #ifndef _TXF_W32_H_INCLUDED_
+ #define _TXF_W32_H_INCLUDED_
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned short TXF_LOG_RECORD_TYPE;
++#endif
+ 
+ #include <winapifamily.h>
+ 
+@@ -43,6 +47,12 @@
+ #define TXF_LOG_RECORD_TYPE_WRITE           0x01
+ #define TXF_LOG_RECORD_TYPE_TRUNCATE        0x02
+ #define TXF_LOG_RECORD_TYPE_AFFECTED_FILE   0x04
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(TXF_LOG_RECORD_TYPE, unsigned short,
++    TXF_LOG_RECORD_TYPE_AFFECTED_FILE,
++    TXF_LOG_RECORD_TYPE_TRUNCATE,
++    TXF_LOG_RECORD_TYPE_WRITE);
++#endif
+ 
+ #define TXF_LOG_RECORD_GENERIC_TYPE_COMMIT  0x01
+ #define TXF_LOG_RECORD_GENERIC_TYPE_ABORT   0x02
+@@ -91,7 +101,7 @@
+     //  Type of record, defined above.
+     //
+ 
+-    USHORT RecordType;
++    _Win32_AssociatedEnum_(TXF_LOG_RECORD_TYPE) USHORT RecordType;
+ 
+     //
+     //  Length of this record in bytes.
+@@ -300,6 +310,8 @@
+ extern "C" {
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ TxfLogCreateFileReadContext (
+@@ -367,6 +379,8 @@
+ 
+ */
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ TxfLogDestroyReadContext (
+@@ -385,6 +399,8 @@
+ */
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ TxfLogReadRecords (
+@@ -584,6 +600,10 @@
+ #define TXFS_MINIVERSION_DIRTY_VIEW                      (0xFFFF)
+ #define TXFS_MINIVERSION_DEFAULT_VIEW                    (0xFFFE)
+ 
++#ifdef WIN32METADATA
++_Win32_Enum_(TXFS_MINIVERSION, unsigned int, TXFS_MINIVERSION_COMMITTED_VIEW, TXFS_MINIVERSION_DIRTY_VIEW, TXFS_MINIVERSION_DEFAULT_VIEW);
++#endif
++
+ 
+ 
+ #ifdef __cplusplus

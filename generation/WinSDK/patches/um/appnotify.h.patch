@@ -1,0 +1,23 @@
+diff --git a/um/appnotify.h b/um/appnotify.h
+--- a/um/appnotify.h
++++ b/um/appnotify.h
+@@ -40,6 +40,9 @@
+     );
+ 
+ typedef struct _APPSTATE_REGISTRATION *PAPPSTATE_REGISTRATION;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PAPPSTATE_REGISTRATION PAPPSTATE_REGISTRATION;
++#endif
+ 
+ APICONTRACT
+ ULONG
+@@ -65,6 +68,9 @@
+ );
+ 
+ typedef struct _APPCONSTRAIN_REGISTRATION *PAPPCONSTRAIN_REGISTRATION;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef PAPPCONSTRAIN_REGISTRATION PAPPCONSTRAIN_REGISTRATION;
++#endif
+ 
+ APICONTRACT
+ ULONG

@@ -1,0 +1,212 @@
+diff --git a/um/wdstptmgmt.idl b/um/wdstptmgmt.idl
+index 118bd940..dffd9c15 100644
+--- a/um/wdstptmgmt.idl
++++ b/um/wdstptmgmt.idl
+@@ -12,6 +12,7 @@ Abstract:
+ 
+ --*/
+ 
++#include <sal.h>
+ cpp_quote("//")
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+@@ -225,6 +226,7 @@ typedef enum
+ //------------------------------------------------------- Interface Definitions
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportCacheable => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(46AD894B-0BAB-47DC-84B2-7B553F1D8F80),
+@@ -241,6 +243,7 @@ interface IWdsTransportCacheable : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportCollection => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(B8BA4B1A-2FF4-43AB-996C-B2B10A91A6EB),
+@@ -256,6 +259,7 @@ interface IWdsTransportCollection : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportManager => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(5B0D35F5-1B13-4AFD-B878-6526DC340B5D),
+@@ -269,6 +273,7 @@ interface IWdsTransportManager : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportServer => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(09CCD093-830D-4344-A30A-73AE8E8FCA90),
+@@ -286,6 +291,7 @@ interface IWdsTransportServer : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportServer2 => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(256e999f-6df4-4538-81b9-857b9ab8fb47),
+@@ -299,6 +305,7 @@ interface IWdsTransportServer2 : IWdsTransportServer{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportSetupManager => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(F7238425-EFA8-40A4-AEF9-C98D969C0B75),
+@@ -316,6 +323,7 @@ interface IWdsTransportSetupManager : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportSetupManager2 => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(02BE79DA-7E9E-4366-8B6E-2AA9A91BE47F),
+@@ -330,6 +338,7 @@ interface IWdsTransportSetupManager2 : IWdsTransportSetupManager{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportConfigurationManager => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(84CC4779-42DD-4792-891E-1321D6D74B44),
+@@ -351,6 +360,7 @@ interface IWdsTransportConfigurationManager : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportConfigurationManager2 => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(D0D85CAF-A153-4F1D-A9DD-96F431C50717),
+@@ -364,6 +374,7 @@ interface IWdsTransportConfigurationManager2 : IWdsTransportConfigurationManager
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportNamespaceManager => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(3E22D9F6-3777-4D98-83E1-F98696717BA3),
+@@ -379,6 +390,7 @@ interface IWdsTransportNamespaceManager : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportTftpManager => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(1327a7c8-ae8a-4fb3-8150-136227c37e9a),
+@@ -392,6 +404,7 @@ interface IWdsTransportTftpManager : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportServicePolicy => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(B9468578-9F2B-48CC-B27A-A60799C2750C),
+@@ -416,6 +429,7 @@ interface IWdsTransportServicePolicy : IWdsTransportCacheable{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportServicePolicy2 => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(65C19E5C-AA7E-4B91-8944-91E0E5572797),
+@@ -434,6 +448,7 @@ interface IWdsTransportServicePolicy2 : IWdsTransportServicePolicy{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportDiagnosticsPolicy => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(13B33EFC-7856-4F61-9A59-8DE67B6B87B6),
+@@ -450,6 +465,7 @@ interface IWdsTransportDiagnosticsPolicy : IWdsTransportCacheable{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportMulticastSessionPolicy => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(4E5753CF-68EC-4504-A951-4A003266606B),
+@@ -470,6 +486,7 @@ interface IWdsTransportMulticastSessionPolicy : IWdsTransportCacheable{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportNamespace => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(FA561F57-FBEF-4ED3-B056-127CB1B33B84),
+@@ -511,6 +528,7 @@ interface IWdsTransportNamespace : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportNamespaceAutoCast => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(AD931A72-C4BD-4C41-8FBC-59C9C748DF9E),
+@@ -523,6 +541,7 @@ interface IWdsTransportNamespaceAutoCast : IWdsTransportNamespace{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportNamespaceScheduledCast => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(3840CECF-D76C-416E-A4CC-31C741D2874B),
+@@ -536,6 +555,7 @@ interface IWdsTransportNamespaceScheduledCast : IWdsTransportNamespace{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportNamespaceScheduledCastManualStart => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(013E6E4C-E6A7-4FB5-B7FF-D9F5DA805C31),
+@@ -548,6 +568,7 @@ interface IWdsTransportNamespaceScheduledCastManualStart : IWdsTransportNamespac
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportNamespaceScheduledCastAutoStart => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(D606AF3D-EA9C-4219-961E-7491D618D9B9),
+@@ -564,6 +585,7 @@ interface IWdsTransportNamespaceScheduledCastAutoStart : IWdsTransportNamespaceS
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportContent => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(D405D711-0296-4AB4-A860-AC7D32E65798),
+@@ -581,6 +603,7 @@ interface IWdsTransportContent : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportSession => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(F4EFEA88-65B1-4F30-A4B9-2793987796FB),
+@@ -601,6 +624,7 @@ interface IWdsTransportSession : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportClient => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(B5DBC93A-CABE-46CA-837F-3E44E93C6545),
+@@ -625,6 +649,7 @@ interface IWdsTransportClient : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportTftpClient => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(b022d3ae-884d-4d85-b146-53320e76ef62),
+@@ -644,6 +669,7 @@ interface IWdsTransportTftpClient : IDispatch{
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWdsTransportContentProvider => SupportedOSPlatform(\"windowsserver2012\") */")
+ [
+     object,
+     uuid(B9489F24-F219-4ACF-AAD7-265C7C08A6AE),

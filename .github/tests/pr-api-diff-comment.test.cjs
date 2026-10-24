@@ -180,6 +180,11 @@ test('both artifact uploads still include the generated patch', () => {
   }
 });
 
+test('full SDK scrapes have a bounded two-hour budget while build and test keep one hour', () => {
+  assert.match(validationJob('scrape'), /^    timeout-minutes: 120$/m);
+  assert.match(validationJob('build-test'), /^    timeout-minutes: 60$/m);
+});
+
 for (const [jobName, uploadCount] of [['scrape', 1], ['build-test', 2]]) {
   test(`${jobName} always-run local uploads require a successful checkout`, () => {
     const job = validationJob(jobName);

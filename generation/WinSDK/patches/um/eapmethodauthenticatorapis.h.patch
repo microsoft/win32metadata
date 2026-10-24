@@ -1,0 +1,95 @@
+diff --git a/um/eapmethodauthenticatorapis.h b/um/eapmethodauthenticatorapis.h
+index d2c47a14..5afeb8de 100644
+--- a/um/eapmethodauthenticatorapis.h
++++ b/um/eapmethodauthenticatorapis.h
+@@ -215,14 +215,19 @@ extern "C"
+     //
+     // EAP Functions
+     //
++    _Win32_SupportedOS_WindowsVista_
+     void WINAPI EapMethodAuthenticatorFreeErrorMemory(_In_ EAP_ERROR* pEapError);
++    _Win32_SupportedOS_WindowsVista_
+     void WINAPI EapMethodAuthenticatorFreeMemory(_In_ void* pUIContextData);
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorGetInfo(
+         _In_ EAP_METHOD_TYPE* pEapType, _Out_ EAP_AUTHENTICATOR_METHOD_ROUTINES* pEapInfo, _Outptr_ EAP_ERROR** ppEapError);
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorInitialize(_In_ EAP_METHOD_TYPE* pEapType, _Outptr_ EAP_ERROR** ppEapError);
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorBeginSession(
+         // Flags to qualify the authentication process.
+         _In_ DWORD dwFlags,
+@@ -247,6 +252,7 @@ extern "C"
+         // the failure. This will be null on a successful call.
+         _Outptr_ EAP_ERROR** ppEapError);
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorUpdateInnerMethodParams(
+         // context handle as returned from a successful call to
+         // EapAuthenticatorBeginSession
+@@ -263,6 +269,7 @@ extern "C"
+     // The authenticator calls this any time it receives a packet that the eaphost
+     // needs to process. This should be called only after a successful call to
+     // EapAuthenticatorBeginSession.
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorReceivePacket(
+         // context handle as returned from a successful call to
+         // EapAuthenticatorBeginSession
+@@ -281,6 +288,7 @@ extern "C"
+         // the failure. This will be null on a successful call.
+         _Outptr_ EAP_ERROR** ppEapError);
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorSendPacket(
+         // context handle as returned from a successful call to
+         // EapHostAuthenticatorBeginSession
+@@ -304,6 +312,7 @@ extern "C"
+     // Returns an array of attributes that the caller needs to act on.
+     // The supplicant will call this when a call to
+     // EapHostAuthenticatorProcessRequestPacket returns EapHostAuthenticatorResponseRespond.
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorGetAttributes(
+         // context handle as returned from a successful call to
+         // EapHostAuthenticatorBeginSession
+@@ -314,6 +323,7 @@ extern "C"
+ 
+     // Sets an array of attributes that the caller wants the eap method to act
+     // on.
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorSetAttributes(
+         // context handle as returned from a successful call to
+         // EapHostAuthenticatorBeginSession
+@@ -335,6 +345,7 @@ extern "C"
+     //    this method with a failure.
+     // 2. The server can choose to terminate an authentication with a failure in the middle of
+     //    an authentication.
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorGetResult(
+         // context handle as returned from a successful call to
+         // EapHostPeerBeginSession
+@@ -348,6 +359,7 @@ extern "C"
+ 
+     // Ends the authentication session. This cleans up any state that the eap
+     // method or eaphost might be keeping.
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorEndSession(
+         // context handle as returned from a successful call to
+         // EapHostPeerBeginSession. This will be set to NULL on a successful call.
+@@ -356,12 +368,14 @@ extern "C"
+         // the failure. This will be null on a successful call.
+         _Outptr_ EAP_ERROR** ppEapError);
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD EapMethodAuthenticatorShutdown(_In_ EAP_METHOD_TYPE* pEapType, _Outptr_ EAP_ERROR** ppEapError);
+ 
+     /// Config API
+ 
+ #define EAP_METHOD_AUTHENTICATOR_CONFIG_IS_IDENTITY_PRIVACY 0x1
+ 
++    _Win32_SupportedOS_WindowsVista_
+     DWORD WINAPI EapMethodAuthenticatorInvokeConfigUI(
+         _In_ EAP_METHOD_TYPE* pEapMethodType,
+         _In_ HWND hwndParent,

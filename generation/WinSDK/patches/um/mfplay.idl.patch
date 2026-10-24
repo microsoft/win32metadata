@@ -1,0 +1,58 @@
+diff --git a/um/mfplay.idl b/um/mfplay.idl
+index 62b58e9d..438f7d03 100644
+--- a/um/mfplay.idl
++++ b/um/mfplay.idl
+@@ -1,3 +1,4 @@
++cpp_quote("#include <sal.h>")
+ //*@@@+++@@@@******************************************************************
+ //
+ // Microsoft Windows Media Foundation
+@@ -5,6 +6,7 @@
+ //
+ //*@@@---@@@@******************************************************************
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -204,9 +206,11 @@ typedef [v1_enum] enum _MFP_CREDENTIAL_FLAGS
+ /// </param>
+ 
+ cpp_quote( "STDAPI MFPCreateMediaPlayer(" )
++cpp_quote("/* Win32Metadata: function ::MFPCreateMediaPlayer => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote( "            _In_opt_  LPCWSTR pwszURL," )
+ cpp_quote( "            _In_      BOOL fStartPlayback," )
+ cpp_quote( "            _In_opt_  MFP_CREATION_OPTIONS creationOptions," )
++cpp_quote("/* Win32Metadata: parameter ::MFPCreateMediaPlayer::creationOptions => Optional(false) */")
+ cpp_quote( "            _In_opt_  IMFPMediaPlayerCallback * pCallback," )
+ cpp_quote( "            _In_opt_  HWND hWnd," )
+ cpp_quote( "            _Out_opt_ IMFPMediaPlayer ** ppMediaPlayer );" )
+@@ -216,6 +220,7 @@ cpp_quote( "            _Out_opt_ IMFPMediaPlayer ** ppMediaPlayer );" )
+ //////////////////////////////////////////////////////////////////////////////
+ /// <summary>
+ /// </summary>
++cpp_quote("/* Win32Metadata: interface ::IMFPMediaPlayer => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     local,
+     object,
+@@ -428,6 +433,7 @@ interface IMFPMediaPlayer : IUnknown
+ cpp_quote( "EXTERN_GUID( MFP_POSITIONTYPE_100NS, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 );" )  // GUID_NULL
+ 
+ //////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IMFPMediaItem => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     local,
+     object,
+@@ -803,6 +809,7 @@ cpp_quote( "#define MFP_GET_ACQUIRE_USER_CREDENTIAL_EVENT( pHdr )
+ //////////////////////////////////////////////////////////////////////////////
+ /// <summary>
+ /// </summary>
++cpp_quote("/* Win32Metadata: interface ::IMFPMediaPlayerCallback => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     local,
+     object,
+@@ -816,4 +823,3 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
+-

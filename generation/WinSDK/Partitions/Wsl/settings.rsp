@@ -1,12 +1,6 @@
 --traverse
 <IncludeRoot>/um/wslapi.h
---with-librarypath
-WslIsDistributionRegistered=Api-ms-win-wsl-api-l1-1-0.dll
-WslRegisterDistribution=Api-ms-win-wsl-api-l1-1-0.dll
-WslUnregisterDistribution=Api-ms-win-wsl-api-l1-1-0.dll
-WslConfigureDistribution=Api-ms-win-wsl-api-l1-1-0.dll
-WslGetDistributionConfiguration=Api-ms-win-wsl-api-l1-1-0.dll
-WslLaunchInteractive=Api-ms-win-wsl-api-l1-1-0.dll
-WslLaunch=Api-ms-win-wsl-api-l1-1-0.dll
 --namespace
 Windows.Win32.System.SubsystemForLinux
+--config
+parse-win32-annotations

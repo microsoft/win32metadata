@@ -1,0 +1,17 @@
+diff --git a/shared/fltUserStructures.h b/shared/fltUserStructures.h
+--- a/shared/fltUserStructures.h
++++ b/shared/fltUserStructures.h
+@@ -42,7 +42,13 @@
+ #define INSTANCE_NAME_MAX_BYTES   (INSTANCE_NAME_MAX_CHARS * sizeof( WCHAR ))
+ 
+ typedef HANDLE  HFILTER;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HFILTER HFILTER;
++#endif
+ typedef HANDLE  HFILTER_INSTANCE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HFILTER_INSTANCE HFILTER_INSTANCE;
++#endif
+ typedef HANDLE  HFILTER_VOLUME;
+ 
+ 

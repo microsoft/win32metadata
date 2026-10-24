@@ -1,0 +1,229 @@
+diff --git a/um/rdpencomapi.idl b/um/rdpencomapi.idl
+index b5e35cc7..a399b2ac 100644
+--- a/um/rdpencomapi.idl
++++ b/um/rdpencomapi.idl
+@@ -10,6 +10,8 @@
+ // Date:    06/24/2004
+ //
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #include <olectl.h>
+@@ -258,6 +260,7 @@ interface IRDPSRAPIDebug : IUnknown
+ }; // IRDPSRAPIDebug
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIPerfCounterLogger => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(071c2533-0fa4-4e8f-ae83-9c10b4305ab5),
+@@ -273,6 +276,7 @@ interface IRDPSRAPIPerfCounterLogger : IUnknown
+ }; // IRDPSRAPIPerfLogger
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIPerfCounterLoggingManager => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(9a512c86-ac6e-4a8e-b1a4-fcef363f6e64),
+@@ -288,6 +292,7 @@ interface IRDPSRAPIPerfCounterLoggingManager : IUnknown
+ }; // IRDPSRAPIPerfCounterLoggingManager
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIAudioStream => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(e3e30ef9-89c6-4541-ba3b-19336ac6d31c),
+@@ -317,6 +322,7 @@ interface IRDPSRAPIAudioStream : IUnknown
+     FreeBuffer();
+ }; // IRDPSRAPIAudioStream
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIClipboardUseEvents => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(D559F59A-7A27-4138-8763-247CE5F659A8),
+@@ -340,6 +346,7 @@ interface IRDPSRAPIClipboardUseEvents : IUnknown
+ ///////////////////////////////////////////////////////////////////////////
+ interface IRDPSRAPIApplication;
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIWindow => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(beafe0f9-c77b-4933-ba9f-a24cddcc27cf),
+@@ -410,6 +417,7 @@ interface IRDPSRAPIWindow: IDispatch
+         
+ }; // IRDPSRAPIWindow
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIWindowList => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(8a05ce44-715a-4116-a189-a118f30a07bd),
+@@ -440,6 +448,7 @@ interface IRDPSRAPIWindowList: IDispatch
+ 
+ }; // IRDPSRAPIWindowList
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIApplication => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(41e7a09d-eb7a-436e-935d-780ca2628324),
+@@ -502,6 +511,7 @@ interface IRDPSRAPIApplication: IDispatch
+ 
+ }; // IRDPSRAPIApplication
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIApplicationList => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(d4b4aeb3-22dc-4837-b3b6-42ea2517849a),
+@@ -532,6 +542,7 @@ interface IRDPSRAPIApplicationList: IDispatch
+ 
+ }; // IRDPSRAPIApplicationList
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIApplicationFilter => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(d20f10ca-6637-4f06-b1d5-277ea7e5160d),
+@@ -578,6 +589,7 @@ interface IRDPSRAPIApplicationFilter: IDispatch
+ 
+ }; // IRDPSRAPIApplicationFilter
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPISessionProperties => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(339b24f2-9bc0-4f16-9aac-f165433d13d4),
+@@ -607,6 +619,7 @@ interface IRDPSRAPISessionProperties: IDispatch
+         );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIInvitation => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(4fac1d43-fc51-45bb-b1b4-2b53aa562fa3),
+@@ -681,6 +694,7 @@ interface IRDPSRAPIInvitation: IDispatch
+         
+ }; // IRDPSRAPIInvitation
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIInvitationManager => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(4722b049-92c3-4c2d-8a65-f7348f644dcf),
+@@ -733,6 +747,7 @@ interface IRDPSRAPIInvitationManager: IDispatch
+         
+ }; // IRDPSRAPIInvitationManager
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPITcpConnectionInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(f74049a4-3d06-4028-8193-0a8c29bc2452),
+@@ -789,6 +804,7 @@ interface IRDPSRAPITcpConnectionInfo : IDispatch
+ }; // IRDPSRAPITcpConnectionInfo
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIAttendee => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(ec0671b3-1b78-4b80-a464-9132247543e3),
+@@ -869,6 +885,7 @@ interface IRDPSRAPIAttendee : IDispatch
+         
+ }; // IRDPSRAPIAttendee
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIAttendeeManager => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(ba3a37e8-33da-4749-8da0-07fa34da7944),
+@@ -898,6 +915,7 @@ interface IRDPSRAPIAttendeeManager : IDispatch
+         );
+ }; // IAttendeeManager
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIAttendeeDisconnectInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(c187689f-447c-44a1-9c14-fffbb3b7ec17),
+@@ -936,6 +954,7 @@ interface IRDPSRAPIAttendeeDisconnectInfo : IDispatch
+ 
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIVirtualChannel => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(05e12f95-28b3-4c9a-8780-d0248574a1e0),
+@@ -991,6 +1010,7 @@ interface IRDPSRAPIVirtualChannel : IDispatch
+         );    
+ }; //IVirtual Channel
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIVirtualChannelManager => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(0d11c661-5d0d-4ee4-89df-2166ae1fdfed),
+@@ -1032,6 +1052,7 @@ interface IRDPSRAPIVirtualChannelManager : IDispatch
+ 
+ }; //IRDPSRAPIVirtualChannelList
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIViewer => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(c6bfcd38-8ce9-404d-8ae8-f31d00c65cb5),
+@@ -1170,6 +1191,7 @@ interface IRDPSRAPIViewer : IDispatch
+         
+ }; // IRDPSRAPIViewer
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPViewerInputSink => SupportedOSPlatform(\"windows8.1\") */")
+ [
+     object,
+     uuid(BB590853-A6C5-4A7B-8DD4-76B69EEA12D5),
+@@ -1251,6 +1273,7 @@ interface IRDPViewerInputSink : IUnknown
+         );
+ };  // IRDPViewerInputSink
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPIFrameBuffer => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(3D67E7D2-B27B-448E-81B3-C6110ED8B4BE),
+@@ -1301,6 +1324,7 @@ interface IRDPSRAPIFrameBuffer : IDispatch
+ }; //IRDPSRAPIFrameBuffer
+ 
+ // Transport Stream interfaces
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPITransportStreamBuffer => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(81c80290-5085-44b0-b460-f865c39cb4a9),
+@@ -1400,6 +1424,7 @@ interface IRDPSRAPITransportStreamBuffer : IUnknown
+ 
+ };//IRDPSRAPITransportStreamBuffer
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPITransportStreamEvents => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(ea81c254-f5af-4e40-982e-3e63bb595276),
+@@ -1434,6 +1459,7 @@ interface IRDPSRAPITransportStreamEvents : IUnknown
+ 
+ }; //IRDPSRAPITransportStreamEvents
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPITransportStream => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(36cfa065-43bb-4ef7-aed7-9b88a5053036),
+@@ -1491,6 +1517,7 @@ interface IRDPSRAPITransportStream : IUnknown
+ 
+ }; //IRDPSRAPITransportStream - End TransportStream interfaces
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPISharingSession => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(eeb20886-e470-4cf6-842b-2739c0ec5cfb),
+@@ -1618,6 +1645,7 @@ interface IRDPSRAPISharingSession : IDispatch
+         );            
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IRDPSRAPISharingSession2 => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(fee4ee57-e3e8-4205-8fb0-8fd1d0675c21),
+@@ -1675,6 +1703,7 @@ library RDPCOMAPILib
+         CONST_ATTENDEE_ID_DEFAULT               = 0xFFFFFFFF
+     } RDPENCOMAPI_CONSTANTS;    
+     
++cpp_quote("/* Win32Metadata: interface ::_IRDPSessionEvents => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         uuid(98a97042-6698-40e9-8efd-b3200990004b)
+     ]

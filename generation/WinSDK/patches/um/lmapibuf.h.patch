@@ -1,0 +1,43 @@
+diff --git a/um/lmapibuf.h b/um/lmapibuf.h
+index 8316cf6b..353c2221 100644
+--- a/um/lmapibuf.h
++++ b/um/lmapibuf.h
+@@ -40,6 +40,7 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferAllocate(
+@@ -47,12 +48,14 @@ NetApiBufferAllocate(
+     _Outptr_result_bytebuffer_(ByteCount) LPVOID * Buffer
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferFree (
+     _Frees_ptr_opt_ LPVOID Buffer
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferReallocate(
+@@ -61,6 +64,7 @@ NetApiBufferReallocate(
+     _Outptr_result_bytebuffer_(NewByteCount) LPVOID * NewBuffer
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferSize(
+@@ -91,6 +95,7 @@ NetapipBufferAllocate (                 // Internal Function
+ #pragma region Desktop Family or OneCore Family Or Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Win32_SupportedOS_Windows2000_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetApiBufferFree (

@@ -1,0 +1,20 @@
+diff --git a/um/vsadmin.idl b/um/vsadmin.idl
+index f023feca..73e2cafe 100644
+--- a/um/vsadmin.idl
++++ b/um/vsadmin.idl
+@@ -10,6 +10,7 @@
+ //
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -19,6 +20,7 @@ import "oaidl.idl";
+ import "ocidl.idl";
+ import "vss.idl";
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssAdmin => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(77ED5996-2F63-11d3-8A39-00C04F72D8E3),

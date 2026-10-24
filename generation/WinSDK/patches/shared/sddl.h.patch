@@ -1,0 +1,97 @@
+diff --git a/shared/sddl.h b/shared/sddl.h
+index ac2b84be..bd6937f4 100644
+--- a/shared/sddl.h
++++ b/shared/sddl.h
+@@ -20,6 +20,7 @@ Revision History:
+ 
+ #ifndef __SDDL_H__
+ #define __SDDL_H__
++#include <sal.h>
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -263,6 +264,8 @@ extern "C" {
+ #if !defined(_NTDDK_)
+ 
+ #if (_WIN32_WINNT >= 0x0500)
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -271,6 +274,8 @@ ConvertSidToStringSidA(
+     _Outptr_ LPSTR  *StringSid
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -285,6 +290,8 @@ ConvertSidToStringSidW(
+ #define ConvertSidToStringSid  ConvertSidToStringSidA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -293,6 +300,8 @@ ConvertStringSidToSidA(
+     _Outptr_ PSID   *Sid
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -307,6 +316,8 @@ ConvertStringSidToSidW(
+ #define ConvertStringSidToSid  ConvertStringSidToSidA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -317,6 +328,8 @@ ConvertStringSecurityDescriptorToSecurityDescriptorA(
+     _Out_opt_ PULONG  SecurityDescriptorSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -333,24 +346,28 @@ ConvertStringSecurityDescriptorToSecurityDescriptorW(
+ #define ConvertStringSecurityDescriptorToSecurityDescriptor  ConvertStringSecurityDescriptorToSecurityDescriptorA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertSecurityDescriptorToStringSecurityDescriptorA(
+     _In_  PSECURITY_DESCRIPTOR  SecurityDescriptor,
+     _In_  DWORD RequestedStringSDRevision,
+-    _In_  SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_  SECURITY_INFORMATION SecurityInformation,
+     _Outptr_ LPSTR  *StringSecurityDescriptor,
+     _Out_opt_ PULONG StringSecurityDescriptorLen
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertSecurityDescriptorToStringSecurityDescriptorW(
+     _In_ PSECURITY_DESCRIPTOR SecurityDescriptor,
+     _In_ DWORD RequestedStringSDRevision,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _Outptr_ LPWSTR* StringSecurityDescriptor,
+     _Out_opt_ PULONG StringSecurityDescriptorLen
+     );

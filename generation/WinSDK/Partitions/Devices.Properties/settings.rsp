@@ -4,3 +4,5 @@
 <IncludeRoot>/shared/devpropdef.h
 --namespace
 Windows.Win32.Devices.Properties
+--config
+parse-win32-annotations

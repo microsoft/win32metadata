@@ -4,3 +4,5 @@
 <IncludeRoot>/shared/iscsierr.h
 --namespace
 Windows.Win32.Storage.IscsiDisc
+--config
+parse-win32-annotations

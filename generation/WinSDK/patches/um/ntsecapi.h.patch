@@ -1,0 +1,918 @@
+diff --git a/um/ntsecapi.h b/um/ntsecapi.h
+index e30ee026..626baf52 100644
+--- a/um/ntsecapi.h
++++ b/um/ntsecapi.h
+@@ -15,6 +15,7 @@ Revision History:
+ --*/
+ 
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -893,6 +894,9 @@ extern "C" {
+ 
+ #ifndef _NTDEF_
+ typedef _Return_type_success_(return >= 0) LONG NTSTATUS, *PNTSTATUS;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef NTSTATUS NTSTATUS;
++#endif
+ #endif
+ 
+ #include <lsalookup.h>
+@@ -1653,6 +1657,7 @@ typedef enum _POLICY_AUDIT_EVENT_TYPE {
+ #ifndef _NTLSA_IFS_
+ // begin_ntifs
+ 
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1668,6 +1673,7 @@ LsaRegisterLogonProcess (
+ // However, the function has always been there, so it is okay to use
+ // even on w2k
+ //
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1691,6 +1697,7 @@ LsaLogonUser (
+ 
+ // end_ntifs
+ 
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1703,6 +1710,7 @@ LsaLookupAuthenticationPackage (
+ 
+ // begin_ntifs
+ 
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ NTSTATUS
+ NTAPI
+@@ -1712,6 +1720,7 @@ LsaFreeReturnBuffer (
+ 
+ // end_ntifs
+ 
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1726,6 +1735,7 @@ LsaCallAuthenticationPackage (
+     _Out_opt_ PNTSTATUS ProtocolStatus
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -1734,6 +1744,7 @@ LsaDeregisterLogonProcess (
+     _In_ HANDLE LsaHandle
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _IRQL_requires_same_
+ _IRQL_requires_max_(PASSIVE_LEVEL)
+ NTSTATUS
+@@ -2353,7 +2364,10 @@
+ // always a pointer type unlike regular handles.
+ //
+ 
+ typedef PVOID LSA_HANDLE, *PLSA_HANDLE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef LSA_HANDLE LSA_HANDLE;
++#endif
+ 
+ 
+ //
+@@ -2478,12 +2492,28 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
+ #define TRUST_DIRECTION_OUTBOUND        0x00000002
+ #define TRUST_DIRECTION_BIDIRECTIONAL   (TRUST_DIRECTION_INBOUND | TRUST_DIRECTION_OUTBOUND)
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(TRUSTED_DOMAIN_TRUST_DIRECTION, unsigned long,
++    TRUST_DIRECTION_DISABLED,
++    TRUST_DIRECTION_INBOUND,
++    TRUST_DIRECTION_OUTBOUND,
++    TRUST_DIRECTION_BIDIRECTIONAL);
++#endif
++
+ #define TRUST_TYPE_DOWNLEVEL            0x00000001  // NT4 and before
+ #define TRUST_TYPE_UPLEVEL              0x00000002  // NT5
+ #define TRUST_TYPE_MIT                  0x00000003  // Trust with a MIT Kerberos realm
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(TRUSTED_DOMAIN_TRUST_TYPE, ULONG, TRUST_TYPE_DOWNLEVEL, TRUST_TYPE_UPLEVEL, TRUST_TYPE_MIT);
++#endif
++
+ #if (_WIN32_WINNT < 0x0502)
+ #define TRUST_TYPE_DCE                  0x00000004  // Trust with a DCE realm
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(TRUSTED_DOMAIN_TRUST_TYPE, ULONG, TRUST_TYPE_DCE);
++#endif
+ #endif
+ 
+ #define TRUST_TYPE_AAD                  0x00000005 // Trust with Azure AD
+@@ -2547,14 +2577,25 @@ typedef PLSA_TRUST_INFORMATION PTRUSTED_DOMAIN_INFORMATION_BASIC;
+ #endif
+ #define TRUST_ATTRIBUTES_USER           0xFF000000
+ 
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("Enum(TRUST_ATTRIBUTE_NON_TRANSITIVE, TRUST_ATTRIBUTE_UPLEVEL_ONLY, TRUST_ATTRIBUTE_FILTER_SIDS, TRUST_ATTRIBUTE_FOREST_TRANSITIVE, TRUST_ATTRIBUTE_CROSS_ORGANIZATION, TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL, TRUST_ATTRIBUTE_WITHIN_FOREST)",
++    TRUST_ATTRIBUTE_NON_TRANSITIVE,
++    TRUST_ATTRIBUTE_UPLEVEL_ONLY,
++    TRUST_ATTRIBUTE_QUARANTINED_DOMAIN,
++    TRUST_ATTRIBUTE_FOREST_TRANSITIVE,
++    TRUST_ATTRIBUTE_CROSS_ORGANIZATION,
++    TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL,
++    TRUST_ATTRIBUTE_WITHIN_FOREST) unsigned long TRUSTED_DOMAIN_TRUST_ATTRIBUTES;
++#endif
+ typedef struct _TRUSTED_DOMAIN_INFORMATION_EX {
+ 
+     LSA_UNICODE_STRING Name;
+     LSA_UNICODE_STRING FlatName;
+     PSID  Sid;
+-    ULONG TrustDirection;
+-    ULONG TrustType;
+-    ULONG TrustAttributes;
++    _Win32_AssociatedEnum_(TRUSTED_DOMAIN_TRUST_DIRECTION) ULONG TrustDirection;
++    _Win32_AssociatedEnum_(TRUSTED_DOMAIN_TRUST_TYPE) ULONG TrustType;
++    _Win32_AssociatedEnum_(TRUSTED_DOMAIN_TRUST_ATTRIBUTES) ULONG TrustAttributes;
+ 
+ } TRUSTED_DOMAIN_INFORMATION_EX, *PTRUSTED_DOMAIN_INFORMATION_EX;
+ 
+@@ -2582,10 +2623,18 @@ typedef struct _TRUSTED_DOMAIN_INFORMATION_EX2 {
+ #define TRUST_AUTH_TYPE_CLEAR   2   // Cleartext password
+ #define TRUST_AUTH_TYPE_VERSION 3   // Cleartext password version number
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(LSA_AUTH_INFORMATION_AUTH_TYPE, unsigned long,
++    TRUST_AUTH_TYPE_NONE,
++    TRUST_AUTH_TYPE_NT4OWF,
++    TRUST_AUTH_TYPE_CLEAR,
++    TRUST_AUTH_TYPE_VERSION);
++#endif
++
+ typedef struct _LSA_AUTH_INFORMATION {
+ 
+     LARGE_INTEGER LastUpdateTime;
+-    ULONG AuthType;
++    _Win32_AssociatedEnum_(LSA_AUTH_INFORMATION_AUTH_TYPE) ULONG AuthType;
+     ULONG AuthInfoLength;
+     PUCHAR AuthInfo;
+ } LSA_AUTH_INFORMATION, *PLSA_AUTH_INFORMATION;
+@@ -2858,12 +2907,14 @@ typedef struct _LSA_ENUMERATION_INFORMATION {
+ ////////////////////////////////////////////////////////////////////////////
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaFreeMemory(
+     _In_opt_ PVOID Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaClose(
+@@ -2924,6 +2975,7 @@ typedef struct _SECURITY_LOGON_SESSION_DATA {
+ #endif
+ } SECURITY_LOGON_SESSION_DATA, * PSECURITY_LOGON_SESSION_DATA;
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaEnumerateLogonSessions(
+@@ -2931,6 +2983,7 @@ LsaEnumerateLogonSessions(
+     _Out_ PLUID * LogonSessionList
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaGetLogonSessionData(
+@@ -2939,13 +2992,14 @@ LsaGetLogonSessionData(
+     );
+ 
+ #endif
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaOpenPolicy(
+     _In_opt_ PLSA_UNICODE_STRING SystemName,
+     _In_ PLSA_OBJECT_ATTRIBUTES ObjectAttributes,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PLSA_HANDLE PolicyHandle
++    _Win32_RAIIFree_(LsaClose, -1, 0) _Out_ PLSA_HANDLE PolicyHandle
+     );
+ 
+ 
+@@ -3082,6 +3136,7 @@ LsaQueryCAPs(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaQueryInformationPolicy(
+@@ -3090,6 +3145,7 @@ LsaQueryInformationPolicy(
+     _Out_ PVOID *Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaSetInformationPolicy(
+@@ -3098,6 +3154,7 @@ LsaSetInformationPolicy(
+     _In_ PVOID Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaQueryDomainInformationPolicy(
+@@ -3106,6 +3163,7 @@ LsaQueryDomainInformationPolicy(
+     _Out_ PVOID *Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaSetDomainInformationPolicy(
+@@ -3115,6 +3173,7 @@ LsaSetDomainInformationPolicy(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaRegisterPolicyChangeNotification(
+@@ -3122,6 +3181,7 @@ LsaRegisterPolicyChangeNotification(
+     _In_ HANDLE  NotificationEventHandle
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaUnregisterPolicyChangeNotification(
+@@ -3131,6 +3191,7 @@ LsaUnregisterPolicyChangeNotification(
+ 
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaEnumerateTrustedDomains(
+@@ -3142,6 +3203,7 @@ LsaEnumerateTrustedDomains(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaLookupNames(
+@@ -3153,6 +3215,7 @@ LsaLookupNames(
+     );
+ 
+ #if (_WIN32_WINNT >= 0x0501)
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaLookupNames2(
+@@ -3165,6 +3228,7 @@ LsaLookupNames2(
+     );
+ #endif
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaLookupSids(
+@@ -3175,6 +3239,7 @@ LsaLookupSids(
+     _Out_ PLSA_TRANSLATED_NAME *Names
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ NTSTATUS
+ NTAPI
+ LsaLookupSids2(
+@@ -3205,6 +3270,7 @@ LsaLookupSids2(
+ // This new API returns all the accounts with a certain privilege
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaEnumerateAccountsWithUserRight(
+@@ -3219,6 +3285,7 @@ LsaEnumerateAccountsWithUserRight(
+ // to open the account first and passing in an account handle
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaEnumerateAccountRights(
+@@ -3228,6 +3295,7 @@ LsaEnumerateAccountRights(
+     _Out_ PULONG CountOfRights
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaAddAccountRights(
+@@ -3237,6 +3305,7 @@ LsaAddAccountRights(
+     _In_ ULONG CountOfRights
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaRemoveAccountRights(
+@@ -3253,16 +3322,18 @@ LsaRemoveAccountRights(
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaOpenTrustedDomainByName(
+     _In_ LSA_HANDLE PolicyHandle,
+     _In_ PLSA_UNICODE_STRING TrustedDomainName,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PLSA_HANDLE TrustedDomainHandle
++    _Win32_RAIIFree_(LsaClose, -1, 0) _Out_ PLSA_HANDLE TrustedDomainHandle
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaQueryTrustedDomainInfo(
+@@ -3272,6 +3343,7 @@ LsaQueryTrustedDomainInfo(
+     _Out_ PVOID *Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaSetTrustedDomainInformation(
+@@ -3281,6 +3353,7 @@ LsaSetTrustedDomainInformation(
+     _In_ PVOID Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaDeleteTrustedDomain(
+@@ -3288,6 +3361,7 @@ LsaDeleteTrustedDomain(
+     _In_ PSID TrustedDomainSid
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaQueryTrustedDomainInfoByName(
+@@ -3297,6 +3371,7 @@ LsaQueryTrustedDomainInfoByName(
+     _Out_ PVOID *Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaSetTrustedDomainInfoByName(
+@@ -3306,6 +3381,7 @@ LsaSetTrustedDomainInfoByName(
+     _In_ PVOID Buffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaEnumerateTrustedDomainsEx(
+@@ -3316,6 +3392,7 @@ LsaEnumerateTrustedDomainsEx(
+     _Out_ PULONG CountReturned
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaCreateTrustedDomainEx(
+@@ -3323,10 +3400,11 @@ LsaCreateTrustedDomainEx(
+     _In_ PTRUSTED_DOMAIN_INFORMATION_EX TrustedDomainInformation,
+     _In_ PTRUSTED_DOMAIN_AUTH_INFORMATION AuthenticationInformation,
+     _In_ ACCESS_MASK DesiredAccess,
+-    _Out_ PLSA_HANDLE TrustedDomainHandle
++    _Win32_RAIIFree_(LsaClose, -1, 0) _Out_ PLSA_HANDLE TrustedDomainHandle
+     );
+ 
+ #if (_WIN32_WINNT >= 0x0501)
++_Win32_SupportedOS_Server2003_
+ NTSTATUS
+ NTAPI
+ LsaQueryForestTrustInformation(
+@@ -3335,6 +3413,7 @@ LsaQueryForestTrustInformation(
+     _Out_ PLSA_FOREST_TRUST_INFORMATION * ForestTrustInfo
+     );
+ 
++_Win32_SupportedOS_Server2003_
+ NTSTATUS
+ NTAPI
+ LsaSetForestTrustInformation(
+@@ -3366,6 +3445,7 @@ LsaForestTrustFindMatch(
+ // the SSI_SECRET_NAME secret)
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaStorePrivateData(
+@@ -3374,6 +3454,7 @@ LsaStorePrivateData(
+     _In_opt_ PLSA_UNICODE_STRING PrivateData
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ NTAPI
+ LsaRetrievePrivateData(
+@@ -3383,6 +3464,7 @@ LsaRetrievePrivateData(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ ULONG
+ NTAPI
+ LsaNtStatusToWinError(
+@@ -3494,6 +3576,16 @@ typedef struct _DOMAIN_PASSWORD_INFORMATION {
+ #define DOMAIN_LOCKOUT_ADMINS               0x00000008L
+ #define DOMAIN_PASSWORD_STORE_CLEARTEXT     0x00000010L
+ #define DOMAIN_REFUSE_PASSWORD_CHANGE       0x00000020L
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(DOMAIN_PASSWORD_PROPERTIES, unsigned long,
++    DOMAIN_PASSWORD_COMPLEX,
++    DOMAIN_PASSWORD_NO_ANON_CHANGE,
++    DOMAIN_PASSWORD_NO_CLEAR_CHANGE,
++    DOMAIN_LOCKOUT_ADMINS,
++    DOMAIN_PASSWORD_STORE_CLEARTEXT,
++    DOMAIN_REFUSE_PASSWORD_CHANGE);
++#endif
+ #if(_WIN32_WINNT >= 0x0502)
+ #define DOMAIN_NO_LM_OWF_CHANGE             0x00000040L
+ #endif
+@@ -3728,6 +3820,20 @@ typedef struct _MSV1_0_INTERACTIVE_PROFILE {
+ #define MSV1_0_RETURN_PROFILE_PATH           0x200
+ #define MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY     0x400
+ #define MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT 0x800
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MSV_SUBAUTH_LOGON_PARAMETER_CONTROL, unsigned int,
++    MSV1_0_CLEARTEXT_PASSWORD_ALLOWED,
++    MSV1_0_UPDATE_LOGON_STATISTICS,
++    MSV1_0_RETURN_USER_PARAMETERS,
++    MSV1_0_DONT_TRY_GUEST_ACCOUNT,
++    MSV1_0_ALLOW_SERVER_TRUST_ACCOUNT,
++    MSV1_0_RETURN_PASSWORD_EXPIRY,
++    MSV1_0_ALLOW_WORKSTATION_TRUST_ACCOUNT,
++    MSV1_0_TRY_GUEST_ACCOUNT_ONLY,
++    MSV1_0_RETURN_PROFILE_PATH,
++    MSV1_0_TRY_SPECIFIED_DOMAIN_ONLY);
++#endif
+ //#if (_WIN32_WINNT >= 0x0501) -- Disabled until IIS fixes their target version.
+ #define MSV1_0_DISABLE_PERSONAL_FALLBACK     0x00001000
+ #define MSV1_0_ALLOW_FORCE_GUEST             0x00002000
+@@ -3793,7 +3899,7 @@ typedef struct _MSV1_0_SUBAUTH_LOGON{
+     UCHAR ChallengeToClient[MSV1_0_CHALLENGE_LENGTH];
+     STRING AuthenticationInfo1;
+     STRING AuthenticationInfo2;
+-    ULONG ParameterControl;
++    _Win32_AssociatedEnum_(MSV_SUBAUTH_LOGON_PARAMETER_CONTROL) ULONG ParameterControl;
+     ULONG SubAuthPackageId;
+ } MSV1_0_SUBAUTH_LOGON, * PMSV1_0_SUBAUTH_LOGON;
+ 
+@@ -3833,6 +3939,19 @@ typedef struct _MSV1_0_S4U_LOGON {
+ #define LOGON_NTLMV2_ENABLED        0x100       // says DC understands NTLMv2
+ #define LOGON_RESOURCE_GROUPS       0x200
+ #define LOGON_PROFILE_PATH_RETURNED 0x400
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(MSV_SUB_AUTHENTICATION_FILTER, unsigned int,
++    LOGON_GUEST,
++    LOGON_NOENCRYPTION,
++    LOGON_CACHED_ACCOUNT,
++    LOGON_USED_LM_PASSWORD,
++    LOGON_EXTRA_SIDS,
++    LOGON_SUBAUTH_SESSION_KEY,
++    LOGON_SERVER_TRUST_ACCOUNT,
++    LOGON_PROFILE_PATH_RETURNED,
++    LOGON_RESOURCE_GROUPS);
++#endif
+ // Defined in Windows Server 2008 and above
+ #define LOGON_NT_V2                 0x800   // NT response was used for validation
+ #define LOGON_LM_V2                 0x1000  // LM response was used for validation
+@@ -3867,7 +3986,7 @@ typedef struct _MSV1_0_LM20_LOGON_PROFILE {
+     MSV1_0_PROFILE_BUFFER_TYPE MessageType;
+     LARGE_INTEGER KickOffTime;
+     LARGE_INTEGER LogoffTime;
+-    ULONG UserFlags;
++    _Win32_AssociatedEnum_(MSV_SUB_AUTHENTICATION_FILTER) ULONG UserFlags;
+     UCHAR UserSessionKey[MSV1_0_USER_SESSION_KEY_LENGTH];
+     UNICODE_STRING LogonDomainName;
+     UCHAR LanmanSessionKey[MSV1_0_LANMAN_SESSION_KEY_LENGTH];
+@@ -3892,6 +4011,13 @@ typedef struct _MSV1_0_LM20_LOGON_PROFILE {
+ #define MSV1_0_CRED_SHA_PRESENT     0x0010
+ 
+ #define MSV1_0_CRED_VERSION             0
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS, unsigned int,
++    MSV1_0_CRED_LM_PRESENT,
++    MSV1_0_CRED_NT_PRESENT,
++    MSV1_0_CRED_VERSION);
++#endif
+ #define MSV1_0_CRED_VERSION_V2          2
+ #define MSV1_0_CRED_VERSION_V3          4
+ #define MSV1_0_CRED_VERSION_IUM         0xffff0001
+@@ -3915,7 +4041,7 @@ typedef struct _MSV1_0_CREDENTIAL_KEY {
+ 
+ typedef struct _MSV1_0_SUPPLEMENTAL_CREDENTIAL {
+     ULONG Version;
+-    ULONG Flags;
++    _Win32_AssociatedEnum_(MSV_SUPPLEMENTAL_CREDENTIAL_FLAGS) ULONG Flags;
+     UCHAR LmPassword[MSV1_0_OWF_PASSWORD_LENGTH];
+     UCHAR NtPassword[MSV1_0_OWF_PASSWORD_LENGTH];
+ } MSV1_0_SUPPLEMENTAL_CREDENTIAL, *PMSV1_0_SUPPLEMENTAL_CREDENTIAL;
+@@ -4176,6 +4302,7 @@ typedef struct _MSV1_0_SUBAUTH_RESPONSE{
+ #endif
+ 
+ #if(_WIN32_WINNT >= 0x0501)
++_Win32_SupportedOS_WindowsXP_
+ BOOLEAN
+ __stdcall
+ RtlGenRandom(
+@@ -4215,6 +4342,7 @@ RtlGenRandom(
+ 
+ #define RTL_ENCRYPT_OPTION_FOR_SYSTEM       0x04
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ __stdcall
+ RtlEncryptMemory(
+@@ -4223,6 +4351,7 @@ RtlEncryptMemory(
+     _In_ ULONG OptionFlags
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ __stdcall
+ RtlDecryptMemory(
+@@ -4314,7 +4443,12 @@
+ //
+ 
+ #define KERB_ETYPE_DES_CBC_MD5_NT                          20
+ #define KERB_ETYPE_RC4_HMAC_NT                             23
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(KERB_CRYPTO_KEY_TYPE, LONG,
++    KERB_ETYPE_DES_CBC_CRC, KERB_ETYPE_DES_CBC_MD4, KERB_ETYPE_DES_CBC_MD5,
++    KERB_ETYPE_NULL, KERB_ETYPE_RC4_HMAC_NT, KERB_ETYPE_RC4_MD4);
++#endif
+ #define KERB_ETYPE_RC4_HMAC_NT_EXP                         24
+ 
+ // Checksum algorithms.
+@@ -4399,6 +4533,24 @@ RtlDecryptMemory(
+ #define KERB_TICKET_FLAGS_enc_pa_rep        0x00010000
+ #define KERB_TICKET_FLAGS_reserved1         0x00000001
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(KERB_TICKET_FLAGS, unsigned long,
++    KERB_TICKET_FLAGS_forwardable,
++    KERB_TICKET_FLAGS_forwarded,
++    KERB_TICKET_FLAGS_hw_authent,
++    KERB_TICKET_FLAGS_initial,
++    KERB_TICKET_FLAGS_invalid,
++    KERB_TICKET_FLAGS_may_postdate,
++    KERB_TICKET_FLAGS_ok_as_delegate,
++    KERB_TICKET_FLAGS_postdated,
++    KERB_TICKET_FLAGS_pre_authent,
++    KERB_TICKET_FLAGS_proxiable,
++    KERB_TICKET_FLAGS_proxy,
++    KERB_TICKET_FLAGS_renewable,
++    KERB_TICKET_FLAGS_reserved,
++    KERB_TICKET_FLAGS_reserved1);
++#endif
++
+ 
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+@@ -4660,13 +4812,13 @@
+ //
+ 
+ typedef struct KERB_CRYPTO_KEY {
+-    LONG KeyType;
++    _Win32_AssociatedEnum_(KERB_CRYPTO_KEY_TYPE) LONG KeyType;
+     ULONG Length;
+     PUCHAR Value;
+ } KERB_CRYPTO_KEY, *PKERB_CRYPTO_KEY;
+ 
+ typedef struct KERB_CRYPTO_KEY32 {
+-    LONG KeyType;
++    _Win32_AssociatedEnum_(KERB_CRYPTO_KEY_TYPE) LONG KeyType;
+     ULONG Length;
+     ULONG Offset;
+ } KERB_CRYPTO_KEY32, *PKERB_CRYPTO_KEY32;
+@@ -4750,7 +4902,7 @@ typedef struct _KERB_TICKET_CACHE_INFO {
+     LARGE_INTEGER EndTime;
+     LARGE_INTEGER RenewTime;
+     LONG EncryptionType;
+-    ULONG TicketFlags;
++    _Win32_AssociatedEnum_(KERB_TICKET_FLAGS) ULONG TicketFlags;
+ } KERB_TICKET_CACHE_INFO, *PKERB_TICKET_CACHE_INFO;
+ 
+ 
+@@ -4916,7 +5068,7 @@ typedef struct _KERB_EXTERNAL_TICKET {
+     UNICODE_STRING TargetDomainName;
+     UNICODE_STRING AltTargetDomainName;  // contains ClientDomainName
+     KERB_CRYPTO_KEY SessionKey;
+-    ULONG TicketFlags;
++    _Win32_AssociatedEnum_(KERB_TICKET_FLAGS) ULONG TicketFlags;
+     ULONG Flags;
+     LARGE_INTEGER KeyExpirationTime;
+     LARGE_INTEGER StartTime;
+@@ -4933,7 +5085,7 @@
+     UNICODE_STRING TargetName;
+     ULONG TicketFlags;
+     ULONG CacheOptions;
+-    LONG EncryptionType;
++    _Win32_AssociatedEnum_(KERB_CRYPTO_KEY_TYPE) LONG EncryptionType;
+     SecHandle CredentialsHandle;
+ } KERB_RETRIEVE_TKT_REQUEST, *PKERB_RETRIEVE_TKT_REQUEST;
+ 
+@@ -5241,11 +5393,18 @@ typedef struct _KERB_DECRYPT_RESPONSE  {
+ // is required for this operation.
+ //
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++#include <dsgetdc.h>
++_Win32_Enum_(KERB_ADDRESS_TYPE, unsigned int,
++    DS_INET_ADDRESS,
++    DS_NETBIOS_ADDRESS);
++#endif
++
+ typedef struct _KERB_ADD_BINDING_CACHE_ENTRY_REQUEST {
+     KERB_PROTOCOL_MESSAGE_TYPE MessageType;
+     UNICODE_STRING RealmName;
+     UNICODE_STRING KdcAddress;
+-    ULONG AddressType;                  //dsgetdc.h DS_NETBIOS_ADDRESS||DS_INET_ADDRESS
++    _Win32_AssociatedEnum_(KERB_ADDRESS_TYPE) ULONG AddressType;                  //dsgetdc.h DS_NETBIOS_ADDRESS||DS_INET_ADDRESS
+ } KERB_ADD_BINDING_CACHE_ENTRY_REQUEST, *PKERB_ADD_BINDING_CACHE_ENTRY_REQUEST;
+ 
+                        
+@@ -5284,19 +5443,30 @@ typedef struct _KERB_REFRESH_SCCRED_REQUEST {
+ // requires TCB to alter "other" creds
+ //
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long KERB_REQUEST_FLAGS;
++#endif
++
+ typedef struct _KERB_ADD_CREDENTIALS_REQUEST {
+     KERB_PROTOCOL_MESSAGE_TYPE MessageType;
+     UNICODE_STRING UserName;
+     UNICODE_STRING DomainName;
+     UNICODE_STRING Password;
+     LUID  LogonId; // optional
+-    ULONG Flags;
++    _Win32_AssociatedEnum_(KERB_REQUEST_FLAGS) ULONG Flags;
+ } KERB_ADD_CREDENTIALS_REQUEST, *PKERB_ADD_CREDENTIALS_REQUEST;
+ 
+ 
+ #define KERB_REQUEST_ADD_CREDENTIAL     1
+ #define KERB_REQUEST_REPLACE_CREDENTIAL 2
+ #define KERB_REQUEST_REMOVE_CREDENTIAL  4
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(KERB_REQUEST_FLAGS, unsigned long,
++    KERB_REQUEST_ADD_CREDENTIAL,
++    KERB_REQUEST_REPLACE_CREDENTIAL,
++    KERB_REQUEST_REMOVE_CREDENTIAL);
++#endif
+ #define KERB_REQUEST_CRED_LOCAL_ACCOUNT 8
+ #endif
+ 
+@@ -5345,7 +5515,7 @@ typedef struct _KERB_BINDING_CACHE_ENTRY_DATA {
+     ULONG64        DiscoveryTime;
+     UNICODE_STRING RealmName;
+     UNICODE_STRING KdcAddress;
+-    ULONG          AddressType;
++    _Win32_AssociatedEnum_(KERB_ADDRESS_TYPE) ULONG          AddressType;
+     ULONG          Flags;
+     ULONG          DcFlags;
+     ULONG          CacheFlags;
+@@ -5362,7 +5532,7 @@ typedef struct _KERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST {
+     KERB_PROTOCOL_MESSAGE_TYPE MessageType;
+     UNICODE_STRING             RealmName;
+     UNICODE_STRING             KdcAddress;
+-    ULONG                      AddressType;   // DS_NETBIOS_ADDRESS / DS_INET_ADDRESS
++    _Win32_AssociatedEnum_(KERB_ADDRESS_TYPE) ULONG                      AddressType;   // DS_NETBIOS_ADDRESS / DS_INET_ADDRESS
+     ULONG                      DcFlags;
+ } KERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST, *PKERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST;
+ 
+@@ -5479,6 +5649,8 @@ typedef const PAUDIT_POLICY_INFORMATION PCAUDIT_POLICY_INFORMATION, LPCAUDIT_POL
+ #define AUDIT_GENERIC_EXECUTE        (STANDARD_RIGHTS_EXECUTE)
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOLEAN
+ NTAPI
+ AuditSetSystemPolicy(
+@@ -5486,6 +5658,8 @@ AuditSetSystemPolicy(
+     _In_ ULONG dwPolicyCount
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOLEAN
+ NTAPI
+ AuditSetPerUserPolicy(
+@@ -5494,6 +5668,8 @@ AuditSetPerUserPolicy(
+     _In_ ULONG dwPolicyCount
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5504,6 +5680,8 @@ AuditQuerySystemPolicy(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5515,6 +5693,8 @@ AuditQueryPerUserPolicy(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5522,6 +5702,8 @@ AuditEnumeratePerUserPolicy(
+     _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PPOLICY_AUDIT_SID_ARRAY* ppAuditSidArray
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5533,6 +5715,8 @@ AuditComputeEffectivePolicyBySid(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5544,6 +5728,8 @@ AuditComputeEffectivePolicyByToken(
+     _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5553,6 +5739,8 @@ AuditEnumerateCategories(
+     _Out_ PULONG pdwCountReturned
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5564,6 +5752,8 @@ AuditEnumerateSubCategories(
+     _Out_ PULONG pdwCountReturned
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5572,6 +5762,8 @@ AuditLookupCategoryNameW(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszCategoryName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5586,6 +5778,8 @@ AuditLookupCategoryNameA(
+ #define AuditLookupCategoryName  AuditLookupCategoryNameA
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5594,6 +5788,8 @@ AuditLookupSubCategoryNameW(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszSubCategoryName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5608,6 +5804,8 @@ AuditLookupSubCategoryNameA(
+ #define AuditLookupSubCategoryName  AuditLookupSubCategoryNameA
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOLEAN
+ NTAPI
+ AuditLookupCategoryIdFromCategoryGuid(
+@@ -5615,6 +5813,8 @@ AuditLookupCategoryIdFromCategoryGuid(
+     _Out_ PPOLICY_AUDIT_EVENT_TYPE pAuditCategoryId
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOLEAN
+ NTAPI
+ AuditLookupCategoryGuidFromCategoryId(
+@@ -5622,6 +5822,8 @@ AuditLookupCategoryGuidFromCategoryId(
+     _Out_ GUID* pAuditCategoryGuid
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOLEAN
+ NTAPI
+ AuditSetSecurity(
+@@ -5629,6 +5831,8 @@ AuditSetSecurity(
+     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5637,6 +5841,8 @@ AuditQuerySecurity(
+     _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSECURITY_DESCRIPTOR *ppSecurityDescriptor
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ BOOLEAN
+ NTAPI
+ AuditSetGlobalSaclW(
+@@ -5644,6 +5850,8 @@ AuditSetGlobalSaclW(
+     _In_opt_ PACL Acl
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ BOOLEAN
+ NTAPI
+ AuditSetGlobalSaclA(
+@@ -5657,6 +5865,8 @@ AuditSetGlobalSaclA(
+ #define AuditSetGlobalSacl AuditSetGlobalSaclA
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5665,6 +5875,8 @@ AuditQueryGlobalSaclW(
+     _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PACL *Acl
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ _Check_return_
+ BOOLEAN
+ NTAPI
+@@ -5679,6 +5891,7 @@ AuditQueryGlobalSaclA(
+ #define AuditQueryGlobalSacl AuditQueryGlobalSaclA
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ VOID
+ NTAPI
+ AuditFree(

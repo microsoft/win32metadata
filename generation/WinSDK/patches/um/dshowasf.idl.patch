@@ -1,0 +1,28 @@
+diff --git a/um/dshowasf.idl b/um/dshowasf.idl
+index 89c562b4..f737b243 100644
+--- a/um/dshowasf.idl
++++ b/um/dshowasf.idl
+@@ -5,6 +5,7 @@
+ //
+ //*@@@---@@@@******************************************************************
+ //
++#include <sal.h>
+ cpp_quote( "//=========================================================================" )
+ cpp_quote( "//" )
+ cpp_quote( "// Microsoft Windows Media Technologies" )
+@@ -87,6 +88,7 @@ enum _AM_ASFWRITERCONFIG_PARAM {
+ };
+ 
+ // Interface to control the ASF writer (version 2)
++cpp_quote("/* Win32Metadata: interface ::IConfigAsfWriter2 => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+ object,
+ uuid(7989CCAA-53F0-44f0-884A-F3B03F6AE066),
+@@ -123,6 +125,7 @@ interface IConfigAsfWriter2 : IConfigAsfWriter
+ }
+ 
+ // Interface to control the ASF writer
++cpp_quote("/* Win32Metadata: interface ::IConfigAsfWriter => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+ object,
+ uuid(45086030-F7E4-486a-B504-826BB5792A3B),

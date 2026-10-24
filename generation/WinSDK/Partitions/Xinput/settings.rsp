@@ -2,3 +2,5 @@
 <IncludeRoot>/um/Xinput.h
 --namespace
 Windows.Win32.UI.Input.XboxController
+--config
+parse-win32-annotations

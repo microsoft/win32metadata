@@ -1,0 +1,28 @@
+diff --git a/um/bits10_1.idl b/um/bits10_1.idl
+index 20b5f64a..fa36666b 100644
+--- a/um/bits10_1.idl
++++ b/um/bits10_1.idl
+@@ -4,6 +4,7 @@
+ *                                                        *
+ *********************************************************/
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -17,6 +18,7 @@ import "bits3_0.idl";
+ import "bits4_0.idl";
+ import "bits5_0.idl";
+ 
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyCallback3 => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     uuid(98c97bd2-e32b-4ad8-a528-95fd8b16bd42)
+ ]
+@@ -30,6 +32,7 @@ interface IBackgroundCopyCallback3 : IBackgroundCopyCallback2
+         );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyFile6 => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     uuid(CF6784F7-D677-49FD-9368-CB47AEE9D1AD)
+ ]

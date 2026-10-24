@@ -2,3 +2,5 @@
 <IncludeRoot>/um/rdpencomapi.h
 --namespace
 Windows.Win32.System.DesktopSharing
+--config
+parse-win32-annotations

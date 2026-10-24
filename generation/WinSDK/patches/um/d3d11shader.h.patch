@@ -1,0 +1,43 @@
+diff --git a/um/d3d11shader.h b/um/d3d11shader.h
+--- a/um/d3d11shader.h
++++ b/um/d3d11shader.h
+@@ -266,6 +266,9 @@
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflectionType
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows7_ struct ID3D11ShaderReflectionType ID3D11ShaderReflectionType;
++#endif
+ DECLARE_INTERFACE(ID3D11ShaderReflectionType)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_SHADER_TYPE_DESC *pDesc) PURE;
+@@ -291,6 +294,9 @@
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflectionVariable
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows7_ struct ID3D11ShaderReflectionVariable ID3D11ShaderReflectionVariable;
++#endif
+ DECLARE_INTERFACE(ID3D11ShaderReflectionVariable)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_SHADER_VARIABLE_DESC *pDesc) PURE;
+@@ -309,6 +315,9 @@
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflectionConstantBuffer
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows7_ struct ID3D11ShaderReflectionConstantBuffer ID3D11ShaderReflectionConstantBuffer;
++#endif
+ DECLARE_INTERFACE(ID3D11ShaderReflectionConstantBuffer)
+ {
+     STDMETHOD(GetDesc)(THIS_ D3D11_SHADER_BUFFER_DESC *pDesc) PURE;
+@@ -330,6 +339,9 @@
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflection
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows7_ struct ID3D11ShaderReflection ID3D11ShaderReflection;
++#endif
+ DECLARE_INTERFACE_(ID3D11ShaderReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid,

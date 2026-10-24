@@ -1,5 +1,6 @@
 --config
 exclude-empty-records
+parse-win32-annotations
 --exclude
 _LIST_ENTRY
 LIST_ENTRY32

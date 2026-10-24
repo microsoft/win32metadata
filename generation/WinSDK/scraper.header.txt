@@ -51,7 +51,6 @@ using Windows.Win32.Graphics.DXCore;
 using Windows.Win32.Graphics.Dxgi;
 using Windows.Win32.Graphics.Dxgi.Common;
 using Windows.Win32.Graphics.Gdi;
-using Windows.Win32.Graphics.Hlsl;
 using Windows.Win32.Graphics.Imaging;
 using Windows.Win32.Graphics.OpenGL;
 using Windows.Win32.Graphics.Printing;

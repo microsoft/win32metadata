@@ -1,0 +1,21 @@
+diff --git a/um/cmdtre.idl b/um/cmdtre.idl
+index c66ea37f..b7379c26 100644
+--- a/um/cmdtre.idl
++++ b/um/cmdtre.idl
+@@ -14,6 +14,8 @@
+ //
+ //-----------------------------------------------------------------------------
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -22,6 +24,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ #include "idlmulti.h"
+ //  
+ 
++cpp_quote("/* Win32Metadata: interface ::ICommandTree => SupportedOSPlatform(\"windows5.0\") */")
+     LOCAL_INTERFACE(0c733a87-2a1c-11ce-ade5-00aa0044773d)
+ 
+     

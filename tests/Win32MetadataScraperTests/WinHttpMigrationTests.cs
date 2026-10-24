@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Text.RegularExpressions;
 using MetadataTasks;
 using Microsoft.CodeAnalysis;
@@ -113,41 +114,43 @@ namespace Win32MetadataScraperTests
             ("DWMSC_NONE", 0),
             ("DWMSC_ALL", uint.MaxValue),
         };
-        private static readonly (string Target, string OS)[] SourceBlockedAvailability =
+        private static readonly (string Header, string Target, string OS)[] SourceBlockedAvailability =
         {
-            ("IAssociatedIdentityProvider", "windows6.1"),
-            ("IConnectedIdentityProvider", "windows8.0"),
-            ("IIdentityAdvise", "windows6.1"),
-            ("IIdentityProvider", "windows6.1"),
-            ("IIdentityStore", "windows6.1"),
-            ("IWscProduct", "windows8.0"),
-            ("IWSCProductList", "windows8.0"),
-            ("ICivicAddressReport", "windows6.1"),
-            ("IDefaultLocation", "windows6.1"),
-            ("ILatLongReport", "windows6.1"),
-            ("ILocation", "windows6.1"),
-            ("ILocationEvents", "windows6.1"),
-            ("ILocationPower", "windows8.0"),
-            ("ILocationReport", "windows6.1"),
-            ("DRendezvousSessionEvents", "windows6.0.6000"),
-            ("IRendezvousApplication", "windows6.0.6000"),
-            ("IRendezvousSession", "windows6.0.6000"),
-            ("IWCNConnectNotify", "windows6.1"),
-            ("IWCNDevice", "windows6.1"),
-            ("IInitiateWinSATAssessment", "windows6.0.6000"),
-            ("IProvideWinSATAssessmentInfo", "windows6.0.6000"),
-            ("IProvideWinSATResultsInfo", "windows6.0.6000"),
-            ("IProvideWinSATVisuals", "windows6.0.6000"),
-            ("IQueryAllWinSATAssessments", "windows6.0.6000"),
-            ("IQueryRecentWinSATAssessment", "windows6.0.6000"),
-            ("IWinSATInitiateEvents", "windows6.0.6000"),
+            (@"um\IdentityProvider.h", "IAssociatedIdentityProvider", "windows6.1"),
+            (@"um\IdentityProvider.h", "IConnectedIdentityProvider", "windows8.0"),
+            (@"um\IdentityProvider.h", "IIdentityAdvise", "windows6.1"),
+            (@"um\IdentityProvider.h", "IIdentityProvider", "windows6.1"),
+            (@"um\IdentityStore.h", "IIdentityStore", "windows6.1"),
+            (@"um\iwscapi.h", "IWscProduct", "windows8.0"),
+            (@"um\iwscapi.h", "IWSCProductList", "windows8.0"),
+            (@"um\locationapi.h", "ICivicAddressReport", "windows6.1"),
+            (@"um\locationapi.h", "IDefaultLocation", "windows6.1"),
+            (@"um\locationapi.h", "ILatLongReport", "windows6.1"),
+            (@"um\locationapi.h", "ILocation", "windows6.1"),
+            (@"um\locationapi.h", "ILocationEvents", "windows6.1"),
+            (@"um\locationapi.h", "ILocationPower", "windows8.0"),
+            (@"um\locationapi.h", "ILocationReport", "windows6.1"),
+            (@"um\rendezvoussession.h", "DRendezvousSessionEvents", "windows6.0.6000"),
+            (@"um\rendezvoussession.h", "IRendezvousApplication", "windows6.0.6000"),
+            (@"um\rendezvoussession.h", "IRendezvousSession", "windows6.0.6000"),
+            (@"um\WcnDevice.h", "IWCNConnectNotify", "windows6.1"),
+            (@"um\WcnDevice.h", "IWCNDevice", "windows6.1"),
+            (@"um\winsatcominterfacei.h", "IInitiateWinSATAssessment", "windows6.0.6000"),
+            (@"um\winsatcominterfacei.h", "IProvideWinSATAssessmentInfo", "windows6.0.6000"),
+            (@"um\winsatcominterfacei.h", "IProvideWinSATResultsInfo", "windows6.0.6000"),
+            (@"um\winsatcominterfacei.h", "IProvideWinSATVisuals", "windows6.0.6000"),
+            (@"um\winsatcominterfacei.h", "IQueryAllWinSATAssessments", "windows6.0.6000"),
+            (@"um\winsatcominterfacei.h", "IQueryRecentWinSATAssessment", "windows6.0.6000"),
+            (@"um\winsatcominterfacei.h", "IWinSATInitiateEvents", "windows6.0.6000"),
         };
-        private static readonly string[] SourceBlockedAssociations =
+        private static readonly (string Header, string Target, string Enum)[] SourceBlockedAssociationFacts =
         {
-            "IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents=[AssociatedEnum(\"IdentityUpdateEvent\")]",
-            "IIdentityProvider::Advise::dwIdentityUpdateEvents=[AssociatedEnum(\"IdentityUpdateEvent\")]",
-            "IWSCProductList::Initialize::provider=[AssociatedEnum(\"WSC_SECURITY_PROVIDER\")]",
+            (@"um\IdentityProvider.h", "IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents", "IdentityUpdateEvent"),
+            (@"um\IdentityProvider.h", "IIdentityProvider::Advise::dwIdentityUpdateEvents", "IdentityUpdateEvent"),
+            (@"um\iwscapi.h", "IWSCProductList::Initialize::provider", "WSC_SECURITY_PROVIDER"),
         };
+        private static readonly string[] SourceBlockedAssociations = SourceBlockedAssociationFacts
+            .Select(fact => fact.Target + "=[AssociatedEnum(\"" + fact.Enum + "\")]").ToArray();
         private static readonly (string Owner, string Member, string Enum, string Native)[] Associations =
         {
             ("WinHttpOpenRequest", "dwFlags", "WINHTTP_OPEN_REQUEST_FLAGS", "UInt32"),
@@ -620,7 +623,7 @@ namespace Win32MetadataScraperTests
                 @"shared\win32metadata_annotations.h", StringComparison.OrdinalIgnoreCase)));
             Assert.Equal(new[] { "path", "sourceSha256" },
                 helper.EnumerateObject().Select(property => property.Name).OrderBy(name => name, StringComparer.Ordinal));
-            Assert.Equal("8654A090389AC88792F40FDEEBB9B298F2C8427136BB0D1B5E39E90D70D48B5D",
+            Assert.Equal("CCF58C367C6CA06844126D14FE6D0C478C26E5DF1191793082BC3358AFCAF959",
                 helper.GetProperty("sourceSha256").GetString());
             byte[] helperBytes = File.ReadAllBytes(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h"));
             Assert.Equal(helper.GetProperty("sourceSha256").GetString(), Convert.ToHexString(SHA256.HashData(helperBytes)));
@@ -4032,9 +4035,11 @@ namespace Win32MetadataScraperTests
         }
 
         [HeaderMigrationDataFact]
-        public void SourceBlockedGeneratedArtifactsRetainTheirExactLegacyFacts()
+        public void SourceBlockedGeneratedArtifactsAccountForEveryDeferredHistoricalFact()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var deferred = ReadSourceBlockedInventory();
+            AssertSourceBlockedInventory(deferred.RootElement);
             string[] osRows = File.ReadAllLines(Path.Combine(project, "supportedOS.rsp"));
             foreach (var fact in SourceBlockedAvailability)
                 Assert.DoesNotContain(osRows, row => row.StartsWith(fact.Target + "=", StringComparison.Ordinal));
@@ -4048,6 +4053,15 @@ namespace Win32MetadataScraperTests
             {
                 string source = File.ReadAllText(Path.Combine(project, "RecompiledIdlHeaders", "um", file));
                 Assert.Contains("File created by MIDL compiler", source);
+                var header = Assert.Single(deferred.RootElement.GetProperty("headers").EnumerateArray()
+                    .Where(header => string.Equals(header.GetProperty("path").GetString(), @"um\" + file,
+                        StringComparison.OrdinalIgnoreCase)));
+                var pin = Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray()
+                    .Where(pin => string.Equals(pin.GetProperty("path").GetString(), @"um\" + file,
+                        StringComparison.OrdinalIgnoreCase)));
+                Assert.Equal(header.GetProperty("sha256").GetString(), pin.GetProperty("sdkSha256").GetString());
+                Assert.Equal(header.GetProperty("sha256").GetString(), Convert.ToHexString(SHA256.HashData(
+                    File.ReadAllBytes(Path.Combine(project, "RecompiledIdlHeaders", "um", file)))));
                 Assert.DoesNotContain(patches, path => File.ReadAllText(Path.Combine(project, "patches", path))
                     .Split('\n').Any(line => line.StartsWith("+++ ", StringComparison.Ordinal) &&
                         line.TrimEnd('\r').EndsWith("/" + file, StringComparison.OrdinalIgnoreCase)));
@@ -4056,21 +4070,93 @@ namespace Win32MetadataScraperTests
                 .Split('\n').Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
                     !line.StartsWith("+++", StringComparison.Ordinal))).SelectMany(lines => lines))
                 .Replace("\\\"", "\"", StringComparison.Ordinal);
-            string[] missingFloors = SourceBlockedAvailability.Where(fact => !Regex.IsMatch(authored,
-                @"/\* Win32Metadata: (?:interface|record) ::" + Regex.Escape(fact.Target) +
-                @" => SupportedOSPlatform\(""" + Regex.Escape(fact.OS) + @"""\) \*/"))
-                .Select(fact => fact.Target + "=" + fact.OS).ToArray();
-            string[] missingAssociations = SourceBlockedAssociations.Where(row =>
+            foreach (var fact in SourceBlockedAvailability)
+                Assert.DoesNotMatch(@"/\* Win32Metadata: (?:interface|record) ::" + Regex.Escape(fact.Target) +
+                    @" => SupportedOSPlatform\(""" + Regex.Escape(fact.OS) + @"""\) \*/", authored);
+            foreach (var fact in SourceBlockedAssociationFacts)
+                Assert.DoesNotContain($"/* Win32Metadata: parameter ::{fact.Target} => AssociatedEnum({fact.Enum}) */",
+                    authored);
+            Assert.DoesNotMatch(@"/\* Win32Metadata: enum ::(?:tag_)?IdentityUpdateEvent => Flags \*/", authored);
+        }
+
+        internal static JsonDocument ReadSourceBlockedInventory()
+            => JsonDocument.Parse(File.ReadAllText(Path.Combine(RepositoryRoot, "tests",
+                "SdkAnnotationCoverage.Tests", "SourceBlockedMetadata.json")));
+
+        internal static void AssertSourceBlockedInventory(JsonElement inventory)
+        {
+            ExactProperties(inventory, "schemaVersion", "sdkPackageVersion", "sdkArchiveSha256",
+                "sourceState", "migrationState", "currentProjectionState", "headers");
+            Assert.Equal(1, inventory.GetProperty("schemaVersion").GetInt32());
+            Assert.Equal("10.0.28000.2705", inventory.GetProperty("sdkPackageVersion").GetString());
+            Assert.Equal("A74CA8F9AF98BD61925D9E2932AD98F746306123167B8F0BBA99CD9EA9F03807",
+                inventory.GetProperty("sdkArchiveSha256").GetString());
+            Assert.Equal("original-unavailable", inventory.GetProperty("sourceState").GetString());
+            Assert.Equal("deferred-unqualified", inventory.GetProperty("migrationState").GetString());
+            Assert.Equal("unqualified", inventory.GetProperty("currentProjectionState").GetString());
+            var headers = inventory.GetProperty("headers").EnumerateArray().ToArray();
+            Assert.Equal(SourceBlockedAvailability.Select(fact => fact.Header.ToLowerInvariant())
+                    .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal),
+                headers.Select(header => header.GetProperty("path").GetString().ToLowerInvariant())
+                    .OrderBy(value => value, StringComparer.Ordinal));
+            var expected = SourceBlockedAvailability.Select(fact =>
+                    fact.Header.ToLowerInvariant() + "|supportedOS|" + fact.Target + "|" + fact.OS)
+                .Concat(SourceBlockedAssociationFacts.Select(fact =>
+                    fact.Header.ToLowerInvariant() + "|associated-enum-use|" + fact.Target + "|" + fact.Enum))
+                .Append(@"um\identityprovider.h|enum-flags|IdentityUpdateEvent|Flags");
+            var actual = new List<string>();
+            foreach (var header in headers)
             {
-                string target = row.Substring(0, row.IndexOf('='));
-                int quote = row.IndexOf('"');
-                string name = row.Substring(quote + 1, row.LastIndexOf('"') - quote - 1);
-                return !authored.Contains($"/* Win32Metadata: parameter ::{target} => AssociatedEnum({name}) */",
-                    StringComparison.Ordinal);
-            }).ToArray();
-            Assert.True(missingFloors.Length == 0 && missingAssociations.Length == 0,
-                "Header-only source coverage is incomplete; retired metadata is not a substitute for original-IDL facts: " +
-                string.Join(", ", missingFloors.Concat(missingAssociations)));
+                ExactProperties(header, "path", "sha256", "facts");
+                Assert.Matches(@"\A[0-9A-F]{64}\z", header.GetProperty("sha256").GetString());
+                foreach (var fact in header.GetProperty("facts").EnumerateArray())
+                {
+                    ExactProperties(fact, "category", "target", "value");
+                    actual.Add(header.GetProperty("path").GetString().ToLowerInvariant() + "|" +
+                        fact.GetProperty("category").GetString() + "|" + fact.GetProperty("target").GetString() + "|" +
+                        fact.GetProperty("value").GetString());
+                }
+            }
+            Assert.Equal(expected.OrderBy(value => value, StringComparer.Ordinal),
+                actual.OrderBy(value => value, StringComparer.Ordinal));
+
+            static void ExactProperties(JsonElement value, params string[] names)
+                => Assert.Equal(names.OrderBy(name => name, StringComparer.Ordinal),
+                    value.EnumerateObject().Select(property => property.Name).OrderBy(name => name, StringComparer.Ordinal));
+        }
+
+        [Theory]
+        [InlineData("missing")]
+        [InlineData("duplicate")]
+        [InlineData("value")]
+        [InlineData("flags")]
+        [InlineData("covered")]
+        [InlineData("preserved")]
+        [InlineData("available-source")]
+        [InlineData("extra-coverage-claim")]
+        [InlineData("owner")]
+        public void DeferredSourceAccountingRejectsUnaccountedChangesAndFalseCoverage(string mutation)
+        {
+            using var original = ReadSourceBlockedInventory();
+            var inventory = JsonNode.Parse(original.RootElement.GetRawText());
+            var facts = inventory["headers"][0]["facts"].AsArray();
+            switch (mutation)
+            {
+                case "missing": facts.RemoveAt(0); break;
+                case "duplicate": facts.Add(facts[0].DeepClone()); break;
+                case "value": facts[0]["value"] = "windows10.0"; break;
+                case "flags":
+                    facts.Remove(facts.Single(fact => fact["category"].GetValue<string>() == "enum-flags"));
+                    break;
+                case "covered": inventory["migrationState"] = "covered"; break;
+                case "preserved": inventory["currentProjectionState"] = "preserved"; break;
+                case "available-source": inventory["sourceState"] = "original-available"; break;
+                case "extra-coverage-claim": inventory["preservedLegacyFacts"] = 30; break;
+                case "owner": inventory["headers"][0]["path"] = @"um\unrelated.h"; break;
+                default: throw new ArgumentOutOfRangeException(nameof(mutation));
+            }
+            using var changed = JsonDocument.Parse(inventory.ToJsonString());
+            Assert.ThrowsAny<XunitException>(() => AssertSourceBlockedInventory(changed.RootElement));
         }
 
         [MigrationTheory]

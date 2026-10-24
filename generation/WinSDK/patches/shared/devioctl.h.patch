@@ -1,0 +1,23 @@
+diff --git a/shared/devioctl.h b/shared/devioctl.h
+--- a/shared/devioctl.h
++++ b/shared/devioctl.h
+@@ -20,6 +20,8 @@
+ 
+ #ifndef _DEVIOCTL_
+ #define _DEVIOCTL_
++
++#include <sal.h>
+ 
+ // begin_ntddk begin_wdm begin_nthal begin_ntifs
+ //
+@@ -81,6 +83,10 @@
+ #define FILE_DEVICE_SMARTCARD           0x00000031
+ #define FILE_DEVICE_ACPI                0x00000032
+ #define FILE_DEVICE_DVD                 0x00000033
++
++#ifdef WIN32METADATA
++_Win32_Enum_(FILE_DEVICE_TYPE, unsigned int, FILE_DEVICE_CD_ROM, FILE_DEVICE_DISK, FILE_DEVICE_TAPE, FILE_DEVICE_DVD);
++#endif
+ #define FILE_DEVICE_FULLSCREEN_VIDEO    0x00000034
+ #define FILE_DEVICE_DFS_FILE_SYSTEM     0x00000035
+ #define FILE_DEVICE_DFS_VOLUME          0x00000036

@@ -1,0 +1,13 @@
+diff --git a/um/imessage.h b/um/imessage.h
+--- a/um/imessage.h
++++ b/um/imessage.h
+@@ -36,6 +36,9 @@
+ #endif
+ 
+ typedef struct _MSGSESS		FAR * LPMSGSESS;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef LPMSGSESS LPMSGSESS;
++#endif
+ 
+ /*	Typedef of optional callback routine to be called on last release of
+  *	top-level messages opened with OpenIMsgOnIStg

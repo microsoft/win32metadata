@@ -1,0 +1,21 @@
+diff --git a/um/RadialControllerInterop.idl b/um/RadialControllerInterop.idl
+index 1ec50876..fdc66b52 100644
+--- a/um/RadialControllerInterop.idl
++++ b/um/RadialControllerInterop.idl
+@@ -7,12 +7,16 @@
+ 
+ import "inspectable.idl";
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS1)")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IRadialControllerInterop => SupportedOSPlatform(\"windows10.0.14393\") */")
++cpp_quote("/* Win32Metadata: interface ::IRadialControllerConfigurationInterop => SupportedOSPlatform(\"windows10.0.14393\") */")
++
+ [
+     uuid(1B0535C9-57AD-45C1-9D79-AD5C34360513),
+     object,

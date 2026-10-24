@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/um/MMCObj.h
 <IncludeRoot>/um/MMC.h

@@ -23,3 +23,6 @@
 <IncludeRoot>/um/fullenumsyncdeviceservice.h
 --namespace
 Windows.Win32.Devices.PortableDevices
+
+--config
+parse-win32-annotations

@@ -1,0 +1,31 @@
+diff --git a/um/computedefs.h b/um/computedefs.h
+--- a/um/computedefs.h
++++ b/um/computedefs.h
+@@ -24,15 +24,27 @@
+ 
+ // Handle to a compute system
+ DECLARE_HANDLE(HCS_SYSTEM);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCS_SYSTEM HCS_SYSTEM;
++#endif
+ 
+ // Handle to a process running in a compute system
+ DECLARE_HANDLE(HCS_PROCESS);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCS_PROCESS HCS_PROCESS;
++#endif
+ 
+ // Handle to an operation on a compute system
+ DECLARE_HANDLE(HCS_OPERATION);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCS_OPERATION HCS_OPERATION;
++#endif
+ 
+ // Handle to a callback registered on a compute system or process handle.
+ DECLARE_HANDLE(HCS_CALLBACK);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef HCS_CALLBACK HCS_CALLBACK;
++#endif
+ 
+ // Type of an operation. These correspond to the functions that invoke the operation.
+ typedef enum HCS_OPERATION_TYPE

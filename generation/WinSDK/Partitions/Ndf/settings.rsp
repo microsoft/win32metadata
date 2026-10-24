@@ -7,3 +7,5 @@ SOCKET_ADDRESS_LIST
 <IncludeRoot>/um/ndfapi.h
 --namespace
 Windows.Win32.NetworkManagement.NetworkDiagnosticsFramework
+--config
+parse-win32-annotations

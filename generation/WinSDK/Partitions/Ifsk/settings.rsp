@@ -4,3 +4,5 @@
 <IncludeRoot>/shared/wnnc.h
 --namespace
 Windows.Win32.Storage.InstallableFileSystems
+--config
+parse-win32-annotations

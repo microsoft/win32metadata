@@ -1,0 +1,115 @@
+diff --git a/um/hlink.idl b/um/hlink.idl
+index 9678c608..ad2d9aa1 100644
+--- a/um/hlink.idl
++++ b/um/hlink.idl
+@@ -76,7 +76,7 @@ cpp_quote("             IHlinkSite * pihlsite,
+ cpp_quote("             DWORD dwSiteData,                                                ")
+ cpp_quote("             IUnknown * piunkOuter,                                           ")
+ cpp_quote("             REFIID riid,                                                     ")
+-cpp_quote("             void ** ppvObj);                                                 ")
++cpp_quote("             _COM_Outptr_ void ** ppvObj);                                                 ")
+ cpp_quote("                                                                              ")
+ cpp_quote("STDAPI HlinkCreateFromString(                                                 ")
+ cpp_quote("             LPCWSTR pwzTarget,                                               ")
+@@ -86,7 +86,7 @@ cpp_quote("             IHlinkSite * pihlsite,
+ cpp_quote("             DWORD dwSiteData,                                                ")
+ cpp_quote("             IUnknown * piunkOuter,                                           ")
+ cpp_quote("             REFIID riid,                                                     ")
+-cpp_quote("             void ** ppvObj);                                                 ")
++cpp_quote("             _COM_Outptr_ void ** ppvObj);                                                 ")
+ cpp_quote("                                                                              ")
+ cpp_quote("STDAPI HlinkCreateFromData(                                                   ")
+ cpp_quote("             IDataObject *piDataObj,                                          ")
+@@ -94,7 +94,7 @@ cpp_quote("             IHlinkSite * pihlsite,
+ cpp_quote("             DWORD dwSiteData,                                                ")
+ cpp_quote("             IUnknown * piunkOuter,                                           ")
+ cpp_quote("             REFIID riid,                                                     ")
+-cpp_quote("             void ** ppvObj);                                                 ")
++cpp_quote("             _COM_Outptr_ void ** ppvObj);                                                 ")
+ cpp_quote("                                                                              ")
+ 
+ // Returns S_OK if a hyperlink can be created from piDataObj, S_FALSE if not.
+@@ -105,12 +105,12 @@ cpp_quote("             IHlink * pihl,
+ cpp_quote("             REFIID riid,                                                     ")
+ cpp_quote("             IHlinkSite * pihlsiteForClone,                                   ")
+ cpp_quote("             DWORD dwSiteData,                                                ")
+-cpp_quote("             void ** ppvObj);                                                 ")
++cpp_quote("             _COM_Outptr_ void ** ppvObj);                                                 ")
+ cpp_quote("                                                                              ")
+ cpp_quote("STDAPI HlinkCreateBrowseContext(                                              ")
+ cpp_quote("             IUnknown * piunkOuter,                                           ")
+ cpp_quote("             REFIID riid,                                                     ")
+-cpp_quote("             void ** ppvObj);                                                 ")
++cpp_quote("             _COM_Outptr_ void ** ppvObj);                                                 ")
+ cpp_quote("                                                                              ")
+ cpp_quote("STDAPI HlinkNavigateToStringReference(                                        ")
+ cpp_quote("             LPCWSTR pwzTarget,                                               ")
+@@ -186,7 +186,7 @@ cpp_quote("             LPCWSTR pszUsername,
+ cpp_quote("             LPCWSTR pszPassword,                                             ")
+ cpp_quote("             IUnknown * piunkOuter,                                           ")
+ cpp_quote("             REFIID riid,                                                     ")
+-cpp_quote("             void ** ppvObj);                                                 ")
++cpp_quote("             _COM_Outptr_ void ** ppvObj);                                                 ")
+ cpp_quote("                                                                              ")
+ cpp_quote("STDAPI HlinkPreprocessMoniker(                                                ")
+ cpp_quote("             LPBC pibc,                                                       ")
+@@ -342,6 +342,9 @@ interface IHlink: IUnknown
+         typedef [unique] IHlink *LPHLINK;
+ 
+         // Navigation flags
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+         typedef enum
+         {
+             HLNF_INTERNALJUMP           = 0x00000001,
+@@ -351,6 +354,9 @@ interface IHlink: IUnknown
+             HLNF_NAVIGATINGTOSTACKITEM  = 0x00000010,
+             HLNF_CREATENOHISTORY        = 0x00000020,
+         } HLNF;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+         // GetXXXReference values indicating reference to be retrieved
+         typedef enum
+@@ -361,6 +367,9 @@ interface IHlink: IUnknown
+         } HLINKGETREF;
+ 
+         // GetFriendlyName flags
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+         typedef enum
+         {
+             HLFNAMEF_DEFAULT            = 0x00000000,
+@@ -369,6 +378,9 @@ interface IHlink: IUnknown
+             HLFNAMEF_TRYFULLTARGET      = 0x00000004,
+             HLFNAMEF_TRYWIN95SHORTCUT   = 0x00000008,
+         } HLFNAMEF;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+         // Status flags
+         typedef enum
+@@ -714,6 +726,9 @@ interface IHlinkBrowseContext : IUnknown
+         } HLTBINFO;
+ 
+         // information about the browse window
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+         enum
+         {
+             HLBWIF_HASFRAMEWNDINFO      = 0x00000001,
+@@ -723,6 +738,9 @@ interface IHlinkBrowseContext : IUnknown
+             HLBWIF_HASWEBTOOLBARINFO    = 0x00000010,
+             HLBWIF_WEBTOOLBARHIDDEN     = 0x00000020
+         };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+         typedef struct _tagHLBWINFO
+         {

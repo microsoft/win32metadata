@@ -4,3 +4,5 @@
 <IncludeRoot>/um/VersionHelpers.h
 --namespace
 Windows.Win32.System.SystemInformation
+--config
+parse-win32-annotations

@@ -7,3 +7,5 @@
 <IncludeRoot>/um/mshtmldiagnostics.h
 --namespace
 Windows.Win32.Web.MsHtml
+--config
+parse-win32-annotations

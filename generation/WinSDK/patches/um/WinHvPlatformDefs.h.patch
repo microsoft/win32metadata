@@ -1,0 +1,13 @@
+diff --git a/um/WinHvPlatformDefs.h b/um/WinHvPlatformDefs.h
+--- a/um/WinHvPlatformDefs.h
++++ b/um/WinHvPlatformDefs.h
+@@ -2199,6 +2199,9 @@
+ //
+ 
+ typedef VOID* WHV_PARTITION_HANDLE;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_NativeTypedef_ typedef WHV_PARTITION_HANDLE WHV_PARTITION_HANDLE;
++#endif
+ 
+ typedef enum WHV_PARTITION_PROPERTY_CODE
+ {

@@ -1,0 +1,41 @@
+diff --git a/um/EventSys.idl b/um/EventSys.idl
+index 5af5a009..2bdae03e 100644
+--- a/um/EventSys.idl
++++ b/um/EventSys.idl
+@@ -8,11 +8,28 @@
+ //
+ // --------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IEventSystem => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventPublisher => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventClass => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventClass2 => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventSubscription => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IFiringControl => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IPublisherFilter => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IMultiInterfacePublisherFilter => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventObjectChange => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventObjectChange2 => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEnumEventObject => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventObjectCollection => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventProperty => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IEventControl => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: interface ::IMultiInterfaceEventControl => SupportedOSPlatform(\"windows5.0\") */")
++
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 
+@@ -724,6 +741,7 @@ library DummyEventSystemLib
+ 
+ //midl_pragma warning(default: 2039) // oleautomation conformance
+ 
++cpp_quote("/* Win32Metadata: method ::IEnumEventObject::Reset => PreserveResult */")
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
+ 

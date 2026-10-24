@@ -2,3 +2,5 @@
 <IncludeRoot>/um/InteractionContext.h
 --namespace
 Windows.Win32.UI.InteractionContext
+--config
+parse-win32-annotations

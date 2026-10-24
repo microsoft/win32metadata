@@ -1,0 +1,242 @@
+diff --git a/um/wdspxe.h b/um/wdspxe.h
+index 662b0c97..2ba39ceb 100644
+--- a/um/wdspxe.h
++++ b/um/wdspxe.h
+@@ -252,6 +252,7 @@ typedef ULONG PXE_PROVIDER_ATTRIBUTE;
+ //
+ // Provider Registration and Enumeration APIs
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderRegister (
+@@ -262,12 +263,14 @@ PxeProviderRegister (
+     _Out_opt_ PHKEY phProviderKey
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderUnRegister (
+     _In_ LPCWSTR pszProviderName
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderQueryIndex (
+@@ -275,12 +278,14 @@ PxeProviderQueryIndex (
+     _Out_ PULONG puIndex
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderEnumFirst (
+     _Out_ HANDLE *phEnum
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderEnumNext (
+@@ -288,12 +293,14 @@ PxeProviderEnumNext (
+     _Out_ PPXE_PROVIDER *ppProvider
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderEnumClose (
+     _In_ HANDLE hEnum
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PxeProviderFreeInfo (
+     _In_ PPXE_PROVIDER pProvider
+@@ -302,6 +309,7 @@ PxeProviderFreeInfo (
+ //
+ // Callback Registration
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeRegisterCallback (
+@@ -314,6 +322,7 @@ PxeRegisterCallback (
+ //
+ // UDP Send/Boot Action
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeSendReply (
+@@ -326,6 +335,7 @@ PxeSendReply (
+ //
+ // Notify of Async Processing
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeAsyncRecvDone (
+@@ -337,6 +347,7 @@ PxeAsyncRecvDone (
+ // Trace
+ //
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeTrace (
+@@ -358,6 +369,8 @@ PxeTraceV (
+ //
+ // Packet Allocation
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ PVOID
+ PXEAPI
+ PxePacketAllocate (
+@@ -366,6 +379,7 @@ PxePacketAllocate (
+     _In_ ULONG uSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxePacketFree (
+@@ -377,6 +391,7 @@ PxePacketFree (
+ //
+ // Provider Attributes
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeProviderSetAttribute (
+@@ -389,6 +404,7 @@ PxeProviderSetAttribute (
+ //
+ // Dhcp Functions
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeDhcpInitialize (
+@@ -399,6 +415,7 @@ PxeDhcpInitialize (
+     _Out_ PULONG puReplyPacketLen
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeDhcpv6Initialize (
+@@ -409,6 +426,7 @@ PxeDhcpv6Initialize (
+     _Out_ PULONG pcbReplyUsed
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeDhcpAppendOption (
+@@ -420,6 +438,7 @@ PxeDhcpAppendOption (
+     _In_reads_bytes_opt_(bOptionLen) PVOID pValue
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ PXEAPI
+@@ -432,6 +451,7 @@ PxeDhcpv6AppendOption (
+     _In_reads_bytes_(cbOption) PVOID pOption
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeDhcpAppendOptionRaw (
+@@ -442,6 +462,7 @@ PxeDhcpAppendOptionRaw (
+     _In_reads_bytes_(uBufferLen) PVOID pBuffer
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ PXEAPI
+@@ -453,6 +474,7 @@ PxeDhcpv6AppendOptionRaw (
+     _In_reads_bytes_(cbBuffer) PVOID pBuffer
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeDhcpIsValid (
+@@ -462,6 +484,7 @@ PxeDhcpIsValid (
+     _Out_opt_ PBOOL pbPxeOptionPresent
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeDhcpv6IsValid (
+@@ -471,6 +494,7 @@ PxeDhcpv6IsValid (
+     _Out_opt_ PBOOL pbPxeOptionPresent
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeDhcpGetOptionValue (
+@@ -482,6 +506,7 @@ PxeDhcpGetOptionValue (
+     _Outptr_opt_result_bytebuffer_(*pbOptionLen) PVOID *ppOptionValue
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeDhcpv6GetOptionValue (
+@@ -493,6 +518,7 @@ PxeDhcpv6GetOptionValue (
+     _Outptr_opt_result_bytebuffer_(*pwOptionLen) PVOID *ppOptionValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeDhcpGetVendorOptionValue (
+@@ -504,6 +530,7 @@ PxeDhcpGetVendorOptionValue (
+     _Outptr_opt_result_bytebuffer_(*pbOptionLen) PVOID *ppOptionValue
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeDhcpv6GetVendorOptionValue (
+@@ -516,6 +543,7 @@ PxeDhcpv6GetVendorOptionValue (
+     _Outptr_opt_result_bytebuffer_(*pwOptionLen) PVOID *ppOptionValue
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeDhcpv6ParseRelayForw (
+@@ -528,6 +556,7 @@ PxeDhcpv6ParseRelayForw (
+     _Out_ PULONG pcbInnerPacket
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeDhcpv6CreateRelayRepl (
+@@ -543,6 +572,7 @@ PxeDhcpv6CreateRelayRepl (
+ //
+ // Server Information
+ //
++_Win32_SupportedOS_Server2008_
+ DWORD
+ PXEAPI
+ PxeGetServerInfo (
+@@ -551,6 +581,7 @@ PxeGetServerInfo (
+     _In_ ULONG uBufferLen
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ PXEAPI
+ PxeGetServerInfoEx (

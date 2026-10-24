@@ -1,0 +1,22 @@
+diff --git a/um/scpops.idl b/um/scpops.idl
+index 125224ae..3bdf25fd 100644
+--- a/um/scpops.idl
++++ b/um/scpops.idl
+@@ -62,7 +62,7 @@ interface IScopedOperations : IBindResource
+ 	[in, size_is((ULONG)cRows), annotation("_In_reads_opt_(cRows)")] LPCOLESTR	rgpwszSourceURLs[],
+ 	[in, size_is((ULONG)cRows), annotation("_In_reads_(cRows)")] LPCOLESTR	rgpwszDestURLs[],
+ 	[in] DWORD dwCopyFlags,
+-	[in, unique, annotation("_In_")] IAuthenticate*	pAuthenticate,
++	[in, unique, annotation("_In_opt_")] IAuthenticate*	pAuthenticate,
+ 	[in, out, size_is((ULONG)cRows), annotation("_Out_writes_(cRows)")] DBSTATUS 	rgdwStatus[],
+ 	[out, size_is((ULONG)cRows), annotation("_Out_writes_opt_(cRows)")] LPOLESTR	rgpwszNewURLs[],
+ 	[out, annotation("_Outptr_result_maybenull_z_")] OLECHAR **ppStringsBuffer
+@@ -91,7 +91,7 @@ interface IScopedOperations : IBindResource
+ 	[in, size_is((ULONG)cRows), annotation("_In_reads_opt_(cRows)")] LPCOLESTR		rgpwszSourceURLs[],
+ 	[in, size_is((ULONG)cRows), annotation("_In_reads_(cRows)")] LPCOLESTR		rgpwszDestURLs[],
+ 	[in]DWORD	dwMoveFlags,
+-	[in, unique, annotation("_In_")]	IAuthenticate*	pAuthenticate,
++	[in, unique, annotation("_In_opt_")]	IAuthenticate*	pAuthenticate,
+ 	[in, out, size_is((ULONG)cRows), annotation("_Out_writes_(cRows)")]	DBSTATUS 		rgdwStatus[],
+ 	[out, size_is((ULONG)cRows), annotation("_Out_writes_opt_(cRows)")] LPOLESTR		rgpwszNewURLs[],
+ 	[out, annotation("_Outptr_result_maybenull_z_")]	OLECHAR		**ppStringsBuffer

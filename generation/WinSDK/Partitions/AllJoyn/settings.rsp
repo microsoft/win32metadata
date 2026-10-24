@@ -38,4 +38,5 @@
 --namespace
 Windows.Win32.Devices.AllJoyn
 --with-librarypath
+# Newer upstream facts not covered by this frozen patch payload.
 *=MSAJApi.dll

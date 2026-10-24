@@ -26,12 +26,59 @@ SOURCE_BLOCKED = {
     r"um\wcndevice.h", r"um\identityprovider.h", r"um\identitystore.h",
     r"um\rendezvoussession.h",
 }
+SOURCE_BLOCKED_INVENTORY = Path("tests") / "SdkAnnotationCoverage.Tests" / "SourceBlockedMetadata.json"
+SOURCE_BLOCKED_FACTS_SHA256 = "10BE7F9BFB824E520619172A0462210C9B2A7A045967F85331E4A421218B6C3D"
 DEVICE_RESERVED = {
     r"um\cfgmgr32.h", r"um\newdev.h", r"um\winusb.h", r"um\swdevice.h",
 }
 TOKEN = re.compile(r"\b[A-Za-z_][A-Za-z_0-9]*\b")
 MACRO = re.compile(r"\b_Win32_[A-Za-z_0-9]+_\b")
 GENERATED = re.compile(r"File created by MIDL compiler|ALWAYS GENERATED file|automatically generated from [^\r\n]*\.idl", re.I)
+
+
+def source_blocked_accounting(inventory, sdk_package_version):
+    if set(inventory) != {
+        "schemaVersion", "sdkPackageVersion", "sdkArchiveSha256",
+        "sourceState", "migrationState", "currentProjectionState", "headers",
+    } or type(inventory["schemaVersion"]) is not int or inventory["schemaVersion"] != 1:
+        raise ValueError("Source-blocked accounting has an invalid schema or an unreviewed coverage claim")
+    if inventory["sdkPackageVersion"] != sdk_package_version or sdk_package_version != "10.0.28000.2705":
+        raise ValueError("Source-blocked accounting does not bind the selected SDK")
+    if inventory["sdkArchiveSha256"] != "A74CA8F9AF98BD61925D9E2932AD98F746306123167B8F0BBA99CD9EA9F03807":
+        raise ValueError("Source-blocked accounting does not bind the reviewed shipped archive")
+    if (inventory["sourceState"], inventory["migrationState"], inventory["currentProjectionState"]) != (
+        "original-unavailable", "deferred-unqualified", "unqualified",
+    ):
+        raise ValueError("Source-blocked facts cannot claim source coverage or current projection preservation")
+    headers, rows, facts = [], [], []
+    for header in inventory["headers"]:
+        if set(header) != {"path", "sha256", "facts"} or not re.fullmatch(r"[0-9A-F]{64}", header["sha256"]):
+            raise ValueError("Source-blocked header identity changed")
+        path = header["path"].lower()
+        headers.append(path)
+        for fact in header["facts"]:
+            if set(fact) != {"category", "target", "value"} or not all(
+                isinstance(value, str) and value for value in fact.values()
+            ):
+                raise ValueError("Source-blocked fact identity or coverage claim changed")
+            rows.append("|".join((path, header["sha256"], fact["category"], fact["target"], fact["value"])))
+            facts.append({"header": path, **fact, "state": "deferred-unqualified", "currentPhysicalProjection": None})
+    if len(headers) != len(SOURCE_BLOCKED) or set(headers) != SOURCE_BLOCKED:
+        raise ValueError("Source-blocked header accounting is incomplete or duplicated")
+    digest = hashlib.sha256("\n".join(sorted(rows)).encode("utf-8")).hexdigest().upper()
+    if digest != SOURCE_BLOCKED_FACTS_SHA256:
+        raise ValueError("Source-blocked historical facts changed, disappeared or were duplicated")
+    counts = Counter(fact["category"] for fact in facts)
+    return {
+        "headers": sorted(headers), "deferredLegacyFacts": len(facts),
+        "state": "source-blocked/deferred-unqualified", "currentProjectionState": "unqualified",
+        "availability": counts["supportedOS"], "associatedEnumUses": counts["associated-enum-use"],
+        "enumFlags": counts["enum-flags"], "currentPreservationClaimed": False,
+        "sdkPackageVersion": sdk_package_version, "sdkArchiveSha256": inventory["sdkArchiveSha256"],
+        "inventory": str(SOURCE_BLOCKED_INVENTORY).replace("/", "\\"),
+        "facts": sorted(facts, key=lambda fact: (fact["header"], fact["category"], fact["target"])),
+        "basis": "Exact historical units and reviewed selected-SDK source unavailability; no current physical preservation or completed migration is established.",
+    }
 
 
 def text(path):
@@ -699,6 +746,9 @@ def main():
             raise ValueError("A dirty-input inventory cannot supply committed baseline counts")
         if campaign.get("sourceReceipts") and not report["sourceProgressScoreboard"]["strictApplyRows"]:
             raise ValueError("Committed source receipts require a strictly applied baseline inventory")
+        report["missingOriginalSourceMigrations"] = source_blocked_accounting(
+            json.loads(text(repo / SOURCE_BLOCKED_INVENTORY)), version
+        )
         report["selectedProviderOverlayOriginals"] = selected_overlay_originals(
             [item["original"] for item in report["selectedSdkOriginals"]],
             report["additionalSelectedSourceProviders"][0]["publicIncludeFiles"],
@@ -1092,12 +1142,9 @@ def main():
             for path in mirror_files if relative(path, project / "RecompiledIdlHeaders").lower() not in sdk_files
         )
         report["manualSources"] = manual
-        report["missingOriginalSourceMigrations"] = {
-            "headers": sorted(SOURCE_BLOCKED), "preservedLegacyFacts": 30,
-            "state": "missing-source/global-tooling-exception",
-            "availability": 26, "associatedEnumUses": 3, "enumFlags": 1,
-            "basis": "Frozen ledger and docs/header-annotation-migration-playbook.md original-source request inventory; IDL filename probes are not invented original filenames.",
-        }
+        report["missingOriginalSourceMigrations"] = source_blocked_accounting(
+            json.loads(text(repo / SOURCE_BLOCKED_INVENTORY)), report["snapshot"]["sdkPackageVersion"]
+        )
         report["intentionalRemovals"] = {
             "policy": "Agile is intentionally jettisoned, not migrated into headers.",
             "stillConfiguredRules": [fact for fact in current_facts if fact["treatment"] == "intentional-removal"],

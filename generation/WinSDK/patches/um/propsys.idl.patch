@@ -1,0 +1,596 @@
+diff --git a/um/propsys.idl b/um/propsys.idl
+index 1fe720ca..66d51852 100644
+--- a/um/propsys.idl
++++ b/um/propsys.idl
+@@ -8,6 +8,9 @@
+ //
+ //****************************************************************************
+ 
++#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <win32metadata_annotations.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ import "objidl.idl";
+@@ -45,6 +48,8 @@
+ cpp_quote("#endif")
+ cpp_quote("#endif")
+ 
++cpp_quote("/* Win32Metadata: interface ::IInitializeWithFile => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IInitializeWithStream => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     uuid(b7d14566-0509-4cce-a71f-0a554233bd9b),
+     object,
+@@ -96,7 +101,9 @@
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ cpp_quote("PSSTDAPI PropVariantToWinRTPropertyValue(_In_ REFPROPVARIANT propvar, _In_ REFIID riid, _COM_Outptr_result_maybenull_ void **ppv);")
++cpp_quote("/* Win32Metadata: function ::PropVariantToWinRTPropertyValue => SupportedOSPlatform(\"windows8.0\") */")
+ cpp_quote("PSSTDAPI WinRTPropertyValueToPropVariant(_In_opt_ IUnknown *punkPropertyValue, _Out_ PROPVARIANT *ppropvar);")
++cpp_quote("/* Win32Metadata: function ::WinRTPropertyValueToPropVariant => SupportedOSPlatform(\"windows8.0\") */")
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma endregion
+@@ -104,6 +111,27 @@
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++cpp_quote("/* Win32Metadata: interface ::INamedPropertyStore => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IObjectWithPropertyKey => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyChange => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyChangeArray => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyStoreCapabilities => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyStoreCache => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyEnumType => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyEnumType2 => SupportedOSPlatform(\"windows6.1\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyEnumTypeList => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyDescription => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyDescription2 => SupportedOSPlatform(\"windows6.1\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyDescriptionAliasInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyDescriptionSearchInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyDescriptionRelatedPropertyInfo => SupportedOSPlatform(\"windows6.1\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertySystem => SupportedOSPlatform(\"windows5.1.2600\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyDescriptionList => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPropertyStoreFactory => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IDelayedPropertyStoreFactory => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPersistSerializedPropStorage => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IPersistSerializedPropStorage2 => SupportedOSPlatform(\"windows6.1\") */")
++cpp_quote("/* Win32Metadata: interface ::ICreateObject => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     uuid(71604b0f-97b0-4764-8577-2f13e98a1422),
+     object,
+@@ -118,6 +146,9 @@
+ };
+ 
+ // The following are new for Vista, but are use in downlevel components
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum GETPROPERTYSTOREFLAGS
+ {
+     // If no flags are specified (GPS_DEFAULT), a read-only property store is returned that includes properties for the file or item.
+@@ -147,6 +178,9 @@
+     GPS_VOLATILEPROPERTIESONLY    = 0x00001000,   // only include properties from the file's volatile store in the indexer
+     GPS_MASK_VALID                = 0x00001FFF,
+ } GETPROPERTYSTOREFLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(GETPROPERTYSTOREFLAGS)")
+ 
+@@ -160,12 +194,19 @@
+     HRESULT GetPropertyKey([out] PROPERTYKEY *pkey);
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum PKA_FLAGS
+ {
+     PKA_SET,      // replace current value
+     PKA_APPEND,   // append to current value - multi-value properties only
+     PKA_DELETE,   // delete from current value - multi-value properties only
+-} PKA_FLAGS;      // note, this enum type not named property, it should have been named PKA_OPERATION
++} PKA_FLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
++      // note, this enum type not named property, it should have been named PKA_OPERATION
+ 
+ [
+     uuid(f917bc8a-1bba-4478-a245-1bde03eb9431),
+@@ -291,6 +332,9 @@
+ ]
+ interface IPropertyDescription : IUnknown
+ {
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++    cpp_quote("#endif")
+     typedef [v1_enum] enum PROPDESC_TYPE_FLAGS
+     {
+         PDTF_DEFAULT                    = 0x00000000,
+@@ -310,9 +354,15 @@
+         PDTF_ISSYSTEMPROPERTY           = 0x80000000,   // This property is owned by the system
+         PDTF_MASK_ALL                   = 0x80001FFF
+     } PROPDESC_TYPE_FLAGS;
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute pop")
++    cpp_quote("#endif")
+ 
+     cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(PROPDESC_TYPE_FLAGS)")
+ 
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++    cpp_quote("#endif")
+     typedef [v1_enum] enum PROPDESC_VIEW_FLAGS
+     {
+         PDVF_DEFAULT                = 0x00000000,
+@@ -331,6 +381,9 @@
+         PDVF_CANWRAP                = 0x00001000,   // the property can be wrapped to the next row
+         PDVF_MASK_ALL               = 0x00001BFF
+     } PROPDESC_VIEW_FLAGS;
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute pop")
++    cpp_quote("#endif")
+ 
+     cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(PROPDESC_VIEW_FLAGS)")
+ 
+@@ -354,6 +407,9 @@
+         PDGR_ENUMERATED     = 6,    // Display buckets from GetEnumTypeList
+     } PROPDESC_GROUPING_RANGE;
+ 
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++    cpp_quote("#endif")
+     typedef [v1_enum] enum PROPDESC_FORMAT_FLAGS
+     {
+         PDFF_DEFAULT                = 0x00000000,
+@@ -372,6 +428,9 @@
+         PDFF_READONLY               = 0x00001000,   // Use readonly format, fill with default text if empty and !PDFF_FAILIFEMPTYPROP
+         PDFF_NOAUTOREADINGORDER     = 0x00002000,   // Don't detect reading order automatically. Useful if you will be converting to Ansi and don't want Unicode reading order characters
+     } PROPDESC_FORMAT_FLAGS;
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute pop")
++    cpp_quote("#endif")
+     cpp_quote("#define PDFF_PREFERFRIENDLY    static_cast<PROPDESC_FORMAT_FLAGS>(0x10000000) // Use even friendlier date/time descriptions ;internal")  // ;internal
+     cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(PROPDESC_FORMAT_FLAGS)")
+ 
+@@ -502,6 +561,9 @@
+ ]
+ interface IPropertyDescriptionSearchInfo : IPropertyDescription
+ {
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++    cpp_quote("#endif")
+     typedef [v1_enum] enum PROPDESC_SEARCHINFO_FLAGS
+     {
+         PDSIF_DEFAULT           = 0x00000000,
+@@ -511,6 +573,9 @@
+         PDSIF_ALWAYSINCLUDE     = 0x00000008,
+         PDSIF_USEFORTYPEAHEAD   = 0x00000010,
+     } PROPDESC_SEARCHINFO_FLAGS;
++    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++    cpp_quote("#pragma clang attribute pop")
++    cpp_quote("#endif")
+ 
+     cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(PROPDESC_SEARCHINFO_FLAGS)")
+ 
+@@ -672,6 +737,7 @@
+ 
+ typedef SERIALIZEDPROPSTORAGE __unaligned *PUSERIALIZEDPROPSTORAGE;
+ typedef const SERIALIZEDPROPSTORAGE __unaligned *PCUSERIALIZEDPROPSTORAGE;
++cpp_quote("/* Win32Metadata: type ::PCUSERIALIZEDPROPSTORAGE => NativeTypedef */")
+ 
+ [
+     uuid(e318ad57-0aa0-450f-aca5-6fab7103d917),
+@@ -730,8 +796,10 @@
+         [out, iid_is(riid)] void **ppv);
+ };
+ 
++cpp_quote("/* Win32Metadata: method ::IPropertyStoreCapabilities::IsPropertyWritable => PreserveResult */")
+ cpp_quote("// Format a property value for display purposes")
+ cpp_quote("PSSTDAPI PSFormatForDisplay(")
++cpp_quote("/* Win32Metadata: function ::PSFormatForDisplay => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY propkey,")
+ cpp_quote("    _In_ REFPROPVARIANT propvar,")
+ cpp_quote("    _In_ PROPDESC_FORMAT_FLAGS pdfFlags,")
+@@ -739,12 +807,14 @@
+ cpp_quote("    _In_ DWORD cchText);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSFormatForDisplayAlloc(")
++cpp_quote("/* Win32Metadata: function ::PSFormatForDisplayAlloc => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY key,")
+ cpp_quote("    _In_ REFPROPVARIANT propvar,")
+ cpp_quote("    _In_ PROPDESC_FORMAT_FLAGS pdff,")
+ cpp_quote("    _Outptr_ PWSTR *ppszDisplay);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSFormatPropertyValue(")
++cpp_quote("/* Win32Metadata: function ::PSFormatPropertyValue => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("    _In_ IPropertyStore *pps,")
+ cpp_quote("    _In_ IPropertyDescription *ppd,")
+ cpp_quote("    _In_ PROPDESC_FORMAT_FLAGS pdff,")
+@@ -752,6 +822,7 @@
+ cpp_quote("")
+ cpp_quote("// Retrieve the image reference associated with a property value (if specified)")
+ cpp_quote("PSSTDAPI PSGetImageReferenceForValue(")
++cpp_quote("/* Win32Metadata: function ::PSGetImageReferenceForValue => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY propkey,")
+ cpp_quote("    _In_ REFPROPVARIANT propvar,")
+ cpp_quote("    _Outptr_ PWSTR *ppszImageRes);")
+@@ -763,11 +834,13 @@
+ cpp_quote("")
+ cpp_quote("// Convert a PROPERTYKEY to and from a PWSTR")
+ cpp_quote("PSSTDAPI PSStringFromPropertyKey(")
++cpp_quote("/* Win32Metadata: function ::PSStringFromPropertyKey => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY pkey,")
+ cpp_quote("    _Out_writes_(cch) LPWSTR psz,")
+ cpp_quote("    _In_ UINT cch);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSPropertyKeyFromString(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyKeyFromString => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ LPCWSTR pszString,")
+ cpp_quote("    _Out_ PROPERTYKEY *pkey);")
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -779,8 +852,10 @@
+ cpp_quote("// Creates an in-memory property store")
+ cpp_quote("// Returns an IPropertyStore, IPersistSerializedPropStorage, and related interfaces interface")
+ cpp_quote("PSSTDAPI PSCreateMemoryPropertyStore(")
+-cpp_quote("    _In_ REFIID riid,")
+-cpp_quote("    _Outptr_ void **ppv);")
++cpp_quote("/* Win32Metadata: function ::PSCreateMemoryPropertyStore => SupportedOSPlatform(\"windows5.1.2600\") */")
++cpp_quote("    _In_ REFIID riid,")
++cpp_quote("    _Outptr_ void **ppv);")
++cpp_quote("/* Win32Metadata: parameter ::PSCreateMemoryPropertyStore::ppv => ComOutPtr(true) */")
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma endregion
+ #pragma region Desktop Family
+@@ -790,6 +865,7 @@
+ cpp_quote("// Create a read-only, delay-bind multiplexing property store")
+ cpp_quote("// Returns an IPropertyStore interface or related interfaces")
+ cpp_quote("PSSTDAPI PSCreateDelayedMultiplexPropertyStore(")
++cpp_quote("/* Win32Metadata: function ::PSCreateDelayedMultiplexPropertyStore => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ GETPROPERTYSTOREFLAGS flags,")
+ cpp_quote("    _In_ IDelayedPropertyStoreFactory *pdpsf,")
+ cpp_quote("    _In_reads_(cStores) const DWORD *rgStoreIds,")
+@@ -801,6 +877,7 @@
+ cpp_quote("// Create a read-only property store from one or more sources (which each must support either IPropertyStore or IPropertySetStorage)")
+ cpp_quote("// Returns an IPropertyStore interface or related interfaces")
+ cpp_quote("PSSTDAPI PSCreateMultiplexPropertyStore(")
++cpp_quote("/* Win32Metadata: function ::PSCreateMultiplexPropertyStore => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_reads_(cStores) IUnknown **prgpunkStores,")
+ cpp_quote("    _In_ DWORD cStores,")
+ cpp_quote("    _In_ REFIID riid,")
+@@ -810,6 +887,7 @@
+ cpp_quote("// Create a container for IPropertyChanges")
+ cpp_quote("// Returns an IPropertyChangeArray interface")
+ cpp_quote("PSSTDAPI PSCreatePropertyChangeArray(")
++cpp_quote("/* Win32Metadata: function ::PSCreatePropertyChangeArray => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_reads_opt_(cChanges) const PROPERTYKEY *rgpropkey,")
+ cpp_quote("    _In_reads_opt_(cChanges) const PKA_FLAGS *rgflags,")
+ cpp_quote("    _In_reads_opt_(cChanges) const PROPVARIANT *rgpropvar,")
+@@ -821,6 +899,7 @@
+ cpp_quote("// Create a simple property change")
+ cpp_quote("// Returns an IPropertyChange interface")
+ cpp_quote("PSSTDAPI PSCreateSimplePropertyChange(")
++cpp_quote("/* Win32Metadata: function ::PSCreateSimplePropertyChange => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ PKA_FLAGS flags,")
+ cpp_quote("    _In_ REFPROPERTYKEY key,")
+ cpp_quote("    _In_ REFPROPVARIANT propvar,")
+@@ -831,11 +910,13 @@
+ cpp_quote("// Get a property description")
+ cpp_quote("// Returns an IPropertyDescription interface")
+ cpp_quote("PSSTDAPI PSGetPropertyDescription(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertyDescription => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY propkey,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSGetPropertyDescriptionByName(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertyDescriptionByName => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ LPCWSTR pszCanonicalName,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+@@ -843,12 +924,14 @@
+ cpp_quote("")
+ cpp_quote("// Lookup a per-machine registered file property handler")
+ cpp_quote("PSSTDAPI PSLookupPropertyHandlerCLSID(")
++cpp_quote("/* Win32Metadata: function ::PSLookupPropertyHandlerCLSID => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ PCWSTR pszFilePath,")
+ cpp_quote("    _Out_ CLSID *pclsid);")
+ cpp_quote("// Get a property handler, on Vista or downlevel to XP")
+ cpp_quote("// punkItem is a shell item created with an SHCreateItemXXX API")
+ cpp_quote("// Returns an IPropertyStore")
+ cpp_quote("PSSTDAPI PSGetItemPropertyHandler(")
++cpp_quote("/* Win32Metadata: function ::PSGetItemPropertyHandler => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IUnknown *punkItem,")
+ cpp_quote("    _In_ BOOL fReadWrite,")
+ cpp_quote("    _In_ REFIID riid,")
+@@ -860,6 +943,7 @@
+ cpp_quote("// punkCreateObject supports ICreateObject")
+ cpp_quote("// Returns an IPropertyStore")
+ cpp_quote("PSSTDAPI PSGetItemPropertyHandlerWithCreateObject(")
++cpp_quote("/* Win32Metadata: function ::PSGetItemPropertyHandlerWithCreateObject => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IUnknown *punkItem,")
+ cpp_quote("    _In_ BOOL fReadWrite,")
+ cpp_quote("    _In_ IUnknown *punkCreateObject,")
+@@ -869,11 +953,13 @@
+ cpp_quote("")
+ cpp_quote("// Get or set a property value from a store")
+ cpp_quote("PSSTDAPI PSGetPropertyValue(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertyValue => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IPropertyStore *pps,")
+ cpp_quote("    _In_ IPropertyDescription *ppd,")
+ cpp_quote("    _Out_ PROPVARIANT *ppropvar);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSSetPropertyValue(")
++cpp_quote("/* Win32Metadata: function ::PSSetPropertyValue => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IPropertyStore *pps,")
+ cpp_quote("    _In_ IPropertyDescription *ppd,")
+ cpp_quote("    _In_ REFPROPVARIANT propvar);")
+@@ -881,15 +967,19 @@
+ cpp_quote("")
+ cpp_quote("// Interact with the set of property descriptions")
+ cpp_quote("PSSTDAPI PSRegisterPropertySchema(")
++cpp_quote("/* Win32Metadata: function ::PSRegisterPropertySchema => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ PCWSTR pszPath);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSUnregisterPropertySchema(")
++cpp_quote("/* Win32Metadata: function ::PSUnregisterPropertySchema => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ PCWSTR pszPath);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSRefreshPropertySchema(void);")
++cpp_quote("/* Win32Metadata: function ::PSRefreshPropertySchema => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("")
+ cpp_quote("// Returns either: IPropertyDescriptionList or IEnumUnknown interfaces")
+ cpp_quote("PSSTDAPI PSEnumeratePropertyDescriptions(")
++cpp_quote("/* Win32Metadata: function ::PSEnumeratePropertyDescriptions => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ PROPDESC_ENUMFILTER filterOn,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+@@ -897,16 +987,19 @@
+ cpp_quote("")
+ cpp_quote("// Convert between a PROPERTYKEY and its canonical name")
+ cpp_quote("PSSTDAPI PSGetPropertyKeyFromName(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertyKeyFromName => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ PCWSTR pszName,")
+ cpp_quote("    _Out_ PROPERTYKEY *ppropkey);")
+ cpp_quote("")
+ cpp_quote("PSSTDAPI PSGetNameFromPropertyKey(")
++cpp_quote("/* Win32Metadata: function ::PSGetNameFromPropertyKey => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY propkey,")
+ cpp_quote("    _Outptr_ PWSTR *ppszCanonicalName);")
+ cpp_quote("")
+ cpp_quote("")
+ cpp_quote("// Coerce and canonicalize a property value")
+ cpp_quote("PSSTDAPI PSCoerceToCanonicalValue(")
++cpp_quote("/* Win32Metadata: function ::PSCoerceToCanonicalValue => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ REFPROPERTYKEY key,")
+ cpp_quote("    _Inout_ PROPVARIANT *ppropvar);")
+ cpp_quote("")
+@@ -914,6 +1007,7 @@
+ cpp_quote("// Convert a 'prop:' string into a list of property descriptions")
+ cpp_quote("// Returns an IPropertyDescriptionList interface")
+ cpp_quote("PSSTDAPI PSGetPropertyDescriptionListFromString(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertyDescriptionListFromString => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ LPCWSTR pszPropList,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+@@ -922,6 +1016,7 @@
+ cpp_quote("// Wrap an IPropertySetStorage interface in an IPropertyStore interface")
+ cpp_quote("// Returns an IPropertyStore or related interface")
+ cpp_quote("PSSTDAPI PSCreatePropertyStoreFromPropertySetStorage(")
++cpp_quote("/* Win32Metadata: function ::PSCreatePropertyStoreFromPropertySetStorage => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IPropertySetStorage *ppss,")
+ cpp_quote("    _In_ DWORD grfMode,")
+ cpp_quote("    _In_ REFIID riid,")
+@@ -936,6 +1031,7 @@
+ cpp_quote("// On success, the returned ppv is guaranteed to support IPropertyStore.")
+ cpp_quote("// If punkSource already supports IPropertyStore, no wrapper is created.")
+ cpp_quote("PSSTDAPI PSCreatePropertyStoreFromObject(")
++cpp_quote("/* Win32Metadata: function ::PSCreatePropertyStoreFromObject => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IUnknown *punk,")
+ cpp_quote("    _In_ DWORD grfMode,")
+ cpp_quote("    _In_ REFIID riid,")
+@@ -945,6 +1041,7 @@
+ cpp_quote("// punkSource must support IPropertyStore")
+ cpp_quote("// riid may be IPropertyStore, IPropertySetStorage, IPropertyStoreCapabilities, or IObjectProvider")
+ cpp_quote("PSSTDAPI PSCreateAdapterFromPropertyStore(")
++cpp_quote("/* Win32Metadata: function ::PSCreateAdapterFromPropertyStore => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ IPropertyStore *pps,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+@@ -957,12 +1054,14 @@
+ cpp_quote("// Talk to the property system using an interface")
+ cpp_quote("// Returns an IPropertySystem interface")
+ cpp_quote("PSSTDAPI PSGetPropertySystem(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertySystem => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+ cpp_quote("")
+ cpp_quote("")
+ cpp_quote("// Obtain a value from serialized property storage")
+ cpp_quote("PSSTDAPI PSGetPropertyFromPropertyStorage(")
++cpp_quote("/* Win32Metadata: function ::PSGetPropertyFromPropertyStorage => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_reads_bytes_(cb) PCUSERIALIZEDPROPSTORAGE psps, ")
+ cpp_quote("    _In_ DWORD cb, ")
+ cpp_quote("    _In_ REFPROPERTYKEY rpkey, ")
+@@ -971,6 +1070,7 @@
+ cpp_quote("")
+ cpp_quote("// Obtain a named value from serialized property storage")
+ cpp_quote("PSSTDAPI PSGetNamedPropertyFromPropertyStorage(")
++cpp_quote("/* Win32Metadata: function ::PSGetNamedPropertyFromPropertyStorage => SupportedOSPlatform(\"windows5.1.2600\") */")
+ cpp_quote("    _In_reads_bytes_(cb) PCUSERIALIZEDPROPSTORAGE psps, ")
+ cpp_quote("    _In_ DWORD cb, ")
+ cpp_quote("    _In_ LPCWSTR pszName, ")
+@@ -979,136 +1079,170 @@
+ cpp_quote("")
+ cpp_quote("// Helper functions for reading and writing values from IPropertyBag's.")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadType(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadType => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ VARIANT *var,")
+ cpp_quote("    VARTYPE type);")
++cpp_quote("/* Win32Metadata: parameter ::PSPropertyBag_ReadType::type => AssociatedEnum(VARENUM) */")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadStr(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadStr => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_writes_(characterCount) LPWSTR value,")
+ cpp_quote("    int characterCount);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadStrAlloc(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadStrAlloc => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Outptr_ PWSTR *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadBSTR(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadBSTR => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Outptr_ BSTR *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteStr(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteStr => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ LPCWSTR value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteBSTR(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteBSTR => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ BSTR value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadInt(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadInt => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ INT *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteInt(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteInt => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    INT value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadSHORT(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadSHORT => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ SHORT *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteSHORT(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteSHORT => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    SHORT value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadLONG(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadLONG => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ LONG *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteLONG(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteLONG => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    LONG value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadDWORD(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadDWORD => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ DWORD *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteDWORD(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteDWORD => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    DWORD value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadBOOL(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadBOOL => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ BOOL *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteBOOL(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteBOOL => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    BOOL value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadPOINTL(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadPOINTL => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ POINTL *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WritePOINTL(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WritePOINTL => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ const POINTL *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadPOINTS(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadPOINTS => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ POINTS *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WritePOINTS(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WritePOINTS => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ const POINTS *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadRECTL(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadRECTL => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ RECTL *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteRECTL(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteRECTL => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ const RECTL *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadStream(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadStream => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Outptr_ IStream **value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteStream(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteStream => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ IStream *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_Delete(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_Delete => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadULONGLONG(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadULONGLONG => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ ULONGLONG *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteULONGLONG(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteULONGLONG => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    ULONGLONG value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadUnknown(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadUnknown => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void **ppv);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteUnknown(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteUnknown => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ IUnknown *punk);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadGUID(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadGUID => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ GUID *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WriteGUID(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WriteGUID => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ const GUID *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_ReadPropertyKey(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_ReadPropertyKey => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _Out_ PROPERTYKEY *value);")
+ cpp_quote("PSSTDAPI PSPropertyBag_WritePropertyKey(")
++cpp_quote("/* Win32Metadata: function ::PSPropertyBag_WritePropertyKey => SupportedOSPlatform(\"windows6.1\") */")
+ cpp_quote("    _In_ IPropertyBag *propBag,")
+ cpp_quote("    _In_ LPCWSTR propName,")
+ cpp_quote("    _In_ REFPROPERTYKEY value);")

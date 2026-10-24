@@ -1,0 +1,20 @@
+diff --git a/um/d3d11_4.idl b/um/d3d11_4.idl
+index 7feeb6b5..e908ada8 100644
+--- a/um/d3d11_4.idl
++++ b/um/d3d11_4.idl
+@@ -8,6 +8,7 @@
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "dxgi1_5.idl";
+@@ -86,6 +87,7 @@ interface ID3D11Multithread
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoContext2 => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [uuid(C4E7374C-6243-4D1B-AE87-52B4F740E261), object, local, pointer_default(unique)]
+ interface ID3D11VideoContext2
+     : ID3D11VideoContext1

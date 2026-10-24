@@ -2,3 +2,5 @@
 <IncludeRoot>/um/dwmapi.h
 --namespace
 Windows.Win32.Graphics.Dwm
+--config
+parse-win32-annotations

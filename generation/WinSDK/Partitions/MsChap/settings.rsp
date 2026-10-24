@@ -2,3 +2,5 @@
 <IncludeRoot>/um/MSChapp.h
 --namespace
 Windows.Win32.System.PasswordManagement
+--config
+parse-win32-annotations

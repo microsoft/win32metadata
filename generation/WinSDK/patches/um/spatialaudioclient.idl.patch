@@ -1,0 +1,57 @@
+diff --git a/um/spatialaudioclient.idl b/um/spatialaudioclient.idl
+index c9af59d8..e2c029ef 100644
+--- a/um/spatialaudioclient.idl
++++ b/um/spatialaudioclient.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //
+@@ -106,6 +107,7 @@ interface IAudioFormatEnumerator : IUnknown
+         [out, annotation("_Outptr_")] WAVEFORMATEX** format);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpatialAudioObjectBase => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     object,
+     uuid(CCE0B8F2-8D4D-4EFB-A8CF-3D6ECF1C30E0),
+@@ -171,6 +173,7 @@ interface ISpatialAudioObjectBase : IUnknown
+         [out, annotation("_Out_")] AudioObjectType* audioObjectType);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpatialAudioObject => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     object,
+     uuid(DDE28967-521B-46E5-8F00-BD6F2BC8AB1D),
+@@ -220,6 +223,7 @@ interface ISpatialAudioObject : ISpatialAudioObjectBase
+ }
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpatialAudioObjectRenderStreamBase => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     object,
+     uuid(FEAAF403-C1D8-450D-AA05-E0CCEE7502A8),
+@@ -287,6 +291,7 @@ interface ISpatialAudioObjectRenderStreamBase : IUnknown
+     HRESULT EndUpdatingAudioObjects();
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpatialAudioObjectRenderStream => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     object,
+     uuid(BAB5F473-B423-477B-85F5-B5A332A04153),
+@@ -307,6 +312,7 @@ interface ISpatialAudioObjectRenderStream : ISpatialAudioObjectRenderStreamBase
+ 
+ 
+ // Notify interface to be implemented by API clients to respond to changes in ISpatialAudioObjectRenderStreamBase state
++cpp_quote("/* Win32Metadata: interface ::ISpatialAudioObjectRenderStreamNotify => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     object,
+     uuid(DDDF83E6-68D7-4C70-883F-A1836AFB4A50),
+@@ -324,6 +330,7 @@ interface ISpatialAudioObjectRenderStreamNotify : IUnknown
+         [in, annotation("_In_")] UINT32 availableDynamicObjectCountChange); // How many dynamic audio objects will be available in hnsComplianceDeadlineTime
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpatialAudioClient => SupportedOSPlatform(\"windows10.0.15063\") */")
+ [
+     object,
+     uuid(BBF8E066-AAAA-49BE-9A4D-FD2A858EA27F),

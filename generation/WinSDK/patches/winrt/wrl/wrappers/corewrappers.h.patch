@@ -1,0 +1,11 @@
+diff --git a/winrt/wrl/wrappers/corewrappers.h b/winrt/wrl/wrappers/corewrappers.h
+--- a/winrt/wrl/wrappers/corewrappers.h
++++ b/winrt/wrl/wrappers/corewrappers.h
+@@ -933,6 +933,7 @@ public:
+         hstr_ = hstr;
+     }
+ 
++    _Win32_RAIIFree_(WindowsDeleteString)
+     HSTRING Detach() throw()
+     {
+         HSTRING tmp = hstr_;
