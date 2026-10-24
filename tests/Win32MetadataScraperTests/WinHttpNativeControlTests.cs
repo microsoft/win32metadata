@@ -65,7 +65,7 @@ namespace Win32MetadataScraperTests
             "SetPrinterDataA::pValueName", "SetPrinterDataW::pValueName",
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NetworkWinspoolNativeConstRetiresOnlyQualifiedPointerOverrides()
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
@@ -1524,7 +1524,7 @@ static_assert(DISC_NO_FORCE == 64u);
             "WAVE_FORMAT_DIRECT_QUERY", "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE", "MIDI_IO_STATUS",
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void MmeapiOpenFragmentContainsOnlyTheSevenAllocatedNativeNamesInsideTheCompleteMetadataGuard()
         {
             string patch = File.ReadAllText(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
@@ -1610,7 +1610,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         public static IEnumerable<object[]> OriginalWnetHeaderControls() => OriginalErrorOwnerControls();
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NetworkEnumSourcePatchesRemoveOnlyCoveredLegacyFacts()
         {
             string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
@@ -1790,7 +1790,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                         yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled };
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NetworkCategorySourcePatchesRetainCrossingGroupsAndHandleContracts()
         {
             string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
@@ -1994,7 +1994,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                             yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled, cInterface };
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void SourcePatchesKeepWinSockGroupsAndNativeAvailability()
         {
             string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
@@ -3538,10 +3538,12 @@ void NetworkBroadSourceSalProbe(
     {
     }
 
-    public sealed class NativeMigrationTheoryAttribute : TheoryAttribute
+    public sealed class NativeMigrationTheoryAttribute : HeaderMigrationDataTheoryAttribute
     {
         public NativeMigrationTheoryAttribute(string additionalFixture = null)
         {
+            if (Skip != null)
+                return;
             if (Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS") == null)
                 Skip = "Set WINHTTP_PREPARED_HEADERS to the pinned private prepared-header tree.";
             else if (additionalFixture != null && Environment.GetEnvironmentVariable(additionalFixture) == null)

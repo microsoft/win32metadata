@@ -34,6 +34,7 @@
   <ItemGroup>
     <EmitterRsp Include="emitter.settings.rsp"/>
     <EmitterRsp Include="requiredNamespacesForNames.rsp"/>
+    <EmitterRsp Include="documentationMappings.rsp" Condition="Exists('documentationMappings.rsp')"/>
   </ItemGroup>
 
   <PropertyGroup>
@@ -45,6 +46,7 @@
 
   <PropertyGroup>
     <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>
+    <_SdkHeaderRecipeSpecified Condition="'$(SdkHeaderRecipe)' != ''">true</_SdkHeaderRecipeSpecified>
     <SdkHeaderRecipe Condition="'$(SdkHeaderRecipe)' == ''">$(MSBuildThisFileDirectory)patches\SdkHeaders.json</SdkHeaderRecipe>
     <SdkHeaderSourceRoot Condition="'$(SdkHeaderSourceRoot)' == ''">$(SdkIncRoot)</SdkHeaderSourceRoot>
     <SdkHeaderOutputRoot Condition="'$(SdkHeaderOutputRoot)' == ''">$(RepoRootPath)artifacts\prepared-sdk</SdkHeaderOutputRoot>
@@ -60,7 +62,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ManualCs Include="manual\Metadata.cs"/>
+    <ManualCs Include="manual\*.cs"/>
     <PartitionFiles Include="partitions\**\main.cpp"/>
     <Partition Include="@(PartitionFiles)">
       <Name>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName($([System.String]::Copy('%(Directory)'))))))</Name>
@@ -69,7 +71,8 @@
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
 
-  <Target Name="PrepareSdkHeaders" BeforeTargets="CompileIdls">
+  <Target Name="PrepareSdkHeaders" BeforeTargets="CompileIdls"
+          Condition="'$(_SdkHeaderRecipeSpecified)' == 'true' or Exists('$(SdkHeaderRecipe)')">
     <Message Text="Preparing SDK headers..." Importance="high" />
     <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)').IncludeRoot&quot;"
           ConsoleToMSBuild="true" StandardOutputImportance="low">

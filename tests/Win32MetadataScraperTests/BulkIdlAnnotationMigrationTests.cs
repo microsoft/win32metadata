@@ -698,7 +698,7 @@ namespace Win32MetadataScraperTests
             Assert.False(Directory.Exists(result.OutputDirectory));
         }
 
-        [MigrationTheory("WIN32METADATA_WMI_GENERATED_SOURCE", "WIN32METADATA_WMI_DISABLED_SOURCE")]
+        [HeaderMigrationDataTheory("WIN32METADATA_WMI_GENERATED_SOURCE", "WIN32METADATA_WMI_DISABLED_SOURCE")]
         [InlineData("IEnumWbemClassObject", "windows6.0.6000")]
         public void ActualNormalWmiSourceProjectsTheOwnedFloorWithoutLegacyFallback(string target, string floor)
         {
@@ -727,7 +727,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [MigrationTheory("WIN32METADATA_CLU_GENERATED_SOURCE")]
+        [HeaderMigrationDataTheory("WIN32METADATA_CLU_GENERATED_SOURCE")]
         [InlineData("MsCs", "cluadmex.h")]
         public void ActualNormalCluSourceProjectsAllOwnedFloorsWithoutLegacyFallback(string partition, string header)
         {
@@ -757,7 +757,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
         }
 
-        [MigrationTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS",
+        [HeaderMigrationDataTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS",
             "WINHTTP_NATIVE_TOOLSET_INCLUDE", "WIN32METADATA_FACTORY_IDL_REPORT")]
         [MemberData(nameof(QuotedFactoryNativeSamples))]
         public void QuotedFactoriesPreservePublishedNativeAbiSalAndInterfaceFloors(
@@ -850,7 +850,7 @@ namespace Win32MetadataScraperTests
                                 architecture.Item2, mode.Item1, mode.Item2, enabled };
         }
 
-        [MigrationTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS",
+        [HeaderMigrationDataTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS",
             "WINHTTP_NATIVE_TOOLSET_INCLUDE", "WIN32METADATA_ORIGINAL_MEMBER_REPORT",
             "WIN32METADATA_ORIGINAL_MEMBER_BASE_REPORT")]
         [MemberData(nameof(PublishedMemberNativeSamples))]
@@ -958,7 +958,7 @@ namespace Win32MetadataScraperTests
                     yield return new object[] { partition, architecture.Item1, architecture.Item2 };
         }
 
-        [MigrationTheory("WIN32METADATA_ORIGINAL_MEMBER_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
+        [HeaderMigrationDataTheory("WIN32METADATA_ORIGINAL_MEMBER_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
             "WIN32METADATA_FACTORY_PUBLISHED_OBJ")]
         [MemberData(nameof(PublishedMemberNormalSamples))]
         public void ActualNormalNativeMembersHaveExactPayloadsImportsAndCompleteInheritedProjection(
@@ -1258,7 +1258,7 @@ namespace Win32MetadataScraperTests
         public static IEnumerable<object[]> PublishedMemberNormalSamples() =>
             PublishedNormalSamples("WIN32METADATA_ORIGINAL_MEMBER_REPORT", functionsOnly: false);
 
-        [MigrationTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
+        [HeaderMigrationDataTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
             "WIN32METADATA_FACTORY_PUBLISHED_OBJ")]
         [MemberData(nameof(PublishedQuotedFactoryNormalSamples))]
         public void ActualNormalQuotedCallablesAddOnlyExactNewFloorsToPublishedSourcesWithoutLegacyFallback(
@@ -1358,7 +1358,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [MigrationTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
+        [HeaderMigrationDataTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
             "WIN32METADATA_FACTORY_DISABLED_OBJ")]
         [InlineData("Mf", "x86", 87)]
         [InlineData("Mf", "x64", 87)]
@@ -1461,7 +1461,7 @@ namespace Win32MetadataScraperTests
                 value.Name.ToString() == "global::Windows.Win32.Foundation.Metadata.RetVal";
         }
 
-        [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
+        [HeaderMigrationDataTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlNativeSamples))]
         public void OriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(
             string partition, string header, string architecture, string target, string language,
@@ -1584,7 +1584,7 @@ namespace Win32MetadataScraperTests
                             };
         }
 
-        [NativeMigrationTheory("BULK_SYSTEM_IDL_MIGRATION_ROOT")]
+        [HeaderMigrationDataTheory("WINHTTP_PREPARED_HEADERS", "BULK_SYSTEM_IDL_MIGRATION_ROOT")]
         [MemberData(nameof(SystemOriginalIdlNativeSamples))]
         public void SystemOriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(
             string partition, string header, string architecture, string target, bool enabled, string[] expected) =>
@@ -1646,7 +1646,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [NativeMigrationTheory("BULK_SYSTEM_IDL_BINDINGS")]
+        [HeaderMigrationDataTheory("WINHTTP_PREPARED_HEADERS", "BULK_SYSTEM_IDL_BINDINGS")]
         [InlineData("x86")]
         [InlineData("x64")]
         [InlineData("arm64")]

@@ -590,7 +590,7 @@ namespace Win32MetadataScraperTests
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void HeaderPatchAvailabilityUsesCanonicalPublicMacros()
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches");
@@ -705,7 +705,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void PropertyStorageIdlFactsHaveOneOriginalArtifactAndNoSemanticFallback()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -985,7 +985,7 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"Architecture {architecture}: all eleven MdmReg function floors and the XML graph interface floor remain exact.");
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void SecurityCenterAuthoredHeaderPreservesItsOriginalPathSpelling()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1001,7 +1001,7 @@ namespace Win32MetadataScraperTests
             Assert.Equal("+++ b/um/Wscapi.h", Assert.Single(patch.Where(value => value.StartsWith("+++ ", StringComparison.Ordinal))));
         }
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("Wscapi.h", "_Win32_SupportedOS_WindowsVista_", 3)]
         [InlineData("DirectML.h", "_Win32_SupportedOS_10240_", 1)]
         [InlineData("wnvapi.h", "_Win32_SupportedOS_Server2012_", 2)]
@@ -1014,7 +1014,7 @@ namespace Win32MetadataScraperTests
             Assert.Equal(count, patch.Split('\n').Count(line => line.TrimEnd('\r') == "+" + annotation));
         }
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("um", "EvColl.h", 15)]
         [InlineData("shared", "tbs.h", 9)]
         [InlineData("um", "davclnt.h", 11)]
@@ -1083,7 +1083,7 @@ namespace Win32MetadataScraperTests
                 "the device operator uses its API-faithful native Int32 contract, and five third-party provider exports are not invented as imports.");
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceQueryRetainsItsOriginalNativeEnumWithoutAnUnsignedOverride()
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1097,7 +1097,7 @@ namespace Win32MetadataScraperTests
                 File.ReadAllText(Path.Combine(root, "RecompiledIdlHeaders", "um", "devfiltertypes.h")));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceFamilyAvailabilityAndLastErrorFactsHaveOriginalHeaderOwners()
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1126,12 +1126,12 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceBulkAvailabilityPatchesUseOriginalHeadersAndSharedPreparation()
             => AssertOriginalDeviceHeaderPatches(DeviceBulkOriginalHeaders()
                 .Select(owner => (owner.Partition, owner.Headers.Select(header => "um\\" + header).ToArray())), 25);
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceContinuationAvailabilityPatchesUseOriginalHeadersAndSharedPreparation()
             => AssertOriginalDeviceHeaderPatches(DeviceContinuationOriginalHeaders(), 22);
 
@@ -1199,7 +1199,7 @@ namespace Win32MetadataScraperTests
             yield return ("WinRT", new[] { "winrt\\roapi.h", "winrt\\roerrorapi.h" });
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceIdlAvailabilityFactsHaveOriginalIdlOwnersAndPreparedOutputs()
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1296,7 +1296,7 @@ namespace Win32MetadataScraperTests
                 "unrouted transaction-log interfaces remain legacy.");
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceRecordAvailabilityFactsHaveNativeOwnersAndRetainUnsupportedRows()
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1649,7 +1649,7 @@ namespace Win32MetadataScraperTests
             "FDICreate", "FDIIsCabinet", "FDICopy", "FDIDestroy",
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void HidStatusAliasUsesTheExistingCCompatibleNativeConstantEncoding()
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1764,7 +1764,7 @@ namespace Win32MetadataScraperTests
             "BluetoothSdpEnumAttributes",
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void BluetoothScalarHeaderRetainsItsOriginalMacroAndExistingNarrowProjection()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1796,7 +1796,7 @@ namespace Win32MetadataScraperTests
                 "WinUsb_GetAssociatedInterface", "AssociatedInterfaceHandle", "WinUsb_Free", new long[] { 0 }),
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceProducerOwnershipHasFourNativeOutputAuthoritiesAndRetainsAllThreeHandleRepresentations()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1835,7 +1835,7 @@ namespace Win32MetadataScraperTests
                 "OpenThemeDataEx", "return", "CloseThemeData", new long[] { 0 }),
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceUiProducerOwnershipHasFiveNativeAuthoritiesAndRetainsBothHandleRepresentations()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -1922,7 +1922,7 @@ namespace Win32MetadataScraperTests
             "CM_Get_Device_Interface_Size_ExA", "CM_Get_Device_Interface_Size_ExW", "CM_Reenumerate_DevNodeEx",
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void DeviceInstallationGroupsHaveOnlyTheirExistingNativeOwnersAndExactResidualUses()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -2439,7 +2439,7 @@ namespace Win32MetadataScraperTests
             "PssWalkMarkerSetPosition", "PssWalkMarkerSeekToBeginning",
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void FdiHeaderUsesTheExistingNativeNeutralSignedCpuGroup()
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "um", "fdi.h.patch"));
@@ -2642,7 +2642,7 @@ namespace Win32MetadataScraperTests
             });
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void WerHeadersUseOnlyTheExistingNativeNeutralGroupVocabulary()
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "um", "WerApi.h.patch"));
@@ -3632,14 +3632,14 @@ namespace Win32MetadataScraperTests
                 "raw CLI Out flags, sequence and complete HRESULT/parameter signature remain unchanged.");
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NativeDwmContactStorageHasNoAuthoredUnderlyingTypeOverride()
         {
             Assert.DoesNotContain(File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "scraper.settings.rsp")),
                 line => line.TrimStart().StartsWith("DWM_SHOWCONTACT=", StringComparison.Ordinal));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void AuthoredSdkPartitionsEnableNormalHeaderAnnotationProcessing()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -3682,7 +3682,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void OriginalErrorGroupingIsExcludedFromMidlGrammar()
         {
             string patch = Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "shared", "winerror.h.patch");
@@ -3699,7 +3699,7 @@ namespace Win32MetadataScraperTests
             Assert.Equal("#endif", additions[^1]);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void SourceBackedDebugPropertyGroupDoesNotDuplicateItsAnonymousNativeEnum()
         {
             string[] settings = File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "scraper.settings.rsp"));
@@ -3710,7 +3710,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("__MIDL___MIDL_itf_dbgprop_0000_0000_0001=DBGPROP_ATTRIB_FLAGS", settings);
         }
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("ATF_FLAGS", "Windows.Win32.System.SystemServices")]
         [InlineData("COPYFILE2_V2_FLAGS", "Windows.Win32.Storage.FileSystem")]
         [InlineData("DFC_TYPE", "Windows.Win32.Graphics.Gdi")]
@@ -3727,7 +3727,7 @@ namespace Win32MetadataScraperTests
             Assert.Single(File.ReadAllLines(path).Where(line => line == name + "=" + ns));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void CertificateBackupGroupingIsExcludedFromItsMidlImport()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -3745,7 +3745,7 @@ namespace Win32MetadataScraperTests
             Assert.Equal("#endif", additions[2]);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void MidlImportedAppMgmtHeaderBootstrapsItsOwnAnnotationMacros()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -3762,7 +3762,7 @@ namespace Win32MetadataScraperTests
             Assert.Equal(Enumerable.Repeat("_Win32_SupportedOS_WindowsVista_", 5), additions.Skip(1));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void OriginalErrorOwnersHaveNoLegacyDefinitionAndRetainAllUnmigratedUses()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -3974,7 +3974,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void WnetSourceMigrationLeavesOnlyExplicitFoundationAndRpcCleanupDebt()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -4014,7 +4014,7 @@ namespace Win32MetadataScraperTests
             this.AssertEveryPhysicalTypeUnchanged(control.Reader, current.Reader, "complete original error-owner group control");
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void SourceBlockedGeneratedArtifactsRetainTheirExactLegacyFacts()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -4425,7 +4425,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void RestartManagerHeaderFactsHaveNoAuthoredFallback()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -4520,7 +4520,7 @@ namespace Win32MetadataScraperTests
                 "four retained legacy enum uses and the 19-member native-source group.");
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void PowerTemporaryUsesAreExactAndSourceGroupsHaveNoFallback()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -4582,7 +4582,7 @@ namespace Win32MetadataScraperTests
                 File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void IntegratedEnumAndLifecycleFactsHaveNoSemanticSidecarFallback()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
@@ -6306,10 +6306,12 @@ namespace Win32MetadataScraperTests
         }
     }
 
-    public sealed class MigrationFactAttribute : FactAttribute
+    public sealed class MigrationFactAttribute : HeaderMigrationDataFactAttribute
     {
         public MigrationFactAttribute(string additionalFixture = null)
         {
+            if (Skip != null)
+                return;
             if (Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") == null ||
                 Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_NEW") == null ||
                 Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_TOOLING_CONTROL") == null)
@@ -6319,10 +6321,12 @@ namespace Win32MetadataScraperTests
         }
     }
 
-    public sealed class MigrationTheoryAttribute : TheoryAttribute
+    public sealed class MigrationTheoryAttribute : HeaderMigrationDataTheoryAttribute
     {
         public MigrationTheoryAttribute(params string[] requiredFixtures)
         {
+            if (Skip != null)
+                return;
             if (requiredFixtures.Length == 0)
                 requiredFixtures = new[] { "WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW", "WINHTTP_MIGRATION_TOOLING_CONTROL" };
             if (requiredFixtures.Any(name => Environment.GetEnvironmentVariable(name) == null))

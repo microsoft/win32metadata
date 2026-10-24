@@ -13,6 +13,11 @@ namespace Win32MetadataScraperTests
     {
         internal static string SdkRoot => Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
 
+        internal static string RecipePath => Path.Combine(SdkRoot, "patches", "SdkHeaders.json");
+
+        internal const string MissingDataReason =
+            @"SDK header migration data is not installed: generation\WinSDK\patches\SdkHeaders.json is absent (provided by the stacked header-migration PR).";
+
         internal static string AddedSource(string artifact)
             => string.Join("\n", File.ReadAllLines(Path.Combine(SdkRoot, "patches", artifact + ".patch"))
                 .Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
@@ -21,7 +26,7 @@ namespace Win32MetadataScraperTests
         internal static string PatchedSource(string artifact)
         {
             string original = Path.Combine(SdkRoot, "RecompiledIdlHeaders", artifact);
-            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(SdkRoot, "patches", "SdkHeaders.json")));
+            using var recipe = JsonDocument.Parse(File.ReadAllText(RecipePath));
             var descriptor = Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray()
                 .Where(header => string.Equals(header.GetProperty("path").GetString(), artifact, StringComparison.OrdinalIgnoreCase)));
             Assert.Equal(descriptor.GetProperty("sourceSha256").GetString(),

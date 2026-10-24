@@ -32,7 +32,7 @@ namespace Win32MetadataScraperTests
             ("Shell", new[] { "shellapi.h", "shlobj_core.h" }),
         };
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("BOOL")]
         [InlineData("BOOLEAN")]
         [InlineData("CHAR")]
@@ -49,7 +49,7 @@ namespace Win32MetadataScraperTests
                 Assert.Single(File.ReadAllLines(path).Where(line => line.StartsWith(name + "=", StringComparison.Ordinal))));
         }
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("HPROPSHEETPAGE", "Windows.Win32.UI.Controls")]
         [InlineData("SC_HANDLE", "Windows.Win32.System.Services")]
         public void SharedNativeHandlesKeepOneEstablishedNamespace(string name, string expectedNamespace)
@@ -60,7 +60,7 @@ namespace Win32MetadataScraperTests
                 Assert.Single(File.ReadAllLines(path).Where(line => line.StartsWith(name + "=", StringComparison.Ordinal))));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NativeNotificationBaseIsNotExcludedAfterManualProviderRetirement()
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
@@ -69,7 +69,7 @@ namespace Win32MetadataScraperTests
             Assert.False(File.Exists(Path.Combine(root, "generation", "WinSDK", "manual", "Controls.cs")));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void SharedScraperImportsDoNotRequireAnUnproducedHlslNamespace()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
@@ -77,7 +77,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("using Windows.Win32.Graphics.Hlsl;", File.ReadAllText(path));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void ProcessAffinityForwardDeclarationKeepsItsNativeDwordStorage()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "patches", "um", "processthreadsapi.h.patch");
@@ -88,7 +88,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("typedef unsigned int PROCESS_AFFINITY_AUTO_UPDATE_FLAGS;", added);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void VariantDiscriminatorAnnotatesTheActualIdlField()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "patches", "um", "oaidl.idl.patch");
@@ -97,7 +97,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("field ::VARIANT::vt =>", patch);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void X64HypervisorEmulationIsIncludedOnlyWithItsNativeArchitectureDefinitions()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
@@ -106,7 +106,7 @@ namespace Win32MetadataScraperTests
                 File.ReadAllText(path));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void TreeViewUsesAnOrderedLiteralCarrierWithoutInventingNativeConstants()
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
@@ -134,7 +134,7 @@ namespace Win32MetadataScraperTests
             Assert.Equal(expected, Normalize(RawValue(SyntaxFactory.ParseExpression(expression)), "Int32"));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void PanoseCarriersKeepNativeValuesAndCompleteByteFieldAssociations()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "patches", "um", "wingdi.h.patch");
@@ -174,7 +174,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotMatch(@"(?m)^\s*#\s*define\s+CLIP_DFA_OVERRIDE\b", added);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void ShareTypeKeepsPublicNativeModesAndAllTypeConsumers()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "patches", "um", "lmshare.h.patch");
@@ -190,7 +190,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotMatch(@"(?m)^\s*#\s*define\s+STYPE_\w+\b", added);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void VirtualKeyContributionsKeepNativeWordStorageAndSharedDbeContract()
         {
             string Added(string header) => string.Join("\n", File.ReadAllLines(Path.Combine(
@@ -213,7 +213,7 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotMatch(@"(?m)^\s*#\s*define\s+VK_", keyboard + "\n" + ime);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void PrinterRightsMetadataLabelsReferToNativeStandardRights()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "patches", "um", "winspool.h.patch");
@@ -237,7 +237,7 @@ namespace Win32MetadataScraperTests
                 + "_Win32_FlagsEnum_(PRINTER_ACCESS_RIGHTS, ULONG, PRINTER_ACCESS_MANAGE_LIMITED);", added);
         }
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("cfgmgr32.h", "HCMNOTIFICATION")]
         [InlineData("commctrl.h", "HIMAGELIST")]
         [InlineData("commctrl.h", "HTREEITEM")]

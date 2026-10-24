@@ -257,7 +257,7 @@ ALIAS ReadValue(void);
             Assert.Empty(Directory.GetFiles(fixture.DirectoryPath, "*.cs", SearchOption.AllDirectories));
         }
 
-        [Theory]
+        [HeaderMigrationDataTheory]
         [InlineData("Partitions\\Gdiplus\\settings.rsp", "PathData")]
         [InlineData("Partitions\\CmpApi\\settings.rsp", "COMPRESSOR_HANDLE__")]
         [InlineData("Partitions\\DirectWrite\\settings.rsp", "DWRITE_FONT_AXIS_TAG")]
@@ -270,14 +270,14 @@ ALIAS ReadValue(void);
             Assert.DoesNotContain(File.ReadAllLines(path), line => line.Trim() == name);
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NativeTypeProviderImportsTheExistingHostComputeNamespace()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "scraper.header.txt");
             Assert.Contains("using Windows.Win32.System.HostComputeSystem;", File.ReadAllLines(path));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void NativeTypeProviderProfilesTraverseTheirActualDeclarationOwners()
         {
             string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "Partitions");

@@ -1596,8 +1596,7 @@ passes and five failures, with no skips. Architecture integrity passes without
 changing the image. Remaining reports include three duplicated backing-record
 groups, 1,439 constant-name groups with different owners, nine suggested
 remappings, two Speech pointers to delegates, and namespace cycles. These are
-unresolved findings, not waived differences. The raw comparison is being graded
-separately against the native SDK and accepted migration policies.
+unresolved findings, not waived differences.
 
 The six performance guards still have the passing combined-tool result in
 `artifacts\performance-default-run-069`. Its large 6,418-constant case has a
@@ -1605,3 +1604,54 @@ The six performance guards still have the passing combined-tool result in
 recorded separately; it is not a replacement for those isolated regression
 budgets. Original-IDL coverage holds and the two previously recorded full-scraper
 failures remain open.
+
+### Initial grading of the complete image
+
+The raw comparison contains 170,964 differences. The inventory is complete;
+source-backed review of every difference is not. Of these rows, 112,334 remain
+unreviewed. The original log, OLD, NEW, and frozen producer inputs remain
+unchanged. Detailed evidence and proposed repairs are recorded in
+`artifacts\actual-sdk-review-073`; no repair in this table has been implemented.
+
+| Finding | Proposed change for discussion |
+| --- | --- |
+| The existing original `hstring.idl` patch is absent from the active preparation recipe. HSTRING and HSTRING_BUFFER lose their named typedef identities. | Admit that patch and regenerate its affected MIDL outputs. Do not edit generated `hstring.h` or recreate a handwritten wrapper. |
+| Four HSTRING marshaler OS-version attributes survive into generated C# but disappear from the physical WinMD. | Reproduce the loss in a small composition/emission case and fix the stage dropping the existing attributes. Another header annotation would not fix this loss. |
+| Nineteen buffer parameters lose ContainsInteriorPointers; their original Winsock, security, and service headers lack the annotations. | Restore the facts on the exact native buffer parameters after reviewing their storage contracts. Preserve the native types, SAL, and counts. |
+| The comparer omits a separate constant-value report when the field type also changes. Physical readback identifies 4,652 additional integer identities needing value or signedness review. | Compare field signatures and constant values independently. Keep raw bytes, signedness, width, numerical values, and architecture variants visible. |
+| 101 neutral Controls aliases change from their W values to their A values, matching the current native compilation context. | Decide whether neutral metadata must preserve Unicode compatibility, then use the same explicit context for declarations and native constant evaluation. Do not replace individual values with W literals. |
+| Queue-status constants now include the native touch/pointer bits selected for modern Windows targets. | Establish the OLD producer's target context before deciding whether these are intended native-context corrections. Do not restore old numbers with overrides. |
+| Retained parameters and some named handle/type namespaces change independently of the accepted enum and cleanup policies. | Review the affected lifetime contracts and intended namespaces separately. RAIIFree relocation does not approve a changed handle identity. |
+
+Documentation-only changes and the intentional Agile retirement remain visible
+in the inventory. They do not approve other changes on the same declarations.
+There is no complete API-equivalence or migration-acceptance claim.
+
+### Tooling and migration PR boundaries
+
+The tooling layer retains the existing sidecar and manual-source inputs and
+supports header annotations alongside them. Compiler, scraper, emitter,
+comparison, incremental-input, and performance changes belong in that layer,
+including generic fixes discovered while preparing the full SDK.
+
+The upper layer supplies the SDK header/IDL patches and preparation recipe and
+retires the API-specific non-header inputs. It does not change the tooling.
+The complete pre-split source is preserved at
+`42d80eeb61f39cdeea1f2f75abc0e272a271d3ca` on
+`jevansaks-header-annotation-full-sdk-checkpoint`; this is a recovery branch,
+not an additional proposed PR.
+
+The independently published tooling head `c915725e` already incorporates the
+newer upstream SDK 10.0.28000.2705. SDK026 and its patch recipe use the separately
+selected 10.0.26100.7705 SDK and its exact older post-MIDL mirror. These histories
+diverge; publishing the combined source directly onto the tooling PR would
+overwrite independent upstream work. Tooling integration must preserve that
+published SDK and merge the generic fixes, rather than replace its whole tree.
+
+The frozen SDK026 qualification does not qualify the resulting two-PR stack.
+Its header recipe checks the entire mirror Git identity as well as individual
+preimages, so installing that recipe over the newer mirror must fail until the
+SDK baseline is deliberately aligned. Do not remove the pins, silently roll the
+tooling PR back to the older SDK, or discard newer sidecar facts to hide this
+mismatch. Adapting the patches and regenerated IDL outputs to the newer SDK is a
+separate change to review.

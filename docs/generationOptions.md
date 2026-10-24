@@ -173,6 +173,16 @@ missing or ambiguous associations fail with WMA003. No native typedef or include
 is needed just to make an association parse. Existing typed association transports
 remain readable.
 
+The tooling can run with the existing sidecar and manual C# inputs, header
+annotations, or a partially migrated combination. The tooling PR does not retire
+the SDK's existing annotation inputs. The header-migration layer supplies
+`generation/WinSDK/patches/SdkHeaders.json` and removes the replaced inputs.
+Without that default recipe, the SDK project uses its existing headers. An
+explicit `SdkHeaderRecipe` is always processed; a missing or invalid explicit
+recipe fails instead of silently selecting the legacy headers. Manual C# staging
+continues to track the complete input glob, so deleted inputs do not survive an
+incremental switch to header-only generation.
+
 The repository annotation header is also a pinned MIDL input. Extending its
 vocabulary requires updating both `sourceGitTree` and that input's `sourceSha256`
 in `generation/WinSDK/patches/SdkHeaders.json`. Preserve the previous prepared

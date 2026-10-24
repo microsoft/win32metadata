@@ -52,7 +52,7 @@ namespace Win32MetadataScraperTests
 
         public SdkComponentMigrationTests(ITestOutputHelper output) => this.output = output;
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void OwnedFloorsKeepOnlyTheExplicitSourceBlockedResidualsAndParserConfiguration()
         {
             string sdk = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
@@ -277,10 +277,12 @@ namespace Win32MetadataScraperTests
             => name.Split('.').Last().Replace("Attribute", "", StringComparison.Ordinal);
     }
 
-    public sealed class ComponentMigrationTheoryAttribute : TheoryAttribute
+    public sealed class ComponentMigrationTheoryAttribute : HeaderMigrationDataTheoryAttribute
     {
         public ComponentMigrationTheoryAttribute()
         {
+            if (Skip != null)
+                return;
             if (Environment.GetEnvironmentVariable("SDK_COMPONENT_MIGRATION_ROOT") == null ||
                 Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") == null)
                 Skip = "Set SDK_COMPONENT_MIGRATION_ROOT and WINHTTP_MIGRATION_OLD to the immutable bounded migration evidence.";

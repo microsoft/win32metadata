@@ -19,7 +19,7 @@ namespace Win32MetadataScraperTests
             ("MenuRc", new[] { "winuser.h", "winnt.h" }),
         };
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void EventTokenUsesTheSelectedNativeProvider()
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
@@ -28,7 +28,7 @@ namespace Win32MetadataScraperTests
             Assert.Contains("<IncludeRoot>/winrt/eventtoken.h", File.ReadAllLines(Path.Combine(partition, "settings.rsp")));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void HStringIdentityCommentsAnnotateOnlyNativePointerAliasesInOriginalIdl()
         {
             string patch = Patch("winrt", "hstring.idl");
@@ -46,7 +46,7 @@ namespace Win32MetadataScraperTests
                 "generation", "WinSDK", "patches", "winrt", "hstring.h.patch")));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void PrivateVdsProvidersComeFromOriginalIdlAndSharedNativeIncludeGuards()
         {
             string partition = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
@@ -91,7 +91,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void EveryConfiguredMidlOutputBindsAnAdmittedHeaderAndItsExactOriginalSdkIdl()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
@@ -113,7 +113,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void RetiredReplacementSuppressionsDoNotHideSelectedWinProgAndClusterRecords()
         {
             string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");

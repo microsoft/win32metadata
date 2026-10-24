@@ -23,7 +23,7 @@ namespace Win32MetadataScraperTests
 
         public InteropOsHeaderMigrationTests(ITestOutputHelper output) => this.output = output;
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void RelocatedOsFactsHaveNoAuthoredFallback()
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "supportedOS.rsp");
@@ -160,10 +160,12 @@ namespace Win32MetadataScraperTests
             .Select(token => token.Text).ToArray();
     }
 
-    public sealed class InteropOsSourceTheoryAttribute : TheoryAttribute
+    public sealed class InteropOsSourceTheoryAttribute : HeaderMigrationDataTheoryAttribute
     {
         public InteropOsSourceTheoryAttribute()
         {
+            if (Skip != null)
+                return;
             if (Environment.GetEnvironmentVariable("INTEROP_OS_SOURCE_CONTROLS") == null ||
                 Environment.GetEnvironmentVariable("INTEROP_OS_OLD_GENERATED") == null)
                 Skip = "Set INTEROP_OS_SOURCE_CONTROLS and INTEROP_OS_OLD_GENERATED to the bounded actual-header controls.";

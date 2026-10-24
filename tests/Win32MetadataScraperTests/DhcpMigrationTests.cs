@@ -77,7 +77,7 @@ DhcpV6GetStatelessStatistics DhcpV4CreateClientInfo DhcpV4EnumSubnetClients
 DhcpV4GetClientInfo DhcpV6CreateClientInfo DhcpV4GetFreeIPAddress DhcpV6GetFreeIPAddress"));
         }
 
-        [Fact]
+        [HeaderMigrationDataFact]
         public void OriginalHeaderPatchesCarryEveryFloorAndKeepOnlyTheExplicitArrayResidual()
         {
             string sdk = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
