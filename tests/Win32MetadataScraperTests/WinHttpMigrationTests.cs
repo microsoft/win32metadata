@@ -993,12 +993,29 @@ namespace Win32MetadataScraperTests
             var header = Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray()
                 .Where(value => value.GetProperty("path").GetString().Equals("um\\Wscapi.h", StringComparison.OrdinalIgnoreCase)));
             Assert.Equal("um\\Wscapi.h", header.GetProperty("path").GetString());
-            Assert.Equal("c\\include\\10.0.26100.0\\um\\Wscapi.h", header.GetProperty("sdkPath").GetString());
+            Assert.Equal(SelectedSdkHeaderPath(recipe.RootElement, "um\\Wscapi.h"), header.GetProperty("sdkPath").GetString());
             Assert.Contains("Wscapi.h", Directory.EnumerateFiles(Path.Combine(project, "RecompiledIdlHeaders", "um"))
                 .Select(Path.GetFileName));
             string[] patch = File.ReadAllLines(Path.Combine(project, "patches", "um", "Wscapi.h.patch"));
             Assert.Equal("--- a/um/Wscapi.h", Assert.Single(patch.Where(value => value.StartsWith("--- ", StringComparison.Ordinal))));
             Assert.Equal("+++ b/um/Wscapi.h", Assert.Single(patch.Where(value => value.StartsWith("+++ ", StringComparison.Ordinal))));
+        }
+
+        [Theory]
+        [InlineData("10.0.26100.7705", "um\\Wscapi.h", "c\\include\\10.0.26100.0\\um\\Wscapi.h")]
+        [InlineData("10.0.28000.2705", "um\\Wscapi.h", "c\\include\\10.0.28000.0\\um\\Wscapi.h")]
+        [InlineData("10.0.26100.7705", "shared\\dcomptypes.h", "c\\include\\10.0.26100.0\\shared\\dcomptypes.h")]
+        [InlineData("10.0.28000.2705", "shared\\dcomptypes.h", "c\\include\\10.0.28000.0\\shared\\dcomptypes.h")]
+        public void AuthoredHeaderSdkPathFollowsTheSelectedRecipeVersion(string packageVersion, string relativeHeader, string expected)
+        {
+            using var recipe = JsonDocument.Parse(JsonSerializer.Serialize(new { sdkPackageVersion = packageVersion }));
+            Assert.Equal(expected, SelectedSdkHeaderPath(recipe.RootElement, relativeHeader));
+        }
+
+        internal static string SelectedSdkHeaderPath(JsonElement recipe, string relativeHeader)
+        {
+            var version = Version.Parse(recipe.GetProperty("sdkPackageVersion").GetString());
+            return $"c\\include\\{version.Major}.{version.Minor}.{version.Build}.0\\{relativeHeader}";
         }
 
         [HeaderMigrationDataTheory]

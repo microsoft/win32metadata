@@ -295,6 +295,8 @@ namespace ClangSharpSourceToWinmd
             if (node is StructDeclarationSyntax s)
             {
                 StringBuilder ret = new StringBuilder();
+                // Keep profiles with different provider proofs separate until validation.
+                ret.Append(NativeHandleSourceProvenance.GetSignature(s));
                 AppendAttributes(ret, s.AttributeLists);
                 ret.Append(s.Identifier.ValueText);
                 ret.Append(s.BaseList?.ToString());

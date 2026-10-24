@@ -12,6 +12,7 @@ namespace ClangSharpSourceToWinmd
     internal static class HeaderTypedefMerger
     {
         private const string NativeTypedefName = "global::Windows.Win32.Foundation.Metadata.NativeTypedefAttribute";
+        private const string InvalidHandleValueName = "global::Windows.Win32.Foundation.Metadata.InvalidHandleValueAttribute";
         private const string ArchitectureName = "global::Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute";
 
         internal static CSharpCompilation LowerConstants(CSharpCompilation compilation, bool writeModifiedFiles = true)
@@ -180,13 +181,20 @@ namespace ClangSharpSourceToWinmd
             // Keep the retained field encoding when header bindings spell void-pointer storage as IntPtr.
             var retained = aliases.FirstOrDefault(alias => IsAutoTypesFile(alias.Tree.FilePath));
             var storageOwner = retained ?? first;
-            var valueType = GetValueType(storageOwner, compilation.GetSemanticModel(storageOwner.Tree));
+            var valueTypes = aliases.ToDictionary(alias => alias,
+                alias => GetValueType(alias, compilation.GetSemanticModel(alias.Tree)));
+            var valueType = valueTypes[storageOwner];
+            bool? provenDeclareHandle = null;
             foreach (var alias in aliases)
             {
-                var incomingType = GetValueType(alias, compilation.GetSemanticModel(alias.Tree));
+                var incomingType = valueTypes[alias];
                 if (!SymbolEqualityComparer.Default.Equals(valueType, incomingType) &&
                     !(retained != null && IsEquivalentNativePointerStorage(valueType, incomingType)))
-                    throw Error(alias, "Conflicting native typedef Value storage types.");
+                {
+                    provenDeclareHandle ??= CanPreserveDeclaredHandleStorage(compilation, aliases, retained, valueTypes);
+                    if (!provenDeclareHandle.Value)
+                        throw Error(alias, "Conflicting native typedef Value storage types.");
+                }
             }
             var attributesByType = first.Attributes.GroupBy(AttributeName, StringComparer.Ordinal)
                 .ToDictionary(attributes => attributes.Key, attributes => attributes.ToArray(), StringComparer.Ordinal);
@@ -217,7 +225,70 @@ namespace ClangSharpSourceToWinmd
                     SyntaxFactory.ParseTypeName(valueType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat))
                         .WithTriviaFrom(field.Declaration.Type));
             }
-            return declaration.AddAttributeLists(added.ToArray());
+            declaration = declaration.AddAttributeLists(added.ToArray());
+            return provenDeclareHandle == true ? NativeHandleSourceProvenance.Remove(declaration) : declaration;
+        }
+
+        private static bool CanPreserveDeclaredHandleStorage(CSharpCompilation compilation, Fragment[] aliases, Fragment retained,
+            IReadOnlyDictionary<Fragment, ITypeSymbol> valueTypes)
+        {
+            if (retained == null || aliases.Count(alias => IsAutoTypesFile(alias.Tree.FilePath)) != 1 ||
+                !IsVoidPointer(valueTypes[retained]) ||
+                !retained.Attributes.Any(attribute => AttributeName(attribute) == InvalidHandleValueName) ||
+                !TryGetDeclareHandleProof(retained, NativeHandleSourceProvider.Retained, out var retainedProof))
+                return false;
+            ITypeSymbol nativeStorage = null;
+            string nativeStorageSyntax = null;
+            foreach (var alias in aliases.Where(alias => alias != retained))
+            {
+                if (!HeaderEnumGroupMerger.IsHeaderTypesFile(alias.Tree.FilePath) ||
+                    !TryGetDeclareHandleProof(alias, NativeHandleSourceProvider.Header, out var headerProof) ||
+                    !StringComparer.Ordinal.Equals(retainedProof.NativeAlias, headerProof.NativeAlias) ||
+                    valueTypes[alias] is not IPointerTypeSymbol pointer || !IsUnambiguousHandlePointee(pointer.PointedAtType))
+                    return false;
+                if (nativeStorage is IPointerTypeSymbol previous)
+                {
+                    if (previous.PointedAtType is IErrorTypeSymbol || pointer.PointedAtType is IErrorTypeSymbol)
+                    {
+                        if (previous.PointedAtType is not IErrorTypeSymbol || pointer.PointedAtType is not IErrorTypeSymbol ||
+                            !SyntaxFactory.AreEquivalent(SyntaxFactory.ParseTypeName(nativeStorageSyntax),
+                                SyntaxFactory.ParseTypeName(headerProof.StorageType)))
+                            return false;
+                    }
+                    else if (!SymbolEqualityComparer.Default.Equals(previous, pointer))
+                        return false;
+                }
+                var field = (FieldDeclarationSyntax)alias.Declaration.Members.Single();
+                var model = compilation.GetSemanticModel(alias.Tree);
+                if (field.Declaration.Type.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>()
+                    .Any(name => model.GetAliasInfo(name) is IAliasSymbol binding && binding.Name != "global"))
+                    return false;
+                nativeStorage = valueTypes[alias];
+                nativeStorageSyntax = headerProof.StorageType;
+            }
+            return true;
+        }
+
+        private static bool IsUnambiguousHandlePointee(ITypeSymbol pointee)
+        {
+            // Retained auto-type preparation intentionally excludes native DECLARE_HANDLE tags.
+            if (pointee is IErrorTypeSymbol missing)
+                return missing.CandidateReason == CandidateReason.None && missing.CandidateSymbols.IsEmpty;
+            return pointee is INamedTypeSymbol record && record.TypeKind == TypeKind.Struct &&
+                record.SpecialType == SpecialType.None && !record.IsGenericType && record.ContainingType == null &&
+                record.IsUnmanagedType && record.DeclaringSyntaxReferences.Length == 1 &&
+                !record.GetAttributes().Any(attribute => AttributeName(attribute) is NativeTypedefName or
+                    "global::Windows.Win32.Foundation.Metadata.MetadataTypedefAttribute");
+        }
+
+        private static bool TryGetDeclareHandleProof(Fragment fragment, NativeHandleSourceProvider provider,
+            out NativeHandleSourceProof proof)
+        {
+            if (!NativeHandleSourceProvenance.TryRead(fragment.Declaration, out proof) || proof.Provider != provider)
+                return false;
+            string fullName = fragment.Symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+            string originalName = GetIdentity(fragment).Substring(fullName.Length - fragment.Symbol.Name.Length);
+            return StringComparer.Ordinal.Equals(proof.GeneratedAlias, originalName);
         }
 
         private static bool IsEquivalentNativePointerStorage(ITypeSymbol left, ITypeSymbol right) =>
