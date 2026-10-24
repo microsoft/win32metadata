@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using MetadataUtils;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -80,6 +83,14 @@ using Windows.Win32.Foundation.Metadata;
                     writer.WriteLine(
 $@"namespace {currentNamespace}
 {{");
+                }
+
+                if (item.ValueType == "DECLARE_HANDLE")
+                {
+                    var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
+                        $"public unsafe struct {item.Name} {{ public void* Value; }}");
+                    var proven = NativeHandleSourceProvenance.AttachRetainedDeclareHandle(declaration, item.Name);
+                    writer.WriteLine("    " + proven.GetLeadingTrivia().ToFullString().Trim());
                 }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))

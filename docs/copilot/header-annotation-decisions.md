@@ -1751,6 +1751,37 @@ failures, hash exceptions and the one-include-root contract. The existing ninety
 preparation/MIDL cases also passed during the bounded validation. These wrapper
 checks do not constitute a fresh complete migrated-SDK generation.
 
+### Retained and native DECLARE_HANDLE providers
+
+A retained `DECLARE_HANDLE` wrapper preserves its established public `void* Value`
+and invalid-value metadata. A header-native wrapper may instead expose the
+compiler's opaque record pointer. These providers compose only with matching,
+source-only identity proofs from both producers. The retained proof records the
+actual `DECLARE_HANDLE` input kind. The header proof requires the compiler's
+original direct `DECLARE_HANDLE` expansion, its standard native definition, the
+same native alias and record origin, and the exact generated pointer storage.
+A matching tag suffix, empty record, layout or pointer size is not sufficient.
+
+The merger retains the established storage only for this proven overlap. It
+rejects unrelated handles, aliases of another handle, additional indirection,
+unproven record pointers, conflicting providers and ambiguous retained storage.
+Internal provenance does not become a public WinMD attribute. The same proof
+also controls removal of an otherwise unused generated opaque tag.
+
+Fresh producer tests pass on x86, x64 and arm64 and physically emit the retained
+`void* Value`, `InvalidHandleValue(0)` and native handle signatures. Seven native
+origin negatives reject handwritten lookalikes, complete empty records, other
+macros, nonstandard macro bodies, factories, other aliases and additional
+pointers. All 460 emitter tests pass. This does not establish equivalence for
+`RO_REGISTRATION_COOKIE` or retrofit provenance into frozen generated sources.
+The migrated SDK needs fresh affected producers before this repair can qualify
+its complete image.
+
+Authored-header path checks derive the SDK include directory from the selected
+recipe package version. They continue to require the exact `Wscapi.h` spelling,
+DirectComposition input hashes and authored patch paths; neither SDK pins nor
+migration data change.
+
 ### Tooling and migration PR boundaries
 
 The tooling layer retains the existing sidecar and manual-source inputs and

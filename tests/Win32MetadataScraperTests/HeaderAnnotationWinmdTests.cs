@@ -886,7 +886,8 @@ DXGI_USAGE LegacyUsage(DXGI_USAGE value, DXGI_USAGE* output);
             const string originalHash = "447E4ADF411B9818D68BB6F5A0A9EF9F423B95CC2B10610F51936DC921135594";
             Assert.Equal(originalHash, header.GetProperty("sourceSha256").GetString());
             Assert.Equal(originalHash, header.GetProperty("sdkSha256").GetString());
-            Assert.Equal("c\\include\\10.0.26100.0\\shared\\dcomptypes.h", header.GetProperty("sdkPath").GetString());
+            Assert.Equal(WinHttpMigrationTests.SelectedSdkHeaderPath(recipe.RootElement, "shared\\dcomptypes.h"),
+                header.GetProperty("sdkPath").GetString());
             Assert.Single(recipe.RootElement.GetProperty("patches").EnumerateArray()
                 .Where(value => value.GetString() == "shared\\dcomptypes.h.patch"));
             string settings = Path.Combine(project, "Partitions", "DirectComp", "settings.rsp");

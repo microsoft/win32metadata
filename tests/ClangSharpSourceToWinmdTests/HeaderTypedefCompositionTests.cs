@@ -4,8 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Text;
 using ClangSharpSourceToWinmd;
+using MetadataUtils;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ClangSharpSourceToWinmdTests
@@ -412,6 +416,358 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
         }
 
         [DataTestMethod]
+        [DataRow("RECORD*", "namespace Test { public struct RECORD { public int unused; } }")]
+        [DataRow("HANDLE__*", "namespace Test { public struct HANDLE__ { public int unused; } }")]
+        [DataRow("HANDLE__*", "namespace Test { public struct HANDLE__ { public int Value; } }")]
+        [DataRow("HANDLE__*", "namespace Test { public struct HANDLE__ { } }")]
+        [DataRow("OTHER_HANDLE__*", "namespace Test { public struct OTHER_HANDLE__ { public int unused; } }")]
+        [DataRow("global::Other.HANDLE__*", "namespace Other { public struct HANDLE__ { public int unused; } }")]
+        [DataRow("HANDLE__**", "namespace Test { public struct HANDLE__ { public int unused; } }")]
+        [DataRow("MISSING_NATIVE_TAG*", "")]
+        public void RetainedInvalidValuesAndHandleShapedRecordsDoNotProveNativeHandleStorage(string storage, string record)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedAlias.Replace("[RAIIFree(\"Close\")]", "", StringComparison.Ordinal));
+            fixture.Write("Bindings.header-types.cs", HeaderAlias
+                .Replace("[global::Windows.Win32.Foundation.Metadata.AlsoUsableFor(\"OTHER_HANDLE\")]", "", StringComparison.Ordinal)
+                .Replace("public void* Value", $"public {storage} Value", StringComparison.Ordinal));
+            fixture.Write("Bindings.cs", record);
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+            StringAssert.Contains(error.Message, "Test.HANDLE");
+        }
+
+        [DataTestMethod]
+        [DataRow("void*", "global::System.IntPtr*")]
+        [DataRow("global::System.IntPtr", "global::System.IntPtr*")]
+        [DataRow("void*", "void**")]
+        [DataRow("global::System.IntPtr", "void**")]
+        public void RetainedNativeStorageDoesNotAuthorizeAdditionalPointerLevels(string retainedStorage, string headerStorage)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedAlias.Replace("public void* Value", $"public {retainedStorage} Value"));
+            fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("public void* Value", $"public {headerStorage} Value"));
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [DataTestMethod]
+        [DataRow("void*")]
+        [DataRow("global::System.IntPtr")]
+        public void MultipleRetainedProvidersDoNotAuthorizeNativeHandlePointerStorage(string otherStorage)
+        {
+            using var fixture = new Fixture("x64");
+            string common = Path.Combine(fixture.DirectoryPath, "common");
+            Directory.CreateDirectory(common);
+            File.WriteAllText(Path.Combine(common, "autotypes.cs"),
+                RetainedAlias.Replace("public void* Value", $"public {otherStorage} Value"));
+            fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("public void* Value", "public HANDLE__* Value"));
+            fixture.Write("Bindings.cs", "namespace Test { public struct HANDLE__ { public int unused; } }");
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [DataTestMethod]
+        [DataRow("x86", false)]
+        [DataRow("x64", false)]
+        [DataRow("arm64", false)]
+        [DataRow("crossarch", false)]
+        [DataRow("x86", true)]
+        [DataRow("x64", true)]
+        [DataRow("arm64", true)]
+        [DataRow("crossarch", true)]
+        public void MatchingDeclareHandleProofsPreserveLegacyStorageAndNativeRecords(string architecture, bool completeEmptyRecord)
+        {
+            using var fixture = new Fixture(architecture);
+            long[] invalidValues = completeEmptyRecord ? new long[] { -1, 0 } : new long[] { 0 };
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource(sourceNamespace: "Retained", invalidValues: invalidValues));
+            string header = HeaderWithDeclareHandleProof(NativeHandleHeader.Replace("namespace Test", "namespace Native"));
+            fixture.Write("Bindings.header-types.cs", header);
+            fixture.Write("Other.header-types.cs", header);
+            fixture.Write("Bindings.cs", "namespace Native { public partial struct HANDLE__ { " +
+                (completeEmptyRecord ? "" : "public int unused;") + " } }");
+            var compilation = fixture.Compile(new() { ["HANDLE"] = "Canonical", ["HANDLE__"] = "Canonical" });
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.HANDLE")!;
+            Assert.AreEqual(1, alias.DeclaringSyntaxReferences.Length);
+            Assert.IsTrue(((IFieldSymbol)alias.GetMembers("Value").Single()).Type is IPointerTypeSymbol pointer &&
+                pointer.PointedAtType.SpecialType == SpecialType.System_Void);
+            CollectionAssert.AreEquivalent(invalidValues, alias.GetAttributes()
+                .Where(attribute => attribute.AttributeClass!.Name == "InvalidHandleValueAttribute")
+                .Select(attribute => (long)attribute.ConstructorArguments.Single().Value!).ToArray());
+            Assert.AreEqual(invalidValues.Length + 1, alias.GetAttributes().Length);
+            var native = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.HANDLE__")!;
+            Assert.AreEqual(1, native.DeclaringSyntaxReferences.Length);
+            Assert.AreEqual(completeEmptyRecord ? 0 : 1,
+                native.GetMembers().OfType<IFieldSymbol>().Count(field => !field.IsImplicitlyDeclared));
+            Assert.IsFalse(NativeHandleSourceProvenance.TryRead(
+                (StructDeclarationSyntax)alias.DeclaringSyntaxReferences.Single().GetSyntax(), out _));
+
+            string output = Path.Combine(fixture.DirectoryPath, "ProvenHandles.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var types = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(definition => reader.GetString(definition.Namespace) == "Canonical").ToArray();
+            CollectionAssert.AreEquivalent(new[] { "HANDLE", "HANDLE__" },
+                types.Select(definition => reader.GetString(definition.Name)).ToArray());
+            var physical = types.Single(definition => reader.GetString(definition.Name) == "HANDLE");
+            CollectionAssert.AreEqual(new byte[] { 0x06, 0x0f, 0x01 },
+                reader.GetBlobBytes(reader.GetFieldDefinition(physical.GetFields().Single()).Signature));
+            CollectionAssert.AreEqual(invalidValues, ReadInvalidValues(reader, physical));
+            Assert.AreEqual(invalidValues.Length + 1, physical.GetCustomAttributes().Count);
+            Assert.AreEqual(completeEmptyRecord ? 0 : 1,
+                types.Single(definition => reader.GetString(definition.Name) == "HANDLE__").GetFields().Count);
+        }
+
+        [DataTestMethod]
+        [DataRow("missing-retained")]
+        [DataRow("missing-header")]
+        [DataRow("other-handle")]
+        [DataRow("wrong-generated-alias")]
+        [DataRow("stale-header-storage")]
+        [DataRow("stale-retained-storage")]
+        [DataRow("wrong-kind")]
+        [DataRow("wrong-provider")]
+        [DataRow("duplicate-proof")]
+        [DataRow("missing-invalid-values")]
+        [DataRow("additional-pointer")]
+        [DataRow("system-pointer")]
+        [DataRow("aliased-storage")]
+        [DataRow("native-typedef-pointee")]
+        [DataRow("ambiguous-pointee")]
+        [DataRow("ambiguous-pointee-resolution")]
+        public void UnmatchedIncompleteOrAmbiguousDeclareHandleProofsFailClosed(string conflict)
+        {
+            using var fixture = new Fixture("x64");
+            string retained = RetainedDeclareHandleSource();
+            string header = HeaderWithDeclareHandleProof();
+            string records = "namespace Test { public partial struct HANDLE__ { public int unused; } " +
+                "public struct OTHER_HANDLE__ { public int unused; } }";
+            switch (conflict)
+            {
+                case "missing-retained":
+                    retained = WithoutHandleSourceProof(retained);
+                    break;
+                case "missing-header":
+                    header = WithoutHandleSourceProof(header);
+                    break;
+                case "other-handle":
+                    header = HeaderWithDeclareHandleProof(NativeHandleHeader.Replace("HANDLE__*", "OTHER_HANDLE__*"),
+                        "OTHER_HANDLE", "OTHER_HANDLE__*");
+                    break;
+                case "wrong-generated-alias":
+                    header = header.Replace("\"generatedAlias\":\"HANDLE\"", "\"generatedAlias\":\"OTHER_HANDLE\"");
+                    break;
+                case "stale-header-storage":
+                    header = header.Replace("public HANDLE__* Value", "public OTHER_HANDLE__* Value");
+                    break;
+                case "stale-retained-storage":
+                    retained = retained.Replace("public void* Value", "public IntPtr Value");
+                    break;
+                case "wrong-kind":
+                    header = header.Replace("\"kind\":\"DECLARE_HANDLE\"", "\"kind\":\"OTHER_KIND\"");
+                    break;
+                case "wrong-provider":
+                    header = header.Replace("\"provider\":\"header\"", "\"provider\":\"retained\"");
+                    break;
+                case "duplicate-proof":
+                    var root = CSharpSyntaxTree.ParseText(header).GetRoot();
+                    var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                    header = root.ReplaceNode(declaration, declaration.WithLeadingTrivia(
+                        declaration.GetLeadingTrivia().AddRange(declaration.GetLeadingTrivia()))).ToFullString();
+                    break;
+                case "missing-invalid-values":
+                    retained = RetainedDeclareHandleSource(invalidValues: Array.Empty<long>());
+                    break;
+                case "additional-pointer":
+                    header = header.Replace("HANDLE__*", "HANDLE__**");
+                    break;
+                case "system-pointer":
+                    header = HeaderWithDeclareHandleProof(NativeHandleHeader.Replace("HANDLE__*", "global::System.IntPtr*"),
+                        storage: "global::System.IntPtr*");
+                    break;
+                case "aliased-storage":
+                    header = HeaderWithDeclareHandleProof("using STORAGE = Test.OTHER_HANDLE__;\n" +
+                        NativeHandleHeader.Replace("HANDLE__*", "STORAGE*"), storage: "STORAGE*");
+                    break;
+                case "native-typedef-pointee":
+                    records = "namespace Test { [global::Windows.Win32.Foundation.Metadata.NativeTypedef] " +
+                        "public partial struct HANDLE__ { public int Value; } }";
+                    break;
+                case "ambiguous-pointee":
+                    records = "namespace Test { public partial struct HANDLE__ { public int First; } " +
+                        "public partial struct HANDLE__ { public int Second; } }";
+                    break;
+                case "ambiguous-pointee-resolution":
+                    records = "namespace First { public struct HANDLE__ { public int unused; } } " +
+                        "namespace Second { public struct HANDLE__ { public int unused; } }";
+                    header = HeaderWithDeclareHandleProof("using First; using Second;\n" + NativeHandleHeader);
+                    break;
+            }
+            fixture.Write("autotypes.cs", retained);
+            fixture.Write("Bindings.header-types.cs", header);
+            fixture.Write("Bindings.cs", records);
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
+        public void MatchingHandleProofsDoNotRequireIntentionallyExcludedNativeTagDefinitions(string architecture)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof());
+            fixture.Write("Other.header-types.cs", HeaderWithDeclareHandleProof());
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("Test.HANDLE__"));
+            var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Test.HANDLE")!;
+            Assert.AreEqual(1, alias.DeclaringSyntaxReferences.Length);
+            Assert.IsTrue(((IFieldSymbol)alias.GetMembers("Value").Single()).Type is IPointerTypeSymbol pointer &&
+                pointer.PointedAtType.SpecialType == SpecialType.System_Void);
+            Assert.AreEqual(0L, alias.GetAttributes()
+                .Single(attribute => attribute.AttributeClass!.Name == "InvalidHandleValueAttribute").ConstructorArguments.Single().Value);
+        }
+
+        [TestMethod]
+        public void DifferentUnresolvedPointerStoragesCannotShareOneRetainedHandleProof()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof());
+            fixture.Write("Other.header-types.cs", HeaderWithDeclareHandleProof(
+                NativeHandleHeader.Replace("HANDLE__*", "OTHER_NATIVE_STORAGE*"), storage: "OTHER_NATIVE_STORAGE*"));
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [DataTestMethod]
+        [DataRow("REMAPPED_NATIVE_TAG*")]
+        [DataRow("global::Test.REMAPPED_NATIVE_TAG*")]
+        public void ProvenGeneratedStorageDoesNotDependOnNativeTagNamingConventions(string storage)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof(
+                NativeHandleHeader.Replace("HANDLE__*", storage), storage: storage));
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct REMAPPED_NATIVE_TAG { public int unused; } }");
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Test.HANDLE")!;
+            Assert.IsTrue(((IFieldSymbol)alias.GetMembers("Value").Single()).Type is IPointerTypeSymbol pointer &&
+                pointer.PointedAtType.SpecialType == SpecialType.System_Void);
+        }
+
+        [TestMethod]
+        public void ConflictingProvenNativePointerBindingsAreNotCollapsed()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof());
+            fixture.Write("Other.header-types.cs", HeaderWithDeclareHandleProof(
+                NativeHandleHeader.Replace("HANDLE__*", "OTHER_NATIVE_STORAGE*"), storage: "OTHER_NATIVE_STORAGE*"));
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } " +
+                "public partial struct OTHER_NATIVE_STORAGE { public int unused; } }");
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [TestMethod]
+        public void MatchingHandleProofsDoNotOverrideConflictingInvalidValueMetadata()
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof(NativeHandleHeader.Replace("public unsafe",
+                "[global::Windows.Win32.Foundation.Metadata.InvalidHandleValue(-1)] public unsafe")));
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } }");
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting 'global::Windows.Win32.Foundation.Metadata.InvalidHandleValueAttribute' annotations");
+        }
+
+        [TestMethod]
+        public void MatchingProofsCannotChooseBetweenMultipleRetainedProviders()
+        {
+            using var fixture = new Fixture("x64");
+            string retained = RetainedDeclareHandleSource();
+            fixture.Write("autotypes.cs", retained);
+            string common = Path.Combine(fixture.DirectoryPath, "common");
+            Directory.CreateDirectory(common);
+            File.WriteAllText(Path.Combine(common, "autotypes.cs"), retained);
+            fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof());
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } }");
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [DataTestMethod]
+        [DataRow("missing")]
+        [DataRow("other-alias")]
+        [DataRow("wrong-kind")]
+        public void CrossArchCoalescingCannotDiscardAProfileWithoutMatchingHandleProof(string conflict)
+        {
+            using var fixture = new Fixture("crossarch");
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            string header = HeaderWithDeclareHandleProof();
+            fixture.Write("Bindings.header-types.cs", header);
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } }");
+            string unproven = conflict switch
+            {
+                "missing" => WithoutHandleSourceProof(header),
+                "other-alias" => header.Replace("\"nativeAlias\":\"::HANDLE\"", "\"nativeAlias\":\"::OTHER_HANDLE\""),
+                _ => header.Replace("\"kind\":\"DECLARE_HANDLE\"", "\"kind\":\"OTHER_KIND\""),
+            };
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "x64", "Bindings.header-types.cs"), unproven);
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
+        }
+
+        [TestMethod]
+        public void ProvenCrossArchHandleVariantsRetainLegacyStorageAndInvalidValues()
+        {
+            using var fixture = new Fixture("crossarch");
+            fixture.Write("autotypes.cs", RetainedDeclareHandleSource());
+            fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } }");
+            foreach (string architecture in new[] { "x86", "x64", "arm64" })
+            {
+                string header = NativeHandleHeader.Replace("public unsafe",
+                    $"[global::Windows.Win32.Foundation.Metadata.AlsoUsableFor(\"{architecture}\")] public unsafe");
+                File.WriteAllText(Path.Combine(fixture.DirectoryPath, architecture, "Bindings.header-types.cs"),
+                    HeaderWithDeclareHandleProof(header));
+            }
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            string output = Path.Combine(fixture.DirectoryPath, "ProvenVariants.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var aliases = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(definition => reader.GetString(definition.Namespace) == "Test" && reader.GetString(definition.Name) == "HANDLE").ToArray();
+            Assert.AreEqual(3, aliases.Length);
+            foreach (var alias in aliases)
+            {
+                CollectionAssert.AreEqual(new byte[] { 0x06, 0x0f, 0x01 },
+                    reader.GetBlobBytes(reader.GetFieldDefinition(alias.GetFields().Single()).Signature));
+                CollectionAssert.AreEqual(new long[] { 0 }, ReadInvalidValues(reader, alias));
+                Assert.AreEqual(4, alias.GetCustomAttributes().Count);
+            }
+        }
+
+        [DataTestMethod]
         [DataRow("void*", "global::System.IntPtr")]
         [DataRow("global::System.IntPtr", "void*")]
         public void RetainedNativePointerStorageIsPreserved(string retainedStorage, string headerStorage)
@@ -605,6 +961,51 @@ namespace Test { public static class Apis {
                     reader.GetBlobBytes(reader.GetFieldDefinition(alias.GetFields().Single()).Signature));
         }
 
+        private static string RetainedDeclareHandleSource(string sourceNamespace = "Test", long[]? invalidValues = null)
+        {
+            using var stream = new MemoryStream();
+            NativeTypedefStructsCreator.WriteToStream(new(), new[]
+            {
+                new AutoType
+                {
+                    Name = "HANDLE",
+                    Namespace = sourceNamespace,
+                    ValueType = "DECLARE_HANDLE",
+                    InvalidHandleValues = invalidValues ?? new long[] { 0 },
+                },
+            }, stream);
+            return Encoding.UTF8.GetString(stream.ToArray());
+        }
+
+        private static string HeaderWithDeclareHandleProof(string source = NativeHandleHeader,
+            string nativeAlias = "HANDLE", string storage = "HANDLE__*")
+        {
+            var root = CSharpSyntaxTree.ParseText(source).GetRoot();
+            var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+            return root.ReplaceNode(declaration,
+                NativeHandleSourceProvenance.AttachHeaderDeclareHandle(declaration, nativeAlias, storage))
+                .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+        }
+
+        private static string WithoutHandleSourceProof(string source)
+        {
+            var root = CSharpSyntaxTree.ParseText(source).GetRoot();
+            return root.ReplaceNodes(root.DescendantNodes().OfType<StructDeclarationSyntax>(),
+                (_, rewritten) => NativeHandleSourceProvenance.Remove(rewritten)).ToFullString();
+        }
+
+        private static long[] ReadInvalidValues(MetadataReader reader, TypeDefinition type) =>
+            type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "InvalidHandleValueAttribute")
+                .Select(handle =>
+                {
+                    var blob = reader.GetBlobReader(reader.GetCustomAttribute(handle).Value);
+                    Assert.AreEqual((ushort)1, blob.ReadUInt16());
+                    long value = blob.ReadInt64();
+                    Assert.AreEqual((ushort)0, blob.ReadUInt16());
+                    Assert.AreEqual(0, blob.RemainingBytes);
+                    return value;
+                }).OrderBy(value => value).ToArray();
+
         private static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)
         {
             var constructor = reader.GetCustomAttribute(handle).Constructor;
@@ -648,6 +1049,12 @@ namespace Test { public static class Apis {
 
             public void Dispose() => Directory.Delete(DirectoryPath, recursive: true);
         }
+
+        private const string NativeHandleHeader = @"
+namespace Test {
+    [global::Windows.Win32.Foundation.Metadata.NativeTypedef]
+    public unsafe partial struct HANDLE { public HANDLE__* Value; }
+}";
 
         private const string HeaderAlias = @"
 using Windows.Win32.Foundation.Metadata;

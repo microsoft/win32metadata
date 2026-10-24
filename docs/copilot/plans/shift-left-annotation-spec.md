@@ -248,6 +248,16 @@ C++ `using` declarations, and unsupported scalar representations fail explicitly
 Do not invent an OS floor or a self-compatibility annotation merely to force a
 provider, and do not infer native pointer storage from historical metadata.
 
+When a retained invalid-value record was authored as `DECLARE_HANDLE`, the tooling
+can preserve its existing `void* Value` only with independent, identity-bound
+source proofs from both producers. The retained producer records its actual
+`DECLARE_HANDLE` kind; the header producer records compiler-proven macro origin,
+the native alias, and the exact generated pointer storage. These attached comments
+are internal source provenance, not public WinMD attributes. Missing, stale,
+conflicting, or ambiguous proofs fail closed; tag spelling, matching layout, and
+empty emitted records do not prove equivalence. Other pointer representations are
+not admitted by this rule, and complete native records remain intact.
+
 For an IDL-owned typedef, use the existing selector-bound comment transport in
 the original IDL, for example:
 

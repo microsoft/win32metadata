@@ -442,6 +442,10 @@ namespace Win32MetadataScraper
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
                 declaration = declaration.AddAttributeLists(GetAttributes(facts).ToArray());
+                if (SyntaxFactory.ParseTypeName(valueType) is PointerTypeSyntax { ElementType: NameSyntax } &&
+                    NativeHandleOrigins.IsDeclareHandle(alias, visited))
+                    declaration = MetadataUtils.NativeHandleSourceProvenance.AttachHeaderDeclareHandle(
+                        declaration, DeclarationSourceMap.QualifiedName(alias.Handle), valueType);
                 members.Add(declaration);
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
             }
