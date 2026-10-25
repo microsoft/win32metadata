@@ -205,18 +205,38 @@ void UseNative(NATIVE_ALIAS value);
                 Assert.True(fixture.Run() == 0, fixture.Diagnostics);
                 using var image = Emit(fixture, architecture);
                 var reader = image.Reader;
-                var pointee = FindType(reader, "NativeHandle__");
-                Assert.Equal(storage == "nominal" ? 1 : 0, pointee.GetFields().Count);
-                if (storage == "nominal")
-                    Assert.Equal("Int32", reader.GetFieldDefinition(Assert.Single(pointee.GetFields()))
-                        .DecodeSignature(new SignatureNames(), null));
+                if (storage == "incomplete")
+                {
+                    Assert.DoesNotContain(ReadOpaqueRecordSources(fixture).SelectMany(root =>
+                        root.DescendantNodes().OfType<StructDeclarationSyntax>()),
+                        type => type.Identifier.ValueText == "NativeHandle__");
+                    Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                        type => reader.GetString(type.Name) == "NativeHandle__");
+                    Assert.DoesNotContain(reader.TypeReferences.Select(reader.GetTypeReference),
+                        type => reader.GetString(type.Name) == "NativeHandle__");
+                }
+                else
+                {
+                    var pointee = FindType(reader, "NativeHandle__");
+                    Assert.Equal(storage == "nominal" ? 1 : 0, pointee.GetFields().Count);
+                    if (storage == "nominal")
+                        Assert.Equal("Int32", reader.GetFieldDefinition(Assert.Single(pointee.GetFields()))
+                            .DecodeSignature(new SignatureNames(), null));
+                }
                 foreach (string name in new[] { "NATIVE_HANDLE", "NATIVE_ALIAS" })
                 {
                     var wrapper = FindType(reader, name);
                     AssertHasAttribute(reader, wrapper.GetCustomAttributes(), "NativeTypedefAttribute");
-                    Assert.Equal("NativeHandle__*", reader.GetFieldDefinition(Assert.Single(wrapper.GetFields()))
-                        .DecodeSignature(new SignatureNames(), null));
+                    var field = reader.GetFieldDefinition(Assert.Single(wrapper.GetFields()));
+                    Assert.Equal(storage == "incomplete" ? "Void*" : "NativeHandle__*",
+                        field.DecodeSignature(new SignatureNames(), null));
+                    if (storage == "incomplete")
+                        Assert.Equal(new byte[] { 0x06, 0x0f, 0x01 }, reader.GetBlobBytes(field.Signature));
                 }
+                Assert.Equal("NATIVE_HANDLE", FindMethod(reader, "Apis", "OpenNative")
+                    .DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "NATIVE_ALIAS" }, FindMethod(reader, "Apis", "UseNative")
+                    .DecodeSignature(new SignatureNames(), null).ParameterTypes);
                 AssertMetadataClosure(reader);
             }
             finally
