@@ -617,6 +617,19 @@ namespace Other { typedef struct _COLOR { int Other; } COLOR_ALIAS; }
     /// </summary>
     public class FunctionPointerDiscoveryTests
     {
+        [Fact]
+        public void BareFunctionWithoutPointerAliasRetainsItsNativeFunctionType()
+        {
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef void __stdcall NATIVE_CALLBACK(unsigned long value);
+                typedef void (__stdcall *POINTER_CALLBACK)(unsigned long value);
+            ");
+
+            Assert.Empty(result.FnPtrRemaps);
+            Assert.Empty(result.FnPtrExcludes);
+            Assert.Equal(new[] { "NATIVE_CALLBACK" }, result.ReducePointerLevel);
+        }
+
         // ── Two-step function pointer pattern ────────────────────────────────
 
         [Fact]

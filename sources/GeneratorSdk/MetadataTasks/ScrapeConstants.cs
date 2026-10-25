@@ -38,6 +38,8 @@ namespace MetadataTasks
         [Required]
         public string SdkIncRoot { get; set; }
 
+        public string[] HeaderPriority { get; set; }
+
         [Required]
         public string MarkerFileName { get; set; }
 
@@ -77,6 +79,7 @@ namespace MetadataTasks
                 string[] paths = this.GetNativeConstantInputs();
                 if (paths.Length != 0 || File.Exists(nativeInputs))
                     File.WriteAllLines(nativeInputs, paths);
+                File.WriteAllLines(Path.Combine(this.ScraperOutputDir, "constant-selection-inputs.txt"), this.GetSelectionInputs());
             }
 
             return ret;
@@ -89,6 +92,7 @@ namespace MetadataTasks
 
             builder.AppendSwitchIfNotNull("--headerTextFile ", this.HeaderTextFile);
             builder.AppendSwitchIfNotNull("--scraperOutputDir ", this.ScraperOutputDir);
+            builder.AppendSwitchIfNotNull("--sdkRoot ", this.SdkIncRoot);
 
             IEnumerable<string> reponseFiles = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
             foreach (var file in reponseFiles)
@@ -104,6 +108,19 @@ namespace MetadataTasks
             StringBuilder ret = new();
 
             this.AppendTraversedFilesAndNamespaces(ret);
+            if (this.HeaderPriority?.Length > 0)
+            {
+                ret.AppendLine("--headerPriority");
+                foreach (string header in this.HeaderPriority)
+                    ret.AppendLine(header);
+            }
+            string[] nativeInputs = this.GetOrderedNativeConstantInputs();
+            if (nativeInputs.Length != 0)
+            {
+                ret.AppendLine("--nativeInput");
+                foreach (string path in nativeInputs)
+                    ret.AppendLine(path);
+            }
 
             if (!string.IsNullOrEmpty(this.EnumsJson))
             {
@@ -132,12 +149,19 @@ namespace MetadataTasks
             {
                 Path.Combine(this.ToolsBinDir, "ConstantsScraper.dll"),
                 Path.Combine(this.ToolsBinDir, "MetadataUtils.dll"),
+                typeof(ScrapeConstants).Assembly.Location,
             };
             if (!string.IsNullOrEmpty(this.HeaderTextFile))
                 producerInputs.Add(TaskUtils.GetFullPath(this.HeaderTextFile, this.MSBuildProjectDirectory));
             if (producerInputs.Any(file => !File.Exists(file)))
                 return false;
             files = files.Concat(producerInputs);
+            string policy = Path.Combine(this.ScraperOutputDir, "constant-selection-inputs.txt");
+            if (!File.Exists(policy) || !File.ReadAllLines(policy).SequenceEqual(this.GetSelectionInputs(), System.StringComparer.Ordinal))
+                return false;
+            if (Directory.Exists(this.ScraperOutputDir))
+                files = files.Concat(Directory.GetFiles(this.ScraperOutputDir, "*header-types.cs", SearchOption.AllDirectories)
+                    .Where(path => !MetadataUtils.NativeConstantValues.IsGeneratedSource(path)));
 
             string[] nativePaths = this.GetNativeConstantInputs();
             string nativeInputs = Path.Combine(this.ScraperOutputDir, "native-constant-inputs.txt");
@@ -151,6 +175,27 @@ namespace MetadataTasks
             ? Directory.GetFiles(this.ScraperOutputDir, "*.native-constants.json", SearchOption.AllDirectories)
                 .OrderBy(path => path, System.StringComparer.OrdinalIgnoreCase).ToArray()
             : System.Array.Empty<string>();
+
+        private string[] GetSelectionInputs() => new[] { "sdkRoot=" + Path.GetFullPath(this.SdkIncRoot) }
+            .Concat((this.HeaderPriority ?? System.Array.Empty<string>()).Select(header => "headerPriority=" + header))
+            .Concat(this.GetOrderedNativeConstantInputs().Select(path => "nativeInput=" + path)).ToArray();
+
+        private string[] GetOrderedNativeConstantInputs()
+        {
+            var remaining = this.GetNativeConstantInputs().ToHashSet(System.StringComparer.OrdinalIgnoreCase);
+            var ordered = new List<string>();
+            foreach (var partition in this.loadedPartitions)
+                foreach (string target in new[] { "common", "x86", "x64", "arm64" })
+                {
+                    string path = Path.GetFullPath(Path.Combine(this.ScraperOutputDir, target, partition.Name + ".native-constants.json"));
+                    if (remaining.Remove(path))
+                        ordered.Add(path);
+                }
+            if (remaining.Count != 0)
+                throw new InvalidDataException("Native constant inputs have no project partition-order owner: " +
+                    string.Join(", ", remaining));
+            return ordered.ToArray();
+        }
 
         private void AppendTraversedFilesAndNamespaces(StringBuilder rsp)
         {
@@ -170,5 +215,6 @@ namespace MetadataTasks
 
             File.WriteAllText(Path.Combine(this.ScraperOutputDir, "traversedFileToNamespace.rsp"), rsp.ToString());
         }
+
     }
 }

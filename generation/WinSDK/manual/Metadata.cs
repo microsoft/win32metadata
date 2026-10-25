@@ -331,7 +331,7 @@ public class StructSizeFieldAttribute : Attribute
     }
 }
 
-[Flags]
+[Flags, ScopedEnum]
 public enum Architecture
 {
     None = 0,

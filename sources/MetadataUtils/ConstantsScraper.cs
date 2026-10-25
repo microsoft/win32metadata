@@ -25,10 +25,25 @@ namespace MetadataUtils
             Dictionary<string, string> requiredNamespaces,
             Dictionary<string, string> remaps,
             Dictionary<string, string> withTypes,
-            Dictionary<string, string> withAttributes)
+            Dictionary<string, string> withAttributes) =>
+            ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames,
+                traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes, null);
+
+        public static ScraperResults ScrapeConstants(
+            string[] enumJsonFiles,
+            string defaultNamespace,
+            string scraperOutputDir,
+            string constantsHeaderText,
+            HashSet<string> exclusionNames,
+            Dictionary<string, string> traversedHeaderToNamespaceMap,
+            Dictionary<string, string> requiredNamespaces,
+            Dictionary<string, string> remaps,
+            Dictionary<string, string> withTypes,
+            Dictionary<string, string> withAttributes,
+            ConstantSelectionOptions selection)
         {
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            return imp.ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames, traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes);
+            return imp.ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames, traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes, selection);
         }
 
         private class ConstantsScraperImpl : IDisposable
@@ -111,6 +126,13 @@ namespace MetadataUtils
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants;
+            private Dictionary<string, string[]> sourceConstantTypes = new(StringComparer.Ordinal);
+            private Dictionary<string, ProtectedConstant[]> sourceConstants = new(StringComparer.Ordinal);
+            private Dictionary<string, NativeDependency[]> nativeDependencies = new(StringComparer.Ordinal);
+            private readonly List<object> legacyDependencyPolicies = new();
+            private object nativeConstantReport;
+            private string legacyHeader;
+            private int legacyLine;
             private HashSet<string> mutableGlobalNames = new(StringComparer.Ordinal);
             private HashSet<string> headerEnumMemberNames = new(StringComparer.Ordinal);
             private Dictionary<string, string> scrapedConstantNamespaces = new(StringComparer.Ordinal);
@@ -118,6 +140,10 @@ namespace MetadataUtils
             private readonly HashSet<string> nativeIntegerNames = new(StringComparer.Ordinal);
             private readonly HashSet<string> nativePointerNames = new(StringComparer.Ordinal);
             private bool usesNativeIntegers;
+            private ConstantSelectionOptions selection = new();
+            private Dictionary<string, int> headerPriorities = new(StringComparer.OrdinalIgnoreCase);
+            private Dictionary<string, int> headerTraversal = new(StringComparer.OrdinalIgnoreCase);
+            private string conflictReport;
 
             private List<EnumObject> enumObjectsFromJsons = new();
             private Dictionary<string, string> withTypes;
@@ -162,7 +188,8 @@ namespace MetadataUtils
                 Dictionary<string, string> requiredNamespaces,
                 Dictionary<string, string> remaps,
                 Dictionary<string, string> withTypes,
-                Dictionary<string, string> withAttributes)
+                Dictionary<string, string> withAttributes,
+                ConstantSelectionOptions selection = null)
             {
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
@@ -171,6 +198,8 @@ namespace MetadataUtils
                 this.withAttributes = withAttributes;
                 this.scraperOutputDir = scraperOutputDir;
                 this.defaultNamespace = defaultNamespace;
+                this.selection = selection ?? new ConstantSelectionOptions();
+                this.PrepareHeaderPriority(traversedHeaderToNamespaceMap);
 
                 this.regexConstHelper = new RegexConstHelper(regexConstMakers, this);
 
@@ -184,11 +213,22 @@ namespace MetadataUtils
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
 
                 this.WriteNativeConstants(traversedHeaderToNamespaceMap);
-                this.ScrapeConstantsFromTraversedFiles(traversedHeaderToNamespaceMap);
+                try
+                {
+                    this.ScrapeConstantsFromTraversedFiles(traversedHeaderToNamespaceMap);
+                }
+                catch (InvalidDataException error)
+                {
+                    this.WriteRejectedConstantReport(error.Message);
+                    throw;
+                }
+                if (this.nativeConstantReport != null)
+                    this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(
+                        this.nativeConstantReport, new JsonSerializerOptions { WriteIndented = true }));
 
                 this.WriteEnumsAndRemaps(remaps);
 
-                return new ScraperResults(this.output);
+                return new ScraperResults(this.output, this.conflictReport);
             }
 
             public void Dispose()
@@ -365,7 +405,7 @@ namespace MetadataUtils
 
             private void AddCtlCodeConstant(string originalNamespace, string name, string deviceType, string function, string method, string access)
             {
-                if (this.usesNativeIntegers || this.writtenConstants.ContainsKey(name))
+                if (this.usesNativeIntegers || this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name))
                 {
                     return;
                 }
@@ -383,7 +423,7 @@ namespace MetadataUtils
 
             private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "")
             {
-                if (this.writtenConstants.ContainsKey(name) || this.usesNativeIntegers &&
+                if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) || this.usesNativeIntegers &&
                     type is "bool" or "char" or "sbyte" or "byte" or "short" or "ushort" or "int" or "uint" or "long" or "ulong")
                 {
                     return;
@@ -448,22 +488,30 @@ namespace MetadataUtils
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name) || this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
+                if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) ||
+                    this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
                 {
                     return;
                 }
 
                 string forcedType = nativeTypeName != null ? null : this.GetForcedTypeForName(name);
+                string dependencyType = null;
+                bool nativeDependency = nativeTypeName == null && this.TryGetNativeDependencyType(name, out dependencyType);
+                if (nativeDependency)
+                    forcedType = dependencyType;
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
                 writer.AddInt(forcedType, nativeTypeName, name, valueText, out var finalType);
 
                 this.writtenConstants.Add(name, finalType);
+                if (nativeDependency)
+                    this.RecordNativeDependencyPolicy(name, name, finalType, valueText);
             }
 
             private void AddConstantShort(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name) || this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
+                if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) ||
+                    this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
                 {
                     return;
                 }
@@ -543,44 +591,101 @@ namespace MetadataUtils
                 return this.exclusionNames.Contains(constName);
             }
 
+            private void PrepareHeaderPriority(Dictionary<string, string> traversedFileMap)
+            {
+                this.headerTraversal = traversedFileMap.Keys.Select((header, index) => (Header: Path.GetFullPath(header), index))
+                    .ToDictionary(value => value.Header, value => value.index, StringComparer.OrdinalIgnoreCase);
+                if (this.selection.HeaderPriority.Count != 0 && string.IsNullOrWhiteSpace(this.selection.SdkRoot))
+                    throw new ArgumentException("Header priority requires an explicit SDK include root.");
+                var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                for (int i = 0; i < this.selection.HeaderPriority.Count; i++)
+                {
+                    string relative = this.selection.HeaderPriority[i].Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+                    if (string.IsNullOrWhiteSpace(relative) || Path.IsPathRooted(relative) ||
+                        relative.Split(Path.DirectorySeparatorChar).Any(part => part is "" or "." or "..") || !seen.Add(relative))
+                        throw new ArgumentException($"Invalid or repeated SDK-root-relative priority header '{relative}'.");
+                    string full = Path.GetFullPath(Path.Combine(this.selection.SdkRoot, relative));
+                    this.headerPriorities.Add(full, i);
+                }
+            }
+
+            private IEnumerable<KeyValuePair<string, string>> OrderedHeaders(Dictionary<string, string> headers) =>
+                headers.OrderBy(pair => this.headerPriorities.GetValueOrDefault(Path.GetFullPath(pair.Key), int.MaxValue));
+
+            private sealed record NativeInput(string Path, NativeConstantValues Values, int Order);
+            private sealed record NativeCandidate(
+                NativeInput Input, NativeConstantValue Value, string Header, string Namespace, int HeaderPriority, int TraversalOrder);
+            private sealed record ProtectedConstant(
+                string Name, string Namespace, string Owner, string Source, Architecture Architecture, string StorageType,
+                string Expression, NativeConstantGroupSource Proof, string DeclaredName, string SourceKind);
+            private sealed record NativeDependency(NativeCandidate Candidate, ProtectedConstant Owner);
+
             private void WriteNativeConstants(Dictionary<string, string> traversedFileMap)
+            {
+                try
+                {
+                    this.WriteNativeConstantsCore(traversedFileMap);
+                }
+                catch (InvalidDataException error)
+                {
+                    this.WriteRejectedConstantReport(error.Message);
+                    throw;
+                }
+                catch (JsonException error)
+                {
+                    this.WriteRejectedConstantReport(error.Message);
+                    throw;
+                }
+            }
+
+            private void WriteRejectedConstantReport(string error)
+            {
+                this.conflictReport = Path.Combine(this.scraperOutputDir, "native-constant-conflicts.json");
+                this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(new
+                {
+                    Version = 1, Status = "rejected", Error = error, this.selection.SdkRoot,
+                    this.selection.HeaderPriority, this.selection.NativeInputs,
+                    RawInputs = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                        "*.native-constants.json", SearchOption.AllDirectories).Select(path => new
+                        {
+                            Path = path, Contents = this._fileSystem.File.ReadAllText(path),
+                        }).ToArray(),
+                }, new JsonSerializerOptions { WriteIndented = true }));
+            }
+
+            private void WriteNativeConstantsCore(Dictionary<string, string> traversedFileMap)
             {
                 var headers = traversedFileMap.ToDictionary(pair => Path.GetFullPath(pair.Key), pair => pair.Value,
                     StringComparer.OrdinalIgnoreCase);
-                string[] paths = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                string[] discovered = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
                     "*.native-constants.json", SearchOption.AllDirectories);
-                var inputs = paths.OrderBy(path => path, StringComparer.Ordinal).Select(path =>
-                {
-                    var input = JsonSerializer.Deserialize<NativeConstantValues>(this._fileSystem.File.ReadAllText(path)) ??
-                        throw new InvalidDataException($"Invalid native constants file '{path}'.");
-                    input.Headers = input.Headers.Select(ResolveHeader).ToArray();
-                    input.Constants = input.Constants.Select(value => value with { Header = ResolveHeader(value.Header) }).ToList();
-                    return input;
-
-                    string ResolveHeader(string header)
-                    {
-                        string full = Path.GetFullPath(header);
-                        if (headers.ContainsKey(full))
-                            return full;
-                        string originalDirectory = input.BindingSource.EndsWith(".cs", StringComparison.Ordinal)
-                            ? Path.GetDirectoryName(input.BindingSource) : input.BindingSource;
-                        string relative = Path.GetRelativePath(originalDirectory, full);
-                        if (Path.IsPathRooted(relative))
-                            return full;
-                        string relocated = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(path), relative));
-                        return headers.ContainsKey(relocated) ? relocated : full;
-                    }
-                }).ToArray();
-                if (inputs.Length == 0)
-                    return;
+                string[] paths = this.selection.NativeInputs.Count == 0 ? discovered :
+                    this.selection.NativeInputs.Select(Path.GetFullPath).ToArray();
+                if (paths.Distinct(StringComparer.OrdinalIgnoreCase).Count() != paths.Length ||
+                    !paths.ToHashSet(StringComparer.OrdinalIgnoreCase).SetEquals(discovered.Select(Path.GetFullPath)))
+                    throw new InvalidDataException("The native constant input plan must name every current input exactly once.");
+                var inputs = paths.Select((path, index) => new NativeInput(path,
+                    JsonSerializer.Deserialize<NativeConstantValues>(this._fileSystem.File.ReadAllText(path)) ??
+                        throw new InvalidDataException($"Invalid native constants file '{path}'."), index)).ToArray();
                 foreach (var input in inputs)
                 {
-                    if (input.Architecture is not (Architecture.X86 or Architecture.X64 or Architecture.Arm64))
-                        throw new InvalidDataException($"Invalid native constant architecture '{input.Architecture}'.");
-                    this.nativeIntegerHeaders.UnionWith(input.Headers.Select(Path.GetFullPath));
-                    this.nativePointerNames.UnionWith(input.Issues.Where(issue => issue.Reason == "pointer constant").Select(issue => issue.Name));
+                    if (input.Values.Architecture is not (Architecture.X86 or Architecture.X64 or Architecture.Arm64))
+                        throw new InvalidDataException($"Invalid native constant architecture '{input.Values.Architecture}'.");
+                    if (input.Values.Headers == null || input.Values.Constants == null ||
+                        input.Values.Issues == null || input.Values.Groups == null)
+                        throw new InvalidDataException($"Missing native constant input collections in '{input.Path}'.");
+                    this.nativeIntegerHeaders.UnionWith(input.Values.Headers.Select(header => ResolveHeader(input, header)));
+                    this.nativePointerNames.UnionWith(input.Values.Issues.Where(issue => issue.Reason == "pointer constant").Select(issue => issue.Name));
                 }
-                var existing = new Dictionary<string, Architecture>(StringComparer.Ordinal);
+                if (inputs.Length == 0 &&
+                    !this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*header-types.cs", SearchOption.AllDirectories)
+                        .Where(file => Path.GetFileName(file) == "header-types.cs" ||
+                            file.EndsWith(".header-types.cs", StringComparison.Ordinal))
+                        .Any(file => this._fileSystem.File.ReadAllText(file)
+                            .StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal)))
+                    return;
+                var protectedConstants = new List<ProtectedConstant>();
+                var missingProofs = new List<string>();
                 foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*.cs", SearchOption.AllDirectories)
                     .Where(file => !NativeConstantValues.IsGeneratedSource(file) &&
                         !file.EndsWith(".modified.cs", StringComparison.Ordinal) &&
@@ -595,41 +700,237 @@ namespace MetadataUtils
                         }).LastOrDefault(value => value != Architecture.None);
                     if (architecture == Architecture.None)
                         architecture = Architecture.All;
-                    var root = SyntaxFactory.ParseCompilationUnit(this._fileSystem.File.ReadAllText(file));
+                    string text = this._fileSystem.File.ReadAllText(file);
+                    var root = SyntaxFactory.ParseCompilationUnit(text);
+                    bool headerSource = Path.GetFileName(file) == "header-types.cs" ||
+                        file.EndsWith(".header-types.cs", StringComparison.Ordinal);
+                    foreach (var group in root.DescendantNodes().OfType<EnumDeclarationSyntax>().Where(group =>
+                        group.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
+                    {
+                        var proof = NativeConstantGroupProvenance.Read(group);
+                        string originalNamespace = NamespaceOf(group);
+                        if (proof != null && (proof.Group.Namespace != originalNamespace ||
+                            !architecture.HasFlag(proof.Architecture) ||
+                            (headerSource ? proof.Group.Kind != "LogicalGroup" ||
+                                !text.StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal) :
+                                proof.Group.Kind != "NativeEnum")))
+                            throw new InvalidDataException($"Native constant group producer/namespace/target drift in '{file}'.");
+                        if (group.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                            attribute.Name.ToString().Split('.').Last() is "ScopedEnum" or "ScopedEnumAttribute"))
+                            continue;
+                        if (headerSource && proof == null)
+                            missingProofs.Add(file);
+                        string ns = this.LookupNamespaceForName(group.Identifier.ValueText) ?? originalNamespace;
+                        foreach (var member in group.Members)
+                            protectedConstants.Add(new ProtectedConstant(member.Identifier.ValueText, ns, group.Identifier.ValueText,
+                                file, architecture, group.BaseList?.Types.Single().Type.ToString() ?? "int",
+                                member.EqualsValue?.Value.ToString(), proof, member.Identifier.ValueText,
+                                headerSource ? "logical-header-group" : "ordinary-unscoped-enum"));
+                    }
                     foreach (var field in root.DescendantNodes().OfType<FieldDeclarationSyntax>().Where(field =>
-                        field.Modifiers.Any(SyntaxKind.ConstKeyword) && field.Parent is ClassDeclarationSyntax type &&
-                        type.Identifier.ValueText == "Apis"))
+                        field.Parent is ClassDeclarationSyntax type && type.Identifier.ValueText == "Apis" &&
+                        (field.Modifiers.Any(SyntaxKind.ConstKeyword) ||
+                            field.Modifiers.ToString() == "public static readonly" &&
+                            field.Declaration.Type.ToString() != "Guid" &&
+                            field.Declaration.Variables.First().Identifier.ValueText.StartsWith("__forceconst__", StringComparison.Ordinal))))
                         foreach (var variable in field.Declaration.Variables)
                         {
-                            string ns = this.LookupNamespaceForName(variable.Identifier.ValueText) ??
-                                string.Join(".", field.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
-                                    .Reverse().Select(parent => parent.Name.ToString()));
-                            string key = ns + "." + variable.Identifier.ValueText;
-                            existing[key] = existing.GetValueOrDefault(key) | architecture;
+                            string declaredName = variable.Identifier.ValueText;
+                            string name = NativeMemberNameProvenance.GetProjectedFieldName(field, declaredName);
+                            if (name.StartsWith("__forceconst__", StringComparison.Ordinal))
+                                name = name.Substring("__forceconst__".Length);
+                            string ns = this.LookupNamespaceForName(declaredName) ?? NamespaceOf(field);
+                            protectedConstants.Add(new ProtectedConstant(name, ns, "Apis", file, architecture,
+                                field.Declaration.Type.ToString(), variable.Initializer?.Value.ToString(), null,
+                                declaredName, "apis-constant"));
                         }
                 }
-                var constants = new Dictionary<(Architecture Architecture, string Namespace, string Name), NativeConstantValue>();
+                this.sourceConstants = protectedConstants.GroupBy(value => value.Name, StringComparer.Ordinal)
+                    .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
+                this.sourceConstantTypes = this.sourceConstants.ToDictionary(pair => pair.Key,
+                    pair => pair.Value.Select(GetSourceDependencyStorageType).Distinct(StringComparer.Ordinal).ToArray(),
+                    StringComparer.Ordinal);
+                if (inputs.Length == 0)
+                    return;
+                var protectionsByName = protectedConstants.ToLookup(value => value.Name, StringComparer.Ordinal);
+                var proofSources = protectedConstants.Where(value => value.Proof != null)
+                    .ToLookup(value => value.Proof, value => value.Source);
+                var proofIds = proofSources.Select((value, index) => (value.Key, index))
+                    .ToDictionary(value => value.Key, value => value.index);
+                var inputsBySource = inputs.ToLookup(input => (input.Values.Architecture, input.Values.SourceFile));
+                var bindingCache = new Dictionary<(NativeInput Input, NativeConstantGroupSource Proof),
+                    ILookup<string, NativeConstantBinding>>();
+                var boundProtections = new Dictionary<(Architecture Target, string Kind, string NativeName), HashSet<ProtectedConstant>>();
+                foreach (var protection in protectedConstants.Where(value => value.Proof != null))
+                    foreach (var input in inputs.Where(input => protection.Architecture.HasFlag(input.Values.Architecture) &&
+                        input.Values.SourceFile == protection.Proof.SourceFile))
+                        foreach (var binding in CompilerBindings(input, protection).Where(binding => binding.Kind != "Expression"))
+                        {
+                            var key = (input.Values.Architecture, binding.Kind, binding.NativeName);
+                            if (!boundProtections.TryGetValue(key, out var owners))
+                                boundProtections.Add(key, owners = new());
+                            owners.Add(protection);
+                        }
+                var candidates = new List<NativeCandidate>();
                 foreach (var input in inputs)
-                    foreach (var value in input.Constants)
+                    foreach (var value in input.Values.Constants)
                     {
-                        if (!headers.TryGetValue(Path.GetFullPath(value.Header), out string ns) ||
+                        string header = ResolveHeader(input, value.Header);
+                        if (!headers.TryGetValue(header, out string ns) ||
                             this.ShouldExclude(value.NativeName) || this.ShouldExclude(value.Name))
                             continue;
                         this.nativeIntegerNames.Add(value.NativeName);
+                        if (value.AliasTarget != null && (value.AliasTarget.Kind != "CXCursor_EnumConstantDecl" ||
+                            string.IsNullOrEmpty(value.AliasTarget.NativeName) ||
+                            string.IsNullOrEmpty(value.AliasTarget.Header) || value.AliasTarget.Line == 0 ||
+                            value.AliasTarget.Column == 0 || value.AliasTarget.HeaderHash?.Length != 64 ||
+                            !value.AliasTarget.HeaderHash.All(Uri.IsHexDigit) ||
+                            value.AliasTarget.NativeType != value.NativeType ||
+                            value.AliasTarget.StorageType != value.StorageType || value.AliasTarget.Value != value.Value ||
+                            string.IsNullOrEmpty(input.Values.SourceFile) || input.Values.SourceHash?.Length != 64 ||
+                            !input.Values.SourceHash.All(Uri.IsHexDigit)))
+                            throw new InvalidDataException($"Invalid compiler-bound native alias in '{input.Path}'.");
                         ns = this.LookupNamespaceForName(value.Name) ?? ns;
-                        if (this.headerEnumMemberNames.Contains(ns + "." + value.Name) ||
-                            existing.GetValueOrDefault(ns + "." + value.Name).HasFlag(input.Architecture))
-                            continue;
-                        var key = (input.Architecture, ns, value.Name);
-                        if (constants.TryGetValue(key, out var previous) &&
-                            (previous.StorageType != value.StorageType || previous.Value != value.Value || previous.NativeType != value.NativeType))
-                            throw new InvalidDataException($"Conflicting native values for '{ns}.{value.Name}' on {input.Architecture}: " +
-                                $"'{previous.Header}' and '{value.Header}'.");
-                        constants[key] = value;
+                        candidates.Add(new NativeCandidate(input, value, header, ns,
+                            this.headerPriorities.GetValueOrDefault(header, int.MaxValue), this.headerTraversal[header]));
                     }
+                var constants = new Dictionary<(Architecture Architecture, string Namespace, string Name), NativeConstantValue>();
+                var decisions = new List<object>();
+                var nativeDependencies = new List<NativeDependency>();
+                foreach (var group in candidates.GroupBy(candidate => (candidate.Input.Values.Architecture, candidate.Value.Name)))
+                {
+                    var ordered = group.OrderBy(candidate => candidate.HeaderPriority).ThenBy(candidate => candidate.TraversalOrder)
+                        .ThenBy(candidate => candidate.Value.Line).ThenBy(candidate => candidate.Value.Column)
+                        .ThenBy(candidate => candidate.Input.Order).ToArray();
+                    var protections = protectionsByName[group.Key.Name].Where(value =>
+                            value.Architecture.HasFlag(group.Key.Architecture))
+                        .Concat(ordered.SelectMany(candidate => NativeOwners(candidate))
+                            .Where(protection => ordered.Any(candidate => IsCompilerBound(candidate, protection))))
+                        .Distinct().ToArray();
+                    var ownership = ordered.Distinct().ToDictionary(candidate => candidate,
+                        candidate => protections.Where(protection => IsCompilerBound(candidate, protection)).ToArray());
+                    foreach (var candidate in ordered)
+                        foreach (var owner in ownership[candidate].Where(owner =>
+                            owner.SourceKind == "logical-header-group" && owner.Name != candidate.Value.NativeName &&
+                            CompilerBindings(candidate.Input, owner).Length == 1 &&
+                            IsCompilerBound(candidate, owner, alias: false)))
+                            nativeDependencies.Add(new NativeDependency(candidate, owner));
+                    var selected = protections.Length == 0 ? ordered[0] : null;
+                    if (selected != null)
+                        constants.Add((group.Key.Architecture, selected.Namespace, selected.Value.Name), selected.Value);
+                    var boundDefinitions = protections.Where(protection => protection.Proof != null)
+                        .SelectMany(protection => inputsBySource[(group.Key.Architecture, protection.Proof.SourceFile)]
+                            .SelectMany(input => CompilerBindings(input, protection)
+                                .Select(binding => new { Protection = protection, Input = input, Binding = binding,
+                                    Header = ResolveHeader(input, binding.Header) }))).Distinct().ToArray();
+                    bool typeValueConflict = ordered.Select(candidate =>
+                        (candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value))
+                        .Concat(boundDefinitions.Select(definition =>
+                            (definition.Binding.NativeType, definition.Binding.StorageType, definition.Binding.Value)))
+                        .Concat(ordered.Where(candidate => candidate.Value.AliasTarget != null).Select(candidate =>
+                            (candidate.Value.AliasTarget.NativeType, candidate.Value.AliasTarget.StorageType, candidate.Value.AliasTarget.Value)))
+                        .Distinct().Count() > 1;
+                    bool projectedTypeConflict = protections.Any(protection => protection.Owner == "Apis" &&
+                        ordered.Any(candidate => IsIntegralType(protection.StorageType) &&
+                            protection.StorageType != candidate.Value.StorageType));
+                    bool distinctDefinitions = ordered.Select(candidate =>
+                        (Kind: "Macro", candidate.Value.NativeName, candidate.Header, candidate.Value.Line, candidate.Value.Column))
+                        .Concat(boundDefinitions.Select(definition =>
+                            (definition.Binding.Kind, definition.Binding.NativeName, definition.Header, definition.Binding.Line, definition.Binding.Column))).Distinct().Count() > 1;
+                    bool unrelatedProtection = protections.Length != 0 && ordered.Any(candidate => ownership[candidate].Length == 0);
+                    string reason = protections.Length != 0 ? "protected-source-declaration" :
+                        ordered[0].HeaderPriority != int.MaxValue ? "explicit-sdk-header-priority" : "first-header-traversal-and-native-location";
+                    if (ordered.Length > 1 || protections.Length != 0 || ordered.Any(candidate => candidate.Value.AliasTarget != null))
+                        decisions.Add(new
+                        {
+                            Name = group.Key.Name, Target = group.Key.Architecture.ToString(), Reason = reason,
+                            TypeValueConflict = typeValueConflict, DistinctNativeDefinitions = distinctDefinitions,
+                            ProjectedTypeConflict = projectedTypeConflict,
+                            UnrelatedProtectedDefinition = unrelatedProtection,
+                            Selected = selected == null ? null : Describe(selected, "selected", reason),
+                            Protected = protections.Select(value => new
+                            {
+                                value.Name, value.DeclaredName, value.SourceKind, value.Namespace, value.Owner, Source = value.Source, value.StorageType,
+                                Value = value.Expression, Target = group.Key.Architecture.ToString(),
+                                Provenance = value.Proof == null ? (int?)null : proofIds[value.Proof],
+                                NativeBindings = boundDefinitions.Where(definition => definition.Protection == value)
+                                    .Select(definition => new { NativeInput = definition.Input.Path, definition.Binding }).ToArray(),
+                                Disposition = "selected-authoritative-source", Reason = "protected-source-declaration",
+                            }).ToArray(),
+                            Candidates = ordered.Select(candidate => Describe(candidate,
+                                candidate == selected ? "selected" : ownership[candidate].Length == 0 ? "discarded-by-policy" :
+                                    ownership[candidate].Any(protection => IsCompilerBound(candidate, protection, alias: true)) ?
+                                        "compiler-bound-native-alias" : "compiler-bound-group-consumption",
+                                ownership[candidate].Length == 0 ? reason :
+                                    ownership[candidate].Any(protection => IsCompilerBound(candidate, protection, alias: true)) ?
+                                        "exact-native-alias-and-published-name-collision" : "exact-native-member-binding")).ToArray(),
+                        });
+                    if (typeValueConflict || projectedTypeConflict || distinctDefinitions || unrelatedProtection)
+                        this.output.Add($"warning WMC001: Constant '{group.Key.Name}' on {group.Key.Architecture}: " +
+                            $"{(typeValueConflict ? "TYPE/VALUE CONFLICT; " : "")}" +
+                            $"{(projectedTypeConflict ? "PROJECTED TYPE CONFLICT; " : "")}{reason}; " +
+                            $"selected {(selected == null ? string.Join(", ", protections.Select(value => value.Namespace + "." + value.Owner)) : selected.Header)}. " +
+                            $"All {ordered.Length} native candidates are retained in native-constant-conflicts.json.");
+                }
+                foreach (var constant in constants)
+                    if (this.sourceConstantTypes.TryGetValue(constant.Key.Name, out var types))
+                        this.sourceConstantTypes[constant.Key.Name] = types.Append(constant.Value.StorageType)
+                            .Distinct(StringComparer.Ordinal).ToArray();
+                var nativeSelections = constants.ToLookup(value => value.Key.Name, StringComparer.Ordinal);
+                this.nativeDependencies = nativeDependencies.GroupBy(value => value.Candidate.Value.NativeName, StringComparer.Ordinal)
+                    .ToDictionary(group => group.Key, group => group.Distinct().ToArray(), StringComparer.Ordinal);
+                this.conflictReport = Path.Combine(this.scraperOutputDir, "native-constant-conflicts.json");
+                this.nativeConstantReport = new
+                {
+                    Version = 1, Status = "completed", SdkRoot = this.selection.SdkRoot, NameComparison = "Ordinal",
+                    PublishedAliasCollisionComparison = "OrdinalIgnoreCaseAfterExactNativeBinding",
+                    HeaderPriority = this.selection.HeaderPriority.Select((header, rank) => new
+                    {
+                        Header = header, Rank = rank,
+                        Applicable = this.headerTraversal.ContainsKey(Path.GetFullPath(Path.Combine(this.selection.SdkRoot, header))),
+                    }).ToArray(),
+                    NativeInputs = inputs.Select(input => new { input.Path, input.Order, input.Values.BindingSource,
+                        input.Values.SourceFile, input.Values.SourceHash, Target = input.Values.Architecture.ToString(),
+                        input.Values.Issues, input.Values.Groups }).ToArray(),
+                    SourceGroups = proofIds.Select(pair => new { Id = pair.Value,
+                        Sources = proofSources[pair.Key].Distinct().ToArray(), Provenance = pair.Key }).ToArray(),
+                    SourceDependencies = protectedConstants.GroupBy(value => value.Name, StringComparer.Ordinal).Select(group => new
+                    {
+                        Name = group.Key, StorageTypes = this.sourceConstantTypes[group.Key],
+                        Reason = group.Any(value => GetSourceDependencyStorageType(value) != value.StorageType) ?
+                            "compiler-bound-logical-member-primitive-storage-not-native-consumption" :
+                            "authoritative-managed-declaration-storage-not-native-consumption",
+                        Declarations = group.Select(value => new
+                        {
+                            value.Name, value.DeclaredName, value.SourceKind, value.Namespace, value.Owner, value.Source,
+                            Target = value.Architecture.ToString(), value.StorageType, Value = value.Expression,
+                            DependencyStorageType = GetSourceDependencyStorageType(value),
+                            Provenance = value.Proof == null ? (int?)null : proofIds[value.Proof],
+                        }).ToArray(),
+                        NativeSelections = nativeSelections[group.Key].Select(value => new
+                        {
+                            Target = value.Key.Architecture.ToString(), value.Key.Namespace, value.Value.StorageType,
+                        }).ToArray(),
+                    }).ToArray(),
+                    NativeDependencies = this.nativeDependencies.Select(pair => new
+                    {
+                        NativeName = pair.Key,
+                        StorageTypes = pair.Value.Select(value => value.Candidate.Value.StorageType).Distinct(StringComparer.Ordinal).ToArray(),
+                        Reason = "compiler-bound-consumed-macro-primitive-for-legacy-dependencies",
+                        Definitions = pair.Value.Select(value => new
+                        {
+                            Candidate = Describe(value.Candidate, "compiler-bound-group-consumption", "exact-native-member-binding"),
+                            value.Owner.Name, value.Owner.DeclaredName, value.Owner.Namespace, value.Owner.Owner,
+                            value.Owner.Source, value.Owner.StorageType,
+                            Provenance = proofIds[value.Owner.Proof],
+                        }).ToArray(),
+                    }).ToArray(),
+                    LegacyDependencyPolicies = this.legacyDependencyPolicies,
+                    MissingGroupProvenance = missingProofs.Distinct().ToArray(), Decisions = decisions,
+                };
                 string[] namespaces = constants.Keys.Select(key => key.Namespace).Distinct(StringComparer.Ordinal)
                     .OrderBy(value => value, StringComparer.Ordinal).ToArray();
-                foreach (var architecture in inputs.Select(input => input.Architecture).Distinct())
+                foreach (var architecture in inputs.Select(input => input.Values.Architecture).Distinct())
                     foreach (string ns in namespaces)
                     {
                         string directory = Path.Combine(this.scraperOutputDir, architecture.ToString().ToLowerInvariant());
@@ -648,6 +949,113 @@ namespace MetadataUtils
                         }
                     }
                 this.output.Add($"Wrote {constants.Count} native integer constants from {inputs.Length} header compilations.");
+
+                string ResolveHeader(NativeInput input, string header)
+                {
+                    string full = Path.GetFullPath(header);
+                    if (headers.ContainsKey(full))
+                        return full;
+                    string originalDirectory = input.Values.BindingSource.EndsWith(".cs", StringComparison.Ordinal)
+                        ? Path.GetDirectoryName(input.Values.BindingSource) : input.Values.BindingSource;
+                    string relative = Path.GetRelativePath(originalDirectory, full);
+                    if (Path.IsPathRooted(relative))
+                        return full;
+                    string relocated = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(input.Path), relative));
+                    return headers.ContainsKey(relocated) ? relocated : full;
+                }
+
+                bool IsCompilerBound(NativeCandidate candidate, ProtectedConstant protection, bool? alias = null)
+                {
+                    if (alias == null)
+                        return IsCompilerBound(candidate, protection, alias: false) || IsCompilerBound(candidate, protection, alias: true);
+                    var target = alias.Value ? candidate.Value.AliasTarget : new NativeConstantBinding("Macro", candidate.Value.NativeName,
+                        candidate.Value.Header, candidate.Value.Line, candidate.Value.Column, candidate.Value.HeaderHash,
+                        candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value);
+                    if (target == null)
+                        return false;
+                    var definitions = CompilerBindings(candidate.Input, protection).Where(binding => binding.Kind == target.Kind &&
+                        binding.NativeName == target.NativeName).ToArray();
+                    var bindings = definitions.Where(binding =>
+                        string.Equals(ResolveHeader(candidate.Input, binding.Header), ResolveHeader(candidate.Input, target.Header), StringComparison.OrdinalIgnoreCase) &&
+                        binding.Line == target.Line && binding.Column == target.Column).ToArray();
+                    if (alias.Value && definitions.Length != 0 && bindings.Length == 0)
+                        throw new InvalidDataException($"Native constant alias definition location drift for '{candidate.Value.NativeName}' in '{candidate.Input.Path}'.");
+                    if (bindings.Any(binding => binding.HeaderHash != target.HeaderHash))
+                        throw new InvalidDataException($"Native constant definition hash drift for '{candidate.Value.NativeName}' in '{candidate.Input.Path}'.");
+                    bool bound = bindings.Any(binding => binding.NativeType == target.NativeType &&
+                        binding.StorageType == target.StorageType && binding.Value == target.Value);
+                    if (alias.Value && bindings.Length != 0 && !bound)
+                        throw new InvalidDataException($"Native constant alias binding drift for '{candidate.Value.NativeName}' in '{candidate.Input.Path}'.");
+                    // Match the existing publication gate only after exact case-sensitive native binding.
+                    return bound && (!alias.Value ||
+                        string.Equals(candidate.Value.Name, protection.Name, StringComparison.OrdinalIgnoreCase));
+                }
+
+                IEnumerable<ProtectedConstant> NativeOwners(NativeCandidate candidate)
+                {
+                    if (boundProtections.TryGetValue((candidate.Input.Values.Architecture, "Macro", candidate.Value.NativeName),
+                        out var macros))
+                        foreach (var protection in macros)
+                            yield return protection;
+                    var target = candidate.Value.AliasTarget;
+                    if (target != null && boundProtections.TryGetValue(
+                        (candidate.Input.Values.Architecture, target.Kind, target.NativeName), out var aliases))
+                        foreach (var protection in aliases)
+                            yield return protection;
+                }
+
+                static bool IsIntegralType(string type) => type is "bool" or "char" or "sbyte" or "byte" or
+                    "short" or "ushort" or "int" or "uint" or "long" or "ulong";
+
+                NativeConstantBinding[] CompilerBindings(NativeInput input, ProtectedConstant protection)
+                {
+                    var proof = protection.Proof;
+                    if (proof == null || proof.SourceFile != input.Values.SourceFile)
+                        return Array.Empty<NativeConstantBinding>();
+                    if (!bindingCache.TryGetValue((input, proof), out var bindings))
+                    {
+                        if (proof.SourceHash != input.Values.SourceHash)
+                            throw new InvalidDataException($"Native constant source-family hash drift in '{input.Path}'.");
+                        var groups = input.Values.Groups.Where(value => value.NativeName == proof.Group.NativeName &&
+                            value.Name == proof.Group.Name && value.Namespace == proof.Group.Namespace).ToArray();
+                        if (groups.Length != 0)
+                        {
+                            if (groups.Length != 1 || groups[0].Kind != proof.Group.Kind || groups[0].StorageType != proof.Group.StorageType ||
+                                !string.Equals(ResolveHeader(input, groups[0].Header),
+                                    ResolveHeader(input, proof.Group.Header), StringComparison.OrdinalIgnoreCase) ||
+                                groups[0].Line != proof.Group.Line ||
+                                !groups[0].Members.Select(value => (value.Name, value.Expression))
+                                    .SequenceEqual(proof.Group.Members.Select(value => (value.Name, value.Expression))))
+                                throw new InvalidDataException($"Native constant group declaration/target drift for '{proof.Group.Name}' in '{input.Path}'.");
+                            if (input.Values.Architecture == proof.Architecture &&
+                                JsonSerializer.Serialize(groups[0]) != JsonSerializer.Serialize(proof.Group))
+                                throw new InvalidDataException($"Native constant group binding drift for '{proof.Group.Name}' in '{input.Path}'.");
+                        }
+                        bindings = groups.SelectMany(group => group.Members)
+                            .SelectMany(member => member.Bindings.Select(binding => (member.Name, Binding: binding)))
+                            .ToLookup(value => value.Name, value => value.Binding, StringComparer.Ordinal);
+                        bindingCache.Add((input, proof), bindings);
+                    }
+                    return bindings[protection.Name].ToArray();
+                }
+
+                object Describe(NativeCandidate candidate, string disposition, string reason) => new
+                {
+                    candidate.Value.Name, candidate.Namespace, Kind = "Macro", candidate.Value.NativeName,
+                    candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value,
+                    candidate.Value.AliasTarget,
+                    RawHeader = candidate.Value.Header, ResolvedHeader = candidate.Header,
+                    SdkRelativeHeader = string.IsNullOrEmpty(this.selection.SdkRoot) ? null :
+                        Path.GetRelativePath(Path.GetFullPath(this.selection.SdkRoot), candidate.Header),
+                    candidate.Value.Line, candidate.Value.Column, candidate.Value.HeaderHash,
+                    Target = candidate.Input.Values.Architecture.ToString(), candidate.Input.Values.BindingSource,
+                    NativeInput = candidate.Input.Path, InputOrder = candidate.Input.Order,
+                    HeaderPriority = candidate.HeaderPriority == int.MaxValue ? (int?)null : candidate.HeaderPriority,
+                    candidate.TraversalOrder, Disposition = disposition, Reason = reason,
+                };
+
+                static string NamespaceOf(SyntaxNode node) => string.Join(".", node.Ancestors()
+                    .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(parent => parent.Name.ToString()));
             }
 
             private static bool TryTranslateStringConstant(
@@ -700,12 +1108,14 @@ namespace MetadataUtils
                 Dictionary<string, string> autoReplacements = GetAutoValueReplacements();
 
                 HashSet<string> manualEnumMemberNames = this.GetManualEnumMemberNames();
-                var pendingAliases = new List<(string Namespace, string Name, string Target, bool NativeIntegers)>();
+                var pendingAliases = new List<(string Namespace, string Name, string Target, bool NativeIntegers, string Header, int Line)>();
 
                 // For each traversed header, scrape the constants
-                foreach (KeyValuePair<string, string> item in traversedFileMap)
+                foreach (KeyValuePair<string, string> item in this.OrderedHeaders(traversedFileMap))
                 {
                     var header = item.Key;
+                    this.legacyHeader = header;
+                    this.legacyLine = 0;
                     var currentNamespace = item.Value;
                     this.usesNativeIntegers = this.nativeIntegerHeaders.Contains(Path.GetFullPath(header));
 
@@ -747,6 +1157,7 @@ namespace MetadataUtils
                     string defineGuidKeyword = null;
                     foreach (string currentLine in this._fileSystem.File.ReadAllLines(header))
                     {
+                        this.legacyLine++;
                         string fixedCurrentLine = currentLine;
 
                         if (continuation != null && continuation.EndsWith('"') && currentLine.StartsWith('"'))
@@ -1145,12 +1556,15 @@ namespace MetadataUtils
 
                                 // Only use a constant as the value if we have seen the constant before
                                 // and we know its type
-                                if (this.writtenConstants.TryGetValue(otherName, out var otherType))
+                                if (this.TryGetConstantDependencyType(otherName, out var otherType))
                                 {
                                     // Skip guids for now
                                     if (otherType != "Guid")
                                     {
-                                        matchedConstantType = otherType;
+                                        // A later legacy definition can still supply this name's value.
+                                        if (!this.nativeDependencies.ContainsKey(otherName) ||
+                                            this.sourceConstants.ContainsKey(otherName) || this.writtenConstants.ContainsKey(otherName))
+                                            matchedConstantType = otherType;
                                     }
                                 }
 
@@ -1217,11 +1631,12 @@ namespace MetadataUtils
                             {
                                 if (matchedConstantType != null)
                                 {
-                                    this.AddConstantValue(currentNamespace, matchedConstantType, name, valueText);
+                                    this.AddConstantValue(currentNamespace, matchedConstantType, name,
+                                        this.GetConstantDependencyExpression(currentNamespace, name, valueText, matchedConstantType));
                                 }
                                 else if (matchedToOtherName)
                                 {
-                                    pendingAliases.Add((currentNamespace, name, valueText, this.usesNativeIntegers));
+                                    pendingAliases.Add((currentNamespace, name, valueText, this.usesNativeIntegers, header, this.legacyLine));
                                 }
                                 else
                                 {
@@ -1242,19 +1657,94 @@ namespace MetadataUtils
                     {
                         var alias = pendingAliases[i];
                         this.usesNativeIntegers = alias.NativeIntegers;
+                        this.legacyHeader = alias.Header;
+                        this.legacyLine = alias.Line;
                         if (this.writtenConstants.ContainsKey(alias.Name))
                         {
                             pendingAliases.RemoveAt(i--);
                         }
-                        else if (this.writtenConstants.TryGetValue(alias.Target, out var type) && type != "Guid")
+                        else if (this.TryGetConstantDependencyType(alias.Target, out var type) && type != "Guid")
                         {
-                            this.AddConstantValue(alias.Namespace, type, alias.Name, alias.Target);
+                            this.AddConstantValue(alias.Namespace, type, alias.Name,
+                                this.GetConstantDependencyExpression(alias.Namespace, alias.Name, alias.Target, type));
                             pendingAliases.RemoveAt(i--);
                             resolvedAlias = true;
                         }
                     }
                 }
                 while (resolvedAlias);
+            }
+
+            private static string GetSourceDependencyStorageType(ProtectedConstant declaration)
+            {
+                if (declaration.SourceKind == "logical-header-group" && declaration.Proof != null)
+                {
+                    var bindings = declaration.Proof.Group.Members.Single(member =>
+                        member.Name == declaration.DeclaredName).Bindings;
+                    if (bindings.Length == 1 && bindings[0].Kind != "Expression")
+                        return bindings[0].StorageType;
+                }
+                return declaration.StorageType;
+            }
+
+            private bool TryGetConstantDependencyType(string name, out string type)
+            {
+                if (this.sourceConstantTypes.TryGetValue(name, out var types))
+                {
+                    if (types.Length != 1)
+                        throw new InvalidDataException($"Constant alias target '{name}' has conflicting authoritative storage types: {string.Join(", ", types)}.");
+                    type = types[0];
+                    return true;
+                }
+                return this.TryGetNativeDependencyType(name, out type) || this.writtenConstants.TryGetValue(name, out type);
+            }
+
+            private bool TryGetNativeDependencyType(string name, out string type)
+            {
+                type = null;
+                if (!this.nativeDependencies.TryGetValue(name, out var dependencies))
+                    return false;
+                var types = dependencies.Select(value => value.Candidate.Value.StorageType).Distinct(StringComparer.Ordinal).ToArray();
+                if (types.Length != 1)
+                    throw new InvalidDataException($"Constant alias target '{name}' has conflicting compiler primitive storage types: {string.Join(", ", types)}.");
+                type = types[0];
+                return true;
+            }
+
+            private void RecordNativeDependencyPolicy(string name, string target, string type, string expression)
+            {
+                this.legacyDependencyPolicies.Add(new
+                {
+                    Name = name, NativeName = target, Header = this.legacyHeader, Line = this.legacyLine,
+                    StorageType = type, Expression = expression,
+                    Reason = "retained-compiler-primitive-storage-not-legacy-native-binding-or-value-equivalence",
+                });
+            }
+
+            private string GetConstantDependencyExpression(string ns, string name, string target, string type)
+            {
+                if (!this.sourceConstants.TryGetValue(target, out var declarations))
+                {
+                    if (!this.nativeDependencies.TryGetValue(target, out var dependencies))
+                        return target;
+                    this.RecordNativeDependencyPolicy(name, target, type, target);
+                    if (this.writtenConstants.ContainsKey(target))
+                        return target;
+                    declarations = dependencies.Select(value => value.Owner).ToArray();
+                }
+                var owners = declarations.Select(value =>
+                    (value.Namespace, value.Owner, value.DeclaredName, value.SourceKind, value.StorageType)).Distinct().ToArray();
+                if (owners.Length != 1)
+                    throw new InvalidDataException($"Constant alias target '{target}' has conflicting authoritative source owners.");
+                var owner = owners[0];
+                if (owner.Namespace == (this.LookupNamespaceForName(name) ?? ns) &&
+                    owner.SourceKind != "ordinary-unscoped-enum" && owner.DeclaredName == target && owner.StorageType == type)
+                    return target;
+                string prefix = string.IsNullOrEmpty(owner.Namespace) ? "global::" : "global::" + owner.Namespace + ".";
+                return $"unchecked(({type}){prefix}{Identifier(owner.Owner)}.{Identifier(owner.DeclaredName)})";
+
+                static string Identifier(string identifier) =>
+                    SyntaxFacts.GetKeywordKind(identifier) == SyntaxKind.None ? identifier : "@" + identifier;
             }
 
             private void TryScrapingEnumFlags(string line)
@@ -1519,11 +2009,17 @@ namespace MetadataUtils
 
     public class ScraperResults
     {
-        public ScraperResults(IEnumerable<string> results)
+        public ScraperResults(IEnumerable<string> results) : this(results, null)
+        {
+        }
+
+        public ScraperResults(IEnumerable<string> results, string conflictReport)
         {
             this.Output = results;
+            this.ConflictReport = conflictReport;
         }
 
         public IEnumerable<string> Output { get; }
+        public string ConflictReport { get; }
     }
 }

@@ -215,6 +215,11 @@ class Program
                     configuredRemaps, configuredExcludes.ToList());
                 var values = NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs,
                     constantConfig, reportedNativeDiagnostics);
+                if (parseHeaderAnnotations)
+                    values.Groups = new HeaderAnnotationProcessor(translationUnit, configuredRemaps, ns,
+                        constantConfig.TraversalNames.ToArray(), configuredExcludes,
+                        configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody))
+                        .GetConstantGroups().ToList();
                 Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(nativeConstantsPath)));
                 File.WriteAllText(nativeConstantsPath, JsonSerializer.Serialize(values), new UTF8Encoding(false));
                 Console.WriteLine($"Native constants: {values.Constants.Count} integers; {values.Issues.Count} other definitions. Details: {nativeConstantsPath}");
@@ -283,6 +288,7 @@ class Program
             var nativeConstants = evaluateNativeConstants
                 ? NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config, reportedNativeDiagnostics)
                 : null;
+            annotations?.SetNativeConstantAliases(nativeConstants);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();
             Func<string, Stream> streamFactory = (path) =>
@@ -506,6 +512,8 @@ class Program
 
                 if (nativeConstants != null)
                 {
+                    if (annotations != null)
+                        nativeConstants.Groups = annotations.GetConstantGroups().ToList();
                     generatedFiles[nativeConstantsPath] = JsonSerializer.Serialize(nativeConstants);
                     Console.WriteLine($"Native constants: {nativeConstants.Constants.Count} integers; {nativeConstants.Issues.Count} other definitions. Details: {nativeConstantsPath}");
                 }

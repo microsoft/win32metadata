@@ -116,7 +116,7 @@ struct __declspec(uuid(""59487912-a894-42c4-8500-bf628adee483"")) IHeaderIdentit
                 ("SIGNED_SHORT", "Int16"), ("UNSIGNED_SHORT", "UInt16"), ("UNSIGNED_LONG", "UInt32"),
                 ("SIGNED_64", "Int64"), ("UNSIGNED_64", "UInt64"),
                 ("NATIVE_FLOAT", "Single"), ("NATIVE_DOUBLE", "Double"), ("NATIVE_BOOL", "Byte"), ("NATIVE_POINTER", "Void*"),
-                ("PCBYTE", "Byte*"), ("PPCBYTE", "Byte**"), ("HOPAQUE", "OPAQUE*"), ("PPCOMPLETE", "COMPLETE**"),
+                ("PCBYTE", "Byte*"), ("PPCBYTE", "Byte**"), ("HOPAQUE", "Void*"), ("PPCOMPLETE", "COMPLETE**"),
             })
                 AssertNativeTypedefStorage(reader, name, storage);
             Assert.Equal(new byte[] { 0x06, 0x08 },
@@ -248,7 +248,7 @@ INTEGER_POINTER RoundTrip(INTEGER_POINTER value, VOID_POINTER opaque, RECORD_POI
             foreach (var (name, storage) in new[]
             {
                 ("INTEGER_POINTER", "Int32*"), ("VOID_POINTER", "Void*"), ("RECORD_POINTER", "COMPLETE*"),
-                ("OPAQUE_POINTER", "OPAQUE*"), ("NESTED_POINTER", "Int32**"), ("OUTER_POINTER", "Int32***"),
+                ("OPAQUE_POINTER", "Void*"), ("NESTED_POINTER", "Int32**"), ("OUTER_POINTER", "Int32***"),
             })
                 AssertNativeTypedefStorage(reader, name, storage);
             var signature = FindMethod(reader, "Apis", "RoundTrip").DecodeSignature(new SignatureNames(), null);

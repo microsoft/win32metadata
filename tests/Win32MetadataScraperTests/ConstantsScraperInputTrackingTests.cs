@@ -46,11 +46,16 @@ namespace Win32MetadataScraperTests
                     MarkerFileName = marker,
                     ScraperOutputDir = directory,
                     MSBuildProjectDirectory = directory,
+                    SdkIncRoot = directory,
                     ResponseFiles = Array.Empty<ITaskItem>(),
                     ManualCs = Array.Empty<ITaskItem>(),
                 };
                 MethodInfo check = typeof(ScrapeConstants).GetMethod("AreNonPartitionFilesUpToDate",
                     BindingFlags.Instance | BindingFlags.NonPublic)!;
+                typeof(ScrapeConstants).GetField("loadedPartitions", BindingFlags.Instance | BindingFlags.NonPublic)!
+                    .SetValue(task, Array.Empty<Partition>());
+                File.WriteAllLines(Path.Combine(directory, "constant-selection-inputs.txt"),
+                    new[] { "sdkRoot=" + Path.GetFullPath(directory) });
                 Assert.True(Assert.IsType<bool>(check.Invoke(task, null)));
 
                 string changed = inputName.EndsWith(".dll", StringComparison.Ordinal)

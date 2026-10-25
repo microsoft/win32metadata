@@ -188,7 +188,7 @@
     <FilterResponseFiles
       ResponseFiles="@(ResponseFile)"
       OutputFileName="$(FilteredRspForConstants)"
-      ValidSwitches="--exclude;--requiredNamespaceForName;--with-attribute;--memberRemap;--with-type"
+      ValidSwitches="--exclude;--requiredNamespaceForName;--with-attribute;--memberRemap;--with-type;--headerPriority"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
 
     <FilterResponseFiles
@@ -288,6 +288,7 @@
       HeaderTextFile="$(FinalConstantsScraperHeaderFile)"
       MarkerFileName="$(ScrapedConstantsMarker)"
       SdkIncRoot="$(SdkIncRoot)"
+      HeaderPriority="$(ConstantHeaderPriority)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
       StandardErrorImportance="high"
       />

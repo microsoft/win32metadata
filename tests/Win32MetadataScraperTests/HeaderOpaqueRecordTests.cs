@@ -175,7 +175,7 @@ struct Unused;
         }
 
         [Fact]
-        public void NativePointerTypedefStorageRetainsItsOpaquePointee()
+        public void NativePointerTypedefStorageDoesNotCreateAnOpaqueBackingRecord()
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
 struct Opaque;
@@ -187,10 +187,11 @@ void UseOpaque(HOPAQUE value);
             {
                 Assert.True(fixture.Run() == 0, fixture.Diagnostics);
                 using var image = Emit(fixture, "x64");
-                AssertOpaqueRecordProvider(image.Reader, "Opaque");
+                Assert.DoesNotContain(image.Reader.TypeDefinitions.Select(image.Reader.GetTypeDefinition),
+                    type => image.Reader.GetString(type.Name) == "Opaque");
                 var wrapper = FindType(image.Reader, "HOPAQUE");
                 AssertHasAttribute(image.Reader, wrapper.GetCustomAttributes(), "NativeTypedefAttribute");
-                Assert.Equal("Opaque*", image.Reader.GetFieldDefinition(Assert.Single(wrapper.GetFields()))
+                Assert.Equal("Void*", image.Reader.GetFieldDefinition(Assert.Single(wrapper.GetFields()))
                     .DecodeSignature(new SignatureNames(), null));
                 Assert.Equal("HOPAQUE", FindMethod(image.Reader, "Apis", "OpenOpaque").DecodeSignature(new SignatureNames(), null).ReturnType);
                 AssertMetadataClosure(image.Reader);
