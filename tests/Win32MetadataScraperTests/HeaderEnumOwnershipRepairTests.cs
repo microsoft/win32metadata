@@ -37,6 +37,7 @@ namespace Win32MetadataScraperTests
         [HeaderMigrationDataTheory]
         [InlineData("BOOL")]
         [InlineData("BOOLEAN")]
+        [InlineData("BSTR")]
         [InlineData("CHAR")]
         [InlineData("HANDLE")]
         [InlineData("HRESULT")]
@@ -54,12 +55,85 @@ namespace Win32MetadataScraperTests
         [HeaderMigrationDataTheory]
         [InlineData("HPROPSHEETPAGE", "Windows.Win32.UI.Controls")]
         [InlineData("SC_HANDLE", "Windows.Win32.System.Services")]
-        public void SharedNativeHandlesKeepOneEstablishedNamespace(string name, string expectedNamespace)
+        [InlineData("ADVANCED_FEATURE_FLAGS", "Windows.Win32.System.Com")]
+        [InlineData("PSID", "Windows.Win32.Security")]
+        [InlineData("PSECURITY_DESCRIPTOR", "Windows.Win32.Security")]
+        [InlineData("SECURITY_DESCRIPTOR_CONTROL", "Windows.Win32.Security")]
+        [InlineData("PTP_CALLBACK_INSTANCE", "Windows.Win32.System.Threading")]
+        [InlineData("PTP_CLEANUP_GROUP", "Windows.Win32.System.Threading")]
+        [InlineData("PTP_IO", "Windows.Win32.System.Threading")]
+        [InlineData("PTP_POOL", "Windows.Win32.System.Threading")]
+        [InlineData("PTP_TIMER", "Windows.Win32.System.Threading")]
+        [InlineData("PTP_WAIT", "Windows.Win32.System.Threading")]
+        [InlineData("PTP_WORK", "Windows.Win32.System.Threading")]
+        public void SharedNativeTypesKeepOneEstablishedNamespace(string name, string expectedNamespace)
         {
             string path = Path.Combine(WinHttpMigrationTests.RepositoryRoot,
                 "generation", "WinSDK", "requiredNamespacesForNames.rsp");
             Assert.Equal(name + "=" + expectedNamespace,
                 Assert.Single(File.ReadAllLines(path).Where(line => line.StartsWith(name + "=", StringComparison.Ordinal))));
+        }
+
+        [HeaderMigrationDataFact]
+        public void HStringTypedefAnnotationsAreAdmittedThroughTheOriginalIdl()
+        {
+            string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
+            var config = recipe.RootElement;
+            Assert.Single(config.GetProperty("patches").EnumerateArray()
+                .Where(patch => patch.GetString() == @"winrt\hstring.idl.patch"));
+            Assert.DoesNotContain(config.GetProperty("patches").EnumerateArray(),
+                patch => patch.GetString() == @"winrt\hstring.h.patch");
+            var header = Assert.Single(config.GetProperty("headers").EnumerateArray()
+                .Where(row => row.GetProperty("path").GetString() == @"winrt\hstring.h"));
+            var midl = config.GetProperty("midl");
+            var input = Assert.Single(midl.GetProperty("inputs").EnumerateArray()
+                .Where(row => row.GetProperty("path").GetString() == @"winrt\hstring.idl"));
+            Assert.Equal(input.GetProperty("sdkPath").GetString(), header.GetProperty("sdkPath").GetString());
+            Assert.Equal(input.GetProperty("sdkSha256").GetString(), header.GetProperty("sdkSha256").GetString());
+            Assert.Equal(Convert.ToHexString(SHA256.HashData(
+                File.ReadAllBytes(Path.Combine(root, "RecompiledIdlHeaders", "winrt", "hstring.h")))),
+                header.GetProperty("sourceSha256").GetString());
+            var output = Assert.Single(midl.GetProperty("outputs").EnumerateArray()
+                .Where(row => row.GetProperty("path").GetString() == @"winrt\hstring.h"));
+            Assert.Equal(@"winrt\hstring.idl", output.GetProperty("source").GetString());
+        }
+
+        [HeaderMigrationDataFact]
+        public void ComAndThemeFieldsUseCanonicalGroupsWithoutDuplicateNativeMembers()
+        {
+            string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            string Added(string name) => string.Join("\n",
+                File.ReadAllLines(Path.Combine(root, "patches", "um", name + ".patch"))
+                    .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                    .Select(line => line.Substring(1)));
+
+            string automation = Added("oaidl.idl");
+            Assert.Matches(@"_Win32_FlagsEnum_\(ADVANCED_FEATURE_FLAGS,\s*unsigned short,", automation);
+            Assert.DoesNotMatch(@"_Win32_FlagsEnum_\(FADF,", automation);
+            Assert.Contains("[annotation(\"_Win32_AssociatedEnum_(ADVANCED_FEATURE_FLAGS)\")] USHORT fFeatures;", automation);
+            string dispatch = Added("oleauto.h");
+            Assert.Matches(@"_Win32_FlagsEnum_\(DISPATCH_FLAGS,\s*unsigned short,", dispatch);
+            Assert.DoesNotMatch(@"_Win32_FlagsEnum_\(DISPATCH,", dispatch);
+            Assert.DoesNotContain("DTTOPTS_iTextShadowTypeFlags", Added("vssym32.h"));
+            Assert.Matches(@"_Win32_AssociatedEnum_\(TEXTSHADOWTYPE\)\s+int\s+iTextShadowType;", Added("uxtheme.h"));
+            Assert.Matches(@"enum\s+TEXTSHADOWTYPE\s*\{",
+                File.ReadAllText(Path.Combine(root, "RecompiledIdlHeaders", "um", "vssym32.h")));
+        }
+
+        [HeaderMigrationDataFact]
+        public void IdentitySelectsWin32SspiWithoutExplicitLegacy16BitStatusInputs()
+        {
+            string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            string partition = Path.Combine(root, "Partitions", "Identity");
+            string source = File.ReadAllText(Path.Combine(partition, "main.cpp"));
+            string settings = File.ReadAllText(Path.Combine(partition, "settings.rsp"));
+            Assert.Contains("#define SECURITY_WIN32", source);
+            Assert.Contains("#include <sspi.h>", source);
+            Assert.Contains("#include <security.h>", source);
+            Assert.DoesNotContain("issper16.h", source, StringComparison.OrdinalIgnoreCase);
+            Assert.DoesNotContain("issper16.h", settings, StringComparison.OrdinalIgnoreCase);
+            Assert.True(File.Exists(Path.Combine(root, "RecompiledIdlHeaders", "shared", "IssPer16.h")));
         }
 
         [HeaderMigrationDataFact]

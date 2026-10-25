@@ -71,6 +71,12 @@ These are pointer-to-opaque-struct typedefs. The metadata tooling recognizes the
 generates value-type wrappers with RAII metadata (close function, invalid values) from
 `autoTypes.json`.
 
+An explicit header `NativeTypedef` annotation gives a scalar or data-pointer alias
+its own wrapper identity. Pointer storage ending in a forward-only native record
+uses `void` as its pointee without changing pointer depth. Complete definitions,
+including empty definitions and definitions appearing later in the translation
+unit, retain their record identity. Ordinary record-pointer API uses remain typed.
+
 ### Function pointers
 
 Function pointer typedefs follow two patterns:
@@ -82,6 +88,10 @@ typedef void CALLBACK TIMECALLBACK(UINT, ...);             // bare-function
 
 Win32MetadataScraper discovers prototype→alias pairs and generates `--remap` and
 `--reducePointerLevel` entries to normalize them into delegates.
+Bare-function typedefs also generate pointer reduction when there is no named
+pointer alias: the delegate represents the first native function pointer, while
+additional native pointer levels remain pointers in metadata. Already-pointer
+typedefs do not receive this standalone reduction.
 
 ---
 
@@ -109,6 +119,56 @@ patterns. It extracts:
 - **Typed constants**: `#define FOO ((HRESULT)0x80000001L)` → typed constant
 
 Constants are placed into namespaces based on which partition's headers they appear in.
+
+The opt-in `native-constant-values` path uses Clang's target-specific integer results.
+Selection protects authored declarations and source-owned groups, then applies explicit
+SDK-root-relative header priority, project partition/traversal order and native source
+location. Names remain case-sensitive. The MSBuild `ConstantHeaderPriority` property
+and CLI `--sdkRoot` / `--headerPriority` options supply this policy.
+
+Logical-group proofs retain the compiler's actual macro or declaration reference,
+independently of the projected member label. Literal expressions have no native
+symbol identity. Each target supplies its own bindings. Only an exact source-family,
+group and native-definition match permits compiler-bound consumption; competing
+definitions selected by policy are reported separately. The conflict JSON stores
+shared proofs once and includes selected/discarded locations, targets, types, values
+and reasons; `WMC001` highlights type/value conflicts. Raw native facts are unchanged.
+
+Protection includes ordinary unscoped source enums and the final published spelling
+of `__forceconst__` fields. A logical member's native binding can consume its macro
+even when its projected label differs. Unrelated definitions remain policy decisions.
+Pure native aliases to enum declarations carry an exact compiler reference and a
+matching source-enum proof. A redundant alias is consumed only when those published
+names collide; case-only publication collisions never make native identities equal.
+Arithmetic expressions, explicit conversions and differently named aliases remain
+separate constants. Scoped enums do not claim global constant names. Diagnostics
+retain transport and published spellings, native alias targets and projected storage
+type differences.
+
+Legacy aliases use the storage of their authoritative source declarations, including
+ordinary native enums and logical header groups. Removing a redundant loose constant
+does not discard that dependency's type or allow regex inference to recreate it.
+`SourceDependencies` records this managed-declaration policy separately from native
+consumption. A logical group's exact compiler-bound member retains its native scalar
+storage for aliases, independently of the projected group's underlying type. The
+report preserves both storage types and identifies that distinction. Conflicting
+dependency storage across targets fails rather than guessing a single alias type.
+This source-ownership path requires native facts or a successful opt-in header-types
+source family. Ordinary legacy scraping without either retains its existing rules.
+
+Renamed logical members retain both the projected declaration name and the exact
+consumed macro's scalar storage for dependency lookup. A legacy definition of that
+raw spelling uses the retained scalar type while keeping its own expression; this
+does not bind the legacy definition to the native one or equate their values.
+`NativeDependencies` records the compiler-bound origin and projected owner.
+`LegacyDependencyPolicies` records the actual legacy header, line, expression and
+storage policy separately. Aliases resolve after legacy definitions so a later
+independent definition can still supply their value. Case-only spellings and
+unrelated equal literals do not acquire a dependency. Projected enum storage is
+unchanged, and conversions back to primitive aliases are explicit.
+
+The metadata-infrastructure `Architecture` enum is scoped because its members belong
+to that helper type. Native unscoped SDK enums and synthetic bags remain unscoped.
 
 ---
 

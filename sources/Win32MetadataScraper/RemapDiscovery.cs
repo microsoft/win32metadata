@@ -422,7 +422,8 @@ public static class RemapDiscovery
     /// reducePointerLevel entries. Uses AST structure (bare vs pointer-to-function)
     /// to determine direction, replacing the old name-prefix heuristic.
     ///
-    /// Only the "bare function + pointer alias" pattern generates fixups:
+    /// Bare function typedefs need pointer reduction even without a named pointer alias.
+    /// The "bare function + pointer alias" pattern also chooses the pointer alias:
     ///   typedef void CALLBACK(int x);      // bare function proto
     ///   typedef CALLBACK *LPCALLBACK;      // pointer alias (adds *)
     /// → remap proto→alias, exclude alias, reducePointerLevel alias
@@ -447,7 +448,11 @@ public static class RemapDiscovery
         foreach (var protoName in discovery.FnBareFunctionTypedefs)
         {
             if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
+            {
+                // A delegate already represents the first native function pointer.
+                result.ReducePointerLevel.Add(protoName);
                 continue;
+            }
 
             // Filter out aliases that are already manually excluded
             var candidates = aliasNames.Where(a => !configuredExcludes.Contains(a)).ToList();

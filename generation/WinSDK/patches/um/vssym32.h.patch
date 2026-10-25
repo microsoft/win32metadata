@@ -10,21 +10,7 @@ index 8db1c56c..51727e8d 100644
  
  #include "VSStyle.h"
  
-@@ -141,6 +142,13 @@ enum TEXTSHADOWTYPE {
- 	TST_CONTINUOUS = 2,
- };
- 
-+#if defined(WIN32METADATA) && !defined(MIDL_PASS)
-+_Win32_Enum_(DTTOPTS_iTextShadowTypeFlags, unsigned int,
-+    TST_NONE,
-+    TST_SINGLE,
-+    TST_CONTINUOUS);
-+#endif
-+
- 
- //
- //  enumerated property values
-@@ -448,6 +456,267 @@ enum GLYPHFONTSIZINGTYPE {
+@@ -448,6 +449,267 @@ enum GLYPHFONTSIZINGTYPE {
  #define TMT_ATLASINPUTIMAGE	8001
  #define TMT_ATLASRECT	8002
  

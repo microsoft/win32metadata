@@ -11,6 +11,7 @@ using ClangSharp.Interop;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MetadataUtils;
 
 namespace Win32MetadataScraper
 {
@@ -86,6 +87,7 @@ namespace Win32MetadataScraper
             this.includedDeclarations = includedDeclarations;
             using (var target = translationUnit.Handle.TargetInfo)
                 nativePointerSize = target.PointerWidth / 8;
+            InitializeConstantGroups(translationUnit);
             Walk(translationUnit.TranslationUnitDecl);
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
@@ -257,7 +259,8 @@ namespace Win32MetadataScraper
                 var members = annotation.Arguments.Zip(arguments, (name, argument) =>
                 {
                     ulong value = ReadInteger(argument, location);
-                    return new LogicalEnumMember(name, $"unchecked(({storage}){value.ToString(CultureInfo.InvariantCulture)}UL)", value & mask);
+                    return new LogicalEnumMember(name, $"unchecked(({storage}){value.ToString(CultureInfo.InvariantCulture)}UL)",
+                        value & mask, new[] { ReadConstantBinding(attribute, name, argument, location) });
                 }).ToArray();
                 facts.LogicalEnumMembers = MergeEnumMembers(facts.LogicalEnumMembers, members, location);
                 facts.IsFlagsEnum = annotation.Name == "FlagsEnum";
@@ -425,6 +428,7 @@ namespace Win32MetadataScraper
                         .AddMembers(facts.LogicalEnumMembers.Select(member =>
                             SyntaxFactory.EnumMemberDeclaration(Remap(member.Name))
                                 .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression(member.Value)))).ToArray());
+                    logicalEnum = NativeConstantGroupProvenance.Attach(logicalEnum, GetConstantGroupSource(facts));
                     members.Add(logicalEnum);
                     projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     continue;
@@ -777,6 +781,11 @@ namespace Win32MetadataScraper
                 {
                     if (value != member.StorageBits)
                         throw Error(location, $"Conflicting enum group values for '{member.Name}'.");
+                    int index = members.FindIndex(existingMember => existingMember.Name == member.Name);
+                    members[index] = members[index] with
+                    {
+                        Bindings = members[index].Bindings.Concat(member.Bindings).Distinct().ToArray(),
+                    };
                     continue;
                 }
                 values.Add(member.Name, member.StorageBits);
@@ -1221,7 +1230,8 @@ namespace Win32MetadataScraper
         {
             type = RemapDiscovery.UnwrapType(type);
             if (underlyingStorage && preserveNativeShape && recordPointee && type.CanonicalType is RecordType nativeRecord)
-                return GetRecordPointeeName(nativeRecord);
+                return (nativeRecord.Decl.Definition ?? nativeRecord.Decl).IsCompleteDefinition
+                    ? GetRecordPointeeName(nativeRecord) : "void";
             if (type is TypedefType typedef)
             {
                 var alias = (TypedefNameDecl)typedef.Decl;
@@ -1396,7 +1406,7 @@ namespace Win32MetadataScraper
                     .Select(diagnostic => $"{diagnostic.Error.Message} [native target: {diagnostic.Target}]"));
         }
 
-        private static string GetNativeTarget(CXCursor declaration)
+        internal static string GetNativeTarget(CXCursor declaration)
         {
             var names = new Stack<string>();
             for (var cursor = declaration; !cursor.IsNull && cursor.Kind != CXCursorKind.CXCursor_TranslationUnit;
@@ -1417,7 +1427,7 @@ namespace Win32MetadataScraper
         }
 
         private sealed record NativeLocation(string File, uint Line, uint Column, uint Offset);
-        private sealed record LogicalEnumMember(string Name, string Value, ulong StorageBits);
+        private sealed record LogicalEnumMember(string Name, string Value, ulong StorageBits, NativeConstantBinding[] Bindings);
 
         private sealed class DeclarationFacts
         {
@@ -1659,11 +1669,18 @@ namespace Win32MetadataScraper
                         throw Error(facts.Location, "A native enum forward reference unexpectedly projected members.");
                     return null;
                 }
+                bool nativeAliases = facts?.Declaration is EnumDecl declaration && owner.HasNativeConstantAliases(declaration);
+                string ns = string.Join(".", node.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                    .Reverse().Select(parent => parent.Name.ToString()));
+                var bindings = nativeAliases ? node.Members.Select(member =>
+                    owner.ReadNativeEnumBinding(FindFacts(member.AttributeLists, member))).ToArray() : null;
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
                 if (facts != null)
                 {
                     owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
+                    if (nativeAliases)
+                        node = NativeConstantGroupProvenance.Attach(node, owner.GetNativeEnumSource(facts, node, ns, bindings));
                 }
                 return node;
             }

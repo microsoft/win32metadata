@@ -1,12 +1,27 @@
 # Header annotation migration: problems and decisions
 
-Updated: 2026-10-24 (UTC).
+Updated: 2026-10-25 (UTC).
 
 This is the running record of migration blockers, their evidence, and the decisions
 made while resolving them. The goal is to express win32metadata's intended API
 metadata faithfully in the selected SDK's original headers and IDL. A zero-difference
 OLD-to-NEW WinMD is not a goal. Breaking changes and unexplained differences remain
 visible for review.
+
+## Constant conflict policy
+
+Use `E_NOTFOUND = 0x80070490` from `um\devicetopology.h` as canonical.
+Resolve competing loose constant projections by header priority and first-wins
+selection. Give that header explicit priority; preserve the actual project
+partition, traversed-header and native declaration order for unlisted headers.
+Keep source-bound group ownership distinct from choosing between unrelated
+native definitions.
+
+Produce warnings and a complete conflict dump for final review. Retain every
+candidate's native identity, header and source location, architecture, type,
+storage and raw value, with the winner and selection reason. Include discarded
+definitions even when their values match. The competing definitions remain
+distinct native contracts, and raw OLD-to-NEW differences remain visible.
 
 ## Full generation and green PR gates
 

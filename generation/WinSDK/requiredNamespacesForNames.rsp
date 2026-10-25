@@ -3,14 +3,26 @@ WIN32_ERROR=Windows.Win32.Foundation
 # Shared native typedefs keep one identity across their header owners.
 BOOL=Windows.Win32.Foundation
 BOOLEAN=Windows.Win32.Foundation
+BSTR=Windows.Win32.Foundation
 CHAR=Windows.Win32.Foundation
 HANDLE=Windows.Win32.Foundation
 HRESULT=Windows.Win32.Foundation
 NTSTATUS=Windows.Win32.Foundation
 PSTR=Windows.Win32.Foundation
 PWSTR=Windows.Win32.Foundation
+PSECURITY_DESCRIPTOR=Windows.Win32.Security
+PSID=Windows.Win32.Security
+PTP_CALLBACK_INSTANCE=Windows.Win32.System.Threading
+PTP_CLEANUP_GROUP=Windows.Win32.System.Threading
+PTP_IO=Windows.Win32.System.Threading
+PTP_POOL=Windows.Win32.System.Threading
+PTP_TIMER=Windows.Win32.System.Threading
+PTP_WAIT=Windows.Win32.System.Threading
+PTP_WORK=Windows.Win32.System.Threading
+SECURITY_DESCRIPTOR_CONTROL=Windows.Win32.Security
 # Source-owned logical groups retain their established projection namespaces.
 ACE_FLAGS=Windows.Win32.Security
+ADVANCED_FEATURE_FLAGS=Windows.Win32.System.Com
 ASC_REQ_FLAGS=Windows.Win32.Security.Authentication.Identity
 ATF_FLAGS=Windows.Win32.System.SystemServices
 CONFIGRET=Windows.Win32.Devices.DeviceAndDriverInstallation

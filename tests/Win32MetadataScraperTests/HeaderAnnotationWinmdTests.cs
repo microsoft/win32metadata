@@ -5375,9 +5375,9 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
                     [printingHeader] = "Printing",
                 }, new Dictionary<string, string>(), new Dictionary<string, string>(),
                 new Dictionary<string, string>(), new Dictionary<string, string>());
-            Assert.Contains("public const int NETWORK_SUCCESS = SUCCESS;",
+            Assert.Contains("public const int NETWORK_SUCCESS = unchecked((int)global::Test.ERROR_GROUP.SUCCESS);",
                 File.ReadAllText(Path.Combine(first.DirectoryPath, "Network.constants.cs")));
-            Assert.Contains("public const uint PRINTING_ALIAS = NOT_SUPPORTED;",
+            Assert.Contains("public const uint PRINTING_ALIAS = unchecked((uint)global::Test.ERROR_GROUP.NOT_SUPPORTED);",
                 File.ReadAllText(Path.Combine(first.DirectoryPath, "Printing.constants.cs")));
             var originals = Directory.GetFiles(first.DirectoryPath, "*.cs", SearchOption.AllDirectories)
                 .ToDictionary(path => path, File.ReadAllBytes);
@@ -6351,10 +6351,13 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
             bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
             IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
             Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd",
-            Dictionary<string, string> apiNamesToNamespaces = null)
+            Dictionary<string, string> apiNamesToNamespaces = null, string metadataSource = null)
         {
-            File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
-                Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
+            if (metadataSource == null)
+                File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                    Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
+            else
+                File.WriteAllText(Path.Combine(directory, "Metadata.manual.cs"), metadataSource);
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
                 memberRemaps ?? new Dictionary<string, string>(), enumAdditions ?? new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),

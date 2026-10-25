@@ -531,17 +531,12 @@ index 7860ea3c..873d1aba 100644
  	LCID lcid,
  	_In_opt_ int *pcbActual
  	);
-@@ -1084,6 +1341,20 @@ typedef DISPID MEMBERID;
+@@ -1084,6 +1341,15 @@ typedef DISPID MEMBERID;
  #define DISPATCH_PROPERTYPUT    0x4
  #define DISPATCH_PROPERTYPUTREF 0x8
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
 +#include <sal.h>
-+_Win32_FlagsEnum_(DISPATCH, unsigned short,
-+    DISPATCH_METHOD,
-+    DISPATCH_PROPERTYGET,
-+    DISPATCH_PROPERTYPUT,
-+    DISPATCH_PROPERTYPUTREF);
 +_Win32_FlagsEnum_(DISPATCH_FLAGS, unsigned short,
 +    DISPATCH_METHOD,
 +    DISPATCH_PROPERTYGET,
@@ -552,7 +547,7 @@ index 7860ea3c..873d1aba 100644
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
-@@ -1212,7 +1483,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
+@@ -1212,7 +1478,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
  
  typedef struct tagPARAMDATA {
      OLECHAR * szName;   /* parameter name */
@@ -561,7 +556,7 @@ index 7860ea3c..873d1aba 100644
  } PARAMDATA, * LPPARAMDATA;
  
  typedef struct tagMETHODDATA {
-@@ -1223,7 +1494,7 @@ typedef struct tagMETHODDATA {
+@@ -1223,7 +1489,7 @@ typedef struct tagMETHODDATA {
      CALLCONV cc;        /* calling convention */
      UINT cArgs;         /* count of arguments */
      WORD wFlags;        /* same wFlags as on IDispatch::Invoke() */
@@ -570,7 +565,7 @@ index 7860ea3c..873d1aba 100644
  } METHODDATA, * LPMETHODDATA;
  
  typedef struct tagINTERFACEDATA {
-@@ -1240,7 +1511,7 @@ _Check_return_
+@@ -1240,7 +1506,7 @@ _Check_return_
  WINOLEAUTAPI DispGetParam(
  	_In_ DISPPARAMS * pdispparams,
  	UINT position,
@@ -579,7 +574,7 @@ index 7860ea3c..873d1aba 100644
  	_Out_ VARIANT * pvarResult,
  	_Out_opt_ UINT * puArgErr
  	);
-@@ -1287,7 +1558,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
+@@ -1287,7 +1553,7 @@ WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
   * for customized Invoke().
   */
  WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV cc,
@@ -588,7 +583,7 @@ index 7860ea3c..873d1aba 100644
              _In_reads_(cActuals) VARIANTARG ** prgpvarg, _Out_ VARIANT * pvargResult);
  
  
-@@ -1299,13 +1570,20 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+@@ -1299,13 +1565,20 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
  #define ACTIVEOBJECT_STRONG 0x0
  #define ACTIVEOBJECT_WEAK 0x1
  

@@ -760,7 +760,7 @@ diff --git a/um/Uxtheme.h b/um/Uxtheme.h
      COLORREF          crBorder;            // color to use for text outline
      COLORREF          crShadow;            // color to use for text shadow
 -    int               iTextShadowType;     // TST_SINGLE or TST_CONTINUOUS
-+    _Win32_AssociatedEnum_(DTTOPTS_iTextShadowTypeFlags) int               iTextShadowType;     // TST_SINGLE or TST_CONTINUOUS
++    _Win32_AssociatedEnum_(TEXTSHADOWTYPE) int               iTextShadowType;     // TST_SINGLE or TST_CONTINUOUS
      POINT             ptShadowOffset;      // where shadow is drawn (relative to text)
      int               iBorderSize;         // Border radius around text
      int               iFontPropId;         // Font property to use for the text instead of TMT_FONT

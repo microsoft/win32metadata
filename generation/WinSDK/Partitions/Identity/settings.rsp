@@ -9,7 +9,6 @@ SystemFunction041
 <IncludeRoot>/shared/secext.h
 <IncludeRoot>/shared/security.h
 <IncludeRoot>/shared/sspi.h
-<IncludeRoot>/shared/issper16.h
 <IncludeRoot>/um/lsalookup.h
 <IncludeRoot>/um/minschannel.h
 <IncludeRoot>/um/ntlsa.h

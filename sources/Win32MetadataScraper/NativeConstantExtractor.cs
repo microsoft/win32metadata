@@ -23,6 +23,8 @@ namespace Win32MetadataScraper
             var result = new NativeConstantValues
             {
                 BindingSource = configuration.OutputLocation,
+                SourceFile = Path.GetFullPath(sourceFile),
+                SourceHash = NativeConstantGroupProvenance.HashFile(sourceFile),
                 Namespace = configuration.DefaultNamespace,
             };
             using (var target = original.Handle.TargetInfo)
@@ -42,6 +44,7 @@ namespace Win32MetadataScraper
             result.Headers = definitions.Where(value => IsTraversed(value.Location.File, sourceFile, configuration.TraversalNames))
                 .Select(value => value.Location.File).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
             var requested = requestedNames == null ? null : new HashSet<string>(requestedNames, StringComparer.Ordinal);
+            var headerHashes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             var candidates = definitions.Where(value => !value.Macro.IsFunctionLike &&
                     (requested != null ? requested.Contains(value.Macro.Name) :
                         IsTraversed(value.Location.File, sourceFile, configuration.TraversalNames)) &&
@@ -198,8 +201,35 @@ namespace Win32MetadataScraper
                     };
                     string name = configuration.RemappedNames.GetValueOrDefault(candidate.Name) ?? candidate.Name;
                     result.Constants.Add(new NativeConstantValue(candidate.Name, name, owner.File, owner.Line,
-                        variable.Init.Type.AsString, storage, literal));
+                        variable.Init.Type.AsString, storage, literal)
+                    {
+                        Column = owner.Column,
+                        HeaderHash = HeaderHash(owner.File),
+                        AliasTarget = ReadAliasTarget(variable.Init),
+                    });
                 }
+            }
+
+            NativeConstantBinding ReadAliasTarget(Expr expression)
+            {
+                while (expression is ParenExpr or ImplicitCastExpr)
+                {
+                    var children = expression.CursorChildren.OfType<Expr>().ToArray();
+                    if (children.Length != 1 || expression.Type.CanonicalType != children[0].Type.CanonicalType)
+                        return null;
+                    expression = children[0];
+                }
+                if (expression is not DeclRefExpr reference ||
+                    reference.Handle.Referenced.Kind != CXCursorKind.CXCursor_EnumConstantDecl)
+                    return null;
+                return ReadEnumConstantBinding(reference.Handle.Referenced, HeaderHash);
+            }
+
+            string HeaderHash(string header)
+            {
+                if (!headerHashes.TryGetValue(header, out string hash))
+                    headerHashes[header] = hash = NativeConstantGroupProvenance.HashFile(header);
+                return hash;
             }
 
             void Reject(Candidate candidate, string reason, params string[] diagnostics) =>
@@ -209,7 +239,33 @@ namespace Win32MetadataScraper
                 System.IO.Enumeration.FileSystemName.MatchesSimpleExpression(pattern, name, ignoreCase: false));
         }
 
-        private static string GetStorage(CXType type)
+        internal static NativeConstantBinding ReadEnumConstantBinding(CXCursor declaration, Func<string, string> headerHash)
+        {
+            var nativeType = clang.getCursorType(declaration);
+            var storageType = nativeType.CanonicalType;
+            if (storageType.kind == CXTypeKind.CXType_Enum)
+                storageType = clang.getEnumDeclIntegerType(clang.getTypeDeclaration(storageType)).CanonicalType;
+            string storage = GetStorage(storageType) ??
+                throw new InvalidOperationException("Unsupported native enum alias storage.");
+            bool unsigned = storage is "byte" or "ushort" or "uint" or "ulong" or "char";
+            ulong unsignedValue = clang.getEnumConstantDeclUnsignedValue(declaration);
+            string number = unsigned ? unsignedValue.ToString(CultureInfo.InvariantCulture) :
+                clang.getEnumConstantDeclValue(declaration).ToString(CultureInfo.InvariantCulture);
+            string literal = storage switch
+            {
+                "uint" => number + "U", "long" => number + "L", "ulong" => number + "UL",
+                "bool" => number == "0" ? "false" : "true",
+                "char" => SymbolDisplay.FormatLiteral((char)unsignedValue, quote: true),
+                _ => number,
+            };
+            var location = GetLocation(declaration.Location);
+            using var spelling = nativeType.Spelling;
+            return new NativeConstantBinding("CXCursor_EnumConstantDecl",
+                HeaderAnnotationProcessor.GetNativeTarget(declaration), location.File, location.Line, location.Column,
+                headerHash(location.File), spelling.ToString(), storage, literal);
+        }
+
+        internal static string GetStorage(CXType type)
         {
             long size = type.SizeOf;
             if (size is < 1 or > 8)
@@ -237,11 +293,11 @@ namespace Win32MetadataScraper
 
         private static Location GetLocation(CXSourceLocation location)
         {
-            location.GetFileLocation(out var file, out uint line, out _, out _);
-            return new Location(file.ToString(), line);
+            location.GetFileLocation(out var file, out uint line, out uint column, out _);
+            return new Location(file.ToString(), line, column);
         }
 
-        private sealed record Location(string File, uint Line);
+        private sealed record Location(string File, uint Line, uint Column);
         private sealed record Candidate(string Name, Location Owner);
     }
 }

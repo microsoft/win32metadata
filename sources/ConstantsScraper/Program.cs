@@ -29,7 +29,10 @@ namespace ConstantsScraperApp
                 new Option<string>("--memberRemap", "A field or parameter that should get remapped to a certain type.", ArgumentArity.OneOrMore),
                 new Option<string>("--with-type", "Use a type for a constant.", ArgumentArity.OneOrMore),
                 new Option<string>("--enumsJson", "A json file with enum information.", ArgumentArity.OneOrMore),
-                new Option<string>("--useConstantsFrom", "Namespaces to import other constants from.", ArgumentArity.OneOrMore)
+                new Option<string>("--useConstantsFrom", "Namespaces to import other constants from.", ArgumentArity.OneOrMore),
+                new Option<string>("--sdkRoot", "Exact SDK include root for relative header-priority identities."),
+                new Option<string>("--headerPriority", "Ordered SDK-root-relative headers; unlisted headers retain traversal order.", ArgumentArity.OneOrMore),
+                new Option<string>("--nativeInput", "Native constant inputs in the project's partition order.", ArgumentArity.OneOrMore)
             };
 
             rootCommand.Handler = CommandHandler.Create<InvocationContext>(Run);
@@ -49,6 +52,12 @@ namespace ConstantsScraperApp
             var withTypeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-type");
             var withAttributeValuePairs = context.ParseResult.ValueForOption<string[]>("--with-attribute");
             var useConstantsFrom = context.ParseResult.ValueForOption<string[]>("--useConstantsFrom");
+            var selection = new ConstantSelectionOptions
+            {
+                SdkRoot = context.ParseResult.ValueForOption<string>("--sdkRoot"),
+                HeaderPriority = context.ParseResult.ValueForOption<string[]>("--headerPriority") ?? System.Array.Empty<string>(),
+                NativeInputs = context.ParseResult.ValueForOption<string[]>("--nativeInput") ?? System.Array.Empty<string>(),
+            };
 
             var exclusionNames = new HashSet<string>(excludeItems ?? (new string[0]));
             Dictionary<string, string> traversedHeadersToNamespaces = ConvertValuePairsToDictionary(traversedHeaderToNamespaceValuePairs);
@@ -84,7 +93,7 @@ namespace ConstantsScraperApp
             {
                 results =
                     ConstantsScraper.ScrapeConstants(
-                        enumJsonFiles, defaultNamespace, scraperOutputDir, headerText, exclusionNames, traversedHeadersToNamespaces, requiredNamespaces, remaps, withTypes, withAttributes);
+                        enumJsonFiles, defaultNamespace, scraperOutputDir, headerText, exclusionNames, traversedHeadersToNamespaces, requiredNamespaces, remaps, withTypes, withAttributes, selection);
             }
             catch (System.Exception e)
             {

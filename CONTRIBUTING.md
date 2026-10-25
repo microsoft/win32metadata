@@ -149,6 +149,25 @@ The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/Co
 
 Constants are removed from the metadata when they are detected as members of an enum.
 
+With `native-constant-values`, Clang supplies integer types and values for each target.
+Duplicate managed names are case-sensitive. Authored declarations and source-owned
+groups are protected; other candidates use ordered header priority, then the project's
+partition and `--traverse` order, then native declaration location. This preserves
+first-successfully-accepted ordering without depending on the legacy regex's coverage.
+
+The normal MSBuild task accepts an ordered `ConstantHeaderPriority` property, for example
+`-p:ConstantHeaderPriority=um\devicetopology.h`. Entries are relative to `SdkIncRoot`;
+the standalone CLI uses `--sdkRoot` and `--headerPriority`. An absent header is reported
+as inapplicable. A same-basename file outside that exact root does not match.
+
+`native-constant-conflicts.json` retains every competing native integer candidate,
+selection reason, target, source location, type and value. `WMC001` warnings identify
+distinct definitions and highlight type/value conflicts. Compiler-bound consumption
+and policy rejection are separate dispositions. Source-group proofs are stored once
+and referenced by ID. Keep this report and the original native JSON facts for review.
+When updating the producer, regenerate affected `.header-types.cs` sources and each
+target's matching native facts; do not infer ownership from old names or equal values.
+
 ## Typedefs
 
 Typedefs are friendly aliases for types that add more intuitive names and type safety to APIs. Typedefs in the metadata are defined in [autotypes.json](generation/WinSDK/autoTypes.json). Each object in the JSON array is a typedef with the following properties:

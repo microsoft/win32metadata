@@ -4587,6 +4587,12 @@
       "sourceSha256": "4DC92762EF63B52DA0D7AEE4D7A192997964ADAB4EC0D9DF5D297ECC2651B075",
       "sdkPath": "c\\include\\10.0.28000.0\\um\\windows.ui.xaml.hosting.referencetracker.idl",
       "sdkSha256": "F963B0B957B2C7D25E3ED00A072F1BC9AD909C5AC4B3562F42A2EECE218A5B99"
+    },
+    {
+      "path": "winrt\\hstring.h",
+      "sourceSha256": "169D6779F382D275A7AC277BB49946C017B31790A43F4B831CEDC96629FCFCFC",
+      "sdkPath": "c\\include\\10.0.28000.0\\winrt\\hstring.idl",
+      "sdkSha256": "E10ED2CE9A0101D4D2DE71E17B01D3C066ECB87D793607467CD4554E2D649213"
     }
   ],
   "midl": {
@@ -8005,6 +8011,10 @@
       {
         "source": "um\\windows.ui.xaml.hosting.referencetracker.idl",
         "path": "um\\windows.ui.xaml.hosting.referencetracker.h"
+      },
+      {
+        "source": "winrt\\hstring.idl",
+        "path": "winrt\\hstring.h"
       }
     ]
   },
@@ -9001,6 +9011,7 @@
     "um\\prsht.idl.patch",
     "um\\sapi.idl.patch",
     "um\\sapiddk.idl.patch",
-    "um\\windows.ui.xaml.hosting.referencetracker.idl.patch"
+    "um\\windows.ui.xaml.hosting.referencetracker.idl.patch",
+    "winrt\\hstring.idl.patch"
   ]
 }
