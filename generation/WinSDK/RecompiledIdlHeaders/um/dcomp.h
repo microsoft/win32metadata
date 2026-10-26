@@ -190,7 +190,7 @@ STDAPI DCompositionGetStatistics(
     _In_ COMPOSITION_FRAME_ID frameId,
     _Out_ COMPOSITION_FRAME_STATS* frameStats,
     _In_ UINT targetIdCount,
-    _Out_writes_opt_(targetCount) COMPOSITION_TARGET_ID* targetIds,
+    _Out_writes_opt_(targetIdCount) COMPOSITION_TARGET_ID* targetIds,
     _Out_opt_ UINT* actualTargetIdCount);
 
 //+-----------------------------------------------------------------------------
@@ -2526,4 +2526,3 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice5, IDCompositionDevice4, "2C6BEBFE-A60
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
-
