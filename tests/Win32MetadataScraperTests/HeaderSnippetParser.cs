@@ -64,6 +64,7 @@ namespace Win32MetadataScraperTests
                           | CXTranslationUnit_Flags.CXTranslationUnit_VisitImplicitAttributes;
 
                 using var index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
+                Console.WriteLine("TEST-TOOLCHAIN direct-discovery-parse");
                 var error = CXTranslationUnit.TryParse(
                     index, sourceFile, clangArgs, ReadOnlySpan<CXUnsavedFile>.Empty, flags, out var handle);
 

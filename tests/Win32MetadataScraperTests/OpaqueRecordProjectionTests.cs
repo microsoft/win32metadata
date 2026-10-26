@@ -352,6 +352,7 @@ namespace Test
                 string path = Path.Combine(directory, "native.cpp");
                 File.WriteAllText(path, source);
                 index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
+                Console.WriteLine("TEST-TOOLCHAIN direct-record-parse");
                 Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, path,
                     new[] { "--language=c++", "--std=c++17", "--target=x86_64-pc-windows-msvc" },
                     ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_None, out var handle));
