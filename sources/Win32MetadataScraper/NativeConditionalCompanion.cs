@@ -99,6 +99,8 @@ namespace Win32MetadataScraper
                 !existing.Contains(name) && !excludes.Contains(name) && !string.IsNullOrWhiteSpace(libraries[name]))
                 .ToHashSet(StringComparer.Ordinal);
             var files = ResolveFiles(primary, traversalFiles, out var includedFiles);
+            var declarationFiles = new Dictionary<CXFile, string>();
+            var qualifiedNames = new Dictionary<CXCursor, string>();
             foreach (string path in files)
             {
                 var file = primary.Handle.GetFile(path);
@@ -115,7 +117,7 @@ namespace Win32MetadataScraper
             }
             var inheritedMethods = new HashSet<CXCursor>();
             var records = new Stack<CXXRecordDecl>(declarations.OfType<CXXRecordDecl>()
-                .Where(record => files.Contains(NativeSourceIdentity.Of(record).File)));
+                .Where(IsTraversalDeclaration));
             var visitedRecords = new HashSet<CXCursor>();
             while (records.TryPop(out var record))
             {
@@ -128,13 +130,14 @@ namespace Win32MetadataScraper
                     if (basis.Type.CanonicalType is RecordType baseType && baseType.Decl is CXXRecordDecl parent)
                         records.Push(parent);
             }
-            var macroMembers = declarations.OfType<NamedDecl>().Where(declaration =>
-                declaration is FunctionDecl or FieldDecl && !excludes.Contains(declaration.Name) &&
-                !excludes.Contains(DeclarationSourceMap.QualifiedName(declaration.Handle)) &&
-                !authoredRemaps.ContainsKey(declaration.Name) &&
-                !authoredRemaps.ContainsKey(DeclarationSourceMap.QualifiedName(declaration.Handle)))
-                .Where(declaration => files.Contains(NativeSourceIdentity.Of(declaration).File) ||
+            var macroMembers = declarations.OfType<NamedDecl>()
+                .Where(declaration => declaration is FunctionDecl or FieldDecl)
+                .Where(declaration => IsTraversalDeclaration(declaration) ||
                     inheritedMethods.Contains(declaration.Handle.CanonicalCursor))
+                .Where(declaration => !excludes.Contains(declaration.Name) &&
+                !excludes.Contains(QualifiedName(declaration)) &&
+                !authoredRemaps.ContainsKey(declaration.Name) &&
+                !authoredRemaps.ContainsKey(QualifiedName(declaration)))
                 .Select(declaration => (Declaration: declaration, Written: NativeMacroNames.GetWrittenMemberName(declaration)))
                 .Where(value => value.Written != null && (IsLegacyMember(value.Declaration) ||
                     HasAuthoredAlternative(value.Declaration, value.Written, authoredRemaps)))
@@ -254,6 +257,29 @@ namespace Win32MetadataScraper
                 evidence.Add(new { kind = "authored-remap", source = NativeSourceIdentity.Of(member.Declaration).ToString(),
                     written = member.Written, primaryName, alternateName, target,
                     macroReplacement = new { file = macroPath, line = macroLine, column = macroColumn, offset = macroOffset } });
+            }
+
+            bool IsTraversalDeclaration(Decl declaration)
+            {
+                declaration.Location.GetExpansionLocation(out var file, out _, out _, out _);
+                if (!declarationFiles.TryGetValue(file, out string path))
+                {
+                    path = file.ToString();
+                    if (path.Length != 0)
+                        path = Path.GetFullPath(path);
+                    declarationFiles.Add(file, path);
+                }
+                return files.Contains(path);
+            }
+
+            string QualifiedName(NamedDecl declaration)
+            {
+                if (!qualifiedNames.TryGetValue(declaration.Handle, out string name))
+                {
+                    name = DeclarationSourceMap.QualifiedName(declaration.Handle);
+                    qualifiedNames.Add(declaration.Handle, name);
+                }
+                return name;
             }
         }
 

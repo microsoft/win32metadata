@@ -40,6 +40,92 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
+        [InlineData("public class Uses { public int Read(uint value) => 1; }")]
+        [InlineData("public unsafe class Uses { public int* Read(byte** value) => null; }")]
+        [InlineData("public class Uses { public int[,] Read(bool[] value) => null; }")]
+        [InlineData("public class Uses { public ulong Read(string value) => (ulong)42; }")]
+        public void PredefinedTypeUsesDoNotCreateNativeProviderSemanticWork(string text)
+        {
+            string reports = Path.Combine(directory, "reports");
+            Environment.SetEnvironmentVariable(GenerationTiming.EnvironmentVariable, reports);
+            using (var session = GenerationTiming.StartFromEnvironment("predefined-type-test"))
+            {
+                var source = GeneratedSource.FromText(text);
+                var projection = new OpaqueRecordProjection(null, new[] { source }, new Dictionary<string, string>());
+                Assert.Empty(projection.IncludedNames);
+                Assert.Empty(projection.RecordAliases);
+                session.Complete(0);
+            }
+            using var report = ReadSingleReport(reports);
+            ValidateReport(report.RootElement);
+            var spans = report.RootElement.GetProperty("spans").EnumerateArray().ToArray();
+            var discovery = Assert.Single(spans.Where(span => Name(span) == "native-providers.discover"));
+            var counters = discovery.GetProperty("counters");
+            Assert.Equal(0, counters.GetProperty("semanticQueryCount").GetInt32());
+            Assert.True(counters.GetProperty("predefinedTypeUseCount").GetInt32() > 0);
+            Assert.DoesNotContain(spans, span => Name(span) == "native-providers.create-compilation");
+        }
+
+        [Fact]
+        public void NamedPrimitiveTypeUsesStillRetainSemanticValidation()
+        {
+            string reports = Path.Combine(directory, "reports");
+            Environment.SetEnvironmentVariable(GenerationTiming.EnvironmentVariable, reports);
+            using (var session = GenerationTiming.StartFromEnvironment("named-primitive-test"))
+            {
+                var source = GeneratedSource.FromText("public class Uses { public System.Int32 Read() => 1; }");
+                var projection = new OpaqueRecordProjection(null, new[] { source }, new Dictionary<string, string>());
+                Assert.Empty(projection.IncludedNames);
+                session.Complete(0);
+            }
+            using var report = ReadSingleReport(reports);
+            ValidateReport(report.RootElement);
+            var spans = report.RootElement.GetProperty("spans").EnumerateArray().ToArray();
+            var discovery = Assert.Single(spans.Where(span => Name(span) == "native-providers.discover"));
+            Assert.Equal(1, discovery.GetProperty("counters").GetProperty("semanticQueryCount").GetInt32());
+            Assert.Single(spans.Where(span => Name(span) == "native-providers.create-compilation"));
+        }
+
+        [Fact]
+        public void PredefinedTypeFilteringStillBindsAndValidatesCustomAliasPointees()
+        {
+            using var native = new OpaqueRecordProjectionTests.NativeRecords("namespace Test { struct Opaque; }\n");
+            string reports = Path.Combine(directory, "reports");
+            Environment.SetEnvironmentVariable(GenerationTiming.EnvironmentVariable, reports);
+            using (var session = GenerationTiming.StartFromEnvironment("mixed-type-test"))
+            {
+                var source = GeneratedSource.FromText(@"
+using Reference = global::Test.Opaque;
+namespace Test
+{
+    public static unsafe class Apis
+    {
+        public static Reference* Read(int* value, byte[] bytes) => null;
+    }
+}");
+                var projection = new OpaqueRecordProjection(native.Unit, new[] { source }, new Dictionary<string, string>());
+                Assert.Equal(new[] { "Test::Opaque" }, projection.IncludedNames);
+                var declaration = NativeConditionalCompanion.Declarations(native.Unit.TranslationUnitDecl)
+                    .OfType<ClangSharp.RecordDecl>().Single(record => record.Name == "Opaque");
+                declaration.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
+                string provider = "namespace Test { [SourceLocation(" +
+                    SyntaxFactory.Literal(file.ToString()).ToFullString() +
+                    $", {line}, {column})] public partial struct Opaque {{ }} }}";
+                var retained = projection.SelectRequiredBindings(new Dictionary<string, string> { ["Opaque.cs"] = provider });
+                Assert.Contains("struct Opaque", Assert.Single(retained).Value);
+                session.Complete(0);
+            }
+            using var report = ReadSingleReport(reports);
+            ValidateReport(report.RootElement);
+            var spans = report.RootElement.GetProperty("spans").EnumerateArray().ToArray();
+            var discovery = Assert.Single(spans.Where(span => Name(span) == "native-providers.discover"));
+            var counters = discovery.GetProperty("counters");
+            Assert.Equal(1, counters.GetProperty("semanticQueryCount").GetInt32());
+            Assert.Equal(2, counters.GetProperty("predefinedTypeUseCount").GetInt32());
+            Assert.Single(spans.Where(span => Name(span) == "native-providers.create-compilation"));
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", 16)]
         [InlineData("x64", "x86_64-pc-windows-msvc", 512)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", 128)]
@@ -60,6 +146,10 @@ namespace Win32MetadataScraperTests
             var format = Assert.Single(spans.Where(span => Name(span) == "projection.format-generated-source"));
             Assert.Equal(1, format.GetProperty("counters").GetProperty("formatCount").GetInt32());
             Assert.Contains(spans, span => Name(span) == "native-providers.recover");
+            var discovery = Assert.Single(spans.Where(span => Name(span) == "native-providers.discover"));
+            var counters = discovery.GetProperty("counters");
+            Assert.Equal(count, counters.GetProperty("semanticQueryCount").GetInt32());
+            Assert.Equal(count * 2, counters.GetProperty("predefinedTypeUseCount").GetInt32());
             var root = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot();
             var methods = root.DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
             Assert.Equal(count, methods.Length);
