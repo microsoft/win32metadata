@@ -190,7 +190,7 @@ STDAPI DCompositionGetStatistics(
     _In_ COMPOSITION_FRAME_ID frameId,
     _Out_ COMPOSITION_FRAME_STATS* frameStats,
     _In_ UINT targetIdCount,
-    _Out_writes_opt_(targetIdCount) COMPOSITION_TARGET_ID* targetIds,
+    _Out_writes_opt_(targetCount) COMPOSITION_TARGET_ID* targetIds,
     _Out_opt_ UINT* actualTargetIdCount);
 
 //+-----------------------------------------------------------------------------
