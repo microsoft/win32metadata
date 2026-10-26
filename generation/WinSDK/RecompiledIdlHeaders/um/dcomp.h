@@ -2526,3 +2526,4 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice5, IDCompositionDevice4, "2C6BEBFE-A60
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
+
