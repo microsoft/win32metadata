@@ -4,9 +4,9 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private static MetadataImage EmitPrimitiveAliasesWithEvidence(HeaderAnnotationTests.NativeFixture first,
+        internal static MetadataImage EmitPrimitiveAliasesWithEvidence(HeaderAnnotationTests.NativeFixture first,
             HeaderAnnotationTests.NativeFixture extra, string architecture, bool includeGroupImport)
         {
             string artifacts = Environment.GetEnvironmentVariable("WIN32_PRIMITIVE_ALIAS_CROSSARCH_ARTIFACTS");
@@ -43,6 +43,9 @@ namespace Win32MetadataScraperTests
                 }
             }
         }
+    }
+    public class HeaderConstantCrossArchOrderingWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData(false, "uint", "UNDECLARED")]

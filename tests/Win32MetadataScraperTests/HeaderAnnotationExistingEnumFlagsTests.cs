@@ -7,7 +7,7 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
         internal const string ExistingEnumFlagDeclarations = @"
 typedef enum ENUM_FLAGS tagSTGC {
@@ -36,6 +36,18 @@ enum ENUM_FLAGS VARENUM {
 };
 struct ENUM_STORAGE { STGC flags; unsigned short tag; unsigned after; };
 ";
+
+        internal static string[] EnumFieldSnapshot(MetadataReader reader, TypeDefinition type)
+            => type.GetFields().Select(reader.GetFieldDefinition).Select(field =>
+            {
+                string value = field.GetDefaultValue().IsNil ? "" :
+                    reader.GetConstant(field.GetDefaultValue()).TypeCode + ":" +
+                    Convert.ToHexString(reader.GetBlobBytes(reader.GetConstant(field.GetDefaultValue()).Value));
+                return reader.GetString(field.Name) + ":" + field.DecodeSignature(new SignatureNames(), null) + ":" + value;
+            }).ToArray();
+    }
+    public class HeaderAnnotationExistingEnumFlagsTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", "macro")]
@@ -167,14 +179,5 @@ enum _Win32_Flags_ Wide : unsigned long long { WIDE_HIGH = 0x100000000ULL, WIDE_
             var reader = image.Reader;
             Assert.Single(FindType(reader, "NATIVE").GetCustomAttributes(), handle => AttributeName(reader, handle) == "FlagsAttribute");
         }
-
-        private static string[] EnumFieldSnapshot(MetadataReader reader, TypeDefinition type)
-            => type.GetFields().Select(reader.GetFieldDefinition).Select(field =>
-            {
-                string value = field.GetDefaultValue().IsNil ? "" :
-                    reader.GetConstant(field.GetDefaultValue()).TypeCode + ":" +
-                    Convert.ToHexString(reader.GetBlobBytes(reader.GetConstant(field.GetDefaultValue()).Value));
-                return reader.GetString(field.Name) + ":" + field.DecodeSignature(new SignatureNames(), null) + ":" + value;
-            }).ToArray();
     }
 }

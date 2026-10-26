@@ -13,6 +13,7 @@ using System.IO;
 using System.Linq;
 using ClangSharp;
 using ClangSharp.Interop;
+using MetadataUtils;
 
 namespace Win32MetadataScraper
 {
@@ -137,68 +138,111 @@ public static class RemapDiscovery
         }
     }
 
-    internal static Dictionary<string, string> FindEmbeddedIncompleteRecordPointerRemaps(Decl rootDecl)
+    internal static Dictionary<string, string> FindEmbeddedIncompleteRecordPointerRemaps(
+        Decl rootDecl, NativeCursorIndex nativeDeclarations = null)
     {
-        var declarations = EnumerateDeclarations(rootDecl).ToArray();
-        var declaredRecords = declarations.OfType<RecordDecl>()
-            .Where(record => record.LexicalParentCursor is not RecordDecl ||
-                record.LexicalParentCursor == record.SemanticParentCursor)
-            .Select(record => record.Handle.CanonicalCursor).ToHashSet();
-        var pending = new Stack<(ClangSharp.Type Type, bool ValueUse, bool BehindPointer)>();
-        var visited = new HashSet<(ClangSharp.Type Type, bool ValueUse, bool BehindPointer)>();
+        using var timing = GenerationTiming.BeginSpan("remap-discovery.embedded-type-uses");
+        using var preparationTiming = GenerationTiming.BeginSpan("remap-discovery.embedded-prepare-declarations");
+        var declarations = (nativeDeclarations ?? new NativeCursorIndex(rootDecl)).Cursors;
+        var declaredRecords = declarations.Where(IsRecordDeclaration)
+            .Where(record => !IsRecordDeclaration(record.LexicalParent) ||
+                record.LexicalParent == record.SemanticParent)
+            .Select(record => record.CanonicalCursor).ToHashSet();
+        preparationTiming?.SetCounter("declarationCount", declarations.Count);
+        preparationTiming?.SetCounter("declaredRecordCount", declaredRecords.Count);
+        preparationTiming?.Dispose();
+        using var seedTiming = GenerationTiming.BeginSpan("remap-discovery.embedded-seed-types");
+        var pending = new Stack<(CXType Type, bool ValueUse, bool BehindPointer)>();
+        var visited = new HashSet<(CXType Type, bool ValueUse, bool BehindPointer)>();
+        var canonicalTypes = new Dictionary<CXType, CXType>();
         var byValue = new HashSet<string>(StringComparer.Ordinal);
         var result = new Dictionary<string, string>(StringComparer.Ordinal);
         foreach (var declaration in declarations)
         {
-            if (declaration is ValueDecl value)
-                pending.Push((value.Type, true, false));
-            else if (declaration is TypedefNameDecl alias)
-                pending.Push((alias.UnderlyingType, false, false));
+            var kind = declaration.DeclKind;
+            if (kind is >= CX_DeclKind.CX_DeclKind_FirstValue and <= CX_DeclKind.CX_DeclKind_LastValue)
+                pending.Push((declaration.Type, true, false));
+            else if (kind is >= CX_DeclKind.CX_DeclKind_FirstTypedefName and <= CX_DeclKind.CX_DeclKind_LastTypedefName)
+                pending.Push((declaration.TypedefDeclUnderlyingType, false, false));
         }
+        timing?.SetCounter("declarationCount", declarations.Count);
+        timing?.SetCounter("initialTypeUseCount", pending.Count);
+        seedTiming?.SetCounter("initialTypeUseCount", pending.Count);
+        seedTiming?.Dispose();
+        using var visitTiming = GenerationTiming.BeginSpan("remap-discovery.embedded-visit-types");
         while (pending.Count != 0)
         {
             var (type, valueUse, behindPointer) = pending.Pop();
-            type = type.CanonicalType;
+            if (!canonicalTypes.TryGetValue(type, out var canonical))
+                canonicalTypes.Add(type, canonical = type.CanonicalType);
+            type = canonical;
             if (!visited.Add((type, valueUse, behindPointer)))
                 continue;
-            if (type is PointerType pointer)
-                pending.Push((pointer.PointeeType, valueUse, true));
-            else if (type is RecordType record && !(record.Decl.Definition ?? record.Decl).IsCompleteDefinition &&
-                !declaredRecords.Contains(record.Decl.Handle.CanonicalCursor))
+            switch (type.TypeClass)
             {
-                // Elaborated field/parameter types can introduce a record
-                // without a declaration that ClangSharp can emit.
-                string name = DeclarationSourceMap.QualifiedName(record.Decl.Handle);
-                if (name.Length != 0)
+                case CX_TypeClass.CX_TypeClass_Pointer:
+                    pending.Push((type.PointeeType, valueUse, true));
+                    break;
+                case CX_TypeClass.CX_TypeClass_Record:
                 {
-                    if (behindPointer)
-                        result.TryAdd(name, "void");
-                    else if (valueUse)
-                        byValue.Add(name);
+                    var record = type.Declaration;
+                    var definition = record.Definition;
+                    if ((!definition.IsNull ? definition : record).IsCompleteDefinition ||
+                        declaredRecords.Contains(record.CanonicalCursor))
+                        break;
+                    // Keep the compiler record identity without constructing every managed type wrapper.
+                    string name = DeclarationSourceMap.QualifiedName(record);
+                    if (name.Length != 0)
+                    {
+                        if (behindPointer)
+                            result.TryAdd(name, "void");
+                        else if (valueUse)
+                            byValue.Add(name);
+                    }
+                    break;
                 }
+                case CX_TypeClass.CX_TypeClass_FunctionProto:
+                    pending.Push((type.ResultType, true, false));
+                    for (uint index = 0; index < type.NumArgTypes; index++)
+                        pending.Push((type.GetArgType(index), true, false));
+                    break;
+                case CX_TypeClass.CX_TypeClass_FunctionNoProto:
+                    pending.Push((type.ResultType, true, false));
+                    break;
+                case CX_TypeClass.CX_TypeClass_ConstantArray:
+                case CX_TypeClass.CX_TypeClass_ArrayParameter:
+                case CX_TypeClass.CX_TypeClass_IncompleteArray:
+                case CX_TypeClass.CX_TypeClass_VariableArray:
+                case CX_TypeClass.CX_TypeClass_DependentSizedArray:
+                    pending.Push((type.ArrayElementType, valueUse, behindPointer));
+                    break;
+                case CX_TypeClass.CX_TypeClass_LValueReference:
+                case CX_TypeClass.CX_TypeClass_RValueReference:
+                    pending.Push((type.PointeeType, valueUse, false));
+                    break;
             }
-            else if (type is FunctionType function)
-            {
-                pending.Push((function.ReturnType, true, false));
-                if (function is FunctionProtoType prototype)
-                    foreach (var parameter in prototype.ParamTypes)
-                        pending.Push((parameter, true, false));
-            }
-            else if (type is ArrayType array)
-                pending.Push((array.ElementType, valueUse, behindPointer));
-            else if (type is ReferenceType reference)
-                pending.Push((reference.PointeeType, valueUse, false));
         }
+        timing?.SetCounter("canonicalTypeCount", canonicalTypes.Count);
+        timing?.SetCounter("visitedTypeUseCount", visited.Count);
+        timing?.SetCounter("pointerRemapCount", result.Count);
         foreach (string name in byValue)
             if (result.ContainsKey(name))
                 throw new InvalidOperationException($"Incomplete native record '{name}' is used by value; opaque pointer storage cannot establish its layout.");
         return result;
     }
 
+    private static bool IsRecordDeclaration(CXCursor cursor)
+        => cursor.DeclKind is >= CX_DeclKind.CX_DeclKind_FirstRecord and <= CX_DeclKind.CX_DeclKind_LastRecord;
+
     public static HashSet<string> FindInaccessibleCopyMembers(Decl rootDecl, bool excludeFunctionsWithBody)
+        => FindInaccessibleCopyMembers(new NativeCursorIndex(rootDecl), excludeFunctionsWithBody);
+
+    internal static HashSet<string> FindInaccessibleCopyMembers(
+        NativeCursorIndex nativeDeclarations, bool excludeFunctionsWithBody)
     {
         var result = new HashSet<string>(StringComparer.Ordinal);
-        foreach (var record in EnumerateDeclarations(rootDecl).OfType<CXXRecordDecl>().Where(record => record.IsCompleteDefinition))
+        foreach (var record in nativeDeclarations.Cursors.Where(IsRecordDeclaration)
+            .Select(nativeDeclarations.GetCursor).OfType<CXXRecordDecl>().Where(record => record.IsCompleteDefinition))
         {
             foreach (var group in record.Methods.GroupBy(method => method.Name))
             {

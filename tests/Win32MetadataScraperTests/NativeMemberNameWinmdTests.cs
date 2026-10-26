@@ -8,9 +8,9 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string MacroSelectedMembers = @"
+        internal const string MacroSelectedMembers = @"
 #ifdef UNICODE
 #define CreateProcess CreateProcessW
 #define WideMember WideMemberW
@@ -39,11 +39,14 @@ extern ""C"" int WideMemberA(char* text);
 extern ""C"" int WideMemberW(unsigned short* text);
 ";
 
-        private static Dictionary<string, string> MacroMemberApis() => new()
+        internal static Dictionary<string, string> MacroMemberApis() => new()
         {
             ["CreateProcessA"] = "Test", ["CreateProcessW"] = "Test",
             ["WideMemberA"] = "Test", ["WideMemberW"] = "Test",
         };
+    }
+    public class NativeMemberNameWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", false, false)]

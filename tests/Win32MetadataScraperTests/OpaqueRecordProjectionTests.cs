@@ -41,6 +41,51 @@ namespace Test
         }
 
         [Fact]
+        public void CandidateMentionsInAnotherSourcesAliasStillRequireBinding()
+        {
+            using var native = new NativeRecords("namespace Test { struct Opaque; }\n");
+            var projection = new OpaqueRecordProjection(native.Unit, new[]
+            {
+                "global using Reference = global::Test.Opaque;",
+                "namespace Test { public static unsafe class Apis { public static extern Reference* Read(); } }",
+            }, new Dictionary<string, string>());
+            Assert.Equal(new[] { "Test::Opaque" }, projection.IncludedNames);
+        }
+
+        [Theory]
+        [InlineData("namespace Test { public static unsafe class Apis { public static extern O\\u0070aque* Read(); } }")]
+        [InlineData("namespace Test { public static unsafe class Apis { public static extern @Opaque* Read(); } }")]
+        public void CandidateNamesUseIdentifierValuesRatherThanSourceSpellings(string source)
+        {
+            using var native = new NativeRecords("namespace Test { struct Opaque; }\n");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { source },
+                new Dictionary<string, string>());
+            Assert.Equal(new[] { "Test::Opaque" }, projection.IncludedNames);
+        }
+
+        [Fact]
+        public void CandidateDiscoveryUsesTheManagedRemapName()
+        {
+            using var native = new NativeRecords("struct NativeTag;\n");
+            var projection = new OpaqueRecordProjection(native.Unit,
+                new[] { "public static unsafe class Apis { public static extern PublicName* Read(); }" },
+                new Dictionary<string, string> { ["NativeTag"] = "PublicName" });
+            Assert.Equal(new[] { "NativeTag" }, projection.IncludedNames);
+        }
+
+        [Fact]
+        public void UnusedNativeCandidatesDoNotInventAProviderForCommentsOrStrings()
+        {
+            using var native = new NativeRecords("struct Opaque;\n");
+            var projection = new OpaqueRecordProjection(native.Unit, new[]
+            {
+                "// Opaque\npublic static class Apis { public const string Name = \"Opaque\"; public static int Read() => 1; }",
+            }, new Dictionary<string, string>());
+            Assert.Empty(projection.IncludedNames);
+            Assert.Empty(projection.RecordAliases);
+        }
+
+        [Fact]
         public void ResolvedNamesDoNotTriggerUnneededNativeAliasAmbiguityErrors()
         {
             using var native = new NativeRecords(@"

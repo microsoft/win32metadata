@@ -28,9 +28,9 @@ namespace Win32MetadataScraper
                 file.Equals(spellingFile) && offset == spellingOffset)
                 return null;
 
-            var expansion = unit.GetCursor(unit.GetLocationForOffset(file, offset));
             if (requireRecordedExpansion)
             {
+                var expansion = unit.GetCursor(unit.GetLocationForOffset(file, offset));
                 if (expansion.Kind != CXCursorKind.CXCursor_MacroExpansion)
                     return null;
                 var definition = expansion.Referenced;

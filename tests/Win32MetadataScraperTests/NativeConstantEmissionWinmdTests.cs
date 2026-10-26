@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public class NativeConstantEmissionWinmdTests : HeaderAnnotationWinmdTests
     {
         [Fact]
         public void RelocatedCompilerOutputsResolveTheirCurrentPreparedHeaders()

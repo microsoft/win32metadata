@@ -10,7 +10,71 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static uint ReadCombinedHeaderConstant(MetadataReader reader, FieldDefinition field)
+        {
+            Assert.True(field.Attributes.HasFlag(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault));
+            Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null));
+            var value = reader.GetConstant(field.GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
+            return reader.GetBlobReader(value.Value).ReadUInt32();
+        }
+
+        internal static int? ReadCombinedHeaderConstantArchitectures(MetadataReader reader, CustomAttributeHandleCollection attributes)
+        {
+            var handles = attributes.Where(handle => AttributeName(reader, handle) == "SupportedArchitectureAttribute").ToArray();
+            if (handles.Length == 0)
+                return null;
+            var attribute = reader.GetCustomAttribute(Assert.Single(handles));
+            var blob = reader.GetBlobReader(attribute.Value);
+            Assert.Equal(1, blob.ReadUInt16());
+            int value = blob.ReadInt32();
+            Assert.Equal(0, blob.ReadUInt16());
+            Assert.Equal(0, blob.RemainingBytes);
+            return value;
+        }
+
+        internal static void ArchiveCombinedHeaderConstants(string artifacts, string name, string directory, MetadataReader reader,
+            string architecture = "crossarch")
+        {
+            string destination = Path.Combine(artifacts, name);
+            Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
+            Directory.CreateDirectory(destination);
+            foreach (string file in Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories))
+            {
+                string target = Path.Combine(destination, Path.GetRelativePath(directory, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
+                File.Copy(file, target);
+            }
+            File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                image = "Test.winmd",
+                imageSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(directory, "Test.winmd")))),
+                fields = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => reader.GetString(type.Name) == "Apis")
+                    .SelectMany(type => type.GetFields().Select(reader.GetFieldDefinition).Select(field => new
+                    {
+                        @namespace = reader.GetString(type.Namespace),
+                        name = reader.GetString(field.Name),
+                        storage = field.DecodeSignature(new SignatureNames(), null),
+                        attributes = field.Attributes.ToString(),
+                        constantType = reader.GetConstant(field.GetDefaultValue()).TypeCode.ToString(),
+                        valueBits = Convert.ToHexString(reader.GetBlobBytes(reader.GetConstant(field.GetDefaultValue()).Value)),
+                        supportedArchitecture = ReadCombinedHeaderConstantArchitectures(reader, field.GetCustomAttributes()),
+                    })),
+                runtime = new[] { typeof(HeaderAnnotationTests).Assembly, typeof(ClangSharpSourceWinmdGenerator).Assembly,
+                    typeof(global::Win32MetadataScraper.HeaderAnnotationProcessor).Assembly }.Select(assembly => new
+                    {
+                        path = assembly.Location,
+                        sha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(assembly.Location))),
+                    }),
+            }, new JsonSerializerOptions { WriteIndented = true }));
+        }
+    }
+    public class HeaderConstantCrossArchWinmdTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData(false)]
@@ -83,67 +147,6 @@ enum _Win32_AssociatedConstant_(EXTRA) E { E_ZERO = 0 };
             Assert.Equal(limitedTo64Bit ? 6 : (int?)null,
                 ReadCombinedHeaderConstantArchitectures(reader, enumeration.GetCustomAttributes()));
             AssertMetadataClosure(reader);
-        }
-
-        private static uint ReadCombinedHeaderConstant(MetadataReader reader, FieldDefinition field)
-        {
-            Assert.True(field.Attributes.HasFlag(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault));
-            Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null));
-            var value = reader.GetConstant(field.GetDefaultValue());
-            Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
-            return reader.GetBlobReader(value.Value).ReadUInt32();
-        }
-
-        private static int? ReadCombinedHeaderConstantArchitectures(MetadataReader reader, CustomAttributeHandleCollection attributes)
-        {
-            var handles = attributes.Where(handle => AttributeName(reader, handle) == "SupportedArchitectureAttribute").ToArray();
-            if (handles.Length == 0)
-                return null;
-            var attribute = reader.GetCustomAttribute(Assert.Single(handles));
-            var blob = reader.GetBlobReader(attribute.Value);
-            Assert.Equal(1, blob.ReadUInt16());
-            int value = blob.ReadInt32();
-            Assert.Equal(0, blob.ReadUInt16());
-            Assert.Equal(0, blob.RemainingBytes);
-            return value;
-        }
-
-        private static void ArchiveCombinedHeaderConstants(string artifacts, string name, string directory, MetadataReader reader,
-            string architecture = "crossarch")
-        {
-            string destination = Path.Combine(artifacts, name);
-            Assert.False(Directory.Exists(destination), "Preserve previous physical attempts.");
-            Directory.CreateDirectory(destination);
-            foreach (string file in Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories))
-            {
-                string target = Path.Combine(destination, Path.GetRelativePath(directory, file));
-                Directory.CreateDirectory(Path.GetDirectoryName(target));
-                File.Copy(file, target);
-            }
-            File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
-            {
-                architecture,
-                image = "Test.winmd",
-                imageSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Path.Combine(directory, "Test.winmd")))),
-                fields = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                    .Where(type => reader.GetString(type.Name) == "Apis")
-                    .SelectMany(type => type.GetFields().Select(reader.GetFieldDefinition).Select(field => new
-                    {
-                        @namespace = reader.GetString(type.Namespace),
-                        name = reader.GetString(field.Name),
-                        storage = field.DecodeSignature(new SignatureNames(), null),
-                        attributes = field.Attributes.ToString(),
-                        constantType = reader.GetConstant(field.GetDefaultValue()).TypeCode.ToString(),
-                        valueBits = Convert.ToHexString(reader.GetBlobBytes(reader.GetConstant(field.GetDefaultValue()).Value)),
-                        supportedArchitecture = ReadCombinedHeaderConstantArchitectures(reader, field.GetCustomAttributes()),
-                    })),
-                runtime = new[] { typeof(HeaderAnnotationTests).Assembly, typeof(ClangSharpSourceWinmdGenerator).Assembly,
-                    typeof(global::Win32MetadataScraper.HeaderAnnotationProcessor).Assembly }.Select(assembly => new
-                    {
-                        path = assembly.Location,
-                        sha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(assembly.Location))),
-                    }),
-            }, new JsonSerializerOptions { WriteIndented = true }));
         }
     }
 }

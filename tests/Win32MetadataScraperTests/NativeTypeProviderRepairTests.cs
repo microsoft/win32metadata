@@ -9,7 +9,49 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static void WriteDiscoveredCopyMemberExcludes(HeaderAnnotationTests.NativeFixture fixture, string target)
+        {
+            using var index = CXIndex.Create(false, false);
+            using var native = ParseTypeProviderFixture(index, fixture, target);
+            var excludes = RemapDiscovery.FindInaccessibleCopyMembers(native.TranslationUnitDecl, true);
+            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "test.rsp"),
+                "--exclude\n" + string.Join("\n", excludes) + "\n");
+        }
+
+        internal static TranslationUnit ParseTypeProviderFixture(CXIndex index, HeaderAnnotationTests.NativeFixture fixture, string target)
+            => ParseTypeProviderFixture(index, fixture, target, Array.Empty<string>());
+
+        internal static TranslationUnit ParseTypeProviderFixture(CXIndex index, HeaderAnnotationTests.NativeFixture fixture, string target,
+            string[] additionalArguments)
+        {
+            string[] arguments =
+            {
+                "--language=c++", "--std=c++17", "--target=" + target,
+                "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
+            };
+            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index,
+                Path.Combine(fixture.DirectoryPath, "test.cpp"), arguments.Concat(additionalArguments).ToArray(),
+                ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_None, out var handle));
+            for (uint diagnostic = 0; diagnostic < handle.NumDiagnostics; diagnostic++)
+            {
+                using var message = handle.GetDiagnostic(diagnostic);
+                Assert.True(message.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
+                    message.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+            }
+            return TranslationUnit.GetOrCreate(handle);
+        }
+
+        internal static HeaderAnnotationTests.NativeFixture TypeProviderFixture(string architecture, string target,
+            string declarations, string extraSettings = "", bool excludeEmptyRecords = true)
+            => new(architecture, target, declarations,
+                extraSettings: "--config\n" + (excludeEmptyRecords ? "exclude-empty-records\n" : "") +
+                    "exclude-funcs-with-body\n" + extraSettings,
+                directoryRoot: Path.Combine(Directory.GetCurrentDirectory(), "artifacts", "native-type-provider-tests"));
+    }
+    public class NativeTypeProviderRepairTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -368,44 +410,5 @@ private:
             var filtered = RemapDiscovery.FindInaccessibleCopyMembers(native.TranslationUnitDecl, true);
             Assert.Equal(new[] { "Inaccessible::Inaccessible", "Inaccessible::operator=" }, filtered.OrderBy(name => name));
         }
-
-        private static void WriteDiscoveredCopyMemberExcludes(HeaderAnnotationTests.NativeFixture fixture, string target)
-        {
-            using var index = CXIndex.Create(false, false);
-            using var native = ParseTypeProviderFixture(index, fixture, target);
-            var excludes = RemapDiscovery.FindInaccessibleCopyMembers(native.TranslationUnitDecl, true);
-            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "test.rsp"),
-                "--exclude\n" + string.Join("\n", excludes) + "\n");
-        }
-
-        private static TranslationUnit ParseTypeProviderFixture(CXIndex index, HeaderAnnotationTests.NativeFixture fixture, string target)
-            => ParseTypeProviderFixture(index, fixture, target, Array.Empty<string>());
-
-        private static TranslationUnit ParseTypeProviderFixture(CXIndex index, HeaderAnnotationTests.NativeFixture fixture, string target,
-            string[] additionalArguments)
-        {
-            string[] arguments =
-            {
-                "--language=c++", "--std=c++17", "--target=" + target,
-                "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
-            };
-            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index,
-                Path.Combine(fixture.DirectoryPath, "test.cpp"), arguments.Concat(additionalArguments).ToArray(),
-                ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_None, out var handle));
-            for (uint diagnostic = 0; diagnostic < handle.NumDiagnostics; diagnostic++)
-            {
-                using var message = handle.GetDiagnostic(diagnostic);
-                Assert.True(message.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
-                    message.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
-            }
-            return TranslationUnit.GetOrCreate(handle);
-        }
-
-        private static HeaderAnnotationTests.NativeFixture TypeProviderFixture(string architecture, string target,
-            string declarations, string extraSettings = "", bool excludeEmptyRecords = true)
-            => new(architecture, target, declarations,
-                extraSettings: "--config\n" + (excludeEmptyRecords ? "exclude-empty-records\n" : "") +
-                    "exclude-funcs-with-body\n" + extraSettings,
-                directoryRoot: Path.Combine(Directory.GetCurrentDirectory(), "artifacts", "native-type-provider-tests"));
     }
 }

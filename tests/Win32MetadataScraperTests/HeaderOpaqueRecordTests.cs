@@ -10,7 +10,38 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static CompilationUnitSyntax[] ReadOpaqueRecordSources(HeaderAnnotationTests.NativeFixture fixture)
+            => Directory.GetFiles(fixture.DirectoryPath, "*.cs", SearchOption.AllDirectories)
+                .Select(path => SyntaxFactory.ParseCompilationUnit(File.ReadAllText(path))).ToArray();
+
+        internal static void AssertOpaqueRecordProvider(MetadataReader reader, string name)
+        {
+            var type = FindType(reader, name);
+            Assert.Empty(type.GetFields());
+            Assert.True(type.GetLayout().IsDefault);
+            AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "NativeTypedefAttribute");
+            AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "GuidAttribute");
+        }
+
+        internal static void SaveOpaqueRecordArtifacts(HeaderAnnotationTests.NativeFixture fixture, string name)
+        {
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_OPAQUE_PROVIDER_ARTIFACTS");
+            if (string.IsNullOrEmpty(artifacts))
+                return;
+            string destination = Path.Combine(artifacts, name + "-" + Path.GetFileName(fixture.DirectoryPath));
+            foreach (string path in Directory.GetFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
+            {
+                string copy = Path.Combine(destination, Path.GetRelativePath(fixture.DirectoryPath, path));
+                Directory.CreateDirectory(Path.GetDirectoryName(copy));
+                File.Copy(path, copy);
+            }
+            File.WriteAllText(Path.Combine(destination, "scraper-diagnostics.txt"), fixture.Diagnostics ?? string.Empty);
+        }
+    }
+    public class HeaderOpaqueRecordTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", "c")]
@@ -608,34 +639,6 @@ Opaque* OpenOpaque(void);
             var declarations = ReadOpaqueRecordSources(fixture).SelectMany(root => root.DescendantNodes().OfType<StructDeclarationSyntax>()).ToArray();
             Assert.Empty(Assert.Single(declarations.Where(type => type.Identifier.ValueText == "Opaque")).Members);
             Assert.DoesNotContain(declarations, type => type.Identifier.ValueText is "Empty" or "Handle__");
-        }
-
-        private static CompilationUnitSyntax[] ReadOpaqueRecordSources(HeaderAnnotationTests.NativeFixture fixture)
-            => Directory.GetFiles(fixture.DirectoryPath, "*.cs", SearchOption.AllDirectories)
-                .Select(path => SyntaxFactory.ParseCompilationUnit(File.ReadAllText(path))).ToArray();
-
-        private static void AssertOpaqueRecordProvider(MetadataReader reader, string name)
-        {
-            var type = FindType(reader, name);
-            Assert.Empty(type.GetFields());
-            Assert.True(type.GetLayout().IsDefault);
-            AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "NativeTypedefAttribute");
-            AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "GuidAttribute");
-        }
-
-        private static void SaveOpaqueRecordArtifacts(HeaderAnnotationTests.NativeFixture fixture, string name)
-        {
-            string artifacts = Environment.GetEnvironmentVariable("WIN32_OPAQUE_PROVIDER_ARTIFACTS");
-            if (string.IsNullOrEmpty(artifacts))
-                return;
-            string destination = Path.Combine(artifacts, name + "-" + Path.GetFileName(fixture.DirectoryPath));
-            foreach (string path in Directory.GetFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
-            {
-                string copy = Path.Combine(destination, Path.GetRelativePath(fixture.DirectoryPath, path));
-                Directory.CreateDirectory(Path.GetDirectoryName(copy));
-                File.Copy(path, copy);
-            }
-            File.WriteAllText(Path.Combine(destination, "scraper-diagnostics.txt"), fixture.Diagnostics ?? string.Empty);
         }
     }
 }

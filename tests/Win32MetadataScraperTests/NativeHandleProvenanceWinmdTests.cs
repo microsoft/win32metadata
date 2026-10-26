@@ -8,10 +8,13 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string DeclareHandleDefinition =
+        internal const string DeclareHandleDefinition =
             "#define DECLARE_HANDLE(name) struct name##__ { int unused; }; typedef struct name##__ *name\n";
+    }
+    public class NativeHandleProvenanceWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]

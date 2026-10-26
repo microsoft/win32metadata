@@ -13,7 +13,15 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static HeaderAnnotationTests.NativeFixture PointeeStorageFixture(string architecture, string target,
+            string declarations, string settings = "")
+            => new(architecture, target, declarations, extraSettings: "--config\nexclude-empty-records\n" + settings,
+                directoryRoot: Path.Combine(Directory.GetCurrentDirectory(), "artifacts", "opaque-pointee-validation", "fixtures"));
+    }
+    public class HeaderPointeeStorageTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -313,11 +321,6 @@ struct Embedded RoundTrip(struct Embedded value);
                 SaveOpaqueRecordArtifacts(fixture, "replayed-sdk-pointees-" + architecture);
             }
         }
-
-        private static HeaderAnnotationTests.NativeFixture PointeeStorageFixture(string architecture, string target,
-            string declarations, string settings = "")
-            => new(architecture, target, declarations, extraSettings: "--config\nexclude-empty-records\n" + settings,
-                directoryRoot: Path.Combine(Directory.GetCurrentDirectory(), "artifacts", "opaque-pointee-validation", "fixtures"));
     }
 
     public sealed class ReplayedPointeeSdkTheoryAttribute : TheoryAttribute

@@ -13,7 +13,69 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static string[] TypeProviderSdkIncludes()
+        {
+            string root = Environment.GetEnvironmentVariable("WIN32_OPAQUE_SDK_INCLUDE_ROOT");
+            return new[] { "um", "shared", "ucrt", "winrt" }.Select(directory => Path.Combine(root, directory))
+                .Append(Environment.GetEnvironmentVariable("WIN32_OPAQUE_SDK_CPP_INCLUDE"))
+                .Append(Environment.GetEnvironmentVariable("WIN32_NATIVE_TYPE_PROVIDER_UCRT_INCLUDE"))
+                .Where(path => !string.IsNullOrEmpty(path)).Select(path => "--include-directory=" + path).ToArray();
+        }
+
+        internal static Dictionary<string, string> GenerateTypeProviderSdkBindings(TranslationUnit native,
+            HeaderAnnotationTests.NativeFixture fixture, PInvokeGeneratorConfigurationOptions flags, IEnumerable<string> names,
+            IEnumerable<string> files, IReadOnlyDictionary<string, string> remaps, IReadOnlyCollection<string> excludes)
+        {
+            var streams = new Dictionary<string, MemoryStream>();
+            var configuration = new PInvokeGeneratorConfiguration("c++", "c++17", "Test", fixture.Output,
+                Path.Combine(AppContext.BaseDirectory, "assets", "scraper.header.txt"), PInvokeGeneratorOutputMode.CSharp, flags)
+            {
+                IncludedNames = names.ToArray(),
+                TraversalNames = RemapDiscovery.ResolveTraversalFiles(native.TranslationUnitDecl, files),
+                RemappedNames = remaps,
+                ExcludedNames = excludes,
+                DefaultClass = "Apis",
+                LibraryPath = "gdiplus.dll",
+            };
+            using var generator = new PInvokeGenerator(configuration, path =>
+            {
+                var stream = new MemoryStream();
+                streams[path] = stream;
+                return stream;
+            });
+            generator.GenerateBindings(native, Path.Combine(fixture.DirectoryPath, "test.cpp"),
+                Array.Empty<string>(), CXTranslationUnit_Flags.CXTranslationUnit_None);
+            Assert.DoesNotContain(generator.Diagnostics, diagnostic => diagnostic.Level == DiagnosticLevel.Error);
+            generator.Close();
+            return streams.ToDictionary(pair => pair.Key, pair => Encoding.UTF8.GetString(pair.Value.ToArray()));
+        }
+
+        internal static void WriteTypeProviderSdkBindings(HeaderAnnotationTests.NativeFixture fixture, IEnumerable<string> sources)
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(fixture.Output));
+            int index = 0;
+            foreach (string source in sources)
+            {
+                var root = new TypeProviderSourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(source));
+                File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "NativeBindings" + index++ + ".cs"),
+                    root.NormalizeWhitespace().ToFullString());
+            }
+        }
+
+        internal sealed class TypeProviderSourceLocationRemover : CSharpSyntaxRewriter
+        {
+            public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
+            {
+                var attributes = SyntaxFactory.SeparatedList(node.Attributes.Where(attribute =>
+                    attribute.Name.ToString() is not "SourceLocation" and not "SourceLocationAttribute"));
+                return attributes.Count == 0 ? null : base.VisitAttributeList(node.WithAttributes(attributes));
+            }
+        }
+    }
+    public class NativeTypeProviderSdkTests : HeaderAnnotationWinmdTests
     {
         [SelectedOpaqueSdkTheory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -143,65 +205,6 @@ namespace Win32MetadataScraperTests
             finally
             {
                 SaveOpaqueRecordArtifacts(fixture, "native-type-provider-sdk-enums-" + architecture);
-            }
-        }
-
-        private static string[] TypeProviderSdkIncludes()
-        {
-            string root = Environment.GetEnvironmentVariable("WIN32_OPAQUE_SDK_INCLUDE_ROOT");
-            return new[] { "um", "shared", "ucrt", "winrt" }.Select(directory => Path.Combine(root, directory))
-                .Append(Environment.GetEnvironmentVariable("WIN32_OPAQUE_SDK_CPP_INCLUDE"))
-                .Append(Environment.GetEnvironmentVariable("WIN32_NATIVE_TYPE_PROVIDER_UCRT_INCLUDE"))
-                .Where(path => !string.IsNullOrEmpty(path)).Select(path => "--include-directory=" + path).ToArray();
-        }
-
-        private static Dictionary<string, string> GenerateTypeProviderSdkBindings(TranslationUnit native,
-            HeaderAnnotationTests.NativeFixture fixture, PInvokeGeneratorConfigurationOptions flags, IEnumerable<string> names,
-            IEnumerable<string> files, IReadOnlyDictionary<string, string> remaps, IReadOnlyCollection<string> excludes)
-        {
-            var streams = new Dictionary<string, MemoryStream>();
-            var configuration = new PInvokeGeneratorConfiguration("c++", "c++17", "Test", fixture.Output,
-                Path.Combine(AppContext.BaseDirectory, "assets", "scraper.header.txt"), PInvokeGeneratorOutputMode.CSharp, flags)
-            {
-                IncludedNames = names.ToArray(),
-                TraversalNames = RemapDiscovery.ResolveTraversalFiles(native.TranslationUnitDecl, files),
-                RemappedNames = remaps,
-                ExcludedNames = excludes,
-                DefaultClass = "Apis",
-                LibraryPath = "gdiplus.dll",
-            };
-            using var generator = new PInvokeGenerator(configuration, path =>
-            {
-                var stream = new MemoryStream();
-                streams[path] = stream;
-                return stream;
-            });
-            generator.GenerateBindings(native, Path.Combine(fixture.DirectoryPath, "test.cpp"),
-                Array.Empty<string>(), CXTranslationUnit_Flags.CXTranslationUnit_None);
-            Assert.DoesNotContain(generator.Diagnostics, diagnostic => diagnostic.Level == DiagnosticLevel.Error);
-            generator.Close();
-            return streams.ToDictionary(pair => pair.Key, pair => Encoding.UTF8.GetString(pair.Value.ToArray()));
-        }
-
-        private static void WriteTypeProviderSdkBindings(HeaderAnnotationTests.NativeFixture fixture, IEnumerable<string> sources)
-        {
-            Directory.CreateDirectory(Path.GetDirectoryName(fixture.Output));
-            int index = 0;
-            foreach (string source in sources)
-            {
-                var root = new TypeProviderSourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(source));
-                File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "NativeBindings" + index++ + ".cs"),
-                    root.NormalizeWhitespace().ToFullString());
-            }
-        }
-
-        private sealed class TypeProviderSourceLocationRemover : CSharpSyntaxRewriter
-        {
-            public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
-            {
-                var attributes = SyntaxFactory.SeparatedList(node.Attributes.Where(attribute =>
-                    attribute.Name.ToString() is not "SourceLocation" and not "SourceLocationAttribute"));
-                return attributes.Count == 0 ? null : base.VisitAttributeList(node.WithAttributes(attributes));
             }
         }
     }

@@ -8,9 +8,30 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string OpaqueCookieStorageRemaps = "--remap\nSOURCE_COOKIE=IntPtr\nCOOKIE_TAG=IntPtr\n--exclude\nCOOKIE_TAG\n";
+        internal const string OpaqueCookieStorageRemaps = "--remap\nSOURCE_COOKIE=IntPtr\nCOOKIE_TAG=IntPtr\n--exclude\nCOOKIE_TAG\n";
+
+        internal static StructDeclarationSyntax ReadOpaqueCookieWrapper(HeaderAnnotationTests.NativeFixture fixture) =>
+            CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().Single(type => type.Identifier.ValueText == "SOURCE_COOKIE");
+
+        internal static void WriteRetainedOpaqueCookie(HeaderAnnotationTests.NativeFixture fixture,
+            string valueType = "typedef struct COOKIE_TAG", bool explicitWrapperIntent = true)
+        {
+            using var output = File.Create(Path.Combine(fixture.DirectoryPath, "autotypes.cs"));
+            NativeTypedefStructsCreator.WriteToStream(new(), new[]
+            {
+                new AutoType
+                {
+                    Name = "SOURCE_COOKIE", Namespace = "Test", ValueType = valueType,
+                    NativeTypedef = explicitWrapperIntent, InvalidHandleValues = new long[] { 0 },
+                },
+            }, output);
+        }
+    }
+    public class OpaqueStructPointerProvenanceWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", 0)]
@@ -160,24 +181,6 @@ typedef SOURCE_COOKIE _Win32_NativeTypedef_ SOURCE_COOKIE;
             WriteRetainedOpaqueCookie(fixture, "typedef struct Other::COOKIE_TAG");
             var error = Assert.Throws<InvalidDataException>(() => Emit(fixture, "x64"));
             Assert.Contains("Conflicting native typedef Value storage types", error.Message);
-        }
-
-        private static StructDeclarationSyntax ReadOpaqueCookieWrapper(HeaderAnnotationTests.NativeFixture fixture) =>
-            CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
-                .DescendantNodes().OfType<StructDeclarationSyntax>().Single(type => type.Identifier.ValueText == "SOURCE_COOKIE");
-
-        private static void WriteRetainedOpaqueCookie(HeaderAnnotationTests.NativeFixture fixture,
-            string valueType = "typedef struct COOKIE_TAG", bool explicitWrapperIntent = true)
-        {
-            using var output = File.Create(Path.Combine(fixture.DirectoryPath, "autotypes.cs"));
-            NativeTypedefStructsCreator.WriteToStream(new(), new[]
-            {
-                new AutoType
-                {
-                    Name = "SOURCE_COOKIE", Namespace = "Test", ValueType = valueType,
-                    NativeTypedef = explicitWrapperIntent, InvalidHandleValues = new long[] { 0 },
-                },
-            }, output);
         }
     }
 }

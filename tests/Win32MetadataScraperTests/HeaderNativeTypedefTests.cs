@@ -10,7 +10,69 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static void AssertNativeTypedefStorage(MetadataReader reader, string name, string storage)
+        {
+            var type = FindType(reader, name);
+            var field = reader.GetFieldDefinition(Assert.Single(type.GetFields()));
+            Assert.Equal("Value", reader.GetString(field.Name));
+            Assert.Equal(storage, field.DecodeSignature(new SignatureNames(), null));
+            Assert.Single(type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "NativeTypedefAttribute"));
+        }
+
+        internal static string RunNativeTypedefControl(HeaderAnnotationTests.NativeFixture fixture, string scraper)
+        {
+            var start = new ProcessStartInfo("dotnet")
+            {
+                WorkingDirectory = fixture.DirectoryPath,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+            start.ArgumentList.Add(scraper);
+            start.ArgumentList.Add(Path.Combine(fixture.DirectoryPath, "control-remaps.txt"));
+            start.ArgumentList.Add("@" + Path.Combine(fixture.DirectoryPath, "test.rsp"));
+            using var process = Process.Start(start);
+            var output = process.StandardOutput.ReadToEndAsync();
+            var error = process.StandardError.ReadToEndAsync();
+            process.WaitForExit();
+            string diagnostics = output.GetAwaiter().GetResult() + error.GetAwaiter().GetResult();
+            Assert.True(process.ExitCode == 0, diagnostics);
+            return diagnostics;
+        }
+
+        internal static string FileSha256(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)));
+
+        internal static void SaveNativeTypedefArtifacts(HeaderAnnotationTests.NativeFixture fixture, string name,
+            MetadataReader reader = null, object native = null)
+        {
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_NATIVE_TYPEDEF_ARTIFACTS");
+            if (artifacts == null)
+                return;
+            string destination = Path.Combine(artifacts, name.Replace("c++", "cpp"));
+            Assert.False(Directory.Exists(destination), "Retain each isolated test attempt separately.");
+            foreach (string path in Directory.GetFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
+            {
+                string copy = Path.Combine(destination, Path.GetRelativePath(fixture.DirectoryPath, path));
+                Directory.CreateDirectory(Path.GetDirectoryName(copy));
+                File.Copy(path, copy);
+            }
+            File.WriteAllText(Path.Combine(destination, "reader.log"), fixture.Diagnostics ?? "");
+            string scraper = typeof(global::Win32MetadataScraper.HeaderAnnotationProcessor).Assembly.Location;
+            string emitter = typeof(ClangSharpSourceToWinmd.ClangSharpSourceWinmdGenerator).Assembly.Location;
+            File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
+            {
+                native,
+                physicalSnapshot = reader == null ? null : StructuredCommentSnapshot(reader),
+                scraper, scraperSha256 = FileSha256(scraper),
+                emitter, emitterSha256 = FileSha256(emitter),
+                helperSha256 = FileSha256(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h")),
+            }, new JsonSerializerOptions { WriteIndented = true }));
+        }
+    }
+    public class HeaderNativeTypedefTests : HeaderAnnotationWinmdTests
     {
         [Fact]
         public void NativeTypedefNeutralPayloadReachesPhysicalWinmd()
@@ -518,65 +580,6 @@ NCRYPT_PROV_HANDLE UseProvider(NCRYPT_KEY_HANDLE value);
             Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == "BOOL");
             Assert.Equal("Int32", FindMethod(reader, "Apis", "RoundTrip").DecodeSignature(new SignatureNames(), null).ReturnType);
             SaveNativeTypedefArtifacts(fixture, "reader-disabled", reader);
-        }
-
-        private static void AssertNativeTypedefStorage(MetadataReader reader, string name, string storage)
-        {
-            var type = FindType(reader, name);
-            var field = reader.GetFieldDefinition(Assert.Single(type.GetFields()));
-            Assert.Equal("Value", reader.GetString(field.Name));
-            Assert.Equal(storage, field.DecodeSignature(new SignatureNames(), null));
-            Assert.Single(type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "NativeTypedefAttribute"));
-        }
-
-        private static string RunNativeTypedefControl(HeaderAnnotationTests.NativeFixture fixture, string scraper)
-        {
-            var start = new ProcessStartInfo("dotnet")
-            {
-                WorkingDirectory = fixture.DirectoryPath,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-            };
-            start.ArgumentList.Add(scraper);
-            start.ArgumentList.Add(Path.Combine(fixture.DirectoryPath, "control-remaps.txt"));
-            start.ArgumentList.Add("@" + Path.Combine(fixture.DirectoryPath, "test.rsp"));
-            using var process = Process.Start(start);
-            var output = process.StandardOutput.ReadToEndAsync();
-            var error = process.StandardError.ReadToEndAsync();
-            process.WaitForExit();
-            string diagnostics = output.GetAwaiter().GetResult() + error.GetAwaiter().GetResult();
-            Assert.True(process.ExitCode == 0, diagnostics);
-            return diagnostics;
-        }
-
-        private static string FileSha256(string path) => Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path)));
-
-        private static void SaveNativeTypedefArtifacts(HeaderAnnotationTests.NativeFixture fixture, string name,
-            MetadataReader reader = null, object native = null)
-        {
-            string artifacts = Environment.GetEnvironmentVariable("WIN32_NATIVE_TYPEDEF_ARTIFACTS");
-            if (artifacts == null)
-                return;
-            string destination = Path.Combine(artifacts, name.Replace("c++", "cpp"));
-            Assert.False(Directory.Exists(destination), "Retain each isolated test attempt separately.");
-            foreach (string path in Directory.GetFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
-            {
-                string copy = Path.Combine(destination, Path.GetRelativePath(fixture.DirectoryPath, path));
-                Directory.CreateDirectory(Path.GetDirectoryName(copy));
-                File.Copy(path, copy);
-            }
-            File.WriteAllText(Path.Combine(destination, "reader.log"), fixture.Diagnostics ?? "");
-            string scraper = typeof(global::Win32MetadataScraper.HeaderAnnotationProcessor).Assembly.Location;
-            string emitter = typeof(ClangSharpSourceToWinmd.ClangSharpSourceWinmdGenerator).Assembly.Location;
-            File.WriteAllText(Path.Combine(destination, "physical.json"), JsonSerializer.Serialize(new
-            {
-                native,
-                physicalSnapshot = reader == null ? null : StructuredCommentSnapshot(reader),
-                scraper, scraperSha256 = FileSha256(scraper),
-                emitter, emitterSha256 = FileSha256(emitter),
-                helperSha256 = FileSha256(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h")),
-            }, new JsonSerializerOptions { WriteIndented = true }));
         }
     }
 }

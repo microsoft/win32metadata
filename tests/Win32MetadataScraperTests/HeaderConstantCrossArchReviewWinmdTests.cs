@@ -8,7 +8,67 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal const string ReviewEmpty = "enum BASE_E { BASE_ZERO=0 };";
+        internal const string ReviewMacro = ReviewEmpty + "\n#define EXTRA 1U\nenum _Win32_AssociatedConstant_(EXTRA) E { E_ZERO=0 };";
+
+        internal static string ReviewFixtureDirectory() => Path.Combine(
+            Environment.GetEnvironmentVariable("WIN32_CROSSARCH_REVIEW_ARTIFACTS") ?? AppContext.BaseDirectory, "native-review-fixtures");
+
+        internal static HeaderAnnotationTests.NativeFixture ReviewFixture(string architecture, string declarations)
+            => new HeaderAnnotationTests.NativeFixture(architecture, architecture switch
+            {
+                "x86" => "i686-pc-windows-msvc",
+                "x64" => "x86_64-pc-windows-msvc",
+                _ => "aarch64-pc-windows-msvc",
+            }, declarations, directoryRoot: ReviewFixtureDirectory());
+
+        internal static void ArchiveReviewOutputs(string name, HeaderAnnotationTests.NativeFixture fixture)
+        {
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_CROSSARCH_REVIEW_ARTIFACTS");
+            if (artifacts == null)
+                return;
+            string destination = Path.Combine(artifacts, name);
+            CopyReviewDirectory(fixture.DirectoryPath, destination);
+            File.WriteAllText(Path.Combine(destination, "diagnostics.txt"), fixture.Diagnostics);
+        }
+
+        internal static void ArchiveReviewImage(string name, HeaderAnnotationTests.NativeFixture fixture, MetadataReader reader)
+        {
+            string artifacts = Environment.GetEnvironmentVariable("WIN32_CROSSARCH_REVIEW_ARTIFACTS");
+            if (artifacts != null)
+                ArchiveCombinedHeaderConstants(artifacts, name, fixture.DirectoryPath, reader);
+        }
+
+        internal static void CopyActualReviewOutputs(HeaderAnnotationTests.NativeFixture fixture, string destination)
+        {
+            string source = Path.GetDirectoryName(fixture.Output);
+            string architecture = Path.GetFileName(source);
+            if (!Directory.Exists(source))
+                return;
+            foreach (string file in Directory.GetFiles(source, "*.cs", SearchOption.AllDirectories))
+            {
+                string target = Path.Combine(destination, architecture, Path.GetRelativePath(source, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
+                File.Copy(file, target, overwrite: true);
+            }
+        }
+
+        internal static void CopyReviewDirectory(string source, string destination)
+        {
+            Assert.False(Directory.Exists(destination), "Keep prior attempts immutable.");
+            Directory.CreateDirectory(destination);
+            foreach (string file in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
+            {
+                string target = Path.Combine(destination, Path.GetRelativePath(source, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(target));
+                File.Copy(file, target);
+            }
+        }
+    }
+    public class HeaderConstantCrossArchReviewWinmdTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData(0)]
@@ -233,63 +293,6 @@ enum _Win32_AssociatedConstant_(EXTRA) E { E_ZERO=0 };
             Assert.Contains("CSSW004", error.Message);
             Assert.False(File.Exists(Path.Combine(x86.DirectoryPath, "Test.winmd")));
             ArchiveReviewOutputs("incomplete-" + unqualified, x86);
-        }
-
-        private const string ReviewEmpty = "enum BASE_E { BASE_ZERO=0 };";
-        private const string ReviewMacro = ReviewEmpty + "\n#define EXTRA 1U\nenum _Win32_AssociatedConstant_(EXTRA) E { E_ZERO=0 };";
-
-        private static string ReviewFixtureDirectory() => Path.Combine(
-            Environment.GetEnvironmentVariable("WIN32_CROSSARCH_REVIEW_ARTIFACTS") ?? AppContext.BaseDirectory, "native-review-fixtures");
-
-        private static HeaderAnnotationTests.NativeFixture ReviewFixture(string architecture, string declarations)
-            => new HeaderAnnotationTests.NativeFixture(architecture, architecture switch
-            {
-                "x86" => "i686-pc-windows-msvc",
-                "x64" => "x86_64-pc-windows-msvc",
-                _ => "aarch64-pc-windows-msvc",
-            }, declarations, directoryRoot: ReviewFixtureDirectory());
-
-        private static void ArchiveReviewOutputs(string name, HeaderAnnotationTests.NativeFixture fixture)
-        {
-            string artifacts = Environment.GetEnvironmentVariable("WIN32_CROSSARCH_REVIEW_ARTIFACTS");
-            if (artifacts == null)
-                return;
-            string destination = Path.Combine(artifacts, name);
-            CopyReviewDirectory(fixture.DirectoryPath, destination);
-            File.WriteAllText(Path.Combine(destination, "diagnostics.txt"), fixture.Diagnostics);
-        }
-
-        private static void ArchiveReviewImage(string name, HeaderAnnotationTests.NativeFixture fixture, MetadataReader reader)
-        {
-            string artifacts = Environment.GetEnvironmentVariable("WIN32_CROSSARCH_REVIEW_ARTIFACTS");
-            if (artifacts != null)
-                ArchiveCombinedHeaderConstants(artifacts, name, fixture.DirectoryPath, reader);
-        }
-
-        private static void CopyActualReviewOutputs(HeaderAnnotationTests.NativeFixture fixture, string destination)
-        {
-            string source = Path.GetDirectoryName(fixture.Output);
-            string architecture = Path.GetFileName(source);
-            if (!Directory.Exists(source))
-                return;
-            foreach (string file in Directory.GetFiles(source, "*.cs", SearchOption.AllDirectories))
-            {
-                string target = Path.Combine(destination, architecture, Path.GetRelativePath(source, file));
-                Directory.CreateDirectory(Path.GetDirectoryName(target));
-                File.Copy(file, target, overwrite: true);
-            }
-        }
-
-        private static void CopyReviewDirectory(string source, string destination)
-        {
-            Assert.False(Directory.Exists(destination), "Keep prior attempts immutable.");
-            Directory.CreateDirectory(destination);
-            foreach (string file in Directory.GetFiles(source, "*", SearchOption.AllDirectories))
-            {
-                string target = Path.Combine(destination, Path.GetRelativePath(source, file));
-                Directory.CreateDirectory(Path.GetDirectoryName(target));
-                File.Copy(file, target);
-            }
         }
     }
 }

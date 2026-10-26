@@ -6,7 +6,7 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public class IncompleteNativeTypedefWinmdTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", "c")]

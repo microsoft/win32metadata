@@ -14,35 +14,10 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        [Theory]
-        [InlineData("x86", "i686-pc-windows-msvc", true)]
-        [InlineData("x86", "i686-pc-windows-msvc", false)]
-        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
-        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
-        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
-        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
-        public void ExplicitHeaderPrioritySelectsTheCompilerEvaluatedHresult(
-            string architecture, string target, bool preferredHeaderFirst)
-        {
-            VerifyNativeHeaderPriority(architecture, target, preferredHeaderFirst, explicitPriority: true);
-        }
 
-        [Theory]
-        [InlineData("x86", "i686-pc-windows-msvc", true)]
-        [InlineData("x86", "i686-pc-windows-msvc", false)]
-        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
-        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
-        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
-        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
-        public void UnlistedHeadersRetainActualTraversalFirstWins(
-            string architecture, string target, bool preferredHeaderFirst)
-        {
-            VerifyNativeHeaderPriority(architecture, target, preferredHeaderFirst, explicitPriority: false);
-        }
-
-        private static void VerifyNativeHeaderPriority(
+        internal static void VerifyNativeHeaderPriority(
             string architecture, string target, bool preferredHeaderFirst, bool explicitPriority)
         {
             using var first = NewNamespaceOwnershipFixture(architecture, target,
@@ -133,6 +108,81 @@ namespace Win32MetadataScraperTests
                 SaveOpaqueRecordArtifacts(first, $"priority-{architecture}-{preferredHeaderFirst}-{explicitPriority}");
                 SaveOpaqueRecordArtifacts(second, $"priority-other-{architecture}-{preferredHeaderFirst}-{explicitPriority}");
             }
+        }
+
+        internal static ScraperResults SelectNativeConstants(string directory, Dictionary<string, string> headers,
+            ConstantSelectionOptions selection = null, Dictionary<string, string> requiredNamespaces = null) =>
+            ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", directory,
+                "using System; using Windows.Win32.Foundation.Metadata;", new(), headers,
+                requiredNamespaces ?? new(), new(), new(), new(), selection);
+
+        internal static void AppendNativeTraversal(HeaderAnnotationTests.NativeFixture fixture, string header) =>
+            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "test.rsp"), "--traverse\n" + header + "\n");
+
+        internal static uint ReadUInt32Field(MetadataReader reader, string type, string name)
+        {
+            var field = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(value => reader.GetString(value.Name) == type).SelectMany(value => value.GetFields())
+                .Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == name);
+            var value = reader.GetConstant(field.GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
+            return reader.GetBlobReader(value.Value).ReadUInt32();
+        }
+
+        internal static void AssertDuplicateConstantTool(string winmd, int expected)
+        {
+            using var process = new Process();
+            process.StartInfo = new ProcessStartInfo("dotnet")
+            {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+            process.StartInfo.ArgumentList.Add(Path.Combine(AppContext.BaseDirectory, "WinmdUtils.dll"));
+            process.StartInfo.ArgumentList.Add("showDuplicateConstants");
+            process.StartInfo.ArgumentList.Add("--winmd");
+            process.StartInfo.ArgumentList.Add(winmd);
+            process.Start();
+            var output = process.StandardOutput.ReadToEndAsync();
+            var error = process.StandardError.ReadToEndAsync();
+            bool completed = process.WaitForExit(30000);
+            if (!completed)
+                process.Kill(entireProcessTree: true);
+            Assert.True(completed, "Duplicate constant gate did not finish.");
+            string stdout = output.GetAwaiter().GetResult();
+            string stderr = error.GetAwaiter().GetResult();
+            Assert.True(expected == process.ExitCode, stdout + stderr);
+            Assert.Equal(expected == 0, stdout.Contains("No duplicate constants/enum names found."));
+            Assert.True(string.IsNullOrEmpty(stderr), stderr);
+        }
+    }
+    public class ConstantSelectionPriorityTests : HeaderAnnotationWinmdTests
+    {
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void ExplicitHeaderPrioritySelectsTheCompilerEvaluatedHresult(
+            string architecture, string target, bool preferredHeaderFirst)
+        {
+            VerifyNativeHeaderPriority(architecture, target, preferredHeaderFirst, explicitPriority: true);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void UnlistedHeadersRetainActualTraversalFirstWins(
+            string architecture, string target, bool preferredHeaderFirst)
+        {
+            VerifyNativeHeaderPriority(architecture, target, preferredHeaderFirst, explicitPriority: false);
         }
 
         [Theory]
@@ -457,53 +507,6 @@ int F();
             var group = Assert.Single(NativeConstantExtractionTests.Read(fixture).Groups);
             Assert.Equal("CXCursor_EnumConstantDecl", Assert.Single(Assert.Single(group.Members).Bindings).Kind);
             Assert.Contains("MEMBER", Assert.Single(Assert.Single(group.Members).Bindings).NativeName);
-        }
-
-        private static ScraperResults SelectNativeConstants(string directory, Dictionary<string, string> headers,
-            ConstantSelectionOptions selection = null, Dictionary<string, string> requiredNamespaces = null) =>
-            ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", directory,
-                "using System; using Windows.Win32.Foundation.Metadata;", new(), headers,
-                requiredNamespaces ?? new(), new(), new(), new(), selection);
-
-        private static void AppendNativeTraversal(HeaderAnnotationTests.NativeFixture fixture, string header) =>
-            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "test.rsp"), "--traverse\n" + header + "\n");
-
-        private static uint ReadUInt32Field(MetadataReader reader, string type, string name)
-        {
-            var field = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .Where(value => reader.GetString(value.Name) == type).SelectMany(value => value.GetFields())
-                .Select(reader.GetFieldDefinition)
-                .Single(field => reader.GetString(field.Name) == name);
-            var value = reader.GetConstant(field.GetDefaultValue());
-            Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
-            return reader.GetBlobReader(value.Value).ReadUInt32();
-        }
-
-        private static void AssertDuplicateConstantTool(string winmd, int expected)
-        {
-            using var process = new Process();
-            process.StartInfo = new ProcessStartInfo("dotnet")
-            {
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-            };
-            process.StartInfo.ArgumentList.Add(Path.Combine(AppContext.BaseDirectory, "WinmdUtils.dll"));
-            process.StartInfo.ArgumentList.Add("showDuplicateConstants");
-            process.StartInfo.ArgumentList.Add("--winmd");
-            process.StartInfo.ArgumentList.Add(winmd);
-            process.Start();
-            var output = process.StandardOutput.ReadToEndAsync();
-            var error = process.StandardError.ReadToEndAsync();
-            bool completed = process.WaitForExit(30000);
-            if (!completed)
-                process.Kill(entireProcessTree: true);
-            Assert.True(completed, "Duplicate constant gate did not finish.");
-            string stdout = output.GetAwaiter().GetResult();
-            string stderr = error.GetAwaiter().GetResult();
-            Assert.True(expected == process.ExitCode, stdout + stderr);
-            Assert.Equal(expected == 0, stdout.Contains("No duplicate constants/enum names found."));
-            Assert.True(string.IsNullOrEmpty(stderr), stderr);
         }
     }
 }

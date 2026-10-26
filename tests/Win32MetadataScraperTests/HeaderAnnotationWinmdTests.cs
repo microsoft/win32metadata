@@ -20,9 +20,9 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string AssociatedConstantNativeDeclarations = @"
+        internal const string AssociatedConstantNativeDeclarations = @"
 typedef enum _Win32_AssociatedConstant_(CLSCTX_ALL) _Win32_AssociatedConstant_(CLSCTX_SERVER)
 __attribute__((flag_enum)) tagCLSCTX {
     CLSCTX_INPROC_SERVER = 1,
@@ -49,6 +49,570 @@ _D3DTRANSFORMSTATETYPE : int { D3DTS_VIEW = 2, D3DTS_PROJECTION = 3 } D3DTRANSFO
 #define UNRELATED_POINTER ((void*)-1)
 void KeepNative(unsigned value);
 ";
+
+        internal const string Declarations = @"
+typedef void* HANDLE;
+typedef int HRESULT;
+enum _Win32_SupportedOS_10240_ _Win32_AssociatedConstant_(LOOSE_A)
+    _Win32_AssociatedConstant_(LOOSE_B) Options : unsigned { OptionA = 1, OptionB = 2 };
+enum class [[clang::flag_enum]] ScopedOptions : unsigned { None = 0, A = 1, B = 2 };
+struct _Win32_SupportedOS_10240_ DESCRIPTION {
+    _Win32_AssociatedEnum_(Options) unsigned flags;
+    int size;
+};
+_Win32_SupportedOS_Windows7_ _Win32_AlsoUsableFor_(OTHER_TOKEN)
+typedef unsigned long TOKEN;
+_Win32_SupportedOS_10240_
+typedef int (__stdcall* PFN_BASE)(_Win32_Retained_ void* context, unsigned count);
+_Win32_SupportedOS_Windows7_
+typedef PFN_BASE PFN_ALIAS;
+extern ""C"" {
+_Win32_SetLastError_ _Win32_ImportLibrary_(""header.dll"") _Win32_SupportedOS_10240_
+int __stdcall Imported(_In_ _Win32_Retained_ void* context,
+    _Out_writes_bytes_opt_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* buffer,
+    unsigned capacity);
+_Win32_RAIIFree_(CloseThing, 0, -1) HANDLE __stdcall OpenThing();
+int __stdcall CreateThing(_Out_ _Win32_RAIIFree_(CloseThing, 0) HANDLE* output);
+_Win32_AssociatedEnum_(Options) unsigned __stdcall AssociatedReturn();
+int __stdcall ReadOption(_In_ _Win32_AssociatedEnum_(Options) unsigned option);
+_Win32_PreserveResult_ HRESULT __stdcall ExactResult();
+int __stdcall Retval(_Out_ _Win32_Retval_ int* result);
+int __stdcall MidlRetval(/* [out] [retval] */ _Out_retval_ int* result);
+TOKEN __stdcall UseToken(TOKEN value, TOKEN* output);
+int __stdcall UseCallback(PFN_ALIAS callback);
+}
+struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Win32_SupportedOS_10240_ IHeaderSample {
+    _Win32_PreserveResult_ _Win32_SupportedOS_Windows7_
+    virtual HRESULT __stdcall Exact(_Out_ _Win32_Retval_ int* result) = 0;
+    _Win32_RAIIFree_(CloseThing, 0, -1)
+    virtual HANDLE __stdcall Produce() = 0;
+    virtual HRESULT __stdcall Buffer(_Out_writes_bytes_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* data, unsigned capacity) = 0;
+};
+";
+
+        internal const string ScopedDeclarations = @"
+typedef int HRESULT;
+int BeforeScope();
+_Win32_SupportedOS_BEGIN_(WindowsVista)
+struct SCOPED_RECORD {
+    int size;
+    unsigned flags;
+    struct NESTED_RECORD { int value; };
+    enum NESTED_ENUM { NestedValue = 1 };
+};
+enum SCOPED_ENUM : unsigned { ScopedValue = 1 };
+typedef unsigned SCOPED_TOKEN;
+typedef int (__stdcall* PFN_SCOPED)(_In_ _Win32_Retained_ void* context, _Out_ int* result);
+using USING_TOKEN = unsigned;
+using PFN_USING = SCOPED_TOKEN (__stdcall*)(_In_ _Win32_Retained_ void* context, _Out_ _Win32_Retval_ int* result);
+using PFN_USING_ALIAS = PFN_USING;
+using PFN_USING_NATIVE_ALIAS = PFN_SCOPED;
+typedef PFN_USING PFN_TYPEDEF_USING_ALIAS;
+SCOPED_TOKEN UseScopedToken(SCOPED_TOKEN value);
+USING_TOKEN UseUsingToken(USING_TOKEN value);
+void UseScopedCallbacks(PFN_SCOPED first, PFN_USING second, PFN_USING_ALIAS third, PFN_TYPEDEF_USING_ALIAS fourth);
+_Win32_SupportedOS_END_()
+using DIRECT_TOKEN _Win32_SupportedOS_Windows7_ = unsigned;
+_Win32_SupportedOS_Windows7_ typedef struct _PRIMARY_SCOPED { unsigned value; } PRIMARY_SCOPED;
+_Win32_SupportedOS_BEGIN_(Windows7)
+int Seven();
+_Win32_SupportedOS_Windows7_ int ExplicitEqual();
+_Win32_SupportedOS_END_()
+_Win32_SupportedOS_Windows8_ int ExplicitLater();
+_Win32_SupportedOS_Windows2000_ int ExplicitEarlier();
+_Win32_SupportedOS_BEGIN_(Windows2000)
+int OlderNested();
+_Win32_SupportedOS_END_()
+struct __declspec(uuid(""4d0ea686-f54d-4b53-aeec-bf6154950080"")) _Win32_SupportedOS_WindowsVista_ IScoped {
+    _Win32_SupportedOS_WindowsVista_ virtual HRESULT __stdcall VistaMethod(_Out_ _Win32_Retval_ int* result) = 0;
+    _Win32_SupportedOS_Windows7_ virtual HRESULT __stdcall SevenMethod() = 0;
+    _Win32_SupportedOS_Windows2000_ virtual HRESULT __stdcall ExplicitMethod() = 0;
+    _Win32_SupportedOS_WindowsVista_ virtual HRESULT __stdcall VistaAgainMethod() = 0;
+};
+int AfterScope();
+struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_SupportedOS_Windows7_ IContainerOnly {
+    virtual HRESULT __stdcall UnannotatedMember(_Out_ _Win32_Retval_ int* result) = 0;
+};
+";
+
+        internal static readonly (string Name, string Header, string Namespace, string Storage,
+            bool Flags, bool Synthetic, int Members)[] ExistingNativeNonfloorGroups =
+        {
+            ("ACTIVEOBJECT_FLAGS", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", true, true, 2),
+            ("NUMPARSE_FLAGS", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", true, true, 16),
+            ("VARCMP", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", false, true, 4),
+            ("DISPATCH_FLAGS", "oleauto.h", "Windows.Win32.System.Com", "UInt16", true, true, 4),
+            ("VAR_CHANGE_FLAGS", "oleauto.h", "Windows.Win32.System.Variant", "UInt16", true, true, 8),
+            ("PICTYPE", "olectl.h", "Windows.Win32.System.Ole", "Int16", false, true, 6),
+            ("LOAD_PICTURE_FLAGS", "olectl.h", "Windows.Win32.System.Ole", "UInt32", true, true, 4),
+            ("STGM", "coml2api.h", "Windows.Win32.System.Com", "UInt32", true, true, 18),
+            ("STGFMT", "coml2api.h", "Windows.Win32.System.Com.StructuredStorage", "UInt32", false, true, 6),
+            ("COINIT", "objbase.h", "Windows.Win32.System.Com", "Int32", true, false, 4),
+            ("PATHCCH_OPTIONS", "pathcch.h", "Windows.Win32.UI.Shell", "UInt32", true, false, 8),
+        };
+
+        internal static string FieldShape(MetadataReader reader, FieldDefinition field)
+            => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
+                field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+
+        internal static string MethodShape(MetadataReader reader, MethodDefinition method)
+        {
+            var signature = method.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+            var import = method.GetImport();
+            string module = import.Module.IsNil ? "" :
+                reader.GetString(reader.GetModuleReference(import.Module).Name);
+            return reader.GetString(method.Name) + "|" + method.Attributes + "|" + method.ImplAttributes + "|" +
+                signature.Header.RawValue + "|" + signature.ReturnType + "|" +
+                string.Join(",", signature.ParameterTypes) + "|" + import.Attributes + "|" + module + "|" +
+                (import.Name.IsNil ? "" : reader.GetString(import.Name)) + "|" +
+                string.Join(",", method.GetParameters().Select(reader.GetParameter)
+                    .Select(parameter => reader.GetString(parameter.Name) + ":" + parameter.SequenceNumber + ":" + parameter.Attributes));
+        }
+
+        internal static void WriteAvailabilityDeclarations(IEnumerable<string> texts, string partition, HashSet<string> names, string directory)
+        {
+            var sources = texts.Select(text => CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot()).ToArray();
+            var source = sources[0].WithUsings(SyntaxFactory.List(sources.SelectMany(unit => unit.Usings)
+                .GroupBy(value => value.ToString(), StringComparer.Ordinal).Select(group => group.First())));
+            var found = new HashSet<string>(StringComparer.Ordinal);
+            var namespaces = sources.SelectMany(unit => unit.Members).OfType<NamespaceDeclarationSyntax>().Select(ns =>
+            {
+                var members = new List<MemberDeclarationSyntax>();
+                foreach (var declaration in ns.Members)
+                {
+                    if (declaration is StructDeclarationSyntax record && names.Contains(record.Identifier.ValueText))
+                    {
+                        Assert.True(found.Add(record.Identifier.ValueText));
+                        members.Add(record);
+                    }
+                    if (declaration is ClassDeclarationSyntax api)
+                    {
+                        var methods = api.Members.OfType<MethodDeclarationSyntax>()
+                            .Where(method => names.Contains(method.Identifier.ValueText)).ToArray();
+                        foreach (var method in methods)
+                            Assert.True(found.Add(method.Identifier.ValueText));
+                        if (methods.Length != 0)
+                            members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(methods)));
+                    }
+                }
+                return ns.WithMembers(SyntaxFactory.List(members));
+            }).Where(ns => ns.Members.Count != 0).ToArray();
+            Assert.True(names.SetEquals(found), directory + "/" + partition + ": " + string.Join(",", names.Except(found)));
+            File.WriteAllText(Path.Combine(directory, partition + ".cs"),
+                source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces)).NormalizeWhitespace().ToFullString());
+        }
+
+        internal static readonly (string Name, string Header, bool Flags, int Members)[] NextNativeCategoryGroups =
+        {
+            ("CERT_SELECT_STRUCT_FLAGS", "cryptdlg.h", true, 6),
+            ("CERT_VIEWPROPERTIES_STRUCT_FLAGS", "cryptdlg.h", true, 10),
+            ("CTL_MODIFY_REQUEST_OPERATION", "cryptdlg.h", false, 3),
+            ("SECURITY_INFO_PAGE_FLAGS", "aclui.h", true, 3),
+            ("SET_SERVICE_OPERATION", "nspapi.h", false, 5),
+            ("PERF_COUNTER_AGGREGATE_FUNC", "perflib.h", false, 5),
+            ("CACHE_CONFIG", "winineti.h", false, 10),
+            ("PFN_WDS_CLI_CALLBACK_MESSAGE_ID", "wdsclientapi.h", false, 4),
+        };
+
+        internal static string[] NativeSurface(HeaderAnnotationTests.NativeFixture fixture, string target, bool metadataEnabled, string language = "c++")
+        {
+            string source = Path.Combine(fixture.DirectoryPath, "test.cpp");
+            var arguments = new List<string>
+            {
+                "--language=" + language, "--std=" + (language == "c" ? "c11" : "c++17"), "--target=" + target,
+                "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
+                "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1",
+            };
+            if (metadataEnabled)
+                arguments.Add("-DWIN32METADATA");
+            using var index = CXIndex.Create(false, false);
+            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
+                ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
+            using var unit = TranslationUnit.GetOrCreate(handle);
+            for (uint i = 0; i < handle.NumDiagnostics; i++)
+            {
+                using var diagnostic = handle.GetDiagnostic(i);
+                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error, diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+            }
+            var surface = new List<string>();
+            Walk(unit.TranslationUnitDecl);
+            return surface.ToArray();
+
+            void Walk(Cursor cursor)
+            {
+                cursor.Location.GetExpansionLocation(out var file, out _, out _, out _);
+                if (Path.GetFileName(file.ToString()) == "test.h")
+                {
+                    if (cursor is FunctionDecl function)
+                        surface.Add("function " + function.Name + " " + function.Type.CanonicalType.AsString);
+                    else if (cursor is FieldDecl field)
+                        surface.Add("field " + field.Name + " " + field.Type.CanonicalType.AsString + " " + field.Handle.OffsetOfField);
+                    else if (cursor is RecordDecl record && record.IsCompleteDefinition)
+                        surface.Add("record " + record.Name + " " + record.Handle.Type.SizeOf + " " + record.Handle.Type.AlignOf);
+                    else if (cursor is EnumDecl enumeration)
+                        surface.Add("enum " + enumeration.Name + " " + enumeration.IntegerType.AsString);
+                }
+                foreach (var child in cursor.CursorChildren)
+                    if (child.Handle.IsDeclaration || child.Handle.IsTranslationUnit)
+                        Walk(child);
+            }
+        }
+
+        internal static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
+            => Emit(fixture.DirectoryPath, architecture);
+
+        internal static void AssertDeviceProducerSourceProjection(string root, string baselinePath, string architecture,
+            (string Header, string Partition, string Namespace, string TypeName,
+                string Method, string Parameter, string Cleanup, long[] InvalidValues)[] transfers)
+        {
+            var families = transfers.DistinctBy(value => value.TypeName).ToArray();
+            using var baseline = new MetadataImage(baselinePath);
+            using var before = Component("before", "original-autoTypes.json");
+            using var after = Component("after", "candidate-owned-autoTypes.json");
+            AssertMetadataClosure(before.Reader);
+            AssertMetadataClosure(after.Reader);
+            Assert.Equal(families.Length, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "RAIIFreeAttribute"));
+            Assert.Equal(families.Sum(value => value.InvalidValues.Length),
+                before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "InvalidHandleValueAttribute"));
+            Assert.Equal(transfers.Length, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "RAIIFreeAttribute"));
+            Assert.Equal(transfers.Sum(value => value.InvalidValues.Length),
+                after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "InvalidHandleValueAttribute"));
+            var originalTypes = TypeSnapshots(before.Reader);
+            var currentTypes = TypeSnapshots(after.Reader);
+            Assert.Equal(originalTypes.Keys, currentTypes.Keys);
+            var changed = families.Select(value => value.Namespace + "." + value.TypeName)
+                .Concat(families.Select(value => value.Namespace + ".Apis")).ToHashSet(StringComparer.Ordinal);
+            foreach (var entry in originalTypes.Where(value => !changed.Contains(value.Key)))
+                Assert.Equal(entry.Value, currentTypes[entry.Key]);
+
+            var signatures = new SignatureNames(qualifiedNames: true);
+            foreach (var family in families)
+            {
+                var original = FindType(before.Reader, family.TypeName);
+                var current = FindType(after.Reader, family.TypeName);
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(baseline.Reader, FindType(baseline.Reader, family.TypeName)),
+                    WinHttpMigrationTests.SnapshotType(before.Reader, original));
+                Assert.Equal(family.Cleanup, ReadStringAttribute(before.Reader, original.GetCustomAttributes(), "RAIIFreeAttribute"));
+                Assert.Equal(family.InvalidValues, ReadInvalidValues(before.Reader, original.GetCustomAttributes()));
+                AssertDoesNotHaveAttribute(after.Reader, current.GetCustomAttributes(), "RAIIFreeAttribute");
+                AssertDoesNotHaveAttribute(after.Reader, current.GetCustomAttributes(), "InvalidHandleValueAttribute");
+                Assert.Equal(original.Attributes, current.Attributes);
+                Assert.Equal(original.GetLayout().PackingSize, current.GetLayout().PackingSize);
+                Assert.Equal(original.GetLayout().Size, current.GetLayout().Size);
+                Assert.Equal(HandleKind.TypeReference, original.BaseType.Kind);
+                Assert.Equal(HandleKind.TypeReference, current.BaseType.Kind);
+                Assert.Equal(signatures.GetTypeFromReference(before.Reader, (TypeReferenceHandle)original.BaseType, 0),
+                    signatures.GetTypeFromReference(after.Reader, (TypeReferenceHandle)current.BaseType, 0));
+                Assert.Equal(Facts(before.Reader, original.GetCustomAttributes(), true),
+                    Facts(after.Reader, current.GetCustomAttributes(), true));
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(before.Reader, original).Split('\n').First(),
+                    WinHttpMigrationTests.SnapshotType(after.Reader, current).Split('\n').First());
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(before.Reader, original).Split('\n').Skip(2),
+                    WinHttpMigrationTests.SnapshotType(after.Reader, current).Split('\n').Skip(2));
+            }
+
+            var usedTransfers = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var family in families)
+            {
+                var originalApis = Api(before.Reader, family.Namespace);
+                var currentApis = Api(after.Reader, family.Namespace);
+                Assert.Equal(originalApis.Attributes, currentApis.Attributes);
+                Assert.Equal(Facts(before.Reader, originalApis.GetCustomAttributes()),
+                    Facts(after.Reader, currentApis.GetCustomAttributes()));
+                var originalMethods = originalApis.GetMethods().Select(before.Reader.GetMethodDefinition).ToArray();
+                var currentMethods = currentApis.GetMethods().Select(after.Reader.GetMethodDefinition).ToArray();
+                var expectedOrder = originalMethods.Select(method => before.Reader.GetString(method.Name)).ToList();
+                Assert.True(expectedOrder.IndexOf(family.Cleanup) > expectedOrder.IndexOf(family.Method));
+                Assert.True(expectedOrder.Remove(family.Cleanup));
+                expectedOrder.Insert(expectedOrder.IndexOf(family.Method), family.Cleanup);
+                Assert.Equal(expectedOrder, currentMethods.Select(method => after.Reader.GetString(method.Name)));
+                foreach (var original in originalMethods)
+                {
+                    string name = before.Reader.GetString(original.Name);
+                    var current = Assert.Single(currentMethods.Where(method => after.Reader.GetString(method.Name) == name));
+                    Assert.Equal(original.Attributes, current.Attributes);
+                    Assert.Equal(original.ImplAttributes, current.ImplAttributes);
+                    var oldSignature = original.DecodeSignature(signatures, null);
+                    var signature = current.DecodeSignature(signatures, null);
+                    Assert.Equal(oldSignature.Header, signature.Header);
+                    Assert.Equal(oldSignature.ReturnType, signature.ReturnType);
+                    Assert.Equal(oldSignature.ParameterTypes.ToArray(), signature.ParameterTypes.ToArray());
+                    Assert.Equal(Facts(before.Reader, original.GetCustomAttributes()), Facts(after.Reader, current.GetCustomAttributes()));
+                    var oldImport = original.GetImport();
+                    var import = current.GetImport();
+                    Assert.Equal(oldImport.Attributes, import.Attributes);
+                    Assert.Equal(before.Reader.GetString(oldImport.Name), after.Reader.GetString(import.Name));
+                    Assert.Equal(before.Reader.GetString(before.Reader.GetModuleReference(oldImport.Module).Name),
+                        after.Reader.GetString(after.Reader.GetModuleReference(import.Module).Name));
+                    var originalParameters = original.GetParameters().Select(before.Reader.GetParameter)
+                        .ToDictionary(parameter => parameter.SequenceNumber);
+                    var parameters = current.GetParameters().Select(after.Reader.GetParameter).ToArray();
+                    Assert.Equal(originalParameters.Keys.OrderBy(value => value),
+                        parameters.Select(parameter => parameter.SequenceNumber).OrderBy(value => value));
+                    foreach (var parameter in parameters)
+                    {
+                        var originalParameter = originalParameters[parameter.SequenceNumber];
+                        string parameterName = after.Reader.GetString(parameter.Name);
+                        string target = parameter.SequenceNumber == 0 ? "return" : parameterName;
+                        var transfer = transfers.SingleOrDefault(value => value.Method == name && value.Parameter == target);
+                        Assert.Equal(before.Reader.GetString(originalParameter.Name), parameterName);
+                        Assert.Equal(originalParameter.Attributes, parameter.Attributes);
+                        Assert.Equal(Facts(before.Reader, originalParameter.GetCustomAttributes()),
+                            Facts(after.Reader, parameter.GetCustomAttributes(), true));
+                        if (transfer.Method == null)
+                        {
+                            AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute");
+                            AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "InvalidHandleValueAttribute");
+                            continue;
+                        }
+                        Assert.True(usedTransfers.Add(name + "::" + target));
+                        AssertStringAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute", transfer.Cleanup);
+                        Assert.Equal(transfer.InvalidValues, ReadInvalidValues(after.Reader, parameter.GetCustomAttributes()));
+                        if (target == "return")
+                        {
+                            Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                            Assert.Equal(transfer.Namespace + "." + transfer.TypeName, signature.ReturnType);
+                        }
+                        else
+                        {
+                            Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                            Assert.Equal(transfer.Namespace + "." + transfer.TypeName + "*",
+                                signature.ParameterTypes[parameter.SequenceNumber - 1]);
+                        }
+                    }
+                }
+            }
+            Assert.Equal(transfers.Select(value => value.Method + "::" + value.Parameter).OrderBy(value => value, StringComparer.Ordinal),
+                usedTransfers.OrderBy(value => value, StringComparer.Ordinal));
+
+            MetadataImage Component(string state, string autoTypesFile)
+            {
+                string directory = Path.Combine(root, "components", architecture, state);
+                Directory.CreateDirectory(directory);
+                var names = new Dictionary<string, string>(StringComparer.Ordinal);
+                foreach (var group in transfers.GroupBy(value => value.Partition, StringComparer.Ordinal))
+                {
+                    string generated = Path.Combine(root, state, "obj", "generated");
+                    string path = new[] { architecture, "common" }.Select(folder =>
+                        Path.Combine(generated, folder, group.Key + ".cs")).Single(File.Exists);
+                    var source = CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetCompilationUnitRoot();
+                    var apis = Assert.Single(source.DescendantNodes().OfType<ClassDeclarationSyntax>()
+                        .Where(value => value.Identifier.ValueText == "Apis"));
+                    var ns = Assert.Single(apis.Ancestors().OfType<NamespaceDeclarationSyntax>());
+                    Assert.All(group, value => Assert.Equal(value.Namespace, ns.Name.ToString()));
+                    var methods = group.Select(value => value.Method).Concat(group.Select(value => value.Cleanup))
+                        .ToHashSet(StringComparer.Ordinal);
+                    string familyPattern = @"\b(?:" + string.Join("|", group.Select(value => Regex.Escape(value.TypeName))
+                        .Distinct(StringComparer.Ordinal)) + @")\b";
+                    var selected = apis.Members.OfType<MethodDeclarationSyntax>()
+                        .Where(value => Regex.IsMatch(value.ToString(), familyPattern)).ToArray();
+                    Assert.All(methods, method => Assert.Single(selected.Where(value => value.Identifier.ValueText == method)));
+                    source = source.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                        ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                            apis.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(selected))))));
+                    File.WriteAllText(Path.Combine(directory, group.Key + ".cs"), source.ToFullString());
+                    foreach (string cleanup in group.Select(value => value.Cleanup))
+                        names[cleanup] = ns.Name.ToString();
+                }
+                var types = AutoTypeHelpers.GetAutoTypesFromFiles(new[] { Path.Combine(root, autoTypesFile) })
+                    .Where(value => families.Any(family => family.TypeName == value.Name)).ToArray();
+                Assert.Equal(families.Length, types.Length);
+                using (var stream = File.Create(Path.Combine(directory, "NativeTypedefs.cs")))
+                    NativeTypedefStructsCreator.WriteToStream(names, types, stream);
+                return Emit(directory, architecture, references: new[] { baselinePath });
+            }
+
+            static TypeDefinition Api(MetadataReader reader, string ns) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(value => reader.GetString(value.Namespace) == ns && reader.GetString(value.Name) == "Apis");
+            static Dictionary<string, string> TypeSnapshots(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .OrderBy(value => reader.GetString(value.Namespace) + "." + reader.GetString(value.Name), StringComparer.Ordinal)
+                .ToDictionary(value => reader.GetString(value.Namespace) + "." + reader.GetString(value.Name),
+                    value => WinHttpMigrationTests.SnapshotType(reader, value), StringComparer.Ordinal);
+            static string[] Facts(MetadataReader reader, CustomAttributeHandleCollection attributes, bool withoutOwnership = false)
+                => attributes.Where(handle => !withoutOwnership ||
+                    AttributeName(reader, handle) is not ("RAIIFreeAttribute" or "InvalidHandleValueAttribute"))
+                    .Select(handle => AttributeName(reader, handle) + ":" +
+                        Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
+            bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
+            IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
+            Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd",
+            Dictionary<string, string> apiNamesToNamespaces = null, string metadataSource = null)
+        {
+            if (metadataSource == null)
+                File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                    Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
+            else
+                File.WriteAllText(Path.Combine(directory, "Metadata.manual.cs"), metadataSource);
+            var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
+                memberRemaps ?? new Dictionary<string, string>(), enumAdditions ?? new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
+                references ?? Array.Empty<string>(), new Dictionary<string, string>(),
+                apiNamesToNamespaces ?? new Dictionary<string, string>(), nativeFieldArrayInfo);
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            string path = Path.Combine(directory, winmdFileName);
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
+                new Dictionary<string, string>(), reducePointerLevels ?? new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
+            Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            return new MetadataImage(path);
+        }
+
+        internal static void WriteNormalMethod(string source, string name, string destination)
+        {
+            var method = CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().Single(value => value.Identifier.ValueText == name);
+            var api = Assert.IsType<ClassDeclarationSyntax>(method.Parent);
+            var ns = Assert.IsType<NamespaceDeclarationSyntax>(api.Parent);
+            var boundedApi = api.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(method));
+            var boundedSource = SyntaxFactory.ParseCompilationUnit(
+                "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;")
+                .AddMembers(ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(boundedApi)));
+            File.WriteAllText(destination, boundedSource.NormalizeWhitespace().ToFullString());
+        }
+
+        internal static TypeDefinition FindType(MetadataReader reader, string name)
+            => reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type => reader.GetString(type.Name) == name);
+
+        internal static MethodDefinition FindMethod(MetadataReader reader, string type, string name)
+            => FindType(reader, type).GetMethods().Select(reader.GetMethodDefinition).Single(method => reader.GetString(method.Name) == name);
+
+        internal static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)
+        {
+            var constructor = reader.GetCustomAttribute(handle).Constructor;
+            var type = constructor.Kind == HandleKind.MethodDefinition
+                ? reader.GetMethodDefinition((MethodDefinitionHandle)constructor).GetDeclaringType()
+                : reader.GetMemberReference((MemberReferenceHandle)constructor).Parent;
+            return type.Kind == HandleKind.TypeDefinition
+                ? reader.GetString(reader.GetTypeDefinition((TypeDefinitionHandle)type).Name)
+                : reader.GetString(reader.GetTypeReference((TypeReferenceHandle)type).Name);
+        }
+
+        internal static void AssertHasAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name)
+            => Assert.Contains(attributes, handle => AttributeName(reader, handle) == name);
+
+        internal static void AssertDoesNotHaveAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name)
+            => Assert.DoesNotContain(attributes, handle => AttributeName(reader, handle) == name);
+
+        internal static void AssertStringAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name, string value)
+            => Assert.Equal(value, ReadStringAttribute(reader, attributes, name));
+
+        internal static string ReadStringAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name)
+        {
+            var attribute = reader.GetCustomAttribute(attributes.Single(handle => AttributeName(reader, handle) == name));
+            var blob = reader.GetBlobReader(attribute.Value);
+            Assert.Equal(1, blob.ReadUInt16());
+            string value = blob.ReadSerializedString();
+            Assert.Equal(0, blob.ReadUInt16());
+            Assert.Equal(0, blob.RemainingBytes);
+            return value;
+        }
+
+        internal static long[] ReadInvalidValues(MetadataReader reader, CustomAttributeHandleCollection attributes)
+            => attributes.Where(handle => AttributeName(reader, handle) == "InvalidHandleValueAttribute").Select(handle =>
+            {
+                var blob = reader.GetBlobReader(reader.GetCustomAttribute(handle).Value);
+                Assert.Equal(1, blob.ReadUInt16());
+                long value = blob.ReadInt64();
+                Assert.Equal(0, blob.ReadUInt16());
+                Assert.Equal(0, blob.RemainingBytes);
+                return value;
+            }).ToArray();
+
+        internal static void AssertMetadataClosure(MetadataReader reader)
+        {
+            var localTypes = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Select(type => reader.GetString(type.Namespace) + "." + reader.GetString(type.Name)).ToHashSet();
+            foreach (var handle in reader.TypeReferences)
+            {
+                var type = reader.GetTypeReference(handle);
+                Assert.False(type.ResolutionScope.IsNil);
+                if (type.ResolutionScope.Kind == HandleKind.ModuleDefinition)
+                    Assert.Contains(reader.GetString(type.Namespace) + "." + reader.GetString(type.Name), localTypes);
+            }
+            foreach (var handle in reader.CustomAttributes)
+            {
+                string name = AttributeName(reader, handle);
+                Assert.DoesNotContain(name, new[] { "NativeAnnotationAttribute", "SourceLocationAttribute", "CppAttributeList" });
+                var constructor = reader.GetCustomAttribute(handle).Constructor;
+                if (constructor.Kind != HandleKind.MemberReference)
+                    continue;
+                var reference = reader.GetMemberReference((MemberReferenceHandle)constructor);
+                if (reference.Parent.Kind != HandleKind.TypeReference)
+                    continue;
+                var type = reader.GetTypeReference((TypeReferenceHandle)reference.Parent);
+                if (type.ResolutionScope.Kind != HandleKind.ModuleDefinition)
+                    continue;
+
+                string fullName = reader.GetString(type.Namespace) + "." + reader.GetString(type.Name);
+                var definition = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(candidate =>
+                    reader.GetString(candidate.Namespace) + "." + reader.GetString(candidate.Name) == fullName);
+                var provider = new SignatureNames(qualifiedNames: true);
+                var expected = reference.DecodeMethodSignature(provider, null);
+                Assert.True(expected.Header.IsInstance);
+                var actual = Assert.Single(definition.GetMethods().Select(reader.GetMethodDefinition)
+                    .Where(method => reader.GetString(method.Name) == ".ctor")
+                    .Select(method => (Method: method, Signature: method.DecodeSignature(provider, null)))
+                    .Where(candidate => candidate.Signature.Header.RawValue == expected.Header.RawValue
+                        && candidate.Signature.GenericParameterCount == expected.GenericParameterCount
+                        && candidate.Signature.RequiredParameterCount == expected.RequiredParameterCount
+                        && candidate.Signature.ReturnType == expected.ReturnType
+                        && candidate.Signature.ParameterTypes.SequenceEqual(expected.ParameterTypes)));
+                Assert.False(actual.Method.Attributes.HasFlag(MethodAttributes.Static));
+                Assert.True(actual.Method.Attributes.HasFlag(MethodAttributes.SpecialName | MethodAttributes.RTSpecialName));
+            }
+        }
+
+        internal sealed class MetadataImage : IDisposable
+        {
+            private readonly FileStream stream;
+            private readonly PEReader image;
+            internal MetadataImage(string path)
+            {
+                stream = File.OpenRead(path);
+                image = new PEReader(stream);
+                Reader = image.GetMetadataReader(MetadataReaderOptions.None);
+            }
+            internal MetadataReader Reader { get; }
+            public void Dispose() { image.Dispose(); stream.Dispose(); }
+        }
+
+        internal sealed class SignatureNames : ISignatureTypeProvider<string, object>
+        {
+            private readonly bool qualifiedNames;
+            internal SignatureNames(bool qualifiedNames = false) => this.qualifiedNames = qualifiedNames;
+
+            public string GetArrayType(string elementType, ArrayShape shape) => elementType + "[]";
+            public string GetByReferenceType(string elementType) => elementType + "&";
+            public string GetFunctionPointerType(MethodSignature<string> signature) => "fnptr";
+            public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments) => genericType;
+            public string GetGenericMethodParameter(object context, int index) => "!!" + index;
+            public string GetGenericTypeParameter(object context, int index) => "!" + index;
+            public string GetModifiedType(string modifier, string type, bool required) => type;
+            public string GetPinnedType(string elementType) => elementType;
+            public string GetPointerType(string elementType) => elementType + "*";
+            public string GetPrimitiveType(PrimitiveTypeCode type) => type.ToString();
+            public string GetSZArrayType(string elementType) => elementType + "[]";
+            public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte kind)
+            {
+                var type = reader.GetTypeDefinition(handle);
+                return this.GetTypeName(reader, type.Namespace, type.Name);
+            }
+            public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte kind)
+            {
+                var type = reader.GetTypeReference(handle);
+                return this.GetTypeName(reader, type.Namespace, type.Name);
+            }
+            public string GetTypeFromSpecification(MetadataReader reader, object context, TypeSpecificationHandle handle, byte kind)
+                => reader.GetTypeSpecification(handle).DecodeSignature(this, context);
+            private string GetTypeName(MetadataReader reader, StringHandle @namespace, StringHandle name)
+                => this.qualifiedNames ? reader.GetString(@namespace) + "." + reader.GetString(name) : reader.GetString(name);
+        }
+    }
+    public class CoreHeaderAnnotationWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -1338,91 +1902,6 @@ namespace Test {
             }
         }
 
-        private const string Declarations = @"
-typedef void* HANDLE;
-typedef int HRESULT;
-enum _Win32_SupportedOS_10240_ _Win32_AssociatedConstant_(LOOSE_A)
-    _Win32_AssociatedConstant_(LOOSE_B) Options : unsigned { OptionA = 1, OptionB = 2 };
-enum class [[clang::flag_enum]] ScopedOptions : unsigned { None = 0, A = 1, B = 2 };
-struct _Win32_SupportedOS_10240_ DESCRIPTION {
-    _Win32_AssociatedEnum_(Options) unsigned flags;
-    int size;
-};
-_Win32_SupportedOS_Windows7_ _Win32_AlsoUsableFor_(OTHER_TOKEN)
-typedef unsigned long TOKEN;
-_Win32_SupportedOS_10240_
-typedef int (__stdcall* PFN_BASE)(_Win32_Retained_ void* context, unsigned count);
-_Win32_SupportedOS_Windows7_
-typedef PFN_BASE PFN_ALIAS;
-extern ""C"" {
-_Win32_SetLastError_ _Win32_ImportLibrary_(""header.dll"") _Win32_SupportedOS_10240_
-int __stdcall Imported(_In_ _Win32_Retained_ void* context,
-    _Out_writes_bytes_opt_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* buffer,
-    unsigned capacity);
-_Win32_RAIIFree_(CloseThing, 0, -1) HANDLE __stdcall OpenThing();
-int __stdcall CreateThing(_Out_ _Win32_RAIIFree_(CloseThing, 0) HANDLE* output);
-_Win32_AssociatedEnum_(Options) unsigned __stdcall AssociatedReturn();
-int __stdcall ReadOption(_In_ _Win32_AssociatedEnum_(Options) unsigned option);
-_Win32_PreserveResult_ HRESULT __stdcall ExactResult();
-int __stdcall Retval(_Out_ _Win32_Retval_ int* result);
-int __stdcall MidlRetval(/* [out] [retval] */ _Out_retval_ int* result);
-TOKEN __stdcall UseToken(TOKEN value, TOKEN* output);
-int __stdcall UseCallback(PFN_ALIAS callback);
-}
-struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Win32_SupportedOS_10240_ IHeaderSample {
-    _Win32_PreserveResult_ _Win32_SupportedOS_Windows7_
-    virtual HRESULT __stdcall Exact(_Out_ _Win32_Retval_ int* result) = 0;
-    _Win32_RAIIFree_(CloseThing, 0, -1)
-    virtual HANDLE __stdcall Produce() = 0;
-    virtual HRESULT __stdcall Buffer(_Out_writes_bytes_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* data, unsigned capacity) = 0;
-};
-";
-
-        private const string ScopedDeclarations = @"
-typedef int HRESULT;
-int BeforeScope();
-_Win32_SupportedOS_BEGIN_(WindowsVista)
-struct SCOPED_RECORD {
-    int size;
-    unsigned flags;
-    struct NESTED_RECORD { int value; };
-    enum NESTED_ENUM { NestedValue = 1 };
-};
-enum SCOPED_ENUM : unsigned { ScopedValue = 1 };
-typedef unsigned SCOPED_TOKEN;
-typedef int (__stdcall* PFN_SCOPED)(_In_ _Win32_Retained_ void* context, _Out_ int* result);
-using USING_TOKEN = unsigned;
-using PFN_USING = SCOPED_TOKEN (__stdcall*)(_In_ _Win32_Retained_ void* context, _Out_ _Win32_Retval_ int* result);
-using PFN_USING_ALIAS = PFN_USING;
-using PFN_USING_NATIVE_ALIAS = PFN_SCOPED;
-typedef PFN_USING PFN_TYPEDEF_USING_ALIAS;
-SCOPED_TOKEN UseScopedToken(SCOPED_TOKEN value);
-USING_TOKEN UseUsingToken(USING_TOKEN value);
-void UseScopedCallbacks(PFN_SCOPED first, PFN_USING second, PFN_USING_ALIAS third, PFN_TYPEDEF_USING_ALIAS fourth);
-_Win32_SupportedOS_END_()
-using DIRECT_TOKEN _Win32_SupportedOS_Windows7_ = unsigned;
-_Win32_SupportedOS_Windows7_ typedef struct _PRIMARY_SCOPED { unsigned value; } PRIMARY_SCOPED;
-_Win32_SupportedOS_BEGIN_(Windows7)
-int Seven();
-_Win32_SupportedOS_Windows7_ int ExplicitEqual();
-_Win32_SupportedOS_END_()
-_Win32_SupportedOS_Windows8_ int ExplicitLater();
-_Win32_SupportedOS_Windows2000_ int ExplicitEarlier();
-_Win32_SupportedOS_BEGIN_(Windows2000)
-int OlderNested();
-_Win32_SupportedOS_END_()
-struct __declspec(uuid(""4d0ea686-f54d-4b53-aeec-bf6154950080"")) _Win32_SupportedOS_WindowsVista_ IScoped {
-    _Win32_SupportedOS_WindowsVista_ virtual HRESULT __stdcall VistaMethod(_Out_ _Win32_Retval_ int* result) = 0;
-    _Win32_SupportedOS_Windows7_ virtual HRESULT __stdcall SevenMethod() = 0;
-    _Win32_SupportedOS_Windows2000_ virtual HRESULT __stdcall ExplicitMethod() = 0;
-    _Win32_SupportedOS_WindowsVista_ virtual HRESULT __stdcall VistaAgainMethod() = 0;
-};
-int AfterScope();
-struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_SupportedOS_Windows7_ IContainerOnly {
-    virtual HRESULT __stdcall UnannotatedMember(_Out_ _Win32_Retval_ int* result) = 0;
-};
-";
-
         [NativeMigrationTheory("SYSTEM_AVAILABILITY_BINDINGS")]
         [InlineData("x86")]
         [InlineData("x64")]
@@ -2123,22 +2602,6 @@ unsigned long __stdcall NativeResourceType(
             Assert.Contains("_Win32_RAIIFree_(CloseCompressor, -1, 0)", compression);
             Assert.Contains("_Win32_RAIIFree_(CloseDecompressor, -1, 0)", compression);
         }
-
-        private static readonly (string Name, string Header, string Namespace, string Storage,
-            bool Flags, bool Synthetic, int Members)[] ExistingNativeNonfloorGroups =
-        {
-            ("ACTIVEOBJECT_FLAGS", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", true, true, 2),
-            ("NUMPARSE_FLAGS", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", true, true, 16),
-            ("VARCMP", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", false, true, 4),
-            ("DISPATCH_FLAGS", "oleauto.h", "Windows.Win32.System.Com", "UInt16", true, true, 4),
-            ("VAR_CHANGE_FLAGS", "oleauto.h", "Windows.Win32.System.Variant", "UInt16", true, true, 8),
-            ("PICTYPE", "olectl.h", "Windows.Win32.System.Ole", "Int16", false, true, 6),
-            ("LOAD_PICTURE_FLAGS", "olectl.h", "Windows.Win32.System.Ole", "UInt32", true, true, 4),
-            ("STGM", "coml2api.h", "Windows.Win32.System.Com", "UInt32", true, true, 18),
-            ("STGFMT", "coml2api.h", "Windows.Win32.System.Com.StructuredStorage", "UInt32", false, true, 6),
-            ("COINIT", "objbase.h", "Windows.Win32.System.Com", "Int32", true, false, 4),
-            ("PATHCCH_OPTIONS", "pathcch.h", "Windows.Win32.UI.Shell", "UInt32", true, false, 8),
-        };
 
         [NativeMigrationTheory("EXISTING_NATIVE_NONFLOOR_ROOT")]
         [InlineData("x86")]
@@ -3541,69 +4004,6 @@ int __stdcall PreserveReserved(
                 AssertHasAttribute(candidate.Reader, parameter.GetCustomAttributes(), "ReservedAttribute");
             AssertMetadataClosure(candidate.Reader);
         }
-
-        private static string FieldShape(MetadataReader reader, FieldDefinition field)
-            => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
-                field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
-
-        private static string MethodShape(MetadataReader reader, MethodDefinition method)
-        {
-            var signature = method.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
-            var import = method.GetImport();
-            string module = import.Module.IsNil ? "" :
-                reader.GetString(reader.GetModuleReference(import.Module).Name);
-            return reader.GetString(method.Name) + "|" + method.Attributes + "|" + method.ImplAttributes + "|" +
-                signature.Header.RawValue + "|" + signature.ReturnType + "|" +
-                string.Join(",", signature.ParameterTypes) + "|" + import.Attributes + "|" + module + "|" +
-                (import.Name.IsNil ? "" : reader.GetString(import.Name)) + "|" +
-                string.Join(",", method.GetParameters().Select(reader.GetParameter)
-                    .Select(parameter => reader.GetString(parameter.Name) + ":" + parameter.SequenceNumber + ":" + parameter.Attributes));
-        }
-
-        private static void WriteAvailabilityDeclarations(IEnumerable<string> texts, string partition, HashSet<string> names, string directory)
-        {
-            var sources = texts.Select(text => CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot()).ToArray();
-            var source = sources[0].WithUsings(SyntaxFactory.List(sources.SelectMany(unit => unit.Usings)
-                .GroupBy(value => value.ToString(), StringComparer.Ordinal).Select(group => group.First())));
-            var found = new HashSet<string>(StringComparer.Ordinal);
-            var namespaces = sources.SelectMany(unit => unit.Members).OfType<NamespaceDeclarationSyntax>().Select(ns =>
-            {
-                var members = new List<MemberDeclarationSyntax>();
-                foreach (var declaration in ns.Members)
-                {
-                    if (declaration is StructDeclarationSyntax record && names.Contains(record.Identifier.ValueText))
-                    {
-                        Assert.True(found.Add(record.Identifier.ValueText));
-                        members.Add(record);
-                    }
-                    if (declaration is ClassDeclarationSyntax api)
-                    {
-                        var methods = api.Members.OfType<MethodDeclarationSyntax>()
-                            .Where(method => names.Contains(method.Identifier.ValueText)).ToArray();
-                        foreach (var method in methods)
-                            Assert.True(found.Add(method.Identifier.ValueText));
-                        if (methods.Length != 0)
-                            members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(methods)));
-                    }
-                }
-                return ns.WithMembers(SyntaxFactory.List(members));
-            }).Where(ns => ns.Members.Count != 0).ToArray();
-            Assert.True(names.SetEquals(found), directory + "/" + partition + ": " + string.Join(",", names.Except(found)));
-            File.WriteAllText(Path.Combine(directory, partition + ".cs"),
-                source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces)).NormalizeWhitespace().ToFullString());
-        }
-
-        private static readonly (string Name, string Header, bool Flags, int Members)[] NextNativeCategoryGroups =
-        {
-            ("CERT_SELECT_STRUCT_FLAGS", "cryptdlg.h", true, 6),
-            ("CERT_VIEWPROPERTIES_STRUCT_FLAGS", "cryptdlg.h", true, 10),
-            ("CTL_MODIFY_REQUEST_OPERATION", "cryptdlg.h", false, 3),
-            ("SECURITY_INFO_PAGE_FLAGS", "aclui.h", true, 3),
-            ("SET_SERVICE_OPERATION", "nspapi.h", false, 5),
-            ("PERF_COUNTER_AGGREGATE_FUNC", "perflib.h", false, 5),
-            ("CACHE_CONFIG", "winineti.h", false, 10),
-            ("PFN_WDS_CLI_CALLBACK_MESSAGE_ID", "wdsclientapi.h", false, 4),
-        };
 
         [HeaderMigrationDataFact]
         public void NextNativeCategoryKeepsSourceGroupsAndExactUnsupportedTails()
@@ -5711,53 +6111,6 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             AssertMetadataClosure(reader);
         }
 
-        private static string[] NativeSurface(HeaderAnnotationTests.NativeFixture fixture, string target, bool metadataEnabled, string language = "c++")
-        {
-            string source = Path.Combine(fixture.DirectoryPath, "test.cpp");
-            var arguments = new List<string>
-            {
-                "--language=" + language, "--std=" + (language == "c" ? "c11" : "c++17"), "--target=" + target,
-                "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
-                "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1",
-            };
-            if (metadataEnabled)
-                arguments.Add("-DWIN32METADATA");
-            using var index = CXIndex.Create(false, false);
-            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
-                ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
-            using var unit = TranslationUnit.GetOrCreate(handle);
-            for (uint i = 0; i < handle.NumDiagnostics; i++)
-            {
-                using var diagnostic = handle.GetDiagnostic(i);
-                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error, diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
-            }
-            var surface = new List<string>();
-            Walk(unit.TranslationUnitDecl);
-            return surface.ToArray();
-
-            void Walk(Cursor cursor)
-            {
-                cursor.Location.GetExpansionLocation(out var file, out _, out _, out _);
-                if (Path.GetFileName(file.ToString()) == "test.h")
-                {
-                    if (cursor is FunctionDecl function)
-                        surface.Add("function " + function.Name + " " + function.Type.CanonicalType.AsString);
-                    else if (cursor is FieldDecl field)
-                        surface.Add("field " + field.Name + " " + field.Type.CanonicalType.AsString + " " + field.Handle.OffsetOfField);
-                    else if (cursor is RecordDecl record && record.IsCompleteDefinition)
-                        surface.Add("record " + record.Name + " " + record.Handle.Type.SizeOf + " " + record.Handle.Type.AlignOf);
-                    else if (cursor is EnumDecl enumeration)
-                        surface.Add("enum " + enumeration.Name + " " + enumeration.IntegerType.AsString);
-                }
-                foreach (var child in cursor.CursorChildren)
-                    if (child.Handle.IsDeclaration || child.Handle.IsTranslationUnit)
-                        Walk(child);
-            }
-        }
-
-        private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
-            => Emit(fixture.DirectoryPath, architecture);
-
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
@@ -6070,181 +6423,6 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                 WinHttpMigrationTests.DeviceUiProducerTransfers);
         }
 
-        private static void AssertDeviceProducerSourceProjection(string root, string baselinePath, string architecture,
-            (string Header, string Partition, string Namespace, string TypeName,
-                string Method, string Parameter, string Cleanup, long[] InvalidValues)[] transfers)
-        {
-            var families = transfers.DistinctBy(value => value.TypeName).ToArray();
-            using var baseline = new MetadataImage(baselinePath);
-            using var before = Component("before", "original-autoTypes.json");
-            using var after = Component("after", "candidate-owned-autoTypes.json");
-            AssertMetadataClosure(before.Reader);
-            AssertMetadataClosure(after.Reader);
-            Assert.Equal(families.Length, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "RAIIFreeAttribute"));
-            Assert.Equal(families.Sum(value => value.InvalidValues.Length),
-                before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "InvalidHandleValueAttribute"));
-            Assert.Equal(transfers.Length, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "RAIIFreeAttribute"));
-            Assert.Equal(transfers.Sum(value => value.InvalidValues.Length),
-                after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "InvalidHandleValueAttribute"));
-            var originalTypes = TypeSnapshots(before.Reader);
-            var currentTypes = TypeSnapshots(after.Reader);
-            Assert.Equal(originalTypes.Keys, currentTypes.Keys);
-            var changed = families.Select(value => value.Namespace + "." + value.TypeName)
-                .Concat(families.Select(value => value.Namespace + ".Apis")).ToHashSet(StringComparer.Ordinal);
-            foreach (var entry in originalTypes.Where(value => !changed.Contains(value.Key)))
-                Assert.Equal(entry.Value, currentTypes[entry.Key]);
-
-            var signatures = new SignatureNames(qualifiedNames: true);
-            foreach (var family in families)
-            {
-                var original = FindType(before.Reader, family.TypeName);
-                var current = FindType(after.Reader, family.TypeName);
-                Assert.Equal(WinHttpMigrationTests.SnapshotType(baseline.Reader, FindType(baseline.Reader, family.TypeName)),
-                    WinHttpMigrationTests.SnapshotType(before.Reader, original));
-                Assert.Equal(family.Cleanup, ReadStringAttribute(before.Reader, original.GetCustomAttributes(), "RAIIFreeAttribute"));
-                Assert.Equal(family.InvalidValues, ReadInvalidValues(before.Reader, original.GetCustomAttributes()));
-                AssertDoesNotHaveAttribute(after.Reader, current.GetCustomAttributes(), "RAIIFreeAttribute");
-                AssertDoesNotHaveAttribute(after.Reader, current.GetCustomAttributes(), "InvalidHandleValueAttribute");
-                Assert.Equal(original.Attributes, current.Attributes);
-                Assert.Equal(original.GetLayout().PackingSize, current.GetLayout().PackingSize);
-                Assert.Equal(original.GetLayout().Size, current.GetLayout().Size);
-                Assert.Equal(HandleKind.TypeReference, original.BaseType.Kind);
-                Assert.Equal(HandleKind.TypeReference, current.BaseType.Kind);
-                Assert.Equal(signatures.GetTypeFromReference(before.Reader, (TypeReferenceHandle)original.BaseType, 0),
-                    signatures.GetTypeFromReference(after.Reader, (TypeReferenceHandle)current.BaseType, 0));
-                Assert.Equal(Facts(before.Reader, original.GetCustomAttributes(), true),
-                    Facts(after.Reader, current.GetCustomAttributes(), true));
-                Assert.Equal(WinHttpMigrationTests.SnapshotType(before.Reader, original).Split('\n').First(),
-                    WinHttpMigrationTests.SnapshotType(after.Reader, current).Split('\n').First());
-                Assert.Equal(WinHttpMigrationTests.SnapshotType(before.Reader, original).Split('\n').Skip(2),
-                    WinHttpMigrationTests.SnapshotType(after.Reader, current).Split('\n').Skip(2));
-            }
-
-            var usedTransfers = new HashSet<string>(StringComparer.Ordinal);
-            foreach (var family in families)
-            {
-                var originalApis = Api(before.Reader, family.Namespace);
-                var currentApis = Api(after.Reader, family.Namespace);
-                Assert.Equal(originalApis.Attributes, currentApis.Attributes);
-                Assert.Equal(Facts(before.Reader, originalApis.GetCustomAttributes()),
-                    Facts(after.Reader, currentApis.GetCustomAttributes()));
-                var originalMethods = originalApis.GetMethods().Select(before.Reader.GetMethodDefinition).ToArray();
-                var currentMethods = currentApis.GetMethods().Select(after.Reader.GetMethodDefinition).ToArray();
-                var expectedOrder = originalMethods.Select(method => before.Reader.GetString(method.Name)).ToList();
-                Assert.True(expectedOrder.IndexOf(family.Cleanup) > expectedOrder.IndexOf(family.Method));
-                Assert.True(expectedOrder.Remove(family.Cleanup));
-                expectedOrder.Insert(expectedOrder.IndexOf(family.Method), family.Cleanup);
-                Assert.Equal(expectedOrder, currentMethods.Select(method => after.Reader.GetString(method.Name)));
-                foreach (var original in originalMethods)
-                {
-                    string name = before.Reader.GetString(original.Name);
-                    var current = Assert.Single(currentMethods.Where(method => after.Reader.GetString(method.Name) == name));
-                    Assert.Equal(original.Attributes, current.Attributes);
-                    Assert.Equal(original.ImplAttributes, current.ImplAttributes);
-                    var oldSignature = original.DecodeSignature(signatures, null);
-                    var signature = current.DecodeSignature(signatures, null);
-                    Assert.Equal(oldSignature.Header, signature.Header);
-                    Assert.Equal(oldSignature.ReturnType, signature.ReturnType);
-                    Assert.Equal(oldSignature.ParameterTypes.ToArray(), signature.ParameterTypes.ToArray());
-                    Assert.Equal(Facts(before.Reader, original.GetCustomAttributes()), Facts(after.Reader, current.GetCustomAttributes()));
-                    var oldImport = original.GetImport();
-                    var import = current.GetImport();
-                    Assert.Equal(oldImport.Attributes, import.Attributes);
-                    Assert.Equal(before.Reader.GetString(oldImport.Name), after.Reader.GetString(import.Name));
-                    Assert.Equal(before.Reader.GetString(before.Reader.GetModuleReference(oldImport.Module).Name),
-                        after.Reader.GetString(after.Reader.GetModuleReference(import.Module).Name));
-                    var originalParameters = original.GetParameters().Select(before.Reader.GetParameter)
-                        .ToDictionary(parameter => parameter.SequenceNumber);
-                    var parameters = current.GetParameters().Select(after.Reader.GetParameter).ToArray();
-                    Assert.Equal(originalParameters.Keys.OrderBy(value => value),
-                        parameters.Select(parameter => parameter.SequenceNumber).OrderBy(value => value));
-                    foreach (var parameter in parameters)
-                    {
-                        var originalParameter = originalParameters[parameter.SequenceNumber];
-                        string parameterName = after.Reader.GetString(parameter.Name);
-                        string target = parameter.SequenceNumber == 0 ? "return" : parameterName;
-                        var transfer = transfers.SingleOrDefault(value => value.Method == name && value.Parameter == target);
-                        Assert.Equal(before.Reader.GetString(originalParameter.Name), parameterName);
-                        Assert.Equal(originalParameter.Attributes, parameter.Attributes);
-                        Assert.Equal(Facts(before.Reader, originalParameter.GetCustomAttributes()),
-                            Facts(after.Reader, parameter.GetCustomAttributes(), true));
-                        if (transfer.Method == null)
-                        {
-                            AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute");
-                            AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "InvalidHandleValueAttribute");
-                            continue;
-                        }
-                        Assert.True(usedTransfers.Add(name + "::" + target));
-                        AssertStringAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute", transfer.Cleanup);
-                        Assert.Equal(transfer.InvalidValues, ReadInvalidValues(after.Reader, parameter.GetCustomAttributes()));
-                        if (target == "return")
-                        {
-                            Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Out));
-                            Assert.Equal(transfer.Namespace + "." + transfer.TypeName, signature.ReturnType);
-                        }
-                        else
-                        {
-                            Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
-                            Assert.Equal(transfer.Namespace + "." + transfer.TypeName + "*",
-                                signature.ParameterTypes[parameter.SequenceNumber - 1]);
-                        }
-                    }
-                }
-            }
-            Assert.Equal(transfers.Select(value => value.Method + "::" + value.Parameter).OrderBy(value => value, StringComparer.Ordinal),
-                usedTransfers.OrderBy(value => value, StringComparer.Ordinal));
-
-            MetadataImage Component(string state, string autoTypesFile)
-            {
-                string directory = Path.Combine(root, "components", architecture, state);
-                Directory.CreateDirectory(directory);
-                var names = new Dictionary<string, string>(StringComparer.Ordinal);
-                foreach (var group in transfers.GroupBy(value => value.Partition, StringComparer.Ordinal))
-                {
-                    string generated = Path.Combine(root, state, "obj", "generated");
-                    string path = new[] { architecture, "common" }.Select(folder =>
-                        Path.Combine(generated, folder, group.Key + ".cs")).Single(File.Exists);
-                    var source = CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetCompilationUnitRoot();
-                    var apis = Assert.Single(source.DescendantNodes().OfType<ClassDeclarationSyntax>()
-                        .Where(value => value.Identifier.ValueText == "Apis"));
-                    var ns = Assert.Single(apis.Ancestors().OfType<NamespaceDeclarationSyntax>());
-                    Assert.All(group, value => Assert.Equal(value.Namespace, ns.Name.ToString()));
-                    var methods = group.Select(value => value.Method).Concat(group.Select(value => value.Cleanup))
-                        .ToHashSet(StringComparer.Ordinal);
-                    string familyPattern = @"\b(?:" + string.Join("|", group.Select(value => Regex.Escape(value.TypeName))
-                        .Distinct(StringComparer.Ordinal)) + @")\b";
-                    var selected = apis.Members.OfType<MethodDeclarationSyntax>()
-                        .Where(value => Regex.IsMatch(value.ToString(), familyPattern)).ToArray();
-                    Assert.All(methods, method => Assert.Single(selected.Where(value => value.Identifier.ValueText == method)));
-                    source = source.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
-                        ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
-                            apis.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(selected))))));
-                    File.WriteAllText(Path.Combine(directory, group.Key + ".cs"), source.ToFullString());
-                    foreach (string cleanup in group.Select(value => value.Cleanup))
-                        names[cleanup] = ns.Name.ToString();
-                }
-                var types = AutoTypeHelpers.GetAutoTypesFromFiles(new[] { Path.Combine(root, autoTypesFile) })
-                    .Where(value => families.Any(family => family.TypeName == value.Name)).ToArray();
-                Assert.Equal(families.Length, types.Length);
-                using (var stream = File.Create(Path.Combine(directory, "NativeTypedefs.cs")))
-                    NativeTypedefStructsCreator.WriteToStream(names, types, stream);
-                return Emit(directory, architecture, references: new[] { baselinePath });
-            }
-
-            static TypeDefinition Api(MetadataReader reader, string ns) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .Single(value => reader.GetString(value.Namespace) == ns && reader.GetString(value.Name) == "Apis");
-            static Dictionary<string, string> TypeSnapshots(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .OrderBy(value => reader.GetString(value.Namespace) + "." + reader.GetString(value.Name), StringComparer.Ordinal)
-                .ToDictionary(value => reader.GetString(value.Namespace) + "." + reader.GetString(value.Name),
-                    value => WinHttpMigrationTests.SnapshotType(reader, value), StringComparer.Ordinal);
-            static string[] Facts(MetadataReader reader, CustomAttributeHandleCollection attributes, bool withoutOwnership = false)
-                => attributes.Where(handle => !withoutOwnership ||
-                    AttributeName(reader, handle) is not ("RAIIFreeAttribute" or "InvalidHandleValueAttribute"))
-                    .Select(handle => AttributeName(reader, handle) + ":" +
-                        Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
-                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
-        }
-
         [NativeMigrationTheory("NETWORK_WINSPOOL_CONST_NORMAL_SOURCES")]
         [InlineData("x86")]
         [InlineData("x64")]
@@ -6345,181 +6523,6 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                 actualNormalMethodsUnmodified = 54, exactParameters = observations, legacyMemberRemapsUsed = 0,
                 fullSdkImageOrConsumerClaimed = false,
             }, new JsonSerializerOptions { WriteIndented = true }));
-        }
-
-        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
-            bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null,
-            IEnumerable<string> references = null, Dictionary<string, string> requiredNamespaces = null,
-            Dictionary<string, Dictionary<string, string>> enumAdditions = null, string winmdFileName = "Test.winmd",
-            Dictionary<string, string> apiNamesToNamespaces = null, string metadataSource = null)
-        {
-            if (metadataSource == null)
-                File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
-                    Path.Combine(directory, "Metadata.manual.cs"), overwrite: true);
-            else
-                File.WriteAllText(Path.Combine(directory, "Metadata.manual.cs"), metadataSource);
-            var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
-                memberRemaps ?? new Dictionary<string, string>(), enumAdditions ?? new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
-                new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
-                references ?? Array.Empty<string>(), new Dictionary<string, string>(),
-                apiNamesToNamespaces ?? new Dictionary<string, string>(), nativeFieldArrayInfo);
-            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
-            string path = Path.Combine(directory, winmdFileName);
-            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
-                new Dictionary<string, string>(), reducePointerLevels ?? new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
-            Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
-            return new MetadataImage(path);
-        }
-
-        private static void WriteNormalMethod(string source, string name, string destination)
-        {
-            var method = CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetRoot().DescendantNodes()
-                .OfType<MethodDeclarationSyntax>().Single(value => value.Identifier.ValueText == name);
-            var api = Assert.IsType<ClassDeclarationSyntax>(method.Parent);
-            var ns = Assert.IsType<NamespaceDeclarationSyntax>(api.Parent);
-            var boundedApi = api.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(method));
-            var boundedSource = SyntaxFactory.ParseCompilationUnit(
-                "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;")
-                .AddMembers(ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(boundedApi)));
-            File.WriteAllText(destination, boundedSource.NormalizeWhitespace().ToFullString());
-        }
-
-        private static TypeDefinition FindType(MetadataReader reader, string name)
-            => reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type => reader.GetString(type.Name) == name);
-
-        private static MethodDefinition FindMethod(MetadataReader reader, string type, string name)
-            => FindType(reader, type).GetMethods().Select(reader.GetMethodDefinition).Single(method => reader.GetString(method.Name) == name);
-
-        internal static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)
-        {
-            var constructor = reader.GetCustomAttribute(handle).Constructor;
-            var type = constructor.Kind == HandleKind.MethodDefinition
-                ? reader.GetMethodDefinition((MethodDefinitionHandle)constructor).GetDeclaringType()
-                : reader.GetMemberReference((MemberReferenceHandle)constructor).Parent;
-            return type.Kind == HandleKind.TypeDefinition
-                ? reader.GetString(reader.GetTypeDefinition((TypeDefinitionHandle)type).Name)
-                : reader.GetString(reader.GetTypeReference((TypeReferenceHandle)type).Name);
-        }
-
-        private static void AssertHasAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name)
-            => Assert.Contains(attributes, handle => AttributeName(reader, handle) == name);
-
-        private static void AssertDoesNotHaveAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name)
-            => Assert.DoesNotContain(attributes, handle => AttributeName(reader, handle) == name);
-
-        private static void AssertStringAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name, string value)
-            => Assert.Equal(value, ReadStringAttribute(reader, attributes, name));
-
-        private static string ReadStringAttribute(MetadataReader reader, CustomAttributeHandleCollection attributes, string name)
-        {
-            var attribute = reader.GetCustomAttribute(attributes.Single(handle => AttributeName(reader, handle) == name));
-            var blob = reader.GetBlobReader(attribute.Value);
-            Assert.Equal(1, blob.ReadUInt16());
-            string value = blob.ReadSerializedString();
-            Assert.Equal(0, blob.ReadUInt16());
-            Assert.Equal(0, blob.RemainingBytes);
-            return value;
-        }
-
-        private static long[] ReadInvalidValues(MetadataReader reader, CustomAttributeHandleCollection attributes)
-            => attributes.Where(handle => AttributeName(reader, handle) == "InvalidHandleValueAttribute").Select(handle =>
-            {
-                var blob = reader.GetBlobReader(reader.GetCustomAttribute(handle).Value);
-                Assert.Equal(1, blob.ReadUInt16());
-                long value = blob.ReadInt64();
-                Assert.Equal(0, blob.ReadUInt16());
-                Assert.Equal(0, blob.RemainingBytes);
-                return value;
-            }).ToArray();
-
-        private static void AssertMetadataClosure(MetadataReader reader)
-        {
-            var localTypes = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .Select(type => reader.GetString(type.Namespace) + "." + reader.GetString(type.Name)).ToHashSet();
-            foreach (var handle in reader.TypeReferences)
-            {
-                var type = reader.GetTypeReference(handle);
-                Assert.False(type.ResolutionScope.IsNil);
-                if (type.ResolutionScope.Kind == HandleKind.ModuleDefinition)
-                    Assert.Contains(reader.GetString(type.Namespace) + "." + reader.GetString(type.Name), localTypes);
-            }
-            foreach (var handle in reader.CustomAttributes)
-            {
-                string name = AttributeName(reader, handle);
-                Assert.DoesNotContain(name, new[] { "NativeAnnotationAttribute", "SourceLocationAttribute", "CppAttributeList" });
-                var constructor = reader.GetCustomAttribute(handle).Constructor;
-                if (constructor.Kind != HandleKind.MemberReference)
-                    continue;
-                var reference = reader.GetMemberReference((MemberReferenceHandle)constructor);
-                if (reference.Parent.Kind != HandleKind.TypeReference)
-                    continue;
-                var type = reader.GetTypeReference((TypeReferenceHandle)reference.Parent);
-                if (type.ResolutionScope.Kind != HandleKind.ModuleDefinition)
-                    continue;
-
-                string fullName = reader.GetString(type.Namespace) + "." + reader.GetString(type.Name);
-                var definition = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(candidate =>
-                    reader.GetString(candidate.Namespace) + "." + reader.GetString(candidate.Name) == fullName);
-                var provider = new SignatureNames(qualifiedNames: true);
-                var expected = reference.DecodeMethodSignature(provider, null);
-                Assert.True(expected.Header.IsInstance);
-                var actual = Assert.Single(definition.GetMethods().Select(reader.GetMethodDefinition)
-                    .Where(method => reader.GetString(method.Name) == ".ctor")
-                    .Select(method => (Method: method, Signature: method.DecodeSignature(provider, null)))
-                    .Where(candidate => candidate.Signature.Header.RawValue == expected.Header.RawValue
-                        && candidate.Signature.GenericParameterCount == expected.GenericParameterCount
-                        && candidate.Signature.RequiredParameterCount == expected.RequiredParameterCount
-                        && candidate.Signature.ReturnType == expected.ReturnType
-                        && candidate.Signature.ParameterTypes.SequenceEqual(expected.ParameterTypes)));
-                Assert.False(actual.Method.Attributes.HasFlag(MethodAttributes.Static));
-                Assert.True(actual.Method.Attributes.HasFlag(MethodAttributes.SpecialName | MethodAttributes.RTSpecialName));
-            }
-        }
-
-        internal sealed class MetadataImage : IDisposable
-        {
-            private readonly FileStream stream;
-            private readonly PEReader image;
-            internal MetadataImage(string path)
-            {
-                stream = File.OpenRead(path);
-                image = new PEReader(stream);
-                Reader = image.GetMetadataReader(MetadataReaderOptions.None);
-            }
-            internal MetadataReader Reader { get; }
-            public void Dispose() { image.Dispose(); stream.Dispose(); }
-        }
-
-        internal sealed class SignatureNames : ISignatureTypeProvider<string, object>
-        {
-            private readonly bool qualifiedNames;
-            internal SignatureNames(bool qualifiedNames = false) => this.qualifiedNames = qualifiedNames;
-
-            public string GetArrayType(string elementType, ArrayShape shape) => elementType + "[]";
-            public string GetByReferenceType(string elementType) => elementType + "&";
-            public string GetFunctionPointerType(MethodSignature<string> signature) => "fnptr";
-            public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments) => genericType;
-            public string GetGenericMethodParameter(object context, int index) => "!!" + index;
-            public string GetGenericTypeParameter(object context, int index) => "!" + index;
-            public string GetModifiedType(string modifier, string type, bool required) => type;
-            public string GetPinnedType(string elementType) => elementType;
-            public string GetPointerType(string elementType) => elementType + "*";
-            public string GetPrimitiveType(PrimitiveTypeCode type) => type.ToString();
-            public string GetSZArrayType(string elementType) => elementType + "[]";
-            public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte kind)
-            {
-                var type = reader.GetTypeDefinition(handle);
-                return this.GetTypeName(reader, type.Namespace, type.Name);
-            }
-            public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte kind)
-            {
-                var type = reader.GetTypeReference(handle);
-                return this.GetTypeName(reader, type.Namespace, type.Name);
-            }
-            public string GetTypeFromSpecification(MetadataReader reader, object context, TypeSpecificationHandle handle, byte kind)
-                => reader.GetTypeSpecification(handle).DecodeSignature(this, context);
-            private string GetTypeName(MetadataReader reader, StringHandle @namespace, StringHandle name)
-                => this.qualifiedNames ? reader.GetString(@namespace) + "." + reader.GetString(name) : reader.GetString(name);
         }
     }
 

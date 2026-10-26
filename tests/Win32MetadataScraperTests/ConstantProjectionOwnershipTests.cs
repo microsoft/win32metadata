@@ -11,7 +11,24 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static JsonElement Decision(JsonDocument report, string name) =>
+            report.RootElement.GetProperty("Decisions").EnumerateArray().Single(value =>
+                value.GetProperty("Name").GetString() == name);
+
+        internal static int ReadInt32Member(MetadataReader reader, string type, string name)
+        {
+            var field = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(value => reader.GetString(value.Name) == type).SelectMany(value => value.GetFields())
+                .Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == name);
+            var constant = reader.GetConstant(field.GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.Int32, constant.TypeCode);
+            return reader.GetBlobReader(constant.Value).ReadInt32();
+        }
+    }
+    public class ConstantProjectionOwnershipTests : HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -557,20 +574,6 @@ namespace Win32MetadataScraperTests
                 new() { [fixture.Header] = "Origin", [legacy] = "Legacy" }));
             Assert.Contains("conflicting authoritative storage types", error.Message);
             Assert.Contains("NATIVE_ERROR", error.Message);
-        }
-
-        private static JsonElement Decision(JsonDocument report, string name) =>
-            report.RootElement.GetProperty("Decisions").EnumerateArray().Single(value =>
-                value.GetProperty("Name").GetString() == name);
-
-        private static int ReadInt32Member(MetadataReader reader, string type, string name)
-        {
-            var field = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .Where(value => reader.GetString(value.Name) == type).SelectMany(value => value.GetFields())
-                .Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == name);
-            var constant = reader.GetConstant(field.GetDefaultValue());
-            Assert.Equal(ConstantTypeCode.Int32, constant.TypeCode);
-            return reader.GetBlobReader(constant.Value).ReadInt32();
         }
     }
 }

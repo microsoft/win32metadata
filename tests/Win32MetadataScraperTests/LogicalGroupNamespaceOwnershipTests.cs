@@ -11,9 +11,71 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string NamespaceOwnedMacro = "#define MEMBER (1U << 2)\n_Win32_Enum_(SOURCE_GROUP, unsigned, MEMBER);\nint F();";
+        internal const string NamespaceOwnedMacro = "#define MEMBER (1U << 2)\n_Win32_Enum_(SOURCE_GROUP, unsigned, MEMBER);\nint F();";
+
+        internal static HeaderAnnotationTests.NativeFixture NewNamespaceOwnershipFixture(
+            string architecture, string target, string declarations, string settings = "") =>
+            new(architecture, target, declarations, extraSettings: "--config\nnative-constant-values\n" + settings);
+
+        internal static void ScrapeNamespaceOwnership(string directory, Dictionary<string, string> headers) =>
+            ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", directory,
+                "using System; using Windows.Win32.Foundation.Metadata;", new(), headers,
+                new() { ["SOURCE_GROUP"] = "Canonical" }, new(), new(), new());
+
+        internal static void AssertNamespaceOwnershipSource(HeaderAnnotationTests.NativeFixture fixture)
+        {
+            string source = fixture.ReadAdditionalTypes();
+            Assert.StartsWith(HeaderTypesSourceFamily.SuccessMarker, source);
+            var group = Assert.Single(CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>());
+            Assert.Equal("SOURCE_GROUP", group.Identifier.ValueText);
+            var member = Assert.Single(group.Members);
+            Assert.Equal("MEMBER", member.Identifier.ValueText);
+            Assert.Equal("unchecked((uint)4UL)", member.EqualsValue.Value.ToString());
+            Assert.NotNull(NativeConstantGroupProvenance.Read(group));
+        }
+
+        internal static NativeConstantBinding GroupMemberBinding(HeaderAnnotationTests.NativeFixture fixture) =>
+            Assert.Single(Assert.Single(NativeConstantGroupProvenance.Read(Assert.Single(
+                CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>()))
+                .Group.Members).Bindings);
+
+        internal static JsonDocument ReadNamespaceOwnershipReport(HeaderAnnotationTests.NativeFixture fixture) =>
+            JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.DirectoryPath, "native-constant-conflicts.json")));
+
+        internal static string[] NamespaceMacroOwners(MetadataReader reader) =>
+            reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => type.GetFields().Select(reader.GetFieldDefinition).Any(field => reader.GetString(field.Name) == "MEMBER"))
+                .Select(type => reader.GetString(type.Namespace) + "." + reader.GetString(type.Name))
+                .OrderBy(name => name, StringComparer.Ordinal).ToArray();
+
+        internal static void RecordNamespaceOwnership(string directory, MetadataReader reader)
+        {
+            var records = reader.TypeDefinitions.Select(reader.GetTypeDefinition).SelectMany(type =>
+                type.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(field => reader.GetString(field.Name) == "MEMBER")
+                    .Select(field => new
+                    {
+                        Owner = reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
+                        TypeAttributes = ReadAttributes(type.GetCustomAttributes()),
+                        FieldAttributes = ReadAttributes(field.GetCustomAttributes()),
+                        Signature = Convert.ToHexString(reader.GetBlobBytes(field.Signature)),
+                        ConstantType = reader.GetConstant(field.GetDefaultValue()).TypeCode.ToString(),
+                        ConstantValue = Convert.ToHexString(reader.GetBlobBytes(reader.GetConstant(field.GetDefaultValue()).Value)),
+                    })).ToArray();
+            File.WriteAllText(Path.Combine(directory, "namespace-ownership-physical.json"),
+                JsonSerializer.Serialize(records, new JsonSerializerOptions { WriteIndented = true }));
+
+            object[] ReadAttributes(CustomAttributeHandleCollection attributes) => attributes.Select(handle => new
+            {
+                Name = AttributeName(reader, handle),
+                Value = Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)),
+            }).Cast<object>().ToArray();
+        }
+    }
+    public class LogicalGroupNamespaceOwnershipTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -207,65 +269,6 @@ namespace Win32MetadataScraperTests
             {
                 SaveOpaqueRecordArtifacts(fixture, "conflicting-binding-" + architecture);
             }
-        }
-
-        private static HeaderAnnotationTests.NativeFixture NewNamespaceOwnershipFixture(
-            string architecture, string target, string declarations, string settings = "") =>
-            new(architecture, target, declarations, extraSettings: "--config\nnative-constant-values\n" + settings);
-
-        private static void ScrapeNamespaceOwnership(string directory, Dictionary<string, string> headers) =>
-            ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", directory,
-                "using System; using Windows.Win32.Foundation.Metadata;", new(), headers,
-                new() { ["SOURCE_GROUP"] = "Canonical" }, new(), new(), new());
-
-        private static void AssertNamespaceOwnershipSource(HeaderAnnotationTests.NativeFixture fixture)
-        {
-            string source = fixture.ReadAdditionalTypes();
-            Assert.StartsWith(HeaderTypesSourceFamily.SuccessMarker, source);
-            var group = Assert.Single(CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>());
-            Assert.Equal("SOURCE_GROUP", group.Identifier.ValueText);
-            var member = Assert.Single(group.Members);
-            Assert.Equal("MEMBER", member.Identifier.ValueText);
-            Assert.Equal("unchecked((uint)4UL)", member.EqualsValue.Value.ToString());
-            Assert.NotNull(NativeConstantGroupProvenance.Read(group));
-        }
-
-        private static NativeConstantBinding GroupMemberBinding(HeaderAnnotationTests.NativeFixture fixture) =>
-            Assert.Single(Assert.Single(NativeConstantGroupProvenance.Read(Assert.Single(
-                CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>()))
-                .Group.Members).Bindings);
-
-        private static JsonDocument ReadNamespaceOwnershipReport(HeaderAnnotationTests.NativeFixture fixture) =>
-            JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.DirectoryPath, "native-constant-conflicts.json")));
-
-        private static string[] NamespaceMacroOwners(MetadataReader reader) =>
-            reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .Where(type => type.GetFields().Select(reader.GetFieldDefinition).Any(field => reader.GetString(field.Name) == "MEMBER"))
-                .Select(type => reader.GetString(type.Namespace) + "." + reader.GetString(type.Name))
-                .OrderBy(name => name, StringComparer.Ordinal).ToArray();
-
-        private static void RecordNamespaceOwnership(string directory, MetadataReader reader)
-        {
-            var records = reader.TypeDefinitions.Select(reader.GetTypeDefinition).SelectMany(type =>
-                type.GetFields().Select(reader.GetFieldDefinition)
-                    .Where(field => reader.GetString(field.Name) == "MEMBER")
-                    .Select(field => new
-                    {
-                        Owner = reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
-                        TypeAttributes = ReadAttributes(type.GetCustomAttributes()),
-                        FieldAttributes = ReadAttributes(field.GetCustomAttributes()),
-                        Signature = Convert.ToHexString(reader.GetBlobBytes(field.Signature)),
-                        ConstantType = reader.GetConstant(field.GetDefaultValue()).TypeCode.ToString(),
-                        ConstantValue = Convert.ToHexString(reader.GetBlobBytes(reader.GetConstant(field.GetDefaultValue()).Value)),
-                    })).ToArray();
-            File.WriteAllText(Path.Combine(directory, "namespace-ownership-physical.json"),
-                JsonSerializer.Serialize(records, new JsonSerializerOptions { WriteIndented = true }));
-
-            object[] ReadAttributes(CustomAttributeHandleCollection attributes) => attributes.Select(handle => new
-            {
-                Name = AttributeName(reader, handle),
-                Value = Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)),
-            }).Cast<object>().ToArray();
         }
     }
 }

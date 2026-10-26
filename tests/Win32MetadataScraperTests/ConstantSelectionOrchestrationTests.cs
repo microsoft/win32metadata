@@ -8,7 +8,34 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
+    {
+
+        internal static string RunConstantsProject(string project, string priority, int expected)
+        {
+            using var process = new Process();
+            process.StartInfo = new ProcessStartInfo("dotnet")
+            {
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+            };
+            foreach (string argument in new[] { "msbuild", project, "-nologo", "-v:normal", "-p:Priority=" + priority })
+                process.StartInfo.ArgumentList.Add(argument);
+            process.Start();
+            var stdout = process.StandardOutput.ReadToEndAsync();
+            var stderr = process.StandardError.ReadToEndAsync();
+            bool completed = process.WaitForExit(60000);
+            if (!completed)
+                process.Kill(entireProcessTree: true);
+            Assert.True(completed, "The normal constants task did not finish.");
+            string output = stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult();
+            File.AppendAllText(Path.ChangeExtension(project, ".log"), $"Priority={priority}; exit={process.ExitCode}\n{output}\n");
+            Assert.True(expected == process.ExitCode, output);
+            return output;
+        }
+    }
+    public class ConstantSelectionOrchestrationTests : HeaderAnnotationWinmdTests
     {
         [Fact]
         public void NormalConstantsTaskPassesExactPriorityInputOrderAndIncrementalPolicy()
@@ -104,30 +131,6 @@ namespace Win32MetadataScraperTests
             static XElement Partition(HeaderAnnotationTests.NativeFixture fixture, string name, string ns, string traversed) =>
                 new("Partition", new XAttribute("Include", Path.Combine(fixture.DirectoryPath, "test.cpp")),
                     new XElement("Name", name), new XElement("Namespace", ns), new XElement("TraverseFiles", traversed));
-        }
-
-        private static string RunConstantsProject(string project, string priority, int expected)
-        {
-            using var process = new Process();
-            process.StartInfo = new ProcessStartInfo("dotnet")
-            {
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-            };
-            foreach (string argument in new[] { "msbuild", project, "-nologo", "-v:normal", "-p:Priority=" + priority })
-                process.StartInfo.ArgumentList.Add(argument);
-            process.Start();
-            var stdout = process.StandardOutput.ReadToEndAsync();
-            var stderr = process.StandardError.ReadToEndAsync();
-            bool completed = process.WaitForExit(60000);
-            if (!completed)
-                process.Kill(entireProcessTree: true);
-            Assert.True(completed, "The normal constants task did not finish.");
-            string output = stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult();
-            File.AppendAllText(Path.ChangeExtension(project, ".log"), $"Priority={priority}; exit={process.ExitCode}\n{output}\n");
-            Assert.True(expected == process.ExitCode, output);
-            return output;
         }
     }
 }

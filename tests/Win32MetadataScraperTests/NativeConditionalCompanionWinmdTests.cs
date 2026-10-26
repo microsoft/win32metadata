@@ -7,9 +7,9 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string ConditionalNativeExports = @"
+        internal const string ConditionalNativeExports = @"
 extern ""C"" {
 typedef unsigned short WCHAR;
 struct Payload { const char* text; unsigned flags; };
@@ -27,6 +27,9 @@ int __stdcall UnmappedExport(AnsiOnlyRecord* value);
 #endif
 }
 ";
+    }
+    public class NativeConditionalCompanionWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true, false)]

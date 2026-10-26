@@ -77,9 +77,26 @@ namespace Win32MetadataScraper
             if (missingNames.Count == 0)
                 return;
 
-            var visited = new HashSet<Cursor>();
             using var nativeTiming = GenerationTiming.BeginSpan("native-providers.collect-native-candidates");
-            Walk(unit.TranslationUnitDecl);
+            var nativeDeclarations = new NativeCursorIndex(unit.TranslationUnitDecl,
+                child => !child.IsAttribute && !child.IsReference && !child.IsExpression, reverseTraversal: false);
+            int selectedCount = 0;
+            foreach (var cursor in nativeDeclarations.Cursors)
+            {
+                if (!cursor.IsDeclaration)
+                    continue;
+                var kind = cursor.DeclKind;
+                if (kind is not (>= CX_DeclKind.CX_DeclKind_FirstTypedefName and <= CX_DeclKind.CX_DeclKind_LastTypedefName) &&
+                    kind is not (>= CX_DeclKind.CX_DeclKind_FirstRecord and <= CX_DeclKind.CX_DeclKind_LastRecord))
+                    continue;
+                using var spelling = cursor.Spelling;
+                string name = spelling.ToString();
+                if (!missingNames.Contains(ManagedName(name, DeclarationSourceMap.QualifiedName(cursor), remaps)))
+                    continue;
+                Inspect(nativeDeclarations.GetCursor(cursor));
+                selectedCount++;
+            }
+            nativeTiming?.SetCounter("selectedDeclarationCount", selectedCount);
             foreach (var group in recordAliases.GroupBy(alias => alias.ManagedName))
                 if (group.Select(alias => alias.Declaration.Handle.CanonicalCursor).Distinct().Count() != 1)
                     throw new InvalidOperationException($"Distinct native record aliases project to '{group.Key}'.");
@@ -87,10 +104,8 @@ namespace Win32MetadataScraper
             recordAliases.Clear();
             recordAliases.AddRange(uniqueAliases);
 
-            void Walk(Cursor cursor)
+            void Inspect(Cursor cursor)
             {
-                if (!visited.Add(cursor))
-                    return;
                 if (cursor is TypedefNameDecl alias && alias.UnderlyingType.CanonicalType is RecordType type)
                 {
                     var declaration = type.Decl.Definition ?? type.Decl;
@@ -128,9 +143,6 @@ namespace Win32MetadataScraper
                         }
                     }
                 }
-                foreach (var child in cursor.CursorChildren)
-                    if (!child.Handle.IsAttribute && !child.Handle.IsReference && !child.Handle.IsExpression)
-                        Walk(child);
             }
         }
 

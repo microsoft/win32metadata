@@ -190,6 +190,133 @@ int OnlyAnsi();
             }
         }
 
+        [Theory]
+        [InlineData("#ifndef UNICODE\nint Recovered(int value);\n#endif", 1, 2)]
+        [InlineData("#ifndef UNICODE\nint Reco\\\nvered(int value);\n#endif", 1, 2)]
+        [InlineData("// Recovered(int value);\nint Available(int value);", 0, 0)]
+        [InlineData("#define Recovered(value) (value)\nint Available(int value);", 0, 0)]
+        [InlineData("int Recovered(int value);", 0, 0)]
+        [InlineData("int Ordinary(int value);", 0, 0)]
+        public void ConditionalRecoveryRetainsExactCompilerSources(string source, int recoveredCount, int parseCount)
+        {
+            using var fixture = new NativeFixture(source, detailed: false);
+            int parses = 0;
+            using var companion = NativeConditionalCompanion.Create(fixture.Unit,
+                new[] { "--language=c++", "--std=c++17", "-DUNICODE" }, (CXTranslationUnit_Flags)12288,
+                new[] { fixture.Source }, new Dictionary<string, string> { ["Recovered"] = "native.dll" },
+                new Dictionary<string, string>(), new HashSet<string>(), (arguments, flags) =>
+                {
+                    parses++;
+                    return fixture.Parse(flags.HasFlag(CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord),
+                        arguments.Where(argument => argument == "-UUNICODE").ToArray());
+                }, Path.ChangeExtension(fixture.Source, ".native-declarations.json"));
+            Assert.Equal(recoveredCount, companion.Functions.Count);
+            Assert.Equal(parseCount, parses);
+            if (recoveredCount != 0)
+                Assert.Equal("Recovered", Assert.Single(companion.Functions).Name);
+        }
+
+        [Fact]
+        public void MemberMacroRecoveryPreservesAuthoredRemapProof()
+        {
+            using var fixture = new NativeFixture(@"
+#ifdef UNICODE
+#define Selected SelectedW
+#else
+#define Selected SelectedA
+#endif
+struct Owner { virtual int Selected(char* text) = 0; };
+", detailed: false);
+            int parses = 0;
+            using var companion = NativeConditionalCompanion.Create(fixture.Unit,
+                new[] { "--language=c++", "--std=c++17", "-DUNICODE" }, (CXTranslationUnit_Flags)12288,
+                new[] { fixture.Source }, new Dictionary<string, string>(),
+                new Dictionary<string, string> { ["Owner::SelectedA"] = "Chosen" },
+                new HashSet<string>(), (arguments, flags) =>
+                {
+                    parses++;
+                    return fixture.Parse(flags.HasFlag(CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord),
+                        arguments.Where(argument => argument == "-UUNICODE").ToArray());
+                }, Path.ChangeExtension(fixture.Source, ".native-declarations.json"));
+            Assert.Empty(companion.Functions);
+            Assert.Equal("Chosen", companion.ScopedRemaps["Owner::SelectedW"]);
+            Assert.Equal(1, parses);
+        }
+
+        [Fact]
+        public void ConditionalRecoveryDoesNotBypassDependencyContractValidation()
+        {
+            using var fixture = new NativeFixture(@"
+#ifdef UNICODE
+typedef unsigned short CHARACTER;
+#else
+typedef char CHARACTER;
+#endif
+struct Payload { CHARACTER* text; };
+#ifndef UNICODE
+int Recovered(Payload* value);
+#endif
+", detailed: false);
+            var error = Assert.Throws<InvalidOperationException>(() => NativeConditionalCompanion.Create(fixture.Unit,
+                new[] { "--language=c++", "--std=c++17", "-DUNICODE" }, (CXTranslationUnit_Flags)12288,
+                new[] { fixture.Source }, new Dictionary<string, string> { ["Recovered"] = "native.dll" },
+                new Dictionary<string, string>(), new HashSet<string>(), (arguments, flags) =>
+                    fixture.Parse(flags.HasFlag(CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord),
+                        arguments.Where(argument => argument == "-UUNICODE").ToArray()),
+                Path.ChangeExtension(fixture.Source, ".native-declarations.json")));
+            Assert.Contains("Primary Unicode declarations remain authoritative", error.Message);
+        }
+
+        [Fact]
+        public void AlternateDeclarationSelectionPreservesAmbiguousExportRejection()
+        {
+            using var fixture = new NativeFixture(@"
+#ifndef UNICODE
+int Recovered(int value);
+int Recovered(char* value);
+#endif
+", detailed: false);
+            var error = Assert.Throws<InvalidOperationException>(() => NativeConditionalCompanion.Create(fixture.Unit,
+                new[] { "--language=c++", "--std=c++17", "-DUNICODE" }, (CXTranslationUnit_Flags)12288,
+                new[] { fixture.Source }, new Dictionary<string, string> { ["Recovered"] = "native.dll" },
+                new Dictionary<string, string>(), new HashSet<string>(), (arguments, flags) =>
+                    fixture.Parse(flags.HasFlag(CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord),
+                        arguments.Where(argument => argument == "-UUNICODE").ToArray()),
+                Path.ChangeExtension(fixture.Source, ".native-declarations.json")));
+            Assert.Contains("ambiguous native declarations", error.Message);
+        }
+
+        [Fact]
+        public void AlternateDeclarationSelectionRetainsDistinctNestedMemberOwners()
+        {
+            using var fixture = new NativeFixture(@"
+#ifdef UNICODE
+#define Selected SelectedW
+#else
+#define Selected SelectedA
+#endif
+namespace Scope {
+struct Outer {
+    struct Nested { virtual int Selected(char* text) = 0; };
+    virtual int Selected(char* text) = 0;
+};
+}
+", detailed: false);
+            using var companion = NativeConditionalCompanion.Create(fixture.Unit,
+                new[] { "--language=c++", "--std=c++17", "-DUNICODE" }, (CXTranslationUnit_Flags)12288,
+                new[] { fixture.Source }, new Dictionary<string, string>(),
+                new Dictionary<string, string>
+                {
+                    ["Scope::Outer::SelectedA"] = "OuterChoice",
+                    ["Scope::Outer::Nested::SelectedA"] = "NestedChoice",
+                }, new HashSet<string>(), (arguments, flags) =>
+                    fixture.Parse(flags.HasFlag(CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord),
+                        arguments.Where(argument => argument == "-UUNICODE").ToArray()),
+                Path.ChangeExtension(fixture.Source, ".native-declarations.json"));
+            Assert.Equal("OuterChoice", companion.ScopedRemaps["Scope::Outer::SelectedW"]);
+            Assert.Equal("NestedChoice", companion.ScopedRemaps["Scope::Outer::Nested::SelectedW"]);
+        }
+
         private static IEnumerable<Decl> Declarations(Decl root)
         {
             yield return root;

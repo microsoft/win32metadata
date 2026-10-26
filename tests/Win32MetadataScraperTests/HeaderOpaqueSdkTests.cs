@@ -11,7 +11,7 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public class HeaderOpaqueSdkTests : HeaderAnnotationWinmdTests
     {
         [SelectedOpaqueSdkTheory]
         [InlineData("x86", "i686-pc-windows-msvc")]

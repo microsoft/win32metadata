@@ -3,14 +3,17 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public partial class HeaderAnnotationWinmdTests
+    public abstract partial class HeaderAnnotationWinmdTests
     {
-        private const string ExplicitAliasProjection = @"
+        internal const string ExplicitAliasProjection = @"
 namespace NativeMath { struct NativeVector { float x, y, z; }; }
 struct ProjectedVector { float x, y, z; };
 typedef NativeMath::NativeVector VECTOR_ALIAS;
 struct Payload { VECTOR_ALIAS value; };
 ";
+    }
+    public class ExplicitAliasProjectionWinmdTests : HeaderAnnotationWinmdTests
+    {
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
