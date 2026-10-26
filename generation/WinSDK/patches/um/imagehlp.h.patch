@@ -222,7 +222,23 @@ index 1cdaaf10..5bb44717 100644
  BOOL
  IMAGEAPI
  UpdateDebugInfoFileEx(
-@@ -845,6 +890,12 @@ UnDecorateSymbolNameW(
+@@ -470,6 +515,7 @@ typedef BOOL
+     _In_ PVOID CallerData
+     );
+ 
++_Win32_SetLastError_
+ HANDLE
+ IMAGEAPI
+ SymFindDebugInfoFile(
+@@ -629,6 +675,7 @@ FindExecutableImageExW(
+     _In_ PVOID CallerData
+     );
+ 
++_Win32_SetLastError_
+ PIMAGE_NT_HEADERS
+ IMAGEAPI
+ ImageNtHeader (
+@@ -845,6 +892,12 @@ UnDecorateSymbolNameW(
  
  #define DBHHEADER_DEBUGDIRS     0x1
  #define DBHHEADER_CVMISC        0x2
@@ -235,7 +251,7 @@ index 1cdaaf10..5bb44717 100644
  #define DBHHEADER_PDBGUID       0x3
  
  #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
-@@ -1611,6 +1662,27 @@ enum SymTagEnum
+@@ -1611,6 +1664,27 @@ enum SymTagEnum
  #define SYMFLAG_ILREL               0x00010000
  #define SYMFLAG_METADATA            0x00020000
  #define SYMFLAG_CLR_TOKEN           0x00040000
@@ -263,7 +279,7 @@ index 1cdaaf10..5bb44717 100644
  #define SYMFLAG_NULL                0x00080000
  #define SYMFLAG_FUNC_NO_RETURN      0x00100000
  #define SYMFLAG_SYNTHETIC_ZEROBASE  0x00200000
-@@ -1949,6 +2021,14 @@ enum {
+@@ -1949,6 +2023,14 @@ enum {
      sevFatal,
      sevMax  // unused
  };
@@ -278,7 +294,7 @@ index 1cdaaf10..5bb44717 100644
  
  #define EVENT_SRCSPEW_START 100
  #define EVENT_SRCSPEW       100
-@@ -3024,6 +3104,14 @@ SymSetSearchPathW(
+@@ -3024,6 +3106,14 @@ SymSetSearchPathW(
  #define SLMFLAG_ALT_INDEX   0x2
  #define SLMFLAG_NO_SYMBOLS  0x4
  
@@ -293,7 +309,7 @@ index 1cdaaf10..5bb44717 100644
  DWORD64
  IMAGEAPI
  SymLoadModuleEx(
-@@ -3614,6 +3702,12 @@ SymGetTypeInfo(
+@@ -3614,6 +3704,12 @@ SymGetTypeInfo(
  #define IMAGEHLP_GET_TYPE_INFO_UNCACHED 0x00000001
  #define IMAGEHLP_GET_TYPE_INFO_CHILDREN 0x00000002
  
@@ -306,7 +322,7 @@ index 1cdaaf10..5bb44717 100644
  typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
      IN  ULONG    SizeOfStruct;
      IN  ULONG    Flags;
-@@ -4163,6 +4257,13 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+@@ -4163,6 +4259,13 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
  #define SSRVOPT_DWORD               0x00000002
  #define SSRVOPT_DWORDPTR            0x00000004
  #define SSRVOPT_GUIDPTR             0x00000008
@@ -320,7 +336,7 @@ index 1cdaaf10..5bb44717 100644
  #define SSRVOPT_OLDGUIDPTR          0x00000010
  #define SSRVOPT_UNATTENDED          0x00000020
  #define SSRVOPT_NOCOPY              0x00000040
-@@ -4239,6 +4340,15 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+@@ -4239,6 +4342,15 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
   #define SYMSTOREOPT_UNICODE         0x20
   #define SYMSTOREOPT_PASS_IF_EXISTS  0x40
  
