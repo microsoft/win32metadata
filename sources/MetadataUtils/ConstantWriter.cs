@@ -119,48 +119,11 @@ $"        public const {type} {name} = {valueText};");
                 return valueText;
             }
 
-            bool signed = false;
-            bool is64Bit = false;
-
-            if (valueText.EndsWith("ULL", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = false;
-                is64Bit = true;
-                valueText = valueText.Substring(0, valueText.Length - 3);
-            }
-            else if (valueText.EndsWith("UL", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = false;
-                valueText = valueText.Substring(0, valueText.Length - 2);
-            }
-            else if (valueText.EndsWith("U", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = false;
-                valueText = valueText.Substring(0, valueText.Length - 1);
-            }
-            else if (valueText.EndsWith("LL", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = true;
-                is64Bit = true;
-                valueText = valueText.Substring(0, valueText.Length - 2);
-            }
-            else if (valueText.EndsWith("L", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = true;
-                valueText = valueText.Substring(0, valueText.Length - 1);
-            }
-            else if (valueText.EndsWith("ui64", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = false;
-                is64Bit = true;
-                valueText = valueText.Substring(0, valueText.Length - 4);
-            }
-            else if (valueText.EndsWith("i64", StringComparison.OrdinalIgnoreCase))
-            {
-                signed = true;
-                is64Bit = true;
-                valueText = valueText.Substring(0, valueText.Length - 3);
-            }
+            string suffix = GetIntegerLiteralSuffix(valueText);
+            bool signed = suffix.Length != 0 && !suffix.StartsWith("u", StringComparison.OrdinalIgnoreCase);
+            bool is64Bit = suffix.Contains("ll", StringComparison.OrdinalIgnoreCase) ||
+                suffix.EndsWith("i64", StringComparison.OrdinalIgnoreCase);
+            valueText = valueText.Substring(0, valueText.Length - suffix.Length);
 
             if (valueText.StartsWith('-'))
             {
@@ -215,6 +178,18 @@ $"        public const {type} {name} = {valueText};");
             }
 
             return valueText;
+        }
+
+        internal static string GetIntegerLiteralSuffix(string valueText, bool nativeSuffixes = false)
+        {
+            if (nativeSuffixes)
+                foreach (string suffix in new[] { "LLU", "LU" })
+                    if (valueText.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                        return valueText.Substring(valueText.Length - suffix.Length);
+            foreach (string suffix in new[] { "ULL", "UL", "U", "LL", "L", "ui64", "i64" })
+                if (valueText.EndsWith(suffix, StringComparison.OrdinalIgnoreCase))
+                    return valueText.Substring(valueText.Length - suffix.Length);
+            return "";
         }
 
         public void AddShort(string nativeTypeName, string name, string valueText, out string finalType)

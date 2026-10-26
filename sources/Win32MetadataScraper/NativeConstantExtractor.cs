@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using ClangSharp;
 using ClangSharp.Interop;
 using MetadataUtils;
@@ -13,19 +12,24 @@ namespace Win32MetadataScraper
 {
     internal static unsafe class NativeConstantExtractor
     {
-        private const string ProbePrefix = "__Win32MetadataConstant_";
-        private const int BatchSize = 4096;
-
         internal static NativeConstantValues Extract(TranslationUnit original, string sourceFile,
-            string[] arguments, PInvokeGeneratorConfiguration configuration, HashSet<string> reportedDiagnostics,
+            NativeConstantProbePlan probes, PInvokeGeneratorConfiguration configuration,
             IReadOnlyCollection<string> requestedNames = null)
         {
+            using var timing = GenerationTiming.BeginSpan("native-constants.extract");
+            using var collectionTiming = GenerationTiming.BeginSpan("native-constants.collect-candidates");
+            long compilerEvaluations = 0;
+            long scannerIntegers = 0;
+            var exactExcludes = configuration.ExcludedNames.ToHashSet(StringComparer.Ordinal);
+            string[] wildcardExcludes = exactExcludes.Where(name => name.IndexOfAny(new[] { '*', '?' }) >= 0).ToArray();
             var result = new NativeConstantValues
             {
                 BindingSource = configuration.OutputLocation,
                 SourceFile = Path.GetFullPath(sourceFile),
                 SourceHash = NativeConstantGroupProvenance.HashFile(sourceFile),
                 Namespace = configuration.DefaultNamespace,
+                Routes = probes.PreparedNames.OrderBy(name => name, StringComparer.Ordinal)
+                    .Select(name => probes.Routes[name]).ToList(),
             };
             using (var target = original.Handle.TargetInfo)
             using (var triple = target.Triple)
@@ -45,175 +49,155 @@ namespace Win32MetadataScraper
                 .Select(value => value.Location.File).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
             var requested = requestedNames == null ? null : new HashSet<string>(requestedNames, StringComparer.Ordinal);
             var headerHashes = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            var candidates = definitions.Where(value => !value.Macro.IsFunctionLike &&
+            var eligible = definitions.Where(value => !value.Macro.IsFunctionLike &&
                     (requested != null ? requested.Contains(value.Macro.Name) :
                         IsTraversed(value.Location.File, sourceFile, configuration.TraversalNames)) &&
                     !IsExcluded(value.Macro.Name))
                 .GroupBy(value => value.Macro.Name, StringComparer.Ordinal)
-                .Select(group => new Candidate(group.Key, group.First().Location))
-                .OrderBy(value => value.Name, StringComparer.Ordinal).ToArray();
+                .ToDictionary(group => group.Key, group => group.First().Location, StringComparer.Ordinal);
+            var scanned = new HashSet<string>(probes.Names, StringComparer.Ordinal);
+            string[] unscanned = eligible.Keys.Where(name => !scanned.Contains(name))
+                .OrderBy(name => name, StringComparer.Ordinal).ToArray();
+            if (unscanned.Length != 0)
+                throw new InvalidOperationException("Object-like macros were not included in the pre-compile name scan: " +
+                    string.Join(", ", unscanned));
+            var candidates = probes.Names.Where(eligible.ContainsKey)
+                .Select(name => new Candidate(name, eligible[name])).ToArray();
             if (requested != null)
                 foreach (string name in requested.Except(candidates.Select(candidate => candidate.Name), StringComparer.Ordinal))
                     result.Issues.Add(new NativeConstantIssue(name, sourceFile,
                         IsExcluded(name) ? "excluded by configuration" : "no object-like macro definition", Array.Empty<string>()));
-            string source = File.ReadAllText(sourceFile);
-            string declaration = arguments.Contains("--language=c", StringComparer.Ordinal) ? "const __auto_type " : "constexpr auto ";
-            using var index = CXIndex.Create();
-            for (int offset = 0; offset < candidates.Length; offset += BatchSize)
-                Evaluate(candidates.Skip(offset).Take(BatchSize).ToArray());
-            return result;
-
-            void Evaluate(Candidate[] batch)
+            collectionTiming?.SetCounter("definitionCount", definitions.Length);
+            collectionTiming?.SetCounter("candidateCount", candidates.Length);
+            collectionTiming?.SetCounter("requestedCount", requested?.Count ?? 0);
+            collectionTiming?.Dispose();
+            using var extractionTiming = GenerationTiming.BeginSpan("native-constants.hybrid-value-extraction");
+            foreach (var candidate in candidates)
             {
-                var text = new StringBuilder(source).AppendLine().AppendLine();
-                uint line = (uint)text.ToString().Count(character => character == '\n') + 1;
-                var byLine = new Dictionary<uint, Candidate>();
-                var byProbe = new Dictionary<string, Candidate>(StringComparer.Ordinal);
-                for (int i = 0; i < batch.Length; i++)
+                probes.Variables.TryGetValue(candidate.Name, out var variable);
+                var owner = probes.ActiveDefinition(candidate.Name);
+                if (owner != null &&
+                    requested == null && !IsTraversed(owner.File, sourceFile, configuration.TraversalNames))
                 {
-                    string probe = ProbePrefix + i.ToString(CultureInfo.InvariantCulture);
-                    text.Append("#if defined(").Append(batch[i].Name).AppendLine(")");
-                    byLine.Add(line + 1, batch[i]);
-                    byProbe.Add(probe, batch[i]);
-                    text.Append(declaration).Append(probe).Append(" = (").Append(batch[i].Name).AppendLine(");");
-                    text.AppendLine("#endif");
-                    line += 3;
+                    Reject(candidate, "active definition is outside traversed headers");
+                    continue;
                 }
-                using var unsaved = CXUnsavedFile.Create(sourceFile, text.ToString());
-                var error = CXTranslationUnit.TryParse(index, sourceFile,
-                    arguments.Concat(new[] { "-ferror-limit=0" }).ToArray(), new[] { unsaved },
-                    CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord |
-                    CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes |
-                    CXTranslationUnit_Flags.CXTranslationUnit_VisitImplicitAttributes, out var handle);
-                if (error != CXErrorCode.CXError_Success)
-                    throw new InvalidOperationException($"Cannot parse native constant probes for '{sourceFile}': {error}.");
-                using var unit = TranslationUnit.GetOrCreate(handle);
-                var errors = new Dictionary<Candidate, List<string>>();
-                var unassignedErrors = new List<string>();
-                for (uint i = 0; i < handle.NumDiagnostics; i++)
+                if (!probes.IsDefined(candidate.Name))
                 {
-                    using var diagnostic = handle.GetDiagnostic(i);
-                    using var formatted = diagnostic.Format(CXDiagnostic.DefaultDisplayOptions);
-                    string message = formatted.ToString();
-                    if (diagnostic.Severity is CXDiagnosticSeverity.CXDiagnostic_Error or CXDiagnosticSeverity.CXDiagnostic_Fatal)
+                    Reject(candidate, "undefined in the final header environment");
+                    continue;
+                }
+                if (owner == null)
+                {
+                    Reject(candidate, "active macro definition is not recorded by Clang");
+                    continue;
+                }
+                if (!probes.Routes.TryGetValue(candidate.Name, out var route))
+                    throw new InvalidOperationException($"Native constant '{candidate.Name}' was not scheduled before binding generation.");
+                if (route.Route == "NonValue")
+                {
+                    Reject(candidate, "non-value macro: " + route.Reason);
+                    continue;
+                }
+                if (probes.SimpleValues.TryGetValue(candidate.Name, out var simple))
+                {
+                    if (simple.Kind == "Integer")
                     {
-                        var location = GetLocation(diagnostic.Location);
-                        if (string.Equals(location.File, sourceFile, StringComparison.OrdinalIgnoreCase) &&
-                            byLine.TryGetValue(location.Line, out var candidate))
+                        string simpleName = configuration.RemappedNames.GetValueOrDefault(candidate.Name) ?? candidate.Name;
+                        result.Constants.Add(new NativeConstantValue(candidate.Name, simpleName, owner.File, owner.Line,
+                            simple.NativeType, simple.StorageType, simple.Value)
                         {
-                            if (!errors.TryGetValue(candidate, out var messages))
-                                errors[candidate] = messages = new();
-                            messages.Add(message);
-                        }
-                        else
-                            unassignedErrors.Add(message);
-                    }
-                    else if (diagnostic.Severity == CXDiagnosticSeverity.CXDiagnostic_Warning && reportedDiagnostics.Add(message))
-                        Console.WriteLine($"    {message}");
-                }
-                if (unassignedErrors.Count != 0)
-                {
-                    if (batch.Length > 1)
-                    {
-                        Evaluate(batch.Take(batch.Length / 2).ToArray());
-                        Evaluate(batch.Skip(batch.Length / 2).ToArray());
+                            Column = owner.Column,
+                            HeaderHash = HeaderHash(owner.File),
+                            Evaluation = "Scanner",
+                        });
+                        scannerIntegers++;
                     }
                     else
-                        Reject(batch[0], "native diagnostic", unassignedErrors.Concat(errors.Values.SelectMany(value => value)).ToArray());
-                    return;
+                        Reject(candidate, simple.Kind is "String" or "Pointer" ? "pointer constant" :
+                            simple.Kind == "Floating" ? "not a supported integer type" : "scanner-resolved non-integer constant");
+                    continue;
                 }
-
-                var activeDefinitions = new Dictionary<Candidate, Location>();
-                _ = handle.Cursor.VisitChildren((cursor, _, _) =>
+                if (variable?.Init?.Type.Handle.CanonicalType.kind == CXTypeKind.CXType_Pointer)
                 {
-                    if (cursor.Kind == CXCursorKind.CXCursor_MacroExpansion)
-                    {
-                        var location = GetLocation(cursor.Location);
-                        using var spelling = cursor.Spelling;
-                        if (byLine.TryGetValue(location.Line, out var candidate) && spelling.ToString() == candidate.Name &&
-                            string.Equals(location.File, sourceFile, StringComparison.OrdinalIgnoreCase))
-                            activeDefinitions[candidate] = GetLocation(clang.getCursorReferenced(cursor).Location);
-                    }
-                    return CXChildVisitResult.CXChildVisit_Continue;
-                }, default);
-                var variables = unit.TranslationUnitDecl.Decls.OfType<VarDecl>()
-                    .Where(variable => byProbe.ContainsKey(variable.Name)).ToDictionary(variable => byProbe[variable.Name]);
-                foreach (var candidate in batch)
-                {
-                    variables.TryGetValue(candidate, out var variable);
-                    if (activeDefinitions.TryGetValue(candidate, out var owner) &&
-                        requested == null && !IsTraversed(owner.File, sourceFile, configuration.TraversalNames))
-                    {
-                        Reject(candidate, "active definition is outside traversed headers");
-                        continue;
-                    }
-                    if (variable?.Init?.Type.Handle.CanonicalType.kind == CXTypeKind.CXType_Pointer)
-                    {
-                        Reject(candidate, "pointer constant", errors.GetValueOrDefault(candidate)?.ToArray() ?? Array.Empty<string>());
-                        continue;
-                    }
-                    if (errors.TryGetValue(candidate, out var messages))
-                    {
-                        Reject(candidate, "native diagnostic", messages.ToArray());
-                        continue;
-                    }
-                    if (variable == null)
-                    {
-                        Reject(candidate, "undefined in the final header environment");
-                        continue;
-                    }
-                    if (owner == null)
-                    {
-                        Reject(candidate, "active macro definition is not recorded by Clang");
-                        continue;
-                    }
-                    if (variable.Init == null)
-                    {
-                        Reject(candidate, "no native initializer");
-                        continue;
-                    }
-                    var type = variable.Init.Type.Handle.CanonicalType;
-                    if (type.kind == CXTypeKind.CXType_Enum)
-                        type = clang.getEnumDeclIntegerType(clang.getTypeDeclaration(type)).CanonicalType;
-                    string storage = GetStorage(type);
-                    if (storage == null)
-                    {
-                        Reject(candidate, type.kind == CXTypeKind.CXType_Pointer ? "pointer constant" : "not a supported integer type");
-                        continue;
-                    }
-                    using var value = variable.Handle.Evaluate;
-                    if (value.Handle == IntPtr.Zero || value.Kind != CXEvalResultKind.CXEval_Int)
-                    {
-                        Reject(candidate, "not a native integer constant");
-                        continue;
-                    }
-                    string number = value.IsUnsignedInt
-                        ? value.AsUnsigned.ToString(CultureInfo.InvariantCulture)
-                        : value.AsLongLong.ToString(CultureInfo.InvariantCulture);
-                    string literal = storage switch
-                    {
-                        "uint" => number + "U",
-                        "long" => number + "L",
-                        "ulong" => number + "UL",
-                        "bool" => number == "0" ? "false" : "true",
-                        "char" => SymbolDisplay.FormatLiteral((char)value.AsUnsigned, quote: true),
-                        _ => number,
-                    };
-                    string name = configuration.RemappedNames.GetValueOrDefault(candidate.Name) ?? candidate.Name;
-                    result.Constants.Add(new NativeConstantValue(candidate.Name, name, owner.File, owner.Line,
-                        variable.Init.Type.AsString, storage, literal)
-                    {
-                        Column = owner.Column,
-                        HeaderHash = HeaderHash(owner.File),
-                        AliasTarget = ReadAliasTarget(variable.Init),
-                    });
+                    Reject(candidate, "pointer constant",
+                        probes.Errors.GetValueOrDefault(candidate.Name)?.ToArray() ?? Array.Empty<string>());
+                    continue;
                 }
+                if (probes.Errors.TryGetValue(candidate.Name, out var messages))
+                {
+                    Reject(candidate, "native diagnostic", messages.ToArray());
+                    continue;
+                }
+                if (variable == null)
+                {
+                    throw new InvalidOperationException($"Complex macro value probe for '{candidate.Name}' is missing.");
+                }
+                if (variable.Init == null)
+                {
+                    Reject(candidate, "no native initializer");
+                    continue;
+                }
+                var type = variable.Init.Type.Handle.CanonicalType;
+                if (type.kind == CXTypeKind.CXType_Enum)
+                    type = clang.getEnumDeclIntegerType(clang.getTypeDeclaration(type)).CanonicalType;
+                string storage = GetStorage(type);
+                if (storage == null)
+                {
+                    Reject(candidate, type.kind == CXTypeKind.CXType_Pointer ? "pointer constant" : "not a supported integer type");
+                    continue;
+                }
+                route.CompilerEvaluated = true;
+                compilerEvaluations++;
+                using var value = variable.Handle.Evaluate;
+                if (value.Handle == IntPtr.Zero || value.Kind != CXEvalResultKind.CXEval_Int)
+                {
+                    Reject(candidate, "not a native integer constant");
+                    continue;
+                }
+                string number = value.IsUnsignedInt
+                    ? value.AsUnsigned.ToString(CultureInfo.InvariantCulture)
+                    : value.AsLongLong.ToString(CultureInfo.InvariantCulture);
+                string literal = storage switch
+                {
+                    "uint" => number + "U",
+                    "long" => number + "L",
+                    "ulong" => number + "UL",
+                    "bool" => number == "0" ? "false" : "true",
+                    "char" => SymbolDisplay.FormatLiteral((char)value.AsUnsigned, quote: true),
+                    _ => number,
+                };
+                string name = configuration.RemappedNames.GetValueOrDefault(candidate.Name) ?? candidate.Name;
+                result.Constants.Add(new NativeConstantValue(candidate.Name, name, owner.File, owner.Line,
+                    variable.Init.Type.AsString, storage, literal)
+                {
+                    Column = owner.Column,
+                    HeaderHash = HeaderHash(owner.File),
+                    AliasTarget = ReadAliasTarget(variable.Init),
+                    Evaluation = "Clang",
+                });
             }
+            timing?.SetCounter("candidateCount", candidates.Length);
+            timing?.SetCounter("parseCount", 0);
+            timing?.SetCounter("retrySplitCount", 0);
+            timing?.SetCounter("errorDiagnosticCount", candidates.Sum(candidate =>
+                (long)(probes.Errors.GetValueOrDefault(candidate.Name)?.Count ?? 0)));
+            timing?.SetCounter("acceptedCount", result.Constants.Count);
+            timing?.SetCounter("rejectedCount", result.Issues.Count);
+            timing?.SetCounter("clangValueEvaluateCount", compilerEvaluations);
+            timing?.SetCounter("scannerResolvedIntegerCount", scannerIntegers);
+            return result;
 
             NativeConstantBinding ReadAliasTarget(Expr expression)
             {
-                while (expression is ParenExpr or ImplicitCastExpr)
+                while (expression is ParenExpr or ImplicitCastExpr or ChooseExpr)
                 {
+                    if (expression is ChooseExpr choice)
+                    {
+                        // ClangSharp 21 exposes a null ChosenSubExpr for this builtin.
+                        expression = choice.IsConditionTrue ? choice.LHS : choice.RHS;
+                        continue;
+                    }
                     var children = expression.CursorChildren.OfType<Expr>().ToArray();
                     if (children.Length != 1 || expression.Type.CanonicalType != children[0].Type.CanonicalType)
                         return null;
@@ -235,7 +219,7 @@ namespace Win32MetadataScraper
             void Reject(Candidate candidate, string reason, params string[] diagnostics) =>
                 result.Issues.Add(new NativeConstantIssue(candidate.Name, candidate.Owner.File, reason, diagnostics));
 
-            bool IsExcluded(string name) => configuration.ExcludedNames.Any(pattern =>
+            bool IsExcluded(string name) => exactExcludes.Contains(name) || wildcardExcludes.Any(pattern =>
                 System.IO.Enumeration.FileSystemName.MatchesSimpleExpression(pattern, name, ignoreCase: false));
         }
 
@@ -286,7 +270,7 @@ namespace Win32MetadataScraper
             };
         }
 
-        private static bool IsTraversed(string file, string source, IReadOnlyCollection<string> traversal) =>
+        internal static bool IsTraversed(string file, string source, IReadOnlyCollection<string> traversal) =>
             traversal.Count == 0 ? string.Equals(file, source, StringComparison.OrdinalIgnoreCase) :
             traversal.Any(path => string.Equals(Path.GetFullPath(path), Path.GetFullPath(file), StringComparison.OrdinalIgnoreCase) ||
                 Path.GetFileName(path) == path && string.Equals(path, Path.GetFileName(file), StringComparison.OrdinalIgnoreCase));

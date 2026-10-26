@@ -149,7 +149,13 @@ The ConstantsScraper uses [regular expression matching](sources/MetadataUtils/Co
 
 Constants are removed from the metadata when they are detected as members of an enum.
 
-With `native-constant-values`, Clang supplies integer types and values for each target.
+With `native-constant-values`, ConstantsScraper reads supported simple literals
+and casts from each target's active macro definitions. Only unresolved value
+expressions are evaluated by Clang. Structural and declaration fragments are
+reported as non-values without generating value probes. Native facts identify
+scanner-derived and compiler-evaluated values separately, with route reasons
+and actual probe/evaluation flags.
+
 Duplicate managed names are case-sensitive. Authored declarations and source-owned
 groups are protected; other candidates use ordered header priority, then the project's
 partition and `--traverse` order, then native declaration location. This preserves

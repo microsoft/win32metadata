@@ -27,7 +27,9 @@ namespace Win32MetadataScraper
         }
 
         internal string Attach(string source) =>
-            Visit(SyntaxFactory.ParseCompilationUnit(source)).NormalizeWhitespace().ToFullString() + Environment.NewLine;
+            GeneratedSource.FromRoot(Attach(GeneratedSource.FromText(source).Root)).Text;
+
+        internal CompilationUnitSyntax Attach(CompilationUnitSyntax root) => (CompilationUnitSyntax)Visit(root);
 
         internal static string ParentIdentity(NamedDecl declaration)
         {

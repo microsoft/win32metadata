@@ -28,18 +28,23 @@ namespace Win32MetadataScraper
 
         internal static Dictionary<string, string> Select(IReadOnlyDictionary<string, string> sources,
             IEnumerable<FunctionDecl> functions, IReadOnlyDictionary<string, string> libraries)
+            => Select(sources.ToDictionary(pair => pair.Key, pair => GeneratedSource.FromText(pair.Value)), functions, libraries)
+                .ToDictionary(pair => pair.Key, pair => pair.Value.Text);
+
+        internal static Dictionary<string, GeneratedSource> Select(IReadOnlyDictionary<string, GeneratedSource> sources,
+            IEnumerable<FunctionDecl> functions, IReadOnlyDictionary<string, string> libraries)
         {
             var filter = new CompanionImportProjection(functions, libraries);
-            var result = new Dictionary<string, string>();
+            var result = new Dictionary<string, GeneratedSource>();
             foreach (var pair in sources)
             {
-                var root = (CompilationUnitSyntax)filter.Visit(SyntaxFactory.ParseCompilationUnit(pair.Value));
+                var root = (CompilationUnitSyntax)filter.Visit(pair.Value.Root);
                 if (root.DescendantNodes().OfType<MemberDeclarationSyntax>().Any(member =>
                     member is not MethodDeclarationSyntax and not ClassDeclarationSyntax and
                         not BaseNamespaceDeclarationSyntax))
                     throw new InvalidOperationException("ANSI companion projection contains an unproved non-import declaration.");
                 if (root.Members.Count != 0)
-                    result.Add(pair.Key, root.NormalizeWhitespace().ToFullString() + Environment.NewLine);
+                    result.Add(pair.Key, GeneratedSource.FromRoot(root));
             }
             var missing = filter.required.Values.Except(filter.found).Select(function => function.Name).ToArray();
             if (missing.Length != 0)
@@ -48,8 +53,13 @@ namespace Win32MetadataScraper
         }
 
         internal static void ValidateNoCollisions(IEnumerable<string> primarySources, IEnumerable<string> companionSources)
+            => ValidateNoCollisions(primarySources.Select(source => GeneratedSource.FromText(source).Root),
+                companionSources.Select(source => GeneratedSource.FromText(source).Root));
+
+        internal static void ValidateNoCollisions(IEnumerable<CompilationUnitSyntax> primarySources,
+            IEnumerable<CompilationUnitSyntax> companionSources)
         {
-            var primaryMembers = primarySources.Select(source => SyntaxFactory.ParseCompilationUnit(source))
+            var primaryMembers = primarySources
                 .SelectMany(root => root.DescendantNodes().OfType<MemberDeclarationSyntax>()).ToArray();
             var primary = primaryMembers
                 .SelectMany(member => MemberNames(member).Select(name => (Owner: Owner(member), Name: name)))
@@ -58,7 +68,7 @@ namespace Win32MetadataScraper
                 .Where(type => type is not ClassDeclarationSyntax)
                 .Select(type => Owner(type) + "." + type.Identifier.ValueText).ToHashSet(StringComparer.Ordinal);
             var recovered = new HashSet<(string Owner, string Name)>();
-            foreach (var method in companionSources.Select(source => SyntaxFactory.ParseCompilationUnit(source))
+            foreach (var method in companionSources
                 .SelectMany(root => root.DescendantNodes().OfType<MethodDeclarationSyntax>()))
             {
                 var key = (Owner: Owner(method), Name: method.Identifier.ValueText);

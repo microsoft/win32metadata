@@ -13,8 +13,92 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MetadataUtils
 {
-    public static class ConstantsScraper
+    public static partial class ConstantsScraper
     {
+        private static readonly Regex DefineRegex =
+            new Regex(@"^\s*#\s*define\s+([_A-Za-z][\dA-Za-z_]*)(?:\s+(.*))?$");
+
+        public static string[] ScanObjectLikeMacroNames(IEnumerable<string> headers, IEnumerable<string> includeDirectories)
+        {
+            string[] roots = includeDirectories.Where(directory => !string.IsNullOrEmpty(directory))
+                .Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+            return headers.SelectMany(header => Path.IsPathRooted(header) ? new[] { header } :
+                    roots.Select(directory => Path.Combine(directory, header)).Prepend(header))
+                .Where(File.Exists).Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase)
+                .SelectMany(header => ReadObjectLikeMacroNames(File.ReadLines(header)))
+                .Distinct(StringComparer.Ordinal).OrderBy(name => name, StringComparer.Ordinal).ToArray();
+        }
+
+        public static IEnumerable<string> ReadObjectLikeMacroNames(IEnumerable<string> lines)
+        {
+            string continuation = null;
+            bool inComment = false;
+            foreach (string currentLine in lines)
+            {
+                string line = continuation == null ? currentLine : continuation + currentLine;
+                if (line.EndsWith("\\", StringComparison.Ordinal))
+                {
+                    continuation = line.Substring(0, line.Length - 1);
+                    continue;
+                }
+                continuation = null;
+                line = RemoveComments(line, ref inComment);
+                Match match = DefineRegex.Match(line);
+                if (match.Success)
+                    yield return match.Groups[1].Value;
+            }
+            if (continuation != null)
+            {
+                Match match = DefineRegex.Match(RemoveComments(continuation, ref inComment));
+                if (match.Success)
+                    yield return match.Groups[1].Value;
+            }
+        }
+
+        private static string RemoveComments(string line, ref bool inComment)
+        {
+            var text = new StringBuilder(line.Length);
+            char quote = '\0';
+            for (int index = 0; index < line.Length; index++)
+            {
+                char character = line[index];
+                if (inComment)
+                {
+                    if (character == '*' && index + 1 < line.Length && line[index + 1] == '/')
+                    {
+                        inComment = false;
+                        index++;
+                    }
+                    continue;
+                }
+                if (quote != '\0')
+                {
+                    text.Append(character);
+                    if (character == '\\' && index + 1 < line.Length)
+                        text.Append(line[++index]);
+                    else if (character == quote)
+                        quote = '\0';
+                    continue;
+                }
+                if (character is '"' or '\'')
+                    quote = character;
+                if (character == '/' && index + 1 < line.Length)
+                {
+                    if (line[index + 1] == '/')
+                        break;
+                    if (line[index + 1] == '*')
+                    {
+                        inComment = true;
+                        text.Append(' ');
+                        index++;
+                        continue;
+                    }
+                }
+                text.Append(character);
+            }
+            return text.ToString();
+        }
+
         public static ScraperResults ScrapeConstants(
             string[] enumJsonFiles,
             string defaultNamespace,
@@ -42,17 +126,14 @@ namespace MetadataUtils
             Dictionary<string, string> withAttributes,
             ConstantSelectionOptions selection)
         {
+            using var timing = GenerationTiming.BeginSpan("constants.aggregate");
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
             return imp.ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames, traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes, selection);
         }
 
         private class ConstantsScraperImpl : IDisposable
         {
-            private static readonly Regex DefineRegex =
-                new Regex(
-                    @"^\s*#\s*define\s+([_A-Za-z][\dA-Za-z_]+)\s+(.+)");
-
-            private static readonly Regex DefineConstantRegex =
+            internal static readonly Regex DefineConstantRegex =
                 new Regex(
                     @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+|(?:0x)?[\da-f]+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\})|(\(UCHAR\)\s*((?:0x)?\d+))|(\(UCHAR\)\s*(-\d+))|(\(BYTE\)((?:0x)?[\da-f]+L?))|(0x[\da-f]+\s*<<\s*\d+)||(0x[\da-f]+ui64\s*<<\s*\d+)|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
@@ -191,6 +272,8 @@ namespace MetadataUtils
                 Dictionary<string, string> withAttributes,
                 ConstantSelectionOptions selection = null)
             {
+                using var inputTiming = GenerationTiming.BeginSpan("constants.load-existing-source");
+                inputTiming?.SetCounter("traversedHeaderCount", traversedHeaderToNamespaceMap.Count);
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
                 this.exclusionNames = exclusionNames;
@@ -211,6 +294,7 @@ namespace MetadataUtils
                 this.CleanExistingFiles();
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
+                inputTiming?.Dispose();
 
                 this.WriteNativeConstants(traversedHeaderToNamespaceMap);
                 try
@@ -223,8 +307,11 @@ namespace MetadataUtils
                     throw;
                 }
                 if (this.nativeConstantReport != null)
+                {
+                    using var reportTiming = GenerationTiming.BeginSpan("constants.write-conflict-report");
                     this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(
                         this.nativeConstantReport, new JsonSerializerOptions { WriteIndented = true }));
+                }
 
                 this.WriteEnumsAndRemaps(remaps);
 
@@ -233,6 +320,9 @@ namespace MetadataUtils
 
             public void Dispose()
             {
+                using var timing = GenerationTiming.BeginSpan("constants.flush-csharp-writers");
+                timing?.SetCounter("enumWriterCount", this.namespacesToEnumWriters.Count);
+                timing?.SetCounter("constantWriterCount", this.namespacesToConstantWriters.Count);
                 foreach (EnumWriter enumWriter in this.namespacesToEnumWriters.Values)
                 {
                     enumWriter.Dispose();
@@ -640,6 +730,7 @@ namespace MetadataUtils
 
             private void WriteRejectedConstantReport(string error)
             {
+                using var timing = GenerationTiming.BeginSpan("constants.write-rejection-report");
                 this.conflictReport = Path.Combine(this.scraperOutputDir, "native-constant-conflicts.json");
                 this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(new
                 {
@@ -655,6 +746,8 @@ namespace MetadataUtils
 
             private void WriteNativeConstantsCore(Dictionary<string, string> traversedFileMap)
             {
+                using var timing = GenerationTiming.BeginSpan("constants.native-inputs");
+                using var loadTiming = GenerationTiming.BeginSpan("constants.load-native-facts");
                 var headers = traversedFileMap.ToDictionary(pair => Path.GetFullPath(pair.Key), pair => pair.Value,
                     StringComparer.OrdinalIgnoreCase);
                 string[] discovered = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
@@ -677,6 +770,10 @@ namespace MetadataUtils
                     this.nativeIntegerHeaders.UnionWith(input.Values.Headers.Select(header => ResolveHeader(input, header)));
                     this.nativePointerNames.UnionWith(input.Values.Issues.Where(issue => issue.Reason == "pointer constant").Select(issue => issue.Name));
                 }
+                loadTiming?.SetCounter("inputCount", inputs.Length);
+                loadTiming?.SetCounter("acceptedFactCount", inputs.Sum(input => (long)input.Values.Constants.Count));
+                loadTiming?.SetCounter("rejectedFactCount", inputs.Sum(input => (long)input.Values.Issues.Count));
+                loadTiming?.Dispose();
                 if (inputs.Length == 0 &&
                     !this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*header-types.cs", SearchOption.AllDirectories)
                         .Where(file => Path.GetFileName(file) == "header-types.cs" ||
@@ -684,6 +781,7 @@ namespace MetadataUtils
                         .Any(file => this._fileSystem.File.ReadAllText(file)
                             .StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal)))
                     return;
+                using var ownersTiming = GenerationTiming.BeginSpan("constants.load-source-owners");
                 var protectedConstants = new List<ProtectedConstant>();
                 var missingProofs = new List<string>();
                 foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*.cs", SearchOption.AllDirectories)
@@ -750,8 +848,11 @@ namespace MetadataUtils
                 this.sourceConstantTypes = this.sourceConstants.ToDictionary(pair => pair.Key,
                     pair => pair.Value.Select(GetSourceDependencyStorageType).Distinct(StringComparer.Ordinal).ToArray(),
                     StringComparer.Ordinal);
+                ownersTiming?.SetCounter("protectedConstantCount", protectedConstants.Count);
+                ownersTiming?.Dispose();
                 if (inputs.Length == 0)
                     return;
+                using var resolutionTiming = GenerationTiming.BeginSpan("constants.resolve-ownership-types-aliases");
                 var protectionsByName = protectedConstants.ToLookup(value => value.Name, StringComparer.Ordinal);
                 var proofSources = protectedConstants.Where(value => value.Proof != null)
                     .ToLookup(value => value.Proof, value => value.Source);
@@ -928,6 +1029,13 @@ namespace MetadataUtils
                     LegacyDependencyPolicies = this.legacyDependencyPolicies,
                     MissingGroupProvenance = missingProofs.Distinct().ToArray(), Decisions = decisions,
                 };
+                resolutionTiming?.SetCounter("candidateCount", candidates.Count);
+                resolutionTiming?.SetCounter("selectedCount", constants.Count);
+                resolutionTiming?.SetCounter("decisionCount", decisions.Count);
+                resolutionTiming?.SetCounter("nativeDependencyCount", nativeDependencies.Count);
+                resolutionTiming?.Dispose();
+                using var outputTiming = GenerationTiming.BeginSpan("constants.write-native-csharp");
+                outputTiming?.SetCounter("constantCount", constants.Count);
                 string[] namespaces = constants.Keys.Select(key => key.Namespace).Distinct(StringComparer.Ordinal)
                     .OrderBy(value => value, StringComparer.Ordinal).ToArray();
                 foreach (var architecture in inputs.Select(input => input.Values.Architecture).Distinct())
@@ -1058,8 +1166,9 @@ namespace MetadataUtils
                     .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(parent => parent.Name.ToString()));
             }
 
-            private static bool TryTranslateStringConstant(
-                string value, string name, string header, out string expression, out bool isUtf16)
+            internal static bool TryTranslateStringConstant(
+                string value, string name, string header, out string expression, out bool isUtf16,
+                bool rejectUnsupported = true)
             {
                 expression = null;
                 isUtf16 = false;
@@ -1074,7 +1183,7 @@ namespace MetadataUtils
                     Match term = StringTermRegex.Match(value, position);
                     if (!term.Success)
                     {
-                        if (hasStringTerm)
+                        if (hasStringTerm && rejectUnsupported)
                             throw new InvalidOperationException(
                                 $"Unsupported string expression for '{name}' in '{header}': {value}");
                         return false;
@@ -1105,6 +1214,9 @@ namespace MetadataUtils
 
             private void ScrapeConstantsFromTraversedFiles(Dictionary<string, string> traversedFileMap)
             {
+                using var timing = GenerationTiming.BeginSpan("constants.legacy-text-and-streaming-csharp");
+                int readHeaders = 0;
+                long readLines = 0;
                 Dictionary<string, string> autoReplacements = GetAutoValueReplacements();
 
                 HashSet<string> manualEnumMemberNames = this.GetManualEnumMemberNames();
@@ -1123,6 +1235,7 @@ namespace MetadataUtils
                     {
                         continue;
                     }
+                    readHeaders++;
 
                     string currentHeaderName = Path.GetFileName(header).ToLowerInvariant();
 
@@ -1279,7 +1392,7 @@ namespace MetadataUtils
                         Match defineMatch = DefineRegex.Match(line);
 
                         // Skip if not #define ...
-                        if (!defineMatch.Success)
+                        if (!defineMatch.Success || defineMatch.Groups[2].Value.Length == 0)
                         {
                             this.TryScrapingEnumFlags(line);
                             continue;
@@ -1646,9 +1759,15 @@ namespace MetadataUtils
                         }
 
                     }
+                    readLines += this.legacyLine;
                 }
 
                 // Preserve resolvable native definitions before processing deferred aliases.
+                timing?.SetCounter("readHeaderCount", readHeaders);
+                timing?.SetCounter("readLineCount", readLines);
+                timing?.SetCounter("pendingAliasCount", pendingAliases.Count);
+                timing?.Dispose();
+                using var aliasesTiming = GenerationTiming.BeginSpan("constants.resolve-legacy-aliases");
                 bool resolvedAlias;
                 do
                 {
@@ -1673,6 +1792,7 @@ namespace MetadataUtils
                     }
                 }
                 while (resolvedAlias);
+                aliasesTiming?.SetCounter("unresolvedAliasCount", pendingAliases.Count);
             }
 
             private static string GetSourceDependencyStorageType(ProtectedConstant declaration)
@@ -1798,6 +1918,8 @@ namespace MetadataUtils
             private void WriteEnumsAndRemaps(
                 Dictionary<string, string> remaps)
             {
+                using var timing = GenerationTiming.BeginSpan("constants.write-enums-remaps");
+                timing?.SetCounter("enumObjectCount", this.enumObjectsFromJsons.Count);
                 // Output the enums and the rsp entries that map parameters and fields to use
                 // enum names
                 var enumRemapsFileName = Path.Combine(this.scraperOutputDir, "enumsRemap.rsp");

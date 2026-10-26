@@ -274,6 +274,47 @@ int NativeConstantProbe();
                 });
         }
 
+        [Fact]
+        public void LargeGeneratedSourceProjectionStaysWithinBudget()
+        {
+            const int declarationCount = 2000;
+            string declarations = string.Join("\n", Enumerable.Range(0, declarationCount).Select(index =>
+                $"struct PERF_RECORD_{index:D4} {{ int value; }};\n" +
+                $"_Win32_SetLastError_ int PerfRead{index:D4}(/* [in] */ PERF_RECORD_{index:D4}* value);"));
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                declarations, directoryRoot: directory);
+            int exitCode = -1;
+            Measure("2,000 native records and annotated signatures through shared CSharp projection", 6000,
+                () => exitCode = fixture.Run(), () =>
+                {
+                    fixture.AssertGeneratorWarnings(exitCode);
+                    var root = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot();
+                    var methods = root.DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
+                    Assert.Equal(declarationCount, methods.Length);
+                    Assert.Equal(Enumerable.Range(0, declarationCount).Select(index => $"PerfRead{index:D4}"),
+                        methods.Select(method => method.Identifier.ValueText).OrderBy(name => name, StringComparer.Ordinal));
+                    var records = root.DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
+                    Assert.Equal(declarationCount, records.Length);
+                    Assert.Equal(Enumerable.Range(0, declarationCount).Select(index => $"PERF_RECORD_{index:D4}"),
+                        records.Select(record => record.Identifier.ValueText).OrderBy(name => name, StringComparer.Ordinal));
+                    foreach (var method in methods)
+                    {
+                        Assert.Contains("SetLastError = true", method.AttributeLists.ToString());
+                        var parameter = Assert.Single(method.ParameterList.Parameters);
+                        Assert.Contains("InteropServices.In", parameter.AttributeLists.ToString());
+                        Assert.IsType<PointerTypeSyntax>(parameter.Type);
+                    }
+                    foreach (var record in records)
+                    {
+                        var field = Assert.IsType<FieldDeclarationSyntax>(Assert.Single(record.Members));
+                        Assert.Equal("int", field.Declaration.Type.ToString());
+                        Assert.Equal("value", Assert.Single(field.Declaration.Variables).Identifier.ValueText);
+                    }
+                    Assert.DoesNotContain(root.DescendantNodes().OfType<AttributeSyntax>(),
+                        attribute => attribute.Name.ToString() is "SourceLocation" or "NativeAnnotation");
+                }, () => RemoveNativeOutputs(fixture));
+        }
+
         private void Measure(string workload, int budgetMilliseconds, Action run, Action validate, Action prepare = null)
         {
             output.WriteLine($"{workload}; median budget {budgetMilliseconds} ms; .NET {Environment.Version}; {Environment.ProcessorCount} logical processors.");

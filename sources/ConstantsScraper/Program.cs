@@ -11,6 +11,22 @@ namespace ConstantsScraperApp
     {
         static int Main(string[] args)
         {
+            try
+            {
+                using var timing = GenerationTiming.StartFromEnvironment("constants-scraper");
+                int exitCode = Invoke(args);
+                timing?.Complete(exitCode);
+                return exitCode;
+            }
+            catch (System.Exception error)
+            {
+                System.Console.Error.WriteLine($"Failed to record local generation timing: {error.Message}");
+                return -1;
+            }
+        }
+
+        private static int Invoke(string[] args)
+        {
 #if DEBUG
             if (System.Environment.GetEnvironmentVariable("DEBUG_CONSTANTS_SCRAPER") == "1")
             {
