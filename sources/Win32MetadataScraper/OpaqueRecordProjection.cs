@@ -17,6 +17,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<(string File, uint Line, uint Column), NativeRecord> records = new();
         private readonly CSharpCompilation originalCompilation;
         private readonly SyntaxTree[] originalTrees;
+        private readonly Dictionary<SyntaxTree, (TypeSyntax Syntax, ITypeSymbol Type)[]> originalTypeUses = new();
         private readonly HashSet<string> includedNames = new(StringComparer.Ordinal);
         private readonly HashSet<string> traversalFiles = new(StringComparer.OrdinalIgnoreCase);
         private readonly List<RecordAlias> recordAliases = new();
@@ -33,6 +34,20 @@ namespace Win32MetadataScraper
         {
             using var timing = GenerationTiming.BeginSpan("native-providers.discover");
             originalTrees = sources.Select(source => source.Tree).ToArray();
+            var typeUses = new Dictionary<SyntaxTree, TypeSyntax[]>();
+            int predefinedCount = 0;
+            foreach (var tree in originalTrees)
+            {
+                var uses = TypeUses(tree.GetRoot()).ToArray();
+                var selected = uses.Where(MayReferenceNativeType).ToArray();
+                typeUses.Add(tree, selected);
+                predefinedCount += uses.Length - selected.Length;
+            }
+            timing?.SetCounter("predefinedTypeUseCount", predefinedCount);
+            timing?.SetCounter("semanticQueryCount", 0);
+            timing?.SetCounter("missingNameCount", 0);
+            if (typeUses.Values.All(uses => uses.Length == 0))
+                return;
             using var semanticTiming = GenerationTiming.BeginSpan("native-providers.bind-type-uses");
             using (var compilationTiming = GenerationTiming.BeginSpan("native-providers.create-compilation"))
             {
@@ -46,11 +61,15 @@ namespace Win32MetadataScraper
             foreach (var tree in originalTrees)
             {
                 var model = originalCompilation.GetSemanticModel(tree);
-                foreach (var use in TypeUses(tree.GetRoot()))
+                var boundUses = new List<(TypeSyntax Syntax, ITypeSymbol Type)>();
+                foreach (var use in typeUses[tree])
                 {
-                    FindMissingTypes(model.GetTypeInfo(use).Type, missingNames);
+                    var type = model.GetTypeInfo(use).Type;
+                    FindMissingTypes(type, missingNames);
+                    boundUses.Add((use, type));
                     queryCount++;
                 }
+                originalTypeUses.Add(tree, boundUses.ToArray());
             }
             timing?.SetCounter("semanticQueryCount", queryCount);
             timing?.SetCounter("missingNameCount", missingNames.Count);
@@ -120,12 +139,14 @@ namespace Win32MetadataScraper
         internal IReadOnlyCollection<RecordAlias> RecordAliases => recordAliases;
 
         internal OpaqueRecordProjection ForAlias(RecordAlias alias)
-            => new(originalTrees, originalCompilation, alias);
+            => new(originalTrees, originalCompilation, originalTypeUses, alias);
 
-        private OpaqueRecordProjection(SyntaxTree[] originalTrees, CSharpCompilation originalCompilation, RecordAlias alias)
+        private OpaqueRecordProjection(SyntaxTree[] originalTrees, CSharpCompilation originalCompilation,
+            Dictionary<SyntaxTree, (TypeSyntax Syntax, ITypeSymbol Type)[]> originalTypeUses, RecordAlias alias)
         {
             this.originalTrees = originalTrees;
             this.originalCompilation = originalCompilation;
+            this.originalTypeUses = originalTypeUses;
             var declaration = alias.Declaration;
             declaration.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
             if (!declaration.IsCompleteDefinition || file.ToString().Length == 0)
@@ -178,10 +199,9 @@ namespace Win32MetadataScraper
             var shadowed = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
             foreach (var tree in originalTrees)
             {
-                var before = originalCompilation.GetSemanticModel(tree);
                 var after = compilation.GetSemanticModel(tree);
-                foreach (var use in TypeUses(tree.GetRoot()))
-                    Inspect(before.GetTypeInfo(use).Type, after.GetTypeInfo(use).Type, behindPointer: false);
+                foreach (var use in originalTypeUses[tree])
+                    Inspect(use.Type, after.GetTypeInfo(use.Syntax).Type, behindPointer: false);
             }
             foreach (var symbol in required)
             {
@@ -300,6 +320,15 @@ namespace Win32MetadataScraper
                 BaseTypeSyntax parent => parent.Type,
                 _ => null
             }).Where(type => type != null);
+
+        // Reserved type keywords cannot name native providers; names, aliases and inferred types still need binding.
+        private static bool MayReferenceNativeType(TypeSyntax type) => type switch
+        {
+            PredefinedTypeSyntax => false,
+            PointerTypeSyntax pointer => MayReferenceNativeType(pointer.ElementType),
+            ArrayTypeSyntax array => MayReferenceNativeType(array.ElementType),
+            _ => true,
+        };
 
         private static void FindMissingTypes(ITypeSymbol type, ISet<string> names)
         {
