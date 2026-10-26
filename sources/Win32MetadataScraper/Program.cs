@@ -4,8 +4,8 @@
 // translation unit, walks the AST to discover typedef-tag remappings, merges them
 // with the configured --remap entries, then runs PInvokeGenerator.GenerateBindings
 // with the full merged remap set. Annotation facts use the original detailed TU;
-// ordinary bindings use a declaration-only TU. Integer macros use native typed
-// probes; general macro binding remains opt-in.
+// ordinary bindings use a declaration-only TU. The scanner reads simple macro
+// values; Clang evaluates unresolved value expressions in a separate TU.
 //
 // Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...
 
@@ -66,6 +66,7 @@ class Program
         "--additional",
         "--auto-remaps-file",
         "--config",
+        "--constant-names-file",
         "--declaration-map",
         "--declaration-map-symbol",
         "--exclude",
@@ -93,6 +94,22 @@ class Program
 
     static int Main(string[] args)
     {
+        try
+        {
+            using var timing = GenerationTiming.StartFromEnvironment("win32metadata-scraper");
+            int exitCode = Run(args);
+            timing?.Complete(exitCode);
+            return exitCode;
+        }
+        catch (Exception ex)
+        {
+            Console.Error.WriteLine($"Error: Local generation timing failed: {ex.Message}");
+            return -1;
+        }
+    }
+
+    static int Run(string[] args)
+    {
         if (args.Length < 2)
         {
             Console.Error.WriteLine("Usage: dotnet Win32MetadataScraper.dll <remapsOutputPath> @rsp1 @rsp2 ...");
@@ -104,6 +121,7 @@ class Program
 
         try
         {
+            using var inputTiming = GenerationTiming.BeginSpan("input-configuration");
             // Parse RSP files
             var settings = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
             foreach (var arg in rspArgs)
@@ -145,6 +163,11 @@ class Program
             bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
             bool evaluateNativeConstants = settings.GetValueOrDefault("--config")?.Contains("native-constant-values") == true;
             bool constantsOnly = settings.GetValueOrDefault("--config")?.Contains("native-constants-only") == true;
+            GenerationTiming.SetContext("sourceFile", sourceFile);
+            GenerationTiming.SetContext("output", outputFile);
+            GenerationTiming.SetContext("namespace", ns);
+            GenerationTiming.SetContext("annotations", parseHeaderAnnotations.ToString());
+            GenerationTiming.SetContext("nativeConstants", (evaluateNativeConstants || constantsOnly).ToString());
             var derivedSettings = LoadAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
             {
@@ -186,6 +209,14 @@ class Program
             var configuredExcludes = new HashSet<string>(
                 settings.GetValueOrDefault("--exclude") ?? new List<string>(),
                 StringComparer.Ordinal);
+            var constantProbes = declarationMap == null &&
+                (evaluateNativeConstants || constantsOnly || parseHeaderAnnotations && !generateAllMacros)
+                ? NativeConstantProbePlan.Create(sourceFile, clangArgs,
+                    settings.GetValueOrDefault("--traverse") ?? new List<string>(),
+                    settings.GetValueOrDefault("--constant-names-file")?.Single())
+                : null;
+            if (constantProbes != null)
+                configuredExcludes.UnionWith(constantProbes.ProbeNames.Keys);
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
@@ -196,37 +227,54 @@ class Program
             // binding generation must not evaluate unrelated SDK macros.
             using var index = CXIndex.Create(excludeDeclarationsFromPch: false, displayDiagnostics: false);
             var reportedNativeDiagnostics = new HashSet<string>(StringComparer.Ordinal);
+            inputTiming?.Dispose();
             using var translationUnit = ParseTranslationUnit(index, sourceFile, clangArgs, translationFlags,
-                reportedNativeDiagnostics);
+                reportedNativeDiagnostics, "translation-unit.original", constantProbes);
             if (translationUnit == null)
                 return -1;
 
             if (declarationMap != null)
             {
+                using var mapTiming = GenerationTiming.BeginSpan("output.declaration-map");
                 DeclarationSourceMap.Write(translationUnit.Handle.Cursor, sourceFile, clangArgs, declarationMap, declarationMapSymbols);
                 return 0;
             }
             if (settings.TryGetValue("--traverse", out var nativeTraversalFiles))
+            {
+                using var traversalTiming = GenerationTiming.BeginSpan("remap-discovery.resolve-traversal");
                 settings["--traverse"] = RemapDiscovery.ResolveTraversalFiles(
                     translationUnit.TranslationUnitDecl, nativeTraversalFiles).ToList();
+            }
             if (constantsOnly)
             {
                 var constantConfig = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
                     configuredRemaps, configuredExcludes.ToList());
-                var values = NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs,
-                    constantConfig, reportedNativeDiagnostics);
+                constantProbes.Prepare(translationUnit, constantConfig, collectTraversalConstants: true, Array.Empty<string>());
+                using var valueUnit = constantProbes.HasValueProbes
+                    ? ParseTranslationUnit(index, sourceFile, clangArgs,
+                        translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord, reportedNativeDiagnostics,
+                        "translation-unit.constant-values", constantProbes, evaluateProbes: true)
+                    : null;
+                if (constantProbes.HasValueProbes && valueUnit == null)
+                    return -1;
+                constantProbes.AttachValueUnit(valueUnit);
+                var values = NativeConstantExtractor.Extract(translationUnit, sourceFile, constantProbes, constantConfig);
                 if (parseHeaderAnnotations)
                     values.Groups = new HeaderAnnotationProcessor(translationUnit, configuredRemaps, ns,
                         constantConfig.TraversalNames.ToArray(), configuredExcludes,
                         configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody))
                         .GetConstantGroups().ToList();
-                Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(nativeConstantsPath)));
-                File.WriteAllText(nativeConstantsPath, JsonSerializer.Serialize(values), new UTF8Encoding(false));
+                using (GenerationTiming.BeginSpan("output.native-constant-facts"))
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(nativeConstantsPath)));
+                    File.WriteAllText(nativeConstantsPath, JsonSerializer.Serialize(values), new UTF8Encoding(false));
+                }
                 Console.WriteLine($"Native constants: {values.Constants.Count} integers; {values.Issues.Count} other definitions. Details: {nativeConstantsPath}");
                 return 0;
             }
 
             // ── Walk AST to discover all typedef-tag and function pointer relationships ──
+            using var remapTiming = GenerationTiming.BeginSpan("remap-discovery");
             var discovery = RemapDiscovery.WalkTranslationUnit(translationUnit.TranslationUnitDecl);
 
             // Resolve tag remaps using disambiguation, then apply opt-outs for
@@ -260,9 +308,15 @@ class Program
             var allExcludes = (settings.GetValueOrDefault("--exclude") ?? new List<string>())
                 .Concat(derivedSettings.GetValueOrDefault("--exclude") ?? new List<string>())
                 .Concat(fnPtrResult.FnPtrExcludes).Distinct(StringComparer.Ordinal).ToList();
+            if (constantProbes != null)
+                allExcludes.AddRange(constantProbes.ProbeNames.Keys);
             allExcludes.AddRange(RemapDiscovery.FindInaccessibleCopyMembers(
                 translationUnit.TranslationUnitDecl,
                 configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody)));
+            remapTiming?.SetCounter("tagCount", discovery.TagToTypedefs.Count);
+            remapTiming?.SetCounter("automaticRemapCount", autoRemaps.Count);
+            remapTiming?.SetCounter("functionPointerRemapCount", fnPtrResult.FnPtrRemaps.Count);
+            remapTiming?.Dispose();
 
             var annotations = parseHeaderAnnotations
                 ? new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
@@ -274,19 +328,42 @@ class Program
                 allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
                 RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
+            constantProbes?.Prepare(translationUnit, config, evaluateNativeConstants,
+                annotations?.GetAssociatedConstantCandidateNames() ?? Array.Empty<string>());
+            if (constantProbes != null)
+                allExcludes.AddRange(constantProbes.ProbeNames.Keys);
             using var companion = NativeConditionalCompanion.Create(translationUnit, clangArgs, translationFlags,
                 config.TraversalNames, config.WithLibraryPaths, configuredRemaps,
                 allExcludes.ToHashSet(StringComparer.Ordinal), (arguments, flags) =>
-                    ParseTranslationUnit(index, sourceFile, arguments, flags, reportedNativeDiagnostics), nativeDeclarationsPath);
+                    ParseTranslationUnit(index, sourceFile, arguments, flags, reportedNativeDiagnostics,
+                        "translation-unit.companion"), nativeDeclarationsPath);
             foreach (var remap in companion.ScopedRemaps)
                 mergedRemaps[remap.Key] = remap.Value;
             var primaryOptions = companion.LegacyMembers.Count == 0 ? configOptions :
                 configOptions | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
-            if (companion.ScopedRemaps.Count != 0 || companion.LegacyMembers.Count != 0)
+            if (companion.ScopedRemaps.Count != 0 || companion.LegacyMembers.Count != 0 || constantProbes?.HasValueProbes == true)
                 config = CreateConfig(settings, ns, outputFile, headerFile, primaryOptions,
                     RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
+            bool separateDeclarations = (parseHeaderAnnotations || evaluateNativeConstants) && !generateAllMacros;
+            var bindingFlags = separateDeclarations
+                ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
+                : translationFlags;
+            using var declarationUnit = separateDeclarations
+                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags, reportedNativeDiagnostics,
+                    "translation-unit.declarations")
+                : null;
+            if (separateDeclarations && declarationUnit == null)
+                return -1;
+            using var constantValueUnit = constantProbes?.HasValueProbes == true
+                ? ParseTranslationUnit(index, sourceFile, clangArgs,
+                    translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord, reportedNativeDiagnostics,
+                    "translation-unit.constant-values", constantProbes, evaluateProbes: true)
+                : null;
+            if (constantProbes?.HasValueProbes == true && constantValueUnit == null)
+                return -1;
+            constantProbes?.AttachValueUnit(constantValueUnit);
             var nativeConstants = evaluateNativeConstants
-                ? NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config, reportedNativeDiagnostics)
+                ? NativeConstantExtractor.Extract(translationUnit, sourceFile, constantProbes, config)
                 : null;
             annotations?.SetNativeConstantAliases(nativeConstants);
 
@@ -299,46 +376,45 @@ class Program
             };
 
             int exitCode = 0;
-            bool separateDeclarations = (parseHeaderAnnotations || evaluateNativeConstants) && !generateAllMacros;
-            var bindingFlags = separateDeclarations
-                ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
-                : translationFlags;
-            using var declarationUnit = separateDeclarations
-                ? ParseTranslationUnit(index, sourceFile, clangArgs, bindingFlags, reportedNativeDiagnostics)
-                : null;
-            if (separateDeclarations && declarationUnit == null)
-                return -1;
             using (var generator = new PInvokeGenerator(config, streamFactory))
             {
+                using var bindingsTiming = GenerationTiming.BeginSpan("pinvoke.bindings");
                 Console.WriteLine($"Processing '{sourceFile}'");
                 generator.GenerateBindings(declarationUnit ?? translationUnit, sourceFile, clangArgs, bindingFlags);
 
                 var bindingDiagnostics = generator.Diagnostics.ToArray();
                 generator.Close();
+                bindingsTiming?.SetCounter("diagnosticCount", bindingDiagnostics.Length);
+                bindingsTiming?.SetCounter("outputCount", capturedStreams.Count);
+                bindingsTiming?.Dispose();
 
-                var generatedFiles = new Dictionary<string, string>();
+                using var projectionTiming = GenerationTiming.BeginSpan("projection.generated-sources");
+                var generatedSources = new Dictionary<string, GeneratedSource>();
                 var memberNames = companion.LegacyMembers.Count == 0 ? null : new NativeMemberNameProjection(companion.LegacyMembers);
                 foreach (var kvp in capturedStreams)
                 {
                     string generatedSource = Encoding.UTF8.GetString(kvp.Value.ToArray());
                     generatedSource = NormalizeGeneratedSource(generatedSource, kvp.Key);
+                    var source = GeneratedSource.FromText(generatedSource);
                     if (memberNames != null)
-                        generatedSource = memberNames.Attach(generatedSource);
-                    generatedFiles[kvp.Key] = generatedSource;
+                        source = GeneratedSource.FromRoot(memberNames.Attach(source.Root));
+                    generatedSources[kvp.Key] = source;
                 }
                 if (annotations != null)
                 {
-                    annotations.PrepareProjections(generatedFiles.Values, config.RemappedNames);
-                    foreach (string path in generatedFiles.Keys.ToArray())
-                        generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
+                    annotations.PrepareProjections(generatedSources.Values.Select(source => source.Root), config.RemappedNames);
+                    foreach (string path in generatedSources.Keys.ToArray())
+                        generatedSources[path] = GeneratedSource.FromRoot(annotations.Rewrite(generatedSources[path].Root));
                 }
                 if (memberNames != null && !configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
-                    foreach (string path in generatedFiles.Keys.ToArray())
-                        generatedFiles[path] = new SourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(generatedFiles[path]))
-                            .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+                    foreach (string path in generatedSources.Keys.ToArray())
+                        generatedSources[path] = GeneratedSource.FromRoot(
+                            (CompilationUnitSyntax)new SourceLocationRemover().Visit(generatedSources[path].Root));
                 string additionalTypes = annotations?.GetAdditionalTypes();
                 if (companion.Functions.Count != 0)
                 {
+                    using var companionTiming = GenerationTiming.BeginSpan("companion.recover-bindings");
+                    companionTiming?.SetCounter("functionCount", companion.Functions.Count);
                     var companionRemaps = new Dictionary<string, string>(mergedRemaps);
                     var included = companion.Functions.Select(function => function.Handle.CanonicalCursor).ToHashSet();
                     var companionAnnotations = parseHeaderAnnotations
@@ -360,10 +436,12 @@ class Program
                         companionStreams[path] = stream;
                         return stream;
                     });
+                    using var companionBindingsTiming = GenerationTiming.BeginSpan("pinvoke.companion-bindings");
                     companionGenerator.GenerateBindings(companion.BindingUnit, sourceFile, companion.Arguments,
                         translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord);
                     var companionDiagnostics = companionGenerator.Diagnostics.ToArray();
                     companionGenerator.Close();
+                    companionBindingsTiming?.Dispose();
                     bindingDiagnostics = bindingDiagnostics.Concat(companionDiagnostics).ToArray();
                     if (companionDiagnostics.Any(diagnostic => diagnostic.Level == DiagnosticLevel.Error))
                     {
@@ -372,25 +450,30 @@ class Program
                         return -1;
                     }
                     var companionSources = CompanionImportProjection.Select(companionStreams.ToDictionary(
-                        pair => pair.Key, pair => NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key)),
+                        pair => pair.Key, pair => GeneratedSource.FromText(
+                            NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key))),
                         companion.Functions, config.WithLibraryPaths);
-                    companionAnnotations?.PrepareProjections(companionSources.Values, companionConfig.RemappedNames);
+                    companionAnnotations?.PrepareProjections(companionSources.Values.Select(source => source.Root), companionConfig.RemappedNames);
                     foreach (string path in companionSources.Keys.ToArray())
-                        companionSources[path] = companionAnnotations?.Rewrite(companionSources[path]) ?? companionSources[path];
-                    CompanionImportProjection.ValidateNoCollisions(generatedFiles.Values, companionSources.Values);
+                        if (companionAnnotations != null)
+                            companionSources[path] = GeneratedSource.FromRoot(companionAnnotations.Rewrite(companionSources[path].Root));
+                    CompanionImportProjection.ValidateNoCollisions(generatedSources.Values.Select(source => source.Root),
+                        companionSources.Values.Select(source => source.Root));
                     foreach (var pair in companionSources)
                     {
-                        string source = pair.Value;
+                        var source = pair.Value;
                         if (!configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
-                            source = new SourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(source))
-                                .NormalizeWhitespace().ToFullString() + Environment.NewLine;
-                        generatedFiles[pair.Key] = generatedFiles.TryGetValue(pair.Key, out string existing)
+                            source = GeneratedSource.FromRoot((CompilationUnitSyntax)new SourceLocationRemover().Visit(source.Root));
+                        generatedSources[pair.Key] = generatedSources.TryGetValue(pair.Key, out var existing)
                             ? MergeGeneratedSources(existing, source) : source;
                     }
                     companionAnnotations?.ValidateProjection();
                 }
+                using var providerTiming = GenerationTiming.BeginSpan("native-providers.recover");
                 var nativeRecords = new OpaqueRecordProjection(translationUnit,
-                    generatedFiles.Values.Append(additionalTypes), config.RemappedNames, allExcludes);
+                    string.IsNullOrEmpty(additionalTypes) ? generatedSources.Values :
+                        generatedSources.Values.Append(GeneratedSource.FromText(additionalTypes)),
+                    config.RemappedNames, allExcludes);
                 var recordProjections = new List<(OpaqueRecordProjection Projection, Dictionary<string, string> Remaps)>();
                 if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords) &&
                     nativeRecords.IncludedNames.Count != 0)
@@ -424,9 +507,11 @@ class Program
                             opaqueStreams[path] = stream;
                             return stream;
                         });
+                        using var opaqueBindingsTiming = GenerationTiming.BeginSpan("pinvoke.native-provider-bindings");
                         opaqueGenerator.GenerateBindings(declarationUnit ?? translationUnit, sourceFile, clangArgs, bindingFlags);
                         var opaqueDiagnostics = opaqueGenerator.Diagnostics.ToArray();
                         opaqueGenerator.Close();
+                        opaqueBindingsTiming?.Dispose();
                         bindingDiagnostics = bindingDiagnostics.Concat(opaqueDiagnostics).ToArray();
                         if (opaqueDiagnostics.Any(diagnostic => diagnostic.Level == DiagnosticLevel.Error))
                         {
@@ -435,18 +520,22 @@ class Program
                             return -1;
                         }
                         var opaqueSources = opaqueRecords.SelectRequiredBindings(opaqueStreams.ToDictionary(
-                            pair => pair.Key, pair => NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key)));
+                            pair => pair.Key, pair => GeneratedSource.FromText(
+                                NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key))));
                         foreach (var pair in opaqueSources)
                         {
-                            string source = annotations != null ? annotations.Rewrite(pair.Value) : pair.Value;
+                            var source = annotations != null
+                                ? GeneratedSource.FromRoot(annotations.Rewrite(pair.Value.Root)) : pair.Value;
                             if (!configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
-                                source = new SourceLocationRemover().Visit(SyntaxFactory.ParseCompilationUnit(source))
-                                    .NormalizeWhitespace().ToFullString() + Environment.NewLine;
-                            generatedFiles[pair.Key] = generatedFiles.TryGetValue(pair.Key, out var existing)
+                                source = GeneratedSource.FromRoot((CompilationUnitSyntax)new SourceLocationRemover().Visit(source.Root));
+                            generatedSources[pair.Key] = generatedSources.TryGetValue(pair.Key, out var existing)
                                 ? MergeGeneratedSources(existing, source) : source;
                         }
                     }
                 }
+                providerTiming?.SetCounter("projectionCount", recordProjections.Count);
+                providerTiming?.Dispose();
+                using var associatedTiming = GenerationTiming.BeginSpan("annotations.associated-constants");
                 var associatedConstantSources = new List<string>();
                 if (annotations != null && !generateAllMacros)
                 {
@@ -459,8 +548,8 @@ class Program
                         string[] missing = names.Except(recovered.Select(value => value.NativeName), StringComparer.Ordinal).ToArray();
                         if (missing.Length != 0)
                         {
-                            var selected = NativeConstantExtractor.Extract(translationUnit, sourceFile, clangArgs, config,
-                                reportedNativeDiagnostics, missing);
+                            var selected = NativeConstantExtractor.Extract(translationUnit, sourceFile,
+                                constantProbes, config, missing);
                             recovered.AddRange(selected.Constants);
                             missing = missing.Except(selected.Constants.Select(value => value.NativeName), StringComparer.Ordinal).ToArray();
                             if (missing.Length != 0)
@@ -492,10 +581,16 @@ class Program
                 }
                 annotations?.ValidateProjection();
                 if (annotations != null)
-                    generatedFiles[additionalTypesPath] = HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine +
-                        (additionalTypes ?? string.Empty);
+                    generatedSources[additionalTypesPath] = GeneratedSource.FromText(
+                        HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine + (additionalTypes ?? string.Empty));
+                associatedTiming?.SetCounter("sourceCount", associatedConstantSources.Count);
+                associatedTiming?.Dispose();
+                var generatedFiles = generatedSources.ToDictionary(pair => pair.Key, pair => pair.Value.Text);
+                projectionTiming?.SetCounter("outputCount", generatedFiles.Count);
+                projectionTiming?.Dispose();
 
                 // Write diagnostics
+                using var diagnosticsTiming = GenerationTiming.BeginSpan("pinvoke.diagnostics");
                 foreach (var diag in bindingDiagnostics)
                 {
                     Console.WriteLine($"    {diag}");
@@ -509,14 +604,18 @@ class Program
                 }
                 if (exitCode < 0)
                     return exitCode;
+                diagnosticsTiming?.Dispose();
 
                 if (nativeConstants != null)
                 {
+                    using var factsTiming = GenerationTiming.BeginSpan("output.serialize-native-constants");
                     if (annotations != null)
                         nativeConstants.Groups = annotations.GetConstantGroups().ToList();
                     generatedFiles[nativeConstantsPath] = JsonSerializer.Serialize(nativeConstants);
                     Console.WriteLine($"Native constants: {nativeConstants.Constants.Count} integers; {nativeConstants.Issues.Count} other definitions. Details: {nativeConstantsPath}");
                 }
+                using var outputTiming = GenerationTiming.BeginSpan("output.generated-files");
+                outputTiming?.SetCounter("fileCount", generatedFiles.Count);
                 foreach (var file in generatedFiles)
                 {
                     string directory = Path.GetDirectoryName(file.Key);
@@ -539,6 +638,7 @@ class Program
             }
 
             // Write auto-discovered remaps + fn ptr remaps to sidecar file
+            using var remapOutputTiming = GenerationTiming.BeginSpan("output.automatic-remaps");
             var allAutoRemaps = new Dictionary<string, string>(autoRemaps);
             foreach (var kv in fnPtrResult.FnPtrRemaps)
                 allAutoRemaps[kv.Key] = kv.Value;
@@ -576,6 +676,7 @@ class Program
             {
                 File.Delete(remapsOutputPath);
             }
+            remapOutputTiming?.Dispose();
 
             companion.CompleteProjection();
             return exitCode;
@@ -594,24 +695,46 @@ class Program
     }
 
     static TranslationUnit ParseTranslationUnit(CXIndex index, string sourceFile, string[] clangArgs,
-        CXTranslationUnit_Flags flags, HashSet<string> reportedDiagnostics)
+        CXTranslationUnit_Flags flags, HashSet<string> reportedDiagnostics, string phase,
+        NativeConstantProbePlan constantProbes = null, bool evaluateProbes = false)
     {
-        var parseError = CXTranslationUnit.TryParse(index, sourceFile, clangArgs,
-            ReadOnlySpan<CXUnsavedFile>.Empty, flags, out var handle);
+        using var timing = GenerationTiming.BeginSpan(phase);
+        timing?.SetCounter("parseCount", 1);
+        timing?.SetCounter("detailedPreprocessingRecord", flags.HasFlag(CXTranslationUnit_DetailedPreprocessingRecord) ? 1 : 0);
+        CXErrorCode parseError;
+        CXTranslationUnit handle;
+        using var unsaved = constantProbes == null ? default :
+            CXUnsavedFile.Create(sourceFile, evaluateProbes ? constantProbes.ValueSource : constantProbes.Source);
+        using (GenerationTiming.BeginSpan("clang.parse"))
+            parseError = CXTranslationUnit.TryParse(index, sourceFile,
+                evaluateProbes && constantProbes?.HasValueProbes == true ?
+                    clangArgs.Concat(new[] { "-ferror-limit=0" }).ToArray() : clangArgs,
+                constantProbes == null ? ReadOnlySpan<CXUnsavedFile>.Empty : new[] { unsaved }, flags, out handle);
         if (parseError != CXError_Success)
         {
             Console.Error.WriteLine($"Error: Failed to parse '{sourceFile}': {parseError}");
             return null;
         }
+        using var diagnosticsTiming = GenerationTiming.BeginSpan("clang.diagnostics");
+        // Clang traverses child notes when counting; this parsed TU is unchanged.
+        uint diagnosticCount = handle.NumDiagnostics;
+        diagnosticsTiming?.SetCounter("diagnosticCount", diagnosticCount);
+        int errors = 0;
         bool skipProcessing = false;
         var previousDiagnostics = new HashSet<string>(reportedDiagnostics, StringComparer.Ordinal);
-        if (handle.NumDiagnostics != 0)
+        if (diagnosticCount != 0)
         {
             bool wroteHeading = false;
-            for (uint i = 0; i < handle.NumDiagnostics; i++)
+            for (uint i = 0; i < diagnosticCount; i++)
             {
                 using var diagnostic = handle.GetDiagnostic(i);
                 string text = diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString();
+                if (evaluateProbes && constantProbes?.RecordDiagnostic(diagnostic, text) == true)
+                {
+                    if (diagnostic.Severity == CXDiagnostic_Warning && reportedDiagnostics.Add(text))
+                        Console.WriteLine($"    {text}");
+                    continue;
+                }
                 // The declaration-only parse must still validate every diagnostic,
                 // but must not report the same native warning a second time.
                 if (!previousDiagnostics.Contains(text))
@@ -625,8 +748,12 @@ class Program
                 }
                 reportedDiagnostics.Add(text);
                 skipProcessing |= diagnostic.Severity is CXDiagnostic_Error or CXDiagnostic_Fatal;
+                if (diagnostic.Severity is CXDiagnostic_Error or CXDiagnostic_Fatal)
+                    errors++;
             }
         }
+        diagnosticsTiming?.SetCounter("errorCount", errors);
+        diagnosticsTiming?.Dispose();
         if (skipProcessing)
         {
             Console.Error.WriteLine($"Skipping '{sourceFile}' due to one or more errors listed above.");
@@ -725,14 +852,13 @@ class Program
                 throw new InvalidOperationException("An AssociatedConstant macro must project to a constant field; readonly or pointer bindings cannot suppress the existing constant fallback.");
     }
 
-    static string MergeGeneratedSources(string first, string second)
+    static GeneratedSource MergeGeneratedSources(GeneratedSource first, GeneratedSource second)
     {
         var roots = new[] { first, second }.Select(source =>
-            (CompilationUnitSyntax)new BlockNamespaceRewriter().Visit(SyntaxFactory.ParseCompilationUnit(source))).ToArray();
-        return roots[0].WithUsings(SyntaxFactory.List(roots.SelectMany(root => root.Usings)
+            (CompilationUnitSyntax)new BlockNamespaceRewriter().Visit(source.Root)).ToArray();
+        return GeneratedSource.FromRoot(roots[0].WithUsings(SyntaxFactory.List(roots.SelectMany(root => root.Usings)
                 .GroupBy(value => value.ToString()).Select(group => group.First())))
-            .WithMembers(MergeMemberScopes(roots[0].Members, roots[1].Members))
-            .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+            .WithMembers(MergeMemberScopes(roots[0].Members, roots[1].Members)));
     }
 
     static SyntaxList<MemberDeclarationSyntax> MergeMemberScopes(

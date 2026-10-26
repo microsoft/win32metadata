@@ -13,6 +13,48 @@ namespace Win32MetadataScraperTests
 {
     public class OpaqueRecordProjectionTests
     {
+        [Theory]
+        [InlineData("using Reference = global::Test.Opaque; namespace Test { public static unsafe class Apis { public static extern Reference* Read(); } }")]
+        [InlineData("namespace Test { public unsafe struct Apis { public delegate* unmanaged<Opaque*, Opaque*> Callback; } }")]
+        [InlineData("namespace Test { public static unsafe class Apis { public static Opaque* Read() => null; public static void Use() { var value = Read(); } } }")]
+        public void CandidateDiscoveryPreservesAliasesFunctionPointersAndInferredTypes(string source)
+        {
+            using var native = new NativeRecords("namespace Test { struct Opaque; }\n");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { GeneratedSource.FromText(source) },
+                new Dictionary<string, string>());
+            Assert.Equal(new[] { "Test::Opaque" }, projection.IncludedNames);
+        }
+
+        [Fact]
+        public void ResolvedAliasReferencesDoNotSelectUnneededNativeProviders()
+        {
+            using var native = new NativeRecords("namespace Test { struct Opaque; }\n");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { @"
+using Reference = global::Test.Opaque;
+namespace Test
+{
+    public struct Opaque { public int Value; }
+    public static unsafe class Apis { public static extern Reference* Read(); }
+}" }, new Dictionary<string, string>());
+            Assert.Empty(projection.IncludedNames);
+            Assert.Empty(projection.RecordAliases);
+        }
+
+        [Fact]
+        public void ResolvedNamesDoNotTriggerUnneededNativeAliasAmbiguityErrors()
+        {
+            using var native = new NativeRecords(@"
+namespace First { struct Record { int value; }; typedef Record Alias; }
+namespace Second { struct Record { short value; }; typedef Record Alias; }
+");
+            var projection = new OpaqueRecordProjection(native.Unit, new[]
+            {
+                "public struct Alias { public int Value; } public static unsafe class Apis { public static extern Alias* Read(); }",
+            }, new Dictionary<string, string>());
+            Assert.Empty(projection.IncludedNames);
+            Assert.Empty(projection.RecordAliases);
+        }
+
         [Fact]
         public void DiscoveryRequiresAnUnresolvedReferenceAndNoCompleteStorageDefinition()
         {
@@ -254,7 +296,7 @@ namespace Test
             Assert.Contains("already resolved", error.Message);
         }
 
-        private sealed class NativeRecords : IDisposable
+        internal sealed class NativeRecords : IDisposable
         {
             private readonly string directory = Path.Combine(Path.GetTempPath(), "win32-opaque-discovery-" + Guid.NewGuid().ToString("N"));
             private readonly CXIndex index;

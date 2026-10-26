@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using ClangSharp;
 using ClangSharp.Interop;
+using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -22,23 +23,43 @@ namespace Win32MetadataScraper
 
         internal OpaqueRecordProjection(TranslationUnit unit, IEnumerable<string> sources, IReadOnlyDictionary<string, string> remaps,
             IReadOnlyCollection<string> excludedNames = null)
+            : this(unit, sources.Where(source => !string.IsNullOrEmpty(source)).Select(GeneratedSource.FromText),
+                remaps, excludedNames)
         {
-            originalTrees = sources.Where(source => !string.IsNullOrEmpty(source))
-                .Select(source => CSharpSyntaxTree.ParseText(source)).ToArray();
-            originalCompilation = CSharpCompilation.Create("OpaqueRecordDiscovery", originalTrees,
-                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+        }
+
+        internal OpaqueRecordProjection(TranslationUnit unit, IEnumerable<GeneratedSource> sources,
+            IReadOnlyDictionary<string, string> remaps, IReadOnlyCollection<string> excludedNames = null)
+        {
+            using var timing = GenerationTiming.BeginSpan("native-providers.discover");
+            originalTrees = sources.Select(source => source.Tree).ToArray();
+            using var semanticTiming = GenerationTiming.BeginSpan("native-providers.bind-type-uses");
+            using (var compilationTiming = GenerationTiming.BeginSpan("native-providers.create-compilation"))
+            {
+                originalCompilation = CSharpCompilation.Create("OpaqueRecordDiscovery", originalTrees,
+                    new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+                compilationTiming?.SetCounter("compilationCount", 1);
+            }
             var missingNames = new HashSet<string>(StringComparer.Ordinal);
+            int queryCount = 0;
             foreach (var tree in originalTrees)
             {
                 var model = originalCompilation.GetSemanticModel(tree);
                 foreach (var use in TypeUses(tree.GetRoot()))
+                {
                     FindMissingTypes(model.GetTypeInfo(use).Type, missingNames);
+                    queryCount++;
+                }
             }
+            timing?.SetCounter("semanticQueryCount", queryCount);
+            timing?.SetCounter("missingNameCount", missingNames.Count);
+            semanticTiming?.Dispose();
             if (missingNames.Count == 0)
                 return;
 
             var visited = new HashSet<Cursor>();
+            using var nativeTiming = GenerationTiming.BeginSpan("native-providers.collect-native-candidates");
             Walk(unit.TranslationUnitDecl);
             foreach (var group in recordAliases.GroupBy(alias => alias.ManagedName))
                 if (group.Select(alias => alias.Declaration.Handle.CanonicalCursor).Distinct().Count() != 1)
@@ -118,10 +139,14 @@ namespace Win32MetadataScraper
         }
 
         internal Dictionary<string, string> SelectRequiredBindings(IReadOnlyDictionary<string, string> generated)
+            => SelectRequiredBindings(generated.ToDictionary(pair => pair.Key, pair => GeneratedSource.FromText(pair.Value)))
+                .ToDictionary(pair => pair.Key, pair => pair.Value.Text);
+
+        internal Dictionary<string, GeneratedSource> SelectRequiredBindings(IReadOnlyDictionary<string, GeneratedSource> generated)
         {
             var candidates = generated.Select(pair => (
                 pair.Key,
-                Root: Filter(SyntaxFactory.ParseCompilationUnit(pair.Value), node => NativeRecordFor(node) != null))).ToArray();
+                Root: Filter(pair.Value.Root, node => NativeRecordFor(node) != null))).ToArray();
             var trees = candidates.Select(candidate => CSharpSyntaxTree.Create(candidate.Root)).ToArray();
             var compilation = originalCompilation.AddSyntaxTrees(trees);
             var providers = new Dictionary<INamedTypeSymbol, List<NativeRecord>>(SymbolEqualityComparer.Default);
@@ -166,13 +191,13 @@ namespace Win32MetadataScraper
                     if (!parent.DeclaringSyntaxReferences.Any(reference => originalTrees.Contains(reference.SyntaxTree)))
                         throw new InvalidOperationException($"Opaque native record '{symbol.ToDisplayString()}' requires an ordinary generated binding for its enclosing type '{parent.ToDisplayString()}'.");
             }
-            var result = new Dictionary<string, string>();
+            var result = new Dictionary<string, GeneratedSource>();
             for (int index = 0; index < trees.Length; index++)
             {
                 var root = Filter((CompilationUnitSyntax)trees[index].GetRoot(),
                     node => nodes.TryGetValue(node, out var symbol) && required.Contains(symbol));
                 if (root.Members.Count != 0)
-                    result[candidates[index].Key] = root.NormalizeWhitespace().ToFullString() + Environment.NewLine;
+                    result[candidates[index].Key] = GeneratedSource.FromRoot(root);
             }
             return result;
 

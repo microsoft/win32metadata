@@ -15,6 +15,7 @@ namespace MetadataUtils
         public List<NativeConstantValue> Constants { get; set; } = new();
         public List<NativeConstantIssue> Issues { get; set; } = new();
         public List<NativeConstantGroup> Groups { get; set; } = new();
+        public List<NativeConstantRoute> Routes { get; set; } = new();
 
         public static bool IsGeneratedSource(string path) =>
             Path.GetFileName(path).StartsWith("NativeConstants.", StringComparison.Ordinal) &&
@@ -27,6 +28,13 @@ namespace MetadataUtils
         public uint Column { get; init; }
         public string HeaderHash { get; init; }
         public NativeConstantBinding AliasTarget { get; init; }
+        public string Evaluation { get; init; }
+    }
+
+    public sealed record NativeConstantRoute(string Name, string Route, string Reason)
+    {
+        public bool ValueProbed { get; set; }
+        public bool CompilerEvaluated { get; set; }
     }
 
     public sealed record NativeConstantIssue(string Name, string Header, string Reason, string[] Diagnostics);

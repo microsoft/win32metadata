@@ -17,6 +17,7 @@ namespace MetadataTasks
         private bool canceled;
         private string win32MetadataScraperPath;
         private string[] defaultIncDirs;
+        private string nativeConstantNamesFile;
         private HashSet<string> partitionSettingsValidSwitches = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private HashSet<string> partitionsToExcludeFromCrossarch = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
         private Dictionary<string, string> suggestedRemaps = new();
@@ -174,6 +175,25 @@ namespace MetadataTasks
 
             this.partitionSettingsValidSwitches = new HashSet<string>(new string[] { "--exclude", "--exclude-auto-remap", "--preserve-auto-fnptr-level", "--remap", "--std", "--with-librarypath", "--with-type", "--with-attribute", "--config" });
             this.LoadManualFunctionPointerFixups();
+            if (this.EvaluateNativeConstants)
+            {
+                var nameScan = System.Diagnostics.Stopwatch.StartNew();
+                string[] headers = this.Partitions.Select(item =>
+                        Partition.FromTaskItem(item, this.MSBuildProjectDirectory, this.SdkIncRoot))
+                    .SelectMany(partition => partition.TraverseFiles.Append(partition.FullPath))
+                    .Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+                var roots = this.defaultIncDirs
+                    .Concat((this.AdditionalIncludes ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries))
+                    .Concat((Environment.GetEnvironmentVariable("INCLUDE") ?? "").Split(
+                        Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries));
+                string[] names = MetadataUtils.ConstantsScraper.ScanConstantMacroNames(headers, roots);
+                Directory.CreateDirectory(this.ScratchDir);
+                this.nativeConstantNamesFile = Path.Combine(this.ScratchDir, "native-constant-names.txt");
+                File.WriteAllLines(this.nativeConstantNamesFile, names);
+                nameScan.Stop();
+                this.Log.LogMessage(MessageImportance.High, FormattableString.Invariant(
+                    $"Scanned {names.Length} native constant names in {nameScan.Elapsed.TotalSeconds:F3}s before compiling partitions."));
+            }
 
             int failureCount = 0;
 
@@ -409,6 +429,8 @@ $@"--file
                 }
                 if (this.EvaluateNativeConstants)
                 {
+                    rspWriter.WriteLine("--constant-names-file");
+                    rspWriter.WriteLine(this.nativeConstantNamesFile);
                     rspWriter.WriteLine("--config");
                     rspWriter.WriteLine(constantsOnly ? "native-constants-only" : "native-constant-values");
                 }

@@ -51,8 +51,14 @@ namespace Win32MetadataScraper
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
             .Select(carrier => carrier.Declaration.Name);
 
+        internal IEnumerable<string> GetAssociatedConstantCandidateNames() => declarations.Values
+            .Where(facts => facts.AnnotationOwner == facts)
+            .SelectMany(facts => facts.Annotations.Where(annotation => annotation.Name == "AssociatedConstant"))
+            .Select(annotation => annotation.Arguments[0]).Distinct(StringComparer.Ordinal);
+
         internal IReadOnlyList<MacroDefinitionRecord> GetAssociatedConstantMacros()
         {
+            using var timing = GenerationTiming.BeginSpan("annotations.select-associated-constants");
             var macrosByName = visited.OfType<MacroDefinitionRecord>().ToLookup(macro => macro.Name, StringComparer.Ordinal);
             var selected = new Dictionary<string, MacroDefinitionRecord>(StringComparer.Ordinal);
             foreach (var facts in declarations.Values.Where(facts => facts.AnnotationOwner == facts &&
@@ -78,6 +84,7 @@ namespace Win32MetadataScraper
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody,
             IReadOnlySet<CXCursor> includedDeclarations = null)
         {
+            using var timing = GenerationTiming.BeginSpan("annotations.discovery");
             this.remaps = remaps;
             storageTypeRemaps = remaps;
             this.generatedNamespace = generatedNamespace;
@@ -87,8 +94,14 @@ namespace Win32MetadataScraper
             this.includedDeclarations = includedDeclarations;
             using (var target = translationUnit.Handle.TargetInfo)
                 nativePointerSize = target.PointerWidth / 8;
-            InitializeConstantGroups(translationUnit);
-            Walk(translationUnit.TranslationUnitDecl);
+            using (GenerationTiming.BeginSpan("annotations.discover-constant-groups"))
+                InitializeConstantGroups(translationUnit);
+            using (var walkTiming = GenerationTiming.BeginSpan("annotations.walk-native-ast"))
+            {
+                Walk(translationUnit.TranslationUnitDecl);
+                walkTiming?.SetCounter("cursorCount", visited.Count);
+            }
+            using var resolutionTiming = GenerationTiming.BeginSpan("annotations.resolve-native-facts");
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
             ApplyFieldAnnotations();
@@ -113,6 +126,8 @@ namespace Win32MetadataScraper
             MergeRedeclarationFacts();
             ThrowAnnotationErrors();
             TransferRecordTypedefFacts();
+            resolutionTiming?.Dispose();
+            using var indexTiming = GenerationTiming.BeginSpan("annotations.index-projections");
             foreach (var facts in declarations.Values)
             {
                 // Match ClangSharp's GetFileLocation transport, including macro arguments.
@@ -122,10 +137,14 @@ namespace Win32MetadataScraper
                     projectionLocations[location] = candidates = new();
                 candidates.Add(facts);
             }
+            timing?.SetCounter("declarationCount", declarations.Count);
+            timing?.SetCounter("annotatedTypedefCount", annotatedTypedefs.Count);
+            timing?.SetCounter("carrierCount", methodCarriers.Count + parameterCarriers.Count + fieldCarriers.Count);
         }
 
         internal void PrepareTypedefs()
         {
+            using var timing = GenerationTiming.BeginSpan("annotations.prepare-typedefs");
             foreach (var facts in annotatedTypedefs)
             {
                 var alias = (TypedefNameDecl)facts.Declaration;
@@ -393,22 +412,34 @@ namespace Win32MetadataScraper
             CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong;
 
         internal void PrepareProjections(IEnumerable<string> sources, IReadOnlyDictionary<string, string> typeRemaps)
+            => PrepareProjections(sources.Select(source => GeneratedSource.FromText(source).Root), typeRemaps);
+
+        internal void PrepareProjections(IEnumerable<CompilationUnitSyntax> sources, IReadOnlyDictionary<string, string> typeRemaps)
         {
+            using var timing = GenerationTiming.BeginSpan("annotations.prepare-projections");
             storageTypeRemaps = typeRemaps;
             var rewriter = new ProjectionRewriter(this);
             foreach (var source in sources)
-                foreach (var node in CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<DelegateDeclarationSyntax>())
+                foreach (var node in source.DescendantNodes(descendIntoChildren: node =>
+                    node is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax or TypeDeclarationSyntax)
+                    .OfType<DelegateDeclarationSyntax>())
                     rewriter.AddCallbackTemplate(node);
         }
 
         internal string Rewrite(string source)
+            => GeneratedSource.FromRoot(Rewrite(GeneratedSource.FromText(source).Root)).Text;
+
+        internal CompilationUnitSyntax Rewrite(CompilationUnitSyntax root)
         {
-            var root = CSharpSyntaxTree.ParseText(source).GetRoot();
-            return new ProjectionRewriter(this).Visit(root).NormalizeWhitespace().ToFullString() + Environment.NewLine;
+            using var timing = GenerationTiming.BeginSpan("annotations.apply-to-source");
+            timing?.SetCounter("sourceCharacters", root.FullSpan.Length);
+            return (CompilationUnitSyntax)new ProjectionRewriter(this).Visit(root);
         }
 
         internal string GetAdditionalTypes()
         {
+            using var timing = GenerationTiming.BeginSpan("annotations.native-type-providers");
+            timing?.SetCounter("annotatedTypedefCount", annotatedTypedefs.Count);
             var members = new List<MemberDeclarationSyntax>();
             foreach (var facts in annotatedTypedefs)
             {
@@ -465,6 +496,7 @@ namespace Win32MetadataScraper
                 members.Add(declaration);
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
             }
+            timing?.SetCounter("memberCount", members.Count);
             if (members.Count == 0)
                 return string.Empty;
             return SyntaxFactory.CompilationUnit().AddUsings(
@@ -476,6 +508,7 @@ namespace Win32MetadataScraper
 
         internal void ValidateProjection()
         {
+            using var timing = GenerationTiming.BeginSpan("annotations.validate-projection");
             foreach (var facts in declarations.Values)
                 CollectAnnotationErrors(facts.Declaration, () =>
                 {

@@ -25,10 +25,94 @@ Custom contexts can remain ANSI; an explicit `--additional` value of `-UUNICODE`
 after the SDK settings overrides the definition. Unicode custom attributes and
 string-storage policies are separate from this compilation context.
 
-Native integer evaluation also works without header-annotation parsing. Its
-detailed preprocessing translation unit supplies native values; ordinary
-bindings use a declaration-only parse with the same compiler arguments.
-General macro binding remains opt-in.
+Native integer evaluation also works without header-annotation parsing.
+ConstantsScraper reads supported simple values from the final active macro
+definitions. These values generate no Clang macro-value probes or evaluation
+calls. Every unresolved value candidate is sent to Clang; known structural and
+declaration fragments are reported as non-values. No complex arithmetic
+evaluator is used in the scanner.
+
+The original detailed-preprocessing translation unit records active definitions
+and annotations using guarded `defined(NAME)` queries. Ordinary bindings use a
+clean declaration-only parse with the same compiler arguments. An additional
+fresh translation unit evaluates unresolved value expressions only when needed;
+it is never used for binding or annotation generation. Constants-only mode omits
+the binding parse, and an all-simple input needs no value parse. General macro
+binding remains opt-in.
+
+The MSBuild task scans the original project's traversal headers once before
+partition filtering and writes `ScratchDir\native-constant-names.txt`. Its
+matching scraper consumes `--constant-names-file`, a unique ordinal-sorted
+identifier-per-line query index that includes function-like macro dependencies.
+Without that option, the CLI scans its traversal and immediately available
+include-directory headers. The index supplies active-definition queries; it
+does not request value evaluation for every name.
+
+### Local phase timing
+
+`Win32MetadataScraper` and `ConstantsScraper` can write local timing reports.
+Set `WIN32METADATA_TIMING_DIRECTORY` to an absolute local directory outside the
+generated-source tree, then run the usual commands with their unchanged inputs:
+
+```powershell
+$env:WIN32METADATA_TIMING_DIRECTORY = 'C:\temp\win32metadata-timing'
+dotnet .\bin\Release\net10.0\win-x64\Win32MetadataScraper.dll <remapsOutputPath> @<settings.rsp>
+dotnet .\bin\Release\net10.0\ConstantsScraper.dll @<constants.rsp>
+Remove-Item Env:\WIN32METADATA_TIMING_DIRECTORY
+```
+
+An unset or empty variable disables timing. The disabled path does not create a
+report, query the process CPU clock, or emit timing events. An enabled command
+reserves a unique `<tool>-<pid>-<guid>.timing.json` file before generation.
+Invalid, UNC, or unwritable directories fail the command explicitly; requested
+timing is never silently disabled. Reports contain local source/output paths.
+Nothing is uploaded, and no timing fields enter native facts or generated source.
+
+The [version 1 schema](generation-timing.schema.json) records parent-linked spans,
+monotonic wall time and process CPU deltas across all process threads. CPU time
+can exceed wall time. `wallMilliseconds` and `processCpuMilliseconds` include
+children; use `selfWallMilliseconds` and `selfProcessCpuMilliseconds` to attribute
+cost without counting nested work twice. `childWallMilliseconds` sums direct
+children only. IDs follow start order. `exitCode` is the ordinary tool result,
+including positive warning counts; it is null if an exception prevented that
+result from being reported. Trace serialization happens after the root span ends.
+
+Scraper phases distinguish original/declaration-only/companion/constant-value TU
+parsing, native diagnostics, remap discovery, annotation discovery/application,
+native provider recovery, PInvoke bindings, constant candidate collection,
+scanner routing, value extraction, and serialization/output.
+`native-constants.hybrid-route` records presence-query, scanner-resolved,
+unresolved-value, non-value and actual value-probe counts.
+`native-constants.extract` records actual Clang value-evaluation calls,
+scanner-derived integers, accepted/rejected facts and diagnostic occurrences.
+Its legacy parse/retry counters are zero; optional value parsing is measured by
+`translation-unit.constant-values`. There are no recursive probe batches.
+Probe and evaluation counts can differ when a result is non-integral.
+Missing explicitly requested definitions can contribute rejected facts without
+being probe candidates. No per-constant spans are recorded.
+
+Native facts retain `Evaluation` (`Scanner` or `Clang`) and explicit routes with
+reasons, `ValueProbed` and `CompilerEvaluated`. Compiler diagnostics retain their
+original text and are attributed only through actual probe locations or notes.
+Unassigned native errors still fail the command.
+
+Generated C# sources retain one immutable syntax root across callback-template
+discovery, annotation rewriting, companion merging and native-provider recovery.
+Unchanged sources retain their original text; rewritten roots are formatted once
+when their output is requested. `projection.parse-generated-source` and
+`projection.format-generated-source` record those operations separately.
+`native-providers.discover` separates semantic type-use binding from native
+candidate discovery. Its semantic queries, provider identity checks, by-value
+storage validation and resolved-reference shadowing checks are unchanged.
+
+The separate aggregation process records loading native facts and source owners,
+ownership/type/alias resolution, native C# writing, legacy text scraping, deferred
+legacy aliases, conflict-report writing, enum/remap output, and writer flushing.
+Legacy text scraping still streams C# through its existing writers, so its phase
+includes that generation work; the flush phase measures the remaining buffered
+output. These aggregation phases do not invoke the native compiler. Compare
+uninstrumented, timing-disabled and timing-enabled runs with identical inputs
+before using a report to discuss architecture changes.
 
 ### Native typedef binding decisions
 
@@ -502,7 +586,7 @@ observed medians for CI headroom, not intended as portable benchmark scores:
 | Two UTF-8 includes, 2,000 declarations: all parameter directions and the single requested `SetLastError` | 2,982 ms | 6,000 ms |
 | 8,192 unrelated macros, no associated constant: one method, no generated fields | 997 ms | 3,000 ms |
 | 8,192 unrelated macros, one associated constant: one method, one enum/association, exactly one companion field with value 32 | 1,084 ms | 3,000 ms |
-| 1,028 native probes across batches of 512 + 512 + 4: exactly 1,025 typed integer values and three explicit rejections | 1,203 ms | 3,000 ms |
+| 1,028 macro value candidates: exactly 1,025 typed integer values and three explicit rejections | 1,203 ms | 3,000 ms |
 | Three profiles, each with 256 header groups and 768 globals: 256 physical groups and 1,024 physical globals | 1,788 ms | 5,000 ms |
 | One 6,418-constant file, qualified in all three profiles: exactly 6,418 physical `uint` globals without architecture masks | 1,370 ms | 4,000 ms |
 

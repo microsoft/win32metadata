@@ -13,6 +13,32 @@ namespace MetadataUtils.Tests
 {
     public class ConstantsScraperTests
     {
+        [Fact]
+        public void ObjectLikeNameScanReusesDefineAndContinuationRulesWithoutEvaluatingValues()
+        {
+            string source = @"
+                #define A 1
+                # define EMPTY
+                #define EXPRESSION (unknown_template<int>{} + invalid_value)
+                #define FUNCTION(x) (x)
+                #define OBJECT (x)
+                #de\
+fine CONTINUED \
+                    (1 + 2)
+                #if 0
+                #define INACTIVE arbitrary tokens
+                #endif
+                /*
+                #define COMMENTED_OUT 1
+                */ #/**/define/**/AFTER_COMMENT/**/4
+                #define TEXT ""/* not a comment */""
+                #define LAST 'x' // trailing comment
+                ";
+            Assert.Equal(new[] { "A", "EMPTY", "EXPRESSION", "OBJECT", "CONTINUED", "INACTIVE",
+                "AFTER_COMMENT", "TEXT", "LAST" },
+                ConstantsScraper.ReadObjectLikeMacroNames(source.Split('\n').Select(line => line.TrimEnd('\r'))));
+        }
+
         [Theory]
         [InlineData("ansi", true)]
         [InlineData("unicode", false)]

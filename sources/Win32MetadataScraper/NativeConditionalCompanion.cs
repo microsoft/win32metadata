@@ -8,6 +8,7 @@ using System.Text.Json;
 using System.Text.RegularExpressions;
 using ClangSharp;
 using ClangSharp.Interop;
+using MetadataUtils;
 
 namespace Win32MetadataScraper
 {
@@ -64,12 +65,17 @@ namespace Win32MetadataScraper
             IReadOnlyDictionary<string, string> libraries, IReadOnlyDictionary<string, string> authoredRemaps,
             IReadOnlySet<string> excludes, Func<string[], CXTranslationUnit_Flags, TranslationUnit> parse, string evidencePath)
         {
+            using var timing = GenerationTiming.BeginSpan("companion.discover-and-recover");
             var result = new NativeConditionalCompanion(arguments, flags, parse, evidencePath);
             try
             {
                 if (!HasUnicodeDefinition(arguments))
                     return result;
                 result.Discover(primary, traversalFiles, libraries, authoredRemaps, excludes);
+                timing?.SetCounter("functionCount", result.Functions.Count);
+                timing?.SetCounter("legacyMemberCount", result.LegacyMembers.Count);
+                timing?.SetCounter("scopedRemapCount", result.ScopedRemaps.Count);
+                timing?.SetCounter("supplementalParseCount", result.parseAttempts.Count);
                 result.WriteEvidence();
                 return result;
             }
@@ -421,6 +427,9 @@ namespace Win32MetadataScraper
 
         private TranslationUnit Parse(string[] arguments, CXTranslationUnit_Flags flags)
         {
+            using var timing = GenerationTiming.BeginSpan("companion.parse");
+            timing?.SetCounter("detailedPreprocessingRecord",
+                flags.HasFlag(CXTranslationUnit_Flags.CXTranslationUnit_DetailedPreprocessingRecord) ? 1 : 0);
             var attempt = new ParseAttempt(arguments, flags.ToString());
             parseAttempts.Add(attempt);
             var unit = parse(arguments, flags) ??
@@ -432,6 +441,7 @@ namespace Win32MetadataScraper
 
         private void WriteEvidence()
         {
+            using var timing = GenerationTiming.BeginSpan("output.companion-evidence");
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(evidencePath)));
             File.WriteAllText(evidencePath, JsonSerializer.Serialize(new
             {
