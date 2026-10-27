@@ -39,11 +39,18 @@ namespace MetadataUtils
 
     public sealed record NativeConstantIssue(string Name, string Header, string Reason, string[] Diagnostics);
 
+    public sealed record NativeConstantInputOwner(
+        string Input, Architecture Architecture, string SourceFile, string Namespace, string[] TraversedHeaders);
+
+    public sealed record NativeConstantHeaderSelection(
+        int Version, string[] IncludeRoots, NativeConstantInputOwner[] Inputs);
+
     public sealed class ConstantSelectionOptions
     {
         public string SdkRoot { get; init; }
         public IReadOnlyList<string> HeaderPriority { get; init; } = Array.Empty<string>();
         public IReadOnlyList<string> NativeInputs { get; init; } = Array.Empty<string>();
+        public string NativeHeaderOwnershipFile { get; init; }
         public bool PreflightOnly { get; init; }
         public string BlockedBy { get; init; }
     }

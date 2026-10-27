@@ -72,6 +72,46 @@ changed prepared header payload requires fresh matching producer inputs; these
 native facts do not contain a complete per-profile dependency proof that could
 authorize partial reuse across different prepared payloads.
 
+### Explicitly traversed selected-toolchain headers
+
+A relative partition `--traverse` selector outside the SDK needs an independently
+selected include root and the exact partition/profile owner. Set
+`NativeConstantToolchainIncludeRoots` to the recorded toolchain include
+directories (semicolon-separated), not a directory guessed from a native fact or
+the current environment. The constants task records these roots and each planned
+input's architecture, current partition source, namespace and traversal selectors
+in `native-constant-header-ownership.json`. The CLI accepts this version 1 record
+through `--nativeHeaderOwnership`; library callers use
+`ConstantSelectionOptions.NativeHeaderOwnershipFile`.
+
+The managed consumer joins the exact input path and target to one owner, verifies
+the relocated native source path/hash against that partition source, and joins
+the full header path to the explicitly selected root plus its complete traversal
+selector. Every retained macro, alias and group-member header proof for that
+header must match its current bytes. Matching values, a native namespace, equal
+bytes in another directory or a header basename do not establish ownership.
+Missing selection, source, root, traversal or hash evidence and ambiguous owners
+or root candidates reject that input; no first-match root or owner is chosen.
+Constants-only targets do not require a fictitious generated binding `.cs` file.
+
+Incremental task reuse also requires the exact ownership plan independently
+derived from the configured roots and partition/profile settings. The successful
+input fingerprint records content hashes of the planned partition sources and
+every selected-root/traversal candidate, including missing alternatives that
+could introduce ambiguity. It never discovers these dependencies from native
+facts. Changed or deleted physical headers invalidate reuse even when their
+timestamps are unchanged; normal consumer revalidation retains typed failures
+and blocks the completion marker. Missing or modified generated ownership plans
+are rebuilt from the independent configuration and revalidated, not trusted as
+new authority or accepted through the cached-success path.
+
+This additional ownership record cannot replace prepared-SDK manifests or relax
+their payload/source checks. Successful selection receipts include the exact
+`ToolchainHeaderOwnership` resolutions; rejected receipts retain the ownership
+record path and every original native-input reference. These consumer-side
+checks change the shared `MetadataUtils` assembly and therefore require separate
+producer/consumer binary-closure qualification before reusing a native run.
+
 ### Default generation diagnostic collection
 
 The normal generation targets collect known, recoverable validation failures at
@@ -137,8 +177,10 @@ original exception's full `Cause`. Group by stable code/stage/identity and sourc
 context; keep every raw error. Prepared SDK binding errors use
 `NATIVE_SDK_BINDING` / `constants.native-inputs` /
 `prepared-sdk-header-binding`, including the raw header, input architecture and
-selected SDK root. `BlockedStages` records each unrun stage and its prerequisite;
-`Reports` names retained stage receipts. Constants failures reference native
+selected SDK root. Selected-toolchain binding errors use `NATIVE_TOOLCHAIN_BINDING` /
+`constants.native-inputs` / `selected-toolchain-header-binding` with the same
+per-input context and original cause. `BlockedStages` records each unrun stage
+and its prerequisite; `Reports` names retained stage receipts. Constants failures reference native
 input paths, byte lengths and SHA-256 pins, plus source identities, rather than
 copying the native-input payloads into another JSON document.
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -41,6 +42,8 @@ namespace MetadataTasks
         public string SdkIncRoot { get; set; }
 
         public string[] HeaderPriority { get; set; }
+
+        public string[] ToolchainIncludeRoots { get; set; }
 
         public bool PreflightOnly { get; set; }
 
@@ -110,6 +113,7 @@ namespace MetadataTasks
                 ? "Validating independent constants inputs..." : "Scraping constants and enums...");
 
             File.Delete(this.MarkerFileName);
+            string[] selectionInputs = this.PreflightOnly ? null : this.GetSelectionInputs();
             bool ret = base.Execute();
 
             if (ret && !this.PreflightOnly && !this.validation.HasErrors)
@@ -119,7 +123,7 @@ namespace MetadataTasks
                 string[] paths = this.GetNativeConstantInputs();
                 if (paths.Length != 0 || File.Exists(nativeInputs))
                     File.WriteAllLines(nativeInputs, paths);
-                File.WriteAllLines(Path.Combine(this.ScraperOutputDir, "constant-selection-inputs.txt"), this.GetSelectionInputs());
+                File.WriteAllLines(Path.Combine(this.ScraperOutputDir, "constant-selection-inputs.txt"), selectionInputs);
             }
             else
             {
@@ -174,6 +178,13 @@ namespace MetadataTasks
                 foreach (string path in nativeInputs)
                     ret.AppendLine(path);
             }
+            if (this.ToolchainIncludeRoots?.Length > 0)
+            {
+                string ownership = Path.Combine(this.ScraperOutputDir, "native-constant-header-ownership.json");
+                File.WriteAllText(ownership, SerializeHeaderSelection(this.GetNativeHeaderSelection()));
+                ret.AppendLine("--nativeHeaderOwnership");
+                ret.AppendLine(ownership);
+            }
 
             if (!string.IsNullOrEmpty(this.EnumsJson))
             {
@@ -209,6 +220,11 @@ namespace MetadataTasks
             if (producerInputs.Any(file => !File.Exists(file)))
                 return false;
             files = files.Concat(producerInputs);
+            if (this.ToolchainIncludeRoots?.Length > 0 &&
+                ((this.ToolchainIncludeRoots.Any(root => !Path.IsPathFullyQualified(root))) ||
+                 FileIdentity(Path.Combine(this.ScraperOutputDir, "native-constant-header-ownership.json")) !=
+                    TextIdentity(SerializeHeaderSelection(this.GetNativeHeaderSelection()))))
+                return false;
             string policy = Path.Combine(this.ScraperOutputDir, "constant-selection-inputs.txt");
             if (!File.Exists(policy) || !File.ReadAllLines(policy).SequenceEqual(this.GetSelectionInputs(), System.StringComparer.Ordinal))
                 return false;
@@ -229,9 +245,78 @@ namespace MetadataTasks
                 .OrderBy(path => path, System.StringComparer.OrdinalIgnoreCase).ToArray()
             : System.Array.Empty<string>();
 
-        private string[] GetSelectionInputs() => new[] { "sdkRoot=" + Path.GetFullPath(this.SdkIncRoot) }
-            .Concat((this.HeaderPriority ?? System.Array.Empty<string>()).Select(header => "headerPriority=" + header))
-            .Concat(this.GetOrderedNativeConstantInputs().Select(path => "nativeInput=" + path)).ToArray();
+        private string[] GetSelectionInputs()
+        {
+            var inputs = new List<string> { "sdkRoot=" + Path.GetFullPath(this.SdkIncRoot) };
+            inputs.AddRange((this.HeaderPriority ?? System.Array.Empty<string>()).Select(header => "headerPriority=" + header));
+            inputs.AddRange((this.ToolchainIncludeRoots ?? System.Array.Empty<string>()).Select(root => "toolchainIncludeRoot=" + root));
+            inputs.AddRange(this.GetOrderedNativeConstantInputs().Select(path => "nativeInput=" + path));
+            if (this.ToolchainIncludeRoots?.Length > 0)
+            {
+                var selection = this.GetNativeHeaderSelection();
+                inputs.Add("nativeHeaderOwnership=" + TextIdentity(SerializeHeaderSelection(selection)));
+                inputs.AddRange(selection.Inputs.Select(owner => owner.SourceFile).Distinct(System.StringComparer.OrdinalIgnoreCase)
+                    .Select(source => "toolchainSource=" + source + "=" + FileIdentity(source)));
+                inputs.AddRange(this.GetSelectedToolchainHeaders(selection).Distinct(System.StringComparer.OrdinalIgnoreCase)
+                    .Select(header => "toolchainHeader=" + header + "=" + FileIdentity(header)));
+            }
+            return inputs.ToArray();
+        }
+
+        private MetadataUtils.NativeConstantHeaderSelection GetNativeHeaderSelection()
+        {
+            var inputs = this.GetOrderedNativeConstantInputs().ToHashSet(System.StringComparer.OrdinalIgnoreCase);
+            var owners = new List<MetadataUtils.NativeConstantInputOwner>();
+            foreach (var partition in this.loadedPartitions)
+                foreach (string profile in new[] { "common", "x86", "x64", "arm64" })
+                {
+                    string input = Path.GetFullPath(Path.Combine(this.ScraperOutputDir, profile, partition.Name + ".native-constants.json"));
+                    if (inputs.Contains(input))
+                        owners.Add(new MetadataUtils.NativeConstantInputOwner(input,
+                            profile switch
+                            {
+                                "common" or "x86" => MetadataUtils.Architecture.X86,
+                                "x64" => MetadataUtils.Architecture.X64,
+                                _ => MetadataUtils.Architecture.Arm64,
+                            }, partition.FullPath, partition.Namespace, partition.TraverseFiles.ToArray()));
+                }
+            return new MetadataUtils.NativeConstantHeaderSelection(1, this.ToolchainIncludeRoots, owners.ToArray());
+        }
+
+        private IEnumerable<string> GetSelectedToolchainHeaders(MetadataUtils.NativeConstantHeaderSelection selection)
+        {
+            foreach (string root in selection.IncludeRoots.Where(Path.IsPathFullyQualified))
+                foreach (string selector in selection.Inputs.SelectMany(owner => owner.TraversedHeaders))
+                {
+                    string header;
+                    string relative;
+                    try
+                    {
+                        header = Path.GetFullPath(Path.Combine(root, selector));
+                        relative = Path.GetRelativePath(root, header);
+                    }
+                    catch (System.ArgumentException)
+                    {
+                        continue; // The consumer retains the contextual invalid-selection diagnostic.
+                    }
+                    if (!Path.IsPathRooted(relative) && relative != ".." &&
+                        !relative.StartsWith(".." + Path.DirectorySeparatorChar, System.StringComparison.Ordinal))
+                        yield return header;
+                }
+        }
+
+        private static string SerializeHeaderSelection(MetadataUtils.NativeConstantHeaderSelection selection) =>
+            System.Text.Json.JsonSerializer.Serialize(selection, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+        private static string TextIdentity(string text) => System.Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(text)));
+
+        private static string FileIdentity(string path)
+        {
+            if (!File.Exists(path))
+                return "missing";
+            using var stream = File.OpenRead(path);
+            return System.Convert.ToHexString(SHA256.HashData(stream));
+        }
 
         private string[] GetOrderedNativeConstantInputs()
         {

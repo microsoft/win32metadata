@@ -14,6 +14,291 @@ namespace MetadataUtils.Tests
 {
     public class ConstantsScraperTests
     {
+        [Fact]
+        public void ExternalToolchainTaskRequiresCurrentPhysicalHeaderAndPlan()
+        {
+            string directory = Path.Combine(AppContext.BaseDirectory, "toolchain-task-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string output = Path.Combine(directory, "consumer", "obj", "generated");
+                string source = Path.Combine(directory, "consumer", "Partitions", "Test", "main.cpp");
+                string root = Path.Combine(directory, "selected-toolchain", "include");
+                string header = Path.Combine(root, "runtime", "control.h");
+                const string headerText = "#define TOOLCHAIN_VALUE -7\n";
+                Write(source, "#include <runtime/control.h>\n");
+                Write(Path.Combine(Path.GetDirectoryName(source), "settings.rsp"), "--namespace\nSelected\n--traverse\nruntime/control.h\n");
+                Write(header, headerText);
+                string manual = Write(Path.Combine(directory, "manual.cs"), "namespace Selected { }\n");
+                string input = Path.Combine(output, "common", "Test.native-constants.json");
+                Write(input, JsonSerializer.Serialize(new NativeConstantValues
+                {
+                    Architecture = Architecture.X86,
+                    SourceFile = source,
+                    SourceHash = NativeConstantGroupProvenance.HashFile(source),
+                    BindingSource = Path.ChangeExtension(input.Replace(".native-constants.json", ""), ".cs"),
+                    Namespace = "NotAnOwnershipProof",
+                    Headers = new[] { header },
+                    Constants = new()
+                    {
+                        new("TOOLCHAIN_VALUE", "TOOLCHAIN_VALUE", header, 1, "int", "int", "-7")
+                            { Column = 9, HeaderHash = NativeConstantGroupProvenance.HashFile(header) },
+                    },
+                }));
+                string marker = Path.Combine(output, "bounded-managed-task-success.marker");
+                string ownership = Path.Combine(output, "native-constant-header-ownership.json");
+                string sdk = Path.Combine(directory, "unprepared-sdk", "include");
+                Directory.CreateDirectory(sdk);
+                string dotnet = Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? Path.GetFullPath(Path.Combine(
+                    System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(), "..", "..", "..",
+                    OperatingSystem.IsWindows() ? "dotnet.exe" : "dotnet"));
+                string project = Write(Path.Combine(directory, "isolated-task.proj"),
+                    "<Project DefaultTargets=\"Run\">" +
+                    $"<UsingTask TaskName=\"MetadataTasks.ScrapeConstants\" AssemblyFile=\"{Xml(Path.Combine(AppContext.BaseDirectory, "MetadataTasks.dll"))}\" />" +
+                    $"<ItemGroup><Partition Include=\"{Xml(source)}\"><Name>Test</Name></Partition></ItemGroup>" +
+                    "<Target Name=\"Run\">" +
+                    $"<ScrapeConstants DefaultNamespace=\"Test\" ScraperOutputDir=\"{Xml(output)}\" Partitions=\"@(Partition)\" ManualCs=\"{Xml(manual)}\" " +
+                    $"ToolsBinDir=\"{Xml(AppContext.BaseDirectory)}\" MSBuildProjectDirectory=\"{Xml(directory)}\" SdkIncRoot=\"{Xml(sdk)}\" " +
+                    $"ToolchainIncludeRoots=\"{Xml(root)}\" MarkerFileName=\"{Xml(marker)}\" ToolExe=\"{Xml(dotnet)}\" />" +
+                    "</Target></Project>");
+                Run(success: true, cached: false);
+                string plan = File.ReadAllText(ownership);
+                DateTime markerTime = File.GetLastWriteTimeUtc(marker);
+                Run(success: true, cached: true);
+                Assert.Equal(markerTime, File.GetLastWriteTimeUtc(marker));
+
+                DateTime headerTime = File.GetLastWriteTimeUtc(header);
+                Write(header, headerText + "// changed bytes with the original timestamp\n");
+                File.SetLastWriteTimeUtc(header, headerTime);
+                Run(success: false, cached: false);
+                AssertRejected();
+                Write(header, headerText);
+                Run(success: true, cached: false);
+
+                File.Delete(header);
+                Run(success: false, cached: false);
+                AssertRejected();
+                Write(header, headerText);
+                Run(success: true, cached: false);
+
+                DateTime planTime = File.GetLastWriteTimeUtc(ownership);
+                Write(ownership, "{}");
+                File.SetLastWriteTimeUtc(ownership, planTime);
+                Run(success: true, cached: false);
+                Assert.Equal(plan, File.ReadAllText(ownership));
+                File.Delete(ownership);
+                Run(success: true, cached: false);
+                Assert.Equal(plan, File.ReadAllText(ownership));
+
+                void Run(bool success, bool cached)
+                {
+                    string scratch = Path.Combine(directory, "process-files");
+                    Directory.CreateDirectory(scratch);
+                    var start = new System.Diagnostics.ProcessStartInfo(dotnet)
+                    {
+                        WorkingDirectory = directory, UseShellExecute = false,
+                        RedirectStandardOutput = true, RedirectStandardError = true,
+                    };
+                    foreach (string argument in new[] { "msbuild", project, "-t:Run", "-m:1", "-nodeReuse:false", "-p:UseSharedCompilation=false", "-verbosity:normal" })
+                        start.ArgumentList.Add(argument);
+                    start.Environment["DOTNET_PROCESSOR_COUNT"] = "4";
+                    start.Environment["TEMP"] = scratch;
+                    start.Environment["TMP"] = scratch;
+                    using var process = System.Diagnostics.Process.Start(start);
+                    var stdout = process.StandardOutput.ReadToEndAsync();
+                    var stderr = process.StandardError.ReadToEndAsync();
+                    if (!process.WaitForExit(60000))
+                    {
+                        process.Kill(entireProcessTree: true);
+                        throw new TimeoutException("Isolated managed constants task did not finish in 60 seconds.");
+                    }
+                    string log = stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult();
+                    Assert.True(success == (process.ExitCode == 0), log);
+                    Assert.Equal(!cached, log.Contains("Scraping constants and enums...", StringComparison.Ordinal));
+                }
+
+                void AssertRejected()
+                {
+                    Assert.False(File.Exists(marker));
+                    using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "native-constant-conflicts.json")));
+                    Assert.Equal("rejected", report.RootElement.GetProperty("Status").GetString());
+                    Assert.Equal("NATIVE_TOOLCHAIN_BINDING", report.RootElement.GetProperty("Errors")[0].GetProperty("Code").GetString());
+                    Assert.Empty(Directory.GetFiles(output, "NativeConstants.*.header-types.cs", SearchOption.AllDirectories));
+                }
+            }
+            finally
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+
+            static string Xml(string value) => System.Security.SecurityElement.Escape(value);
+            static string Write(string path, string contents)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllText(path, contents);
+                return path;
+            }
+        }
+
+        [Theory]
+        [InlineData("selected", null)]
+        [InlineData("header-path-case", null)]
+        [InlineData("missing-selection", "toolchain selection")]
+        [InlineData("malformed-selection", "toolchain selection")]
+        [InlineData("missing-roots", "toolchain selection")]
+        [InlineData("missing-header", "toolchain header")]
+        [InlineData("missing-proof", "native header proof")]
+        [InlineData("hash-mismatch", "native header proof")]
+        [InlineData("one-rejected-profile", "native header proof")]
+        [InlineData("root-mismatch", "toolchain root")]
+        [InlineData("unselected-traversal", "toolchain traversal")]
+        [InlineData("unselected-input", "toolchain input owner")]
+        [InlineData("architecture-mismatch", "toolchain architecture")]
+        [InlineData("source-mismatch", "native source identity")]
+        [InlineData("missing-source", "native source identity")]
+        [InlineData("missing-source-hash", "native source identity")]
+        [InlineData("source-path-mismatch", "native source identity")]
+        [InlineData("ambiguous-owner", "toolchain input owner")]
+        [InlineData("ambiguous-root", "toolchain traversal")]
+        public void ExternalToolchainHeaderIdentity(string scenario, string expectedError)
+        {
+            string directory = Path.Combine(AppContext.BaseDirectory, "toolchain-header-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string output = Path.Combine(directory, "consumer", "generation", "WinSDK", "obj", "generated");
+                string source = Path.Combine(directory, "consumer", "generation", "WinSDK", "Partitions", "Test", "main.cpp");
+                string root = Path.Combine(directory, "selected-toolchain", "include");
+                string selector = Path.Combine("runtime", "control.h");
+                string header = Path.Combine(root, selector);
+                Write(source, "#include <runtime/control.h>\n");
+                Write(header, "#define TOOLCHAIN_VALUE -7\n#define TOOLCHAIN_OTHER 11\n");
+                string headerHash = NativeConstantGroupProvenance.HashFile(header);
+                string sourceHash = NativeConstantGroupProvenance.HashFile(source);
+                string otherSource = Path.ChangeExtension(source, "unselected.cpp");
+                if (scenario == "source-path-mismatch")
+                    Write(otherSource, File.ReadAllText(source));
+                var inputs = new List<string>();
+                var owners = new List<object>();
+                foreach (var target in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
+                {
+                    string profile = target == Architecture.X86 ? "common" : target.ToString().ToLowerInvariant();
+                    string input = Path.Combine(output, profile, "Test.native-constants.json");
+                    var values = new NativeConstantValues
+                    {
+                        Architecture = target,
+                        BindingSource = Path.Combine(directory, "producer", "generation", "WinSDK", "obj", "generated", profile, "Test.cs"),
+                        SourceFile = Path.Combine(directory, "producer", "generation", "WinSDK", "Partitions", "Test", "main.cpp"),
+                        SourceHash = scenario == "missing-source-hash" ? null : sourceHash,
+                        Namespace = "NotAnOwnershipProof",
+                        Headers = new[] { header },
+                        Constants = new()
+                        {
+                            new("TOOLCHAIN_VALUE", "TOOLCHAIN_VALUE", header, 1, "int", "int", "-7")
+                                { Column = 9, HeaderHash = headerHash },
+                            new("TOOLCHAIN_OTHER", "TOOLCHAIN_OTHER", header, 2, "int", "int", "11")
+                            {
+                                Column = 9, HeaderHash = scenario == "missing-proof" ? null :
+                                    scenario == "hash-mismatch" ||
+                                        scenario == "one-rejected-profile" && target == Architecture.X64
+                                        ? new string('F', 64) : headerHash,
+                            },
+                        },
+                    };
+                    if (scenario == "header-path-case")
+                        values.Constants = values.Constants.Select(value => value with { Header = header.ToUpperInvariant() }).ToList();
+                    Write(input, JsonSerializer.Serialize(values));
+                    inputs.Add(input);
+                    object owner = new
+                    {
+                        Input = scenario == "unselected-input" ? input + ".unselected" : input,
+                        Architecture = scenario == "architecture-mismatch" ? Architecture.None : target,
+                        SourceFile = scenario == "source-path-mismatch" ? otherSource : source,
+                        Namespace = "Selected",
+                        TraversedHeaders = new[] { scenario == "unselected-traversal" ? "elsewhere.h" : selector },
+                    };
+                    owners.Add(owner);
+                    if (scenario == "ambiguous-owner")
+                        owners.Add(owner);
+                }
+                string secondRoot = Path.Combine(directory, "other-toolchain", "include");
+                if (scenario is "ambiguous-root" or "root-mismatch")
+                    Write(Path.Combine(secondRoot, selector), File.ReadAllText(header));
+                string ownership = Path.Combine(output, "native-constant-header-ownership.json");
+                Write(ownership, JsonSerializer.Serialize(new
+                {
+                    Version = 1,
+                    IncludeRoots = scenario == "missing-roots" ? Array.Empty<string>() :
+                        scenario == "root-mismatch" ? new[] { secondRoot } :
+                        scenario == "ambiguous-root" ? new[] { root, secondRoot } : new[] { root },
+                    Inputs = owners,
+                }));
+                if (scenario == "missing-selection")
+                    File.Delete(ownership);
+                if (scenario == "malformed-selection")
+                    Write(ownership, "{invalid");
+                if (scenario == "missing-header")
+                    File.Delete(header);
+                if (scenario == "source-mismatch")
+                    File.AppendAllText(source, "#define DIFFERENT_SOURCE 1\n");
+                if (scenario == "missing-source")
+                    File.Delete(source);
+                var selection = JsonSerializer.Deserialize<ConstantSelectionOptions>(JsonSerializer.Serialize(new
+                {
+                    NativeInputs = inputs,
+                    NativeHeaderOwnershipFile = ownership,
+                }));
+                Action scrape = () => ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", output, "",
+                    new(), new() { [selector] = "Selected" }, new(), new(), new(), new(), selection);
+                if (expectedError != null)
+                {
+                    var error = Assert.Throws<InvalidDataException>(scrape);
+                    Assert.Contains(expectedError, error.Message, StringComparison.OrdinalIgnoreCase);
+                    using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "native-constant-conflicts.json")));
+                    Assert.Equal("rejected", report.RootElement.GetProperty("Status").GetString());
+                    Assert.Equal(3, report.RootElement.GetProperty("RawInputs").GetArrayLength());
+                    Assert.Equal(3, report.RootElement.GetProperty("NativeInputReferences").GetArrayLength());
+                    if (scenario == "one-rejected-profile")
+                        Assert.Equal(1, report.RootElement.GetProperty("Errors").GetArrayLength());
+                    foreach (var diagnostic in report.RootElement.GetProperty("Errors").EnumerateArray())
+                    {
+                        Assert.Equal("NATIVE_TOOLCHAIN_BINDING", diagnostic.GetProperty("Code").GetString());
+                        Assert.Equal("constants.native-inputs", diagnostic.GetProperty("Stage").GetString());
+                        Assert.Equal("selected-toolchain-header-binding", diagnostic.GetProperty("IdentityCategory").GetString());
+                        Assert.Equal(header, diagnostic.GetProperty("Header").GetString());
+                        Assert.False(string.IsNullOrEmpty(diagnostic.GetProperty("Architecture").GetString()));
+                        Assert.Equal("Test", diagnostic.GetProperty("Partition").GetString());
+                        Assert.False(string.IsNullOrEmpty(diagnostic.GetProperty("Cause").GetString()));
+                    }
+                    Assert.DoesNotContain(Directory.GetFiles(output, "*.header-types.cs", SearchOption.AllDirectories),
+                        NativeConstantValues.IsGeneratedSource);
+                    return;
+                }
+                scrape();
+                foreach (string profile in new[] { "x86", "x64", "arm64" })
+                {
+                    string generated = File.ReadAllText(Path.Combine(output, profile, "NativeConstants.Selected.header-types.cs"));
+                    Assert.Contains("TOOLCHAIN_VALUE = -7", generated);
+                    Assert.Contains("TOOLCHAIN_OTHER = 11", generated);
+                }
+                using var completed = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "native-constant-conflicts.json")));
+                Assert.Equal("completed", completed.RootElement.GetProperty("Status").GetString());
+                Assert.Equal(3, completed.RootElement.GetProperty("ToolchainHeaderOwnership").GetArrayLength());
+                Assert.False(File.Exists(Path.Combine(output, "x64", "Test.cs")));
+                Assert.False(File.Exists(Path.Combine(output, "arm64", "Test.cs")));
+            }
+            finally
+            {
+                Directory.Delete(directory, true);
+            }
+
+            static void Write(string path, string contents)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllText(path, contents);
+            }
+        }
+
         [Theory]
         [InlineData("equivalent-cache", null)]
         [InlineData("reversed-inputs", null)]

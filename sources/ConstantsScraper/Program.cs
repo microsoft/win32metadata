@@ -50,7 +50,8 @@ namespace ConstantsScraperApp
                 new Option<string>("--headerPriority", "Ordered SDK-root-relative headers; unlisted headers retain traversal order.", ArgumentArity.OneOrMore),
                 new Option<bool>("--preflightOnly", "Validate independent inputs without generating sources or authorizing selection."),
                 new Option<string>("--blockedBy", "Failed producer prerequisite for the read-only preflight."),
-                new Option<string>("--nativeInput", "Native constant inputs in the project's partition order.", ArgumentArity.OneOrMore)
+                new Option<string>("--nativeInput", "Native constant inputs in the project's partition order.", ArgumentArity.OneOrMore),
+                new Option<string>("--nativeHeaderOwnership", "Recorded selected toolchain roots and per-input partition traversal ownership.")
             };
 
             rootCommand.Handler = CommandHandler.Create<InvocationContext>(Run);
@@ -75,6 +76,7 @@ namespace ConstantsScraperApp
                 SdkRoot = context.ParseResult.ValueForOption<string>("--sdkRoot"),
                 HeaderPriority = context.ParseResult.ValueForOption<string[]>("--headerPriority") ?? System.Array.Empty<string>(),
                 NativeInputs = context.ParseResult.ValueForOption<string[]>("--nativeInput") ?? System.Array.Empty<string>(),
+                NativeHeaderOwnershipFile = context.ParseResult.ValueForOption<string>("--nativeHeaderOwnership"),
                 PreflightOnly = context.ParseResult.ValueForOption<bool>("--preflightOnly"),
                 BlockedBy = context.ParseResult.ValueForOption<string>("--blockedBy"),
             };

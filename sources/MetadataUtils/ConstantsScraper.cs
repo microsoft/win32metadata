@@ -761,7 +761,7 @@ namespace MetadataUtils
                 this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(new
                 {
                     Version = 1, Status = this.validation.Status, Error = error, this.selection.SdkRoot,
-                    this.selection.HeaderPriority, this.selection.NativeInputs,
+                    this.selection.HeaderPriority, this.selection.NativeInputs, this.selection.NativeHeaderOwnershipFile,
                     Errors = this.validation.Errors, BlockedStages = this.validation.BlockedStages,
                     NativeSelection = new { Status = "blocked", Dependency = "successful native inputs and constants finalization" },
                     NativeInputReferences = this.nativeInputReferences, Output = this.output,
@@ -796,6 +796,9 @@ namespace MetadataUtils
                 var rejectedInputs = new HashSet<NativeInput>();
                 var preparedSdkHeaders = new PreparedSdkHeaderResolver(
                     this._fileSystem, this.scraperOutputDir, this.selection.SdkRoot);
+                var toolchainHeaders = new SelectedToolchainHeaderResolver(this._fileSystem,
+                    this.selection.NativeHeaderOwnershipFile, this.selection.SdkRoot, traversedFileMap);
+                var toolchainOwners = new Dictionary<(NativeInput Input, string Header), SelectedToolchainHeaderOwnership>();
                 foreach (string path in paths.Concat(discovered).Distinct(StringComparer.OrdinalIgnoreCase))
                 {
                     NativeInput input = null;
@@ -838,8 +841,23 @@ namespace MetadataUtils
                         {
                             try
                             {
-                                string resolved = ResolveHeader(input, header);
-                                if (!headers.ContainsKey(resolved))
+                                string resolved = ResolveHeaderCore(input, header, out bool preparedSdk);
+                                if (!headers.ContainsKey(resolved) && !preparedSdk &&
+                                    !string.IsNullOrEmpty(this.selection.NativeHeaderOwnershipFile))
+                                {
+                                    try
+                                    {
+                                        var owner = toolchainHeaders.Resolve(input.Values, input.Path, header);
+                                        toolchainOwners.TryAdd((input, ToolchainHeaderKey(header)), owner);
+                                    }
+                                    catch (InvalidDataException error)
+                                    {
+                                        RejectInput(error, input, header: header, identityCategory: "selected-toolchain-header-binding");
+                                        valid = false;
+                                        continue;
+                                    }
+                                }
+                                if (!headers.ContainsKey(resolved) && !toolchainOwners.ContainsKey((input, ToolchainHeaderKey(header))))
                                     throw new InvalidDataException($"Native constants input '{input.Path}' ({input.Values.Architecture}) " +
                                         $"has no traversed header identity for '{header}'.");
                                 this.nativeIntegerHeaders.Add(resolved);
@@ -1014,7 +1032,9 @@ namespace MetadataUtils
                         try
                         {
                         string header = ResolveHeader(input, value.Header);
-                        if (!headers.TryGetValue(header, out string ns) ||
+                        var toolchainOwner = toolchainOwners.GetValueOrDefault((input, ToolchainHeaderKey(value.Header)));
+                        string ns = toolchainOwner?.Namespace;
+                        if ((toolchainOwner == null && !headers.TryGetValue(header, out ns)) ||
                             this.ShouldExclude(value.NativeName) || this.ShouldExclude(value.Name))
                             continue;
                         this.nativeIntegerNames.Add(value.NativeName);
@@ -1030,7 +1050,8 @@ namespace MetadataUtils
                             throw new InvalidDataException($"Invalid compiler-bound native alias in '{input.Path}'.");
                         ns = this.LookupNamespaceForName(value.Name) ?? ns;
                         candidates.Add(new NativeCandidate(input, value, header, ns,
-                            this.headerPriorities.GetValueOrDefault(header, int.MaxValue), this.headerTraversal[header]));
+                            this.headerPriorities.GetValueOrDefault(header, int.MaxValue),
+                            toolchainOwner?.TraversalOrder ?? this.headerTraversal[header]));
                         }
                         catch (InvalidDataException error)
                         {
@@ -1139,6 +1160,7 @@ namespace MetadataUtils
                 {
                     Version = 1, Status = this.nativeInputsValid ? "completed" : "rejected",
                     SdkRoot = this.selection.SdkRoot, NameComparison = "Ordinal",
+                    this.selection.NativeHeaderOwnershipFile, ToolchainHeaderOwnership = toolchainOwners.Values,
                     PublishedAliasCollisionComparison = "OrdinalIgnoreCaseAfterExactNativeBinding",
                     HeaderPriority = this.selection.HeaderPriority.Select((header, rank) => new
                     {
@@ -1223,8 +1245,9 @@ namespace MetadataUtils
                     string header = null, int? line = null, string identityCategory = "native-constant-proof")
                 {
                     bool sdkBinding = identityCategory == "prepared-sdk-header-binding";
-                    this.validation.Add(error, sdkBinding ? "NATIVE_SDK_BINDING" : "WMC003",
-                        sdkBinding ? "constants.native-inputs" : "constants.native-validation", input.Path, symbol,
+                    bool toolchainBinding = identityCategory == "selected-toolchain-header-binding";
+                    this.validation.Add(error, sdkBinding ? "NATIVE_SDK_BINDING" : toolchainBinding ? "NATIVE_TOOLCHAIN_BINDING" : "WMC003",
+                        sdkBinding || toolchainBinding ? "constants.native-inputs" : "constants.native-validation", input.Path, symbol,
                         header, line, input.Values.Architecture.ToString(),
                         Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(input.Path)),
                         this.selection.SdkRoot, identityCategory);
@@ -1232,14 +1255,24 @@ namespace MetadataUtils
                     this.nativeInputsValid = false;
                 }
 
-                string ResolveHeader(NativeInput input, string header)
+                string ResolveHeader(NativeInput input, string header) => ResolveHeaderCore(input, header, out _);
+
+                static string ToolchainHeaderKey(string header) => Path.GetFullPath(header).ToUpperInvariant();
+
+                string ResolveHeaderCore(NativeInput input, string header, out bool preparedSdk)
                 {
+                    preparedSdk = false;
                     if (string.IsNullOrWhiteSpace(header))
                         throw new InvalidDataException($"Missing native header identity in input '{input.Path}' ({input.Values.Architecture}).");
                     string full = Path.GetFullPath(header);
                     string prepared = preparedSdkHeaders.Resolve(input.Values, input.Path, full);
                     if (prepared != null)
+                    {
+                        preparedSdk = true;
                         return prepared;
+                    }
+                    if (toolchainOwners.TryGetValue((input, ToolchainHeaderKey(header)), out var owner))
+                        return owner.Header;
                     if (headers.ContainsKey(full))
                         return full;
                     if (string.IsNullOrEmpty(input.Values.BindingSource) || !Path.IsPathRooted(input.Values.BindingSource))
