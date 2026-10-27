@@ -10,12 +10,13 @@ using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {
-    public class CrossArchSyntaxMap
+    public partial class CrossArchSyntaxMap
     {
         private readonly Dictionary<string, List<CrossArchInfo>> namesToInfos = new();
         private readonly Dictionary<string, StructDeclarationSyntax> namesTo64BitStructs = new();
         private readonly HashSet<string> x86StructsNeed64BitAttrs = new();
         private readonly HashSet<string> sourceIdentifiers = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, SyntaxTree> sourceTrees = new(StringComparer.OrdinalIgnoreCase);
         private readonly object syncObj = new();
 
         public CrossArchSyntaxMap()
@@ -104,9 +105,10 @@ namespace ClangSharpSourceToWinmd
         }
 
         public StructDeclarationSyntax FixX86Struct(StructDeclarationSyntax x86Node)
-        {
-            string name = SyntaxUtils.GetFullName(x86Node, true);
+            => this.FixX86Struct(x86Node, SyntaxUtils.GetFullName(x86Node, true));
 
+        internal StructDeclarationSyntax FixX86Struct(StructDeclarationSyntax x86Node, string name)
+        {
             lock (this.syncObj)
             {
                 if (this.x86StructsNeed64BitAttrs.Contains(name))
@@ -146,6 +148,7 @@ namespace ClangSharpSourceToWinmd
         {
             lock (this.syncObj)
             {
+                this.sourceTrees[tree.FilePath] = tree;
                 foreach (var token in tree.GetRoot().DescendantTokens().Where(token => token.IsKind(SyntaxKind.IdentifierToken)))
                     this.sourceIdentifiers.Add(token.ValueText);
             }

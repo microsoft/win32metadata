@@ -17,11 +17,14 @@ namespace ClangSharpSourceToWinmd
         private readonly HashSet<string> reservedIdentifiers;
         private readonly Dictionary<string, string> fieldRenames = new(StringComparer.Ordinal);
 
-        public CrossArchTreeMerger(CrossArchSyntaxMap map, IEnumerable<SyntaxTree> sourceTrees = null)
+        public CrossArchTreeMerger(CrossArchSyntaxMap map, IEnumerable<SyntaxTree> sourceTrees = null,
+            IEnumerable<MetadataReference> references = null)
         {
             this.map = map;
+            var trees = sourceTrees?.ToArray();
+            map.BindCallbackReferences(trees, references);
             this.reservedIdentifiers = new HashSet<string>(map.GetSourceIdentifiers(), StringComparer.Ordinal);
-            foreach (var tree in sourceTrees ?? Array.Empty<SyntaxTree>())
+            foreach (var tree in trees ?? Array.Empty<SyntaxTree>())
             {
                 foreach (var token in tree.GetRoot().DescendantTokens().Where(token => token.IsKind(SyntaxKind.IdentifierToken)))
                     this.reservedIdentifiers.Add(token.ValueText);
@@ -101,6 +104,12 @@ namespace ClangSharpSourceToWinmd
                 return CSharpSyntaxTree.Create(newRoot, null, tree.FilePath);
             }
 
+            public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                string name = this.owner.map.GetCallbackReference(node.SyntaxTree, this.currentArch, node.SpanStart);
+                return name == null ? base.VisitIdentifierName(node) : SyntaxFactory.ParseName(name).WithTriviaFrom(node);
+            }
+
             public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
                 if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
@@ -133,11 +142,13 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
-                if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
+                var original = node;
+                node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
+                if (CrossArchSyntaxMap.IsPotentialCrossArch(original))
                 {
                     var variable = node.Declaration.Variables.First();
                     string name = variable.Identifier.ValueText;
-                    this.HandleArchSpecific(node, out bool removeNode, out var attributes, ref name);
+                    this.HandleArchSpecific(original, out bool removeNode, out var attributes, ref name);
                     if (removeNode)
                         return null;
                     if (name != variable.Identifier.ValueText)
@@ -146,24 +157,25 @@ namespace ClangSharpSourceToWinmd
                         node = node.AddAttributeLists(attributes);
                 }
 
-                return base.VisitFieldDeclaration(node);
+                return node;
             }
 
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
             {
+                var original = node;
                 node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
 
                 if (this.currentArch == Architecture.X86)
                 {
-                    node = this.owner.map.FixX86Struct(node);
+                    node = this.owner.map.FixX86Struct(node, CrossArchSyntaxMap.GetFullName(original));
                 }
 
-                if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
+                if (CrossArchSyntaxMap.IsPotentialCrossArch(original))
                 {
                     var originalName = node.Identifier.ValueText;
                     var name = originalName;
 
-                    this.HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
+                    this.HandleArchSpecific(original, out var removeNode, out var attributeList, ref name);
                     
                     if (removeNode)
                     {
@@ -187,13 +199,14 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
+                var original = node;
                 node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
 
-                if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
+                if (CrossArchSyntaxMap.IsPotentialCrossArch(original))
                 {
                     var originalName = node.Identifier.ValueText;
                     var name = originalName;
-                    this.HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
+                    this.HandleArchSpecific(original, out var removeNode, out var attributeList, ref name);
                     if (removeNode)
                     {
                         return null;
@@ -216,13 +229,14 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
             {
+                var original = node;
                 node = (MethodDeclarationSyntax)base.VisitMethodDeclaration(node);
 
-                if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
+                if (CrossArchSyntaxMap.IsPotentialCrossArch(original))
                 {
                     var originalName = node.Identifier.ValueText;
                     var name = originalName;
-                    this.HandleArchSpecific(node, out var removeNode, out var attributeList, ref name);
+                    this.HandleArchSpecific(original, out var removeNode, out var attributeList, ref name);
                     if (removeNode)
                     {
                         return null;

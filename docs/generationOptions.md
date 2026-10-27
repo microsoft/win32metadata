@@ -782,6 +782,26 @@ in a quiet Release run before changing a budget; investigate sustained regressio
 rather than raising thresholds to conceal unrelated build load.
 These synthetic guards complement, rather than replace, full-SDK build timing.
 
+### Architecture-specific callback references
+
+Combined x86/x64/Arm64 emission keeps callback signature variants and propagates
+their architecture masks through the generated declarations that reference them.
+This includes `IntPtr` plus `NativeTypeName` fields, direct callback references,
+containing records, and imported method parameters and return types. An otherwise
+identical partition cannot be collapsed before these dependencies are composed.
+Native type-name annotations retain their original spelling.
+
+Native callback remapping selects the definition that covers the owning
+declaration's architecture mask. Pointer reduction also recognizes the internal
+variant names. Parameter types, native-width values, pointer depth, and the
+existing calling-convention projection remain part of the emitted signatures.
+
+When callbacks have multiple emitted variants, metadata population first records
+the local definition handles, then populates a fresh builder with those handles
+available to architecture-specific forward references. It verifies the handle
+plan before writing the image. Equal public names cannot select an unrelated
+variant through a shared local type reference.
+
 ### Architecture-aware WinMD integrity checks
 
 Native constant values or storage can differ between architectures. The emitter

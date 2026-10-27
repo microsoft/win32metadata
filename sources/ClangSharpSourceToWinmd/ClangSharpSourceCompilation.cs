@@ -406,6 +406,9 @@ namespace ClangSharpSourceToWinmd
                 Console.WriteLine($"  Merging cross-arch items...");
                 watch.Restart();
 
+                CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(modifiedFiles.Where(File.Exists), opt);
+                CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap,
+                    FilesToTrees(modifiedFiles.Where(File.Exists)), refs);
                 List<string> filesToMerge = new List<string>();
                 foreach (string x86FileName in modifiedFiles.Where(f => GetArchitectureForFileName(f) == Architecture.X86))
                 {
@@ -415,7 +418,10 @@ namespace ClangSharpSourceToWinmd
                     if (File.Exists(x64FileName) && File.Exists(arm64FileName))
                     {
                         string x86Content = File.ReadAllText(x86FileName);
-                        if (x86Content == File.ReadAllText(x64FileName) && x86Content == File.ReadAllText(arm64FileName))
+                        if (x86Content == File.ReadAllText(x64FileName) && x86Content == File.ReadAllText(arm64FileName) &&
+                            !crossArchSyntaxMap.HasCallbackDependencies(x86FileName) &&
+                            !crossArchSyntaxMap.HasCallbackDependencies(x64FileName) &&
+                            !crossArchSyntaxMap.HasCallbackDependencies(arm64FileName))
                         {
                             var parititionName = GetPartitionNameFromFileName(x86FileName);
 
@@ -433,11 +439,7 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
-                CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(filesToMerge, opt);
                 HashSet<string> nonX86TreesUsedForX86 = crossArchSyntaxMap.Get64BitTreesUsedForX86();
-
-                CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap,
-                    FilesToTrees(modifiedFiles.Where(File.Exists)));
                 System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Architecture.X86)), opt, (x86Tree) =>
                 {
                     string x64FileName = x86Tree.FilePath.Replace(@"\x86\", @"\x64\", StringComparison.OrdinalIgnoreCase);
