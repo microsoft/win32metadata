@@ -41,6 +41,10 @@ namespace MetadataTasks
 
         public ITaskItem[] AutoTypes { get; set; }
 
+        public bool PreflightOnly { get; set; }
+
+        public string BlockedBy { get; set; }
+
         protected override string ToolName => "dotnet";
 
         protected override string GenerateFullPathToTool() => this.ToolExe;
@@ -71,6 +75,11 @@ namespace MetadataTasks
 
             builder.AppendSwitchIfNotNull("--sourceDir ", this.EmitterSourceDir);
             builder.AppendSwitchIfNotNull("--arch ", "crossarch");
+            if (this.PreflightOnly)
+            {
+                builder.AppendSwitch("--preflightOnly");
+                builder.AppendSwitchIfNotNull("--blockedBy ", this.BlockedBy);
+            }
 
             if (!StringComparer.OrdinalIgnoreCase.Equals(
                 Path.GetFileName(this.outputWinmdFullPath),
@@ -104,6 +113,8 @@ namespace MetadataTasks
 
         protected override string GenerateResponseFileCommands()
         {
+            if (this.PreflightOnly)
+                return string.Empty;
             var ret = new StringBuilder();
             var staticLibs = this.GetStaticLibs();
             if (staticLibs.Length > 0)
@@ -120,7 +131,7 @@ namespace MetadataTasks
 
         protected override int ExecuteTool(string pathToTool, string responseFileCommands, string commandLineCommands)
         {
-            this.Log.LogMessage($"Emitting winmd...");
+            this.Log.LogMessage(this.PreflightOnly ? "Validating independent emitter inputs..." : "Emitting winmd...");
 
             this.EchoOff = false;
 
@@ -145,7 +156,8 @@ namespace MetadataTasks
                     $"Or, add this property to any partitions you want to exclude: <ExcludeFromCrossarch>true</ExcludeFromCrossarch>");
             }
 
-            this.Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {this.outputWinmdFullPath}");
+            if (!this.PreflightOnly)
+                this.Log.LogMessage(MessageImportance.High, $"Winmd emitted at: {this.outputWinmdFullPath}");
             return exitCode;
         }
 

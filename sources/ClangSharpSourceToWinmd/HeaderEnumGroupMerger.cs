@@ -13,6 +13,15 @@ namespace ClangSharpSourceToWinmd
     {
         internal static void Merge(List<string> files, string objDir, string architecture, HashSet<string> sourceEnumMembers)
         {
+            var validation = new GenerationValidation();
+            MergeWithDiagnostics(files, objDir, architecture, sourceEnumMembers, validation);
+            validation.ThrowIfAny();
+        }
+
+        internal static void MergeWithDiagnostics(List<string> files, string objDir, string architecture,
+            HashSet<string> sourceEnumMembers, GenerationValidation validation)
+        {
+            int previousErrors = validation.Errors.Count;
             var fileSet = files.ToHashSet(StringComparer.OrdinalIgnoreCase);
             var roots = new Dictionary<string, SyntaxNode>(StringComparer.OrdinalIgnoreCase);
             var fragments = new List<Fragment>();
@@ -24,10 +33,18 @@ namespace ClangSharpSourceToWinmd
                 foreach (var declaration in root.DescendantNodes().OfType<EnumDeclarationSyntax>())
                 {
                     if (declaration.Parent is not BaseNamespaceDeclarationSyntax and not CompilationUnitSyntax)
-                        throw Error(file, declaration.Identifier.ValueText, "Logical groups must be namespace-level declarations.");
+                    {
+                        Record(Error(file, declaration.Identifier.ValueText, "Logical groups must be namespace-level declarations."),
+                            file, declaration.Identifier.ValueText, architecture);
+                        continue;
+                    }
                     string ns = GetNamespace(declaration);
                     if (!identities.Add((ns, declaration.Identifier.ValueText)))
-                        throw Error(file, declaration.Identifier.ValueText, "Distinct native declarations project to the same logical group in one translation unit.");
+                    {
+                        Record(Error(file, declaration.Identifier.ValueText, "Distinct native declarations project to the same logical group in one translation unit."),
+                            file, declaration.Identifier.ValueText, architecture);
+                        continue;
+                    }
                     fragments.Add(new Fragment(file, ns, declaration,
                         architecture == "crossarch" ? GetArchitectures(file, fileSet) : Architecture.All));
                 }
@@ -54,8 +71,12 @@ namespace ClangSharpSourceToWinmd
                     if (!headerGroups.Contains((ns, declaration.Identifier.ValueText)))
                         continue;
                     if (!identities.Add((ns, declaration.Identifier.ValueText)))
-                        throw Error(file, declaration.Identifier.ValueText,
-                            "Distinct declarations project to the same logical group in one source file.");
+                    {
+                        Record(Error(file, declaration.Identifier.ValueText,
+                            "Distinct declarations project to the same logical group in one source file."),
+                            file, declaration.Identifier.ValueText, architecture);
+                        continue;
+                    }
                     roots.TryAdd(file, root);
                     fragments.Add(new Fragment(file, ns, declaration,
                         architecture == "crossarch" ? GetArchitectures(file, fileSet) : Architecture.All, false));
@@ -110,15 +131,27 @@ namespace ClangSharpSourceToWinmd
                             failures.Add(failure);
                             continue;
                         }
+                        catch (HeaderEnumValidationException failure)
+                        {
+                            Record(failure, group[0].File, group[0].Declaration.Identifier.ValueText, target.ToString());
+                            pending.Remove(group);
+                            continue;
+                        }
                         merged.Add((group[0].Namespace, declaration.Identifier.ValueText), declaration);
                         if (legacyCompilation != null)
                             legacyCompilation = ReplaceGroup(legacyCompilation, group, group[0], declaration);
                         pending.Remove(group);
                     }
                     if (pending.Count == countBefore)
-                        throw new InvalidOperationException(string.Join(Environment.NewLine, failures.Select(failure => failure.Message)),
-                            failures[0]);
+                    {
+                        foreach (var failure in failures)
+                            Record(failure, null, null, target.ToString());
+                        validation.Block("emitter.enum-composition:" + target, "logical group values and their dependencies");
+                        break;
+                    }
                 }
+                if (validation.Errors.Count != previousErrors)
+                    continue;
                 var members = new List<MemberDeclarationSyntax>();
                 foreach (var ns in groups.GroupBy(group => group.Key.Namespace))
                 {
@@ -137,6 +170,9 @@ namespace ClangSharpSourceToWinmd
                     .NormalizeWhitespace().ToFullString() + Environment.NewLine);
                 files.Add(path);
             }
+
+            void Record(Exception error, string file, string symbol, string target) =>
+                validation.Add(error, "WMA003", "emitter.enum-composition", file, symbol, architecture: target);
         }
 
         internal static bool IsHeaderTypesFile(string path)
@@ -149,6 +185,14 @@ namespace ClangSharpSourceToWinmd
             => IsHeaderTypesFile(path) || Path.GetFileName(path) == "header-enum-groups.modified.cs";
 
         internal static void ValidateAssociations(CSharpCompilation compilation, string architecture)
+        {
+            var validation = new GenerationValidation();
+            ValidateAssociationsWithDiagnostics(compilation, architecture, validation);
+            validation.ThrowIfAny();
+        }
+
+        internal static void ValidateAssociationsWithDiagnostics(CSharpCompilation compilation, string architecture,
+            GenerationValidation validation)
         {
             var enums = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
             foreach (var tree in compilation.SyntaxTrees)
@@ -167,7 +211,6 @@ namespace ClangSharpSourceToWinmd
                 "arm64" => new[] { Architecture.Arm64 },
                 _ => new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 },
             };
-            var errors = new List<string>();
             foreach (var tree in compilation.SyntaxTrees)
             {
                 var model = compilation.GetSemanticModel(tree);
@@ -177,12 +220,15 @@ namespace ClangSharpSourceToWinmd
                         model.GetSymbolInfo(attribute).Symbol is not IMethodSymbol constructor ||
                         constructor.ContainingType.ToDisplayString() != "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute")
                         continue;
+                    try
+                    {
                     var arguments = attribute.ArgumentList?.Arguments;
                     if (arguments?.Count != 1 || model.GetConstantValue(arguments.Value[0].Expression).Value is not string name ||
                         name.Length == 0)
                     {
-                        errors.Add(Error(tree.FilePath, attribute.Parent.Parent.ToString(),
-                            "AssociatedEnum requires one nonempty enum name.").Message);
+                        validation.Add(Error(tree.FilePath, attribute.Parent.Parent.ToString(),
+                            "AssociatedEnum requires one nonempty enum name."),
+                            "WMA003", "emitter.enum-associations", tree.FilePath, architecture: architecture);
                         continue;
                     }
                     var declaration = attribute.Parent.Parent;
@@ -200,13 +246,19 @@ namespace ClangSharpSourceToWinmd
                         var location = attribute.GetLocation().GetLineSpan().StartLinePosition;
                         string found = matching.Length == 0 ? "none" : string.Join(", ",
                             matching.Select(candidate => candidate.ToDisplayString()).OrderBy(value => value, StringComparer.Ordinal));
-                        errors.Add(Error(tree.FilePath + $"({location.Line + 1},{location.Character + 1})", name,
-                            $"AssociatedEnum must identify exactly one emitted enum after composition for {target}; found {matching.Length}: {found}.").Message);
+                        validation.Add(Error(tree.FilePath + $"({location.Line + 1},{location.Character + 1})", name,
+                            $"AssociatedEnum must identify exactly one emitted enum after composition for {target}; found {matching.Length}: {found}."),
+                            "WMA003", "emitter.enum-associations", tree.FilePath, name,
+                            line: location.Line + 1, architecture: target.ToString());
+                    }
+                    }
+                    catch (HeaderEnumValidationException error)
+                    {
+                        validation.Add(error, "WMA003", "emitter.enum-associations", tree.FilePath,
+                            attribute.Parent.Parent.ToString(), architecture: architecture);
                     }
                 }
             }
-            if (errors.Count != 0)
-                throw new InvalidOperationException(string.Join(Environment.NewLine, errors));
         }
 
         private static Architecture GetSupportedArchitectures(ISymbol symbol)
@@ -580,10 +632,15 @@ namespace ClangSharpSourceToWinmd
             return value & (ulong.MaxValue >> (64 - width));
         }
 
-        private static InvalidOperationException Error(string file, string name, string message)
+        private static HeaderEnumValidationException Error(string file, string name, string message)
             => new($"{file}: error WMA003: Logical group '{name}': {message}");
 
-        private sealed class LegacyValueEvaluationException : InvalidOperationException
+        private class HeaderEnumValidationException : InvalidOperationException
+        {
+            internal HeaderEnumValidationException(string message) : base(message) { }
+        }
+
+        private sealed class LegacyValueEvaluationException : HeaderEnumValidationException
         {
             internal LegacyValueEvaluationException(string message) : base(message) { }
         }

@@ -45,8 +45,8 @@ namespace ClangSharpSourceToWinmdTests
                 Assert.AreEqual("mapped-constants.h", errors[0].Location.GetMappedLineSpan().Path);
 
             var error = Assert.ThrowsException<InvalidOperationException>(() => Qualify(tree));
-            Assert.AreEqual($"CSSW003: Cannot qualify 'VALUE' in '{tree.FilePath}' for X86. " +
-                "The constant or its dependencies could not be evaluated in this profile.", error.Message);
+            StringAssert.Contains(error.Message, $"CSSW003: Cannot qualify 'VALUE' in '{tree.FilePath}' for X86. " +
+                "The constant or its dependencies could not be evaluated in this profile.");
         }
 
         [DataTestMethod]

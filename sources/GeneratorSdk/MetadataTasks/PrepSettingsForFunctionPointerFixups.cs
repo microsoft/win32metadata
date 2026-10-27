@@ -16,6 +16,8 @@ namespace MetadataTasks
 
         public string EmitterFunctionPointerFixupsRsp { get; set; }
 
+        public bool PreflightOnly { get; set; }
+
         public override bool Execute()
         {
 #if DEBUG
@@ -27,18 +29,41 @@ namespace MetadataTasks
             StringBuilder emitterRspReducePointerLevelSection = new();
             StringBuilder scraperRspRemapSection = new();
             StringBuilder scraperRspExcludeSection = new();
+            var validation = new MetadataUtils.GenerationValidation();
+            string report = Path.Combine(Path.GetDirectoryName(this.ScraperFunctionPointerFixupsRsp), "function-pointer-preparation-diagnostics.json");
+            Directory.CreateDirectory(Path.GetDirectoryName(report));
+            File.Delete(report);
 
             foreach (var fileItem in this.FunctionPointerFixups)
             {
                 string fixupsFileName = fileItem.ItemSpec;
                 if (!File.Exists(fixupsFileName))
                 {
+                    validation.Add(new InvalidDataException("Missing function-pointer fixups input."),
+                        "WMG004", "PrepSettingsForFunctionPointerFixups", fixupsFileName);
                     continue;
                 }
 
-                var functionFixups = Newtonsoft.Json.JsonConvert.DeserializeObject<FunctionPointerFixup[]>(File.ReadAllText(fixupsFileName));
+                FunctionPointerFixup[] functionFixups;
+                try
+                {
+                    functionFixups = Newtonsoft.Json.JsonConvert.DeserializeObject<FunctionPointerFixup[]>(File.ReadAllText(fixupsFileName));
+                    if (functionFixups == null || Array.Exists(functionFixups, fixup => fixup == null))
+                        throw new Newtonsoft.Json.JsonSerializationException("Expected an array of non-null function-pointer fixups.");
+                }
+                catch (Newtonsoft.Json.JsonException error)
+                {
+                    validation.Add(error, "WMG004", "PrepSettingsForFunctionPointerFixups", fixupsFileName);
+                    continue;
+                }
                 foreach (var functionFixup in functionFixups)
                 {
+                    if (string.IsNullOrWhiteSpace(functionFixup.name))
+                    {
+                        validation.Add(new InvalidDataException("Function-pointer fixups require a name."),
+                            "WMG004", "PrepSettingsForFunctionPointerFixups", fixupsFileName);
+                        continue;
+                    }
                     bool origDeclIsPointer = functionFixup.alreadyPointer;
 
                     if (!string.IsNullOrEmpty(functionFixup.pointerType))
@@ -62,6 +87,17 @@ namespace MetadataTasks
             }
 
             Directory.CreateDirectory(Path.GetDirectoryName(this.ScraperFunctionPointerFixupsRsp));
+            if (validation.HasErrors)
+            {
+                File.Delete(this.ScraperFunctionPointerFixupsRsp);
+                File.Delete(this.EmitterFunctionPointerFixupsRsp);
+                validation.Block("ScrapeHeaders;ScrapeConstants;EmitWinmd;default tests", "valid function-pointer settings");
+                validation.WriteReport(report);
+                this.Log.LogError(validation.Format());
+                return false;
+            }
+            if (this.PreflightOnly)
+                return true;
             using StreamWriter outputScraperRspWriter = new StreamWriter(this.ScraperFunctionPointerFixupsRsp);
             AppendSectionToWriter(outputScraperRspWriter, scraperRspExcludeSection, "--exclude");
             AppendSectionToWriter(outputScraperRspWriter, scraperRspRemapSection, "--remap");

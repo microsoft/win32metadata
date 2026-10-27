@@ -11,6 +11,10 @@ namespace ClangSharpSourceToWinmd
     {
         public static void WriteToStream(Dictionary<string, string> apiNamesToNamespaces, IEnumerable<AutoType> items, Stream output)
         {
+            items = items.ToArray();
+            var validation = new GenerationValidation();
+            Validate(apiNamesToNamespaces, items, validation);
+            validation.ThrowIfAny();
             Dictionary<string, string> autotypesToNamespaces = new Dictionary<string, string>();
             string currentNamespace = null;
 
@@ -151,6 +155,51 @@ $@"    [{(nativeTypedef ? "NativeTypedef" : "MetadataTypedef")}]
             {
                 throw new System.InvalidOperationException($"{string.Join(", ", alsoUsableForNamespaceMismatches.Select((a, i) => a.Name))} not in the same namespace as AlsoUsableFor. AlsoUsableFor relationships must exist in the same namespace.");
             }
+        }
+
+        internal static void Validate(Dictionary<string, string> apiNamesToNamespaces, IEnumerable<AutoType> items,
+            GenerationValidation validation)
+        {
+            var namespaces = new Dictionary<string, string>(System.StringComparer.Ordinal);
+            var declarations = items?.ToArray() ?? System.Array.Empty<AutoType>();
+            foreach (var item in declarations)
+            {
+                if (item == null || string.IsNullOrWhiteSpace(item.Name) || string.IsNullOrWhiteSpace(item.ValueType))
+                {
+                    Record(item, "An auto type requires nonempty Name and ValueType.");
+                    continue;
+                }
+                string ns = item.Namespace;
+                if (!string.IsNullOrEmpty(item.CloseApi))
+                {
+                    if (!apiNamesToNamespaces.TryGetValue(item.CloseApi, out string apiNamespace))
+                        Record(item, $"The API {item.CloseApi} was not found in the .cs files. The auto type {item.Name} needs to be given an explicit namespace.");
+                    else if (string.IsNullOrEmpty(ns))
+                    {
+                        if (apiNamespace.Contains(';'))
+                            Record(item, $"The API {item.CloseApi} has multiple namespaces: {apiNamespace}. The auto type {item.Name} needs to be given an explicit namespace.");
+                        else
+                            ns = apiNamespace;
+                    }
+                    else if (ns != apiNamespace)
+                        Record(item, $"{item.Name} not in the same namespace as CloseApi. CloseApi relationships must exist in the same namespace.");
+                }
+                if (string.IsNullOrEmpty(ns))
+                    Record(item, $"Autotype {item.Name} needs a namespace to be specified.");
+                if (!namespaces.TryAdd(item.Name, ns))
+                    Record(item, $"Multiple auto type declarations use the name '{item.Name}'.");
+            }
+            foreach (var item in declarations.Where(item => item != null && !string.IsNullOrEmpty(item.Name) &&
+                !string.IsNullOrEmpty(item.AlsoUsableFor)))
+            {
+                if (!namespaces.TryGetValue(item.AlsoUsableFor, out string targetNamespace))
+                    Record(item, $"Auto type '{item.Name}' refers to missing AlsoUsableFor type '{item.AlsoUsableFor}'.");
+                else if (namespaces.GetValueOrDefault(item.Name) != targetNamespace)
+                    Record(item, $"{item.Name} not in the same namespace as AlsoUsableFor. AlsoUsableFor relationships must exist in the same namespace.");
+            }
+
+            void Record(AutoType item, string message) => validation.Add(new System.InvalidOperationException(message),
+                "CSSW006", "emitter.auto-type-validation", item?.InputPath, item?.Name);
         }
     }
 }

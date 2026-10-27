@@ -5,6 +5,7 @@ using System.CommandLine.Invocation;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -27,6 +28,8 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option<string>("--memberRemap", "Remaps fields and parameters by adding attributes or changing the type.", ArgumentArity.OneOrMore),
                 new Option<bool>("--nativeFieldArrayInfo", "Opt in to NativeArrayInfo inference for native SAL pointer/array fields."),
+                new Option<bool>("--preflightOnly", "Validate independent inputs without transforming sources or emitting metadata."),
+                new Option<string>("--blockedBy", "Failed producer prerequisite for the read-only preflight."),
 
                 new Option<string>("--enumAddition", "Add a member to an enum.", ArgumentArity.OneOrMore),
                 new Option<string>("--ref", "The path to a referenced binary.", ArgumentArity.OneOrMore),
@@ -41,7 +44,16 @@ namespace ClangSharpSourceToWinmd
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
 
-            return rootCommand.Invoke(args);
+            try
+            {
+                return rootCommand.Invoke(args);
+            }
+            catch (Exception error)
+            {
+                Console.Error.WriteLine($"fatal WMG999: Unexpected emitter failure: {error}");
+                Console.Error.WriteLine("error WMG002: Blocked WinMD publication and default tests.");
+                return -1;
+            }
         }
 
         public static int Run(InvocationContext context)
@@ -52,6 +64,8 @@ namespace ClangSharpSourceToWinmd
             string version = context.ParseResult.ValueForOption<string>("--version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
             bool nativeFieldArrayInfo = context.ParseResult.ValueForOption<bool>("--nativeFieldArrayInfo");
+            bool preflightOnly = context.ParseResult.ValueForOption<bool>("--preflightOnly");
+            string blockedBy = context.ParseResult.ValueForOption<string>("--blockedBy");
             var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("--enumAddition");
             var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("--enumMakeFlags");
             var reducePointerLevelPairs = context.ParseResult.ValueForOption<string[]>("--reducePointerLevel");
@@ -75,11 +89,11 @@ namespace ClangSharpSourceToWinmd
 
             string archForAutoTypes = arch == "crossarch" ? "common" : arch;
             string archSourceDir = Path.Combine(sourceDirectory, archForAutoTypes);
+            var validation = new GenerationValidation();
+            var autoTypes = AutoTypeHelpers.GetAutoTypesWithDiagnostics(autoTypeFiles, validation);
 
-            Dictionary<string, string> apiNamesToNamespaces;
-            try
+            if (!preflightOnly)
             {
-                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles)?.ToArray();
                 foreach (string generatedArchitecture in new[] { "common", "x86", "x64", "arm64" })
                 {
                     try
@@ -92,51 +106,65 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
-                apiNamesToNamespaces = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(sourceDirectory, MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs | MetadataUtils.ScraperUtils.NameOptions.Delegates);
-                if (requiredNamespaceValuePairs != null)
-                {
-                    foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
-                    {
-                        if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
-                        {
-                            apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
-                        }
-                    }
-                }
-
-                if (autoTypes != null && autoTypes.Length != 0)
-                {
-                    var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
-                    if (!Directory.Exists(Path.GetDirectoryName(outputFilePath)))
-                    {
-                        Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath));
-                    }
-
-                    using var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
-                    NativeTypedefStructsCreator.WriteToStream(apiNamesToNamespaces, autoTypes, fileStream);
-                }
             }
-            catch (Exception e)
+
+            var apiNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(sourceDirectory,
+                ScraperUtils.NameOptions.Methods | ScraperUtils.NameOptions.Structs | ScraperUtils.NameOptions.Delegates);
+            if (requiredNamespaceValuePairs != null)
             {
-                var error = new GeneratorDiagnostic($"Failed to create source for auto types: {e.Message}", Microsoft.CodeAnalysis.DiagnosticSeverity.Error);
-                Console.WriteLine(error.ToString());
-
-                return -1;
+                foreach (KeyValuePair<string, string> requiredItem in requiredNamespaces)
+                {
+                    if (apiNamesToNamespaces.ContainsKey(requiredItem.Key))
+                    {
+                        apiNamesToNamespaces[requiredItem.Key] = requiredItem.Value;
+                    }
+                }
             }
 
-            Console.WriteLine($"Preparing and compiling source files...");
+            NativeTypedefStructsCreator.Validate(apiNamesToNamespaces, autoTypes, validation);
+            if (!preflightOnly && autoTypes != null && autoTypes.Length != 0 && !validation.HasErrors)
+            {
+                var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
+                Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath));
+                using var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
+                NativeTypedefStructsCreator.WriteToStream(apiNamesToNamespaces, autoTypes, fileStream);
+            }
+            else if (validation.HasErrors || preflightOnly)
+                validation.Block("emitter.auto-type-source", blockedBy ?? "valid auto-type declarations and inputs");
+
+            Console.WriteLine(preflightOnly ? "Validating independent emitter inputs..." : "Preparing and compiling source files...");
             System.Diagnostics.Stopwatch mainWatch = System.Diagnostics.Stopwatch.StartNew();
 
-            ClangSharpSourceCompilation clangSharpCompliation =
-                ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces, nativeFieldArrayInfo);
+            ClangSharpSourceCompilation clangSharpCompliation;
+            try
+            {
+                clangSharpCompliation = ClangSharpSourceCompilation.Create(
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces,
+                    reducePointerLevels, refs, staticLibs, apiNamesToNamespaces, nativeFieldArrayInfo, validation,
+                    preflightOnly, blockedBy);
+            }
+            catch (InvalidDataException error) when (GenerationValidation.IsValidationFailure(error))
+            {
+                Console.Error.WriteLine(error.Message);
+                return -1;
+            }
+            catch (InvalidOperationException error) when (GenerationValidation.IsValidationFailure(error))
+            {
+                Console.Error.WriteLine(error.Message);
+                return -1;
+            }
+            if (preflightOnly)
+            {
+                Console.Error.WriteLine(validation.Format());
+                Console.Error.WriteLine("Full diagnostics: " + Path.Combine(sourceDirectory, "emitter-preflight-diagnostics.json"));
+                return -1;
+            }
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");
             System.Collections.ObjectModel.ReadOnlyCollection<Microsoft.CodeAnalysis.Diagnostic> diags = clangSharpCompliation.GetDiagnostics();
 
             int errors = 0;
-            const int MaxErrorsToShow = 10000;
             foreach (Microsoft.CodeAnalysis.Diagnostic diag in diags)
             {
                 if (errors == 0)
@@ -146,15 +174,14 @@ namespace ClangSharpSourceToWinmd
 
                 errors++;
                 Console.WriteLine(diag.ToString());
-                if (errors >= MaxErrorsToShow)
-                {
-                    Console.WriteLine($"Only showing the first {MaxErrorsToShow} errors.");
-                    break;
-                }
+                validation.Add(new InvalidOperationException(diag.ToString()), diag.Id, "emitter.compilation",
+                    diag.Location.SourceTree?.FilePath, line: diag.Location.GetLineSpan().StartLinePosition.Line + 1);
             }
 
             if (errors > 0)
             {
+                validation.Block("EmitWinmd;default tests", "successful C# compilation");
+                validation.WriteReport(Path.Combine(sourceDirectory, "generation-diagnostics.json"));
                 return -1;
             }
 
@@ -180,11 +207,23 @@ namespace ClangSharpSourceToWinmd
             foreach (GeneratorDiagnostic diag in generator.GetDiagnostics())
             {
                 Console.WriteLine(diag.ToString());
+                if (diag.Severity == Microsoft.CodeAnalysis.DiagnosticSeverity.Error)
+                    validation.Add(new InvalidOperationException(diag.Message), "WMG001", "emitter.metadata-emission");
+            }
+            if (validation.HasErrors)
+            {
+                validation.Block("WinMD publication;default tests", "successful metadata emission");
+                validation.WriteReport(Path.Combine(sourceDirectory, "generation-diagnostics.json"));
             }
 
             Console.WriteLine($"{OutputUtils.FormatTimespan(mainWatch.Elapsed)}");
             ClangSharpSourceCompilation.ShowMemory();
 
+            if (generator.WroteWinmd)
+            {
+                File.Delete(Path.Combine(sourceDirectory, "generation-failures.json"));
+                File.Delete(Path.Combine(sourceDirectory, "emitter-preflight-diagnostics.json"));
+            }
             return generator.WroteWinmd ? 0 : -1;
         }
 

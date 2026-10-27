@@ -35,13 +35,22 @@ namespace ClangSharpSourceToWinmd
             return (ns.Length == 0 ? "" : ns + "::") + string.Join("::", owners);
         }
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false, GenerationValidation validation = null)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo);
+            bool ownsValidation = validation == null;
+            validation ??= new GenerationValidation();
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo, validation, filePath);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             newRoot = NativeMemberNameProvenance.Project(newRoot);
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
+            if (ownsValidation)
+                validation.ThrowIfAny();
             return ret;
+        }
+
+        private sealed class SourceValidationException : InvalidOperationException
+        {
+            internal SourceValidationException(string message) : base(message) { }
         }
 
         private class TreeRewriter : CSharpSyntaxRewriter
@@ -65,9 +74,13 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
             private readonly bool nativeFieldArrayInfo;
+            private readonly GenerationValidation validation;
+            private readonly string filePath;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, bool nativeFieldArrayInfo)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, bool nativeFieldArrayInfo, GenerationValidation validation, string filePath)
             {
+                this.validation = validation;
+                this.filePath = filePath;
                 this.remaps = remaps;
                 this.InitRegexRemaps();
 
@@ -79,6 +92,29 @@ namespace ClangSharpSourceToWinmd
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
                 this.nativeFieldArrayInfo = nativeFieldArrayInfo;
+            }
+
+            public override SyntaxNode Visit(SyntaxNode node)
+            {
+                try
+                {
+                    return base.Visit(node);
+                }
+                catch (SourceValidationException error) when (node is MemberDeclarationSyntax or ParameterSyntax)
+                {
+                    string symbol = node switch
+                    {
+                        MethodDeclarationSyntax method => method.Identifier.ValueText,
+                        ParameterSyntax parameter => parameter.Identifier.ValueText,
+                        FieldDeclarationSyntax field => string.Join(", ", field.Declaration.Variables
+                            .Select(variable => variable.Identifier.ValueText)),
+                        _ => node.Kind().ToString(),
+                    };
+                    this.validation.Add(error, "WMA002", "emitter.source-cleaning", this.filePath, symbol,
+                        line: node.GetLocation().GetLineSpan().StartLinePosition.Line + 1,
+                        architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(this.filePath).ToString());
+                    return node;
+                }
             }
 
             private void InitRegexRemaps()
@@ -157,7 +193,7 @@ namespace ClangSharpSourceToWinmd
                     {
                         if (remove || !headerAttributes.Any(attribute =>
                             NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(attrNode)))
-                            throw new InvalidOperationException($"WMA002: Legacy remapping '{attrNode}' conflicts with header annotation '{headerAttributes[0]}'.");
+                            throw new SourceValidationException($"WMA002: Legacy remapping '{attrNode}' conflicts with header annotation '{headerAttributes[0]}'.");
                         continue;
                     }
                     if (attrName.EndsWith(EncodeHelpers.AttributeToRemoveSuffix))
@@ -236,7 +272,7 @@ namespace ClangSharpSourceToWinmd
                 foreach (var attribute in node.AttributeLists.SelectMany(list => list.Attributes))
                 {
                     if (TryReadParameterOverride(attribute, out string name, out bool enabled) && !overrides.TryAdd(name, enabled))
-                        throw new InvalidOperationException($"WMA001: Duplicate '{name}' parameter override on '{fullName}'.");
+                        throw new SourceValidationException($"WMA001: Duplicate '{name}' parameter override on '{fullName}'.");
                 }
                 this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName);
                 node = (ParameterSyntax)base.VisitParameter(node);
@@ -253,7 +289,7 @@ namespace ClangSharpSourceToWinmd
                             if (!IsParameterMetadataAttribute(name, pair.Key))
                                 return true;
                             if (pair.Value == remove)
-                                throw new InvalidOperationException($"WMA002: Legacy remapping '{attribute}' conflicts with header parameter override '{pair.Key}({pair.Value.ToString().ToLowerInvariant()})' on '{fullName}'.");
+                                throw new SourceValidationException($"WMA002: Legacy remapping '{attribute}' conflicts with header parameter override '{pair.Key}({pair.Value.ToString().ToLowerInvariant()})' on '{fullName}'.");
                             return false;
                         }).ToList();
                     }
@@ -309,7 +345,7 @@ namespace ClangSharpSourceToWinmd
                     return false;
                 var match = ParameterOverrideRegex.Match(payload);
                 if (attribute.ArgumentList.Arguments.Count != 1 || !match.Success)
-                    throw new InvalidOperationException($"WMA001: Malformed parameter override '{payload}'; expected Optional(true|false) or ComOutPtr(true|false).");
+                    throw new SourceValidationException($"WMA001: Malformed parameter override '{payload}'; expected Optional(true|false) or ComOutPtr(true|false).");
                 name = match.Groups[1].Value;
                 enabled = match.Groups[2].Value == "true";
                 return true;
@@ -560,7 +596,7 @@ namespace ClangSharpSourceToWinmd
                 if (TryReadParameterOverride(firstAttr, out _, out _))
                 {
                     if (node.Parent is not ParameterSyntax || node.Target?.Identifier.ValueText is not (null or "param"))
-                        throw new InvalidOperationException("WMA001: Optional/ComOutPtr overrides are valid only on parameters.");
+                        throw new SourceValidationException("WMA001: Optional/ComOutPtr overrides are valid only on parameters.");
                     return null;
                 }
 
@@ -1476,7 +1512,7 @@ namespace ClangSharpSourceToWinmd
                         return null;
                     }
 
-                    throw new InvalidOperationException($"WMA002: Native SAL array count on '{GetFullNameWithoutArchSuffix(fieldNode)}' conflicts with '{existing[0]}'.");
+                    throw new SourceValidationException($"WMA002: Native SAL array count on '{GetFullNameWithoutArchSuffix(fieldNode)}' conflicts with '{existing[0]}'.");
                 }
 
                 return SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(arrayInfo));

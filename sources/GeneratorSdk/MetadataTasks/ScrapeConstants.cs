@@ -10,6 +10,8 @@ namespace MetadataTasks
     public class ScrapeConstants : ToolTask
     {
         private Partition[] loadedPartitions;
+        private string[] orderedNativeInputs;
+        private readonly MetadataUtils.GenerationValidation validation = new();
 
         [Required]
         public string DefaultNamespace { get; set; }
@@ -40,6 +42,10 @@ namespace MetadataTasks
 
         public string[] HeaderPriority { get; set; }
 
+        public bool PreflightOnly { get; set; }
+
+        public string BlockedBy { get; set; }
+
         [Required]
         public string MarkerFileName { get; set; }
 
@@ -50,6 +56,10 @@ namespace MetadataTasks
         public override bool Execute()
         {
             this.EchoOff = false;
+            bool actualScrape = !this.PreflightOnly;
+            Directory.CreateDirectory(this.ScraperOutputDir);
+            File.Delete(Path.Combine(this.ScraperOutputDir, "constants-task-diagnostics.json"));
+            File.Delete(Path.Combine(this.ScraperOutputDir, "constants-preflight-diagnostics.json"));
 
 #if DEBUG
             if (System.Environment.GetEnvironmentVariable("DEBUG_CONSTANTS_SCRAPER_TASK") == "1")
@@ -59,20 +69,50 @@ namespace MetadataTasks
 #endif
 
             bool needsBuild = !File.Exists(this.MarkerFileName);
-            this.loadedPartitions = Partition.FromTaskItems(this.Partitions, this.MSBuildProjectDirectory, this.SdkIncRoot).ToArray();
+            var partitions = new List<Partition>();
+            foreach (var item in this.Partitions)
+            {
+                var partition = Partition.FromTaskItem(item, this.MSBuildProjectDirectory, this.SdkIncRoot);
+                try
+                {
+                    _ = partition.Namespace;
+                    partitions.Add(partition);
+                }
+                catch (InvalidDataException error)
+                {
+                    this.validation.Add(error, "WMG004", "constants.partition-plan", partition.FullPath,
+                        partition: item.GetMetadata("Name"), selectedSdkRoot: this.SdkIncRoot);
+                }
+            }
+            this.loadedPartitions = partitions.ToArray();
+            _ = this.GetOrderedNativeConstantInputs();
             needsBuild |= this.loadedPartitions.Any(p => !p.IsUpToDate(this.MarkerFileName));
             needsBuild |= !this.AreNonPartitionFilesUpToDate();
+            needsBuild |= this.PreflightOnly || this.validation.HasErrors;
 
             if (!needsBuild)
             {
                 return true;
             }
+            if (actualScrape)
+                File.Delete(Path.Combine(this.ScraperOutputDir, "native-constant-conflicts.json"));
 
-            this.Log.LogMessage(MessageImportance.High, $"Scraping constants and enums...");
+            if (this.validation.HasErrors)
+            {
+                this.PreflightOnly = true;
+                this.BlockedBy ??= "valid constants input/partition plan";
+                this.validation.Block("ScrapeConstants;EmitWinmd;default tests", this.BlockedBy);
+                Directory.CreateDirectory(this.ScraperOutputDir);
+                this.validation.WriteReport(Path.Combine(this.ScraperOutputDir, "constants-task-diagnostics.json"));
+                this.Log.LogError(this.validation.Format());
+            }
+            this.Log.LogMessage(MessageImportance.High, this.PreflightOnly
+                ? "Validating independent constants inputs..." : "Scraping constants and enums...");
 
+            File.Delete(this.MarkerFileName);
             bool ret = base.Execute();
 
-            if (ret)
+            if (ret && !this.PreflightOnly && !this.validation.HasErrors)
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
                 string nativeInputs = Path.Combine(this.ScraperOutputDir, "native-constant-inputs.txt");
@@ -81,8 +121,15 @@ namespace MetadataTasks
                     File.WriteAllLines(nativeInputs, paths);
                 File.WriteAllLines(Path.Combine(this.ScraperOutputDir, "constant-selection-inputs.txt"), this.GetSelectionInputs());
             }
+            else
+            {
+                this.Log.LogError(this.PreflightOnly
+                    ? $"Blocked constants finalization, EmitWinmd and default tests: requires valid {this.BlockedBy}. See constants-preflight-diagnostics.json."
+                    : "Blocked EmitWinmd and default tests: constants finalization failed. " +
+                        "See native-constant-conflicts.json and the complete constants scraper output.");
+            }
 
-            return ret;
+            return ret && !this.PreflightOnly && !this.validation.HasErrors;
         }
 
         protected override string GenerateCommandLineCommands()
@@ -90,9 +137,15 @@ namespace MetadataTasks
             var builder = new CommandLineBuilder();
             builder.AppendFileNameIfNotNull(Path.Combine(this.ToolsBinDir, "ConstantsScraper.dll"));
 
-            builder.AppendSwitchIfNotNull("--headerTextFile ", this.HeaderTextFile);
+            if (!this.PreflightOnly)
+                builder.AppendSwitchIfNotNull("--headerTextFile ", this.HeaderTextFile);
             builder.AppendSwitchIfNotNull("--scraperOutputDir ", this.ScraperOutputDir);
             builder.AppendSwitchIfNotNull("--sdkRoot ", this.SdkIncRoot);
+            if (this.PreflightOnly)
+            {
+                builder.AppendSwitch("--preflightOnly");
+                builder.AppendSwitchIfNotNull("--blockedBy ", this.BlockedBy);
+            }
 
             IEnumerable<string> reponseFiles = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
             foreach (var file in reponseFiles)
@@ -182,6 +235,8 @@ namespace MetadataTasks
 
         private string[] GetOrderedNativeConstantInputs()
         {
+            if (this.orderedNativeInputs != null)
+                return this.orderedNativeInputs;
             var remaining = this.GetNativeConstantInputs().ToHashSet(System.StringComparer.OrdinalIgnoreCase);
             var ordered = new List<string>();
             foreach (var partition in this.loadedPartitions)
@@ -191,10 +246,14 @@ namespace MetadataTasks
                     if (remaining.Remove(path))
                         ordered.Add(path);
                 }
-            if (remaining.Count != 0)
-                throw new InvalidDataException("Native constant inputs have no project partition-order owner: " +
-                    string.Join(", ", remaining));
-            return ordered.ToArray();
+            foreach (string path in remaining.OrderBy(path => path, System.StringComparer.OrdinalIgnoreCase))
+            {
+                this.validation.Add(new InvalidDataException("Native constant input has no project partition-order owner."),
+                    "WMC002", "constants.native-input-plan", path, selectedSdkRoot: this.SdkIncRoot,
+                    identityCategory: "partition-order-owner");
+                ordered.Add(path);
+            }
+            return this.orderedNativeInputs = ordered.ToArray();
         }
 
         private void AppendTraversedFilesAndNamespaces(StringBuilder rsp)

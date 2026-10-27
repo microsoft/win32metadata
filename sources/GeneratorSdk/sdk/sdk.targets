@@ -4,6 +4,7 @@
   <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.ScrapeConstants" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.CollectGenerationDiagnostics" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.CompileIdls" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.FilterResponseFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.GetPartitionFiles" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
@@ -60,7 +61,6 @@
     <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
     <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
   </ItemGroup>
-
   <PropertyGroup Condition="'$(UseWinSDKAssets)' == 'true'">
     <AdditionalIncludes>$(WinSDKAssets)\inc;$(AdditionalIncludes)</AdditionalIncludes>
   </PropertyGroup>
@@ -69,6 +69,7 @@
     Inputs="$(BaseScraperHeaderFile);$(ScraperHeader)"
     Outputs="$(FinalScraperHeaderFile)">
 
+    <PropertyGroup><_GenerationFailureStage>PrepScraperHeader</_GenerationFailureStage></PropertyGroup>
     <ItemGroup>
       <InputScraperFiles Include="$(BaseScraperHeaderFile)"/>
       <InputScraperFiles Include="$(ScraperHeader)"/>
@@ -79,12 +80,14 @@
       InputFiles="@(InputScraperFiles)"
       OutputFile="$(FinalScraperHeaderFile)"/>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="PrepConstantsScraperHeader"
     Inputs="$(BaseConstantsScraperHeaderFile);$(ConstantsScraperHeader)"
     Outputs="$(FinalConstantsScraperHeaderFile)">
 
+    <PropertyGroup><_GenerationFailureStage>PrepConstantsScraperHeader</_GenerationFailureStage></PropertyGroup>
     <ItemGroup>
       <InputScraperFiles Include="$(BaseConstantsScraperHeaderFile)"/>
       <InputScraperFiles Include="$(ConstantsScraperHeader)"/>
@@ -95,20 +98,24 @@
       InputFiles="@(InputScraperFiles)"
       OutputFile="$(FinalConstantsScraperHeaderFile)"/>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="PrepSettingsForFunctionPointerFixups" BeforeTargets="Build"
     Inputs="@(FunctionPointerFixup)"
     Outputs="$(ScraperFunctionPointerFixupsRsp);$(EmitterFunctionPointerFixupsRsp)">
 
+    <PropertyGroup><_GenerationFailureStage>PrepSettingsForFunctionPointerFixups</_GenerationFailureStage></PropertyGroup>
     <PrepSettingsForFunctionPointerFixups
       FunctionPointerFixups="@(FunctionPointerFixup)"
       ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
       EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"/>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="TrackGeneratedSourceInputs">
+    <PropertyGroup><_GenerationFailureStage>TrackGeneratedSourceInputs</_GenerationFailureStage></PropertyGroup>
     <ItemGroup>
       <_CurrentGeneratedSourceInputs Include="@(AutoType -> 'AutoType:%(FullPath)');@(AutoTypesForSettingsOnly -> 'AutoTypesForSettingsOnly:%(FullPath)');@(ManualCs -> 'ManualCs:%(FullPath)')"/>
       <_OwnedScrapedHeadersMarkers Include="$(GeneratedDir)\scannedheaders.*.txt"/>
@@ -129,6 +136,7 @@
     <WriteLinesToFile
       File="$(ScraperAutoTypesRsp)" Overwrite="true" WriteOnlyWhenDifferent="true"
       Condition="'@(AutoType);@(AutoTypesForSettingsOnly)' == ';'"/>
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="PrepSettingsForAutoTypes" BeforeTargets="Build"
@@ -136,16 +144,19 @@
     Inputs="@(AutoType);@(AutoTypesForSettingsOnly)"
     Outputs="$(ScraperAutoTypesRsp)">
 
+    <PropertyGroup><_GenerationFailureStage>PrepSettingsForAutoTypes</_GenerationFailureStage></PropertyGroup>
     <PrepSettingsForAutoTypes
       AutoTypes="@(AutoType);@(AutoTypesForSettingsOnly)"
       ScraperAutoTypesRsp="$(ScraperAutoTypesRsp)"/>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="CompileIdls" BeforeTargets="Build"
     Inputs="@(Idls)"
     Outputs="@(Idls -> '$(CompiledHeadersDir)\%(Filename).h')">
 
+    <PropertyGroup><_GenerationFailureStage>CompileIdls</_GenerationFailureStage></PropertyGroup>
     <Message Text="Compiling idl files..." Importance="high"/>
 
     <CompileIdls
@@ -158,12 +169,14 @@
       AdditionalIncludes="$(AdditionalIncludes)"
       MidlSwitches="$(MidlSwitches)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="PrepareWithLibsRsp" BeforeTargets="Build"
     Inputs="@(ImportLibs)"
     Outputs="$(WithLibsRsp)">
 
+    <PropertyGroup><_GenerationFailureStage>PrepareWithLibsRsp</_GenerationFailureStage></PropertyGroup>
     <Message Text="Scanning libs..." Importance="high"/>
 
     <ScanLibs
@@ -173,12 +186,14 @@
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </ScanLibs>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="FilterRsps"
     Inputs="@(ResponseFile)"
     Outputs="$(FilteredRspForHeaders);$(FilteredRspForConstants)">
 
+    <PropertyGroup><_GenerationFailureStage>FilterRsps</_GenerationFailureStage></PropertyGroup>
     <FilterResponseFiles
       ResponseFiles="@(ResponseFile)"
       OutputFileName="$(FilteredRspForHeaders)"
@@ -197,6 +212,7 @@
       ValidSwitches="--memberRemap;--enumMakeFlags;--reducePointerLevel;--requiredNamespaceForName;--autoTypes;--staticLibs;--enumAddition"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <ItemGroup>
@@ -221,6 +237,9 @@
   <Target Name="ScrapeHeaders" BeforeTargets="Build"
     DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
 
+    <PropertyGroup>
+      <_GenerationFailureStage>ScrapeHeaders</_GenerationFailureStage>
+    </PropertyGroup>
     <ScrapeHeaders
       Condition="'$(SkipScraping)' != 'true'"
       Partitions="@(Partition)"
@@ -246,10 +265,12 @@
       EvaluateNativeConstants="$(EvaluateNativeConstants)"
       NuGetPackageSource="$(NuGetPackageSource)"/>
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <Target Name="CopyManualFilesToScraped" BeforeTargets="Build"
     DependsOnTargets="TrackGeneratedSourceInputs">
+    <PropertyGroup><_GenerationFailureStage>CopyManualFilesToScraped</_GenerationFailureStage></PropertyGroup>
     <ItemGroup>
       <_CurrentManualCsOutputs Include="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')"/>
       <_RetiredManualCsOutputs Include="$(GeneratedDir)\*.manual.cs" Exclude="@(_CurrentManualCsOutputs)"/>
@@ -258,6 +279,7 @@
     <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(_CurrentManualCsOutputs)" SkipUnchangedFiles="$(_GeneratedSourceInputsUnchanged)" />
     <!-- Commit manual identities only after their destination copies succeed. -->
     <WriteLinesToFile File="$(GeneratedSourceInputsFile)" Lines="@(_CurrentGeneratedSourceInputs)" Overwrite="true" WriteOnlyWhenDifferent="true"/>
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
 
   <ItemGroup>
@@ -274,7 +296,9 @@
 
     <PropertyGroup>
       <DefaultNamespace>DefaultNamespace</DefaultNamespace>
+      <_GenerationFailureStage>ScrapeConstants</_GenerationFailureStage>
     </PropertyGroup>
+    <Delete Files="$(GeneratedDir)\constants-task-diagnostics.json;$(GeneratedDir)\constants-preflight-diagnostics.json"/>
 
     <ScrapeConstants
       Condition="'$(SkipScraping)' != 'true' or '$(EvaluateNativeConstants)' == 'true'"
@@ -293,6 +317,79 @@
       StandardErrorImportance="high"
       />
 
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
+  </Target>
+
+  <Target Name="CollectIndependentGenerationDiagnostics">
+    <PropertyGroup>
+      <_GenerationFailureStage Condition="'$(_GenerationFailureStage)' == ''">generation prerequisites</_GenerationFailureStage>
+    </PropertyGroup>
+    <MakeDir Directories="$(GeneratedDir)"/>
+    <Delete Files="$(ScrapedHeadersMarker);$(ScrapedConstantsMarker)"/>
+    <Delete Files="$(GeneratedDir)\constants-task-diagnostics.json;$(GeneratedDir)\constants-preflight-diagnostics.json"
+      Condition="'$(_GenerationFailureStage)' != 'ScrapeConstants'"/>
+    <Delete Files="$(GeneratedDir)\emitter-preflight-diagnostics.json"/>
+    <Delete Files="$(GeneratedDir)\auto-types-preparation-diagnostics.json"
+      Condition="'@(AutoType);@(AutoTypesForSettingsOnly)' == ';'"/>
+    <Delete Files="$(GeneratedDir)\function-pointer-preparation-diagnostics.json"
+      Condition="'@(FunctionPointerFixup)' == ''"/>
+    <Message Text="Collecting independent validation after failed $(_GenerationFailureStage). Dependent finalization, WinMD emission and default tests remain blocked." Importance="high"/>
+    <ItemGroup>
+      <_PreflightEmitterRsp Include="@(EmitterRsp);$(FilteredRspForEmitter)"/>
+    </ItemGroup>
+    <PrepSettingsForFunctionPointerFixups
+      Condition="'@(FunctionPointerFixup)' != ''"
+      PreflightOnly="true"
+      FunctionPointerFixups="@(FunctionPointerFixup)"
+      ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
+      EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"
+      ContinueOnError="ErrorAndContinue"/>
+    <PrepSettingsForAutoTypes
+      Condition="'@(AutoType);@(AutoTypesForSettingsOnly)' != ';'"
+      PreflightOnly="true"
+      AutoTypes="@(AutoType);@(AutoTypesForSettingsOnly)"
+      ScraperAutoTypesRsp="$(ScraperAutoTypesRsp)"
+      ContinueOnError="ErrorAndContinue"/>
+    <Copy SourceFiles="@(ManualCs)" DestinationFiles="@(ManualCs -> '$(GeneratedDir)\%(Filename).manual.cs')"
+      SkipUnchangedFiles="true" ContinueOnError="ErrorAndContinue"/>
+    <ScrapeConstants
+      Condition="'$(_GenerationFailureStage)' != 'ScrapeConstants'"
+      PreflightOnly="true"
+      BlockedBy="$(_GenerationFailureStage)"
+      DefaultNamespace="DefaultNamespace"
+      ScraperOutputDir="$(GeneratedDir)"
+      ResponseFiles="@(ConstantsScraperRsp)"
+      Partitions="@(Partition)"
+      ManualCs="@(ManualCs)"
+      EnumsJson="$(EnumsJson)"
+      ToolsBinDir="$(ToolsBinDir)"
+      HeaderTextFile="$(FinalConstantsScraperHeaderFile)"
+      MarkerFileName="$(ScrapedConstantsMarker)"
+      SdkIncRoot="$(SdkIncRoot)"
+      HeaderPriority="$(ConstantHeaderPriority)"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
+      StandardErrorImportance="high"
+      ContinueOnError="ErrorAndContinue"/>
+    <EmitWinmd
+      PreflightOnly="true"
+      BlockedBy="$(_GenerationFailureStage)"
+      Libs="@(ImportLibs)"
+      AutoTypes="@(AutoType)"
+      EmitterSourceDir="$(GeneratedDir)"
+      ToolsBinDir="$(ToolsBinDir)"
+      ResponseFiles="@(_PreflightEmitterRsp)"
+      Win32WinmdBinDir="$(Win32WinmdBinDir)"
+      WinmdVersion="$(WinmdVersion)"
+      OutputWinmd="$(OutputWinmd)"
+      ShowOutputDetails="true"
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
+      ContinueOnError="ErrorAndContinue"/>
+    <CallTarget Targets="CollectFinalGenerationDiagnostics"/>
+  </Target>
+
+  <Target Name="CollectFinalGenerationDiagnostics">
+    <CollectGenerationDiagnostics GeneratedDir="$(GeneratedDir)" FailedStage="$(_GenerationFailureStage)"
+      AdditionalReports="$(ObjDir)\idl-generation-diagnostics.json"/>
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build"
@@ -300,6 +397,8 @@
     Outputs="$(OutputWinmd)"
     DependsOnTargets="ScrapeConstants">
 
+    <PropertyGroup><_GenerationFailureStage>EmitWinmd</_GenerationFailureStage></PropertyGroup>
+    <Delete Files="$(GeneratedDir)\generation-diagnostics.json"/>
     <ItemGroup>
       <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
       <!-- When scraping ran in this build, include only the current arch's auto-rsp -->
@@ -325,6 +424,12 @@
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </EmitWinmd>
 
+    <OnError ExecuteTargets="CollectFinalGenerationDiagnostics"/>
+  </Target>
+
+  <Target Name="RetireGenerationFailureReportAfterSuccessfulEmit" AfterTargets="EmitWinmd">
+    <Delete Files="$(GeneratedDir)\generation-failures.json;$(GeneratedDir)\emitter-preflight-diagnostics.json"
+      Condition="Exists('$(OutputWinmd)')"/>
   </Target>
 
   <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Version="3.0.4" Project="sdk.targets"/>

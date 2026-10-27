@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -122,10 +123,11 @@ namespace ClangSharpSourceToWinmd
             return Path.GetFileName(fileName).Replace(".modified.cs", string.Empty);
         }
 
-        private static void ValidateHeaderTypesFamilies(IEnumerable<string> files)
+        private static void ValidateHeaderTypesFamilies(IEnumerable<string> files, GenerationValidation validation)
         {
             var paths = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
-            foreach (string file in paths.Where(HeaderEnumGroupMerger.IsHeaderTypesFile))
+            foreach (string file in paths.Where(file => HeaderEnumGroupMerger.IsHeaderTypesFile(file) ||
+                Path.GetFileName(file) == "header-types.cs" || file.EndsWith(".header-types.cs", StringComparison.Ordinal)))
             {
                 if (GetArchitectureForFileName(file) == Architecture.None ||
                     !File.ReadAllText(file).StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal))
@@ -138,13 +140,62 @@ namespace ClangSharpSourceToWinmd
                     File.ReadAllText(path).StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal)))
                     continue;
                 bool common = present.Length == 1 && GetArchitectureForFileName(file) == Architecture.X86 &&
-                    !siblings.Skip(1).Any(sibling => Path.GetFileName(file) == "header-types.modified.cs"
+                    !siblings.Skip(1).Any(sibling => Path.GetFileName(file) is "header-types.modified.cs" or "header-types.cs"
                         ? paths.Any(path => string.Equals(Path.GetDirectoryName(path), Path.GetDirectoryName(sibling),
                             StringComparison.OrdinalIgnoreCase))
-                        : paths.Contains(sibling.Replace(".header-types.modified.cs", ".modified.cs", StringComparison.Ordinal)));
+                        : paths.Contains(sibling.Replace(".header-types.modified.cs", ".modified.cs", StringComparison.Ordinal)
+                            .Replace(".header-types.cs", ".cs", StringComparison.Ordinal)));
                 if (!common)
-                    throw new InvalidOperationException($"CSSW004: Incomplete successful header-types source family '{file}'. " +
-                        "Supply all three successfully generated companions, including successful empty outputs; missing or failed profiles are not empty outputs.");
+                    validation.Add(new InvalidOperationException($"CSSW004: Incomplete successful header-types source family '{file}'. " +
+                        "Supply all three successfully generated companions, including successful empty outputs; missing or failed profiles are not empty outputs."),
+                        "CSSW004", "emitter.source-family-preflight", file,
+                        architecture: GetArchitectureForFileName(file).ToString(),
+                        partition: Path.GetFileName(file));
+            }
+        }
+
+        private static string ReadProducerStatus(JsonElement root)
+        {
+            if (root.ValueKind != JsonValueKind.Object)
+                throw new JsonException("Producer receipt must be an object.");
+            if (!root.TryGetProperty("Version", out var version) || version.ValueKind != JsonValueKind.Number ||
+                !version.TryGetInt32(out int number) || number != 1)
+                throw new JsonException("Producer receipt requires supported Version 1.");
+            RequireString(root, "Status");
+            string status = root.GetProperty("Status").GetString();
+            if (status is not ("completed" or "rejected" or "blocked"))
+                throw new JsonException($"Unknown producer receipt Status '{status}'.");
+            foreach (string field in new[] { "Errors", "BlockedStages", "Reports" })
+            {
+                if (!root.TryGetProperty(field, out var values))
+                    continue;
+                if (values.ValueKind != JsonValueKind.Array)
+                    throw new JsonException($"Producer receipt '{field}' must be an array when present.");
+                foreach (var value in values.EnumerateArray())
+                {
+                    if (field == "Reports")
+                    {
+                        if (value.ValueKind != JsonValueKind.String || string.IsNullOrEmpty(value.GetString()))
+                            throw new JsonException("Producer receipt Reports entries must be nonempty paths.");
+                    }
+                    else
+                    {
+                        if (value.ValueKind != JsonValueKind.Object)
+                            throw new JsonException($"Producer receipt '{field}' entries must be objects.");
+                        foreach (string name in field == "Errors"
+                            ? new[] { "Code", "Stage", "Message", "Cause" } : new[] { "Stage", "Dependency" })
+                            RequireString(value, name);
+                    }
+                }
+                if (status == "completed" && field != "Reports" && values.GetArrayLength() != 0)
+                    throw new JsonException($"Completed producer receipt cannot contain nonempty '{field}'.");
+            }
+            return status;
+
+            static void RequireString(JsonElement value, string name)
+            {
+                if (!value.TryGetProperty(name, out var property) || property.ValueKind != JsonValueKind.String)
+                    throw new JsonException($"Producer receipt '{name}' must be a string.");
             }
         }
 
@@ -160,11 +211,89 @@ namespace ClangSharpSourceToWinmd
             IEnumerable<string> addedRefs,
             Dictionary<string, string> staticLibs,
             Dictionary<string, string> apiNamesToNamespaces,
-            bool nativeFieldArrayInfo = false)
+            bool nativeFieldArrayInfo = false,
+            GenerationValidation validation = null,
+            bool preflightOnly = false,
+            string blockedBy = null)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
+            validation ??= new GenerationValidation();
+            string validationReport = Path.Combine(sourceDirectory,
+                preflightOnly ? "emitter-preflight-diagnostics.json" : "generation-diagnostics.json");
+            File.Delete(validationReport);
+            var producerReports = new List<string>();
+            foreach (string receipt in new[] { "scrape-diagnostics.json", "native-constant-conflicts.json" })
+            {
+                if (preflightOnly && (receipt == "scrape-diagnostics.json" && blockedBy != "ScrapeHeaders" ||
+                    receipt == "native-constant-conflicts.json" && blockedBy != "ScrapeConstants"))
+                    continue;
+                string path = Path.Combine(sourceDirectory, receipt);
+                if (!File.Exists(path))
+                    continue;
+                try
+                {
+                    using var report = JsonDocument.Parse(File.ReadAllText(path));
+                    string status = ReadProducerStatus(report.RootElement);
+                    if (status != "completed")
+                    {
+                        producerReports.Add(path);
+                        validation.Add(new InvalidDataException($"A required producer has status '{status}'. Rerun it successfully before emission."),
+                            "WMG002", "emitter.producer-preflight", path, identityCategory: "producer-authorization");
+                    }
+                }
+                catch (JsonException error)
+                {
+                    producerReports.Add(path);
+                    validation.Add(error, "CSSW004", "emitter.producer-preflight", path, identityCategory: "producer-authorization");
+                }
+            }
 
-            string topObjDir = Path.Combine(sourceDirectory, $"obj");
+            var refs = new List<MetadataReference>();
+            foreach (string referencePath in addedRefs ?? Enumerable.Empty<string>())
+            {
+                try
+                {
+                    if (string.IsNullOrWhiteSpace(referencePath))
+                        throw new FileNotFoundException("An explicit reference must name an existing metadata assembly.", referencePath);
+                    var reference = MetadataReference.CreateFromFile(referencePath);
+                    var metadata = reference.GetMetadata();
+                    if (metadata is AssemblyMetadata assembly)
+                        foreach (var module in assembly.GetModules())
+                            _ = module.GetMetadataReader();
+                    else if (metadata is ModuleMetadata moduleMetadata)
+                        _ = moduleMetadata.GetMetadataReader();
+                    refs.Add(reference);
+                }
+                catch (FileNotFoundException error)
+                {
+                    validation.Add(error, "CSSW007", "emitter.reference-preflight", referencePath);
+                }
+                catch (DirectoryNotFoundException error)
+                {
+                    validation.Add(error, "CSSW007", "emitter.reference-preflight", referencePath);
+                }
+                catch (BadImageFormatException error)
+                {
+                    validation.Add(error, "CSSW007", "emitter.reference-preflight", referencePath);
+                }
+            }
+
+            string topObjDir = Path.Combine(sourceDirectory, "obj");
+            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories)
+                .Where(file => !file.StartsWith(topObjDir + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase) &&
+                    IsValidCsSourceFile(file, arch)).ToArray();
+            if (arch == "crossarch")
+                ValidateHeaderTypesFamilies(sourceFiles, validation);
+            if (preflightOnly || validation.HasErrors)
+            {
+                CollectSyntaxErrors(sourceFiles);
+                validation.Block("emitter.source-transformation;emitter.compilation;EmitWinmd;default tests",
+                    blockedBy ?? "valid source families, producer receipts, auto-type inputs and explicit references");
+                validation.WriteReport(validationReport, producerReports);
+                validation.ThrowIfAny(validationReport);
+                return null;
+            }
+
             if (Directory.Exists(topObjDir))
             {
                 Directory.Delete(topObjDir, true);
@@ -173,13 +302,11 @@ namespace ClangSharpSourceToWinmd
             string objDir = Path.Combine(topObjDir, arch);
             Directory.CreateDirectory(objDir);
 
-            var refs = (addedRefs ?? Enumerable.Empty<string>()).Select(r => MetadataReference.CreateFromFile(r)).ToArray();
             IReadOnlyDictionary<string, string> fieldRenames = new Dictionary<string, string>();
 
             TreeInfoFinder infoFinder = new TreeInfoFinder();
 
             List<string> modifiedFiles = new List<string>();
-            var sourceFiles = Directory.GetFiles(sourceDirectory, "*.cs", SearchOption.AllDirectories).Where(f => IsValidCsSourceFile(f, arch));
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions();
 
 #if MakeSingleThreaded
@@ -209,9 +336,6 @@ namespace ClangSharpSourceToWinmd
                 modifiedFiles.Add(modifiedFile);
             }
 
-            if (arch == "crossarch")
-                ValidateHeaderTypesFamilies(modifiedFiles);
-
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
             Console.WriteLine($"  Moving names to correct namespaces...");
@@ -235,7 +359,8 @@ namespace ClangSharpSourceToWinmd
 
             ShowMemory();
 
-            HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch, infoFinder.EnumMemberNames);
+            HeaderEnumGroupMerger.MergeWithDiagnostics(modifiedFiles, objDir, arch, infoFinder.EnumMemberNames, validation);
+            StopIfInvalid("emitter.source-cleaning", "logical enum composition");
 
             // Retained enum bags own macros globally; native enums also own ConstantsScraper copies.
             var scrapedEnumMemberNames = new HashSet<string>(infoFinder.EnumMemberNames);
@@ -262,16 +387,19 @@ namespace ClangSharpSourceToWinmd
             {
                 var enumMemberNames = tree.FilePath.EndsWith(".constants.modified.cs", StringComparison.OrdinalIgnoreCase)
                     ? scrapedEnumMemberNames : infoFinder.EnumMemberNames;
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, enumMemberNames, tree.FilePath, nativeFieldArrayInfo);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, enumMemberNames, tree.FilePath, nativeFieldArrayInfo, validation);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
+            StopIfInvalid("emitter.crossarch-composition", "source declaration validation");
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
 
             if (arch == "crossarch")
             {
-                foreach (var tree in CrossArchConstantQualifier.Qualify(FilesToTrees(modifiedFiles).ToArray(), refs))
+                var qualified = CrossArchConstantQualifier.QualifyWithDiagnostics(FilesToTrees(modifiedFiles).ToArray(), refs, validation);
+                StopIfInvalid("emitter.crossarch-composition", "constant qualification for every architecture");
+                foreach (var tree in qualified)
                     WriteTree(tree, tree.FilePath);
                 List<string> partitionsNotNeedingCrossarch = new List<string>();
 
@@ -368,16 +496,45 @@ namespace ClangSharpSourceToWinmd
             comp = AddNetstandardReference(comp);
 
             comp = MergeRepeatedStructs(comp);
-            comp = MergeLegacyTypedefProjections(comp, requiredNamespaces);
-            comp = HeaderTypedefMerger.Merge(comp);
-            comp = HeaderTypedefMerger.LowerConstants(comp);
-            comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
-            HeaderEnumGroupMerger.ValidateAssociations(comp, arch);
+            comp = MergeLegacyTypedefProjections(comp, requiredNamespaces, validation);
+            comp = HeaderTypedefMerger.MergeWithDiagnostics(comp, validation);
+            if (!validation.HasErrors)
+            {
+                comp = HeaderTypedefMerger.LowerConstantsWithDiagnostics(comp, true, validation);
+                if (!validation.HasErrors)
+                    comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
+            }
+            else
+                validation.Block("emitter.typedef-constant-lowering", "native typedef composition");
+            HeaderEnumGroupMerger.ValidateAssociationsWithDiagnostics(comp, arch, validation);
+            StopIfInvalid("emitter.compilation", "typedef and association validation");
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
 
             return new ClangSharpSourceCompilation(comp, typeImports, fieldRenames);
+
+            void StopIfInvalid(string stage, string dependency)
+            {
+                if (!validation.HasErrors)
+                    return;
+                CollectSyntaxErrors(modifiedFiles);
+                validation.Block(stage, dependency);
+                validation.Block("EmitWinmd;default tests", stage);
+                validation.WriteReport(validationReport, producerReports);
+                validation.ThrowIfAny(validationReport);
+            }
+
+            void CollectSyntaxErrors(IEnumerable<string> files)
+            {
+                foreach (var tree in FilesToTrees(files.Where(File.Exists))
+                    .Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath)))
+                    foreach (var diagnostic in tree.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
+                        validation.Add(new InvalidOperationException(diagnostic.ToString()), diagnostic.Id,
+                            "emitter.source-syntax-preflight", tree.FilePath,
+                            line: diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1,
+                            architecture: GetArchitectureForFileName(tree.FilePath).ToString());
+            }
         }
 
         private static CSharpCompilation MergeRepeatedStructs(CSharpCompilation compilation)
@@ -419,7 +576,7 @@ namespace ClangSharpSourceToWinmd
         }
 
         private static CSharpCompilation MergeLegacyTypedefProjections(CSharpCompilation compilation,
-            IReadOnlyDictionary<string, string> requiredNamespaces)
+            IReadOnlyDictionary<string, string> requiredNamespaces, GenerationValidation validation)
         {
             var removals = new HashSet<StructDeclarationSyntax>();
             foreach (var tree in compilation.SyntaxTrees.Where(tree =>
@@ -450,8 +607,13 @@ namespace ClangSharpSourceToWinmd
                             WithoutDocumentation(declaration, generatedModel).WithIdentifier(manual.Identifier),
                             WithoutDocumentation(manual, manualModel)) ||
                         !BindingsMatch(declaration, generatedModel, manual, manualModel, ignoreDocumentation: true))
-                        throw new InvalidOperationException($"Legacy typedef projection '{declaration.Identifier.ValueText}' " +
-                            $"conflicts with the established manual provider '{identity}'.");
+                    {
+                        validation.Add(new InvalidOperationException($"Legacy typedef projection '{declaration.Identifier.ValueText}' " +
+                            $"conflicts with the established manual provider '{identity}'."),
+                            "CSSW005", "emitter.legacy-typedef-composition", tree.FilePath, declaration.Identifier.ValueText,
+                            architecture: GetArchitectureForFileName(tree.FilePath).ToString());
+                        continue;
+                    }
                     removals.Add(declaration);
                 }
             }
