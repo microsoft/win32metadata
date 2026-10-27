@@ -90,6 +90,12 @@ defaults may be absent. Explicit `AutoType` and `FunctionPointerFixup` items rem
 required, even when they use those filenames. Present defaults and all configured
 inputs are validated normally; malformed settings still reject generation.
 
+I/O failures retiring generated `autotypes.cs` sources are collected as `WMG004`
+at `emitter.auto-type-source-retirement`, with the path, architecture and original
+exception. Independent retirement and input-preflight checks continue, while
+auto-type regeneration, source transformation, compilation and publication remain
+blocked.
+
 After a native input has been read and its headers bound, a failed declaration
 keeps that entire input ineligible for selection but does not stop local
 validation of its later independent facts.
