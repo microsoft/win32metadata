@@ -118,6 +118,8 @@ class Program
 
         string remapsOutputPath = args[0];
         string[] rspArgs = args.Skip(1).ToArray();
+        string diagnosticSource = null;
+        string diagnosticOutput = null;
 
         try
         {
@@ -144,6 +146,10 @@ class Program
             string outputFile = settings.GetValueOrDefault("--output")?.LastOrDefault();
             string ns = settings.GetValueOrDefault("--namespace")?.LastOrDefault();
             string headerFile = settings.GetValueOrDefault("--headerFile")?.LastOrDefault();
+            diagnosticSource = sourceFile;
+            diagnosticOutput = outputFile;
+            if (diagnosticOutput != null && File.Exists(diagnosticOutput + ".generation-diagnostics.json"))
+                File.Delete(diagnosticOutput + ".generation-diagnostics.json");
             string declarationMap = settings.GetValueOrDefault("--declaration-map")?.SingleOrDefault();
             var declarationMapSymbols = settings.GetValueOrDefault("--declaration-map-symbol");
 
@@ -543,6 +549,7 @@ class Program
                 providerTiming?.Dispose();
                 using var associatedTiming = GenerationTiming.BeginSpan("annotations.associated-constants");
                 var associatedConstantSources = new List<string>();
+                bool associatedConstantsValid = true;
                 if (annotations != null && !generateAllMacros)
                 {
                     var macros = annotations.GetAssociatedConstantMacros();
@@ -559,10 +566,12 @@ class Program
                             recovered.AddRange(selected.Constants);
                             missing = missing.Except(selected.Constants.Select(value => value.NativeName), StringComparer.Ordinal).ToArray();
                             if (missing.Length != 0)
-                                throw new InvalidOperationException("Associated constants have no valid native integer value: " +
-                                    string.Join("; ", missing.Select(name => name + ": " +
-                                        string.Join(", ", selected.Issues.Where(issue => issue.Name == name)
-                                            .Select(issue => issue.Reason + " " + string.Join(" ", issue.Diagnostics))))));
+                            {
+                                associatedConstantsValid = false;
+                                foreach (string name in missing)
+                                    annotations.RejectAssociatedConstant(macros.First(macro => macro.Name == name),
+                                        selected.Issues.Where(issue => issue.Name == name));
+                            }
                         }
                         using var stream = new MemoryStream();
                         using (var writer = new ConstantWriter(stream, config.DefaultNamespace,
@@ -571,8 +580,9 @@ class Program
                                 writer.AddNativeInteger(value);
                         associatedConstantSources.Add(Encoding.UTF8.GetString(stream.ToArray()));
                     }
-                    ValidateAssociatedConstantSources(associatedConstantSources, macros.Select(macro =>
-                        mergedRemaps.GetValueOrDefault(macro.Name) ?? macro.Name).ToArray(), config.DefaultClass);
+                    if (associatedConstantsValid)
+                        ValidateAssociatedConstantSources(associatedConstantSources, macros.Select(macro =>
+                            mergedRemaps.GetValueOrDefault(macro.Name) ?? macro.Name).ToArray(), config.DefaultClass);
                 }
                 if (associatedConstantSources.Count != 0)
                 {
@@ -689,13 +699,25 @@ class Program
         }
         catch (HeaderAnnotationDiagnosticsException ex)
         {
-            Console.Error.WriteLine(ex.Message);
+            var validation = new GenerationValidation();
+            foreach (string diagnostic in ex.Diagnostics)
+                validation.Add(new InvalidDataException(diagnostic), "WMA001", "native.annotation-validation",
+                    diagnosticSource, architecture: Path.GetFileName(Path.GetDirectoryName(diagnosticOutput)),
+                    partition: Path.GetFileNameWithoutExtension(diagnosticOutput));
+            validation.Block("native output publication;ScrapeConstants;EmitWinmd;default tests",
+                "native declaration and projection validation");
+            string report = diagnosticOutput + ".generation-diagnostics.json";
+            Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(report)));
+            validation.WriteReport(report);
+            Console.Error.WriteLine(validation.Format());
+            Console.Error.WriteLine("Full diagnostics: " + report);
             return -1;
         }
         catch (Exception ex)
         {
-            Console.Error.WriteLine($"Error: {ex.Message}");
+            Console.Error.WriteLine($"fatal WMG999: Unexpected native generation failure: {ex.Message}");
             Console.Error.WriteLine(ex.StackTrace);
+            Console.Error.WriteLine("error WMG002: Blocked native output publication and dependent generation stages.");
             return -1;
         }
     }

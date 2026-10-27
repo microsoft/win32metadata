@@ -4,6 +4,7 @@ using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Moq;
@@ -13,6 +14,188 @@ namespace MetadataUtils.Tests
 {
     public class ConstantsScraperTests
     {
+        [Theory]
+        [InlineData("equivalent-cache", null)]
+        [InlineData("reversed-inputs", null)]
+        [InlineData("same-path", null)]
+        [InlineData("same-key", null)]
+        [InlineData("cache-key-case", null)]
+        [InlineData("binding-extension-case", null)]
+        [InlineData("cross-drive", null)]
+        [InlineData("cross-drive-sdk-header-source", null)]
+        [InlineData("crossarch-producer", null)]
+        [InlineData("missing-producer-manifest", "prepared SDK identity")]
+        [InlineData("missing-selected-manifest", "prepared SDK identity")]
+        [InlineData("malformed-producer-manifest", "prepared SDK identity")]
+        [InlineData("same-path-missing-selected-manifest", "prepared SDK identity")]
+        [InlineData("same-path-different-sdk", "prepared SDK identity")]
+        [InlineData("same-path-missing-source-identity", "native source identity")]
+        [InlineData("same-path-missing-native-binding", "native header proof")]
+        [InlineData("same-key-missing-producer-manifest", "prepared SDK identity")]
+        [InlineData("same-key-missing-source-identity", "native source identity")]
+        [InlineData("unrelated-architecture-manifest", "prepared SDK identity")]
+        [InlineData("crossarch-mismatch", "prepared SDK identity")]
+        [InlineData("different-sdk", "prepared SDK identity")]
+        [InlineData("different-prepared-headers", "prepared SDK identity")]
+        [InlineData("missing-header-identity", "prepared SDK header identity")]
+        [InlineData("different-header-bytes", "prepared SDK header hash")]
+        [InlineData("different-native-binding", "native header proof")]
+        [InlineData("missing-native-binding", "native header proof")]
+        [InlineData("different-source-profile", "native source identity")]
+        [InlineData("missing-source-identity", "native source identity")]
+        [InlineData("missing-binding-source", "native source identity")]
+        [InlineData("unrooted-source-identity", "native source identity")]
+        [InlineData("missing-header-path", "native header identity")]
+        [InlineData("unrecorded-sdk-root", "traversed header identity")]
+        [InlineData("missing-traversed-owner", "traversed header identity")]
+        [InlineData("authoritative-ambiguity", "conflicting authoritative source owners")]
+        public void PreparedSdkRelocationRequiresTheRecordedSdkHeaderAndSourceIdentity(
+            string scenario, string expectedError)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "prepared-native-identity-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string oldKey = new string('A', 64);
+                string newKey = new string('B', 64);
+                if (scenario == "cache-key-case")
+                {
+                    oldKey = oldKey.ToLowerInvariant();
+                    newKey = newKey.ToLowerInvariant();
+                }
+                if (scenario.StartsWith("same-path", StringComparison.Ordinal))
+                    oldKey = newKey;
+                if (scenario.StartsWith("same-key", StringComparison.Ordinal))
+                    newKey = oldKey;
+                string output = Path.Combine(directory, "consumer", "generation", "WinSDK", "obj", "generated");
+                string sourceRelative = Path.Combine("generation", "WinSDK", "Partitions", "Foundation", "main.cpp");
+                string oldSource = Path.Combine(directory, "producer", sourceRelative);
+                string currentSource = Path.Combine(directory, "consumer", sourceRelative);
+                string relative = Path.Combine("shared", "rpcnterr.h");
+                string oldHeader = Path.Combine(directory, "producer", "cache", oldKey, "headers", relative);
+                if (scenario.StartsWith("cross-drive", StringComparison.Ordinal))
+                    oldHeader = Path.Combine(Path.GetPathRoot(directory) == @"Z:\" ? @"Y:\" : @"Z:\",
+                        "recorded-cache", oldKey, "headers", relative);
+                if (scenario == "unrecorded-sdk-root")
+                    oldHeader = Path.Combine(directory, "unrecorded-sdk", relative);
+                if (scenario == "missing-header-path")
+                    oldHeader = null;
+                string sdk = scenario.StartsWith("same-key", StringComparison.Ordinal)
+                    ? Path.Combine(directory, "consumer", "cache", newKey, "headers")
+                    : Path.Combine(directory, "selected-cache", newKey, "headers");
+                string header = Path.Combine(sdk, relative);
+                if (scenario.StartsWith("same-path", StringComparison.Ordinal))
+                    oldHeader = header;
+                Write(currentSource, "#include <rpcnterr.h>\n");
+                Write(header, "#define RPC_S_OUT_OF_MEMORY 14\n#define RPC_X_NO_MEMORY RPC_S_OUT_OF_MEMORY\n");
+                string sourceHash = NativeConstantGroupProvenance.HashFile(currentSource);
+                string headerHash = NativeConstantGroupProvenance.HashFile(header);
+                Write(Path.Combine(output, "common", "Foundation.header-types.cs"),
+                    HeaderTypesSourceFamily.SuccessMarker + "\n" +
+                    "namespace Foundation { public enum RPC_STATUS : int { RPC_S_OUT_OF_MEMORY = 14 } }\n");
+                Write(Path.Combine(output, "common", "Rpc.header-types.cs"),
+                    HeaderTypesSourceFamily.SuccessMarker + "\n" +
+                    "namespace Rpc { public enum RPC_STATUS : int { RPC_S_OUT_OF_MEMORY = 14 } }\n");
+                var inputs = new List<string>();
+                foreach (var architecture in new[] { Architecture.X86, Architecture.X64 })
+                {
+                    string arch = architecture.ToString().ToLowerInvariant();
+                    string input = Path.Combine(output, arch, "Foundation.native-constants.json");
+                    var values = new NativeConstantValues
+                    {
+                        Architecture = architecture,
+                        BindingSource = scenario == "missing-binding-source" ? null :
+                            Path.Combine(directory, "producer", "generation", "WinSDK", "obj",
+                            "generated", arch, scenario == "binding-extension-case" ? "Foundation.CS" : "Foundation.cs"),
+                        SourceFile = scenario == "unrooted-source-identity" ? sourceRelative :
+                            scenario == "cross-drive-sdk-header-source" ? oldHeader : oldSource,
+                        SourceHash = scenario.EndsWith("missing-source-identity", StringComparison.Ordinal) ? null :
+                            scenario == "cross-drive-sdk-header-source" ? headerHash : sourceHash,
+                        Namespace = "Foundation",
+                        Headers = new[] { oldHeader },
+                        Constants = new()
+                        {
+                            new("RPC_S_OUT_OF_MEMORY", "RPC_S_OUT_OF_MEMORY", oldHeader, 1, "int", "int", "14")
+                            { Column = 9, HeaderHash = headerHash },
+                            new("RPC_X_NO_MEMORY", "RPC_X_NO_MEMORY", oldHeader, 2, "int", "int", "14")
+                            {
+                                Column = 9, HeaderHash = scenario == "different-native-binding" ? new string('F', 64) :
+                                    scenario.EndsWith("missing-native-binding", StringComparison.Ordinal) ? null : headerHash,
+                            },
+                        },
+                    };
+                    if (scenario == "authoritative-ambiguity")
+                        values.Constants.RemoveAt(1);
+                    Write(input, JsonSerializer.Serialize(values));
+                    inputs.Add(input);
+                    string producerArch = scenario.StartsWith("crossarch", StringComparison.Ordinal) ? "crossarch" :
+                        scenario == "unrelated-architecture-manifest" ? "arm64" : arch;
+                    if (!scenario.EndsWith("missing-producer-manifest", StringComparison.Ordinal))
+                        Write(Path.Combine(Path.GetDirectoryName(output), "prepared-sdk-provenance", producerArch,
+                            oldKey, "manifest.json"), scenario == "malformed-producer-manifest" ? "{invalid" :
+                                Manifest(oldKey, producer: true));
+                }
+                if (!scenario.EndsWith("missing-selected-manifest", StringComparison.Ordinal))
+                    Write(Path.Combine(Path.GetDirectoryName(sdk), "manifest.json"), Manifest(newKey, producer: false));
+                if (scenario == "different-header-bytes")
+                    File.AppendAllText(header, "#define CHANGED 1\n");
+                if (scenario == "different-source-profile")
+                    File.AppendAllText(currentSource, "#define DIFFERENT_PROFILE 1\n");
+                if (scenario == "reversed-inputs")
+                    inputs.Reverse();
+                var headers = new Dictionary<string, string>();
+                if (scenario != "missing-traversed-owner")
+                    headers.Add(header, "Foundation");
+                Action scrape = () => ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", output, "",
+                    new(), headers, new(), new(), new(), new(),
+                    new ConstantSelectionOptions { SdkRoot = sdk, NativeInputs = inputs });
+                if (expectedError != null)
+                {
+                    var error = Assert.Throws<InvalidDataException>(scrape);
+                    Assert.Contains(expectedError, error.Message, StringComparison.OrdinalIgnoreCase);
+                    Assert.DoesNotContain(Directory.GetFiles(output, "*.header-types.cs", SearchOption.AllDirectories),
+                        path => NativeConstantValues.IsGeneratedSource(path));
+                    using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "native-constant-conflicts.json")));
+                    Assert.Equal("rejected", report.RootElement.GetProperty("Status").GetString());
+                    return;
+                }
+                scrape();
+                foreach (string arch in new[] { "x86", "x64" })
+                {
+                    string generated = File.ReadAllText(Path.Combine(output, arch, "NativeConstants.Foundation.header-types.cs"));
+                    Assert.Contains("RPC_X_NO_MEMORY = 14", generated);
+                    Assert.DoesNotContain("RPC_S_OUT_OF_MEMORY =", generated);
+                }
+                Assert.False(File.Exists(Path.Combine(output, "Foundation.constants.cs")));
+                using var completed = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "native-constant-conflicts.json")));
+                Assert.Equal("completed", completed.RootElement.GetProperty("Status").GetString());
+
+                string Manifest(string identity, bool producer) => JsonSerializer.Serialize(new
+                {
+                    schemaVersion = 1, identity = identity.ToUpperInvariant(),
+                    sdkPackageVersion = !producer && (scenario.EndsWith("different-sdk", StringComparison.Ordinal) ||
+                        scenario == "crossarch-mismatch")
+                        ? "10.0.99999.1" : "10.0.28000.2705",
+                    sourceStage = "post-midl", sourceGitTree = new string('C', 40),
+                    sourceSha256 = new string('D', 64), recipeSha256 = new string('E', 64),
+                    preparationSha256 = new string('F', 64),
+                    preparedSha256 = !producer && scenario == "different-prepared-headers" ? new string('2', 64) : new string('1', 64),
+                    files = producer && scenario == "missing-header-identity" ? Array.Empty<object>() :
+                        new object[] { new { path = relative, sha256 = headerHash } },
+                });
+            }
+            finally
+            {
+                Directory.Delete(directory, true);
+            }
+
+            static void Write(string path, string contents)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllText(path, contents);
+            }
+        }
+
         [Fact]
         public void ObjectLikeNameScanReusesDefineAndContinuationRulesWithoutEvaluatingValues()
         {
@@ -488,6 +671,10 @@ fine CONTINUED \
             public void ScrapeConstantsFromTraversedFiles(Dictionary<string, string> fileMap)
             {
                 this._scrapeConstantsFromTraversedFiles.Invoke(this._instance, new[] { fileMap });
+                var validation = this._instance.GetType().GetField("validation", BindingFlags.NonPublic | BindingFlags.Instance)
+                    .GetValue(this._instance);
+                typeof(GenerationValidation).GetMethod(nameof(GenerationValidation.ThrowIfAny))
+                    .Invoke(validation, new object[] { null });
             }
 
             protected virtual void Dispose(bool disposing)

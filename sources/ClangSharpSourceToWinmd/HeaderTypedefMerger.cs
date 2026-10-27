@@ -17,6 +17,16 @@ namespace ClangSharpSourceToWinmd
 
         internal static CSharpCompilation LowerConstants(CSharpCompilation compilation, bool writeModifiedFiles = true)
         {
+            var validation = new GenerationValidation();
+            var result = LowerConstantsWithDiagnostics(compilation, writeModifiedFiles, validation);
+            validation.ThrowIfAny();
+            return result;
+        }
+
+        internal static CSharpCompilation LowerConstantsWithDiagnostics(CSharpCompilation compilation,
+            bool writeModifiedFiles, GenerationValidation validation)
+        {
+            int previousErrors = validation.Errors.Count;
             var storageTypes = new Dictionary<ITypeSymbol, ITypeSymbol>(SymbolEqualityComparer.Default);
             var rewritten = compilation;
             foreach (var tree in compilation.SyntaxTrees)
@@ -26,6 +36,8 @@ namespace ClangSharpSourceToWinmd
                 foreach (var field in tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>()
                     .Where(field => field.Modifiers.Any(SyntaxKind.ConstKeyword)))
                 {
+                    try
+                    {
                     var storage = GetStorage(field.Declaration.Type);
                     if (storage != null)
                     {
@@ -37,15 +49,32 @@ namespace ClangSharpSourceToWinmd
                     }
                     foreach (var variable in field.Declaration.Variables)
                         LowerCasts(variable.Initializer?.Value);
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        validation.Add(error, "CSSW005", "emitter.typedef-constant-lowering", tree.FilePath,
+                            string.Join(", ", field.Declaration.Variables.Select(variable => variable.Identifier.ValueText)),
+                            line: field.GetLocation().GetLineSpan().StartLinePosition.Line + 1,
+                            architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(tree.FilePath).ToString());
+                    }
                 }
                 foreach (var member in tree.GetRoot().DescendantNodes().OfType<EnumMemberDeclarationSyntax>())
-                    LowerCasts(member.EqualsValue?.Value);
+                {
+                    try
+                    {
+                        LowerCasts(member.EqualsValue?.Value);
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        validation.Add(error, "CSSW005", "emitter.typedef-constant-lowering", tree.FilePath,
+                            member.Identifier.ValueText,
+                            architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(tree.FilePath).ToString());
+                    }
+                }
                 if (replacements.Count == 0)
                     continue;
                 var replacement = tree.WithRootAndOptions(tree.GetRoot().ReplaceNodes(replacements.Keys,
                     (original, _) => replacements[original]), tree.Options);
-                if (writeModifiedFiles)
-                    File.WriteAllText(tree.FilePath, replacement.GetText().ToString());
                 rewritten = rewritten.ReplaceSyntaxTree(tree, replacement);
 
                 void LowerCasts(ExpressionSyntax expression)
@@ -92,6 +121,11 @@ namespace ClangSharpSourceToWinmd
                     return valueType;
                 }
             }
+            if (validation.Errors.Count != previousErrors)
+                return compilation;
+            if (writeModifiedFiles)
+                foreach (var tree in rewritten.SyntaxTrees.Where(tree => !compilation.SyntaxTrees.Contains(tree)))
+                    File.WriteAllText(tree.FilePath, tree.GetText().ToString());
             return rewritten;
         }
 
@@ -100,12 +134,23 @@ namespace ClangSharpSourceToWinmd
 
         internal static CSharpCompilation Merge(CSharpCompilation compilation)
         {
+            var validation = new GenerationValidation();
+            var result = MergeWithDiagnostics(compilation, validation);
+            validation.ThrowIfAny();
+            return result;
+        }
+
+        internal static CSharpCompilation MergeWithDiagnostics(CSharpCompilation compilation, GenerationValidation validation)
+        {
+            int previousErrors = validation.Errors.Count;
             var fragments = new List<Fragment>();
             foreach (var tree in compilation.SyntaxTrees.Where(tree => IsGeneratedAliasFile(tree.FilePath)))
             {
                 var model = compilation.GetSemanticModel(tree);
                 foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
                 {
+                    try
+                    {
                     if (model.GetDeclaredSymbol(declaration) is not INamedTypeSymbol symbol)
                         continue;
                     var attributes = symbol.GetAttributes().Where(attribute =>
@@ -114,6 +159,13 @@ namespace ClangSharpSourceToWinmd
                     if (!attributes.Any(attribute => AttributeName(attribute) == NativeTypedefName))
                         continue;
                     fragments.Add(new Fragment(tree, declaration, symbol, attributes));
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        validation.Add(error, "CSSW005", "emitter.typedef-input", tree.FilePath,
+                            declaration.Identifier.ValueText,
+                            architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(tree.FilePath).ToString());
+                    }
                 }
             }
 
@@ -124,6 +176,8 @@ namespace ClangSharpSourceToWinmd
                 var aliases = group.OrderBy(fragment => IsAutoTypesFile(fragment.Tree.FilePath) ? 0 : 1)
                     .ThenBy(fragment => fragment.Tree.FilePath, StringComparer.Ordinal).ToArray();
                 var first = aliases[0];
+                try
+                {
                 if (aliases.Any(alias => alias.Symbol.DeclaringSyntaxReferences.Any(reference => !aliases.Any(fragment =>
                     fragment.Tree == reference.SyntaxTree && fragment.Declaration.Span == reference.Span))))
                     throw Error(first, "A header alias overlaps a declaration outside generated header-types/autotypes inputs.");
@@ -158,8 +212,17 @@ namespace ClangSharpSourceToWinmd
                     foreach (var alias in aliases.Skip(1))
                         replacements.Add(alias.Declaration, null);
                 }
+                }
+                catch (InvalidDataException error)
+                {
+                    validation.Add(error, "CSSW005", "emitter.typedef-composition", first.Tree.FilePath,
+                        first.Symbol.ToDisplayString(),
+                        architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(first.Tree.FilePath).ToString());
+                }
             }
 
+            if (validation.Errors.Count != previousErrors)
+                return compilation;
             if (replacements.Count == 0)
                 return compilation;
             var rewritten = compilation;

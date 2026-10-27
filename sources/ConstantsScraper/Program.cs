@@ -20,7 +20,7 @@ namespace ConstantsScraperApp
             }
             catch (System.Exception error)
             {
-                System.Console.Error.WriteLine($"Failed to record local generation timing: {error.Message}");
+                System.Console.Error.WriteLine($"fatal WMG999: Unexpected constants scraper failure: {error}");
                 return -1;
             }
         }
@@ -48,6 +48,8 @@ namespace ConstantsScraperApp
                 new Option<string>("--useConstantsFrom", "Namespaces to import other constants from.", ArgumentArity.OneOrMore),
                 new Option<string>("--sdkRoot", "Exact SDK include root for relative header-priority identities."),
                 new Option<string>("--headerPriority", "Ordered SDK-root-relative headers; unlisted headers retain traversal order.", ArgumentArity.OneOrMore),
+                new Option<bool>("--preflightOnly", "Validate independent inputs without generating sources or authorizing selection."),
+                new Option<string>("--blockedBy", "Failed producer prerequisite for the read-only preflight."),
                 new Option<string>("--nativeInput", "Native constant inputs in the project's partition order.", ArgumentArity.OneOrMore)
             };
 
@@ -73,6 +75,8 @@ namespace ConstantsScraperApp
                 SdkRoot = context.ParseResult.ValueForOption<string>("--sdkRoot"),
                 HeaderPriority = context.ParseResult.ValueForOption<string[]>("--headerPriority") ?? System.Array.Empty<string>(),
                 NativeInputs = context.ParseResult.ValueForOption<string[]>("--nativeInput") ?? System.Array.Empty<string>(),
+                PreflightOnly = context.ParseResult.ValueForOption<bool>("--preflightOnly"),
+                BlockedBy = context.ParseResult.ValueForOption<string>("--blockedBy"),
             };
 
             var exclusionNames = new HashSet<string>(excludeItems ?? (new string[0]));
@@ -113,7 +117,9 @@ namespace ConstantsScraperApp
             }
             catch (System.Exception e)
             {
-                context.Console.Error.Write($"Failed to scrape constants:\r\n{e.Message}\r\n{e.StackTrace}");
+                context.Console.Error.Write((GenerationValidation.IsValidationFailure(e) ? "Constants validation failed:\r\n" :
+                    "fatal WMG999: Unexpected constants generation failure:\r\n") + e + "\r\n" +
+                    "error WMG002: Blocked EmitWinmd and default tests: constants generation did not succeed.\r\n");
                 return -1;
             }
 
@@ -123,7 +129,7 @@ namespace ConstantsScraperApp
                 context.Console.Out.Write("\r\n");
             }
 
-            return 0;
+            return selection.PreflightOnly ? -1 : 0;
         }
 
         private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items)

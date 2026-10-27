@@ -71,6 +71,10 @@ namespace MetadataTasks
 #endif
 
             string[] idls = this.GetIdls();
+            var validation = new MetadataUtils.GenerationValidation();
+            string report = Path.Combine(this.ObjDir, "idl-generation-diagnostics.json");
+            if (File.Exists(report))
+                File.Delete(report);
             if (idls.Length == 0)
             {
                 return true;
@@ -106,6 +110,8 @@ namespace MetadataTasks
 
             foreach (var idl in idls)
             {
+                string compiledHeader = Path.Combine(this.CompiledHeadersDir, Path.ChangeExtension(Path.GetFileName(idl), ".h"));
+                File.Delete(compiledHeader);
                 string fixedIdlFile = Path.Combine(this.ObjDir, Path.GetFileName(idl));
                 string scriptArgs = $"-inputFileName '{idl}' -outputFileName '{fixedIdlFile}'";
                 if (File.Exists(fixedIdlFile))
@@ -113,24 +119,36 @@ namespace MetadataTasks
                     File.Delete(fixedIdlFile);
                 }
 
-                if (!TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _))
+                if (!TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out string preparationOutput))
                 {
-                    return false;
+                    validation.Add(new InvalidDataException("IDL source preparation process failed: " + preparationOutput),
+                        "WMG003", "CompileIdls.prepare", idl, header: compiledHeader, architecture: "x86",
+                        selectedSdkRoot: this.SdkIncRoot);
+                    continue;
                 }
 
-                string compiledHeader = Path.Combine(this.CompiledHeadersDir, Path.ChangeExtension(Path.GetFileName(idl), ".h"));
                 string midlArgs = $"\"{fixedIdlFile}\" /header \"{compiledHeader}\" {commonMidlArgs}";
                 int ret = TaskUtils.ExecuteCmd(midlPath, midlArgs, out var midlOutput, this.Log, vcPath);
                 if (ret != 0)
                 {
                     this.Log.LogError($"midl.exe failed: {midlOutput}");
-                    return false;
+                    File.Delete(compiledHeader);
+                    validation.Add(new InvalidDataException("midl.exe failed: " + midlOutput),
+                        "WMG003", "CompileIdls.compile", idl, header: compiledHeader, architecture: "x86",
+                        selectedSdkRoot: this.SdkIncRoot);
+                    continue;
                 }
 
                 this.Log.LogMessage(midlOutput);
             }
 
-            return true;
+            if (validation.HasErrors)
+            {
+                validation.Block("ScrapeHeaders;ScrapeConstants;EmitWinmd;default tests", "successful IDL inputs");
+                validation.WriteReport(report);
+                this.Log.LogError(validation.Format());
+            }
+            return !validation.HasErrors;
         }
 
         private string[] GetIdls()

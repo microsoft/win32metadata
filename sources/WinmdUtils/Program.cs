@@ -1192,60 +1192,11 @@ namespace WinmdUtilsProgram
 
             string fullField1Name = GetFullMemberName(field1);
 
-            // Using the ReflectionName gets us the name of the type in
-            // metadata. The FullName might not be fully resolvable by the
-            // library because it doesn't know how to resolve arch-specific types
-            if (field1.Type.ReflectionName != field2.Type.ReflectionName)
-            {
-                writer.WriteDifference($"{fullField1Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}");
-            }
-            else
-            {
-                if (field1.IsConst)
-                {
-                    if (!field2.IsConst)
-                    {
-                        writer.WriteDifference($"winmd1: {fullField1Name} const, winmd2: not");
-                    }
-                    else
-                    {
-                        var fieldVal1 = field1.GetConstantValue();
-                        var fieldVal2 = field2.GetConstantValue();
-
-                        if (fieldVal1 == null)
-                        {
-                            writer.WriteDifference($"winmd1: {fullField1Name} is a constant with a null value");
-                        }
-
-                        if (fieldVal2 == null)
-                        {
-                            writer.WriteDifference($"winmd2: {fullField1Name} is a constant with a null value");
-                        }
-
-                        var fieldInitType1 = fieldVal1.GetType().Name;
-                        var fieldInitType2 = fieldVal2.GetType().Name;
-                        if (fieldInitType1 != fieldInitType2)
-                        {
-                            writer.WriteDifference($"{fullField1Name} value init changed {fieldInitType1}->{fieldInitType2}");
-                        }
-
-                        string val1 = fieldVal1?.ToString();
-                        string val2 = fieldVal2?.ToString();
-
-                        if (val1 != val2)
-                        {
-                            writer.WriteDifference($"winmd1: {fullField1Name} = {val1}, winmd2 = {val2}");
-                        }
-                    }
-                }
-                else if (field2.IsConst)
-                {
-                    if (!field2.IsConst)
-                    {
-                        writer.WriteDifference($"winmd1: {fullField1Name} not const, winmd2: const");
-                    }
-                }
-            }
+            WinmdConstantComparison.Compare(
+                fullField1Name,
+                field1.Type.ReflectionName, field1.ParentModule.PEFile.Metadata, (FieldDefinitionHandle)field1.MetadataToken,
+                field2.Type.ReflectionName, field2.ParentModule.PEFile.Metadata, (FieldDefinitionHandle)field2.MetadataToken,
+                difference => writer.WriteDifference(difference));
 
             return writer.DifferencesCount == before;
         }

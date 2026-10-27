@@ -48,6 +48,110 @@ Without that option, the CLI scans its traversal and immediately available
 include-directory headers. The index supplies active-definition queries; it
 does not request value evaluation for every name.
 
+### Relocating prepared SDK native facts
+
+Constants aggregation can relocate a prepared SDK cache only through the retained
+`obj\prepared-sdk-provenance\<architecture>\<identity>\manifest.json` and the
+selected prepared root's manifest. The SDK, source, recipe, preparation and full
+prepared-header identities must match. Exact SDK-relative header records, native
+header proofs, current header bytes and the relocated source profile hash must
+also agree. Cache paths and MIDL path identities may differ when the complete
+prepared header payload is unchanged.
+
+These checks apply even when absolute paths or cache keys already match, and
+support SDK caches on another drive. The producer's architecture-specific
+manifest is used when present; the recorded `crossarch` batch manifest can cover
+all three targets. A manifest recorded only for another architecture is not a
+substitute. Source profiles retain their absolute producer identity and resolve
+through the current workspace or their exact prepared SDK header record.
+
+Missing or mismatched identities reject the native input explicitly. Header
+basenames or matching constant values do not authorize a binding, and missing
+traversed ownership cannot silently fall back to legacy constant parsing. A
+changed prepared header payload requires fresh matching producer inputs; these
+native facts do not contain a complete per-profile dependency proof that could
+authorize partial reuse across different prepared payloads.
+
+### Default generation diagnostic collection
+
+The normal generation targets collect known, recoverable validation failures at
+declaration, input-file, partition and architecture boundaries. This is the
+default behavior, not a census-only option. Errors are not deduplicated and
+ambiguous ownership never authorizes a fallback value or namespace.
+
+`ScrapeHeaders` keeps its single processor-capped parallel loop: a rejected job
+or failed child process does not cancel later independent jobs. Settings JSON
+and import-library inputs are validated independently; IDL preparation/compiler
+process failures are retained per input. Invalid prerequisites still block the
+dependent native binding or constants-publication stage.
+
+After a native input has been read and its headers bound, a failed declaration
+keeps that entire input ineligible for selection but does not stop local
+validation of its later independent facts.
+
+The targets' failure bridge uses `ContinueOnError="ErrorAndContinue"` **only**
+to run independent read-only constants and emitter preflights, followed by a
+task that returns failure. Thus `ScrapeConstants` depending on `ScrapeHeaders`
+does not starve the managed input census. Failed managed emission instead runs
+only the final reporter: it does not repeat transformations or preflight over
+the failed intermediate sources. Explicit missing or invalid metadata references
+are collected individually before semantic compilation; safe source-family and
+syntax checks still run without inventing replacement references.
+
+Producer receipts authorize transformation and emission only with supported
+`Version: 1` and `Status: "completed"`. Blocked, rejected, unknown, malformed or
+unsupported receipts diagnose independently before reference/source checks.
+Optional `Errors` and `BlockedStages`, when present on a completed receipt, must
+be arrays and empty. The existing successful native-selection receipt remains
+valid without either array. Invalid receipt diagnostics retain the original
+receipt path and cause; no invalid receipt can authorize a replacement image.
+
+The final failure census is `GeneratedDir\generation-failures.json`. Direct
+tool invocations retain their stage report even without MSBuild. Failure and
+blocked receipts follow the [version 1 schema](generation-diagnostics.schema.json):
+
+| Report | Contents |
+|---|---|
+| `scrape-diagnostics.json` | Native partition/profile failures, complete child output and explicit references to those jobs' declaration diagnostics. |
+| `<output.cs>.generation-diagnostics.json` | Individual native annotation diagnostics before binding publication. |
+| `auto-types-preparation-diagnostics.json`, `function-pointer-preparation-diagnostics.json`, `library-input-diagnostics.json` | Independent preparation input/declaration errors. |
+| `ObjDir\idl-generation-diagnostics.json` | IDL source-preparation and compiler process failures. |
+| `constants-task-diagnostics.json`, `native-constant-conflicts.json` | Input-plan, SDK identity, native proof, ownership, legacy constant and enum-finalization errors. The successful native selection report retains its existing shape. |
+| `constants-preflight-diagnostics.json`, `emitter-preflight-diagnostics.json` | Read-only input validation after an earlier prerequisite failed; dependent selection, transformation, compilation and publication remain blocked. |
+| `generation-diagnostics.json` | Managed source, reference, composition, compilation or emission rejection. |
+
+`Errors` retain `Code`, `Stage`, `Message`, `Input`, `Symbol`, `Header`, `Line`,
+`Architecture`, `Partition`, `SelectedSdkRoot`, `IdentityCategory` and the
+original exception's full `Cause`. Group by stable code/stage/identity and source
+context; keep every raw error. Prepared SDK binding errors use
+`NATIVE_SDK_BINDING` / `constants.native-inputs` /
+`prepared-sdk-header-binding`, including the raw header, input architecture and
+selected SDK root. `BlockedStages` records each unrun stage and its prerequisite;
+`Reports` names retained stage receipts. Constants failures reference native
+input paths, byte lengths and SHA-256 pins, plus source identities, rather than
+copying the native-input payloads into another JSON document.
+
+Report membership is scoped to the targets and jobs attempted by the current
+failure path, not a recursive scan of unrelated old reports or a timestamp guess.
+Read-only emitter preflight neither deletes nor rewrites `generated\obj` or a
+previous failed managed report. A successful emission retires the old final
+failure census. Failed attempts invalidate success markers and return nonzero.
+Known report schema violations produce `WMG999` diagnostics at the report
+boundary without stopping later independent report imports; malformed originals
+remain referenced on disk. A successful up-to-date `EmitWinmd` target also
+retires stale final/preflight failure receipts without rebuilding the image.
+No failed/preflight path publishes an incomplete WinMD; successful serialization
+uses a same-directory `.pending` file before replacing the output. An existing
+valid image is not overwritten by a rejected attempt.
+
+Collection stops at genuine dependencies: invalid native ownership sets block
+legacy alias finalization; invalid transformed source/composition blocks the
+dependent semantic stages. A partial metadata builder is never resumed.
+Unexpected exceptions, cancellation, unavailable tools and unclassified I/O or
+native-parser failures remain fatal, with explicit blocked stages; the reporter
+does not claim that their remaining work ran. External SDK, MIDL and native
+toolchain failures still require their corresponding qualification environment.
+
 ### Local phase timing
 
 `Win32MetadataScraper` and `ConstantsScraper` can write local timing reports.

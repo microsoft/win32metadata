@@ -14,6 +14,15 @@ namespace ClangSharpSourceToWinmd
     {
         internal static IEnumerable<SyntaxTree> Qualify(SyntaxTree[] trees, IEnumerable<MetadataReference> references)
         {
+            var validation = new GenerationValidation();
+            var result = QualifyWithDiagnostics(trees, references, validation);
+            validation.ThrowIfAny();
+            return result;
+        }
+
+        internal static IEnumerable<SyntaxTree> QualifyWithDiagnostics(SyntaxTree[] trees,
+            IEnumerable<MetadataReference> references, GenerationValidation validation)
+        {
             var paths = new HashSet<string>(trees.Select(tree => tree.FilePath), StringComparer.OrdinalIgnoreCase);
             var fields = trees.ToDictionary(tree => tree, tree => GetFields(tree).ToArray());
             if (!fields.Values.Any(values => values.Length != 0))
@@ -32,7 +41,13 @@ namespace ClangSharpSourceToWinmd
                     "CrossArchConstants", inputs, references,
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)));
                 // Common trees must not be overwritten by another profile's intermediate lowering.
-                compilation = HeaderTypedefMerger.LowerConstants(compilation, writeModifiedFiles: false);
+                int previousErrors = validation.Errors.Count;
+                compilation = HeaderTypedefMerger.LowerConstantsWithDiagnostics(compilation, false, validation);
+                if (validation.Errors.Count != previousErrors)
+                {
+                    validation.Block("emitter.constant-qualification:" + architecture, "native typedef storage lowering");
+                    continue;
+                }
                 compilation = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(compilation, writeModifiedFiles: false);
                 foreach (var tree in compilation.SyntaxTrees)
                 {
@@ -48,16 +63,29 @@ namespace ClangSharpSourceToWinmd
                     {
                         var candidates = lowered[CrossArchSyntaxMap.GetFullName(field)].ToArray();
                         if (candidates.Length != 1)
-                            throw Error(original, field.Declaration.Variables.First(), architecture,
-                                "The lowered constant does not have a unique original qualified identity.");
+                        {
+                            Record(Error(original, field.Declaration.Variables.First(), architecture,
+                                "The lowered constant does not have a unique original qualified identity."));
+                            continue;
+                        }
                         foreach (var variable in field.Declaration.Variables)
                         {
+                            try
+                            {
                             var binding = candidates[0].Declaration.Variables.Single(candidate =>
                                 candidate.Identifier.ValueText == variable.Identifier.ValueText);
                             var symbol = model.GetDeclaredSymbol(binding) as IFieldSymbol;
                             if (symbol == null || !symbol.HasConstantValue || binding.Initializer == null ||
                                 HasError(binding.Initializer.Span, errorSpans ??= GetErrorSpans(model)))
+                            {
+                                if (binding.Initializer != null)
+                                    foreach (var diagnostic in model.GetDiagnostics(binding.Initializer.Span)
+                                        .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
+                                        validation.Add(new InvalidOperationException(diagnostic.ToString()), "CSSW003",
+                                            "emitter.constant-binding", original.FilePath, variable.Identifier.ValueText,
+                                            architecture: architecture.ToString());
                                 throw Error(original, variable, architecture, "The constant or its dependencies could not be evaluated in this profile.");
+                            }
                             string type = symbol.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
                             if (symbol.Type is INamedTypeSymbol enumType && enumType.EnumUnderlyingType != null)
                                 enumUses.Add((original, variable, architecture, RecordEnumStorage(enumType, enumStorage, varyingEnums)));
@@ -68,16 +96,29 @@ namespace ClangSharpSourceToWinmd
                                     "A common source constant has architecture-dependent storage or value; provide an architecture-qualified source family.");
                             values[variable] = (identity, expression);
                             types[field] = type;
+                            }
+                            catch (ConstantQualificationException error)
+                            {
+                                Record(error);
+                            }
                         }
                     }
+
+                    void Record(ConstantQualificationException error) => validation.Add(error, "CSSW003",
+                        "emitter.constant-qualification", original.FilePath, error.Symbol,
+                        architecture: architecture.ToString());
                 }
             }
 
             foreach (var use in enumUses)
                 if (varyingEnums.Contains(use.Name))
-                    throw Error(use.Tree, use.Variable, use.Architecture,
-                        $"Enum '{use.Name}' has architecture-dependent underlying storage; enum-typed constants cannot preserve that identity through composition.");
+                    validation.Add(Error(use.Tree, use.Variable, use.Architecture,
+                        $"Enum '{use.Name}' has architecture-dependent underlying storage; enum-typed constants cannot preserve that identity through composition."),
+                        "CSSW003", "emitter.constant-qualification", use.Tree.FilePath, use.Variable.Identifier.ValueText,
+                        architecture: use.Architecture.ToString());
 
+            if (validation.HasErrors)
+                return trees;
             return trees.Select(tree => tree.WithRootAndOptions(tree.GetRoot().ReplaceNodes(fields[tree], (field, _) =>
             {
                 var variables = field.Declaration.Variables.Select(variable => variable.WithInitializer(
@@ -187,8 +228,15 @@ namespace ClangSharpSourceToWinmd
             return $"unchecked(({type}){bits.ToString(CultureInfo.InvariantCulture)}UL)";
         }
 
-        private static InvalidOperationException Error(SyntaxTree tree, VariableDeclaratorSyntax variable,
+        private static ConstantQualificationException Error(SyntaxTree tree, VariableDeclaratorSyntax variable,
             Architecture architecture, string message)
-            => new InvalidOperationException($"CSSW003: Cannot qualify '{variable.Identifier.ValueText}' in '{tree.FilePath}' for {architecture}. {message}");
+            => new($"CSSW003: Cannot qualify '{variable.Identifier.ValueText}' in '{tree.FilePath}' for {architecture}. {message}",
+                variable.Identifier.ValueText);
+
+        private sealed class ConstantQualificationException : InvalidOperationException
+        {
+            internal ConstantQualificationException(string message, string symbol) : base(message) => Symbol = symbol;
+            internal string Symbol { get; }
+        }
     }
 }

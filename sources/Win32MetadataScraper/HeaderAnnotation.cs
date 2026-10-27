@@ -240,6 +240,9 @@ namespace Win32MetadataScraper
         internal HeaderAnnotationDiagnosticsException(IEnumerable<string> diagnostics)
             : base(string.Join(Environment.NewLine, diagnostics))
         {
+            Diagnostics = diagnostics.ToArray();
         }
+
+        internal IReadOnlyList<string> Diagnostics { get; }
     }
 }

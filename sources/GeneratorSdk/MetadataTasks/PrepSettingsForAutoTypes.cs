@@ -14,6 +14,8 @@ namespace MetadataTasks
 
         public string ScraperAutoTypesRsp { get; set; }
 
+        public bool PreflightOnly { get; set; }
+
         public override bool Execute()
         {
 #if DEBUG
@@ -25,18 +27,41 @@ namespace MetadataTasks
 
             HashSet<string> typesToExclude = new HashSet<string>();
             StringBuilder remapSection = new StringBuilder();
+            var validation = new MetadataUtils.GenerationValidation();
+            string report = Path.Combine(Path.GetDirectoryName(this.ScraperAutoTypesRsp), "auto-types-preparation-diagnostics.json");
+            Directory.CreateDirectory(Path.GetDirectoryName(report));
+            File.Delete(report);
             foreach (var fileItem in this.AutoTypes)
             {
                 string autoTypesFileName = fileItem.ItemSpec;
                 if (!File.Exists(autoTypesFileName))
                 {
+                    validation.Add(new InvalidDataException("Missing auto-types input."),
+                        "WMG004", "PrepSettingsForAutoTypes", autoTypesFileName);
                     continue;
                 }
 
-                var autoTypes = Newtonsoft.Json.JsonConvert.DeserializeObject<AutoType[]>(File.ReadAllText(autoTypesFileName));
+                AutoType[] autoTypes;
+                try
+                {
+                    autoTypes = Newtonsoft.Json.JsonConvert.DeserializeObject<AutoType[]>(File.ReadAllText(autoTypesFileName));
+                    if (autoTypes == null || Array.Exists(autoTypes, type => type == null))
+                        throw new Newtonsoft.Json.JsonSerializationException("Expected an array of non-null auto-type declarations.");
+                }
+                catch (Newtonsoft.Json.JsonException error)
+                {
+                    validation.Add(error, "WMG004", "PrepSettingsForAutoTypes", autoTypesFileName);
+                    continue;
+                }
                 foreach (var autoType in autoTypes)
                 {
                     var type = autoType.ValueType;
+                    if (string.IsNullOrWhiteSpace(type) || string.IsNullOrWhiteSpace(autoType.Name))
+                    {
+                        validation.Add(new InvalidDataException("Auto-type declarations require Name and ValueType."),
+                            "WMG004", "PrepSettingsForAutoTypes", autoTypesFileName, autoType.Name);
+                        continue;
+                    }
                     if (type == "DECLARE_HANDLE" || type == "DECLARE_OPAQUE_KEY")
                     {
                         var typeName = autoType.Name;
@@ -74,6 +99,16 @@ namespace MetadataTasks
             }
 
             Directory.CreateDirectory(Path.GetDirectoryName(this.ScraperAutoTypesRsp));
+            if (validation.HasErrors)
+            {
+                File.Delete(this.ScraperAutoTypesRsp);
+                validation.Block("ScrapeHeaders;ScrapeConstants;EmitWinmd;default tests", "valid auto-type settings");
+                validation.WriteReport(report);
+                this.Log.LogError(validation.Format());
+                return false;
+            }
+            if (this.PreflightOnly)
+                return true;
             using StreamWriter writer = new StreamWriter(this.ScraperAutoTypesRsp);
             if (remapSection.Length != 0)
             {

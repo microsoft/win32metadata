@@ -44,5 +44,7 @@ namespace MetadataUtils
         public string SdkRoot { get; init; }
         public IReadOnlyList<string> HeaderPriority { get; init; } = Array.Empty<string>();
         public IReadOnlyList<string> NativeInputs { get; init; } = Array.Empty<string>();
+        public bool PreflightOnly { get; init; }
+        public string BlockedBy { get; init; }
     }
 }

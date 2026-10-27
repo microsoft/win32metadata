@@ -76,8 +76,14 @@ namespace Win32MetadataScraper
                             throw Error(facts.Location, $"AssociatedConstant macro '{name}' must be an object-like constant.");
                         selected.TryAdd(name, macro);
                     });
-            ThrowAnnotationErrors();
             return selected.Values.OrderBy(macro => macro.Name, StringComparer.Ordinal).ToArray();
+        }
+
+        internal void RejectAssociatedConstant(MacroDefinitionRecord macro, IEnumerable<NativeConstantIssue> issues)
+        {
+            var location = GetLocation(macro.Location);
+            annotationErrors.Add((Error(location, $"Associated constant '{macro.Name}' has no valid native integer value: " +
+                string.Join("; ", issues.Select(issue => issue.Reason + " " + string.Join(" ", issue.Diagnostics)))), macro.Name));
         }
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
@@ -444,6 +450,8 @@ namespace Win32MetadataScraper
             foreach (var facts in annotatedTypedefs)
             {
                 var alias = (TypedefNameDecl)facts.Declaration;
+                try
+                {
                 string name = Remap(alias.Name);
                 if (projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
                     continue;
@@ -495,6 +503,12 @@ namespace Win32MetadataScraper
                         DeclarationSourceMap.QualifiedName(nativeRecord.Decl.Handle), valueType, explicitWrapperIntent: true);
                 members.Add(declaration);
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
+                }
+                catch (HeaderAnnotationException error)
+                {
+                    invalidDeclarations.Add(GetNativeIdentity(alias));
+                    annotationErrors.Add((error, GetNativeTarget(alias.Handle)));
+                }
             }
             timing?.SetCounter("memberCount", members.Count);
             if (members.Count == 0)
@@ -1488,6 +1502,21 @@ namespace Win32MetadataScraper
             internal ProjectionRewriter(HeaderAnnotationProcessor owner)
             {
                 this.owner = owner;
+            }
+
+            public override SyntaxNode Visit(SyntaxNode node)
+            {
+                try
+                {
+                    return base.Visit(node);
+                }
+                catch (HeaderAnnotationException error) when (node is MemberDeclarationSyntax or ParameterSyntax)
+                {
+                    owner.annotationErrors.Add((error, "projection " + node.Kind() + ": " +
+                        string.Join(", ", node.ChildTokens().Where(token => token.IsKind(SyntaxKind.IdentifierToken))
+                            .Select(token => token.ValueText))));
+                    return node;
+                }
             }
 
             internal void AddCallbackTemplate(DelegateDeclarationSyntax node)

@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Win32 metadata generation failure and preflight diagnostics, version 1",
+  "type": "object",
+  "required": ["Version", "Status", "Errors", "BlockedStages"],
+  "properties": {
+    "Version": { "const": 1 },
+    "Status": { "enum": ["completed", "rejected", "blocked"] },
+    "Errors": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/error" }
+    },
+    "BlockedStages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["Stage", "Dependency"],
+        "properties": {
+          "Stage": { "type": "string" },
+          "Dependency": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "Reports": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Explicit retained stage-report paths; not a wildcard census."
+    },
+    "RawInputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["Path", "Length", "Sha256"],
+        "properties": {
+          "Path": { "type": "string" },
+          "Length": { "type": "integer", "minimum": 0 },
+          "Sha256": { "type": "string", "pattern": "^[0-9A-Fa-f]{64}$" }
+        },
+        "additionalProperties": false
+      },
+      "description": "Constants input artifact pins, without copied input payloads."
+    },
+    "NativeInputReferences": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["Path", "Architecture"],
+        "properties": {
+          "Path": { "type": "string" },
+          "Architecture": { "type": "string" },
+          "BindingSource": { "type": ["string", "null"] },
+          "SourceFile": { "type": ["string", "null"] },
+          "SourceHash": { "type": ["string", "null"] }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": true,
+  "$defs": {
+    "error": {
+      "type": "object",
+      "required": ["Code", "Stage", "Message", "Cause"],
+      "properties": {
+        "Code": { "type": "string" },
+        "Stage": { "type": "string" },
+        "Message": { "type": "string" },
+        "Input": { "type": ["string", "null"] },
+        "Symbol": { "type": ["string", "null"] },
+        "Header": { "type": ["string", "null"] },
+        "Line": { "type": ["integer", "null"] },
+        "Architecture": { "type": ["string", "null"] },
+        "Partition": { "type": ["string", "null"] },
+        "SelectedSdkRoot": { "type": ["string", "null"] },
+        "IdentityCategory": { "type": ["string", "null"] },
+        "Cause": {
+          "type": "string",
+          "description": "Original Exception.ToString(), retained without deduplication."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

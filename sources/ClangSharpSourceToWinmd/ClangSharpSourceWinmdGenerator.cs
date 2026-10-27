@@ -517,9 +517,17 @@ namespace ClangSharpSourceToWinmd
                 Directory.CreateDirectory(dir);
             }
 
-            using (FileStream fileStream = new FileStream(outputFileName, FileMode.Create, FileAccess.ReadWrite))
+            string stagedOutput = outputFileName + "." + Guid.NewGuid().ToString("N") + ".pending";
+            try
             {
-                peBlob.WriteContentTo(fileStream);
+                using (FileStream fileStream = new FileStream(stagedOutput, FileMode.CreateNew, FileAccess.Write))
+                    peBlob.WriteContentTo(fileStream);
+                File.Move(stagedOutput, outputFileName, overwrite: true);
+            }
+            finally
+            {
+                if (File.Exists(stagedOutput))
+                    File.Delete(stagedOutput);
             }
 
             this.WroteWinmd = true;
