@@ -96,13 +96,19 @@ namespace ClangSharpSourceToWinmd
             {
                 foreach (string generatedArchitecture in new[] { "common", "x86", "x64", "arm64" })
                 {
+                    string generatedSource = Path.Combine(sourceDirectory, generatedArchitecture, "autotypes.cs");
                     try
                     {
-                        File.Delete(Path.Combine(sourceDirectory, generatedArchitecture, "autotypes.cs"));
+                        File.Delete(generatedSource);
                     }
                     catch (DirectoryNotFoundException)
                     {
                         // Sparse source layouts need not contain every architecture.
+                    }
+                    catch (Exception error) when (error is IOException or UnauthorizedAccessException)
+                    {
+                        validation.Add(error, "WMG004", "emitter.auto-type-source-retirement", generatedSource,
+                            architecture: generatedArchitecture);
                     }
                 }
 

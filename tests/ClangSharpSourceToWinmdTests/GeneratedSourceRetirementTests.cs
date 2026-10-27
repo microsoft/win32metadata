@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Runtime.CompilerServices;
+using System.Text.Json;
 using System.Xml.Linq;
 using ClangSharpSourceToWinmd;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -59,13 +60,52 @@ namespace ClangSharpSourceToWinmdTests
         {
             using var fixture = new Fixture();
             string stale = Path.Combine(fixture.GeneratedDirectory, "common", "autotypes.cs");
-            File.WriteAllText(stale, "namespace Windows.Win32.RetirementTests { public struct Stale { } }");
+            string staleX64 = Path.Combine(fixture.GeneratedDirectory, "x64", "autotypes.cs");
+            string retired = Path.Combine(fixture.GeneratedDirectory, "x86", "autotypes.cs");
+            const string staleSource = "namespace Windows.Win32.RetirementTests { public struct Stale { } }";
+            File.WriteAllText(stale, staleSource);
+            File.WriteAllText(staleX64, staleSource);
+            File.WriteAllText(retired, staleSource);
             using var locked = File.Open(stale, FileMode.Open, FileAccess.Read, FileShare.Read);
+            using var lockedX64 = File.Open(staleX64, FileMode.Open, FileAccess.Read, FileShare.Read);
+            string definitions = Path.Combine(fixture.DirectoryPath, "autoTypes.json");
+            File.WriteAllText(definitions,
+                "[{\"Name\":\"FRESH_HANDLE\",\"ValueType\":\"int\",\"Namespace\":\"Windows.Win32.RetirementTests\",\"NativeTypedef\":true}]");
+            string missingReference = Path.Combine(fixture.DirectoryPath, "missing.winmd");
+            string broken = Path.Combine(fixture.GeneratedDirectory, "common", "Broken.cs");
+            File.WriteAllText(broken, "#error independent source preflight must continue\n");
             string output = Path.Combine(fixture.DirectoryPath, "Windows.Win32.winmd");
 
             Assert.AreEqual(-1, Program.Main(new[] {
-                "--sourceDir", fixture.GeneratedDirectory, "--arch", "crossarch", "--outputFileName", output }));
+                "--sourceDir", fixture.GeneratedDirectory, "--arch", "crossarch", "--outputFileName", output,
+                "--autoTypes", definitions, "--ref", missingReference }));
             Assert.IsFalse(File.Exists(output));
+            Assert.IsFalse(Directory.Exists(Path.Combine(fixture.GeneratedDirectory, "obj")));
+            Assert.IsFalse(File.Exists(retired));
+            Assert.AreEqual(staleSource, File.ReadAllText(stale));
+            Assert.AreEqual(staleSource, File.ReadAllText(staleX64));
+
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.GeneratedDirectory, "generation-diagnostics.json")));
+            Assert.AreEqual("rejected", report.RootElement.GetProperty("Status").GetString());
+            var errors = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
+            Assert.AreEqual(4, errors.Length);
+            foreach (var (path, architecture) in new[] { (stale, "common"), (staleX64, "x64") })
+            {
+                var error = errors.Single(error => error.GetProperty("Input").GetString() == path &&
+                    error.GetProperty("Stage").GetString() == "emitter.auto-type-source-retirement");
+                Assert.AreEqual("WMG004", error.GetProperty("Code").GetString());
+                Assert.AreEqual(architecture, error.GetProperty("Architecture").GetString());
+                StringAssert.Contains(error.GetProperty("Cause").GetString()!, "System.IO.IOException");
+                StringAssert.Contains(error.GetProperty("Cause").GetString()!, path);
+            }
+            Assert.IsTrue(errors.Any(error => error.GetProperty("Code").GetString() == "CSSW007" &&
+                error.GetProperty("Input").GetString() == missingReference));
+            Assert.IsTrue(errors.Any(error => error.GetProperty("Code").GetString() == "CS1029" &&
+                error.GetProperty("Input").GetString() == broken));
+            var blocked = report.RootElement.GetProperty("BlockedStages").EnumerateArray()
+                .Select(stage => stage.GetProperty("Stage").GetString()).ToArray();
+            CollectionAssert.IsSubsetOf(new[] { "emitter.auto-type-source", "emitter.source-transformation",
+                "emitter.compilation", "EmitWinmd", "default tests" }, blocked);
         }
 
         [TestMethod]
