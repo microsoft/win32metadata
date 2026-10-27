@@ -275,7 +275,9 @@ class Program
 
             // ── Walk AST to discover all typedef-tag and function pointer relationships ──
             using var remapTiming = GenerationTiming.BeginSpan("remap-discovery");
+            using var typedefTraversalTiming = GenerationTiming.BeginSpan("remap-discovery.walk-typedefs");
             var discovery = RemapDiscovery.WalkTranslationUnit(translationUnit.TranslationUnitDecl);
+            typedefTraversalTiming?.Dispose();
 
             // Resolve tag remaps using disambiguation, then apply opt-outs for
             // compatibility cases where we intentionally keep the historical public name.
@@ -295,11 +297,14 @@ class Program
             }
 
             // Cached settings affect bindings, not discovery; authored settings win.
+            var nativeDeclarations = new NativeCursorIndex(translationUnit.TranslationUnitDecl);
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);
             foreach (var kv in fnPtrResult.FnPtrRemaps)
                 mergedRemaps[kv.Key] = kv.Value;
-            foreach (var kv in RemapDiscovery.FindEmbeddedIncompleteRecordPointerRemaps(translationUnit.TranslationUnitDecl))
-                mergedRemaps[kv.Key] = kv.Value;
+            using (GenerationTiming.BeginSpan("remap-discovery.embedded-incomplete-records"))
+                foreach (var kv in RemapDiscovery.FindEmbeddedIncompleteRecordPointerRemaps(
+                    translationUnit.TranslationUnitDecl, nativeDeclarations))
+                    mergedRemaps[kv.Key] = kv.Value;
             foreach (var kv in ParseKeyValuePairs(derivedSettings.GetValueOrDefault("--remap")))
                 mergedRemaps[kv.Key] = kv.Value;
             foreach (var kv in configuredRemaps)
@@ -310,9 +315,10 @@ class Program
                 .Concat(fnPtrResult.FnPtrExcludes).Distinct(StringComparer.Ordinal).ToList();
             if (constantProbes != null)
                 allExcludes.AddRange(constantProbes.ProbeNames.Keys);
-            allExcludes.AddRange(RemapDiscovery.FindInaccessibleCopyMembers(
-                translationUnit.TranslationUnitDecl,
-                configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody)));
+            using (GenerationTiming.BeginSpan("remap-discovery.inaccessible-copy-members"))
+                allExcludes.AddRange(RemapDiscovery.FindInaccessibleCopyMembers(
+                    nativeDeclarations,
+                    configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody)));
             remapTiming?.SetCounter("tagCount", discovery.TagToTypedefs.Count);
             remapTiming?.SetCounter("automaticRemapCount", autoRemaps.Count);
             remapTiming?.SetCounter("functionPointerRemapCount", fnPtrResult.FnPtrRemaps.Count);
@@ -336,7 +342,7 @@ class Program
                 config.TraversalNames, config.WithLibraryPaths, configuredRemaps,
                 allExcludes.ToHashSet(StringComparer.Ordinal), (arguments, flags) =>
                     ParseTranslationUnit(index, sourceFile, arguments, flags, reportedNativeDiagnostics,
-                        "translation-unit.companion"), nativeDeclarationsPath);
+                        "translation-unit.companion"), nativeDeclarationsPath, nativeDeclarations);
             foreach (var remap in companion.ScopedRemaps)
                 mergedRemaps[remap.Key] = remap.Value;
             var primaryOptions = companion.LegacyMembers.Count == 0 ? configOptions :

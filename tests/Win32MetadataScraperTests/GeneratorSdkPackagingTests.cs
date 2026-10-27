@@ -13,7 +13,10 @@ namespace Win32MetadataScraperTests
         [Fact]
         public void PackagedScraperIncludesEveryManagedRuntimeDependency()
         {
-            string repositoryRoot = WinHttpMigrationTests.RepositoryRoot;
+            var directory = new DirectoryInfo(AppContext.BaseDirectory);
+            while (directory != null && !File.Exists(Path.Combine(directory.FullName, "sources", "GeneratorSdk", "nuget", "BuildSdk.nuspec")))
+                directory = directory.Parent;
+            string repositoryRoot = directory?.FullName ?? throw new InvalidOperationException("Repository manifest was not found.");
             string manifestPath = Path.Combine(repositoryRoot, "sources", "GeneratorSdk", "nuget", "BuildSdk.nuspec");
             var manifest = XDocument.Load(manifestPath);
             var scraperFiles = manifest.Root.Element("files").Elements("file")

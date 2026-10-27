@@ -32,6 +32,25 @@ in the AST.
 **The Emitter** (`ClangSharpSourceToWinmd`) compiles all the generated C# sources,
 applies transformations (remaps, attribute additions), and writes the winmd.
 
+The default scraper also checks incomplete native records, inaccessible copy
+members, Unicode companion declarations and missing native type providers.
+These compatibility checks run independently of opt-in header annotations and
+native constant evaluation. Companion recovery may parse additional translation
+units even when there is only one primary binding-generation call.
+
+Native inventory uses compiler cursor handles and recorded traversal parents.
+The checks resolve selected declarations through those parent paths instead of
+eagerly walking every managed child subtree.
+Incomplete-record analysis follows the same canonical native type graph,
+including pointer depth, arrays, function signatures and by-value rejection.
+Companion imports still require their complete native dependency validation.
+Provider recovery retains the original semantic binding and shadow checks.
+
+Set `WIN32METADATA_TIMING_DIRECTORY` to an absolute directory to retain per-worker
+phase wall time, process CPU and parse/query/binding counters. Child intervals are
+included in their parent; use self times when summing nested work. Worker count,
+translation-unit parse count and binding-generation count describe different work.
+
 ---
 
 ## Types (Typedefs and Structs)

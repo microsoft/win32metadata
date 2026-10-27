@@ -63,7 +63,8 @@ namespace Win32MetadataScraper
         internal static NativeConditionalCompanion Create(TranslationUnit primary, string[] arguments,
             CXTranslationUnit_Flags flags, IReadOnlyCollection<string> traversalFiles,
             IReadOnlyDictionary<string, string> libraries, IReadOnlyDictionary<string, string> authoredRemaps,
-            IReadOnlySet<string> excludes, Func<string[], CXTranslationUnit_Flags, TranslationUnit> parse, string evidencePath)
+            IReadOnlySet<string> excludes, Func<string[], CXTranslationUnit_Flags, TranslationUnit> parse, string evidencePath,
+            NativeCursorIndex nativeDeclarations = null)
         {
             using var timing = GenerationTiming.BeginSpan("companion.discover-and-recover");
             var result = new NativeConditionalCompanion(arguments, flags, parse, evidencePath);
@@ -71,7 +72,7 @@ namespace Win32MetadataScraper
             {
                 if (!HasUnicodeDefinition(arguments))
                     return result;
-                result.Discover(primary, traversalFiles, libraries, authoredRemaps, excludes);
+                result.Discover(primary, traversalFiles, libraries, authoredRemaps, excludes, nativeDeclarations);
                 timing?.SetCounter("functionCount", result.Functions.Count);
                 timing?.SetCounter("legacyMemberCount", result.LegacyMembers.Count);
                 timing?.SetCounter("scopedRemapCount", result.ScopedRemaps.Count);
@@ -90,9 +91,18 @@ namespace Win32MetadataScraper
 
         private void Discover(TranslationUnit primary, IReadOnlyCollection<string> traversalFiles,
             IReadOnlyDictionary<string, string> libraries, IReadOnlyDictionary<string, string> authoredRemaps,
-            IReadOnlySet<string> excludes)
+            IReadOnlySet<string> excludes, NativeCursorIndex nativeDeclarations)
         {
-            var declarations = Declarations(primary.TranslationUnitDecl).ToArray();
+            Decl[] declarations;
+            using (GenerationTiming.BeginSpan("companion.primary-declarations"))
+            {
+                nativeDeclarations ??= new NativeCursorIndex(primary.TranslationUnitDecl);
+                declarations = nativeDeclarations.Cursors.Where(cursor =>
+                    cursor.DeclKind is >= CX_DeclKind.CX_DeclKind_FirstFunction and <= CX_DeclKind.CX_DeclKind_LastFunction ||
+                    cursor.DeclKind is >= CX_DeclKind.CX_DeclKind_FirstField and <= CX_DeclKind.CX_DeclKind_LastField ||
+                    cursor.DeclKind is >= CX_DeclKind.CX_DeclKind_FirstRecord and <= CX_DeclKind.CX_DeclKind_LastRecord)
+                    .Select(nativeDeclarations.GetCursor).Cast<Decl>().ToArray();
+            }
             var nativeFunctions = declarations.OfType<FunctionDecl>().Where(IsGlobalFunction).ToArray();
             var existing = nativeFunctions.Select(function => function.Name).ToHashSet(StringComparer.Ordinal);
             var mapped = libraries.Keys.Where(name => Regex.IsMatch(name, @"\A[A-Za-z_][A-Za-z_0-9]*\z") &&
@@ -107,7 +117,13 @@ namespace Win32MetadataScraper
                 if (!file.Equals(default(CXFile)))
                     sourceHashes[path] = Convert.ToHexString(SHA256.HashData(primary.Handle.GetFileContents(file, out _)));
             }
-            var candidates = FindCandidates(primary, files, mapped);
+            List<Candidate> candidates;
+            using (var candidateTiming = GenerationTiming.BeginSpan("companion.find-export-candidates"))
+            {
+                candidates = FindCandidates(primary, files, mapped);
+                candidateTiming?.SetCounter("inputFileCount", files.Count);
+                candidateTiming?.SetCounter("candidateCount", candidates.Count);
+            }
             if (candidates.Count != 0)
             {
                 var conditions = new UnicodeConditions(primary, includedFiles.Concat(files));
@@ -130,18 +146,29 @@ namespace Win32MetadataScraper
                     if (basis.Type.CanonicalType is RecordType baseType && baseType.Decl is CXXRecordDecl parent)
                         records.Push(parent);
             }
-            var macroMembers = declarations.OfType<NamedDecl>()
-                .Where(declaration => declaration is FunctionDecl or FieldDecl)
-                .Where(declaration => IsTraversalDeclaration(declaration) ||
-                    inheritedMethods.Contains(declaration.Handle.CanonicalCursor))
-                .Where(declaration => !excludes.Contains(declaration.Name) &&
-                !excludes.Contains(QualifiedName(declaration)) &&
-                !authoredRemaps.ContainsKey(declaration.Name) &&
-                !authoredRemaps.ContainsKey(QualifiedName(declaration)))
-                .Select(declaration => (Declaration: declaration, Written: NativeMacroNames.GetWrittenMemberName(declaration)))
-                .Where(value => value.Written != null && (IsLegacyMember(value.Declaration) ||
-                    HasAuthoredAlternative(value.Declaration, value.Written, authoredRemaps)))
-                .ToArray();
+            (NamedDecl Declaration, string Written)[] macroMembers;
+            using (var memberTiming = GenerationTiming.BeginSpan("companion.find-macro-members"))
+            {
+                int inspected = 0;
+                macroMembers = declarations.OfType<NamedDecl>()
+                    .Where(declaration => declaration is FunctionDecl or FieldDecl)
+                    .Where(declaration => IsTraversalDeclaration(declaration) ||
+                        inheritedMethods.Contains(declaration.Handle.CanonicalCursor))
+                    .Where(declaration => !excludes.Contains(declaration.Name) &&
+                    !excludes.Contains(QualifiedName(declaration)) &&
+                    !authoredRemaps.ContainsKey(declaration.Name) &&
+                    !authoredRemaps.ContainsKey(QualifiedName(declaration)))
+                    .Select(declaration =>
+                    {
+                        inspected++;
+                        return (Declaration: declaration, Written: NativeMacroNames.GetWrittenMemberName(declaration));
+                    })
+                    .Where(value => value.Written != null && (IsLegacyMember(value.Declaration) ||
+                        HasAuthoredAlternative(value.Declaration, value.Written, authoredRemaps)))
+                    .ToArray();
+                memberTiming?.SetCounter("inspectedMemberCount", inspected);
+                memberTiming?.SetCounter("macroMemberCount", macroMembers.Length);
+            }
             if (candidates.Count == 0 && macroMembers.Length == 0)
                 return;
             TranslationUnit detailed = primary;
@@ -153,7 +180,10 @@ namespace Win32MetadataScraper
 
             ansiAttempted = true;
             Unit = Parse(Arguments, flags);
-            var alternateDeclarations = Declarations(Unit.TranslationUnitDecl).ToArray();
+            Decl[] alternateDeclarations;
+            using (GenerationTiming.BeginSpan("companion.alternate-declarations"))
+                alternateDeclarations = SelectAlternateDeclarations(Unit, skipped, mapped,
+                    macroMembers.Select(member => member.Declaration));
             var recovered = alternateDeclarations.OfType<FunctionDecl>()
                 .Where(function => IsGlobalFunction(function) && !function.Handle.IsDefinition &&
                     mapped.Contains(function.Name) && skipped.Any(range => range.Name == function.Name &&
@@ -165,9 +195,10 @@ namespace Win32MetadataScraper
                         throw new InvalidOperationException($"ANSI companion export '{group.Key}' has ambiguous native declarations.");
                     return functions[0];
                 }).ToArray();
-            var compatibility = new NativeTypeCompatibility(declarations);
+            NativeTypeCompatibility compatibility = null;
             foreach (var function in recovered)
             {
+                compatibility ??= new NativeTypeCompatibility(Declarations(primary.TranslationUnitDecl));
                 try
                 {
                     compatibility.Validate(function);
@@ -342,6 +373,42 @@ namespace Win32MetadataScraper
                 foreach (var child in declaration.CursorChildren.OfType<Decl>())
                     pending.Push(child);
             }
+        }
+
+        private static Decl[] SelectAlternateDeclarations(TranslationUnit unit,
+            IReadOnlyCollection<SkippedCandidate> skipped, IReadOnlySet<string> mapped,
+            IEnumerable<NamedDecl> members)
+        {
+            using var timing = GenerationTiming.BeginSpan("companion.select-alternate-declarations");
+            var identities = members.Select(NativeSourceIdentity.Of).ToHashSet();
+            var offsets = identities.Select(identity => (identity.Kind, identity.Offset)).ToHashSet();
+            var kinds = identities.Select(identity => identity.Kind).ToHashSet();
+            var nativeDeclarations = new NativeCursorIndex(unit.TranslationUnitDecl);
+            var selected = new List<CXCursor>();
+            foreach (var cursor in nativeDeclarations.Cursors)
+            {
+                bool include = false;
+                if (skipped.Count != 0 && cursor.Kind == CXCursorKind.CXCursor_FunctionDecl &&
+                    !cursor.IsDefinition)
+                {
+                    using var spelling = cursor.Spelling;
+                    include = mapped.Contains(spelling.ToString()) &&
+                        skipped.Any(range => range.Contains(NativeSourceIdentity.Of(cursor)));
+                }
+                if (!include && kinds.Contains(cursor.Kind))
+                {
+                    cursor.Location.GetExpansionLocation(out _, out _, out _, out uint offset);
+                    include = offsets.Contains((cursor.Kind, offset)) &&
+                        identities.Contains(NativeSourceIdentity.Of(cursor));
+                }
+                if (include)
+                    selected.Add(cursor);
+            }
+            timing?.SetCounter("visitedDeclarationCount", nativeDeclarations.Cursors.Count);
+            timing?.SetCounter("selectedDeclarationCount", selected.Count);
+
+            using var materializationTiming = GenerationTiming.BeginSpan("companion.materialize-alternate-declarations");
+            return selected.Select(nativeDeclarations.GetCursor).Cast<Decl>().ToArray();
         }
 
         private static List<Candidate> FindCandidates(TranslationUnit unit, IReadOnlySet<string> files,
