@@ -44,6 +44,8 @@
           Link="assets\scraper\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\sources\GeneratorSdk\sdk\sdk.targets"
           Link="assets\scraper.sdk.targets" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\sdk\sdk.props"
+          Link="assets\scraper.sdk.props" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

@@ -85,6 +85,11 @@ and import-library inputs are validated independently; IDL preparation/compiler
 process failures are retained per input. Invalid prerequisites still block the
 dependent native binding or constants-publication stage.
 
+The SDK's implicit project-local `autoTypes.json` and `functionPointerFixups.json`
+defaults may be absent. Explicit `AutoType` and `FunctionPointerFixup` items remain
+required, even when they use those filenames. Present defaults and all configured
+inputs are validated normally; malformed settings still reject generation.
+
 After a native input has been read and its headers bound, a failed declaration
 keeps that entire input ineligible for selection but does not stop local
 validation of its later independent facts.

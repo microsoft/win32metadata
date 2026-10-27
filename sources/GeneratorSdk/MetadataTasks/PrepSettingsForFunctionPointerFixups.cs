@@ -39,6 +39,8 @@ namespace MetadataTasks
                 string fixupsFileName = fileItem.ItemSpec;
                 if (!File.Exists(fixupsFileName))
                 {
+                    if (string.Equals(fileItem.GetMetadata("IsImplicitDefault"), "true", StringComparison.OrdinalIgnoreCase))
+                        continue;
                     validation.Add(new InvalidDataException("Missing function-pointer fixups input."),
                         "WMG004", "PrepSettingsForFunctionPointerFixups", fixupsFileName);
                     continue;

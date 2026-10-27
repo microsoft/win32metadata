@@ -36,6 +36,8 @@ namespace MetadataTasks
                 string autoTypesFileName = fileItem.ItemSpec;
                 if (!File.Exists(autoTypesFileName))
                 {
+                    if (string.Equals(fileItem.GetMetadata("IsImplicitDefault"), "true", StringComparison.OrdinalIgnoreCase))
+                        continue;
                     validation.Add(new InvalidDataException("Missing auto-types input."),
                         "WMG004", "PrepSettingsForAutoTypes", autoTypesFileName);
                     continue;
