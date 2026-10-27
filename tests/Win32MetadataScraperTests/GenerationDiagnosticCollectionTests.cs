@@ -619,6 +619,96 @@ namespace Win32MetadataScraperTests
         [Fact]
         public void ValidDefaultCliStillWritesAllConstantsAndPhysicalMetadata()
         {
+            using (var settings = new Fixture())
+            {
+                string generated = Path.Combine(settings.Root, "obj", "generated");
+                string autoTypes = Path.Combine(settings.Root, "autoTypes.json");
+                string fixups = Path.Combine(settings.Root, "functionPointerFixups.json");
+                string autoTypesRsp = Path.Combine(generated, "scraper.autoTypes.generated.rsp");
+                string scraperFixupsRsp = Path.Combine(generated, "scraper.functionPointerFixups.generated.rsp");
+                string emitterFixupsRsp = Path.Combine(generated, "emitter.functionPointerFixups.generated.rsp");
+                string settingsOutput = Path.Combine(settings.Root, "output.winmd");
+                var project = new XElement("Project",
+                    new XElement("PropertyGroup", new XElement("UsingMicrosoftNoTargetsSdk", "true")),
+                    new XElement("Import", new XAttribute("Project",
+                        Path.Combine(AppContext.BaseDirectory, "assets", "scraper.sdk.props"))),
+                    new XElement("PropertyGroup",
+                        new XElement("UseWinSDKAssets", "false"),
+                        new XElement("TaskBinDir", Path.GetDirectoryName(typeof(ScrapeHeaders).Assembly.Location)),
+                        new XElement("ToolsBinDir", Path.GetDirectoryName(typeof(ConstantsScraperApp.Program).Assembly.Location)),
+                        new XElement("ObjDir", Path.Combine(settings.Root, "obj")),
+                        new XElement("OutputWinmd", settingsOutput),
+                        new XElement("Win32WinmdBinDir", settings.Root),
+                        new XElement("WinmdVersion", "1.0.0.0")),
+                    new XElement("Import", new XAttribute("Project",
+                        Path.Combine(AppContext.BaseDirectory, "assets", "scraper.sdk.targets"))));
+                string path = settings.Write("default-settings.proj", project.ToString());
+                string[] args = { path, "-nologo", "-verbosity:minimal", "-maxcpucount:1",
+                    "-target:PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes" };
+                foreach (bool populated in new[] { false, true, false })
+                {
+                    if (populated)
+                    {
+                        settings.Write("autoTypes.json", "[{\"Namespace\":\"Test\",\"Name\":\"HANDLE\",\"ValueType\":\"DECLARE_HANDLE\"}]");
+                        settings.Write("functionPointerFixups.json", "[{\"name\":\"CALLBACK\",\"pointerType\":\"PCALLBACK\"}]");
+                    }
+                    else
+                    {
+                        File.Delete(autoTypes);
+                        File.Delete(fixups);
+                    }
+                    var prepared = Run("msbuild", args);
+                    Assert.True(prepared.ExitCode == 0, prepared.Output);
+                    foreach (string rsp in new[] { autoTypesRsp, scraperFixupsRsp, emitterFixupsRsp })
+                    {
+                        Assert.True(File.Exists(rsp), prepared.Output);
+                        Assert.Equal(populated, new FileInfo(rsp).Length > 0);
+                    }
+                    if (populated)
+                    {
+                        Assert.Contains("HANDLE=IntPtr", File.ReadAllText(autoTypesRsp));
+                        Assert.Contains("CALLBACK=PCALLBACK", File.ReadAllText(scraperFixupsRsp));
+                        Assert.Contains("PCALLBACK", File.ReadAllText(emitterFixupsRsp));
+                    }
+                }
+
+                var explicitInputs = new XElement("ItemGroup",
+                    new XElement("AutoType", new XAttribute("Include", autoTypes)),
+                    new XElement("FunctionPointerFixup", new XAttribute("Include", fixups)));
+                project.Add(explicitInputs);
+                settings.Write("default-settings.proj", project.ToString());
+                var missing = Run("msbuild", args);
+                Assert.NotEqual(0, missing.ExitCode);
+                foreach (var input in new[] {
+                    (Path: autoTypes, Report: "auto-types-preparation-diagnostics.json"),
+                    (Path: fixups, Report: "function-pointer-preparation-diagnostics.json") })
+                {
+                    using var report = settings.Report(Path.Combine("obj", "generated", input.Report));
+                    var error = Assert.Single(report.RootElement.GetProperty("Errors").EnumerateArray());
+                    Assert.Equal("WMG004", error.GetProperty("Code").GetString());
+                    Assert.Equal(input.Path, error.GetProperty("Input").GetString());
+                    Assert.Contains("InvalidDataException", error.GetProperty("Cause").GetString());
+                }
+
+                explicitInputs.Remove();
+                settings.Write("default-settings.proj", project.ToString());
+                settings.Write("autoTypes.json", "{");
+                settings.Write("functionPointerFixups.json", "{");
+                var rejected = Run("msbuild", args);
+                Assert.NotEqual(0, rejected.ExitCode);
+                foreach (string reportPath in new[] { "auto-types-preparation-diagnostics.json", "function-pointer-preparation-diagnostics.json" })
+                {
+                    using var report = settings.Report(Path.Combine("obj", "generated", reportPath));
+                    var error = Assert.Single(report.RootElement.GetProperty("Errors").EnumerateArray());
+                    Assert.Equal("WMG004", error.GetProperty("Code").GetString());
+                    Assert.Contains("Json", error.GetProperty("Cause").GetString());
+                }
+                Assert.False(File.Exists(settingsOutput));
+                Assert.False(File.Exists(autoTypesRsp));
+                Assert.False(File.Exists(scraperFixupsRsp));
+                Assert.False(File.Exists(emitterFixupsRsp));
+            }
+
             using var fixture = new Fixture();
             string header = fixture.Write("input.h", "#define FIRST 1\n#define LAST 9\n");
             fixture.Write("Metadata.manual.cs", File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs")));
