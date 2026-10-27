@@ -947,15 +947,16 @@
  WINSOCK_API_LINKAGE
  _Must_inspect_result_
  SOCKET
-@@ -3482,6 +3689,8 @@
+@@ -3482,7 +3689,9 @@
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_AssociatedEnum_(WAIT_EVENT) _Win32_SetLastError_
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) _Win32_SetLastError_
 +_Win32_SupportedOS_Windows81_
  WINSOCK_API_LINKAGE
  DWORD
  WSAAPI
+ WSAWaitForMultipleEvents(
 @@ -3508,6 +3717,8 @@
  
  #if INCL_WINSOCK_API_PROTOTYPES

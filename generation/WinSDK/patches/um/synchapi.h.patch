@@ -265,7 +265,7 @@ index 8721bd1d..296a266f 100644
 -WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
  WaitForSingleObject(
@@ -284,7 +284,7 @@ index 8721bd1d..296a266f 100644
 -WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
  WaitForSingleObjectEx(
@@ -295,7 +295,7 @@ index 8721bd1d..296a266f 100644
 -WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
  WaitForMultipleObjectsEx(
@@ -589,7 +589,7 @@ index 8721bd1d..296a266f 100644
 -WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
  WaitForMultipleObjects(

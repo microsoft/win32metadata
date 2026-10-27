@@ -29,6 +29,18 @@
       "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
     },
     {
+      "path": "um\\Unknwn.h",
+      "sourceSha256": "A75D789AB4B466E4023B19A7A905F7109CF7268701AB35C84EF7155D9A026A05",
+      "sdkPath": "c\\include\\10.0.28000.0\\um\\unknwn.idl",
+      "sdkSha256": "2E146DA78625D05E345E7D480A61C5CC54696DD7C713B8FF07D9D36D95363C6C"
+    },
+    {
+      "path": "um\\Unknwnbase.h",
+      "sourceSha256": "AC994A95B97A3E2E5D2FDB14D2E2B63B560BFFE042E28895BC311D960C4041AA",
+      "sdkPath": "c\\include\\10.0.28000.0\\um\\unknwnbase.idl",
+      "sdkSha256": "797B7267F24259A02A14455203F9B11309B504C1BFFAF879AF7BC05B8B67A5BC"
+    },
+    {
       "path": "um\\winhttp.h",
       "sourceSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2",
       "sdkPath": "c\\include\\10.0.28000.0\\um\\winhttp.h",
@@ -6988,6 +7000,14 @@
       }
     ],
     "outputs": [
+      {
+        "source": "um\\unknwn.idl",
+        "path": "um\\Unknwn.h"
+      },
+      {
+        "source": "um\\unknwnbase.idl",
+        "path": "um\\Unknwnbase.h"
+      },
       {
         "source": "um\\waasapitypes.idl",
         "path": "um\\waasapitypes.h"

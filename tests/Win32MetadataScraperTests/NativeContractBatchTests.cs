@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 using MetadataUtils;
 using Win32MetadataScraper;
 using Xunit;
@@ -39,6 +41,20 @@ _Win32_NativeTypedef_ typedef BATCH_HANDLE* BATCH_PHANDLE;
 struct BATCH_OPAQUE;
 _Win32_NativeTypedef_ typedef struct BATCH_OPAQUE* BATCH_HOPAQUE;
 BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE output, BATCH_HOPAQUE opaque);
+typedef unsigned long DWORD;
+typedef int BOOL;
+enum WAIT_EVENT : unsigned long { WAIT_OBJECT_0 = 0, WAIT_ABANDONED = 128, WAIT_IO_COMPLETION = 192, WAIT_TIMEOUT = 258, WAIT_FAILED = 0xffffffffUL };
+extern ""C"" {
+_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT)
+DWORD __stdcall _Win32_PreserveResult_ WaitForSingleObject(HANDLE hHandle, DWORD dwMilliseconds);
+_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT)
+DWORD __stdcall _Win32_PreserveResult_ WaitForSingleObjectEx(HANDLE hHandle, DWORD dwMilliseconds, BOOL bAlertable);
+_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT)
+DWORD __stdcall _Win32_PreserveResult_ WaitForMultipleObjects(DWORD nCount, const HANDLE* lpHandles, BOOL bWaitAll, DWORD dwMilliseconds);
+_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT)
+DWORD __stdcall _Win32_PreserveResult_ WaitForMultipleObjectsEx(DWORD nCount, const HANDLE* lpHandles, BOOL bWaitAll, DWORD dwMilliseconds, BOOL bAlertable);
+DWORD __stdcall WaitResultWithoutPreserveResult(DWORD dwMilliseconds);
+}
 #define BATCH_WRAP32 (0xffffffffU + 1U)
 #define BATCH_POINTER_SIZE sizeof(void*)
 #if defined(_WIN64)
@@ -46,6 +62,45 @@ BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE o
 #else
 #define BATCH_ONLY_32 32U
 #endif
+";
+
+        private const string ImageHlpLastErrorDeclarations = @"
+extern ""C"" {
+void* __stdcall _Win32_SetLastError_ ImageRvaToSection(void* headers, void* image, unsigned long rva);
+void* __stdcall _Win32_SetLastError_ ImageRvaToVa(void* headers, void* image, unsigned long rva, void** section);
+HANDLE __stdcall _Win32_SetLastError_ FindDebugInfoFile(const char* fileName, const char* searchPath, char* result);
+void* __stdcall ImageHlpWithoutLastError(void* image);
+}
+";
+
+        private const string FileAndSocketResultDeclarations = @"
+typedef unsigned long DWORD;
+typedef int BOOL;
+typedef const char* LPCSTR;
+typedef const wchar_t* LPCWSTR;
+typedef wchar_t* LPWSTR;
+typedef void* WSAEVENT;
+enum BATCH_SOCKET_WAIT_EVENT : unsigned long { BatchEvent = 0, BatchCompletion = 192, BatchTimeout = 258, BatchFailed = 0xffffffffUL };
+extern ""C"" {
+_Win32_PreserveResult_ _Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_
+DWORD __stdcall GetFileAttributesA(_In_ LPCSTR lpFileName);
+_Win32_PreserveResult_ _Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_
+DWORD __stdcall GetFileAttributesW(_In_ LPCWSTR lpFileName);
+_Win32_PreserveResult_ _Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_
+DWORD __stdcall QueryDosDeviceW(_In_opt_ LPCWSTR lpDeviceName,
+    _Out_writes_to_opt_(ucchMax,return) LPWSTR lpTargetPath, _In_ DWORD ucchMax);
+_Win32_PreserveResult_ _Win32_AssociatedEnum_(BATCH_SOCKET_WAIT_EVENT) _Win32_SetLastError_ _Win32_SupportedOS_Windows81_
+DWORD __stdcall WSAWaitForMultipleEvents(_In_ DWORD cEvents,
+    _In_reads_(cEvents) const WSAEVENT* lphEvents, _In_ BOOL fWaitAll, _In_ DWORD dwTimeout, _In_ BOOL fAlertable);
+DWORD __stdcall FileAndSocketResultWithoutPreserveResult(DWORD value);
+}
+";
+
+        private const string FileAndSocketResultLibraries = @"--with-librarypath
+GetFileAttributesA=kernel32.dll
+GetFileAttributesW=kernel32.dll
+QueryDosDeviceW=kernel32.dll
+WSAWaitForMultipleEvents=ws2_32.dll
 ";
 
         [Fact]
@@ -63,9 +118,10 @@ BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE o
                 {
                     this.output.WriteLine($"Native contract batch: architecture={architecture}; target={target}");
                     string declarations = "#define _WIN32_WINNT 0x0600\n" + Declarations +
-                        ScopedDeclarations + AssociatedConstantNativeDeclarations + AdditionalDeclarations;
+                        ScopedDeclarations + AssociatedConstantNativeDeclarations + AdditionalDeclarations +
+                        ImageHlpLastErrorDeclarations + FileAndSocketResultDeclarations;
                     var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
-                        extraSettings: "--config\nnative-constant-values\n");
+                        extraSettings: "--config\nnative-constant-values\n" + FileAndSocketResultLibraries);
                     fixtures.Add((architecture, fixture));
                     fixture.AssertSuccess("FlagEnum", "FlagEnum", "MSInheritance", "MSInheritance");
                     Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
@@ -73,6 +129,9 @@ BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE o
                     using var image = Emit(fixture, architecture);
                     var reader = image.Reader;
                     AssertNativeHeaders(fixture, reader);
+                    AssertImageHlpLastError(reader);
+                    AssertWaitResults(reader);
+                    AssertFileAndSocketResults(reader);
 
                     foreach (string name in new[] { "SCOPED_RECORD", "SCOPED_ENUM", "SCOPED_TOKEN", "PFN_SCOPED" })
                         AssertStringAttribute(reader, FindType(reader, name).GetCustomAttributes(),
@@ -143,6 +202,9 @@ BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE o
                     fixtures.ToDictionary(value => value.Fixture.Header, _ => "Test"), new(), new(), new(), new());
                 using var combined = Emit(first, "crossarch");
                 AssertNativeHeaders(first, combined.Reader);
+                AssertImageHlpLastError(combined.Reader);
+                AssertWaitResults(combined.Reader);
+                AssertFileAndSocketResults(combined.Reader);
                 AssertConstant(combined.Reader, "Apis", "BATCH_WRAP32", 0);
                 var fields = FindType(combined.Reader, "Apis").GetFields().Select(combined.Reader.GetFieldDefinition)
                     .GroupBy(field => combined.Reader.GetString(field.Name)).ToDictionary(group => group.Key, group => group.ToArray());
@@ -165,6 +227,34 @@ BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE o
                 foreach (var (_, fixture) in fixtures)
                     fixture.Dispose();
             }
+        }
+
+        [Fact]
+        public void SelectedImageHlpLastErrorContractsAreAnnotatedOnTheTraversedHeader()
+        {
+            string sdk = Path.Combine(RepositoryRoot(), "generation", "WinSDK");
+            Assert.Contains("#include <ImageHlp.h>", File.ReadAllText(Path.Combine(sdk, "Partitions", "Debug", "main.cpp")));
+            Assert.Contains("<IncludeRoot>/um/ImageHlp.h",
+                File.ReadAllText(Path.Combine(sdk, "Partitions", "Debug", "settings.rsp")));
+            string patch = File.ReadAllText(Path.Combine(sdk, "patches", "um", "imagehlp.h.patch"));
+            foreach (string name in new[] { "ImageRvaToSection", "ImageRvaToVa", "FindDebugInfoFile" })
+                Assert.Matches(@"(?m)^\+_Win32_SetLastError_\s+" + Regex.Escape(name) + @"\s*\(", patch);
+        }
+
+        private static string RepositoryRoot([CallerFilePath] string source = null)
+            => Path.GetFullPath(Path.Combine(Path.GetDirectoryName(source), "..", ".."));
+
+        private static void AssertImageHlpLastError(MetadataReader reader)
+        {
+            foreach (string name in new[] { "ImageRvaToSection", "ImageRvaToVa", "FindDebugInfoFile" })
+            {
+                var import = FindMethod(reader, "Apis", name).GetImport();
+                Assert.True(import.Attributes.HasFlag(MethodImportAttributes.SetLastError));
+                Assert.Equal("scan.dll", reader.GetString(reader.GetModuleReference(import.Module).Name));
+                Assert.Equal(name, reader.GetString(import.Name));
+            }
+            Assert.False(FindMethod(reader, "Apis", "ImageHlpWithoutLastError").GetImport()
+                .Attributes.HasFlag(MethodImportAttributes.SetLastError));
         }
 
         [Fact]
@@ -247,6 +337,107 @@ int Ordinary(void);
             Assert.DoesNotContain(nativeTests, method => method.IsDefined(typeof(TheoryAttribute), inherit: true));
             Assert.Empty(typeof(HeaderAnnotationWinmdTests).GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.Static).Where(method => method.IsDefined(typeof(FactAttribute), inherit: true)));
+        }
+
+        [Fact]
+        public void ActiveWaitDeclarationsPreserveNativeStatusResults()
+        {
+            string root = WaitStatusRepositoryRoot();
+            string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "um", "synchapi.h.patch"));
+            foreach (string name in new[] { "WaitForSingleObject", "WaitForSingleObjectEx", "WaitForMultipleObjects", "WaitForMultipleObjectsEx" })
+                Assert.Contains("+_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI\n DWORD\n WINAPI\n " + name + "(",
+                    patch.Replace("\r\n", "\n"));
+            Assert.Contains("<IncludeRoot>/um/synchapi.h", File.ReadAllText(
+                Path.Combine(root, "generation", "WinSDK", "Partitions", "Threading", "settings.rsp")));
+        }
+
+        private static string WaitStatusRepositoryRoot(
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFile = "") =>
+            Path.GetFullPath(Path.Combine(Path.GetDirectoryName(sourceFile), "..", ".."));
+
+        private static void AssertWaitResults(MetadataReader reader)
+        {
+            foreach (var (name, parameterCount) in new[]
+            {
+                ("WaitForSingleObject", 2), ("WaitForSingleObjectEx", 3),
+                ("WaitForMultipleObjects", 4), ("WaitForMultipleObjectsEx", 5),
+            })
+            {
+                var method = FindMethod(reader, "Apis", name);
+                Assert.True(method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig), name);
+                Assert.True(method.GetImport().Attributes.HasFlag(MethodImportAttributes.SetLastError), name);
+                Assert.Equal(name, reader.GetString(method.GetImport().Name));
+                var signature = method.DecodeSignature(new SignatureNames(), null);
+                Assert.Equal("UInt32", signature.ReturnType);
+                Assert.Equal(parameterCount, signature.ParameterTypes.Length);
+                var result = method.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 0);
+                AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "WAIT_EVENT");
+                AssertStringAttribute(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows5.1.2600");
+            }
+            Assert.False(FindMethod(reader, "Apis", "WaitResultWithoutPreserveResult")
+                .ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+        }
+
+        [Fact]
+        public void ActiveFileAndSocketDeclarationsPreserveNativeResults()
+        {
+            string root = FileAndSocketResultRepositoryRoot();
+            foreach (var (header, name, prefix, os, linkage, convention) in new[]
+            {
+                ("fileapi.h", "GetFileAttributesA", "", "WindowsXP", "WINBASEAPI", "WINAPI"),
+                ("fileapi.h", "GetFileAttributesW", "", "WindowsXP", "WINBASEAPI", "WINAPI"),
+                ("fileapi.h", "QueryDosDeviceW", "", "WindowsXP", "WINBASEAPI", "WINAPI"),
+                ("winsock2.h", "WSAWaitForMultipleEvents", "_Win32_AssociatedEnum_(WAIT_EVENT) ",
+                    "Windows81", "WINSOCK_API_LINKAGE", "WSAAPI"),
+            })
+            {
+                string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "um", header + ".patch"))
+                    .Replace("\r\n", "\n");
+                Assert.Contains("+_Win32_PreserveResult_ " + prefix + "_Win32_SetLastError_\n" +
+                    "+_Win32_SupportedOS_" + os + "_\n " + linkage + "\n DWORD\n " + convention + "\n " + name + "(", patch);
+            }
+            foreach (var (partition, header) in new[] { ("Fs", "fileapi.h"), ("WinSock", "WinSock2.h") })
+            {
+                string directory = Path.Combine(root, "generation", "WinSDK", "Partitions", partition);
+                Assert.Contains("<IncludeRoot>/um/" + header, File.ReadAllText(Path.Combine(directory, "settings.rsp")));
+                Assert.Contains("#include <" + header.ToLowerInvariant() + ">", File.ReadAllText(Path.Combine(directory, "main.cpp")));
+            }
+        }
+
+        private static string FileAndSocketResultRepositoryRoot(
+            [System.Runtime.CompilerServices.CallerFilePath] string sourceFile = "") =>
+            Path.GetFullPath(Path.Combine(Path.GetDirectoryName(sourceFile), "..", ".."));
+
+        private static void AssertFileAndSocketResults(MetadataReader reader, string waitEnum = "BATCH_SOCKET_WAIT_EVENT")
+        {
+            foreach (var (name, count) in new[]
+            {
+                ("GetFileAttributesA", 1), ("GetFileAttributesW", 1),
+                ("QueryDosDeviceW", 3), ("WSAWaitForMultipleEvents", 5),
+            })
+            {
+                bool socket = name == "WSAWaitForMultipleEvents";
+                var method = FindMethod(reader, "Apis", name);
+                Assert.True(method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig), name);
+                var import = method.GetImport();
+                Assert.Equal(MethodImportAttributes.ExactSpelling | MethodImportAttributes.CallingConventionWinApi |
+                    MethodImportAttributes.SetLastError, import.Attributes);
+                Assert.Equal(socket ? "ws2_32.dll" : "kernel32.dll", reader.GetString(reader.GetModuleReference(import.Module).Name));
+                Assert.Equal(name, reader.GetString(import.Name));
+                var signature = method.DecodeSignature(new SignatureNames(), null);
+                Assert.Equal("UInt32", signature.ReturnType);
+                Assert.Equal(count, signature.ParameterTypes.Length);
+                var results = method.GetParameters().Select(reader.GetParameter).Where(parameter => parameter.SequenceNumber == 0).ToArray();
+                if (socket)
+                    AssertStringAttribute(reader, Assert.Single(results).GetCustomAttributes(), "AssociatedEnumAttribute", waitEnum);
+                else
+                    foreach (var result in results)
+                        AssertDoesNotHaveAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute");
+                AssertStringAttribute(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute",
+                    socket ? "windows8.1" : "windows5.1.2600");
+            }
+            Assert.False(FindMethod(reader, "Apis", "FileAndSocketResultWithoutPreserveResult")
+                .ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
         }
 
         private static void AssertConstant(MetadataReader reader, string type, string name, long expected)

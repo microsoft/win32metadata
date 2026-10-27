@@ -230,6 +230,16 @@ index 1cdaaf10..5bb44717 100644
  HANDLE
  IMAGEAPI
  SymFindDebugInfoFile(
+@@ -499,8 +545,8 @@ SymFindDebugInfoFileW(
+ 
+ HANDLE
+ IMAGEAPI
+-FindDebugInfoFile (
++_Win32_SetLastError_ FindDebugInfoFile (
+     _In_ PCSTR FileName,
+     _In_ PCSTR SymbolPath,
+     _Out_writes_(MAX_PATH + 1) PSTR DebugFilePath
+     );
 @@ -629,6 +675,7 @@ FindExecutableImageExW(
      _In_ PVOID CallerData
      );
@@ -238,6 +248,26 @@ index 1cdaaf10..5bb44717 100644
  PIMAGE_NT_HEADERS
  IMAGEAPI
  ImageNtHeader (
+@@ -656,17 +703,17 @@ ImageDirectoryEntryToData(
+ 
+ PIMAGE_SECTION_HEADER
+ IMAGEAPI
+-ImageRvaToSection(
++_Win32_SetLastError_ ImageRvaToSection(
+     _In_ PIMAGE_NT_HEADERS NtHeaders,
+     _In_ PVOID Base,
+     _In_ ULONG Rva
+     );
+ 
+ PVOID
+ IMAGEAPI
+-ImageRvaToVa(
++_Win32_SetLastError_ ImageRvaToVa(
+     _In_ PIMAGE_NT_HEADERS NtHeaders,
+     _In_ PVOID Base,
+     _In_ ULONG Rva,
+     _In_opt_ OUT PIMAGE_SECTION_HEADER *LastRvaSection
+     );
 @@ -845,6 +892,12 @@ UnDecorateSymbolNameW(
  
  #define DBHHEADER_DEBUGDIRS     0x1

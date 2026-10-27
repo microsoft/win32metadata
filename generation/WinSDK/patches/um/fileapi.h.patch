@@ -388,24 +388,26 @@
  WINBASEAPI
  UINT
  WINAPI
-@@ -594,6 +682,8 @@
+@@ -594,7 +682,9 @@
      DWORD nFileSizeLow;
  } WIN32_FILE_ATTRIBUTE_DATA, *LPWIN32_FILE_ATTRIBUTE_DATA;
  
-+_Win32_SetLastError_
++_Win32_PreserveResult_ _Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINBASEAPI
  DWORD
  WINAPI
-@@ -601,6 +691,8 @@
+ GetFileAttributesA(
+@@ -601,7 +691,9 @@
      _In_ LPCSTR lpFileName
      );
  
-+_Win32_SetLastError_
++_Win32_PreserveResult_ _Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINBASEAPI
  DWORD
  WINAPI
+ GetFileAttributesW(
 @@ -614,6 +706,8 @@
  #define GetFileAttributes  GetFileAttributesA
  #endif // !UNICODE
@@ -637,15 +639,16 @@
      _Reserved_ DWORD dwReserved,
      _In_ DWORD nNumberOfBytesToLockLow,
      _In_ DWORD nNumberOfBytesToLockHigh,
-@@ -967,6 +1105,8 @@
+@@ -967,7 +1105,9 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-+_Win32_SetLastError_
++_Win32_PreserveResult_ _Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINBASEAPI
  DWORD
  WINAPI
+ QueryDosDeviceW(
 @@ -986,6 +1126,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)

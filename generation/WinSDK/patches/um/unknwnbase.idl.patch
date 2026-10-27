@@ -16,16 +16,26 @@ index e44b2a38..3992681a 100644
  [
    local,
    object,
-@@ -117,6 +120,8 @@ cpp_quote("#else")
+@@ -54,6 +57,7 @@ cpp_quote("        public:")
+ cpp_quote("            BEGIN_INTERFACE")
++cpp_quote("            _Win32_PreserveResult_")
+ cpp_quote("            virtual HRESULT STDMETHODCALLTYPE QueryInterface( ")
+ cpp_quote("                /* [in] */ REFIID riid,")
+ cpp_quote("                /* [iid_is][out] */ _COM_Outptr_ void __RPC_FAR *__RPC_FAR *ppvObject) = 0;")
+ cpp_quote("")
+ cpp_quote("            virtual ULONG STDMETHODCALLTYPE AddRef( void) = 0;")
+@@ -117,6 +121,10 @@ cpp_quote("#else")
  }
++cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE) && (_MSC_VER < 1100)")
++cpp_quote("_WIN32META_ANNOTATE_METHOD_(IUnknown::QueryInterface, _Win32_PreserveResult_);")
++cpp_quote("#endif")
++
  cpp_quote("#endif")
  
-+cpp_quote("/* Win32Metadata: method ::IUnknown::QueryInterface => PreserveResult */")
-+
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
  
-@@ -150,6 +155,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -150,6 +158,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
