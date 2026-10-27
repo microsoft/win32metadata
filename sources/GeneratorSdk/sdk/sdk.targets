@@ -313,6 +313,7 @@
       MarkerFileName="$(ScrapedConstantsMarker)"
       SdkIncRoot="$(SdkIncRoot)"
       HeaderPriority="$(ConstantHeaderPriority)"
+      ToolchainIncludeRoots="$(NativeConstantToolchainIncludeRoots)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
       StandardErrorImportance="high"
       />
@@ -368,6 +369,7 @@
       SdkIncRoot="$(SdkIncRoot)"
       HeaderPriority="$(ConstantHeaderPriority)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
+      ToolchainIncludeRoots="$(NativeConstantToolchainIncludeRoots)"
       StandardErrorImportance="high"
       ContinueOnError="ErrorAndContinue"/>
     <EmitWinmd

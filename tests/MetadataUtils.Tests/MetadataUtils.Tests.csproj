@@ -23,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\sources\ConstantsScraper\ConstantsScraper.csproj" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="..\..\sources\GeneratorSdk\MetadataTasks\MetadataTasks.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\..\sources\MetadataUtils\MetadataUtils.csproj" />
     <ProjectReference Include="..\..\sources\WinmdUtils\WinmdUtils.csproj" />
     <ProjectReference Include="..\TestCommon\TestCommon.csproj" />
