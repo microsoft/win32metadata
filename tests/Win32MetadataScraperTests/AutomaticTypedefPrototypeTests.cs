@@ -167,51 +167,35 @@ void __stdcall PrototypeUseProjectedEnums(LEGACY_MASK mask, LEGACY_HIGH_MASK hig
             RunCase("x86", "i686-pc-windows-msvc", annotationsEnabled: false);
             RunCase("arm64", "aarch64-pc-windows-msvc", annotationsEnabled: false);
             RunCase("x64", "x86_64-pc-windows-msvc", annotationsEnabled: true);
-            AssertInvalidIntrinsicStorage("short", "IntPtr");
-            AssertInvalidIntrinsicStorage("__INTPTR_TYPE__", "UIntPtr");
             AssertFixedWidthPointerStorage("x64", "x86_64-pc-windows-msvc", "__ptr32", 4, 8);
             AssertFixedWidthPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
-            AssertInvalidOpaqueProviderStorage();
-            AssertInvalidNominalPointeeStorage();
             AssertEnumProjectionStorage();
+            AssertInvalidStorageBatches();
         }
 
         private static void AssertEnumProjectionStorage()
         {
-            foreach (string storage in new[] { "unsigned long", "unsigned long long", "float", "void*" })
+            string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            string evidence = root == null ? null : Path.Combine(root, "enum-unsigned-long");
+            if (evidence != null)
             {
-                string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
-                string evidence = root == null ? null : Path.Combine(root, "enum-" + storage.Replace(" ", "-").Replace("*", "-pointer"));
-                if (evidence != null)
-                {
-                    Assert.False(Directory.Exists(evidence));
-                    Directory.CreateDirectory(evidence);
-                }
-                using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
-                    "typedef " + storage + @" PROJECTED_VALUE;
+                Assert.False(Directory.Exists(evidence));
+                Directory.CreateDirectory(evidence);
+            }
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                @"typedef unsigned long PROJECTED_VALUE;
 typedef enum _PROJECTED_VALUE { ProjectedFirst = 1 } _PROJECTED_VALUE;
 extern ""C"" void UseProjected(PROJECTED_VALUE value);",
-                    annotationsEnabled: false, extraSettings: "--remap\n_PROJECTED_VALUE=PROJECTED_VALUE\n");
-                try
-                {
-                    int exitCode = fixture.Run();
-                    if (storage == "unsigned long")
-                    {
-                        fixture.AssertGeneratorWarnings(exitCode);
-                        Assert.Contains("enum PROJECTED_VALUE", fixture.ReadSource());
-                        Assert.DoesNotContain("struct PROJECTED_VALUE", fixture.ReadAdditionalTypes());
-                    }
-                    else
-                    {
-                        Assert.True(exitCode != 0, $"Expected rejection for native storage '{storage}'.{Environment.NewLine}{fixture.Diagnostics}");
-                        Assert.Contains("does not preserve native integral width and alignment.", fixture.Diagnostics);
-                    }
-                }
-                finally
-                {
-                    if (evidence != null)
-                        RetainFixture(fixture, evidence);
-                }
+                annotationsEnabled: false, extraSettings: "--remap\n_PROJECTED_VALUE=PROJECTED_VALUE\n");
+            try
+            {
+                fixture.AssertSuccess();
+                Assert.Contains("enum PROJECTED_VALUE", fixture.ReadSource());
+                Assert.DoesNotContain("struct PROJECTED_VALUE", fixture.ReadAdditionalTypes());
+            }
+            finally
+            {
+                RetainFixture(fixture, evidence);
             }
         }
 
@@ -319,60 +303,82 @@ extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
             {
                 RetainFixture(fixture, evidence);
             }
-            using var invalid = new HeaderAnnotationTests.NativeFixture(architecture, target,
-                "typedef void * " + qualifier + " APPLICATION_POINTER;", annotationsEnabled: false,
-                extraSettings: "--remap\nAPPLICATION_POINTER=IntPtr\n");
-            Assert.NotEqual(0, invalid.Run());
-            Assert.Contains("does not preserve native width, alignment, and pointer depth.", invalid.Diagnostics);
         }
 
-        private static void AssertInvalidOpaqueProviderStorage()
+        private static void AssertInvalidStorageBatches()
         {
-            using var fixture = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
-                "typedef unsigned long long LEGACY_RESOURCE;", annotationsEnabled: false,
-                extraSettings: "--remap\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nLEGACY_RESOURCE__\n");
-            Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("does not preserve native width", fixture.Diagnostics);
-            foreach (var storage in new[] { (Native: "long long", Managed: "int"), (Native: "double", Managed: "long") })
+            AssertRejectedStorageBatch("x64", "x86_64-pc-windows-msvc", "native-storage",
+                @"typedef short NARROW_INTEGER;
+typedef __INTPTR_TYPE__ SIGNED_INTEGER;
+typedef void* __ptr32 NARROW_POINTER;
+typedef void* FIRST_OWNER;
+typedef void* SECOND_OWNER;
+typedef FIRST_OWNER* FOREIGN_POINTER;",
+                "--remap\nNARROW_INTEGER=IntPtr\nSIGNED_INTEGER=UIntPtr\nNARROW_POINTER=IntPtr\nFOREIGN_POINTER=SECOND_OWNER*\n",
+                IntegerError("NARROW_INTEGER=IntPtr"), IntegerError("SIGNED_INTEGER=UIntPtr"),
+                PointerError("NARROW_POINTER=IntPtr"), PointerError("FOREIGN_POINTER=SECOND_OWNER*"));
+            AssertRejectedStorageBatch("x86", "i686-pc-windows-msvc", "native-storage",
+                @"typedef void* __ptr64 WIDE_POINTER;
+typedef unsigned long long LEGACY_RESOURCE;
+typedef struct NARROW_OWNER__ { long long value; } NARROW_OWNER, *BAD_NARROW_POINTEE;
+typedef struct FLOAT_OWNER__ { double value; } FLOAT_OWNER, *BAD_FLOAT_POINTEE;
+struct WIDE_OWNER__;
+typedef WIDE_OWNER__* __ptr64 WIDE_OWNER;
+typedef WIDE_OWNER* BAD_NOMINAL_WIDTH;
+struct RAW_WIDE_OWNER__;
+typedef RAW_WIDE_OWNER__* __ptr64 RAW_WIDE_OWNER, * __ptr64 *BAD_RAW_WIDTH;",
+                "--remap\nWIDE_POINTER=IntPtr\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n" +
+                "NARROW_OWNER=int\nNARROW_OWNER__*=NARROW_OWNER\nBAD_NARROW_POINTEE=NARROW_OWNER*\n" +
+                "FLOAT_OWNER=long\nFLOAT_OWNER__*=FLOAT_OWNER\nBAD_FLOAT_POINTEE=FLOAT_OWNER*\n" +
+                "WIDE_OWNER=IntPtr\nWIDE_OWNER__*=WIDE_OWNER\nBAD_NOMINAL_WIDTH=WIDE_OWNER*\n" +
+                "RAW_WIDE_OWNER__=IntPtr\nBAD_RAW_WIDTH=RAW_WIDE_OWNER*\n" +
+                "--exclude\nLEGACY_RESOURCE__\nNARROW_OWNER__\nFLOAT_OWNER__\nWIDE_OWNER\nWIDE_OWNER__\nRAW_WIDE_OWNER\nRAW_WIDE_OWNER__\n",
+                PointerError("WIDE_POINTER=IntPtr"), IntegerError("LEGACY_RESOURCE=IntPtr"),
+                PointerError("BAD_NARROW_POINTEE=NARROW_OWNER*"), PointerError("BAD_FLOAT_POINTEE=FLOAT_OWNER*"),
+                PointerError("BAD_NOMINAL_WIDTH=WIDE_OWNER*"), PointerError("BAD_RAW_WIDTH=RAW_WIDE_OWNER*"));
+
+            // Enum projection happens after discovery errors have already stopped generation.
+            AssertRejectedStorageBatch("x64", "x86_64-pc-windows-msvc", "enum-storage",
+                @"typedef unsigned long long PROJECTED_WIDE;
+typedef enum _PROJECTED_WIDE { WideFirst = 1 } _PROJECTED_WIDE;
+typedef float PROJECTED_FLOAT;
+typedef enum _PROJECTED_FLOAT { FloatFirst = 1 } _PROJECTED_FLOAT;
+typedef void* PROJECTED_POINTER;
+typedef enum _PROJECTED_POINTER { PointerFirst = 1 } _PROJECTED_POINTER;",
+                "--remap\n_PROJECTED_WIDE=PROJECTED_WIDE\n_PROJECTED_FLOAT=PROJECTED_FLOAT\n_PROJECTED_POINTER=PROJECTED_POINTER\n",
+                EnumError("PROJECTED_WIDE"), EnumError("PROJECTED_FLOAT"), EnumError("PROJECTED_POINTER"));
+
+            static string IntegerError(string remap)
+                => $"'NativeTypedef' storage remap '{remap}' does not preserve native width, signedness, and pointer depth.";
+            static string PointerError(string remap)
+                => $"'NativeTypedef' storage remap '{remap}' does not preserve native width, alignment, and pointer depth.";
+            static string EnumError(string name)
+                => $"Native enum projection '{name}' does not preserve native integral width and alignment.";
+        }
+
+        private static void AssertRejectedStorageBatch(string architecture, string target, string name,
+            string declarations, string settings, params string[] diagnostics)
+        {
+            string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            string evidence = root == null ? null : Path.Combine(root, architecture + "-" + name + "-rejections");
+            if (evidence != null)
             {
-                using var record = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
-                    "typedef struct OWNED_VALUE__ { " + storage.Native + " value; } OWNED_VALUE, *APPLICATION_POINTER;",
-                    annotationsEnabled: false,
-                    extraSettings: "--remap\nOWNED_VALUE=" + storage.Managed +
-                        "\nOWNED_VALUE__*=OWNED_VALUE\nAPPLICATION_POINTER=OWNED_VALUE*\n--exclude\nOWNED_VALUE__\n");
-                Assert.NotEqual(0, record.Run());
-                Assert.Contains("does not preserve native width, alignment, and pointer depth.", record.Diagnostics);
+                Assert.False(Directory.Exists(evidence));
+                Directory.CreateDirectory(evidence);
             }
-        }
-
-        private static void AssertInvalidIntrinsicStorage(string nativeType, string managedType)
-        {
-            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
-                "typedef " + nativeType + " APPLICATION_INTEGER;", annotationsEnabled: false,
-                extraSettings: "--remap\nAPPLICATION_INTEGER=" + managedType + "\n");
-            Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("does not preserve native width, signedness, and pointer depth.", fixture.Diagnostics);
-        }
-
-        private static void AssertInvalidNominalPointeeStorage()
-        {
-            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
-                "typedef void* FIRST_OWNER; typedef void* SECOND_OWNER; typedef FIRST_OWNER* APPLICATION_POINTER;",
-                annotationsEnabled: false, extraSettings: "--remap\nAPPLICATION_POINTER=SECOND_OWNER*\n");
-            Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("does not preserve native width, alignment, and pointer depth.", fixture.Diagnostics);
-            using var invalidWidth = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
-                "struct WIDE_OWNER__; typedef WIDE_OWNER__* __ptr64 WIDE_OWNER; typedef WIDE_OWNER* APPLICATION_POINTER;",
-                annotationsEnabled: false,
-                extraSettings: "--remap\nWIDE_OWNER=IntPtr\nWIDE_OWNER__*=WIDE_OWNER\nAPPLICATION_POINTER=WIDE_OWNER*\n--exclude\nWIDE_OWNER\nWIDE_OWNER__\n");
-            Assert.NotEqual(0, invalidWidth.Run());
-            Assert.Contains("does not preserve native width, alignment, and pointer depth.", invalidWidth.Diagnostics);
-            using var invalidRawWidth = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
-                "struct RAW_WIDE_OWNER__; typedef RAW_WIDE_OWNER__* __ptr64 RAW_WIDE_OWNER, * __ptr64 *APPLICATION_POINTER;",
-                annotationsEnabled: false,
-                extraSettings: "--remap\nRAW_WIDE_OWNER__=IntPtr\nAPPLICATION_POINTER=RAW_WIDE_OWNER*\n--exclude\nRAW_WIDE_OWNER\nRAW_WIDE_OWNER__\n");
-            Assert.NotEqual(0, invalidRawWidth.Run());
-            Assert.Contains("does not preserve native width, alignment, and pointer depth.", invalidRawWidth.Diagnostics);
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                declarations, annotationsEnabled: false, extraSettings: settings);
+            try
+            {
+                Assert.NotEqual(0, fixture.Run());
+                Assert.Equal(1, fixture.InvocationCount);
+                foreach (string diagnostic in diagnostics)
+                    Assert.Contains(diagnostic, fixture.Diagnostics);
+            }
+            finally
+            {
+                RetainFixture(fixture, evidence);
+            }
         }
 
         private static void RunCase(string architecture, string target, bool annotationsEnabled)
