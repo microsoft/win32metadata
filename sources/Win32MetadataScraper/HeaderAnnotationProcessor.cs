@@ -525,8 +525,11 @@ namespace Win32MetadataScraper
                 if (IsStorageTypeName(name))
                     name = alias.Name;
                 name = EscapeIdentifier(name);
-                string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true,
-                    preserveNativeShape: facts.HasNativeTypedefIdentity);
+                string valueType = nativeTypedefStorageRemaps.TryGetValue(alias.Handle.CanonicalCursor, out string pointerStorage) &&
+                    SyntaxFactory.ParseTypeName(pointerStorage) is PointerTypeSyntax
+                    ? GetNativeIntegerStorage(pointerStorage) ?? pointerStorage
+                    : GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true,
+                        preserveNativeShape: facts.HasNativeTypedefIdentity);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
                 if (declaration == null || declaration.ContainsDiagnostics || declaration.Members.Count != 1 ||
@@ -1181,6 +1184,9 @@ namespace Win32MetadataScraper
                         MatchesStorage(nativePointer.PointeeType, pointer.ElementType);
                 }
 
+                // An explicit pointer remap may give an untyped native pointee a managed view.
+                if (canonical.Kind == CXTypeKind.CXType_Void)
+                    return managed is PredefinedTypeSyntax or NameSyntax;
                 string name = managed.ToString();
                 string integerStorage = GetNativeIntegerStorage(name);
                 int scalarSize = integerStorage != null ? nativePointerSize : managed is PredefinedTypeSyntax primitive
@@ -1213,32 +1219,56 @@ namespace Win32MetadataScraper
                 if (managed is PredefinedTypeSyntax voidType && voidType.Keyword.IsKind(SyntaxKind.VoidKeyword))
                     return canonical is not PointerType;
 
+                // Sibling declarators share native storage without a written reference to the sibling alias.
+                var namedOwners = visited.OfType<TypedefNameDecl>().Where(owner => MatchesOwnerName(owner, name))
+                    .GroupBy(owner => owner.Handle.CanonicalCursor).Select(group => group.First()).ToArray();
+                var owners = namedOwners.Where(owner => owner.UnderlyingType.CanonicalType.Handle.Equals(canonical.Handle) &&
+                    (written is not TypedefType || owner.Handle.Extent.Start.Equals(alias.Handle.Extent.Start))).ToArray();
+                if (owners.Length != 0)
+                    return owners.Length == 1 && MatchesOwner(owners[0], canonical);
                 while (written is TypedefType typedef)
                 {
                     var owner = (TypedefNameDecl)typedef.Decl;
-                    projectionTypeRemaps.TryGetValue(owner.Name, out string ownerMapping);
-                    if (name == EscapeIdentifier(owner.Name) ||
-                        ownerMapping != null && !IsStorageTypeName(ownerMapping) && name == EscapeIdentifier(ownerMapping))
-                    {
-                        if (owner.Handle.Type.SizeOf != canonical.Handle.SizeOf || owner.Handle.Type.AlignOf != canonical.Handle.AlignOf)
-                            return false;
-                        if (ownerMapping != null && IsStorageTypeName(ownerMapping))
-                        {
-                            if (!resolving.Add(owner.Handle.CanonicalCursor))
-                                return false;
-                            bool matches = MatchesStorage(owner.UnderlyingType, SyntaxFactory.ParseTypeName(ownerMapping));
-                            resolving.Remove(owner.Handle.CanonicalCursor);
-                            return matches;
-                        }
-                        if (canonical is RecordType or EnumType)
-                            return true;
-                        ValidateNativeTypedefType(owner.UnderlyingType, location);
-                        return canonical is not PointerType || canonical.Handle.AlignOf == canonical.Handle.SizeOf;
-                    }
+                    if (MatchesOwnerName(owner, name))
+                        return MatchesOwner(owner, canonical);
                     written = RemapDiscovery.UnwrapType(owner.UnderlyingType);
                 }
-                return written is RecordType record && name == GetRecordPointeeName(record) ||
+                return written is RecordType record && (name == GetRecordPointeeName(record) ||
+                    namedOwners.Length == 0 && IsExcludedRecord(record.Decl) &&
+                    !(record.Decl.Definition ?? record.Decl).IsCompleteDefinition &&
+                    projectionTypeRemaps.TryGetValue(record.Decl.Name, out string providerStorage) &&
+                    GetNativeIntegerStorage(providerStorage) is "global::System.IntPtr" or "global::System.UIntPtr") ||
                     written is EnumType nativeEnum && name == EscapeIdentifier(Remap(nativeEnum.Decl.Name));
+            }
+
+            bool MatchesOwnerName(TypedefNameDecl owner, string name)
+            {
+                projectionTypeRemaps.TryGetValue(owner.Name, out string ownerMapping);
+                return name == EscapeIdentifier(owner.Name) ||
+                    ownerMapping != null && !IsStorageTypeName(ownerMapping) && name == EscapeIdentifier(ownerMapping);
+            }
+
+            bool MatchesOwner(TypedefNameDecl owner, ClangSharp.Type canonical)
+            {
+                if (owner.Handle.Type.SizeOf != canonical.Handle.SizeOf || owner.Handle.Type.AlignOf != canonical.Handle.AlignOf)
+                    return false;
+                if (projectionTypeRemaps.TryGetValue(owner.Name, out string ownerMapping) && IsStorageTypeName(ownerMapping))
+                {
+                    if (!resolving.Add(owner.Handle.CanonicalCursor))
+                        return false;
+                    bool matches = MatchesStorage(owner.UnderlyingType, SyntaxFactory.ParseTypeName(ownerMapping));
+                    resolving.Remove(owner.Handle.CanonicalCursor);
+                    return matches;
+                }
+                if (canonical is RecordType or EnumType)
+                    return true;
+                if (canonical is PointerType pointer && pointer.PointeeType.CanonicalType is RecordType record &&
+                    IsExcludedRecord(record.Decl) && projectionTypeRemaps.TryGetValue(record.Decl.Name, out string providerStorage) &&
+                    GetNativeIntegerStorage(providerStorage) is "global::System.IntPtr" or "global::System.UIntPtr" &&
+                    (canonical.Handle.SizeOf != nativePointerSize || canonical.Handle.AlignOf != nativePointerSize))
+                    return false;
+                ValidateNativeTypedefType(owner.UnderlyingType, location);
+                return canonical is not PointerType || canonical.Handle.AlignOf == canonical.Handle.SizeOf;
             }
         }
 
