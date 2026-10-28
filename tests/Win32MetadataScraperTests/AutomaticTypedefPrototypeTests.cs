@@ -18,6 +18,7 @@ namespace Win32MetadataScraperTests
     {
         private const string NativeDeclarations = @"
 #define DECLARE_HANDLE(name) struct name##__ { int unused; }; typedef struct name##__ *name
+#define DECLARE_OPAQUE_KEY(name) typedef struct name##__ { long long Internal; } name, *P##name
 typedef void VOID;
 typedef HANDLE ADS_SEARCH_HANDLE;
 typedef ADS_SEARCH_HANDLE *PADS_SEARCH_HANDLE;
@@ -54,6 +55,12 @@ typedef NATIVE_SESSION_BITS SESSION_KEY, *PSESSION_KEY;
 typedef HANDLE SIBLING_HANDLE, *PSIBLING_HANDLE;
 typedef struct PROVIDED_CONTEXT_t *PPROVIDED_CONTEXT;
 typedef struct _RECORD_VALUE RECORD_VIEW, *PRECORD_VIEW;
+typedef int REDECLARED_BOOLEAN;
+typedef NATIVE_BOOLEAN_BASE REDECLARED_BOOLEAN, *PREDECLARED_BOOLEAN;
+DECLARE_HANDLE(PRIMARY_RESOURCE);
+typedef PRIMARY_RESOURCE SECONDARY_RESOURCE;
+typedef PRIMARY_RESOURCE *PSECONDARY_RESOURCE;
+DECLARE_OPAQUE_KEY(OPAQUE_VALUE_KEY);
 struct EXPLICIT_POINTER_FIELDS {
     PPROVIDED_TOKEN token;
     UNTYPED_RECORD_ADDRESS record;
@@ -63,13 +70,17 @@ struct EXPLICIT_POINTER_FIELDS {
     PSIBLING_HANDLE handle;
     PPROVIDED_CONTEXT context;
     PRECORD_VIEW view;
+    PREDECLARED_BOOLEAN repeated;
+    PSECONDARY_RESOURCE secondary;
+    POPAQUE_VALUE_KEY key;
 };
 static_assert(sizeof(PROVIDED_TOKEN) == sizeof(void*), ""Provider width changed."");
 static_assert(sizeof(PPROVIDED_TOKEN) == sizeof(void*), ""Provider pointer width changed."");
 static_assert(sizeof(UNTYPED_RECORD_ADDRESS) == sizeof(void*), ""Untyped pointer width changed."");
 static_assert(sizeof(SESSION_KEY) == 8 && alignof(SESSION_KEY) == 8, ""Session storage changed."");
 static_assert(sizeof(RECORD_VIEW) == sizeof(RECORD_VALUE), ""Record view storage changed."");
-static_assert(sizeof(EXPLICIT_POINTER_FIELDS) == 8 * sizeof(void*), ""Pointer field layout changed."");
+static_assert(sizeof(OPAQUE_VALUE_KEY) == 8 && alignof(OPAQUE_VALUE_KEY) == 8, ""Opaque value storage changed."");
+static_assert(sizeof(EXPLICIT_POINTER_FIELDS) == 11 * sizeof(void*), ""Pointer field layout changed."");
 static_assert(alignof(EXPLICIT_POINTER_FIELDS) == alignof(void*), ""Pointer field alignment changed."");
 typedef enum _NATIVE_ENUM { NativeFirst = 1, NativeSecond = 2 } NATIVE_ENUM;
 enum class NATIVE_SCOPED : unsigned { NativeOnly = 1 };
@@ -112,6 +123,8 @@ void __stdcall PrototypeUseExplicitPointerViews(PPROVIDED_TOKEN token, UNTYPED_R
 void __stdcall PrototypeUseSiblingPointers(PSIBLING_COUNT count, PSIBLING_BOOLEAN boolean,
     PSESSION_KEY session, PSIBLING_HANDLE handle, PPROVIDED_CONTEXT context, PRECORD_VIEW view);
 int __stdcall PrototypeCloseSession(SESSION_KEY value);
+void __stdcall PrototypeUseAlternateOwners(PREDECLARED_BOOLEAN repeated, PSECONDARY_RESOURCE resource, POPAQUE_VALUE_KEY key, OPAQUE_VALUE_KEY value);
+int __stdcall PrototypeCloseOpaqueValue(OPAQUE_VALUE_KEY value);
 EXTERNAL_API_HANDLE __stdcall PrototypeUseExternalDependencies(PUBLIC_FIELD_RECORD* record, EXTERNAL_API_HANDLE value);
 void __stdcall PrototypeUseArrayAliases(PRECORD_VALUE_ARRAY records, PBYTE_VALUE_ARRAY bytes, SCALAR_ALIAS count);
 SELECTED_TEMPLATE_SCALAR __stdcall PrototypeUseTemplateAlias(SELECTED_TEMPLATE_SCALAR value);
@@ -268,6 +281,16 @@ extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
                 extraSettings: "--remap\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nLEGACY_RESOURCE__\n");
             Assert.NotEqual(0, fixture.Run());
             Assert.Contains("does not preserve native width", fixture.Diagnostics);
+            foreach (var storage in new[] { (Native: "long long", Managed: "int"), (Native: "double", Managed: "long") })
+            {
+                using var record = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
+                    "typedef struct OWNED_VALUE__ { " + storage.Native + " value; } OWNED_VALUE, *APPLICATION_POINTER;",
+                    annotationsEnabled: false,
+                    extraSettings: "--remap\nOWNED_VALUE=" + storage.Managed +
+                        "\nOWNED_VALUE__*=OWNED_VALUE\nAPPLICATION_POINTER=OWNED_VALUE*\n--exclude\nOWNED_VALUE__\n");
+                Assert.NotEqual(0, record.Run());
+                Assert.Contains("does not preserve native width, alignment, and pointer depth.", record.Diagnostics);
+            }
         }
 
         private static void AssertInvalidIntrinsicStorage(string nativeType, string managedType)
@@ -313,7 +336,7 @@ extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
                 "\n_WIN32META_ANNOTATE_FIELD_(GateRecord::value, _Win32_Reserved_);\n");
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                 annotationsEnabled, libraryPath: "candidate-prototype.dll", namespaceName: "Windows.Win32.Foundation",
-                extraSettings: "-DWIN32METADATA\n--remap\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nLEGACY_RESOURCE__\n");
+                extraSettings: "-DWIN32METADATA\n--remap\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nPREDECLARED_BOOLEAN=REDECLARED_BOOLEAN*\nPRIMARY_RESOURCE=IntPtr\nPRIMARY_RESOURCE__*=PRIMARY_RESOURCE\nSECONDARY_RESOURCE=IntPtr\nSECONDARY_RESOURCE__*=SECONDARY_RESOURCE\nPSECONDARY_RESOURCE=SECONDARY_RESOURCE*\nOPAQUE_VALUE_KEY=long\nOPAQUE_VALUE_KEY__*=OPAQUE_VALUE_KEY\nPOPAQUE_VALUE_KEY=OPAQUE_VALUE_KEY*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nPRIMARY_RESOURCE__\nSECONDARY_RESOURCE__\nOPAQUE_VALUE_KEY__\nLEGACY_RESOURCE__\n");
             File.AppendAllText(Path.Combine(fixture.DirectoryPath, "cleanup.h"), @"
 typedef void* HANDLE;
 typedef unsigned long EXTERNAL_COUNT_BASE;
@@ -362,6 +385,29 @@ typedef int EXTERNAL_UNUSED;
                         Namespace = "Windows.Win32.Foundation",
                         ValueType = "long",
                         CloseApi = "PrototypeCloseSession",
+                        InvalidHandleValues = new long[] { 0 },
+                        NativeTypedef = true,
+                    },
+                    new ClangSharpSourceToWinmd.AutoType
+                    {
+                        Name = "PRIMARY_RESOURCE",
+                        Namespace = "Windows.Win32.Foundation",
+                        ValueType = "DECLARE_HANDLE",
+                        NativeTypedef = true,
+                    },
+                    new ClangSharpSourceToWinmd.AutoType
+                    {
+                        Name = "SECONDARY_RESOURCE",
+                        Namespace = "Windows.Win32.Foundation",
+                        ValueType = "DECLARE_HANDLE",
+                        NativeTypedef = true,
+                    },
+                    new ClangSharpSourceToWinmd.AutoType
+                    {
+                        Name = "OPAQUE_VALUE_KEY",
+                        Namespace = "Windows.Win32.Foundation",
+                        ValueType = "DECLARE_OPAQUE_KEY",
+                        CloseApi = "PrototypeCloseOpaqueValue",
                         InvalidHandleValues = new long[] { 0 },
                         NativeTypedef = true,
                     },
@@ -468,6 +514,13 @@ typedef int EXTERNAL_UNUSED;
                 AssertWrapper(reader, "SESSION_KEY", "Int64");
                 AssertWrapper(reader, "SIBLING_HANDLE", "Void*");
                 AssertWrapper(reader, "PROVIDED_CONTEXT", "IntPtr");
+                AssertWrapper(reader, "REDECLARED_BOOLEAN", "Int32");
+                AssertWrapper(reader, "PREDECLARED_BOOLEAN", "Windows.Win32.Foundation.REDECLARED_BOOLEAN*");
+                AssertWrapper(reader, "PRIMARY_RESOURCE", "Void*");
+                AssertWrapper(reader, "SECONDARY_RESOURCE", "Void*");
+                AssertWrapper(reader, "OPAQUE_VALUE_KEY", "Int64");
+                AssertWrapper(reader, "PSECONDARY_RESOURCE", "Windows.Win32.Foundation.SECONDARY_RESOURCE*");
+                AssertWrapper(reader, "POPAQUE_VALUE_KEY", "Windows.Win32.Foundation.OPAQUE_VALUE_KEY*");
                 string[] siblingPointers = { "PSIBLING_COUNT", "PSIBLING_BOOLEAN", "PSESSION_KEY",
                     "PSIBLING_HANDLE", "PPROVIDED_CONTEXT", "PRECORD_VIEW" };
                 string[] siblingPointees = { "SIBLING_COUNT", "SIBLING_BOOLEAN", "SESSION_KEY",
@@ -475,10 +528,12 @@ typedef int EXTERNAL_UNUSED;
                 for (int i = 0; i < siblingPointers.Length; i++)
                     AssertWrapper(reader, siblingPointers[i], "Windows.Win32.Foundation." + siblingPointees[i] + "*");
                 var explicitFields = FindType(reader, "EXPLICIT_POINTER_FIELDS").GetFields().Select(reader.GetFieldDefinition).ToArray();
-                Assert.Equal(new[] { "token", "record", "count", "boolean", "session", "handle", "context", "view" },
+                Assert.Equal(new[] { "token", "record", "count", "boolean", "session", "handle", "context", "view", "repeated", "secondary", "key" },
                     explicitFields.Select(field => reader.GetString(field.Name)));
                 Assert.Equal(new[] { "Windows.Win32.Foundation.PPROVIDED_TOKEN", "Windows.Win32.Foundation.UNTYPED_RECORD_ADDRESS" }
-                    .Concat(siblingPointers.Select(name => "Windows.Win32.Foundation." + name)),
+                    .Concat(siblingPointers.Select(name => "Windows.Win32.Foundation." + name))
+                    .Concat(new[] { "Windows.Win32.Foundation.PREDECLARED_BOOLEAN", "Windows.Win32.Foundation.PSECONDARY_RESOURCE",
+                        "Windows.Win32.Foundation.POPAQUE_VALUE_KEY" }),
                     explicitFields.Select(field => field.DecodeSignature(decoder, null)));
                 foreach (string name in new[] { "byte", "LEGACY_RESOURCE" })
                     Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
@@ -580,6 +635,10 @@ typedef int EXTERNAL_UNUSED;
                     explicitPointers.ParameterTypes);
                 var siblingMethod = FindMethod(reader, "Apis", "PrototypeUseSiblingPointers").DecodeSignature(decoder, null);
                 Assert.Equal(siblingPointers.Select(name => "Windows.Win32.Foundation." + name), siblingMethod.ParameterTypes);
+                var alternateMethod = FindMethod(reader, "Apis", "PrototypeUseAlternateOwners").DecodeSignature(decoder, null);
+                Assert.Equal(new[] { "Windows.Win32.Foundation.PREDECLARED_BOOLEAN", "Windows.Win32.Foundation.PSECONDARY_RESOURCE",
+                    "Windows.Win32.Foundation.POPAQUE_VALUE_KEY",
+                    "Windows.Win32.Foundation.OPAQUE_VALUE_KEY" }, alternateMethod.ParameterTypes);
                 var externalMethod = FindMethod(reader, "Apis", "PrototypeUseExternalDependencies").DecodeSignature(decoder, null);
                 Assert.Equal("Windows.Win32.Foundation.EXTERNAL_API_HANDLE", externalMethod.ReturnType);
                 Assert.Equal(new[]
@@ -624,7 +683,11 @@ typedef int EXTERNAL_UNUSED;
                 {
                     using var provider = File.Create(Path.Combine(fixture.DirectoryPath, "autotypes.cs"));
                     ClangSharpSourceToWinmd.NativeTypedefStructsCreator.WriteToStream(
-                        new Dictionary<string, string> { ["PrototypeCloseSession"] = "Windows.Win32.Foundation" },
+                        new Dictionary<string, string>
+                        {
+                            ["PrototypeCloseSession"] = "Windows.Win32.Foundation",
+                            ["PrototypeCloseOpaqueValue"] = "Windows.Win32.Foundation",
+                        },
                         providers, provider);
                 }
 

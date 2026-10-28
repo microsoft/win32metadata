@@ -69,12 +69,20 @@ matching native alias with the same canonical storage. Scalar, pointer and
 record siblings in the same native typedef declaration can also supply that
 ownership when the spelling names their shared base instead. A different
 written owner in another declaration does not authorize an unrelated alias.
+Ownership checks retain the matching redeclaration before deduplicating native
+identities. A secondary native alias can also own a pointer whose spelling names
+an alias in that secondary alias's underlying chain.
 An authored pointer view can give a native `void` pointee, or an excluded
 incomplete record with existing intrinsic provider storage, a managed type
 without inventing a native pointee identity. An existing conflicting native
 alias still rejects. Validated explicit pointer remaps remain the wrapper's
 `Value` type. Pointer layers and opaque-provider storage still require matching
 physical width and alignment.
+An excluded complete POD struct can retain its existing scalar provider only
+when the effective excluded-record/provider mapping agrees and its sole
+non-bit-field integer member has zero offset and matching signed storage,
+width and alignment. This does not admit arbitrary record-to-scalar mappings,
+floating storage or narrowing providers.
 Retained-provider composition accepts the single string `NativeTypeName`
 source-transport attribute without relaxing storage or other field-attribute
 validation.
