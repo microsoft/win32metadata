@@ -288,57 +288,6 @@ int Ordinary(void);
             this.output.WriteLine($"TOOLCHAIN disabled-C: scraper={fixture.InvocationCount}");
         }
 
-        [Fact]
-        public void PayloadValidationRunsInMemoryInsteadOfLaunchingTheCompilerPerString()
-        {
-            foreach (string payload in new[]
-            {
-                "SetLastError()", "Flags()", "Flags(true)", "Flags(unsigned)", "Retained(1)",
-                "Reserved()", "ContainsInteriorPointers=value", "RAIIFree()", "RAIIFree(Close, )",
-                "RAIIFree(Close, (0)", "RAIIFree(Close, [))", "AssociatedEnum", "Field",
-                "ImportLibrary(\"\")", "ImportLibrary(\"x.dll\", \"#0\")",
-                "ImportLibrary(\"x.dll\", \"#65536\")", "ImportLibrary(\"x.dll\", \"#not-an-ordinal\")",
-                "SupportedOSPlatform(\"windows10.0.99999\")", "Optional", "Optional()", "Optional(1)",
-                "Optional(TRUE)", "Optional(\"false\")", "ComOutPtr(false, true)",
-                "ComOutPtr(true || false)", "Unsupported",
-            })
-            {
-                var error = Record.Exception(() => HeaderAnnotation.Parse(payload));
-                Assert.True(error?.GetType() == typeof(FormatException), $"Expected FormatException for payload '{payload}'; actual: {error}");
-            }
-            foreach (string payload in new[] { "Flags", "Win32Metadata.Flags" })
-            {
-                this.output.WriteLine("Valid payload: " + payload);
-                var annotation = HeaderAnnotation.Parse(payload);
-                Assert.Equal("Flags", annotation.Name);
-                Assert.Empty(annotation.Arguments);
-            }
-            foreach (var (payload, name, argument) in new[]
-            {
-                ("Optional(true)", "Optional", "true"), ("Optional(false)", "Optional", "false"),
-                ("Win32Metadata.ComOutPtr(true)", "ComOutPtr", "true"), ("ComOutPtr(false)", "ComOutPtr", "false"),
-            })
-            {
-                this.output.WriteLine("Valid payload: " + payload);
-                var annotation = HeaderAnnotation.Parse(payload);
-                Assert.Equal(name, annotation.Name);
-                Assert.Equal(argument, Assert.Single(annotation.Arguments));
-            }
-        }
-
-        [Fact]
-        public void NativeIntegrationUsesBatchesInsteadOfInheritedScenarioTheories()
-        {
-            var nativeClasses = typeof(HeaderAnnotationWinmdTests).Assembly.GetTypes()
-                .Where(type => !type.IsAbstract && typeof(HeaderAnnotationWinmdTests).IsAssignableFrom(type)).ToArray();
-            var nativeTests = nativeClasses.SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
-                .Where(method => method.IsDefined(typeof(FactAttribute), inherit: true)).ToArray();
-            Assert.InRange(nativeTests.Length, 1, 10);
-            Assert.DoesNotContain(nativeTests, method => method.IsDefined(typeof(TheoryAttribute), inherit: true));
-            Assert.Empty(typeof(HeaderAnnotationWinmdTests).GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
-                BindingFlags.Instance | BindingFlags.Static).Where(method => method.IsDefined(typeof(FactAttribute), inherit: true)));
-        }
-
         private static void AssertWaitResults(MetadataReader reader)
         {
             foreach (var (name, parameterCount) in new[]
@@ -445,6 +394,68 @@ int Ordinary(void);
             Assert.Equal(0, blob.ReadUInt16());
             Assert.Equal(0, blob.RemainingBytes);
             return value;
+        }
+    }
+
+    public class NativeContractBatchTestsManaged
+    {
+        private readonly ITestOutputHelper output;
+
+        public NativeContractBatchTestsManaged(ITestOutputHelper output) => this.output = output;
+
+        [Fact]
+        public void PayloadValidationRunsInMemoryInsteadOfLaunchingTheCompilerPerString()
+        {
+            foreach (string payload in new[]
+            {
+                "SetLastError()", "Flags()", "Flags(true)", "Flags(unsigned)", "Retained(1)",
+                "Reserved()", "ContainsInteriorPointers=value", "RAIIFree()", "RAIIFree(Close, )",
+                "RAIIFree(Close, (0)", "RAIIFree(Close, [))", "AssociatedEnum", "Field",
+                "ImportLibrary(\"\")", "ImportLibrary(\"x.dll\", \"#0\")",
+                "ImportLibrary(\"x.dll\", \"#65536\")", "ImportLibrary(\"x.dll\", \"#not-an-ordinal\")",
+                "SupportedOSPlatform(\"windows10.0.99999\")", "Optional", "Optional()", "Optional(1)",
+                "Optional(TRUE)", "Optional(\"false\")", "ComOutPtr(false, true)",
+                "ComOutPtr(true || false)", "Unsupported",
+            })
+            {
+                var error = Record.Exception(() => HeaderAnnotation.Parse(payload));
+                Assert.True(error?.GetType() == typeof(FormatException), $"Expected FormatException for payload '{payload}'; actual: {error}");
+            }
+            foreach (string payload in new[] { "Flags", "Win32Metadata.Flags" })
+            {
+                this.output.WriteLine("Valid payload: " + payload);
+                var annotation = HeaderAnnotation.Parse(payload);
+                Assert.Equal("Flags", annotation.Name);
+                Assert.Empty(annotation.Arguments);
+            }
+            foreach (var (payload, name, argument) in new[]
+            {
+                ("Optional(true)", "Optional", "true"), ("Optional(false)", "Optional", "false"),
+                ("Win32Metadata.ComOutPtr(true)", "ComOutPtr", "true"), ("ComOutPtr(false)", "ComOutPtr", "false"),
+            })
+            {
+                this.output.WriteLine("Valid payload: " + payload);
+                var annotation = HeaderAnnotation.Parse(payload);
+                Assert.Equal(name, annotation.Name);
+                Assert.Equal(argument, Assert.Single(annotation.Arguments));
+            }
+        }
+
+        [Fact]
+        public void NativeIntegrationUsesBatchesInsteadOfInheritedScenarioTheories()
+        {
+            var nativeClasses = typeof(HeaderAnnotationWinmdTests).Assembly.GetTypes()
+                .Where(type => !type.IsAbstract && typeof(HeaderAnnotationWinmdTests).IsAssignableFrom(type)).ToArray();
+            var nativeTests = nativeClasses.SelectMany(type => type.GetMethods(BindingFlags.Public | BindingFlags.Instance))
+                .Where(method => method.IsDefined(typeof(FactAttribute), inherit: true)).ToArray();
+            this.output.WriteLine($"Native batch budget: {nativeTests.Length} Fact methods across {nativeClasses.Length} concrete classes.");
+            foreach (var method in nativeTests.OrderBy(method => method.DeclaringType.FullName, StringComparer.Ordinal)
+                .ThenBy(method => method.Name, StringComparer.Ordinal))
+                this.output.WriteLine(method.DeclaringType.FullName + "." + method.Name);
+            Assert.InRange(nativeTests.Length, 1, 10);
+            Assert.DoesNotContain(nativeTests, method => method.IsDefined(typeof(TheoryAttribute), inherit: true));
+            Assert.Empty(typeof(HeaderAnnotationWinmdTests).GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
+                BindingFlags.Instance | BindingFlags.Static).Where(method => method.IsDefined(typeof(FactAttribute), inherit: true)));
         }
     }
 }
