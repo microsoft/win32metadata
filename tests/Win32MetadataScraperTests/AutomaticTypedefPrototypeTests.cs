@@ -38,6 +38,26 @@ typedef struct { int _; } *UI_ANIMATION_KEYFRAME;
 struct PUBLIC_FIELD_RECORD { EXTERNAL_FIELD_COUNT count; };
 typedef struct _RECORD_VALUE { int count; } RECORD_VALUE;
 typedef enum _NATIVE_ENUM { NativeFirst = 1, NativeSecond = 2 } NATIVE_ENUM;
+typedef RECORD_VALUE RECORD_VALUE_ARRAY[1];
+typedef RECORD_VALUE_ARRAY *PRECORD_VALUE_ARRAY;
+typedef unsigned char BYTE_VALUE_ARRAY[4];
+typedef BYTE_VALUE_ARRAY *PBYTE_VALUE_ARRAY;
+template<unsigned Size> struct SCALAR_FOR_SIZE;
+template<> struct SCALAR_FOR_SIZE<1> { typedef signed char type; };
+template<> struct SCALAR_FOR_SIZE<4> { typedef int type; };
+template<class T> struct SIZED_SCALAR {
+    typedef typename SCALAR_FOR_SIZE<sizeof(T)>::type type;
+};
+template<class T> class DEPENDENT_FACTORY {
+    typedef struct { T value; } DEPENDENT_RECORD;
+    typedef __unaligned DEPENDENT_RECORD *DEPENDENT_POINTER;
+    typedef const __unaligned DEPENDENT_RECORD *CONST_DEPENDENT_POINTER;
+};
+typedef SCALAR_FOR_SIZE<4>::type SELECTED_TEMPLATE_SCALAR;
+struct ARRAY_ALIAS_FIELDS {
+    PRECORD_VALUE_ARRAY records;
+    PBYTE_VALUE_ARRAY bytes;
+};
 struct GateRecord { int value; };
 #define GATE_VALUE 7
 _Win32_Enum_(GateGroup, unsigned, GATE_VALUE);
@@ -50,6 +70,8 @@ void __stdcall PrototypeUseInlinePointers(UI_ANIMATION_KEYFRAME keyframe, Machin
 void __stdcall PrototypeUseIntrinsicTypes(INT_PTR signedValue, UINT_PTR unsignedValue,
     APP_SIGNED_POINTER_VALUE signedAlias, APP_UNSIGNED_POINTER_VALUE unsignedAlias, POINTER_SIZED_CALLBACK callback);
 EXTERNAL_API_HANDLE __stdcall PrototypeUseExternalDependencies(PUBLIC_FIELD_RECORD* record, EXTERNAL_API_HANDLE value);
+void __stdcall PrototypeUseArrayAliases(PRECORD_VALUE_ARRAY records, PBYTE_VALUE_ARRAY bytes, SCALAR_ALIAS count);
+SELECTED_TEMPLATE_SCALAR __stdcall PrototypeUseTemplateAlias(SELECTED_TEMPLATE_SCALAR value);
 void __stdcall PrototypeUseSurface(HDC dc, HDRVR driver, VARIANT_BOOL booleanValue,
     SCALAR_ALIAS scalarValue, USet* set, OPAQUE_HANDLE opaqueValue,
     RECORD_VALUE recordValue, NATIVE_ENUM enumValue, CALLBACK_ALIAS callback);
@@ -77,6 +99,17 @@ HRESULT __stdcall PrototypeReturnResult();
             RunCase("x64", "x86_64-pc-windows-msvc", annotationsEnabled: true);
             AssertInvalidIntrinsicStorage("short", "IntPtr");
             AssertInvalidIntrinsicStorage("__INTPTR_TYPE__", "UIntPtr");
+            AssertInvalidPointerStorage("x64", "x86_64-pc-windows-msvc", "__ptr32", 4, 8);
+            AssertInvalidPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
+        }
+
+        private static void AssertInvalidPointerStorage(string architecture, string target, string qualifier, int size, int targetSize)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                "typedef void * " + qualifier + " APPLICATION_POINTER;", annotationsEnabled: false);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("ordinary target-width data pointers at every pointer level", fixture.Diagnostics);
+            Assert.Contains("native size " + size + " bytes instead of the target's " + targetSize + " bytes", fixture.Diagnostics);
         }
 
         private static void AssertInvalidIntrinsicStorage(string nativeType, string managedType)
@@ -196,7 +229,18 @@ typedef int EXTERNAL_UNUSED;
                 AssertWrapper(reader, "EXTERNAL_FIELD_COUNT", "Windows.Win32.Foundation.EXTERNAL_COUNT_BASE");
                 AssertWrapper(reader, "EXTERNAL_HANDLE_BASE", "Void*");
                 AssertWrapper(reader, "EXTERNAL_API_HANDLE", "Windows.Win32.Foundation.EXTERNAL_HANDLE_BASE");
+                AssertWrapper(reader, "SELECTED_TEMPLATE_SCALAR", "Int32");
                 Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == "EXTERNAL_UNUSED");
+                foreach (string name in new[]
+                {
+                    "RECORD_VALUE_ARRAY", "PRECORD_VALUE_ARRAY", "BYTE_VALUE_ARRAY", "PBYTE_VALUE_ARRAY",
+                    "type", "DEPENDENT_POINTER", "CONST_DEPENDENT_POINTER",
+                })
+                    Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
+                var arrayFields = FindType(reader, "ARRAY_ALIAS_FIELDS").GetFields().Select(reader.GetFieldDefinition).ToArray();
+                Assert.Equal(new[] { "records", "bytes" }, arrayFields.Select(field => reader.GetString(field.Name)));
+                Assert.Equal(new[] { "Windows.Win32.Foundation.RECORD_VALUE*", "Byte*" },
+                    arrayFields.Select(field => field.DecodeSignature(decoder, null)));
                 var externalRecord = FindType(reader, "PUBLIC_FIELD_RECORD");
                 var externalCount = reader.GetFieldDefinition(Assert.Single(externalRecord.GetFields()));
                 Assert.Equal("count", reader.GetString(externalCount.Name));
@@ -258,6 +302,15 @@ typedef int EXTERNAL_UNUSED;
                     "Windows.Win32.Foundation.PUBLIC_FIELD_RECORD*",
                     "Windows.Win32.Foundation.EXTERNAL_API_HANDLE",
                 }, externalMethod.ParameterTypes);
+                var arrayMethod = FindMethod(reader, "Apis", "PrototypeUseArrayAliases").DecodeSignature(decoder, null);
+                // Preserve the ordinary generator's parameter projection for pointer-to-array aliases.
+                Assert.Equal(new[]
+                {
+                    "Windows.Win32.Foundation.RECORD_VALUE**", "Byte**", "Windows.Win32.Foundation.SCALAR_ALIAS",
+                }, arrayMethod.ParameterTypes);
+                var templateMethod = FindMethod(reader, "Apis", "PrototypeUseTemplateAlias").DecodeSignature(decoder, null);
+                Assert.Equal("Windows.Win32.Foundation.SELECTED_TEMPLATE_SCALAR", templateMethod.ReturnType);
+                Assert.Equal(templateMethod.ReturnType, Assert.Single(templateMethod.ParameterTypes));
                 var callback = FindMethod(reader, "CALLBACK_ALIAS", "Invoke").DecodeSignature(decoder, null);
                 Assert.Equal("Int32", callback.ReturnType);
                 Assert.Equal(method.ReturnType, Assert.Single(callback.ParameterTypes));

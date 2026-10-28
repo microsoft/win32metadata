@@ -336,16 +336,15 @@ class Program
                 settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
                 configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody),
                 inferNativeTypedefs: true, parseHeaderAnnotations: parseHeaderAnnotations, projectionTypeRemaps: projectionTypeRemaps);
-            annotations?.PrepareTypedefs();
-            if (annotations != null)
-                allExcludes.AddRange(annotations.AnnotationCarrierNames);
+            annotations.PrepareTypedefs();
+            allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var bindingOptions = configOptions;
             if (annotations.RequiresRecordProjectionIdentity)
                 bindingOptions |= PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
             var config = CreateConfig(settings, ns, outputFile, headerFile, bindingOptions,
                 RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
             constantProbes?.Prepare(translationUnit, config, evaluateNativeConstants,
-                annotations?.GetAssociatedConstantCandidateNames() ?? Array.Empty<string>());
+                annotations.GetAssociatedConstantCandidateNames());
             if (constantProbes != null)
                 allExcludes.AddRange(constantProbes.ProbeNames.Keys);
             using var companion = NativeConditionalCompanion.Create(translationUnit, clangArgs, translationFlags,
@@ -381,7 +380,7 @@ class Program
             var nativeConstants = evaluateNativeConstants
                 ? NativeConstantExtractor.Extract(translationUnit, sourceFile, constantProbes, config)
                 : null;
-            annotations?.SetNativeConstantAliases(nativeConstants);
+            annotations.SetNativeConstantAliases(nativeConstants);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();
             Func<string, Stream> streamFactory = (path) =>
@@ -416,17 +415,14 @@ class Program
                         source = GeneratedSource.FromRoot(memberNames.Attach(source.Root));
                     generatedSources[kvp.Key] = source;
                 }
-                if (annotations != null)
-                {
-                    annotations.PrepareProjections(generatedSources.Values.Select(source => source.Root), config.RemappedNames);
-                    foreach (string path in generatedSources.Keys.ToArray())
-                        generatedSources[path] = GeneratedSource.FromRoot(annotations.Rewrite(generatedSources[path].Root));
-                }
+                annotations.PrepareProjections(generatedSources.Values.Select(source => source.Root), config.RemappedNames);
+                foreach (string path in generatedSources.Keys.ToArray())
+                    generatedSources[path] = GeneratedSource.FromRoot(annotations.Rewrite(generatedSources[path].Root));
                 if (memberNames != null && !configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
                     foreach (string path in generatedSources.Keys.ToArray())
                         generatedSources[path] = GeneratedSource.FromRoot(
                             (CompilationUnitSyntax)new SourceLocationRemover().Visit(generatedSources[path].Root));
-                string additionalTypes = annotations?.GetAdditionalTypes();
+                string additionalTypes = annotations.GetAdditionalTypes();
                 if (companion.Functions.Count != 0)
                 {
                     using var companionTiming = GenerationTiming.BeginSpan("companion.recover-bindings");
@@ -540,8 +536,7 @@ class Program
                                 NormalizeGeneratedSource(Encoding.UTF8.GetString(pair.Value.ToArray()), pair.Key))));
                         foreach (var pair in opaqueSources)
                         {
-                            var source = annotations != null
-                                ? GeneratedSource.FromRoot(annotations.Rewrite(pair.Value.Root)) : pair.Value;
+                            var source = GeneratedSource.FromRoot(annotations.Rewrite(pair.Value.Root));
                             if (!configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute))
                                 source = GeneratedSource.FromRoot((CompilationUnitSyntax)new SourceLocationRemover().Visit(source.Root));
                             generatedSources[pair.Key] = generatedSources.TryGetValue(pair.Key, out var existing)
@@ -554,7 +549,7 @@ class Program
                 using var associatedTiming = GenerationTiming.BeginSpan("annotations.associated-constants");
                 var associatedConstantSources = new List<string>();
                 bool associatedConstantsValid = true;
-                if (annotations != null && !generateAllMacros)
+                if (!generateAllMacros)
                 {
                     var macros = annotations.GetAssociatedConstantMacros();
                     if (macros.Count != 0)
@@ -599,10 +594,9 @@ class Program
                         .AddMembers(units.SelectMany(unit => unit.Members).ToArray())
                         .NormalizeWhitespace().ToFullString() + Environment.NewLine;
                 }
-                annotations?.ValidateProjection();
-                if (annotations != null)
-                    generatedSources[additionalTypesPath] = GeneratedSource.FromText(
-                        HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine + (additionalTypes ?? string.Empty));
+                annotations.ValidateProjection();
+                generatedSources[additionalTypesPath] = GeneratedSource.FromText(
+                    HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine + (additionalTypes ?? string.Empty));
                 associatedTiming?.SetCounter("sourceCount", associatedConstantSources.Count);
                 associatedTiming?.Dispose();
                 var generatedFiles = generatedSources.ToDictionary(pair => pair.Key, pair => pair.Value.Text);
@@ -629,8 +623,7 @@ class Program
                 if (nativeConstants != null)
                 {
                     using var factsTiming = GenerationTiming.BeginSpan("output.serialize-native-constants");
-                    if (annotations != null)
-                        nativeConstants.Groups = annotations.GetConstantGroups().ToList();
+                    nativeConstants.Groups = annotations.GetConstantGroups().ToList();
                     generatedFiles[nativeConstantsPath] = JsonSerializer.Serialize(nativeConstants);
                     Console.WriteLine($"Native constants: {nativeConstants.Constants.Count} integers; {nativeConstants.Issues.Count} other definitions. Details: {nativeConstantsPath}");
                 }
