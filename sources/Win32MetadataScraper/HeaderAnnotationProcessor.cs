@@ -202,7 +202,10 @@ namespace Win32MetadataScraper
             return bindings;
         }
 
-        internal bool RequiresRecordProjectionIdentity => recordPointees.Count != 0;
+        internal bool RequiresProjectionIdentity => recordPointees.Count != 0 ||
+            declarations.Values.Any(facts => facts.Declaration is EnumDecl enumeration &&
+                projectionTypeRemaps.TryGetValue(enumeration.Name, out string name) &&
+                GetEnumTypedefProjectionCandidates(enumeration, name).Any());
 
         private static unsafe bool IsForwardEnumReference(EnumDecl declaration)
         {
@@ -449,6 +452,36 @@ namespace Win32MetadataScraper
             CXTypeKind.CXType_Short or CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or
             CXTypeKind.CXType_Int or CXTypeKind.CXType_UInt or CXTypeKind.CXType_Long or CXTypeKind.CXType_ULong or
             CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong;
+
+        private void RegisterEnumTypedefProjection(EnumDecl nativeEnum, EnumDeclarationSyntax projection,
+            string projectedNamespace, NativeLocation location)
+        {
+            string name = projection.Identifier.ValueText;
+            if (!projectionTypeRemaps.TryGetValue(nativeEnum.Name, out string mapped) || mapped != name ||
+                projectedNamespace != generatedNamespace)
+                return;
+            var candidates = GetEnumTypedefProjectionCandidates(nativeEnum, name).ToArray();
+            if (candidates.Length == 0)
+                return;
+            if (candidates.Length != 1)
+                throw Error(location, $"Native enum projection '{name}' has multiple native typedef owners.");
+            var alias = candidates[0];
+            if (!alias.IsInferredTypedef || alias.Annotations.Count != 0)
+                throw Error(alias.Location, $"Native enum projection '{name}' conflicts with authored typedef metadata.");
+            var nativeType = ((TypedefNameDecl)alias.Declaration).UnderlyingType.CanonicalType;
+            var enumType = clang.getEnumDeclIntegerType(nativeEnum.Handle).CanonicalType;
+            if (!IsEnumStorage(nativeType.Kind) || !IsEnumStorage(enumType.kind) ||
+                nativeType.Handle.SizeOf != enumType.SizeOf || nativeType.Handle.AlignOf != enumType.AlignOf)
+                throw Error(alias.Location, $"Native enum projection '{name}' does not preserve native integral width and alignment.");
+            projectedDeclarations.Add(alias.AnnotationOwner.Declaration);
+        }
+
+        private IEnumerable<DeclarationFacts> GetEnumTypedefProjectionCandidates(EnumDecl nativeEnum, string name)
+            => annotatedTypedefs.Where(facts => facts.LogicalEnumMembers == null &&
+                    Remap(facts.Declaration.Name) == name &&
+                    facts.Declaration.SemanticParentCursor.Handle.CanonicalCursor == nativeEnum.SemanticParentCursor.Handle.CanonicalCursor)
+                .GroupBy(facts => facts.AnnotationOwner.Declaration.Handle.CanonicalCursor)
+                .Select(group => group.First());
 
         internal void PrepareProjections(IEnumerable<string> sources, IReadOnlyDictionary<string, string> typeRemaps)
             => PrepareProjections(sources.Select(source => GeneratedSource.FromText(source).Root), typeRemaps);
@@ -2166,6 +2199,8 @@ namespace Win32MetadataScraper
                 {
                     owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
+                    if (facts.Declaration is EnumDecl projectedEnum)
+                        owner.RegisterEnumTypedefProjection(projectedEnum, node, ns, facts.Location);
                     if (nativeAliases)
                         node = NativeConstantGroupProvenance.Attach(node, owner.GetNativeEnumSource(facts, node, ns, bindings));
                 }

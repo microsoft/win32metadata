@@ -333,17 +333,19 @@ namespace ClangSharpSourceToWinmd
                         this.contributedToNonCommonTree = true;
 
                         var fullNameWithArch = this.GetFullNameWithArch(node, archGroup);
+                        string provider = this.owner.map.GetCallbackProviderKey(node);
+                        string visitKey = provider.Length == 0 ? fullNameWithArch : fullNameWithArch + "\0" + provider;
 
                         lock (this.owner)
                         {
                             // If we've already visited it via another arch, get rid of this one
-                            if (this.owner.crossArchVisitedNames.Contains(fullNameWithArch))
+                            if (this.owner.crossArchVisitedNames.Contains(visitKey))
                             {
                                 removeNode = true;
                                 return;
                             }
 
-                            this.owner.crossArchVisitedNames.Add(fullNameWithArch);
+                            this.owner.crossArchVisitedNames.Add(visitKey);
                         }
 
                         if (i != 0)

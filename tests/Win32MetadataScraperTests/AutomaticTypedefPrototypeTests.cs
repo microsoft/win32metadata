@@ -84,6 +84,10 @@ static_assert(sizeof(OPAQUE_VALUE_KEY) == 8 && alignof(OPAQUE_VALUE_KEY) == 8, "
 static_assert(sizeof(EXPLICIT_POINTER_FIELDS) == 11 * sizeof(void*), ""Pointer field layout changed."");
 static_assert(alignof(EXPLICIT_POINTER_FIELDS) == alignof(void*), ""Pointer field alignment changed."");
 typedef enum _NATIVE_ENUM { NativeFirst = 1, NativeSecond = 2 } NATIVE_ENUM;
+typedef unsigned long LEGACY_MASK;
+typedef enum _LEGACY_MASK { LegacyMaskFirst = 1, LegacyMaskSecond = 2 } _LEGACY_MASK;
+typedef unsigned long LEGACY_HIGH_MASK;
+typedef enum _LEGACY_HIGH_MASK { LegacyMaskHigh = 0x80000000U } _LEGACY_HIGH_MASK;
 enum class NATIVE_SCOPED : unsigned { NativeOnly = 1 };
 typedef __UINTPTR_TYPE__ LEGACY_RESOURCE;
 #define DECLARE_RECORD_BUFFER(n) typedef struct _RECORD_BUFFER { RECORD_VALUE values[n]; } RECORD_BUFFER, *PRECORD_BUFFER
@@ -141,6 +145,7 @@ void __stdcall PrototypeUseSurface(HDC dc, HDRVR driver, VARIANT_BOOL booleanVal
     SCALAR_ALIAS scalarValue, USet* set, OPAQUE_HANDLE opaqueValue,
     RECORD_VALUE recordValue, NATIVE_ENUM enumValue, CALLBACK_ALIAS callback);
 HRESULT __stdcall PrototypeReturnResult();
+void __stdcall PrototypeUseProjectedEnums(LEGACY_MASK mask, LEGACY_HIGH_MASK high);
 }
 ";
         private static readonly Dictionary<string, string> Routing = new()
@@ -168,6 +173,46 @@ HRESULT __stdcall PrototypeReturnResult();
             AssertFixedWidthPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
             AssertInvalidOpaqueProviderStorage();
             AssertInvalidNominalPointeeStorage();
+            AssertEnumProjectionStorage();
+        }
+
+        private static void AssertEnumProjectionStorage()
+        {
+            foreach (string storage in new[] { "unsigned long", "unsigned long long", "float", "void*" })
+            {
+                string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+                string evidence = root == null ? null : Path.Combine(root, "enum-" + storage.Replace(" ", "-").Replace("*", "-pointer"));
+                if (evidence != null)
+                {
+                    Assert.False(Directory.Exists(evidence));
+                    Directory.CreateDirectory(evidence);
+                }
+                using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                    "typedef " + storage + @" PROJECTED_VALUE;
+typedef enum _PROJECTED_VALUE { ProjectedFirst = 1 } _PROJECTED_VALUE;
+extern ""C"" void UseProjected(PROJECTED_VALUE value);",
+                    annotationsEnabled: false, extraSettings: "--remap\n_PROJECTED_VALUE=PROJECTED_VALUE\n");
+                try
+                {
+                    int exitCode = fixture.Run();
+                    if (storage == "unsigned long")
+                    {
+                        fixture.AssertGeneratorWarnings(exitCode);
+                        Assert.Contains("enum PROJECTED_VALUE", fixture.ReadSource());
+                        Assert.DoesNotContain("struct PROJECTED_VALUE", fixture.ReadAdditionalTypes());
+                    }
+                    else
+                    {
+                        Assert.True(exitCode != 0, $"Expected rejection for native storage '{storage}'.{Environment.NewLine}{fixture.Diagnostics}");
+                        Assert.Contains("does not preserve native integral width and alignment.", fixture.Diagnostics);
+                    }
+                }
+                finally
+                {
+                    if (evidence != null)
+                        RetainFixture(fixture, evidence);
+                }
+            }
         }
 
         private static void AssertFixedWidthPointerStorage(string architecture, string target, string qualifier, int size, int targetSize)
@@ -343,7 +388,7 @@ extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
                 "\n_WIN32META_ANNOTATE_FIELD_(GateRecord::value, _Win32_Reserved_);\n");
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                 annotationsEnabled, libraryPath: "candidate-prototype.dll", namespaceName: "Windows.Win32.Foundation",
-                extraSettings: "-DWIN32METADATA\n--remap\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nPREDECLARED_BOOLEAN=REDECLARED_BOOLEAN*\nPRIMARY_RESOURCE=IntPtr\nPRIMARY_RESOURCE__*=PRIMARY_RESOURCE\nSECONDARY_RESOURCE=IntPtr\nSECONDARY_RESOURCE__*=SECONDARY_RESOURCE\nPSECONDARY_RESOURCE=SECONDARY_RESOURCE*\nOPAQUE_VALUE_KEY=long\nOPAQUE_VALUE_KEY__*=OPAQUE_VALUE_KEY\nPOPAQUE_VALUE_KEY=OPAQUE_VALUE_KEY*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nPRIMARY_RESOURCE__\nSECONDARY_RESOURCE__\nOPAQUE_VALUE_KEY__\nLEGACY_RESOURCE__\n");
+                extraSettings: "-DWIN32METADATA\n--remap\n_LEGACY_MASK=LEGACY_MASK\n_LEGACY_HIGH_MASK=LEGACY_HIGH_MASK\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nPREDECLARED_BOOLEAN=REDECLARED_BOOLEAN*\nPRIMARY_RESOURCE=IntPtr\nPRIMARY_RESOURCE__*=PRIMARY_RESOURCE\nSECONDARY_RESOURCE=IntPtr\nSECONDARY_RESOURCE__*=SECONDARY_RESOURCE\nPSECONDARY_RESOURCE=SECONDARY_RESOURCE*\nOPAQUE_VALUE_KEY=long\nOPAQUE_VALUE_KEY__*=OPAQUE_VALUE_KEY\nPOPAQUE_VALUE_KEY=OPAQUE_VALUE_KEY*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nPRIMARY_RESOURCE__\nSECONDARY_RESOURCE__\nOPAQUE_VALUE_KEY__\nLEGACY_RESOURCE__\n");
             File.AppendAllText(Path.Combine(fixture.DirectoryPath, "cleanup.h"), @"
 typedef void* HANDLE;
 typedef unsigned long EXTERNAL_COUNT_BASE;
@@ -592,6 +637,27 @@ typedef int EXTERNAL_UNUSED;
                 Assert.Equal("count", reader.GetString(reader.GetFieldDefinition(Assert.Single(record.GetFields())).Name));
                 AssertDoesNotHaveAttribute(reader, record.GetCustomAttributes(), "NativeTypedefAttribute");
                 AssertDoesNotHaveAttribute(reader, FindType(reader, "NATIVE_ENUM").GetCustomAttributes(), "NativeTypedefAttribute");
+                foreach (string name in new[] { "LEGACY_MASK", "LEGACY_HIGH_MASK" })
+                {
+                    var type = FindType(reader, name);
+                    AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "NativeTypedefAttribute");
+                    Assert.Equal("Enum", reader.GetString(reader.GetTypeReference((TypeReferenceHandle)type.BaseType).Name));
+                    var ordinaryEnum = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                        .OfType<EnumDeclarationSyntax>().Single(declaration => declaration.Identifier.ValueText == name);
+                    string storage = ordinaryEnum.BaseList?.Types.Single().Type.ToString() == "uint" ? "UInt32" : "Int32";
+                    var backing = reader.GetFieldDefinition(type.GetFields().Single(handle =>
+                        reader.GetString(reader.GetFieldDefinition(handle).Name) == "value__"));
+                    Assert.Equal(storage, backing.DecodeSignature(decoder, null));
+                    Assert.DoesNotContain("struct " + name, companion);
+                }
+                var projectedEnums = FindMethod(reader, "Apis", "PrototypeUseProjectedEnums").DecodeSignature(decoder, null);
+                Assert.Equal(new[] { "Windows.Win32.Foundation.LEGACY_MASK", "Windows.Win32.Foundation.LEGACY_HIGH_MASK" },
+                    projectedEnums.ParameterTypes.ToArray());
+                var highMember = reader.GetFieldDefinition(FindType(reader, "LEGACY_HIGH_MASK").GetFields().Single(handle =>
+                    reader.GetString(reader.GetFieldDefinition(handle).Name) == "LegacyMaskHigh"));
+                var highConstant = reader.GetConstant(highMember.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.Int32, highConstant.TypeCode);
+                Assert.Equal("00000080", Convert.ToHexString(reader.GetBlobBytes(highConstant.Value)));
                 var gateField = reader.GetFieldDefinition(Assert.Single(FindType(reader, "GateRecord").GetFields()));
                 AssertDoesNotHaveAttribute(reader, gateField.GetCustomAttributes(), "ReservedAttribute");
                 if (annotationsEnabled)

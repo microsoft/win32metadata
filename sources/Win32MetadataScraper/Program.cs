@@ -340,7 +340,7 @@ class Program
             annotations.PrepareTypedefs();
             allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var bindingOptions = configOptions;
-            if (annotations.RequiresRecordProjectionIdentity)
+            if (annotations.RequiresProjectionIdentity)
                 bindingOptions |= PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
             var config = CreateConfig(settings, ns, outputFile, headerFile, bindingOptions,
                 annotations.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);

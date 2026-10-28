@@ -17,6 +17,236 @@ namespace ClangSharpSourceToWinmdTests
     [TestClass]
     public partial class HeaderTypedefCompositionTests
     {
+        [TestMethod]
+        public void CrossArchPartialNativeAliasProvidersComposeBeforeDependentBinding()
+        {
+            using var fixture = new Fixture("crossarch");
+            AddPartialNativeAliasProviders(fixture, "byte");
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            foreach (var pair in new[] { (Alias: "NATIVE_FLAG", Storage: "BYTE_BASE"), (Alias: "NATIVE_STATUS", Storage: "INT_BASE") })
+            {
+                var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Test." + pair.Alias)!;
+                Assert.AreEqual(1, alias.DeclaringSyntaxReferences.Length);
+                var field = alias.GetMembers("Value").OfType<IFieldSymbol>().Single();
+                Assert.AreEqual("Test." + pair.Storage, field.Type.ToDisplayString());
+            }
+            var method = compilation.CSharpCompilation.GetTypeByMetadataName("Test.Apis")!.GetMembers("Read").OfType<IMethodSymbol>().Single();
+            Assert.AreEqual("Test.NATIVE_STATUS", method.ReturnType.ToDisplayString());
+            Assert.AreEqual("Test.NATIVE_FLAG", method.Parameters.Single().Type.ToDisplayString());
+            string output = Path.Combine(fixture.DirectoryPath, "PartialProviders.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            RetainPartialProviderImage(output);
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            foreach (var pair in new[] { (Alias: "NATIVE_FLAG", Storage: "BYTE_BASE"), (Alias: "NATIVE_STATUS", Storage: "INT_BASE") })
+            {
+                var definition = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Single(type => reader.GetString(type.Namespace) == "Test" && reader.GetString(type.Name) == pair.Alias);
+                var field = reader.GetFieldDefinition(definition.GetFields().Single());
+                var signature = reader.GetBlobReader(field.Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                var storage = signature.ReadTypeHandle();
+                Assert.AreEqual(HandleKind.TypeDefinition, storage.Kind);
+                Assert.AreEqual(pair.Storage, reader.GetString(reader.GetTypeDefinition((TypeDefinitionHandle)storage).Name));
+                Assert.AreEqual(0, signature.RemainingBytes);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("sbyte")]
+        [DataRow("short")]
+        [DataRow("float")]
+        public void CrossArchPartialNativeAliasProvidersKeepStrictStorageValidation(string storage)
+        {
+            using var fixture = new Fixture("crossarch");
+            AddPartialNativeAliasProviders(fixture, storage);
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types.");
+        }
+
+        [DataTestMethod]
+        [DataRow("byte", false, false)]
+        [DataRow("sbyte", false, false)]
+        [DataRow("short", false, false)]
+        [DataRow("float", false, false)]
+        [DataRow("byte", true, false)]
+        [DataRow("sbyte", true, false)]
+        [DataRow("short", true, false)]
+        [DataRow("float", true, false)]
+        [DataRow("byte", true, true)]
+        [DataRow("sbyte", true, true)]
+        [DataRow("short", true, true)]
+        [DataRow("float", true, true)]
+        public void CrossArchPartialNativeAliasProvidersRetainAllArchitectureVariantFragments(string storage, bool sameSignature, bool sameFile)
+        {
+            using var fixture = new Fixture("crossarch");
+            AddPartialNativeAliasProviders(fixture, storage);
+            foreach (string architecture in new[] { "x86", "x64", "arm64" })
+            {
+                string header = Path.Combine(fixture.DirectoryPath, architecture, "Bindings.header-types.cs");
+                string path = Path.Combine(fixture.DirectoryPath, architecture, "Other.header-types.cs");
+                string first = File.ReadAllText(header);
+                string second = File.ReadAllText(path);
+                string incoming = storage;
+                if (architecture != "x86")
+                {
+                    first = first.Replace("public byte Value;", "public ushort Value;");
+                    incoming = storage == "byte" ? "ushort" : storage;
+                    second = second.Replace("unsigned char", "unsigned short")
+                        .Replace("public " + storage + " Value;", "public " + incoming + " Value;");
+                }
+                if (sameSignature)
+                {
+                    string clrStorage = incoming switch
+                    {
+                        "byte" => "System.Byte",
+                        "ushort" => "System.UInt16",
+                        "sbyte" => "System.SByte",
+                        "short" => "System.Int16",
+                        "float" => "System.Single",
+                        _ => throw new ArgumentOutOfRangeException(nameof(storage)),
+                    };
+                    first = first.Replace("namespace Test {", "namespace Test { using STORAGE = Test.BYTE_BASE;")
+                        .Replace("public BYTE_BASE Value;", "public STORAGE Value;");
+                    second = second.Replace("namespace Test {", "namespace Test { using STORAGE = " + clrStorage + ";")
+                        .Replace("public " + incoming + " Value;", "public STORAGE Value;");
+                    if (sameFile)
+                    {
+                        var root = CSharpSyntaxTree.ParseText(first).GetCompilationUnitRoot();
+                        var other = CSharpSyntaxTree.ParseText(second).GetCompilationUnitRoot();
+                        first = root.WithMembers(root.Members.AddRange(other.Members)).ToFullString();
+                        File.Delete(path);
+                    }
+                }
+                if (!sameFile)
+                    File.WriteAllText(path, second);
+                File.WriteAllText(header, first);
+            }
+            if (sameFile)
+            {
+                var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+                StringAssert.Contains(error.Message, "Header native typedef 'Test.NATIVE_FLAG");
+                StringAssert.Contains(error.Message, "Multiple native aliases in one input project to the same type.");
+                return;
+            }
+            if (storage != "byte")
+            {
+                var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+                StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types.");
+                return;
+            }
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+            foreach (var pair in new[] { (Suffix: "", Mask: 1), (Suffix: "____1", Mask: 6) })
+            {
+                var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Test.NATIVE_FLAG" + pair.Suffix)!;
+                Assert.IsNotNull(alias);
+                Assert.AreEqual(1, alias.DeclaringSyntaxReferences.Length);
+                var backing = (INamedTypeSymbol)alias.GetMembers("Value").OfType<IFieldSymbol>().Single().Type;
+                CollectionAssert.Contains(new[] { "BYTE_BASE", "BYTE_BASE____1" }, backing.Name);
+                Assert.AreEqual("Test", backing.ContainingNamespace.ToDisplayString());
+                Assert.AreEqual(pair.Mask, backing.GetAttributes().Single(attribute =>
+                    attribute.AttributeClass!.Name == "SupportedArchitectureAttribute").ConstructorArguments.Single().Value);
+                Assert.AreEqual(pair.Mask == 1 ? SpecialType.System_Byte : SpecialType.System_UInt16,
+                    backing.GetMembers("Value").OfType<IFieldSymbol>().Single().Type.SpecialType);
+                Assert.AreEqual(pair.Mask, alias.GetAttributes().Single(attribute =>
+                    attribute.AttributeClass!.Name == "SupportedArchitectureAttribute").ConstructorArguments.Single().Value);
+                var consumer = compilation.CSharpCompilation.GetTypeByMetadataName("Test.CONSUMER" + pair.Suffix)!;
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(alias,
+                    consumer.GetMembers("Flag").OfType<IFieldSymbol>().Single().Type));
+                var method = compilation.CSharpCompilation.GetTypeByMetadataName("Test.Apis")!
+                    .GetMembers("Read" + pair.Suffix).OfType<IMethodSymbol>().Single();
+                Assert.AreEqual("Test.NATIVE_STATUS", method.ReturnType.ToDisplayString());
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(alias, method.Parameters.Single().Type));
+                Assert.AreEqual(pair.Mask, method.GetAttributes().Single(attribute =>
+                    attribute.AttributeClass!.Name == "SupportedArchitectureAttribute").ConstructorArguments.Single().Value);
+            }
+            string output = Path.Combine(fixture.DirectoryPath, sameSignature ? "PartialAliasedProviders.winmd" : "PartialVariantProviders.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0, 0, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            RetainPartialProviderImage(output);
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var definitions = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Namespace) == "Test" && reader.GetString(type.Name) == "NATIVE_FLAG").ToArray();
+            Assert.AreEqual(2, definitions.Length);
+            CollectionAssert.AreEquivalent(new[] { 1, 6 }, definitions.Select(type => ReadArchitecture(reader, type)).ToArray());
+            foreach (var definition in definitions)
+            {
+                var field = reader.GetFieldDefinition(definition.GetFields().Single());
+                var signature = reader.GetBlobReader(field.Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                var backing = signature.ReadTypeHandle();
+                Assert.AreEqual(HandleKind.TypeDefinition, backing.Kind);
+                var backingDefinition = reader.GetTypeDefinition((TypeDefinitionHandle)backing);
+                Assert.AreEqual("BYTE_BASE", reader.GetString(backingDefinition.Name));
+                int mask = ReadArchitecture(reader, definition);
+                Assert.AreEqual(mask, ReadArchitecture(reader, backingDefinition));
+                Assert.AreEqual(0, signature.RemainingBytes);
+                var storageSignature = reader.GetBlobReader(reader.GetFieldDefinition(backingDefinition.GetFields().Single()).Signature);
+                Assert.AreEqual(SignatureKind.Field, storageSignature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(mask == 1 ? SignatureTypeCode.Byte : SignatureTypeCode.UInt16, storageSignature.ReadSignatureTypeCode());
+                Assert.AreEqual(0, storageSignature.RemainingBytes);
+            }
+        }
+
+        private static int ReadArchitecture(MetadataReader reader, TypeDefinition definition)
+        {
+            var handle = definition.GetCustomAttributes().Single(attribute =>
+                AttributeName(reader, attribute) == "SupportedArchitectureAttribute");
+            var value = reader.GetBlobReader(reader.GetCustomAttribute(handle).Value);
+            Assert.AreEqual((ushort)1, value.ReadUInt16());
+            int architecture = value.ReadInt32();
+            Assert.AreEqual((ushort)0, value.ReadUInt16());
+            Assert.AreEqual(0, value.RemainingBytes);
+            return architecture;
+        }
+
+        private static void RetainPartialProviderImage(string output)
+        {
+            string? evidence = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            if (evidence == null)
+                return;
+            Directory.CreateDirectory(evidence);
+            File.Copy(output, Path.Combine(evidence, Path.GetFileName(output)));
+        }
+
+        private static void AddPartialNativeAliasProviders(Fixture fixture, string storage)
+        {
+            fixture.Write("autotypes.cs", "");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "NativeTransport.manual.cs"), @"namespace Windows.Win32.Foundation.Metadata {
+    [System.AttributeUsage(System.AttributeTargets.Field)]
+    public sealed class NativeTypeNameAttribute : System.Attribute { public NativeTypeNameAttribute(string value) { } }
+}");
+            fixture.Write("Bindings.header-types.cs", @"using Windows.Win32.Foundation.Metadata;
+namespace Test {
+    [NativeTypedef] public partial struct BYTE_BASE { public byte Value; }
+    [NativeTypedef] public partial struct INT_BASE { public int Value; }
+    [NativeTypedef] public partial struct NATIVE_FLAG { [NativeTypeName(""BYTE_BASE"")] public BYTE_BASE Value; }
+    [NativeTypedef] public partial struct NATIVE_STATUS { [NativeTypeName(""INT_BASE"")] public INT_BASE Value; }
+}");
+            fixture.Write("Other.header-types.cs", @"using Windows.Win32.Foundation.Metadata;
+namespace Test {
+    [NativeTypedef] public partial struct NATIVE_FLAG { [NativeTypeName(""unsigned char"")] public " + storage + @" Value; }
+    [NativeTypedef] public partial struct NATIVE_STATUS { [NativeTypeName(""long"")] public int Value; }
+}");
+            fixture.Write("Bindings.cs", @"using System.Runtime.InteropServices;
+namespace Test {
+    public struct CONSUMER { public NATIVE_FLAG Flag; public NATIVE_STATUS Status; }
+    public static class Apis { [DllImport(""test"")] public static extern NATIVE_STATUS Read(NATIVE_FLAG value); }
+}");
+        }
+
         [DataTestMethod]
         [DataRow("x86", false)]
         [DataRow("x64", false)]
@@ -1079,7 +1309,7 @@ namespace Windows.Win32.Foundation.Metadata {
     [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Field)]
     public sealed class DocumentationAttribute : Attribute { public DocumentationAttribute(string url) { } }
     [Flags] public enum Architecture { None = 0, X86 = 1, X64 = 2, Arm64 = 4, All = 7 }
-    [AttributeUsage(AttributeTargets.Struct)]
+    [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Method)]
     public sealed class SupportedArchitectureAttribute : Attribute { public SupportedArchitectureAttribute(Architecture architecture) { } }
     [AttributeUsage(AttributeTargets.Struct)]
     public sealed class NativeTypedefAttribute : Attribute { }
