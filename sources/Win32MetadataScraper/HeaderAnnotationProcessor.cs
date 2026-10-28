@@ -1220,10 +1220,10 @@ namespace Win32MetadataScraper
                     return canonical is not PointerType;
 
                 // Sibling declarators share native storage without a written reference to the sibling alias.
-                var namedOwners = visited.OfType<TypedefNameDecl>().Where(owner => MatchesOwnerName(owner, name))
-                    .GroupBy(owner => owner.Handle.CanonicalCursor).Select(group => group.First()).ToArray();
+                var namedOwners = visited.OfType<TypedefNameDecl>().Where(owner => MatchesOwnerName(owner, name)).ToArray();
                 var owners = namedOwners.Where(owner => owner.UnderlyingType.CanonicalType.Handle.Equals(canonical.Handle) &&
-                    (written is not TypedefType || owner.Handle.Extent.Start.Equals(alias.Handle.Extent.Start))).ToArray();
+                    OwnsWrittenPointee(owner, written))
+                    .GroupBy(owner => owner.Handle.CanonicalCursor).Select(group => group.First()).ToArray();
                 if (owners.Length != 0)
                     return owners.Length == 1 && MatchesOwner(owners[0], canonical);
                 while (written is TypedefType typedef)
@@ -1248,12 +1248,30 @@ namespace Win32MetadataScraper
                     ownerMapping != null && !IsStorageTypeName(ownerMapping) && name == EscapeIdentifier(ownerMapping);
             }
 
+            bool OwnsWrittenPointee(TypedefNameDecl owner, ClangSharp.Type written)
+            {
+                if (written is not TypedefType reference ||
+                    owner.Handle.Extent.Start.Equals(alias.Handle.Extent.Start) ||
+                    owner.Handle.CanonicalCursor == reference.Decl.Handle.CanonicalCursor)
+                    return true;
+                var underlying = RemapDiscovery.UnwrapType(owner.UnderlyingType);
+                while (underlying is TypedefType typedef)
+                {
+                    if (typedef.Decl.Handle.CanonicalCursor == reference.Decl.Handle.CanonicalCursor)
+                        return true;
+                    underlying = RemapDiscovery.UnwrapType(typedef.Decl.UnderlyingType);
+                }
+                return false;
+            }
+
             bool MatchesOwner(TypedefNameDecl owner, ClangSharp.Type canonical)
             {
                 if (owner.Handle.Type.SizeOf != canonical.Handle.SizeOf || owner.Handle.Type.AlignOf != canonical.Handle.AlignOf)
                     return false;
                 if (projectionTypeRemaps.TryGetValue(owner.Name, out string ownerMapping) && IsStorageTypeName(ownerMapping))
                 {
+                    if (canonical is RecordType recordStorage)
+                        return MatchesOpaqueValueStorage(owner, recordStorage, ownerMapping);
                     if (!resolving.Add(owner.Handle.CanonicalCursor))
                         return false;
                     bool matches = MatchesStorage(owner.UnderlyingType, SyntaxFactory.ParseTypeName(ownerMapping));
@@ -1269,6 +1287,23 @@ namespace Win32MetadataScraper
                     return false;
                 ValidateNativeTypedefType(owner.UnderlyingType, location);
                 return canonical is not PointerType || canonical.Handle.AlignOf == canonical.Handle.SizeOf;
+            }
+
+            bool MatchesOpaqueValueStorage(TypedefNameDecl owner, RecordType record, string mapped)
+            {
+                var definition = record.Decl.Definition ?? record.Decl;
+                if (!definition.IsCompleteDefinition || record.Decl.Handle.Kind != CXCursorKind.CXCursor_StructDecl ||
+                    !record.Handle.IsPODType || !IsExcludedRecord(record.Decl) ||
+                    !projectionTypeRemaps.TryGetValue(record.Decl.Name + "*", out string provider) || provider != owner.Name)
+                    return false;
+                var fields = definition.CursorChildren.OfType<FieldDecl>().ToArray();
+                if (fields.Length != 1 || fields[0].IsBitField || fields[0].Handle.OffsetOfField != 0 ||
+                    !IsEnumStorage(fields[0].Type.CanonicalType.Kind) ||
+                    GetManagedType(fields[0].Type, location) != mapped ||
+                    record.Handle.SizeOf != fields[0].Type.Handle.SizeOf ||
+                    record.Handle.AlignOf != fields[0].Type.Handle.AlignOf)
+                    return false;
+                return MatchesStorage(fields[0].Type, SyntaxFactory.ParseTypeName(mapped));
             }
         }
 
