@@ -10,37 +10,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  #pragma once
  #include <winapifamily.h>
  
-@@ -195,11 +197,29 @@
- 
- 
- DECLARE_HANDLE(HBM);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HBM HBM;
-+#endif
- DECLARE_HANDLE(HDEV);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDEV HDEV;
-+#endif
- DECLARE_HANDLE(HSURF);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HSURF HSURF;
-+#endif
- DECLARE_HANDLE(DHSURF);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef DHSURF DHSURF;
-+#endif
- DECLARE_HANDLE(DHPDEV);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef DHPDEV DHPDEV;
-+#endif
- DECLARE_HANDLE(HDRVOBJ);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDRVOBJ HDRVOBJ;
-+#endif
- 
- #define LTOFX(x)            ((x)<<4)
- 
-@@ -1747,22 +1767,26 @@
+@@ -1747,22 +1749,26 @@
   * BRUSHOBJ callbacks
   */
  
@@ -67,7 +37,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HANDLE APIENTRY BRUSHOBJ_hGetColorTransform(
      BRUSHOBJ *pbo
-@@ -1802,6 +1826,7 @@
+@@ -1802,6 +1808,7 @@
      RECTL       arcl[1];
  } ENUMRECTS;
  
@@ -75,7 +45,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY CLIPOBJ_cEnumStart(
      CLIPOBJ *pco,
-@@ -1811,6 +1836,7 @@
+@@ -1811,6 +1818,7 @@
      __in_data_source(USER_MODE) ULONG    cLimit
      );
  
@@ -83,7 +53,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY CLIPOBJ_bEnum(
      CLIPOBJ *pco,
-@@ -1818,6 +1844,7 @@
+@@ -1818,6 +1826,7 @@
      ULONG   *pul
      );
  
@@ -91,7 +61,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  PATHOBJ* APIENTRY CLIPOBJ_ppoGetPath(
      CLIPOBJ* pco
      );
-@@ -1932,17 +1959,20 @@
+@@ -1932,17 +1941,20 @@
      ULONG   cjMaxGlyph32;
  } FONTINFO, *PFONTINFO;
  
@@ -112,7 +82,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ULONG APIENTRY FONTOBJ_cGetGlyphs(
      FONTOBJ *pfo,
      __in_data_source(USER_MODE) ULONG    iMode,
-@@ -1956,29 +1986,35 @@
+@@ -1956,29 +1968,35 @@
      FONTOBJ *pfo);
  #endif // (NTDDI_VERSION <= NTDDI_WINXP)
  
@@ -148,7 +118,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  LPWSTR APIENTRY FONTOBJ_pwszFontFilePaths (
      FONTOBJ *pfo,
      ULONG   *pcwc
-@@ -1988,6 +2024,7 @@
+@@ -1988,6 +2006,7 @@
  
  #define FO_ATTR_MODE_ROTATE         1
  
@@ -156,7 +126,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  PFD_GLYPHATTR APIENTRY FONTOBJ_pQueryGlyphAttrs(
      FONTOBJ       *pfo,
      __in_data_source(USER_MODE) ULONG          iMode
-@@ -2003,6 +2040,7 @@
+@@ -2003,6 +2022,7 @@
  #define PAL_BGR           0x00000008
  #define PAL_CMYK          0x00000010
  
@@ -164,7 +134,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ULONG APIENTRY PALOBJ_cGetColors(
      PALOBJ *ppalo,
      ULONG   iStart,
-@@ -2055,17 +2093,20 @@
+@@ -2055,17 +2075,20 @@
      RUN     arun[1];
  } CLIPLINE, *PCLIPLINE;
  
@@ -185,7 +155,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY PATHOBJ_vEnumStartClipLines(
      PATHOBJ   *ppo,
-@@ -2074,6 +2115,7 @@
+@@ -2074,6 +2097,7 @@
      LINEATTRS *pla
      );
  
@@ -193,7 +163,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY PATHOBJ_bEnumClipLines(
      PATHOBJ  *ppo,
-@@ -2081,12 +2123,14 @@
+@@ -2081,12 +2105,14 @@
      CLIPLINE *pcl
      );
  
@@ -208,7 +178,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY PATHOBJ_bPolyLineTo(
      _In_ PATHOBJ      *ppo,
-@@ -2094,6 +2138,7 @@
+@@ -2094,6 +2120,7 @@
      _In_ ULONG         cptfx
      );
  
@@ -216,7 +186,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY PATHOBJ_bPolyBezierTo(
      _In_ PATHOBJ   *ppo,
-@@ -2101,11 +2146,13 @@
+@@ -2101,11 +2128,13 @@
      _In_ ULONG      cptfx
      );
  
@@ -230,7 +200,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY PATHOBJ_vGetBounds(
      PATHOBJ *ppo,
-@@ -2116,11 +2163,13 @@
+@@ -2116,11 +2145,13 @@
   * STROBJ callbacks
   */
  
@@ -244,7 +214,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY STROBJ_bEnum(
      STROBJ    *pstro,
-@@ -2128,6 +2177,7 @@
+@@ -2128,6 +2159,7 @@
      PGLYPHPOS *ppgpos
      );
  
@@ -252,7 +222,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY STROBJ_bEnumPositionsOnly(
      STROBJ    *pstro,
-@@ -2135,21 +2185,25 @@
+@@ -2135,21 +2167,25 @@
      PGLYPHPOS *ppgpos
      );
  
@@ -278,7 +248,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY STROBJ_bGetAdvanceWidths(
      STROBJ   *pso,
-@@ -2227,12 +2281,14 @@
+@@ -2227,12 +2263,14 @@
  #define XF_LTOFX        2L
  #define XF_INV_FXTOL    3L
  
@@ -293,7 +263,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY XFORMOBJ_bApplyXform(
      XFORMOBJ *pxo,
-@@ -2265,17 +2321,20 @@
+@@ -2265,17 +2303,20 @@
  #define XO_SRCBITFIELDS  4
  #define XO_DESTBITFIELDS 5
  
@@ -314,7 +284,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY XLATEOBJ_cGetPalette(
      XLATEOBJ *pxlo,
-@@ -2284,6 +2343,7 @@
+@@ -2284,6 +2325,7 @@
      ULONG    *pPal
      );
  
@@ -322,7 +292,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HANDLE APIENTRY XLATEOBJ_hGetColorTransform(
      XLATEOBJ *pxlo
-@@ -2300,9 +2360,11 @@
+@@ -2300,9 +2342,11 @@
  
  #else // !USERMODE_DRIVER
  
@@ -334,7 +304,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY EngGetLastError();
  
-@@ -2335,6 +2397,7 @@
+@@ -2335,6 +2379,7 @@
  #define HOOK_FLAGS                      0x0003b5ef
  #endif
  
@@ -342,7 +312,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HBITMAP APIENTRY EngCreateBitmap(
      SIZEL sizl,
-@@ -2344,6 +2407,7 @@
+@@ -2344,6 +2389,7 @@
      __in_data_source(USER_MODE) PVOID pvBits
      );
  
@@ -350,7 +320,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HSURF APIENTRY EngCreateDeviceSurface(
      __in_data_source(USER_MODE) DHSURF dhsurf,
-@@ -2351,6 +2415,7 @@
+@@ -2351,6 +2397,7 @@
      ULONG iFormatCompat
      );
  
@@ -358,7 +328,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HBITMAP APIENTRY EngCreateDeviceBitmap(
      __in_data_source(USER_MODE) DHSURF dhsurf,
-@@ -2367,21 +2432,25 @@
+@@ -2367,21 +2414,25 @@
      );
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
@@ -384,7 +354,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngEraseSurface(
      SURFOBJ *pso,
-@@ -2389,6 +2458,7 @@
+@@ -2389,6 +2440,7 @@
      __in_data_source(USER_MODE) ULONG    iColor
      );
  
@@ -392,7 +362,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngAssociateSurface(
      HSURF hsurf,
-@@ -2403,6 +2473,7 @@
+@@ -2403,6 +2455,7 @@
  #define MS_REUSEDDEVICEBITMAP 0x0008
  #endif // (NTDDI_VERSION >= NTDDI_WIN10_RS2)
  
@@ -400,7 +370,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngModifySurface(
      HSURF   hsurf,
-@@ -2415,11 +2486,13 @@
+@@ -2415,11 +2468,13 @@
      VOID*   pvReserved
      );
  
@@ -414,7 +384,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngCheckAbort(
      SURFOBJ *pso
-@@ -2429,9 +2502,11 @@
+@@ -2429,9 +2484,11 @@
   * Engine callbacks - Paths
   */
  
@@ -426,7 +396,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngDeletePath(
      PATHOBJ *ppo
-@@ -2441,6 +2516,7 @@
+@@ -2441,6 +2498,7 @@
   * Engine callbacks - Palettes
   */
  
@@ -434,7 +404,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HPALETTE APIENTRY EngCreatePalette(
      __in_data_source(USER_MODE) ULONG  iMode,
-@@ -2451,6 +2527,7 @@
+@@ -2451,6 +2509,7 @@
      __in_data_source(USER_MODE) FLONG  flBlue
      );
  
@@ -442,7 +412,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY EngQueryPalette(
      HPALETTE    hpal,
-@@ -2458,6 +2535,7 @@
+@@ -2458,6 +2517,7 @@
      ULONG       cColors,
      ULONG      *pulColors);
  
@@ -450,7 +420,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngDeletePalette(
      __in_data_source(USER_MODE) HPALETTE hpal
-@@ -2467,9 +2545,11 @@
+@@ -2467,9 +2527,11 @@
   * Engine callbacks - Clipping
   */
  
@@ -462,7 +432,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngDeleteClip(
      _In_opt_ CLIPOBJ *pco
-@@ -3391,6 +3471,7 @@
+@@ -3391,6 +3453,7 @@
  #define WO_RGN_SPRITE           0x0200
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -470,7 +440,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  WNDOBJ * APIENTRY EngCreateWnd(
      SURFOBJ         *pso,
-@@ -3400,11 +3481,13 @@
+@@ -3400,11 +3463,13 @@
      int              iPixelFormat
      );
  
@@ -484,7 +454,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY WNDOBJ_cEnumStart(
      WNDOBJ  *pwo,
-@@ -3413,6 +3496,7 @@
+@@ -3413,6 +3478,7 @@
      ULONG    cLimit
      );
  
@@ -492,7 +462,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY WNDOBJ_bEnum(
      WNDOBJ  *pwo,
-@@ -3420,6 +3504,7 @@
+@@ -3420,6 +3486,7 @@
      ULONG   *pul
      );
  
@@ -500,7 +470,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY WNDOBJ_vSetConsumer(
      WNDOBJ  *pwo,
-@@ -3450,6 +3535,7 @@
+@@ -3450,6 +3517,7 @@
  #define EHN_RESTORED        0
  #define EHN_ERROR           1
  
@@ -508,7 +478,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY EngHangNotification(
      HDEV hdev,
-@@ -3461,6 +3547,7 @@
+@@ -3461,6 +3529,7 @@
   * Engine callbacks - tracking driver managed resources
   */
  
@@ -516,7 +486,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HDRVOBJ APIENTRY EngCreateDriverObj(
      PVOID pvObj,
-@@ -3468,6 +3555,7 @@
+@@ -3468,6 +3537,7 @@
      HDEV hdev
      );
  
@@ -524,7 +494,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngDeleteDriverObj(
      HDRVOBJ hdo,
-@@ -3475,11 +3563,13 @@
+@@ -3475,11 +3545,13 @@
      BOOL bLocked
      );
  
@@ -538,7 +508,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngUnlockDriverObj(
      HDRVOBJ hdo
-@@ -3489,6 +3579,7 @@
+@@ -3489,6 +3561,7 @@
   * Engine callback - return current process handle.
   */
  
@@ -546,7 +516,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HANDLE APIENTRY EngGetProcessHandle();
  
-@@ -3496,6 +3587,7 @@
+@@ -3496,6 +3569,7 @@
   * Engine callback - return current thread id
   */
  
@@ -554,7 +524,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HANDLE APIENTRY EngGetCurrentThreadId();
  
-@@ -3503,6 +3595,7 @@
+@@ -3503,6 +3577,7 @@
   * Engine callback - return current process id
   */
  
@@ -562,7 +532,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  HANDLE APIENTRY EngGetCurrentProcessId();
  
-@@ -3536,6 +3629,7 @@
+@@ -3536,6 +3611,7 @@
   * Function prototypes - Engine Simulations
   */
  
@@ -570,7 +540,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngBitBlt(
      _In_ SURFOBJ  *psoTrg,
-@@ -3551,6 +3645,7 @@
+@@ -3551,6 +3627,7 @@
      __in_data_source(USER_MODE) ROP4      rop4
      );
  
@@ -578,7 +548,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngLineTo(
      SURFOBJ   *pso,
-@@ -3564,6 +3659,7 @@
+@@ -3564,6 +3641,7 @@
      __in_data_source(USER_MODE) MIX        mix
      );
  
@@ -586,7 +556,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngStretchBlt(
      SURFOBJ         *psoDest,
-@@ -3579,6 +3675,7 @@
+@@ -3579,6 +3657,7 @@
      __in_data_source(USER_MODE) ULONG            iMode
      );
  
@@ -594,7 +564,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngStretchBltROP(
      SURFOBJ         *psoDest,
-@@ -3596,6 +3693,7 @@
+@@ -3596,6 +3675,7 @@
      __in_data_source(USER_MODE) DWORD            rop4
      );
  
@@ -602,7 +572,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngAlphaBlend(
      SURFOBJ       *psoDest,
-@@ -3607,6 +3705,7 @@
+@@ -3607,6 +3687,7 @@
      BLENDOBJ      *pBlendObj
      );
  
@@ -610,7 +580,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGradientFill(
      SURFOBJ         *psoDest,
-@@ -3621,6 +3720,7 @@
+@@ -3621,6 +3702,7 @@
      __in_data_source(USER_MODE) ULONG            ulMode
      );
  
@@ -618,7 +588,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngTransparentBlt(
      _In_ SURFOBJ    *psoDst,
-@@ -3633,6 +3733,7 @@
+@@ -3633,6 +3715,7 @@
      __in_data_source(USER_MODE) ULONG      bCalledFromBitBlt
      ); 
  
@@ -626,7 +596,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngTextOut(
      SURFOBJ  *pso,
-@@ -3647,6 +3748,7 @@
+@@ -3647,6 +3730,7 @@
      __in_data_source(USER_MODE) MIX       mix
      );
  
@@ -634,7 +604,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngStrokePath(
      SURFOBJ   *pso,
-@@ -3659,6 +3761,7 @@
+@@ -3659,6 +3743,7 @@
      __in_data_source(USER_MODE) MIX        mix
      );
  
@@ -642,7 +612,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngFillPath(
      SURFOBJ  *pso,
-@@ -3670,6 +3773,7 @@
+@@ -3670,6 +3755,7 @@
      __in_data_source(USER_MODE) FLONG     flOptions
      );
  
@@ -650,7 +620,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngStrokeAndFillPath(
      SURFOBJ   *pso,
-@@ -3684,6 +3788,7 @@
+@@ -3684,6 +3770,7 @@
      __in_data_source(USER_MODE) FLONG      flOptions
      );
  
@@ -658,7 +628,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngPaint(
      SURFOBJ  *pso,
-@@ -3693,6 +3798,7 @@
+@@ -3693,6 +3780,7 @@
      __in_data_source(USER_MODE) MIX       mix
      );
  
@@ -666,7 +636,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngCopyBits(
      SURFOBJ  *psoDest,
-@@ -3703,6 +3809,7 @@
+@@ -3703,6 +3791,7 @@
      __in_data_source(USER_MODE) POINTL   *pptlSrc
      );
  
@@ -674,7 +644,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY EngSetPointerShape(
      SURFOBJ  *pso,
-@@ -3717,6 +3824,7 @@
+@@ -3717,6 +3806,7 @@
      FLONG     fl
      );
  
@@ -682,7 +652,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngMovePointer(
      SURFOBJ  *pso,
-@@ -3725,6 +3833,7 @@
+@@ -3725,6 +3815,7 @@
      RECTL    *prcl
      );
  
@@ -690,7 +660,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngPlgBlt(
      SURFOBJ         *psoTrg,
-@@ -3740,6 +3849,7 @@
+@@ -3740,6 +3831,7 @@
      __in_data_source(USER_MODE) ULONG            iMode
      );
  
@@ -698,7 +668,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  ULONG APIENTRY EngDitherColor(
      HDEV   hdev,
-@@ -3775,6 +3885,7 @@
+@@ -3775,6 +3867,7 @@
  #define ECS_TEARDOWN    0x0001
  #define ECS_REDRAW      0x0002
  
@@ -706,7 +676,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngControlSprites(
      WNDOBJ  *pwo,
-@@ -3786,6 +3897,7 @@
+@@ -3786,6 +3879,7 @@
  // Halftone releated APIs
  //
  
@@ -714,7 +684,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  LONG APIENTRY HT_ComputeRGBGammaTable(
      _In_    USHORT  GammaTableEntries,
      _In_    USHORT  GammaTableType,
-@@ -3795,6 +3907,7 @@
+@@ -3795,6 +3889,7 @@
      _Out_writes_bytes_(GammaTableEntries * 3)   LPBYTE  pGammaTable
      );
  
@@ -722,7 +692,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  LONG APIENTRY HT_Get8BPPFormatPalette(
      _Out_opt_   LPPALETTEENTRY  pPaletteEntry,
      _In_        USHORT          RedGamma,
-@@ -3802,6 +3915,7 @@
+@@ -3802,6 +3897,7 @@
      _In_        USHORT          BlueGamma
      );
  
@@ -730,7 +700,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  LONG APIENTRY HT_Get8BPPMaskPalette(
      _Out_opt_   LPPALETTEENTRY  pPaletteEntry,
      _In_        BOOL            Use8BPPMaskPal,
-@@ -3829,6 +3943,7 @@
+@@ -3829,6 +3925,7 @@
      PDEVHTINFO  pAdjHTInfo;
      } DEVHTADJDATA, *PDEVHTADJDATA;
  
@@ -738,7 +708,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  LONG
  APIENTRY
  HTUI_DeviceColorAdjustment(
-@@ -3841,6 +3956,7 @@
+@@ -3841,6 +3938,7 @@
  // General support APIS
  //
  
@@ -746,7 +716,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  __analysis_noreturn
  ENGAPI
  VOID APIENTRY EngDebugBreak(
-@@ -3858,6 +3974,7 @@
+@@ -3858,6 +3956,7 @@
      );
  #endif // (NTDDI_VERSION >= NTDDI_WINXPSP2)
  
@@ -754,7 +724,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngDebugPrint(
      _In_z_              PCHAR StandardPrefix,
-@@ -3865,16 +3982,19 @@
+@@ -3865,16 +3964,19 @@
      _In_                va_list ap
      );
  
@@ -774,7 +744,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  __drv_preferredFunction("(see documentation)", "Obsolete, always returns false. ") 
  ENGAPI
  BOOL APIENTRY EngSetPointerTag(
-@@ -3908,6 +4028,7 @@
+@@ -3908,6 +4010,7 @@
  
  #else // !USERMODE_DRIVER
  
@@ -782,7 +752,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  _Post_writable_byte_size_(MemSize)
  PVOID APIENTRY EngAllocMem(
-@@ -3917,10 +4038,11 @@
+@@ -3917,10 +4020,11 @@
      );
  
  ENGAPI
@@ -795,7 +765,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  _Post_writable_byte_size_(cj)
  PVOID APIENTRY EngAllocUserMem(
-@@ -3929,10 +4051,11 @@
+@@ -3929,10 +4033,11 @@
      );
  
  ENGAPI
@@ -808,7 +778,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  _Post_writable_byte_size_(cj)
  PVOID APIENTRY EngAllocPrivateUserMem(
-@@ -3942,7 +4065,7 @@
+@@ -3942,7 +4047,7 @@
      );
  
  ENGAPI
@@ -817,7 +787,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  EngFreePrivateUserMem(
      _In_                PDD_SURFACE_LOCAL psl,
      _In_                PVOID pv
-@@ -3958,6 +4081,7 @@
+@@ -3958,6 +4063,7 @@
      );
  #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  
@@ -825,7 +795,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  int APIENTRY EngMulDiv(
      _In_                int a,
-@@ -3972,6 +4096,7 @@
+@@ -3972,6 +4078,7 @@
  // User mode memory Operations
  //
  
@@ -833,7 +803,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngProbeForRead(
      _In_reads_bytes_(Length)     PVOID Address,
-@@ -3983,6 +4108,7 @@
+@@ -3983,6 +4090,7 @@
      _In_                    ULONG Alignment
      );
  
@@ -841,7 +811,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngProbeForReadAndWrite(
      _Inout_updates_bytes_(Length)  PVOID Address,
-@@ -3994,17 +4120,20 @@
+@@ -3994,17 +4102,20 @@
      _In_                    ULONG Alignment
      );
  
@@ -862,7 +832,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  DWORD APIENTRY EngDeviceIoControl(
      _In_                                HANDLE hDevice,
-@@ -4028,11 +4157,13 @@
+@@ -4028,11 +4139,13 @@
  
  #else // !USERMODE_DRIVER
  
@@ -876,7 +846,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  PVOID APIENTRY EngFindImageProcAddress(
      HANDLE hModule,
-@@ -4040,10 +4171,11 @@
+@@ -4040,10 +4153,11 @@
      );
  
  ENGAPI
@@ -889,7 +859,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  PVOID APIENTRY EngMapModule(
      _In_ HANDLE h,
-@@ -4057,11 +4189,13 @@
+@@ -4057,11 +4171,13 @@
  // callback for extra PDEV information
  //
  
@@ -903,7 +873,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  LPWSTR APIENTRY EngGetDriverName(
      _In_                    HDEV hdev
-@@ -4074,6 +4208,7 @@
+@@ -4074,6 +4190,7 @@
      ULONG   ulIdentifier;
  } TYPE1_FONT;
  
@@ -911,7 +881,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetType1FontList(
      _In_                            HDEV            hdev,
-@@ -4088,11 +4223,13 @@
+@@ -4088,11 +4205,13 @@
  // Manipulating resource sections
  //
  
@@ -925,7 +895,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  PVOID APIENTRY EngFindResource(
      _In_                    HANDLE h,
-@@ -4101,11 +4238,13 @@
+@@ -4101,11 +4220,13 @@
      _Out_                   PULONG pulSize
      );
  
@@ -939,7 +909,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL
  APIENTRY
-@@ -4113,6 +4252,7 @@
+@@ -4113,6 +4234,7 @@
      _In_                    LPWSTR  pwszFileName
      );
  
@@ -947,7 +917,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  _Success_(return != 0)
  _When_(cjSize != 0, _At_(return, _Out_writes_bytes_(cjSize)))
-@@ -4124,6 +4264,7 @@
+@@ -4124,6 +4246,7 @@
      _Out_    ULONG_PTR  *piFile
      );
  
@@ -955,7 +925,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL
  APIENTRY
-@@ -4135,12 +4276,14 @@
+@@ -4135,12 +4258,14 @@
  // FontFile Callbacks
  //
  
@@ -970,7 +940,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  __drv_preferredFunction("EngMapFontFileFD", "Obsolete") 
  ENGAPI
  BOOL APIENTRY EngMapFontFile(
-@@ -4149,11 +4292,13 @@
+@@ -4149,11 +4274,13 @@
      _Out_                           ULONG  *pcjBuf
      );
  
@@ -984,7 +954,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngMapFontFileFD(
      _In_                            ULONG_PTR  iFile,
-@@ -4161,6 +4306,7 @@
+@@ -4161,6 +4288,7 @@
      _Out_                           ULONG  *pcjBuf
      );
  
@@ -992,14 +962,11 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngLpkInstalled();
  
-@@ -4169,27 +4315,40 @@
+@@ -4169,27 +4297,35 @@
  //
  
  DECLARE_HANDLE(HSEMAPHORE);
 -
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HSEMAPHORE HSEMAPHORE;
-+#endif
 +
 +#if (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus))
 +_Win32_RAIIFree_(EngDeleteSemaphore, -1, 0)
@@ -1028,13 +995,11 @@ diff --git a/um/winddi.h b/um/winddi.h
      _In_                    HSEMAPHORE hsem
      );
  
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+#endif
 +
  #if (NTDDI_VERSION >= NTDDI_LONGHORN)
  ENGAPI
  VOID APIENTRY EngAcquireSemaphoreShared(
-@@ -4209,11 +4368,13 @@
+@@ -4209,11 +4345,13 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -1048,17 +1013,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngIsSemaphoreOwnedByCurrentThread(
      _In_                    HSEMAPHORE hsem
-@@ -4229,6 +4390,9 @@
- 
- #if (NTDDI_VERSION >= NTDDI_LONGHORN)
- DECLARE_HANDLE(HFASTMUTEX);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HFASTMUTEX HFASTMUTEX;
-+#endif
- 
- ENGAPI
- HFASTMUTEX APIENTRY EngCreateFastMutex();
-@@ -4260,16 +4424,19 @@
+@@ -4260,16 +4398,19 @@
      LONG lCount;
  } ENGSAFESEMAPHORE;
  
@@ -1078,7 +1033,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngMultiByteToUnicodeN(
      _Out_writes_bytes_to_(MaxBytesInUnicodeString, *BytesInUnicodeString)   LPWSTR UnicodeString,
-@@ -4279,6 +4446,7 @@
+@@ -4279,6 +4420,7 @@
      _In_                                                                ULONG BytesInMultiByteString
      );
  
@@ -1086,7 +1041,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngUnicodeToMultiByteN(
      _Out_writes_bytes_to_(MaxBytesInMultiByteString, *BytesInMultiByteString)   PCHAR MultiByteString,
-@@ -4302,6 +4470,7 @@
+@@ -4302,6 +4444,7 @@
  
  #else // !USERMODE_DRIVER
  
@@ -1094,7 +1049,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetPrinterDriver(
      _In_                    HANDLE  hPrinter,
-@@ -4312,6 +4481,7 @@
+@@ -4312,6 +4455,7 @@
      _Out_                   DWORD  *pcbNeeded
      );
  
@@ -1102,7 +1057,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  DWORD APIENTRY EngGetPrinterData(
      _In_                    HANDLE   hPrinter,
-@@ -4322,6 +4492,7 @@
+@@ -4322,6 +4466,7 @@
      _Out_                   LPDWORD  pcbNeeded
      );
  
@@ -1110,7 +1065,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  DWORD APIENTRY EngSetPrinterData(
      _In_                        HANDLE   hPrinter,
-@@ -4331,6 +4502,7 @@
+@@ -4331,6 +4476,7 @@
      _In_                        DWORD    cjPrinterData
      );
  
@@ -1118,7 +1073,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetForm(
      _In_                    HANDLE  hPrinter,
-@@ -4341,6 +4513,7 @@
+@@ -4341,6 +4487,7 @@
      _Out_                   LPDWORD pcbNeeded
      );
  
@@ -1126,7 +1081,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngWritePrinter(
      _In_                    HANDLE  hPrinter,
-@@ -4349,6 +4522,7 @@
+@@ -4349,6 +4496,7 @@
      _Out_                   LPDWORD pcWritten
      );
  
@@ -1134,7 +1089,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngGetPrinter(
      _In_                    HANDLE  hPrinter,
-@@ -4358,6 +4532,7 @@
+@@ -4358,6 +4506,7 @@
      _Out_                   LPDWORD pcbNeeded
      );
  
@@ -1142,7 +1097,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngEnumForms(
      _In_                    HANDLE  hPrinter,
-@@ -4379,36 +4554,44 @@
+@@ -4379,36 +4528,44 @@
          ULONG ul2;
      } FLOATOBJ, *PFLOATOBJ;
  
@@ -1208,7 +1163,7 @@ diff --git a/um/winddi.h b/um/winddi.h
      BOOL APIENTRY FLOATOBJ_LessThan(PFLOATOBJ,PFLOATOBJ);
  
  #else
-@@ -4472,6 +4655,7 @@
+@@ -4472,6 +4629,7 @@
      FLOATOBJ eDy;
  } FLOATOBJ_XFORM, *PFLOATOBJ_XFORM, FAR *LPFLOATOBJ_XFORM;
  
@@ -1216,7 +1171,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
      XFORMOBJ *pxo,
      FLOATOBJ_XFORM * pfxo
-@@ -4484,6 +4668,7 @@
+@@ -4484,6 +4642,7 @@
  
  typedef int (__cdecl *SORTCOMP)(const void *pv1, const void *pv2);
  
@@ -1224,7 +1179,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID APIENTRY EngSort(
      _Inout_updates_bytes_(c * cjElem)  PBYTE pjBuf,
-@@ -4503,11 +4688,13 @@
+@@ -4503,11 +4662,13 @@
      USHORT usWeekday;     // range [0..6] == [Sunday..Saturday]
  } ENG_TIME_FIELDS, *PENG_TIME_FIELDS;
  
@@ -1238,7 +1193,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return != 0)
  ENGAPI
  FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
-@@ -4516,6 +4703,7 @@
+@@ -4516,6 +4677,7 @@
      _In_                    INT cChars
      );
  
@@ -1246,7 +1201,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  INT APIENTRY EngMultiByteToWideChar(
      _In_                                    UINT CodePage,
-@@ -4525,6 +4713,7 @@
+@@ -4525,6 +4687,7 @@
      _In_                                    INT BytesInMultiByteString
      );
  
@@ -1254,7 +1209,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  INT APIENTRY EngWideCharToMultiByte(
      _In_                                    UINT CodePage,
-@@ -4534,23 +4723,27 @@
+@@ -4534,23 +4697,27 @@
      _In_                                    INT BytesInMultiByteString
      );
  
@@ -1282,7 +1237,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return)
  ENGAPI
  BOOL APIENTRY EngGetFileChangeTime(
-@@ -4558,6 +4751,7 @@
+@@ -4558,6 +4725,7 @@
      _Out_   LARGE_INTEGER   *pChangeTime
      );
  
@@ -1290,7 +1245,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return)
  ENGAPI
  BOOL APIENTRY EngGetFilePath(
-@@ -4575,7 +4769,7 @@
+@@ -4575,7 +4743,7 @@
      _Kernel_float_saved_
      _At_(*pBuffer, _Post_valid_ _Kernel_acquires_resource_(EngFloatState))) 
  _On_failure_(_Post_satisfies_(return == 0))          
@@ -1299,7 +1254,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ULONG
  #pragma warning(suppress: 6001 6101 28104) // Suppress PREfast warnings for not acquiring EngFloatState and filling out pBuffer
  EngSaveFloatingPointState (
-@@ -4594,7 +4788,7 @@
+@@ -4594,7 +4762,7 @@
  _Kernel_float_restored_
  _At_(*pBuffer, _Kernel_requires_resource_held_(EngFloatState)
                 _Kernel_releases_resource_(EngFloatState))
@@ -1308,7 +1263,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  BOOL
  #pragma warning(suppress: 28103) // Suppress PREfast warning for not releasing EngFloatState
  EngRestoreFloatingPointState (
-@@ -4616,7 +4810,7 @@
+@@ -4616,7 +4784,7 @@
      _At_(*pBuffer, _Post_valid_ _Kernel_acquires_resource_(EngFloatState))) 
  _On_failure_(_Post_satisfies_(return == 0))          
  ENGAPI
@@ -1317,7 +1272,7 @@ diff --git a/um/winddi.h b/um/winddi.h
      _At_(*pBuffer, _Kernel_requires_resource_not_held_(EngFloatState)) 
      _Out_writes_bytes_opt_(cjBufferSize) 
                  VOID    *pBuffer, 
-@@ -4629,7 +4823,7 @@
+@@ -4629,7 +4797,7 @@
  _At_(*pBuffer, _Kernel_requires_resource_held_(EngFloatState)
                 _Kernel_releases_resource_(EngFloatState))
  ENGAPI
@@ -1326,7 +1281,7 @@ diff --git a/um/winddi.h b/um/winddi.h
      _In_reads_(_Inexpressible_(statesize))  
      VOID *pBuffer 
      );
-@@ -4640,11 +4834,13 @@
+@@ -4640,11 +4808,13 @@
  // DirectDraw surface locking
  //
  
@@ -1340,7 +1295,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY EngUnlockDirectDrawSurface(
          _In_    PDD_SURFACE_LOCAL pSurface
-@@ -4660,21 +4856,25 @@
+@@ -4660,21 +4830,25 @@
  
  typedef struct _ENG_EVENT *PEVENT;
  
@@ -1366,7 +1321,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  PEVENT APIENTRY EngMapEvent(
      _In_        HDEV            hDev,
-@@ -4684,24 +4884,28 @@
+@@ -4684,24 +4858,28 @@
      _Reserved_  PVOID           Reserved3
      );
  
@@ -1395,7 +1350,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  LONG APIENTRY
  EngReadStateEvent (
-@@ -4732,6 +4936,7 @@
+@@ -4732,6 +4910,7 @@
  #endif // (NTDDI_VERSION >= NTDDI_LONGHORN)
  
  
@@ -1403,7 +1358,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  BOOL APIENTRY
  EngQuerySystemAttribute(
-@@ -4741,6 +4946,7 @@
+@@ -4741,6 +4920,7 @@
  #define ENG_FNT_CACHE_READ_FAULT    0x1
  #define ENG_FNT_CACHE_WRITE_FAULT   0x2
  
@@ -1411,7 +1366,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  _Success_(return != nullptr)
  ENGAPI
  _Post_writable_byte_size_(*pulSize)
-@@ -4755,11 +4961,13 @@
+@@ -4755,11 +4935,13 @@
      _In_  BOOL  DiscardContent);
  
 +_Win32_SupportedOS_WindowsXP_
@@ -1425,7 +1380,7 @@ diff --git a/um/winddi.h b/um/winddi.h
  ENGAPI
  VOID  APIENTRY  EngFntCacheFault(
      _In_    ULONG ulFastCheckSum, 
-@@ -4771,6 +4979,7 @@
+@@ -4771,6 +4953,7 @@
      QDA_ACCELERATION_LEVEL = 1
  } ENG_DEVICE_ATTRIBUTE;
  

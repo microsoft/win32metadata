@@ -9,17 +9,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
  #include <winapifamily.h>
  
  #pragma region Desktop Family
-@@ -2504,6 +2505,9 @@
- //
- 
- typedef PVOID LSA_HANDLE, *PLSA_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef LSA_HANDLE LSA_HANDLE;
-+#endif
- 
- // end_ntsecapi
- 
-@@ -2667,12 +2671,18 @@
+@@ -2667,12 +2668,18 @@
  #define TRUST_DIRECTION_OUTBOUND        0x00000002
  #define TRUST_DIRECTION_BIDIRECTIONAL   (TRUST_DIRECTION_INBOUND | TRUST_DIRECTION_OUTBOUND)
  
@@ -38,7 +28,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
  #endif
  
  #define TRUST_TYPE_AAD                  0x00000005 // Trust with Azure AD
-@@ -2682,6 +2692,8 @@
+@@ -2682,6 +2689,8 @@
  
  #define TRUST_ATTRIBUTE_NON_TRANSITIVE                0x00000001  // Disallow transitivity
  #define TRUST_ATTRIBUTE_UPLEVEL_ONLY                  0x00000002  // Trust link only valid for uplevel client
@@ -47,7 +37,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
  #if (_WIN32_WINNT == 0x0500)
  #define TRUST_ATTRIBUTE_TREE_PARENT     0x00400000  // Denotes that we are setting the trust
                                                      // to our parent in the org tree...
-@@ -2696,16 +2708,22 @@
+@@ -2696,16 +2705,22 @@
  
  #if (_WIN32_WINNT < 0x0502)
  #define TRUST_ATTRIBUTE_FILTER_SIDS        0x00000004  // Used to quarantine domains
@@ -70,7 +60,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
  #if (_WIN32_WINNT >= 0x0600)
  #define TRUST_ATTRIBUTE_TRUST_USES_RC4_ENCRYPTION     0x00000080  // MIT trust with RC4
  #define TRUST_ATTRIBUTE_TRUST_USES_AES_KEYS           0x00000100  // Use AES keys to encrypte KRB TGTs
-@@ -2771,6 +2789,8 @@
+@@ -2771,6 +2786,8 @@
  #define TRUST_AUTH_TYPE_CLEAR   2   // Cleartext password
  #define TRUST_AUTH_TYPE_VERSION 3   // Cleartext password version number
  
@@ -79,7 +69,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
  typedef struct _LSA_AUTH_INFORMATION {
  
      LARGE_INTEGER LastUpdateTime;
-@@ -3118,7 +3138,7 @@
+@@ -3118,7 +3135,7 @@
  NTAPI
  LsaQuerySecurityObject(
      _In_ LSA_HANDLE ObjectHandle,
@@ -88,7 +78,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      _Out_ PSECURITY_DESCRIPTOR *SecurityDescriptor
      );
  
-@@ -3225,7 +3245,7 @@
+@@ -3225,7 +3242,7 @@
      _In_opt_ PLSA_UNICODE_STRING SystemName,
      _In_ PLSA_OBJECT_ATTRIBUTES ObjectAttributes,
      _In_ ACCESS_MASK DesiredAccess,
@@ -97,7 +87,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  // end_ntsecapi
-@@ -3236,7 +3256,7 @@
+@@ -3236,7 +3253,7 @@
      _In_opt_ PLSA_UNICODE_STRING SystemName,
      _In_ PLSA_OBJECT_ATTRIBUTES ObjectAttributes,
      _In_ ACCESS_MASK DesiredAccess,
@@ -106,7 +96,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  ///////////////////////////////////////////////////////////////////////////////
-@@ -3365,7 +3385,7 @@
+@@ -3365,7 +3382,7 @@
  
  NTSTATUS
  NTAPI
@@ -115,7 +105,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      _In_opt_ PLSA_UNICODE_STRING SystemName,
      _Outptr_result_buffer_(*CAPIDCount) PSID **CAPIDs,
      _Out_ PULONG CAPIDCount
-@@ -3373,7 +3393,7 @@
+@@ -3373,7 +3390,7 @@
  
  NTSTATUS
  NTAPI
@@ -124,7 +114,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      _In_reads_opt_(CAPIDCount) PSID *CAPIDs,
      _In_ ULONG CAPIDCount,
      _Outptr_result_buffer_(*CAPCount) PCENTRAL_ACCESS_POLICY *CAPs,
-@@ -3446,7 +3466,7 @@
+@@ -3446,7 +3463,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PSID AccountSid,
      _In_ ACCESS_MASK DesiredAccess,
@@ -133,7 +123,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  NTSTATUS
-@@ -3465,7 +3485,7 @@
+@@ -3465,7 +3482,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PLSA_TRUST_INFORMATION TrustedDomainInformation,
      _In_ ACCESS_MASK DesiredAccess,
@@ -142,7 +132,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  // begin_ntsecapi
-@@ -3546,7 +3566,7 @@
+@@ -3546,7 +3563,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PLSA_UNICODE_STRING SecretName,
      _In_ ACCESS_MASK DesiredAccess,
@@ -151,7 +141,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  //
-@@ -3570,7 +3590,7 @@
+@@ -3570,7 +3587,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PSID AccountSid,
      _In_ ACCESS_MASK DesiredAccess,
@@ -160,7 +150,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  NTSTATUS
-@@ -3683,7 +3703,7 @@
+@@ -3683,7 +3700,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PSID TrustedDomainSid,
      _In_ ACCESS_MASK DesiredAccess,
@@ -169,7 +159,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  NTSTATUS
-@@ -3714,7 +3734,7 @@
+@@ -3714,7 +3731,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PLSA_UNICODE_STRING SecretName,
      _In_ ACCESS_MASK DesiredAccess,
@@ -178,7 +168,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  NTSTATUS
-@@ -3744,7 +3764,7 @@
+@@ -3744,7 +3761,7 @@
  
  NTSTATUS
  NTAPI
@@ -187,7 +177,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PLSA_UNICODE_STRING Name,
      _Out_ PLUID Value
-@@ -3868,7 +3888,7 @@
+@@ -3868,7 +3885,7 @@
      _In_ LSA_HANDLE PolicyHandle,
      _In_ PLSA_UNICODE_STRING TrustedDomainName,
      _In_ ACCESS_MASK DesiredAccess,
@@ -196,7 +186,7 @@ diff --git a/um/ntlsa.h b/um/ntlsa.h
      );
  
  
-@@ -3932,7 +3952,7 @@
+@@ -3932,7 +3949,7 @@
      _In_ PTRUSTED_DOMAIN_INFORMATION_EX TrustedDomainInformation,
      _In_ PTRUSTED_DOMAIN_AUTH_INFORMATION AuthenticationInformation,
      _In_ ACCESS_MASK DesiredAccess,

@@ -19,14 +19,12 @@ index f072bc93..b9c518f1 100644
  
  import "oaidl.idl";
  import "ocidl.idl";
-@@ -311,23 +316,35 @@
+@@ -311,23 +316,33 @@
  cpp_quote("EXTERN_C const CLSID CLSID_Antimalware;")
  cpp_quote("")
  cpp_quote("DECLARE_HANDLE(HAMSICONTEXT);")
-+cpp_quote("/* Win32Metadata: type ::HAMSICONTEXT => NativeTypedef */")
  cpp_quote("DECLARE_HANDLE(HAMSISESSION);")
 -cpp_quote("")
-+cpp_quote("/* Win32Metadata: type ::HAMSISESSION => NativeTypedef */")
 +cpp_quote("")
 +cpp_quote("")
 +cpp_quote("/* Win32Metadata: function ::AmsiInitialize => SupportedOSPlatform(\"windows10.0.10240\") */")
@@ -56,7 +54,7 @@ index f072bc93..b9c518f1 100644
  cpp_quote("STDAPI AmsiScanBuffer(")
  cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
  cpp_quote("    _In_reads_bytes_(length) PVOID buffer,")
-@@ -343,6 +360,8 @@
+@@ -343,6 +358,8 @@
  cpp_quote("    _In_opt_  LPCWSTR contentName,")
  cpp_quote("    _Out_ AMSI_RESULT* result);")
  cpp_quote("")

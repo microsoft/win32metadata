@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sdkPackageVersion": "10.0.28000.2705",
   "sourceStage": "post-midl",
-  "sourceGitTree": "4dd741bb691ea30f83ac09d56c836201b63dd442",
+  "sourceGitTree": "114b05b4db93918a563294f2be0981d93766aaa4",
   "headers": [
     {
       "path": "um\\winnt.h",
@@ -6983,7 +6983,7 @@
       },
       {
         "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "CCF58C367C6CA06844126D14FE6D0C478C26E5DF1191793082BC3358AFCAF959"
+        "sourceSha256": "700F626B86D825F32A5A76CA0A14011B57EABCB4DDFCA2468A0B5F4317B84A14"
       },
       {
         "path": "um\\activdbg.idl",
@@ -9022,30 +9022,9 @@
     "shared\\rpcnterr.h.patch",
     "shared\\ntiologc.h.patch",
     "um\\activdbg.idl.patch",
-    "shared\\fltUserStructures.h.patch",
-    "shared\\ifdef.h.patch",
     "shared\\minwindef.h.patch",
     "um\\Iads.h.patch",
     "um\\alljoyn_c\\AboutDataListener.h.patch",
-    "shared\\mswsockdef.h.patch",
-    "shared\\usbioctl.h.patch",
-    "um\\appnotify.h.patch",
-    "um\\computedefs.h.patch",
-    "um\\ddraw.h.patch",
-    "um\\ddrawint.h.patch",
-    "um\\devquery.h.patch",
-    "um\\esent.h.patch",
-    "um\\HttpExt.h.patch",
-    "um\\imessage.h.patch",
-    "um\\packagevirtualizationcontext.h.patch",
-    "um\\tspi.h.patch",
-    "um\\wincontypes.h.patch",
-    "um\\WinHvPlatformDefs.h.patch",
-    "um\\kbd.h.patch",
-    "um\\prsht.idl.patch",
-    "um\\sapi.idl.patch",
-    "um\\sapiddk.idl.patch",
-    "um\\windows.ui.xaml.hosting.referencetracker.idl.patch",
-    "winrt\\hstring.idl.patch"
+    "um\\kbd.h.patch"
   ]
 }

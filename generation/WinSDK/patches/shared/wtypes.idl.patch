@@ -2,16 +2,7 @@ diff --git a/shared/wtypes.idl b/shared/wtypes.idl
 index 7f4a102f3..6cc54ff1e 100644
 --- a/shared/wtypes.idl
 +++ b/shared/wtypes.idl
-@@ -153,7 +153,8 @@
- DECLARE_HANDLE(HKL);
- DECLARE_HANDLE(HGDIOBJ);
- 
- typedef HANDLE HDWP;
-+cpp_quote("/* Win32Metadata: type ::HDWP => NativeTypedef */")
- 
- cpp_quote("#ifndef _HFILE_DEFINED")
- cpp_quote("#define _HFILE_DEFINED")
-@@ -314,6 +315,9 @@ cpp_quote("#define _ROTFLAGS_DEFINED")
+@@ -314,6 +314,9 @@ cpp_quote("#define _ROTFLAGS_DEFINED")
  cpp_quote("#define ROTFLAGS_REGISTRATIONKEEPSALIVE 0x1")
  cpp_quote("#define ROTFLAGS_ALLOWANYCLIENT 0x2")
  cpp_quote("#endif // !_ROTFLAGS_DEFINED")
@@ -21,7 +12,7 @@ index 7f4a102f3..6cc54ff1e 100644
  // Maximum size of comparison buffer for IROTData::GetComparisonData
  cpp_quote("#ifndef _ROT_COMPARE_MAX_DEFINED")
  cpp_quote("#define _ROT_COMPARE_MAX_DEFINED")
-@@ -334,11 +338,17 @@ typedef enum tagDVASPECT
+@@ -334,11 +337,17 @@ typedef enum tagDVASPECT
      DVASPECT_ICON = 4,
      DVASPECT_DOCPRINT = 8
  } DVASPECT;
@@ -39,21 +30,7 @@ index 7f4a102f3..6cc54ff1e 100644
  typedef enum tagSTGC
  {
      STGC_DEFAULT        = 0,
-@@ -724,11 +734,13 @@
- cpp_quote("#else // _PREFAST_")
- cpp_quote("typedef _Null_terminated_ OLECHAR *BSTR;")
- cpp_quote("#endif")
-+cpp_quote("/* Win32Metadata: type ::BSTR => NativeTypedef */")
- typedef BSTR * LPBSTR;
- 
- cpp_quote("/* 0 == FALSE, -1 == TRUE */")
- typedef short VARIANT_BOOL;
-+cpp_quote("/* Win32Metadata: type ::VARIANT_BOOL => NativeTypedef */")
- 
- cpp_quote("/* The BSTRBLOB structure is used by some implementations */")
- cpp_quote("/* of the IPropertyStorage interface when marshaling BSTRs */")
- cpp_quote("/* on systems which don't support BSTR marshaling. */")
-@@ -824,6 +836,7 @@ cpp_quote(" *  VT_BYREF            [V]           void* for local use")
+@@ -824,6 +833,7 @@ cpp_quote(" *  VT_BYREF            [V]           void* for local use")
  cpp_quote(" *  VT_BSTR_BLOB                      Reserved for system use")
  cpp_quote(" */")
  

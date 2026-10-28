@@ -9,17 +9,7 @@ diff --git a/um/ras.h b/um/ras.h
  #include <winapifamily.h>
  
  #pragma region Desktop Family or CmdLineTools Package
-@@ -146,6 +147,9 @@
- #define RAS_MaxDnsSuffix      256
- 
- DECLARE_HANDLE( HRASCONN );
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HRASCONN HRASCONN;
-+#endif
- #define LPHRASCONN HRASCONN*
- 
- #if (WINVER >= 0x501)
-@@ -749,6 +753,12 @@
+@@ -749,6 +750,12 @@
  #define RASLCPAD_CHAP_MS      0x80
  #define RASLCPAD_CHAP_MSV2    0x81
  
@@ -32,7 +22,7 @@ diff --git a/um/ras.h b/um/ras.h
  /* RASPPPLCP 'dwOptions' and 'dwServerOptions' flags.
  */
  #define RASLCPO_PFC           0x00000001
-@@ -920,10 +930,10 @@
+@@ -920,10 +927,10 @@
      // LCP Options
      BOOL         fBundled;
      BOOL         fMultilink;
@@ -47,7 +37,7 @@ diff --git a/um/ras.h b/um/ras.h
      DWORD        dwEapTypeId;
      DWORD        dwServerEapTypeId;
      DWORD        dwLcpOptions;
-@@ -944,6 +954,10 @@
+@@ -944,6 +951,10 @@
  #define RASIKEv2_FLAGS_BEHIND_NAT          0x00000002
  #define RASIKEv2_FLAGS_SERVERBEHIND_NAT    0x00000004
  
@@ -58,7 +48,7 @@ diff --git a/um/ras.h b/um/ras.h
  /* RASIKEV2_PROJECTION_INFO 'dwAuthenticatonProtocol' values.
  */
  #define RASIKEv2_AUTH_MACHINECERTIFICATES  1
-@@ -967,7 +981,7 @@
+@@ -967,7 +978,7 @@
      DWORD         dwAuthenticationProtocol;
      DWORD         dwEapTypeId;
  
@@ -67,7 +57,7 @@ diff --git a/um/ras.h b/um/ras.h
      DWORD         dwEncryptionMethod;
  
      DWORD         numIPv4ServerAddresses;
-@@ -1128,6 +1142,15 @@
+@@ -1128,6 +1139,15 @@
  #define VS_ProtocolList 15  // Use ProtocolList to determine protocols to connect
  #endif
  
@@ -83,7 +73,7 @@ diff --git a/um/ras.h b/um/ras.h
  /* A RAS phone book entry.
  */
  #define RASENTRYA struct tagRASENTRYA
-@@ -1189,7 +1212,7 @@
+@@ -1189,7 +1209,7 @@
      // Multilink
      //
      DWORD       dwSubEntries;
@@ -92,7 +82,7 @@ diff --git a/um/ras.h b/um/ras.h
      DWORD       dwDialExtraPercent;
      DWORD       dwDialExtraSampleSeconds;
      DWORD       dwHangUpExtraPercent;
-@@ -1347,7 +1370,7 @@
+@@ -1347,7 +1367,7 @@
      // Multilink
      //
      DWORD       dwSubEntries;
@@ -101,7 +91,7 @@ diff --git a/um/ras.h b/um/ras.h
      DWORD       dwDialExtraPercent;
      DWORD       dwDialExtraSampleSeconds;
      DWORD       dwHangUpExtraPercent;
-@@ -1627,11 +1650,6 @@
+@@ -1627,11 +1647,6 @@
  #endif
  
  #if (WINVER >= 0x401)
@@ -113,7 +103,7 @@ diff --git a/um/ras.h b/um/ras.h
  /* RASENTRY 'dwIdleDisconnectSeconds' constants.
  */
  #define RASIDS_Disabled                 0xffffffff
-@@ -1910,147 +1928,209 @@
+@@ -1910,147 +1925,209 @@
  
  /* External RAS API function prototypes.
  */
@@ -323,7 +313,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasSetAutodialParamW( _In_ DWORD, _In_ LPVOID, _In_ DWORD );
  
  DWORD APIENTRY RasGetPCscf(_Out_ LPWSTR lpszPCscf);
-@@ -2106,21 +2186,27 @@
+@@ -2106,21 +2183,27 @@
  #define RCD_Eap         0x00000002
  #define RCD_Logon       0x00000004
  
@@ -351,7 +341,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasGetEapUserDataA(
                     _In_opt_ HANDLE hToken,
                     _In_opt_ LPCSTR pszPhonebook,
-@@ -2129,6 +2215,7 @@
+@@ -2129,6 +2212,7 @@
                     _Inout_ DWORD *pdwSizeofEapData );
  
  
@@ -359,7 +349,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasGetEapUserDataW(
                     _In_opt_ HANDLE  hToken,
                     _In_opt_ LPCWSTR pszPhonebook,
-@@ -2136,6 +2223,7 @@
+@@ -2136,6 +2220,7 @@
                     _Out_opt_ BYTE    *pbEapData,
                     _Inout_ DWORD *pdwSizeofEapData );
  
@@ -367,7 +357,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasSetEapUserDataA(
                     _In_opt_ HANDLE hToken,
                     _In_opt_ LPCSTR pszPhonebook,
-@@ -2143,6 +2231,7 @@
+@@ -2143,6 +2228,7 @@
                     _In_ BYTE   *pbEapData,
                     _In_ DWORD dwSizeofEapData );
  
@@ -375,7 +365,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasSetEapUserDataW(
                     _In_opt_ HANDLE  hToken,
                     _In_opt_ LPCWSTR pszPhonebook,
-@@ -2150,6 +2239,7 @@
+@@ -2150,6 +2236,7 @@
                     _In_ BYTE    *pbEapData,
                     _In_ DWORD dwSizeofEapData );
  
@@ -383,7 +373,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasGetCustomAuthDataA(
                     _In_opt_ LPCSTR pszPhonebook,
                     _In_ LPCSTR pszEntry,
-@@ -2157,12 +2247,14 @@
+@@ -2157,12 +2244,14 @@
                     _Inout_ DWORD  *pdwSizeofCustomAuthData );
  
  
@@ -398,7 +388,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasSetCustomAuthDataA(
                     _In_opt_ LPCSTR pszPhonebook,
                     _In_ LPCSTR pszEntry,
-@@ -2170,12 +2262,14 @@
+@@ -2170,12 +2259,14 @@
                     _In_ DWORD  dwSizeofCustomAuthData
                     );
  
@@ -413,7 +403,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasGetEapUserIdentityW(
                     _In_opt_ LPCWSTR              pszPhonebook,
                     _In_ LPCWSTR                  pszEntry,
-@@ -2183,6 +2277,7 @@
+@@ -2183,6 +2274,7 @@
                     _In_ HWND                     hwnd,
                     _Out_ LPRASEAPUSERIDENTITYW*  ppRasEapUserIdentity
  );
@@ -421,7 +411,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY RasGetEapUserIdentityA(
                     _In_opt_ LPCSTR                   pszPhonebook,
                     _In_ LPCSTR                   pszEntry,
-@@ -2190,9 +2285,11 @@
+@@ -2190,9 +2282,11 @@
                     _In_ HWND                     hwnd,
                     _Out_ LPRASEAPUSERIDENTITYA*   ppRasEapUserIdentity
  );
@@ -433,7 +423,7 @@ diff --git a/um/ras.h b/um/ras.h
  VOID APIENTRY RasFreeEapUserIdentityA(
                     _In_ LPRASEAPUSERIDENTITYA    pRasEapUserIdentity
  );
-@@ -2200,11 +2297,13 @@
+@@ -2200,11 +2294,13 @@
  
  #if (WINVER >= 0x501)
  
@@ -447,7 +437,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY  RasDeleteSubEntryW(
                  _In_opt_ LPCWSTR pszPhonebook,
                  _In_ LPCWSTR pszEntry,
-@@ -2216,7 +2315,7 @@
+@@ -2216,7 +2312,7 @@
  
  #ifdef USES_RAS_QUARANTINE_APIS
  
@@ -456,7 +446,7 @@ diff --git a/um/ras.h b/um/ras.h
  RasGetNapStatus(
          _In_ HRASCONN hRasconn,
          _Out_ LPRASNAPSTATE pRasNapState);
-@@ -2244,6 +2343,7 @@
+@@ -2244,6 +2340,7 @@
  
  #define LPRASUPDATECONN  RASUPDATECONN*
  
@@ -464,7 +454,7 @@ diff --git a/um/ras.h b/um/ras.h
  DWORD APIENTRY
  RasUpdateConnection(
          _In_ HRASCONN        hrasconn,
-@@ -2251,6 +2351,7 @@
+@@ -2251,6 +2348,7 @@
  
  /* Ras Projection information for PPP or IKEv2
  */

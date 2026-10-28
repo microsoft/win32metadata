@@ -7,47 +7,7 @@ index 6c179890..d975c367 100644
  #include <winapifamily.h>  // winnt
 +#include <sal.h>
  
-@@ -553,5 +554,6 @@
- #ifndef VOID
- #define VOID void
-+_Win32_NativeTypedef_
- typedef char CHAR;
- typedef short SHORT;
- typedef long LONG;
-@@ -577,3 +579,6 @@
- typedef _Null_terminated_ WCHAR *NWPSTR, *LPWSTR, *PWSTR;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef PWSTR PWSTR;
-+#endif
- typedef _Null_terminated_ PWSTR *PZPWSTR;
- typedef _Null_terminated_ CONST PWSTR *PCZPWSTR;
-@@ -646,3 +651,6 @@
- typedef _Null_terminated_ CHAR *NPSTR, *LPSTR, *PSTR;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef PSTR PSTR;
-+#endif
- typedef _Null_terminated_ PSTR *PZPSTR;
- typedef _Null_terminated_ CONST PSTR *PCZPSTR;
-@@ -852,1 +860,2 @@
-+_Win32_NativeTypedef_
- typedef void *HANDLE;
-@@ -859,1 +868,2 @@
-+_Win32_NativeTypedef_
- typedef PVOID HANDLE;
-@@ -881,1 +891,2 @@
-+_Win32_NativeTypedef_
- typedef LONG HRESULT;
-@@ -883,1 +894,2 @@
-+_Win32_NativeTypedef_
- typedef _Return_type_success_(return >= 0) long HRESULT;
-@@ -1062,1 +1074,2 @@
-+_Win32_NativeTypedef_
- typedef _Return_type_success_(return >= 0) LONG NTSTATUS;
-@@ -1676,2 +1689,3 @@
-+_Win32_NativeTypedef_
- typedef UCHAR BOOLEAN;           // winnt
- typedef BOOLEAN *PBOOLEAN;       // winnt
-@@ -3452,5 +3466,199 @@ C_ASSERT(TYPE_ALIGNMENT(LARGE_INTEGER) == 8);
+@@ -3452,5 +3453,199 @@ C_ASSERT(TYPE_ALIGNMENT(LARGE_INTEGER) == 8);
  #endif
  
  

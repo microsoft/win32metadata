@@ -168,23 +168,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      GUID    *                   pTriggerSubtype;            // Provider GUID if the trigger type is SERVICE_TRIGGER_TYPE_CUSTOM
                                                              // Device class interface GUID if the trigger type is
                                                              // SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL
-@@ -696,9 +780,15 @@
- //
- 
- DECLARE_HANDLE(SC_HANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef SC_HANDLE SC_HANDLE;
-+#endif
- typedef SC_HANDLE   *LPSC_HANDLE;
- 
- DECLARE_HANDLE(SERVICE_STATUS_HANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef SERVICE_STATUS_HANDLE SERVICE_STATUS_HANDLE;
-+#endif
- 
- //
- // Info levels for QueryServiceStatusEx
-@@ -721,8 +811,8 @@
+@@ -721,8 +805,8 @@
  //
  
  typedef struct _SERVICE_STATUS {
@@ -195,7 +179,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      DWORD   dwControlsAccepted;
      DWORD   dwWin32ExitCode;
      DWORD   dwServiceSpecificExitCode;
-@@ -731,15 +821,15 @@
+@@ -731,15 +815,15 @@
  } SERVICE_STATUS, *LPSERVICE_STATUS;
  
  typedef struct _SERVICE_STATUS_PROCESS {
@@ -214,7 +198,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  } SERVICE_STATUS_PROCESS, *LPSERVICE_STATUS_PROCESS;
  
  
-@@ -814,9 +904,9 @@
+@@ -814,9 +898,9 @@
  //
  
  typedef struct _QUERY_SERVICE_CONFIGA {
@@ -227,7 +211,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      LPSTR   lpBinaryPathName;
      LPSTR   lpLoadOrderGroup;
      DWORD   dwTagId;
-@@ -825,9 +915,9 @@
+@@ -825,9 +909,9 @@
      LPSTR   lpDisplayName;
  } QUERY_SERVICE_CONFIGA, *LPQUERY_SERVICE_CONFIGA;
  typedef struct _QUERY_SERVICE_CONFIGW {
@@ -240,7 +224,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      LPWSTR  lpBinaryPathName;
      LPWSTR  lpLoadOrderGroup;
      DWORD   dwTagId;
-@@ -1019,14 +1109,16 @@
+@@ -1019,14 +1103,16 @@
  // API Function Prototypes
  ///////////////////////////////////////////////////////////////////////////
  
@@ -260,7 +244,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _In_opt_    LPCSTR     lpBinaryPathName,
      _In_opt_    LPCSTR     lpLoadOrderGroup,
      _Out_opt_   LPDWORD      lpdwTagId,
-@@ -1035,14 +1127,16 @@
+@@ -1035,14 +1121,16 @@
      _In_opt_    LPCSTR     lpPassword,
      _In_opt_    LPCSTR     lpDisplayName
      );
@@ -280,7 +264,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _In_opt_    LPCWSTR     lpBinaryPathName,
      _In_opt_    LPCWSTR     lpLoadOrderGroup,
      _Out_opt_   LPDWORD      lpdwTagId,
-@@ -1057,20 +1151,24 @@
+@@ -1057,20 +1145,24 @@
  #define ChangeServiceConfig  ChangeServiceConfigA
  #endif // !UNICODE
  
@@ -307,7 +291,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _In_opt_    LPVOID       lpInfo
      );
  #ifdef UNICODE
-@@ -1079,6 +1177,8 @@
+@@ -1079,6 +1171,8 @@
  #define ChangeServiceConfig2  ChangeServiceConfig2A
  #endif // !UNICODE
  
@@ -316,7 +300,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1086,6 +1186,8 @@
+@@ -1086,6 +1180,8 @@
      _In_        SC_HANDLE   hSCObject
      );
  
@@ -325,7 +309,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1095,6 +1197,8 @@
+@@ -1095,6 +1191,8 @@
      _Out_       LPSERVICE_STATUS    lpServiceStatus
      );
  
@@ -334,7 +318,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1104,9 +1208,9 @@
+@@ -1104,9 +1202,9 @@
      _In_        LPCSTR     lpServiceName,
      _In_opt_    LPCSTR     lpDisplayName,
      _In_        DWORD        dwDesiredAccess,
@@ -347,7 +331,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _In_opt_    LPCSTR     lpBinaryPathName,
      _In_opt_    LPCSTR     lpLoadOrderGroup,
      _Out_opt_   LPDWORD      lpdwTagId,
-@@ -1114,6 +1218,8 @@
+@@ -1114,6 +1212,8 @@
      _In_opt_    LPCSTR     lpServiceStartName,
      _In_opt_    LPCSTR     lpPassword
      );
@@ -356,7 +340,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1123,9 +1229,9 @@
+@@ -1123,9 +1223,9 @@
      _In_        LPCWSTR     lpServiceName,
      _In_opt_    LPCWSTR     lpDisplayName,
      _In_        DWORD        dwDesiredAccess,
@@ -369,7 +353,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _In_opt_    LPCWSTR     lpBinaryPathName,
      _In_opt_    LPCWSTR     lpLoadOrderGroup,
      _Out_opt_   LPDWORD      lpdwTagId,
-@@ -1139,6 +1245,8 @@
+@@ -1139,6 +1239,8 @@
  #define CreateService  CreateServiceA
  #endif // !UNICODE
  
@@ -378,7 +362,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1146,26 +1254,30 @@
+@@ -1146,26 +1248,30 @@
      _In_        SC_HANDLE   hService
      );
  
@@ -411,7 +395,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _Out_writes_bytes_opt_(cbBufSize)
                      LPENUM_SERVICE_STATUSW  lpServices,
      _In_            DWORD                   cbBufSize,
-@@ -1184,14 +1296,16 @@
+@@ -1184,14 +1290,16 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -430,7 +414,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _Out_writes_bytes_opt_(cbBufSize)
                      LPENUM_SERVICE_STATUSA  lpServices,
      _In_            DWORD                   cbBufSize,
-@@ -1199,14 +1313,16 @@
+@@ -1199,14 +1307,16 @@
      _Out_           LPDWORD                 lpServicesReturned,
      _Inout_opt_     LPDWORD                 lpResumeHandle
      );
@@ -449,7 +433,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _Out_writes_bytes_opt_(cbBufSize)
                      LPENUM_SERVICE_STATUSW  lpServices,
      _In_            DWORD                   cbBufSize,
-@@ -1226,6 +1342,8 @@
+@@ -1226,6 +1336,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -458,7 +442,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1233,8 +1351,8 @@
+@@ -1233,8 +1345,8 @@
  EnumServicesStatusExA(
      _In_            SC_HANDLE               hSCManager,
      _In_            SC_ENUM_TYPE            InfoLevel,
@@ -469,7 +453,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _Out_writes_bytes_opt_(cbBufSize)
                      LPBYTE                  lpServices,
      _In_            DWORD                   cbBufSize,
-@@ -1243,6 +1361,8 @@
+@@ -1243,6 +1355,8 @@
      _Inout_opt_     LPDWORD                 lpResumeHandle,
      _In_opt_        LPCSTR                pszGroupName
      );
@@ -478,7 +462,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1250,8 +1370,8 @@
+@@ -1250,8 +1364,8 @@
  EnumServicesStatusExW(
      _In_            SC_HANDLE               hSCManager,
      _In_            SC_ENUM_TYPE            InfoLevel,
@@ -489,7 +473,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _Out_writes_bytes_opt_(cbBufSize)
                      LPBYTE                  lpServices,
      _In_            DWORD                   cbBufSize,
-@@ -1266,6 +1386,8 @@
+@@ -1266,6 +1380,8 @@
  #define EnumServicesStatusEx  EnumServicesStatusExA
  #endif // !UNICODE
  
@@ -498,7 +482,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1277,6 +1399,8 @@
+@@ -1277,6 +1393,8 @@
                      LPSTR                 lpServiceName,
      _Inout_         LPDWORD                 lpcchBuffer
      );
@@ -507,7 +491,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1294,6 +1418,8 @@
+@@ -1294,6 +1412,8 @@
  #define GetServiceKeyName  GetServiceKeyNameA
  #endif // !UNICODE
  
@@ -516,7 +500,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1305,6 +1431,8 @@
+@@ -1305,6 +1425,8 @@
                      LPSTR                 lpDisplayName,
      _Inout_         LPDWORD                 lpcchBuffer
      );
@@ -525,7 +509,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1328,6 +1456,8 @@
+@@ -1328,6 +1450,8 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -534,7 +518,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  SC_LOCK
  WINAPI
-@@ -1335,6 +1465,8 @@
+@@ -1335,6 +1459,8 @@
      _In_            SC_HANDLE               hSCManager
      );
  
@@ -543,7 +527,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1348,6 +1480,8 @@
+@@ -1348,6 +1474,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -552,7 +536,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1357,6 +1491,8 @@
+@@ -1357,6 +1485,8 @@
      _In_opt_        LPCSTR                lpDatabaseName,
      _In_            DWORD                   dwDesiredAccess
      );
@@ -561,7 +545,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1372,6 +1508,8 @@
+@@ -1372,6 +1502,8 @@
  #define OpenSCManager  OpenSCManagerA
  #endif // !UNICODE
  
@@ -570,7 +554,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1381,6 +1519,8 @@
+@@ -1381,6 +1513,8 @@
      _In_            LPCSTR                lpServiceName,
      _In_            DWORD                   dwDesiredAccess
      );
@@ -579,7 +563,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1396,6 +1536,8 @@
+@@ -1396,6 +1530,8 @@
  #define OpenService  OpenServiceA
  #endif // !UNICODE
  
@@ -588,7 +572,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1407,6 +1549,8 @@
+@@ -1407,6 +1543,8 @@
      _In_            DWORD                   cbBufSize,
      _Out_           LPDWORD                 pcbBytesNeeded
      );
@@ -597,7 +581,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1424,6 +1568,8 @@
+@@ -1424,6 +1562,8 @@
  #define QueryServiceConfig  QueryServiceConfigA
  #endif // !UNICODE
  
@@ -606,7 +590,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONA))))
  _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
-@@ -1437,12 +1583,14 @@
+@@ -1437,12 +1577,14 @@
  WINAPI
  QueryServiceConfig2A(
      _In_            SC_HANDLE               hService,
@@ -622,7 +606,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONW))))
  _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
-@@ -1456,7 +1604,7 @@
+@@ -1456,7 +1598,7 @@
  WINAPI
  QueryServiceConfig2W(
      _In_            SC_HANDLE               hService,
@@ -631,7 +615,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _Out_writes_bytes_opt_(cbBufSize)
                      LPBYTE                  lpBuffer,
      _In_            DWORD                   cbBufSize,
-@@ -1474,6 +1622,8 @@
+@@ -1474,6 +1616,8 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -640,7 +624,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1485,6 +1635,8 @@
+@@ -1485,6 +1629,8 @@
      _In_            DWORD                           cbBufSize,
      _Out_           LPDWORD                         pcbBytesNeeded
      );
@@ -649,7 +633,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1508,6 +1660,8 @@
+@@ -1508,6 +1654,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -658,7 +642,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1521,6 +1675,8 @@
+@@ -1521,6 +1669,8 @@
      _Out_           LPDWORD                 pcbBytesNeeded
      );
  
@@ -667,7 +651,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1530,6 +1686,8 @@
+@@ -1530,6 +1680,8 @@
      _Out_           LPSERVICE_STATUS    lpServiceStatus
      );
  
@@ -676,7 +660,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1543,6 +1701,8 @@
+@@ -1543,6 +1695,8 @@
      _Out_           LPDWORD             pcbBytesNeeded
      );
  
@@ -685,7 +669,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1552,6 +1712,8 @@
+@@ -1552,6 +1706,8 @@
      _In_    __callback
              LPHANDLER_FUNCTION          lpHandlerProc
      );
@@ -694,7 +678,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1567,6 +1729,8 @@
+@@ -1567,6 +1723,8 @@
  #define RegisterServiceCtrlHandler  RegisterServiceCtrlHandlerA
  #endif // !UNICODE
  
@@ -703,7 +687,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1577,6 +1741,8 @@
+@@ -1577,6 +1735,8 @@
              LPHANDLER_FUNCTION_EX       lpHandlerProc,
      _In_opt_ LPVOID                     lpContext
      );
@@ -712,7 +696,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1593,15 +1759,19 @@
+@@ -1593,15 +1753,19 @@
  #define RegisterServiceCtrlHandlerEx  RegisterServiceCtrlHandlerExA
  #endif // !UNICODE
  
@@ -733,7 +717,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1610,12 +1780,16 @@
+@@ -1610,12 +1774,16 @@
      _In_        LPSERVICE_STATUS        lpServiceStatus
      );
  
@@ -750,7 +734,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1629,6 +1803,8 @@
+@@ -1629,6 +1797,8 @@
  #endif // !UNICODE
  
  
@@ -759,7 +743,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1638,6 +1814,8 @@
+@@ -1638,6 +1808,8 @@
      _In_reads_opt_(dwNumServiceArgs)
                      LPCSTR             *lpServiceArgVectors
      );
@@ -768,7 +752,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1659,6 +1837,8 @@
+@@ -1659,6 +1831,8 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -777,7 +761,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1674,20 +1854,22 @@
+@@ -1674,20 +1848,22 @@
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -802,7 +786,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
      _In_        PSERVICE_NOTIFYW        pNotifyBuffer
      );
  #ifdef UNICODE
-@@ -1696,6 +1878,8 @@
+@@ -1696,6 +1872,8 @@
  #define NotifyServiceStatusChange  NotifyServiceStatusChangeA
  #endif // !UNICODE
  
@@ -811,7 +795,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1705,6 +1889,8 @@
+@@ -1705,6 +1883,8 @@
      _In_        DWORD                   dwInfoLevel,
      _Inout_     PVOID                   pControlParams
      );
@@ -820,7 +804,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1720,6 +1906,8 @@
+@@ -1720,6 +1900,8 @@
  #define ControlServiceEx  ControlServiceExA
  #endif // !UNICODE
  
@@ -829,17 +813,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1753,6 +1941,9 @@
- typedef SC_NOTIFICATION_CALLBACK* PSC_NOTIFICATION_CALLBACK;
- 
- typedef struct _SC_NOTIFICATION_REGISTRATION* PSC_NOTIFICATION_REGISTRATION;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef PSC_NOTIFICATION_REGISTRATION PSC_NOTIFICATION_REGISTRATION;
-+#endif
- 
- WINADVAPI
- DWORD
-@@ -1796,6 +1987,7 @@
+@@ -1796,6 +1978,7 @@
      MaxServiceRegistryStateType = 2,
  } SERVICE_REGISTRY_STATE_TYPE;
  
@@ -847,7 +821,7 @@ diff --git a/um/winsvc.h b/um/winsvc.h
  _Must_inspect_result_
  DWORD
  WINAPI
-@@ -1815,6 +2007,7 @@
+@@ -1815,6 +1998,7 @@
      ServiceDirectoryTypeMax = 1,
  } SERVICE_DIRECTORY_TYPE;
  

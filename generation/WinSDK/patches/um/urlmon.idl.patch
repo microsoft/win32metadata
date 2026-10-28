@@ -8,15 +8,7 @@ index c28def31..f68ea233 100644
  //+---------------------------------------------------------------------------
  //
  //  Microsoft Windows
-@@ -45,6 +47,7 @@
- 
- #ifdef UNIX
- typedef unsigned long HANDLE_PTR;
-+cpp_quote("/* Win32Metadata: type ::HANDLE_PTR => NativeTypedef */")
- #endif /* UNIX */
- 
- import "objidl.idl";
-@@ -125,6 +128,7 @@
+@@ -125,6 +127,7 @@
  #pragma midl_echo("STDAPI CreateURLMonikerEx(_In_opt_ LPMONIKER pMkCtx, _In_ LPCWSTR szURL, _Outptr_ LPMONIKER FAR * ppmk, DWORD dwFlags);             ")
  #pragma midl_echo("STDAPI GetClassURL(_In_ LPCWSTR szURL, _Out_ CLSID *pClsID);                                           ")
  #pragma midl_echo("STDAPI CreateAsyncBindCtx(DWORD reserved, _In_ IBindStatusCallback *pBSCb,                       ")
@@ -24,7 +16,7 @@ index c28def31..f68ea233 100644
  #pragma midl_echo("                                _In_opt_ IEnumFORMATETC *pEFetc, _Outptr_ IBindCtx **ppBC);                   ")
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
-@@ -148,6 +152,7 @@
+@@ -148,6 +151,7 @@
  #pragma midl_echo("            _In_ LPCWSTR szCODE, DWORD dwFileVersionMS, ")
  #pragma midl_echo("            DWORD dwFileVersionLS, _In_ LPCWSTR szTYPE,")
  #pragma midl_echo("            _In_ LPBINDCTX pBindCtx, DWORD dwClsContext,")
@@ -32,7 +24,7 @@ index c28def31..f68ea233 100644
  #pragma midl_echo("            _Reserved_ LPVOID pvReserved, REFIID riid, _Outptr_ LPVOID * ppv);")
  
  #pragma midl_echo("STDAPI IEInstallScope(_Out_ LPDWORD pdwScope);")
-@@ -178,6 +183,7 @@
+@@ -178,6 +182,7 @@
  #pragma midl_echo("STDAPI RegisterMediaTypes(_In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _Out_writes_(ctypes) CLIPFORMAT* rgcfTypes);            ")
  #pragma midl_echo("STDAPI FindMediaType(_In_ LPCSTR rgszTypes, _Out_ CLIPFORMAT* rgcfTypes);                                       ")
  #pragma midl_echo("STDAPI CreateFormatEnumerator( _In_ _In_range_(>, 0) UINT cfmtetc, _In_reads_(cfmtetc) FORMATETC* rgfmtetc, _Outptr_ IEnumFORMATETC** ppenumfmtetc); ")
@@ -40,7 +32,7 @@ index c28def31..f68ea233 100644
  #pragma midl_echo("STDAPI RegisterFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc, DWORD reserved);          ")
  #pragma midl_echo("STDAPI RevokeFormatEnumerator(_In_ LPBC pBC, _In_ IEnumFORMATETC *pEFetc);                            ")
  #pragma midl_echo("STDAPI RegisterMediaTypeClass(_In_ LPBC pBC, _In_ _In_range_(>, 0) UINT ctypes, _In_reads_(ctypes) const LPCSTR* rgszTypes, _In_reads_(ctypes)  CLSID *rgclsID, DWORD reserved);    ")
-@@ -541,6 +547,8 @@
+@@ -541,6 +546,8 @@
      HRESULT GetCurMoniker(
          [out] IMoniker ** ppimkName);
  }
@@ -49,7 +41,7 @@ index c28def31..f68ea233 100644
  
  cpp_quote("#endif")
  
-@@ -1576,8 +1584,12 @@
+@@ -1576,8 +1583,12 @@
          [out] BOOL* pfEqual);
  }
  
@@ -62,7 +54,7 @@ index c28def31..f68ea233 100644
  #pragma midl_echo("                 _Reserved_ DWORD_PTR dwReserved,   // must be 0")
  #pragma midl_echo("                 _Outptr_ IUri** ppURI);")
  #pragma midl_echo("")
-@@ -1650,6 +1662,7 @@
+@@ -1650,6 +1661,7 @@
  #pragma midl_echo("#define Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS 0x00008000    // Don't percent-encode characters that are forbidden by the RFC.")
  #pragma midl_echo("#define Uri_CREATE_NORMALIZE_INTL_CHARACTERS      0x00010000    // Percent encode all extended unicode charcters, then decode all percent encoded extended unicode characters (except those identified as dangerous)")
  #pragma midl_echo("#define Uri_CREATE_CANONICALIZE_ABSOLUTE          0x00020000    // Generate a fully UTF-8 encoded value for absoluteUri")

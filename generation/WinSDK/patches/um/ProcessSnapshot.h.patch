@@ -1,21 +1,7 @@
 diff --git a/um/processsnapshot.h b/um/processsnapshot.h
 --- a/um/processsnapshot.h
 +++ b/um/processsnapshot.h
-@@ -106,7 +106,13 @@
- 
- 
- DECLARE_HANDLE(HPSS);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HPSS HPSS;
-+#endif
- DECLARE_HANDLE(HPSSWALK);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HPSSWALK HPSSWALK;
-+#endif
- 
- // PssQuerySnapshot/PssWalkSnapshot information structures.
- 
-@@ -370,6 +376,7 @@
+@@ -370,6 +370,7 @@
  #if (NTDDI_VERSION >= NTDDI_WINBLUE)
  
  // Win32 APIs.
@@ -23,7 +9,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssCaptureSnapshot(
-@@ -379,6 +386,7 @@
+@@ -379,6 +380,7 @@
      _Out_ HPSS* SnapshotHandle
      );
  
@@ -31,7 +17,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssFreeSnapshot(
-@@ -386,6 +394,7 @@
+@@ -386,6 +388,7 @@
      _In_ HPSS SnapshotHandle
      );
  
@@ -39,7 +25,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssQuerySnapshot(
-@@ -395,6 +404,7 @@
+@@ -395,6 +398,7 @@
      _In_ DWORD BufferLength
      );
  
@@ -47,7 +33,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssWalkSnapshot(
-@@ -405,6 +415,7 @@
+@@ -405,6 +409,7 @@
      _In_ DWORD BufferLength
      );
  
@@ -55,7 +41,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssDuplicateSnapshot(
-@@ -416,19 +427,22 @@
+@@ -416,19 +421,22 @@
      );
  
  // Win32 walk marker management.
@@ -87,7 +73,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssWalkMarkerGetPosition(
-@@ -436,6 +450,7 @@
+@@ -436,6 +444,7 @@
      _Out_ ULONG_PTR *Position
      );
  
@@ -95,7 +81,7 @@ diff --git a/um/processsnapshot.h b/um/processsnapshot.h
  _Success_(return == ERROR_SUCCESS)
  STDAPI_(DWORD)
  PssWalkMarkerSetPosition(
-@@ -443,6 +458,7 @@
+@@ -443,6 +452,7 @@
      _In_ ULONG_PTR Position
      );
  

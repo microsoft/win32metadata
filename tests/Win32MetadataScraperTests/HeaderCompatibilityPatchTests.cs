@@ -16,6 +16,44 @@ namespace Win32MetadataScraperTests
     public class HeaderCompatibilityPatchTests
     {
         [Fact]
+        public void ActiveWaitDeclarationsPreserveNativeStatusResults()
+        {
+            string root = RepositoryRoot();
+            string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "um", "synchapi.h.patch"));
+            foreach (string name in new[] { "WaitForSingleObject", "WaitForSingleObjectEx", "WaitForMultipleObjects", "WaitForMultipleObjectsEx" })
+                Assert.Contains("+_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI\n DWORD\n WINAPI\n " + name + "(",
+                    patch.Replace("\r\n", "\n"));
+            Assert.Contains("<IncludeRoot>/um/synchapi.h", File.ReadAllText(
+                Path.Combine(root, "generation", "WinSDK", "Partitions", "Threading", "settings.rsp")));
+        }
+
+        [Fact]
+        public void ActiveFileAndSocketDeclarationsPreserveNativeResults()
+        {
+            string root = RepositoryRoot();
+            foreach (var (header, name, prefix, os, linkage, convention) in new[]
+            {
+                ("fileapi.h", "GetFileAttributesA", "", "WindowsXP", "WINBASEAPI", "WINAPI"),
+                ("fileapi.h", "GetFileAttributesW", "", "WindowsXP", "WINBASEAPI", "WINAPI"),
+                ("fileapi.h", "QueryDosDeviceW", "", "WindowsXP", "WINBASEAPI", "WINAPI"),
+                ("winsock2.h", "WSAWaitForMultipleEvents", "_Win32_AssociatedEnum_(WAIT_EVENT) ",
+                    "Windows81", "WINSOCK_API_LINKAGE", "WSAAPI"),
+            })
+            {
+                string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "um", header + ".patch"))
+                    .Replace("\r\n", "\n");
+                Assert.Contains("+_Win32_PreserveResult_ " + prefix + "_Win32_SetLastError_\n" +
+                    "+_Win32_SupportedOS_" + os + "_\n " + linkage + "\n DWORD\n " + convention + "\n " + name + "(", patch);
+            }
+            foreach (var (partition, header) in new[] { ("Fs", "fileapi.h"), ("WinSock", "WinSock2.h") })
+            {
+                string directory = Path.Combine(root, "generation", "WinSDK", "Partitions", partition);
+                Assert.Contains("<IncludeRoot>/um/" + header, File.ReadAllText(Path.Combine(directory, "settings.rsp")));
+                Assert.Contains("#include <" + header.ToLowerInvariant() + ">", File.ReadAllText(Path.Combine(directory, "main.cpp")));
+            }
+        }
+
+        [Fact]
         public void CompatibilityPatchesPreserveResultsWidthsAndInputHandleDirections()
         {
             using var headers = new PatchedHeaders();

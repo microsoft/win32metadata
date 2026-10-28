@@ -10,13 +10,10 @@ diff --git a/um/gamingexperience.h b/um/gamingexperience.h
  
  #include <apiset.h>
  #include <apisetcconv.h>
-@@ -59,13 +61,16 @@
+@@ -59,13 +61,13 @@
      );
  
  DECLARE_HANDLE(GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION;
-+#endif
  
  HRESULT
  WINAPI

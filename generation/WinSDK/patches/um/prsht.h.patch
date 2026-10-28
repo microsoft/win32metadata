@@ -1,13 +1,10 @@
 diff --git a/um/prsht.h b/um/prsht.h
 --- a/um/prsht.h
 +++ b/um/prsht.h
-@@ -95,14 +95,21 @@
+@@ -95,14 +95,18 @@
  
  struct _PSP;
  typedef struct _PSP * HPROPSHEETPAGE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HPROPSHEETPAGE HPROPSHEETPAGE;
-+#endif
  
  #ifndef MIDL_PASS
  struct _PROPSHEETPAGEA;
@@ -25,7 +22,7 @@ diff --git a/um/prsht.h b/um/prsht.h
  
  #ifdef UNICODE
  #define LPFNPSPCALLBACK         LPFNPSPCALLBACKW
-@@ -135,6 +142,13 @@
+@@ -135,6 +139,13 @@
  #define PSPCB_ADDREF            0
  #define PSPCB_RELEASE           1
  #define PSPCB_CREATE            2
@@ -39,7 +36,7 @@ diff --git a/um/prsht.h b/um/prsht.h
  
  #ifdef _WIN32
  typedef LPCDLGTEMPLATE PROPSHEETPAGE_RESOURCE;
-@@ -582,12 +596,28 @@
+@@ -582,12 +593,26 @@
  #define PSCB_BUTTONPRESSED 3
  #endif  // NTDDI_VERSION >= NTDDI_WINXP
  
@@ -56,8 +53,6 @@ diff --git a/um/prsht.h b/um/prsht.h
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL           WINAPI DestroyPropertySheetPage(HPROPSHEETPAGE);
  
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
-+#endif
 +
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
@@ -68,7 +63,7 @@ diff --git a/um/prsht.h b/um/prsht.h
  WINCOMMCTRLAPI INT_PTR        WINAPI PropertySheetW(LPCPROPSHEETHEADERW);
  
  #ifdef UNICODE
-@@ -908,4 +938,3 @@
+@@ -908,4 +933,3 @@
  #if defined(_MSC_VER) && (_MSC_VER >= 1200)
  #pragma warning(pop)
  #endif

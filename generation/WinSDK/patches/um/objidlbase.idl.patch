@@ -346,11 +346,3 @@ index dd5ca29b..80752dff 100644
  cpp_quote("")
  cpp_quote("            template<class Q>")
  cpp_quote("            HRESULT")
-@@ -1731,6 +1789,7 @@
- typedef struct MachineGlobalObjectTableRegistrationToken__{
-     int unused;
- }* MachineGlobalObjectTableRegistrationToken;
-+cpp_quote("/* Win32Metadata: type ::MachineGlobalObjectTableRegistrationToken => NativeTypedef */")
- 
- [
-     local,

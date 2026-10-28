@@ -1,17 +1,7 @@
 diff --git a/um/winineti.h b/um/winineti.h
 --- a/um/winineti.h
 +++ b/um/winineti.h
-@@ -670,6 +670,9 @@
- //
- 
- DECLARE_HANDLE(HTTP_PUSH_WAIT_HANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HTTP_PUSH_WAIT_HANDLE HTTP_PUSH_WAIT_HANDLE;
-+#endif
- 
- typedef struct _HTTP_PUSH_TRANSPORT_SETTING
- {
-@@ -1042,6 +1045,8 @@
+@@ -1042,6 +1042,8 @@
  #define INTERNET_CACHE_CONTAINER_SHARE_READ (0x100)
  #define INTERNET_CACHE_CONTAINER_SHARE_READ_WRITE (0x300)
  
@@ -20,7 +10,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI CreateUrlCacheContainerA(
      _In_ LPCSTR Name,
      _In_ LPCSTR lpCachePrefix,
-@@ -1052,6 +1057,8 @@
+@@ -1052,6 +1054,8 @@
      _Reserved_ LPVOID pvBuffer,
      _Reserved_ LPDWORD cbBuffer
      );
@@ -29,7 +19,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI CreateUrlCacheContainerW(
      _In_ LPCWSTR Name,
      _In_ LPCWSTR lpCachePrefix,
-@@ -1068,10 +1075,14 @@
+@@ -1068,10 +1072,14 @@
  #define CreateUrlCacheContainer  CreateUrlCacheContainerA
  #endif // !UNICODE
  
@@ -44,7 +34,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI DeleteUrlCacheContainerW(
      _In_ LPCWSTR Name,
      _In_ DWORD dwOptions
-@@ -1161,11 +1172,15 @@
+@@ -1161,11 +1169,15 @@
  } WININET_SYNC_MODE;
  
  
@@ -60,7 +50,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI FreeUrlCacheSpaceW(
      _In_opt_ LPCWSTR lpszCachePath,
      _In_ DWORD dwSize,
-@@ -1229,17 +1244,42 @@
+@@ -1229,17 +1241,42 @@
  #define CACHE_CONFIG_CONTENT_USAGE_FC                                0x00002000
  #define CACHE_CONFIG_STICKY_CONTENT_USAGE_FC                         0x00004000
  
@@ -106,7 +96,7 @@ diff --git a/um/winineti.h b/um/winineti.h
      );
  #ifdef UNICODE
  #define GetUrlCacheConfigInfo  GetUrlCacheConfigInfoW
-@@ -1737,6 +1777,7 @@
+@@ -1737,6 +1774,7 @@
  // Autodial APIs
  //
  
@@ -114,7 +104,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  INTERNETAPI_(DWORD) InternetDialA(
      _In_ HWND     hwndParent,
      _In_opt_ LPSTR   lpszConnectoid,
-@@ -1745,7 +1786,7 @@
+@@ -1745,7 +1783,7 @@
      _Reserved_ DWORD    dwReserved
      );
  
@@ -123,7 +113,7 @@ diff --git a/um/winineti.h b/um/winineti.h
      _In_ HWND     hwndParent,
      _In_opt_ LPWSTR   lpszConnectoid,
      _In_ DWORD    dwFlags,
-@@ -1759,6 +1800,7 @@
+@@ -1759,6 +1797,7 @@
  #ifdef _WINX32_
  #define InternetDial  InternetDialA
  #else
@@ -131,7 +121,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  INTERNETAPI_(DWORD) InternetDial(
      _In_ HWND     hwndParent,
      _In_opt_ LPSTR   lpszConnectoid,
-@@ -1775,7 +1817,7 @@
+@@ -1775,7 +1814,7 @@
  #define INTERNET_DIAL_SHOW_OFFLINE     0x4000
  #define INTERNET_DIAL_UNATTENDED       0x8000
  
@@ -140,7 +130,7 @@ diff --git a/um/winineti.h b/um/winineti.h
      _In_   DWORD_PTR    dwConnection,
      _Reserved_ DWORD        dwReserved);
  
-@@ -1783,12 +1825,16 @@
+@@ -1783,12 +1822,16 @@
  #define INTERENT_GOONLINE_NOPROMPT 0x00000002
  #define INTERENT_GOONLINE_MASK     0x00000003
  
@@ -157,7 +147,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI InternetGoOnlineW(
      _In_opt_ LPCWSTR lpszURL,
      _In_ HWND     hwndParent,
-@@ -1801,6 +1847,8 @@
+@@ -1801,6 +1844,8 @@
  #ifdef _WINX32_
  #define InternetGoOnline  InternetGoOnlineA
  #else
@@ -166,7 +156,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI InternetGoOnline(
      _In_opt_ LPSTR   lpszURL,
      _In_ HWND     hwndParent,
-@@ -1809,8 +1857,10 @@
+@@ -1809,8 +1854,10 @@
  #endif // _WINX32_
  #endif // !UNICODE
  
@@ -178,7 +168,7 @@ diff --git a/um/winineti.h b/um/winineti.h
      _In_opt_ HWND   hwndParent);
  
  // Flags for InternetAutodial
-@@ -1821,24 +1871,32 @@
+@@ -1821,24 +1868,32 @@
  
  
  #define INTERNET_AUTODIAL_FLAGS_MASK (INTERNET_AUTODIAL_FORCE_ONLINE | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT)
@@ -214,7 +204,7 @@ diff --git a/um/winineti.h b/um/winineti.h
      _Out_writes_opt_(cchNameLen) LPWSTR lpszConnectionName,
      _In_ DWORD cchNameLen,
      _Reserved_ DWORD dwReserved
-@@ -1880,16 +1938,21 @@
+@@ -1880,16 +1935,21 @@
  #define INTERNET_AUTOPROXY_INIT_MASK (INTERNET_AUTOPROXY_INIT_DEFAULT|INTERNET_AUTOPROXY_INIT_DOWNLOADSYNC|INTERNET_AUTOPROXY_INIT_QUERYSTATE|INTERNET_AUTOPROXY_INIT_ONLYQUERY)
  
  
@@ -236,7 +226,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI CreateMD5SSOHash (
      _In_ PWSTR    pszChallengeInfo,
      _In_ PWSTR    pwszRealm,
-@@ -1903,8 +1966,10 @@
+@@ -1903,8 +1963,10 @@
  #ifdef _WINX32_
  #define InternetGetConnectedStateEx  InternetGetConnectedStateExA
  #else
@@ -248,7 +238,7 @@ diff --git a/um/winineti.h b/um/winineti.h
      _Out_writes_opt_(dwNameLen) LPSTR lpszConnectionName,
      _In_ DWORD dwNameLen,
      _In_ DWORD dwReserved
-@@ -2107,12 +2172,14 @@
+@@ -2107,12 +2169,14 @@
  #endif // !UNICODE
  
  
@@ -263,7 +253,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  BOOLAPI InternetEnumPerSiteCookieDecisionW(
      _Out_writes_to_(*pcSiteNameSize, *pcSiteNameSize) LPWSTR pszSiteName,
      _Inout_ unsigned long *pcSiteNameSize,
-@@ -2145,6 +2212,7 @@
+@@ -2145,6 +2209,7 @@
  #define PRIVACY_TYPE_FIRST_PARTY        0
  #define PRIVACY_TYPE_THIRD_PARTY        1
  
@@ -271,7 +261,7 @@ diff --git a/um/winineti.h b/um/winineti.h
  INTERNETAPI_(DWORD)
  PrivacySetZonePreferenceW(
      _In_ DWORD       dwZone,
-@@ -2153,6 +2221,7 @@
+@@ -2153,6 +2218,7 @@
      _In_opt_ LPCWSTR     pszPreference
      );
  

@@ -850,17 +850,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2584,6 +2817,9 @@
- #if (NTDDI_VERSION >= NTDDI_WIN10_VB) 
- 
- DECLARE_HANDLE(HSAVEDUILANGUAGES);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HSAVEDUILANGUAGES HSAVEDUILANGUAGES;
-+#endif
- 
- WINBASEAPI
- BOOL
-@@ -2609,6 +2845,7 @@
+@@ -2609,6 +2842,7 @@
  
  #if(WINVER >= 0x0600)
  
@@ -868,7 +858,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2616,7 +2853,7 @@
+@@ -2616,7 +2850,7 @@
      _In_        DWORD dwFlags,
      _In_opt_    PCWSTR pcwstrNewLanguage,
      _In_opt_    PCWSTR pcwstrPreviousLanguage,
@@ -877,7 +867,7 @@ diff --git a/um/winnls.h b/um/winnls.h
      _Out_opt_   PDWORD pdwStatusRtrn
  );
  
-@@ -2658,6 +2895,8 @@
+@@ -2658,6 +2892,8 @@
  //
  //        GetStringTypeEx (above) should be used instead.
  //
@@ -886,7 +876,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2668,11 +2907,13 @@
+@@ -2668,11 +2904,13 @@
      _In_ int      cchSrc,
      _Out_ LPWORD  lpCharType);
  
@@ -901,7 +891,7 @@ diff --git a/um/winnls.h b/um/winnls.h
      _In_reads_(cchSrc) LPCSTR  lpSrcStr,
      _In_ int      cchSrc,
      _Out_writes_opt_(cchDest) LPSTR  lpDestStr,
-@@ -2690,6 +2931,8 @@
+@@ -2690,6 +2928,8 @@
  #if(WINVER >= 0x0500)
  
  // DEPRECATED, please use Locale Names and call EnumSystemLocalesEx
@@ -910,7 +900,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2697,6 +2940,8 @@
+@@ -2697,6 +2937,8 @@
      _In_ LOCALE_ENUMPROCA lpLocaleEnumProc,
      _In_ DWORD            dwFlags);
  // DEPRECATED, please use Locale Names and call EnumSystemLocalesEx
@@ -919,7 +909,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2720,20 +2965,24 @@
+@@ -2720,20 +2962,24 @@
  #if(WINVER >= 0x0500)
  
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -946,7 +936,7 @@ diff --git a/um/winnls.h b/um/winnls.h
      _In_ LONG_PTR                lParam);
  #ifdef UNICODE
  #define EnumSystemLanguageGroups  EnumSystemLanguageGroupsW
-@@ -2742,6 +2991,8 @@
+@@ -2742,6 +2988,8 @@
  #endif // !UNICODE
  
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -955,7 +945,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2751,6 +3002,8 @@
+@@ -2751,6 +2999,8 @@
      _In_ DWORD                     dwFlags,
      _In_ LONG_PTR                  lParam);
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -964,7 +954,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2772,6 +3025,8 @@
+@@ -2772,6 +3022,8 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: use the user language profile instead.
@@ -973,7 +963,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2780,6 +3035,8 @@
+@@ -2780,6 +3032,8 @@
      _In_ DWORD                dwFlags,
      _In_ LONG_PTR             lParam);
  // DEPRECATED: use the user language profile instead.
@@ -982,7 +972,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2802,19 +3059,23 @@
+@@ -2802,19 +3056,23 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP  | WINAPI_PARTITION_SYSTEM)
  
  // Please use Unicode instead.  Use of other code pages/encodings is discouraged.
@@ -1008,7 +998,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  #ifdef UNICODE
  #define EnumSystemCodePages  EnumSystemCodePagesW
  #else
-@@ -2836,6 +3097,8 @@
+@@ -2836,6 +3094,8 @@
  //
  // IDN (International Domain Name) Functions
  //
@@ -1017,7 +1007,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINNORMALIZEAPI
  int
  WINAPI IdnToAscii(_In_                           DWORD    dwFlags,
-@@ -2844,6 +3107,8 @@
+@@ -2844,6 +3104,8 @@
                    _Out_writes_opt_(cchASCIIChar) LPWSTR   lpASCIICharStr,
                    _In_                        	 int      cchASCIIChar);
  
@@ -1026,7 +1016,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINNORMALIZEAPI
  int
  WINAPI IdnToUnicode(_In_                         	 DWORD   dwFlags,
-@@ -2852,6 +3117,8 @@
+@@ -2852,6 +3114,8 @@
                      _Out_writes_opt_(cchUnicodeChar) LPWSTR  lpUnicodeCharStr,
                      _In_                         	 int     cchUnicodeChar);
  
@@ -1035,7 +1025,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINNORMALIZEAPI
  int
  WINAPI IdnToNameprepUnicode(_In_                            	DWORD   dwFlags,
-@@ -2870,6 +3137,8 @@
+@@ -2870,6 +3134,8 @@
  
  #if (WINVER >= 0x0600)
  
@@ -1044,7 +1034,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINNORMALIZEAPI
  int
  WINAPI NormalizeString( _In_                          NORM_FORM NormForm,
-@@ -2878,12 +3147,16 @@
+@@ -2878,12 +3144,16 @@
                          _Out_writes_opt_(cwDstLength) LPWSTR    lpDstString,
                          _In_                          int       cwDstLength );
  
@@ -1061,7 +1051,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI VerifyScripts(
-@@ -2893,6 +3166,8 @@
+@@ -2893,6 +3163,8 @@
      _In_    LPCWSTR lpTestScripts,      // test scripts string
      _In_    int     cchTestScripts);    // size of test list string
  
@@ -1070,7 +1060,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI GetStringScripts(
-@@ -2920,6 +3195,8 @@
+@@ -2920,6 +3192,8 @@
  #define LOCALE_NAME_INVARIANT               L""
  #define LOCALE_NAME_SYSTEM_DEFAULT          L"!x-sys-default-locale"
  
@@ -1079,7 +1069,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI
-@@ -2936,13 +3213,15 @@
+@@ -2936,13 +3210,15 @@
  #pragma region Desktop or PC Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -1096,7 +1086,7 @@ diff --git a/um/winnls.h b/um/winnls.h
      _In_ CALTYPE CalType,
      _Out_writes_opt_(cchData) LPWSTR lpCalData,
      _In_ int cchData,
-@@ -2956,7 +3235,7 @@
+@@ -2956,7 +3232,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
  #ifndef GetDurationFormatEx_DEFINED
@@ -1105,7 +1095,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  int
  WINAPI
  GetDurationFormatEx(
-@@ -2976,6 +3255,8 @@
+@@ -2976,6 +3252,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1114,7 +1104,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI
-@@ -2988,6 +3269,8 @@
+@@ -2988,6 +3266,8 @@
      _In_ int cchNumber
  );
  
@@ -1123,7 +1113,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI
-@@ -3000,6 +3283,8 @@
+@@ -3000,6 +3280,8 @@
      _In_ int cchCurrency
  );
  
@@ -1132,7 +1122,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI
-@@ -3014,6 +3299,8 @@
+@@ -3014,6 +3296,8 @@
  #pragma region Desktop or PC Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -1141,7 +1131,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI
-@@ -3022,6 +3309,8 @@
+@@ -3022,6 +3306,8 @@
      _In_ int cchLocaleName
  );
  
@@ -1150,7 +1140,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3032,6 +3321,8 @@
+@@ -3032,6 +3318,8 @@
      _In_reads_(cchStr) LPCWSTR          lpString,
      _In_ INT              cchStr);
  
@@ -1159,7 +1149,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3042,6 +3333,7 @@
+@@ -3042,6 +3330,7 @@
  );
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -1167,7 +1157,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  DWORD
  WINAPI
-@@ -3058,6 +3350,8 @@
+@@ -3058,6 +3347,8 @@
  #pragma region Application Family or OneCore or Gamaes Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1176,7 +1166,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  int
  WINAPI
-@@ -3070,11 +3364,13 @@
+@@ -3070,11 +3361,13 @@
      _In_ int cchValue,
      _Out_opt_ LPINT pcchFound,
      _In_opt_ LPNLSVERSIONINFO lpVersionInformation,
@@ -1191,7 +1181,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  _When_((dwMapFlags & (LCMAP_SORTKEY | LCMAP_BYTEREV | LCMAP_HASH | LCMAP_SORTHANDLE)) != 0, _At_((LPBYTE) lpDestStr, _Out_writes_bytes_opt_(cchDest)))
  #else
  _When_((dwMapFlags & (LCMAP_SORTKEY | LCMAP_BYTEREV)) != 0, _At_((LPBYTE) lpDestStr, _Out_writes_bytes_opt_(cchDest)))
-@@ -3092,10 +3388,11 @@
+@@ -3092,10 +3385,11 @@
      _Out_writes_opt_(cchDest) LPWSTR lpDestStr,
      _In_ int cchDest,
      _In_opt_ LPNLSVERSIONINFO lpVersionInformation,
@@ -1204,7 +1194,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3111,6 +3408,8 @@
+@@ -3111,6 +3405,8 @@
  
  typedef BOOL (CALLBACK* CALINFO_ENUMPROCEXEX)(LPWSTR, CALID, LPWSTR, LPARAM);
  
@@ -1213,7 +1203,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3118,25 +3417,29 @@
+@@ -3118,25 +3414,29 @@
      _In_ CALINFO_ENUMPROCEXEX pCalInfoEnumProcExEx,
      _In_opt_ LPCWSTR lpLocaleName,
      _In_ CALID Calendar,
@@ -1245,7 +1235,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3155,6 +3458,8 @@
+@@ -3155,6 +3455,8 @@
  
  typedef BOOL (CALLBACK* LOCALE_ENUMPROCEX)(LPWSTR, DWORD, LPARAM);
  
@@ -1254,7 +1244,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3162,7 +3467,7 @@
+@@ -3162,7 +3464,7 @@
      _In_ LOCALE_ENUMPROCEX lpLocaleEnumProcEx,
      _In_ DWORD dwFlags,
      _In_ LPARAM lParam,
@@ -1263,7 +1253,7 @@ diff --git a/um/winnls.h b/um/winnls.h
  );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-@@ -3175,6 +3480,8 @@
+@@ -3175,6 +3477,8 @@
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  

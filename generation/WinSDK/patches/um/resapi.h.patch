@@ -827,20 +827,17 @@ diff --git a/um/resapi.h b/um/resapi.h
  DWORD
  WINAPI
  ResUtilGetCoreClusterResourcesEx(
-@@ -2701,7 +2819,11 @@
+@@ -2701,7 +2819,8 @@
  #define CLUS_CREATE_CRYPT_CONTAINER_NOT_FOUND       0x0001
  
  typedef struct _HCLUSCRYPTPROVIDER *HCLUSCRYPTPROVIDER;
 -
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCLUSCRYPTPROVIDER HCLUSCRYPTPROVIDER;
-+#endif
 +
 +_Win32_SupportedOS_Server2012_
  HCLUSCRYPTPROVIDER
  WINAPI
  OpenClusterCryptProvider(
-@@ -2738,6 +2860,7 @@
+@@ -2738,6 +2857,7 @@
      _In_ DWORD dwFlags
      );
  
@@ -848,7 +845,7 @@ diff --git a/um/resapi.h b/um/resapi.h
  DWORD
  WINAPI
  CloseClusterCryptProvider(
-@@ -2749,6 +2872,7 @@
+@@ -2749,6 +2869,7 @@
      _In_ HCLUSCRYPTPROVIDER hClusCryptProvider
      );
  
@@ -856,7 +853,7 @@ diff --git a/um/resapi.h b/um/resapi.h
  DWORD
  WINAPI
  ClusterEncrypt(
-@@ -2768,6 +2892,7 @@
+@@ -2768,6 +2889,7 @@
      _Out_ PDWORD pcbData
      );
  
@@ -864,7 +861,7 @@ diff --git a/um/resapi.h b/um/resapi.h
  DWORD
  WINAPI
  ClusterDecrypt(
-@@ -2787,6 +2912,7 @@
+@@ -2787,6 +2909,7 @@
      _Out_ PDWORD pcbCryptOutput
      );
  
@@ -872,7 +869,7 @@ diff --git a/um/resapi.h b/um/resapi.h
  DWORD
  WINAPI
  FreeClusterCrypt(
-@@ -2848,8 +2974,10 @@
+@@ -2848,8 +2971,10 @@
      PaxosTagCStruct paxosToValidate;
  }WitnessTagHelper;
  

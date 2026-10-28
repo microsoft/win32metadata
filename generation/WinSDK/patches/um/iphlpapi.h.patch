@@ -560,17 +560,7 @@ index 3a4ac2c..bf1920e 100644
      _Inout_                         PULONG               pOutBufLen
      );
  #endif
-@@ -974,6 +1037,9 @@ typedef struct _INTERFACE_HARDWARE_CROSSTIMESTAMP
- } INTERFACE_HARDWARE_CROSSTIMESTAMP, *PINTERFACE_HARDWARE_CROSSTIMESTAMP;
- 
- DECLARE_HANDLE(HIFTIMESTAMPCHANGE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HIFTIMESTAMPCHANGE HIFTIMESTAMPCHANGE;
-+#endif
- 
- IPHLPAPI_DLL_LINKAGE
- DWORD
-@@ -1015,7 +1081,7 @@ WINAPI
+@@ -1015,7 +1078,7 @@ WINAPI
  RegisterInterfaceTimestampConfigChange(
      _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
      _In_opt_ PVOID CallerContext,
@@ -579,7 +569,7 @@ index 3a4ac2c..bf1920e 100644
      );
  
  IPHLPAPI_DLL_LINKAGE
-@@ -1047,7 +1113,7 @@ WINAPI
+@@ -1047,7 +1110,7 @@ WINAPI
  NotifyIfTimestampConfigChange(
      _In_opt_ PVOID CallerContext,
      _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
@@ -588,17 +578,7 @@ index 3a4ac2c..bf1920e 100644
      );
  
  IPHLPAPI_DLL_LINKAGE
-@@ -1102,6 +1168,9 @@ typedef struct _INTERFACE_HARDWARE_CROSSTIMESTAMP
- } INTERFACE_HARDWARE_CROSSTIMESTAMP, *PINTERFACE_HARDWARE_CROSSTIMESTAMP;
- 
- DECLARE_HANDLE(HIFTIMESTAMPCHANGE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HIFTIMESTAMPCHANGE HIFTIMESTAMPCHANGE;
-+#endif
- 
- IPHLPAPI_DLL_LINKAGE
- DWORD
-@@ -1143,7 +1212,7 @@ WINAPI
+@@ -1143,7 +1206,7 @@ WINAPI
  NotifyIfTimestampConfigChange(
      _In_opt_ PVOID CallerContext,
      _In_ PINTERFACE_TIMESTAMP_CONFIG_CHANGE_CALLBACK Callback,
@@ -607,7 +587,7 @@ index 3a4ac2c..bf1920e 100644
      );
  
  IPHLPAPI_DLL_LINKAGE
-@@ -1161,6 +1230,7 @@ CancelIfTimestampConfigChange(
+@@ -1161,6 +1224,7 @@ CancelIfTimestampConfigChange(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -615,7 +595,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1168,6 +1238,7 @@ IpReleaseAddress(
+@@ -1168,6 +1232,7 @@ IpReleaseAddress(
      _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
@@ -623,7 +603,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1175,6 +1246,7 @@ IpRenewAddress(
+@@ -1175,6 +1240,7 @@ IpRenewAddress(
      _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
@@ -631,7 +611,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1185,6 +1257,8 @@ SendARP(
+@@ -1185,6 +1251,8 @@ SendARP(
      _Inout_ PULONG  PhyAddrLen
      );
  
@@ -640,7 +620,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  BOOL
  WINAPI
-@@ -1195,6 +1269,7 @@ GetRTTAndHopCount(
+@@ -1195,6 +1263,7 @@ GetRTTAndHopCount(
      _Out_ PULONG RTT
      );
  
@@ -648,7 +628,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1202,6 +1277,7 @@ GetFriendlyIfIndex(
+@@ -1202,6 +1271,7 @@ GetFriendlyIfIndex(
      _In_ DWORD IfIndex
      );
  
@@ -656,7 +636,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1210,6 +1286,7 @@ EnableRouter(
+@@ -1210,6 +1280,7 @@ EnableRouter(
      _Out_ OVERLAPPED* pOverlapped
      );
  
@@ -664,7 +644,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1218,6 +1295,7 @@ UnenableRouter(
+@@ -1218,6 +1289,7 @@ UnenableRouter(
      _Out_opt_ LPDWORD lpdwEnableCount
      );
  
@@ -672,7 +652,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1226,6 +1304,7 @@ DisableMediaSense(
+@@ -1226,6 +1298,7 @@ DisableMediaSense(
      _In_  OVERLAPPED *pOverLapped
      );
  
@@ -680,7 +660,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1236,6 +1315,7 @@ RestoreMediaSense(
+@@ -1236,6 +1309,7 @@ RestoreMediaSense(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -688,7 +668,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1247,6 +1327,7 @@ GetIpErrorString(
+@@ -1247,6 +1321,7 @@ GetIpErrorString(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #ifdef _WS2DEF_
@@ -696,7 +676,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1262,6 +1343,7 @@ ResolveNeighbor(
+@@ -1262,6 +1337,7 @@ ResolveNeighbor(
  // Port reservation API routines.
  //
  
@@ -704,7 +684,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1271,6 +1353,7 @@ CreatePersistentTcpPortReservation(
+@@ -1271,6 +1347,7 @@ CreatePersistentTcpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -712,7 +692,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1280,6 +1363,7 @@ CreatePersistentUdpPortReservation(
+@@ -1280,6 +1357,7 @@ CreatePersistentUdpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -720,7 +700,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1288,6 +1372,7 @@ DeletePersistentTcpPortReservation(
+@@ -1288,6 +1366,7 @@ DeletePersistentTcpPortReservation(
      _In_ USHORT NumberOfPorts
      );
  
@@ -728,7 +708,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1296,6 +1381,7 @@ DeletePersistentUdpPortReservation(
+@@ -1296,6 +1375,7 @@ DeletePersistentUdpPortReservation(
      _In_ USHORT NumberOfPorts
      );
  
@@ -736,7 +716,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1305,6 +1391,7 @@ LookupPersistentTcpPortReservation(
+@@ -1305,6 +1385,7 @@ LookupPersistentTcpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -744,7 +724,7 @@ index 3a4ac2c..bf1920e 100644
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1415,6 +1502,7 @@ typedef struct NET_ADDRESS_INFO_
+@@ -1415,6 +1496,7 @@ typedef struct NET_ADDRESS_INFO_
  
  #pragma warning(pop) // 4201 nonstandard extension used: nameless struct/union
  

@@ -10,17 +10,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  #include <winapifamily.h>
  
  #pragma region Desktop Family or EventLogService Package
-@@ -27,6 +29,9 @@
- #if (WINVER >= _WIN32_WINNT_LONGHORN)
- 
- typedef HANDLE EVT_HANDLE, *PEVT_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef EVT_HANDLE EVT_HANDLE;
-+#endif
- 
- typedef enum _EVT_VARIANT_TYPE
- {
-@@ -154,7 +159,9 @@
+@@ -154,7 +156,9 @@
  
  
  // Timeout and Flags must currently be 0
@@ -31,7 +21,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtOpenSession(
      EVT_LOGIN_CLASS LoginClass,
-@@ -169,6 +176,8 @@
+@@ -169,6 +173,8 @@
  //
  ////////////////////////////////////////////////////////////////////////////////
  
@@ -40,7 +30,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -177,12 +186,15 @@
+@@ -177,12 +183,15 @@
      );
  
  
@@ -56,7 +46,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return == ERROR_SUCCESS)
  DWORD
  WINAPI
-@@ -223,7 +235,9 @@
+@@ -223,7 +232,9 @@
  } EVT_SEEK_FLAGS;
  
  
@@ -67,7 +57,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtQuery(
      _In_opt_ EVT_HANDLE Session,
-@@ -232,6 +246,8 @@
+@@ -232,6 +243,8 @@
      DWORD Flags
      );
  
@@ -76,7 +66,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -245,6 +261,8 @@
+@@ -245,6 +258,8 @@
      );
  
  // Timeout must currently be 0
@@ -85,7 +75,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtSeek(
-@@ -286,7 +304,9 @@
+@@ -286,7 +301,9 @@
      _Maybenull_ PVOID UserContext,
      _In_ EVT_HANDLE Event );
  
@@ -96,7 +86,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtSubscribe(
      _In_opt_ EVT_HANDLE Session,
-@@ -345,7 +365,9 @@
+@@ -345,7 +362,9 @@
  
   } EVT_RENDER_FLAGS;
  
@@ -107,7 +97,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtCreateRenderContext(
      DWORD ValuePathsCount,
-@@ -353,6 +375,8 @@
+@@ -353,6 +372,8 @@
      DWORD Flags
      );
  
@@ -116,7 +106,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -361,7 +385,7 @@
+@@ -361,7 +382,7 @@
      _In_ EVT_HANDLE Fragment,
      DWORD Flags,
      DWORD BufferSize,
@@ -125,7 +115,7 @@ diff --git a/um/winevt.h b/um/winevt.h
      _Out_ PDWORD BufferUsed,
      _Out_ PDWORD PropertyCount
      );
-@@ -382,6 +406,8 @@
+@@ -382,6 +403,8 @@
  
  
  // PublisherMetadata is NULL for forwarded events
@@ -134,7 +124,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -423,7 +449,9 @@
+@@ -423,7 +446,9 @@
  
  } EVT_LOG_PROPERTY_ID;
  
@@ -145,7 +135,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtOpenLog(
      _In_opt_ EVT_HANDLE Session,
-@@ -431,6 +459,8 @@
+@@ -431,6 +456,8 @@
      DWORD Flags
      );
  
@@ -154,7 +144,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -442,6 +472,8 @@
+@@ -442,6 +469,8 @@
      _Out_ PDWORD PropertyValueBufferUsed
      );
  
@@ -163,7 +153,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtClearLog(
-@@ -461,6 +493,8 @@
+@@ -461,6 +490,8 @@
  
  } EVT_EXPORTLOG_FLAGS;
  
@@ -172,7 +162,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtExportLog(
-@@ -472,6 +506,8 @@
+@@ -472,6 +503,8 @@
      );
  
  
@@ -181,7 +171,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtArchiveExportedLog(
-@@ -546,13 +582,17 @@
+@@ -546,13 +579,17 @@
  } EVT_CHANNEL_SID_TYPE;
  
  
@@ -200,7 +190,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -563,7 +603,9 @@
+@@ -563,7 +600,9 @@
      _Out_ PDWORD ChannelPathBufferUsed
      );
  
@@ -211,7 +201,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtOpenChannelConfig(
      _In_opt_ EVT_HANDLE Session,
-@@ -572,6 +614,8 @@
+@@ -572,6 +611,8 @@
      );
  
  
@@ -220,7 +210,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtSaveChannelConfig(
-@@ -579,6 +623,8 @@
+@@ -579,6 +620,8 @@
      DWORD Flags
      );
  
@@ -229,7 +219,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtSetChannelConfigProperty(
-@@ -588,6 +634,8 @@
+@@ -588,6 +631,8 @@
      _In_ PEVT_VARIANT PropertyValue
      );
  
@@ -238,7 +228,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -596,7 +644,7 @@
+@@ -596,7 +641,7 @@
      EVT_CHANNEL_CONFIG_PROPERTY_ID PropertyId,
      DWORD Flags,
      DWORD PropertyValueBufferSize,
@@ -247,7 +237,7 @@ diff --git a/um/winevt.h b/um/winevt.h
      _Out_ PDWORD PropertyValueBufferUsed
      );
  
-@@ -654,13 +702,17 @@
+@@ -654,13 +699,17 @@
  } EVT_PUBLISHER_METADATA_PROPERTY_ID;
  
  
@@ -266,7 +256,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -671,7 +723,9 @@
+@@ -671,7 +720,9 @@
      _Out_ PDWORD PublisherIdBufferUsed
      );
  
@@ -277,7 +267,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  WINAPI
  EvtOpenPublisherMetadata(
      _In_opt_ EVT_HANDLE Session,
-@@ -681,6 +735,8 @@
+@@ -681,6 +732,8 @@
      DWORD Flags
      );
  
@@ -286,7 +276,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -689,7 +745,7 @@
+@@ -689,7 +742,7 @@
      EVT_PUBLISHER_METADATA_PROPERTY_ID PropertyId,
      DWORD Flags,
      DWORD PublisherMetadataPropertyBufferSize,
@@ -295,7 +285,7 @@ diff --git a/um/winevt.h b/um/winevt.h
      _Out_ PDWORD PublisherMetadataPropertyBufferUsed
      );
  
-@@ -715,20 +771,26 @@
+@@ -715,20 +768,26 @@
  } EVT_EVENT_METADATA_PROPERTY_ID;
  
  
@@ -324,7 +314,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -737,7 +799,7 @@
+@@ -737,7 +796,7 @@
      EVT_EVENT_METADATA_PROPERTY_ID PropertyId,
      DWORD Flags,
      DWORD EventMetadataPropertyBufferSize,
@@ -333,7 +323,7 @@ diff --git a/um/winevt.h b/um/winevt.h
      _Out_ PDWORD EventMetadataPropertyBufferUsed
      );
  
-@@ -750,6 +812,8 @@
+@@ -750,6 +809,8 @@
  typedef HANDLE EVT_OBJECT_ARRAY_PROPERTY_HANDLE;
  
  
@@ -342,7 +332,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -758,6 +822,8 @@
+@@ -758,6 +819,8 @@
      _Out_ PDWORD ObjectArraySize
      );
  
@@ -351,7 +341,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -767,7 +833,7 @@
+@@ -767,7 +830,7 @@
      DWORD ArrayIndex,
      DWORD Flags,
      DWORD PropertyValueBufferSize,
@@ -360,7 +350,7 @@ diff --git a/um/winevt.h b/um/winevt.h
      _Out_ PDWORD PropertyValueBufferUsed
      );
  
-@@ -805,6 +871,8 @@
+@@ -805,6 +868,8 @@
  } EVT_EVENT_PROPERTY_ID;
  
  
@@ -369,7 +359,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -812,16 +880,20 @@
+@@ -812,16 +877,20 @@
      _In_ EVT_HANDLE QueryOrSubscription,
      EVT_QUERY_PROPERTY_ID PropertyId,
      DWORD PropertyValueBufferSize,
@@ -392,7 +382,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  BOOL
  WINAPI
  EvtUpdateBookmark(
-@@ -829,6 +901,8 @@
+@@ -829,6 +898,8 @@
      _In_ EVT_HANDLE Event
      );
  
@@ -401,7 +391,7 @@ diff --git a/um/winevt.h b/um/winevt.h
  _Success_(return != 0)
  BOOL
  WINAPI
-@@ -836,7 +910,7 @@
+@@ -836,7 +907,7 @@
      _In_ EVT_HANDLE Event,
      EVT_EVENT_PROPERTY_ID PropertyId,
      DWORD PropertyValueBufferSize,

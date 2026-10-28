@@ -1,38 +1,7 @@
 diff --git a/um/msacm.h b/um/msacm.h
 --- a/um/msacm.h
 +++ b/um/msacm.h
-@@ -136,18 +136,30 @@
- //  that can accept two or more ACM handle types.
- //
- DECLARE_HANDLE(HACMDRIVERID);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HACMDRIVERID HACMDRIVERID;
-+#endif
- typedef HACMDRIVERID       *PHACMDRIVERID;
- typedef HACMDRIVERID   FAR *LPHACMDRIVERID;
- 
- DECLARE_HANDLE(HACMDRIVER);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HACMDRIVER HACMDRIVER;
-+#endif
- typedef HACMDRIVER         *PHACMDRIVER;
- typedef HACMDRIVER     FAR *LPHACMDRIVER;
- 
- DECLARE_HANDLE(HACMSTREAM);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HACMSTREAM HACMSTREAM;
-+#endif
- typedef HACMSTREAM         *PHACMSTREAM;
- typedef HACMSTREAM     FAR *LPHACMSTREAM;
- 
- DECLARE_HANDLE(HACMOBJ);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HACMOBJ HACMOBJ;
-+#endif
- typedef HACMOBJ            *PHACMOBJ;
- typedef HACMOBJ        FAR *LPHACMOBJ;
- 
-@@ -210,6 +222,7 @@
+@@ -210,6 +210,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -40,7 +9,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  DWORD ACMAPI acmGetVersion
  (
      void
-@@ -223,6 +236,7 @@
+@@ -223,6 +224,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -48,7 +17,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmMetrics
  (
      HACMOBJ                 hao,
-@@ -272,6 +286,7 @@
+@@ -272,6 +274,7 @@
      DWORD                   fdwSupport
  );
  
@@ -56,7 +25,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverEnum
  (
      ACMDRIVERENUMCB         fnCallback,
-@@ -289,6 +304,7 @@
+@@ -289,6 +292,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -64,7 +33,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverID
  (
      HACMOBJ                 hao,
-@@ -305,6 +321,7 @@
+@@ -305,6 +309,7 @@
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
  #ifdef _WIN32
@@ -72,7 +41,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverAddA
  (
      LPHACMDRIVERID          phadid,
-@@ -314,6 +331,7 @@
+@@ -314,6 +319,7 @@
      DWORD                   fdwAdd
  );
  
@@ -80,7 +49,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverAddW
  (
      LPHACMDRIVERID          phadid,
-@@ -360,6 +378,7 @@
+@@ -360,6 +366,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -88,7 +57,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverRemove
  (
      HACMDRIVERID            hadid,
-@@ -374,6 +393,7 @@
+@@ -374,6 +381,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -96,7 +65,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverOpen
  (
      LPHACMDRIVER            phad, 
-@@ -389,6 +409,7 @@
+@@ -389,6 +397,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -104,7 +73,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverClose
  (
      HACMDRIVER              had,
-@@ -403,6 +424,7 @@
+@@ -403,6 +412,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -112,7 +81,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  LRESULT ACMAPI acmDriverMessage
  (
      HACMDRIVER              had,
-@@ -432,6 +454,7 @@
+@@ -432,6 +442,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -120,7 +89,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverPriority
  (
      HACMDRIVERID            hadid,
-@@ -625,6 +648,7 @@
+@@ -625,6 +636,7 @@
  
  
  #ifdef _WIN32
@@ -128,7 +97,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverDetailsA
  (
      HACMDRIVERID            hadid,
-@@ -632,6 +656,7 @@
+@@ -632,6 +644,7 @@
      DWORD                   fdwDetails
  );
  
@@ -136,7 +105,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmDriverDetailsW
  (
      HACMDRIVERID            hadid,
-@@ -722,6 +747,7 @@
+@@ -722,6 +735,7 @@
  #endif
  
  #ifdef _WIN32
@@ -144,7 +113,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatTagDetailsA
  (
      HACMDRIVER              had,
-@@ -729,6 +755,7 @@
+@@ -729,6 +743,7 @@
      DWORD                   fdwDetails
  );
  
@@ -152,7 +121,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatTagDetailsW
  (
      HACMDRIVER              had,
-@@ -773,6 +800,7 @@
+@@ -773,6 +788,7 @@
      DWORD                   fdwSupport
  );
  
@@ -160,7 +129,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatTagEnumA
  (
      HACMDRIVER              had,
-@@ -789,6 +817,7 @@
+@@ -789,6 +805,7 @@
      DWORD                   fdwSupport
  );
  
@@ -168,7 +137,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatTagEnumW
  (
      HACMDRIVER              had,
-@@ -893,6 +922,7 @@
+@@ -893,6 +910,7 @@
  
  
  #ifdef _WIN32
@@ -176,7 +145,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatDetailsA
  (
      HACMDRIVER              had,
-@@ -900,6 +930,7 @@
+@@ -900,6 +918,7 @@
      DWORD                   fdwDetails
  );
  
@@ -184,7 +153,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatDetailsW
  (
      HACMDRIVER              had,
-@@ -942,6 +973,7 @@
+@@ -942,6 +961,7 @@
      DWORD                   fdwSupport
  );
  
@@ -192,7 +161,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatEnumA
  (
      HACMDRIVER              had,
-@@ -959,6 +991,7 @@
+@@ -959,6 +979,7 @@
      DWORD                   fdwSupport
  );
  
@@ -200,7 +169,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatEnumW
  (
      HACMDRIVER              had,
-@@ -1013,6 +1046,7 @@
+@@ -1013,6 +1034,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -208,7 +177,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatSuggest
  (
      HACMDRIVER          had,
-@@ -1212,11 +1246,13 @@
+@@ -1212,11 +1234,13 @@
  #define ACMFORMATCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
  
  #ifdef _WIN32
@@ -222,7 +191,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFormatChooseW
  (
      LPACMFORMATCHOOSEW      pafmtc
-@@ -1302,6 +1338,7 @@
+@@ -1302,6 +1326,7 @@
  #endif
  
  #ifdef _WIN32
@@ -230,7 +199,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterTagDetailsA
  (
      HACMDRIVER              had,
-@@ -1309,6 +1346,7 @@
+@@ -1309,6 +1334,7 @@
      DWORD                   fdwDetails
  );
  
@@ -238,7 +207,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterTagDetailsW
  (
      HACMDRIVER              had,
-@@ -1353,6 +1391,7 @@
+@@ -1353,6 +1379,7 @@
      DWORD                   fdwSupport
  );
  
@@ -246,7 +215,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterTagEnumA
  (
      HACMDRIVER              had,
-@@ -1370,6 +1409,7 @@
+@@ -1370,6 +1397,7 @@
      DWORD                   fdwSupport
  );
  
@@ -254,7 +223,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterTagEnumW
  (
      HACMDRIVER              had,
-@@ -1473,6 +1513,7 @@
+@@ -1473,6 +1501,7 @@
  #endif
  
  #ifdef _WIN32
@@ -262,7 +231,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterDetailsA
  (
      HACMDRIVER              had,
-@@ -1480,6 +1521,7 @@
+@@ -1480,6 +1509,7 @@
      DWORD                   fdwDetails
  );
  
@@ -270,7 +239,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterDetailsW
  (
      HACMDRIVER              had,
-@@ -1521,6 +1563,7 @@
+@@ -1521,6 +1551,7 @@
      DWORD                   fdwSupport
  );
  
@@ -278,7 +247,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterEnumA
  (
      HACMDRIVER              had,
-@@ -1538,6 +1581,7 @@
+@@ -1538,6 +1569,7 @@
      DWORD                   fdwSupport
  );
  
@@ -286,7 +255,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterEnumW
  (
      HACMDRIVER              had,
-@@ -1736,11 +1780,13 @@
+@@ -1736,11 +1768,13 @@
  #define ACMFILTERCHOOSE_STYLEF_CONTEXTHELP           0x00000080L
  
  #ifdef _WIN32
@@ -300,7 +269,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmFilterChooseW
  (
      LPACMFILTERCHOOSEW      pafltrc
-@@ -1806,6 +1852,7 @@
+@@ -1806,6 +1840,7 @@
  #define ACMSTREAMHEADER_STATUSF_INQUEUE     0x00100000L
  
  
@@ -308,7 +277,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamOpen
  (
      LPHACMSTREAM            phas,       // pointer to stream handle
-@@ -1829,6 +1876,7 @@
+@@ -1829,6 +1864,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -316,7 +285,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamClose
  (
      HACMSTREAM              has,
-@@ -1843,6 +1891,7 @@
+@@ -1843,6 +1879,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -324,7 +293,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamSize
  (
      HACMSTREAM              has,
-@@ -1863,6 +1912,7 @@
+@@ -1863,6 +1900,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -332,7 +301,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamReset
  (
      HACMSTREAM              has,
-@@ -1877,6 +1927,7 @@
+@@ -1877,6 +1915,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -340,7 +309,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamMessage
  (
      HACMSTREAM              has,
-@@ -1894,6 +1945,7 @@
+@@ -1894,6 +1933,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -348,7 +317,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamConvert
  (
      HACMSTREAM              has, 
-@@ -1912,6 +1964,7 @@
+@@ -1912,6 +1952,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  
@@ -356,7 +325,7 @@ diff --git a/um/msacm.h b/um/msacm.h
  MMRESULT ACMAPI acmStreamPrepareHeader
  (
      HACMSTREAM          has,
-@@ -1927,6 +1980,7 @@
+@@ -1927,6 +1968,7 @@
  //
  //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - ;
  

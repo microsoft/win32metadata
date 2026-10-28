@@ -10,15 +10,7 @@ diff --git a/um/dbs.idl b/um/dbs.idl
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -496,6 +498,7 @@
- 	//
- 
- typedef ULONG_PTR HACCESSOR;
-+cpp_quote("/* Win32Metadata: type ::HACCESSOR => NativeTypedef */")
- 
- cpp_quote("#define DB_NULL_HACCESSOR 0x00 // deprecated; use DB_INVALID_HACCESSOR instead")
- cpp_quote("#define DB_INVALID_HACCESSOR 0x00")
-@@ -1972,6 +1975,7 @@
+@@ -1972,6 +1974,7 @@
  cpp_quote("#endif // OLEDBVER >= 0x0260")
  cpp_quote("//@@@- V2.6")
  

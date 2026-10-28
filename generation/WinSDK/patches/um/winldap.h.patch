@@ -1158,17 +1158,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI
  int LDAPAPI
  LdapUnicodeToUTF8(
-@@ -2538,6 +2728,9 @@
- #define LDAP_SERVER_RESP_SORT_OID_W L"1.2.840.113556.1.4.474"
- 
- typedef struct ldapsearch LDAPSearch, *PLDAPSearch;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef PLDAPSearch PLDAPSearch;
-+#endif
- 
- typedef struct ldapsortkeyW {
- 
-@@ -2570,6 +2763,7 @@
+@@ -2570,6 +2760,7 @@
  //  Use this one rather than ldap_encode_sort_control as this is per RFC.
  //
  
@@ -1176,7 +1166,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2577,6 +2771,7 @@
+@@ -2577,6 +2768,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1184,7 +1174,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_create_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPSortKeyW  *SortKeys,
-@@ -2589,6 +2784,7 @@
+@@ -2589,6 +2781,7 @@
  //  to free the attribute value, if it's returned.
  //
  
@@ -1192,7 +1182,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPControlA  *Control,
-@@ -2596,6 +2792,7 @@
+@@ -2596,6 +2789,7 @@
          _Outptr_opt_result_maybenull_ PCHAR          *Attribute
          );
  
@@ -1200,7 +1190,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPControlW  *Control,
-@@ -2610,6 +2807,7 @@
+@@ -2610,6 +2804,7 @@
  
  #else
  
@@ -1208,7 +1198,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_create_sort_control (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2617,6 +2815,7 @@
+@@ -2617,6 +2812,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1216,7 +1206,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_sort_control (
          PLDAP           ExternalHandle,
          PLDAPControlA  *Control,
-@@ -2634,6 +2833,7 @@
+@@ -2634,6 +2830,7 @@
  //  ldap_create_sort_control defined above.
  //
  
@@ -1224,7 +1214,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlW (
          PLDAP           ExternalHandle,
          PLDAPSortKeyW  *SortKeys,
-@@ -2641,6 +2841,7 @@
+@@ -2641,6 +2838,7 @@
          BOOLEAN Criticality
          );
  
@@ -1232,7 +1222,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_controlA (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2654,6 +2855,7 @@
+@@ -2654,6 +2852,7 @@
  
  #else
  
@@ -1240,7 +1230,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_encode_sort_control (
          PLDAP           ExternalHandle,
          PLDAPSortKeyA  *SortKeys,
-@@ -2668,6 +2870,7 @@
+@@ -2668,6 +2867,7 @@
  //  ldap_create_page_control.
  //
  
@@ -1248,7 +1238,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlW(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
-@@ -2676,6 +2879,7 @@
+@@ -2676,6 +2876,7 @@
          PLDAPControlW  *Control
          );
  
@@ -1256,7 +1246,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_create_page_controlA(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
-@@ -2684,6 +2888,7 @@
+@@ -2684,6 +2885,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1264,7 +1254,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlW (
          PLDAP           ExternalHandle,
          PLDAPControlW  *ServerControls,
-@@ -2691,6 +2896,7 @@
+@@ -2691,6 +2893,7 @@
          struct berval  **Cookie     // Use ber_bvfree to free
          );
  
@@ -1272,7 +1262,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_page_controlA (
          PLDAP           ExternalHandle,
          PLDAPControlA  *ServerControls,
-@@ -2705,6 +2911,7 @@
+@@ -2705,6 +2908,7 @@
  
  #else
  
@@ -1280,7 +1270,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_create_page_control(
          PLDAP           ExternalHandle,
          ULONG           PageSize,
-@@ -2713,6 +2920,7 @@
+@@ -2713,6 +2917,7 @@
          PLDAPControlA  *Control
          );
  
@@ -1288,7 +1278,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_page_control (
          PLDAP           ExternalHandle,
          PLDAPControlA  *ServerControls,
-@@ -2756,6 +2964,8 @@
+@@ -2756,6 +2961,8 @@
  #define LDAP_PAGED_RESULT_OID_STRING "1.2.840.113556.1.4.319"
  #define LDAP_PAGED_RESULT_OID_STRING_W L"1.2.840.113556.1.4.319"
  
@@ -1297,7 +1287,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageW(
          PLDAP           ExternalHandle,
          _In_ const PWSTR    DistinguishedName,
-@@ -2770,6 +2980,8 @@
+@@ -2770,6 +2977,8 @@
          PLDAPSortKeyW  *SortKeys
      );
  
@@ -1306,7 +1296,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_pageA(
          PLDAP           ExternalHandle,
          _In_ const PSTR     DistinguishedName,
-@@ -2790,6 +3002,8 @@
+@@ -2790,6 +2999,8 @@
  
  #else
  
@@ -1315,7 +1305,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI PLDAPSearch LDAPAPI ldap_search_init_page(
          PLDAP           ExternalHandle,
          const PSTR      DistinguishedName,
-@@ -2806,6 +3020,7 @@
+@@ -2806,6 +3017,7 @@
  
  #endif
  
@@ -1323,7 +1313,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_get_next_page(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchHandle,
-@@ -2813,6 +3028,7 @@
+@@ -2813,6 +3025,7 @@
          ULONG          *MessageNumber
      );
  
@@ -1331,7 +1321,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_get_next_page_s(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchHandle,
-@@ -2822,6 +3038,7 @@
+@@ -2822,6 +3035,7 @@
          LDAPMessage     **Results
      );
  
@@ -1339,7 +1329,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_get_paged_count(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchBlock,
-@@ -2829,6 +3046,7 @@
+@@ -2829,6 +3043,7 @@
          PLDAPMessage    Results
      );
  
@@ -1347,7 +1337,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_search_abandon_page(
          PLDAP           ExternalHandle,
          PLDAPSearch     SearchBlock
-@@ -2872,6 +3090,7 @@
+@@ -2872,6 +3087,7 @@
  } LDAPVLVInfo, *PLDAPVLVInfo;
  
  
@@ -1355,7 +1345,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlW (
          PLDAP             ExternalHandle,
          PLDAPVLVInfo      VlvInfo,
-@@ -2879,6 +3098,7 @@
+@@ -2879,6 +3095,7 @@
          PLDAPControlW    *Control
      );
  
@@ -1363,7 +1353,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI INT LDAPAPI ldap_create_vlv_controlA (
          PLDAP             ExternalHandle,
          PLDAPVLVInfo      VlvInfo,
-@@ -2886,6 +3106,7 @@
+@@ -2886,6 +3103,7 @@
          PLDAPControlA    *Control
      );
  
@@ -1371,7 +1361,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlW (
          PLDAP            ExternalHandle,
          PLDAPControlW   *Control,
-@@ -2895,6 +3116,7 @@
+@@ -2895,6 +3113,7 @@
          PINT             ErrCode
      );
  
@@ -1379,7 +1369,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI INT LDAPAPI ldap_parse_vlv_controlA (
          PLDAP             ExternalHandle,
          PLDAPControlA    *Control,
-@@ -2940,6 +3162,7 @@
+@@ -2940,6 +3159,7 @@
  // The operation has a default timeout of about 30 seconds.
  //
  
@@ -1387,7 +1377,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sW (
      IN   PLDAP          ExternalHandle,
      OUT  PULONG         ServerReturnValue,
-@@ -2949,6 +3172,7 @@
+@@ -2949,6 +3169,7 @@
  );
  
  
@@ -1395,7 +1385,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_start_tls_sA (
      IN   PLDAP          ExternalHandle,
      OUT  PULONG         ServerReturnValue,
-@@ -2970,6 +3194,7 @@
+@@ -2970,6 +3191,7 @@
  // The operation has a default timeout of about 30 seconds.
  //
  
@@ -1403,7 +1393,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI BOOLEAN LDAPAPI ldap_stop_tls_s (
      IN  PLDAP ExternalHandle
   );
-@@ -3009,6 +3234,7 @@
+@@ -3009,6 +3231,7 @@
  //  freed so should not be freed explicitly.
  //
  
@@ -1411,7 +1401,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI LDAPMessage *LDAPAPI ldap_first_reference( LDAP *ld, LDAPMessage *res );
  
  //
-@@ -3016,6 +3242,7 @@
+@@ -3016,6 +3239,7 @@
  //  freed so should not be freed explicitly.
  //
  
@@ -1419,7 +1409,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI LDAPMessage *LDAPAPI ldap_next_reference( LDAP *ld, LDAPMessage *entry );
  
  //
-@@ -3023,18 +3250,21 @@
+@@ -3023,18 +3247,21 @@
  //  response to a search request.
  //
  
@@ -1441,7 +1431,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_referenceA (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -3047,6 +3277,7 @@
+@@ -3047,6 +3274,7 @@
  
  #else
  
@@ -1449,7 +1439,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_parse_reference (
          LDAP *Connection,
          LDAPMessage *ResultMessage,
-@@ -3066,6 +3297,7 @@
+@@ -3066,6 +3294,7 @@
  //  These are thread safe.
  //
  
@@ -1457,7 +1447,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operationW(
          LDAP *ld,
          _In_ const PWSTR Oid,
-@@ -3075,6 +3307,7 @@
+@@ -3075,6 +3304,7 @@
          ULONG           *MessageNumber
          );
  
@@ -1465,7 +1455,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operationA(
          LDAP *ld,
          _In_ const PSTR Oid,
-@@ -3084,6 +3317,7 @@
+@@ -3084,6 +3314,7 @@
          ULONG           *MessageNumber
          );
  
@@ -1473,7 +1463,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sA (
          LDAP            *ExternalHandle,
          _In_ PSTR           Oid,
-@@ -3094,6 +3328,7 @@
+@@ -3094,6 +3325,7 @@
          struct berval   **ReturnedData
          );
  
@@ -1481,7 +1471,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operation_sW (
          LDAP            *ExternalHandle,
          _In_ PWSTR          Oid,
-@@ -3113,6 +3348,7 @@
+@@ -3113,6 +3345,7 @@
  
  #else
  
@@ -1489,7 +1479,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_extended_operation(
          LDAP *ld,
          const PSTR Oid,
-@@ -3126,6 +3362,7 @@
+@@ -3126,6 +3359,7 @@
  
  #endif
  
@@ -1497,7 +1487,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  WINLDAPAPI ULONG LDAPAPI ldap_close_extended_op(
          LDAP    *ld,
          ULONG   MessageNumber
-@@ -3225,13 +3462,16 @@
+@@ -3225,13 +3459,16 @@
  //  LdapGetLastError();
  //
  
@@ -1515,7 +1505,7 @@ diff --git a/um/winldap.h b/um/winldap.h
  
  //
  // This is an arrangement for specifying client certificates while establishing
-@@ -3289,6 +3529,7 @@
+@@ -3289,6 +3526,7 @@
  //  came from.  It can return NULL if the connection has already been freed.
  //
  

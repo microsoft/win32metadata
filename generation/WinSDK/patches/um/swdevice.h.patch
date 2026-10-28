@@ -1,17 +1,7 @@
 diff --git a/um/swdevice.h b/um/swdevice.h
 --- a/um/swdevice.h
 +++ b/um/swdevice.h
-@@ -30,6 +30,9 @@
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
- 
- DECLARE_HANDLE(HSWDEVICE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HSWDEVICE HSWDEVICE;
-+#endif
- typedef HSWDEVICE *PHSWDEVICE;
- 
- typedef VOID (WINAPI *SW_DEVICE_CREATE_CALLBACK)(
-@@ -38,6 +41,12 @@
+@@ -38,6 +38,12 @@
      _In_opt_ PVOID pContext,
      _In_opt_ PCWSTR pszDeviceInstanceId);
  
@@ -24,7 +14,7 @@ diff --git a/um/swdevice.h b/um/swdevice.h
  _Check_return_ HRESULT WINAPI
  SwDeviceCreate(
      _In_ PCWSTR pszEnumeratorName,
-@@ -47,19 +56,17 @@
+@@ -47,19 +53,17 @@
      _In_reads_opt_(cPropertyCount) const DEVPROPERTY *pProperties,
      _In_ SW_DEVICE_CREATE_CALLBACK pCallback,
      _In_opt_ PVOID pContext,
@@ -47,7 +37,7 @@ diff --git a/um/swdevice.h b/um/swdevice.h
  _Check_return_ HRESULT WINAPI
  SwDeviceGetLifetime(
      _In_ HSWDEVICE hSwDevice,
-@@ -67,12 +74,14 @@
+@@ -67,12 +71,14 @@
  
  #endif
  
@@ -62,7 +52,7 @@ diff --git a/um/swdevice.h b/um/swdevice.h
  _Check_return_ HRESULT WINAPI
  SwDeviceInterfaceRegister(
      _In_ HSWDEVICE hSwDevice,
-@@ -83,16 +92,19 @@
+@@ -83,16 +89,19 @@
      _In_ BOOL fEnabled,
      _Outptr_result_maybenull_ PWSTR* ppszDeviceInterfaceId);
  

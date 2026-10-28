@@ -1,17 +1,7 @@
 diff --git a/um/wsman.h b/um/wsman.h
 --- a/um/wsman.h
 +++ b/um/wsman.h
-@@ -277,6 +277,9 @@
- //
- 
- typedef struct WSMAN_API *WSMAN_API_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef WSMAN_API_HANDLE WSMAN_API_HANDLE;
-+#endif
- 
- //
- // -----------------------------------------------------------------------------
-@@ -285,6 +288,7 @@
+@@ -285,6 +285,7 @@
  // Returns a nonzero error code upon failure
  // -----------------------------------------------------------------------------
  // 
@@ -19,7 +9,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManInitialize(
      DWORD flags,
      _Out_ WSMAN_API_HANDLE *apiHandle
-@@ -299,6 +303,7 @@
+@@ -299,6 +300,7 @@
  // Returns non zero error code upon failure
  // -----------------------------------------------------------------------------
  // 
@@ -27,7 +17,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManDeinitialize(
      _Inout_opt_ WSMAN_API_HANDLE apiHandle,
      DWORD flags
-@@ -319,6 +324,7 @@
+@@ -319,6 +321,7 @@
  //  the messageLengthUsed parameter contains the requested size of the buffer.
  // -----------------------------------------------------------------------------
  //
@@ -35,17 +25,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManGetErrorMessage(
      _In_ WSMAN_API_HANDLE apiHandle,
      _Reserved_ DWORD flags,            // reserved for future use; must be 0
-@@ -373,6 +379,9 @@
- // -----------------------------------------------------------------------------
- //
- typedef struct WSMAN_SESSION *WSMAN_SESSION_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef WSMAN_SESSION_HANDLE WSMAN_SESSION_HANDLE;
-+#endif
- 
- //
- // -----------------------------------------------------------------------------
-@@ -380,6 +389,7 @@
+@@ -380,6 +383,7 @@
  // Returns a non zero error code upon failure
  // -----------------------------------------------------------------------------
  //
@@ -53,7 +33,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManCreateSession(
      _In_ WSMAN_API_HANDLE apiHandle,
      _In_opt_ PCWSTR connection,                         // if NULL, then connection will default to localhost
-@@ -396,6 +406,7 @@
+@@ -396,6 +400,7 @@
  // Returns a non zero error code upon failure
  // -----------------------------------------------------------------------------
  //
@@ -61,7 +41,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManCloseSession(
      _Inout_opt_ WSMAN_SESSION_HANDLE session,
      DWORD flags
-@@ -469,6 +480,7 @@
+@@ -469,6 +474,7 @@
  //  Returns a non zero error code upon failure
  // -----------------------------------------------------------------------------
  // 
@@ -69,7 +49,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManSetSessionOption(
      _In_ WSMAN_SESSION_HANDLE session,
      WSManSessionOption option,
-@@ -481,6 +493,7 @@
+@@ -481,6 +487,7 @@
  //  Returns a non zero error code upon failure
  // -----------------------------------------------------------------------------
  // 
@@ -77,7 +57,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManGetSessionOptionAsDword(
      _In_ WSMAN_SESSION_HANDLE session,
      WSManSessionOption option,
-@@ -493,6 +506,7 @@
+@@ -493,6 +500,7 @@
  //  Returns a non zero error code upon failure
  // -----------------------------------------------------------------------------
  // 
@@ -85,17 +65,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  _Success_(return == NO_ERROR)
  DWORD WINAPI WSManGetSessionOptionAsString(
      _In_ WSMAN_SESSION_HANDLE session,
-@@ -508,6 +522,9 @@
- // -----------------------------------------------------------------------------
- //
- typedef struct WSMAN_OPERATION *WSMAN_OPERATION_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef WSMAN_OPERATION_HANDLE WSMAN_OPERATION_HANDLE;
-+#endif
- 
- //
- // -----------------------------------------------------------------------------
-@@ -564,6 +581,7 @@
+@@ -564,6 +572,7 @@
  //  after the callback returns.
  // -----------------------------------------------------------------------------
  //
@@ -103,27 +73,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManCloseOperation(
      _Inout_opt_ WSMAN_OPERATION_HANDLE operationHandle,
      DWORD flags
-@@ -594,6 +612,9 @@
- // -----------------------------------------------------------------------
- //
- typedef struct WSMAN_SHELL *WSMAN_SHELL_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef WSMAN_SHELL_HANDLE WSMAN_SHELL_HANDLE;
-+#endif
- 
- //
- // -----------------------------------------------------------------------
-@@ -601,6 +622,9 @@
- // -----------------------------------------------------------------------
- //
- typedef struct WSMAN_COMMAND *WSMAN_COMMAND_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef WSMAN_COMMAND_HANDLE WSMAN_COMMAND_HANDLE;
-+#endif
- 
- //
- // -----------------------------------------------------------------------
-@@ -874,6 +898,7 @@
+@@ -874,6 +883,7 @@
  // WSManCreateShell API - wxf:Create
  // -----------------------------------------------------------------------------
  //
@@ -131,7 +81,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManCreateShell(
  
      _Inout_ WSMAN_SESSION_HANDLE session,
-@@ -904,6 +929,7 @@
+@@ -904,6 +914,7 @@
  
  } WSMAN_COMMAND_ARG_SET;
  
@@ -139,7 +89,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManRunShellCommand(
  
      _Inout_ WSMAN_SHELL_HANDLE shell,
-@@ -930,6 +956,7 @@
+@@ -930,6 +941,7 @@
  #define WSMAN_SIGNAL_SHELL_CODE_CTRL_C WSMAN_SHELL_NS L"/signal/ctrl_c"
  #define WSMAN_SIGNAL_SHELL_CODE_CTRL_BREAK WSMAN_SHELL_NS L"/signal/ctrl_break"
  
@@ -147,7 +97,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManSignalShell(
  
      _In_ WSMAN_SHELL_HANDLE shell,
-@@ -946,6 +973,7 @@
+@@ -946,6 +958,7 @@
  // -----------------------------------------------------------------------------
  //
  
@@ -155,7 +105,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManReceiveShellOutput(
  
      _Inout_ WSMAN_SHELL_HANDLE shell,
-@@ -961,6 +989,7 @@
+@@ -961,6 +974,7 @@
  //  WSManSendShellInput API - rsp:Send
  // -----------------------------------------------------------------------------
  //
@@ -163,7 +113,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManSendShellInput(
  
      _In_ WSMAN_SHELL_HANDLE shell,
-@@ -986,6 +1015,7 @@
+@@ -986,6 +1000,7 @@
  //  is called with WSMAN_FLAG_CALLBACK_END_OF_OPERATION flag as result of this operation
  // -----------------------------------------------------------------------------
  //
@@ -171,7 +121,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManCloseCommand(
      _Inout_opt_ WSMAN_COMMAND_HANDLE commandHandle,
      DWORD flags,
-@@ -1004,6 +1034,7 @@
+@@ -1004,6 +1019,7 @@
  //  WSMAN_FLAG_CALLBACK_END_OF_OPERATION flag as result of this operation
  // -----------------------------------------------------------------------------
  //
@@ -179,7 +129,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManCloseShell(
      _Inout_opt_ WSMAN_SHELL_HANDLE shellHandle,
      DWORD flags,
-@@ -1018,6 +1049,7 @@
+@@ -1018,6 +1034,7 @@
  // WSManCreateShellEx API - wxf:Create with specific shell Id.
  // -----------------------------------------------------------------------------
  //
@@ -187,7 +137,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManCreateShellEx(
      _Inout_ WSMAN_SESSION_HANDLE session,
      DWORD flags,  
-@@ -1035,6 +1067,7 @@
+@@ -1035,6 +1052,7 @@
  // WSManRunShellCommandEx API - rsp:Command with specific command Id.
  // -----------------------------------------------------------------------------
  //
@@ -195,7 +145,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManRunShellCommandEx(
  
      _Inout_ WSMAN_SHELL_HANDLE shell,
-@@ -1052,6 +1085,7 @@
+@@ -1052,6 +1070,7 @@
  // WSManDisconnectShell API - rsp:Disconnect
  // -----------------------------------------------------------------------------
  //
@@ -203,7 +153,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManDisconnectShell(
      _Inout_ WSMAN_SHELL_HANDLE shell,
      DWORD flags,  
-@@ -1064,6 +1098,7 @@
+@@ -1064,6 +1083,7 @@
  // WSManReconnectShell API - rsp:Disconnect
  // -----------------------------------------------------------------------------
  //
@@ -211,7 +161,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManReconnectShell(
      _Inout_ WSMAN_SHELL_HANDLE shell,
      DWORD flags,  
-@@ -1078,6 +1113,7 @@
+@@ -1078,6 +1098,7 @@
  // WSManRunShellCommand is used to report the completion of this operation
  // -----------------------------------------------------------------------------
  //
@@ -219,7 +169,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManReconnectShellCommand(
      _Inout_ WSMAN_COMMAND_HANDLE commandHandle,
      DWORD flags,  
-@@ -1089,6 +1125,7 @@
+@@ -1089,6 +1110,7 @@
  // WSManConnectShell API - rsp:Connect
  // -----------------------------------------------------------------------------
  //
@@ -227,7 +177,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManConnectShell(
      _Inout_ WSMAN_SESSION_HANDLE session,
      DWORD flags,  
-@@ -1105,6 +1142,7 @@
+@@ -1105,6 +1127,7 @@
  // WSManConnectShellCommand API - rsp:Connect
  // -----------------------------------------------------------------------------
  //
@@ -235,7 +185,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  void WINAPI WSManConnectShellCommand(
      _Inout_ WSMAN_SHELL_HANDLE shell,
      DWORD flags,  
-@@ -1187,6 +1225,7 @@
+@@ -1187,6 +1210,7 @@
  // errors being generated.
  // -----------------------------------------------------------------------------
  //
@@ -243,7 +193,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginReportContext(
      _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
      _In_ DWORD flags,
-@@ -1235,6 +1274,7 @@
+@@ -1235,6 +1259,7 @@
  #define WSMAN_FLAG_RECEIVE_FLUSH               2
  #define WSMAN_FLAG_RECEIVE_RESULT_DATA_BOUNDARY 4
  
@@ -251,7 +201,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginReceiveResult(
      _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
      _In_ DWORD flags,
-@@ -1260,6 +1300,7 @@
+@@ -1260,6 +1285,7 @@
  // - to supply open Xml content in certain wsman responses like rsp:ConnectResponse
  // -----------------------------------------------------------------------------
  //
@@ -259,7 +209,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginOperationComplete(
      _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
      _In_ DWORD flags,
-@@ -1287,6 +1328,7 @@
+@@ -1287,6 +1313,7 @@
  #define WSMAN_PLUGIN_PARAMS_GET_REQUESTED_DATA_LOCALE 6 /* Returns WSMAN_DATA_TEXT */
  
  
@@ -267,7 +217,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginGetOperationParameters ( 
      _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
      _In_ DWORD flags,
-@@ -1355,6 +1397,7 @@
+@@ -1355,6 +1382,7 @@
  // not call the operation complete method for some time.  
  // -----------------------------------------------------------------------------
  //
@@ -275,7 +225,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginFreeRequestDetails(_In_ WSMAN_PLUGIN_REQUEST *requestDetails);
  
  //
-@@ -1594,6 +1637,7 @@
+@@ -1594,6 +1622,7 @@
  // Authorization Plug-in Callback methods
  // -----------------------------------------------------------------------------
  //
@@ -283,7 +233,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginAuthzUserComplete ( 
      _In_ WSMAN_SENDER_DETAILS *senderDetails,
      _In_ DWORD flags,
-@@ -1604,6 +1648,7 @@
+@@ -1604,6 +1633,7 @@
      _In_opt_ PCWSTR extendedErrorInformation
      );
  
@@ -291,7 +241,7 @@ diff --git a/um/wsman.h b/um/wsman.h
  DWORD WINAPI WSManPluginAuthzOperationComplete ( 
      _In_ WSMAN_SENDER_DETAILS *senderDetails,
      _In_ DWORD flags,
-@@ -1612,6 +1657,7 @@
+@@ -1612,6 +1642,7 @@
      _In_opt_ PCWSTR extendedErrorInformation
      );
  

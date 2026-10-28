@@ -1,33 +1,15 @@
 diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
 --- a/um/diagnosticdataquery.h
 +++ b/um/diagnosticdataquery.h
-@@ -5,31 +5,54 @@
+@@ -5,31 +5,36 @@
  #include <diagnosticdataquerytypes.h>
  
  DECLARE_HANDLE(HDIAGNOSTIC_DATA_QUERY_SESSION);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDIAGNOSTIC_DATA_QUERY_SESSION HDIAGNOSTIC_DATA_QUERY_SESSION;
-+#endif
  DECLARE_HANDLE(HDIAGNOSTIC_REPORT);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDIAGNOSTIC_REPORT HDIAGNOSTIC_REPORT;
-+#endif
  DECLARE_HANDLE(HDIAGNOSTIC_EVENT_TAG_DESCRIPTION);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDIAGNOSTIC_EVENT_TAG_DESCRIPTION HDIAGNOSTIC_EVENT_TAG_DESCRIPTION;
-+#endif
  DECLARE_HANDLE(HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION HDIAGNOSTIC_EVENT_PRODUCER_DESCRIPTION;
-+#endif
  DECLARE_HANDLE(HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION HDIAGNOSTIC_EVENT_CATEGORY_DESCRIPTION;
-+#endif
  DECLARE_HANDLE(HDIAGNOSTIC_RECORD);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDIAGNOSTIC_RECORD HDIAGNOSTIC_RECORD;
-+#endif
  
  #ifdef __cplusplus
  extern "C" {
@@ -58,7 +40,7 @@ diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
  STDAPI DdqGetDiagnosticRecordStats(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ DIAGNOSTIC_DATA_SEARCH_CRITERIA const* searchCriteria,
-@@ -38,64 +61,78 @@
+@@ -38,64 +43,78 @@
      _Out_ INT64* maxRowId);
  
  // Caller is expected to free payload with CoTaskMemFree()
@@ -143,7 +125,7 @@ diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
  STDAPI DdqIsDiagnosticRecordSampledIn(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ const GUID* providerGroup,
-@@ -108,52 +145,63 @@
+@@ -108,52 +127,63 @@
      _Out_ BOOL* isSampledIn);
  
  // Invoke DdqFreeDiagnosticRecordPage() to free record
@@ -211,7 +193,7 @@ diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
  STDAPI DdqExtractDiagnosticReport(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_ UINT32 reportStoreType,
-@@ -161,6 +209,7 @@
+@@ -161,6 +191,7 @@
      _In_ PCWSTR destinationPath);
  
  // Caller is expected to free tagStats with CoTaskMemFree()
@@ -219,7 +201,7 @@ diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
  STDAPI DdqGetDiagnosticRecordTagDistribution(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_reads_(producerNameCount) PCWSTR* producerNames,
-@@ -169,6 +218,7 @@
+@@ -169,6 +200,7 @@
      _Out_ UINT32* statCount);
  
  // Caller is expected to free binaryStats with CoTaskMemFree()
@@ -227,7 +209,7 @@ diff --git a/um/diagnosticdataquery.h b/um/diagnosticdataquery.h
  STDAPI DdqGetDiagnosticRecordBinaryDistribution(
      _In_ HDIAGNOSTIC_DATA_QUERY_SESSION hSession,
      _In_reads_(producerNameCount) PCWSTR* producerNames,
-@@ -177,16 +227,19 @@
+@@ -177,16 +209,19 @@
      _Outptr_result_buffer_all_(*statCount) DIAGNOSTIC_DATA_EVENT_BINARY_STATS** binaryStats,
      _Out_ UINT32* statCount);
  

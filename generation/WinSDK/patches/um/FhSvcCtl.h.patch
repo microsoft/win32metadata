@@ -1,13 +1,10 @@
 diff --git a/um/fhsvcctl.h b/um/fhsvcctl.h
 --- a/um/fhsvcctl.h
 +++ b/um/fhsvcctl.h
-@@ -48,20 +48,25 @@
+@@ -48,20 +48,22 @@
  } FhBackupStopReason;
  
  DECLARE_HANDLE (FH_SERVICE_PIPE_HANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef FH_SERVICE_PIPE_HANDLE FH_SERVICE_PIPE_HANDLE;
-+#endif
 +
 +_Win32_SupportedOS_BEGIN_(Windows8)
 +
@@ -35,7 +32,7 @@ diff --git a/um/fhsvcctl.h b/um/fhsvcctl.h
      );
  
  __declspec(deprecated("FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
-@@ -101,6 +106,7 @@
+@@ -101,6 +103,7 @@
      _In_ FH_SERVICE_PIPE_HANDLE Pipe
      );
  

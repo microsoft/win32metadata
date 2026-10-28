@@ -2,17 +2,7 @@ diff --git a/um/powerbase.h b/um/powerbase.h
 index 73c8bfd..9be6c2a 100644
 --- a/um/powerbase.h
 +++ b/um/powerbase.h
-@@ -36,6 +36,9 @@ extern "C" {
- #define _HPOWERNOTIFY_DEF_
- 
- typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HPOWERNOTIFY HPOWERNOTIFY;
-+#endif
- 
- #endif // _HPOWERNOTIFY_DEF_
- 
-@@ -44,6 +47,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
+@@ -44,6 +44,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
  #define _OVERRIDE_NTSTATUS_
  #endif
  
@@ -20,7 +10,7 @@ index 73c8bfd..9be6c2a 100644
  NTSTATUS
  WINAPI
  CallNtPowerInformation(
-@@ -58,6 +62,8 @@ CallNtPowerInformation(
+@@ -58,6 +59,8 @@ CallNtPowerInformation(
  #undef NTSTATUS
  #endif
  
@@ -29,7 +19,7 @@ index 73c8bfd..9be6c2a 100644
  BOOLEAN
  WINAPI
  GetPwrCapabilities(
-@@ -65,6 +71,8 @@ GetPwrCapabilities(
+@@ -65,6 +68,8 @@ GetPwrCapabilities(
      );
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -38,7 +28,7 @@ index 73c8bfd..9be6c2a 100644
  POWER_PLATFORM_ROLE
  WINAPI
  PowerDeterminePlatformRoleEx(
-@@ -74,10 +82,12 @@ PowerDeterminePlatformRoleEx(
+@@ -74,10 +79,12 @@ PowerDeterminePlatformRoleEx(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
@@ -52,7 +42,7 @@ index 73c8bfd..9be6c2a 100644
      _In_ HANDLE Recipient,
      _Out_ PHPOWERNOTIFY RegistrationHandle
      );
-@@ -85,6 +95,8 @@ PowerRegisterSuspendResumeNotification(
+@@ -85,6 +92,8 @@ PowerRegisterSuspendResumeNotification(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)

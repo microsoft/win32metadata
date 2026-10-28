@@ -1,28 +1,6 @@
 --- a/shared/minwindef.h
 +++ b/shared/minwindef.h
-@@ -156,4 +156,5 @@
- typedef unsigned long       DWORD;
-+_Win32_NativeTypedef_
- typedef int                 BOOL;
- typedef unsigned char       BYTE;
- typedef unsigned short      WORD;
-@@ -186,3 +187,6 @@
-+_Win32_NativeTypedef_
- typedef UINT_PTR            WPARAM;
-+_Win32_NativeTypedef_
- typedef LONG_PTR            LPARAM;
-+_Win32_NativeTypedef_
- typedef LONG_PTR            LRESULT;
-@@ -209,6 +213,8 @@
- typedef HANDLE NEAR         *SPHANDLE;
- typedef HANDLE FAR          *LPHANDLE;
-+_Win32_NativeTypedef_
- typedef HANDLE              HGLOBAL;
-+_Win32_NativeTypedef_
- typedef HANDLE              HLOCAL;
- typedef HANDLE              GLOBALHANDLE;
- typedef HANDLE              LOCALHANDLE;
-@@ -219,7 +225,7 @@
+@@ -219,7 +219,7 @@
  #endif
  #ifndef _MAC
 -#ifdef _WIN64
@@ -31,12 +9,11 @@
  typedef INT_PTR (NEAR WINAPI *NEARPROC)();
  typedef INT_PTR (WINAPI *PROC)();
  #else
-@@ -247,15 +253,30 @@
+@@ -247,15 +247,20 @@
  DECLARE_HANDLE(HKEY);
  typedef HKEY *PHKEY;
  DECLARE_HANDLE(HMETAFILE);
  DECLARE_HANDLE(HINSTANCE);
-+_Win32_NativeTypedef_
 +_Win32_AlsoUsableFor_(HINSTANCE)
  typedef HINSTANCE HMODULE;      /* HMODULEs can be used in place of HINSTANCEs */
  DECLARE_HANDLE(HRGN);
@@ -48,17 +25,8 @@
  DECLARE_HANDLE(HWINSTA);
  DECLARE_HANDLE(HKL);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HKEY HKEY;
-+_Win32_NativeTypedef_ typedef HMETAFILE HMETAFILE;
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HMODULE) typedef HINSTANCE HINSTANCE;
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HGDIOBJ) typedef HRGN HRGN;
-+_Win32_NativeTypedef_ typedef HRSRC HRSRC;
-+_Win32_NativeTypedef_ typedef HSPRITE HSPRITE;
-+_Win32_NativeTypedef_ typedef HLSURF HLSURF;
-+_Win32_NativeTypedef_ typedef HSTR HSTR;
-+_Win32_NativeTypedef_ typedef HTASK HTASK;
-+_Win32_NativeTypedef_ typedef HWINSTA HWINSTA;
-+_Win32_NativeTypedef_ typedef HKL HKL;
++_Win32_AlsoUsableFor_(HMODULE) typedef HINSTANCE HINSTANCE;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HRGN HRGN;
 +#endif
  
  #ifndef _MAC

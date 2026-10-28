@@ -1,29 +1,7 @@
 diff --git a/um/ddeml.h b/um/ddeml.h
 --- a/um/ddeml.h
 +++ b/um/ddeml.h
-@@ -33,9 +33,21 @@
- /******** public types ********/
- 
- DECLARE_HANDLE(HCONVLIST);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCONVLIST HCONVLIST;
-+#endif
- DECLARE_HANDLE(HCONV);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCONV HCONV;
-+#endif
- DECLARE_HANDLE(HSZ);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HSZ HSZ;
-+#endif
- DECLARE_HANDLE(HDDEDATA);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDDEDATA HDDEDATA;
-+#endif
- #define EXPENTRY        CALLBACK
- 
- /* the following structure is for use with XTYP_WILDCONNECT processing. */
-@@ -70,9 +82,9 @@
+@@ -70,9 +70,9 @@
      HSZ     hszTopic;      /* Topic name for conversation  */
      HSZ     hszItem;       /* transaction item name or NULL if quiescent  */
      UINT    wFmt;          /* transaction format or NULL if quiescent  */
@@ -36,7 +14,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
      UINT    wLastError;    /* last transaction error.  */
      HCONVLIST hConvList;   /* parent hConvList if this conversation is in a list */
      CONVCONTEXT ConvCtxt;  /* conversation context */
-@@ -100,6 +112,27 @@
+@@ -100,6 +100,27 @@
  #define     XST_ADVDATASENT      15
  #define     XST_ADVDATAACKRCVD   16
  
@@ -64,7 +42,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  /* used in LOWORD(dwData1) of XTYP_ADVREQ callbacks... */
  #define     CADV_LATEACK         0xFFFF
  
-@@ -114,6 +147,19 @@
+@@ -114,6 +135,19 @@
  #define     ST_INLIST               0x0040
  #define     ST_BLOCKNEXT            0x0080
  #define     ST_ISSELF               0x0100
@@ -84,7 +62,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  
  /* DDE constants for wStatus field */
  
-@@ -218,19 +264,21 @@
+@@ -218,19 +252,21 @@
  
  /* DLL registration functions */
  
@@ -108,7 +86,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
      _Reserved_ DWORD ulRes);
  #ifdef UNICODE
  #define DdeInitialize  DdeInitializeW
-@@ -269,6 +317,7 @@
+@@ -269,6 +305,7 @@
  #define     APPCLASS_STANDARD            0x00000000L
  #define     APPCLASS_MASK                0x0000000FL
  
@@ -116,7 +94,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdeUninitialize(
-@@ -277,6 +326,7 @@
+@@ -277,6 +314,7 @@
  /*
   * conversation enumeration functions
   */
@@ -124,7 +102,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  HCONVLIST
  WINAPI
  DdeConnectList(
-@@ -286,11 +336,13 @@
+@@ -286,11 +324,13 @@
      _In_ HCONVLIST hConvList,
      _In_opt_ PCONVCONTEXT pCC);
  
@@ -138,7 +116,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdeDisconnectList(
-@@ -299,6 +351,7 @@
+@@ -299,6 +339,7 @@
  /*
   * conversation control functions
   */
@@ -146,7 +124,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  HCONV
  WINAPI
  DdeConnect(
-@@ -307,16 +360,19 @@
+@@ -307,16 +348,19 @@
      _In_ HSZ hszTopic,
      _In_opt_ PCONVCONTEXT pCC);
  
@@ -166,7 +144,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  UINT
  WINAPI
  DdeQueryConvInfo(
-@@ -324,6 +380,7 @@
+@@ -324,6 +368,7 @@
      _In_ DWORD idTransaction,
      _Inout_ PCONVINFO pConvInfo);
  
@@ -174,7 +152,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdeSetUserHandle(
-@@ -331,6 +388,7 @@
+@@ -331,6 +376,7 @@
      _In_ DWORD id,
      _In_ DWORD_PTR hUser);
  
@@ -182,7 +160,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdeAbandonTransaction(
-@@ -342,6 +400,7 @@
+@@ -342,6 +388,7 @@
  /*
   * app server interface functions
   */
@@ -190,7 +168,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdePostAdvise(
-@@ -349,13 +408,16 @@
+@@ -349,13 +396,16 @@
      _In_ HSZ hszTopic,
      _In_ HSZ hszItem);
  
@@ -209,7 +187,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdeImpersonateClient(
-@@ -367,22 +429,40 @@
+@@ -367,22 +417,40 @@
  #define EC_DISABLE              ST_BLOCKED
  #define EC_QUERYWAITING         2
  
@@ -251,7 +229,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  HDDEDATA
  WINAPI
  DdeClientTransaction(
-@@ -391,7 +471,7 @@
+@@ -391,7 +459,7 @@
      _In_ HCONV hConv,
      _In_opt_ HSZ hszItem,
      _In_ UINT wFmt,
@@ -260,7 +238,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
      _In_ DWORD dwTimeout,
      _Out_opt_ LPDWORD pdwResult);
  
-@@ -400,6 +480,7 @@
+@@ -400,6 +468,7 @@
   *data transfer functions
   */
  
@@ -268,7 +246,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  HDDEDATA
  WINAPI
  DdeCreateDataHandle(
-@@ -411,6 +492,7 @@
+@@ -411,6 +480,7 @@
      _In_ UINT wFmt,
      _In_ UINT afCmd);
  
@@ -276,7 +254,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  HDDEDATA
  WINAPI
  DdeAddData(
-@@ -419,6 +501,7 @@
+@@ -419,6 +489,7 @@
      _In_ DWORD cb,
      _In_ DWORD cbOff);
  
@@ -284,7 +262,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  DWORD
  WINAPI
  DdeGetData(
-@@ -427,17 +510,20 @@
+@@ -427,17 +498,20 @@
      _In_ DWORD cbMax,
      _In_ DWORD cbOff);
  
@@ -305,7 +283,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  BOOL
  WINAPI
  DdeFreeDataHandle(
-@@ -446,6 +532,7 @@
+@@ -446,6 +520,7 @@
  #define     HDATA_APPOWNED          0x0001
  
  
@@ -313,7 +291,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  UINT
  WINAPI
  DdeGetLastError(
-@@ -477,12 +564,14 @@
+@@ -477,12 +552,14 @@
  
  #define     DMLERR_LAST                        0x4011
  
@@ -328,7 +306,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  HSZ
  WINAPI
  DdeCreateStringHandleW(
-@@ -495,6 +584,7 @@
+@@ -495,6 +572,7 @@
  #define DdeCreateStringHandle  DdeCreateStringHandleA
  #endif // !UNICODE
  
@@ -336,7 +314,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  DWORD
  WINAPI
  DdeQueryStringA(
-@@ -503,6 +593,7 @@
+@@ -503,6 +581,7 @@
      _Out_writes_opt_(cchMax) LPSTR psz,
      _In_ DWORD cchMax,
      _In_ int iCodePage);
@@ -344,7 +322,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  DWORD
  WINAPI
  DdeQueryStringW(
-@@ -517,18 +608,21 @@
+@@ -517,18 +596,21 @@
  #define DdeQueryString  DdeQueryStringA
  #endif // !UNICODE
  
@@ -366,7 +344,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  int
  WINAPI
  DdeCmpStringHandles(
-@@ -643,6 +737,25 @@
+@@ -643,6 +725,25 @@
  #define     APPCLASS_MONITOR        0x00000001L
  #define     XTYP_MONITOR            (0x00F0 | XCLASS_NOTIFICATION | XTYPF_NOBLOCK)
  
@@ -392,7 +370,7 @@ diff --git a/um/ddeml.h b/um/ddeml.h
  /*
   * Callback filter flags for use with MONITOR apps - 0 implies no monitor
   * callbacks.
-@@ -655,6 +768,33 @@
+@@ -655,6 +756,33 @@
  #define     MF_LINKS                     0x20000000
  #define     MF_CONV                      0x40000000
  

@@ -702,19 +702,16 @@ index f907576fa1be5bb647cb4c506cc028bac892968b..af42c24e888f2e9ba57e8a9be1fcf692
    _In_          PVOID pReserved,
    _In_          DWORD Reserved,
    _In_          LPSTR pListenerName,
-@@ -1597,7 +1736,10 @@
+@@ -1597,7 +1736,7 @@
  
  DECLARE_HANDLE(WTS_CLOUD_AUTH_HANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef WTS_CLOUD_AUTH_HANDLE WTS_CLOUD_AUTH_HANDLE;
-+#endif
  
 -WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
 +_Win32_RAIIFree_(WTSCloudAuthClose, -1, 0) WTS_CLOUD_AUTH_HANDLE WINAPI WTSCloudAuthOpen(
      _In_ const GUID* activityId);
  
  void WINAPI WTSCloudAuthClose(
-@@ -1646,16 +1788,19 @@
+@@ -1646,16 +1785,19 @@
  #define WTSGetListenerSecurity WTSGetListenerSecurityA
  #endif
  

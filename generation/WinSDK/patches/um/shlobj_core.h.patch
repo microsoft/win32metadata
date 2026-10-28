@@ -852,7 +852,7 @@ index 04174f87..803bb767 100644
  
  //
  // Special value of fmtID which means "use the default format"
-@@ -2455,24 +2732,42 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
+@@ -2455,24 +2732,39 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
  #define SHFMT_ID_DEFAULT    0xFFFF
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(SHFMT_ID, unsigned int, SHFMT_ID_DEFAULT);
@@ -883,9 +883,6 @@ index 04174f87..803bb767 100644
  #define HPSXA_DEFINED
 +#include <sal.h>
  DECLARE_HANDLE( HPSXA );
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HPSXA HPSXA;
-+#endif
  #endif
 +_Win32_SupportedOS_WindowsXP_
  WINSHELLAPI void WINAPI SHDestroyPropSheetExtArray(_In_ HPSXA hpsxa);
@@ -895,7 +892,7 @@ index 04174f87..803bb767 100644
  WINSHELLAPI UINT WINAPI SHReplaceFromPropSheetExtArray(_In_ HPSXA hpsxa, UINT uPageID, _In_ LPFNADDPROPSHEETPAGE lpfnReplaceWith, LPARAM lParam);
  
  // shell restriction values, parameter for SHRestricted()
-@@ -2698,32 +2993,44 @@ typedef enum RESTRICTIONS
+@@ -2698,32 +2990,44 @@ typedef enum RESTRICTIONS
  #endif  // NTDDI_VISTA
  #endif  // NTDDI_WINXPSP2
  } RESTRICTIONS;
@@ -942,7 +939,7 @@ index 04174f87..803bb767 100644
                             _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
  #ifdef UNICODE
  #define SHDefExtractIcon  SHDefExtractIconW
-@@ -2734,7 +3041,11 @@ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
+@@ -2734,7 +3038,11 @@ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
  // Elevation
  
  // OpenAsInfo flags
@@ -955,7 +952,7 @@ index 04174f87..803bb767 100644
      OAIF_ALLOW_REGISTRATION = 0x00000001,     // enable the "always use this file" checkbox (NOTE if you don't pass this, it will be disabled)
      OAIF_REGISTER_EXT       = 0x00000002,     // do the registration after the user hits "ok"
      OAIF_EXEC               = 0x00000004,     // execute file after registering
-@@ -2765,13 +3076,18 @@ typedef struct _openasinfo
+@@ -2765,13 +3073,18 @@ typedef struct _openasinfo
  #include <poppack.h>        /* Return to byte packing */
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -974,7 +971,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
  #ifdef UNICODE
  #define Shell_GetCachedImageIndex  Shell_GetCachedImageIndexW
-@@ -2782,14 +3098,25 @@ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIn
+@@ -2782,14 +3095,25 @@ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIn
  #define VALIDATEUNC_CONNECT     0x0001          // connect a drive letter
  #define VALIDATEUNC_NOUI        0x0002          // don't bring up UI
  #define VALIDATEUNC_PRINT       0x0004          // validate as print share instead of disk share
@@ -1001,7 +998,7 @@ index 04174f87..803bb767 100644
  #define PIFNAMESIZE     30
  #define PIFSTARTLOCSIZE 63
  #define PIFDEFPATHSIZE  64
-@@ -2817,14 +3144,21 @@ typedef UNALIGNED PROPPRG *PPROPPRG;
+@@ -2817,14 +3141,21 @@ typedef UNALIGNED PROPPRG *PPROPPRG;
  typedef UNALIGNED PROPPRG FAR *LPPROPPRG;
  typedef const UNALIGNED PROPPRG FAR *LPCPROPPRG;
  
@@ -1023,7 +1020,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPARAM lParam);
  
  //
-@@ -2834,9 +3168,12 @@ SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPAR
+@@ -2834,9 +3165,12 @@ SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPAR
  #undef  INTERFACE
  #define INTERFACE   IShellFolderViewCB
  
@@ -1037,7 +1034,7 @@ index 04174f87..803bb767 100644
  };
  
  #include <pshpack8.h>
-@@ -2918,6 +3255,39 @@ typedef struct _ITEMSPACING
+@@ -2918,6 +3252,39 @@ typedef struct _ITEMSPACING
  #define SFVM_GETPANE              59    // Pane ID            DWORD*
  #define SFVM_GETHELPTOPIC         63    // -                  SFVM_HELPTOPIC_DATA *
  #define SFVM_GETANIMATION         68    // HINSTANCE *        WCHAR *
@@ -1077,7 +1074,7 @@ index 04174f87..803bb767 100644
 +
  // IShellFolderView
  //
-@@ -2946,10 +3316,17 @@ typedef struct _ITEMSPACING
+@@ -2946,10 +3313,17 @@ typedef struct _ITEMSPACING
  #define SFVS_SELECT_NONE        0x0 // unselect all
  #define SFVS_SELECT_ALLITEMS    0x1 // select all
  #define SFVS_SELECT_INVERT      0x2 // Invert the selection
@@ -1095,7 +1092,7 @@ index 04174f87..803bb767 100644
  DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-08002B2E1262")
  {
      STDMETHOD(Rearrange) (THIS_ LPARAM lParamSort) PURE; // use IFolderView2::SetSortColumns
-@@ -2978,7 +3355,7 @@ DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-0800
+@@ -2978,7 +3352,7 @@ DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-0800
      STDMETHOD(SetPoints) (THIS_ _In_ IDataObject *pDataObject) PURE; // copies points of current selection in to data object.  Call is not needed if drag operation was originated by the IShellView.
      STDMETHOD(GetItemSpacing) (THIS_ _Out_ ITEMSPACING *pSpacing) PURE; // use IFolderView::GetSpacing instead.  GetItemSpacing returns the spacing for small and large view modes only, returning S_OK if the current view mode is is positionable, S_FALSE otherwise.
      STDMETHOD(SetCallback) (THIS_ _In_opt_ IShellFolderViewCB* pNewCB, _Outptr_result_maybenull_ IShellFolderViewCB** ppOldCB) PURE; // replace the IShellFolderViewCB that the IShellView uses
@@ -1104,7 +1101,7 @@ index 04174f87..803bb767 100644
      STDMETHOD(QuerySupport) (THIS_ _Inout_ UINT * pdwSupport ) PURE; // does nothing, returns S_OK.
      STDMETHOD(SetAutomationObject)(THIS_ _In_opt_ IDispatch* pdisp) PURE; // replaces the IShellView's internal automation object.
  };
-@@ -2992,10 +3369,12 @@ typedef struct _SFV_CREATE
+@@ -2992,10 +3366,12 @@ typedef struct _SFV_CREATE
      IShellFolderViewCB* psfvcb; // No callback if NULL
  } SFV_CREATE;
  
@@ -1118,7 +1115,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI CDefFolderMenu_Create2(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ HWND hwnd,
                                  UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl,
                                  _In_opt_ IShellFolder *psf, _In_opt_ LPFNDFMCALLBACK pfn,
-@@ -3017,7 +3396,8 @@ typedef struct {
+@@ -3017,7 +3393,8 @@ typedef struct {
  // used in the implemetnation of ::GetUIObjectOf()
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -1128,7 +1125,7 @@ index 04174f87..803bb767 100644
  #endif // NTDDI_VISTA
  
  // structure for lParam of DFM_INFOKECOMMANDEX
-@@ -3061,7 +3441,14 @@
+@@ -3061,7 +3438,14 @@
  #define DFM_GETVERBW                 15     // idCmd,cchMax pszText -Unicode
  #define DFM_GETVERBA                 16     // idCmd,cchMax pszText -Ansi
  #define DFM_MERGECONTEXTMENU_BOTTOM  17     // uFlags       LPQCMINFO
@@ -1143,7 +1140,7 @@ index 04174f87..803bb767 100644
  
  // Commands from DFM_INVOKECOMMAND when strings are passed in
  #define DFM_CMD_DELETE          ((UINT)-1)
-@@ -3076,7 +3463,14 @@
+@@ -3076,7 +3460,14 @@
  #define DFM_CMD_PASTELINK       ((UINT)-10)
  #define DFM_CMD_PASTESPECIAL    ((UINT)-11)
  #define DFM_CMD_MODALPROP       ((UINT)-12)
@@ -1158,7 +1155,7 @@ index 04174f87..803bb767 100644
  
  
  typedef HRESULT (CALLBACK * LPFNVIEWCALLBACK)(_In_ IShellView *psvOuter,
-@@ -3100,7 +3494,9 @@ typedef struct _CSFV
+@@ -3100,7 +3491,9 @@ typedef struct _CSFV
  
  #include <poppack.h>        /* Return to byte packing */
  
@@ -1168,7 +1165,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI SHCreateShellFolderViewEx(_In_ CSFV *pcsfv, _Outptr_ IShellView **ppsv);
  
  
-@@ -3131,7 +3527,13 @@
+@@ -3131,7 +3524,13 @@
  #define PID_IS_AUTHOR        11
  #define PID_IS_DESCRIPTION   12
  #define PID_IS_COMMENT       13
@@ -1182,7 +1179,7 @@ index 04174f87..803bb767 100644
  
  // PROPIDs for Internet Sites (FMTID_InternetSite) to be used with
  // IPropertySetStorage/IPropertyStorage
-@@ -3176,25 +3578,45 @@
+@@ -3176,25 +3575,45 @@
  #define PID_INTSITE_TRACKING      19
  #define PID_INTSITE_ICONINDEX     20
  #define PID_INTSITE_ICONFILE      21
@@ -1228,7 +1225,7 @@ index 04174f87..803bb767 100644
  
  ////////////////////////////////////////////////////////////////////
  //
-@@ -3313,7 +3735,8 @@ typedef struct {
+@@ -3313,7 +3732,8 @@ typedef struct {
  #define SHELLSTATE_SIZE_IE4   FIELD_OFFSET(SHELLSTATE,uNotUsed)
  #define SHELLSTATE_SIZE_WIN2K sizeof(SHELLSTATE)
  
@@ -1238,7 +1235,7 @@ index 04174f87..803bb767 100644
  
  //
  //  SysFiles are these windows special files:
-@@ -3373,17 +3796,49 @@ typedef struct {
+@@ -3373,17 +3793,49 @@ typedef struct {
  #define SSF_WEBVIEW                 0x00020000
  #define SSF_SHOWSUPERHIDDEN         0x00040000
  #define SSF_SEPPROCESS              0x00080000
@@ -1288,7 +1285,7 @@ index 04174f87..803bb767 100644
 +#endif
  #endif  // NTDDI_VISTA
  
-@@ -3394,24 +3849,29 @@ typedef struct {
+@@ -3394,24 +3846,29 @@ typedef struct {
  // When these settings change, a WM_SETTINGCHANGE message is sent
  // with the string lParam value of "ShellState".
  //
@@ -1322,7 +1319,7 @@ index 04174f87..803bb767 100644
  
  #endif // NTDDI_VISTA
  
-@@ -3445,6 +3905,7 @@ __inline BOOL IDListContainerIsConsistent(_In_reads_bytes_(cbAlloc) PCUIDLIST_RE
+@@ -3445,6 +3902,7 @@ __inline BOOL IDListContainerIsConsistent(_In_reads_bytes_(cbAlloc) PCUIDLIST_RE
  //  psfgaoOut is optional for SFGAO attributes
  //
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -1330,7 +1327,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _In_ SFGAOF sfgaoIn, _Out_opt_ SFGAOF *psfgaoOut);
  #endif // NTDDI_WINXP
  
-@@ -3475,7 +3936,9 @@ SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr
+@@ -3475,7 +3933,9 @@ SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr
  #endif // NTDDI_WINXP
  
  
@@ -1340,7 +1337,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
  #ifdef UNICODE
  #define SHPathPrepareForWrite  SHPathPrepareForWriteW
-@@ -3491,6 +3954,9 @@ SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnabl
+@@ -3491,6 +3951,9 @@ SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnabl
  //--------------------------------------------------------------------------
  #undef  INTERFACE
  #define INTERFACE  INamedPropertyBag
@@ -1350,7 +1347,7 @@ index 04174f87..803bb767 100644
  DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000000000000")
  {
      STDMETHOD(ReadPropertyNPB) (THIS_ _In_ PCWSTR pszBagname,
-@@ -3521,6 +3987,7 @@ DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000
+@@ -3521,6 +3984,7 @@ DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000
  //  IPropertyStorage** ppstg,  // Address to receive requested vtable
  //  puCodePage      //  Optional address to receive the code page ID for the set.
  //
@@ -1358,7 +1355,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _In_opt_ const CLSID *pclsid, DWORD grfFlags, DWORD grfMode, DWORD dwDisposition, _Outptr_ IPropertyStorage** ppstg, _Out_opt_ UINT* puCodePage);
  
  
-@@ -3536,6 +4003,7 @@ SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _
+@@ -3536,6 +4000,7 @@ SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _
  //  rgpspec,   //Array of the properties to be read
  //  rgvar      //Array of PROPVARIANTs containing the property values on return
  //
@@ -1366,7 +1363,7 @@ index 04174f87..803bb767 100644
  SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Out_writes_all_(cpspec) PROPVARIANT rgvar[] );
  
  
-@@ -3552,35 +4020,43 @@ SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG
+@@ -3552,35 +4017,43 @@ SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG
  //  rgvar,     // Array of PROPVARIANT values
  //  propidNameFirst // Minimum value for property identifiers. This value should be >= PID_FIRST_USABLE
  //

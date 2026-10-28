@@ -1,118 +1,39 @@
 --- a/shared/windef.h
 +++ b/shared/windef.h
-@@ -39,4 +39,8 @@
+@@ -39,4 +39,7 @@
  DECLARE_HANDLE            (HWND);
  DECLARE_HANDLE            (HHOOK);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HANDLE) typedef HWND HWND;
-+_Win32_NativeTypedef_ typedef HHOOK HHOOK;
++_Win32_AlsoUsableFor_(HANDLE) typedef HWND HWND;
 +#endif
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-@@ -62,6 +66,9 @@
- #ifdef STRICT
- typedef void NEAR* HGDIOBJ;
- #else
- DECLARE_HANDLE(HGDIOBJ);
- #endif
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HGDIOBJ HGDIOBJ;
-+#endif
- #endif
-@@ -70,2 +77,5 @@
- DECLARE_HANDLE(HACCEL);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HACCEL HACCEL;
-+#endif
- #endif
-@@ -73,3 +83,7 @@
+@@ -73,3 +76,7 @@
  DECLARE_HANDLE(HBITMAP);
  DECLARE_HANDLE(HBRUSH);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HGDIOBJ) typedef HBITMAP HBITMAP;
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HGDIOBJ) typedef HBRUSH HBRUSH;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HBITMAP HBITMAP;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HBRUSH HBRUSH;
 +#endif
  #endif
-@@ -77,2 +91,5 @@
- DECLARE_HANDLE(HCOLORSPACE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCOLORSPACE HCOLORSPACE;
-+#endif
- #endif /* WINVER >= 0x0400 */
-@@ -80,2 +97,5 @@
- DECLARE_HANDLE(HDC);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDC HDC;
-+#endif
- #endif
-@@ -82,4 +102,9 @@
- DECLARE_HANDLE(HGLRC);          // OpenGL
- DECLARE_HANDLE(HDESK);
- DECLARE_HANDLE(HENHMETAFILE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HGLRC HGLRC;
-+_Win32_NativeTypedef_ typedef HDESK HDESK;
-+_Win32_NativeTypedef_ typedef HENHMETAFILE HENHMETAFILE;
-+#endif
- #if !defined(_MAC) || !defined(GDI_INTERNAL)
-@@ -86,2 +111,5 @@
+@@ -86,2 +93,5 @@
  DECLARE_HANDLE(HFONT);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HGDIOBJ) typedef HFONT HFONT;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HFONT HFONT;
 +#endif
  #endif
-@@ -88,2 +116,5 @@
- DECLARE_HANDLE(HICON);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HICON HICON;
-+#endif
- #if !defined(_MAC) || !defined(WIN_INTERNAL)
-@@ -90,2 +121,5 @@
- DECLARE_HANDLE(HMENU);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HMENU HMENU;
-+#endif
- #endif
-@@ -93,3 +127,7 @@
+@@ -93,3 +103,7 @@
  DECLARE_HANDLE(HPALETTE);
  DECLARE_HANDLE(HPEN);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HGDIOBJ) typedef HPALETTE HPALETTE;
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HGDIOBJ) typedef HPEN HPEN;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HPALETTE HPALETTE;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HPEN HPEN;
 +#endif
  #endif
-@@ -98,2 +136,5 @@
- DECLARE_HANDLE(HWINEVENTHOOK);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HWINEVENTHOOK HWINEVENTHOOK;
-+#endif
- #endif /* WINVER >= 0x0400 */
-@@ -110,3 +151,6 @@
- DECLARE_HANDLE(HMONITOR);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HMONITOR HMONITOR;
-+#endif
- 
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
-@@ -120,3 +164,6 @@
- DECLARE_HANDLE(HUMPD);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HUMPD HUMPD;
-+#endif
- 
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -134,3 +181,7 @@
+@@ -134,3 +148,6 @@
  #endif
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ _Win32_AlsoUsableFor_(HICON) typedef HCURSOR HCURSOR;
++_Win32_AlsoUsableFor_(HICON) typedef HCURSOR HCURSOR;
 +#endif
-+_Win32_NativeTypedef_
  typedef DWORD   COLORREF;
-@@ -256,3 +307,6 @@
- DECLARE_HANDLE(DPI_AWARENESS_CONTEXT);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef DPI_AWARENESS_CONTEXT DPI_AWARENESS_CONTEXT;
-+#endif
- 
- typedef enum DPI_AWARENESS {

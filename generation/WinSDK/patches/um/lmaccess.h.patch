@@ -551,17 +551,7 @@ index d6bf1c4c..e349d485 100644
  _Success_(return == ERROR_SUCCESS)
  NET_API_STATUS NET_API_FUNCTION
  NetGetAnyDCName (
-@@ -1590,6 +1663,9 @@ NetLogonControl2 (
- 
- #ifndef _NTDEF_
- typedef _Return_type_success_(return >= 0) LONG NTSTATUS, *PNTSTATUS;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef NTSTATUS NTSTATUS;
-+#endif
- #endif
- 
- NTSTATUS NET_API_FUNCTION
-@@ -1711,6 +1787,7 @@ DEFINE_GUID( //262e99c9-6160-4871-acec-4e61736b6f21
+@@ -1711,6 +1784,7 @@ DEFINE_GUID( //262e99c9-6160-4871-acec-4e61736b6f21
      0x4871,
      0xAC, 0xEC, 0x4E, 0x61, 0x73, 0x6B, 0x6F, 0x21 );
  
@@ -569,7 +559,7 @@ index d6bf1c4c..e349d485 100644
  NTSTATUS
  NetAddServiceAccount(
      _In_opt_ LPWSTR ServerName,
-@@ -1736,12 +1813,14 @@ NetAddServiceAccount(
+@@ -1736,12 +1810,14 @@ NetAddServiceAccount(
  // attempt to unlink or delete the account
  #define SERVICE_ACCOUNT_FLAG_REMOVE_OFFLINE       0x00000002L
  
@@ -584,7 +574,7 @@ index d6bf1c4c..e349d485 100644
  NTSTATUS
  NetEnumerateServiceAccounts(
      _In_opt_ LPWSTR ServerName,
-@@ -1749,6 +1828,7 @@ NetEnumerateServiceAccounts(
+@@ -1749,6 +1825,7 @@ NetEnumerateServiceAccounts(
      _Out_ DWORD* AccountsCount,
      _Outptr_result_buffer_(*AccountsCount) PZPWSTR* Accounts);
  
@@ -592,7 +582,7 @@ index d6bf1c4c..e349d485 100644
  NTSTATUS
  NetIsServiceAccount(
      _In_opt_ LPWSTR ServerName,
-@@ -1762,6 +1842,7 @@ NetIsServiceAccount2(
+@@ -1762,6 +1839,7 @@ NetIsServiceAccount2(
      _Out_ BOOL * IsService,
      _Out_ MSA_INFO_ACCOUNT_TYPE * AccountType);
  

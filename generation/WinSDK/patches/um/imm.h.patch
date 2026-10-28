@@ -10,30 +10,7 @@ diff --git a/um/imm.h b/um/imm.h
  
  #ifdef __cplusplus
  extern "C" {
-@@ -29,10 +29,22 @@
- 
- #if (WINVER >= 0x040A)
- DECLARE_HANDLE(HIMC);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HIMC HIMC;
-+#endif
- DECLARE_HANDLE(HIMCC);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HIMCC HIMCC;
-+#endif
- #else
- typedef DWORD   HIMC;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HIMC HIMC;
-+#endif
- typedef DWORD   HIMCC;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HIMCC HIMCC;
-+#endif
- #endif /* WINVER >= 0x040A */
- 
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-@@ -216,111 +228,111 @@
+@@ -216,111 +216,111 @@
  #pragma endregion
  
  #endif /* WINVER >= 0x040A */
@@ -186,7 +163,7 @@ diff --git a/um/imm.h b/um/imm.h
  #ifdef UNICODE
  #define ImmSetCompositionFont  ImmSetCompositionFontW
  #else
-@@ -328,48 +340,48 @@
+@@ -328,48 +328,48 @@
  #endif // !UNICODE
  #endif  // defined(_WINGDI_) && !defined(NOGDI)
  
@@ -253,7 +230,7 @@ diff --git a/um/imm.h b/um/imm.h
  
  typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, LPVOID);
  typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, LPVOID);
-@@ -379,32 +391,32 @@
+@@ -379,32 +379,32 @@
  #define REGISTERWORDENUMPROC  REGISTERWORDENUMPROCA
  #endif // !UNICODE
  
@@ -294,7 +271,7 @@ diff --git a/um/imm.h b/um/imm.h
  #ifdef UNICODE
  #define ImmEnumRegisterWord  ImmEnumRegisterWordW
  #else
-@@ -412,21 +424,21 @@
+@@ -412,21 +412,21 @@
  #endif // !UNICODE
  
  #if (WINVER >= 0x040A)
@@ -322,7 +299,7 @@ diff --git a/um/imm.h b/um/imm.h
  #endif /* WINVER >= 0x0602 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -510,6 +522,24 @@
+@@ -510,6 +510,24 @@
  #define IME_ITHOTKEY_PREVIOUS_COMPOSITION       0x201
  #define IME_ITHOTKEY_UISTYLE_TOGGLE             0x202
  #define IME_ITHOTKEY_RECONVERTSTRING            0x203
@@ -347,7 +324,7 @@ diff --git a/um/imm.h b/um/imm.h
  #define IME_HOTKEY_PRIVATE_LAST                 0x21F
  
  
-@@ -526,6 +556,22 @@
+@@ -526,6 +544,22 @@
  #define GCS_RESULTREADCLAUSE            0x0400
  #define GCS_RESULTSTR                   0x0800
  #define GCS_RESULTCLAUSE                0x1000
@@ -370,7 +347,7 @@ diff --git a/um/imm.h b/um/imm.h
  
  // style bit flags for WM_IME_COMPOSITION
  #define CS_INSERTCHAR                   0x2000
-@@ -603,6 +649,17 @@
+@@ -603,6 +637,17 @@
  #define IGP_SETCOMPSTR                  0x00000014
  #define IGP_SELECT                      0x00000018
  
@@ -388,7 +365,7 @@ diff --git a/um/imm.h b/um/imm.h
  // dwIndex for ImmSetCompositionString API
  #define SCS_SETSTR                      (GCS_COMPREADSTR|GCS_COMPSTR)
  #define SCS_CHANGEATTR                  (GCS_COMPREADATTR|GCS_COMPATTR)
-@@ -630,10 +687,10 @@
+@@ -630,10 +675,10 @@
  #define GCL_CONVERSION                  0x0001
  #define GCL_REVERSECONVERSION           0x0002
  #define GCL_REVERSE_LENGTH              0x0003
@@ -402,7 +379,7 @@ diff --git a/um/imm.h b/um/imm.h
  // bit field for conversion mode
  // IME_CMODE_HANGEUL is old name of IME_CMODE_HANGUL. It will be gone eventually.
  #define IME_CMODE_HANGEUL               IME_CMODE_NATIVE
-@@ -652,6 +709,17 @@
+@@ -652,6 +697,17 @@
  #define IME_SMODE_PHRASEPREDICT         0x0008
  #define IME_SMODE_CONVERSATION          0x0010
  #define IME_SMODE_RESERVED          0x0000F000
@@ -420,7 +397,7 @@ diff --git a/um/imm.h b/um/imm.h
  
  
  // style of candidate
-@@ -718,6 +786,25 @@
+@@ -718,6 +774,25 @@
  #define IME_ESC_PRIVATE_HOTKEY          0x100a
  #define IME_ESC_GETHELPFILENAME         0x100b
  

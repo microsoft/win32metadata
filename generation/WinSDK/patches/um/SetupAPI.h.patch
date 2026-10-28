@@ -84,17 +84,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  } FILEPATHS_W, *PFILEPATHS_W;
  
  #ifdef UNICODE
-@@ -741,6 +766,9 @@
- // Define type for reference to device information set
- //
- typedef PVOID HDEVINFO;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDEVINFO HDEVINFO;
-+#endif
- 
- //
- // Device information structure (references a device instance
-@@ -905,8 +933,8 @@
+@@ -905,8 +930,8 @@
  //
  typedef struct _SP_DEVINSTALL_PARAMS_A {
      DWORD             cbSize;
@@ -105,7 +95,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      HWND              hwndParent;
      PSP_FILE_CALLBACK InstallMsgHandler;
      PVOID             InstallMsgHandlerContext;
-@@ -918,8 +946,8 @@
+@@ -918,8 +943,8 @@
  
  typedef struct _SP_DEVINSTALL_PARAMS_W {
      DWORD             cbSize;
@@ -116,7 +106,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      HWND              hwndParent;
      PSP_FILE_CALLBACK InstallMsgHandler;
      PVOID             InstallMsgHandlerContext;
-@@ -1097,7 +1125,7 @@
+@@ -1097,7 +1122,7 @@
  //
  typedef struct _SP_CLASSINSTALL_HEADER {
      DWORD       cbSize;
@@ -125,7 +115,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  } SP_CLASSINSTALL_HEADER, *PSP_CLASSINSTALL_HEADER;
  
  
-@@ -1135,8 +1163,8 @@
+@@ -1135,8 +1160,8 @@
  //
  typedef struct _SP_PROPCHANGE_PARAMS {
      SP_CLASSINSTALL_HEADER ClassInstallHeader;
@@ -136,7 +126,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      DWORD                  HwProfile;
  } SP_PROPCHANGE_PARAMS, *PSP_PROPCHANGE_PARAMS;
  
-@@ -1146,7 +1174,7 @@
+@@ -1146,7 +1171,7 @@
  //
  typedef struct _SP_REMOVEDEVICE_PARAMS {
      SP_CLASSINSTALL_HEADER ClassInstallHeader;
@@ -145,7 +135,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      DWORD HwProfile;
  } SP_REMOVEDEVICE_PARAMS, *PSP_REMOVEDEVICE_PARAMS;
  
-@@ -1573,7 +1601,7 @@
+@@ -1573,7 +1598,7 @@
  typedef struct _SP_DRVINSTALL_PARAMS {
      DWORD cbSize;
      DWORD Rank;
@@ -154,7 +144,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      DWORD_PTR PrivateData;
      DWORD Reserved;
  } SP_DRVINSTALL_PARAMS, *PSP_DRVINSTALL_PARAMS;
-@@ -1954,7 +1982,101 @@
+@@ -1954,7 +1979,101 @@
  #define ERROR_NOT_INSTALLED (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x1000)
  
  #endif // _SPAPI_ERRORS
@@ -257,7 +247,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -1967,6 +2089,8 @@
+@@ -1967,6 +2086,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -266,7 +256,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -1995,6 +2119,8 @@
+@@ -1995,6 +2116,8 @@
  #endif
  
  
@@ -275,7 +265,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2006,6 +2132,8 @@
+@@ -2006,6 +2129,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -284,7 +274,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2024,6 +2152,8 @@
+@@ -2024,6 +2149,8 @@
  #endif
  
  
@@ -293,7 +283,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2034,6 +2164,8 @@
+@@ -2034,6 +2161,8 @@
      _Out_ PSP_ORIGINAL_FILE_INFO_A OriginalFileInfo
      );
  
@@ -302,7 +292,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2051,6 +2183,8 @@
+@@ -2051,6 +2180,8 @@
  #endif
  
  
@@ -311,7 +301,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2063,6 +2197,8 @@
+@@ -2063,6 +2194,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -320,7 +310,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2084,6 +2220,8 @@
+@@ -2084,6 +2217,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -329,7 +319,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2096,6 +2234,8 @@
+@@ -2096,6 +2231,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -338,7 +328,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2114,6 +2254,8 @@
+@@ -2114,6 +2251,8 @@
  #define SetupGetInfDriverStoreLocation SetupGetInfDriverStoreLocationA
  #endif
  
@@ -347,7 +337,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2124,6 +2266,8 @@
+@@ -2124,6 +2263,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -356,7 +346,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2143,23 +2287,27 @@
+@@ -2143,23 +2284,27 @@
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
  
@@ -386,7 +376,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Out_writes_(ReturnBufferSize) PWSTR ReturnBuffer,
      _In_ DWORD ReturnBufferSize,
      _Out_opt_ PDWORD RequiredSize
-@@ -2172,23 +2320,27 @@
+@@ -2172,23 +2317,27 @@
  #endif
  
  
@@ -416,7 +406,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Out_opt_ PUINT ErrorLine
      );
  
-@@ -2199,6 +2351,8 @@
+@@ -2199,6 +2348,8 @@
  #endif
  
  
@@ -425,7 +415,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HINF
  WINAPI
-@@ -2207,6 +2361,8 @@
+@@ -2207,6 +2358,8 @@
      );
  
  
@@ -434,7 +424,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2216,6 +2372,8 @@
+@@ -2216,6 +2369,8 @@
      _Out_opt_ PUINT ErrorLine
      );
  
@@ -443,7 +433,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2232,6 +2390,7 @@
+@@ -2232,6 +2387,7 @@
  #endif
  
  
@@ -451,7 +441,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -2240,6 +2399,8 @@
+@@ -2240,6 +2396,8 @@
      );
  
  
@@ -460,7 +450,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2250,6 +2411,8 @@
+@@ -2250,6 +2408,8 @@
      _Out_ PINFCONTEXT Context
      );
  
@@ -469,7 +459,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2267,6 +2430,8 @@
+@@ -2267,6 +2427,8 @@
  #endif
  
  
@@ -478,7 +468,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2276,6 +2441,8 @@
+@@ -2276,6 +2438,8 @@
      );
  
  
@@ -487,7 +477,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2285,6 +2452,8 @@
+@@ -2285,6 +2449,8 @@
      _Out_ PINFCONTEXT ContextOut
      );
  
@@ -496,7 +486,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2301,6 +2470,8 @@
+@@ -2301,6 +2467,8 @@
  #endif
  
  
@@ -505,7 +495,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2311,6 +2482,8 @@
+@@ -2311,6 +2479,8 @@
      _Out_ PINFCONTEXT Context
      );
  
@@ -514,7 +504,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2328,6 +2501,8 @@
+@@ -2328,6 +2498,8 @@
  #endif
  
  
@@ -523,7 +513,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  LONG
  WINAPI
-@@ -2336,6 +2511,8 @@
+@@ -2336,6 +2508,8 @@
      _In_ PCSTR Section
      );
  
@@ -532,7 +522,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  LONG
  WINAPI
-@@ -2351,6 +2528,8 @@
+@@ -2351,6 +2525,8 @@
  #endif
  
  
@@ -541,7 +531,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2364,6 +2543,8 @@
+@@ -2364,6 +2540,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -550,7 +540,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2384,6 +2565,8 @@
+@@ -2384,6 +2562,8 @@
  #endif
  
  
@@ -559,7 +549,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  DWORD
  WINAPI
-@@ -2392,6 +2575,8 @@
+@@ -2392,6 +2572,8 @@
      );
  
  
@@ -568,7 +558,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2403,6 +2588,8 @@
+@@ -2403,6 +2585,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -577,7 +567,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2421,6 +2608,8 @@
+@@ -2421,6 +2605,8 @@
  #endif
  
  
@@ -586,7 +576,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2431,6 +2620,8 @@
+@@ -2431,6 +2617,8 @@
      );
  
  
@@ -595,7 +585,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2442,6 +2633,8 @@
+@@ -2442,6 +2630,8 @@
      _Out_opt_ LPDWORD RequiredSize
      );
  
@@ -604,7 +594,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2459,6 +2652,8 @@
+@@ -2459,6 +2649,8 @@
  #define SetupGetMultiSzField SetupGetMultiSzFieldA
  #endif
  
@@ -613,7 +603,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -2479,6 +2674,8 @@
+@@ -2479,6 +2671,8 @@
  // must be freed by the export setupapi!MyFree (NT4+ Win95+)
  // or LocalFree (Win2k+)
  //
@@ -622,7 +612,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  DWORD
  WINAPI
-@@ -2487,9 +2684,11 @@
+@@ -2487,9 +2681,11 @@
      _Out_ PSTR *ActualSourceFileName,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -637,7 +627,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  DWORD
  WINAPI
-@@ -2498,7 +2697,7 @@
+@@ -2498,7 +2694,7 @@
      _Out_ PWSTR *ActualSourceFileName,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -646,7 +636,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -2516,6 +2715,8 @@
+@@ -2516,6 +2712,8 @@
  // buffer.
  //
  
@@ -655,7 +645,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2526,9 +2727,11 @@
+@@ -2526,9 +2724,11 @@
      _Out_opt_ PDWORD RequiredBufferLen,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -670,7 +660,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2539,7 +2742,7 @@
+@@ -2539,7 +2739,7 @@
      _Out_opt_ PDWORD RequiredBufferLen,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -679,7 +669,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -2559,22 +2762,26 @@
+@@ -2559,22 +2759,26 @@
  #define FILE_COMPRESSION_NTCAB      3
  
  
@@ -710,7 +700,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -2584,6 +2791,8 @@
+@@ -2584,6 +2788,8 @@
  #endif
  
  
@@ -719,7 +709,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2597,6 +2806,8 @@
+@@ -2597,6 +2803,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -728,7 +718,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2617,6 +2828,8 @@
+@@ -2617,6 +2825,8 @@
  #endif
  
  
@@ -737,7 +727,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2629,6 +2842,8 @@
+@@ -2629,6 +2839,8 @@
      _In_ UINT RoundingFactor
      );
  
@@ -746,7 +736,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2648,6 +2863,8 @@
+@@ -2648,6 +2860,8 @@
  #endif
  
  
@@ -755,7 +745,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2660,6 +2877,8 @@
+@@ -2660,6 +2874,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -764,7 +754,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2692,6 +2911,8 @@
+@@ -2692,6 +2908,8 @@
  #define SRCLIST_NOSTRIPPLATFORM 0x00000400
  
  
@@ -773,7 +763,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2701,6 +2922,8 @@
+@@ -2701,6 +2919,8 @@
      _In_ UINT SourceCount
      );
  
@@ -782,7 +772,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2717,6 +2940,8 @@
+@@ -2717,6 +2937,8 @@
  #endif
  
  
@@ -791,7 +781,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2725,6 +2950,8 @@
+@@ -2725,6 +2947,8 @@
      );
  
  
@@ -800,7 +790,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2733,6 +2960,8 @@
+@@ -2733,6 +2957,8 @@
      _In_ PCSTR Source
      );
  
@@ -809,7 +799,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2748,6 +2977,8 @@
+@@ -2748,6 +2974,8 @@
  #endif
  
  
@@ -818,7 +808,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2756,6 +2987,8 @@
+@@ -2756,6 +2984,8 @@
      _In_ PCSTR Source
      );
  
@@ -827,7 +817,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2771,6 +3004,8 @@
+@@ -2771,6 +3001,8 @@
  #endif
  
  
@@ -836,7 +826,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2780,6 +3015,8 @@
+@@ -2780,6 +3012,8 @@
      _Out_ PUINT Count
      );
  
@@ -845,7 +835,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2796,6 +3033,8 @@
+@@ -2796,6 +3030,8 @@
  #endif
  
  
@@ -854,7 +844,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2804,6 +3043,8 @@
+@@ -2804,6 +3040,8 @@
      _In_ UINT Count
      );
  
@@ -863,7 +853,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2819,6 +3060,8 @@
+@@ -2819,6 +3057,8 @@
  #endif
  
  
@@ -872,7 +862,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2835,6 +3078,8 @@
+@@ -2835,6 +3075,8 @@
      _Out_opt_ PDWORD PathRequiredSize
      );
  
@@ -881,7 +871,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2858,6 +3103,8 @@
+@@ -2858,6 +3100,8 @@
  #endif
  
  
@@ -890,7 +880,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2875,6 +3122,8 @@
+@@ -2875,6 +3119,8 @@
      _Out_opt_ PDWORD PathRequiredSize
      );
  
@@ -899,7 +889,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2899,6 +3148,8 @@
+@@ -2899,6 +3145,8 @@
  #endif
  
  
@@ -908,7 +898,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2911,6 +3162,8 @@
+@@ -2911,6 +3159,8 @@
      _In_ DWORD Style
      );
  
@@ -917,7 +907,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2930,6 +3183,8 @@
+@@ -2930,6 +3180,8 @@
  #endif
  
  
@@ -926,7 +916,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2941,6 +3196,8 @@
+@@ -2941,6 +3193,8 @@
      _In_ DWORD Style
      );
  
@@ -935,7 +925,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2958,6 +3215,8 @@
+@@ -2958,6 +3212,8 @@
  #define SetupDeleteError SetupDeleteErrorA
  #endif
  
@@ -944,7 +934,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2970,6 +3229,8 @@
+@@ -2970,6 +3226,8 @@
      _In_ DWORD Style
      );
  
@@ -953,7 +943,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -3021,6 +3282,8 @@
+@@ -3021,6 +3279,8 @@
  #define DPROMPT_OUTOFMEMORY     4
  
  
@@ -962,7 +952,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3030,6 +3293,8 @@
+@@ -3030,6 +3290,8 @@
      _In_opt_ PCSTR Directory
      );
  
@@ -971,7 +961,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3046,6 +3311,8 @@
+@@ -3046,6 +3308,8 @@
  #endif
  
  
@@ -980,7 +970,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3058,6 +3325,8 @@
+@@ -3058,6 +3322,8 @@
      _Reserved_ PVOID Reserved2
      );
  
@@ -989,7 +979,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3082,6 +3351,8 @@
+@@ -3082,6 +3348,8 @@
  #define SETDIRID_NOT_FULL_PATH      0x00000001
  
  
@@ -998,7 +988,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3094,6 +3365,8 @@
+@@ -3094,6 +3362,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -1007,7 +997,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3133,6 +3406,8 @@
+@@ -3133,6 +3403,8 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -1016,7 +1006,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3142,11 +3417,13 @@
+@@ -3142,11 +3414,13 @@
      _In_opt_ PCSTR SourceFile,
      _In_opt_ PCSTR SourcePathRoot,
      _In_opt_ PCSTR DestinationName,
@@ -1031,7 +1021,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3156,7 +3433,7 @@
+@@ -3156,7 +3430,7 @@
      _In_opt_ PCWSTR SourceFile,
      _In_opt_ PCWSTR SourcePathRoot,
      _In_opt_ PCWSTR DestinationName,
@@ -1040,7 +1030,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_opt_ PSP_FILE_CALLBACK_W CopyMsgHandler,
      _In_opt_ PVOID Context
      );
-@@ -3167,6 +3444,8 @@
+@@ -3167,6 +3441,8 @@
  #define SetupInstallFile SetupInstallFileA
  #endif
  
@@ -1049,7 +1039,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3176,12 +3455,14 @@
+@@ -3176,12 +3452,14 @@
      _In_opt_ PCSTR SourceFile,
      _In_opt_ PCSTR SourcePathRoot,
      _In_opt_ PCSTR DestinationName,
@@ -1065,7 +1055,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3191,7 +3472,7 @@
+@@ -3191,7 +3469,7 @@
      _In_opt_ PCWSTR SourceFile,
      _In_opt_ PCWSTR SourcePathRoot,
      _In_opt_ PCWSTR DestinationName,
@@ -1074,7 +1064,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_opt_ PSP_FILE_CALLBACK_W CopyMsgHandler,
      _In_opt_ PVOID Context,
      _Out_ PBOOL FileWasInUse
-@@ -3271,6 +3552,8 @@
+@@ -3271,6 +3549,8 @@
  #endif //_SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
  
@@ -1083,7 +1073,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HSPFILEQ
  WINAPI
-@@ -3278,6 +3561,7 @@
+@@ -3278,6 +3558,7 @@
      VOID
      );
  
@@ -1091,7 +1081,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3285,6 +3569,8 @@
+@@ -3285,6 +3566,8 @@
      _In_ HSPFILEQ QueueHandle
      );
  
@@ -1100,7 +1090,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3294,6 +3580,8 @@
+@@ -3294,6 +3577,8 @@
      _In_opt_ PCSTR AlternateDefaultCatalogFile
      );
  
@@ -1109,7 +1099,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3310,6 +3598,8 @@
+@@ -3310,6 +3595,8 @@
  #endif
  
  
@@ -1118,7 +1108,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3317,6 +3607,8 @@
+@@ -3317,6 +3604,8 @@
      _In_opt_ PCSTR Override
      );
  
@@ -1127,7 +1117,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3331,6 +3623,8 @@
+@@ -3331,6 +3620,8 @@
  #endif
  
  
@@ -1136,7 +1126,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3346,6 +3640,8 @@
+@@ -3346,6 +3637,8 @@
      _In_ DWORD CopyStyle
      );
  
@@ -1145,7 +1135,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3368,6 +3664,8 @@
+@@ -3368,6 +3661,8 @@
  #endif
  
  
@@ -1154,7 +1144,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3375,6 +3673,8 @@
+@@ -3375,6 +3670,8 @@
      _In_ PSP_FILE_COPY_PARAMS_A CopyParams
      );
  
@@ -1163,7 +1153,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3389,6 +3689,8 @@
+@@ -3389,6 +3686,8 @@
  #endif
  
  
@@ -1172,7 +1162,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3401,6 +3703,8 @@
+@@ -3401,6 +3700,8 @@
      _In_ DWORD CopyStyle
      );
  
@@ -1181,7 +1171,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3420,6 +3724,8 @@
+@@ -3420,6 +3721,8 @@
  #endif
  
  
@@ -1190,7 +1180,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3432,6 +3738,8 @@
+@@ -3432,6 +3735,8 @@
      _In_ DWORD CopyStyle
      );
  
@@ -1199,7 +1189,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3451,6 +3759,8 @@
+@@ -3451,6 +3756,8 @@
  #endif
  
  
@@ -1208,7 +1198,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3460,6 +3770,8 @@
+@@ -3460,6 +3767,8 @@
      _In_opt_ PCSTR PathPart2
      );
  
@@ -1217,7 +1207,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3476,6 +3788,8 @@
+@@ -3476,6 +3785,8 @@
  #endif
  
  
@@ -1226,7 +1216,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3486,6 +3800,8 @@
+@@ -3486,6 +3797,8 @@
      _In_ PCSTR Section
      );
  
@@ -1235,7 +1225,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3503,6 +3819,8 @@
+@@ -3503,6 +3816,8 @@
  #endif
  
  
@@ -1244,7 +1234,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3514,6 +3832,8 @@
+@@ -3514,6 +3829,8 @@
      _In_ PCSTR TargetFilename
      );
  
@@ -1253,7 +1243,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3532,6 +3852,8 @@
+@@ -3532,6 +3849,8 @@
  #endif
  
  
@@ -1262,7 +1252,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3542,6 +3864,8 @@
+@@ -3542,6 +3861,8 @@
      _In_ PCSTR Section
      );
  
@@ -1271,7 +1261,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3559,6 +3883,8 @@
+@@ -3559,6 +3880,8 @@
  #endif
  
  
@@ -1280,7 +1270,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3569,6 +3895,8 @@
+@@ -3569,6 +3892,8 @@
      _In_ PVOID Context
      );
  
@@ -1289,7 +1279,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3586,24 +3914,28 @@
+@@ -3586,24 +3911,28 @@
  #endif
  
  
@@ -1320,7 +1310,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_opt_ HWND Window,
      _In_opt_ PSP_FILE_CALLBACK_W CallbackRoutine,
      _In_opt_ PVOID CallbackContext,
-@@ -3655,6 +3987,8 @@
+@@ -3655,6 +3984,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -1329,7 +1319,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3664,6 +3998,8 @@
+@@ -3664,6 +3995,8 @@
      _Out_ PUINT NumOperations
      );
  
@@ -1338,7 +1328,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3672,6 +4008,8 @@
+@@ -3672,6 +4005,8 @@
      _Out_ PDWORD Flags
      );
  
@@ -1347,7 +1337,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3719,28 +4057,32 @@
+@@ -3719,28 +4054,32 @@
  #define SPOST_URL   2
  #define SPOST_MAX   3
  
@@ -1384,7 +1374,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Out_writes_opt_(DestinationInfFileNameSize) PWSTR DestinationInfFileName,
      _In_ DWORD DestinationInfFileNameSize,
      _Out_opt_ PDWORD RequiredSize,
-@@ -3770,6 +4112,7 @@
+@@ -3770,6 +4109,7 @@
  
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
@@ -1392,7 +1382,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3779,6 +4122,7 @@
+@@ -3779,6 +4119,7 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -1400,7 +1390,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3795,6 +4139,8 @@
+@@ -3795,6 +4136,8 @@
  #endif
  
  
@@ -1409,7 +1399,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3810,6 +4156,8 @@
+@@ -3810,6 +4153,8 @@
  //
  // Disk space list APIs
  //
@@ -1418,7 +1408,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3819,6 +4167,8 @@
+@@ -3819,6 +4164,8 @@
      _In_ UINT Flags
      );
  
@@ -1427,7 +1417,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3841,6 +4191,8 @@
+@@ -3841,6 +4188,8 @@
  #define SPDSL_DISALLOW_NEGATIVE_ADJUST 0x00000002
  
  
@@ -1436,7 +1426,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3851,6 +4203,8 @@
+@@ -3851,6 +4200,8 @@
      _In_ UINT Flags
      );
  
@@ -1445,7 +1435,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3868,6 +4222,8 @@
+@@ -3868,6 +4219,8 @@
  #endif
  
  
@@ -1454,7 +1444,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3876,6 +4232,8 @@
+@@ -3876,6 +4229,8 @@
      );
  
  
@@ -1463,7 +1453,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3886,6 +4244,8 @@
+@@ -3886,6 +4241,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -1472,7 +1462,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3903,6 +4263,8 @@
+@@ -3903,6 +4260,8 @@
  #endif
  
  
@@ -1481,7 +1471,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3914,6 +4276,8 @@
+@@ -3914,6 +4273,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1490,7 +1480,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3932,6 +4296,8 @@
+@@ -3932,6 +4293,8 @@
  #endif
  
  
@@ -1499,7 +1489,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3943,6 +4309,8 @@
+@@ -3943,6 +4306,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1508,7 +1498,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3961,6 +4329,8 @@
+@@ -3961,6 +4326,8 @@
  #endif
  
  
@@ -1517,7 +1507,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3968,11 +4338,13 @@
+@@ -3968,11 +4335,13 @@
      _In_ HDSKSPC DiskSpace,
      _In_ PCSTR TargetFilespec,
      _In_ LONGLONG FileSize,
@@ -1532,7 +1522,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3980,7 +4352,7 @@
+@@ -3980,7 +4349,7 @@
      _In_ HDSKSPC DiskSpace,
      _In_ PCWSTR TargetFilespec,
      _In_ LONGLONG FileSize,
@@ -1541,7 +1531,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -3992,6 +4364,8 @@
+@@ -3992,6 +4361,8 @@
  #endif
  
  
@@ -1550,7 +1540,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4000,11 +4374,13 @@
+@@ -4000,11 +4371,13 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCSTR SectionName,
@@ -1565,7 +1555,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4013,7 +4389,7 @@
+@@ -4013,7 +4386,7 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCWSTR SectionName,
@@ -1574,7 +1564,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -4025,6 +4401,8 @@
+@@ -4025,6 +4398,8 @@
  #endif
  
  
@@ -1583,7 +1573,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4037,6 +4415,8 @@
+@@ -4037,6 +4412,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1592,7 +1582,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4056,24 +4436,28 @@
+@@ -4056,24 +4433,28 @@
  #endif
  
  
@@ -1623,7 +1613,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -4085,6 +4469,8 @@
+@@ -4085,6 +4466,8 @@
  #endif
  
  
@@ -1632,7 +1622,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4093,11 +4479,13 @@
+@@ -4093,11 +4476,13 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCSTR SectionName,
@@ -1647,7 +1637,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4106,7 +4494,7 @@
+@@ -4106,7 +4491,7 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCWSTR SectionName,
@@ -1656,7 +1646,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -4118,6 +4506,8 @@
+@@ -4118,6 +4503,8 @@
  #endif
  
  
@@ -1665,7 +1655,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4130,6 +4520,8 @@
+@@ -4130,6 +4517,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1674,7 +1664,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4153,6 +4545,8 @@
+@@ -4153,6 +4542,8 @@
  // Cabinet APIs
  //
  
@@ -1683,7 +1673,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4163,6 +4557,8 @@
+@@ -4163,6 +4554,8 @@
      _In_ PVOID Context
      );
  
@@ -1692,7 +1682,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4180,6 +4576,8 @@
+@@ -4180,6 +4573,8 @@
  #endif
  
  
@@ -1701,7 +1691,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  INT
  WINAPI
-@@ -4197,6 +4595,8 @@
+@@ -4197,6 +4592,8 @@
  #define SPFILEQ_REBOOT_IN_PROGRESS  0x00000004
  
  
@@ -1710,7 +1700,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  PVOID
  WINAPI
-@@ -4204,6 +4604,7 @@
+@@ -4204,6 +4601,7 @@
      _In_opt_ HWND OwnerWindow
      );
  
@@ -1718,7 +1708,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  PVOID
  WINAPI
-@@ -4215,6 +4616,8 @@
+@@ -4215,6 +4613,8 @@
      _Reserved_ PVOID Reserved2
      );
  
@@ -1727,7 +1717,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4222,6 +4625,8 @@
+@@ -4222,6 +4622,8 @@
      _In_ PVOID Context
      );
  
@@ -1736,7 +1726,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -4232,6 +4637,8 @@
+@@ -4232,6 +4634,8 @@
      _In_ UINT_PTR Param2
      );
  
@@ -1745,7 +1735,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  UINT
  WINAPI
-@@ -4409,6 +4816,8 @@
+@@ -4409,6 +4813,8 @@
  #define FLG_DELPROPERTY_MULTI_SZ_DELSTRING  ( 0x00000001 )
  
  
@@ -1754,7 +1744,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4426,6 +4835,8 @@
+@@ -4426,6 +4832,8 @@
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
@@ -1763,7 +1753,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4499,6 +4910,8 @@
+@@ -4499,6 +4907,8 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -1772,7 +1762,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4511,6 +4924,8 @@
+@@ -4511,6 +4921,8 @@
      _In_ UINT CopyFlags
      );
  
@@ -1781,7 +1771,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4646,22 +5061,26 @@
+@@ -4646,22 +5058,26 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
  
@@ -1812,7 +1802,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -4671,26 +5090,30 @@
+@@ -4671,26 +5087,30 @@
  #endif
  
  
@@ -1845,7 +1835,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_opt_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _Reserved_ PVOID Reserved1,
-@@ -4713,6 +5136,7 @@
+@@ -4713,6 +5133,7 @@
  // wsprintf(CmdLineBuffer,TEXT("DefaultInstall 132 %s"),InfPath);
  // InstallHinfSection(NULL,NULL,CmdLineBuffer,0);
  //
@@ -1853,7 +1843,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  VOID
  WINAPI
  InstallHinfSectionA(
-@@ -4722,6 +5146,7 @@
+@@ -4722,6 +5143,7 @@
      _In_ INT ShowCommand
      );
  
@@ -1861,7 +1851,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  VOID
  WINAPI
  InstallHinfSectionW(
-@@ -4746,6 +5171,8 @@
+@@ -4746,6 +5168,8 @@
  //
  typedef PVOID HSPFILELOG;
  
@@ -1870,7 +1860,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HSPFILELOG
  WINAPI
-@@ -4754,6 +5181,8 @@
+@@ -4754,6 +5178,8 @@
      _In_ DWORD Flags
      );
  
@@ -1879,7 +1869,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  HSPFILELOG
  WINAPI
-@@ -4776,6 +5205,8 @@
+@@ -4776,6 +5202,8 @@
  #define SPFILELOG_QUERYONLY     0x00000004  // allows non-administrators to read system log
  
  
@@ -1888,7 +1878,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4784,6 +5215,8 @@
+@@ -4784,6 +5212,8 @@
      );
  
  
@@ -1897,7 +1887,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4799,6 +5232,8 @@
+@@ -4799,6 +5229,8 @@
      _In_ DWORD Flags
      );
  
@@ -1906,7 +1896,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4826,6 +5261,8 @@
+@@ -4826,6 +5258,8 @@
  #define SPFILELOG_OEMFILE   0x00000001
  
  
@@ -1915,7 +1905,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4835,6 +5272,8 @@
+@@ -4835,6 +5269,8 @@
      _In_opt_ PCSTR TargetFilename
      );
  
@@ -1924,7 +1914,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4863,6 +5302,8 @@
+@@ -4863,6 +5299,8 @@
      SetupFileLogMax
  } SetupFileLogInfo;
  
@@ -1933,7 +1923,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4876,6 +5317,8 @@
+@@ -4876,6 +5314,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -1942,7 +1932,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4905,6 +5348,8 @@
+@@ -4905,6 +5345,8 @@
  #define LogSevFatalError            0x00000003
  #define LogSevMaximum               0x00000004
  
@@ -1951,7 +1941,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4912,6 +5357,8 @@
+@@ -4912,6 +5354,8 @@
      _In_ BOOL Erase
      );
  
@@ -1960,7 +1950,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4920,6 +5367,8 @@
+@@ -4920,6 +5364,8 @@
      _In_ LogSeverity Severity
      );
  
@@ -1969,7 +1959,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4934,6 +5383,7 @@
+@@ -4934,6 +5380,7 @@
  #define SetupLogError SetupLogErrorA
  #endif
  
@@ -1977,7 +1967,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4948,6 +5398,7 @@
+@@ -4948,6 +5395,7 @@
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
  
@@ -1985,7 +1975,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  SP_LOG_TOKEN
  WINAPI
-@@ -4955,6 +5406,7 @@
+@@ -4955,6 +5403,7 @@
      VOID
      );
  
@@ -1993,7 +1983,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4962,6 +5414,7 @@
+@@ -4962,6 +5411,7 @@
      _In_ SP_LOG_TOKEN LogToken
      );
  
@@ -2001,7 +1991,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4973,6 +5426,7 @@
+@@ -4973,6 +5423,7 @@
      ...
      );
  
@@ -2009,7 +1999,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4985,6 +5439,7 @@
+@@ -4985,6 +5436,7 @@
      ...
      );
  
@@ -2017,7 +2007,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  VOID
  WINAPI
-@@ -5059,6 +5514,7 @@
+@@ -5059,6 +5511,7 @@
  // Overriden if SetupAPI is run in non-interactive window session
  //
  
@@ -2025,7 +2015,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5066,6 +5522,7 @@
+@@ -5066,6 +5519,7 @@
      _In_ BOOL NonInteractiveFlag
      );
  
@@ -2033,7 +2023,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5079,9 +5536,11 @@
+@@ -5079,9 +5533,11 @@
  // Device Installer APIs
  //
  
@@ -2046,7 +2036,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDeviceInfoList(
      _In_opt_ CONST GUID *ClassGuid,
-@@ -5089,9 +5548,11 @@
+@@ -5089,9 +5545,11 @@
      );
  
  
@@ -2059,7 +2049,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDeviceInfoListExA(
      _In_opt_ CONST GUID *ClassGuid,
-@@ -5100,9 +5561,11 @@
+@@ -5100,9 +5558,11 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2072,7 +2062,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDeviceInfoListExW(
      _In_opt_ CONST GUID *ClassGuid,
-@@ -5118,6 +5581,8 @@
+@@ -5118,6 +5578,8 @@
  #endif
  
  
@@ -2081,7 +2071,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5126,20 +5591,24 @@
+@@ -5126,20 +5588,24 @@
      _Out_ LPGUID ClassGuid
      );
  
@@ -2110,7 +2100,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5155,6 +5624,8 @@
+@@ -5155,6 +5621,8 @@
  #define DICD_GENERATE_ID        0x00000001
  #define DICD_INHERIT_CLASSDRVS  0x00000002
  
@@ -2119,7 +2109,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5164,10 +5635,12 @@
+@@ -5164,10 +5632,12 @@
      _In_ CONST GUID *ClassGuid,
      _In_opt_ PCSTR DeviceDescription,
      _In_opt_ HWND hwndParent,
@@ -2136,7 +2126,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5177,8 +5650,8 @@
+@@ -5177,8 +5647,8 @@
      _In_ CONST GUID *ClassGuid,
      _In_opt_ PCWSTR DeviceDescription,
      _In_opt_ HWND hwndParent,
@@ -2147,7 +2137,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5194,6 +5667,8 @@
+@@ -5194,6 +5664,8 @@
  #define DIOD_INHERIT_CLASSDRVS  0x00000002
  #define DIOD_CANCEL_REMOVE      0x00000004
  
@@ -2156,7 +2146,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5202,9 +5677,11 @@
+@@ -5202,9 +5674,11 @@
      _In_ PCSTR DeviceInstanceId,
      _In_opt_ HWND hwndParent,
      _In_ DWORD OpenFlags,
@@ -2171,7 +2161,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5213,7 +5690,7 @@
+@@ -5213,7 +5687,7 @@
      _In_ PCWSTR DeviceInstanceId,
      _In_opt_ HWND hwndParent,
      _In_ DWORD OpenFlags,
@@ -2180,7 +2170,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5223,6 +5700,8 @@
+@@ -5223,6 +5697,8 @@
  #endif
  
  
@@ -2189,7 +2179,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5234,6 +5713,8 @@
+@@ -5234,6 +5710,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2198,7 +2188,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5252,6 +5733,8 @@
+@@ -5252,6 +5730,8 @@
  #endif
  
  
@@ -2207,7 +2197,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5261,16 +5744,20 @@
+@@ -5261,16 +5741,20 @@
      );
  
  
@@ -2232,7 +2222,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5279,6 +5766,8 @@
+@@ -5279,6 +5763,8 @@
      );
  
  
@@ -2241,7 +2231,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5287,7 +5776,7 @@
+@@ -5287,7 +5773,7 @@
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _In_ CONST GUID *InterfaceClassGuid,
      _In_ DWORD MemberIndex,
@@ -2250,7 +2240,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  //
-@@ -5296,6 +5785,8 @@
+@@ -5296,6 +5782,8 @@
  #define SetupDiEnumInterfaceDevice SetupDiEnumDeviceInterfaces
  
  
@@ -2259,7 +2249,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5305,9 +5796,11 @@
+@@ -5305,9 +5793,11 @@
      _In_ CONST GUID *InterfaceClassGuid,
      _In_opt_ PCSTR ReferenceString,
      _In_ DWORD CreationFlags,
@@ -2274,7 +2264,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5317,7 +5810,7 @@
+@@ -5317,7 +5807,7 @@
      _In_ CONST GUID *InterfaceClassGuid,
      _In_opt_ PCWSTR ReferenceString,
      _In_ DWORD CreationFlags,
@@ -2283,7 +2273,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5343,6 +5836,8 @@
+@@ -5343,6 +5833,8 @@
  //
  #define DIODI_NO_ADD    0x00000001
  
@@ -2292,7 +2282,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5350,9 +5845,11 @@
+@@ -5350,9 +5842,11 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PCSTR DevicePath,
      _In_ DWORD OpenFlags,
@@ -2307,7 +2297,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5360,7 +5857,7 @@
+@@ -5360,7 +5854,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PCWSTR DevicePath,
      _In_ DWORD OpenFlags,
@@ -2316,7 +2306,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5381,6 +5878,8 @@
+@@ -5381,6 +5875,8 @@
  #endif
  
  
@@ -2325,7 +2315,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5388,7 +5887,7 @@
+@@ -5388,7 +5884,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData,
      _In_ CONST GUID *AliasInterfaceClassGuid,
@@ -2334,7 +2324,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  //
-@@ -5397,6 +5896,8 @@
+@@ -5397,6 +5893,8 @@
  #define SetupDiGetInterfaceDeviceAlias SetupDiGetDeviceInterfaceAlias
  
  
@@ -2343,7 +2333,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5411,6 +5912,8 @@
+@@ -5411,6 +5909,8 @@
  #define SetupDiDeleteInterfaceDeviceData SetupDiDeleteDeviceInterfaceData
  
  
@@ -2352,7 +2342,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5424,6 +5927,8 @@
+@@ -5424,6 +5924,8 @@
  //
  #define SetupDiRemoveInterfaceDevice SetupDiRemoveDeviceInterface
  
@@ -2361,7 +2351,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _At_((LPSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
-@@ -5435,9 +5940,11 @@
+@@ -5435,9 +5937,11 @@
      _Inout_updates_bytes_to_opt_(DeviceInterfaceDetailDataSize, *RequiredSize) PSP_DEVICE_INTERFACE_DETAIL_DATA_A DeviceInterfaceDetailData,
      _In_ DWORD DeviceInterfaceDetailDataSize,
      _Out_opt_ _Out_range_(>=, sizeof(SP_DEVICE_INTERFACE_DETAIL_DATA_A)) PDWORD RequiredSize,
@@ -2376,7 +2366,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _At_((LPWSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
-@@ -5449,7 +5956,7 @@
+@@ -5449,7 +5953,7 @@
      _Out_writes_bytes_to_opt_(DeviceInterfaceDetailDataSize, *RequiredSize) PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,
      _In_ DWORD DeviceInterfaceDetailDataSize,
      _Out_opt_ _Out_range_(>=, sizeof(SP_DEVICE_INTERFACE_DETAIL_DATA_W)) PDWORD RequiredSize,
@@ -2385,7 +2375,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5473,6 +5980,8 @@
+@@ -5473,6 +5977,8 @@
  //
  // Default install handler for DIF_INSTALLINTERFACES.
  //
@@ -2394,7 +2384,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5489,6 +5998,8 @@
+@@ -5489,6 +5995,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -2403,7 +2393,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5511,6 +6022,8 @@
+@@ -5511,6 +6019,8 @@
  //
  #define SPRDI_FIND_DUPS        0x00000001
  
@@ -2412,7 +2402,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5520,7 +6033,7 @@
+@@ -5520,7 +6030,7 @@
      _In_ DWORD Flags,
      _In_opt_ PSP_DETSIG_CMPPROC CompareProc,
      _In_opt_ PVOID CompareContext,
@@ -2421,7 +2411,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  
-@@ -5533,16 +6046,20 @@
+@@ -5533,16 +6043,20 @@
  #define SPDIT_CLASSDRIVER        0x00000001
  #define SPDIT_COMPATDRIVER       0x00000002
  
@@ -2446,7 +2436,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5551,26 +6068,30 @@
+@@ -5551,26 +6065,30 @@
      );
  
  
@@ -2483,7 +2473,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5580,22 +6101,26 @@
+@@ -5580,22 +6098,26 @@
  #endif
  
  
@@ -2514,7 +2504,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5605,6 +6130,8 @@
+@@ -5605,6 +6127,8 @@
  #endif
  
  
@@ -2523,7 +2513,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5614,6 +6141,8 @@
+@@ -5614,6 +6138,8 @@
      _Inout_opt_ PSP_DRVINFO_DATA_A DriverInfoData
      );
  
@@ -2532,7 +2522,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5629,6 +6158,8 @@
+@@ -5629,6 +6155,8 @@
  #define SetupDiSetSelectedDriver SetupDiSetSelectedDriverA
  #endif
  
@@ -2541,7 +2531,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5641,6 +6172,8 @@
+@@ -5641,6 +6169,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2550,7 +2540,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5660,13 +6193,15 @@
+@@ -5660,13 +6190,15 @@
  #endif
  
  
@@ -2567,7 +2557,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  
-@@ -5686,26 +6221,30 @@
+@@ -5686,26 +6218,30 @@
  #define DIGCF_INTERFACEDEVICE DIGCF_DEVICEINTERFACE
  
  
@@ -2604,7 +2594,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -5715,6 +6254,8 @@
+@@ -5715,6 +6251,8 @@
  #endif
  
  
@@ -2613,7 +2603,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Check_return_
  WINSETUPAPI
  HDEVINFO
-@@ -5723,12 +6264,14 @@
+@@ -5723,12 +6261,14 @@
      _In_opt_ CONST GUID *ClassGuid,
      _In_opt_ PCSTR Enumerator,
      _In_opt_ HWND hwndParent,
@@ -2629,7 +2619,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Check_return_
  WINSETUPAPI
  HDEVINFO
-@@ -5737,7 +6280,7 @@
+@@ -5737,7 +6277,7 @@
      _In_opt_ CONST GUID *ClassGuid,
      _In_opt_ PCWSTR Enumerator,
      _In_opt_ HWND hwndParent,
@@ -2638,7 +2628,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_opt_ HDEVINFO DeviceInfoSet,
      _In_opt_ PCWSTR MachineName,
      _Reserved_ PVOID Reserved
-@@ -5750,6 +6293,8 @@
+@@ -5750,6 +6290,8 @@
  #endif
  
  
@@ -2647,7 +2637,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5761,6 +6306,8 @@
+@@ -5761,6 +6303,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2656,7 +2646,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5786,6 +6333,8 @@
+@@ -5786,6 +6330,8 @@
  #define DIBCI_NOINSTALLCLASS   0x00000001
  #define DIBCI_NODISPLAYCLASS   0x00000002
  
@@ -2665,7 +2655,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -5797,6 +6346,8 @@
+@@ -5797,6 +6343,8 @@
      _Out_ PDWORD RequiredSize
      );
  
@@ -2674,7 +2664,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -5810,6 +6361,8 @@
+@@ -5810,6 +6358,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2683,7 +2673,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -5830,6 +6383,8 @@
+@@ -5830,6 +6380,8 @@
  #endif
  
  
@@ -2692,7 +2682,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5840,6 +6395,8 @@
+@@ -5840,6 +6392,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2701,7 +2691,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5857,6 +6414,8 @@
+@@ -5857,6 +6411,8 @@
  #endif
  
  
@@ -2710,7 +2700,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5869,6 +6428,8 @@
+@@ -5869,6 +6425,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2719,7 +2709,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5888,11 +6449,13 @@
+@@ -5888,11 +6446,13 @@
  #endif
  
  
@@ -2734,7 +2724,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
-@@ -5901,6 +6464,8 @@
+@@ -5901,6 +6461,8 @@
  //
  // Default install handler for DIF_SELECTDEVICE
  //
@@ -2743,7 +2733,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5913,6 +6478,8 @@
+@@ -5913,6 +6475,8 @@
  //
  // Default install handler for DIF_SELECTBESTCOMPATDRV
  //
@@ -2752,7 +2742,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5925,6 +6492,8 @@
+@@ -5925,6 +6489,8 @@
  //
  // Default install handler for DIF_INSTALLDEVICE
  //
@@ -2761,7 +2751,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5937,6 +6506,8 @@
+@@ -5937,6 +6503,8 @@
  //
  // Default install handler for DIF_INSTALLDEVICEFILES
  //
@@ -2770,7 +2760,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5949,6 +6520,8 @@
+@@ -5949,6 +6517,8 @@
  //
  // Default install handler for DIF_REGISTER_COINSTALLERS
  //
@@ -2779,7 +2769,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5961,6 +6534,7 @@
+@@ -5961,6 +6531,7 @@
  //
  // Default install handler for DIF_REMOVE
  //
@@ -2787,7 +2777,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5973,6 +6547,8 @@
+@@ -5973,6 +6544,8 @@
  //
  // Default install handler for DIF_UNREMOVE
  //
@@ -2796,7 +2786,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5983,6 +6559,7 @@
+@@ -5983,6 +6556,7 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
@@ -2804,7 +2794,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5996,6 +6573,8 @@
+@@ -5996,6 +6570,8 @@
  //
  // Default install handler for DIF_PROPERTYCHANGE
  //
@@ -2813,7 +2803,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6005,6 +6584,8 @@
+@@ -6005,6 +6581,8 @@
      );
  
  
@@ -2822,7 +2812,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6015,6 +6596,8 @@
+@@ -6015,6 +6593,8 @@
      _In_opt_ HSPFILEQ FileQueue
      );
  
@@ -2831,7 +2821,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6032,6 +6615,8 @@
+@@ -6032,6 +6612,8 @@
  #endif
  
  
@@ -2840,7 +2830,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6045,6 +6630,8 @@
+@@ -6045,6 +6627,8 @@
      _Reserved_ PVOID Reserved2
      );
  
@@ -2849,7 +2839,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6065,9 +6652,11 @@
+@@ -6065,9 +6649,11 @@
  #endif
  
  
@@ -2862,7 +2852,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiOpenClassRegKey(
      _In_opt_ CONST GUID *ClassGuid,
-@@ -6081,9 +6670,11 @@
+@@ -6081,9 +6667,11 @@
  #define DIOCR_INSTALLER   0x00000001    // class installer registry branch
  #define DIOCR_INTERFACE   0x00000002    // interface class registry branch
  
@@ -2875,7 +2865,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiOpenClassRegKeyExA(
      _In_opt_ CONST GUID *ClassGuid,
-@@ -6093,9 +6684,11 @@
+@@ -6093,9 +6681,11 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2888,7 +2878,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiOpenClassRegKeyExW(
      _In_opt_ CONST GUID *ClassGuid,
-@@ -6112,9 +6705,11 @@
+@@ -6112,9 +6702,11 @@
  #endif
  
  
@@ -2901,7 +2891,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDeviceInterfaceRegKeyA(
      _In_ HDEVINFO DeviceInfoSet,
-@@ -6125,9 +6720,11 @@
+@@ -6125,9 +6717,11 @@
      _In_opt_ PCSTR InfSectionName
      );
  
@@ -2914,7 +2904,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDeviceInterfaceRegKeyW(
      _In_ HDEVINFO DeviceInfoSet,
-@@ -6156,9 +6753,11 @@
+@@ -6156,9 +6750,11 @@
  #endif
  
  
@@ -2927,7 +2917,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiOpenDeviceInterfaceRegKey(
      _In_ HDEVINFO DeviceInfoSet,
-@@ -6173,6 +6772,8 @@
+@@ -6173,6 +6769,8 @@
  #define SetupDiOpenInterfaceDeviceRegKey SetupDiOpenDeviceInterfaceRegKey
  
  
@@ -2936,7 +2926,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6196,9 +6797,11 @@
+@@ -6196,9 +6794,11 @@
  #define DIREG_DRV       0x00000002          // Open/Create/Delete driver key
  #define DIREG_BOTH      0x00000004          // Delete both driver and Device key
  
@@ -2949,7 +2939,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDevRegKeyA(
      _In_ HDEVINFO DeviceInfoSet,
-@@ -6210,9 +6813,11 @@
+@@ -6210,9 +6810,11 @@
      _In_opt_ PCSTR InfSectionName
      );
  
@@ -2962,7 +2952,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiCreateDevRegKeyW(
      _In_ HDEVINFO DeviceInfoSet,
-@@ -6231,9 +6836,11 @@
+@@ -6231,9 +6833,11 @@
  #endif
  
  
@@ -2975,7 +2965,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINAPI
  SetupDiOpenDevRegKey(
      _In_ HDEVINFO DeviceInfoSet,
-@@ -6245,6 +6852,8 @@
+@@ -6245,6 +6849,8 @@
      );
  
  
@@ -2984,7 +2974,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6256,6 +6865,8 @@
+@@ -6256,6 +6862,8 @@
      _In_ DWORD KeyType
      );
  
@@ -2993,7 +2983,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6267,6 +6878,8 @@
+@@ -6267,6 +6875,8 @@
      _Out_opt_ PDWORD CurrentlyActiveIndex
      );
  
@@ -3002,7 +2992,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6280,6 +6893,8 @@
+@@ -6280,6 +6890,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3011,7 +3001,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6301,6 +6916,8 @@
+@@ -6301,6 +6913,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -3020,7 +3010,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6313,6 +6930,8 @@
+@@ -6313,6 +6927,8 @@
      _In_         DWORD            Flags
      );
  
@@ -3029,7 +3019,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6335,6 +6954,8 @@
+@@ -6335,6 +6951,8 @@
  #define SetupDiGetDeviceProperty SetupDiGetDevicePropertyW
  #endif
  
@@ -3038,7 +3028,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6352,6 +6973,8 @@
+@@ -6352,6 +6970,8 @@
  #define SetupDiSetDeviceProperty SetupDiSetDevicePropertyW
  #endif
  
@@ -3047,7 +3037,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6364,6 +6987,8 @@
+@@ -6364,6 +6984,8 @@
      _In_         DWORD            Flags
      );
  
@@ -3056,7 +3046,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6386,6 +7011,8 @@
+@@ -6386,6 +7008,8 @@
  #define SetupDiGetDeviceInterfaceProperty SetupDiGetDeviceInterfacePropertyW
  #endif
  
@@ -3065,7 +3055,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6410,6 +7037,8 @@
+@@ -6410,6 +7034,8 @@
  #define DICLASSPROP_INSTALLER   0x00000001    // device setup class property
  #define DICLASSPROP_INTERFACE   0x00000002    // device interface class property
  
@@ -3074,7 +3064,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6421,6 +7050,8 @@
+@@ -6421,6 +7047,8 @@
      _In_         DWORD            Flags
      );
  
@@ -3083,7 +3073,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6438,6 +7069,8 @@
+@@ -6438,6 +7066,8 @@
  #define SetupDiGetClassPropertyKeysEx SetupDiGetClassPropertyKeysExW
  #endif
  
@@ -3092,7 +3082,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6459,6 +7092,8 @@
+@@ -6459,6 +7089,8 @@
  #define SetupDiGetClassProperty SetupDiGetClassPropertyW
  #endif
  
@@ -3101,7 +3091,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6482,6 +7117,8 @@
+@@ -6482,6 +7114,8 @@
  #define SetupDiGetClassPropertyEx SetupDiGetClassPropertyExW
  #endif
  
@@ -3110,7 +3100,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6498,6 +7135,8 @@
+@@ -6498,6 +7132,8 @@
  #define SetupDiSetClassProperty SetupDiSetClassPropertyW
  #endif
  
@@ -3119,7 +3109,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6588,6 +7227,8 @@
+@@ -6588,6 +7224,8 @@
  #define SPCRP_CHARACTERISTICS             (0x0000001B)  // Device Characteristics (R/W)
  #define SPCRP_MAXIMUM_PROPERTY            (0x0000001C)  // Upper bound on ordinals
  
@@ -3128,7 +3118,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _When_((*PropertyRegDataType == REG_SZ), _At_((PSTR) PropertyBuffer, _Post_valid_))
  _When_((*PropertyRegDataType == REG_MULTI_SZ), _At_((PZZSTR) PropertyBuffer, _Post_valid_))
-@@ -6597,13 +7238,15 @@
+@@ -6597,13 +7235,15 @@
  SetupDiGetDeviceRegistryPropertyA(
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PSP_DEVINFO_DATA DeviceInfoData,
@@ -3145,7 +3135,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  _When_((*PropertyRegDataType == REG_SZ), _At_((PWSTR) PropertyBuffer, _Post_valid_))
  _When_((*PropertyRegDataType == REG_MULTI_SZ), _At_((PZZWSTR) PropertyBuffer, _Post_valid_))
-@@ -6613,7 +7256,7 @@
+@@ -6613,7 +7253,7 @@
  SetupDiGetDeviceRegistryPropertyW(
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PSP_DEVINFO_DATA DeviceInfoData,
@@ -3154,7 +3144,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _Out_opt_ PDWORD PropertyRegDataType,
      _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize) PBYTE PropertyBuffer,
      _In_ DWORD PropertyBufferSize,
-@@ -6628,6 +7271,8 @@
+@@ -6628,6 +7268,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3163,7 +3153,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6643,6 +7288,8 @@
+@@ -6643,6 +7285,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3172,7 +3162,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6666,24 +7313,28 @@
+@@ -6666,24 +7310,28 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3203,7 +3193,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_reads_bytes_opt_(PropertyBufferSize) CONST BYTE *PropertyBuffer,
      _In_ DWORD PropertyBufferSize
      );
-@@ -6696,6 +7347,8 @@
+@@ -6696,6 +7344,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3212,7 +3202,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6708,6 +7361,8 @@
+@@ -6708,6 +7358,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3221,7 +3211,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6728,22 +7383,26 @@
+@@ -6728,22 +7380,26 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3252,7 +3242,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -6752,6 +7411,8 @@
+@@ -6752,6 +7408,8 @@
  #define SetupDiGetDeviceInstallParams SetupDiGetDeviceInstallParamsA
  #endif
  
@@ -3261,7 +3251,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6764,6 +7425,8 @@
+@@ -6764,6 +7422,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3270,7 +3260,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6783,6 +7446,8 @@
+@@ -6783,6 +7443,8 @@
  #endif
  
  
@@ -3279,7 +3269,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6792,6 +7457,8 @@
+@@ -6792,6 +7454,8 @@
      _In_ PSP_DEVINSTALL_PARAMS_A DeviceInstallParams
      );
  
@@ -3288,7 +3278,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6808,6 +7475,8 @@
+@@ -6808,6 +7472,8 @@
  #endif
  
  
@@ -3297,7 +3287,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6818,6 +7487,8 @@
+@@ -6818,6 +7484,8 @@
      _In_ DWORD ClassInstallParamsSize
      );
  
@@ -3306,7 +3296,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6835,6 +7506,8 @@
+@@ -6835,6 +7503,8 @@
  #endif
  
  
@@ -3315,7 +3305,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6842,9 +7515,11 @@
+@@ -6842,9 +7512,11 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _In_ PSP_DRVINFO_DATA_A DriverInfoData,
@@ -3330,7 +3320,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6852,7 +7527,7 @@
+@@ -6852,7 +7524,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _In_ PSP_DRVINFO_DATA_W DriverInfoData,
@@ -3339,7 +3329,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #ifdef UNICODE
-@@ -6862,6 +7537,8 @@
+@@ -6862,6 +7534,8 @@
  #endif
  
  
@@ -3348,7 +3338,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6872,6 +7549,8 @@
+@@ -6872,6 +7546,8 @@
      _In_ PSP_DRVINSTALL_PARAMS DriverInstallParams
      );
  
@@ -3357,7 +3347,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6889,17 +7568,21 @@
+@@ -6889,17 +7565,21 @@
  #endif
  
  
@@ -3380,7 +3370,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6909,7 +7592,7 @@
+@@ -6909,7 +7589,7 @@
      _In_ UINT cxIcon,
      _In_ UINT cyIcon,
      _In_ DWORD Flags,
@@ -3389,7 +3379,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      );
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
-@@ -6922,6 +7605,7 @@
+@@ -6922,6 +7602,7 @@
  #define DMI_BKCOLOR   0x00000002
  #define DMI_USERECT   0x00000004
  
@@ -3397,7 +3387,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  INT
  WINAPI
-@@ -6933,6 +7617,8 @@
+@@ -6933,6 +7614,8 @@
      );
  
  
@@ -3406,7 +3396,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6942,28 +7628,34 @@
+@@ -6942,28 +7625,34 @@
      );
  
  
@@ -3447,7 +3437,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
      _In_opt_ PCWSTR MachineName,
      _Reserved_ PVOID Reserved
      );
-@@ -6975,6 +7667,8 @@
+@@ -6975,6 +7664,8 @@
  #endif
  
  
@@ -3456,7 +3446,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6985,6 +7679,8 @@
+@@ -6985,6 +7676,8 @@
      );
  
  
@@ -3465,7 +3455,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7006,6 +7702,8 @@
+@@ -7006,6 +7699,8 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3474,7 +3464,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7018,6 +7716,8 @@
+@@ -7018,6 +7713,8 @@
      _In_ DWORD PropertySheetType
      );
  
@@ -3483,7 +3473,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7054,6 +7754,8 @@
+@@ -7054,6 +7751,8 @@
  #define IDI_FORCED_OVL              502
  
  
@@ -3492,7 +3482,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7063,6 +7765,8 @@
+@@ -7063,6 +7762,8 @@
      );
  
  
@@ -3501,7 +3491,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7073,6 +7777,8 @@
+@@ -7073,6 +7774,8 @@
      );
  
  
@@ -3510,7 +3500,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7083,6 +7789,8 @@
+@@ -7083,6 +7786,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3519,7 +3509,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7100,6 +7808,8 @@
+@@ -7100,6 +7805,8 @@
  #endif
  
  
@@ -3528,7 +3518,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7112,6 +7822,8 @@
+@@ -7112,6 +7819,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3537,7 +3527,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7130,6 +7842,8 @@
+@@ -7130,6 +7839,8 @@
  #define SetupDiClassNameFromGuidEx SetupDiClassNameFromGuidExA
  #endif
  
@@ -3546,7 +3536,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7141,6 +7855,8 @@
+@@ -7141,6 +7852,8 @@
      _Out_ PDWORD RequiredSize
      );
  
@@ -3555,7 +3545,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7159,6 +7875,8 @@
+@@ -7159,6 +7872,8 @@
  #endif
  
  
@@ -3564,7 +3554,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7172,6 +7890,8 @@
+@@ -7172,6 +7887,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3573,7 +3563,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7192,6 +7912,8 @@
+@@ -7192,6 +7909,8 @@
  #endif
  
  
@@ -3582,7 +3572,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7202,6 +7924,8 @@
+@@ -7202,6 +7921,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3591,7 +3581,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7219,6 +7943,8 @@
+@@ -7219,6 +7940,8 @@
  #endif
  
  
@@ -3600,7 +3590,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7231,6 +7957,8 @@
+@@ -7231,6 +7954,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3609,7 +3599,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7272,15 +8000,19 @@
+@@ -7272,15 +7997,19 @@
      );
  
  
@@ -3633,7 +3623,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7292,6 +8024,7 @@
+@@ -7292,6 +8021,7 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
@@ -3641,7 +3631,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7304,6 +8037,7 @@
+@@ -7304,6 +8034,7 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3649,7 +3639,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7325,6 +8059,8 @@
+@@ -7325,6 +8056,8 @@
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
  
@@ -3658,7 +3648,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7337,6 +8073,8 @@
+@@ -7337,6 +8070,8 @@
      _Out_opt_ PSTR *Extension
      );
  
@@ -3667,7 +3657,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7358,6 +8096,8 @@
+@@ -7358,6 +8093,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3676,7 +3666,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7372,6 +8112,8 @@
+@@ -7372,6 +8109,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3685,7 +3675,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7400,6 +8142,8 @@
+@@ -7400,6 +8139,8 @@
  //
  // SetupEnumInfSections is for low-level parsing of an INF
  //
@@ -3694,7 +3684,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7411,6 +8155,8 @@
+@@ -7411,6 +8152,8 @@
      _Out_opt_ UINT *SizeNeeded
      );
  
@@ -3703,7 +3693,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7519,6 +8265,7 @@
+@@ -7519,6 +8262,7 @@
  #endif  // use current version of signer info structure
  
  
@@ -3711,7 +3701,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7528,6 +8275,7 @@
+@@ -7528,6 +8272,7 @@
      _Inout_ PSP_INF_SIGNER_INFO_A InfSignerInfo
      );
  
@@ -3719,7 +3709,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7552,6 +8300,8 @@
+@@ -7552,6 +8297,8 @@
  //
  #define DICUSTOMDEVPROP_MERGE_MULTISZ    0x00000001
  
@@ -3728,7 +3718,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7567,6 +8317,8 @@
+@@ -7567,6 +8314,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3737,7 +3727,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7604,6 +8356,7 @@
+@@ -7604,6 +8353,7 @@
  //
  #define SCWMI_CLOBBER_SECURITY  0x00000001
  
@@ -3745,7 +3735,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7613,6 +8366,7 @@
+@@ -7613,6 +8363,7 @@
      _In_ DWORD Flags
      );
  
@@ -3753,7 +3743,7 @@ diff --git a/um/SetupAPI.h b/um/SetupAPI.h
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7632,6 +8386,316 @@
+@@ -7632,6 +8383,316 @@
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
  

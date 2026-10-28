@@ -10,17 +10,7 @@ diff --git a/um/featurestagingapi.h b/um/featurestagingapi.h
  
  #include <apiset.h>
  #include <apisetcconv.h>
-@@ -52,6 +54,9 @@
- } FEATURE_ERROR;
- 
- DECLARE_HANDLE(FEATURE_STATE_CHANGE_SUBSCRIPTION);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef FEATURE_STATE_CHANGE_SUBSCRIPTION FEATURE_STATE_CHANGE_SUBSCRIPTION;
-+#endif
- typedef void WINAPI FEATURE_STATE_CHANGE_CALLBACK(_In_opt_ void* context);
- typedef FEATURE_STATE_CHANGE_CALLBACK *PFEATURE_STATE_CHANGE_CALLBACK;
- 
-@@ -81,7 +86,7 @@
+@@ -81,7 +83,7 @@
  EXTERN_C
  void
  SubscribeFeatureStateChangeNotification(

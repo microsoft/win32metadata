@@ -9,17 +9,7 @@ diff --git a/um/msports.h b/um/msports.h
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -91,6 +92,9 @@
- #endif
- 
- DECLARE_HANDLE(HCOMDB);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCOMDB HCOMDB;
-+#endif
- typedef HCOMDB *PHCOMDB;
- #define HCOMDB_INVALID_HANDLE_VALUE ((HCOMDB) INVALID_HANDLE_VALUE)
- 
-@@ -103,7 +107,7 @@
+@@ -103,7 +104,7 @@
  LONG
  WINAPI
  ComDBOpen (

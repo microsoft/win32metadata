@@ -182,13 +182,7 @@
  //
  // HRESULT_FROM_WIN32(x) used to be a macro, however we now run it as an inline function
  // to prevent double evaluation of 'x'. If you still need the macro, you can use __HRESULT_FROM_WIN32(x)
-@@ -30410,4 +30557,5 @@
- #if !defined(_HRESULT_DEFINED) && !defined(__midl)
- #define _HRESULT_DEFINED
-+_Win32_NativeTypedef_
- typedef _Return_type_success_(return >= 0) long HRESULT;
- #endif
-@@ -35934,6 +36082,111 @@
+@@ -35934,6 +36081,111 @@
  // OLE is waiting before retrying a request.
  //
  #define RPC_S_WAITONTIMER                _HRESULT_TYPEDEF_(0x80010116L)
@@ -300,13 +294,7 @@
  
  //
  // MessageId: RPC_E_CALL_COMPLETE
-@@ -40019,4 +40272,5 @@
- #if !defined(_HRESULT_DEFINED) && !defined(__midl)
- #define _HRESULT_DEFINED
-+_Win32_NativeTypedef_
- typedef _Return_type_success_(return >= 0) long HRESULT;
- #endif
-@@ -67494,4 +67748,3295 @@
+@@ -67494,4 +67746,3295 @@
  //
  #define PPF_E_JSONTX_EVENT_TYPE_ERROR    _HRESULT_TYPEDEF_(0xC928000DL)
  

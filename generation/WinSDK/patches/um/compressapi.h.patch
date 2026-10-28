@@ -1,23 +1,7 @@
 diff --git a/um/compressapi.h b/um/compressapi.h
 --- a/um/compressapi.h
 +++ b/um/compressapi.h
-@@ -30,9 +30,15 @@
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
- 
- DECLARE_HANDLE(COMPRESSOR_HANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef COMPRESSOR_HANDLE COMPRESSOR_HANDLE;
-+#endif
- typedef COMPRESSOR_HANDLE *PCOMPRESSOR_HANDLE;
- 
- typedef COMPRESSOR_HANDLE DECOMPRESSOR_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef DECOMPRESSOR_HANDLE DECOMPRESSOR_HANDLE;
-+#endif
- typedef COMPRESSOR_HANDLE *PDECOMPRESSOR_HANDLE;
- 
- #define COMPRESS_ALGORITHM_INVALID      0
-@@ -45,6 +51,15 @@
+@@ -45,6 +45,15 @@
  
  #define COMPRESS_RAW             (1 << 29)
  
@@ -33,7 +17,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  typedef PVOID (__cdecl *PFN_COMPRESS_ALLOCATE) (
      _In_ PVOID UserContext,
      _In_ SIZE_T Size
-@@ -69,14 +84,29 @@
+@@ -69,14 +78,29 @@
  
  // Compression routines
  
@@ -67,7 +51,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  SetCompressorInformation (
-@@ -86,6 +116,8 @@
+@@ -86,6 +110,8 @@
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -76,7 +60,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  QueryCompressorInformation (
-@@ -95,6 +127,8 @@
+@@ -95,6 +121,8 @@
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -85,7 +69,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  Compress (
-@@ -106,12 +140,16 @@
+@@ -106,12 +134,16 @@
      _Out_ PSIZE_T CompressedDataSize
      );
  
@@ -102,7 +86,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  CloseCompressor (
-@@ -120,14 +158,29 @@
+@@ -120,14 +152,29 @@
  
  // Decompression routines
  
@@ -136,7 +120,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  SetDecompressorInformation (
-@@ -137,6 +190,8 @@
+@@ -137,6 +184,8 @@
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -145,7 +129,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  QueryDecompressorInformation (
-@@ -146,6 +201,8 @@
+@@ -146,6 +195,8 @@
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -154,7 +138,7 @@ diff --git a/um/compressapi.h b/um/compressapi.h
  BOOL
  WINAPI
  Decompress (
-@@ -157,12 +214,16 @@
+@@ -157,12 +208,16 @@
      _Out_opt_ PSIZE_T UncompressedDataSize
      );
  

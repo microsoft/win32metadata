@@ -1,17 +1,7 @@
 diff --git a/um/lpmapi.h b/um/lpmapi.h
 --- a/um/lpmapi.h
 +++ b/um/lpmapi.h
-@@ -962,6 +962,9 @@
- DECLARE_HANDLE(LPM_HANDLE);
- 
- DECLARE_HANDLE(RHANDLE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef RHANDLE RHANDLE;
-+#endif
- 
- typedef ULONG   LPV;
- 
-@@ -1092,7 +1095,7 @@
+@@ -1092,7 +1092,7 @@
  
  ULONG
  APIENTRY
@@ -20,7 +10,7 @@ diff --git a/um/lpmapi.h b/um/lpmapi.h
  
      IN  LPM_HANDLE      LpmHandle,
      
-@@ -1112,7 +1115,7 @@
+@@ -1112,7 +1112,7 @@
  
  ULONG
  APIENTRY
@@ -29,7 +19,7 @@ diff --git a/um/lpmapi.h b/um/lpmapi.h
      IN  LPM_HANDLE      LpmHandle );
              
  
-@@ -1139,7 +1142,7 @@
+@@ -1139,7 +1139,7 @@
  
  ULONG
  APIENTRY
@@ -38,7 +28,7 @@ diff --git a/um/lpmapi.h b/um/lpmapi.h
  
      IN  RHANDLE         PcmReqHandle,
      
-@@ -1168,7 +1171,7 @@
+@@ -1168,7 +1168,7 @@
  
  ULONG
  APIENTRY
@@ -47,7 +37,7 @@ diff --git a/um/lpmapi.h b/um/lpmapi.h
  
      IN  RHANDLE         PcmReqHandle,
      
-@@ -1202,7 +1205,7 @@
+@@ -1202,7 +1202,7 @@
  
  VOID
  APIENTRY
@@ -56,7 +46,7 @@ diff --git a/um/lpmapi.h b/um/lpmapi.h
  
      IN  RSVP_HOP        *pRcvdIfAddr,
      
-@@ -1240,7 +1243,7 @@
+@@ -1240,7 +1240,7 @@
  
  BOOL
  APIENTRY
@@ -65,7 +55,7 @@ diff --git a/um/lpmapi.h b/um/lpmapi.h
  
      IN  ULONG       cIpAddrTable,
      
-@@ -1260,7 +1263,7 @@
+@@ -1260,7 +1260,7 @@
  
  VOID
  APIENTRY

@@ -1,13 +1,10 @@
 diff --git a/um/dciman.h b/um/dciman.h
 --- a/um/dciman.h
 +++ b/um/dciman.h
-@@ -34,13 +34,19 @@
+@@ -34,13 +34,16 @@
   ***************************************************************************/
  
  DECLARE_HANDLE(HWINWATCH);  // context handle for WinWatch instance
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HWINWATCH HWINWATCH;
-+#endif
  
  /****************************************************************************
   ***************************************************************************/
@@ -21,7 +18,7 @@ diff --git a/um/dciman.h b/um/dciman.h
  extern int WINAPI DCICreatePrimary(HDC hdc, LPDCISURFACEINFO FAR *lplpSurface);
  extern int WINAPI DCICreateOffscreen(HDC hdc, DWORD dwCompression, DWORD dwRedMask,
      DWORD dwGreenMask, DWORD dwBlueMask, DWORD dwWidth, DWORD dwHeight,
-@@ -78,9 +84,9 @@
+@@ -78,9 +81,9 @@
  /****************************************************************************
   helper functions to call DCIMAN16.DLL
   ***************************************************************************/

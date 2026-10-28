@@ -1,29 +1,7 @@
 diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
 --- a/um/uiautomationcoreapi.h
 +++ b/um/uiautomationcoreapi.h
-@@ -52,9 +52,21 @@
- #define UiaRootObjectId        -25
- 
- DECLARE_HANDLE(HUIANODE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HUIANODE HUIANODE;
-+#endif
- DECLARE_HANDLE(HUIAPATTERNOBJECT);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HUIAPATTERNOBJECT HUIAPATTERNOBJECT;
-+#endif
- DECLARE_HANDLE(HUIATEXTRANGE);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HUIATEXTRANGE HUIATEXTRANGE;
-+#endif
- DECLARE_HANDLE(HUIAEVENT);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HUIAEVENT HUIAEVENT;
-+#endif
- 
- #ifndef __uiautomationclient_h__
- enum TreeScope
-@@ -476,6 +488,7 @@
+@@ -476,6 +476,7 @@
  //
  // --------------------------------------------------------------------------
  
@@ -31,7 +9,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  BOOL WINAPI UiaGetErrorDescription(BSTR * pDescription);
  
  // --------------------------------------------------------------------------
-@@ -511,7 +524,7 @@
+@@ -511,7 +512,7 @@
  struct UiaPropertyCondition
  {
      enum ConditionType ConditionType;
@@ -40,7 +18,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
      VARIANT Value;
      enum PropertyConditionFlags Flags;
  };
-@@ -556,9 +569,12 @@
+@@ -556,9 +557,12 @@
      enum AutomationElementMode automationElementMode;
  };
  
@@ -56,7 +34,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  
  // --------------------------------------------------------------------------
  //
-@@ -605,24 +621,38 @@
+@@ -605,24 +609,38 @@
      struct UiaCondition * pFindCondition;
  };
  
@@ -99,7 +77,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  inline void UiaRectSetEmpty(_Out_ UiaRect & rc)
  {
      rc.left = 0;
-@@ -631,6 +661,7 @@
+@@ -631,6 +649,7 @@
      rc.height = 0;
  }
  
@@ -107,7 +85,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  inline bool UiaRectIsEmpty(const UiaRect & rc)
  {
      return rc.width <= 0 || rc.height <= 0;
-@@ -652,6 +683,7 @@
+@@ -652,6 +671,7 @@
  
  typedef SAFEARRAY * WINAPI UiaProviderCallback(HWND hwnd, enum ProviderType providerType);
  
@@ -115,7 +93,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  void WINAPI UiaRegisterProviderCallback(UiaProviderCallback * pCallback);
  
  
-@@ -674,6 +706,7 @@
+@@ -674,6 +694,7 @@
      AutomationIdentifierType_Style,
  };
  
@@ -123,7 +101,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  int WINAPI UiaLookupId(enum AutomationIdentifierType type, const GUID* pGuid);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -682,7 +715,9 @@
+@@ -682,7 +703,9 @@
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -133,7 +111,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaGetReservedMixedAttributeValue(IUnknown **punkMixedAttributeValue);
  
  // --------------------------------------------------------------------------
-@@ -725,7 +760,7 @@
+@@ -725,7 +748,7 @@
  struct UiaPropertyChangedEventArgs
  {
      enum EventArgsType Type;
@@ -142,7 +120,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
      PROPERTYID PropertyId;
      VARIANT OldValue;
      VARIANT NewValue;
-@@ -774,19 +809,28 @@
+@@ -774,19 +797,28 @@
  //
  // Provider Event APIs
  //
@@ -173,7 +151,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
      _In_ IRawElementProviderSimple* provider,
      _In_opt_ ITextRangeProvider* textRange);
-@@ -801,9 +845,13 @@
+@@ -801,9 +833,13 @@
  // Client Event APIs
  //
  typedef void WINAPI UiaEventCallback(struct UiaEventArgs * pArgs, SAFEARRAY * pRequestedData, BSTR pTreeStructure);
@@ -188,7 +166,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
  
  
-@@ -813,65 +861,121 @@
+@@ -813,65 +849,121 @@
  //
  // --------------------------------------------------------------------------
  
@@ -319,7 +297,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  BOOL WINAPI UiaTextRangeRelease(HUIATEXTRANGE hobj);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -887,8 +991,11 @@
+@@ -887,8 +979,11 @@
  // 
  // --------------------------------------------------------------------------
  
@@ -331,7 +309,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaProviderForNonClient(HWND hwnd, long idObject, long idChild, IRawElementProviderSimple ** ppProvider);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-@@ -900,6 +1007,7 @@
+@@ -900,6 +995,7 @@
  #define UIA_IAFP_DEFAULT        0x0000
  #define UIA_IAFP_UNWRAP_BRIDGE  0x0001
  
@@ -339,7 +317,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaIAccessibleFromProvider(
      _In_ IRawElementProviderSimple * pProvider, 
      _In_ DWORD dwFlags, 
-@@ -915,6 +1023,7 @@
+@@ -915,6 +1011,7 @@
  #define UIA_PFIA_DEFAULT        0x0000
  #define UIA_PFIA_UNWRAP_BRIDGE  0x0001
  
@@ -347,7 +325,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaProviderFromIAccessible(
      _In_ IAccessible * pAccessible, 
      long idChild, 
-@@ -927,7 +1036,9 @@
+@@ -927,7 +1024,9 @@
  // 
  // --------------------------------------------------------------------------
  
@@ -357,7 +335,7 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaDisconnectProvider(IRawElementProviderSimple * pProvider);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-@@ -942,6 +1053,7 @@
+@@ -942,6 +1041,7 @@
  //
  // --------------------------------------------------------------------------
  

@@ -51,15 +51,7 @@ index 9a1d6382..cc05ed8a 100644
  [
      local,
      object,
-@@ -460,6 +467,7 @@
- 
- struct _PSP;
- typedef struct _PSP * HPROPSHEETPAGE;
-+cpp_quote("/* Win32Metadata: type ::HPROPSHEETPAGE => NativeTypedef */")
- 
- typedef enum _TASKPAGE {
-     TASKPAGE_TASK     = 0,
-@@ -481,6 +489,7 @@
+@@ -481,6 +488,7 @@
  cpp_quote("DEFINE_GUID(IID_IProvideTaskPage, 0x4086658aL, 0xcbbb, 0x11cf, 0xb6, 0x04, 0x00, 0xc0, 0x4f, 0xd8, 0xd5, 0x65);")
  
  interface IProvideTaskPage;
@@ -67,7 +59,7 @@ index 9a1d6382..cc05ed8a 100644
  [
      local,
      object,
-@@ -496,6 +505,8 @@
+@@ -496,6 +504,8 @@
                  [out] HPROPSHEETPAGE * phPage);
  }
  

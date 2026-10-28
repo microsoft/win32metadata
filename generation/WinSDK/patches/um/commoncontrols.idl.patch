@@ -10,15 +10,7 @@ index 10787e66..f828ffed 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -21,6 +23,7 @@
- 
- typedef IUnknown* HIMAGELIST;
- cpp_quote("typedef struct _IMAGELIST* HIMAGELIST;")
-+cpp_quote("/* Win32Metadata: type ::HIMAGELIST => NativeTypedef */")
- 
- typedef struct _IMAGELISTDRAWPARAMS
- {
-@@ -59,20 +62,26 @@
+@@ -59,20 +61,26 @@
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
  cpp_quote("WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(")
@@ -45,7 +37,7 @@ index 10787e66..f828ffed 100644
  [
      uuid(46EB5926-582E-4017-9FDF-E8998DAA0950),
      local
-@@ -126,6 +135,7 @@
+@@ -126,6 +134,7 @@
  
  
  // New for (_WIN32_IE >= 0x0605)

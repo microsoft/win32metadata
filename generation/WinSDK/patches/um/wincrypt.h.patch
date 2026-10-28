@@ -569,24 +569,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  __cdecl
  GetEncSChannel(
-@@ -1581,10 +1789,16 @@
- // the CNG NCRYPT_KEY_HANDLE. Where appropriate, the HCRYPTPROV will be
- // converted to a NCRYPT_KEY_HANDLE via the CNG NCryptTranslateHandle().
- typedef ULONG_PTR HCRYPTPROV_OR_NCRYPT_KEY_HANDLE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCRYPTPROV_OR_NCRYPT_KEY_HANDLE HCRYPTPROV_OR_NCRYPT_KEY_HANDLE;
-+#endif
- 
- // This type is used where the HCRYPTPROV parameter is no longer used.
- // The caller should always pass in NULL.
- typedef ULONG_PTR HCRYPTPROV_LEGACY;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCRYPTPROV_LEGACY HCRYPTPROV_LEGACY;
-+#endif
- 
- //+-------------------------------------------------------------------------
- //  In a CRYPT_BIT_BLOB the last byte may contain 0-7 unused bits. Therefore, the
-@@ -2006,9 +2220,13 @@
+@@ -2006,9 +2214,13 @@
  //  The interpretation of the Value depends on the dwValueType.
  //  See below for a list of the types.
  //--------------------------------------------------------------------------
@@ -601,7 +584,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      CERT_RDN_VALUE_BLOB     Value;
  } CERT_RDN_ATTR, *PCERT_RDN_ATTR;
  
-@@ -2146,6 +2364,28 @@
+@@ -2146,6 +2358,28 @@
  #define CERT_RDN_UNICODE_STRING          12
  #define CERT_RDN_UTF8_STRING             13
  
@@ -630,7 +613,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CERT_RDN_TYPE_MASK                  0x000000FF
  #define CERT_RDN_FLAGS_MASK                 0xFF000000
  
-@@ -2383,7 +2623,7 @@
+@@ -2383,7 +2617,7 @@
      CRYPT_BIT_BLOB              IssuerUniqueId;
      CRYPT_BIT_BLOB              SubjectUniqueId;
      DWORD                       cExtension;
@@ -639,7 +622,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  } CERT_INFO, *PCERT_INFO;
  // certenrolls_end
  
-@@ -2615,6 +2855,12 @@
+@@ -2615,6 +2849,12 @@
  #define X509_ASN_ENCODING           0x00000001
  #define X509_NDR_ENCODING           0x00000002
  #define PKCS_7_ASN_ENCODING         0x00010000
@@ -652,7 +635,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define PKCS_7_NDR_ENCODING         0x00020000
  
  //+-------------------------------------------------------------------------
-@@ -2631,11 +2877,13 @@
+@@ -2631,11 +2871,13 @@
  //  for the lpszStructType, the hex dump of the encoded BLOB will be returned.
  //  User can set the flag CRYPT_FORMAT_STR_NO_HEX to disable the hex dump.
  //--------------------------------------------------------------------------
@@ -667,7 +650,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ DWORD dwFormatType,
      _In_ DWORD dwFormatStrType,
      _In_opt_ void *pFormatStruct,
-@@ -2730,24 +2978,28 @@
+@@ -2730,24 +2972,28 @@
  } CRYPT_ENCODE_PARA, *PCRYPT_ENCODE_PARA;
  
  
@@ -699,7 +682,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ LPCSTR lpszStructType,
      _In_ const void *pvStructInfo,
      _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
-@@ -2812,6 +3064,15 @@
+@@ -2812,6 +3058,15 @@
  // IA5String encoding of host name(in DNS Name/ URL/ EmailAddress) containing
  // non-IA5 characters by encoding the host name in punycode first.
  #define CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG   0x20000
@@ -715,7 +698,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  // The following flag is applicable when encoding structures that require
  // IA5String encoding of a path (http URL/Ldap query) containing non-IA5
-@@ -2835,11 +3096,13 @@
+@@ -2835,11 +3090,13 @@
      PFN_CRYPT_FREE          pfnFree;            // OPTIONAL
  } CRYPT_DECODE_PARA, *PCRYPT_DECODE_PARA;
  
@@ -730,7 +713,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ LPCSTR lpszStructType,
      _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
      _In_ DWORD cbEncoded,
-@@ -2850,16 +3113,18 @@
+@@ -2850,16 +3107,18 @@
      );
  
  
@@ -751,7 +734,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbStructInfo
      );
  
-@@ -3643,6 +3908,13 @@
+@@ -3643,6 +3902,13 @@
  
  // Subject logotype
  #define CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO 0x20
@@ -765,7 +748,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  // Validation of the OrganizationalUnit (OU) field in the subject name
  // meets Root Program Requirements for display.
-@@ -4069,6 +4341,17 @@
+@@ -4069,6 +4335,17 @@
  #define CERT_ALT_NAME_URL                7
  #define CERT_ALT_NAME_IP_ADDRESS         8
  #define CERT_ALT_NAME_REGISTERED_ID      9
@@ -783,7 +766,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  // certenrolld_end
  
  // certenrolls_begin -- CERT_ALT_NAME_INFO
-@@ -4493,6 +4776,18 @@
+@@ -4493,6 +4770,18 @@
  #define CRL_REASON_CESSATION_OF_OPERATION   5
  #define CRL_REASON_CERTIFICATE_HOLD         6
  #define CRL_REASON_REMOVE_FROM_CRL          8
@@ -802,7 +785,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CRL_REASON_PRIVILEGE_WITHDRAWN      9
  #define CRL_REASON_AA_COMPROMISE            10
  
-@@ -5534,16 +5829,24 @@
+@@ -5534,16 +5823,24 @@
      PCERT_HASHED_URL            rgHashedUrl;
  } CERT_LOGOTYPE_REFERENCE, *PCERT_LOGOTYPE_REFERENCE;
  
@@ -829,7 +812,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CERT_LOGOTYPE_NO_IMAGE_RESOLUTION_CHOICE
          // No resolution value
-@@ -5561,9 +5864,22 @@
+@@ -5561,9 +5858,22 @@
  #define CERT_LOGOTYPE_GRAY_SCALE_IMAGE_INFO_CHOICE          1
  #define CERT_LOGOTYPE_COLOR_IMAGE_INFO_CHOICE               2
  
@@ -852,7 +835,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  typedef struct _CERT_LOGOTYPE_IMAGE {
      CERT_LOGOTYPE_DETAILS       LogotypeDetails;
-@@ -5598,8 +5914,12 @@
+@@ -5598,8 +5908,12 @@
  } CERT_LOGOTYPE_DATA, *PCERT_LOGOTYPE_DATA;
  
  
@@ -866,7 +849,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CERT_LOGOTYPE_DIRECT_INFO_CHOICE
          PCERT_LOGOTYPE_DATA         pLogotypeDirectInfo;
-@@ -5611,6 +5931,12 @@
+@@ -5611,6 +5925,12 @@
  
  #define CERT_LOGOTYPE_DIRECT_INFO_CHOICE    1
  #define CERT_LOGOTYPE_INDIRECT_INFO_CHOICE  2
@@ -879,7 +862,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  typedef struct _CERT_OTHER_LOGOTYPE_INFO {
      LPSTR                       pszObjId;
-@@ -5639,8 +5965,12 @@
+@@ -5639,8 +5959,12 @@
  //  pvStructInfo points to following CERT_BIOMETRIC_EXT_INFO data structure.
  //==========================================================================
  
@@ -893,7 +876,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE
          DWORD                       dwPredefined;
-@@ -5654,6 +5984,12 @@
+@@ -5654,6 +5978,12 @@
  
  #define CERT_BIOMETRIC_PREDEFINED_DATA_CHOICE   1
  #define CERT_BIOMETRIC_OID_DATA_CHOICE          2
@@ -906,7 +889,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  #define CERT_BIOMETRIC_PICTURE_TYPE             0
  #define CERT_BIOMETRIC_SIGNATURE_TYPE           1
-@@ -5764,7 +6100,7 @@
+@@ -5764,7 +6094,7 @@
      FILETIME                    RevocationDate;
  
      // See X509_CRL_REASON_CODE for list of reason codes
@@ -915,7 +898,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  } OCSP_BASIC_REVOKED_INFO, *POCSP_BASIC_REVOKED_INFO;
  
  typedef struct _OCSP_BASIC_RESPONSE_ENTRY {
-@@ -5950,6 +6286,7 @@
+@@ -5950,6 +6280,7 @@
  //  DEFAULT functions are installed by setting rgFuncEntry[].pszOID =
  //  CRYPT_DEFAULT_OID.
  //--------------------------------------------------------------------------
@@ -923,7 +906,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -5968,6 +6305,7 @@
+@@ -5968,6 +6299,7 @@
  //
  //  If the set already exists, a handle to the existing set is returned.
  //--------------------------------------------------------------------------
@@ -931,7 +914,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCRYPTOIDFUNCSET
  WINAPI
-@@ -5994,6 +6332,8 @@
+@@ -5994,6 +6326,8 @@
  //  the registered function might handle a new special case and call the
  //  pre-installed function to handle the remaining cases.
  //--------------------------------------------------------------------------
@@ -940,7 +923,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -6017,6 +6357,8 @@
+@@ -6017,6 +6351,8 @@
  //  names. The list is terminated with an empty (L"\0") Dll file name.
  //  For example: L"first.dll" L"\0" L"second.dll" L"\0" L"\0"
  //--------------------------------------------------------------------------
@@ -949,7 +932,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -6051,6 +6393,7 @@
+@@ -6051,6 +6387,7 @@
  //  be called to release it or CryptGetDefaultOIDFunctionAddress can also
  //  be called for a NULL pwszDll.
  //--------------------------------------------------------------------------
@@ -957,7 +940,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -6077,6 +6420,7 @@
+@@ -6077,6 +6414,7 @@
  //      STDAPI  DllCanUnloadNow(void);
  //--------------------------------------------------------------------------
  
@@ -965,7 +948,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6105,6 +6449,7 @@
+@@ -6105,6 +6443,7 @@
  //  This allows a Dll to export multiple OID functions for the same
  //  function name without needing to interpose its own OID dispatcher function.
  //--------------------------------------------------------------------------
@@ -973,7 +956,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6120,6 +6465,7 @@
+@@ -6120,6 +6459,7 @@
  //  Unregister the Dll containing the function to be called for the specified
  //  encoding type, function name and OID.
  //--------------------------------------------------------------------------
@@ -981,7 +964,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6143,6 +6489,7 @@
+@@ -6143,6 +6483,7 @@
  //  pwszDll may contain environment-variable strings
  //  which are ExpandEnvironmentStrings()'ed before loading the Dll.
  //--------------------------------------------------------------------------
@@ -989,7 +972,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6160,6 +6507,7 @@
+@@ -6160,6 +6501,7 @@
  //  Unregister the Dll containing the default function to be called for
  //  the specified encoding type and function name.
  //--------------------------------------------------------------------------
@@ -997,7 +980,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6177,6 +6525,7 @@
+@@ -6177,6 +6519,7 @@
  //
  //  String types are UNICODE.
  //--------------------------------------------------------------------------
@@ -1005,7 +988,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6185,7 +6534,7 @@
+@@ -6185,7 +6528,7 @@
      _In_ LPCSTR pszFuncName,
      _In_ LPCSTR pszOID,
      _In_opt_ LPCWSTR pwszValueName,
@@ -1014,7 +997,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_opt_(cbValueData) const BYTE *pbValueData,
      _In_ DWORD cbValueData
      );
-@@ -6205,6 +6554,8 @@
+@@ -6205,6 +6548,8 @@
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -1023,7 +1006,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6243,6 +6594,8 @@
+@@ -6243,6 +6588,8 @@
  //
  //  String types are UNICODE.
  //--------------------------------------------------------------------------
@@ -1032,7 +1015,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6519,6 +6872,7 @@
+@@ -6519,6 +6866,7 @@
  //  Setting dwGroupId to 0, searches all groups according to the dwKeyType.
  //  Otherwise, only the dwGroupId is searched.
  //--------------------------------------------------------------------------
@@ -1040,7 +1023,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCRYPT_OID_INFO
  WINAPI
-@@ -6541,6 +6895,12 @@
+@@ -6541,6 +6889,12 @@
  #define CRYPT_OID_INFO_OID_KEY_FLAGS_MASK           0xFFFF0000
  #define CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG         0x80000000
  #define CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG      0x40000000
@@ -1053,7 +1036,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  // Set the following in the above dwKeyType parameter to restrict public keys
  // valid for "Pure" or "PreHash" signing
-@@ -6600,6 +6960,7 @@
+@@ -6600,6 +6954,7 @@
  //  By default the registered OID information is installed after crypt32.dll's
  //  OID entries. Set CRYPT_INSTALL_OID_INFO_BEFORE_FLAG to install before.
  //--------------------------------------------------------------------------
@@ -1061,7 +1044,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6614,6 +6975,7 @@
+@@ -6614,6 +6969,7 @@
  //  Unregister OID information. Only the pszOID and dwGroupId fields are
  //  used to identify the OID information to be unregistered.
  //--------------------------------------------------------------------------
@@ -1069,7 +1052,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6643,6 +7005,7 @@
+@@ -6643,6 +6999,7 @@
  //
  //  dwFlags currently isn't used and must be set to 0.
  //--------------------------------------------------------------------------
@@ -1077,7 +1060,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -6676,6 +7039,7 @@
+@@ -6676,6 +7033,7 @@
  //
  //  The registered names are searched before the pre-installed names.
  //--------------------------------------------------------------------------
@@ -1085,7 +1068,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LPCWSTR
  WINAPI
-@@ -6690,8 +7054,12 @@
+@@ -6690,8 +7048,12 @@
  //  Certificate Strong Signature Defines and Data Structures
  //==========================================================================
  
@@ -1099,7 +1082,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      LPWSTR                  pwszCNGSignHashAlgids;
      LPWSTR                  pwszCNGPubKeyMinBitLengths; // Optional
  } CERT_STRONG_SIGN_SERIALIZED_INFO, *PCERT_STRONG_SIGN_SERIALIZED_INFO;
-@@ -6744,6 +7112,12 @@
+@@ -6744,6 +7106,12 @@
  // CRLs or OCSP responses.
  #define CERT_STRONG_SIGN_ENABLE_CRL_CHECK           0x1
  #define CERT_STRONG_SIGN_ENABLE_OCSP_CHECK          0x2
@@ -1112,7 +1095,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  
  //
-@@ -6829,6 +7203,15 @@
+@@ -6829,6 +7197,15 @@
  #define CMSG_ENVELOPED               3
  #define CMSG_SIGNED_AND_ENVELOPED    4
  #define CMSG_HASHED                  5
@@ -1128,7 +1111,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CMSG_ENCRYPTED               6
  
  //+-------------------------------------------------------------------------
-@@ -6854,8 +7237,12 @@
+@@ -6854,8 +7231,12 @@
  //+-------------------------------------------------------------------------
  //  Certificate Identifier
  //--------------------------------------------------------------------------
@@ -1142,7 +1125,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CERT_ID_ISSUER_SERIAL_NUMBER
          CERT_ISSUER_SERIAL_NUMBER   IssuerSerialNumber;
-@@ -6869,6 +7256,13 @@
+@@ -6869,6 +7250,13 @@
  #define CERT_ID_ISSUER_SERIAL_NUMBER    1
  #define CERT_ID_KEY_IDENTIFIER          2
  #define CERT_ID_SHA1_HASH               3
@@ -1156,7 +1139,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+-------------------------------------------------------------------------
  //  The message encode information (pvMsgEncodeInfo) is message type dependent
-@@ -7120,6 +7514,10 @@
+@@ -7120,6 +7508,10 @@
  } CMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO,
      *PCMSG_RECIPIENT_ENCRYPTED_KEY_ENCODE_INFO;
  
@@ -1167,7 +1150,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  typedef struct _CMSG_KEY_AGREE_RECIPIENT_ENCODE_INFO {
      DWORD                       cbSize;
      CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
-@@ -7136,7 +7534,7 @@
+@@ -7136,7 +7528,7 @@
      HCRYPTPROV_LEGACY           hCryptProv;
      DWORD                       dwKeySpec;
  
@@ -1176,7 +1159,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE
          //
-@@ -7156,6 +7554,12 @@
+@@ -7156,6 +7548,12 @@
  
  #define CMSG_KEY_AGREE_EPHEMERAL_KEY_CHOICE         1
  #define CMSG_KEY_AGREE_STATIC_KEY_CHOICE            2
@@ -1189,7 +1172,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+-------------------------------------------------------------------------
  //  Mail List Recipient Encode Info
-@@ -7401,13 +7805,15 @@
+@@ -7401,13 +7799,15 @@
  //  The pStreamInfo parameter needs to be set to stream the encoded message
  //  output.
  //--------------------------------------------------------------------------
@@ -1206,7 +1189,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ void const *pvMsgEncodeInfo,
      _In_opt_ LPSTR pszInnerContentObjID,
      _In_opt_ PCMSG_STREAM_INFO pStreamInfo
-@@ -7421,6 +7827,8 @@
+@@ -7421,6 +7821,8 @@
  //  the data to be updated. Note, this might not be the exact length. However,
  //  it will always be greater than or equal to the actual length.
  //--------------------------------------------------------------------------
@@ -1215,7 +1198,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -7445,6 +7853,8 @@
+@@ -7445,6 +7847,8 @@
  //  The pStreamInfo parameter needs to be set to stream the decoded content
  //  output.
  //--------------------------------------------------------------------------
@@ -1224,7 +1207,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCRYPTMSG
  WINAPI
-@@ -7460,6 +7870,7 @@
+@@ -7460,6 +7864,7 @@
  //+-------------------------------------------------------------------------
  //  Duplicate a cryptographic message handle
  //--------------------------------------------------------------------------
@@ -1232,7 +1215,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCRYPTMSG
  WINAPI
-@@ -7472,6 +7883,8 @@
+@@ -7472,6 +7877,8 @@
  //
  //  LastError is preserved unless FALSE is returned.
  //--------------------------------------------------------------------------
@@ -1241,7 +1224,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -7488,6 +7901,8 @@
+@@ -7488,6 +7895,8 @@
  //  is completed. The encoded/decoded content and the decoded parameters
  //  are valid until the open and all duplicated handles are closed.
  //--------------------------------------------------------------------------
@@ -1250,7 +1233,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -7522,6 +7937,8 @@
+@@ -7522,6 +7931,8 @@
  //
  //  See below for a list of the parameters to get.
  //--------------------------------------------------------------------------
@@ -1259,7 +1242,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -7529,7 +7946,7 @@
+@@ -7529,7 +7940,7 @@
      _In_ HCRYPTMSG hCryptMsg,
      _In_ DWORD dwParamType,
      _In_ DWORD dwIndex,
@@ -1268,7 +1251,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbData
      );
  
-@@ -7987,9 +8404,13 @@
+@@ -7987,9 +8398,13 @@
      PCRYPT_ATTRIBUTE_TYPE_VALUE pOtherAttr;
  } CMSG_RECIPIENT_ENCRYPTED_KEY_INFO, *PCMSG_RECIPIENT_ENCRYPTED_KEY_INFO;
  
@@ -1283,7 +1266,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CMSG_KEY_AGREE_ORIGINATOR_CERT
          CERT_ID                     OriginatorCertId;
-@@ -8005,6 +8426,12 @@
+@@ -8005,6 +8420,12 @@
  
  #define CMSG_KEY_AGREE_ORIGINATOR_CERT         1
  #define CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY   2
@@ -1296,7 +1279,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  
  typedef struct _CMSG_MAIL_LIST_RECIPIENT_INFO {
-@@ -8060,6 +8487,8 @@
+@@ -8060,6 +8481,8 @@
  //  See below for a list of the control operations and their pvCtrlPara
  //  type definition.
  //--------------------------------------------------------------------------
@@ -1305,7 +1288,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -8468,6 +8897,8 @@
+@@ -8468,6 +8891,8 @@
  //  The only fields referenced from pciCountersigner are SerialNumber, Issuer,
  //  and SubjectPublicKeyInfo.
  //--------------------------------------------------------------------------
@@ -1314,7 +1297,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  WINAPI
  CryptMsgVerifyCountersignatureEncoded(
-@@ -8491,6 +8922,8 @@
+@@ -8491,6 +8916,8 @@
  //  The signer can be a CERT_PUBLIC_KEY_INFO, certificate context or a
  //  chain context.
  //--------------------------------------------------------------------------
@@ -1323,7 +1306,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  WINAPI
  CryptMsgVerifyCountersignatureEncodedEx(
-@@ -8517,6 +8950,8 @@
+@@ -8517,6 +8944,8 @@
  //
  //  dwIndex is a zero-based index of the SignerInfo to be countersigned.
  //--------------------------------------------------------------------------
@@ -1332,7 +1315,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  WINAPI
  CryptMsgCountersign(
-@@ -8532,6 +8967,8 @@
+@@ -8532,6 +8961,8 @@
  //  attribute in the unauthenticated attributes of a signed-data or
  //  signed-and-enveloped-data message.
  //--------------------------------------------------------------------------
@@ -1341,7 +1324,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  WINAPI
  CryptMsgCountersignEncoded(
-@@ -8805,7 +9242,7 @@
+@@ -8805,7 +9236,7 @@
      DWORD                       dwRecipientIndex;
      CRYPT_ALGORITHM_IDENTIFIER  KeyEncryptionAlgorithm;
      CRYPT_DATA_BLOB             UserKeyingMaterial;
@@ -1350,17 +1333,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      union {
          // CMSG_KEY_AGREE_ORIGINATOR_CERT
          CERT_ID                     OriginatorCertId;
-@@ -9171,6 +9608,9 @@
- //--------------------------------------------------------------------------
- 
- typedef void *HCERTSTORE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCERTSTORE HCERTSTORE;
-+#endif
- 
- //+-------------------------------------------------------------------------
- //  Certificate context.
-@@ -9183,7 +9623,7 @@
+@@ -9183,7 +9614,7 @@
  //--------------------------------------------------------------------------
  // certenrolls_begin -- CERT_CONTEXT
  typedef struct _CERT_CONTEXT {
@@ -1369,7 +1342,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      BYTE                    *pbCertEncoded;
      DWORD                   cbCertEncoded;
      PCERT_INFO              pCertInfo;
-@@ -9202,7 +9642,7 @@
+@@ -9202,7 +9633,7 @@
  //  copy (which also must be freed by calling CertFreeCRLContext).
  //--------------------------------------------------------------------------
  typedef struct _CRL_CONTEXT {
@@ -1378,7 +1351,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      BYTE                    *pbCrlEncoded;
      DWORD                   cbCrlEncoded;
      PCRL_INFO               pCrlInfo;
-@@ -9526,11 +9966,15 @@
+@@ -9526,11 +9957,15 @@
      DWORD           dwFlags;
  } CRYPT_KEY_PROV_PARAM, *PCRYPT_KEY_PROV_PARAM;
  
@@ -1395,7 +1368,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      DWORD                   cProvParam;
      PCRYPT_KEY_PROV_PARAM   rgProvParam;
      DWORD                   dwKeySpec;
-@@ -9550,6 +9994,13 @@
+@@ -9550,6 +9985,13 @@
  // Special dwKeySpec indicating a CNG NCRYPT_KEY_HANDLE instead of a CAPI1
  // HCRYPTPROV
  #define CERT_NCRYPT_KEY_SPEC                0xFFFFFFFF
@@ -1409,7 +1382,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+-------------------------------------------------------------------------
  //  Certificate Key Context
-@@ -9672,6 +10123,22 @@
+@@ -9672,6 +10114,22 @@
  #define CERT_STORE_CREATE_NEW_FLAG                      0x00002000
  #define CERT_STORE_MAXIMUM_ALLOWED_FLAG                 0x00001000
  
@@ -1432,7 +1405,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  //+-------------------------------------------------------------------------
  //  Certificate Store Provider flags are in the HiWord (0xFFFF0000)
  //--------------------------------------------------------------------------
-@@ -9707,6 +10174,12 @@
+@@ -9707,6 +10165,12 @@
  
  // Location of the system store:
  #define CERT_SYSTEM_STORE_LOCATION_MASK         0x00FF0000
@@ -1445,7 +1418,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CERT_SYSTEM_STORE_LOCATION_SHIFT        16
  
  
-@@ -10572,15 +11045,17 @@
+@@ -10572,15 +11036,17 @@
  //      attribute.
  //
  //--------------------------------------------------------------------------
@@ -1466,17 +1439,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_opt_ const void *pvPara
      );
  
-@@ -10590,6 +11065,9 @@
- 
- // Handle returned by the store provider when opened.
- typedef void *HCERTSTOREPROV;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCERTSTOREPROV HCERTSTOREPROV;
-+#endif
- 
- // Store Provider OID function's pszFuncName.
- #define CRYPT_OID_OPEN_STORE_PROV_FUNC   "CertDllOpenStoreProv"
-@@ -10600,12 +11078,16 @@
+@@ -10600,12 +11066,16 @@
  // zeroed with cbSize set before the provider is called. If the provider
  // doesn't need to be called again after the open it doesn't need to
  // make any updates to the CERT_STORE_PROV_INFO.
@@ -1494,7 +1457,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      HCRYPTOIDFUNCADDR   hStoreProvFuncAddr2;
  } CERT_STORE_PROV_INFO, *PCERT_STORE_PROV_INFO;
  
-@@ -10618,9 +11100,9 @@
+@@ -10618,9 +11088,9 @@
  // call the appropriate provider callback function.
  typedef BOOL (WINAPI *PFN_CERT_DLL_OPEN_STORE_PROV_FUNC)(
      _In_ LPCSTR lpszStoreProvider,
@@ -1506,7 +1469,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_opt_ const void *pvPara,
      _In_ HCERTSTORE hCertStore,
      _Inout_ PCERT_STORE_PROV_INFO pStoreProvInfo
-@@ -10645,6 +11127,15 @@
+@@ -10645,6 +11115,15 @@
  // The open callback sets the following flag if the contexts are persisted
  // to a LocalMachine system store.
  #define CERT_STORE_PROV_LM_SYSTEM_STORE_FLAG    0x10
@@ -1522,7 +1485,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  // The open callback sets the following flag if the contexts are persisted
  // to a GroupPolicy system store.
-@@ -10941,6 +11432,7 @@
+@@ -10941,6 +11420,7 @@
  //+-------------------------------------------------------------------------
  //  Duplicate a cert store handle
  //--------------------------------------------------------------------------
@@ -1530,7 +1493,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCERTSTORE
  WINAPI
-@@ -10950,6 +11442,12 @@
+@@ -10950,6 +11430,12 @@
  
  #define CERT_STORE_SAVE_AS_STORE        1
  #define CERT_STORE_SAVE_AS_PKCS7        2
@@ -1543,7 +1506,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CERT_STORE_SAVE_AS_PKCS12       3
  
  #define CERT_STORE_SAVE_TO_FILE         1
-@@ -10957,6 +11455,15 @@
+@@ -10957,6 +11443,15 @@
  #define CERT_STORE_SAVE_TO_FILENAME_A   3
  #define CERT_STORE_SAVE_TO_FILENAME_W   4
  #define CERT_STORE_SAVE_TO_FILENAME     CERT_STORE_SAVE_TO_FILENAME_W
@@ -1559,7 +1522,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+-------------------------------------------------------------------------
  //  Save the cert store. Extended version with lots of options.
-@@ -11010,14 +11517,16 @@
+@@ -11010,14 +11505,16 @@
  //      Note, the default (without "_A" or "_W") is UNICODE.
  //
  //--------------------------------------------------------------------------
@@ -1579,7 +1542,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ void *pvSaveToPara,
      _In_ DWORD dwFlags
      );
-@@ -11052,6 +11561,8 @@
+@@ -11052,6 +11549,8 @@
  //  LastError is preserved unless CERT_CLOSE_STORE_CHECK_FLAG is set and FALSE
  //  is returned.
  //--------------------------------------------------------------------------
@@ -1588,7 +1551,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -11072,12 +11583,14 @@
+@@ -11072,12 +11571,14 @@
  //  The returned certificate might not be valid. Normally, it would be
  //  verified when getting its issuer certificate (CertGetIssuerCertificateFromStore).
  //--------------------------------------------------------------------------
@@ -1604,7 +1567,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_INFO pCertId           // Only the Issuer and SerialNumber
                                        // fields are used
      );
-@@ -11098,6 +11611,8 @@
+@@ -11098,6 +11599,8 @@
  //  NOTE: a NON-NULL pPrevCertContext is always CertFreeCertificateContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -1613,7 +1576,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCERT_CONTEXT
  WINAPI
-@@ -11130,14 +11645,16 @@
+@@ -11130,14 +11633,16 @@
  //  NOTE: a NON-NULL pPrevCertContext is always CertFreeCertificateContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -1632,7 +1595,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_opt_ const void *pvFindPara,
      _In_opt_ PCCERT_CONTEXT pPrevCertContext
      );
-@@ -11413,6 +11930,54 @@
+@@ -11413,6 +11918,54 @@
  #define CERT_FIND_OR_CTL_USAGE_FLAG         CERT_FIND_OR_ENHKEY_USAGE_FLAG
  #define CERT_FIND_VALID_CTL_USAGE_FLAG      CERT_FIND_VALID_ENHKEY_USAGE_FLAG
  
@@ -1687,7 +1650,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  //+-------------------------------------------------------------------------
  //  CERT_FIND_CERT_ID
  //
-@@ -11503,6 +12068,8 @@
+@@ -11503,6 +12056,8 @@
  //  For a verification check failure, a pointer to the issuer's CERT_CONTEXT
  //  is still returned and SetLastError isn't updated.
  //--------------------------------------------------------------------------
@@ -1696,7 +1659,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCERT_CONTEXT
  WINAPI
-@@ -11523,6 +12090,8 @@
+@@ -11523,6 +12078,8 @@
  //
  //  For a verification check failure, SUCCESS is still returned.
  //--------------------------------------------------------------------------
@@ -1705,7 +1668,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -11535,6 +12104,7 @@
+@@ -11535,6 +12092,7 @@
  //+-------------------------------------------------------------------------
  //  Duplicate a certificate context
  //--------------------------------------------------------------------------
@@ -1713,7 +1676,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCERT_CONTEXT
  WINAPI
-@@ -11556,11 +12126,13 @@
+@@ -11556,11 +12114,13 @@
  //  CertSetCertificateContextProperty and CertGetCertificateContextProperty can be called
  //  to store properties for the certificate.
  //--------------------------------------------------------------------------
@@ -1729,7 +1692,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbCertEncoded) const BYTE *pbCertEncoded,
      _In_ DWORD cbCertEncoded
      );
-@@ -11571,6 +12143,7 @@
+@@ -11571,6 +12131,7 @@
  //  There needs to be a corresponding free for each context obtained by a
  //  get, find, duplicate or create.
  //--------------------------------------------------------------------------
@@ -1737,7 +1700,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -11719,6 +12292,8 @@
+@@ -11719,6 +12280,8 @@
  //  CERT_SET_PROPERTY_IGNORE_PERSIST_ERROR_FLAG can be set to ignore any
  //  provider write errors and always update the cached context's property.
  //--------------------------------------------------------------------------
@@ -1746,7 +1709,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -11796,13 +12371,15 @@
+@@ -11796,13 +12359,15 @@
  //
  //  For all other PROP_IDs, pvData points to an encoded array of bytes.
  //--------------------------------------------------------------------------
@@ -1763,7 +1726,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbData
      );
  
-@@ -11820,6 +12397,7 @@
+@@ -11820,6 +12385,7 @@
  //  properties are stored as fields in the CERT_KEY_CONTEXT_PROP_ID
  //  property, they aren't enumerated individually.
  //--------------------------------------------------------------------------
@@ -1771,7 +1734,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -11850,6 +12428,8 @@
+@@ -11850,6 +12416,8 @@
  //  CTL_ENTRY_FROM_PROP_CHAIN_FLAG can be set in dwFlags, to force the
  //  inclusion of the chain building hash properties as attributes.
  //--------------------------------------------------------------------------
@@ -1780,7 +1743,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -11860,7 +12440,7 @@
+@@ -11860,7 +12428,7 @@
      _In_reads_opt_(cOptAttr) PCRYPT_ATTRIBUTE rgOptAttr,
      _In_ DWORD dwFlags,
      _Reserved_ void *pvReserved,
@@ -1789,7 +1752,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbCtlEntry
      );
  
-@@ -11879,6 +12459,8 @@
+@@ -11879,6 +12447,8 @@
  //
  //  CERT_SET_PROPERTY_IGNORE_PERSIST_ERROR_FLAG may be set in dwFlags.
  //--------------------------------------------------------------------------
@@ -1798,7 +1761,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -11946,6 +12528,8 @@
+@@ -11946,6 +12516,8 @@
  //  For a verification check failure, a pointer to the first or next
  //  CRL_CONTEXT is still returned and SetLastError isn't updated.
  //--------------------------------------------------------------------------
@@ -1807,7 +1770,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCRL_CONTEXT
  WINAPI
-@@ -11972,6 +12556,8 @@
+@@ -11972,6 +12544,8 @@
  //  NOTE: a NON-NULL pPrevCrlContext is always CertFreeCRLContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -1816,7 +1779,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCRL_CONTEXT
  WINAPI
-@@ -12003,12 +12589,14 @@
+@@ -12003,12 +12577,14 @@
  //  NOTE: a NON-NULL pPrevCrlContext is always CertFreeCRLContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -1832,7 +1795,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ DWORD dwFindFlags,
      _In_ DWORD dwFindType,
      _In_opt_ const void *pvFindPara,
-@@ -12107,6 +12695,7 @@
+@@ -12107,6 +12683,7 @@
  //+-------------------------------------------------------------------------
  //  Duplicate a CRL context
  //--------------------------------------------------------------------------
@@ -1840,7 +1803,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCRL_CONTEXT
  WINAPI
-@@ -12128,11 +12717,13 @@
+@@ -12128,11 +12705,13 @@
  //  CertSetCRLContextProperty and CertGetCRLContextProperty can be called
  //  to store properties for the CRL.
  //--------------------------------------------------------------------------
@@ -1855,7 +1818,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbCrlEncoded) const BYTE *pbCrlEncoded,
      _In_ DWORD cbCrlEncoded
      );
-@@ -12143,6 +12734,7 @@
+@@ -12143,6 +12722,7 @@
  //  There needs to be a corresponding free for each context obtained by a
  //  get, duplicate or create.
  //--------------------------------------------------------------------------
@@ -1863,7 +1826,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12155,6 +12747,8 @@
+@@ -12155,6 +12735,8 @@
  //
  //  Same Property Ids and semantics as CertSetCertificateContextProperty.
  //--------------------------------------------------------------------------
@@ -1872,7 +1835,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12173,6 +12767,8 @@
+@@ -12173,6 +12755,8 @@
  //  CERT_SHA1_HASH_PROP_ID, CERT_MD5_HASH_PROP_ID or
  //  CERT_SIGNATURE_HASH_PROP_ID is the predefined property of most interest.
  //--------------------------------------------------------------------------
@@ -1881,7 +1844,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12193,6 +12789,7 @@
+@@ -12193,6 +12777,7 @@
  //
  //  CertGetCRLContextProperty is called to get the property's data.
  //--------------------------------------------------------------------------
@@ -1889,7 +1852,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -12214,6 +12811,7 @@
+@@ -12214,6 +12799,7 @@
  //
  //  dwFlags and pvReserved currently aren't used and must be set to 0 or NULL.
  //--------------------------------------------------------------------------
@@ -1897,7 +1860,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12237,6 +12835,7 @@
+@@ -12237,6 +12823,7 @@
  //
  //  dwFlags and pvReserved currently aren't used and must be set to 0 and NULL.
  //--------------------------------------------------------------------------
@@ -1905,7 +1868,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12305,13 +12904,15 @@
+@@ -12305,13 +12892,15 @@
  //  ppCertContext can be NULL, indicating the caller isn't interested
  //  in getting the CERT_CONTEXT of the added or existing certificate.
  //--------------------------------------------------------------------------
@@ -1922,7 +1885,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbCertEncoded) const BYTE *pbCertEncoded,
      _In_ DWORD cbCertEncoded,
      _In_ DWORD dwAddDisposition,
-@@ -12375,6 +12976,8 @@
+@@ -12375,6 +12964,8 @@
  //  ppStoreContext can be NULL, indicating the caller isn't interested
  //  in getting the CERT_CONTEXT of the added or existing certificate.
  //--------------------------------------------------------------------------
@@ -1931,7 +1894,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12429,6 +13032,8 @@
+@@ -12429,6 +13020,8 @@
  //  returned it must be freed by calling CertFreeCertificateContext or
  //  CertFreeCRLContext.
  //--------------------------------------------------------------------------
@@ -1940,7 +1903,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12459,6 +13064,8 @@
+@@ -12459,6 +13052,8 @@
  //  NOTE: the pCertContext is always CertFreeCertificateContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -1949,7 +1912,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12482,13 +13089,15 @@
+@@ -12482,13 +13077,15 @@
  //  ppCrlContext can be NULL, indicating the caller isn't interested
  //  in getting the CRL_CONTEXT of the added or existing CRL.
  //--------------------------------------------------------------------------
@@ -1966,7 +1929,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbCrlEncoded) const BYTE *pbCrlEncoded,
      _In_ DWORD cbCrlEncoded,
      _In_ DWORD dwAddDisposition,
-@@ -12515,6 +13124,8 @@
+@@ -12515,6 +13112,8 @@
  //  ppStoreContext can be NULL, indicating the caller isn't interested
  //  in getting the CRL_CONTEXT of the added or existing CRL.
  //--------------------------------------------------------------------------
@@ -1975,7 +1938,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12538,6 +13149,8 @@
+@@ -12538,6 +13137,8 @@
  //  NOTE: the pCrlContext is always CertFreeCRLContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -1984,7 +1947,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12549,6 +13162,8 @@
+@@ -12549,6 +13150,8 @@
  //  Serialize the certificate context's encoded certificate and its
  //  properties.
  //--------------------------------------------------------------------------
@@ -1993,7 +1956,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12563,6 +13178,8 @@
+@@ -12563,6 +13166,8 @@
  //+-------------------------------------------------------------------------
  //  Serialize the CRL context's encoded CRL and its properties.
  //--------------------------------------------------------------------------
@@ -2002,7 +1965,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12582,6 +13199,7 @@
+@@ -12582,6 +13187,7 @@
  //+-------------------------------------------------------------------------
  //  Duplicate a CTL context
  //--------------------------------------------------------------------------
@@ -2010,7 +1973,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCTL_CONTEXT
  WINAPI
-@@ -12603,6 +13221,8 @@
+@@ -12603,6 +13209,8 @@
  //  CertSetCTLContextProperty and CertGetCTLContextProperty can be called
  //  to store properties for the CTL.
  //--------------------------------------------------------------------------
@@ -2019,7 +1982,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCTL_CONTEXT
  WINAPI
-@@ -12618,6 +13238,7 @@
+@@ -12618,6 +13226,7 @@
  //  There needs to be a corresponding free for each context obtained by a
  //  get, duplicate or create.
  //--------------------------------------------------------------------------
@@ -2027,7 +1990,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12630,6 +13251,8 @@
+@@ -12630,6 +13239,8 @@
  //
  //  Same Property Ids and semantics as CertSetCertificateContextProperty.
  //--------------------------------------------------------------------------
@@ -2036,7 +1999,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12648,6 +13271,8 @@
+@@ -12648,6 +13259,8 @@
  //  CERT_SHA1_HASH_PROP_ID or CERT_NEXT_UPDATE_LOCATION_PROP_ID are the
  //  predefined properties of most interest.
  //--------------------------------------------------------------------------
@@ -2045,7 +2008,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12661,6 +13286,7 @@
+@@ -12661,6 +13274,7 @@
  //+-------------------------------------------------------------------------
  //  Enumerate the properties for the specified CTL context.
  //--------------------------------------------------------------------------
@@ -2053,7 +2016,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -12685,6 +13311,8 @@
+@@ -12685,6 +13299,8 @@
  //  NOTE: a NON-NULL pPrevCtlContext is always CertFreeCTLContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -2062,7 +2025,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCTL_CONTEXT
  WINAPI
-@@ -12711,6 +13339,8 @@
+@@ -12711,6 +13327,8 @@
  //
  //  dwEncodingType isn't used for either of the above SubjectTypes.
  //--------------------------------------------------------------------------
@@ -2071,7 +2034,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCTL_ENTRY
  WINAPI
-@@ -12756,6 +13386,12 @@
+@@ -12756,6 +13374,12 @@
  //  NOTE: a NON-NULL pPrevCtlContext is always CertFreeCTLContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -2084,7 +2047,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCTL_CONTEXT
  WINAPI
-@@ -12763,7 +13399,7 @@
+@@ -12763,7 +13387,7 @@
      _In_ HCERTSTORE hCertStore,
      _In_ DWORD dwMsgAndCertEncodingType,
      _In_ DWORD dwFindFlags,
@@ -2093,7 +2056,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_opt_ const void *pvFindPara,
      _In_opt_ PCCTL_CONTEXT pPrevCtlContext
      );
-@@ -12786,6 +13422,17 @@
+@@ -12786,6 +13410,17 @@
  #define CTL_FIND_NO_SIGNER_PTR      ((PCERT_INFO) -1)
  
  #define CTL_FIND_SAME_USAGE_FLAG    0x1
@@ -2111,7 +2074,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  
  typedef struct _CTL_FIND_SUBJECT_PARA {
-@@ -12861,13 +13508,15 @@
+@@ -12861,13 +13496,15 @@
  //  ppCtlContext can be NULL, indicating the caller isn't interested
  //  in getting the CTL_CONTEXT of the added or existing CTL.
  //--------------------------------------------------------------------------
@@ -2128,7 +2091,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbCtlEncoded) const BYTE *pbCtlEncoded,
      _In_ DWORD cbCtlEncoded,
      _In_ DWORD dwAddDisposition,
-@@ -12894,6 +13543,8 @@
+@@ -12894,6 +13531,8 @@
  //  ppStoreContext can be NULL, indicating the caller isn't interested
  //  in getting the CTL_CONTEXT of the added or existing CTL.
  //--------------------------------------------------------------------------
@@ -2137,7 +2100,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12908,6 +13559,8 @@
+@@ -12908,6 +13547,8 @@
  //+-------------------------------------------------------------------------
  //  Serialize the CTL context's encoded CTL and its properties.
  //--------------------------------------------------------------------------
@@ -2146,7 +2109,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12930,6 +13583,8 @@
+@@ -12930,6 +13571,8 @@
  //  NOTE: the pCtlContext is always CertFreeCTLContext'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -2155,7 +2118,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12938,6 +13593,8 @@
+@@ -12938,6 +13581,8 @@
      );
  
  
@@ -2164,7 +2127,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12949,6 +13606,8 @@
+@@ -12949,6 +13594,8 @@
      _Outptr_opt_ PCCERT_CONTEXT *ppStoreContext
      );
  
@@ -2173,7 +2136,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12960,6 +13619,8 @@
+@@ -12960,6 +13607,8 @@
      _Outptr_opt_ PCCRL_CONTEXT *ppStoreContext
      );
  
@@ -2182,7 +2145,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -12971,6 +13632,7 @@
+@@ -12971,6 +13620,7 @@
      _Outptr_opt_ PCCTL_CONTEXT *ppStoreContext
      );
  
@@ -2190,7 +2153,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -12981,6 +13643,7 @@
+@@ -12981,6 +13631,7 @@
      _In_ DWORD dwPriority
      );
  
@@ -2198,7 +2161,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  void
  WINAPI
-@@ -12990,12 +13653,18 @@
+@@ -12990,12 +13641,18 @@
      );
  
  
@@ -2218,7 +2181,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ DWORD dwCtrlType,
      _In_opt_ void const *pvCtrlPara
      );
-@@ -13091,6 +13760,13 @@
+@@ -13091,6 +13748,13 @@
  #define CERT_STORE_CTRL_COMMIT_FORCE_FLAG   0x1
  #define CERT_STORE_CTRL_COMMIT_CLEAR_FLAG   0x2
  
@@ -2232,7 +2195,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+=========================================================================
  //  Cert Store Property Defines and APIs
-@@ -13126,6 +13802,7 @@
+@@ -13126,6 +13790,7 @@
  //  If the property already exists, then, the old value is deleted and silently
  //  replaced. Setting, pvData to NULL, deletes the property.
  //--------------------------------------------------------------------------
@@ -2240,7 +2203,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13149,6 +13826,8 @@
+@@ -13149,6 +13814,8 @@
  //  If the property doesn't exist, returns FALSE and sets LastError to
  //  CRYPT_E_NOT_FOUND.
  //--------------------------------------------------------------------------
@@ -2249,7 +2212,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -13222,6 +13901,8 @@
+@@ -13222,6 +13889,8 @@
  //  free context API. The context can be duplicated by calling the
  //  appropriate duplicate context API.
  //--------------------------------------------------------------------------
@@ -2258,7 +2221,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  const void *
  WINAPI
-@@ -13380,6 +14061,7 @@
+@@ -13380,6 +14049,7 @@
  //  Set CERT_STORE_CREATE_NEW_FLAG to cause a failure if the system store
  //  already exists in the store location.
  //--------------------------------------------------------------------------
@@ -2266,7 +2229,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13406,6 +14088,7 @@
+@@ -13406,6 +14076,7 @@
  //  Set CERT_STORE_CREATE_NEW_FLAG to cause a failure if the physical store
  //  already exists in the system store.
  //--------------------------------------------------------------------------
@@ -2274,7 +2237,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13432,6 +14115,7 @@
+@@ -13432,6 +14103,7 @@
  //
  //  CERT_STORE_DELETE_FLAG can optionally be set in dwFlags.
  //--------------------------------------------------------------------------
@@ -2282,7 +2245,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13455,6 +14139,7 @@
+@@ -13455,6 +14127,7 @@
  //
  //  CERT_STORE_DELETE_FLAG can optionally be set in dwFlags.
  //--------------------------------------------------------------------------
@@ -2290,7 +2253,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13496,7 +14181,7 @@
+@@ -13496,7 +14169,7 @@
  
  typedef BOOL (WINAPI *PFN_CERT_ENUM_SYSTEM_STORE)(
      _In_ const void *pvSystemStore,
@@ -2299,7 +2262,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_SYSTEM_STORE_INFO pStoreInfo,
      _Reserved_ void *pvReserved,
      _Inout_opt_ void *pvArg
-@@ -13530,6 +14215,7 @@
+@@ -13530,6 +14203,7 @@
  //+-------------------------------------------------------------------------
  //  Enumerate the system store locations.
  //--------------------------------------------------------------------------
@@ -2307,7 +2270,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13570,6 +14256,7 @@
+@@ -13570,6 +14244,7 @@
  //  the leading "\\" backslashes or a trailing backslash. Otherwise, its
  //  interpretted as the ServiceName or UserName.
  //--------------------------------------------------------------------------
@@ -2315,7 +2278,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13596,6 +14283,8 @@
+@@ -13596,6 +14271,8 @@
  //  If the system store location only supports system stores and doesn't
  //  support physical stores, LastError is set to ERROR_CALL_NOT_IMPLEMENTED.
  //--------------------------------------------------------------------------
@@ -2324,7 +2287,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13658,13 +14347,15 @@
+@@ -13658,13 +14335,15 @@
  //  If the CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG is set, then, only get the
  //  property.
  //--------------------------------------------------------------------------
@@ -2341,7 +2304,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbUsage
      );
  
-@@ -13677,6 +14368,8 @@
+@@ -13677,6 +14356,8 @@
  //+-------------------------------------------------------------------------
  //  Set the enhanced key usage property for the certificate.
  //--------------------------------------------------------------------------
@@ -2350,7 +2313,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13688,6 +14381,8 @@
+@@ -13688,6 +14369,8 @@
  //+-------------------------------------------------------------------------
  //  Add the usage identifier to the certificate's enhanced key usage property.
  //--------------------------------------------------------------------------
@@ -2359,7 +2322,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13701,6 +14396,8 @@
+@@ -13701,6 +14384,8 @@
  //  Remove the usage identifier from the certificate's enhanced key usage
  //  property.
  //--------------------------------------------------------------------------
@@ -2368,7 +2331,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13723,6 +14420,8 @@
+@@ -13723,6 +14408,8 @@
  //  If each cert is good for all possible usages then the cNumOIDs is set to -1.
  //
  //----------------------------------------------------------------------------
@@ -2377,7 +2340,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -13763,6 +14462,8 @@
+@@ -13763,6 +14450,8 @@
  //  interested in getting the CertContext and/or index of the signer.
  //--------------------------------------------------------------------------
  
@@ -2386,7 +2349,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return == TRUE)
  BOOL
-@@ -13795,6 +14496,8 @@
+@@ -13795,6 +14484,8 @@
  //  CMSG_CMS_ENCAPSULATED_CTL_FLAG can be set to encode a CMS compatible
  //  V3 SignedData message.
  //--------------------------------------------------------------------------
@@ -2395,7 +2358,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13824,6 +14527,8 @@
+@@ -13824,6 +14515,8 @@
  //  CMSG_CMS_ENCAPSULATED_CTL_FLAG can be set to encode a CMS compatible
  //  V3 SignedData message.
  //--------------------------------------------------------------------------
@@ -2404,7 +2367,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13851,6 +14556,7 @@
+@@ -13851,6 +14544,7 @@
  //  Returns TRUE if the SubjectIdentifier exists in the CTL. Optionally
  //  returns a pointer to and byte count of the Subject's encoded attributes.
  //--------------------------------------------------------------------------
@@ -2412,7 +2375,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13875,6 +14581,7 @@
+@@ -13875,6 +14569,7 @@
  //  Note, the returned DER_BLOBs point directly into the encoded
  //  bytes (not allocated, and must not be freed).
  //--------------------------------------------------------------------------
@@ -2420,7 +2383,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13977,6 +14684,8 @@
+@@ -13977,6 +14672,8 @@
  //      CRYPT_E_NOT_IN_CTL
  //      CRYPT_E_NO_TRUSTED_SIGNER
  //--------------------------------------------------------------------------
@@ -2429,7 +2392,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14111,7 +14820,7 @@
+@@ -14111,7 +14808,7 @@
      DWORD                   cbSize;
      DWORD                   dwIndex;
      DWORD                   dwError;
@@ -2438,7 +2401,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
      // Depending on cbSize, the following fields may optionally be returned.
  
-@@ -14208,6 +14917,8 @@
+@@ -14208,6 +14905,8 @@
  //  advancing the start of the context array to the returned dwIndex and
  //  decrementing the count of remaining contexts.
  //--------------------------------------------------------------------------
@@ -2447,7 +2410,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14296,6 +15007,8 @@
+@@ -14296,6 +14995,8 @@
  //  Returns TRUE if the integer blobs are identical after removing leading
  //  0 or 0xFF bytes.
  //--------------------------------------------------------------------------
@@ -2456,7 +2419,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  WINAPI
  CertCompareIntegerBlob(
-@@ -14311,11 +15024,12 @@
+@@ -14311,11 +15012,12 @@
  //
  //  Returns TRUE if the certificates are identical.
  //--------------------------------------------------------------------------
@@ -2470,7 +2433,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_INFO pCertId1,
      _In_ PCERT_INFO pCertId2
      );
-@@ -14325,11 +15039,12 @@
+@@ -14325,11 +15027,12 @@
  //
  //  Returns TRUE if the names are identical.
  //--------------------------------------------------------------------------
@@ -2484,7 +2447,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_NAME_BLOB pCertName1,
      _In_ PCERT_NAME_BLOB pCertName2
      );
-@@ -14358,11 +15073,13 @@
+@@ -14358,11 +15061,13 @@
  //  CERT_UNICODE_IS_RDN_ATTRS_FLAG should be set if the pRDN was initialized
  //  with unicode strings as for CryptEncodeObject(X509_UNICODE_NAME).
  //--------------------------------------------------------------------------
@@ -2499,7 +2462,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ DWORD dwFlags,
      _In_ PCERT_NAME_BLOB pCertName,
      _In_ PCERT_RDN pRDN
-@@ -14376,11 +15093,12 @@
+@@ -14376,11 +15081,12 @@
  //
  //  Returns TRUE if the keys are identical.
  //--------------------------------------------------------------------------
@@ -2513,7 +2476,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pPublicKey1,
      _In_ PCERT_PUBLIC_KEY_INFO pPublicKey2
      );
-@@ -14396,11 +15114,13 @@
+@@ -14396,11 +15102,13 @@
  //
  //  Returns 0 if unable to determine the key's length.
  //--------------------------------------------------------------------------
@@ -2528,7 +2491,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pPublicKey
      );
  
-@@ -14419,13 +15139,15 @@
+@@ -14419,13 +15127,15 @@
  //  hCryptProv specifies the crypto provider to use to verify the signature.
  //  It doesn't need to use a private key.
  //--------------------------------------------------------------------------
@@ -2545,7 +2508,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
      _In_ DWORD cbEncoded,
      _In_ PCERT_PUBLIC_KEY_INFO pPublicKey
-@@ -14456,18 +15178,20 @@
+@@ -14456,18 +15166,20 @@
  //  to verify this no signature case. If any other dwIssuerType is
  //  specified, the verify will fail with LastError set to E_INVALIDARG.
  //--------------------------------------------------------------------------
@@ -2568,7 +2531,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_opt_ void *pvExtra
      );
  
-@@ -14536,6 +15260,13 @@
+@@ -14536,6 +15248,13 @@
  //
  #define CRYPT_VERIFY_CERT_SIGN_RETURN_STRONG_PROPERTIES_FLAG 0x00000004
  
@@ -2582,7 +2545,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  typedef struct _CRYPT_VERIFY_CERT_SIGN_STRONG_PROPERTIES_INFO {
      // CERT_SIGN_HASH_CNG_ALG_PROP_ID
      CRYPT_DATA_BLOB CertSignHashCNGAlgPropData;
-@@ -14578,6 +15309,8 @@
+@@ -14578,6 +15297,8 @@
  //  The SigningCert can be NULL to only check if the CNG hash algorithm is
  //  strong.
  //--------------------------------------------------------------------------
@@ -2591,7 +2554,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14594,12 +15327,14 @@
+@@ -14594,12 +15315,14 @@
  //  hCryptProv specifies the crypto provider to use to compute the hash.
  //  It doesn't need to use a private key.
  //--------------------------------------------------------------------------
@@ -2607,7 +2570,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
      _In_ DWORD cbEncoded,
      _Out_writes_bytes_to_opt_(*pcbComputedHash, *pcbComputedHash) BYTE *pbComputedHash,
-@@ -14615,6 +15350,8 @@
+@@ -14615,6 +15338,8 @@
  //  Algid specifies the CAPI hash algorithm to use. If Algid is 0, then, the
  //  default hash algorithm (currently SHA1) is used.
  //--------------------------------------------------------------------------
@@ -2616,7 +2579,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14639,6 +15376,8 @@
+@@ -14639,6 +15364,8 @@
  //+-------------------------------------------------------------------------
  //  Hash the encoded content using the CNG hash algorithm provider.
  //--------------------------------------------------------------------------
@@ -2625,7 +2588,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -14672,6 +15411,8 @@
+@@ -14672,6 +15399,8 @@
  //  dwKeySpec isn't used and hCryptProvOrNCryptKey can be NULL where an
  //  appropriate default provider will be used for hashing.
  //--------------------------------------------------------------------------
@@ -2634,7 +2597,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14682,7 +15423,7 @@
+@@ -14682,7 +15411,7 @@
      _In_opt_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
  #endif
      _In_opt_ DWORD dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
@@ -2643,7 +2606,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_reads_bytes_(cbEncodedToBeSigned) const BYTE *pbEncodedToBeSigned,
      _In_ DWORD cbEncodedToBeSigned,
      _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
-@@ -14703,6 +15444,8 @@
+@@ -14703,6 +15432,8 @@
  //  dwKeySpec isn't used and hCryptProv can be NULL where an appropriate
  //  default provider will be used for hashing.
  //--------------------------------------------------------------------------
@@ -2652,7 +2615,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14712,8 +15455,8 @@
+@@ -14712,8 +15443,8 @@
  #else
      _In_opt_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
  #endif
@@ -2663,7 +2626,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ LPCSTR lpszStructType,       // "to be signed"
      _In_ const void *pvStructInfo,
      _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
-@@ -14748,7 +15491,7 @@
+@@ -14748,7 +15479,7 @@
  #define CRYPT_OID_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC \
      "CryptDllExtractEncodedSignatureParameters"
  typedef BOOL (WINAPI *PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC)(
@@ -2672,7 +2635,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
      _Outptr_result_maybenull_ void **ppvDecodedSignPara, // LocalFree()
      _Outptr_ LPWSTR *ppwszCNGHashAlgid      // LocalFree()
-@@ -14759,7 +15502,7 @@
+@@ -14759,7 +15490,7 @@
      "CryptDllSignAndEncodeHash"
  typedef BOOL (WINAPI *PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC)(
      _In_ NCRYPT_KEY_HANDLE hKey,
@@ -2681,7 +2644,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
      _In_opt_ void *pvDecodedSignPara,
      _In_ LPCWSTR pwszCNGPubKeyAlgid,    // obtained from signature OID
-@@ -14775,7 +15518,7 @@
+@@ -14775,7 +15506,7 @@
  #define CRYPT_OID_VERIFY_ENCODED_SIGNATURE_FUNC \
      "CryptDllVerifyEncodedSignature"
  typedef BOOL (WINAPI *PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC)(
@@ -2690,7 +2653,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pPubKeyInfo,
      _In_ PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
      _In_opt_ void *pvDecodedSignPara,
-@@ -14796,6 +15539,7 @@
+@@ -14796,6 +15527,7 @@
  //
  //  If pTimeToVerify is NULL, uses the current time.
  //--------------------------------------------------------------------------
@@ -2698,7 +2661,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LONG
  WINAPI
-@@ -14818,6 +15562,7 @@
+@@ -14818,6 +15550,7 @@
  //
  //  If pTimeToVerify is NULL, uses the current time.
  //--------------------------------------------------------------------------
@@ -2706,7 +2669,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LONG
  WINAPI
-@@ -14832,6 +15577,7 @@
+@@ -14832,6 +15565,7 @@
  //
  //  Returns TRUE if it nests. Otherwise, returns FALSE.
  //--------------------------------------------------------------------------
@@ -2714,7 +2677,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -14845,11 +15591,12 @@
+@@ -14845,11 +15579,12 @@
  //
  //  Returns true if the certificate isn't on the CRL.
  //--------------------------------------------------------------------------
@@ -2728,7 +2691,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_INFO pCertId,          // Only the Issuer and SerialNumber
                                        // fields are used
      _In_ DWORD cCrlInfo,
-@@ -14861,6 +15608,7 @@
+@@ -14861,6 +15596,7 @@
  //
  //  Returns NULL if there isn't an ObjId corresponding to the AlgId.
  //--------------------------------------------------------------------------
@@ -2736,7 +2699,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LPCSTR
  WINAPI
-@@ -14873,6 +15621,7 @@
+@@ -14873,6 +15609,7 @@
  //
  //  Returns 0 if there isn't an AlgId corresponding to the ObjId.
  //--------------------------------------------------------------------------
@@ -2744,7 +2707,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -14891,6 +15640,7 @@
+@@ -14891,6 +15628,7 @@
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -2752,7 +2715,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCERT_EXTENSION
  WINAPI
-@@ -14905,6 +15655,7 @@
+@@ -14905,6 +15643,7 @@
  //
  //  If found, returns pointer to the attribute. Otherwise, returns NULL.
  //--------------------------------------------------------------------------
@@ -2760,7 +2723,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCRYPT_ATTRIBUTE
  WINAPI
-@@ -14920,6 +15671,7 @@
+@@ -14920,6 +15659,7 @@
  //
  //  If found, returns pointer to the attribute. Otherwise, returns NULL.
  //--------------------------------------------------------------------------
@@ -2768,7 +2731,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCERT_RDN_ATTR
  WINAPI
-@@ -14936,11 +15688,13 @@
+@@ -14936,11 +15676,13 @@
  //  cbKeyUsage bytes are copied into *pbKeyUsage. Any remaining uncopied
  //  bytes are zeroed.
  //--------------------------------------------------------------------------
@@ -2783,7 +2746,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_INFO pCertInfo,
      _Out_writes_bytes_all_(cbKeyUsage) BYTE *pbKeyUsage,
      _In_ DWORD cbKeyUsage
-@@ -14981,14 +15735,24 @@
+@@ -14981,14 +15723,24 @@
  //  not CryptReleaseContext'ed if CryptUninstallDefaultContext is
  //  called.
  //--------------------------------------------------------------------------
@@ -2810,7 +2773,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Reserved_ void *pvReserved,
      _Out_ HCRYPTDEFAULTCONTEXT *phDefaultContext
      );
-@@ -14997,9 +15761,21 @@
+@@ -14997,9 +15749,21 @@
  #define CRYPT_DEFAULT_CONTEXT_AUTO_RELEASE_FLAG             0x00000001
  #define CRYPT_DEFAULT_CONTEXT_PROCESS_FLAG                  0x00000002
  
@@ -2832,7 +2795,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+-------------------------------------------------------------------------
  //  CRYPT_DEFAULT_CONTEXT_CERT_SIGN_OID
-@@ -15034,6 +15810,8 @@
+@@ -15034,6 +15798,8 @@
  //  set, if any other threads are currently using this context,
  //  this function will block until they finish.
  //--------------------------------------------------------------------------
@@ -2841,7 +2804,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -15050,14 +15828,16 @@
+@@ -15050,14 +15816,16 @@
  //  Calls CryptExportPublicKeyInfoEx with pszPublicKeyObjId = NULL,
  //  dwFlags = 0 and pvAuxInfo = NULL.
  //--------------------------------------------------------------------------
@@ -2860,7 +2823,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbInfo
      );
  
-@@ -15090,17 +15870,19 @@
+@@ -15090,17 +15858,19 @@
  //      CRYPT_OID_USE_CURVE_PARAMETERS_FOR_ENCODE_FLAG
  //--------------------------------------------------------------------------
  
@@ -2882,7 +2845,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbInfo
      );
  
-@@ -15115,7 +15897,7 @@
+@@ -15115,7 +15885,7 @@
      "CryptDllExportPublicKeyInfoEx2"
  typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC) (
      _In_ NCRYPT_KEY_HANDLE hNCryptKey,
@@ -2891,7 +2854,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ LPSTR pszPublicKeyObjId,
      _In_ DWORD dwFlags,
      _In_opt_ void *pvAuxInfo,
-@@ -15145,16 +15927,17 @@
+@@ -15145,16 +15915,17 @@
  //      CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG
  //--------------------------------------------------------------------------
  
@@ -2911,7 +2874,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD *pcbInfo
      );
  
-@@ -15167,7 +15950,7 @@
+@@ -15167,7 +15938,7 @@
      "CryptDllExportPublicKeyInfoFromBCryptKeyHandle"
  typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC) (
      _In_ BCRYPT_KEY_HANDLE hBCryptKey,
@@ -2920,7 +2883,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ LPSTR pszPublicKeyObjId,
      _In_ DWORD dwFlags,
      _In_opt_ void *pvAuxInfo,
-@@ -15184,12 +15967,14 @@
+@@ -15184,12 +15955,14 @@
  //  Calls CryptImportPublicKeyInfoEx with aiKeyAlg = 0, dwFlags = 0 and
  //  pvAuxInfo = NULL.
  //--------------------------------------------------------------------------
@@ -2936,7 +2899,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pInfo,
      _Out_ HCRYPTKEY *phKey
      );
-@@ -15210,12 +15995,14 @@
+@@ -15210,12 +15983,14 @@
  //--------------------------------------------------------------------------
  #define CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_FUNC   "CryptDllImportPublicKeyInfoEx"
  
@@ -2952,7 +2915,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pInfo,
      _In_ ALG_ID aiKeyAlg,
      _In_ DWORD dwFlags,
-@@ -15246,15 +16033,17 @@
+@@ -15246,15 +16021,17 @@
  //  dwFlags can also have BCRYPT_NO_KEY_VALIDATION OR'd in. This flag is
  //  passed to BCryptImportKeyPair.
  //--------------------------------------------------------------------------
@@ -2973,7 +2936,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      );
  
  //+-------------------------------------------------------------------------
-@@ -15263,7 +16052,7 @@
+@@ -15263,7 +16040,7 @@
  #define CRYPT_OID_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC \
      "CryptDllImportPublicKeyInfoEx2"
  typedef BOOL (WINAPI *PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC) (
@@ -2982,7 +2945,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pInfo,
      _In_ DWORD dwFlags,
      _In_opt_ void *pvAuxInfo,
-@@ -15362,15 +16151,21 @@
+@@ -15362,15 +16139,21 @@
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -3006,7 +2969,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_opt_ BOOL *pfCallerFreeProvOrNCryptKey
      );
  
-@@ -15387,6 +16182,20 @@
+@@ -15387,6 +16170,20 @@
  #define CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG    0x00020000
  #define CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG      0x00040000
  
@@ -3027,7 +2990,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)*/
  #pragma endregion
-@@ -15416,18 +16225,31 @@
+@@ -15416,18 +16213,31 @@
  //  The above CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS can also be set. The default
  //  is CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG.
  //--------------------------------------------------------------------------
@@ -3060,7 +3023,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  
  //+-------------------------------------------------------------------------
-@@ -15471,12 +16293,14 @@
+@@ -15471,12 +16281,14 @@
  // pvAuxInfo - This parameter is reserved for future use and should be set
  //             to NULL in the interim.
  //--------------------------------------------------------------------------
@@ -3076,7 +3039,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_opt_ HCRYPTPROV *phCryptProv,                      // out, optional
      _In_opt_ void* pvAuxInfo                                // in, optional
      );
-@@ -15502,6 +16326,8 @@
+@@ -15502,6 +16314,8 @@
  //
  //  Export the private key in PKCS8 format
  //--------------------------------------------------------------------------
@@ -3085,7 +3048,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -15543,6 +16369,8 @@
+@@ -15543,6 +16357,8 @@
  // pcbPrivateKeyBlob - A pointer to a DWORD that contains the size, in bytes,
  //                                         of the private key blob being exported.
  //+-------------------------------------------------------------------------
@@ -3094,7 +3057,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -15565,6 +16393,8 @@
+@@ -15565,6 +16381,8 @@
  //
  //  The public key info is encoded and then hashed.
  //--------------------------------------------------------------------------
@@ -3103,7 +3066,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -15572,7 +16402,7 @@
+@@ -15572,7 +16390,7 @@
      _In_opt_ HCRYPTPROV_LEGACY hCryptProv,
      _In_ ALG_ID Algid,
      _In_ DWORD dwFlags,
@@ -3112,7 +3075,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_PUBLIC_KEY_INFO pInfo,
      _Out_writes_bytes_to_opt_(*pcbComputedHash, *pcbComputedHash) BYTE *pbComputedHash,
      _Inout_ DWORD *pcbComputedHash
-@@ -15589,6 +16419,7 @@
+@@ -15589,6 +16407,7 @@
  //
  //  Note: csz includes the NULL char.
  //--------------------------------------------------------------------------
@@ -3120,7 +3083,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -15609,6 +16440,7 @@
+@@ -15609,6 +16428,7 @@
  //
  //  Note: csz includes the NULL char.
  //--------------------------------------------------------------------------
@@ -3128,7 +3091,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -15721,23 +16553,29 @@
+@@ -15721,23 +16541,29 @@
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
  
@@ -3162,7 +3125,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_writes_to_opt_(csz, return) LPWSTR psz,
      _In_ DWORD csz
      );
-@@ -15754,6 +16592,13 @@
+@@ -15754,6 +16580,13 @@
  #define CERT_SIMPLE_NAME_STR        1
  #define CERT_OID_NAME_STR           2
  #define CERT_X500_NAME_STR          3
@@ -3176,7 +3139,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CERT_XML_NAME_STR           4
  
  //+-------------------------------------------------------------------------
-@@ -15887,13 +16732,15 @@
+@@ -15887,13 +16720,15 @@
  
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
@@ -3194,7 +3157,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Reserved_ void *pvReserved,
      _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
      _Inout_ DWORD *pcbEncoded,
-@@ -15901,13 +16748,15 @@
+@@ -15901,13 +16736,15 @@
      );
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
@@ -3212,7 +3175,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Reserved_ void *pvReserved,
      _Out_writes_bytes_to_opt_(*pcbEncoded, *pcbEncoded) BYTE *pbEncoded,
      _Inout_ DWORD *pcbEncoded,
-@@ -16012,6 +16861,7 @@
+@@ -16012,6 +16849,7 @@
  
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
@@ -3220,7 +3183,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -16025,6 +16875,7 @@
+@@ -16025,6 +16863,7 @@
      );
  //+-------------------------------------------------------------------------
  //--------------------------------------------------------------------------
@@ -3228,7 +3191,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  DWORD
  WINAPI
-@@ -16122,7 +16973,7 @@
+@@ -16122,7 +16961,7 @@
  //--------------------------------------------------------------------------
  typedef PCCERT_CONTEXT (WINAPI *PFN_CRYPT_GET_SIGNER_CERTIFICATE)(
      _Inout_opt_ void *pvGetArg,
@@ -3237,7 +3200,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ PCERT_INFO pSignerId,    // Only the Issuer and SerialNumber
                                  // fields have been updated
      _In_ HCERTSTORE hMsgCertStore
-@@ -16374,7 +17225,7 @@
+@@ -16374,7 +17213,7 @@
  //--------------------------------------------------------------------------
  typedef struct _CRYPT_KEY_SIGN_MESSAGE_PARA {
      DWORD                       cbSize;
@@ -3246,7 +3209,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
      // NCryptIsKeyHandle() is called to determine the union choice.
      union {
-@@ -16383,7 +17234,7 @@
+@@ -16383,7 +17222,7 @@
      } DUMMYUNIONNAME;
  
      // not applicable for hNCryptKey choice
@@ -3255,7 +3218,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
      CRYPT_ALGORITHM_IDENTIFIER  HashAlgorithm;
      void                        *pvHashAuxInfo;
-@@ -16420,6 +17271,8 @@
+@@ -16420,6 +17259,8 @@
  //  If fDetachedSignature is TRUE, the "to be signed" content isn't included
  //  in the encoded signed blob.
  //--------------------------------------------------------------------------
@@ -3264,7 +3227,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16469,6 +17322,8 @@
+@@ -16469,6 +17310,8 @@
  //  Note, an alternative way to get the certificates and CRLs from a
  //  signed message is to call CryptGetMessageCertificates.
  //--------------------------------------------------------------------------
@@ -3273,7 +3236,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16486,6 +17341,8 @@
+@@ -16486,6 +17329,8 @@
  //  Returns the count of signers in the signed message. For no signers, returns
  //  0. For an error returns -1 with LastError updated accordingly.
  //--------------------------------------------------------------------------
@@ -3282,7 +3245,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LONG
  WINAPI
-@@ -16499,6 +17356,8 @@
+@@ -16499,6 +17344,8 @@
  //  Returns the cert store containing the message's certs and CRLs.
  //  For an error, returns NULL with LastError updated.
  //--------------------------------------------------------------------------
@@ -3291,7 +3254,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCERTSTORE
  WINAPI
-@@ -16515,6 +17374,8 @@
+@@ -16515,6 +17362,8 @@
  //  The "to be signed" content is passed in separately. No
  //  decoded output. Otherwise, identical to CryptVerifyMessageSignature.
  //--------------------------------------------------------------------------
@@ -3300,7 +3263,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16532,6 +17393,8 @@
+@@ -16532,6 +17381,8 @@
  //+-------------------------------------------------------------------------
  //  Encrypts the message for the recipient(s).
  //--------------------------------------------------------------------------
@@ -3309,7 +3272,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16559,6 +17422,8 @@
+@@ -16559,6 +17410,8 @@
  //  ppXchgCert can be NULL, indicating the caller isn't interested
  //  in getting the CertContext used to decrypt.
  //--------------------------------------------------------------------------
@@ -3318,7 +3281,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16578,6 +17443,8 @@
+@@ -16578,6 +17431,8 @@
  //  Note: this isn't the CMSG_SIGNED_AND_ENVELOPED. Its a CMSG_SIGNED
  //  inside of an CMSG_ENVELOPED.
  //--------------------------------------------------------------------------
@@ -3327,7 +3290,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16619,6 +17486,8 @@
+@@ -16619,6 +17474,8 @@
  //  The message always needs to be decrypted to allow access to the
  //  signed message. Therefore, if ppXchgCert != NULL, its always updated.
  //--------------------------------------------------------------------------
@@ -3336,7 +3299,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16666,6 +17535,8 @@
+@@ -16666,6 +17523,8 @@
  //      CryptVerifyMessageSignature.
  //  For CMSG_HASHED: verifies the hash and returns decoded content.
  //--------------------------------------------------------------------------
@@ -3345,7 +3308,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16695,6 +17566,8 @@
+@@ -16695,6 +17554,8 @@
  //  pcbHashedBlob or pcbComputedHash can be NULL, indicating the caller
  //  isn't interested in getting the output.
  //--------------------------------------------------------------------------
@@ -3354,7 +3317,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16716,6 +17589,8 @@
+@@ -16716,6 +17577,8 @@
  //  pcbToBeHashed or pcbComputedHash can be NULL,
  //  indicating the caller isn't interested in getting the output.
  //--------------------------------------------------------------------------
@@ -3363,7 +3326,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16737,6 +17612,8 @@
+@@ -16737,6 +17600,8 @@
  //  pcbComputedHash can be NULL, indicating the caller isn't interested
  //  in getting the output.
  //--------------------------------------------------------------------------
@@ -3372,7 +3335,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16757,6 +17634,8 @@
+@@ -16757,6 +17622,8 @@
  //
  //  Normally used until a certificate has been created for the key.
  //--------------------------------------------------------------------------
@@ -3381,7 +3344,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16781,6 +17660,8 @@
+@@ -16781,6 +17648,8 @@
  //  pcbDecoded can be NULL, indicating the caller isn't interested
  //  in getting the decoded content.
  //--------------------------------------------------------------------------
@@ -3390,7 +3353,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16825,6 +17706,8 @@
+@@ -16825,6 +17694,8 @@
  //--------------------------------------------------------------------------
  
  
@@ -3399,7 +3362,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCERTSTORE
  WINAPI
-@@ -16832,6 +17715,8 @@
+@@ -16832,6 +17703,8 @@
      _In_opt_ HCRYPTPROV_LEGACY      hProv,
      _In_ LPCSTR            szSubsystemProtocol
      );
@@ -3408,7 +3371,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCERTSTORE
  WINAPI
-@@ -16851,6 +17736,8 @@
+@@ -16851,6 +17724,8 @@
  #pragma region Desktop Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -3417,7 +3380,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -16859,6 +17746,8 @@
+@@ -16859,6 +17734,8 @@
      _In_reads_bytes_(cbCertEncoded) const BYTE *    pbCertEncoded,
      _In_ DWORD           cbCertEncoded
      );
@@ -3426,7 +3389,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -17048,18 +17937,40 @@
+@@ -17048,18 +17925,40 @@
  //  If the *pbObject is of type CERT_QUERY_CONTENT_PKCS10 or CERT_QUERY_CONTENT_PFX, CryptQueryObject
  //  will not return anything in *phCertstore, *phMsg, or *ppvContext.
  //--------------------------------------------------------------------------
@@ -3473,7 +3436,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_opt_ HCERTSTORE          *phCertStore,
      _Out_opt_ HCRYPTMSG           *phMsg,
      _Outptr_opt_result_maybenull_ const void **ppvContext
-@@ -17071,6 +17982,12 @@
+@@ -17071,6 +17970,12 @@
  //-------------------------------------------------------------------------
  #define     CERT_QUERY_OBJECT_FILE         0x00000001
  #define     CERT_QUERY_OBJECT_BLOB         0x00000002
@@ -3486,7 +3449,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //-------------------------------------------------------------------------
  //dwContentType for CryptQueryObject
-@@ -17104,6 +18021,24 @@
+@@ -17104,6 +18009,24 @@
  //an encoded PFX BLOB, which was loaded to phCertStore
  #define     CERT_QUERY_CONTENT_PFX_AND_LOAD         14
  
@@ -3511,7 +3474,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //-------------------------------------------------------------------------
  //dwExpectedConentTypeFlags for CryptQueryObject
-@@ -17190,6 +18125,26 @@
+@@ -17190,6 +18113,26 @@
                  CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED     |      \
                  CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED   )
  
@@ -3538,7 +3501,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //-------------------------------------------------------------------------
  //dwFormatType for CryptQueryObject
-@@ -17202,6 +18157,13 @@
+@@ -17202,6 +18145,13 @@
  
  //the content is ascii hex encoded with "{ASN}" prefix
  #define     CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED 3
@@ -3552,7 +3515,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  //-------------------------------------------------------------------------
  //dwExpectedFormatTypeFlags for CryptQueryObject
  //-------------------------------------------------------------------------
-@@ -17223,6 +18185,14 @@
+@@ -17223,6 +18173,14 @@
              CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED | \
              CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED )
  
@@ -3567,7 +3530,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)*/
  #pragma endregion
  
-@@ -17235,6 +18205,7 @@
+@@ -17235,6 +18193,7 @@
  // those buffers using CryptMemFree.  Also included is CryptMemSize
  //
  
@@ -3575,7 +3538,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LPVOID
  WINAPI
-@@ -17242,6 +18213,7 @@
+@@ -17242,6 +18201,7 @@
      _In_ ULONG cbSize
      );
  
@@ -3583,7 +3546,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  LPVOID
  WINAPI
-@@ -17250,6 +18222,7 @@
+@@ -17250,6 +18210,7 @@
      _In_ ULONG cbSize
      );
  
@@ -3591,17 +3554,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -17268,6 +18241,9 @@
- // set to ERROR_CALL_NOT_IMPLEMENTED.
- 
- typedef HANDLE HCRYPTASYNC, *PHCRYPTASYNC;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCRYPTASYNC HCRYPTASYNC;
-+#endif
- 
- typedef VOID (WINAPI *PFN_CRYPT_ASYNC_PARAM_FREE_FUNC) (
-     _In_ LPSTR pszParamOid,
-@@ -17279,7 +18255,7 @@
+@@ -17279,7 +18240,7 @@
  WINAPI
  CryptCreateAsyncHandle (
      _In_ DWORD dwFlags,
@@ -3610,7 +3563,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      );
  
  WINCRYPT32API
-@@ -17732,6 +18708,7 @@
+@@ -17732,6 +18693,7 @@
  #pragma region Desktop Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -3618,7 +3571,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return == TRUE)
  BOOL
-@@ -17747,6 +18724,7 @@
+@@ -17747,6 +18709,7 @@
      _In_opt_ LPVOID pvVerify,
      _Inout_opt_ PCRYPT_RETRIEVE_AUX_INFO pAuxInfo
      );
@@ -3626,7 +3579,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return == TRUE)
  BOOL
-@@ -17873,6 +18851,14 @@
+@@ -17873,6 +18836,14 @@
  #define CRYPT_GET_URL_FROM_UNAUTH_ATTRIBUTE 0x00000004
  #define CRYPT_GET_URL_FROM_AUTH_ATTRIBUTE   0x00000008
  
@@ -3641,7 +3594,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  typedef struct _CRYPT_URL_ARRAY {
      DWORD   cUrl;
      LPWSTR* rgwszUrl;
-@@ -17891,14 +18877,16 @@
+@@ -17891,14 +18862,16 @@
      DWORD   *rgcGroupEntry;
  } CRYPT_URL_INFO, *PCRYPT_URL_INFO;
  
@@ -3660,7 +3613,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Inout_ DWORD* pcbUrlArray,
      _Out_writes_bytes_to_opt_(*pcbUrlInfo, *pcbUrlInfo) PCRYPT_URL_INFO pUrlInfo,
      _Inout_opt_ DWORD* pcbUrlInfo,
-@@ -18080,6 +19068,8 @@
+@@ -18080,6 +19053,8 @@
  } CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO,
      *PCRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO;
  
@@ -3669,7 +3622,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return == TRUE)
  BOOL
-@@ -18224,13 +19214,19 @@
+@@ -18224,13 +19199,19 @@
  //      CRYPT_OID_USE_CURVE_NAME_FOR_ENCODE_FLAG
  //      CRYPT_OID_USE_CURVE_PARAMETERS_FOR_ENCODE_FLAG
  //--------------------------------------------------------------------------
@@ -3690,7 +3643,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_opt_  PCRYPT_KEY_PROV_INFO        pKeyProvInfo,
      _In_opt_  PCRYPT_ALGORITHM_IDENTIFIER pSignatureAlgorithm,
      _In_opt_  PSYSTEMTIME                 pStartTime,
-@@ -18241,6 +19237,12 @@
+@@ -18241,6 +19222,12 @@
  #define CERT_CREATE_SELFSIGN_NO_SIGN    1
  #define CERT_CREATE_SELFSIGN_NO_KEY_INFO 2
  
@@ -3703,7 +3656,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)*/
  #pragma endregion
  
-@@ -18276,6 +19278,8 @@
+@@ -18276,6 +19263,8 @@
  //  can also be set to specify the name of a remote computer to be searched
  //  instead of the local machine.
  //--------------------------------------------------------------------------
@@ -3712,7 +3665,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -18317,6 +19321,8 @@
+@@ -18317,6 +19306,8 @@
  //  exists. For an existing property, FALSE is returned with LastError set to
  //  CRYPT_E_EXISTS.
  //--------------------------------------------------------------------------
@@ -3721,7 +3674,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -18369,6 +19375,8 @@
+@@ -18369,6 +19360,8 @@
  //  Key Identifiers. Set pwszComputerName, to enumerate Key Identifiers on
  //  a remote computer.
  //--------------------------------------------------------------------------
@@ -3730,7 +3683,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -18393,11 +19401,13 @@
+@@ -18393,11 +19386,13 @@
  //  public key Object Identifier. pszPubKeyOID can be set to override
  //  the default OID obtained from the aiKeyAlg.
  //--------------------------------------------------------------------------
@@ -3745,17 +3698,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_opt_ LPCSTR pszPubKeyOID,
      _In_reads_bytes_(cbPubKeyStruc) const PUBLICKEYSTRUC *pPubKeyStruc,
      _In_ DWORD cbPubKeyStruc,
-@@ -19405,6 +20415,9 @@
- //
- 
- typedef HANDLE HCERTCHAINENGINE;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HCERTCHAINENGINE HCERTCHAINENGINE;
-+#endif
- 
- #define HCCE_CURRENT_USER           ((HCERTCHAINENGINE)NULL)
- #define HCCE_LOCAL_MACHINE          ((HCERTCHAINENGINE)0x1)
-@@ -19525,19 +20538,22 @@
+@@ -19525,19 +20520,22 @@
  #define CERT_CHAIN_EXCLUSIVE_ENABLE_CA_FLAG                 0x00000001
  #endif
  
@@ -3779,7 +3722,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -19550,6 +20566,8 @@
+@@ -19550,6 +20548,8 @@
  // the engine and updates the engine caches.
  //
  
@@ -3788,7 +3731,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -19990,6 +21008,8 @@
+@@ -19990,6 +20990,8 @@
  // dwInfoStatus.
  #define CERT_CHAIN_ENABLE_DISALLOWED_CA             0x00020000
  
@@ -3797,7 +3740,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -20009,6 +21029,7 @@
+@@ -20009,6 +21011,7 @@
  // Free a certificate chain
  //
  
@@ -3805,7 +3748,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -20020,6 +21041,7 @@
+@@ -20020,6 +21023,7 @@
  // Duplicate (add a reference to) a certificate chain
  //
  
@@ -3813,7 +3756,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCERT_CHAIN_CONTEXT
  WINAPI
-@@ -20100,13 +21122,14 @@
+@@ -20100,13 +21104,14 @@
  //  NOTE: a NON-NULL pPrevChainContext is always CertFreeCertificateChain'ed by
  //  this function, even for an error.
  //--------------------------------------------------------------------------
@@ -3830,7 +3773,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _In_ DWORD dwFindType,
      _In_opt_ const void *pvFindPara,
      _In_opt_ PCCERT_CHAIN_CONTEXT pPrevChainContext
-@@ -20251,13 +21274,27 @@
+@@ -20251,13 +21256,27 @@
  // stores.
  #define CERT_CHAIN_FIND_BY_ISSUER_CACHE_ONLY_FLAG           0x8000
  
@@ -3859,7 +3802,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      void                    *pvExtraPolicyPara;     // pszPolicyOID specific
  } CERT_CHAIN_POLICY_PARA, *PCERT_CHAIN_POLICY_PARA;
  
-@@ -20334,6 +21371,7 @@
+@@ -20334,6 +21353,7 @@
  //  In addition to returning dwError, in pPolicyStatus, policy OID specific
  //  extra status may be returned via pvExtraPolicyStatus.
  //--------------------------------------------------------------------------
@@ -3867,7 +3810,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -20431,6 +21469,10 @@
+@@ -20431,6 +21451,10 @@
  //--------------------------------------------------------------------------
  
  // fdwChecks flags are defined in wininet.h
@@ -3878,7 +3821,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  typedef struct _HTTPSPolicyCallbackData
  {
      union {
-@@ -20438,7 +21480,7 @@
+@@ -20438,7 +21462,7 @@
          DWORD           cbSize;         // sizeof(HTTPSPolicyCallbackData);
      } DUMMYUNIONNAME;
  
@@ -3887,7 +3830,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #                       define      AUTHTYPE_CLIENT         1
  #                       define      AUTHTYPE_SERVER         2
  
-@@ -20448,6 +21490,12 @@
+@@ -20448,6 +21472,12 @@
  
  } HTTPSPolicyCallbackData, *PHTTPSPolicyCallbackData,
      SSL_EXTRA_CERT_CHAIN_POLICY_PARA, *PSSL_EXTRA_CERT_CHAIN_POLICY_PARA;
@@ -3900,7 +3843,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //+-------------------------------------------------------------------------
  //  CERT_CHAIN_POLICY_BASIC_CONSTRAINTS
-@@ -20536,6 +21584,34 @@
+@@ -20536,6 +21566,34 @@
  #define MICROSOFT_ROOT_CERT_CHAIN_POLICY_CHECK_APPLICATION_ROOT_FLAG 0x00020000
  #define MICROSOFT_ROOT_CERT_CHAIN_POLICY_DISABLE_FLIGHT_ROOT_FLAG    0x00040000
  
@@ -3935,7 +3878,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  //+-------------------------------------------------------------------------
  //  CERT_CHAIN_POLICY_EV
  //
-@@ -20554,7 +21630,7 @@
+@@ -20554,7 +21612,7 @@
  
  typedef struct _EV_EXTRA_CERT_CHAIN_POLICY_PARA {
      DWORD               cbSize;
@@ -3944,7 +3887,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  } EV_EXTRA_CERT_CHAIN_POLICY_PARA,
      *PEV_EXTRA_CERT_CHAIN_POLICY_PARA;
  
-@@ -20830,6 +21906,12 @@
+@@ -20830,6 +21888,12 @@
  // *pdwSkip returns the character count of skipped strings, optional
  // *pdwFlags returns the actual format used in the conversion, optional
  //--------------------------------------------------------------------------
@@ -3957,7 +3900,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
-@@ -20839,7 +21921,7 @@
+@@ -20839,7 +21903,7 @@
      _When_(dwFlags == CRYPT_STRING_BINARY, _In_reads_bytes_(cchString))
          LPCSTR pszString,
      _In_ DWORD cchString,
@@ -3966,7 +3909,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_writes_bytes_to_opt_(*pcbBinary, *pcbBinary) BYTE *pbBinary,
      _Inout_ DWORD  *pcbBinary,
      _Out_opt_ DWORD *pdwSkip,
-@@ -20856,6 +21938,8 @@
+@@ -20856,6 +21920,8 @@
  // *pdwSkip returns the character count of skipped strings, optional
  // *pdwFlags returns the actual format used in the conversion, optional
  //--------------------------------------------------------------------------
@@ -3975,7 +3918,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
-@@ -20865,7 +21949,7 @@
+@@ -20865,7 +21931,7 @@
      _When_(dwFlags == CRYPT_STRING_BINARY, _In_reads_bytes_(cchString))
          LPCWSTR pszString,
      _In_ DWORD cchString,
@@ -3984,7 +3927,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_writes_bytes_to_opt_(*pcbBinary, *pcbBinary) BYTE *pbBinary,
      _Inout_ DWORD  *pcbBinary,
      _Out_opt_ DWORD *pdwSkip,
-@@ -20883,6 +21967,7 @@
+@@ -20883,6 +21949,7 @@
  // if pszString is NULL, *pcchString returns size in characters
  // including null-terminator
  //--------------------------------------------------------------------------
@@ -3992,7 +3935,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
-@@ -20890,7 +21975,7 @@
+@@ -20890,7 +21957,7 @@
  CryptBinaryToStringA(
      _In_reads_bytes_(cbBinary) CONST BYTE *pbBinary,
      _In_ DWORD cbBinary,
@@ -4001,7 +3944,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_writes_to_opt_(*pcchString, *pcchString) LPSTR pszString,
      _Inout_ DWORD *pcchString
      );
-@@ -20900,6 +21985,7 @@
+@@ -20900,6 +21967,7 @@
  // if pszString is NULL, *pcchString returns size in characters
  // including null-terminator
  //--------------------------------------------------------------------------
@@ -4009,7 +3952,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  _Success_(return)
  WINCRYPT32STRINGAPI
  BOOL
-@@ -20907,7 +21993,7 @@
+@@ -20907,7 +21975,7 @@
  CryptBinaryToStringW(
      _In_reads_bytes_(cbBinary) CONST BYTE *pbBinary,
      _In_ DWORD cbBinary,
@@ -4018,7 +3961,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      _Out_writes_to_opt_(*pcchString, *pcchString) LPWSTR pszString,
      _Inout_ DWORD *pcchString
      );
-@@ -20941,6 +22027,24 @@
+@@ -20941,6 +22009,24 @@
  #define CRYPT_STRING_PERCENTESCAPE          0x08000000	// base64 formats only
  #define CRYPT_STRING_HASHDATA               0x10000000
  #define CRYPT_STRING_STRICT                 0x20000000
@@ -4043,7 +3986,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define CRYPT_STRING_NOCRLF                 0x40000000
  #define CRYPT_STRING_NOCR                   0x80000000
  // certenrolld_end
-@@ -21056,13 +22160,19 @@
+@@ -21056,13 +22142,19 @@
  //                                           except, we won't fallback to
  //                                           using the password to decrypt.
  //--------------------------------------------------------------------------
@@ -4064,7 +4007,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  // dwFlags definitions for PFXImportCertStore
  //#define CRYPT_EXPORTABLE          0x00000001  // CryptImportKey dwFlags
-@@ -21099,6 +22209,7 @@
+@@ -21099,6 +22191,7 @@
  //  blob, and if that works it will return TRUE, it will return FALSE otherwise
  //
  //--------------------------------------------------------------------------
@@ -4072,7 +4015,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -21115,6 +22226,7 @@
+@@ -21115,6 +22208,7 @@
  //  Return value is TRUE if password appears correct, FALSE otherwise.
  //
  //--------------------------------------------------------------------------
@@ -4080,7 +4023,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -21181,6 +22293,8 @@
+@@ -21181,6 +22275,8 @@
  //  the memory pointed to by pPFX->pbData is updated with the encoded bytes
  //  and pPFX->cbData is updated with the encoded byte length.
  //--------------------------------------------------------------------------
@@ -4089,7 +4032,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -21197,6 +22311,41 @@
+@@ -21197,6 +22293,41 @@
  #define REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY   0x0002
  #define EXPORT_PRIVATE_KEYS                     0x0004
  #define PKCS12_INCLUDE_EXTENDED_PROPERTIES      0x0010
@@ -4131,7 +4074,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  #define PKCS12_PROTECT_TO_DOMAIN_SIDS           0x0020
  #define PKCS12_EXPORT_SILENT                    0x0040
  #define PKCS12_EXPORT_PBES2_PARAMS              0x0080 
-@@ -21253,6 +22402,8 @@
+@@ -21253,6 +22384,8 @@
  //  This is an old API kept for compatibility with IE4 clients. New applications
  //  should call the above PfxExportCertStoreEx for enhanced security.
  //--------------------------------------------------------------------------
@@ -4140,7 +4083,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -21372,6 +22523,8 @@
+@@ -21372,6 +22505,8 @@
  //  CertCloseServerOcspResponse() must be called to close the returned
  //  handle.
  //--------------------------------------------------------------------------
@@ -4149,7 +4092,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  HCERT_SERVER_OCSP_RESPONSE
  WINAPI
-@@ -21390,6 +22543,7 @@
+@@ -21390,6 +22525,7 @@
  //  CertOpenServerOcspResponse(). Each Open and AddRef requires a
  //  corresponding CertCloseServerOcspResponse().
  //--------------------------------------------------------------------------
@@ -4157,7 +4100,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -21403,6 +22557,7 @@
+@@ -21403,6 +22539,7 @@
  //
  //  dwFlags isn't currently used and must be set to 0.
  //--------------------------------------------------------------------------
@@ -4165,7 +4108,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -21424,6 +22579,7 @@
+@@ -21424,6 +22561,7 @@
  //  CertFreeServerOcspResponseContext() must be called to free the
  //  returned OCSP response context.
  //--------------------------------------------------------------------------
@@ -4173,7 +4116,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  PCCERT_SERVER_OCSP_RESPONSE_CONTEXT
  WINAPI
-@@ -21438,6 +22594,7 @@
+@@ -21438,6 +22576,7 @@
  //  CertGetServerOcspResponseContext(). Each Get and AddRef requires a
  //  corresponding CertFreeServerOcspResponseContext().
  //--------------------------------------------------------------------------
@@ -4181,7 +4124,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -21449,6 +22606,7 @@
+@@ -21449,6 +22588,7 @@
  //  Free the OCSP response context returned by
  //  CertGetServerOcspResponseContext().
  //--------------------------------------------------------------------------
@@ -4189,7 +4132,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -21506,6 +22664,8 @@
+@@ -21506,6 +22646,8 @@
  //  *ppwszMimeType is always NULL for the biometric types. For success,
  //  the caller must always check if non-NULL before dereferencing.
  //--------------------------------------------------------------------------
@@ -4198,7 +4141,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -21563,7 +22723,7 @@
+@@ -21563,7 +22705,7 @@
  
  typedef struct _CERT_SELECT_CRITERIA
  {
@@ -4207,7 +4150,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      DWORD                           cPara;
      _Field_size_(cPara) void**    ppPara;
  }
-@@ -21585,6 +22745,21 @@
+@@ -21585,6 +22727,21 @@
  #define CERT_SELECT_BY_PUBLIC_KEY            10
  #define CERT_SELECT_BY_TLS_SIGNATURES        11
  
@@ -4229,7 +4172,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  //add for WinRT
  #define CERT_SELECT_BY_ISSUER_DISPLAYNAME    12
  #define CERT_SELECT_BY_FRIENDLYNAME          13
-@@ -21610,6 +22785,8 @@
+@@ -21610,6 +22767,8 @@
  //  the matching ones based on the flags and selection criteria.
  //--------------------------------------------------------------------------
  
@@ -4238,7 +4181,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
-@@ -21630,6 +22807,7 @@
+@@ -21630,6 +22789,7 @@
  //  CertFreeCertificateChain is NOT called for each entry.
  //--------------------------------------------------------------------------
  
@@ -4246,7 +4189,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  WINCRYPT32API
  VOID
  WINAPI
-@@ -21651,9 +22829,14 @@
+@@ -21651,9 +22811,14 @@
  //--------------------------------------------------------------------------
  #define TIMESTAMP_VERSION  1
  
@@ -4262,7 +4205,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      CRYPT_ALGORITHM_IDENTIFIER  HashAlgorithm;
      CRYPT_DER_BLOB              HashedMessage;
      LPSTR                       pszTSAPolicyId;         // OPTIONAL
-@@ -21668,9 +22851,13 @@
+@@ -21668,9 +22833,13 @@
  //  CRYPT_TIMESTAMP_RESPONSE
  //
  //--------------------------------------------------------------------------
@@ -4277,7 +4220,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
      DWORD                       cFreeText;              // OPTIONAL
      _Field_size_(cFreeText)
      LPWSTR*                     rgFreeText;
-@@ -21684,6 +22871,16 @@
+@@ -21684,6 +22853,16 @@
  #define TIMESTAMP_STATUS_WAITING                        3
  #define TIMESTAMP_STATUS_REVOCATION_WARNING             4
  #define TIMESTAMP_STATUS_REVOKED                        5
@@ -4294,7 +4237,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  #define TIMESTAMP_FAILURE_BAD_ALG                       0
  #define TIMESTAMP_FAILURE_BAD_REQUEST                   2
-@@ -21811,6 +23008,8 @@
+@@ -21811,6 +22990,8 @@
  //     if fRequestCerts value is TRUE.
  //
  //--------------------------------------------------------------------------
@@ -4303,7 +4246,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  BOOL
  WINAPI
  CryptRetrieveTimeStamp(
-@@ -21874,6 +23073,8 @@
+@@ -21874,6 +23055,8 @@
  //    The caller should also build a chain for ppTsSigner and validate the trust.
  //--------------------------------------------------------------------------
  
@@ -4312,7 +4255,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  _Success_(return == TRUE)
  BOOL
  WINAPI
-@@ -21926,6 +23127,14 @@
+@@ -21926,6 +23109,14 @@
  #define CRYPT_OBJECT_LOCATOR_RELEASE_PROCESS_EXIT      3
  #define CRYPT_OBJECT_LOCATOR_RELEASE_DLL_UNLOAD        4
  
@@ -4327,7 +4270,7 @@ diff --git a/um/wincrypt.h b/um/wincrypt.h
  
  //--------------------------------------------------------------------------
  // The object locator provider receives this function when it is initialized.
-@@ -22012,7 +23221,7 @@
+@@ -22012,7 +23203,7 @@
  //    it is initialized. 
  //--------------------------------------------------------------------------
  typedef void (WINAPI * PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE)(

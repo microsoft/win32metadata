@@ -469,17 +469,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -606,6 +691,9 @@
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
- 
- typedef struct _PROC_THREAD_ATTRIBUTE_LIST *PPROC_THREAD_ATTRIBUTE_LIST, *LPPROC_THREAD_ATTRIBUTE_LIST;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef LPPROC_THREAD_ATTRIBUTE_LIST LPPROC_THREAD_ATTRIBUTE_LIST;
-+#endif
- 
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
- #pragma endregion
-@@ -615,6 +703,8 @@
+@@ -615,6 +700,8 @@
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -488,7 +478,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  DWORD
  WINAPI
-@@ -626,6 +716,8 @@
+@@ -626,6 +713,8 @@
  
  #if (_WIN32_WINNT >= 0x0502)
  
@@ -497,7 +487,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  DWORD
  WINAPI
-@@ -637,6 +729,7 @@
+@@ -637,6 +726,7 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -505,7 +495,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  VOID
  WINAPI
-@@ -654,6 +747,8 @@
+@@ -654,6 +744,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -514,7 +504,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  DWORD
  WINAPI
-@@ -661,6 +756,8 @@
+@@ -661,6 +753,8 @@
      _In_ HANDLE Thread
      );
  
@@ -523,7 +513,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -672,6 +769,7 @@
+@@ -672,6 +766,7 @@
      _When_(lpAttributeList == nullptr,_Out_) _When_(lpAttributeList != nullptr,_Inout_) PSIZE_T lpSize
      );
  
@@ -531,7 +521,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  VOID
  WINAPI
-@@ -681,6 +779,8 @@
+@@ -681,6 +776,8 @@
  
  #define PROC_THREAD_ATTRIBUTE_REPLACE_VALUE     0x00000001
  
@@ -540,7 +530,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -696,6 +796,7 @@
+@@ -696,6 +793,7 @@
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
  
@@ -548,7 +538,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -727,21 +828,28 @@
+@@ -727,21 +825,28 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  #define PROCESS_AFFINITY_ENABLE_AUTO_UPDATE 0x00000001UL
@@ -582,7 +572,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
-@@ -752,6 +860,8 @@
+@@ -752,6 +857,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -591,7 +581,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -777,6 +887,7 @@
+@@ -777,6 +884,7 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -599,7 +589,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  VOID
  WINAPI
-@@ -787,6 +898,8 @@
+@@ -787,6 +895,8 @@
  
  #endif
  
@@ -608,7 +598,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -803,6 +916,8 @@
+@@ -803,6 +913,8 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -617,7 +607,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -821,6 +936,8 @@
+@@ -821,6 +933,8 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -626,7 +616,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -837,6 +954,8 @@
+@@ -837,6 +951,8 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -635,7 +625,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -856,6 +975,8 @@
+@@ -856,6 +972,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -644,7 +634,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -871,6 +992,8 @@
+@@ -871,6 +989,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -653,7 +643,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -882,20 +1005,23 @@
+@@ -882,20 +1002,23 @@
      _Out_ LPFILETIME lpUserTime
      );
  
@@ -679,7 +669,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM  | WINAPI_PARTITION_GAMES) */
-@@ -906,6 +1032,8 @@
+@@ -906,6 +1029,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -688,7 +678,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -924,6 +1052,7 @@
+@@ -924,6 +1049,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -696,7 +686,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  DWORD
  WINAPI
-@@ -941,6 +1070,8 @@
+@@ -941,6 +1067,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -705,7 +695,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -950,6 +1081,8 @@
+@@ -950,6 +1078,8 @@
      _Out_opt_ PPROCESSOR_NUMBER lpPreviousIdealProcessor
      );
  
@@ -714,7 +704,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -958,6 +1091,7 @@
+@@ -958,6 +1088,7 @@
      _Out_ PPROCESSOR_NUMBER lpIdealProcessor
      );
  
@@ -722,7 +712,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  VOID
  WINAPI
-@@ -975,6 +1109,8 @@
+@@ -975,6 +1106,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
@@ -731,7 +721,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -983,6 +1119,8 @@
+@@ -983,6 +1116,8 @@
      _Out_ PBOOL pDisablePriorityBoost
      );
  
@@ -740,7 +730,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1001,6 +1139,8 @@
+@@ -1001,6 +1136,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
@@ -749,7 +739,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1018,6 +1158,8 @@
+@@ -1018,6 +1155,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
@@ -758,7 +748,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1049,9 +1191,11 @@
+@@ -1049,9 +1188,11 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
  typedef struct _MEMORY_PRIORITY_INFORMATION {
@@ -771,7 +761,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1062,6 +1206,8 @@
+@@ -1062,6 +1203,8 @@
      _In_ DWORD ThreadInformationSize
      );
  
@@ -780,7 +770,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1098,6 +1244,8 @@
+@@ -1098,6 +1241,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
  
@@ -789,7 +779,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1110,6 +1258,8 @@
+@@ -1110,6 +1255,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
  
@@ -798,7 +788,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1119,6 +1269,7 @@
+@@ -1119,6 +1266,7 @@
      _Out_opt_ PULONG_PTR OldPolicyValue
      );
  
@@ -806,7 +796,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1135,6 +1286,8 @@
+@@ -1135,6 +1283,8 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -815,7 +805,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1183,7 +1336,7 @@
+@@ -1183,7 +1333,7 @@
  #endif
  
  typedef struct _PROCESS_MACHINE_INFORMATION {
@@ -824,7 +814,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
      USHORT Res0;
      MACHINE_ATTRIBUTES MachineAttributes;
  } PROCESS_MACHINE_INFORMATION;
-@@ -1229,7 +1382,7 @@
+@@ -1229,7 +1379,7 @@
  } PROCESS_POWER_THROTTLING_STATE, *PPROCESS_POWER_THROTTLING_STATE;
  
  typedef struct PROCESS_PROTECTION_LEVEL_INFORMATION {
@@ -833,7 +823,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  } PROCESS_PROTECTION_LEVEL_INFORMATION;
  
  #define PROCESS_LEAP_SECOND_INFO_FLAG_ENABLE_SIXTY_SECOND   0x1
-@@ -1243,6 +1396,8 @@
+@@ -1243,6 +1393,8 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -842,7 +832,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1253,6 +1408,8 @@
+@@ -1253,6 +1405,8 @@
      _In_ DWORD ProcessInformationSize
      );
  
@@ -851,7 +841,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1324,6 +1481,8 @@
+@@ -1324,6 +1478,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -860,7 +850,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINADVAPI
  BOOL
  WINAPI
-@@ -1334,7 +1493,7 @@
+@@ -1334,7 +1490,7 @@
      _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
      _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
      _In_ BOOL bInheritHandles,
@@ -869,7 +859,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
      _In_opt_ LPVOID lpEnvironment,
      _In_opt_ LPCSTR lpCurrentDirectory,
      _In_ LPSTARTUPINFOA lpStartupInfo,
-@@ -1345,6 +1504,8 @@
+@@ -1345,6 +1501,8 @@
  #define CreateProcessAsUser  CreateProcessAsUserA
  #endif
  
@@ -878,7 +868,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1419,6 +1580,7 @@
+@@ -1419,6 +1577,7 @@
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
@@ -886,7 +876,7 @@ diff --git a/um/processthreadsapi.h b/um/processthreadsapi.h
  WINBASEAPI
  HRESULT
  WINAPI
-@@ -1427,6 +1589,7 @@
+@@ -1427,6 +1586,7 @@
      _In_ PCWSTR lpThreadDescription
      );
  

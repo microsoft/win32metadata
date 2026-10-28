@@ -25,11 +25,8 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumArgs);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
-@@ -79,30 +89,42 @@
+@@ -79,30 +89,39 @@
  DECLARE_HANDLE(HDROP);
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef HDROP HDROP;
-+#endif
  
  _Success_(return != 0)
 +_Win32_SupportedOS_WindowsXP_
@@ -70,7 +67,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(HINSTANCE) FindExecutableW(_In_ LPCWSTR lpFile, _In_opt_ LPCWSTR lpDirectory, _Out_writes_(MAX_PATH) LPWSTR lpResult);
  #ifdef UNICODE
  #define FindExecutable  FindExecutableW
-@@ -110,29 +132,38 @@
+@@ -110,29 +129,38 @@
  #define FindExecutable  FindExecutableA
  #endif // !UNICODE
  
@@ -109,7 +106,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(HICON) ExtractIconW(_Reserved_ HINSTANCE hInst, _In_ LPCWSTR pszExeFileName, UINT nIconIndex);
  #ifdef UNICODE
  #define ExtractIcon  ExtractIconW
-@@ -216,13 +247,16 @@
+@@ -216,13 +244,16 @@
  } APPBARDATA, *PAPPBARDATA;
  
  
@@ -126,7 +123,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(DWORD)   DoEnvironmentSubstW(_Inout_updates_(cchSrc) LPWSTR pszSrc, UINT cchSrc);
  #ifdef UNICODE
  #define DoEnvironmentSubst  DoEnvironmentSubstW
-@@ -231,7 +265,11 @@
+@@ -231,7 +262,11 @@
  #endif // !UNICODE
  
  #define EIRESID(x) (-1 * (int)(x))
@@ -138,7 +135,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(UINT) ExtractIconExW(_In_ LPCWSTR lpszFile, int nIconIndex, _Out_writes_opt_(nIcons) HICON *phiconLarge, _Out_writes_opt_(nIcons) HICON *phiconSmall, UINT nIcons);
  #ifdef UNICODE
  #define ExtractIconEx  ExtractIconExW
-@@ -269,6 +307,15 @@
+@@ -269,6 +304,15 @@
  #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  #define FOF_NO_UI                   (FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR) // don't display any UI at all
  
@@ -154,7 +151,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  typedef WORD FILEOP_FLAGS;
  
  #define PO_DELETE       0x0013  // printer is being deleted
-@@ -321,13 +368,18 @@
+@@ -321,13 +365,18 @@
  typedef LPSHFILEOPSTRUCTA LPSHFILEOPSTRUCT;
  #endif
  
@@ -173,7 +170,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(void) SHFreeNameMappings(_In_opt_ HANDLE hNameMappings);
  
  typedef struct _SHNAMEMAPPINGA
-@@ -499,7 +551,11 @@
+@@ -499,7 +548,11 @@
  typedef LPSHELLEXECUTEINFOA LPSHELLEXECUTEINFO;
  #endif // UNICODE
  
@@ -185,7 +182,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(BOOL) ShellExecuteExW(_Inout_ SHELLEXECUTEINFOW *pExecInfo);
  #ifdef UNICODE
  #define ShellExecuteEx  ShellExecuteExW
-@@ -526,11 +582,14 @@
+@@ -526,11 +579,14 @@
      LPPROCESS_INFORMATION lpProcessInformation;
  } SHCREATEPROCESSINFOW, *PSHCREATEPROCESSINFOW;
  
@@ -200,7 +197,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI SHEvaluateSystemCommandTemplate(_In_ PCWSTR pszCmdTemplate, _Outptr_ PWSTR *ppszApplication, _Outptr_opt_ PWSTR *ppszCommandLine, _Outptr_opt_ PWSTR *ppszParameters);
  //
  //  SHEvaluateSystemCommandTemplate()
-@@ -894,6 +953,7 @@
+@@ -894,6 +950,7 @@
  
  // the object returned from this API implements IQueryAssociations
  
@@ -208,7 +205,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI AssocCreateForClasses(_In_reads_(cClasses) const ASSOCIATIONELEMENT *rgClasses, ULONG cClasses, _In_ REFIID riid, _COM_Outptr_ void **ppv);
  
  /* #if 0 // SAMPLE CODE
-@@ -959,14 +1019,18 @@
+@@ -959,14 +1016,18 @@
  #define SHERB_NOSOUND           0x00000004
  
  
@@ -227,7 +224,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI SHEmptyRecycleBinW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRootPath, DWORD dwFlags);
  #ifdef UNICODE
  #define SHEmptyRecycleBin  SHEmptyRecycleBinW
-@@ -999,12 +1063,14 @@
+@@ -999,12 +1060,14 @@
  #endif
  } QUERY_USER_NOTIFICATION_STATE;
  
@@ -243,7 +240,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #endif
  
  
-@@ -1012,7 +1078,7 @@
+@@ -1012,7 +1075,7 @@
      DWORD cbSize;
      HWND hWnd;
      UINT uID;
@@ -252,7 +249,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
      UINT uCallbackMessage;
      HICON hIcon;
  #if (NTDDI_VERSION < NTDDI_WIN2K)
-@@ -1020,8 +1086,8 @@
+@@ -1020,8 +1083,8 @@
  #endif
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
      CHAR   szTip[128];
@@ -263,7 +260,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
      CHAR   szInfo[256];
  #ifndef _SHELL_EXPORTS_INTERNALAPI_H_
      union {
-@@ -1030,7 +1096,7 @@
+@@ -1030,7 +1093,7 @@
      } DUMMYUNIONNAME;
  #endif
      CHAR   szInfoTitle[64];
@@ -272,7 +269,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #endif
  #if (NTDDI_VERSION >= NTDDI_WINXP)
      GUID guidItem;
-@@ -1043,7 +1109,7 @@
+@@ -1043,7 +1106,7 @@
      DWORD cbSize;
      HWND hWnd;
      UINT uID;
@@ -281,7 +278,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
      UINT uCallbackMessage;
      HICON hIcon;
  #if (NTDDI_VERSION < NTDDI_WIN2K)
-@@ -1051,8 +1117,8 @@
+@@ -1051,8 +1114,8 @@
  #endif
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
      WCHAR  szTip[128];
@@ -292,7 +289,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
      WCHAR  szInfo[256];
  #ifndef _SHELL_EXPORTS_INTERNALAPI_H_
      union {
-@@ -1061,7 +1127,7 @@
+@@ -1061,7 +1124,7 @@
      } DUMMYUNIONNAME;
  #endif
      WCHAR  szInfoTitle[64];
@@ -301,7 +298,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #endif
  #if (NTDDI_VERSION >= NTDDI_WINXP)
      GUID guidItem;
-@@ -1125,6 +1191,14 @@
+@@ -1125,6 +1188,14 @@
  #define NIM_DELETE      0x00000002
  #define NIM_SETFOCUS    0x00000003
  #define NIM_SETVERSION  0x00000004
@@ -316,7 +313,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  
  
  // set NOTIFYICONDATA.uVersion with 0, 3 or 4
-@@ -1145,10 +1219,26 @@
+@@ -1145,10 +1216,26 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #define NIF_REALTIME    0x00000040
  #define NIF_SHOWTIP     0x00000080
@@ -343,7 +340,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  
  // says this is the source of a shared icon
  
-@@ -1171,6 +1261,18 @@
+@@ -1171,6 +1258,18 @@
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  #define NIIF_RESPECT_QUIET_TIME 0x00000080
@@ -362,7 +359,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
  
-@@ -1182,8 +1284,10 @@
+@@ -1182,8 +1281,10 @@
  } NOTIFYICONIDENTIFIER, *PNOTIFYICONIDENTIFIER;
  
  
@@ -375,7 +372,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #ifdef UNICODE
  #define Shell_NotifyIcon  Shell_NotifyIconW
  #else
-@@ -1191,6 +1295,7 @@
+@@ -1191,6 +1292,7 @@
  #endif // !UNICODE
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -383,7 +380,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI Shell_NotifyIconGetRect(_In_ const NOTIFYICONIDENTIFIER* identifier, _Out_ RECT* iconLocation);
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
-@@ -1269,10 +1374,34 @@
+@@ -1269,10 +1371,34 @@
  #define SHGFI_OVERLAYINDEX      0x000000040     // Get the index of the overlay
                                                  // in the upper 8 bits of the iIcon
  
@@ -422,7 +419,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #ifdef UNICODE
  #define SHGetFileInfo  SHGetFileInfoW
  #else
-@@ -1297,6 +1426,17 @@
+@@ -1297,6 +1423,17 @@
  #define SHGSI_LARGEICON         SHGFI_LARGEICON
  #define SHGSI_SMALLICON         SHGFI_SMALLICON
  #define SHGSI_SHELLICONSIZE     SHGFI_SHELLICONSIZE
@@ -440,7 +437,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  
  //  Shell icons
  
-@@ -1404,7 +1544,8 @@
+@@ -1404,7 +1541,8 @@
  
  #define SIID_INVALID ((SHSTOCKICONID)-1)
  
@@ -450,7 +447,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  
-@@ -1412,8 +1553,10 @@
+@@ -1412,8 +1550,10 @@
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
  #define SHGetDiskFreeSpace SHGetDiskFreeSpaceEx
  
@@ -461,7 +458,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExW(_In_ LPCWSTR pszDirectoryName, _Out_opt_ ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
      _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfBytes, _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfFreeBytes);
  #ifdef UNICODE
-@@ -1422,8 +1565,10 @@
+@@ -1422,8 +1562,10 @@
  #define SHGetDiskFreeSpaceEx  SHGetDiskFreeSpaceExA
  #endif // !UNICODE
  _Success_(return != 0)
@@ -472,7 +469,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(BOOL) SHGetNewLinkInfoW(_In_ LPCWSTR pszLinkTo, _In_ LPCWSTR pszDir, _Out_writes_(MAX_PATH) LPWSTR pszName, _Out_ BOOL *pfMustCopy, _In_ UINT uFlags);
  #ifdef UNICODE
  #define SHGetNewLinkInfo  SHGetNewLinkInfoW
-@@ -1456,7 +1601,9 @@
+@@ -1456,7 +1598,9 @@
  
  // deprecated, instead invoke verbs on printers/netprinters using IContextMenu or ShellExecute()
  
@@ -482,7 +479,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(BOOL) SHInvokePrinterCommandW(_In_opt_ HWND hwnd, UINT uAction, _In_ LPCWSTR lpBuf1, _In_opt_ LPCWSTR lpBuf2, BOOL fModal);
  #ifdef UNICODE
  #define SHInvokePrinterCommand  SHInvokePrinterCommandW
-@@ -1509,6 +1656,7 @@
+@@ -1509,6 +1653,7 @@
  // Returns:
  //      S_OK
  //
@@ -490,7 +487,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI SHLoadNonloadedIconOverlayIdentifiers(void);
  
  //
-@@ -1530,6 +1678,7 @@
+@@ -1530,6 +1675,7 @@
  //     Both OFFLINE_STATUS_LOCAL and OFFLINE_STATUS_REMOTE may be returned,
  //     indicating "open in both places." This is common when the server is online.
  //
@@ -498,7 +495,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI SHIsFileAvailableOffline(_In_ PCWSTR pwszPath, _Out_opt_ DWORD *pdwStatus);
  
  #define OFFLINE_STATUS_LOCAL        0x0001  // If open, it's open locally
-@@ -1543,13 +1692,16 @@
+@@ -1543,13 +1689,16 @@
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  //  sets the specified path to use the string resource
  //  as the UI instead of the file system name
@@ -515,7 +512,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI SHGetLocalizedName(_In_ PCWSTR pszPath, _Out_writes_(cch) PWSTR pszResModule, UINT cch, _Out_ int *pidsRes);
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  
-@@ -1579,18 +1731,22 @@
+@@ -1579,18 +1728,22 @@
  #define LWSTDAPIV_(type)  STDAPIV_(type)
  #endif
  
@@ -540,7 +537,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #ifdef UNICODE
  #define ShellMessageBox  ShellMessageBoxW
  #else
-@@ -1610,7 +1766,9 @@
+@@ -1610,7 +1763,9 @@
  
  #if         _WIN32_IE >= 0x0600
  
@@ -550,7 +547,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  STDAPI SHEnumerateUnreadMailAccountsW(_In_opt_ HKEY hKeyUser, DWORD dwIndex, _Out_writes_(cchMailAddress) LPWSTR pszMailAddress, int cchMailAddress);
  #ifdef UNICODE
  #define SHEnumerateUnreadMailAccounts  SHEnumerateUnreadMailAccountsW
-@@ -1618,6 +1776,7 @@
+@@ -1618,6 +1773,7 @@
  #define SHEnumerateUnreadMailAccounts  SHEnumerateUnreadMailAccountsA
  #endif // !UNICODE
  STDAPI SHGetUnreadMailCountA(_In_opt_ HKEY hKeyUser, _In_opt_ LPCSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPSTR pszShellExecuteCommand, int cchShellExecuteCommand);
@@ -558,7 +555,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  STDAPI SHGetUnreadMailCountW(_In_opt_ HKEY hKeyUser, _In_opt_ LPCWSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPWSTR pszShellExecuteCommand, int cchShellExecuteCommand);
  #ifdef UNICODE
  #define SHGetUnreadMailCount  SHGetUnreadMailCountW
-@@ -1625,6 +1784,7 @@
+@@ -1625,6 +1781,7 @@
  #define SHGetUnreadMailCount  SHGetUnreadMailCountA
  #endif // !UNICODE
  STDAPI SHSetUnreadMailCountA(_In_ LPCSTR pszMailAddress, DWORD dwCount, _In_ LPCSTR pszShellExecuteCommand);
@@ -566,7 +563,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  STDAPI SHSetUnreadMailCountW(_In_ LPCWSTR pszMailAddress, DWORD dwCount, _In_ LPCWSTR pszShellExecuteCommand);
  #ifdef UNICODE
  #define SHSetUnreadMailCount  SHSetUnreadMailCountW
-@@ -1635,13 +1795,15 @@
+@@ -1635,13 +1792,15 @@
  #endif  /*  _WIN32_IE >= 0x0600     */
  
  #if (_WIN32_IE >= 0x0601)
@@ -583,7 +580,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  
  
-@@ -1689,6 +1851,7 @@
+@@ -1689,6 +1848,7 @@
  
  // Instantiation
  #define WC_NETADDRESS L"msctls_netaddress"
@@ -591,7 +588,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(BOOL) InitNetworkAddressControl(void);
  
  // Address Control Messages
-@@ -1730,6 +1893,7 @@
+@@ -1730,6 +1890,7 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  // Returns the type of media (CD, DVD, Blank, etc) that is in the drive.
  // dwMediaContent is set to a combination of ARCONTENT flags.

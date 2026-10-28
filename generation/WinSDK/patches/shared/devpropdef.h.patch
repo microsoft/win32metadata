@@ -1,17 +1,7 @@
 diff --git a/shared/devpropdef.h b/shared/devpropdef.h
 --- a/shared/devpropdef.h
 +++ b/shared/devpropdef.h
-@@ -90,6 +90,9 @@
- 
- // 8-bit boolean type definition for DEVPROP_TYPE_BOOLEAN (True=-1, False=0)
- typedef CHAR DEVPROP_BOOLEAN, *PDEVPROP_BOOLEAN;
-+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
-+_Win32_NativeTypedef_ typedef DEVPROP_BOOLEAN DEVPROP_BOOLEAN;
-+#endif
- #define DEVPROP_TRUE  ((DEVPROP_BOOLEAN)-1)
- #define DEVPROP_FALSE ((DEVPROP_BOOLEAN) 0)
- 
-@@ -206,5 +209,41 @@
+@@ -206,5 +206,41 @@
  #define DEFINE_DEVPROPKEY(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8, pid) EXTERN_C const DEVPROPKEY name
  #endif // INITGUID
  
