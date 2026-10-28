@@ -156,7 +156,8 @@ namespace Win32MetadataScraper
         }
 
         internal NativeConstantGroup[] GetConstantGroups() => annotatedTypedefs
-            .Where(facts => facts.LogicalEnumMembers != null && ShouldEmit(facts.Declaration, facts.Location))
+            .Where(facts => facts.LogicalEnumMembers != null &&
+                ShouldProjectTypedef((TypedefNameDecl)facts.Declaration, facts.Location))
             .GroupBy(facts => facts.AnnotationOwner).Select(group => GetConstantGroupSource(group.First()).Group)
             .Concat(nativeEnumGroups.Values).ToArray();
     }

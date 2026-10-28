@@ -3,6 +3,7 @@
   <UsingTask TaskName="MetadataTasks.ScanLibs" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.ScrapeHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.ScrapeConstants" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
+  <UsingTask TaskName="MetadataTasks.SelectNativeConstantToolchainHeaders" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.EmitWinmd" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.CollectGenerationDiagnostics" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.CompileIdls" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
@@ -234,8 +235,19 @@
     <AllTraverseFiles Include="%(Partition.TraverseFiles)"/>
   </ItemGroup>
 
+  <Target Name="SelectNativeConstantToolchainHeaders"
+    Condition="'$(EvaluateNativeConstants)' == 'true'">
+    <PropertyGroup><_GenerationFailureStage>SelectNativeConstantToolchainHeaders</_GenerationFailureStage></PropertyGroup>
+    <SelectNativeConstantToolchainHeaders
+      ScriptsDir="$(ScriptsDir)"
+      ToolchainIncludeRoots="$(NativeConstantToolchainIncludeRoots)">
+      <Output TaskParameter="ToolchainIncludeRoots" PropertyName="NativeConstantToolchainIncludeRoots"/>
+    </SelectNativeConstantToolchainHeaders>
+    <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
+  </Target>
+
   <Target Name="ScrapeHeaders" BeforeTargets="Build"
-    DependsOnTargets="PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
+    DependsOnTargets="SelectNativeConstantToolchainHeaders;PrepScraperHeader;PrepSettingsForFunctionPointerFixups;PrepSettingsForAutoTypes;CompileIdls;PrepareWithLibsRsp;FilterRsps">
 
     <PropertyGroup>
       <_GenerationFailureStage>ScrapeHeaders</_GenerationFailureStage>
@@ -253,6 +265,7 @@
       ToolsBinDir="$(ToolsBinDir)"
       ScriptsDir="$(ScriptsDir)"
       AdditionalIncludes="$(AdditionalIncludes)"
+      ToolchainIncludeRoots="$(NativeConstantToolchainIncludeRoots)"
       GeneratedDir="$(GeneratedDir)"
       ScratchDir="$(ScratchOutputDir)"
       MaxProcessors="$(MaxProcessors)"
@@ -263,7 +276,9 @@
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
       PartitionFilter="$(PartitionFilter)"
       EvaluateNativeConstants="$(EvaluateNativeConstants)"
-      NuGetPackageSource="$(NuGetPackageSource)"/>
+      NuGetPackageSource="$(NuGetPackageSource)">
+      <Output TaskParameter="ToolchainIncludeRoots" PropertyName="NativeConstantToolchainIncludeRoots"/>
+    </ScrapeHeaders>
 
     <OnError ExecuteTargets="CollectIndependentGenerationDiagnostics"/>
   </Target>
@@ -292,7 +307,7 @@
   </ItemGroup>
 
   <Target Name="ScrapeConstants" BeforeTargets="Build"
-    DependsOnTargets="PrepConstantsScraperHeader;ScrapeHeaders;CopyManualFilesToScraped">
+    DependsOnTargets="SelectNativeConstantToolchainHeaders;PrepConstantsScraperHeader;ScrapeHeaders;CopyManualFilesToScraped">
 
     <PropertyGroup>
       <DefaultNamespace>DefaultNamespace</DefaultNamespace>

@@ -78,6 +78,9 @@ namespace MetadataTasks
 
         public string AdditionalIncludes { get; set; }
 
+        [Output]
+        public string[] ToolchainIncludeRoots { get; set; }
+
         [Required]
         public string MarkerFileName { get; set; }
 
@@ -105,9 +108,14 @@ namespace MetadataTasks
 
             Directory.CreateDirectory(this.GeneratedDir);
             File.Delete(Path.Combine(this.GeneratedDir, "scrape-diagnostics.json"));
+            if (this.EvaluateNativeConstants && !this.SelectNativeConstantToolchainHeaders())
+                return false;
             string nativeConstantState = this.MarkerFileName + ".native-constants";
+            string nativeConstantStateValue = string.Join(Environment.NewLine,
+                new[] { this.EvaluateNativeConstants.ToString() }.Concat(this.EvaluateNativeConstants
+                    ? this.ToolchainIncludeRoots : Array.Empty<string>()));
             bool nativeConstantStateChanged = this.EvaluateNativeConstants || File.Exists(nativeConstantState)
-                ? !File.Exists(nativeConstantState) || File.ReadAllText(nativeConstantState) != this.EvaluateNativeConstants.ToString()
+                ? !File.Exists(nativeConstantState) || File.ReadAllText(nativeConstantState) != nativeConstantStateValue
                 : false;
             bool globalSettingsChanged = !this.AreNonPartitionFilesUpToDate() || nativeConstantStateChanged;
             var validation = new MetadataUtils.GenerationValidation();
@@ -189,6 +197,7 @@ namespace MetadataTasks
                     .Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
                 var roots = this.defaultIncDirs
                     .Concat((this.AdditionalIncludes ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries))
+                    .Concat(this.ToolchainIncludeRoots ?? Array.Empty<string>())
                     .Concat((Environment.GetEnvironmentVariable("INCLUDE") ?? "").Split(
                         Path.PathSeparator, StringSplitOptions.RemoveEmptyEntries));
                 string[] names = MetadataUtils.ConstantsScraper.ScanConstantMacroNames(headers, roots);
@@ -223,7 +232,7 @@ namespace MetadataTasks
             {
                 File.WriteAllText(this.MarkerFileName, string.Empty);
                 if (this.EvaluateNativeConstants || File.Exists(nativeConstantState))
-                    File.WriteAllText(nativeConstantState, this.EvaluateNativeConstants.ToString());
+                    File.WriteAllText(nativeConstantState, nativeConstantStateValue);
             }
 
             return ret;
@@ -303,6 +312,15 @@ namespace MetadataTasks
         public void Cancel()
         {
             this.canceled = true;
+        }
+
+        private bool SelectNativeConstantToolchainHeaders()
+        {
+            if (!TaskUtils.TrySelectNativeConstantToolchainHeaders(this.ScriptsDir, this.ToolchainIncludeRoots,
+                this.Log, out var roots))
+                return false;
+            this.ToolchainIncludeRoots = roots;
+            return true;
         }
 
         private bool EnsureClangSharpInstalled()
@@ -469,6 +487,10 @@ namespace MetadataTasks
             {
                 includeDirs.Add(dir);
             }
+            if (this.EvaluateNativeConstants)
+                foreach (string root in this.ToolchainIncludeRoots)
+                    if (includeDirHash.Add(root))
+                        includeDirs.Add(root);
 
             string sourceFile = partition.FullPath;
 
