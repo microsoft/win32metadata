@@ -38,6 +38,12 @@ receiving a scalar wrapper. An incomplete native record remains an empty record,
 without an invented `Value` field. Function-pointer aliases use the existing
 callback discovery.
 
+Array aliases, pointers to arrays, unresolved dependent types and template-owned
+typedefs remain with the ordinary generator rather than becoming nominal
+wrappers. A selected non-template alias with a concrete specialization can still
+retain its scalar identity. Concrete non-default-width pointers and incompatible
+intrinsic remaps continue to reject instead of bypassing native ABI validation.
+
 Complete named and anonymous record pointees retain their generated record and
 fields. The scraper joins the generated managed record through native source
 identity before writing the typed alias pointer; it does not invent an anonymous

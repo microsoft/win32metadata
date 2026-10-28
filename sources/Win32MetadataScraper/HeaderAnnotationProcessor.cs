@@ -978,7 +978,8 @@ namespace Win32MetadataScraper
         private void DiscoverNativeTypedefs()
         {
             var dependencies = new HashSet<ClangSharp.Type>();
-            foreach (var facts in declarations.Values.Where(facts => ShouldEmit(facts.Declaration, facts.Location)).ToArray())
+            foreach (var facts in declarations.Values.Where(facts =>
+                ShouldEmit(facts.Declaration, facts.Location) && !HasTemplateContext(facts.Declaration)).ToArray())
             {
                 switch (facts.Declaration)
                 {
@@ -998,7 +999,7 @@ namespace Win32MetadataScraper
             foreach (var facts in declarations.Values)
             {
                 if (facts.Declaration is not TypedefDecl alias || facts.LogicalEnumMembers != null ||
-                    !ShouldProjectTypedef(alias, facts.Location))
+                    !ShouldProjectTypedef(alias, facts.Location) || HasTemplateContext(alias))
                     continue;
                 var type = alias.UnderlyingType.CanonicalType;
                 if (type.Kind == CXTypeKind.CXType_Void || type is RecordType or EnumType or ArrayType or ReferenceType or FunctionType)
@@ -1013,11 +1014,11 @@ namespace Win32MetadataScraper
                     });
                     continue;
                 }
+                if (!IsNativeTypedefCandidate(type))
+                    continue;
                 var terminal = type;
                 while (terminal is PointerType pointer)
                     terminal = pointer.PointeeType.CanonicalType;
-                if (terminal is FunctionType)
-                    continue;
                 CollectAnnotationErrors(alias, () =>
                 {
                     ValidateNativeTypedefType(alias.UnderlyingType, facts.Location);
@@ -1028,6 +1029,22 @@ namespace Win32MetadataScraper
                         annotatedTypedefs.Add(facts);
                 });
             }
+        }
+
+        private static bool IsNativeTypedefCandidate(ClangSharp.Type type)
+        {
+            type = type.CanonicalType;
+            bool pointee = false;
+            while (type is PointerType pointer)
+            {
+                if (pointer.Handle.SizeOf < 0)
+                    return false;
+                pointee = true;
+                type = pointer.PointeeType.CanonicalType;
+            }
+            if (pointee && (type.Kind == CXTypeKind.CXType_Void || type is RecordType or EnumType))
+                return true;
+            return GetNativeTypedefScalarSize(type.Kind) != 0 && type.Handle.SizeOf >= 0;
         }
 
         private void RequireTypedefDependencies(ClangSharp.Type type, HashSet<ClangSharp.Type> visitedTypes)
@@ -1082,7 +1099,14 @@ namespace Win32MetadataScraper
             }
             if (pointee && (type.Kind == CXTypeKind.CXType_Void || type is RecordType or EnumType))
                 return;
-            int size = type.Kind switch
+            int size = GetNativeTypedefScalarSize(type.Kind);
+            if (size == 0 || type.Handle.SizeOf != size)
+                throw Error(location, $"'NativeTypedef' requires a supported native scalar or data-pointer alias; " +
+                    $"unsupported underlying type '{type.AsString}'. Record values (including incomplete records), enums, callbacks, arrays, and references are not supported.");
+        }
+
+        private static int GetNativeTypedefScalarSize(CXTypeKind kind)
+            => kind switch
             {
                 CXTypeKind.CXType_Bool or CXTypeKind.CXType_Char_S or CXTypeKind.CXType_SChar or
                     CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar => 1,
@@ -1092,10 +1116,6 @@ namespace Win32MetadataScraper
                 CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong or CXTypeKind.CXType_Double => 8,
                 _ => 0,
             };
-            if (size == 0 || type.Handle.SizeOf != size)
-                throw Error(location, $"'NativeTypedef' requires a supported native scalar or data-pointer alias; " +
-                    $"unsupported underlying type '{type.AsString}'. Record values (including incomplete records), enums, callbacks, arrays, and references are not supported.");
-        }
 
         private void TransferRecordTypedefFacts()
         {
