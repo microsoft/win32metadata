@@ -92,6 +92,11 @@ Constant qualification and lowering use the same validated backing-chain
 analysis. Every fragment, including retained providers, must agree on fixed
 integer storage and signedness before a native typedef constant can be lowered.
 This analysis does not change public alias fields or direct API identities.
+Source-bound fixed-integer constant variables use Clang's evaluated native
+value, including native character-to-unsigned and signed-to-unsigned
+conversions, from the original translation unit. This does not reinterpret
+managed C# initializers during emission: invalid managed casts, overflow and
+conflicting backing storage still reject.
 An existing retained integral resource with `NativeTypedef`, `RAIIFree` and
 `InvalidHandleValue` can preserve its fixed-integer signed encoding when the
 native backing has the same byte width. This does not apply to

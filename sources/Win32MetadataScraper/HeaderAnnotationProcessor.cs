@@ -2115,6 +2115,21 @@ namespace Win32MetadataScraper
                 {
                     owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
+                    if (facts.Declaration is VarDecl variable && node.Modifiers.Any(SyntaxKind.ConstKeyword) &&
+                        IsEnumStorage(variable.Type.CanonicalType.Kind))
+                    {
+                        string storage = NativeConstantExtractor.GetStorage(variable.Type.Handle.CanonicalType) ??
+                            throw Error(facts.Location, $"Unsupported native constant storage for '{variable.Name}'.");
+                        using var value = variable.Handle.Evaluate;
+                        if (value.Handle == IntPtr.Zero || value.Kind != CXEvalResultKind.CXEval_Int)
+                            throw Error(facts.Location, $"Native constant '{variable.Name}' has no integral constant value.");
+                        ulong bits = value.IsUnsignedInt ? value.AsUnsigned : unchecked((ulong)value.AsLongLong);
+                        var initializer = SyntaxFactory.ParseExpression(
+                            $"unchecked(({storage}){bits.ToString(CultureInfo.InvariantCulture)}UL)");
+                        var declaration = node.Declaration.Variables.Single();
+                        node = node.WithDeclaration(node.Declaration.WithVariables(SyntaxFactory.SingletonSeparatedList(
+                            declaration.WithInitializer(SyntaxFactory.EqualsValueClause(initializer)))));
+                    }
                 }
                 return node;
             }
