@@ -9,10 +9,11 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using Xunit;
+using static Win32MetadataScraperTests.HeaderAnnotationWinmdTests;
 
 namespace Win32MetadataScraperTests
 {
-    public class HeaderCompatibilityPatchTests : HeaderAnnotationWinmdTests
+    public class HeaderCompatibilityPatchTests
     {
         [Fact]
         public void CompatibilityPatchesPreserveResultsWidthsAndInputHandleDirections()
@@ -92,11 +93,17 @@ void __stdcall AfterSearch(PCWSTR SearchPath);
                     Assert.Equal(0, blob.ReadUInt16());
                     Assert.Equal(0, blob.RemainingBytes);
                 }
+                var hresult = FindType(reader, "HRESULT");
+                AssertHasAttribute(reader, hresult.GetCustomAttributes(), "NativeTypedefAttribute");
+                var hresultValue = reader.GetFieldDefinition(Assert.Single(hresult.GetFields()));
+                Assert.Equal("Value", reader.GetString(hresultValue.Name));
+                Assert.Equal("Int32", hresultValue.DecodeSignature(new SignatureNames(), null));
+                string resultType = reader.GetString(hresult.Namespace) + "." + reader.GetString(hresult.Name);
                 foreach (string name in new[] { "GetFirstRow", "GetNextRow", "GetPreviousRow", "GetNextColumnName" })
                 {
                     var method = FindMethod(reader, "IDirectorySearch", name);
                     Assert.True(method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig), name);
-                    Assert.Equal("Int32", method.DecodeSignature(new SignatureNames(), null).ReturnType);
+                    Assert.Equal(resultType, method.DecodeSignature(new SignatureNames(qualifiedNames: true), null).ReturnType);
                 }
                 foreach (string name in new[] { "alljoyn_aboutdatalistener_getaboutdata_ptr",
                     "alljoyn_aboutdatalistener_getannouncedaboutdata_ptr" })
@@ -118,6 +125,7 @@ void __stdcall AfterSearch(PCWSTR SearchPath);
                     types + originalCallbacks + other, annotationsEnabled: false);
                 Assert.Equal(NativeSurface(ordinary, target, metadataEnabled: false),
                     NativeSurface(fixture, target, metadataEnabled: false));
+                AssertMetadataClosure(reader);
             }
         }
 
@@ -225,10 +233,35 @@ ABI_CHECK(__is_same(decltype(PROCESS_BASIC_INFORMATION::InheritedFromUniqueProce
             fixture.AssertSuccess();
             using var image = Emit(fixture, architecture);
             var reader = image.Reader;
+            var decoder = new SignatureNames(qualifiedNames: true);
             var fields = FindType(reader, "PROCESS_BASIC_INFORMATION").GetFields()
-                .Select(reader.GetFieldDefinition).Select(field => reader.GetString(field.Name)).ToArray();
-            Assert.Equal(new[] { "ExitStatus", "PebBaseAddress", "AffinityMask", "BasePriority",
-                "UniqueProcessId", "InheritedFromUniqueProcessId" }, fields);
+                .Select(reader.GetFieldDefinition).Select(field =>
+                    (reader.GetString(field.Name), field.DecodeSignature(decoder, null))).ToArray();
+            Assert.Equal(new[]
+            {
+                ("ExitStatus", "Test.NTSTATUS"), ("PebBaseAddress", "Test.PPEB"),
+                ("AffinityMask", "UIntPtr"), ("BasePriority", "Test.KPRIORITY"),
+                ("UniqueProcessId", "UIntPtr"), ("InheritedFromUniqueProcessId", "UIntPtr"),
+            }, fields);
+            foreach (var (name, storage) in new[]
+            {
+                ("NTSTATUS", "Test.LONG"), ("KPRIORITY", "Test.LONG"),
+                ("LONG", "Int32"), ("PPEB", "Test._PEB*"),
+            })
+            {
+                var alias = FindType(reader, name);
+                Assert.Equal("Test", reader.GetString(alias.Namespace));
+                AssertHasAttribute(reader, alias.GetCustomAttributes(), "NativeTypedefAttribute");
+                var value = reader.GetFieldDefinition(Assert.Single(alias.GetFields()));
+                Assert.Equal("Value", reader.GetString(value.Name));
+                Assert.Equal(storage, value.DecodeSignature(decoder, null));
+            }
+            var peb = FindType(reader, "_PEB");
+            Assert.Equal("Test", reader.GetString(peb.Namespace));
+            Assert.Empty(peb.GetFields());
+            AssertDoesNotHaveAttribute(reader, peb.GetCustomAttributes(), "NativeTypedefAttribute");
+            Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                type => reader.GetString(type.Name) == "ULONG_PTR");
             AssertMetadataClosure(reader);
             var metadataSurface = NativeSurface(fixture, target, metadataEnabled: true);
             Assert.Contains($"record _PROCESS_BASIC_INFORMATION {size} {alignment}", metadataSurface);
