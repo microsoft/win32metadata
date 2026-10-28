@@ -24,7 +24,7 @@ namespace ClangSharpSourceToWinmd
             SyntaxTree[] trees = this.sourceTrees.Values.Concat(additionalTrees ?? Array.Empty<SyntaxTree>())
                 .GroupBy(tree => tree.FilePath, StringComparer.OrdinalIgnoreCase).Select(group => group.Last()).ToArray();
             var affected = new HashSet<string>(trees.SelectMany(tree => tree.GetRoot().DescendantNodes()
-                    .OfType<DelegateDeclarationSyntax>()).Select(GetFullName)
+                    .Where(node => node is DelegateDeclarationSyntax or StructDeclarationSyntax)).Select(GetFullName)
                 .Where(name => this.namesToInfos.TryGetValue(name, out var groups) && groups.Count > 1),
                 StringComparer.Ordinal);
             if (affected.Count == 0)

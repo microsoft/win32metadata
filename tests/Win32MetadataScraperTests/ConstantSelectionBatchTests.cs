@@ -21,6 +21,104 @@ namespace Win32MetadataScraperTests
         public ConstantSelectionBatchTests(ITestOutputHelper output) => this.output = output;
 
         [Fact]
+        public void GuidInitializerTuplesPreserveGuidDefinitionsAndNestedCommaScalars()
+        {
+            const string high = "0x54F39980L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8";
+            const string low = "0xE09C77E0L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8";
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "#define DDVPTYPE_E_HREFH_VREFH " + high + "\n" +
+                "#define DDVPTYPE_E_HREFL_VREFL " + low + "\n" +
+                "#define BARE_GUID_ALIAS DDVPTYPE_E_HREFH_VREFH\n" +
+                "#define PAREN_GUID_ALIAS (DDVPTYPE_E_HREFH_VREFH)\n" +
+                "#define NESTED_COMMA (1, (2, 3))\n" +
+                "#define ELEVEN_COMMA (1,2,3,4,5,6,7,8,9,10,11)\n" +
+                "#define NESTED_ELEVEN_COMMA ((1,2,3,4,5,6,7,8,9,10,11))\n" +
+                "#define NESTED_CALL __builtin_choose_expr(1, (4, 5), 0)\nint F();",
+                extraSettings: "--config\nnative-constant-values\n", namespaceName: "KernelStreaming");
+            fixture.AssertSuccess();
+            string input = Path.ChangeExtension(fixture.Output, ".native-constants.json");
+            var values = JsonSerializer.Deserialize<NativeConstantValues>(File.ReadAllText(input));
+            var scalars = new[]
+            {
+                (Name: "ELEVEN_COMMA", Value: 11),
+                (Name: "NESTED_ELEVEN_COMMA", Value: 11),
+                (Name: "PAREN_GUID_ALIAS", Value: 184),
+            };
+            foreach (string name in new[] { "DDVPTYPE_E_HREFH_VREFH", "DDVPTYPE_E_HREFL_VREFL" })
+            {
+                Assert.DoesNotContain(values.Constants, value => value.Name == name);
+                var route = Assert.Single(values.Routes.Where(value => value.Name == name));
+                Assert.Equal("ScannerResolved", route.Route);
+                Assert.Equal("Guid", route.Reason);
+                Assert.False(route.ValueProbed);
+                Assert.False(route.CompilerEvaluated);
+            }
+            Assert.Equal("3", Assert.Single(values.Constants.Where(value => value.Name == "NESTED_COMMA")).Value);
+            Assert.Equal("5", Assert.Single(values.Constants.Where(value => value.Name == "NESTED_CALL")).Value);
+            Assert.DoesNotContain(values.Constants, value => value.Name == "BARE_GUID_ALIAS");
+            var bareAlias = Assert.Single(values.Routes.Where(value => value.Name == "BARE_GUID_ALIAS"));
+            Assert.Equal("ScannerResolved", bareAlias.Route);
+            Assert.Equal("simple macro alias", bareAlias.Reason);
+            Assert.False(bareAlias.ValueProbed);
+            Assert.False(bareAlias.CompilerEvaluated);
+            foreach (var scalar in scalars)
+            {
+                Assert.Equal(scalar.Value.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                    Assert.Single(values.Constants.Where(value => value.Name == scalar.Name)).Value);
+                var route = Assert.Single(values.Routes.Where(value => value.Name == scalar.Name));
+                Assert.Equal("UnresolvedValue", route.Route);
+                Assert.NotEqual("Guid", route.Reason);
+                Assert.True(route.ValueProbed);
+                Assert.True(route.CompilerEvaluated);
+            }
+
+            string guidHeader = Path.Combine(fixture.DirectoryPath, "dvp.h");
+            File.WriteAllText(guidHeader, "DEFINE_GUID(DDVPTYPE_E_HREFH_VREFH," + high + ");\n" +
+                "DEFINE_GUID(DDVPTYPE_E_HREFL_VREFL," + low + ");\n");
+            ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", fixture.DirectoryPath,
+                "using System; using Windows.Win32.Foundation.Metadata;", new(),
+                new() { [fixture.Header] = "KernelStreaming", [guidHeader] = "DirectDraw" },
+                new(), new(), new(), new(), new ConstantSelectionOptions { NativeInputs = new[] { input } });
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            foreach (var expected in new[]
+            {
+                (Name: "DDVPTYPE_E_HREFH_VREFH", Guid: "54F39980-DA60-11CF-9B06-00A0C903A3B8"),
+                (Name: "DDVPTYPE_E_HREFL_VREFL", Guid: "E09C77E0-DA60-11CF-9B06-00A0C903A3B8"),
+            })
+            {
+                var owner = Assert.Single(reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => type.GetFields().Select(reader.GetFieldDefinition)
+                        .Any(field => reader.GetString(field.Name) == expected.Name)));
+                Assert.Equal("DirectDraw", reader.GetString(owner.Namespace));
+                var field = Assert.Single(owner.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(value => reader.GetString(value.Name) == expected.Name));
+                Assert.Equal((FieldAttributes)0, field.Attributes & FieldAttributes.Literal);
+                Assert.True(field.GetDefaultValue().IsNil);
+                var attribute = reader.GetCustomAttribute(Assert.Single(field.GetCustomAttributes()
+                    .Where(handle => AttributeName(reader, handle) == "GuidAttribute")));
+                Assert.Equal("0100" + Convert.ToHexString(new Guid(expected.Guid).ToByteArray()) + "0000",
+                    Convert.ToHexString(reader.GetBlobBytes(attribute.Value)));
+            }
+            foreach (var scalar in scalars)
+            {
+                var owner = Assert.Single(reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => type.GetFields().Select(reader.GetFieldDefinition)
+                        .Any(field => reader.GetString(field.Name) == scalar.Name)));
+                Assert.Equal("KernelStreaming", reader.GetString(owner.Namespace));
+                var field = Assert.Single(owner.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(value => reader.GetString(value.Name) == scalar.Name));
+                Assert.NotEqual((FieldAttributes)0, field.Attributes & FieldAttributes.Literal);
+                var constant = reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(System.Reflection.Metadata.ConstantTypeCode.Int32, constant.TypeCode);
+                Assert.Equal(scalar.Value, reader.GetBlobReader(constant.Value).ReadInt32());
+                Assert.DoesNotContain(field.GetCustomAttributes(), handle => AttributeName(reader, handle) == "GuidAttribute");
+            }
+            AssertMetadataClosure(reader);
+            this.output.WriteLine($"GUID tuple regression: scraper={fixture.InvocationCount}; physical WinMD emissions=1");
+        }
+
+        [Fact]
         public void TwoNativeInputsServeAllSelectionPoliciesAndLogicalOwnershipAssertions()
         {
             using var first = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",

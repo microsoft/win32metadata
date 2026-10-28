@@ -10,6 +10,7 @@ using ClangSharpSourceToWinmd;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ClangSharpSourceToWinmdTests
@@ -17,6 +18,8 @@ namespace ClangSharpSourceToWinmdTests
     [TestClass]
     public class CrossArchMetadataTests
     {
+        public TestContext TestContext { get; set; } = null!;
+
         [TestMethod]
         public void EmitEnums_ArchitectureVariants_KeepNativeNamesValuesAndFlags()
         {
@@ -320,6 +323,179 @@ public static extern CallbackAlias DirectBridge(CallbackAlias value);") + " }";
             Assert.AreEqual(0, invokeSignature.RemainingBytes);
         }
 
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
+        public void StructArrayReferences_KeepArchitectureSpecificEncodedTargets(bool reverseOrder)
+        {
+            using var fixture = new MetadataFixture();
+            string winmd = fixture.Generate(
+                string.Empty, Source(true), Source(false),
+                callbackOrder: reverseOrder, testContext: this.TestContext);
+            using var stream = File.OpenRead(winmd);
+            using var pe = new PEReader(stream);
+            MetadataReader reader = pe.GetMetadataReader(MetadataReaderOptions.None);
+            TypeDefinitionHandle[] tables = Types("Table");
+            TypeDefinitionHandle[] entries = Types("TableEntry");
+            Assert.AreEqual(2, tables.Length);
+            Assert.AreEqual(2, entries.Length);
+            CollectionAssert.AreEquivalent(new[] { Architecture.X64, Architecture.Arm64 }, tables.Select(ArchitectureOf).ToArray());
+            CollectionAssert.AreEquivalent(new[] { Architecture.X64, Architecture.Arm64 }, entries.Select(ArchitectureOf).ToArray());
+            AssertNativeNames("Table", "Entry", "TABLE_ENTRY[12]");
+            AssertNativeNames("TableEntry", "FunctionEntry", "PRUNTIME_FUNCTION");
+
+            foreach (TypeDefinitionHandle table in tables)
+            {
+                Architecture architecture = ArchitectureOf(table);
+                FieldDefinition array = Field(table, "Entry");
+                BlobReader signature = reader.GetBlobReader(array.Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.Array, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                TypeDefinitionHandle entry = LocalType(ref signature);
+                Assert.AreEqual(entries.Single(handle => ArchitectureOf(handle) == architecture), entry);
+                Assert.AreEqual(1, signature.ReadCompressedInteger(), "Array rank");
+                Assert.AreEqual(1, signature.ReadCompressedInteger(), "Array sizes");
+                Assert.AreEqual(12, signature.ReadCompressedInteger(), "Array size");
+                Assert.AreEqual(1, signature.ReadCompressedInteger(), "Array lower bounds");
+                Assert.AreEqual(0, signature.ReadCompressedSignedInteger(), "Array lower bound");
+                Assert.AreEqual(0, signature.RemainingBytes);
+
+                signature = reader.GetBlobReader(Field(entry, "ImageBase").Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.UIntPtr, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(0, signature.RemainingBytes);
+                FieldDefinition pointer = Field(entry, "FunctionEntry");
+                signature = reader.GetBlobReader(pointer.Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.Pointer, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                TypeDefinitionHandle pointee = LocalType(ref signature);
+                TypeDefinitionHandle expected = Types(architecture == Architecture.X64 ? "FunctionX64" : "FunctionArm64").Single();
+                Assert.AreEqual(expected, pointee);
+                Assert.AreEqual(architecture, ArchitectureOf(pointee));
+                Assert.AreEqual(0, signature.RemainingBytes);
+                this.TestContext.WriteLine(
+                    "Chain: owner=0x{0:X8}/{1}; arrayElement=0x{2:X8}/{3}; pointee=0x{4:X8}/{5}; array=rank1,size12,bound0; ImageBase=UIntPtr; pointerDepth=1; native=TABLE_ENTRY[12],PRUNTIME_FUNCTION",
+                    MetadataTokens.GetToken(table), architecture, MetadataTokens.GetToken(entry), ArchitectureOf(entry),
+                    MetadataTokens.GetToken(pointee), ArchitectureOf(pointee));
+            }
+
+            TypeDefinitionHandle other = Types("Other").Single();
+            Assert.AreEqual(Architecture.X64 | Architecture.Arm64, ArchitectureOf(other));
+            INamedTypeSymbol otherType = fixture.Compilation.GetTypeByMetadataName("Test.Other")
+                ?? throw new AssertFailedException("The unrelated containing type must remain intact.");
+            var otherValue = (IFieldSymbol)otherType.GetMembers("Value").Single();
+            Assert.IsTrue(SymbolEqualityComparer.Default.Equals(
+                otherType.GetTypeMembers("TableEntry", 0).Single(), otherValue.Type));
+
+            MethodDefinitionHandle[] methods = reader.GetTypeDefinition(Types("Apis").Single()).GetMethods().ToArray();
+            Assert.AreEqual(2, methods.Length);
+            foreach (MethodDefinitionHandle methodHandle in methods)
+            {
+                MethodDefinition method = reader.GetMethodDefinition(methodHandle);
+                Architecture architecture = AttributeArchitecture(method.GetCustomAttributes());
+                TypeDefinitionHandle expected = tables.Single(table => ArchitectureOf(table) == architecture);
+                BlobReader signature = reader.GetBlobReader(method.Signature);
+                Assert.IsFalse(signature.ReadSignatureHeader().IsInstance);
+                Assert.AreEqual(1, signature.ReadCompressedInteger());
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(expected, LocalType(ref signature));
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(expected, LocalType(ref signature));
+                Assert.AreEqual(0, signature.RemainingBytes);
+                this.TestContext.WriteLine("MethodChain: method=0x{0:X8}/{1}; returnAndParameter=0x{2:X8}/{3}; signature={4}",
+                    MetadataTokens.GetToken(methodHandle), architecture, MetadataTokens.GetToken(expected), ArchitectureOf(expected),
+                    Convert.ToHexString(reader.GetBlobBytes(method.Signature)));
+            }
+
+            string Source(bool x64) =>
+                (x64 ? "public struct FunctionX64 { public uint BeginAddress; public uint EndAddress; public uint UnwindInfo; }" :
+                    "public struct FunctionArm64 { public uint BeginAddress; public uint UnwindData; }") + @"
+public unsafe struct TableEntry
+{
+    public UIntPtr ImageBase;
+    [NativeTypeName(""PRUNTIME_FUNCTION"")]
+    public " + (x64 ? "FunctionX64" : "FunctionArm64") + @"* FunctionEntry;
+}
+public unsafe struct Table
+{
+    public uint Count;
+    [NativeTypeName(""TABLE_ENTRY[12]"")]
+    public _Entry_e__FixedBuffer Entry;
+    public unsafe struct _Entry_e__FixedBuffer
+    {
+        public TableEntry e0;
+        public TableEntry e1;
+        public TableEntry e2;
+        public TableEntry e3;
+        public TableEntry e4;
+        public TableEntry e5;
+        public TableEntry e6;
+        public TableEntry e7;
+        public TableEntry e8;
+        public TableEntry e9;
+        public TableEntry e10;
+        public TableEntry e11;
+        public ref TableEntry this[int index]
+        {
+            get
+            {
+                fixed (TableEntry* first = &e0)
+                    return ref first[index];
+            }
+        }
+    }
+}
+public struct Other { public TableEntry Value; public struct TableEntry { public int Marker; } }
+public static class Apis
+{
+    [DllImport(""fixture"")]
+    public static extern Table Lookup(Table value);
+}";
+
+            TypeDefinitionHandle[] Types(string name) => reader.TypeDefinitions
+                .Where(handle => reader.GetTypeDefinition(handle).GetDeclaringType().IsNil &&
+                    reader.GetString(reader.GetTypeDefinition(handle).Namespace) == "Test" &&
+                    reader.GetString(reader.GetTypeDefinition(handle).Name) == name).ToArray();
+
+            FieldDefinition Field(TypeDefinitionHandle owner, string name) => reader.GetTypeDefinition(owner).GetFields()
+                .Select(reader.GetFieldDefinition).Single(field => reader.GetString(field.Name) == name);
+
+            Architecture ArchitectureOf(TypeDefinitionHandle handle)
+                => AttributeArchitecture(reader.GetTypeDefinition(handle).GetCustomAttributes());
+
+            Architecture AttributeArchitecture(CustomAttributeHandleCollection handles)
+            {
+                CustomAttribute attribute = handles.Select(reader.GetCustomAttribute)
+                    .Single(value => GetAttributeName(reader, value) == "SupportedArchitectureAttribute");
+                BlobReader value = reader.GetBlobReader(attribute.Value);
+                Assert.AreEqual(1, value.ReadUInt16());
+                return (Architecture)value.ReadInt32();
+            }
+
+            TypeDefinitionHandle LocalType(ref BlobReader signature)
+            {
+                EntityHandle handle = signature.ReadTypeHandle();
+                Assert.AreEqual(HandleKind.TypeDefinition, handle.Kind, "References must select exact local definitions.");
+                Assert.IsTrue(MetadataTokens.GetRowNumber(handle) > 0);
+                return (TypeDefinitionHandle)handle;
+            }
+
+            void AssertNativeNames(string owner, string field, string expected)
+            {
+                FieldDeclarationSyntax[] declarations = fixture.Compilation.SyntaxTrees
+                    .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                    .Where(type => type.Parent is NamespaceDeclarationSyntax &&
+                        (type.Identifier.ValueText == owner || type.Identifier.ValueText == owner + "____1"))
+                    .SelectMany(type => type.Members.OfType<FieldDeclarationSyntax>())
+                    .Where(value => value.Declaration.Variables.Single().Identifier.ValueText == field).ToArray();
+                Assert.AreEqual(2, declarations.Length);
+                foreach (FieldDeclarationSyntax declaration in declarations)
+                    Assert.AreEqual(expected, SyntaxUtils.GetNativeTypeNameFromAttributesLists(declaration.AttributeLists));
+            }
+        }
+
         private static string GetAttributeName(MetadataReader reader, CustomAttribute attribute)
         {
             EntityHandle parent = attribute.Constructor.Kind == HandleKind.MemberReference
@@ -356,6 +532,8 @@ public static extern CallbackAlias DirectBridge(CallbackAlias value);") + " }";
         {
             private readonly string directory = Path.Combine(Path.GetTempPath(), "Win32MetadataTests-" + Guid.NewGuid().ToString("N"));
 
+            public CSharpCompilation Compilation { get; private set; } = null!;
+
             public MetadataFixture()
             {
                 Directory.CreateDirectory(this.directory);
@@ -377,7 +555,8 @@ namespace Windows.Win32.Foundation.Metadata
             }
 
             public string Generate(string x86, string x64, string arm64, IEnumerable<string>? flags = null,
-                bool? callbackOrder = null, HashSet<string>? reducePointerLevels = null, string? commonSource = null)
+                bool? callbackOrder = null, HashSet<string>? reducePointerLevels = null, string? commonSource = null,
+                TestContext? testContext = null)
             {
                 foreach (var source in new[] { ("x86", x86), ("x64", x64), ("arm64", arm64) })
                 {
@@ -429,6 +608,7 @@ namespace Windows.Win32.Foundation.Metadata
                 Diagnostic[] errors = compilation.GetDiagnostics()
                     .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
                 Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+                this.Compilation = compilation.CSharpCompilation;
 
                 string output = Path.Combine(this.directory, "Test.winmd");
                 ClangSharpSourceWinmdGenerator generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
@@ -439,6 +619,29 @@ namespace Windows.Win32.Foundation.Metadata
                     new Version(1, 0, 0, 0),
                     output);
                 Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+                if (testContext != null)
+                {
+                    string artifacts = Path.Combine(testContext.TestRunDirectory, "CrossArchMetadata", Guid.NewGuid().ToString("N"));
+                    Directory.CreateDirectory(artifacts);
+                    foreach (string input in Directory.GetFiles(this.directory, "*.cs", SearchOption.AllDirectories))
+                        File.Copy(input, Path.Combine(artifacts, Path.GetRelativePath(this.directory, input).Replace(Path.DirectorySeparatorChar, '_')));
+                    int index = 0;
+                    foreach (SyntaxTree tree in compilation.CSharpCompilation.SyntaxTrees)
+                        File.WriteAllText(Path.Combine(artifacts, $"Postcomposition{index++}.cs"), tree.ToString());
+                    File.Copy(output, Path.Combine(artifacts, "Test.winmd"));
+                    foreach (string artifact in Directory.GetFiles(artifacts))
+                        testContext.AddResultFile(artifact);
+                    testContext.WriteLine("Runtime: {0}; processors={1}; PID={2}",
+                        System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription, Environment.ProcessorCount, Environment.ProcessId);
+                    if (OperatingSystem.IsWindows())
+                    {
+                        using var process = Process.GetCurrentProcess();
+                        testContext.WriteLine("Affinity: {0}", process.ProcessorAffinity.ToInt64());
+                    }
+                    foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies().Where(assembly => !assembly.IsDynamic))
+                        testContext.WriteLine("Assembly: {0}|{1}|{2}", assembly.GetName().Name,
+                            assembly.ManifestModule.ModuleVersionId, assembly.Location);
+                }
                 return output;
             }
 

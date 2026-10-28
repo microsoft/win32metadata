@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Xunit;
 
@@ -14,6 +15,145 @@ namespace MetadataUtils.Tests
 {
     public class ConstantsScraperTests
     {
+        [Theory]
+        [InlineData("0x54F39980L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8")]
+        [InlineData("0xE09C77E0L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8")]
+        [InlineData("842094158, 0, 16, 128, 0, 0, 170, 0, 56, 155, 113")]
+        public void BareGuidInitializerListsAreStructuredValues(string expression)
+        {
+            Assert.True(ConstantsScraper.TryReadSimpleMacroValue(expression, true, true, _ => null, _ => null, out var value));
+            Assert.Equal("Guid", value.Kind);
+            Assert.Equal("GUID", value.NativeType);
+            Assert.Null(value.StorageType);
+            Assert.Equal(expression, value.Value);
+            Assert.Equal(new[] { "GUID_VALUE" },
+                ConstantsScraper.ReadObjectLikeMacroNames(new[] { "#define GUID_VALUE " + expression }));
+        }
+
+        [Theory]
+        [InlineData("(1, (2, 3))")]
+        [InlineData("(1,2,3,4,5,6,7,8,9,10,11)")]
+        [InlineData("((1,2,3,4,5,6,7,8,9,10,11))")]
+        [InlineData("CHOOSE(1, 2)")]
+        [InlineData("CALL(1,2,3,4,5,6,7,8,9,10,11)")]
+        [InlineData("1,2,3,4,5,6,7,8,9,CHOOSE(10,11)")]
+        [InlineData("1,2,3,4,5,6,7,8,9,(10,11)")]
+        [InlineData("1,2,3,4,5,6,7,8,9,10")]
+        [InlineData("1,2,3,4,5,6,7,8,9,10,11,12")]
+        public void OrdinaryCommaExpressionsAreNotGuidInitializerLists(string expression)
+        {
+            Assert.False(ConstantsScraper.TryReadSimpleMacroValue(expression, true, true, _ => null, _ => null, out _));
+        }
+
+        [Theory]
+        [InlineData("((UCHAR)0)", 0)]
+        [InlineData("((UCHAR)255)", 255)]
+        [InlineData("((UCHAR)256)", 0)]
+        [InlineData("((UCHAR)-1)", 255)]
+        [InlineData("((UCHAR)-42)", 214)]
+        public void LegacyUcharCastsPreserveNativeByteWidthAndWrapping(string expression, int expected)
+        {
+            var files = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                [@"C:\uchar.h"] = new MockFileData($"#define BYTE_VALUE {expression}\n"),
+            });
+            using (var scraper = new TestableConstantsScraper(files))
+                scraper.ScrapeConstantsFromTraversedFiles(new() { [@"C:\uchar.h"] = "Test.Namespace.Win32" });
+            var compilation = CSharpCompilation.Create("LegacyUchar",
+                new[] { CSharpSyntaxTree.ParseText(files.GetFile("output.txt").TextContents) },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            var field = Assert.IsAssignableFrom<IFieldSymbol>(
+                Assert.Single(compilation.GetTypeByMetadataName("Test.Namespace.Win32.Apis").GetMembers("BYTE_VALUE")));
+            Assert.Equal(SpecialType.System_Byte, field.Type.SpecialType);
+            Assert.Equal((byte)expected, Assert.IsType<byte>(field.ConstantValue));
+        }
+
+        [Fact]
+        public void DuplicateGuidDefinitionsStillDeduplicate()
+        {
+            const string definition = "DEFINE_GUID(DDVPTYPE_E_HREFH_VREFH," +
+                "0x54F39980L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8);\n";
+            var files = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                [@"C:\first.h"] = new MockFileData(definition),
+                [@"C:\second.h"] = new MockFileData(definition),
+            });
+            using (var scraper = new TestableConstantsScraper(files))
+                scraper.ScrapeConstantsFromTraversedFiles(new()
+                {
+                    [@"C:\first.h"] = "Test.Namespace.Win32",
+                    [@"C:\second.h"] = "Test.Namespace.Win32",
+                });
+            var field = Assert.Single(CSharpSyntaxTree.ParseText(files.GetFile("output.txt").TextContents)
+                .GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>());
+            Assert.Equal("Guid", field.Declaration.Type.ToString());
+            Assert.Equal("DDVPTYPE_E_HREFH_VREFH__scanned__", Assert.Single(field.Declaration.Variables).Identifier.ValueText);
+        }
+
+        [Theory]
+        [InlineData("DDVPTYPE_E_HREFH_VREFH", "0x54F39980L")]
+        [InlineData("DDVPTYPE_E_HREFL_VREFL", "0xE09C77E0L")]
+        public void SelectedNativeScalarCannotSilentlySuppressAGuid(string name, string firstComponent)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "native-guid-collision-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string tuple = firstComponent + ",0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8";
+                string header = Path.Combine(directory, "ksmedia.h");
+                string guidHeader = Path.Combine(directory, "dvp.h");
+                string source = Path.Combine(directory, "main.cpp");
+                File.WriteAllText(header, $"#define {name} {tuple}\n");
+                File.WriteAllText(guidHeader, $"DEFINE_GUID({name},{tuple});\n");
+                File.WriteAllText(source, "#include \"ksmedia.h\"\n");
+                string input = Path.Combine(directory, "x64", "KernelStreaming.native-constants.json");
+                Directory.CreateDirectory(Path.GetDirectoryName(input));
+                File.WriteAllText(input, JsonSerializer.Serialize(new NativeConstantValues
+                {
+                    Architecture = Architecture.X64,
+                    SourceFile = source,
+                    SourceHash = NativeConstantGroupProvenance.HashFile(source),
+                    BindingSource = Path.ChangeExtension(input.Replace(".native-constants.json", ""), ".cs"),
+                    Namespace = "KernelStreaming",
+                    Headers = new[] { header },
+                    Constants = new()
+                    {
+                        new(name, name, header, 1, "int", "int", "184")
+                        {
+                            Column = 9,
+                            HeaderHash = NativeConstantGroupProvenance.HashFile(header),
+                            Evaluation = "Clang",
+                        },
+                    },
+                }));
+                var error = Assert.Throws<InvalidDataException>(() => ConstantsScraper.ScrapeConstants(
+                    Array.Empty<string>(), "Test", directory, "", new(),
+                    new() { [header] = "KernelStreaming", [guidHeader] = "DirectDraw" },
+                    new(), new(), new(), new(), new ConstantSelectionOptions { NativeInputs = new[] { input } }));
+                Assert.Contains(name, error.Message);
+                Assert.Contains(header, error.Message);
+                Assert.Contains(guidHeader, error.Message);
+                Assert.Contains(source, error.Message);
+                Assert.Contains("value 184", error.Message);
+                using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "native-constant-conflicts.json")));
+                Assert.Equal("rejected", report.RootElement.GetProperty("Status").GetString());
+                var diagnostic = Assert.Single(report.RootElement.GetProperty("Errors").EnumerateArray());
+                Assert.Equal("NATIVE_GUID_COLLISION", diagnostic.GetProperty("Code").GetString());
+                Assert.Equal(input, diagnostic.GetProperty("Input").GetString());
+                Assert.Equal(guidHeader, diagnostic.GetProperty("Header").GetString());
+                Assert.Equal(1, diagnostic.GetProperty("Line").GetInt32());
+                Assert.Equal("X64", diagnostic.GetProperty("Architecture").GetString());
+                Assert.Empty(Directory.GetFiles(directory, "NativeConstants.*.header-types.cs", SearchOption.AllDirectories));
+                Assert.Empty(Directory.GetFiles(directory, "*.constants.cs", SearchOption.AllDirectories));
+            }
+            finally
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+        }
+
         [Fact]
         public void ExternalToolchainTaskRequiresCurrentPhysicalHeaderAndPlan()
         {

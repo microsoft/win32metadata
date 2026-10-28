@@ -205,7 +205,7 @@ class Program
                 File.Delete(nativeDeclarationsPath);
             if (declarationMap == null && File.Exists(nativeConstantsPath))
                 File.Delete(nativeConstantsPath);
-            if (parseHeaderAnnotations && declarationMap == null && File.Exists(additionalTypesPath))
+            if (declarationMap == null && File.Exists(additionalTypesPath))
                 File.Delete(additionalTypesPath);
             bool generateAllMacros = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMacroBindings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
@@ -330,15 +330,19 @@ class Program
             remapTiming?.SetCounter("functionPointerRemapCount", fnPtrResult.FnPtrRemaps.Count);
             remapTiming?.Dispose();
 
-            var annotations = parseHeaderAnnotations
-                ? new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
-                    settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
-                    configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody))
-                : null;
+            var projectionTypeRemaps = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
+                RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes).RemappedNames;
+            var annotations = new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
+                settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
+                configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody),
+                inferNativeTypedefs: true, parseHeaderAnnotations: parseHeaderAnnotations, projectionTypeRemaps: projectionTypeRemaps);
             annotations?.PrepareTypedefs();
             if (annotations != null)
                 allExcludes.AddRange(annotations.AnnotationCarrierNames);
-            var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions,
+            var bindingOptions = configOptions;
+            if (annotations.RequiresRecordProjectionIdentity)
+                bindingOptions |= PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
+            var config = CreateConfig(settings, ns, outputFile, headerFile, bindingOptions,
                 RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
             constantProbes?.Prepare(translationUnit, config, evaluateNativeConstants,
                 annotations?.GetAssociatedConstantCandidateNames() ?? Array.Empty<string>());
@@ -351,8 +355,8 @@ class Program
                         "translation-unit.companion"), nativeDeclarationsPath, nativeDeclarations);
             foreach (var remap in companion.ScopedRemaps)
                 mergedRemaps[remap.Key] = remap.Value;
-            var primaryOptions = companion.LegacyMembers.Count == 0 ? configOptions :
-                configOptions | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
+            var primaryOptions = companion.LegacyMembers.Count == 0 ? bindingOptions :
+                bindingOptions | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
             if (companion.ScopedRemaps.Count != 0 || companion.LegacyMembers.Count != 0 || constantProbes?.HasValueProbes == true)
                 config = CreateConfig(settings, ns, outputFile, headerFile, primaryOptions,
                     RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);

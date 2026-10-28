@@ -13,6 +13,45 @@ There are different options you can pass to the scraping and emitting stages to 
 
 Scraping options are passed to ClangSharp via .rsp files. For the Windows Win32 metadata project, all partitions share the [generation/WinSDK/scraper.settings.rsp](/generation/WinSDK/scraper.settings.rsp) file. This allows partitions to interpret the headers in the same way.
 
+### Automatic native typedef identity
+
+The scraper discovers supported scalar and data-pointer `typedef` declarations
+in its selected traversal. They do not require a header annotation or the
+`parse-win32-annotations` option. Each nominal alias becomes a one-field WinMD
+struct with the internal `NativeTypedefAttribute`; ECMA metadata has no C typedef
+row. Alias chains and written pointer pointees retain their discovered types,
+with native target-width validation.
+
+Written typedef dependencies are followed transitively through selected API
+returns, parameters, fields, pointer/array elements, callbacks and record fields.
+Referenced aliases in included non-traversed headers are retained too; unrelated
+aliases there and explicitly excluded declarations remain outside that selection.
+
+Integral aliases already routed to `IntPtr`/`UIntPtr` by the generator's effective
+projection settings retain that intrinsic projection after native width and
+signedness validation. This uses the existing remap policy; it is not a new
+per-name exception. Aliases built on those intrinsic types can still retain
+their own nominal identity.
+
+Record and enum tag aliases keep the existing record/enum projection rather than
+receiving a scalar wrapper. An incomplete native record remains an empty record,
+without an invented `Value` field. Function-pointer aliases use the existing
+callback discovery.
+
+Complete named and anonymous record pointees retain their generated record and
+fields. The scraper joins the generated managed record through native source
+identity before writing the typed alias pointer; it does not invent an anonymous
+record name or replace its pointee with an opaque value.
+
+Generated `.header-types.cs` companions use the ordinary emitter namespace mover.
+Configure projection placement with the existing `--requiredNamespaceForName`
+mapping, just as for other generated declarations. This routing policy is
+independent of native typedef semantics and header-annotation parsing.
+Authored metadata, including active C++ method/parameter/field carriers and
+logical enum groups, still requires `parse-win32-annotations`. Without it, the
+scraper omits transport carriers and infers native aliases without applying or
+validating their authored annotation payloads.
+
 ### Production SDK character-set context
 
 The shared Windows SDK settings pass `-DUNICODE` through `--additional` on x86,
@@ -674,13 +713,12 @@ is missing, normal ownership is unresolved, or an actual owner is not enabled.
 
 Header-generated `[NativeTypedef]` wrappers can compose with retained AutoTypes
 wrappers of the same fully qualified identity and unmanaged `Value` storage.
-An existing native scalar/data-pointer `typedef` can request identity alone with
-valueless `_Win32_NativeTypedef_` (`Win32Metadata.NativeTypedef`). Original-IDL
-`cpp_quote("/* Win32Metadata: type ::Alias => NativeTypedef */")` uses the same
-reader path. No cleanup, invalid value, compatible type, or OS version is implied.
-The explicit marker preserves written alias binding, deduplicates native
-redeclarations, and emits one wrapper/`Value`/attribute only when that native
-identity is traversed and not excluded. Unannotated aliases are not promoted.
+The scraper infers supported native scalar/data-pointer aliases and their
+referenced typedef dependencies as described above. No cleanup, invalid value,
+compatible type, or OS version is implied. `NativeTypedef` is not accepted as a
+header annotation or structured-comment fact, and the canonical helper does not
+define `_Win32_NativeTypedef_`. Inferred identity preserves written alias binding,
+deduplicates native redeclarations, and emits one wrapper/`Value`/attribute.
 Storage preserves actual native width, signedness, and data-pointer depth;
 pointer-sized integral remaps must match the target ABI. Each pointer level must
 have the target's ordinary pointer width. Non-default widths (for example x64
