@@ -20,7 +20,7 @@ in its selected traversal. They do not require a header annotation or the
 `parse-win32-annotations` option. Each nominal alias becomes a one-field WinMD
 struct with the internal `NativeTypedefAttribute`; ECMA metadata has no C typedef
 row. Alias chains and written pointer pointees retain their discovered types,
-with native target-width validation.
+with native width and alignment validation.
 
 Written typedef dependencies are followed transitively through selected API
 returns, parameters, fields, pointer/array elements, callbacks and record fields.
@@ -33,6 +33,15 @@ signedness validation. This uses the existing remap policy; it is not a new
 per-name exception. Aliases built on those intrinsic types can still retain
 their own nominal identity.
 
+An existing opaque-handle provider can retain its `IntPtr` storage when the
+effective remaps also map its excluded backing-record pointer to that handle.
+That ownership proof allows the provider's existing signed storage for native
+unsigned pointer-sized values. Native width validation still applies. Ordinary
+integer aliases continue to require matching signedness.
+Native aliases that already spell their matching C# primitive retain that
+primitive binding. Other keyword identifiers are escaped consistently in
+generated declarations and references.
+
 Record and enum tag aliases keep the existing record/enum projection rather than
 receiving a scalar wrapper. An incomplete native record remains an empty record,
 without an invented `Value` field. Function-pointer aliases use the existing
@@ -41,8 +50,13 @@ callback discovery.
 Array aliases, pointers to arrays, unresolved dependent types and template-owned
 typedefs remain with the ordinary generator rather than becoming nominal
 wrappers. A selected non-template alias with a concrete specialization can still
-retain its scalar identity. Concrete non-default-width pointers and incompatible
-intrinsic remaps continue to reject instead of bypassing native ABI validation.
+retain its scalar identity. Non-default-width data-pointer aliases use fixed
+`uint` or `ulong` backing at the affected pointer level, matching Clang's native
+size and alignment. `NativeTypeName` on generated C# `Value` retains the written
+pointer type and qualifier as source provenance; the ordinary emitter consumes
+that transport. WinMD retains the nominal alias and fixed backing storage.
+Alias chains and ordinary outer pointer levels are preserved.
+Explicit incompatible CLR storage remaps fail validation.
 
 Complete named and anonymous record pointees retain their generated record and
 fields. The scraper joins the generated managed record through native source
@@ -726,11 +740,12 @@ header annotation or structured-comment fact, and the canonical helper does not
 define `_Win32_NativeTypedef_`. Inferred identity preserves written alias binding,
 deduplicates native redeclarations, and emits one wrapper/`Value`/attribute.
 Storage preserves actual native width, signedness, and data-pointer depth;
-pointer-sized integral remaps must match the target ABI. Each pointer level must
-have the target's ordinary pointer width. Non-default widths (for example x64
-`__ptr32` or x86 `__ptr64`), including beneath ordinary outer pointers and typedefs,
-fail with WMA001 before output rather than losing the qualifier or becoming an
-integer. Complete/incomplete record **pointers** are supported, not record **values**, native enum values,
+pointer-sized integral remaps must match the target ABI. Pointer levels with the
+target's ordinary width retain pointer storage. A non-default-width level, such
+as x64 `__ptr32` or x86 `__ptr64`, uses matching fixed-width unsigned storage and
+retains its native type provenance. Unsupported width/alignment and incompatible
+explicit CLR storage mappings fail with WMA001 before output.
+Complete/incomplete record **pointers** are supported, not record **values**, native enum values,
 logical groups, callbacks, arrays, references, or C++ `using` aliases. Unsupported
 native scalar representations fail with WMA001 rather than producing recursive
 `Value` storage or guessing a pointer from an old `IntPtr` field.

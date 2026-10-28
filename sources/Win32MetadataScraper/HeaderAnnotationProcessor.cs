@@ -185,6 +185,23 @@ namespace Win32MetadataScraper
             }
         }
 
+        internal Dictionary<string, string> CreateBindingRemaps(DiscoveryResult discovery,
+            IReadOnlyDictionary<string, string> names, ISet<string> autoRemapExcludes)
+        {
+            var bindings = RemapDiscovery.CreateBindingRemaps(discovery, names, autoRemapExcludes);
+            foreach (var facts in annotatedTypedefs)
+            {
+                string nativeName = facts.Declaration.Name;
+                string name = names.GetValueOrDefault(nativeName) ?? nativeName;
+                if (IsStorageTypeName(name))
+                    name = nativeName;
+                if (SyntaxFacts.GetKeywordKind(name) != SyntaxKind.None)
+                    // ClangSharp consumes the first @ as a force-remap marker.
+                    bindings[nativeName] = "@" + EscapeIdentifier(name);
+            }
+            return bindings;
+        }
+
         internal bool RequiresRecordProjectionIdentity => recordPointees.Count != 0;
 
         private static unsafe bool IsForwardEnumReference(EnumDecl declaration)
@@ -507,10 +524,14 @@ namespace Win32MetadataScraper
                 // ABI storage remaps do not rename annotated native wrappers.
                 if (IsStorageTypeName(name))
                     name = alias.Name;
+                name = EscapeIdentifier(name);
                 string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true,
                     preserveNativeShape: facts.HasNativeTypedefIdentity);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
+                if (declaration == null || declaration.ContainsDiagnostics || declaration.Members.Count != 1 ||
+                    declaration.Members[0] is not FieldDeclarationSyntax)
+                    throw Error(facts.Location, $"Cannot project native typedef '{alias.Name}' as managed '{name}' with storage '{valueType}'.");
                 if (facts.IsInferredTypedef)
                     declaration = declaration.ReplaceNode(declaration.Members.Single(),
                         ((FieldDeclarationSyntax)declaration.Members.Single()).AddAttributeLists(
@@ -629,7 +650,7 @@ namespace Win32MetadataScraper
                     facts.HasMidlRetval = true;
                 }
             }
-            if (declaration is EnumDecl enumDeclaration)
+            if (parseHeaderAnnotations && declaration is EnumDecl enumDeclaration)
             {
                 facts.IsScopedEnum = enumDeclaration.IsScoped;
                 facts.IsFlagsEnum = declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_FlagEnum);
@@ -1004,6 +1025,11 @@ namespace Win32MetadataScraper
                 var type = alias.UnderlyingType.CanonicalType;
                 if (type.Kind == CXTypeKind.CXType_Void || type is RecordType or EnumType or ArrayType or ReferenceType or FunctionType)
                     continue;
+                if (facts.Annotations.Count == 0 && GetNativeTypedefScalarSize(type.Kind) != 0 &&
+                    SyntaxFactory.ParseTypeName(alias.Name) is PredefinedTypeSyntax &&
+                    GetManagedType(type, facts.Location) == alias.Name &&
+                    (!projectionTypeRemaps.TryGetValue(alias.Name, out string primitiveRemap) || primitiveRemap == alias.Name))
+                    continue;
                 if (type is not PointerType && facts.Annotations.Count == 0 &&
                     projectionTypeRemaps.TryGetValue(alias.Name, out string mapped) && GetNativeIntegerStorage(mapped) != null)
                 {
@@ -1021,7 +1047,14 @@ namespace Win32MetadataScraper
                     terminal = pointer.PointeeType.CanonicalType;
                 CollectAnnotationErrors(alias, () =>
                 {
+                    if (type is PointerType && projectionTypeRemaps.TryGetValue(alias.Name, out string pointerMapping) &&
+                        IsStorageTypeName(pointerMapping))
+                        ValidateNativePointerStorage(alias, pointerMapping, facts.Location);
                     ValidateNativeTypedefType(alias.UnderlyingType, facts.Location);
+                    if (type is PointerType nativePointer && nativePointer.Handle.SizeOf != nativePointerSize &&
+                        (alias.Handle.Type.SizeOf != nativePointer.Handle.SizeOf ||
+                            alias.Handle.Type.AlignOf != nativePointer.Handle.AlignOf))
+                        throw Error(facts.Location, $"Native pointer alias '{alias.Name}' has an unsupported size or alignment.");
                     facts.IsInferredTypedef = true;
                     if (type is PointerType && terminal is RecordType record)
                         recordPointees.Add(record.Decl.Handle.CanonicalCursor);
@@ -1089,11 +1122,7 @@ namespace Win32MetadataScraper
             type = type.CanonicalType;
             if (type is PointerType pointer)
             {
-                long pointerSize = pointer.Handle.SizeOf;
-                if (pointerSize != nativePointerSize)
-                    throw Error(location, $"'NativeTypedef' requires ordinary target-width data pointers at every pointer level; " +
-                        $"pointer '{type.AsString}' has native size {pointerSize} bytes instead of the target's {nativePointerSize} bytes. " +
-                        "Non-default-width pointer storage is not supported.");
+                GetFixedPointerStorage(pointer, location);
                 ValidateNativeTypedefType(pointer.PointeeType, location, pointee: true);
                 return;
             }
@@ -1116,6 +1145,54 @@ namespace Win32MetadataScraper
                 CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong or CXTypeKind.CXType_Double => 8,
                 _ => 0,
             };
+
+        private string GetFixedPointerStorage(PointerType pointer, NativeLocation location)
+        {
+            long size = pointer.Handle.SizeOf;
+            if (size == nativePointerSize)
+                return null;
+            if (pointer.Handle.AlignOf == size)
+            {
+                if (size == 4)
+                    return "uint";
+                if (size == 8)
+                    return "ulong";
+            }
+            throw Error(location, $"Native pointer '{pointer.AsString}' has unsupported size {size} or alignment {pointer.Handle.AlignOf}.");
+        }
+
+        private void ValidateNativePointerStorage(TypedefNameDecl alias, string mapped, NativeLocation location)
+        {
+            var managed = SyntaxFactory.ParseTypeName(mapped);
+            int depth = 0;
+            while (managed is PointerTypeSyntax pointer)
+            {
+                depth++;
+                managed = pointer.ElementType;
+            }
+            bool nativeInteger = GetNativeIntegerStorage(managed.ToString()) is "global::System.IntPtr" or "global::System.UIntPtr";
+            int scalarSize = nativeInteger ? nativePointerSize : managed is PredefinedTypeSyntax primitive
+                ? primitive.Keyword.Kind() switch
+                {
+                    SyntaxKind.ByteKeyword or SyntaxKind.SByteKeyword => 1,
+                    SyntaxKind.ShortKeyword or SyntaxKind.UShortKeyword or SyntaxKind.CharKeyword => 2,
+                    SyntaxKind.IntKeyword or SyntaxKind.UIntKeyword => 4,
+                    SyntaxKind.LongKeyword or SyntaxKind.ULongKeyword => 8,
+                    _ => 0,
+                } : 0;
+            var native = alias.UnderlyingType.CanonicalType;
+            int levels = depth + (nativeInteger || depth == 0 ? 1 : 0);
+            for (int level = 0; level < levels; level++)
+            {
+                int size = level < depth ? nativePointerSize : scalarSize;
+                if (size == 0 || native is not PointerType pointer || pointer.Handle.SizeOf != size ||
+                    pointer.Handle.AlignOf != size)
+                    throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, alignment, and pointer depth.");
+                native = pointer.PointeeType.CanonicalType;
+            }
+            if (native is PointerType)
+                throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, alignment, and pointer depth.");
+        }
 
         private void TransferRecordTypedefFacts()
         {
@@ -1239,6 +1316,9 @@ namespace Win32MetadataScraper
         }
 
         private string Remap(string name) => remaps.GetValueOrDefault(name) ?? name;
+
+        private static string EscapeIdentifier(string name)
+            => SyntaxFacts.GetKeywordKind(name) == SyntaxKind.None ? name : "@" + name;
 
         private static FunctionProtoType GetFunctionType(ClangSharp.Type type)
         {
@@ -1432,23 +1512,24 @@ namespace Win32MetadataScraper
                     "A native anonymous record pointee requires one source-bound generated managed record identity.");
             string name = Remap(record.Decl.Name);
             // A whole-alias storage mapping is not a name for its native record pointee.
-            return IsStorageTypeName(name) || visited.OfType<TypedefNameDecl>().Any(alias =>
+            return EscapeIdentifier(IsStorageTypeName(name) || visited.OfType<TypedefNameDecl>().Any(alias =>
                 alias.UnderlyingType.CanonicalType is PointerType && Remap(alias.Name) == name)
-                ? record.Decl.Name : name;
+                ? record.Decl.Name : name);
         }
 
         private string GetSignatureType(ClangSharp.Type type, NativeLocation location, bool underlyingStorage = false,
             bool preserveNativeShape = false, bool recordPointee = false)
         {
+            var nativeType = type.CanonicalType;
             type = RemapDiscovery.UnwrapType(type);
             if (underlyingStorage && preserveNativeShape && recordPointee && type.CanonicalType is RecordType nativeRecord)
                 return IsExcludedRecord(nativeRecord.Decl) ? "void" : GetRecordPointeeName(nativeRecord);
             if (type is TypedefType typedef)
             {
                 var alias = (TypedefNameDecl)typedef.Decl;
-                if (underlyingStorage && preserveNativeShape &&
+                if ((!underlyingStorage || preserveNativeShape) &&
                     declarations.TryGetValue(alias, out var facts) && facts.HasNativeTypedefIdentity)
-                    return Remap(alias.Name);
+                    return EscapeIdentifier(Remap(alias.Name));
                 var mappings = underlyingStorage ? storageTypeRemaps : remaps;
                 if (mappings.TryGetValue(alias.Name, out string mapped) && (!underlyingStorage || mapped != alias.Name))
                 {
@@ -1471,6 +1552,11 @@ namespace Win32MetadataScraper
             }
             if (type is PointerType pointer)
             {
+                if (nativeType is not PointerType nativePointer)
+                    throw Error(location, $"Unsupported native pointer representation '{nativeType.AsString}'.");
+                string fixedStorage = GetFixedPointerStorage(nativePointer, location);
+                if (fixedStorage != null)
+                    return fixedStorage;
                 if (underlyingStorage && pointer.PointeeType.CanonicalType is RecordType record &&
                     !(record.Decl.Definition ?? record.Decl).IsCompleteDefinition && IsExcludedRecord(record.Decl))
                     return "void*";
@@ -1495,8 +1581,11 @@ namespace Win32MetadataScraper
             bool unsigned = native.Kind is CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
                 CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or CXTypeKind.CXType_UInt or
                 CXTypeKind.CXType_ULong or CXTypeKind.CXType_ULongLong;
+            bool opaqueProvider = GetNativeIntegerStorage(mapped) == "global::System.IntPtr" &&
+                projectionTypeRemaps.Any(pair => pair.Value == alias.Name && pair.Key.EndsWith("*", StringComparison.Ordinal) &&
+                    excludedNames.Contains(pair.Key.Substring(0, pair.Key.Length - 1).TrimEnd()));
             if (!IsEnumStorage(native.Kind) || native.Handle.SizeOf != nativePointerSize ||
-                GetNativeIntegerStorage(mapped) != (unsigned ? "global::System.UIntPtr" : "global::System.IntPtr"))
+                !opaqueProvider && GetNativeIntegerStorage(mapped) != (unsigned ? "global::System.UIntPtr" : "global::System.IntPtr"))
                 throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, signedness, and pointer depth.");
         }
 
@@ -1711,7 +1800,7 @@ namespace Win32MetadataScraper
                 var owners = node.AncestorsAndSelf().OfType<StructDeclarationSyntax>().Reverse().ToArray();
                 if (owners.Any(type => type.TypeParameterList?.Parameters.Count > 0))
                     throw Error(GetLocation(record.Location), "A native data-pointer typedef cannot use an open generic record projection.");
-                string name = string.Join(".", owners.Select(type => type.Identifier.ValueText));
+                string name = string.Join(".", owners.Select(type => type.Identifier.Text));
                 string ns = MetadataUtils.SyntaxUtils.GetEnclosingNamespace(node);
                 if (!string.IsNullOrEmpty(ns))
                     name = ns + "." + name;
@@ -1743,6 +1832,16 @@ namespace Win32MetadataScraper
                 var compatible = candidates?.Where(facts => MatchesKind(facts.Declaration, node)).ToArray()
                     ?? Array.Empty<DeclarationFacts>();
                 compatible = compatible.GroupBy(facts => facts.AnnotationOwner).Select(group => group.First()).ToArray();
+                if (node is StructDeclarationSyntax && compatible.Length != 0)
+                {
+                    var enclosingRecords = node.Ancestors().OfType<StructDeclarationSyntax>()
+                        .Select(parent => FindFacts(parent.AttributeLists, parent)?.Declaration)
+                        .OfType<RecordDecl>().Select(record => record.Handle.CanonicalCursor).ToHashSet();
+                    // A synthesized nested buffer cannot be its enclosing native record.
+                    compatible = compatible.Where(facts => !enclosingRecords.Contains(facts.Declaration.Handle.CanonicalCursor)).ToArray();
+                    if (compatible.Length == 0)
+                        return null;
+                }
                 if (compatible.Length > 1 && node is ParameterSyntax parameterNode)
                 {
                     var parent = parameterNode.Parent?.Parent;
