@@ -1163,35 +1163,83 @@ namespace Win32MetadataScraper
 
         private void ValidateNativePointerStorage(TypedefNameDecl alias, string mapped, NativeLocation location)
         {
-            var managed = SyntaxFactory.ParseTypeName(mapped);
-            int depth = 0;
-            while (managed is PointerTypeSyntax pointer)
-            {
-                depth++;
-                managed = pointer.ElementType;
-            }
-            bool nativeInteger = GetNativeIntegerStorage(managed.ToString()) is "global::System.IntPtr" or "global::System.UIntPtr";
-            int scalarSize = nativeInteger ? nativePointerSize : managed is PredefinedTypeSyntax primitive
-                ? primitive.Keyword.Kind() switch
-                {
-                    SyntaxKind.ByteKeyword or SyntaxKind.SByteKeyword => 1,
-                    SyntaxKind.ShortKeyword or SyntaxKind.UShortKeyword or SyntaxKind.CharKeyword => 2,
-                    SyntaxKind.IntKeyword or SyntaxKind.UIntKeyword => 4,
-                    SyntaxKind.LongKeyword or SyntaxKind.ULongKeyword => 8,
-                    _ => 0,
-                } : 0;
-            var native = alias.UnderlyingType.CanonicalType;
-            int levels = depth + (nativeInteger || depth == 0 ? 1 : 0);
-            for (int level = 0; level < levels; level++)
-            {
-                int size = level < depth ? nativePointerSize : scalarSize;
-                if (size == 0 || native is not PointerType pointer || pointer.Handle.SizeOf != size ||
-                    pointer.Handle.AlignOf != size)
-                    throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, alignment, and pointer depth.");
-                native = pointer.PointeeType.CanonicalType;
-            }
-            if (native is PointerType)
+            var resolving = new HashSet<CXCursor>();
+            if (!MatchesStorage(alias.UnderlyingType, SyntaxFactory.ParseTypeName(mapped)))
                 throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, alignment, and pointer depth.");
+
+            bool MatchesStorage(ClangSharp.Type native, TypeSyntax managed)
+            {
+                var canonical = native.CanonicalType;
+                // Retain written aliases so nominal pointees can own their desugared storage.
+                var written = RemapDiscovery.UnwrapType(native);
+                if (managed is PointerTypeSyntax pointer)
+                {
+                    while (written is TypedefType typedef)
+                        written = RemapDiscovery.UnwrapType(typedef.Decl.UnderlyingType);
+                    return canonical is PointerType && canonical.Handle.SizeOf == nativePointerSize &&
+                        canonical.Handle.AlignOf == nativePointerSize && written is PointerType nativePointer &&
+                        MatchesStorage(nativePointer.PointeeType, pointer.ElementType);
+                }
+
+                string name = managed.ToString();
+                string integerStorage = GetNativeIntegerStorage(name);
+                int scalarSize = integerStorage != null ? nativePointerSize : managed is PredefinedTypeSyntax primitive
+                    ? primitive.Keyword.Kind() switch
+                    {
+                        SyntaxKind.BoolKeyword or SyntaxKind.ByteKeyword or SyntaxKind.SByteKeyword => 1,
+                        SyntaxKind.ShortKeyword or SyntaxKind.UShortKeyword or SyntaxKind.CharKeyword => 2,
+                        SyntaxKind.IntKeyword or SyntaxKind.UIntKeyword or SyntaxKind.FloatKeyword => 4,
+                        SyntaxKind.LongKeyword or SyntaxKind.ULongKeyword or SyntaxKind.DoubleKeyword => 8,
+                        _ => 0,
+                    } : 0;
+                if (scalarSize != 0)
+                {
+                    if (canonical.Handle.SizeOf != scalarSize || canonical.Handle.AlignOf != scalarSize)
+                        return false;
+                    if (canonical is PointerType nativePointer)
+                        return nativePointer.PointeeType.CanonicalType is not PointerType &&
+                            (integerStorage != null || managed is PredefinedTypeSyntax scalar &&
+                                scalar.Keyword.Kind() is not (SyntaxKind.FloatKeyword or SyntaxKind.DoubleKeyword));
+                    if (integerStorage != null)
+                    {
+                        if (written is TypedefType typedef)
+                            ValidateNativeIntegerStorage((TypedefNameDecl)typedef.Decl, name, location);
+                        else if (!IsEnumStorage(canonical.Kind) ||
+                            integerStorage != (IsUnsignedNativeInteger(canonical.Kind) ? "global::System.UIntPtr" : "global::System.IntPtr"))
+                            return false;
+                    }
+                    return GetNativeTypedefScalarSize(canonical.Kind) != 0 || canonical is EnumType;
+                }
+                if (managed is PredefinedTypeSyntax voidType && voidType.Keyword.IsKind(SyntaxKind.VoidKeyword))
+                    return canonical is not PointerType;
+
+                while (written is TypedefType typedef)
+                {
+                    var owner = (TypedefNameDecl)typedef.Decl;
+                    projectionTypeRemaps.TryGetValue(owner.Name, out string ownerMapping);
+                    if (name == EscapeIdentifier(owner.Name) ||
+                        ownerMapping != null && !IsStorageTypeName(ownerMapping) && name == EscapeIdentifier(ownerMapping))
+                    {
+                        if (owner.Handle.Type.SizeOf != canonical.Handle.SizeOf || owner.Handle.Type.AlignOf != canonical.Handle.AlignOf)
+                            return false;
+                        if (ownerMapping != null && IsStorageTypeName(ownerMapping))
+                        {
+                            if (!resolving.Add(owner.Handle.CanonicalCursor))
+                                return false;
+                            bool matches = MatchesStorage(owner.UnderlyingType, SyntaxFactory.ParseTypeName(ownerMapping));
+                            resolving.Remove(owner.Handle.CanonicalCursor);
+                            return matches;
+                        }
+                        if (canonical is RecordType or EnumType)
+                            return true;
+                        ValidateNativeTypedefType(owner.UnderlyingType, location);
+                        return canonical is not PointerType || canonical.Handle.AlignOf == canonical.Handle.SizeOf;
+                    }
+                    written = RemapDiscovery.UnwrapType(owner.UnderlyingType);
+                }
+                return written is RecordType record && name == GetRecordPointeeName(record) ||
+                    written is EnumType nativeEnum && name == EscapeIdentifier(Remap(nativeEnum.Decl.Name));
+            }
         }
 
         private void TransferRecordTypedefFacts()
@@ -1578,9 +1626,7 @@ namespace Win32MetadataScraper
         private void ValidateNativeIntegerStorage(TypedefNameDecl alias, string mapped, NativeLocation location)
         {
             var native = alias.UnderlyingType.CanonicalType;
-            bool unsigned = native.Kind is CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
-                CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or CXTypeKind.CXType_UInt or
-                CXTypeKind.CXType_ULong or CXTypeKind.CXType_ULongLong;
+            bool unsigned = IsUnsignedNativeInteger(native.Kind);
             bool opaqueProvider = GetNativeIntegerStorage(mapped) == "global::System.IntPtr" &&
                 projectionTypeRemaps.Any(pair => pair.Value == alias.Name && pair.Key.EndsWith("*", StringComparison.Ordinal) &&
                     excludedNames.Contains(pair.Key.Substring(0, pair.Key.Length - 1).TrimEnd()));
@@ -1588,6 +1634,11 @@ namespace Win32MetadataScraper
                 !opaqueProvider && GetNativeIntegerStorage(mapped) != (unsigned ? "global::System.UIntPtr" : "global::System.IntPtr"))
                 throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, signedness, and pointer depth.");
         }
+
+        private static bool IsUnsignedNativeInteger(CXTypeKind kind)
+            => kind is CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
+                CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or CXTypeKind.CXType_UInt or
+                CXTypeKind.CXType_ULong or CXTypeKind.CXType_ULongLong;
 
         private static bool IsStorageTypeName(string name)
             => GetNativeIntegerStorage(name) != null ||
