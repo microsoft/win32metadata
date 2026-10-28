@@ -24,6 +24,7 @@ typedef HANDLE ADS_SEARCH_HANDLE;
 typedef ADS_SEARCH_HANDLE *PADS_SEARCH_HANDLE;
 typedef HANDLE *RAW_HANDLE_POINTER;
 typedef unsigned long DWORD;
+typedef unsigned char BYTE_CODE;
 typedef unsigned char byte;
 typedef unsigned int event;
 typedef DWORD SCALAR_ALIAS;
@@ -112,6 +113,12 @@ struct GateRecord { int value; };
 _Win32_Enum_(GateGroup, unsigned, GATE_VALUE);
 typedef int (__stdcall *CALLBACK_ALIAS)(ADS_SEARCH_HANDLE handle);
 const unsigned int E_XML_INVALID = 0xC00CE225U;
+const BYTE_CODE LOWER_MARKER = (signed char)('l');
+const BYTE_CODE UPPER_MARKER = (signed char)('B');
+const DWORD UNSIGNED_STATUS_UNAVAILABLE = (DWORD)(-1);
+static_assert(sizeof(BYTE_CODE) == 1 && sizeof(DWORD) == 4, ""Native constant storage changed."");
+static_assert(LOWER_MARKER == 108 && UPPER_MARKER == 66 &&
+    UNSIGNED_STATUS_UNAVAILABLE == 0xffffffffU, ""Native constant values changed."");
 extern ""C"" {
 ADS_SEARCH_HANDLE __stdcall PrototypeEchoSearchHandle(ADS_SEARCH_HANDLE value);
 void __stdcall PrototypeUsePointerAlias(PADS_SEARCH_HANDLE value, RAW_HANDLE_POINTER raw);
@@ -494,6 +501,7 @@ typedef int EXTERNAL_UNUSED;
                 AssertWrapper(reader, "PADS_SEARCH_HANDLE", "Windows.Win32.Networking.ActiveDirectory.ADS_SEARCH_HANDLE*");
                 AssertWrapper(reader, "RAW_HANDLE_POINTER", "Windows.Win32.Foundation.HANDLE*");
                 AssertWrapper(reader, "DWORD", "UInt32");
+                AssertWrapper(reader, "BYTE_CODE", "Byte");
                 AssertWrapper(reader, "SCALAR_ALIAS", "Windows.Win32.Foundation.DWORD");
                 AssertWrapper(reader, "VARIANT_BOOL", "Int16");
                 AssertWrapper(reader, "APP_SIGNED_POINTER_VALUE", "IntPtr");
@@ -677,6 +685,20 @@ typedef int EXTERNAL_UNUSED;
                 var xmlConstant = reader.GetConstant(xml.GetDefaultValue());
                 Assert.Equal(ConstantTypeCode.UInt32, xmlConstant.TypeCode);
                 Assert.Equal("25E20CC0", Convert.ToHexString(reader.GetBlobBytes(xmlConstant.Value)));
+                foreach (var expected in new[]
+                {
+                    (Name: "LOWER_MARKER", Type: "BYTE_CODE", Code: ConstantTypeCode.Byte, Bits: "6C"),
+                    (Name: "UPPER_MARKER", Type: "BYTE_CODE", Code: ConstantTypeCode.Byte, Bits: "42"),
+                    (Name: "UNSIGNED_STATUS_UNAVAILABLE", Type: "DWORD", Code: ConstantTypeCode.UInt32, Bits: "FFFFFFFF"),
+                })
+                {
+                    var field = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition)
+                        .Single(value => reader.GetString(value.Name) == expected.Name);
+                    Assert.Equal("Windows.Win32.Foundation." + expected.Type, field.DecodeSignature(decoder, null));
+                    var constant = reader.GetConstant(field.GetDefaultValue());
+                    Assert.Equal(expected.Code, constant.TypeCode);
+                    Assert.Equal(expected.Bits, Convert.ToHexString(reader.GetBlobBytes(constant.Value)));
+                }
                 AssertMetadataClosure(reader);
 
                 void WriteProviders()
