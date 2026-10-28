@@ -268,7 +268,8 @@ class Program
                 if (parseHeaderAnnotations)
                     values.Groups = new HeaderAnnotationProcessor(translationUnit, configuredRemaps, ns,
                         constantConfig.TraversalNames.ToArray(), configuredExcludes,
-                        configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody))
+                        configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody),
+                        inferNativeTypedefs: true)
                         .GetConstantGroups().ToList();
                 using (GenerationTiming.BeginSpan("output.native-constant-facts"))
                 {

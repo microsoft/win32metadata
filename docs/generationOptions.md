@@ -144,6 +144,13 @@ it is never used for binding or annotation generation. Constants-only mode omits
 the binding parse, and an all-simple input needs no value parse. General macro
 binding remains opt-in.
 
+Logical-group exports use the same traversed-or-required typedef selection as
+their generated providers. Constants-only annotation export also discovers
+typedef dependencies, so a group required from a nontraversed header retains
+the same declaration owner as ordinary binding generation, including compatible
+redeclarations. Declaration, member-expression and native binding checks remain
+strict in the managed consumer.
+
 The MSBuild task scans the original project's traversal headers once before
 partition filtering and writes `ScratchDir\native-constant-names.txt`. Its
 matching scraper consumes `--constant-names-file`, a unique ordinal-sorted
@@ -179,11 +186,22 @@ authorize partial reuse across different prepared payloads.
 ### Explicitly traversed selected-toolchain headers
 
 A relative partition `--traverse` selector outside the SDK needs an independently
-selected include root and the exact partition/profile owner. Set
-`NativeConstantToolchainIncludeRoots` to the recorded toolchain include
-directories (semicolon-separated), not a directory guessed from a native fact or
-the current environment. The constants task records these roots and each planned
-input's architecture, current partition source, namespace and traversal selectors
+selected include root and the exact partition/profile owner. When native
+constant evaluation is enabled, the shared MSBuild prerequisite uses the
+repository's existing Visual C++ tools selector to select the matching compiler
+include directory. This prerequisite runs for both scrape targets, including a
+fresh constants consumer with `SkipScraping=true`; it does not depend on running
+the native header task or retaining a producer's ownership JSON.
+The Windows PowerShell selector uses its native module path rather than
+inherited PowerShell Core module directories. An explicit
+`NativeConstantToolchainIncludeRoots` value supplies alternative selected include
+directories (semicolon-separated). Missing, relative or nonexistent selections
+are errors; roots are never guessed from a native fact or macro basename.
+
+The selected roots feed native compilation, the macro-name scan and
+`ScrapeConstants`. The scraper's incremental state
+includes the enabled setting and selected roots. The constants task records these
+roots and each planned input's architecture, current partition source, namespace and traversal selectors
 in `native-constant-header-ownership.json`. The CLI accepts this version 1 record
 through `--nativeHeaderOwnership`; library callers use
 `ConstantSelectionOptions.NativeHeaderOwnershipFile`.

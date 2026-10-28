@@ -123,8 +123,10 @@ namespace Win32MetadataScraperTests
         {
             using var first = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
                 "#include \"sdk/um/infotech.h\"\n#define MEMBER (1U << 2)\n" +
-                "_Win32_Enum_(SOURCE_GROUP, unsigned, MEMBER);\nint F();",
+                "#include \"group-owner.h\"\ntypedef unsigned SOURCE_GROUP;\nSOURCE_GROUP F(SOURCE_GROUP value);",
                 extraSettings: "--config\nnative-constant-values\n");
+            string groupOwner = Path.Combine(first.DirectoryPath, "group-owner.h");
+            File.WriteAllText(groupOwner, "_Win32_Enum_(SOURCE_GROUP, unsigned, MEMBER);\n");
             string sdk = Path.Combine(first.DirectoryPath, "sdk");
             string original = Path.Combine(sdk, "um", "infotech.h");
             string preferred = Path.Combine(sdk, "um", "devicetopology.h");
@@ -144,9 +146,44 @@ namespace Win32MetadataScraperTests
             var group = Assert.Single(CSharpSyntaxTree.ParseText(first.ReadAdditionalTypes()).GetRoot()
                 .DescendantNodes().OfType<EnumDeclarationSyntax>());
             Assert.Equal("SOURCE_GROUP", group.Identifier.ValueText);
-            var binding = Assert.Single(Assert.Single(NativeConstantGroupProvenance.Read(group).Group.Members).Bindings);
+            var proof = NativeConstantGroupProvenance.Read(group);
+            var values = JsonSerializer.Deserialize<NativeConstantValues>(
+                File.ReadAllText(Path.ChangeExtension(first.Output, ".native-constants.json")));
+            var exported = Assert.Single(values.Groups);
+            this.output.WriteLine("Projected group: " + JsonSerializer.Serialize(proof.Group));
+            this.output.WriteLine("Exported group: " + JsonSerializer.Serialize(exported));
+            Retain(first.DirectoryPath, "logical-group-native");
+            Assert.Equal(groupOwner, proof.Group.Header);
+            Assert.Equal(JsonSerializer.Serialize(proof.Group), JsonSerializer.Serialize(exported));
+            var binding = Assert.Single(Assert.Single(proof.Group.Members).Bindings);
             Assert.Equal("Macro", binding.Kind);
             Assert.Equal("MEMBER", binding.NativeName);
+            int constantsOnlyInvocations = 0;
+            foreach (bool redeclare in new[] { true, false })
+            {
+                using var constantsOnly = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                    "#define MEMBER (1U << 2)\n#include \"group-owner.h\"\n" +
+                    (redeclare ? "typedef unsigned SOURCE_GROUP;\n" : "") + "SOURCE_GROUP F(SOURCE_GROUP value);",
+                    extraSettings: "--config\nnative-constant-values\nnative-constants-only\n");
+                string owner = Path.Combine(constantsOnly.DirectoryPath, "group-owner.h");
+                File.WriteAllText(owner, "_Win32_Enum_(SOURCE_GROUP, unsigned, MEMBER);\n");
+                int exitCode = constantsOnly.Run();
+                this.output.WriteLine(constantsOnly.Diagnostics);
+                constantsOnlyInvocations += constantsOnly.InvocationCount;
+                Retain(constantsOnly.DirectoryPath, redeclare ? "logical-group-constants-only-redeclared" : "logical-group-constants-only-required");
+                Assert.True(exitCode == 0, constantsOnly.Diagnostics);
+                var facts = JsonSerializer.Deserialize<NativeConstantValues>(
+                    File.ReadAllText(Path.ChangeExtension(constantsOnly.Output, ".native-constants.json")));
+                var exportedGroup = Assert.Single(facts.Groups);
+                this.output.WriteLine("Constants-only group: " + JsonSerializer.Serialize(exportedGroup));
+                Assert.Equal(owner, exportedGroup.Header);
+                Assert.Equal(proof.Group.Line, exportedGroup.Line);
+                Assert.Equal(proof.Group.Name, exportedGroup.Name);
+                Assert.Equal(proof.Group.NativeName, exportedGroup.NativeName);
+                Assert.Equal(proof.Group.StorageType, exportedGroup.StorageType);
+                Assert.Equal(proof.Group.Namespace, exportedGroup.Namespace);
+                Assert.Equal("MEMBER", Assert.Single(exportedGroup.Members).Name);
+            }
             string extraInput = Path.Combine(Path.GetDirectoryName(first.Output), "Other.native-constants.json");
             File.Copy(Path.ChangeExtension(second.Output, ".native-constants.json"), extraInput);
             var namespaces = new Dictionary<string, string> { ["SOURCE_GROUP"] = "Canonical" };
@@ -155,8 +192,8 @@ namespace Win32MetadataScraperTests
                 {
                     this.output.WriteLine($"Constant selection policy: explicitPriority={explicitPriority}; preferredFirst={preferredFirst}");
                     var headers = preferredFirst
-                        ? new Dictionary<string, string> { [preferred] = "Audio", [original] = "HtmlHelp", [first.Header] = "Origin" }
-                        : new Dictionary<string, string> { [original] = "HtmlHelp", [preferred] = "Audio", [first.Header] = "Origin" };
+                        ? new Dictionary<string, string> { [preferred] = "Audio", [original] = "HtmlHelp", [first.Header] = "Origin", [groupOwner] = "Origin" }
+                        : new Dictionary<string, string> { [original] = "HtmlHelp", [preferred] = "Audio", [first.Header] = "Origin", [groupOwner] = "Origin" };
                     var options = new ConstantSelectionOptions
                     {
                         SdkRoot = sdk,
@@ -208,11 +245,154 @@ namespace Win32MetadataScraperTests
                         Assert.Equal(unchecked((int)(canonical ? 0x80070490 : 0x8000100D)),
                             reader.GetBlobReader(value.Value).ReadInt32());
                         AssertMetadataClosure(reader);
+                        Retain(first.DirectoryPath, preferredFirst ? "logical-group-preferred-image" : "logical-group-original-image");
                     }
                     ScraperResults Select() => ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", first.DirectoryPath,
                         "using System; using Windows.Win32.Foundation.Metadata;", new(), headers, namespaces, new(), new(), new(), options);
                 }
-            this.output.WriteLine($"TOOLCHAIN constant selection: scraper={first.InvocationCount + second.InvocationCount}; physical WinMD emissions=2; managed policy selections=8");
+            this.output.WriteLine($"TOOLCHAIN constant selection: scraper={first.InvocationCount + second.InvocationCount + constantsOnlyInvocations}; physical WinMD emissions=2; managed policy selections=8");
+        }
+
+        [Fact]
+        public void SelectedCompilerHeadersReachNativeInvocationAndConstantOwnership()
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "selected-compiler-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string include = Path.Combine(directory, "selected", "include");
+                string bin = Path.Combine(directory, "selected", "bin", "Hostx86", "x86");
+                Directory.CreateDirectory(bin);
+                string header = Write(Path.Combine(include, "toolchain.h"), "#define TOOLCHAIN_VALUE -7\nint F();\n");
+                string source = Write(Path.Combine(directory, "Partitions", "Test", "main.cpp"), "#include <toolchain.h>\n");
+                Write(Path.Combine(Path.GetDirectoryName(source), "settings.rsp"), "--namespace\nSelected\n--traverse\ntoolchain.h\n");
+                string sdk = Path.Combine(directory, "unprepared-sdk");
+                Directory.CreateDirectory(sdk);
+                string obj = Path.Combine(directory, "obj");
+                string output = Path.Combine(obj, "generated");
+                string scratch = Path.Combine(obj, "scratch");
+                string scripts = Path.Combine(directory, "scripts");
+                string selectorCalls = Path.Combine(directory, "selector-calls.txt");
+                string selector = Write(Path.Combine(scripts, "GetVcDirPath.ps1"),
+                    "param($Arch, $HostArch)\nAdd-Content -LiteralPath '" +
+                    selectorCalls.Replace("'", "''") + "' -Value $PID\n'" + bin.Replace("'", "''") + "'\n");
+                string rsp = Write(Path.Combine(directory, "scraper.rsp"),
+                    "--libraryPath\nscan.dll\n--config\ncompatible-codegen\ngenerate-cpp-attributes\n--additional=--target=i686-pc-windows-msvc\n");
+                string assets = Path.Combine(directory, "assets");
+                string prelude = Write(Path.Combine(assets, "scraper", "scraper.header.txt"),
+                    "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;\n");
+                Write(Path.Combine(assets, "scraper", "ConstantsScraper.header.txt"), File.ReadAllText(prelude));
+                Write(Path.Combine(assets, "scraper", "baseSettings.rsp"), "");
+                Write(Path.Combine(assets, "scraper", "baseSettings.ConstantsScraper.rsp"), "");
+                Write(Path.Combine(directory, "manual.cs"),
+                    File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs")));
+                string dotnet = Environment.GetEnvironmentVariable("DOTNET_HOST_PATH") ?? Path.GetFullPath(Path.Combine(
+                    System.Runtime.InteropServices.RuntimeEnvironment.GetRuntimeDirectory(), "..", "..", "..",
+                    OperatingSystem.IsWindows() ? "dotnet.exe" : "dotnet"));
+                string project = Write(Path.Combine(directory, "selection.proj"),
+                    "<Project><PropertyGroup><UsingMicrosoftNoTargetsSdk>true</UsingMicrosoftNoTargetsSdk></PropertyGroup>" +
+                    $"<Import Project=\"{Xml(Path.Combine(AppContext.BaseDirectory, "assets", "scraper.sdk.props"))}\" />" +
+                    "<PropertyGroup><UseWinSDKAssets>false</UseWinSDKAssets><EvaluateNativeConstants>true</EvaluateNativeConstants>" +
+                    $"<ObjDir>{Xml(obj)}</ObjDir><SdkIncRoot>{Xml(sdk)}</SdkIncRoot>" +
+                    $"<TargetPlatformSdkRootOverride>{Xml(sdk)}</TargetPlatformSdkRootOverride>" +
+                    $"<TaskBinDir>{Xml(Path.GetDirectoryName(typeof(ScrapeHeaders).Assembly.Location))}</TaskBinDir>" +
+                    $"<ToolsBinDir>{Xml(AppContext.BaseDirectory)}</ToolsBinDir><ScriptsDir>{Xml(scripts)}</ScriptsDir>" +
+                    $"<Win32WinmdBinDir>{Xml(directory)}</Win32WinmdBinDir><WinmdVersion>1.0.0.0</WinmdVersion>" +
+                    $"<OutputWinmd>{Xml(Path.Combine(directory, "output.winmd"))}</OutputWinmd>" +
+                    $"<Win32MetadataAssetsDir>{Xml(assets)}</Win32MetadataAssetsDir><ScanArch>x86</ScanArch></PropertyGroup>" +
+                    $"<ItemGroup><ScraperRsp Include=\"{Xml(rsp)}\" /></ItemGroup>" +
+                    $"<ItemGroup><Partition Include=\"{Xml(source)}\"><Name>Test</Name><ExcludeFromCrossarch>true</ExcludeFromCrossarch></Partition></ItemGroup>" +
+                    $"<Import Project=\"{Xml(Path.Combine(AppContext.BaseDirectory, "assets", "scraper.sdk.targets"))}\" /></Project>");
+                Run(success: true, target: "ScrapeHeaders");
+                string nativeInput = Path.Combine(output, "common", "Test.native-constants.json");
+                string nativeHash = NativeConstantGroupProvenance.HashFile(nativeInput);
+                var values = JsonSerializer.Deserialize<NativeConstantValues>(File.ReadAllText(nativeInput));
+                var constant = Assert.Single(values.Constants.Where(value => value.Name == "TOOLCHAIN_VALUE"));
+                Assert.Equal(header, constant.Header);
+                Assert.Equal(NativeConstantGroupProvenance.HashFile(header), constant.HeaderHash);
+                Assert.Equal("-7", constant.Value);
+                Assert.Contains(include, File.ReadAllText(Path.Combine(scratch, "common", "Test.settings.rsp")));
+                string ownership = Path.Combine(output, "native-constant-header-ownership.json");
+                Write(ownership, "retained producer content is not independent consumer authority");
+                Run(success: true, skipScraping: true);
+                Assert.Equal(nativeHash, NativeConstantGroupProvenance.HashFile(nativeInput));
+                string[] selectors = File.ReadAllLines(selectorCalls);
+                Assert.Equal(2, selectors.Length);
+                Assert.NotEqual(selectors[0], selectors[1]);
+                using (var plan = JsonDocument.Parse(File.ReadAllText(Path.Combine(output, "native-constant-header-ownership.json"))))
+                {
+                    Assert.Equal(include, plan.RootElement.GetProperty("IncludeRoots")[0].GetString());
+                    Assert.Equal(source, plan.RootElement.GetProperty("Inputs")[0].GetProperty("SourceFile").GetString());
+                }
+                Assert.True(File.Exists(Path.Combine(output, "constants.scraped.txt")));
+                Retain(directory, "selected-compiler-positive");
+                File.WriteAllText(selector, "param($Arch, $HostArch)\n'not-an-absolute-tools-directory'\n");
+                foreach (bool skip in new[] { false, true })
+                {
+                    Run(success: false, skipScraping: skip, expectedError: "selected Visual C++ tools directory");
+                    Run(success: true, skipScraping: skip, explicitRoot: include);
+                    Run(success: false, skipScraping: skip, explicitRoot: "relative-include", expectedError: "compiler include root");
+                }
+
+                void Run(bool success, string target = "ScrapeConstants", bool skipScraping = false,
+                    string explicitRoot = null, string expectedError = null)
+                {
+                    var start = new System.Diagnostics.ProcessStartInfo(dotnet)
+                    {
+                        WorkingDirectory = directory, UseShellExecute = false,
+                        RedirectStandardOutput = true, RedirectStandardError = true,
+                    };
+                    foreach (string argument in new[] { "msbuild", project, "-t:" + target, "-m:1", "-nodeReuse:false",
+                        "-verbosity:normal", "-p:SkipScraping=" + skipScraping })
+                        start.ArgumentList.Add(argument);
+                    if (explicitRoot != null)
+                        start.ArgumentList.Add("-p:NativeConstantToolchainIncludeRoots=" + explicitRoot);
+                    start.Environment["DOTNET_PROCESSOR_COUNT"] = "4";
+                    start.Environment["INCLUDE"] = "";
+                    start.Environment.Remove("NativeConstantToolchainIncludeRoots");
+                    using var process = System.Diagnostics.Process.Start(start);
+                    this.output.WriteLine($"Actual SDK target: pid={process.Id}; target={target}; SkipScraping={skipScraping}; explicitRoot={explicitRoot}");
+                    var stdout = process.StandardOutput.ReadToEndAsync();
+                    var stderr = process.StandardError.ReadToEndAsync();
+                    if (!process.WaitForExit(60000))
+                    {
+                        process.Kill(entireProcessTree: true);
+                        throw new TimeoutException("Selected compiler-header SDK target did not finish in 60 seconds.");
+                    }
+                    string log = stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult();
+                    this.output.WriteLine(log);
+                    Assert.True(success == (process.ExitCode == 0), log);
+                    if (expectedError != null)
+                        Assert.Contains(expectedError, log);
+                }
+            }
+            finally
+            {
+                Retain(directory, "selected-compiler-final");
+                Directory.Delete(directory, recursive: true);
+            }
+
+            static string Xml(string value) => System.Security.SecurityElement.Escape(value);
+            static string Write(string path, string content)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllText(path, content);
+                return path;
+            }
+        }
+
+        private static void Retain(string directory, string name)
+        {
+            string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            if (root == null)
+                return;
+            string destination = Path.Combine(root, name);
+            foreach (string file in Directory.EnumerateFiles(directory, "*", SearchOption.AllDirectories))
+            {
+                string output = Path.Combine(destination, Path.GetRelativePath(directory, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(output));
+                File.Copy(file, output, overwrite: true);
+            }
         }
 
         [Fact]
