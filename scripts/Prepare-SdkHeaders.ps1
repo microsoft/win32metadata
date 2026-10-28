@@ -282,14 +282,30 @@ if ($config.sourceGitTree) {
 }
 
 $recipeRoot = [IO.Path]::GetDirectoryName($Recipe)
+$retainedHeaders = @()
 foreach ($header in $config.headers) {
     $source = Resolve-Child $SourceRoot $header.path
     if ((Get-Sha256 $source) -ne $header.sourceSha256) {
         throw "Post-MIDL preimage mismatch: $($header.path)"
     }
-    $sdk = Resolve-Child $SdkPackageRoot $header.sdkPath
-    if ((Get-Sha256 $sdk) -ne $header.sdkSha256) {
-        throw "Selected SDK input mismatch: $($header.sdkPath)"
+    if ($null -ne $header.PSObject.Properties['sourceKind']) {
+        if ($header.sourceKind -cne 'retained' -or
+            [IO.Path]::GetExtension($header.path) -cne '.h' -or
+            $null -ne $header.PSObject.Properties['sdkPath'] -or
+            $null -ne $header.PSObject.Properties['sdkSha256'] -or
+            $null -eq $header.PSObject.Properties['retentionReason'] -or
+            [string]::IsNullOrWhiteSpace($header.retentionReason)) {
+            throw "A retained header requires an explicit reason and source hash, without a selected SDK binding: $($header.path)"
+        }
+        $retainedHeaders += [pscustomobject]@{
+            path = $header.path; sourceSha256 = $header.sourceSha256; retentionReason = $header.retentionReason
+        }
+    }
+    else {
+        $sdk = Resolve-Child $SdkPackageRoot $header.sdkPath
+        if ((Get-Sha256 $sdk) -ne $header.sdkSha256) {
+            throw "Selected SDK input mismatch: $($header.sdkPath)"
+        }
     }
 }
 $midlInputs = @()
@@ -338,6 +354,7 @@ if ($hasMidl) {
         throw 'MIDL outputs must be nonempty and contain no duplicate headers.'
     }
     foreach ($header in $config.headers | Where-Object {
+        $null -eq $_.PSObject.Properties['sourceKind'] -and
         [IO.Path]::GetExtension($_.sdkPath) -eq '.idl' -and $_.sdkPath -in $midlInputs.sdkPath
     }) {
         if (@($config.midl.outputs | Where-Object path -eq $header.path).Count -ne 1) {
@@ -409,19 +426,25 @@ $patches = @($config.patches | ForEach-Object {
             throw "A patch must target one admitted SDK artifact: $_"
         }
         $header = $headers[0]
-        $sdk = Resolve-Child $SdkPackageRoot $header.sdkPath
-        $sdkIdl = [IO.Path]::ChangeExtension($sdk, '.idl')
-        if ([IO.Path]::GetExtension($header.sdkPath) -eq '.idl' -or
-            ([IO.File]::ReadAllText((Resolve-Child $SourceRoot $header.path)).Contains('File created by MIDL compiler') -and
-                (Test-Path -LiteralPath $sdkIdl -PathType Leaf))) {
-            throw "A shipped-IDL-backed annotation patch belongs before MIDL, on its SDK IDL artifact: $_"
+        if ($artifact -in @($retainedHeaders | ForEach-Object path)) {
+            $sdk = Resolve-Child $SourceRoot $header.path
+            if ($input.Count) {
+                throw "A retained compatibility header cannot substitute for a selected SDK MIDL input: $artifact"
+            }
         }
-        if ($header.sourceSha256 -ne $header.sdkSha256) {
-            throw "A direct SDK header patch requires the pristine SDK preimage: $_"
-        }
-        if ($input.Count -eq 1 -and ($input[0].sourceKind -ne 'sdk' -or
-            $input[0].fullPath -ne $sdk -or $input[0].sha256 -ne $header.sdkSha256)) {
-            throw "A patched header shared with MIDL must bind the same pristine SDK input: $artifact"
+        else {
+            $sdk = Resolve-Child $SdkPackageRoot $header.sdkPath
+            if ([IO.Path]::GetExtension($header.sdkPath) -eq '.idl' -or
+                ($hasMidl -and $artifact -in $config.midl.outputs.path)) {
+                throw "A regenerated header patch belongs before MIDL, on its admitted SDK IDL artifact: $_"
+            }
+            if ($header.sourceSha256 -ne $header.sdkSha256) {
+                throw "A direct SDK header patch requires the pristine SDK preimage: $_"
+            }
+            if ($input.Count -eq 1 -and ($input[0].sourceKind -ne 'sdk' -or
+                $input[0].fullPath -ne $sdk -or $input[0].sha256 -ne $header.sdkSha256)) {
+                throw "A patched header shared with MIDL must bind the same pristine SDK input: $artifact"
+            }
         }
     }
     if (!$sdk.EndsWith("\$artifact", [StringComparison]::OrdinalIgnoreCase)) {
@@ -552,6 +575,7 @@ try {
         sourceStage = $config.sourceStage
         sourceGitTree = $config.sourceGitTree
         sourceSha256 = $sourceState.sha256
+        retainedHeaders = $retainedHeaders
         recipeSha256 = $recipeSha256
         preparationSha256 = $preparationSha256
         patches = @($patches | Select-Object path, sha256)

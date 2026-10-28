@@ -4481,6 +4481,18 @@
       "sdkSha256": "A9CF08BE8407A196104124D5ADE2308E204E47D3252BCD2AD20D0F2137843D62"
     },
     {
+      "path": "um\\Iads.h",
+      "sourceSha256": "915F09878FC8F2F2361FB78FA4B3E448A2CC09AD97DC60DB4AFAD5FB6D81C4AA",
+      "sdkPath": "c\\include\\10.0.28000.0\\um\\Iads.h",
+      "sdkSha256": "915F09878FC8F2F2361FB78FA4B3E448A2CC09AD97DC60DB4AFAD5FB6D81C4AA"
+    },
+    {
+      "path": "um\\alljoyn_c\\AboutDataListener.h",
+      "sourceKind": "retained",
+      "sourceSha256": "9D0A0C64E91B750BA90A06FC29E209286A2A7CB16BCD2A8335830DB78DE3DB34",
+      "retentionReason": "Retain the existing AllJoyn compatibility surface for this SDK update; removal is deferred."
+    },
+    {
       "path": "shared\\mswsockdef.h",
       "sourceSha256": "6555E8528263DE35DEFD45F80232C86DC36F3BBF1576AE261296250431A5D9CA",
       "sdkPath": "c\\include\\10.0.28000.0\\shared\\mswsockdef.h",
@@ -9013,6 +9025,8 @@
     "shared\\fltUserStructures.h.patch",
     "shared\\ifdef.h.patch",
     "shared\\minwindef.h.patch",
+    "um\\Iads.h.patch",
+    "um\\alljoyn_c\\AboutDataListener.h.patch",
     "shared\\mswsockdef.h.patch",
     "shared\\usbioctl.h.patch",
     "um\\appnotify.h.patch",

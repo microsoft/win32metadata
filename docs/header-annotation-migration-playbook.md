@@ -242,10 +242,11 @@ The new manifest records `midlIdentity`, `midlReusedFrom` and the original
 Old caches without that identity require one fresh production. Corrupt matching
 caches fail rather than falling back to regeneration.
 
-Respect the SDK artifact boundary, not just a recipe filename extension. Patch a
-shipped source IDL before MIDL when its corresponding generated header owns the
-fact; keep real direct-shipped header artifacts as header patches. A generated
-dependency is not automatically another annotation target. Never run broad
+Follow the actual preparation inputs. When preparation regenerates the consumed
+header, patch its owning SDK IDL before MIDL. Otherwise patch the shipped SDK header
+that preparation consumes, even when it has a generated banner or a corresponding
+IDL/ODL that is not regenerated. A generated dependency is not automatically another
+annotation target. Never run broad
 SDK/IDL update scripts to implement a bounded migration: those scripts reset the
 mirror and restore removed SDK artifacts.
 
@@ -258,14 +259,30 @@ that same artifact (`a/um/winhttp.h` to `b/um/winhttp.h`), starting from its pri
 admitted SDK bytes, not another patch's output. Reject repeated targets even
 under different filenames; do not stack semantic layers on a header.
 
+Retained compatibility headers require an explicit recipe entry with
+`sourceKind: "retained"`, their repository `sourceSha256`, and a nonempty
+`retentionReason`. They have no `sdkPath` or `sdkSha256`, cannot replace an SDK MIDL
+input, and are listed separately in the prepared manifest's `retainedHeaders`.
+This update deliberately retains the existing AllJoyn surface for compatibility.
+Ordinary entries still require their exact selected-SDK binding; a missing SDK
+header never enables retention automatically.
+
+The cumulative `um\winternl.h` patch selects the documented
+`PROCESS_BASIC_INFORMATION` fields only under `WIN32METADATA`. It uses the native
+`NTSTATUS`, `PPEB`, `ULONG_PTR` and `KPRIORITY` typedefs already available to that
+header. Ordinary SDK clients retain the shipped reserved-field declaration.
+The metadata-only declaration preserves native size, alignment and corresponding
+field offsets on x86, x64 and Arm64; it is not an emitter-owned record replacement.
+
 Artifact identity determines preparation, not a stage directory or recipe order.
 Apply direct-header patches to private SDK header copies and IDL patches to the
 pinned raw source closure before the existing MIDL-to-SAL conversion and shared
-`MidlHeaderUtils.ps1` flags regenerate only the admitted outputs. There are no
-post-MIDL annotation patches or patches on generated headers. Scraping
-and constants still consume one private root. Reject generated-header patches,
-unpinned imports, changed tools/preimages, failed generation and modified caches;
-never fall back to an old generated header.
+`MidlHeaderUtils.ps1` flags regenerate only the admitted outputs. Never patch those
+regenerated outputs or the SDK mirror directly. Consumed shipped headers that are
+not regenerated use the direct-header patch phase. Scraping
+and constants still consume one private root. Reject patches to headers that
+preparation regenerates, unpinned imports, changed tools/preimages, failed
+generation and modified caches; never fall back to an old generated header.
 Every admitted header whose source IDL participates in the MIDL input closure
 must have its own pinned output, including an unpatched IDL that includes a
 patched source. A shared declaration guard can otherwise make an unchanged
