@@ -35,11 +35,11 @@ struct __declspec(uuid(""eb0c0ca2-cfc2-4538-a693-314db6fc20f2"")) IOverride {
     virtual int __stdcall Read(_Out_opt_ void** value) = 0;
 };
 _WIN32META_ANNOTATE_PARAMETER_(IOverride::Read, value, _Win32_Optional_(false) _Win32_ComOutPtr_(true));
-_Win32_NativeTypedef_ typedef int BATCH_BOOL;
-_Win32_NativeTypedef_ typedef void* BATCH_HANDLE;
-_Win32_NativeTypedef_ typedef BATCH_HANDLE* BATCH_PHANDLE;
+typedef int BATCH_BOOL;
+typedef void* BATCH_HANDLE;
+typedef BATCH_HANDLE* BATCH_PHANDLE;
 struct BATCH_OPAQUE;
-_Win32_NativeTypedef_ typedef struct BATCH_OPAQUE* BATCH_HOPAQUE;
+typedef struct BATCH_OPAQUE* BATCH_HOPAQUE;
 BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE output, BATCH_HOPAQUE opaque);
 typedef unsigned long DWORD;
 typedef int BOOL;
@@ -174,7 +174,7 @@ WSAWaitForMultipleEvents=ws2_32.dll
                     foreach (var (name, storage) in new[]
                     {
                     ("BATCH_BOOL", "Int32"), ("BATCH_HANDLE", "Void*"),
-                    ("BATCH_PHANDLE", "Void**"), ("BATCH_HOPAQUE", "Void*"),
+                    ("BATCH_PHANDLE", "BATCH_HANDLE*"), ("BATCH_HOPAQUE", "BATCH_OPAQUE*"),
                 })
                     {
                         var type = FindType(reader, name);

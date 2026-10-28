@@ -190,7 +190,7 @@ namespace ClangSharpSourceToWinmd
 
             if (!generator.diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error) &&
                 compilation.CSharpCompilation.SyntaxTrees.SelectMany(tree => tree.GetRoot().DescendantNodes())
-                    .OfType<DelegateDeclarationSyntax>()
+                    .Where(node => node is DelegateDeclarationSyntax or StructDeclarationSyntax)
                     .GroupBy(node => FixArchSpecificName(SyntaxUtils.GetFullName(node, true)), StringComparer.Ordinal)
                     .Any(group => group.Count() > 1))
             {

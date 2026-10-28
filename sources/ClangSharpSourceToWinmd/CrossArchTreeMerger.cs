@@ -127,7 +127,14 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitClassDeclaration(ClassDeclarationSyntax node)
             {
+                bool hasVariantReferences = this.owner.map.HasCallbackDependencies(node.SyntaxTree.FilePath);
                 node = (ClassDeclarationSyntax)base.VisitClassDeclaration(node);
+
+                if (hasVariantReferences && node.Members.OfType<MethodDeclarationSyntax>().Any(CrossArchSyntaxMap.IsPotentialCrossArch) &&
+                    !node.Modifiers.Any(SyntaxKind.PartialKeyword))
+                {
+                    node = node.AddModifiers(SyntaxFactory.Token(SyntaxKind.PartialKeyword).WithTrailingTrivia(SyntaxFactory.Space));
+                }
 
                 if (node.Identifier.ValueText == "Apis")
                 {

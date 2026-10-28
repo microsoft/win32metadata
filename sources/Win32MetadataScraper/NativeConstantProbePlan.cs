@@ -181,7 +181,7 @@ namespace Win32MetadataScraper
                 string nonValue = ConstantsScraper.GetNonValueMacroReason(body);
                 if (nonValue != null)
                     return routes[name] = new NativeConstantRoute(name, "NonValue", nonValue);
-                if (ConstantsScraper.TryReadSimpleMacroValue(body, cplusplus, windowsTarget, StorageOfType,
+                if (ConstantsScraper.TryReadSimpleMacroValue(macro.Body, cplusplus, windowsTarget, StorageOfType,
                     DirectCastWrapper, out var value))
                 {
                     simple[name] = value;
@@ -192,7 +192,8 @@ namespace Win32MetadataScraper
                     if (active.TryGetValue(body, out var target) && !target.FunctionLike)
                     {
                         var targetRoute = Resolve(body);
-                        if (targetRoute.Route == "ScannerResolved")
+                        if (targetRoute.Route == "ScannerResolved" &&
+                            (simple[body].Kind != "Guid" || macro.Body.Trim() == body))
                         {
                             simple[name] = simple[body];
                             return routes[name] = new NativeConstantRoute(name, "ScannerResolved", "simple macro alias");

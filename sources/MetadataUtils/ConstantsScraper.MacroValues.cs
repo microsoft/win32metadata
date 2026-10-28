@@ -133,6 +133,7 @@ namespace MetadataUtils
             out SimpleMacroValue result)
         {
             result = null;
+            string replacement = value;
             value = StripMacroParentheses(value);
             if (GetNonValueMacroReason(value) != null)
                 return false;
@@ -157,7 +158,8 @@ namespace MetadataUtils
                     "float" : "double", null, legacyValue);
                 return true;
             }
-            if (legacy.Success && (legacy.Groups[25].Success || legacy.Groups[31].Success))
+            if (legacy.Success && (legacy.Groups[25].Success || legacy.Groups[31].Success) ||
+                IsGuidInitializerList(replacement))
             {
                 result = new SimpleMacroValue("Guid", "GUID", null, value);
                 return true;
@@ -184,6 +186,13 @@ namespace MetadataUtils
                 ? new SimpleMacroValue("Pointer", castType, null, integer.Value)
                 : ConvertSimpleInteger(integer, castType, storage);
             return result != null;
+        }
+
+        private static bool IsGuidInitializerList(string value)
+        {
+            string[] components = value.Split(',');
+            return components.Length == 11 &&
+                components.All(component => IntegerLiteralRegex.IsMatch(component.Trim()));
         }
 
         private static string CanonicalBuiltinType(string type) => type switch

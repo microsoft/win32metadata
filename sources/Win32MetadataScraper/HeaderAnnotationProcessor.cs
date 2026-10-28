@@ -24,6 +24,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<(string File, uint Line, uint Column), List<DeclarationFacts>> projectionLocations = new();
         private readonly Dictionary<string, string> remaps;
         private IReadOnlyDictionary<string, string> storageTypeRemaps;
+        private readonly IReadOnlyDictionary<string, string> projectionTypeRemaps;
         private readonly Dictionary<CXCursor, string> nativeTypedefStorageRemaps = new();
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
         private readonly HashSet<NamedDecl> projectedDeclarations = new();
@@ -31,8 +32,12 @@ namespace Win32MetadataScraper
         private readonly IReadOnlyList<string> traversalNames;
         private readonly ISet<string> excludedNames;
         private readonly bool excludeFunctionsWithBody;
+        private readonly bool parseHeaderAnnotations;
         private readonly IReadOnlySet<CXCursor> includedDeclarations;
         private readonly int nativePointerSize;
+        private readonly HashSet<CXCursor> recordPointees = new();
+        private readonly Dictionary<CXCursor, string> projectedRecordNames = new();
+        private readonly HashSet<CXCursor> requiredTypedefs = new();
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
         private readonly List<(CXCursor Declaration, NamedDecl Target, NativeLocation Location)> enumAssociations = new();
@@ -88,15 +93,18 @@ namespace Win32MetadataScraper
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody,
-            IReadOnlySet<CXCursor> includedDeclarations = null)
+            IReadOnlySet<CXCursor> includedDeclarations = null, bool inferNativeTypedefs = false, bool parseHeaderAnnotations = true,
+            IReadOnlyDictionary<string, string> projectionTypeRemaps = null)
         {
             using var timing = GenerationTiming.BeginSpan("annotations.discovery");
             this.remaps = remaps;
             storageTypeRemaps = remaps;
+            this.projectionTypeRemaps = projectionTypeRemaps ?? remaps;
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
             this.excludeFunctionsWithBody = excludeFunctionsWithBody;
+            this.parseHeaderAnnotations = parseHeaderAnnotations;
             this.includedDeclarations = includedDeclarations;
             using (var target = translationUnit.Handle.TargetInfo)
                 nativePointerSize = target.PointerWidth / 8;
@@ -108,10 +116,13 @@ namespace Win32MetadataScraper
                 walkTiming?.SetCounter("cursorCount", visited.Count);
             }
             using var resolutionTiming = GenerationTiming.BeginSpan("annotations.resolve-native-facts");
-            ApplyMethodAnnotations();
-            ApplyParameterAnnotations();
-            ApplyFieldAnnotations();
-            ApplyCommentAnnotations(translationUnit);
+            if (parseHeaderAnnotations)
+            {
+                ApplyMethodAnnotations();
+                ApplyParameterAnnotations();
+                ApplyFieldAnnotations();
+                ApplyCommentAnnotations(translationUnit);
+            }
             ResolveEnumNameReferences();
             foreach (var facts in declarations.Values.Where(value => value.HasMidlRetval))
                 CollectAnnotationErrors(facts.Declaration, () =>
@@ -130,6 +141,8 @@ namespace Win32MetadataScraper
                         throw Error(association.Location, "AssociatedEnum requires a native enum or a _Win32_Enum_/_Win32_FlagsEnum_ group.");
                 });
             MergeRedeclarationFacts();
+            if (inferNativeTypedefs)
+                DiscoverNativeTypedefs();
             ThrowAnnotationErrors();
             TransferRecordTypedefFacts();
             resolutionTiming?.Dispose();
@@ -159,17 +172,20 @@ namespace Win32MetadataScraper
                 bool primaryRecord = alias.UnderlyingType.CanonicalType is RecordType record && Remap(record.Decl.Name) == Remap(alias.Name);
                 if ((GetFunctionType(alias.UnderlyingType) == null || alias is TypeAliasDecl) && !primaryRecord)
                 {
-                    if (facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef") &&
+                    if (facts.HasNativeTypedefIdentity &&
                         remaps.TryGetValue(alias.Name, out string mapped) && IsStorageTypeName(mapped))
                     {
                         nativeTypedefStorageRemaps[alias.Handle.CanonicalCursor] = mapped;
                         remaps[alias.Name] = alias.Name;
                     }
+
                     else
                         remaps.TryAdd(alias.Name, alias.Name);
                 }
             }
         }
+
+        internal bool RequiresRecordProjectionIdentity => recordPointees.Count != 0;
 
         private static unsafe bool IsForwardEnumReference(EnumDecl declaration)
         {
@@ -427,9 +443,13 @@ namespace Win32MetadataScraper
             var rewriter = new ProjectionRewriter(this);
             foreach (var source in sources)
                 foreach (var node in source.DescendantNodes(descendIntoChildren: node =>
-                    node is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax or TypeDeclarationSyntax)
-                    .OfType<DelegateDeclarationSyntax>())
-                    rewriter.AddCallbackTemplate(node);
+                    node is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax or TypeDeclarationSyntax))
+                {
+                    if (node is DelegateDeclarationSyntax callback)
+                        rewriter.AddCallbackTemplate(callback);
+                    else if (node is StructDeclarationSyntax record)
+                        rewriter.AddRecordProjection(record);
+                }
         }
 
         internal string Rewrite(string source)
@@ -455,7 +475,7 @@ namespace Win32MetadataScraper
                 string name = Remap(alias.Name);
                 if (projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
                     continue;
-                if (!ShouldEmit(alias, facts.Location))
+                if (!ShouldProjectTypedef(alias, facts.Location))
                     continue;
                 if (facts.LogicalEnumMembers != null)
                 {
@@ -488,9 +508,13 @@ namespace Win32MetadataScraper
                 if (IsStorageTypeName(name))
                     name = alias.Name;
                 string valueType = GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true,
-                    preserveNativeShape: facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef"));
+                    preserveNativeShape: facts.HasNativeTypedefIdentity);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
+                if (facts.IsInferredTypedef)
+                    declaration = declaration.ReplaceNode(declaration.Members.Single(),
+                        ((FieldDeclarationSyntax)declaration.Members.Single()).AddAttributeLists(
+                            MakeAttribute($"NativeTypeName({HeaderAnnotation.Quote(alias.UnderlyingType.AsString)})")));
                 declaration = declaration.AddAttributeLists(GetAttributes(facts).ToArray());
                 if (SyntaxFactory.ParseTypeName(valueType) is PointerTypeSyntax { ElementType: NameSyntax } &&
                     NativeHandleOrigins.IsDeclareHandle(alias, visited))
@@ -526,8 +550,10 @@ namespace Win32MetadataScraper
             foreach (var facts in declarations.Values)
                 CollectAnnotationErrors(facts.Declaration, () =>
                 {
-                    if ((facts.Annotations.Count != 0 || facts.MidlDirection != ParameterAttributes.None || facts.IsScopedEnum || facts.IsFlagsEnum) &&
-                        ShouldEmit(facts.Declaration, facts.Location) && !projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
+                    if ((facts.HasNativeTypedefIdentity || facts.Annotations.Count != 0 || facts.MidlDirection != ParameterAttributes.None || facts.IsScopedEnum || facts.IsFlagsEnum) &&
+                        (ShouldEmit(facts.Declaration, facts.Location) ||
+                            facts.IsInferredTypedef && ShouldProjectTypedef((TypedefNameDecl)facts.Declaration, facts.Location)) &&
+                        !projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
                         throw Error(facts.Location, $"Annotation facts for '{facts.Declaration.Name}' were not projected by ClangSharp.");
                 });
             ThrowAnnotationErrors();
@@ -556,32 +582,45 @@ namespace Win32MetadataScraper
             if (targets.Length != 0)
             {
                 string kind = HeaderAnnotation.RemoveOwnerPrefix(targets[0].Spelling);
-                if (targets.Length != 1 || declaration is not VarDecl variable ||
-                    variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
-                    variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
-                    !variable.Type.Handle.IsConstQualified ||
-                    !variable.Name.StartsWith("_WIN32META_" + kind.ToUpperInvariant() + "_", StringComparison.Ordinal))
-                    throw Error(location, $"{kind} annotations require the metadata-only _Win32_Annotate{kind}_ carrier.");
                 var carriers = kind switch
                 {
                     "Parameter" => parameterCarriers,
                     "Field" => fieldCarriers,
                     _ => methodCarriers,
                 };
-                carriers.Add((variable, targets[0]));
-                return;
+                string prefix = "_WIN32META_" + kind.ToUpperInvariant() + "_";
+                if (!parseHeaderAnnotations)
+                {
+                    if (declaration is VarDecl ignored && ignored.Name.StartsWith(prefix, StringComparison.Ordinal))
+                    {
+                        carriers.Add((ignored, targets[0]));
+                        return;
+                    }
+                }
+                else
+                {
+                    if (targets.Length != 1 || declaration is not VarDecl variable ||
+                        variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
+                        variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
+                        !variable.Type.Handle.IsConstQualified ||
+                        !variable.Name.StartsWith(prefix, StringComparison.Ordinal))
+                        throw Error(location, $"{kind} annotations require the metadata-only _Win32_Annotate{kind}_ carrier.");
+                    carriers.Add((variable, targets[0]));
+                    return;
+                }
             }
             var facts = new DeclarationFacts(declaration, location);
-            string parameterComment = declaration is ParmVarDecl ? GetLegacyParameterComment(declaration) : null;
-            if (declaration is ParmVarDecl)
+            string parameterComment = parseHeaderAnnotations && declaration is ParmVarDecl ? GetLegacyParameterComment(declaration) : null;
+            if (parseHeaderAnnotations && declaration is ParmVarDecl)
             {
                 if (!HasSalParameterDirection(declaration))
                     facts.MidlDirection = GetMidlDirection(parameterComment);
             }
-            ReadAnnotations(declaration, facts);
+            if (parseHeaderAnnotations)
+                ReadAnnotations(declaration, facts);
             if (invalidDeclarations.Contains(GetNativeIdentity(declaration)))
                 return;
-            if (declaration is ParmVarDecl)
+            if (parseHeaderAnnotations && declaration is ParmVarDecl)
             {
                 if (parameterComment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
                 {
@@ -936,6 +975,98 @@ namespace Win32MetadataScraper
             => declaration is VarDecl variable and not ParmVarDecl &&
                 variable.Type.Handle.IsConstQualified && variable.SemanticParentCursor is not FunctionDecl;
 
+        private void DiscoverNativeTypedefs()
+        {
+            var dependencies = new HashSet<ClangSharp.Type>();
+            foreach (var facts in declarations.Values.Where(facts => ShouldEmit(facts.Declaration, facts.Location)).ToArray())
+            {
+                switch (facts.Declaration)
+                {
+                    case FunctionDecl function:
+                        RequireTypedefDependencies(function.ReturnType, dependencies);
+                        foreach (var parameter in function.Parameters)
+                            RequireTypedefDependencies(parameter.Type, dependencies);
+                        break;
+                    case FieldDecl field:
+                        RequireTypedefDependencies(field.Type, dependencies);
+                        break;
+                    case TypedefNameDecl alias:
+                        RequireTypedefDependencies(alias.UnderlyingType, dependencies);
+                        break;
+                }
+            }
+            foreach (var facts in declarations.Values)
+            {
+                if (facts.Declaration is not TypedefDecl alias || facts.LogicalEnumMembers != null ||
+                    !ShouldProjectTypedef(alias, facts.Location))
+                    continue;
+                var type = alias.UnderlyingType.CanonicalType;
+                if (type.Kind == CXTypeKind.CXType_Void || type is RecordType or EnumType or ArrayType or ReferenceType or FunctionType)
+                    continue;
+                if (type is not PointerType && facts.Annotations.Count == 0 &&
+                    projectionTypeRemaps.TryGetValue(alias.Name, out string mapped) && GetNativeIntegerStorage(mapped) != null)
+                {
+                    CollectAnnotationErrors(alias, () =>
+                    {
+                        ValidateNativeIntegerStorage(alias, mapped, facts.Location);
+                        remaps[alias.Name] = mapped;
+                    });
+                    continue;
+                }
+                var terminal = type;
+                while (terminal is PointerType pointer)
+                    terminal = pointer.PointeeType.CanonicalType;
+                if (terminal is FunctionType)
+                    continue;
+                CollectAnnotationErrors(alias, () =>
+                {
+                    ValidateNativeTypedefType(alias.UnderlyingType, facts.Location);
+                    facts.IsInferredTypedef = true;
+                    if (type is PointerType && terminal is RecordType record)
+                        recordPointees.Add(record.Decl.Handle.CanonicalCursor);
+                    if (!annotatedTypedefs.Contains(facts))
+                        annotatedTypedefs.Add(facts);
+                });
+            }
+        }
+
+        private void RequireTypedefDependencies(ClangSharp.Type type, HashSet<ClangSharp.Type> visitedTypes)
+        {
+            type = RemapDiscovery.UnwrapType(type);
+            if (!visitedTypes.Add(type))
+                return;
+            switch (type)
+            {
+                case TypedefType typedef:
+                    var alias = (TypedefNameDecl)typedef.Decl;
+                    if (IsExcludedDeclaration(alias))
+                        return;
+                    requiredTypedefs.Add(alias.Handle.CanonicalCursor);
+                    RequireTypedefDependencies(alias.UnderlyingType, visitedTypes);
+                    break;
+                case PointerType pointer:
+                    RequireTypedefDependencies(pointer.PointeeType, visitedTypes);
+                    break;
+                case ReferenceType reference:
+                    RequireTypedefDependencies(reference.PointeeType, visitedTypes);
+                    break;
+                case ArrayType array:
+                    RequireTypedefDependencies(array.ElementType, visitedTypes);
+                    break;
+                case FunctionProtoType function:
+                    RequireTypedefDependencies(function.ReturnType, visitedTypes);
+                    foreach (var parameter in function.ParamTypes)
+                        RequireTypedefDependencies(parameter, visitedTypes);
+                    break;
+                case RecordType record:
+                    if (IsExcludedDeclaration(record.Decl))
+                        return;
+                    foreach (var field in (record.Decl.Definition ?? record.Decl).CursorChildren.OfType<FieldDecl>())
+                        RequireTypedefDependencies(field.Type, visitedTypes);
+                    break;
+            }
+        }
+
         private void ValidateNativeTypedefType(ClangSharp.Type type, NativeLocation location, bool pointee = false)
         {
             type = type.CanonicalType;
@@ -1065,17 +1196,26 @@ namespace Win32MetadataScraper
                 declaration = definition;
                 location = GetLocation(definition.Location);
             }
-            for (Cursor cursor = declaration; cursor is NamedDecl named; cursor = cursor.SemanticParentCursor)
-                if (excludedNames.Contains(named.Name) ||
-                    named is FunctionDecl function &&
-                    (function.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Builtin) ||
-                        excludeFunctionsWithBody && function.HasBody))
-                    return false;
-            if (location.File.Length == 0)
+            if (IsExcludedDeclaration(declaration) || location.File.Length == 0)
                 return false;
             return traversalNames.Count == 0 || traversalNames.Any(name =>
                 string.Equals(Path.GetFullPath(name), Path.GetFullPath(location.File), StringComparison.OrdinalIgnoreCase) ||
                 (Path.GetFileName(name) == name && string.Equals(name, Path.GetFileName(location.File), StringComparison.OrdinalIgnoreCase)));
+        }
+
+        private bool ShouldProjectTypedef(TypedefNameDecl alias, NativeLocation location)
+            => ShouldEmit(alias, location) || requiredTypedefs.Contains(alias.Handle.CanonicalCursor) &&
+                location.File.Length != 0 && !IsExcludedDeclaration(alias);
+
+        private bool IsExcludedDeclaration(NamedDecl declaration)
+        {
+            for (Cursor cursor = declaration; cursor is NamedDecl named; cursor = cursor.SemanticParentCursor)
+                if (excludedNames.Contains(named.Name) || excludedNames.Contains(DeclarationSourceMap.QualifiedName(named.Handle)) ||
+                    named is FunctionDecl function &&
+                    (function.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Builtin) ||
+                        excludeFunctionsWithBody && function.HasBody))
+                    return true;
+            return false;
         }
 
         private string Remap(string name) => remaps.GetValueOrDefault(name) ?? name;
@@ -1220,7 +1360,7 @@ namespace Win32MetadataScraper
         private bool TryGetOpaqueStructPointer(DeclarationFacts facts, TypedefNameDecl alias, out RecordType record)
         {
             record = null;
-            if (!facts.Annotations.Any(annotation => annotation.Name == "NativeTypedef") ||
+            if (!facts.HasNativeTypedefIdentity ||
                 !nativeTypedefStorageRemaps.TryGetValue(alias.Handle.CanonicalCursor, out string mapped) ||
                 GetNativeIntegerStorage(mapped) != "global::System.IntPtr")
                 return false;
@@ -1265,6 +1405,11 @@ namespace Win32MetadataScraper
 
         private string GetRecordPointeeName(RecordType record)
         {
+            if (projectedRecordNames.TryGetValue(record.Decl.Handle.CanonicalCursor, out string projectedName))
+                return projectedName;
+            if (string.IsNullOrEmpty(record.Decl.Name))
+                throw Error(GetLocation(record.Decl.Location),
+                    "A native anonymous record pointee requires one source-bound generated managed record identity.");
             string name = Remap(record.Decl.Name);
             // A whole-alias storage mapping is not a name for its native record pointee.
             return IsStorageTypeName(name) || visited.OfType<TypedefNameDecl>().Any(alias =>
@@ -1277,11 +1422,13 @@ namespace Win32MetadataScraper
         {
             type = RemapDiscovery.UnwrapType(type);
             if (underlyingStorage && preserveNativeShape && recordPointee && type.CanonicalType is RecordType nativeRecord)
-                return (nativeRecord.Decl.Definition ?? nativeRecord.Decl).IsCompleteDefinition
-                    ? GetRecordPointeeName(nativeRecord) : "void";
+                return IsExcludedRecord(nativeRecord.Decl) ? "void" : GetRecordPointeeName(nativeRecord);
             if (type is TypedefType typedef)
             {
                 var alias = (TypedefNameDecl)typedef.Decl;
+                if (underlyingStorage && preserveNativeShape &&
+                    declarations.TryGetValue(alias, out var facts) && facts.HasNativeTypedefIdentity)
+                    return Remap(alias.Name);
                 var mappings = underlyingStorage ? storageTypeRemaps : remaps;
                 if (mappings.TryGetValue(alias.Name, out string mapped) && (!underlyingStorage || mapped != alias.Name))
                 {
@@ -1294,13 +1441,8 @@ namespace Win32MetadataScraper
                         var native = alias.UnderlyingType.CanonicalType;
                         if (!preserveNativeShape || native is not PointerType)
                         {
-                            bool unsigned = native.Kind is CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
-                                CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or CXTypeKind.CXType_UInt or
-                                CXTypeKind.CXType_ULong or CXTypeKind.CXType_ULongLong;
-                            if (preserveNativeShape && (!IsEnumStorage(native.Kind) ||
-                                native.Handle.SizeOf != nativePointerSize ||
-                                storage != (unsigned ? "global::System.UIntPtr" : "global::System.IntPtr")))
-                                throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, signedness, and pointer depth.");
+                            if (preserveNativeShape)
+                                ValidateNativeIntegerStorage(alias, mapped, location);
                             return storage;
                         }
                     }
@@ -1325,6 +1467,17 @@ namespace Win32MetadataScraper
                     excludedNames.Contains(DeclarationSourceMap.QualifiedName(declaration.Handle)))
                     return true;
             return false;
+        }
+
+        private void ValidateNativeIntegerStorage(TypedefNameDecl alias, string mapped, NativeLocation location)
+        {
+            var native = alias.UnderlyingType.CanonicalType;
+            bool unsigned = native.Kind is CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
+                CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or CXTypeKind.CXType_UInt or
+                CXTypeKind.CXType_ULong or CXTypeKind.CXType_ULongLong;
+            if (!IsEnumStorage(native.Kind) || native.Handle.SizeOf != nativePointerSize ||
+                GetNativeIntegerStorage(mapped) != (unsigned ? "global::System.UIntPtr" : "global::System.IntPtr"))
+                throw Error(location, $"'NativeTypedef' storage remap '{alias.Name}={mapped}' does not preserve native width, signedness, and pointer depth.");
         }
 
         private static bool IsStorageTypeName(string name)
@@ -1492,6 +1645,9 @@ namespace Win32MetadataScraper
             internal bool HasMidlRetval { get; set; }
             internal bool IsScopedEnum { get; set; }
             internal bool IsFlagsEnum { get; set; }
+            internal bool IsInferredTypedef { get; set; }
+            internal bool HasNativeTypedefIdentity => IsInferredTypedef ||
+                Annotations.Any(annotation => annotation.Name == "NativeTypedef");
             internal ParameterAttributes MidlDirection { get; set; }
             internal LogicalEnumMember[] LogicalEnumMembers { get; set; }
         }
@@ -1525,6 +1681,25 @@ namespace Win32MetadataScraper
                 if (declaration is TypedefNameDecl alias &&
                     owner.callbackOrigins.TryGetValue(alias, out var origin) && origin == alias)
                     owner.callbackTemplates[origin] = node;
+            }
+
+            internal void AddRecordProjection(StructDeclarationSyntax node)
+            {
+                if (FindFacts(node.AttributeLists, node)?.Declaration is not RecordDecl record ||
+                    !owner.recordPointees.Contains(record.Handle.CanonicalCursor))
+                    return;
+                var owners = node.AncestorsAndSelf().OfType<StructDeclarationSyntax>().Reverse().ToArray();
+                if (owners.Any(type => type.TypeParameterList?.Parameters.Count > 0))
+                    throw Error(GetLocation(record.Location), "A native data-pointer typedef cannot use an open generic record projection.");
+                string name = string.Join(".", owners.Select(type => type.Identifier.ValueText));
+                string ns = MetadataUtils.SyntaxUtils.GetEnclosingNamespace(node);
+                if (!string.IsNullOrEmpty(ns))
+                    name = ns + "." + name;
+                name = "global::" + name;
+                var identity = record.Handle.CanonicalCursor;
+                if (owner.projectedRecordNames.TryGetValue(identity, out string previous) && previous != name)
+                    throw Error(GetLocation(record.Location), "A native record pointee has multiple generated managed identities.");
+                owner.projectedRecordNames[identity] = name;
             }
 
             private DeclarationFacts FindFacts(SyntaxList<AttributeListSyntax> attributes, SyntaxNode node)

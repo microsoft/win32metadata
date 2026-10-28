@@ -210,6 +210,7 @@ namespace MetadataUtils
             private Dictionary<string, string[]> sourceConstantTypes = new(StringComparer.Ordinal);
             private Dictionary<string, ProtectedConstant[]> sourceConstants = new(StringComparer.Ordinal);
             private Dictionary<string, NativeDependency[]> nativeDependencies = new(StringComparer.Ordinal);
+            private readonly Dictionary<string, List<NativeCandidate>> selectedNativeScalars = new(StringComparer.Ordinal);
             private readonly List<object> legacyDependencyPolicies = new();
             private object nativeConstantReport;
             private readonly List<object> nativeInputReferences = new();
@@ -557,12 +558,28 @@ namespace MetadataUtils
             {
                 int firstComma = line.IndexOf(',');
                 string name = line.Substring(0, firstComma).Trim();
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.ShouldExclude(name))
                 {
                     return;
                 }
 
-                if (this.ShouldExclude(name))
+                if (this.selectedNativeScalars.TryGetValue(name, out var scalars))
+                {
+                    foreach (var scalar in scalars)
+                        this.validation.Add(new InvalidDataException(
+                            $"Native scalar '{name}' ({scalar.Value.NativeType}, {scalar.Value.StorageType}, " +
+                            $"value {scalar.Value.Value}) selected from '{scalar.Header}':{scalar.Value.Line}:{scalar.Value.Column} " +
+                            $"(header SHA256 {scalar.Value.HeaderHash}; producer '{scalar.Input.Values.SourceFile}', " +
+                            $"source SHA256 {scalar.Input.Values.SourceHash}) conflicts with " +
+                            $"'{defineGuidKeyword}' GUID definition in '{this.legacyHeader}':{this.legacyLine}."),
+                            "NATIVE_GUID_COLLISION", "constants.legacy-guids", scalar.Input.Path, name,
+                            this.legacyHeader, this.legacyLine, scalar.Input.Values.Architecture.ToString(),
+                            Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(scalar.Input.Path)),
+                            this.selection.SdkRoot, "selected-native-scalar-versus-guid");
+                    return;
+                }
+
+                if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -1086,7 +1103,12 @@ namespace MetadataUtils
                             nativeDependencies.Add(new NativeDependency(candidate, owner));
                     var selected = protections.Length == 0 ? ordered[0] : null;
                     if (selected != null)
+                    {
                         constants.Add((group.Key.Architecture, selected.Namespace, selected.Value.Name), selected.Value);
+                        if (!this.selectedNativeScalars.TryGetValue(selected.Value.Name, out var scalars))
+                            this.selectedNativeScalars.Add(selected.Value.Name, scalars = new());
+                        scalars.Add(selected);
+                    }
                     var boundDefinitions = protections.Where(protection => protection.Proof != null)
                         .SelectMany(protection => inputsBySource[(group.Key.Architecture, protection.Proof.SourceFile)]
                             .Where(input => !rejectedInputs.Contains(input))
@@ -1854,13 +1876,13 @@ namespace MetadataUtils
                             // (UCHAR) 123
                             else if (match.Groups[32].Success)
                             {
-                                this.AddConstantValue(currentNamespace, "ushort", name, match.Groups[33].Value);
+                                this.AddConstantValue(currentNamespace, "byte", name, $"unchecked((byte){match.Groups[33].Value})");
                                 continue;
                             }
                             // (UCHAR) -42
                             else if (match.Groups[34].Success)
                             {
-                                this.AddConstantValue(currentNamespace, "ushort", name, $"unchecked((ushort){match.Groups[35].Value})");
+                                this.AddConstantValue(currentNamespace, "byte", name, $"unchecked((byte){match.Groups[35].Value})");
                                 continue;
                             }
                             // (BYTE) 0x42
