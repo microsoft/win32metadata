@@ -64,6 +64,27 @@ any pointer layer. The validator checks that owner's effective storage mapping
 and physical width and alignment. Intrinsic integer pointees retain their
 pointer-sized integral storage. Unrelated pointee identities and incompatible
 provider storage fail validation.
+When a native pointee has no written alias, its named owner must be the unique
+matching native alias with the same canonical storage. Scalar, pointer and
+record siblings in the same native typedef declaration can also supply that
+ownership when the spelling names their shared base instead. A different
+written owner in another declaration does not authorize an unrelated alias.
+An authored pointer view can give a native `void` pointee, or an excluded
+incomplete record with existing intrinsic provider storage, a managed type
+without inventing a native pointee identity. An existing conflicting native
+alias still rejects. Validated explicit pointer remaps remain the wrapper's
+`Value` type. Pointer layers and opaque-provider storage still require matching
+physical width and alignment.
+Retained-provider composition accepts the single string `NativeTypeName`
+source-transport attribute without relaxing storage or other field-attribute
+validation.
+For that composition only, native nominal backing chains are compared with the
+retained provider's field encoding; other alias declarations remain nominal.
+An existing retained integral resource with `NativeTypedef`, `RAIIFree` and
+`InvalidHandleValue` can preserve its fixed-integer signed encoding when the
+native backing has the same byte width. This does not apply to
+`IntPtr`/`UIntPtr`, incompatible widths, ordinary integer aliases or explicit
+native storage remaps.
 
 Complete named and anonymous record pointees retain their generated record and
 fields. The scraper joins the generated managed record through native source

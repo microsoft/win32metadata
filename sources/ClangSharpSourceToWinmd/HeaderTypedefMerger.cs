@@ -12,7 +12,9 @@ namespace ClangSharpSourceToWinmd
     internal static class HeaderTypedefMerger
     {
         private const string NativeTypedefName = "global::Windows.Win32.Foundation.Metadata.NativeTypedefAttribute";
+        private const string NativeTypeNameName = "global::Windows.Win32.Foundation.Metadata.NativeTypeNameAttribute";
         private const string InvalidHandleValueName = "global::Windows.Win32.Foundation.Metadata.InvalidHandleValueAttribute";
+        private const string RaiiFreeName = "global::Windows.Win32.Foundation.Metadata.RAIIFreeAttribute";
         private const string ArchitectureName = "global::Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute";
 
         internal static CSharpCompilation LowerConstants(CSharpCompilation compilation, bool writeModifiedFiles = true)
@@ -251,11 +253,15 @@ namespace ClangSharpSourceToWinmd
             foreach (var alias in aliases)
             {
                 var incomingType = valueTypes[alias];
+                // Compare native backing without flattening the emitted nominal aliases.
+                if (retained != null && alias != retained && !SymbolEqualityComparer.Default.Equals(valueType, incomingType))
+                    incomingType = GetHeaderBackingStorage(compilation, incomingType, new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
                 if (!SymbolEqualityComparer.Default.Equals(valueType, incomingType) &&
                     !(retained != null && IsEquivalentNativePointerStorage(valueType, incomingType)))
                 {
                     provenNativeStorage ??= CanPreserveDeclaredHandleStorage(compilation, aliases, retained, valueTypes) ||
-                        CanPreserveOpaqueStructPointerStorage(compilation, aliases, retained, valueTypes);
+                        CanPreserveOpaqueStructPointerStorage(compilation, aliases, retained, valueTypes) ||
+                        CanPreserveIntegralResourceStorage(compilation, aliases, retained, valueTypes);
                     if (!provenNativeStorage.Value)
                         throw Error(alias, "Conflicting native typedef Value storage types.");
                 }
@@ -292,6 +298,61 @@ namespace ClangSharpSourceToWinmd
             declaration = declaration.AddAttributeLists(added.ToArray());
             return provenNativeStorage == true ? NativeHandleSourceProvenance.Remove(declaration) : declaration;
         }
+
+        private static ITypeSymbol GetHeaderBackingStorage(CSharpCompilation compilation, ITypeSymbol type,
+            HashSet<ITypeSymbol> resolving)
+        {
+            if (type is not INamedTypeSymbol named || named.TypeKind != TypeKind.Struct ||
+                !named.GetAttributes().Any(attribute => AttributeName(attribute) == NativeTypedefName))
+                return type;
+            var declarations = named.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
+                .OfType<StructDeclarationSyntax>().Where(declaration =>
+                    HeaderEnumGroupMerger.IsHeaderTypesFile(declaration.SyntaxTree.FilePath)).ToArray();
+            if (declarations.Length == 0)
+                return type;
+            if (!resolving.Add(type))
+                throw new InvalidDataException($"Cyclic header native typedef storage for '{type.ToDisplayString()}'.");
+            ITypeSymbol storage = null;
+            foreach (var declaration in declarations)
+            {
+                var attributes = named.GetAttributes().Where(attribute =>
+                    attribute.ApplicationSyntaxReference?.SyntaxTree == declaration.SyntaxTree &&
+                    declaration.AttributeLists.Any(list => list.Span.Contains(attribute.ApplicationSyntaxReference.Span))).ToArray();
+                var fragment = new Fragment(declaration.SyntaxTree, declaration, named, attributes);
+                var incoming = GetHeaderBackingStorage(compilation,
+                    GetValueType(fragment, compilation.GetSemanticModel(declaration.SyntaxTree)), resolving);
+                if (storage != null && !SymbolEqualityComparer.Default.Equals(storage, incoming))
+                    throw Error(fragment, "Conflicting native typedef backing storage types.");
+                storage = incoming;
+            }
+            resolving.Remove(type);
+            return storage;
+        }
+
+        private static bool CanPreserveIntegralResourceStorage(CSharpCompilation compilation, Fragment[] aliases,
+            Fragment retained, IReadOnlyDictionary<Fragment, ITypeSymbol> valueTypes)
+        {
+            if (retained == null || aliases.Count(alias => IsAutoTypesFile(alias.Tree.FilePath)) != 1 ||
+                !retained.Attributes.Any(attribute => AttributeName(attribute) == InvalidHandleValueName) ||
+                !retained.Attributes.Any(attribute => AttributeName(attribute) == RaiiFreeName &&
+                    attribute.ConstructorArguments.Length == 1 &&
+                    attribute.ConstructorArguments[0].Value is string closeApi && !string.IsNullOrWhiteSpace(closeApi)))
+                return false;
+            int size = GetIntegralStorageSize(valueTypes[retained].SpecialType);
+            return size != 0 && aliases.Where(alias => alias != retained).All(alias =>
+                HeaderEnumGroupMerger.IsHeaderTypesFile(alias.Tree.FilePath) &&
+                GetIntegralStorageSize(GetHeaderBackingStorage(compilation, valueTypes[alias],
+                    new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default)).SpecialType) == size);
+        }
+
+        private static int GetIntegralStorageSize(SpecialType type) => type switch
+        {
+            SpecialType.System_SByte or SpecialType.System_Byte => 1,
+            SpecialType.System_Int16 or SpecialType.System_UInt16 => 2,
+            SpecialType.System_Int32 or SpecialType.System_UInt32 => 4,
+            SpecialType.System_Int64 or SpecialType.System_UInt64 => 8,
+            _ => 0,
+        };
 
         private static bool CanPreserveDeclaredHandleStorage(CSharpCompilation compilation, Fragment[] aliases, Fragment retained,
             IReadOnlyDictionary<Fragment, ITypeSymbol> valueTypes)
@@ -427,12 +488,19 @@ namespace ClangSharpSourceToWinmd
                 declaration.TypeParameterList != null || declaration.BaseList != null ||
                 declaration.Members.Count != 1 || declaration.Members[0] is not FieldDeclarationSyntax field ||
                 field.Declaration.Variables.Count != 1 || field.Declaration.Variables[0].Identifier.ValueText != "Value" ||
-                field.Declaration.Variables[0].Initializer != null || field.AttributeLists.Count != 0 ||
+                field.Declaration.Variables[0].Initializer != null ||
                 !field.Modifiers.Any(SyntaxKind.PublicKeyword) || field.Modifiers.Any(modifier =>
                     modifier.IsKind(SyntaxKind.StaticKeyword) || modifier.IsKind(SyntaxKind.ConstKeyword) ||
                     modifier.IsKind(SyntaxKind.ReadOnlyKeyword) || modifier.IsKind(SyntaxKind.VolatileKeyword)) ||
                 fragment.Attributes.Count(attribute => AttributeName(attribute) == NativeTypedefName) != 1)
                 throw Error(fragment, "Expected a namespace-level native typedef wrapper containing one public instance Value field.");
+            if (model.GetDeclaredSymbol(field.Declaration.Variables[0]) is not IFieldSymbol valueField)
+                throw Error(fragment, "Cannot resolve native typedef Value storage.");
+            var fieldAttributes = valueField.GetAttributes();
+            if (fieldAttributes.Length > 1 || fieldAttributes.Any(attribute => AttributeName(attribute) != NativeTypeNameName ||
+                attribute.ConstructorArguments.Length != 1 || attribute.ConstructorArguments[0].Value is not string ||
+                attribute.NamedArguments.Length != 0))
+                throw Error(fragment, "Native typedef Value fields only support one NativeTypeName source-transport attribute.");
             var type = model.GetTypeInfo(field.Declaration.Type).Type;
             if (type == null || type.TypeKind == TypeKind.Error || !type.IsUnmanagedType)
                 throw Error(fragment, "Cannot resolve native typedef Value storage.");
