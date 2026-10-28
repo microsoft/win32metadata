@@ -258,6 +258,18 @@ namespace ClangSharpSourceToWinmd
                 // Compare native backing without flattening the emitted nominal aliases.
                 if (retained != null && alias != retained && !SymbolEqualityComparer.Default.Equals(valueType, incomingType))
                     incomingType = GetHeaderBackingStorage(compilation, incomingType, new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
+                if (retained == null && !SymbolEqualityComparer.Default.Equals(valueType, incomingType))
+                {
+                    var storage = GetHeaderBackingStorage(compilation, valueType,
+                        new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
+                    var incoming = GetHeaderBackingStorage(compilation, incomingType,
+                        new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
+                    if (storage.SpecialType is (SpecialType.System_SByte or SpecialType.System_Byte or
+                        SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char or
+                        SpecialType.System_Int32 or SpecialType.System_UInt32 or SpecialType.System_Int64 or SpecialType.System_UInt64) &&
+                        SymbolEqualityComparer.Default.Equals(storage, incoming))
+                        continue;
+                }
                 if (!SymbolEqualityComparer.Default.Equals(valueType, incomingType) &&
                     !(retained != null && IsEquivalentNativePointerStorage(valueType, incomingType)))
                 {

@@ -47,6 +47,16 @@ receiving a scalar wrapper. An incomplete native record remains an empty record,
 without an invented `Value` field. Function-pointer aliases use the existing
 callback discovery.
 
+An explicitly remapped, source-bound native enum can already provide the managed
+identity of an inferred scalar alias in the same native scope. The scraper keeps
+that ordinary enum, its backing type and members instead of adding a conflicting
+nominal struct. The alias must be the unique unannotated owner with integral
+native storage matching the enum's width and alignment. Floating, pointer,
+incompatible-width and conflicting authored typedef metadata reject.
+Source-location transport is selected for this path even when authored
+annotation parsing is disabled and no records are present. Unrelated native
+scopes remain distinct, and explicit CLR storage validation is unchanged.
+
 Array aliases, pointers to arrays, unresolved dependent types and template-owned
 typedefs remain with the ordinary generator rather than becoming nominal
 wrappers. A selected non-template alias with a concrete specialization can still
@@ -92,6 +102,17 @@ Constant qualification and lowering use the same validated backing-chain
 analysis. Every fragment, including retained providers, must agree on fixed
 integer storage and signedness before a native typedef constant can be lowered.
 This analysis does not change public alias fields or direct API identities.
+Cross-architecture dependency identity partitions the complete set of provider
+fragments for each architecture. Multiple partial providers are not separate
+architecture variants. Distinct source fragments survive variant deduplication
+until strict provider composition; a referenced type still has exactly one
+dependency group per architecture. This also retains same-signature fragments
+with different scoped bindings, including repeated namespace blocks in one file.
+Multiple native alias owners in one input still reject.
+Header-only integer providers can compare
+their semantically resolved terminal fixed-integer backing without flattening
+the retained field's nominal type. Signedness, width, pointer ownership,
+annotations and other storage conflicts remain validated.
 Source-bound fixed-integer constant variables use Clang's evaluated native
 value, including native character-to-unsigned and signed-to-unsigned
 conversions, from the original translation unit. This does not reinterpret

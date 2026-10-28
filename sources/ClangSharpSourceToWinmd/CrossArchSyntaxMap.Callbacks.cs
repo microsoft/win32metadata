@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using MetadataUtils;
@@ -13,11 +14,23 @@ namespace ClangSharpSourceToWinmd
     {
         private readonly Dictionary<(string Path, Architecture Architecture, int Position), string> callbackReferences = new();
         private readonly HashSet<string> callbackDependentTrees = new(StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> callbackMultiFragmentTypes = new(StringComparer.Ordinal);
 
         internal bool HasCallbackDependencies(string path) => this.callbackDependentTrees.Contains(path);
 
         internal string GetCallbackReference(SyntaxTree tree, Architecture architecture, int position)
             => this.callbackReferences.TryGetValue((tree.FilePath, architecture, position), out string name) ? name : null;
+
+        internal string GetCallbackProviderKey(SyntaxNode node)
+        {
+            string name = GetFullName(node);
+            if (!this.callbackMultiFragmentTypes.Contains(name))
+                return string.Empty;
+            int ordinal = node.SyntaxTree.GetRoot().DescendantNodes().TakeWhile(declaration => declaration.SpanStart != node.SpanStart)
+                .Count(declaration => declaration.RawKind == node.RawKind && GetFullName(declaration) == name);
+            return Path.GetFileName(node.SyntaxTree.FilePath).ToUpperInvariant() + "\0" +
+                ordinal.ToString(System.Globalization.CultureInfo.InvariantCulture) + "\0" + GetFullSignature(node);
+        }
 
         internal void BindCallbackReferences(IEnumerable<SyntaxTree> additionalTrees, IEnumerable<MetadataReference> references)
         {
@@ -29,6 +42,7 @@ namespace ClangSharpSourceToWinmd
                 StringComparer.Ordinal);
             if (affected.Count == 0)
                 return;
+            var affectedTypes = new HashSet<string>(affected, StringComparer.Ordinal);
 
             var paths = new HashSet<string>(trees.Select(tree => tree.FilePath), StringComparer.OrdinalIgnoreCase);
             var declarations = trees.Where(IsCrossArchTree).Where(tree => GetArchForTree(tree) != Architecture.None)
@@ -96,7 +110,13 @@ namespace ClangSharpSourceToWinmd
             }
             while (added);
 
-            var seeds = affected.ToDictionary(name => name, name => this.namesToInfos[name].ToArray(), StringComparer.Ordinal);
+            foreach (var group in declarations.Where(node => (node is StructDeclarationSyntax or DelegateDeclarationSyntax) &&
+                affected.Contains(GetFullName(node))).GroupBy(node => (Name: GetFullName(node), Architecture: GetArchForTree(node.SyntaxTree))))
+                if (group.Skip(1).Any())
+                    this.callbackMultiFragmentTypes.Add(group.Key.Name);
+
+            var architectures = new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 };
+            var seeds = affected.ToDictionary(name => name, CreateSeeds, StringComparer.Ordinal);
             var current = seeds;
             bool changed;
             do
@@ -109,7 +129,7 @@ namespace ClangSharpSourceToWinmd
                     for (int seed = 0; seed < seeds[name].Length; seed++)
                     {
                         var fingerprints = new Dictionary<string, CrossArchInfo>(StringComparer.Ordinal);
-                        foreach (Architecture architecture in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
+                        foreach (Architecture architecture in architectures)
                         {
                             if (!seeds[name][seed].Arch.HasFlag(architecture))
                                 continue;
@@ -144,6 +164,31 @@ namespace ClangSharpSourceToWinmd
                 string suffix = "____" + ordinal;
                 string replacement = pair.Value.Alias ? pair.Value.QualifiedName + suffix : pair.Key.Identifier.ValueText + suffix;
                 this.callbackReferences[(pair.Key.SyntaxTree.FilePath, architecture, pair.Key.SpanStart)] = replacement;
+            }
+
+            CrossArchInfo[] CreateSeeds(string name)
+            {
+                var sources = this.namesToInfos[name];
+                if (!affectedTypes.Contains(name) ||
+                    !architectures.Any(architecture => sources.Count(group => group.Arch.HasFlag(architecture)) > 1))
+                    return sources.ToArray();
+                this.callbackMultiFragmentTypes.Add(name);
+                var groups = new Dictionary<string, CrossArchInfo>(StringComparer.Ordinal);
+                // Partition the complete provider set, not individual parts of one type.
+                foreach (Architecture architecture in sources.SelectMany(source =>
+                    architectures.Where(architecture => source.Arch.HasFlag(architecture))).Distinct())
+                {
+                    string signature = string.Concat(sources.Where(source => source.Arch.HasFlag(architecture))
+                        .Select(source => source.FullSignature).OrderBy(value => value, StringComparer.Ordinal)
+                        .Select(value => value.Length.ToString(System.Globalization.CultureInfo.InvariantCulture) + ":" + value));
+                    if (!groups.TryGetValue(signature, out var group))
+                    {
+                        group = new CrossArchInfo { FullSignature = signature };
+                        groups.Add(signature, group);
+                    }
+                    group.Arch |= architecture;
+                }
+                return groups.Values.ToArray();
             }
 
             SemanticModel Model(SyntaxTree tree)
