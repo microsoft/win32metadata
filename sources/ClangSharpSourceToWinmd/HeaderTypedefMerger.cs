@@ -109,7 +109,9 @@ namespace ClangSharpSourceToWinmd
                             attribute.ApplicationSyntaxReference?.SyntaxTree == declaration.SyntaxTree &&
                             declaration.AttributeLists.Any(list => list.Span.Contains(attribute.ApplicationSyntaxReference.Span))).ToArray();
                         var fragment = new Fragment(declaration.SyntaxTree, declaration, type, attributes);
-                        var incoming = GetValueType(fragment, compilation.GetSemanticModel(declaration.SyntaxTree));
+                        var incoming = GetHeaderBackingStorage(compilation,
+                            GetValueType(fragment, compilation.GetSemanticModel(declaration.SyntaxTree)),
+                            new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
                         if (valueType != null && !SymbolEqualityComparer.Default.Equals(valueType, incoming))
                             throw Error(fragment, "Conflicting native typedef constant storage types.");
                         valueType = incoming;

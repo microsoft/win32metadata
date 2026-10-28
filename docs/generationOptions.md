@@ -86,8 +86,12 @@ floating storage or narrowing providers.
 Retained-provider composition accepts the single string `NativeTypeName`
 source-transport attribute without relaxing storage or other field-attribute
 validation.
-For that composition only, native nominal backing chains are compared with the
-retained provider's field encoding; other alias declarations remain nominal.
+Retained-provider composition compares native nominal backing chains with the
+provider's field encoding without flattening emitted alias declarations.
+Constant qualification and lowering use the same validated backing-chain
+analysis. Every fragment, including retained providers, must agree on fixed
+integer storage and signedness before a native typedef constant can be lowered.
+This analysis does not change public alias fields or direct API identities.
 An existing retained integral resource with `NativeTypedef`, `RAIIFree` and
 `InvalidHandleValue` can preserve its fixed-integer signed encoding when the
 native backing has the same byte width. This does not apply to

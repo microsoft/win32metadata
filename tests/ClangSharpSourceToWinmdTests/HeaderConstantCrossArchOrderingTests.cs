@@ -17,25 +17,86 @@ namespace ClangSharpSourceToWinmdTests
         public void NativeTypedefConstantsKeepTheirNativeTypeAndStorage(
             string storage, string value, ConstantTypeCode code, string bits)
         {
-            Emit(new Dictionary<string, string>
+            foreach (bool repeatedProviders in new[] { false, true })
             {
-                ["provider.header-types.cs"] = "namespace Test { [NativeTypedef] " +
-                    "public partial struct STATUS { public " + storage + " Value; } }",
-                ["constants.cs"] = Source("[NativeTypeName(\"const STATUS\")] public const STATUS ORIGINAL=" +
-                    "unchecked((STATUS)" + value + "); public const " + storage + " ALIAS=(" + storage + ")ORIGINAL;"),
-            }, fields =>
-            {
-                var original = fields.Single(field => field.Name == "ORIGINAL");
-                StringAssert.StartsWith(original.Signature, "0611");
-                Assert.AreEqual(code, original.ConstantType);
-                Assert.AreEqual(bits, original.ValueBits);
-                Assert.IsNull(original.Architectures);
-                var alias = fields.Single(field => field.Name == "ALIAS");
-                Assert.AreEqual(code, alias.ConstantType);
-                Assert.AreEqual(bits, alias.ValueBits);
-                Assert.IsNull(alias.Architectures);
-                Assert.IsFalse(alias.Signature.StartsWith("0611", StringComparison.Ordinal));
-            });
+                var inputs = new Dictionary<string, string>
+                {
+                    ["provider.header-types.cs"] = "namespace Test { [NativeTypedef] " +
+                        "public partial struct STATUS { public " + storage + " Value; } }",
+                    ["constants.cs"] = Source("[NativeTypeName(\"const STATUS\")] public const STATUS ORIGINAL=" +
+                        "unchecked((STATUS)" + value + "); public const " + storage + " ALIAS=(" + storage + ")ORIGINAL;"),
+                };
+                if (repeatedProviders)
+                {
+                    inputs["backing.header-types.cs"] = "namespace Test { [NativeTypedef] " +
+                        "public partial struct BASE { public " + storage + " Value; } " +
+                        "[NativeTypedef] public partial struct CHAIN { public BASE Value; } }";
+                    inputs["other.header-types.cs"] = "namespace Test { [NativeTypedef] " +
+                        "public partial struct STATUS { public CHAIN Value; } }";
+                    inputs["autotypes.cs"] = inputs["provider.header-types.cs"];
+                    inputs["consumer.cs"] = "using System.Runtime.InteropServices; namespace Test { " +
+                        "public struct BUFFER { public STATUS Value; } public static partial class Apis { " +
+                        "[DllImport(\"native\")] public static extern STATUS RoundTrip(STATUS value); } }";
+                }
+                Emit(inputs, fields =>
+                {
+                    var original = fields.Single(field => field.Name == "ORIGINAL");
+                    StringAssert.StartsWith(original.Signature, "0611");
+                    Assert.AreEqual(code, original.ConstantType);
+                    Assert.AreEqual(bits, original.ValueBits);
+                    Assert.IsNull(original.Architectures);
+                    var alias = fields.Single(field => field.Name == "ALIAS");
+                    Assert.AreEqual(code, alias.ConstantType);
+                    Assert.AreEqual(bits, alias.ValueBits);
+                    Assert.IsNull(alias.Architectures);
+                    Assert.IsFalse(alias.Signature.StartsWith("0611", StringComparison.Ordinal));
+                }, inspectImage: image =>
+                {
+                    if (!repeatedProviders)
+                        return;
+                    using var stream = image.OpenRead();
+                    using var pe = new System.Reflection.PortableExecutable.PEReader(stream);
+                    var reader = pe.GetMetadataReader();
+                    var types = reader.TypeDefinitions.ToDictionary(
+                        handle => reader.GetString(reader.GetTypeDefinition(handle).Name));
+                    foreach (string name in new[] { "STATUS", "BASE" })
+                    {
+                        var type = reader.GetTypeDefinition(types[name]);
+                        Assert.AreEqual("Test", reader.GetString(type.Namespace));
+                        var field = reader.GetFieldDefinition(type.GetFields().Single());
+                        CollectionAssert.AreEqual(new byte[] { 0x06, code switch
+                        {
+                            ConstantTypeCode.Int32 => 0x08,
+                            ConstantTypeCode.UInt32 => 0x09,
+                            ConstantTypeCode.Int64 => 0x0a,
+                            _ => 0x0b,
+                        } }, reader.GetBlobBytes(field.Signature));
+                    }
+                    foreach (var pair in new[] { (Owner: "CHAIN", Value: "BASE"), (Owner: "BUFFER", Value: "STATUS") })
+                    {
+                        var field = reader.GetFieldDefinition(reader.GetTypeDefinition(types[pair.Owner]).GetFields().Single());
+                        var signature = reader.GetBlobReader(field.Signature);
+                        Assert.AreEqual(0x06, (int)signature.ReadByte());
+                        AssertNominal(ref signature, pair.Value);
+                        Assert.AreEqual(0, signature.RemainingBytes);
+                    }
+                    var method = reader.GetMethodDefinition(reader.GetTypeDefinition(types["Apis"]).GetMethods()
+                        .Single(handle => reader.GetString(reader.GetMethodDefinition(handle).Name) == "RoundTrip"));
+                    var methodSignature = reader.GetBlobReader(method.Signature);
+                    Assert.AreEqual(0, (int)methodSignature.ReadByte());
+                    Assert.AreEqual(1, methodSignature.ReadCompressedInteger());
+                    AssertNominal(ref methodSignature, "STATUS");
+                    AssertNominal(ref methodSignature, "STATUS");
+                    Assert.AreEqual(0, methodSignature.RemainingBytes);
+
+                    void AssertNominal(ref BlobReader signature, string name)
+                    {
+                        Assert.AreEqual(0x11, (int)signature.ReadByte());
+                        Assert.AreEqual(System.Reflection.Metadata.Ecma335.MetadataTokens.GetRowNumber(types[name]) << 2,
+                            signature.ReadCompressedInteger());
+                    }
+                });
+            }
         }
 
         [TestMethod]
@@ -98,6 +159,25 @@ namespace ClangSharpSourceToWinmdTests
             }, _ => { }));
             StringAssert.Contains(error.Message, "CSSW003");
             StringAssert.Contains(error.Message, "ORIGINAL");
+            if (nativeTypedef)
+            {
+                foreach (string conflictingStorage in new[] { "uint", "long", "double" })
+                {
+                    var storageError = Assert.ThrowsException<InvalidDataException>(() => Emit(new Dictionary<string, string>
+                    {
+                        ["provider.header-types.cs"] = "namespace Test { [NativeTypedef] " +
+                            "public partial struct STATUS { public int Value; } " +
+                            "[NativeTypedef] public partial struct BASE { public " + conflictingStorage + " Value; } }",
+                        ["other.header-types.cs"] = "namespace Test { [NativeTypedef] " +
+                            "public partial struct STATUS { public BASE Value; } }",
+                        ["autotypes.cs"] = "namespace Test { [NativeTypedef] " +
+                            "public partial struct STATUS { public int Value; } }",
+                        ["constants.cs"] = Source("[NativeTypeName(\"const STATUS\")] public const STATUS ORIGINAL=(STATUS)1;"),
+                    }, _ => { }));
+                    StringAssert.Contains(storageError.Message, "CSSW005");
+                    StringAssert.Contains(storageError.Message, "Conflicting native typedef constant storage types");
+                }
+            }
         }
 
         [DataTestMethod]
