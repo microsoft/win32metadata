@@ -342,7 +342,7 @@ class Program
             if (annotations.RequiresRecordProjectionIdentity)
                 bindingOptions |= PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
             var config = CreateConfig(settings, ns, outputFile, headerFile, bindingOptions,
-                RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
+                annotations.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
             constantProbes?.Prepare(translationUnit, config, evaluateNativeConstants,
                 annotations.GetAssociatedConstantCandidateNames());
             if (constantProbes != null)
@@ -358,7 +358,7 @@ class Program
                 bindingOptions | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
             if (companion.ScopedRemaps.Count != 0 || companion.LegacyMembers.Count != 0 || constantProbes?.HasValueProbes == true)
                 config = CreateConfig(settings, ns, outputFile, headerFile, primaryOptions,
-                    RemapDiscovery.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
+                    annotations.CreateBindingRemaps(discovery, mergedRemaps, configuredAutoRemapExcludes), allExcludes);
             bool separateDeclarations = (parseHeaderAnnotations || evaluateNativeConstants) && !generateAllMacros;
             var bindingFlags = separateDeclarations
                 ? translationFlags & ~CXTranslationUnit_DetailedPreprocessingRecord
@@ -439,7 +439,7 @@ class Program
                     var companionOptions = (configOptions & ~PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
                         | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
                     var companionConfig = CreateConfig(settings, ns, outputFile, headerFile, companionOptions,
-                        RemapDiscovery.CreateBindingRemaps(companionDiscovery, companionRemaps, configuredAutoRemapExcludes),
+                        annotations.CreateBindingRemaps(companionDiscovery, companionRemaps, configuredAutoRemapExcludes),
                         allExcludes, companion.Functions.Select(function => function.Name).ToArray());
                     var companionStreams = new Dictionary<string, MemoryStream>();
                     using var companionGenerator = new PInvokeGenerator(companionConfig, path =>
@@ -509,7 +509,7 @@ class Program
                             & ~PInvokeGeneratorConfigurationOptions.GenerateMacroBindings)
                             | PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute;
                         var opaqueConfig = CreateConfig(settings, ns, outputFile, headerFile,
-                            opaqueOptions, RemapDiscovery.CreateBindingRemaps(discovery, projection.Remaps, configuredAutoRemapExcludes),
+                            opaqueOptions, annotations.CreateBindingRemaps(discovery, projection.Remaps, configuredAutoRemapExcludes),
                             allExcludes, opaqueRecords.IncludedNames,
                             opaqueRecords.TraversalFiles.Concat(config.TraversalNames).Distinct(StringComparer.OrdinalIgnoreCase).ToArray());
                         var opaqueStreams = new Dictionary<string, MemoryStream>();

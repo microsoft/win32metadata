@@ -2,11 +2,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
 
 namespace Win32MetadataScraperTests
@@ -20,6 +23,8 @@ typedef HANDLE ADS_SEARCH_HANDLE;
 typedef ADS_SEARCH_HANDLE *PADS_SEARCH_HANDLE;
 typedef HANDLE *RAW_HANDLE_POINTER;
 typedef unsigned long DWORD;
+typedef unsigned char byte;
+typedef unsigned int event;
 typedef DWORD SCALAR_ALIAS;
 typedef short VARIANT_BOOL;
 typedef int HRESULT;
@@ -38,6 +43,10 @@ typedef struct { int _; } *UI_ANIMATION_KEYFRAME;
 struct PUBLIC_FIELD_RECORD { EXTERNAL_FIELD_COUNT count; };
 typedef struct _RECORD_VALUE { int count; } RECORD_VALUE;
 typedef enum _NATIVE_ENUM { NativeFirst = 1, NativeSecond = 2 } NATIVE_ENUM;
+enum class NATIVE_SCOPED : unsigned { NativeOnly = 1 };
+typedef __UINTPTR_TYPE__ LEGACY_RESOURCE;
+#define DECLARE_RECORD_BUFFER(n) typedef struct _RECORD_BUFFER { RECORD_VALUE values[n]; } RECORD_BUFFER, *PRECORD_BUFFER
+DECLARE_RECORD_BUFFER(2);
 typedef RECORD_VALUE RECORD_VALUE_ARRAY[1];
 typedef RECORD_VALUE_ARRAY *PRECORD_VALUE_ARRAY;
 typedef unsigned char BYTE_VALUE_ARRAY[4];
@@ -72,6 +81,8 @@ void __stdcall PrototypeUseIntrinsicTypes(INT_PTR signedValue, UINT_PTR unsigned
 EXTERNAL_API_HANDLE __stdcall PrototypeUseExternalDependencies(PUBLIC_FIELD_RECORD* record, EXTERNAL_API_HANDLE value);
 void __stdcall PrototypeUseArrayAliases(PRECORD_VALUE_ARRAY records, PBYTE_VALUE_ARRAY bytes, SCALAR_ALIAS count);
 SELECTED_TEMPLATE_SCALAR __stdcall PrototypeUseTemplateAlias(SELECTED_TEMPLATE_SCALAR value);
+void __stdcall PrototypeUsePrimitiveAndOwnedTypes(byte value, byte* buffer, event namedValue, LEGACY_RESOURCE resource, NATIVE_SCOPED scoped);
+void __stdcall PrototypeUseRecordBuffer(PRECORD_BUFFER value);
 void __stdcall PrototypeUseSurface(HDC dc, HDRVR driver, VARIANT_BOOL booleanValue,
     SCALAR_ALIAS scalarValue, USet* set, OPAQUE_HANDLE opaqueValue,
     RECORD_VALUE recordValue, NATIVE_ENUM enumValue, CALLBACK_ALIAS callback);
@@ -99,17 +110,129 @@ HRESULT __stdcall PrototypeReturnResult();
             RunCase("x64", "x86_64-pc-windows-msvc", annotationsEnabled: true);
             AssertInvalidIntrinsicStorage("short", "IntPtr");
             AssertInvalidIntrinsicStorage("__INTPTR_TYPE__", "UIntPtr");
-            AssertInvalidPointerStorage("x64", "x86_64-pc-windows-msvc", "__ptr32", 4, 8);
-            AssertInvalidPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
+            AssertFixedWidthPointerStorage("x64", "x86_64-pc-windows-msvc", "__ptr32", 4, 8);
+            AssertFixedWidthPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
+            AssertInvalidOpaqueProviderStorage();
         }
 
-        private static void AssertInvalidPointerStorage(string architecture, string target, string qualifier, int size, int targetSize)
+        private static void AssertFixedWidthPointerStorage(string architecture, string target, string qualifier, int size, int targetSize)
         {
+            string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            string evidence = root == null ? null : Path.Combine(root, architecture + qualifier + "-fixed-width");
+            if (evidence != null)
+            {
+                Assert.False(Directory.Exists(evidence));
+                Directory.CreateDirectory(evidence);
+            }
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
-                "typedef void * " + qualifier + " APPLICATION_POINTER;", annotationsEnabled: false);
+                "typedef void * " + qualifier + @" APPLICATION_POINTER;
+typedef APPLICATION_POINTER FIXED_CHAIN;
+typedef APPLICATION_POINTER* APPLICATION_POINTER_ADDRESS;
+typedef void * " + qualifier + @" *RAW_APPLICATION_POINTER_ADDRESS;
+struct WIDTH_RECORD { unsigned char prefix; APPLICATION_POINTER value; unsigned char tail; };
+static_assert(sizeof(APPLICATION_POINTER) == " + size + @", ""Native pointer width changed."");
+static_assert(sizeof(WIDTH_RECORD) > 0, ""Force native record layout."");
+extern ""C"" APPLICATION_POINTER WidthEcho(APPLICATION_POINTER value);
+extern ""C"" APPLICATION_POINTER __stdcall WidthStdcallEcho(APPLICATION_POINTER value);
+extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
+                annotationsEnabled: false, namespaceName: "Windows.Win32.Foundation",
+                extraSettings: "--additional=-Xclang\n--additional=-fdump-record-layouts\n");
+            try
+            {
+                fixture.AssertSuccess();
+                using var image = Emit(fixture.DirectoryPath, architecture);
+                var reader = image.Reader;
+                var decoder = new SignatureNames(qualifiedNames: true);
+                string aliasType = "Windows.Win32.Foundation.APPLICATION_POINTER";
+                string storage = size == 4 ? "UInt32" : "UInt64";
+                AssertWrapper(reader, "APPLICATION_POINTER", storage);
+                AssertWrapper(reader, "FIXED_CHAIN", aliasType);
+                AssertWrapper(reader, "APPLICATION_POINTER_ADDRESS", aliasType + "*");
+                AssertWrapper(reader, "RAW_APPLICATION_POINTER_ADDRESS", storage + "*");
+                var alias = FindType(reader, "APPLICATION_POINTER");
+                var value = reader.GetFieldDefinition(Assert.Single(alias.GetFields()));
+                var aliasSource = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot().DescendantNodes()
+                    .OfType<StructDeclarationSyntax>().Single(type => type.Identifier.ValueText == "APPLICATION_POINTER");
+                var valueSource = (FieldDeclarationSyntax)Assert.Single(aliasSource.Members);
+                Assert.Equal(size == 4 ? "uint" : "ulong", valueSource.Declaration.Type.ToString());
+                string nativeType = MetadataUtils.SyntaxUtils.GetNativeTypeNameFromAttributesLists(valueSource.AttributeLists);
+                Assert.Contains(qualifier, nativeType);
+                Assert.Contains("void", nativeType);
+                AssertDoesNotHaveAttribute(reader, value.GetCustomAttributes(), "NativeTypeNameAttribute");
+                var record = FindType(reader, "WIDTH_RECORD");
+                var fields = record.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                Assert.Equal(new[] { "prefix", "value", "tail" }, fields.Select(field => reader.GetString(field.Name)));
+                Assert.Equal(new[] { "Byte", aliasType, "Byte" }, fields.Select(field => field.DecodeSignature(decoder, null)));
+                Assert.Equal(TypeAttributes.SequentialLayout, record.Attributes & TypeAttributes.LayoutMask);
+                Assert.Equal(TypeAttributes.SequentialLayout, alias.Attributes & TypeAttributes.LayoutMask);
+                var cdeclMethod = FindMethod(reader, "Apis", "WidthEcho");
+                var method = cdeclMethod.DecodeSignature(decoder, null);
+                Assert.Equal(aliasType, method.ReturnType);
+                Assert.Equal(aliasType, Assert.Single(method.ParameterTypes));
+                Assert.Equal(MethodImportAttributes.CallingConventionCDecl,
+                    cdeclMethod.GetImport().Attributes & MethodImportAttributes.CallingConventionMask);
+                var stdcallMethod = FindMethod(reader, "Apis", "WidthStdcallEcho");
+                var stdcallSignature = stdcallMethod.DecodeSignature(decoder, null);
+                Assert.Equal(aliasType, stdcallSignature.ReturnType);
+                Assert.Equal(aliasType, Assert.Single(stdcallSignature.ParameterTypes));
+                Assert.Equal(MethodImportAttributes.CallingConventionWinApi,
+                    stdcallMethod.GetImport().Attributes & MethodImportAttributes.CallingConventionMask);
+                if (evidence != null)
+                {
+                    var layout = record.GetLayout();
+                    File.WriteAllText(Path.Combine(evidence, "observed-metadata.json"), JsonSerializer.Serialize(new
+                    {
+                        architecture,
+                        target,
+                        qualifier,
+                        nativePointerBytes = size,
+                        targetPointerBytes = targetSize,
+                        aliasType,
+                        storage,
+                        storageBytes = size,
+                        nativeType,
+                        nativeTypeProvenance = "generated C# Value.NativeTypeName; consumed by the ordinary emitter",
+                        aliasAttributes = alias.Attributes.ToString(),
+                        aliasLayoutSize = alias.GetLayout().Size,
+                        aliasLayoutPackingSize = alias.GetLayout().PackingSize,
+                        aliasValueRawSignature = Convert.ToHexString(reader.GetBlobBytes(value.Signature)),
+                        recordAttributes = record.Attributes.ToString(),
+                        layoutSize = layout.Size,
+                        layoutPackingSize = layout.PackingSize,
+                        fields = fields.Select(field => new
+                        {
+                            name = reader.GetString(field.Name),
+                            type = field.DecodeSignature(decoder, null),
+                            offset = field.GetOffset(),
+                            rawSignature = Convert.ToHexString(reader.GetBlobBytes(field.Signature)),
+                        }).ToArray(),
+                        methodReturnType = method.ReturnType,
+                        methodParameterTypes = method.ParameterTypes.ToArray(),
+                        cdeclImportAttributes = cdeclMethod.GetImport().Attributes.ToString(),
+                        stdcallReturnType = stdcallSignature.ReturnType,
+                        stdcallParameterTypes = stdcallSignature.ParameterTypes.ToArray(),
+                        stdcallImportAttributes = stdcallMethod.GetImport().Attributes.ToString(),
+                    }, new JsonSerializerOptions { WriteIndented = true }));
+                }
+            }
+            finally
+            {
+                RetainFixture(fixture, evidence);
+            }
+            using var invalid = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                "typedef void * " + qualifier + " APPLICATION_POINTER;", annotationsEnabled: false,
+                extraSettings: "--remap\nAPPLICATION_POINTER=IntPtr\n");
+            Assert.NotEqual(0, invalid.Run());
+            Assert.Contains("does not preserve native width, alignment, and pointer depth.", invalid.Diagnostics);
+        }
+
+        private static void AssertInvalidOpaqueProviderStorage()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
+                "typedef unsigned long long LEGACY_RESOURCE;", annotationsEnabled: false,
+                extraSettings: "--remap\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nLEGACY_RESOURCE__\n");
             Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("ordinary target-width data pointers at every pointer level", fixture.Diagnostics);
-            Assert.Contains("native size " + size + " bytes instead of the target's " + targetSize + " bytes", fixture.Diagnostics);
+            Assert.Contains("does not preserve native width", fixture.Diagnostics);
         }
 
         private static void AssertInvalidIntrinsicStorage(string nativeType, string managedType)
@@ -134,7 +257,7 @@ HRESULT __stdcall PrototypeReturnResult();
                 "\n_WIN32META_ANNOTATE_FIELD_(GateRecord::value, _Win32_Reserved_);\n");
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                 annotationsEnabled, libraryPath: "candidate-prototype.dll", namespaceName: "Windows.Win32.Foundation",
-                extraSettings: "-DWIN32METADATA\n");
+                extraSettings: "-DWIN32METADATA\n--remap\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nLEGACY_RESOURCE__\n");
             File.AppendAllText(Path.Combine(fixture.DirectoryPath, "cleanup.h"), @"
 typedef void* HANDLE;
 typedef unsigned long EXTERNAL_COUNT_BASE;
@@ -230,6 +353,31 @@ typedef int EXTERNAL_UNUSED;
                 AssertWrapper(reader, "EXTERNAL_HANDLE_BASE", "Void*");
                 AssertWrapper(reader, "EXTERNAL_API_HANDLE", "Windows.Win32.Foundation.EXTERNAL_HANDLE_BASE");
                 AssertWrapper(reader, "SELECTED_TEMPLATE_SCALAR", "Int32");
+                AssertWrapper(reader, "event", "UInt32");
+                AssertWrapper(reader, "PRECORD_BUFFER", "Windows.Win32.Foundation.RECORD_BUFFER*");
+                foreach (string name in new[] { "byte", "LEGACY_RESOURCE" })
+                    Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
+                var primitiveMethod = FindMethod(reader, "Apis", "PrototypeUsePrimitiveAndOwnedTypes").DecodeSignature(decoder, null);
+                Assert.Equal(new[] { "Byte", "Byte*", "Windows.Win32.Foundation.event", "IntPtr", "Windows.Win32.Foundation.NATIVE_SCOPED" },
+                    primitiveMethod.ParameterTypes);
+                var scoped = FindType(reader, "NATIVE_SCOPED");
+                Assert.Equal(annotationsEnabled, scoped.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "ScopedEnumAttribute"));
+                var nativeBuffer = FindType(reader, "RECORD_BUFFER");
+                var bufferFields = nativeBuffer.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                Assert.Equal("values", reader.GetString(Assert.Single(bufferFields).Name));
+                Assert.Equal("Windows.Win32.Foundation.RECORD_VALUE[]", bufferFields[0].DecodeSignature(decoder, null));
+                var bufferSignature = reader.GetBlobReader(bufferFields[0].Signature);
+                Assert.Equal(SignatureKind.Field, bufferSignature.ReadSignatureHeader().Kind);
+                Assert.Equal(SignatureTypeCode.Array, bufferSignature.ReadSignatureTypeCode());
+                Assert.Equal(SignatureTypeCode.TypeHandle, bufferSignature.ReadSignatureTypeCode());
+                var element = reader.GetTypeDefinition((TypeDefinitionHandle)bufferSignature.ReadTypeHandle());
+                Assert.Equal("RECORD_VALUE", reader.GetString(element.Name));
+                Assert.Equal(1, bufferSignature.ReadCompressedInteger());
+                Assert.Equal(1, bufferSignature.ReadCompressedInteger());
+                Assert.Equal(2, bufferSignature.ReadCompressedInteger());
+                Assert.Equal(1, bufferSignature.ReadCompressedInteger());
+                Assert.Equal(0, bufferSignature.ReadCompressedSignedInteger());
+                Assert.Equal(0, bufferSignature.RemainingBytes);
                 Assert.DoesNotContain(reader.TypeDefinitions, handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == "EXTERNAL_UNUSED");
                 foreach (string name in new[]
                 {
@@ -337,16 +485,20 @@ typedef int EXTERNAL_UNUSED;
             }
             finally
             {
-                if (evidence != null)
-                {
-                    File.WriteAllText(Path.Combine(evidence, "scraper.stdout-stderr.log"), fixture.Diagnostics ?? "");
-                    foreach (string file in Directory.EnumerateFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
-                    {
-                        string destination = Path.Combine(evidence, "fixture", Path.GetRelativePath(fixture.DirectoryPath, file));
-                        Directory.CreateDirectory(Path.GetDirectoryName(destination));
-                        File.Copy(file, destination, overwrite: false);
-                    }
-                }
+                RetainFixture(fixture, evidence);
+            }
+        }
+
+        private static void RetainFixture(HeaderAnnotationTests.NativeFixture fixture, string evidence)
+        {
+            if (evidence == null)
+                return;
+            File.WriteAllText(Path.Combine(evidence, "scraper.stdout-stderr.log"), fixture.Diagnostics ?? "");
+            foreach (string file in Directory.EnumerateFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
+            {
+                string destination = Path.Combine(evidence, "fixture", Path.GetRelativePath(fixture.DirectoryPath, file));
+                Directory.CreateDirectory(Path.GetDirectoryName(destination));
+                File.Copy(file, destination, overwrite: false);
             }
         }
 

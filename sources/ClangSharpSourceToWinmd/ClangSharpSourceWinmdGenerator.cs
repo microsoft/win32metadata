@@ -40,6 +40,9 @@ namespace ClangSharpSourceToWinmd
         private static readonly Regex IsCharRegex = new Regex(@"^(?:CHAR|char)");
         private static readonly Regex ArrayMatcher = new Regex(@"\[\d*\]");
         private static readonly Regex NormalizeNativeTypeNameRegex = new Regex(@"((?:const )?(?:unsigned )?\S+)\s?(\*?(?:\[\d*\]))");
+        private static readonly SymbolDisplayFormat MetadataNameFormat = SymbolDisplayFormat.CSharpErrorMessageFormat
+            .WithMiscellaneousOptions(SymbolDisplayFormat.CSharpErrorMessageFormat.MiscellaneousOptions &
+                ~SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
@@ -633,9 +636,10 @@ namespace ClangSharpSourceToWinmd
             }
 
             // Change from namepace.parent.self => parent/self
-            string name = symbol.ToString().Substring(symbol.ContainingNamespace.ToString().Length + 1).Replace('.', '/');
+            string @namespace = symbol.ContainingNamespace.ToDisplayString(MetadataNameFormat);
+            string name = symbol.ToDisplayString(MetadataNameFormat).Substring(@namespace.Length + 1).Replace('.', '/');
 
-            return this.GetTypeReference(symbol.ContainingNamespace.ToString(), name, scopeRef);
+            return this.GetTypeReference(@namespace, name, scopeRef);
         }
 
         private EntityHandle GetTypeReference(string @namespace, string name)
@@ -1726,7 +1730,7 @@ namespace ClangSharpSourceToWinmd
         {
             if (typeSymbol.ContainingType == null)
             {
-                return typeSymbol.ToString();
+                return typeSymbol.ToDisplayString(MetadataNameFormat);
             }
 
             return this.GetFullNameForSymbol(typeSymbol.ContainingType) + "/" + this.GetShortNameForSymbol(typeSymbol);
