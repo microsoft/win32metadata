@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
@@ -35,6 +35,7 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
                 new Option<string>("--autoTypes", "A path to a .json file of auto-types to add to the metadata.", ArgumentArity.OneOrMore),
                 new Option<string>("--staticLibs", "Mapping from DLL names to alternative static libraries.", ArgumentArity.OneOrMore),
+                new Option<string>("--importEntryPoint", "Maps a function name to the native entry point to import, such as #7 for an ordinal-only export.", ArgumentArity.OneOrMore),
                 new Option<string>("--forceGuidConst", "Forces a guid-only struct to be a guid const.", ArgumentArity.OneOrMore)
             };
 
@@ -58,6 +59,7 @@ namespace ClangSharpSourceToWinmd
             var autoTypeFiles = context.ParseResult.ValueForOption<string[]>("--autoTypes");
             var refs = context.ParseResult.ValueForOption<string[]>("--ref");
             var staticLibValuePairs = context.ParseResult.ValueForOption<string[]>("--staticLibs");
+            var importEntryPointValuePairs = context.ParseResult.ValueForOption<string[]>("--importEntryPoint");
             var forceGuidConstsVals = context.ParseResult.ValueForOption<string[]>("--forceGuidConst");
 
             Dictionary<string, string> remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
@@ -66,6 +68,7 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             Dictionary<string, string> requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
             Dictionary<string, string> staticLibs = ConvertValuePairsToDictionary(staticLibValuePairs);
+            Dictionary<string, string> importEntryPoints = ConvertValuePairsToDictionary(importEntryPointValuePairs);
             var forceGuidConsts = new HashSet<string>(forceGuidConstsVals ?? (Array.Empty<string>()));
 
             string rawVersion = version.Split('-')[0];
@@ -116,7 +119,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces);
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces, importEntryPoints);
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");

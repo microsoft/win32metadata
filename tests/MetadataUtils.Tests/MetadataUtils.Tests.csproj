@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\sources\GeneratorSdk\MetadataTasks\MetadataTasks.csproj" />
     <ProjectReference Include="..\..\sources\MetadataUtils\MetadataUtils.csproj" />
     <ProjectReference Include="..\TestCommon\TestCommon.csproj" />
   </ItemGroup>
@@ -34,6 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="assets\*\ordinalfixture.dll;assets\*\ordinalfixture.lib;assets\ordinalfixture.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="assets\arm64\cabinet.lib">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
