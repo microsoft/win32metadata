@@ -30,6 +30,7 @@ typedef short VARIANT_BOOL;
 typedef int HRESULT;
 typedef __INTPTR_TYPE__ INT_PTR;
 typedef __UINTPTR_TYPE__ UINT_PTR;
+typedef UINT_PTR *APP_UNSIGNED_POINTER_ADDRESS;
 typedef INT_PTR APP_SIGNED_POINTER_VALUE;
 typedef UINT_PTR APP_UNSIGNED_POINTER_VALUE;
 typedef INT_PTR (__stdcall *POINTER_SIZED_CALLBACK)();
@@ -78,6 +79,7 @@ void __stdcall PrototypeUsePointerAlias(PADS_SEARCH_HANDLE value, RAW_HANDLE_POI
 void __stdcall PrototypeUseInlinePointers(UI_ANIMATION_KEYFRAME keyframe, MachineGlobalObjectTableRegistrationToken token);
 void __stdcall PrototypeUseIntrinsicTypes(INT_PTR signedValue, UINT_PTR unsignedValue,
     APP_SIGNED_POINTER_VALUE signedAlias, APP_UNSIGNED_POINTER_VALUE unsignedAlias, POINTER_SIZED_CALLBACK callback);
+void __stdcall PrototypeUseMappedPointerAliases(RAW_HANDLE_POINTER handle, PADS_SEARCH_HANDLE search, APP_UNSIGNED_POINTER_ADDRESS integer);
 EXTERNAL_API_HANDLE __stdcall PrototypeUseExternalDependencies(PUBLIC_FIELD_RECORD* record, EXTERNAL_API_HANDLE value);
 void __stdcall PrototypeUseArrayAliases(PRECORD_VALUE_ARRAY records, PBYTE_VALUE_ARRAY bytes, SCALAR_ALIAS count);
 SELECTED_TEMPLATE_SCALAR __stdcall PrototypeUseTemplateAlias(SELECTED_TEMPLATE_SCALAR value);
@@ -113,6 +115,7 @@ HRESULT __stdcall PrototypeReturnResult();
             AssertFixedWidthPointerStorage("x64", "x86_64-pc-windows-msvc", "__ptr32", 4, 8);
             AssertFixedWidthPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
             AssertInvalidOpaqueProviderStorage();
+            AssertInvalidNominalPointeeStorage();
         }
 
         private static void AssertFixedWidthPointerStorage(string architecture, string target, string qualifier, int size, int targetSize)
@@ -244,6 +247,21 @@ extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
             Assert.Contains("does not preserve native width, signedness, and pointer depth.", fixture.Diagnostics);
         }
 
+        private static void AssertInvalidNominalPointeeStorage()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "typedef void* FIRST_OWNER; typedef void* SECOND_OWNER; typedef FIRST_OWNER* APPLICATION_POINTER;",
+                annotationsEnabled: false, extraSettings: "--remap\nAPPLICATION_POINTER=SECOND_OWNER*\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("does not preserve native width, alignment, and pointer depth.", fixture.Diagnostics);
+            using var invalidWidth = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc",
+                "struct WIDE_OWNER__; typedef WIDE_OWNER__* __ptr64 WIDE_OWNER; typedef WIDE_OWNER* APPLICATION_POINTER;",
+                annotationsEnabled: false,
+                extraSettings: "--remap\nWIDE_OWNER=IntPtr\nWIDE_OWNER__*=WIDE_OWNER\nAPPLICATION_POINTER=WIDE_OWNER*\n--exclude\nWIDE_OWNER\nWIDE_OWNER__\n");
+            Assert.NotEqual(0, invalidWidth.Run());
+            Assert.Contains("does not preserve native width, alignment, and pointer depth.", invalidWidth.Diagnostics);
+        }
+
         private static void RunCase(string architecture, string target, bool annotationsEnabled)
         {
             string root = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
@@ -257,7 +275,7 @@ extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
                 "\n_WIN32META_ANNOTATE_FIELD_(GateRecord::value, _Win32_Reserved_);\n");
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                 annotationsEnabled, libraryPath: "candidate-prototype.dll", namespaceName: "Windows.Win32.Foundation",
-                extraSettings: "-DWIN32METADATA\n--remap\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nLEGACY_RESOURCE__\n");
+                extraSettings: "-DWIN32METADATA\n--remap\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nLEGACY_RESOURCE__\n");
             File.AppendAllText(Path.Combine(fixture.DirectoryPath, "cleanup.h"), @"
 typedef void* HANDLE;
 typedef unsigned long EXTERNAL_COUNT_BASE;
@@ -348,6 +366,7 @@ typedef int EXTERNAL_UNUSED;
                 AssertWrapper(reader, "VARIANT_BOOL", "Int16");
                 AssertWrapper(reader, "APP_SIGNED_POINTER_VALUE", "IntPtr");
                 AssertWrapper(reader, "APP_UNSIGNED_POINTER_VALUE", "UIntPtr");
+                AssertWrapper(reader, "APP_UNSIGNED_POINTER_ADDRESS", "UIntPtr*");
                 AssertWrapper(reader, "EXTERNAL_COUNT_BASE", "UInt32");
                 AssertWrapper(reader, "EXTERNAL_FIELD_COUNT", "Windows.Win32.Foundation.EXTERNAL_COUNT_BASE");
                 AssertWrapper(reader, "EXTERNAL_HANDLE_BASE", "Void*");
@@ -443,6 +462,13 @@ typedef int EXTERNAL_UNUSED;
                     "Windows.Win32.Foundation.POINTER_SIZED_CALLBACK",
                 }, intrinsicMethod.ParameterTypes);
                 Assert.Equal("IntPtr", FindMethod(reader, "POINTER_SIZED_CALLBACK", "Invoke").DecodeSignature(decoder, null).ReturnType);
+                var mappedPointers = FindMethod(reader, "Apis", "PrototypeUseMappedPointerAliases").DecodeSignature(decoder, null);
+                Assert.Equal(new[]
+                {
+                    "Windows.Win32.Networking.ActiveDirectory.RAW_HANDLE_POINTER",
+                    "Windows.Win32.Networking.ActiveDirectory.PADS_SEARCH_HANDLE",
+                    "Windows.Win32.Foundation.APP_UNSIGNED_POINTER_ADDRESS",
+                }, mappedPointers.ParameterTypes);
                 var externalMethod = FindMethod(reader, "Apis", "PrototypeUseExternalDependencies").DecodeSignature(decoder, null);
                 Assert.Equal("Windows.Win32.Foundation.EXTERNAL_API_HANDLE", externalMethod.ReturnType);
                 Assert.Equal(new[]

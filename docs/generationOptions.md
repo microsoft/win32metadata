@@ -58,6 +58,13 @@ that transport. WinMD retains the nominal alias and fixed backing storage.
 Alias chains and ordinary outer pointer levels are preserved.
 Explicit incompatible CLR storage remaps fail validation.
 
+Pointer remap validation follows the written native pointee aliases. A named
+nominal type or existing provider owns its underlying native storage, including
+any pointer layer. The validator checks that owner's effective storage mapping
+and physical width and alignment. Intrinsic integer pointees retain their
+pointer-sized integral storage. Unrelated pointee identities and incompatible
+provider storage fail validation.
+
 Complete named and anonymous record pointees retain their generated record and
 fields. The scraper joins the generated managed record through native source
 identity before writing the typed alias pointer; it does not invent an anonymous
