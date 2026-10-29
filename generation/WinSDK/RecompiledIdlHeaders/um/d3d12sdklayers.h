@@ -96,6 +96,13 @@ typedef interface ID3D12Debug6 ID3D12Debug6;
 #endif 	/* __ID3D12Debug6_FWD_DEFINED__ */
 
 
+#ifndef __ID3D12Debug7_FWD_DEFINED__
+#define __ID3D12Debug7_FWD_DEFINED__
+typedef interface ID3D12Debug7 ID3D12Debug7;
+
+#endif 	/* __ID3D12Debug7_FWD_DEFINED__ */
+
+
 #ifndef __ID3D12DebugDevice1_FWD_DEFINED__
 #define __ID3D12DebugDevice1_FWD_DEFINED__
 typedef interface ID3D12DebugDevice1 ID3D12DebugDevice1;
@@ -989,7 +996,151 @@ EXTERN_C const IID IID_ID3D12Debug6;
 #endif 	/* __ID3D12Debug6_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12sdklayers_0000_0007 */
+#ifndef __ID3D12Debug7_INTERFACE_DEFINED__
+#define __ID3D12Debug7_INTERFACE_DEFINED__
+
+/* interface ID3D12Debug7 */
+/* [unique][local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ID3D12Debug7;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("31d409f9-22b4-409d-9c44-f72da8a2ba61")
+    ID3D12Debug7 : public ID3D12Debug6
+    {
+    public:
+        virtual void STDMETHODCALLTYPE SetEnableDriverReportedMessages( 
+            BOOL Enable) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ID3D12Debug7Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ID3D12Debug7 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ID3D12Debug7 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ID3D12Debug7 * This);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug, EnableDebugLayer)
+        void ( STDMETHODCALLTYPE *EnableDebugLayer )( 
+            ID3D12Debug7 * This);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug3, SetEnableGPUBasedValidation)
+        void ( STDMETHODCALLTYPE *SetEnableGPUBasedValidation )( 
+            ID3D12Debug7 * This,
+            BOOL Enable);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug3, SetEnableSynchronizedCommandQueueValidation)
+        void ( STDMETHODCALLTYPE *SetEnableSynchronizedCommandQueueValidation )( 
+            ID3D12Debug7 * This,
+            BOOL Enable);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug3, SetGPUBasedValidationFlags)
+        void ( STDMETHODCALLTYPE *SetGPUBasedValidationFlags )( 
+            ID3D12Debug7 * This,
+            D3D12_GPU_BASED_VALIDATION_FLAGS Flags);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug4, DisableDebugLayer)
+        void ( STDMETHODCALLTYPE *DisableDebugLayer )( 
+            ID3D12Debug7 * This);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug5, SetEnableAutoName)
+        void ( STDMETHODCALLTYPE *SetEnableAutoName )( 
+            ID3D12Debug7 * This,
+            BOOL Enable);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug6, SetForceLegacyBarrierValidation)
+        void ( STDMETHODCALLTYPE *SetForceLegacyBarrierValidation )( 
+            ID3D12Debug7 * This,
+            BOOL Enable);
+        
+        DECLSPEC_XFGVIRT(ID3D12Debug7, SetEnableDriverReportedMessages)
+        void ( STDMETHODCALLTYPE *SetEnableDriverReportedMessages )( 
+            ID3D12Debug7 * This,
+            BOOL Enable);
+        
+        END_INTERFACE
+    } ID3D12Debug7Vtbl;
+
+    interface ID3D12Debug7
+    {
+        CONST_VTBL struct ID3D12Debug7Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ID3D12Debug7_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ID3D12Debug7_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ID3D12Debug7_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ID3D12Debug7_EnableDebugLayer(This)	\
+    ( (This)->lpVtbl -> EnableDebugLayer(This) ) 
+
+
+#define ID3D12Debug7_SetEnableGPUBasedValidation(This,Enable)	\
+    ( (This)->lpVtbl -> SetEnableGPUBasedValidation(This,Enable) ) 
+
+#define ID3D12Debug7_SetEnableSynchronizedCommandQueueValidation(This,Enable)	\
+    ( (This)->lpVtbl -> SetEnableSynchronizedCommandQueueValidation(This,Enable) ) 
+
+#define ID3D12Debug7_SetGPUBasedValidationFlags(This,Flags)	\
+    ( (This)->lpVtbl -> SetGPUBasedValidationFlags(This,Flags) ) 
+
+
+#define ID3D12Debug7_DisableDebugLayer(This)	\
+    ( (This)->lpVtbl -> DisableDebugLayer(This) ) 
+
+
+#define ID3D12Debug7_SetEnableAutoName(This,Enable)	\
+    ( (This)->lpVtbl -> SetEnableAutoName(This,Enable) ) 
+
+
+#define ID3D12Debug7_SetForceLegacyBarrierValidation(This,Enable)	\
+    ( (This)->lpVtbl -> SetForceLegacyBarrierValidation(This,Enable) ) 
+
+
+#define ID3D12Debug7_SetEnableDriverReportedMessages(This,Enable)	\
+    ( (This)->lpVtbl -> SetEnableDriverReportedMessages(This,Enable) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ID3D12Debug7_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_d3d12sdklayers_0000_0008 */
 /* [local] */ 
 
 DEFINE_GUID(WKPDID_D3DAutoDebugObjectNameW, 0xd4902e36, 0x757a, 0x4942, 0x95, 0x94, 0xb6, 0x76, 0x9a, 0xfa, 0x43, 0xcd);
@@ -1067,8 +1218,8 @@ enum D3D12_DEBUG_DEVICE_BYTECODE_VALIDATION_MODE
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0007_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0007_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0008_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0008_v0_0_s_ifspec;
 
 #ifndef __ID3D12DebugDevice1_INTERFACE_DEFINED__
 #define __ID3D12DebugDevice1_INTERFACE_DEFINED__
@@ -1426,14 +1577,14 @@ EXTERN_C const IID IID_ID3D12DebugDevice2;
 #endif 	/* __ID3D12DebugDevice2_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12sdklayers_0000_0010 */
+/* interface __MIDL_itf_d3d12sdklayers_0000_0011 */
 /* [local] */ 
 
 DEFINE_GUID(DXGI_DEBUG_D3D12, 0xcf59a98c, 0xa950, 0x4326, 0x91, 0xef, 0x9b, 0xba, 0xa1, 0x7b, 0xfd, 0x95);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0010_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0010_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0011_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0011_v0_0_s_ifspec;
 
 #ifndef __ID3D12DebugCommandQueue_INTERFACE_DEFINED__
 #define __ID3D12DebugCommandQueue_INTERFACE_DEFINED__
@@ -1646,7 +1797,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
 #endif 	/* __ID3D12DebugCommandQueue1_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12sdklayers_0000_0012 */
+/* interface __MIDL_itf_d3d12sdklayers_0000_0013 */
 /* [local] */ 
 
 typedef 
@@ -1662,8 +1813,8 @@ typedef struct D3D12_DEBUG_COMMAND_LIST_GPU_BASED_VALIDATION_SETTINGS
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0012_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0012_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0013_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0013_v0_0_s_ifspec;
 
 #ifndef __ID3D12DebugCommandList1_INTERFACE_DEFINED__
 #define __ID3D12DebugCommandList1_INTERFACE_DEFINED__
@@ -2417,7 +2568,7 @@ EXTERN_C const IID IID_ID3D12ManualWriteTrackingResource;
 #endif 	/* __ID3D12ManualWriteTrackingResource_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12sdklayers_0000_0018 */
+/* interface __MIDL_itf_d3d12sdklayers_0000_0019 */
 /* [local] */ 
 
 typedef 
@@ -2433,7 +2584,8 @@ enum D3D12_MESSAGE_CATEGORY
         D3D12_MESSAGE_CATEGORY_STATE_GETTING	= ( D3D12_MESSAGE_CATEGORY_STATE_SETTING + 1 ) ,
         D3D12_MESSAGE_CATEGORY_RESOURCE_MANIPULATION	= ( D3D12_MESSAGE_CATEGORY_STATE_GETTING + 1 ) ,
         D3D12_MESSAGE_CATEGORY_EXECUTION	= ( D3D12_MESSAGE_CATEGORY_RESOURCE_MANIPULATION + 1 ) ,
-        D3D12_MESSAGE_CATEGORY_SHADER	= ( D3D12_MESSAGE_CATEGORY_EXECUTION + 1 ) 
+        D3D12_MESSAGE_CATEGORY_SHADER	= ( D3D12_MESSAGE_CATEGORY_EXECUTION + 1 ) ,
+        D3D12_MESSAGE_CATEGORY_STATE_OBJECT_DATABASE	= ( D3D12_MESSAGE_CATEGORY_SHADER + 1 ) 
     } 	D3D12_MESSAGE_CATEGORY;
 
 typedef 
@@ -3438,16 +3590,74 @@ enum D3D12_MESSAGE_ID
         D3D12_MESSAGE_ID_RENDER_TARGET_OR_DEPTH_STENCIL_RESOUCE_NOT_INITIALIZED	= 1422,
         D3D12_MESSAGE_ID_BYTECODE_VALIDATION_ERROR	= 1423,
         D3D12_MESSAGE_ID_FENCE_ZERO_WAIT	= 1424,
+        D3D12_MESSAGE_ID_FENCE_BARRIERS_NOT_SUPPORTED	= 1425,
+        D3D12_MESSAGE_ID_WAIT_BARRIER_NO_FENCES	= 1426,
+        D3D12_MESSAGE_ID_WAIT_BARRIER_NOT_SUPPORTED	= 1427,
+        D3D12_MESSAGE_ID_FENCE_BARRIERS_RACE_CONDITION	= 1428,
+        D3D12_MESSAGE_ID_FENCE_BARRIERS_NON_SERIALIZABLE_DEPENDENCY	= 1429,
+        D3D12_MESSAGE_ID_COMMAND_LIST_SCOPED_WAIT_BARRIER_UNSATISFIED	= 1430,
         D3D12_MESSAGE_ID_NON_COMMON_RESOURCE_IN_COPY_QUEUE	= 1431,
         D3D12_MESSAGE_ID_CREATEPIPELINESTATE_MULTIPLE_ROOT_SIGNATURES_DEFINED	= 1435,
         D3D12_MESSAGE_ID_TEXTURE_BARRIER_INVALID_FLAGS	= 1436,
+        D3D12_MESSAGE_ID_ASYNC_COMMANDS_NOT_SUPPORTED	= 1437,
+        D3D12_MESSAGE_ID_COPYBUFFERREGIONS_INVALIDDESTRESOURCE	= 1438,
+        D3D12_MESSAGE_ID_DUMP_FILE_APP_BLOB_INVALID_ADDRESS	= 1439,
+        D3D12_MESSAGE_ID_DUMP_FILE_APP_BLOB_INVALID_SIZE	= 1440,
+        D3D12_MESSAGE_ID_DUMP_FILE_APP_BLOB_OUT_OF_MEMORY	= 1441,
         D3D12_MESSAGE_ID_STOREPIPELINE_CACHED_BLOB_DISABLED	= 1442,
         D3D12_MESSAGE_ID_CREATEQUERYHEAP_INVALID_FLAGS	= 1443,
         D3D12_MESSAGE_ID_RESOLVEQUERYDATA_INVALID_QUERYHEAP	= 1444,
+        D3D12_MESSAGE_ID_COPYRESOURCES_REPEATED_DEST_RESOURCE	= 1445,
+        D3D12_MESSAGE_ID_COPYTEXTUREREGIONS_REPEATED_DEST_RESOURCE	= 1446,
+        D3D12_MESSAGE_ID_GUID_MLIR_UNSUPPORTED	= 1447,
+        D3D12_MESSAGE_ID_INVALID_MLIR_PROGRAM	= 1448,
+        D3D12_MESSAGE_ID_COPYBUFFERREGIONS_REPEATED_DEST_RESOURCE	= 1449,
+        D3D12_MESSAGE_ID_DUMP_FILE_DRIVER_OPTION_NOT_SUPPORTED	= 1450,
         D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_NON_UNIFORM_RESOURCE_INDEX	= 1451,
+        D3D12_MESSAGE_ID_FILLBUFFERS_UNRECOGNIZED_FORMAT	= 1452,
+        D3D12_MESSAGE_ID_FILLBUFFERS_INVALID_FILL_RANGE	= 1453,
+        D3D12_MESSAGE_ID_CLEARTEXTURESUBRESOURCES_UNRECOGNIZED_FORMAT	= 1454,
+        D3D12_MESSAGE_ID_CLEARTEXTURESUBRESOURCES_REPEATED_DEST_RESOURCE	= 1455,
+        D3D12_MESSAGE_ID_DEVICE_CLEARVIEW_EMPTYBOX	= 1456,
+        D3D12_MESSAGE_ID_DEVICE_CLEARVIEW_INVALIDSOURCEBOX	= 1457,
+        D3D12_MESSAGE_ID_CLEARBOUNDDEPTHSTENCILVIEW_DEPTH_STENCIL_DELETED	= 1458,
+        D3D12_MESSAGE_ID_CLEARBOUNDDEPTHSTENCILVIEW_DEPTH_STENCIL_UNBOUND	= 1459,
+        D3D12_MESSAGE_ID_CLEARBOUNDDEPTHSTENCILVIEW_REPEATED_DEST_RESOURCE	= 1460,
+        D3D12_MESSAGE_ID_CLEARBOUNDRENDERTARGETVIEWS_RENDER_TARGET_DELETED	= 1461,
+        D3D12_MESSAGE_ID_CLEARBOUNDRENDERTARGETVIEWS_RENDER_TARGET_UNBOUND	= 1462,
+        D3D12_MESSAGE_ID_CLEARBOUNDRENDERTARGETVIEWS_REPEATED_DEST_RESOURCE	= 1463,
+        D3D12_MESSAGE_ID_FILL_BUFFERS_INVALID_FILL_BUFFER_DESC	= 1464,
+        D3D12_MESSAGE_ID_SET_USER_DEFINED_ANNOTATION_MODE_INVALID_ARGUMENT	= 1465,
         D3D12_MESSAGE_ID_DEGENERATE_SPLIT_BARRIER	= 1466,
+        D3D12_MESSAGE_ID_SODB_UNKNOWN_FEATURE_IGNORED	= 1473,
+        D3D12_MESSAGE_ID_SODB_UNKNOWN_FEATURE_SKIP_ENTRY	= 1474,
+        D3D12_MESSAGE_ID_SODB_UNKNOWN_FEATURE_REJECT	= 1475,
+        D3D12_MESSAGE_ID_SODB_STATE_OBJECT_LOOKUP_FAILED	= 1476,
+        D3D12_MESSAGE_ID_DEPTH_STENCIL_FORMAT_UNUSED	= 1477,
         D3D12_MESSAGE_ID_CREATERESOURCE_ALIGNMENT_OVERRIDDEN	= 1478,
-        D3D12_MESSAGE_ID_D3D12_MESSAGES_END	= 1479
+        D3D12_MESSAGE_ID_DRIVER_COMPILER_PLUGIN_COMPILE_FAILED	= 1479,
+        D3D12_MESSAGE_ID_DRIVER_COMPILER_PLUGIN_MISSING_SET_OBJECT_VALUE_KEYS	= 1480,
+        D3D12_MESSAGE_ID_SODB_SCHEMA_UPGRADE_FAILED	= 1481,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_SRV_RESOURCE_SAMPLE_COUNT_MISMATCH	= 1482,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_SRV_RESOURCE_COMPONENT_TYPE_MISMATCH	= 1483,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_UAV_RESOURCE_COMPONENT_TYPE_MISMATCH	= 1484,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_DESCRIPTOR_UNALIGNED	= 1485,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_EXECUTE_INDIRECT_INVALID_GPU_VIRTUAL_ADDRESS	= 1486,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_UAV_TYPED_LOAD_FORMAT_UNSUPPORTED	= 1487,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_UAV_ATOMIC_FORMAT_UNSUPPORTED	= 1488,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_UAV_ATOMIC_FORMAT_WIDTH_MISMATCH	= 1489,
+        D3D12_MESSAGE_ID_GPU_BASED_VALIDATION_INVALID_SHADER_IDENTIFIER_IN_TABLE	= 1490,
+        D3D12_MESSAGE_ID_OVERSIZED_1D_DISPATCH	= 1497,
+        D3D12_MESSAGE_ID_ASYNC_COMMANDS_FALLBACK_UNSUPPORTED	= 1498,
+        D3D12_MESSAGE_ID_RESOLVESUBRESOURCEREGION_ASYNC_INVALID_RESOLVE_MODE	= 1505,
+        D3D12_MESSAGE_ID_DRIVER_REPORTED_MESSAGE	= 1506,
+        D3D12_MESSAGE_ID_SODB_DATABASE_OPENED_READ_ONLY	= 1507,
+        D3D12_MESSAGE_ID_CHECKFEATURESUPPORT1_CAPABILITY_CLAMPED	= 1508,
+        D3D12_MESSAGE_ID_CHECKFEATURESUPPORT1_SDK_VERSION_TOO_NEW	= 1509,
+        D3D12_MESSAGE_ID_GET_GLOBAL_ROOT_SIGNATURE_FOR_PROGRAM_ERROR	= 1510,
+        D3D12_MESSAGE_ID_GET_GLOBAL_ROOT_SIGNATURE_FOR_SHADER_ERROR	= 1511,
+        D3D12_MESSAGE_ID_DUMP_FILE_NOT_SUPPORTED_FOR_32BIT_PROCESS	= 1512,
+        D3D12_MESSAGE_ID_D3D12_MESSAGES_END	= 1513
     } 	D3D12_MESSAGE_ID;
 
 typedef struct D3D12_MESSAGE
@@ -3482,8 +3692,8 @@ typedef struct D3D12_INFO_QUEUE_FILTER
 #define D3D12_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0018_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0018_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0019_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0019_v0_0_s_ifspec;
 
 #ifndef __ID3D12InfoQueue_INTERFACE_DEFINED__
 #define __ID3D12InfoQueue_INTERFACE_DEFINED__
@@ -3986,7 +4196,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
 #endif 	/* __ID3D12InfoQueue_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12sdklayers_0000_0019 */
+/* interface __MIDL_itf_d3d12sdklayers_0000_0020 */
 /* [local] */ 
 
 typedef 
@@ -4006,8 +4216,8 @@ typedef void ( __stdcall *D3D12MessageFunc )(
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0019_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0019_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0020_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0020_v0_0_s_ifspec;
 
 #ifndef __ID3D12InfoQueue1_INTERFACE_DEFINED__
 #define __ID3D12InfoQueue1_INTERFACE_DEFINED__
@@ -4423,8 +4633,13 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
 #endif 	/* __ID3D12InfoQueue1_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12sdklayers_0000_0020 */
+/* interface __MIDL_itf_d3d12sdklayers_0000_0021 */
 /* [local] */ 
+
+
+typedef HRESULT (WINAPI* PFN_D3D12_SDK_LAYERS_GET_INTERFACE)( _In_ REFCLSID, _In_ REFIID, _COM_Outptr_opt_ void** );
+
+HRESULT WINAPI D3D12SDKLayersGetInterface( _In_ REFCLSID rclsid, _In_ REFIID riid, _COM_Outptr_opt_ void** ppvInterface );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -4435,6 +4650,7 @@ DEFINE_GUID(IID_ID3D12Debug3,0x5cf4e58f,0xf671,0x4ff1,0xa5,0x42,0x36,0x86,0xe3,0
 DEFINE_GUID(IID_ID3D12Debug4,0x014b816e,0x9ec5,0x4a2f,0xa8,0x45,0xff,0xbe,0x44,0x1c,0xe1,0x3a);
 DEFINE_GUID(IID_ID3D12Debug5,0x548d6b12,0x09fa,0x40e0,0x90,0x69,0x5d,0xcd,0x58,0x9a,0x52,0xc9);
 DEFINE_GUID(IID_ID3D12Debug6,0x82a816d6,0x5d01,0x4157,0x97,0xd0,0x49,0x75,0x46,0x3f,0xd1,0xed);
+DEFINE_GUID(IID_ID3D12Debug7,0x31d409f9,0x22b4,0x409d,0x9c,0x44,0xf7,0x2d,0xa8,0xa2,0xba,0x61);
 DEFINE_GUID(IID_ID3D12DebugDevice1,0xa9b71770,0xd099,0x4a65,0xa6,0x98,0x3d,0xee,0x10,0x02,0x0f,0x88);
 DEFINE_GUID(IID_ID3D12DebugDevice,0x3febd6dd,0x4973,0x4787,0x81,0x94,0xe4,0x5f,0x9e,0x28,0x92,0x3e);
 DEFINE_GUID(IID_ID3D12DebugDevice2,0x60eccbc1,0x378d,0x4df1,0x89,0x4c,0xf8,0xac,0x5c,0xe4,0xd7,0xdd);
@@ -4450,8 +4666,8 @@ DEFINE_GUID(IID_ID3D12InfoQueue,0x0742a90b,0xc387,0x483f,0xb9,0x46,0x30,0xa7,0xe
 DEFINE_GUID(IID_ID3D12InfoQueue1,0x2852dd88,0xb484,0x4c0c,0xb6,0xb1,0x67,0x16,0x85,0x00,0xe6,0x00);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0020_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0020_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0021_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12sdklayers_0000_0021_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

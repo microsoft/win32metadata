@@ -75,6 +75,13 @@ typedef interface ID3D12Compiler ID3D12Compiler;
 #endif 	/* __ID3D12Compiler_FWD_DEFINED__ */
 
 
+#ifndef __ID3D12Compiler1_FWD_DEFINED__
+#define __ID3D12Compiler1_FWD_DEFINED__
+typedef interface ID3D12Compiler1 ID3D12Compiler1;
+
+#endif 	/* __ID3D12Compiler1_FWD_DEFINED__ */
+
+
 #ifndef __ID3D12CompilerFactory_FWD_DEFINED__
 #define __ID3D12CompilerFactory_FWD_DEFINED__
 typedef interface ID3D12CompilerFactory ID3D12CompilerFactory;
@@ -123,6 +130,16 @@ HRESULT WINAPI D3D12CompilerSerializeVersionedRootSignature(
                             _In_ const D3D12_VERSIONED_ROOT_SIGNATURE_DESC* pRootSignature,
                             _Out_ ID3DBlob** ppBlob,
                             _Always_(_Outptr_opt_result_maybenull_) ID3DBlob** ppErrorBlob);
+
+typedef HRESULT (WINAPI* PFN_D3D12_COMPILER_GET_INTERFACE)( 
+    _In_ REFCLSID rclsid,
+    _In_ REFIID riid,
+    _COM_Outptr_opt_ void** ppvIface );
+
+HRESULT WINAPI D3D12CompilerGetInterface(
+    _In_ REFCLSID rclsid,
+    _In_ REFIID riid,
+    _COM_Outptr_opt_ void** ppvIface );
 
 
 
@@ -854,6 +871,239 @@ EXTERN_C const IID IID_ID3D12Compiler;
 #endif 	/* __ID3D12Compiler_INTERFACE_DEFINED__ */
 
 
+#ifndef __ID3D12Compiler1_INTERFACE_DEFINED__
+#define __ID3D12Compiler1_INTERFACE_DEFINED__
+
+/* interface ID3D12Compiler1 */
+/* [unique][local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ID3D12Compiler1;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("e524f9f2-497e-43e2-9386-02d53bdc2d52")
+    ID3D12Compiler1 : public ID3D12Compiler
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE CompilePipelineState1( 
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKeys,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const UINT *pVersions,
+            UINT NumGroupKeys,
+            /* [annotation] */ 
+            _In_  const D3D12_PIPELINE_STATE_STREAM_DESC *pDesc) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE CompileStateObject1( 
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKeys,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const UINT *pVersions,
+            UINT NumGroupKeys,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pDesc,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppCompilerStateObject) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE CompileAddToStateObject1( 
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKeys,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const UINT *pVersions,
+            UINT NumGroupKeys,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pAddition,
+            /* [annotation] */ 
+            _In_  ID3D12CompilerStateObject *pCompilerStateObjectToGrowFrom,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppNewCompilerStateObject) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ID3D12Compiler1Vtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ID3D12Compiler1 * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ID3D12Compiler1 * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ID3D12Compiler1 * This);
+        
+        DECLSPEC_XFGVIRT(ID3D12CompilerFactoryChild, GetFactory)
+        HRESULT ( STDMETHODCALLTYPE *GetFactory )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppCompilerFactory);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler, CompilePipelineState)
+        HRESULT ( STDMETHODCALLTYPE *CompilePipelineState )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKey,
+            UINT GroupVersion,
+            /* [annotation] */ 
+            _In_  const D3D12_PIPELINE_STATE_STREAM_DESC *pDesc);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler, CompileStateObject)
+        HRESULT ( STDMETHODCALLTYPE *CompileStateObject )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKey,
+            UINT GroupVersion,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pDesc,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppCompilerStateObject);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler, CompileAddToStateObject)
+        HRESULT ( STDMETHODCALLTYPE *CompileAddToStateObject )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKey,
+            UINT GroupVersion,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pAddition,
+            /* [annotation] */ 
+            _In_  ID3D12CompilerStateObject *pCompilerStateObjectToGrowFrom,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppNewCompilerStateObject);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler, GetCacheSession)
+        HRESULT ( STDMETHODCALLTYPE *GetCacheSession )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppCompilerCacheSession);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler1, CompilePipelineState1)
+        HRESULT ( STDMETHODCALLTYPE *CompilePipelineState1 )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKeys,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const UINT *pVersions,
+            UINT NumGroupKeys,
+            /* [annotation] */ 
+            _In_  const D3D12_PIPELINE_STATE_STREAM_DESC *pDesc);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler1, CompileStateObject1)
+        HRESULT ( STDMETHODCALLTYPE *CompileStateObject1 )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKeys,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const UINT *pVersions,
+            UINT NumGroupKeys,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pDesc,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppCompilerStateObject);
+        
+        DECLSPEC_XFGVIRT(ID3D12Compiler1, CompileAddToStateObject1)
+        HRESULT ( STDMETHODCALLTYPE *CompileAddToStateObject1 )( 
+            ID3D12Compiler1 * This,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const D3D12_COMPILER_CACHE_GROUP_KEY *pGroupKeys,
+            /* [annotation] */ 
+            _In_reads_(NumGroupKeys)  const UINT *pVersions,
+            UINT NumGroupKeys,
+            /* [annotation] */ 
+            _In_  const D3D12_STATE_OBJECT_DESC *pAddition,
+            /* [annotation] */ 
+            _In_  ID3D12CompilerStateObject *pCompilerStateObjectToGrowFrom,
+            /* [annotation] */ 
+            _In_  REFIID riid,
+            /* [annotation] */ 
+            _COM_Outptr_  void **ppNewCompilerStateObject);
+        
+        END_INTERFACE
+    } ID3D12Compiler1Vtbl;
+
+    interface ID3D12Compiler1
+    {
+        CONST_VTBL struct ID3D12Compiler1Vtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ID3D12Compiler1_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ID3D12Compiler1_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ID3D12Compiler1_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ID3D12Compiler1_GetFactory(This,riid,ppCompilerFactory)	\
+    ( (This)->lpVtbl -> GetFactory(This,riid,ppCompilerFactory) ) 
+
+
+#define ID3D12Compiler1_CompilePipelineState(This,pGroupKey,GroupVersion,pDesc)	\
+    ( (This)->lpVtbl -> CompilePipelineState(This,pGroupKey,GroupVersion,pDesc) ) 
+
+#define ID3D12Compiler1_CompileStateObject(This,pGroupKey,GroupVersion,pDesc,riid,ppCompilerStateObject)	\
+    ( (This)->lpVtbl -> CompileStateObject(This,pGroupKey,GroupVersion,pDesc,riid,ppCompilerStateObject) ) 
+
+#define ID3D12Compiler1_CompileAddToStateObject(This,pGroupKey,GroupVersion,pAddition,pCompilerStateObjectToGrowFrom,riid,ppNewCompilerStateObject)	\
+    ( (This)->lpVtbl -> CompileAddToStateObject(This,pGroupKey,GroupVersion,pAddition,pCompilerStateObjectToGrowFrom,riid,ppNewCompilerStateObject) ) 
+
+#define ID3D12Compiler1_GetCacheSession(This,riid,ppCompilerCacheSession)	\
+    ( (This)->lpVtbl -> GetCacheSession(This,riid,ppCompilerCacheSession) ) 
+
+
+#define ID3D12Compiler1_CompilePipelineState1(This,pGroupKeys,pVersions,NumGroupKeys,pDesc)	\
+    ( (This)->lpVtbl -> CompilePipelineState1(This,pGroupKeys,pVersions,NumGroupKeys,pDesc) ) 
+
+#define ID3D12Compiler1_CompileStateObject1(This,pGroupKeys,pVersions,NumGroupKeys,pDesc,riid,ppCompilerStateObject)	\
+    ( (This)->lpVtbl -> CompileStateObject1(This,pGroupKeys,pVersions,NumGroupKeys,pDesc,riid,ppCompilerStateObject) ) 
+
+#define ID3D12Compiler1_CompileAddToStateObject1(This,pGroupKeys,pVersions,NumGroupKeys,pAddition,pCompilerStateObjectToGrowFrom,riid,ppNewCompilerStateObject)	\
+    ( (This)->lpVtbl -> CompileAddToStateObject1(This,pGroupKeys,pVersions,NumGroupKeys,pAddition,pCompilerStateObjectToGrowFrom,riid,ppNewCompilerStateObject) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ID3D12Compiler1_INTERFACE_DEFINED__ */
+
+
 #ifndef __ID3D12CompilerFactory_INTERFACE_DEFINED__
 #define __ID3D12CompilerFactory_INTERFACE_DEFINED__
 
@@ -1050,7 +1300,7 @@ EXTERN_C const IID IID_ID3D12CompilerFactory;
 #endif 	/* __ID3D12CompilerFactory_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_d3d12compiler_0000_0005 */
+/* interface __MIDL_itf_d3d12compiler_0000_0006 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
@@ -1059,11 +1309,12 @@ DEFINE_GUID(IID_ID3D12CompilerFactoryChild,0xe0d06420,0x9f31,0x47e8,0xae,0x9a,0x
 DEFINE_GUID(IID_ID3D12CompilerCacheSession,0x5704e5e6,0x054b,0x4738,0xb6,0x61,0x7b,0x0d,0x68,0xd8,0xdd,0xe2);
 DEFINE_GUID(IID_ID3D12CompilerStateObject,0x5981cca4,0xe8ae,0x44ca,0x9b,0x92,0x4f,0xa8,0x6f,0x5a,0x3a,0x3a);
 DEFINE_GUID(IID_ID3D12Compiler,0x8c403c12,0x993b,0x4583,0x80,0xf1,0x68,0x24,0x13,0x8f,0xa6,0x8e);
+DEFINE_GUID(IID_ID3D12Compiler1,0xe524f9f2,0x497e,0x43e2,0x93,0x86,0x02,0xd5,0x3b,0xdc,0x2d,0x52);
 DEFINE_GUID(IID_ID3D12CompilerFactory,0xc1ee4b59,0x3f59,0x47a5,0x9b,0x4e,0xa8,0x55,0xc8,0x58,0xa8,0x78);
 
 
-extern RPC_IF_HANDLE __MIDL_itf_d3d12compiler_0000_0005_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_d3d12compiler_0000_0005_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12compiler_0000_0006_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_d3d12compiler_0000_0006_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 
