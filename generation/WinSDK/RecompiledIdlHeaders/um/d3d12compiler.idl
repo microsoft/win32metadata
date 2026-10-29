@@ -41,6 +41,16 @@ cpp_quote("                            _In_ const D3D12_VERSIONED_ROOT_SIGNATURE
 cpp_quote("                            _Out_ ID3DBlob** ppBlob,")
 cpp_quote("                            _Always_(_Outptr_opt_result_maybenull_) ID3DBlob** ppErrorBlob);")
 cpp_quote("")
+cpp_quote("typedef HRESULT (WINAPI* PFN_D3D12_COMPILER_GET_INTERFACE)( ")
+cpp_quote("    _In_ REFCLSID rclsid,")
+cpp_quote("    _In_ REFIID riid,")
+cpp_quote("    _COM_Outptr_opt_ void** ppvIface );")
+cpp_quote("")
+cpp_quote("HRESULT WINAPI D3D12CompilerGetInterface(")
+cpp_quote("    _In_ REFCLSID rclsid,")
+cpp_quote("    _In_ REFIID riid,")
+cpp_quote("    _COM_Outptr_opt_ void** ppvIface );")
+cpp_quote("")
 
 [uuid(e0d06420-9f31-47e8-ae9a-dd2ba25ac0bc), object, local, pointer_default(unique)]
 interface ID3D12CompilerFactoryChild
@@ -239,6 +249,37 @@ interface ID3D12Compiler
         );
 };
 
+[uuid(e524f9f2-497e-43e2-9386-02d53bdc2d52), object, local, pointer_default(unique)]
+interface ID3D12Compiler1
+    : ID3D12Compiler
+{
+    HRESULT CompilePipelineState1(
+        [annotation("_In_reads_(NumGroupKeys)")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKeys,
+        [annotation("_In_reads_(NumGroupKeys)")] const UINT* pVersions,
+        UINT NumGroupKeys,
+        [annotation("_In_")] const D3D12_PIPELINE_STATE_STREAM_DESC* pDesc
+        );
+
+    HRESULT CompileStateObject1(
+        [annotation("_In_reads_(NumGroupKeys)")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKeys,
+        [annotation("_In_reads_(NumGroupKeys)")] const UINT* pVersions,
+        UINT NumGroupKeys,
+        [annotation("_In_")] const D3D12_STATE_OBJECT_DESC* pDesc,
+        [annotation("_In_")] REFIID riid,
+        [annotation("_COM_Outptr_")] void** ppCompilerStateObject
+        );
+
+    HRESULT CompileAddToStateObject1(
+        [annotation("_In_reads_(NumGroupKeys)")] const D3D12_COMPILER_CACHE_GROUP_KEY* pGroupKeys,
+        [annotation("_In_reads_(NumGroupKeys)")] const UINT* pVersions,
+        UINT NumGroupKeys,
+        [annotation("_In_")] const D3D12_STATE_OBJECT_DESC* pAddition,
+        [annotation("_In_")] ID3D12CompilerStateObject* pCompilerStateObjectToGrowFrom,
+        [annotation("_In_")] REFIID riid,
+        [annotation("_COM_Outptr_")] void** ppNewCompilerStateObject
+        );
+};
+
 [uuid(c1ee4b59-3f59-47a5-9b4e-a855c858a878), object, local, pointer_default(unique)]
 interface ID3D12CompilerFactory
     : IUnknown
@@ -287,4 +328,5 @@ cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerFactoryChild,0xe0d06420,0x9f31,0x47e8,
 cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerCacheSession,0x5704e5e6,0x054b,0x4738,0xb6,0x61,0x7b,0x0d,0x68,0xd8,0xdd,0xe2);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerStateObject,0x5981cca4,0xe8ae,0x44ca,0x9b,0x92,0x4f,0xa8,0x6f,0x5a,0x3a,0x3a);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12Compiler,0x8c403c12,0x993b,0x4583,0x80,0xf1,0x68,0x24,0x13,0x8f,0xa6,0x8e);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12Compiler1,0xe524f9f2,0x497e,0x43e2,0x93,0x86,0x02,0xd5,0x3b,0xdc,0x2d,0x52);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12CompilerFactory,0xc1ee4b59,0x3f59,0x47a5,0x9b,0x4e,0xa8,0x55,0xc8,0x58,0xa8,0x78);" )
