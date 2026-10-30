@@ -28,6 +28,19 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void SharedDxgiUsageGroupHasOneProjectionNamespace()
+        {
+            string root = RepositoryRoot();
+            var routes = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "requiredNamespacesForNames.rsp"))
+                .Where(line => line.StartsWith("DXGI_USAGE=", StringComparison.Ordinal));
+            Assert.Equal("DXGI_USAGE=Windows.Win32.Graphics.Dxgi", Assert.Single(routes));
+            string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "shared", "dxgi.idl.patch"));
+            Assert.Contains("_Win32_FlagsEnum_(DXGI_USAGE, unsigned int, DXGI_USAGE_SHADER_INPUT, " +
+                "DXGI_USAGE_RENDER_TARGET_OUTPUT, DXGI_USAGE_BACK_BUFFER, DXGI_USAGE_SHARED, DXGI_USAGE_READ_ONLY, " +
+                "DXGI_USAGE_DISCARD_ON_PRESENT, DXGI_USAGE_UNORDERED_ACCESS);", patch);
+        }
+
+        [Fact]
         public void ActiveFileAndSocketDeclarationsPreserveNativeResults()
         {
             string root = RepositoryRoot();

@@ -43,6 +43,7 @@ DFM_CMD=Windows.Win32.UI.Shell
 DFM_MESSAGE_ID=Windows.Win32.UI.Shell
 DNS_QUERY_OPTIONS=Windows.Win32.NetworkManagement.Dns
 DRAWITEMSTRUCT_CTL_TYPE=Windows.Win32.UI.Controls
+DXGI_USAGE=Windows.Win32.Graphics.Dxgi
 EMBDHLP_FLAGS=Windows.Win32.System.Ole
 EVT_HANDLE=Windows.Win32.System.EventLog
 EXIT_WINDOWS_FLAGS=Windows.Win32.System.Shutdown
