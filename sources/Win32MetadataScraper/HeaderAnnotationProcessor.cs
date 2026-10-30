@@ -588,10 +588,12 @@ namespace Win32MetadataScraper
                 if (IsStorageTypeName(name))
                     name = alias.Name;
                 name = EscapeIdentifier(name);
+                // Metadata-only redeclarations do not replace the original native storage.
+                var storageType = ((TypedefNameDecl)alias.CanonicalDecl).UnderlyingType;
                 string valueType = nativeTypedefStorageRemaps.TryGetValue(alias.Handle.CanonicalCursor, out string pointerStorage) &&
                     SyntaxFactory.ParseTypeName(pointerStorage) is PointerTypeSyntax
                     ? GetNativeIntegerStorage(pointerStorage) ?? pointerStorage
-                    : GetSignatureType(alias.UnderlyingType, facts.Location, underlyingStorage: true,
+                    : GetSignatureType(storageType, facts.Location, underlyingStorage: true,
                         preserveNativeShape: facts.HasNativeTypedefIdentity);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
@@ -601,7 +603,7 @@ namespace Win32MetadataScraper
                 if (facts.IsInferredTypedef)
                     declaration = declaration.ReplaceNode(declaration.Members.Single(),
                         ((FieldDeclarationSyntax)declaration.Members.Single()).AddAttributeLists(
-                            MakeAttribute($"NativeTypeName({HeaderAnnotation.Quote(alias.UnderlyingType.AsString)})")));
+                            MakeAttribute($"NativeTypeName({HeaderAnnotation.Quote(storageType.AsString)})")));
                 declaration = declaration.AddAttributeLists(GetAttributes(facts).ToArray());
                 if (SyntaxFactory.ParseTypeName(valueType) is PointerTypeSyntax { ElementType: NameSyntax } &&
                     NativeHandleOrigins.IsDeclareHandle(alias, visited))

@@ -79,6 +79,15 @@ QueryDosDeviceW=kernel32.dll
 WSAWaitForMultipleEvents=ws2_32.dll
 ";
 
+        private const string RedeclaredAliasDeclarations = @"
+#define DECLARE_HANDLE(name) struct name##__ { int unused; }; typedef struct name##__ *name
+DECLARE_HANDLE(BATCH_REDECL_HANDLE);
+_Win32_AlsoUsableFor_(BATCH_REDECL_HANDLE)
+typedef BATCH_REDECL_HANDLE BATCH_REDECL_ALIAS;
+_Win32_AlsoUsableFor_(BATCH_REDECL_ALIAS)
+typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
+";
+
         [Fact]
         public void OneHeaderPerArchitectureExercisesNativeContractsAndPhysicalMetadata()
         {
@@ -95,7 +104,8 @@ WSAWaitForMultipleEvents=ws2_32.dll
                     this.output.WriteLine($"Native contract batch: architecture={architecture}; target={target}");
                     string declarations = "#define _WIN32_WINNT 0x0600\n" + Declarations +
                         ScopedDeclarations + AssociatedConstantNativeDeclarations + AdditionalDeclarations +
-                        ImageHlpLastErrorDeclarations + FileAndSocketResultDeclarations;
+                        ImageHlpLastErrorDeclarations + FileAndSocketResultDeclarations +
+                        RedeclaredAliasDeclarations;
                     var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                         extraSettings: "--config\nnative-constant-values\n" +
                             "--remap\nBATCH_BOOL=BATCH_BOOL\nBATCH_HANDLE=BATCH_HANDLE\n" +
@@ -155,6 +165,8 @@ WSAWaitForMultipleEvents=ws2_32.dll
                     {
                     ("BATCH_BOOL", "Int32"), ("BATCH_HANDLE", "Void*"),
                     ("BATCH_PHANDLE", "BATCH_HANDLE*"), ("BATCH_HOPAQUE", "BATCH_OPAQUE*"),
+                    ("BATCH_REDECL_HANDLE", "BATCH_REDECL_HANDLE__*"),
+                    ("BATCH_REDECL_ALIAS", "BATCH_REDECL_HANDLE"),
                 })
                     {
                         var type = FindType(reader, name);

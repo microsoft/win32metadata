@@ -49,6 +49,10 @@ annotated typedefs. Native integral constants are evaluated in the original
 translation unit before their typedef storage is lowered for C# compilation.
 Enum backing types and casts use the existing compiler-backed lowering.
 
+Annotation-only `typedef NAME NAME` redeclarations retain the canonical native
+declaration's backing storage. Distinct alias declarations retain their
+compiler-bound nominal dependencies.
+
 Repeated native record and inferred typedef observations retain the canonical
 Clang identity, declaring-header hash and location, and per-target ABI as
 source-only provenance. Explicit namespace routes take precedence; otherwise a
