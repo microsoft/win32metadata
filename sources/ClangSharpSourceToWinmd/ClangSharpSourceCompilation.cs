@@ -1378,6 +1378,8 @@ namespace ClangSharpSourceToWinmd
                     canonical = canonical.WithAttributeLists(SyntaxFactory.List(declaration.AttributeLists.Select(list =>
                         list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes.Where(attribute =>
                             !IsArchitectureAttribute(attribute, model))))).Where(list => list.Attributes.Count != 0)));
+                if (SyntaxFactory.AreEquivalent(declaration, canonical))
+                    return (declaration, model, canonical.NormalizeWhitespace());
                 var canonicalRoot = retainedTree.GetRoot().ReplaceNode(declaration, canonical);
                 var canonicalTree = retainedTree.WithRootAndOptions(canonicalRoot, retainedTree.Options);
                 result = result.ReplaceSyntaxTree(retainedTree, canonicalTree);
