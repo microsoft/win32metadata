@@ -41,7 +41,7 @@ namespace Windows.Win32.Tests
         public void NoInvalidEmptyDelegates()
         {
             string allowedEmptyDelegatesFileName = TestUtils.GetAssetFile("emptyDelegatesAllowList.rsp");
-            string args = $"showEmptyDelegates --winmd \"{TestUtils.Win32WinmdPath}\" \"@{allowedEmptyDelegatesFileName}\"";
+            string args = $"showEmptyDelegates --winmd \"{TestUtils.Win32WinmdPath}\" --reference \"{TestUtils.Direct3D12WinmdPath}\" \"@{allowedEmptyDelegatesFileName}\"";
             this.ExecWinmdUtils(args);
         }
 
@@ -49,8 +49,21 @@ namespace Windows.Win32.Tests
         public void NoInvalidPointersToDelegates()
         {
             string pointersToDelegatesFileName = TestUtils.GetAssetFile("pointersToDelegatesAllowList.rsp");
-            string args = $"showPointersToDelegates --winmd \"{TestUtils.Win32WinmdPath}\" \"@{pointersToDelegatesFileName}\"";
+            string args = $"showPointersToDelegates --winmd \"{TestUtils.Win32WinmdPath}\" --reference \"{TestUtils.Direct3D12WinmdPath}\" \"@{pointersToDelegatesFileName}\"";
             this.ExecWinmdUtils(args);
+        }
+
+        [Theory]
+        [InlineData("showEmptyDelegates")]
+        [InlineData("showPointersToDelegates")]
+        public void DelegateInspectionRejectsMissingReference(string command)
+        {
+            string winmdUtilsDll = Path.Combine(TestUtils.BinPath, "winmdutils.dll");
+            string args = $"\"{winmdUtilsDll}\" {command} --winmd \"{TestUtils.Win32WinmdPath}\"";
+            int ret = TestUtils.ExecuteCmd("dotnet", args, out var outputText, this.outputHelper);
+            this.outputHelper.WriteLine(outputText);
+            Assert.NotEqual(0, ret);
+            Assert.Contains("Could not find definition for 'Windows.Win32.Graphics.Direct3D12.ID3D12Pageable'", outputText);
         }
 
         [Fact]

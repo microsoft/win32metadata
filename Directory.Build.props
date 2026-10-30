@@ -26,6 +26,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>images/windows.png</PackageIcon>
     <LastWin32MetadataReleaseVersion>70.0.11-preview</LastWin32MetadataReleaseVersion>
+    <Direct3D12PackageVersion>1.619.3</Direct3D12PackageVersion>
   </PropertyGroup>
 
   <ItemGroup>

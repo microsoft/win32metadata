@@ -263,7 +263,7 @@
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp)"
+    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp);@(EmitterReference)"
     Outputs="$(OutputWinmd)"
     DependsOnTargets="ScrapeConstants">
 
@@ -282,6 +282,7 @@
     <EmitWinmd
       Libs="@(ImportLibs)"
       AutoTypes="@(AutoType)"
+      References="@(EmitterReference)"
       EmitterSourceDir="$(GeneratedDir)"
       ToolsBinDir="$(ToolsBinDir)"
       ResponseFiles="@(EmitterRsp)"

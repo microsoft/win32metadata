@@ -41,6 +41,8 @@ namespace MetadataTasks
 
         public ITaskItem[] AutoTypes { get; set; }
 
+        public ITaskItem[] References { get; set; }
+
         protected override string ToolName => "dotnet";
 
         protected override string GenerateFullPathToTool() => this.ToolExe;
@@ -77,6 +79,14 @@ namespace MetadataTasks
                 Path.GetFileName(win32WinmdPath)))
             {
                 builder.AppendSwitchIfNotNull("--ref ", win32WinmdPath);
+            }
+
+            if (this.References != null)
+            {
+                foreach (string reference in TaskUtils.GetFullPaths(this.References, this.MSBuildProjectDirectory))
+                {
+                    builder.AppendSwitchIfNotNull("--ref ", reference);
+                }
             }
 
             builder.AppendSwitchIfNotNull("--version ", this.WinmdVersion);

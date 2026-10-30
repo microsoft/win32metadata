@@ -70,18 +70,20 @@ namespace WinmdUtilsProgram
             var showEmptyDelegates = new Command("showEmptyDelegates", "Show delegates that have no parameters.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--reference", "A metadata file used to resolve referenced types.", ArgumentArity.OneOrMore),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showEmptyDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowEmptyDelegates);
+            showEmptyDelegates.Handler = CommandHandler.Create<FileInfo, string[], string[], IConsole>(ShowEmptyDelegates);
 
             var showPointersToDelegates = new Command("showPointersToDelegates", "Show pointers to delegates.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--reference", "A metadata file used to resolve referenced types.", ArgumentArity.OneOrMore),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowPointersToDelegates);
+            showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], string[], IConsole>(ShowPointersToDelegates);
 
             var showSuggestedRemappings = new Command("showSuggestedRemappings", "Show suggested remappings.")
             {
@@ -425,40 +427,63 @@ namespace WinmdUtilsProgram
             return 0;
         }
 
-        public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)
+        private static int WithMetadataReferences(WinmdUtils winmd, string[] reference, Func<List<WinmdUtils>, int> inspect)
+        {
+            var allWinmds = new List<WinmdUtils> { winmd };
+            try
+            {
+                foreach (string path in reference ?? Array.Empty<string>())
+                {
+                    allWinmds.Add(WinmdUtils.LoadFromFile(path));
+                }
+
+                return inspect(allWinmds);
+            }
+            finally
+            {
+                foreach (var referencedWinmd in allWinmds.Skip(1))
+                {
+                    referencedWinmd.Dispose();
+                }
+            }
+        }
+
+        public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, string[] reference, IConsole console)
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            List<WinmdUtils> allWinmds = new List<WinmdUtils>{ w1 };
-            bool pointersFound = false;
-
-            HashSet<string> delegateNames = new HashSet<string>(w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
-
-            foreach (var type in w1.GetTypes(allWinmds))
+            return WithMetadataReferences(w1, reference, allWinmds =>
             {
-                foreach (var pointerInUse in PointerToOneOfNamesInUse(delegateNames, type))
+                bool pointersFound = false;
+                HashSet<string> delegateNames = new HashSet<string>(allWinmds.SelectMany(metadata => metadata.GetTypes(allWinmds))
+                    .OfType<DelegateTypeInfo>().Select(d => $"{d.Namespace}.{d.Name}"));
+
+                foreach (var type in w1.GetTypes(allWinmds))
                 {
-                    if (allowTable.Contains(pointerInUse.Name))
+                    foreach (var pointerInUse in PointerToOneOfNamesInUse(delegateNames, type))
                     {
-                        continue;
-                    }
+                        if (allowTable.Contains(pointerInUse.Name))
+                        {
+                            continue;
+                        }
 
-                    if (!pointersFound)
-                    {
-                        console.Out.Write("Pointers to delegates detected:\r\n");
-                        pointersFound = true;
-                    }
+                        if (!pointersFound)
+                        {
+                            console.Out.Write("Pointers to delegates detected:\r\n");
+                            pointersFound = true;
+                        }
 
-                    console?.Out.Write($"{pointerInUse.Type},{pointerInUse.Name}\r\n");
+                        console?.Out.Write($"{pointerInUse.Type},{pointerInUse.Name}\r\n");
+                    }
                 }
-            }
 
-            if (!pointersFound)
-            {
-                console.Out.Write("No pointers to delegates found.\r\n");
-            }
+                if (!pointersFound)
+                {
+                    console.Out.Write("No pointers to delegates found.\r\n");
+                }
 
-            return pointersFound ? -1 : 0;
+                return pointersFound ? -1 : 0;
+            });
         }
         
 
@@ -709,38 +734,39 @@ namespace WinmdUtilsProgram
             return dupsFound ? -1 : 0;
         }
 
-        public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, IConsole console)
+        public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, string[] reference, IConsole console)
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
             using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            List<WinmdUtils> allWinmds = new List<WinmdUtils> { w1 };
-            bool emptyFound = false;
-            foreach (DelegateTypeInfo type in w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo))
+            return WithMetadataReferences(w1, reference, allWinmds =>
             {
-                if (!type.Parameters.Any())
+                bool emptyFound = false;
+                foreach (DelegateTypeInfo type in w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo))
                 {
-                    if (allowTable.Contains(type.Name))
+                    if (!type.Parameters.Any())
                     {
-                        continue;
-                    }
+                        if (allowTable.Contains(type.Name))
+                        {
+                            continue;
+                        }
 
-                    if (!emptyFound)
-                    {
-                        emptyFound = true;
-                        console.Out.Write("Empty delegates detected:\r\n");
-                    }
+                        if (!emptyFound)
+                        {
+                            emptyFound = true;
+                            console.Out.Write("Empty delegates detected:\r\n");
+                        }
 
-                    console?.Out.Write($"{type.Name}\r\n");
+                        console?.Out.Write($"{type.Name}\r\n");
+                    }
                 }
-            }
 
+                if (!emptyFound)
+                {
+                    console.Out.Write("No empty delegates found.\r\n");
+                }
 
-            if (!emptyFound)
-            {
-                console.Out.Write("No empty delegates found.\r\n");
-            }
-
-            return emptyFound ? -1 : 0;
+                return emptyFound ? -1 : 0;
+            });
         }
 
         private static Architecture GetSupportedArchitectures(IEnumerable<IAttribute> attributes)
