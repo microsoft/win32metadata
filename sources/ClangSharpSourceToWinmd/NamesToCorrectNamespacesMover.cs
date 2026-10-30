@@ -63,6 +63,7 @@ namespace ClangSharpSourceToWinmd
                 var aliases = root.DescendantNodes().OfType<UsingDirectiveSyntax>()
                     .Where(directive => directive.Alias != null)
                     .Select(directive => directive.Alias.Name.Identifier.ValueText).ToHashSet();
+                var shadowedTypeNames = new Dictionary<TypeDeclarationSyntax, HashSet<string>>();
                 var types = root.DescendantNodes().Select(node => node switch
                 {
                     VariableDeclarationSyntax variable => variable.Type,
@@ -121,24 +122,38 @@ namespace ClangSharpSourceToWinmd
                             SyntaxFactory.SeparatedList(function.ParameterList.Parameters.Select(parameter =>
                                 parameter.WithType(Qualify(parameter.Type, ns)))))),
                         IdentifierNameSyntax identifier when !aliases.Contains(identifier.Identifier.ValueText) &&
-                            !IsShadowedType(identifier) &&
-                            sourceTypes.Contains((ns, identifier.Identifier.ValueText)) =>
+                            sourceTypes.Contains((ns, identifier.Identifier.ValueText)) &&
+                            !IsShadowedType(identifier) =>
                             QualifiedAlias(TryGetNamespace(ns, identifier.Identifier.ValueText, out string owner)
                                 ? owner : ns, identifier.Identifier.Text),
                         _ => type,
                     };
                 }
 
-                static bool IsShadowedType(IdentifierNameSyntax identifier)
+                bool IsShadowedType(IdentifierNameSyntax identifier)
                 {
                     string name = identifier.Identifier.ValueText;
                     return identifier.Ancestors().OfType<TypeDeclarationSyntax>().Any(declaration =>
-                        declaration.TypeParameterList?.Parameters.Any(parameter => parameter.Identifier.ValueText == name) == true ||
-                        declaration.Parent is TypeDeclarationSyntax && declaration.Identifier.ValueText == name ||
-                        declaration.Members.OfType<BaseTypeDeclarationSyntax>().Any(member => member.Identifier.ValueText == name) ||
-                        declaration.Members.OfType<DelegateDeclarationSyntax>().Any(member => member.Identifier.ValueText == name)) ||
+                        GetShadowedTypeNames(declaration).Contains(name)) ||
                         identifier.Ancestors().OfType<MethodDeclarationSyntax>().Any(method =>
                             method.TypeParameterList?.Parameters.Any(parameter => parameter.Identifier.ValueText == name) == true);
+                }
+
+                HashSet<string> GetShadowedTypeNames(TypeDeclarationSyntax declaration)
+                {
+                    if (!shadowedTypeNames.TryGetValue(declaration, out var names))
+                    {
+                        names = declaration.TypeParameterList?.Parameters
+                            .Select(parameter => parameter.Identifier.ValueText).ToHashSet() ?? new HashSet<string>();
+                        if (declaration.Parent is TypeDeclarationSyntax)
+                            names.Add(declaration.Identifier.ValueText);
+                        names.UnionWith(declaration.Members.OfType<BaseTypeDeclarationSyntax>()
+                            .Select(member => member.Identifier.ValueText));
+                        names.UnionWith(declaration.Members.OfType<DelegateDeclarationSyntax>()
+                            .Select(member => member.Identifier.ValueText));
+                        shadowedTypeNames.Add(declaration, names);
+                    }
+                    return names;
                 }
             }
 

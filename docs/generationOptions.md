@@ -199,6 +199,10 @@ proof family. Weak cache keys do not retain discarded trees. Rewritten or
 reparsed declarations are validated independently, including cached absence;
 malformed proofs still fail on every read. The cache contains no compiler
 symbols, ownership decisions or cross-declaration identity comparisons.
+Namespace qualification builds each enclosing type's lexical shadow-name set
+once per immutable tree traversal. Nested types, delegates and generic parameters
+retain their original binding precedence; these sets are not shared across trees
+or used to infer native ownership.
 Legacy numeric partition suffixes retain their established parsed-prefix
 namespace. The existing syntax repair records the original namespace for the
 source-provenance check while ownership uses the repaired, valid C# namespace.
