@@ -1581,8 +1581,7 @@ namespace ClangSharpSourceToWinmd
             StructDeclarationSyntax second, SemanticModel secondModel, bool ignoreDocumentation = false,
             bool isolated = false)
         {
-            var firstDeclarations = isolated ? DeclaredSymbols(first, firstModel) : null;
-            var secondDeclarations = isolated ? DeclaredSymbols(second, secondModel) : null;
+            var comparison = new DeclarationBindingComparison(first, firstModel, second, secondModel, isolated);
             var firstNodes = first.DescendantNodes().Where(node => node is ExpressionSyntax or AttributeSyntax)
                 .Where(node => !isolated || !IsMemberImplementation(node))
                 .Where(node => !ignoreDocumentation || !node.AncestorsAndSelf().OfType<AttributeSyntax>()
@@ -1598,21 +1597,36 @@ namespace ClangSharpSourceToWinmd
                 var left = firstModel.GetSymbolInfo(firstNodes[i]);
                 var right = secondModel.GetSymbolInfo(secondNodes[i]);
                 if (left.CandidateReason != CandidateReason.None || right.CandidateReason != CandidateReason.None ||
-                    !SymbolsMatch(left.Symbol, right.Symbol))
+                    !comparison.SymbolsMatch(left.Symbol, right.Symbol))
                     return false;
                 if (firstNodes[i] is ExpressionSyntax leftExpression && secondNodes[i] is ExpressionSyntax rightExpression)
                 {
                     var leftType = firstModel.GetTypeInfo(leftExpression);
                     var rightType = secondModel.GetTypeInfo(rightExpression);
                     if (leftType.Type?.TypeKind == TypeKind.Error || rightType.Type?.TypeKind == TypeKind.Error ||
-                        !TypesMatch(leftType.Type, rightType.Type) ||
-                        !TypesMatch(leftType.ConvertedType, rightType.ConvertedType))
+                        !comparison.TypesMatch(leftType.Type, rightType.Type) ||
+                        !comparison.TypesMatch(leftType.ConvertedType, rightType.ConvertedType))
                         return false;
                 }
             }
             return true;
+        }
 
-            bool SymbolsMatch(ISymbol left, ISymbol right)
+        private sealed class DeclarationBindingComparison
+        {
+            private readonly bool isolated;
+            private readonly Dictionary<ISymbol, int> firstDeclarations;
+            private readonly Dictionary<ISymbol, int> secondDeclarations;
+
+            public DeclarationBindingComparison(StructDeclarationSyntax first, SemanticModel firstModel,
+                StructDeclarationSyntax second, SemanticModel secondModel, bool isolated)
+            {
+                this.isolated = isolated;
+                firstDeclarations = isolated ? DeclaredSymbols(first, firstModel) : null;
+                secondDeclarations = isolated ? DeclaredSymbols(second, secondModel) : null;
+            }
+
+            public bool SymbolsMatch(ISymbol left, ISymbol right)
             {
                 if (SymbolEqualityComparer.Default.Equals(left, right))
                     return true;
@@ -1632,11 +1646,14 @@ namespace ClangSharpSourceToWinmd
                     SymbolKind.Method or SymbolKind.Property or SymbolKind.Event))
                     return false;
                 string identity = DocumentationCommentId.CreateDeclarationId(left);
-                return identity != null && identity == DocumentationCommentId.CreateDeclarationId(right) &&
+                return HasDeclarationIdentity(right, identity) &&
                     Equals(left.ContainingAssembly?.Identity, right.ContainingAssembly?.Identity);
             }
 
-            bool TypesMatch(ITypeSymbol left, ITypeSymbol right)
+            private static bool HasDeclarationIdentity(ISymbol symbol, string identity) =>
+                identity != null && identity == DocumentationCommentId.CreateDeclarationId(symbol);
+
+            public bool TypesMatch(ITypeSymbol left, ITypeSymbol right)
             {
                 if (SymbolEqualityComparer.IncludeNullability.Equals(left, right))
                     return true;
@@ -1655,7 +1672,7 @@ namespace ClangSharpSourceToWinmd
                 return false;
             }
 
-            static Dictionary<ISymbol, int> DeclaredSymbols(StructDeclarationSyntax declaration, SemanticModel model)
+            private static Dictionary<ISymbol, int> DeclaredSymbols(StructDeclarationSyntax declaration, SemanticModel model)
             {
                 var result = new Dictionary<ISymbol, int>(SymbolEqualityComparer.Default);
                 int index = 0;
