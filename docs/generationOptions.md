@@ -73,12 +73,20 @@ and compiler-bound storage validate separately.
 When no retained definition exists, a configured alias projection can select an
 actual native typedef provider in the same generated input. The configured
 binding must match that source observation, architecture, width and alignment,
-and the input must have one native target family. Separate inputs can select
+and the input must have one native target family. An existing global native
+typedef explicitly named as a configured projection target carries its own
+source-bound nominal binding. A compatible configured alias can refer to that
+target from another input without redeclaring it locally. Automatically
+discovered tag remaps and primitive or pointer storage mappings do not establish
+this target intent. Separate inputs can select
 different native declaration families for the same explicitly routed public
 projection; each family still validates independently. An ambiguous native
 target, an unrelated alias, or an output namespace alone does not establish a
-projection. Native handle contracts also retain their source-bound public owner,
-including compatible-type annotations. A cleanup-derived namespace requires an
+projection. Native handle contracts also retain their source-bound public owner.
+A `DECLARE_HANDLE` observation identifies its own native family; it does not
+redirect an unrelated inferred typedef with the same name. Explicit cleanup or
+compatible-type annotations can select a shared owner, while native storage and
+declaration-family checks still apply. A cleanup-derived namespace requires an
 unambiguous actual cleanup API. Inferred-only aliases can share an intrinsic CLR
 projection only after their independent source, storage, signedness and layout
 checks pass. Repeated observations of one native declaration family instead use

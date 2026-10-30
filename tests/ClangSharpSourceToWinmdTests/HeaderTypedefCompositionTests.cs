@@ -2491,6 +2491,218 @@ public static partial class Apis {
         }
 
         [DataTestMethod]
+        [DataRow("x64", "compatible")]
+        [DataRow("crossarch", "compatible")]
+        [DataRow("crossarch", "separate-target")]
+        [DataRow("crossarch", "unproven-target")]
+        [DataRow("crossarch", "missing-target")]
+        [DataRow("crossarch", "foreign-family")]
+        [DataRow("crossarch", "source-drift")]
+        [DataRow("crossarch", "storage")]
+        [DataRow("crossarch", "missing-route")]
+        public void ExplicitNativeProjectionTargetsAuthorizeConfiguredAliasesAcrossInputs(string architecture, string scenario)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", scenario == "missing-target" ? "" :
+                Provider("Native", "SCALAR", configured: scenario != "unproven-target"));
+            fixture.Write("Mapped.header-types.cs", Provider("Mapped", "MAPPED_SCALAR", configured: true,
+                storage: scenario == "storage" ? "uint" : "int"));
+            if (scenario is "separate-target" or "missing-route" or "source-drift")
+                fixture.Write("Other.header-types.cs", Provider("Other", "SCALAR", configured: true,
+                    header: scenario == "separate-target" ? "other-target" : null,
+                    hash: scenario == "source-drift" ? 'B' : 'A'));
+            if (scenario is "foreign-family" or "missing-target")
+                fixture.Write("Other.header-types.cs", Provider("Other", "UNRELATED", configured: false));
+            fixture.Write("Bindings.cs", @"namespace Mapped { public struct CARRIER { public SCALAR Value; } }");
+            var routes = scenario == "missing-route" ? new Dictionary<string, string>() :
+                new Dictionary<string, string> { ["SCALAR"] = "Canonical" };
+            if (scenario == "missing-route")
+            {
+                var unrouted = fixture.Compile(routes);
+                Assert.AreEqual(0, unrouted.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+                Assert.IsNull(unrouted.CSharpCompilation.GetTypeByMetadataName("Canonical.SCALAR"));
+                var mapped = unrouted.CSharpCompilation.GetTypeByMetadataName("Mapped.SCALAR")!;
+                Assert.AreEqual("MAPPED_SCALAR", NativeTypedefSourceProvenance.Read(
+                    (StructDeclarationSyntax)mapped.DeclaringSyntaxReferences.Single().GetSyntax())!.NativeName);
+                var consumer = unrouted.CSharpCompilation.GetTypeByMetadataName("Mapped.CARRIER")!;
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(mapped,
+                    consumer.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+                return;
+            }
+            if (scenario is not ("compatible" or "separate-target"))
+            {
+                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(routes)).Message, "CSSW005");
+                return;
+            }
+            var compilation = fixture.Compile(routes);
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            var canonical = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.SCALAR")!;
+            var declaration = (StructDeclarationSyntax)canonical.DeclaringSyntaxReferences.Single().GetSyntax();
+            Assert.AreEqual("SCALAR", NativeTypedefSourceProvenance.Read(declaration)!.NativeName);
+            Assert.IsTrue(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration));
+            var carrier = compilation.CSharpCompilation.GetTypeByMetadataName("Mapped.CARRIER")!;
+            Assert.IsTrue(SymbolEqualityComparer.Default.Equals(canonical,
+                carrier.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+            string output = Path.Combine(fixture.DirectoryPath, "ExplicitNativeTarget.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var scalar = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Name) == "SCALAR");
+            Assert.AreEqual("Canonical", reader.GetString(scalar.Namespace));
+            CollectionAssert.AreEqual(new byte[] { 0x06, 0x08 },
+                reader.GetBlobBytes(reader.GetFieldDefinition(scalar.GetFields().Single()).Signature));
+            var physicalCarrier = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Name) == "CARRIER");
+            var signature = reader.GetBlobReader(reader.GetFieldDefinition(physicalCarrier.GetFields().Single()).Signature);
+            Assert.AreEqual((byte)0x06, signature.ReadByte());
+            Assert.AreEqual((byte)0x11, signature.ReadByte());
+            var target = ResolveLocalType(reader, signature.ReadTypeHandle());
+            Assert.AreEqual("SCALAR", reader.GetString(target.Name));
+            Assert.AreEqual("Canonical", reader.GetString(target.Namespace));
+            Assert.AreEqual(0, signature.RemainingBytes);
+
+            string Provider(string ns, string nativeName, bool configured, string storage = "int",
+                string? header = null, char hash = 'A')
+            {
+                string file = (header ?? nativeName) + ".h";
+                var root = CSharpSyntaxTree.ParseText(TypedefProvider(fixture, ns, "c:" + file + "@T@" + nativeName,
+                    true, storage)).GetRoot();
+                var original = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var source = NativeTypedefSourceProvenance.Read(original)! with
+                {
+                    NativeName = nativeName,
+                    Header = Path.Combine(fixture.DirectoryPath, file),
+                    HeaderHash = new string(hash, 64),
+                };
+                var declaration = NativeTypedefProjectionProvenance.WithPolicy(NativeTypedefSourceProvenance.Attach(
+                    original.WithTrailingTrivia(default(SyntaxTriviaList)), source), inferred: !configured);
+                if (configured)
+                    declaration = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(declaration);
+                return root.ReplaceNode(original, declaration).ToFullString()
+                    .Replace("using Windows.Win32.Foundation.Metadata;", "", StringComparison.Ordinal)
+                    .Replace("[NativeTypedef]", "[global::Windows.Win32.Foundation.Metadata.NativeTypedef]", StringComparison.Ordinal);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("x86", false)]
+        [DataRow("x64", false)]
+        [DataRow("arm64", false)]
+        [DataRow("crossarch", false)]
+        [DataRow("crossarch", true)]
+        public void NativeHandleShapeDoesNotRelocateIndependentInferredAliases(string architecture, bool explicitRoute)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            foreach (string target in architecture == "crossarch" ? new[] { "x86", "x64", "arm64" } : new[] { architecture })
+            {
+                string directory = Path.Combine(fixture.DirectoryPath, target);
+                File.WriteAllText(Path.Combine(directory, "Bindings.header-types.cs"), Provider("Observed", "observed",
+                    "global::System.UIntPtr", target, inferred: true));
+                File.WriteAllText(Path.Combine(directory, "Owner.header-types.cs"), Provider("Native", "native",
+                    "SCALAR__*", target, inferred: false));
+            }
+            fixture.Write("Bindings.cs", @"
+using System.Runtime.InteropServices;
+namespace Observed {
+public struct CARRIER { public SCALAR Value; }
+public static class Apis { [DllImport(""native.dll"")] public static extern void UseObserved(SCALAR value); }
+}
+namespace Native {
+public struct SCALAR__ { public int unused; }
+public static class Apis { [DllImport(""native.dll"")] public static extern void UseNative(SCALAR value); }
+}");
+            var routes = explicitRoute ? new Dictionary<string, string> { ["SCALAR"] = "Native" } :
+                new Dictionary<string, string>();
+            if (explicitRoute)
+            {
+                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(routes)).Message, "CSSW005");
+                return;
+            }
+            var compilation = fixture.Compile(routes);
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            foreach (var owner in new[] { (Namespace: "Observed", Header: "observed"), (Namespace: "Native", Header: "native") })
+            {
+                var alias = compilation.CSharpCompilation.GetTypeByMetadataName(owner.Namespace + ".SCALAR")!;
+                var declaration = (StructDeclarationSyntax)alias.DeclaringSyntaxReferences.Single().GetSyntax();
+                Assert.AreEqual(Path.Combine(fixture.DirectoryPath, owner.Header + ".h"),
+                    NativeTypedefSourceProvenance.Read(declaration)!.Header);
+                var method = compilation.CSharpCompilation.GetTypeByMetadataName(owner.Namespace + ".Apis")!
+                    .GetMembers("Use" + owner.Namespace).OfType<IMethodSymbol>().Single();
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(alias, method.Parameters.Single().Type));
+            }
+            string output = Path.Combine(fixture.DirectoryPath, "IndependentNativeHandleFamilies.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var scalar = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Name) == "SCALAR");
+            Assert.AreEqual("Native", reader.GetString(scalar.Namespace));
+            var fieldSignature = reader.GetBlobReader(reader.GetFieldDefinition(scalar.GetFields().Single()).Signature);
+            Assert.AreEqual(SignatureKind.Field, fieldSignature.ReadSignatureHeader().Kind);
+            Assert.AreEqual(SignatureTypeCode.Pointer, fieldSignature.ReadSignatureTypeCode());
+            Assert.AreEqual(SignatureTypeCode.TypeHandle, fieldSignature.ReadSignatureTypeCode());
+            var tag = ResolveLocalType(reader, fieldSignature.ReadTypeHandle());
+            Assert.AreEqual("SCALAR__", reader.GetString(tag.Name));
+            Assert.AreEqual("Native", reader.GetString(tag.Namespace));
+            Assert.AreEqual(0, fieldSignature.RemainingBytes);
+            foreach (var name in new[] { "UseObserved", "UseNative" })
+            {
+                var method = reader.MethodDefinitions.Select(reader.GetMethodDefinition)
+                    .Single(method => reader.GetString(method.Name) == name);
+                var signature = reader.GetBlobReader(method.Signature);
+                Assert.AreEqual(SignatureKind.Method, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(1, signature.ReadCompressedInteger());
+                Assert.AreEqual(SignatureTypeCode.Void, signature.ReadSignatureTypeCode());
+                if (name == "UseObserved")
+                    Assert.AreEqual(SignatureTypeCode.UIntPtr, signature.ReadSignatureTypeCode());
+                else
+                {
+                    Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                    var target = ResolveLocalType(reader, signature.ReadTypeHandle());
+                    Assert.AreEqual("SCALAR", reader.GetString(target.Name));
+                    Assert.AreEqual("Native", reader.GetString(target.Namespace));
+                }
+                Assert.AreEqual(0, signature.RemainingBytes);
+            }
+
+            string Provider(string ns, string header, string storage, string target, bool inferred)
+            {
+                int size = target == "x86" ? 4 : 8;
+                var root = CSharpSyntaxTree.ParseText(TypedefProvider(fixture, ns, "c:" + header + ".h@T@SCALAR",
+                    true, storage, size, size).Replace("public partial struct", "public unsafe partial struct")).GetRoot();
+                var original = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var source = NativeTypedefSourceProvenance.Read(original)! with
+                {
+                    NativeName = "SCALAR",
+                    Header = Path.Combine(fixture.DirectoryPath, header + ".h"),
+                    HeaderHash = new string(inferred ? 'A' : 'B', 64),
+                    SourceArchitecture = target switch
+                    {
+                        "x86" => Architecture.X86,
+                        "x64" => Architecture.X64,
+                        _ => Architecture.Arm64,
+                    },
+                };
+                var declaration = NativeTypedefProjectionProvenance.WithPolicy(NativeTypedefSourceProvenance.Attach(
+                    original.WithTrailingTrivia(default(SyntaxTriviaList)), source), inferred);
+                if (!inferred)
+                    declaration = NativeHandleSourceProvenance.AttachHeaderDeclareHandle(declaration, "::SCALAR", storage);
+                return root.ReplaceNode(original, declaration).ToFullString()
+                    .Replace("using Windows.Win32.Foundation.Metadata;", "", StringComparison.Ordinal)
+                    .Replace("[NativeTypedef]", "[global::Windows.Win32.Foundation.Metadata.NativeTypedef]", StringComparison.Ordinal);
+            }
+        }
+
+        [DataTestMethod]
         [DataRow("lifecycle")]
         [DataRow("output-only")]
         [DataRow("foreign-family")]

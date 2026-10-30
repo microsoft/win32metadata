@@ -39,7 +39,7 @@ namespace ClangSharpSourceToWinmd
                     .Select(declaration => declaration.Identifier.ValueText)).ToHashSet(StringComparer.Ordinal);
             var aliases = new List<(StructDeclarationSyntax Declaration, NativeRecordSource Source,
                 (string Identity, string Header, string Name) Family, bool? Inferred,
-                bool Configured, string Cleanup, bool Handle)>();
+                bool Configured, string Cleanup, bool NativeHandle, bool CompatibleType)>();
             foreach (var declaration in declarations)
             {
                 try
@@ -50,8 +50,8 @@ namespace ClangSharpSourceToWinmd
                     aliases.Add((declaration, source, ProjectionFamily(source),
                         NativeTypedefProjectionProvenance.IsInferred(declaration),
                         NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration),
-                        CleanupApi(declaration), NativeHandleSourceProvenance.TryRead(declaration, out _) ||
-                            declaration.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                        CleanupApi(declaration), NativeHandleSourceProvenance.TryRead(declaration, out _),
+                        declaration.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
                                 attribute.Name.ToString() is "global::Windows.Win32.Foundation.Metadata.AlsoUsableFor" or
                                     "global::Windows.Win32.Foundation.Metadata.AlsoUsableForAttribute")));
                 }
@@ -67,7 +67,7 @@ namespace ClangSharpSourceToWinmd
             var byFamily = aliases.GroupBy(alias => alias.Family).ToDictionary(group => group.Key, group => group.ToArray());
             var candidates = aliases.Where(alias => !retainedNames.Contains(alias.Source.Name) &&
                 alias.Source.NativeName == alias.Source.Name &&
-                (alias.Inferred == false && (alias.Configured || alias.Cleanup != null || alias.Handle) ||
+                (alias.Inferred == false && (alias.Configured || alias.Cleanup != null || alias.NativeHandle || alias.CompatibleType) ||
                     witnesses.Contains((alias.Declaration.SyntaxTree, alias.Source.NativeName,
                         alias.Source.SourceArchitecture, alias.Source.Size, alias.Source.Alignment))))
                 .GroupBy(alias => alias.Source.Name, StringComparer.Ordinal).ToArray();
@@ -110,7 +110,7 @@ namespace ClangSharpSourceToWinmd
                     continue;
                 result.Add(candidate.Key, new NativeProjectionOwner(owner,
                     providers.Select(alias => alias.Declaration).ToArray(), cleanups.Length == 1 ||
-                        providers.Any(alias => alias.Handle)));
+                        providers.Any(alias => alias.CompatibleType)));
             }
             return result;
         }
@@ -140,6 +140,7 @@ namespace ClangSharpSourceToWinmd
                 Namespace = ns;
                 Providers = providers;
                 IntentionalHandle = intentionalHandle;
+                ConfiguredTarget = providers.Any(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding);
                 Families = providers.Select(provider => ProjectionFamily(NativeTypedefSourceProvenance.Read(provider)))
                     .ToHashSet();
                 Name = Families.First().Name;
@@ -148,6 +149,7 @@ namespace ClangSharpSourceToWinmd
             internal string Namespace { get; }
             internal StructDeclarationSyntax[] Providers { get; }
             private bool IntentionalHandle { get; }
+            private bool ConfiguredTarget { get; }
             private string Name { get; }
             private HashSet<(string Identity, string Header, string Name)> Families { get; }
 
@@ -161,7 +163,7 @@ namespace ClangSharpSourceToWinmd
                 return source != null && (IsTarget(declaration) ||
                     NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration) &&
                         source.NativeName != source.Name && source.Name == Name &&
-                        Providers.Any(provider => provider.SyntaxTree == declaration.SyntaxTree) ||
+                        (ConfiguredTarget || Providers.Any(provider => provider.SyntaxTree == declaration.SyntaxTree)) ||
                     IntentionalHandle && source.NativeName == Name &&
                         NativeTypedefProjectionProvenance.IsInferred(declaration) == true);
             }
