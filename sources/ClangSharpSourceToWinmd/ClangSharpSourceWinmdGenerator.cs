@@ -662,53 +662,12 @@ namespace ClangSharpSourceToWinmd
                 {
                     var storage = this.GetIntrinsicUseType(value.Type);
                     if (declarations.Length != 0 && declarations.All(declaration =>
-                        StorageMatches(NativeTypedefSourceProvenance.Read(declaration), storage)))
+                        HeaderTypedefMerger.NativeStorageMatches(NativeTypedefSourceProvenance.Read(declaration), storage)))
                         result = storage;
                 }
             }
             this.intrinsicUseTypes[type] = result;
             return result;
-
-            static bool StorageMatches(NativeRecordSource source, ITypeSymbol storage)
-            {
-                if (source == null)
-                    return false;
-                int pointerSize = source.SourceArchitecture switch
-                {
-                    Architecture.X86 => 4,
-                    Architecture.X64 or Architecture.Arm64 => 8,
-                    _ => 0,
-                };
-                int size = StorageSize(storage, new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
-                return size != 0 && source.Size == size && source.Alignment == size;
-
-                int StorageSize(ITypeSymbol type, HashSet<ITypeSymbol> resolving)
-                {
-                    if (type is INamedTypeSymbol { TypeKind: TypeKind.Enum } enumeration)
-                        return StorageSize(enumeration.EnumUnderlyingType, resolving);
-                    int size = type.SpecialType switch
-                    {
-                        SpecialType.System_Boolean or SpecialType.System_SByte or SpecialType.System_Byte => 1,
-                        SpecialType.System_Char or SpecialType.System_Int16 or SpecialType.System_UInt16 => 2,
-                        SpecialType.System_Int32 or SpecialType.System_UInt32 or SpecialType.System_Single => 4,
-                        SpecialType.System_Int64 or SpecialType.System_UInt64 or SpecialType.System_Double => 8,
-                        SpecialType.System_IntPtr or SpecialType.System_UIntPtr => pointerSize,
-                        _ => type is IPointerTypeSymbol ? pointerSize : 0,
-                    };
-                    if (size != 0 || !resolving.Add(type))
-                        return size;
-                    var attributes = type.GetAttributes();
-                    if (!attributes.Any(attribute => attribute.AttributeClass?.ToDisplayString() ==
-                            "Windows.Win32.Foundation.Metadata.NativeTypedefAttribute") ||
-                        attributes.Any(attribute => attribute.AttributeClass?.Name is
-                            "StructLayoutAttribute" or "AlignmentAttribute"))
-                        return 0;
-                    var fields = type.GetMembers().OfType<IFieldSymbol>().Where(field => !field.IsStatic).ToArray();
-                    return fields.Length == 1 && fields[0].Name == "Value" &&
-                        !fields[0].GetAttributes().Any(attribute => attribute.AttributeClass?.Name == "FieldOffsetAttribute")
-                        ? StorageSize(fields[0].Type, resolving) : 0;
-                }
-            }
         }
 
         private void GatherNativeProjectionClosure()

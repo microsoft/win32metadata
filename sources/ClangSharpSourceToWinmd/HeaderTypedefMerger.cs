@@ -24,6 +24,149 @@ namespace ClangSharpSourceToWinmd
         private const string ArchitectureName = "global::Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute";
         private static readonly SyntaxAnnotation ComposedHeaderAlias = new SyntaxAnnotation();
 
+        internal static Dictionary<string, NativeProjectionOwner> FindNativeProjectionOwners(
+            IEnumerable<SyntaxTree> trees, IEnumerable<StructDeclarationSyntax> declarations,
+            IReadOnlyDictionary<string, string> requiredNamespaces, GenerationValidation validation)
+        {
+            var sourceTrees = trees.ToArray();
+            var retainedNames = sourceTrees.Where(tree => IsAutoTypesFile(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Select(declaration => declaration.Identifier.ValueText)
+                .Concat(sourceTrees.Where(tree => MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) ||
+                    tree.FilePath.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase))
+                    .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
+                    .Select(declaration => declaration.Identifier.ValueText)).ToHashSet(StringComparer.Ordinal);
+            var aliases = new List<(StructDeclarationSyntax Declaration, NativeRecordSource Source,
+                (string Identity, string Header, string Name) Family, bool? Inferred,
+                bool Configured, string Cleanup, bool Handle)>();
+            foreach (var declaration in declarations)
+            {
+                try
+                {
+                    var source = NativeTypedefSourceProvenance.Read(declaration);
+                    if (source == null)
+                        continue;
+                    aliases.Add((declaration, source, ProjectionFamily(source),
+                        NativeTypedefProjectionProvenance.IsInferred(declaration),
+                        NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration),
+                        CleanupApi(declaration), NativeHandleSourceProvenance.TryRead(declaration, out _) ||
+                            declaration.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                                attribute.Name.ToString() is "global::Windows.Win32.Foundation.Metadata.AlsoUsableFor" or
+                                    "global::Windows.Win32.Foundation.Metadata.AlsoUsableForAttribute")));
+                }
+                catch (InvalidDataException error)
+                {
+                    validation.Add(error, "CSSW005", "emitter.record-ownership", declaration.SyntaxTree.FilePath,
+                        declaration.Identifier.ValueText);
+                }
+            }
+            var witnesses = aliases.Where(alias => alias.Configured && alias.Source.NativeName != alias.Source.Name)
+                .Select(alias => (alias.Declaration.SyntaxTree, alias.Source.Name, alias.Source.SourceArchitecture,
+                    alias.Source.Size, alias.Source.Alignment)).ToHashSet();
+            var byFamily = aliases.GroupBy(alias => alias.Family).ToDictionary(group => group.Key, group => group.ToArray());
+            var candidates = aliases.Where(alias => !retainedNames.Contains(alias.Source.Name) &&
+                alias.Source.NativeName == alias.Source.Name &&
+                (alias.Inferred == false && (alias.Configured || alias.Cleanup != null || alias.Handle) ||
+                    witnesses.Contains((alias.Declaration.SyntaxTree, alias.Source.NativeName,
+                        alias.Source.SourceArchitecture, alias.Source.Size, alias.Source.Alignment))))
+                .GroupBy(alias => alias.Source.Name, StringComparer.Ordinal).ToArray();
+            var cleanupNames = candidates.SelectMany(group => group.Select(alias => alias.Cleanup))
+                .Where(name => name != null).ToHashSet(StringComparer.Ordinal);
+            var cleanupOwners = (cleanupNames.Count == 0 ? Array.Empty<MethodDeclarationSyntax>() :
+                sourceTrees.SelectMany(tree => tree.GetRoot().DescendantNodes(node =>
+                    node is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax or TypeDeclarationSyntax))
+                .OfType<MethodDeclarationSyntax>().Where(method => cleanupNames.Contains(method.Identifier.ValueText) &&
+                    method.Modifiers.Any(SyntaxKind.StaticKeyword) && method.Modifiers.Any(SyntaxKind.ExternKeyword)))
+                .GroupBy(method => method.Identifier.ValueText, StringComparer.Ordinal)
+                .ToDictionary(group => group.Key, group => group.Select(SyntaxUtils.GetEnclosingNamespace)
+                    .Distinct(StringComparer.Ordinal).ToArray(), StringComparer.Ordinal);
+            var result = new Dictionary<string, NativeProjectionOwner>(StringComparer.Ordinal);
+            foreach (var candidate in candidates)
+            {
+                var families = candidate.Select(alias => alias.Family).ToHashSet();
+                var providers = families.SelectMany(family => byFamily[family]).ToArray();
+                if (providers.GroupBy(alias => alias.Declaration.SyntaxTree).Any(input =>
+                    input.Select(alias => alias.Family).Distinct().Skip(1).Any()))
+                    continue;
+                var cleanups = providers.Select(alias => alias.Cleanup)
+                    .Where(name => name != null).Distinct(StringComparer.Ordinal).ToArray();
+                if (cleanups.Length > 1)
+                    continue;
+                string owner = requiredNamespaces != null && requiredNamespaces.TryGetValue(candidate.Key, out string configured)
+                    ? configured : null;
+                if (cleanups.Length == 1)
+                {
+                    if (!cleanupOwners.TryGetValue(cleanups[0], out var namespaces) || namespaces.Length != 1)
+                        continue;
+                    owner ??= requiredNamespaces != null && requiredNamespaces.TryGetValue(cleanups[0], out string cleanupOwner)
+                        ? cleanupOwner : namespaces[0];
+                }
+                var direct = providers.Where(alias => alias.Source.TraversedHeader).Select(alias => alias.Source.Namespace)
+                    .Distinct(StringComparer.Ordinal).ToArray();
+                var observed = providers.Select(alias => alias.Source.Namespace).Distinct(StringComparer.Ordinal).ToArray();
+                owner ??= direct.Length == 1 ? direct[0] : observed.Length == 1 ? observed[0] : null;
+                if (owner == null)
+                    continue;
+                result.Add(candidate.Key, new NativeProjectionOwner(owner,
+                    providers.Select(alias => alias.Declaration).ToArray(), cleanups.Length == 1 ||
+                        providers.Any(alias => alias.Handle)));
+            }
+            return result;
+        }
+
+        private static (string Identity, string Header, string Name) ProjectionFamily(NativeRecordSource source) =>
+            (NativeRecordSourceProvenance.GetIdentityKey(source), source.Header.ToUpperInvariant(), source.Name);
+
+        private static string CleanupApi(StructDeclarationSyntax declaration)
+        {
+            var attributes = declaration.AttributeLists.SelectMany(list => list.Attributes).Where(attribute =>
+                attribute.Name.ToString() is "global::Windows.Win32.Foundation.Metadata.RAIIFree" or
+                    "global::Windows.Win32.Foundation.Metadata.RAIIFreeAttribute").ToArray();
+            if (attributes.Length == 0)
+                return null;
+            if (attributes.Length != 1 || attributes[0].ArgumentList?.Arguments.Count != 1 ||
+                attributes[0].ArgumentList.Arguments[0].Expression is not LiteralExpressionSyntax literal ||
+                !literal.IsKind(SyntaxKind.StringLiteralExpression) || string.IsNullOrEmpty(literal.Token.ValueText))
+                throw new InvalidDataException("A native cleanup owner requires one literal cleanup API.");
+            return literal.Token.ValueText;
+        }
+
+        internal sealed class NativeProjectionOwner
+        {
+            internal NativeProjectionOwner(string ns, StructDeclarationSyntax[] providers,
+                bool intentionalHandle)
+            {
+                Namespace = ns;
+                Providers = providers;
+                IntentionalHandle = intentionalHandle;
+                Families = providers.Select(provider => ProjectionFamily(NativeTypedefSourceProvenance.Read(provider)))
+                    .ToHashSet();
+                Name = Families.First().Name;
+            }
+
+            internal string Namespace { get; }
+            internal StructDeclarationSyntax[] Providers { get; }
+            private bool IntentionalHandle { get; }
+            private string Name { get; }
+            private HashSet<(string Identity, string Header, string Name)> Families { get; }
+
+            internal bool IsTarget(StructDeclarationSyntax declaration) =>
+                NativeTypedefSourceProvenance.Read(declaration) is { } source &&
+                    Families.Contains(ProjectionFamily(source));
+
+            internal bool Authorizes(StructDeclarationSyntax declaration)
+            {
+                var source = NativeTypedefSourceProvenance.Read(declaration);
+                return source != null && (IsTarget(declaration) ||
+                    NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration) &&
+                        source.NativeName != source.Name && source.Name == Name &&
+                        Providers.Any(provider => provider.SyntaxTree == declaration.SyntaxTree) ||
+                    IntentionalHandle && source.NativeName == Name &&
+                        NativeTypedefProjectionProvenance.IsInferred(declaration) == true);
+            }
+        }
+
         internal static CSharpCompilation LowerConstants(CSharpCompilation compilation, bool writeModifiedFiles = true)
         {
             var validation = new GenerationValidation();
@@ -379,10 +522,17 @@ namespace ClangSharpSourceToWinmd
         {
             int previousErrors = validation.Errors.Count;
             var replacements = new Dictionary<StructDeclarationSyntax, StructDeclarationSyntax>();
+            var nativeOwners = FindNativeProjectionOwners(compilation.SyntaxTrees,
+                fragments.Select(fragment => fragment.Declaration), requiredNamespaces, validation);
             foreach (var group in fragments.GroupBy(GetIdentity,
                 StringComparer.Ordinal).Where(group => group.Any(fragment => HeaderEnumGroupMerger.IsHeaderTypesFile(fragment.Tree.FilePath))))
             {
+                var nativeOwner = nativeOwners.TryGetValue(group.First().Symbol.Name, out var candidate) &&
+                    candidate.Namespace == group.First().Symbol.ContainingNamespace.ToDisplayString() &&
+                    group.Any(alias => candidate.IsTarget(alias.Declaration)) &&
+                    group.All(alias => candidate.Authorizes(alias.Declaration)) ? candidate : null;
                 var aliases = group.OrderBy(fragment => IsAutoTypesFile(fragment.Tree.FilePath) ? 0 : 1)
+                    .ThenBy(fragment => nativeOwner?.IsTarget(fragment.Declaration) == true ? 0 : 1)
                     .ThenBy(fragment => NativeTypedefSourceProvenance.Read(fragment.Declaration)?.TraversedHeader == true ? 0 : 1)
                     .ThenBy(fragment => fragment.Tree.FilePath, StringComparer.Ordinal).ToArray();
                 var first = aliases[0];
@@ -391,8 +541,11 @@ namespace ClangSharpSourceToWinmd
                 var sources = aliases.Select(alias => (Source: NativeTypedefSourceProvenance.Read(alias.Declaration),
                     Architectures: (Architecture)GetArchitecture(alias)));
                 bool retainedProjection = HasRoutedRetainedOwner(aliases, requiredNamespaces) ||
-                    retainedEnumProjections?.Contains(group.Key) == true;
-                bool conflictingSources = retainedProjection
+                    retainedEnumProjections?.Contains(group.Key) == true || nativeOwner != null;
+                bool intrinsicProjection = aliases.All(alias =>
+                    NativeTypedefSourceProvenance.Read(alias.Declaration) != null &&
+                    NativeTypedefProjectionProvenance.IsInferred(alias.Declaration) == true);
+                bool conflictingSources = retainedProjection || intrinsicProjection
                     ? sources.GroupBy(source => (Identity: NativeRecordSourceProvenance.GetIdentityKey(source.Source),
                         Header: source.Source?.Header.ToUpperInvariant()))
                         .Any(ClangSharpSourceCompilation.HasConflictingNativeDeclarations)
@@ -404,8 +557,23 @@ namespace ClangSharpSourceToWinmd
                     throw Error(first, "A header alias overlaps a declaration outside generated header-types/autotypes inputs.");
                 if (aliases.Length < 2)
                     continue;
+                if (intrinsicProjection || nativeOwner != null)
+                {
+                    foreach (var alias in aliases)
+                    {
+                        var storage = GetHeaderBackingStorage(compilation,
+                            GetValueType(alias, compilation.GetSemanticModel(alias.Tree)),
+                            new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default), recordFamilies);
+                        if (!NativeStorageMatches(NativeTypedefSourceProvenance.Read(alias.Declaration), storage) ||
+                            intrinsicProjection && (alias.Attributes.Any(attribute => AttributeName(attribute) is not
+                                (NativeTypedefName or ArchitectureName or DocumentationName)) ||
+                            GetFieldAttributes(alias, compilation.GetSemanticModel(alias.Tree))
+                                .Any(attribute => AttributeName(attribute) != NativeTypeNameName)))
+                            throw Error(alias, "Independent native projections require source-proven intrinsic storage and compatible nominal intent.");
+                    }
+                }
                 if (aliases.GroupBy(alias => (alias.Tree, alias.Symbol.Name)).Any(declarations => declarations.Count() != 1) &&
-                    !retainedProjection)
+                    !retainedProjection && !intrinsicProjection)
                     throw Error(first, "Multiple native aliases in one input project to the same type.");
 
                 var variants = aliases.Where(alias => GetArchitecture(alias) != 0).ToArray();
@@ -1061,6 +1229,46 @@ namespace ClangSharpSourceToWinmd
             if (type == null || type.TypeKind == TypeKind.Error || !type.IsUnmanagedType)
                 throw Error(fragment, "Cannot resolve native typedef Value storage.");
             return type;
+        }
+
+        internal static bool NativeStorageMatches(NativeRecordSource source, ITypeSymbol storage)
+        {
+            if (source == null)
+                return false;
+            int pointerSize = source.SourceArchitecture switch
+            {
+                Architecture.X86 => 4,
+                Architecture.X64 or Architecture.Arm64 => 8,
+                _ => 0,
+            };
+            int size = StorageSize(storage, new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
+            return size != 0 && source.Size == size && source.Alignment == size;
+
+            int StorageSize(ITypeSymbol type, HashSet<ITypeSymbol> resolving)
+            {
+                if (type is INamedTypeSymbol { TypeKind: TypeKind.Enum } enumeration)
+                    return StorageSize(enumeration.EnumUnderlyingType, resolving);
+                int size = type.SpecialType switch
+                {
+                    SpecialType.System_Boolean or SpecialType.System_SByte or SpecialType.System_Byte => 1,
+                    SpecialType.System_Char or SpecialType.System_Int16 or SpecialType.System_UInt16 => 2,
+                    SpecialType.System_Int32 or SpecialType.System_UInt32 or SpecialType.System_Single => 4,
+                    SpecialType.System_Int64 or SpecialType.System_UInt64 or SpecialType.System_Double => 8,
+                    SpecialType.System_IntPtr or SpecialType.System_UIntPtr => pointerSize,
+                    _ => type is IPointerTypeSymbol ? pointerSize : 0,
+                };
+                if (size != 0 || !resolving.Add(type))
+                    return size;
+                var attributes = type.GetAttributes();
+                if (!attributes.Any(attribute => AttributeName(attribute) == NativeTypedefName) ||
+                    attributes.Any(attribute => attribute.AttributeClass?.Name is
+                        "StructLayoutAttribute" or "AlignmentAttribute"))
+                    return 0;
+                var fields = type.GetMembers().OfType<IFieldSymbol>().Where(field => !field.IsStatic).ToArray();
+                return fields.Length == 1 && fields[0].Name == "Value" &&
+                    !fields[0].GetAttributes().Any(attribute => attribute.AttributeClass?.Name == "FieldOffsetAttribute")
+                    ? StorageSize(fields[0].Type, resolving) : 0;
+            }
         }
 
         private static IEnumerable<AttributeData> GetFieldAttributes(Fragment fragment, SemanticModel model)
