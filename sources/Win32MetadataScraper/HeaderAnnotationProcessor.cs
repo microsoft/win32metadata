@@ -25,6 +25,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<string, string> remaps;
         private IReadOnlyDictionary<string, string> storageTypeRemaps;
         private readonly IReadOnlyDictionary<string, string> projectionTypeRemaps;
+        private readonly IReadOnlyDictionary<string, string> automaticTagRemaps;
         private readonly Dictionary<CXCursor, string> nativeTypedefStorageRemaps = new();
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
         private readonly HashSet<NamedDecl> projectedDeclarations = new();
@@ -35,6 +36,8 @@ namespace Win32MetadataScraper
         private readonly bool parseHeaderAnnotations;
         private readonly IReadOnlySet<CXCursor> includedDeclarations;
         private readonly int nativePointerSize;
+        private readonly Architecture? nativeSourceArchitecture;
+        private readonly CXCallingConv nativeComCallingConvention;
         private readonly HashSet<CXCursor> recordPointees = new();
         private readonly Dictionary<CXCursor, string> projectedRecordNames = new();
         private readonly HashSet<CXCursor> requiredTypedefs = new();
@@ -51,6 +54,8 @@ namespace Win32MetadataScraper
         private readonly HashSet<(CXCursor Declaration, int Parameter)> invalidDeclarations = new();
         private readonly List<(HeaderAnnotationException Error, string Target)> annotationErrors = new();
         private readonly Dictionary<CXFile, byte[]> parameterCommentSources = new();
+        private readonly Dictionary<string, string> recordSourceHashes = new(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<ClangSharp.Diagnostic, (NativeRecordSource Source, int Alignment)> nativeAlignmentDiagnostics = new();
         private NativeNameLookup nativeNames;
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
@@ -94,12 +99,14 @@ namespace Win32MetadataScraper
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody,
             IReadOnlySet<CXCursor> includedDeclarations = null, bool inferNativeTypedefs = false, bool parseHeaderAnnotations = true,
-            IReadOnlyDictionary<string, string> projectionTypeRemaps = null)
+            IReadOnlyDictionary<string, string> projectionTypeRemaps = null,
+            IReadOnlyDictionary<string, string> automaticTagRemaps = null)
         {
             using var timing = GenerationTiming.BeginSpan("annotations.discovery");
             this.remaps = remaps;
             storageTypeRemaps = remaps;
             this.projectionTypeRemaps = projectionTypeRemaps ?? remaps;
+            this.automaticTagRemaps = automaticTagRemaps ?? new Dictionary<string, string>();
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
@@ -107,7 +114,25 @@ namespace Win32MetadataScraper
             this.parseHeaderAnnotations = parseHeaderAnnotations;
             this.includedDeclarations = includedDeclarations;
             using (var target = translationUnit.Handle.TargetInfo)
+            {
                 nativePointerSize = target.PointerWidth / 8;
+                using var triple = target.Triple;
+                string architecture = triple.ToString().Split('-')[0];
+                nativeSourceArchitecture = architecture switch
+                {
+                    "i386" or "i486" or "i586" or "i686" => Architecture.X86,
+                    "x86_64" => Architecture.X64,
+                    "aarch64" => Architecture.Arm64,
+                    _ => null,
+                };
+                nativeComCallingConvention = architecture switch
+                {
+                    "i386" or "i486" or "i586" or "i686" => CXCallingConv.CXCallingConv_X86StdCall,
+                    "x86_64" => CXCallingConv.CXCallingConv_Win64,
+                    "aarch64" => CXCallingConv.CXCallingConv_C,
+                    _ => CXCallingConv.CXCallingConv_Invalid,
+                };
+            }
             using (GenerationTiming.BeginSpan("annotations.discover-constant-groups"))
                 InitializeConstantGroups(translationUnit);
             using (var walkTiming = GenerationTiming.BeginSpan("annotations.walk-native-ast"))
@@ -202,7 +227,10 @@ namespace Win32MetadataScraper
             return bindings;
         }
 
-        internal bool RequiresProjectionIdentity => recordPointees.Count != 0 ||
+        internal bool RequiresProjectionIdentity => annotatedTypedefs.Any(facts => facts.HasNativeTypedefIdentity) ||
+            recordPointees.Count != 0 ||
+            declarations.Values.Any(facts => facts.Declaration is RecordDecl { IsCompleteDefinition: true } &&
+                ShouldEmit(facts.Declaration, facts.Location)) ||
             declarations.Values.Any(facts => facts.Declaration is EnumDecl enumeration &&
                 projectionTypeRemaps.TryGetValue(enumeration.Name, out string name) &&
                 GetEnumTypedefProjectionCandidates(enumeration, name).Any());
@@ -370,7 +398,7 @@ namespace Win32MetadataScraper
             foreach (var reference in cleanupReferences)
                 CollectAnnotationErrors(reference.Target, () =>
                 {
-                    var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location);
+                    var candidates = nativeNames.Resolve(reference.Owner, reference.Name, message => Error(reference.Location, message));
                     if (candidates.Length != 1 || candidates[0].Handle.Kind != CXCursorKind.CXCursor_FunctionDecl)
                         throw Error(reference.Location, $"RAIIFree cleanup '{reference.Name}' must identify one declared native cleanup function; found {candidates.Length} candidates.");
                     reference.Arguments[0] = candidates[0].Name;
@@ -385,7 +413,7 @@ namespace Win32MetadataScraper
             foreach (var reference in enumNameReferences)
                 CollectAnnotationErrors(reference.Target, () =>
                 {
-                    var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location)
+                    var candidates = nativeNames.Resolve(reference.Owner, reference.Name, message => Error(reference.Location, message))
                         .Select(UnwrapTypeDeclaration).GroupBy(value => value.Handle.CanonicalCursor)
                         .Select(group => group.First()).ToArray();
                     if (candidates.Length == 0 && !reference.Name.Contains("::", StringComparison.Ordinal))
@@ -582,6 +610,12 @@ namespace Win32MetadataScraper
                     declaration = MetadataUtils.NativeHandleSourceProvenance.AttachHeaderOpaqueStructPointer(
                         declaration, DeclarationSourceMap.QualifiedName(alias.Handle),
                         DeclarationSourceMap.QualifiedName(nativeRecord.Decl.Handle), valueType, explicitWrapperIntent: true);
+                declaration = NativeTypedefSourceProvenance.Attach(declaration,
+                    GetNativeSource(alias, declaration.Identifier.ValueText, generatedNamespace));
+                declaration = NativeTypedefProjectionProvenance.WithPolicy(declaration,
+                    facts.IsInferredTypedef && facts.Annotations.Count == 0 &&
+                    !projectionTypeRemaps.ContainsKey(alias.Name) &&
+                    !NativeHandleSourceProvenance.TryRead(declaration, out _));
                 members.Add(declaration);
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                 }
@@ -595,10 +629,90 @@ namespace Win32MetadataScraper
             if (members.Count == 0)
                 return string.Empty;
             return SyntaxFactory.CompilationUnit().AddUsings(
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")),
                 SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Runtime.InteropServices")),
                 SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata"))).AddMembers(
                 SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(generatedNamespace)).AddMembers(members.ToArray()))
                 .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+        }
+
+        private NativeRecordSource GetNativeSource(NamedDecl declaration, string name, string ns)
+        {
+            var location = declaration is TypedefNameDecl ? declaration.Handle.CanonicalCursor.Location : declaration.Handle.Location;
+            location.GetFileLocation(out var file, out uint line, out uint column, out _);
+            using var identity = clang.getCursorUSR(declaration.Handle.CanonicalCursor);
+            string header = Path.GetFullPath(file.ToString());
+            if (!recordSourceHashes.TryGetValue(header, out string hash))
+                recordSourceHashes.Add(header, hash = NativeConstantGroupProvenance.HashFile(header));
+            return new NativeRecordSource(identity.ToString(), DeclarationSourceMap.QualifiedName(declaration.Handle),
+                header, hash, line, column, name, ns, MatchesTraversalFile(traversalNames, header),
+                declaration.Handle.Type.SizeOf, declaration.Handle.Type.AlignOf)
+            {
+                SourceArchitecture = nativeSourceArchitecture,
+            };
+        }
+
+        private static AttributeListSyntax GetNativeAlignmentAttribute(NamedDecl declaration, NativeLocation location)
+        {
+            uint bits = declaration.MaxAlignment;
+            if (bits == 0)
+                return null;
+            uint alignment = bits / 8;
+            if (bits % 8 != 0 || alignment == 0 || (alignment & (alignment - 1)) != 0)
+                throw Error(location, $"Native alignment request '{bits}' is not a power-of-two byte alignment.");
+            long effectiveAlignment = declaration switch
+            {
+                RecordDecl record => record.Handle.Type.AlignOf,
+                FieldDecl field when field.SemanticParentCursor is RecordDecl parent => parent.Handle.Type.AlignOf,
+                _ => -1,
+            };
+            if (effectiveAlignment < alignment)
+                throw Error(location, $"Native alignment request '{alignment}' exceeds the containing record's effective alignment '{effectiveAlignment}'.");
+            return SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
+                SyntaxFactory.Attribute(SyntaxFactory.ParseName(MetadataNamespace + "Alignment"))
+                    .WithArgumentList(SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(
+                        SyntaxFactory.AttributeArgument(SyntaxFactory.LiteralExpression(
+                            SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal((int)alignment))))))));
+        }
+
+        private void RegisterNativeAlignmentDiagnostic(RecordDecl declaration, NativeRecordSource source)
+        {
+            long maximumFieldAlignment = declaration.Fields.Any()
+                ? declaration.Fields.Max(field => Math.Max(field.Type.Handle.AlignOf, 1))
+                : Math.Max(declaration.Handle.Type.AlignOf, 1);
+            int alignment = (int)(declaration.MaxAlignment / 8);
+            if (alignment <= maximumFieldAlignment)
+                return;
+            var diagnostic = new ClangSharp.Diagnostic(DiagnosticLevel.Warning,
+                $"Struct '{source.Name}' requests {alignment} byte alignment which .NET cannot honor; over-alignment can only lower, never raise, alignment, so the runtime will align it to {maximumFieldAlignment} bytes.",
+                declaration.Location);
+            nativeAlignmentDiagnostics[diagnostic] = (source, alignment);
+        }
+
+        internal static bool HasNativeAlignmentProjection(StructDeclarationSyntax declaration, NativeRecordSource source, int alignment) =>
+            source != null && NativeRecordSourceProvenance.Read(declaration) == source &&
+            declaration.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                attribute.Name.ToString() == MetadataNamespace + "Alignment" &&
+                attribute.ArgumentList?.Arguments.Count == 1 &&
+                attribute.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal &&
+                literal.Token.Value is int value && value == alignment);
+
+        internal IReadOnlyDictionary<ClangSharp.Diagnostic, string> GetNativeAlignmentDiagnostics(IEnumerable<CompilationUnitSyntax> sources)
+        {
+            var represented = new Dictionary<ClangSharp.Diagnostic, string>();
+            if (nativeAlignmentDiagnostics.Count == 0)
+                return represented;
+            var declarations = sources.SelectMany(source => source.DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(declaration => declaration.AttributeLists.SelectMany(list => list.Attributes)
+                    .Any(attribute => attribute.Name.ToString() == MetadataNamespace + "Alignment")).ToArray();
+            foreach (var pair in nativeAlignmentDiagnostics)
+            {
+                var (source, alignment) = pair.Value;
+                if (declarations.Any(declaration => HasNativeAlignmentProjection(declaration, source, alignment)))
+                    represented.Add(pair.Key,
+                        $"Native alignment for '{source.Namespace}.{source.Name}' is carried by AlignmentAttribute({alignment}). The generated C# is compiler storage; native consumers must honor the metadata alignment.");
+            }
+            return represented;
         }
 
         internal void ValidateProjection()
@@ -1081,6 +1195,9 @@ namespace Win32MetadataScraper
                 var terminal = type;
                 while (terminal is PointerType pointer)
                     terminal = pointer.PointeeType.CanonicalType;
+                if (facts.Annotations.Count == 0 && terminal is RecordType interfaceType &&
+                    IsComInterface(interfaceType.Decl, new HashSet<CXCursor>()))
+                    continue;
                 CollectAnnotationErrors(alias, () =>
                 {
                     if (type is PointerType && projectionTypeRemaps.TryGetValue(alias.Name, out string pointerMapping) &&
@@ -1099,6 +1216,60 @@ namespace Win32MetadataScraper
                 });
             }
         }
+
+        private bool IsComInterface(RecordDecl record, ISet<CXCursor> visiting)
+        {
+            record = record.Definition ?? record;
+            if (record is not CXXRecordDecl cpp || !record.IsCompleteDefinition ||
+                record.Fields.Count != 0 || !visiting.Add(record.Handle.CanonicalCursor))
+                return false;
+            try
+            {
+                var methods = cpp.Methods.Where(method => method.IsVirtual).OrderBy(method => method.VtblIndex).ToArray();
+                if (methods.Any(method => !HasComCallingConvention(method)))
+                    return false;
+                if (cpp.Bases.Count != 0)
+                    return cpp.Bases.Count == 1 && !cpp.Bases[0].IsVirtual &&
+                        cpp.Bases[0].Type.CanonicalType is RecordType parent &&
+                        IsComInterface(parent.Decl, visiting);
+
+                if (!record.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Uuid))
+                    return false;
+                if (methods.Length != 3 || methods.Where((method, index) =>
+                    method.VtblIndex != index || !method.Handle.IsPureVirtual).Any())
+                    return false;
+                var query = methods[0];
+                if (query.Name != "QueryInterface" || query.NumParams != 2 ||
+                    query.ReturnType.CanonicalType.Handle.SizeOf != 4 ||
+                    query.ReturnType.CanonicalType.Kind is not (CXTypeKind.CXType_Int or CXTypeKind.CXType_Long))
+                    return false;
+                var iid = query.Parameters[0].Type.CanonicalType;
+                if (iid is not (PointerType or ReferenceType))
+                    return false;
+                iid = iid is PointerType pointer ? pointer.PointeeType.CanonicalType :
+                    iid is ReferenceType reference ? reference.PointeeType.CanonicalType : iid;
+                if (iid is not RecordType guid || guid.Handle.SizeOf != 16 || guid.Handle.AlignOf != 4 ||
+                    query.Parameters[1].Type.CanonicalType is not PointerType output ||
+                    output.PointeeType.CanonicalType is not PointerType result ||
+                    result.PointeeType.CanonicalType.Kind != CXTypeKind.CXType_Void)
+                    return false;
+                return methods.Skip(1).Select((method, index) =>
+                    method.Name == (index == 0 ? "AddRef" : "Release") && method.NumParams == 0 &&
+                    method.ReturnType.CanonicalType.Handle.SizeOf == 4 &&
+                    method.ReturnType.CanonicalType.Kind is CXTypeKind.CXType_UInt or CXTypeKind.CXType_ULong).All(value => value);
+            }
+            finally
+            {
+                visiting.Remove(record.Handle.CanonicalCursor);
+            }
+        }
+
+        private bool HasComCallingConvention(CXXMethodDecl method)
+            => nativeComCallingConvention != CXCallingConv.CXCallingConv_Invalid &&
+                GetFunctionType(method.Type.CanonicalType) is FunctionProtoType signature &&
+                (signature.CallConv == nativeComCallingConvention ||
+                    nativeComCallingConvention == CXCallingConv.CXCallingConv_Win64 &&
+                    signature.CallConv == CXCallingConv.CXCallingConv_C);
 
         private static bool IsNativeTypedefCandidate(ClangSharp.Type type)
         {
@@ -1147,7 +1318,7 @@ namespace Win32MetadataScraper
                 case RecordType record:
                     if (IsExcludedDeclaration(record.Decl))
                         return;
-                    foreach (var field in (record.Decl.Definition ?? record.Decl).CursorChildren.OfType<FieldDecl>())
+                    foreach (var field in (record.Decl.Definition ?? record.Decl).Fields)
                         RequireTypedefDependencies(field.Type, visitedTypes);
                     break;
             }
@@ -1441,10 +1612,13 @@ namespace Win32MetadataScraper
             }
             if (IsExcludedDeclaration(declaration) || location.File.Length == 0)
                 return false;
-            return traversalNames.Count == 0 || traversalNames.Any(name =>
-                string.Equals(Path.GetFullPath(name), Path.GetFullPath(location.File), StringComparison.OrdinalIgnoreCase) ||
-                (Path.GetFileName(name) == name && string.Equals(name, Path.GetFileName(location.File), StringComparison.OrdinalIgnoreCase)));
+            return traversalNames.Count == 0 || MatchesTraversalFile(traversalNames, location.File);
         }
+
+        internal static bool MatchesTraversalFile(IReadOnlyList<string> traversalNames, string file)
+            => traversalNames.Any(name =>
+                string.Equals(Path.GetFullPath(name), Path.GetFullPath(file), StringComparison.OrdinalIgnoreCase) ||
+                (Path.GetFileName(name) == name && string.Equals(name, Path.GetFileName(file), StringComparison.OrdinalIgnoreCase)));
 
         private bool ShouldProjectTypedef(TypedefNameDecl alias, NativeLocation location)
             => ShouldEmit(alias, location) || requiredTypedefs.Contains(alias.Handle.CanonicalCursor) &&
@@ -1669,7 +1843,16 @@ namespace Win32MetadataScraper
             var nativeType = type.CanonicalType;
             type = RemapDiscovery.UnwrapType(type);
             if (underlyingStorage && preserveNativeShape && recordPointee && type.CanonicalType is RecordType nativeRecord)
-                return IsExcludedRecord(nativeRecord.Decl) ? "void" : GetRecordPointeeName(nativeRecord);
+            {
+                if (!IsExcludedRecord(nativeRecord.Decl))
+                    return GetRecordPointeeName(nativeRecord);
+                // A discovered tag-to-typedef name does not supply an excluded native body.
+                return (nativeRecord.Decl.Definition ?? nativeRecord.Decl).IsCompleteDefinition &&
+                    projectionTypeRemaps.TryGetValue(nativeRecord.Decl.Name, out string provider) &&
+                    provider != nativeRecord.Decl.Name && !IsStorageTypeName(provider) &&
+                    (!automaticTagRemaps.TryGetValue(nativeRecord.Decl.Name, out string tagName) || tagName != provider)
+                    ? provider : "void";
+            }
             if (type is TypedefType typedef)
             {
                 var alias = (TypedefNameDecl)typedef.Decl;
@@ -2148,6 +2331,12 @@ namespace Win32MetadataScraper
                 {
                     owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
+                    if (facts.Declaration is FieldDecl field)
+                    {
+                        var alignment = GetNativeAlignmentAttribute(field, facts.Location);
+                        if (alignment != null)
+                            node = node.AddAttributeLists(alignment);
+                    }
                     if (facts.Declaration is VarDecl variable && node.Modifiers.Any(SyntaxKind.ConstKeyword) &&
                         IsEnumStorage(variable.Type.CanonicalType.Kind))
                     {
@@ -2170,11 +2359,27 @@ namespace Win32MetadataScraper
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 var facts = FindFacts(node.AttributeLists, node);
+                string sourceNamespace = SyntaxUtils.GetEnclosingNamespace(node);
                 node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
                 if (facts != null)
                 {
                     owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
+                    if (facts.Declaration is RecordDecl record)
+                    {
+                        var definition = record.Definition ?? record;
+                        var alignment = GetNativeAlignmentAttribute(definition, facts.Location);
+                        if (alignment != null)
+                            node = node.AddAttributeLists(alignment);
+                        if (definition.IsCompleteDefinition && definition.Name.Length != 0 &&
+                            definition.Handle.Type.SizeOf >= 0 && definition.Handle.Type.AlignOf > 0)
+                        {
+                            var source = owner.GetNativeSource(definition, node.Identifier.ValueText, sourceNamespace);
+                            node = NativeRecordSourceProvenance.Attach(node, source);
+                            if (alignment != null)
+                                owner.RegisterNativeAlignmentDiagnostic(definition, source);
+                        }
+                    }
                 }
                 return node;
             }

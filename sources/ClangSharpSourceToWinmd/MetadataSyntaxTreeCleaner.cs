@@ -15,6 +15,38 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
         internal const string RevertToTypeSuffix = "___";
+        private const string AppliedTypeRemapMarker = "/* Win32Metadata.AppliedTypeRemap */";
+        private static readonly Regex IsRegexRemap = new Regex(@"[^\w::]");
+
+        internal static bool HasAppliedTypeRemap(SyntaxNode declaration) =>
+            declaration != null && declaration.GetLeadingTrivia().Concat(declaration.GetTrailingTrivia()).Any(trivia =>
+                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) && trivia.ToString() == AppliedTypeRemapMarker);
+
+        private static T MarkAppliedTypeRemap<T>(T declaration) where T : SyntaxNode =>
+            HasAppliedTypeRemap(declaration) ? declaration :
+                declaration.WithTrailingTrivia(SyntaxFactory.TriviaList(
+                    SyntaxFactory.Space, SyntaxFactory.Comment(AppliedTypeRemapMarker))
+                    .AddRange(declaration.GetTrailingTrivia()).Add(SyntaxFactory.ElasticCarriageReturnLineFeed));
+
+        internal static Func<string, string> CreateRemapResolver(Dictionary<string, string> remaps)
+        {
+            var exact = new Dictionary<string, string>(remaps, remaps.Comparer);
+            var patterns = exact.Where(pair => IsRegexRemap.IsMatch(pair.Key))
+                .Select(pair => (Pattern: new Regex(pair.Key), pair.Value)).ToArray();
+            return name =>
+            {
+                if (string.IsNullOrEmpty(name))
+                    return null;
+                exact.TryGetValue(name, out string data);
+                foreach (var pair in patterns)
+                    if (pair.Pattern.IsMatch(name))
+                        data += pair.Value;
+                return data;
+            };
+        }
+
+        internal static string GetFullNameWithoutArchSuffix(SyntaxNode node)
+            => SyntaxUtils.GetFullName(node).Replace("____1", string.Empty).Replace("____2", string.Empty);
 
         internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
             => node.Modifiers.ToString() == "public const" &&
@@ -57,12 +89,11 @@ namespace ClangSharpSourceToWinmd
         {
             private static readonly Regex NativeTypeNameArrayRegex = new Regex(@"\[\s*(\d+)\s*\]$");
             private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
-            private static readonly Regex IsRegex = new Regex(@"[^\w::]");
             private static readonly Regex ParameterOverrideRegex = new Regex(@"^Win32Metadata\.(Optional|ComOutPtr)\((true|false)\)$");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
-            private Dictionary<Regex, string> regexRemaps = new Dictionary<Regex, string>();
+            private readonly Func<string, string> resolveRemap;
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private Dictionary<string, string> staticLibs;
@@ -82,7 +113,7 @@ namespace ClangSharpSourceToWinmd
                 this.validation = validation;
                 this.filePath = filePath;
                 this.remaps = remaps;
-                this.InitRegexRemaps();
+                this.resolveRemap = CreateRemapResolver(remaps);
 
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
@@ -114,17 +145,6 @@ namespace ClangSharpSourceToWinmd
                         line: node.GetLocation().GetLineSpan().StartLinePosition.Line + 1,
                         architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(this.filePath).ToString());
                     return node;
-                }
-            }
-
-            private void InitRegexRemaps()
-            {
-                foreach (var pair in this.remaps)
-                {
-                    if (IsRegex.IsMatch(pair.Key))
-                    {
-                        this.regexRemaps[new Regex(pair.Key)] = pair.Value;
-                    }
                 }
             }
 
@@ -274,7 +294,8 @@ namespace ClangSharpSourceToWinmd
                     if (TryReadParameterOverride(attribute, out string name, out bool enabled) && !overrides.TryAdd(name, enabled))
                         throw new SourceValidationException($"WMA001: Duplicate '{name}' parameter override on '{fullName}'.");
                 }
-                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName);
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(),
+                    out string newType, out string newName, out bool explicitTypeRemap);
                 node = (ParameterSyntax)base.VisitParameter(node);
                 foreach (var pair in overrides)
                 {
@@ -320,7 +341,11 @@ namespace ClangSharpSourceToWinmd
                 if (newName != null)
                     node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
                 if (newType != null)
+                {
                     node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+                    if (explicitTypeRemap)
+                        node = MarkAppliedTypeRemap(node);
+                }
 
                 // Get rid of default parameter values
                 if (node.Default != null)
@@ -454,7 +479,8 @@ namespace ClangSharpSourceToWinmd
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
-                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Declaration.Type.ToString(),
+                    out string newType, out string newName, out bool explicitTypeRemap);
 
                 // ClangSharp mistakenly emits string[] for WCHAR[] Foo = "Bar".
                 // Change it to string
@@ -572,6 +598,8 @@ namespace ClangSharpSourceToWinmd
                 if (newType != null)
                 {
                     node = node.WithDeclaration(node.Declaration.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space)));
+                    if (explicitTypeRemap)
+                        node = MarkAppliedTypeRemap(node);
                 }
 
                 return node;
@@ -788,7 +816,8 @@ namespace ClangSharpSourceToWinmd
 
                 string returnFullName = $"{fixedName}::return";
 
-                if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, node.ReturnType.ToString(), out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, node.ReturnType.ToString(),
+                    out var newType, out _, out bool explicitTypeRemap))
                 {
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
 
@@ -798,12 +827,20 @@ namespace ClangSharpSourceToWinmd
                     if (newType != null)
                     {
                         node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+                        if (explicitTypeRemap)
+                            node = MarkAppliedTypeRemap(node);
                     }
 
-                    return node;
+                    return EnsureUnsafe(node);
                 }
 
-                return base.VisitDelegateDeclaration(node);
+                return EnsureUnsafe((DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node));
+
+                static DelegateDeclarationSyntax EnsureUnsafe(DelegateDeclarationSyntax declaration)
+                    => !declaration.Modifiers.Any(SyntaxKind.UnsafeKeyword) &&
+                        declaration.DescendantNodes().Any(node => node is PointerTypeSyntax or FunctionPointerTypeSyntax)
+                        ? declaration.AddModifiers(SyntaxFactory.Token(SyntaxKind.UnsafeKeyword).WithTrailingTrivia(SyntaxFactory.Space))
+                        : declaration;
             }
 
             public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
@@ -899,7 +936,8 @@ namespace ClangSharpSourceToWinmd
                 string nodeReturnType = node.ReturnType.ToString();
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, nodeReturnType, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, nodeReturnType,
+                    out var newType, out _, out bool explicitTypeRemap))
                 {
                     var target = SyntaxFactory.AttributeTargetSpecifier(SyntaxFactory.Token(SyntaxKind.ReturnKeyword));
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes, target));
@@ -907,6 +945,8 @@ namespace ClangSharpSourceToWinmd
                     if (newType != null)
                     {
                         node = node.WithReturnType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+                        if (explicitTypeRemap)
+                            node = MarkAppliedTypeRemap(node);
                     }
                 }
 
@@ -924,16 +964,6 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return null;
-            }
-
-            private static string GetFullNameWithoutArchSuffix(SyntaxNode node)
-            {
-                string ret = SyntaxUtils.GetFullName(node);
-
-                ret = ret.Replace("____1", string.Empty);
-                ret = ret.Replace("____2", string.Empty);
-
-                return ret;
             }
 
             private string GetInfoForNativeType(string nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated)
@@ -1534,42 +1564,23 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            private string GetRemapData(string fullName)
-            {
-                if (string.IsNullOrEmpty(fullName))
-                {
-                    return null;
-                }
-
-                string remapData = null;
-
-                if (this.remaps.TryGetValue(fullName, out var remap))
-                {
-                    remapData += remap;
-                }
-
-                foreach (var pair in this.regexRemaps)
-                {
-                    if (pair.Key.IsMatch(fullName))
-                    {
-                        remapData += pair.Value;
-                    }
-                }
-
-                return remapData;
-            }
-
             private bool GetRemapInfo(string fullName, SyntaxList<AttributeListSyntax> existingAttrList, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
+                => this.GetRemapInfo(fullName, existingAttrList, out listAttributes, currentType, out newType, out newName, out _);
+
+            private bool GetRemapInfo(string fullName, SyntaxList<AttributeListSyntax> existingAttrList, out List<AttributeSyntax> listAttributes,
+                string currentType, out string newType, out string newName, out bool explicitTypeRemap)
             {
                 listAttributes = null;
                 newType = null;
                 newName = null;
+                explicitTypeRemap = false;
 
                 bool ret = false;
-                string remapData = this.GetRemapData(fullName);
+                string remapData = this.resolveRemap(fullName);
                 if (!string.IsNullOrEmpty(remapData))
                 {
                     ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
+                    explicitTypeRemap = newType != null;
                     if (newType != null)
                     {
                         // Try to keep the pointers at the same level if we're replacing
@@ -1602,7 +1613,18 @@ namespace ClangSharpSourceToWinmd
 
                         if (!hasNativeTypeName && !(currentType.Contains("IUnknown**")) && !(currentType.Contains("IInspectable**")))
                         {
-                            var newCurrentType = "(\"" + currentType + "\")";
+                            // Namespace movement adds C# qualification, not native type spelling.
+                            var hintType = SyntaxFactory.ParseTypeName(currentType);
+                            var qualifiedNames = hintType.DescendantNodesAndSelf().OfType<NameSyntax>()
+                                .Where(name => name.GetFirstToken().ValueText == "global" &&
+                                    name is QualifiedNameSyntax or AliasQualifiedNameSyntax).ToArray();
+                            string hint = hintType.ReplaceNodes(qualifiedNames, (_, rewritten) => rewritten switch
+                            {
+                                QualifiedNameSyntax qualified => qualified.Right,
+                                AliasQualifiedNameSyntax alias => alias.Name,
+                                _ => rewritten,
+                            }).ToString();
+                            var newCurrentType = "(\"" + hint + "\")";
                             newCurrentType = newCurrentType.ToUpper();
 
                             var attrNameNode = SyntaxFactory.ParseName("NativeTypeName");

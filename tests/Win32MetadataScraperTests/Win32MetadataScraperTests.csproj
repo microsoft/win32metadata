@@ -28,6 +28,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="..\Shared\HeaderAnnotationCases.cs" Link="Cases\HeaderAnnotationCases.cs" />
+    <Compile Include="..\Shared\NativeContractPhysicalAssertions.cs" Link="Cases\NativeContractPhysicalAssertions.cs" />
     <None Include="..\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h"
           Link="assets\win32metadata_annotations.h" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\generation\WinSDK\manual\Metadata.cs"

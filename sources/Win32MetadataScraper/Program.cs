@@ -30,68 +30,6 @@ using static ClangSharp.Interop.CXTranslationUnit_Flags;
 
 class Program
 {
-    static readonly Dictionary<string, string> OptionAliases = new(StringComparer.Ordinal)
-    {
-        ["-a"] = "--additional",
-        ["-c"] = "--config",
-        ["-e"] = "--exclude",
-        ["-f"] = "--file",
-        ["-hf"] = "--headerFile",
-        ["--header-file"] = "--headerFile",
-        ["-I"] = "--include-directory",
-        ["-x"] = "--language",
-        ["-l"] = "--libraryPath",
-        ["--library-path"] = "--libraryPath",
-        ["-m"] = "--methodClassName",
-        ["--method-class-name"] = "--methodClassName",
-        ["-n"] = "--namespace",
-        ["-o"] = "--output",
-        ["-r"] = "--remap",
-        ["-std"] = "--std",
-        ["-t"] = "--traverse",
-        ["-wa"] = "--with-attribute",
-        ["-wcc"] = "--with-callconv",
-        ["-wlb"] = "--with-librarypath",
-        ["--with-library-path"] = "--with-librarypath",
-        ["-wsle"] = "--with-setlasterror",
-        ["--with-set-last-error"] = "--with-setlasterror",
-        ["-wsgct"] = "--with-suppressgctransition",
-        ["--with-suppress-gc-transition"] = "--with-suppressgctransition",
-        ["-wt"] = "--with-type",
-        ["-wu"] = "--with-using",
-    };
-
-    static readonly HashSet<string> SupportedOptions = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "--additional",
-        "--auto-remaps-file",
-        "--config",
-        "--constant-names-file",
-        "--declaration-map",
-        "--declaration-map-symbol",
-        "--exclude",
-        "--exclude-auto-remap",
-        "--file",
-        "--headerFile",
-        "--include-directory",
-        "--language",
-        "--libraryPath",
-        "--methodClassName",
-        "--namespace",
-        "--output",
-        "--preserve-auto-fnptr-level",
-        "--remap",
-        "--std",
-        "--traverse",
-        "--with-attribute",
-        "--with-callconv",
-        "--with-librarypath",
-        "--with-setlasterror",
-        "--with-suppressgctransition",
-        "--with-type",
-        "--with-using",
-    };
-
     static int Main(string[] args)
     {
         try
@@ -133,7 +71,7 @@ class Program
             }
 
             string[] unsupportedOptions = settings.Keys
-                .Where(option => !SupportedOptions.Contains(option))
+                .Where(option => !NativeResponseFiles.IsSupported(option))
                 .OrderBy(option => option, StringComparer.OrdinalIgnoreCase)
                 .ToArray();
             if (unsupportedOptions.Length > 0)
@@ -176,21 +114,7 @@ class Program
             GenerationTiming.SetContext("nativeConstants", (evaluateNativeConstants || constantsOnly).ToString());
             var derivedSettings = LoadAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
-            {
-                if (clangArgs.Contains("-w", StringComparer.Ordinal))
-                {
-                    Console.Error.WriteLine("Error: -w suppresses ignored metadata attribute diagnostics and cannot be used with parse-win32-annotations. Use specific -Wno- options for native warnings.");
-                    return 1;
-                }
-                clangArgs = clangArgs.Concat(new[]
-                {
-                    "-DWIN32METADATA",
-                    "-D_WIN32META_ANNOTATION_(...)=_Pragma(\"clang diagnostic push\") " +
-                        "_Pragma(\"clang diagnostic error \\\"-Wignored-attributes\\\"\") " +
-                        $"__attribute__((annotate(\"{HeaderAnnotation.OwnerPrefix}\" __VA_ARGS__))) " +
-                        "_Pragma(\"clang diagnostic pop\")",
-                }).ToArray();
-            }
+                clangArgs = NativeResponseFiles.EnableHeaderAnnotations(clangArgs);
             var configOptions = BuildOptionsFlags(settings);
             string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
                 ? Path.Combine(outputFile, "header-types.cs")
@@ -336,7 +260,8 @@ class Program
             var annotations = new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
                 settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
                 configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody),
-                inferNativeTypedefs: true, parseHeaderAnnotations: parseHeaderAnnotations, projectionTypeRemaps: projectionTypeRemaps);
+                inferNativeTypedefs: true, parseHeaderAnnotations: parseHeaderAnnotations,
+                projectionTypeRemaps: projectionTypeRemaps, automaticTagRemaps: autoRemaps);
             annotations.PrepareTypedefs();
             allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var bindingOptions = configOptions;
@@ -483,10 +408,11 @@ class Program
                     companionAnnotations?.ValidateProjection();
                 }
                 using var providerTiming = GenerationTiming.BeginSpan("native-providers.recover");
+                var requiredPointeeSources = string.IsNullOrEmpty(additionalTypes)
+                    ? Array.Empty<GeneratedSource>() : new[] { GeneratedSource.FromText(additionalTypes) };
                 var nativeRecords = new OpaqueRecordProjection(translationUnit,
-                    string.IsNullOrEmpty(additionalTypes) ? generatedSources.Values :
-                        generatedSources.Values.Append(GeneratedSource.FromText(additionalTypes)),
-                    config.RemappedNames, allExcludes);
+                    generatedSources.Values.Concat(requiredPointeeSources),
+                    config.RemappedNames, allExcludes, requiredPointeeSources.Select(source => source.Tree).ToArray());
                 var recordProjections = new List<(OpaqueRecordProjection Projection, Dictionary<string, string> Remaps)>();
                 if (configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeEmptyRecords) &&
                     nativeRecords.IncludedNames.Count != 0)
@@ -606,9 +532,16 @@ class Program
 
                 // Write diagnostics
                 using var diagnosticsTiming = GenerationTiming.BeginSpan("pinvoke.diagnostics");
+                var nativeAlignmentDiagnostics = annotations.GetNativeAlignmentDiagnostics(
+                    generatedSources.Values.Select(source => source.Root));
                 foreach (var diag in bindingDiagnostics)
                 {
                     Console.WriteLine($"    {diag}");
+                    if (nativeAlignmentDiagnostics.TryGetValue(diag, out string alignmentProjection))
+                    {
+                        Console.WriteLine($"    Info: {alignmentProjection}");
+                        continue;
+                    }
                     if (diag.Level == DiagnosticLevel.Warning && exitCode >= 0)
                         exitCode++;
                     else if (diag.Level == DiagnosticLevel.Error)
@@ -931,17 +864,7 @@ class Program
     }
 
     static string[] BuildClangArgs(Dictionary<string, List<string>> settings)
-    {
-        string language = settings.GetValueOrDefault("--language")?.LastOrDefault() ?? "c++";
-        string languageStandard = settings.GetValueOrDefault("--std")?.LastOrDefault() ?? "c++17";
-        var clangArgs = new List<string> { $"--language={language}", $"--std={languageStandard}", "-Wno-pragma-once-outside-header" };
-        if (settings.TryGetValue("--include-directory", out var incDirs))
-            foreach (var dir in incDirs)
-                clangArgs.Add($"--include-directory={dir}");
-        if (settings.TryGetValue("--additional", out var additionals))
-            clangArgs.AddRange(additionals);
-        return clangArgs.ToArray();
-    }
+        => NativeResponseFiles.BuildClangArgs(settings);
 
     static PInvokeGeneratorConfigurationOptions BuildOptionsFlags(Dictionary<string, List<string>> settings)
     {
@@ -1029,54 +952,7 @@ class Program
     }
 
     static void ParseRspFile(string path, Dictionary<string, List<string>> settings)
-    {
-        if (!File.Exists(path))
-            throw new FileNotFoundException($"Response file not found: '{path}'.", path);
-        string currentSwitch = null;
-        foreach (var rawLine in File.ReadLines(path))
-        {
-            string line = rawLine.Trim();
-            if (string.IsNullOrEmpty(line)) continue;
-            if (line.StartsWith("#", StringComparison.Ordinal)) continue;
-
-            if (line.StartsWith("@"))
-            {
-                string nestedPath = line.Substring(1).Trim('"');
-                ParseRspFile(nestedPath, settings);
-            }
-            else if (TryParseOption(line, out string option, out string inlineValue))
-            {
-                currentSwitch = option;
-                if (!settings.ContainsKey(currentSwitch))
-                    settings[currentSwitch] = new List<string>();
-
-                if (!string.IsNullOrEmpty(inlineValue))
-                    settings[currentSwitch].Add(inlineValue);
-            }
-            else if (currentSwitch != null)
-            {
-                settings[currentSwitch].Add(line);
-            }
-        }
-
-        static bool TryParseOption(string line, out string option, out string inlineValue)
-        {
-            option = null;
-            inlineValue = null;
-
-            int separatorIndex = line.IndexOf('=');
-            string candidate = separatorIndex >= 0 ? line.Substring(0, separatorIndex) : line;
-            bool isLongOption = candidate.StartsWith("--", StringComparison.Ordinal);
-            if (!isLongOption && !OptionAliases.ContainsKey(candidate))
-                return false;
-
-            option = OptionAliases.GetValueOrDefault(candidate) ?? candidate;
-            if (separatorIndex >= 0 && separatorIndex < line.Length - 1)
-                inlineValue = line.Substring(separatorIndex + 1);
-
-            return true;
-        }
-    }
+        => NativeResponseFiles.Read(path, settings);
 
     static Dictionary<string, string> ParseKeyValuePairs(List<string> items)
     {

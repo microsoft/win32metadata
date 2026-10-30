@@ -19,28 +19,8 @@ namespace Win32MetadataScraperTests
 
         public NativeContractBatchTests(ITestOutputHelper output) => this.output = output;
 
-        private const string AdditionalDeclarations = @"
-#define BATCH_FIRST 1U
-#define BATCH_SECOND (1U << 3)
-_Win32_FlagsEnum_(BATCH_OPTIONS, unsigned, BATCH_FIRST, BATCH_SECOND);
-enum BATCH_NATIVE_FLAGS : unsigned { BatchRead = 1, BatchWrite = 4 };
-/* Win32Metadata: enum ::BATCH_NATIVE_FLAGS => Flags */
-struct BATCH_FIELDS { unsigned value; };
-_Win32_AnnotateField_(BATCH_FIELDS::value, _Win32_AssociatedEnum_(BATCH_NATIVE_FLAGS));
-#pragma pack(push, 1)
-struct BATCH_PACKED { unsigned char kind; void* context; };
-#pragma pack(pop)
-_Win32_ImportLibrary_(""ordinal.dll"", ""#42"") int __stdcall ByOrdinal();
-struct __declspec(uuid(""eb0c0ca2-cfc2-4538-a693-314db6fc20f2"")) IOverride {
-    virtual int __stdcall Read(_Out_opt_ void** value) = 0;
-};
-_WIN32META_ANNOTATE_PARAMETER_(IOverride::Read, value, _Win32_Optional_(false) _Win32_ComOutPtr_(true));
-typedef int BATCH_BOOL;
-typedef void* BATCH_HANDLE;
-typedef BATCH_HANDLE* BATCH_PHANDLE;
-struct BATCH_OPAQUE;
-typedef struct BATCH_OPAQUE* BATCH_HOPAQUE;
-BATCH_BOOL RoundTripBatch(BATCH_BOOL value, BATCH_HANDLE handle, BATCH_PHANDLE output, BATCH_HOPAQUE opaque);
+        private const string AdditionalDeclarations =
+            Win32MetadataTestCases.HeaderAnnotationCases.NativeContractAdditionalDeclarations + @"
 typedef unsigned long DWORD;
 typedef int BOOL;
 enum WAIT_EVENT : unsigned long { WAIT_OBJECT_0 = 0, WAIT_ABANDONED = 128, WAIT_IO_COMPLETION = 192, WAIT_TIMEOUT = 258, WAIT_FAILED = 0xffffffffUL };
@@ -55,13 +35,6 @@ _Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_E
 DWORD __stdcall _Win32_PreserveResult_ WaitForMultipleObjectsEx(DWORD nCount, const HANDLE* lpHandles, BOOL bWaitAll, DWORD dwMilliseconds, BOOL bAlertable);
 DWORD __stdcall WaitResultWithoutPreserveResult(DWORD dwMilliseconds);
 }
-#define BATCH_WRAP32 (0xffffffffU + 1U)
-#define BATCH_POINTER_SIZE sizeof(void*)
-#if defined(_WIN64)
-#define BATCH_ONLY_64 64U
-#else
-#define BATCH_ONLY_32 32U
-#endif
 ";
 
         private const string ImageHlpLastErrorDeclarations = @"
@@ -121,7 +94,10 @@ WSAWaitForMultipleEvents=ws2_32.dll
                         ScopedDeclarations + AssociatedConstantNativeDeclarations + AdditionalDeclarations +
                         ImageHlpLastErrorDeclarations + FileAndSocketResultDeclarations;
                     var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
-                        extraSettings: "--config\nnative-constant-values\n" + FileAndSocketResultLibraries);
+                        extraSettings: "--config\nnative-constant-values\n" +
+                            "--remap\nBATCH_BOOL=BATCH_BOOL\nBATCH_HANDLE=BATCH_HANDLE\n" +
+                            "BATCH_PHANDLE=BATCH_PHANDLE\nBATCH_HOPAQUE=BATCH_HOPAQUE\nDWORD=DWORD\n" +
+                            FileAndSocketResultLibraries);
                     fixtures.Add((architecture, fixture));
                     fixture.AssertSuccess("FlagEnum", "FlagEnum", "MSInheritance", "MSInheritance");
                     Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
@@ -406,17 +382,7 @@ int Ordinary(void);
         [Fact]
         public void PayloadValidationRunsInMemoryInsteadOfLaunchingTheCompilerPerString()
         {
-            foreach (string payload in new[]
-            {
-                "SetLastError()", "Flags()", "Flags(true)", "Flags(unsigned)", "Retained(1)",
-                "Reserved()", "ContainsInteriorPointers=value", "RAIIFree()", "RAIIFree(Close, )",
-                "RAIIFree(Close, (0)", "RAIIFree(Close, [))", "AssociatedEnum", "Field",
-                "ImportLibrary(\"\")", "ImportLibrary(\"x.dll\", \"#0\")",
-                "ImportLibrary(\"x.dll\", \"#65536\")", "ImportLibrary(\"x.dll\", \"#not-an-ordinal\")",
-                "SupportedOSPlatform(\"windows10.0.99999\")", "Optional", "Optional()", "Optional(1)",
-                "Optional(TRUE)", "Optional(\"false\")", "ComOutPtr(false, true)",
-                "ComOutPtr(true || false)", "Unsupported",
-            })
+            foreach (string payload in Win32MetadataTestCases.HeaderAnnotationCases.InvalidPayloads)
             {
                 var error = Record.Exception(() => HeaderAnnotation.Parse(payload));
                 Assert.True(error?.GetType() == typeof(FormatException), $"Expected FormatException for payload '{payload}'; actual: {error}");

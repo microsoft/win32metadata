@@ -8,14 +8,23 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Text.Json;
+using ClangSharpSourceToWinmd;
+using MetadataUtils;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Win32MetadataScraper;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Win32MetadataScraperTests
 {
     public class AutomaticTypedefPrototypeTests : HeaderAnnotationWinmdTests
     {
+        private readonly ITestOutputHelper output;
+
+        public AutomaticTypedefPrototypeTests(ITestOutputHelper output) => this.output = output;
+
         private const string NativeDeclarations = @"
 #define DECLARE_HANDLE(name) struct name##__ { int unused; }; typedef struct name##__ *name
 #define DECLARE_OPAQUE_KEY(name) typedef struct name##__ { long long Internal; } name, *P##name
@@ -160,6 +169,66 @@ void __stdcall PrototypeUseProjectedEnums(LEGACY_MASK mask, LEGACY_HIGH_MASK hig
             ["VARIANT_BOOL"] = "Windows.Win32.Foundation",
         };
 
+        private const string InferredProjectionDeclarations = @"
+#ifndef WIN32METADATA
+#define WIN32METADATA
+#endif
+#include <win32metadata_annotations.h>
+typedef unsigned long FIRST_COUNT;
+typedef FIRST_COUNT SECOND_COUNT;
+typedef SECOND_COUNT* PSECOND_COUNT;
+typedef float SCALAR_FLOAT;
+typedef unsigned long CONFIGURED_COUNT;
+typedef _Win32_AlsoUsableFor_(CONFIGURED_COUNT) unsigned long AUTHORED_COUNT;
+struct ROW {
+    FIRST_COUNT first;
+    SECOND_COUNT second;
+    PSECOND_COUNT values;
+    SCALAR_FLOAT factor;
+    CONFIGURED_COUNT configured;
+    AUTHORED_COUNT authored;
+};
+extern ""C"" SECOND_COUNT Echo(SECOND_COUNT value, SCALAR_FLOAT factor, PSECOND_COUNT values);
+";
+
+        private static void InferredIdentityPreservesOrdinaryClrProjectionAndExplicitNominalIntent(
+            HeaderAnnotationTests.NativeFixture fixture, MetadataReader reader, bool annotationsEnabled)
+        {
+            var providers = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
+            var identities = new HashSet<string>(StringComparer.Ordinal);
+            foreach (string name in new[] { "FIRST_COUNT", "SECOND_COUNT", "PSECOND_COUNT", "SCALAR_FLOAT" })
+            {
+                var provider = providers.Single(type => type.Identifier.ValueText == name);
+                var source = NativeTypedefSourceProvenance.Read(provider);
+                Assert.NotNull(source);
+                Assert.True(identities.Add(source.Identity));
+                Assert.True(NativeTypedefProjectionProvenance.IsInferred(provider));
+            }
+            Assert.False(NativeTypedefProjectionProvenance.IsInferred(providers.Single(type =>
+                type.Identifier.ValueText == "CONFIGURED_COUNT")));
+            Assert.Equal(!annotationsEnabled, NativeTypedefProjectionProvenance.IsInferred(providers.Single(type =>
+                type.Identifier.ValueText == "AUTHORED_COUNT")));
+            var secondStorage = Assert.Single(providers.Single(type =>
+                type.Identifier.ValueText == "SECOND_COUNT").Members.OfType<FieldDeclarationSyntax>());
+            Assert.Equal("FIRST_COUNT", secondStorage.Declaration.Type.ToString());
+            var decoder = new SignatureNames(qualifiedNames: true);
+            var row = FindType(reader, "ROW");
+            Assert.Equal(new[] { "UInt32", "UInt32", "UInt32*", "Single", "Windows.Win32.Foundation.CONFIGURED_COUNT",
+                annotationsEnabled ? "Windows.Win32.Foundation.AUTHORED_COUNT" : "UInt32" },
+                row.GetFields().Select(handle => reader.GetFieldDefinition(handle).DecodeSignature(decoder, null)));
+            var method = FindMethod(reader, "Apis", "Echo").DecodeSignature(decoder, null);
+            Assert.Equal("UInt32", method.ReturnType);
+            Assert.Equal(new[] { "UInt32", "Single", "UInt32*" }, method.ParameterTypes);
+            foreach (string name in new[] { "FIRST_COUNT", "SECOND_COUNT", "PSECOND_COUNT", "SCALAR_FLOAT" })
+                Assert.DoesNotContain(reader.TypeDefinitions, handle =>
+                    reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
+            AssertWrapper(reader, "CONFIGURED_COUNT", "UInt32");
+            if (annotationsEnabled)
+                AssertWrapper(reader, "AUTHORED_COUNT", "UInt32");
+            AssertMetadataClosure(reader);
+        }
+
         [Fact]
         public void UnannotatedAliasesEmitAndUseExistingNamespaceRouting()
         {
@@ -167,10 +236,794 @@ void __stdcall PrototypeUseProjectedEnums(LEGACY_MASK mask, LEGACY_HIGH_MASK hig
             RunCase("x86", "i686-pc-windows-msvc", annotationsEnabled: false);
             RunCase("arm64", "aarch64-pc-windows-msvc", annotationsEnabled: false);
             RunCase("x64", "x86_64-pc-windows-msvc", annotationsEnabled: true);
+            RunCase("x86", "i686-pc-windows-msvc", annotationsEnabled: true);
+            RunCase("arm64", "aarch64-pc-windows-msvc", annotationsEnabled: true);
             AssertFixedWidthPointerStorage("x64", "x86_64-pc-windows-msvc", "__ptr32", 4, 8);
             AssertFixedWidthPointerStorage("x86", "i686-pc-windows-msvc", "__ptr64", 8, 4);
             AssertEnumProjectionStorage();
             AssertInvalidStorageBatches();
+
+            RunControl(nameof(NativeRecordTraversalRequiresAnExplicitMatchingFile),
+                NativeRecordTraversalRequiresAnExplicitMatchingFile);
+            foreach (var (architecture, target, observedArchitecture) in new[]
+            {
+                ("x86", "i686-pc-windows-msvc", MetadataUtils.Architecture.X86),
+                ("x64", "x86_64-pc-windows-msvc", MetadataUtils.Architecture.X64),
+                ("arm64", "aarch64-pc-windows-msvc", MetadataUtils.Architecture.Arm64),
+            })
+            {
+                RunControl($"{nameof(NativeRecordOnlyTraversalRetainsItsCanonicalSourceIdentity)}:{architecture}",
+                    () => NativeRecordOnlyTraversalRetainsItsCanonicalSourceIdentity(architecture, target, observedArchitecture));
+                RunControl($"{nameof(AutomaticInitializationDoesNotChangeTheNativeOrMetadataContract)}:{architecture}",
+                    () => AutomaticInitializationDoesNotChangeTheNativeOrMetadataContract(architecture, target));
+                RunControl($"{nameof(RequiredNativeAlignmentIsSeparateFromPacking)}:{architecture}",
+                    () => RequiredNativeAlignmentIsSeparateFromPacking(architecture, target));
+                RunControl($"{nameof(ReferencedAnonymousRecordsDiscoverTheirNestedScalarTypedefs)}:{architecture}",
+                    () => ReferencedAnonymousRecordsDiscoverTheirNestedScalarTypedefs(architecture, target));
+                foreach (bool mapped in new[] { true, false })
+                    RunControl($"{nameof(ExcludedRecordPointersRetainConfiguredExternalProjection)}:{architecture}:{mapped}",
+                        () => ExcludedRecordPointersRetainConfiguredExternalProjection(architecture, target, mapped));
+                RunControl($"{nameof(AutomaticTagNamesDoNotInventExternalProvidersForExcludedRecords)}:{architecture}",
+                    () => AutomaticTagNamesDoNotInventExternalProvidersForExcludedRecords(architecture, target));
+                RunControl($"{nameof(ComPointerAliasesPreserveOrdinaryExternalProjection)}:{architecture}",
+                    () => ComPointerAliasesPreserveOrdinaryExternalProjection(architecture, target));
+            }
+            foreach (var (query, addRef, release, derived) in new[]
+            {
+                ("__cdecl", "__cdecl", "__cdecl", false),
+                ("__cdecl", "__stdcall", "__stdcall", false),
+                ("__stdcall", "__cdecl", "__stdcall", false),
+                ("__stdcall", "__stdcall", "__cdecl", false),
+                ("__stdcall", "__stdcall", "__stdcall", true),
+            })
+                RunControl($"{nameof(NonComCallingConventionsRetainNativePointerAliases)}:{query}:{addRef}:{release}:{derived}",
+                    () => NonComCallingConventionsRetainNativePointerAliases(query, addRef, release, derived));
+            foreach (string declaration in new[]
+            {
+                "struct __declspec(uuid(\"00000000-0000-0000-c000-000000000046\")) Record { int value; };",
+                "struct __declspec(uuid(\"00000000-0000-0000-c000-000000000046\")) Record { virtual int Read() = 0; };",
+            })
+                RunControl($"{nameof(UuidAndVirtualMethodsAloneDoNotEraseNativePointerAliases)}:{declaration}",
+                    () => UuidAndVirtualMethodsAloneDoNotEraseNativePointerAliases(declaration));
+            foreach (bool bare in new[] { false, true })
+                RunControl($"{nameof(InferredScalarContextsComposeRealPartitionObservationsThroughTheOriginalEmitter)}:{bare}",
+                    () => InferredScalarContextsComposeRealPartitionObservationsThroughTheOriginalEmitter(bare));
+
+            void RunControl(string name, Action control)
+            {
+                this.output.WriteLine("Native typedef control: " + name);
+                control();
+            }
+        }
+
+        private static void NativeRecordTraversalRequiresAnExplicitMatchingFile()
+        {
+            string header = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N"), "shared-aliases.h");
+            Assert.True(HeaderAnnotationProcessor.MatchesTraversalFile(new[] { header }, header));
+            Assert.True(HeaderAnnotationProcessor.MatchesTraversalFile(new[] { "SHARED-ALIASES.H" }, header));
+            Assert.False(HeaderAnnotationProcessor.MatchesTraversalFile(Array.Empty<string>(), header));
+            Assert.False(HeaderAnnotationProcessor.MatchesTraversalFile(new[] { "other.h" }, header));
+            Assert.False(HeaderAnnotationProcessor.MatchesTraversalFile(
+                new[] { Path.Combine("other", "shared-aliases.h") }, header));
+        }
+
+        private static void NativeRecordOnlyTraversalRetainsItsCanonicalSourceIdentity(string architecture, string triple,
+            MetadataUtils.Architecture observedArchitecture)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, triple, @"
+struct RECORD_ONLY { unsigned long Value; };
+extern ""C"" void UseRecord(RECORD_ONLY* value);
+", annotationsEnabled: false);
+            fixture.AssertSuccess();
+            Assert.DoesNotContain("NativeTypedef", fixture.ReadAdditionalTypes());
+            var record = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().Single(declaration => declaration.Identifier.ValueText == "RECORD_ONLY");
+            var source = NativeRecordSourceProvenance.Read(record);
+            Assert.NotNull(source);
+            Assert.True(source.TraversedHeader);
+            Assert.Equal(fixture.Header, source.Header);
+            Assert.Equal("RECORD_ONLY", source.NativeName);
+            Assert.Equal("Test", source.Namespace);
+            Assert.Equal(observedArchitecture, source.SourceArchitecture);
+            Assert.Equal(4L, source.Size);
+            Assert.Equal(4L, source.Alignment);
+        }
+
+        private static void ReferencedAnonymousRecordsDiscoverTheirNestedScalarTypedefs(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#include ""dependency.h""
+extern ""C"" void GetInfo(PINFO info);
+", annotationsEnabled: false, extraSettings: "--remap\nNATIVE_FIELD_BITS=NATIVE_FIELD_BITS\n");
+            string dependency = Path.Combine(fixture.DirectoryPath, "dependency.h");
+            File.WriteAllText(dependency, @"
+typedef unsigned long long NATIVE_FIELD_BITS;
+typedef struct _INFO {
+    union {
+        struct { NATIVE_FIELD_BITS AllocationTag; };
+    };
+} INFO, *PINFO;
+");
+            fixture.AssertSuccess();
+            var alias = Assert.Single(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().Where(type =>
+                    type.Identifier.ValueText == "NATIVE_FIELD_BITS"));
+            var proof = NativeTypedefSourceProvenance.Read(alias);
+            Assert.NotNull(proof);
+            Assert.Equal(dependency, proof.Header);
+            Assert.Equal("NATIVE_FIELD_BITS", proof.NativeName);
+            Assert.Equal(8, proof.Size);
+            var field = Assert.Single(CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot()
+                .DescendantNodes().OfType<FieldDeclarationSyntax>().Where(declaration =>
+                    declaration.Declaration.Variables.Any(variable => variable.Identifier.ValueText == "AllocationTag")));
+            Assert.Equal("NATIVE_FIELD_BITS", field.Declaration.Type.ToString());
+            File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                Path.Combine(fixture.DirectoryPath, "Metadata.manual.cs"));
+            var compilation = ClangSharpSourceCompilation.Create(fixture.DirectoryPath, architecture,
+                new(), new(), Array.Empty<string>(), new(), new(), new(), Array.Empty<string>(), new(), new());
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            string imagePath = Path.Combine(fixture.DirectoryPath, "AnonymousRecordAliases.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), imagePath);
+            Assert.True(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            using var image = new MetadataImage(imagePath);
+            var reader = image.Reader;
+            var physical = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                reader.GetString(type.Namespace) == "Test" && reader.GetString(type.Name) == "NATIVE_FIELD_BITS");
+            Assert.Equal("UInt64", reader.GetFieldDefinition(physical.GetFields().Single())
+                .DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+            var nativeField = reader.TypeDefinitions.SelectMany(handle => reader.GetTypeDefinition(handle).GetFields())
+                .Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == "AllocationTag");
+            Assert.Equal("Test.NATIVE_FIELD_BITS", nativeField.DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+            AssertMetadataClosure(reader);
+        }
+
+        private static void AutomaticInitializationDoesNotChangeTheNativeOrMetadataContract(string architecture, string target)
+        {
+            string settings = Path.Combine(AppContext.BaseDirectory, "assets", "scraper", "baseSettings.rsp");
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#ifndef DECLSPEC_NOINITALL
+#define DECLSPEC_NOINITALL __declspec(no_init_all)
+#endif
+struct DECLSPEC_NOINITALL NOINIT_RECORD { unsigned long code; void* data; };
+typedef NOINIT_RECORD* PNOINIT_RECORD;
+extern ""C"" void UseNoInit(PNOINIT_RECORD value);
+", annotationsEnabled: false, extraSettings: "@" + settings);
+            Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
+                NativeSurface(fixture, target, metadataEnabled: false,
+                    additionalArguments: new[] { "-DDECLSPEC_NOINITALL=" }));
+            fixture.AssertSuccess();
+            var record = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().Single(declaration => declaration.Identifier.ValueText == "NOINIT_RECORD");
+            var source = NativeRecordSourceProvenance.Read(record);
+            Assert.NotNull(source);
+            Assert.Equal(architecture == "x86" ? 8L : 16L, source.Size);
+            Assert.Equal(architecture == "x86" ? 4L : 8L, source.Alignment);
+            using var image = Emit(fixture, architecture);
+            var physical = FindType(image.Reader, "NOINIT_RECORD");
+            Assert.Equal(new[] { "UInt32", "Void*" }, physical.GetFields().Select(handle =>
+                image.Reader.GetFieldDefinition(handle).DecodeSignature(new SignatureNames(), null)));
+            AssertMetadataClosure(image.Reader);
+        }
+
+        private static void RequiredNativeAlignmentIsSeparateFromPacking(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+struct __declspec(align(16)) ALIGNED_RECORD { unsigned long long lower; long long upper; };
+struct ALIGNMENT_CONTAINER { unsigned char prefix; ALIGNED_RECORD payload; unsigned char tail; };
+struct ORDINARY_RECORD { unsigned long long lower; long long upper; };
+struct MEMBER_ALIGNED_RECORD { unsigned char prefix; __declspec(align(16)) unsigned long long value; };
+#pragma pack(push, 4)
+struct PACKED_RECORD { unsigned char prefix; unsigned long long value; };
+#pragma pack(pop)
+extern ""C"" ALIGNED_RECORD UseAligned(ALIGNED_RECORD value, ALIGNMENT_CONTAINER* container);
+", annotationsEnabled: false);
+            Assert.Equal(0, fixture.Run());
+            Assert.Contains("requests 16 byte alignment which .NET cannot honor", fixture.Diagnostics);
+            Assert.Contains("is carried by AlignmentAttribute(16)", fixture.Diagnostics);
+            var native = NativeSurface(fixture, target, metadataEnabled: false);
+            Assert.Contains("record ALIGNED_RECORD 16 16", native);
+            Assert.Contains("record ALIGNMENT_CONTAINER 48 16", native);
+            Assert.Contains("record ORDINARY_RECORD 16 8", native);
+            Assert.Contains("record MEMBER_ALIGNED_RECORD 32 16", native);
+            Assert.Contains("record PACKED_RECORD 12 4", native);
+            Assert.Contains("field payload ALIGNED_RECORD 128", native);
+            Assert.Contains("field tail unsigned char 256", native);
+            var declaration = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().Single(type => type.Identifier.ValueText == "ALIGNED_RECORD");
+            var source = NativeRecordSourceProvenance.Read(declaration);
+            Assert.NotNull(source);
+            Assert.True(HeaderAnnotationProcessor.HasNativeAlignmentProjection(declaration, source, 16));
+            Assert.False(HeaderAnnotationProcessor.HasNativeAlignmentProjection(declaration, source, 8));
+            Assert.False(HeaderAnnotationProcessor.HasNativeAlignmentProjection(declaration, source with { Identity = "other" }, 16));
+            Assert.False(HeaderAnnotationProcessor.HasNativeAlignmentProjection(declaration, source with { Size = 32 }, 16));
+            Assert.False(HeaderAnnotationProcessor.HasNativeAlignmentProjection(declaration.WithAttributeLists(default), source, 16));
+            using var image = Emit(fixture, architecture);
+            var aligned = FindType(image.Reader, "ALIGNED_RECORD");
+            var attributes = aligned.GetCustomAttributes().Where(handle =>
+                AttributeName(image.Reader, handle) == "AlignmentAttribute");
+            var blob = image.Reader.GetBlobReader(image.Reader.GetCustomAttribute(Assert.Single(attributes)).Value);
+            Assert.Equal(1, blob.ReadUInt16());
+            Assert.Equal(16, blob.ReadInt32());
+            Assert.Equal(0, blob.ReadUInt16());
+            Assert.Equal(0, blob.RemainingBytes);
+            Assert.Equal(0, aligned.GetLayout().PackingSize);
+            Assert.Equal(new[] { "UInt64", "Int64" }, aligned.GetFields().Select(handle =>
+                image.Reader.GetFieldDefinition(handle).DecodeSignature(new SignatureNames(), null)));
+            var container = FindType(image.Reader, "ALIGNMENT_CONTAINER");
+            Assert.Equal(new[] { "Byte", "Test.ALIGNED_RECORD", "Byte" }, container.GetFields().Select(handle =>
+                image.Reader.GetFieldDefinition(handle).DecodeSignature(new SignatureNames(qualifiedNames: true), null)));
+            AssertDoesNotHaveAttribute(image.Reader, container.GetCustomAttributes(), "AlignmentAttribute");
+            AssertDoesNotHaveAttribute(image.Reader, FindType(image.Reader, "ORDINARY_RECORD").GetCustomAttributes(), "AlignmentAttribute");
+            var packed = FindType(image.Reader, "PACKED_RECORD");
+            Assert.Equal(4, packed.GetLayout().PackingSize);
+            AssertDoesNotHaveAttribute(image.Reader, packed.GetCustomAttributes(), "AlignmentAttribute");
+            var memberAligned = FindType(image.Reader, "MEMBER_ALIGNED_RECORD");
+            AssertDoesNotHaveAttribute(image.Reader, memberAligned.GetCustomAttributes(), "AlignmentAttribute");
+            var alignedMember = memberAligned.GetFields().Select(image.Reader.GetFieldDefinition)
+                .Single(field => image.Reader.GetString(field.Name) == "value");
+            var memberBlob = image.Reader.GetBlobReader(image.Reader.GetCustomAttribute(
+                Assert.Single(alignedMember.GetCustomAttributes().Where(handle =>
+                    AttributeName(image.Reader, handle) == "AlignmentAttribute"))).Value);
+            Assert.Equal(1, memberBlob.ReadUInt16());
+            Assert.Equal(16, memberBlob.ReadInt32());
+            Assert.Equal(0, memberBlob.ReadUInt16());
+            Assert.Equal(0, memberBlob.RemainingBytes);
+            Assert.Equal("Test.ALIGNED_RECORD", FindMethod(image.Reader, "Apis", "UseAligned")
+                .DecodeSignature(new SignatureNames(qualifiedNames: true), null).ReturnType);
+            AssertMetadataClosure(image.Reader);
+            AssertLayout("ALIGNED_RECORD", 16, 16, 0, 8);
+            AssertLayout("ALIGNMENT_CONTAINER", 48, 16, 0, 16, 32);
+            AssertLayout("MEMBER_ALIGNED_RECORD", 32, 16, 0, 16);
+            AssertLayout("ORDINARY_RECORD", 16, 8, 0, 8);
+            AssertLayout("PACKED_RECORD", 12, 4, 0, 4);
+            if (architecture == "x86")
+            {
+                using var unsupported = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+struct __declspec(align(16)) ALIGNED_RECORD { unsigned long long lower; long long upper; };
+struct __declspec(no_init_all) UNREPRESENTED_ATTRIBUTE { int value; };
+", annotationsEnabled: false);
+                Assert.Equal(1, unsupported.Run());
+                Assert.Contains("is carried by AlignmentAttribute(16)", unsupported.Diagnostics);
+                Assert.Contains("Unsupported attribute: 'NoTrivialAutoVarInit'", unsupported.Diagnostics);
+            }
+
+            void AssertLayout(string name, int size, int alignment, params int[] offsets)
+            {
+                var layout = ReadLayout("Test." + name);
+                Assert.Equal(size, layout.Size);
+                Assert.Equal(alignment, layout.Alignment);
+                Assert.Equal(offsets, layout.Offsets);
+            }
+
+            (int Size, int Alignment, int Required, int[] Offsets) ReadLayout(string name)
+            {
+                if (name == "Byte")
+                    return (1, 1, 0, Array.Empty<int>());
+                if (name is "UInt64" or "Int64")
+                    return (8, 8, 0, Array.Empty<int>());
+                var type = image.Reader.TypeDefinitions.Select(image.Reader.GetTypeDefinition).Single(candidate =>
+                    image.Reader.GetString(candidate.Namespace) + "." + image.Reader.GetString(candidate.Name) == name);
+                Assert.Equal(TypeAttributes.SequentialLayout, type.Attributes & TypeAttributes.LayoutMask);
+                var layout = type.GetLayout();
+                int pack = layout.PackingSize == 0 ? 8 : layout.PackingSize;
+                int size = 0, alignment = 1, required = ReadAlignment(type.GetCustomAttributes());
+                var offsets = new List<int>();
+                foreach (var handle in type.GetFields())
+                {
+                    var field = image.Reader.GetFieldDefinition(handle);
+                    var value = ReadLayout(field.DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+                    int fieldRequired = Math.Max(value.Required, ReadAlignment(field.GetCustomAttributes()));
+                    int fieldAlignment = Math.Max(Math.Min(pack, value.Alignment), fieldRequired);
+                    int offset = Align(size, fieldAlignment);
+                    offsets.Add(offset);
+                    size = checked(offset + value.Size);
+                    alignment = Math.Max(alignment, fieldAlignment);
+                    required = Math.Max(required, fieldRequired);
+                }
+                alignment = Math.Max(alignment, required);
+                return (Align(Math.Max(Math.Max(size, layout.Size), 1), alignment), alignment, required, offsets.ToArray());
+            }
+
+            int ReadAlignment(CustomAttributeHandleCollection attributes)
+            {
+                var matching = attributes.Where(handle => AttributeName(image.Reader, handle) == "AlignmentAttribute").ToArray();
+                if (matching.Length == 0)
+                    return 0;
+                var value = image.Reader.GetBlobReader(image.Reader.GetCustomAttribute(Assert.Single(matching)).Value);
+                Assert.Equal(1, value.ReadUInt16());
+                int alignment = value.ReadInt32();
+                Assert.True(alignment > 0 && (alignment & (alignment - 1)) == 0);
+                Assert.Equal(0, value.ReadUInt16());
+                Assert.Equal(0, value.RemainingBytes);
+                return alignment;
+            }
+
+            static int Align(int value, int alignment) => checked((value + alignment - 1) / alignment * alignment);
+        }
+
+        private static void ExcludedRecordPointersRetainConfiguredExternalProjection(string architecture, string target, bool mapped)
+        {
+            string declarations = mapped ? @"
+struct _GUID { unsigned long first; unsigned short second, third; unsigned char fourth[8]; };
+typedef _GUID GUID;
+typedef GUID IID;
+typedef GUID CLSID;
+typedef GUID* LPGUID;
+typedef IID* LPIID;
+typedef CLSID* LPCLSID;
+extern ""C"" void UseIdentifiers(LPGUID guid, LPIID iid, LPCLSID clsid);
+" : @"
+struct UNMAPPED_RECORD { unsigned long first; unsigned short second, third; unsigned char fourth[8]; };
+typedef UNMAPPED_RECORD* LPGUID;
+typedef UNMAPPED_RECORD* LPIID;
+typedef UNMAPPED_RECORD* LPCLSID;
+extern ""C"" void UseIdentifiers(LPGUID guid, LPIID iid, LPCLSID clsid);
+";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                annotationsEnabled: false, extraSettings: (mapped ? "--exclude\n_GUID\n--remap\n_GUID=Guid\n" :
+                    "--exclude\nUNMAPPED_RECORD\n") +
+                    "--remap\nLPGUID=LPGUID\nLPIID=LPIID\nLPCLSID=LPCLSID\n");
+            fixture.AssertSuccess();
+            var aliases = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
+            foreach (string name in new[] { "LPGUID", "LPIID", "LPCLSID" })
+            {
+                var alias = Assert.Single(aliases.Where(type => type.Identifier.ValueText == name));
+                Assert.Equal(mapped ? "Guid*" : "void*",
+                    Assert.Single(alias.Members.OfType<FieldDeclarationSyntax>()).Declaration.Type.ToString());
+                var proof = NativeTypedefSourceProvenance.Read(alias);
+                Assert.NotNull(proof);
+                Assert.Equal(name, proof.NativeName);
+                Assert.Equal(fixture.Header, proof.Header);
+                Assert.Equal(architecture == "x86" ? 4L : 8L, proof.Size);
+                Assert.Equal(proof.Size, proof.Alignment);
+            }
+            File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                Path.Combine(fixture.DirectoryPath, "Metadata.manual.cs"));
+            var compilation = ClangSharpSourceCompilation.Create(fixture.DirectoryPath, architecture,
+                new(), new(), Array.Empty<string>(), new(), new(), new(), Array.Empty<string>(), new(), new());
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            foreach (string name in new[] { "LPGUID", "LPIID", "LPCLSID" })
+            {
+                var value = compilation.CSharpCompilation.GetTypeByMetadataName("Test." + name)
+                    .GetMembers("Value").OfType<IFieldSymbol>().Single();
+                var pointer = Assert.IsAssignableFrom<IPointerTypeSymbol>(value.Type);
+                Assert.Equal(mapped ? "System.Guid" : "void", pointer.PointedAtType.ToDisplayString());
+            }
+            string path = Path.Combine(fixture.DirectoryPath, "ExternalRecordPointers.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), path);
+            Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var image = new MetadataImage(path);
+            var reader = image.Reader;
+            foreach (string name in new[] { "LPGUID", "LPIID", "LPCLSID" })
+            {
+                var type = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Single(type => reader.GetString(type.Namespace) == "Test" && reader.GetString(type.Name) == name);
+                var field = reader.GetFieldDefinition(type.GetFields().Single());
+                Assert.Equal(mapped ? "System.Guid*" : "Void*",
+                    field.DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+            }
+            Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                type => reader.GetString(type.Name) is "_GUID" or "GUID" or "IID" or "CLSID" or "Guid" or "UNMAPPED_RECORD");
+            AssertMetadataClosure(reader);
+        }
+
+        private static void AutomaticTagNamesDoNotInventExternalProvidersForExcludedRecords(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+struct _EXCLUDED_RECORD { unsigned long value; };
+typedef _EXCLUDED_RECORD EXCLUDED_RECORD;
+typedef EXCLUDED_RECORD* PEXCLUDED_RECORD;
+typedef struct _EXCLUDED_INLINE_RECORD { unsigned long value; } EXCLUDED_INLINE_RECORD, *PEXCLUDED_INLINE_RECORD;
+extern ""C"" void UseExcluded(PEXCLUDED_RECORD first, PEXCLUDED_INLINE_RECORD second);
+", annotationsEnabled: false, extraSettings: "--exclude\n_EXCLUDED_RECORD\n_EXCLUDED_INLINE_RECORD\n" +
+                "--remap\nPEXCLUDED_RECORD=PEXCLUDED_RECORD\nPEXCLUDED_INLINE_RECORD=PEXCLUDED_INLINE_RECORD\n");
+            fixture.AssertSuccess();
+            var aliases = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
+            foreach (string name in new[] { "PEXCLUDED_RECORD", "PEXCLUDED_INLINE_RECORD" })
+            {
+                var alias = Assert.Single(aliases.Where(type => type.Identifier.ValueText == name));
+                Assert.Equal("void*", Assert.Single(alias.Members.OfType<FieldDeclarationSyntax>())
+                    .Declaration.Type.ToString());
+                var source = NativeTypedefSourceProvenance.Read(alias);
+                Assert.NotNull(source);
+                Assert.Equal(name, source.NativeName);
+                Assert.Equal(fixture.Header, source.Header);
+                Assert.Equal(architecture == "x86" ? 4L : 8L, source.Size);
+                Assert.Equal(source.Size, source.Alignment);
+            }
+            File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                Path.Combine(fixture.DirectoryPath, "Metadata.manual.cs"));
+            var compilation = ClangSharpSourceCompilation.Create(fixture.DirectoryPath, architecture,
+                new(), new(), Array.Empty<string>(), new(), new(), new(), Array.Empty<string>(), new(), new());
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            string path = Path.Combine(fixture.DirectoryPath, "ExcludedRecordAliases.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), path);
+            Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var image = new MetadataImage(path);
+            var reader = image.Reader;
+            foreach (string name in new[] { "PEXCLUDED_RECORD", "PEXCLUDED_INLINE_RECORD" })
+            {
+                var alias = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Single(type => reader.GetString(type.Namespace) == "Test" && reader.GetString(type.Name) == name);
+                Assert.Equal("Void*", reader.GetFieldDefinition(alias.GetFields().Single())
+                    .DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+            }
+            Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                type => reader.GetString(type.Name) is "_EXCLUDED_RECORD" or "EXCLUDED_RECORD" or
+                    "_EXCLUDED_INLINE_RECORD" or "EXCLUDED_INLINE_RECORD");
+            AssertMetadataClosure(reader);
+        }
+
+        private static void ComPointerAliasesPreserveOrdinaryExternalProjection(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#include ""external.h""
+typedef long HRESULT;
+typedef External::IController* PCONTROLLER;
+typedef PCONTROLLER CONTROLLER_ALIAS;
+typedef CONTROLLER_ALIAS* PPCONTROLLER;
+extern ""C"" HRESULT CreateController(PPCONTROLLER result);
+", annotationsEnabled: false);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "external.h"), @"
+struct IID { unsigned long first; unsigned short second, third; unsigned char fourth[8]; };
+struct __declspec(uuid(""00000000-0000-0000-c000-000000000046"")) Unknown
+{
+    virtual long __stdcall QueryInterface(const IID& iid, void** result) = 0;
+    virtual unsigned long __stdcall AddRef() = 0;
+    virtual unsigned long __stdcall Release() = 0;
+};
+namespace External
+{
+    struct UnneededDependency;
+    struct __declspec(uuid(""22f34e66-50db-4e36-a98d-61c01b384d20"")) IController : Unknown
+    {
+        virtual long __stdcall UnneededMethod(UnneededDependency** result) = 0;
+    };
+}
+");
+            fixture.AssertSuccess();
+            var source = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot();
+            Assert.Empty(source.DescendantNodes().OfType<StructDeclarationSyntax>());
+            var method = Assert.Single(source.DescendantNodes().OfType<MethodDeclarationSyntax>());
+            Assert.Equal("IController**", Assert.Single(method.ParameterList.Parameters).Type.ToString());
+            var additional = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().Select(type => type.Identifier.ValueText).ToArray();
+            Assert.Equal(new[] { "HRESULT" }, additional);
+            File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                Path.Combine(fixture.DirectoryPath, "Metadata.manual.cs"));
+            var imports = new Dictionary<string, string>
+            {
+                ["IController(interface)"] = "<Windows.Foundation.UniversalApiContract, Version=10.0.0.0, Culture=neutral, PublicKeyToken=null>Windows.System.DispatcherQueueController",
+            };
+            var compilation = ClangSharpSourceCompilation.Create(fixture.DirectoryPath, architecture,
+                new(), new(), Array.Empty<string>(), imports, new(), new(), Array.Empty<string>(), new(), new());
+            var compilerErrors = compilation.CSharpCompilation.GetDeclarationDiagnostics()
+                .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.All(compilerErrors, diagnostic => Assert.Contains(diagnostic.Id, new[] { "CS0246", "CS0208" }));
+            var importedError = Assert.Single(compilerErrors.Where(diagnostic => diagnostic.Id == "CS0246"));
+            Assert.Contains("'IController'", importedError.GetMessage());
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            string path = Path.Combine(fixture.DirectoryPath, "ExternalController.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, imports, new(), new(), new Version(1, 0), path);
+            Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var image = new MetadataImage(path);
+            var reader = image.Reader;
+            var physical = FindMethod(reader, "Apis", "CreateController")
+                .DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+            Assert.Equal(new[] { "Windows.System.DispatcherQueueController*" }, physical.ParameterTypes);
+            Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                type => reader.GetString(type.Name) is "PCONTROLLER" or "CONTROLLER_ALIAS" or "PPCONTROLLER" or
+                    "IController" or "Unknown" or "UnneededDependency");
+            var reference = Assert.Single(reader.TypeReferences.Select(reader.GetTypeReference)
+                .Where(type => reader.GetString(type.Namespace) == "Windows.System" &&
+                    reader.GetString(type.Name) == "DispatcherQueueController"));
+            Assert.Equal(HandleKind.AssemblyReference, reference.ResolutionScope.Kind);
+            var assembly = reader.GetAssemblyReference((AssemblyReferenceHandle)reference.ResolutionScope);
+            Assert.Equal("Windows.Foundation.UniversalApiContract", reader.GetString(assembly.Name));
+            Assert.Equal(new Version(10, 0, 0, 0), assembly.Version);
+            Assert.True(assembly.PublicKeyOrToken.IsNil);
+            AssertMetadataClosure(reader);
+            var withoutImport = ClangSharpSourceCompilation.Create(fixture.DirectoryPath, architecture,
+                new(), new(), Array.Empty<string>(), new(), new(), new(), Array.Empty<string>(), new(), new());
+            Assert.Contains(withoutImport.GetDiagnostics(), diagnostic => diagnostic.Id == "CS0246" &&
+                diagnostic.GetMessage().Contains("'IController'", StringComparison.Ordinal));
+        }
+
+        private static void NonComCallingConventionsRetainNativePointerAliases(
+            string queryConvention, string addRefConvention, string releaseConvention, bool derived)
+        {
+            string name = derived ? "Derived" : "Record";
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc", $@"
+struct IID {{ unsigned long first; unsigned short second, third; unsigned char fourth[8]; }};
+struct __declspec(uuid(""00000000-0000-0000-c000-000000000046"")) Record
+{{
+    virtual long {queryConvention} QueryInterface(const IID& iid, void** result) = 0;
+    virtual unsigned long {addRefConvention} AddRef() = 0;
+    virtual unsigned long {releaseConvention} Release() = 0;
+}};
+{(derived ? "struct Derived : Record { virtual void __cdecl AdditionalMethod() = 0; };" : "")}
+typedef {name}* RECORD_POINTER;
+extern ""C"" void Use(RECORD_POINTER value);
+", annotationsEnabled: false);
+            fixture.AssertSuccess();
+            var alias = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>()
+                .Single(type => type.Identifier.ValueText == "RECORD_POINTER");
+            Assert.Equal($"global::Test.{name}*",
+                Assert.Single(alias.Members.OfType<FieldDeclarationSyntax>()).Declaration.Type.ToString());
+            var proof = NativeTypedefSourceProvenance.Read(alias);
+            Assert.NotNull(proof);
+            Assert.Equal("RECORD_POINTER", proof.NativeName);
+            Assert.Equal(fixture.Header, proof.Header);
+            Assert.Equal(4L, proof.Size);
+            Assert.Equal(4L, proof.Alignment);
+        }
+
+        private static void UuidAndVirtualMethodsAloneDoNotEraseNativePointerAliases(string declaration)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
+                declaration + "\ntypedef Record* RECORD_POINTER;\nextern \"C\" void Use(RECORD_POINTER value);",
+                annotationsEnabled: false);
+            fixture.AssertSuccess();
+            var alias = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>()
+                .Single(type => type.Identifier.ValueText == "RECORD_POINTER");
+            Assert.Equal("global::Test.Record*", Assert.Single(alias.Members.OfType<FieldDeclarationSyntax>()).Declaration.Type.ToString());
+            Assert.NotNull(NativeTypedefSourceProvenance.Read(alias));
+        }
+
+        private static void InferredScalarContextsComposeRealPartitionObservationsThroughTheOriginalEmitter(bool bareTraversalFileName)
+        {
+            string evidence = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            string scenario = bareTraversalFileName ? "bare-traversal-contexts" : "scalar-contexts";
+            string ownerNamespace = bareTraversalFileName ? "Observed.ZOwner" : "Observed.First";
+            string observerNamespace = bareTraversalFileName ? "Observed.AObserver" : "Observed.Second";
+            if (bareTraversalFileName)
+                Assert.True(StringComparer.Ordinal.Compare(ownerNamespace, observerNamespace) > 0);
+            string root = Path.Combine(Path.GetTempPath(), "win32-typedef-contexts-" + Guid.NewGuid().ToString("N"));
+            string inputs = Path.Combine(root, "inputs");
+            Directory.CreateDirectory(inputs);
+            string header = Path.Combine(root, "shared-aliases.h");
+            File.WriteAllText(header, @"
+typedef unsigned long APP_SCALAR;
+typedef __UINTPTR_TYPE__ APP_WORD;
+struct APP_RECORD { APP_SCALAR first; APP_SCALAR second; };
+typedef APP_RECORD* PAPP_RECORD;
+static_assert(sizeof(APP_SCALAR) == 4 && alignof(APP_SCALAR) == 4, ""Scalar ABI changed."");
+static_assert(sizeof(APP_WORD) == sizeof(void*) && alignof(APP_WORD) == alignof(void*), ""Word ABI changed."");
+static_assert(sizeof(APP_RECORD) == 8 && alignof(APP_RECORD) == 4, ""Record ABI changed."");
+");
+            var routing = new Dictionary<string, string>
+            {
+                ["APP_SCALAR"] = "Projected.Types", ["APP_WORD"] = "Projected.Types",
+                ["FirstUse"] = "Projected.Api", ["SecondUse"] = "Projected.Api",
+                ["FirstRecord"] = "Projected.Api", ["SecondRecord"] = "Projected.Api",
+                ["PAPP_RECORD"] = "Projected.Types",
+                ["FirstEnum"] = "Projected.Enums", ["SecondEnum"] = "Projected.Enums",
+            };
+            var recordIdentities = new HashSet<string>(StringComparer.Ordinal);
+            var aliasIdentities = new HashSet<string>(StringComparer.Ordinal);
+            try
+            {
+                foreach (var target in new[]
+                {
+                    (Architecture: "x86", Triple: "i686-pc-windows-msvc"),
+                    (Architecture: "x64", Triple: "x86_64-pc-windows-msvc"),
+                    (Architecture: "arm64", Triple: "aarch64-pc-windows-msvc"),
+                })
+                {
+                    string directory = Path.Combine(inputs, target.Architecture);
+                    Directory.CreateDirectory(directory);
+                    foreach (string prefix in new[] { "First", "Second" })
+                    {
+                        string sourceNamespace = prefix == "First" ? ownerNamespace : observerNamespace;
+                        using var fixture = new HeaderAnnotationTests.NativeFixture(target.Architecture, target.Triple,
+                            "#include \"shared-aliases.h\"\n" +
+                            "const APP_SCALAR " + prefix + "Constant = (APP_SCALAR)-1;\n" +
+                            "enum " + prefix + "Enum : APP_SCALAR { " + prefix + "EnumValue = (APP_SCALAR)7 };\n" +
+                            "extern \"C\" APP_SCALAR __stdcall " + prefix + "Use(APP_SCALAR value, APP_WORD count);\n" +
+                            "extern \"C\" void __stdcall " + prefix + "Record(PAPP_RECORD value);\n",
+                            annotationsEnabled: false, namespaceName: sourceNamespace,
+                            extraSettings: "--include-directory\n" + root + "\n" +
+                                "--remap\nAPP_SCALAR=APP_SCALAR\nAPP_WORD=APP_WORD\nPAPP_RECORD=PAPP_RECORD\n" +
+                                (prefix == "First" ? "--traverse\n" +
+                                    (bareTraversalFileName ? Path.GetFileName(header) : header) + "\n" : ""),
+                            directoryRoot: root);
+                        try
+                        {
+                            Assert.False(File.Exists(Path.Combine(fixture.DirectoryPath, Path.GetFileName(header))));
+                            fixture.AssertSuccess();
+                            var observedRecord = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                                .OfType<StructDeclarationSyntax>().Single(record => record.Identifier.ValueText == "APP_RECORD");
+                            var source = NativeRecordSourceProvenance.Read(observedRecord);
+                            Assert.NotNull(source);
+                            Assert.Equal(prefix == "First", source.TraversedHeader);
+                            Assert.Equal(sourceNamespace, source.Namespace);
+                            Assert.Equal(header, source.Header);
+                            Assert.Equal(NativeConstantGroupProvenance.HashFile(header), source.HeaderHash);
+                            Assert.Equal(8L, source.Size);
+                            Assert.Equal(4L, source.Alignment);
+                            recordIdentities.Add(source.Identity);
+                            var observedAlias = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                                .DescendantNodes().OfType<StructDeclarationSyntax>()
+                                .Single(alias => alias.Identifier.ValueText == "PAPP_RECORD");
+                            var aliasSource = NativeTypedefSourceProvenance.Read(observedAlias);
+                            Assert.NotNull(aliasSource);
+                            Assert.Equal(header, aliasSource.Header);
+                            Assert.Equal(source.HeaderHash, aliasSource.HeaderHash);
+                            Assert.Equal(prefix == "First", aliasSource.TraversedHeader);
+                            Assert.Equal(target.Architecture == "x86" ? 4L : 8L, aliasSource.Size);
+                            aliasIdentities.Add(aliasSource.Identity);
+                            File.Copy(fixture.Output, Path.Combine(directory, prefix + ".cs"));
+                            File.Copy(Path.ChangeExtension(fixture.Output, ".header-types.cs"),
+                                Path.Combine(directory, prefix + ".header-types.cs"));
+                        }
+                        finally
+                        {
+                            string retained = evidence == null ? null :
+                                Path.Combine(evidence, scenario, target.Architecture, prefix);
+                            if (retained != null)
+                                Directory.CreateDirectory(retained);
+                            RetainFixture(fixture, retained);
+                        }
+                    }
+                    Assert.Single(recordIdentities);
+                    Assert.Single(aliasIdentities);
+                }
+                File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                    Path.Combine(inputs, "Metadata.manual.cs"));
+                var compilation = ClangSharpSourceCompilation.Create(inputs, "crossarch", new(), new(),
+                    Array.Empty<string>(), new(), routing, new(), Array.Empty<string>(), new(), new());
+                var errors = compilation.CSharpCompilation.GetDiagnostics()
+                    .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+                Assert.True(errors.Length == 0, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+                foreach (string prefix in new[] { "First", "Second" })
+                {
+                    var api = compilation.CSharpCompilation.GetTypeByMetadataName(
+                        (prefix == "First" ? ownerNamespace : observerNamespace) + ".Apis");
+                    Assert.NotNull(api);
+                    var constant = Assert.Single(api.GetMembers(prefix + "Constant").OfType<IFieldSymbol>());
+                    Assert.Equal(SpecialType.System_UInt32, constant.Type.SpecialType);
+                    Assert.Equal(uint.MaxValue, constant.ConstantValue);
+                    var enumeration = compilation.CSharpCompilation.GetTypeByMetadataName("Projected.Enums." + prefix + "Enum");
+                    Assert.NotNull(enumeration);
+                    Assert.Equal(SpecialType.System_UInt32, enumeration.EnumUnderlyingType.SpecialType);
+                    Assert.Equal(7U, Assert.Single(enumeration.GetMembers(prefix + "EnumValue")
+                        .OfType<IFieldSymbol>()).ConstantValue);
+                }
+                string output = Path.Combine(inputs, "ScalarContexts.winmd");
+                var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                    compilation, new(), new(), new(), new Version(1, 0), output);
+                Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+                using var image = new MetadataImage(output);
+                var reader = image.Reader;
+                var scalar = FindType(reader, "APP_SCALAR");
+                Assert.Equal("Projected.Types", reader.GetString(scalar.Namespace));
+                AssertWrapper(reader, "APP_SCALAR", "UInt32");
+                var record = FindType(reader, "APP_RECORD");
+                Assert.Equal(ownerNamespace, reader.GetString(record.Namespace));
+                Assert.Equal(new[] { "first", "second" }, record.GetFields().Select(reader.GetFieldDefinition)
+                    .Select(field => reader.GetString(field.Name)).ToArray());
+                Assert.All(record.GetFields().Select(reader.GetFieldDefinition), field =>
+                    Assert.Equal("Projected.Types.APP_SCALAR", field.DecodeSignature(new SignatureNames(qualifiedNames: true), null)));
+                Assert.Equal(record.GetCustomAttributes().Count, record.GetCustomAttributes()
+                    .Select(attribute => AttributeName(reader, attribute)).Distinct().Count());
+                AssertWrapper(reader, "PAPP_RECORD", ownerNamespace + ".APP_RECORD*");
+                var words = reader.TypeDefinitions
+                    .Where(handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == "APP_WORD").ToArray();
+                Assert.Equal(2, words.Length);
+                var wordArchitectures = new Dictionary<EntityHandle, int>();
+                var decoder = new SignatureNames(qualifiedNames: true);
+                foreach (var handle in words)
+                {
+                    var word = reader.GetTypeDefinition(handle);
+                    Assert.Equal("Projected.Types", reader.GetString(word.Namespace));
+                    AssertHasAttribute(reader, word.GetCustomAttributes(), "NativeTypedefAttribute");
+                    var value = reader.GetFieldDefinition(Assert.Single(word.GetFields()));
+                    string storage = value.DecodeSignature(decoder, null);
+                    Assert.Contains(storage, new[] { "UInt32", "UInt64" });
+                    int architecture = ReadArchitecture(word.GetCustomAttributes());
+                    Assert.Equal(storage == "UInt32" ? 1 : 6, architecture);
+                    wordArchitectures.Add(handle, architecture);
+                }
+                var projectedApi = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                    reader.GetString(type.Name) == "Apis" && reader.GetString(type.Namespace) == "Projected.Api");
+                var methods = projectedApi.GetMethods().Select(reader.GetMethodDefinition)
+                    .Where(method => reader.GetString(method.Name) is "FirstUse" or "SecondUse").ToArray();
+                Assert.Equal(4, methods.Length);
+                foreach (string prefix in new[] { "First", "Second" })
+                    Assert.Equal(new[] { 1, 6 }, methods.Where(method => reader.GetString(method.Name) == prefix + "Use")
+                        .Select(method => ReadArchitecture(method.GetCustomAttributes())).OrderBy(mask => mask).ToArray());
+                foreach (var method in methods)
+                {
+                    Assert.Equal("Projected.Api", reader.GetString(reader.GetTypeDefinition(method.GetDeclaringType()).Namespace));
+                    var signature = method.DecodeSignature(decoder, null);
+                    Assert.Equal("Projected.Types.APP_SCALAR", signature.ReturnType);
+                    Assert.Equal(new[] { "Projected.Types.APP_SCALAR", "Projected.Types.APP_WORD" },
+                        signature.ParameterTypes.ToArray());
+                    var blob = reader.GetBlobReader(method.Signature);
+                    Assert.Equal(SignatureKind.Method, blob.ReadSignatureHeader().Kind);
+                    Assert.Equal(2, blob.ReadCompressedInteger());
+                    int architecture = ReadArchitecture(method.GetCustomAttributes());
+                    EntityHandle returned = ReadAlias(ref blob, architecture);
+                    EntityHandle parameter = ReadAlias(ref blob, architecture);
+                    EntityHandle word = ReadAlias(ref blob, architecture);
+                    Assert.Equal(returned, parameter);
+                    Assert.Equal("APP_SCALAR", reader.GetString(reader.GetTypeDefinition((TypeDefinitionHandle)returned).Name));
+                    Assert.Equal(architecture, wordArchitectures[word]);
+                    Assert.Equal(0, blob.RemainingBytes);
+                }
+                foreach (string prefix in new[] { "First", "Second" })
+                {
+                    var fields = reader.FieldDefinitions.Select(reader.GetFieldDefinition)
+                        .Where(field => reader.GetString(field.Name) == prefix + "Constant").ToArray();
+                    Assert.NotEmpty(fields);
+                    foreach (var field in fields)
+                    {
+                        var constant = reader.GetConstant(field.GetDefaultValue());
+                        Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                        Assert.Equal(uint.MaxValue, reader.GetBlobReader(constant.Value).ReadUInt32());
+                    }
+                }
+                AssertMetadataClosure(reader);
+
+                int ReadArchitecture(CustomAttributeHandleCollection attributes, bool required = true)
+                {
+                    var matching = attributes.Where(attribute => AttributeName(reader, attribute) == "SupportedArchitectureAttribute").ToArray();
+                    if (!required && matching.Length == 0)
+                        return 7;
+                    var blob = reader.GetBlobReader(reader.GetCustomAttribute(Assert.Single(matching)).Value);
+                    Assert.Equal(1, blob.ReadUInt16());
+                    int mask = blob.ReadInt32();
+                    Assert.Equal(0, blob.ReadUInt16());
+                    Assert.Equal(0, blob.RemainingBytes);
+                    return mask;
+                }
+
+                EntityHandle ReadAlias(ref BlobReader blob, int architecture)
+                {
+                    Assert.Equal(SignatureTypeCode.TypeHandle, blob.ReadSignatureTypeCode());
+                    EntityHandle type = blob.ReadTypeHandle();
+                    if (type.Kind == HandleKind.TypeDefinition)
+                    {
+                        Assert.Equal(architecture, ReadArchitecture(reader.GetTypeDefinition((TypeDefinitionHandle)type)
+                            .GetCustomAttributes(), required: false) & architecture);
+                        return type;
+                    }
+                    Assert.Equal(HandleKind.TypeReference, type.Kind);
+                    var reference = reader.GetTypeReference((TypeReferenceHandle)type);
+                    Assert.Equal(HandleKind.ModuleDefinition, reference.ResolutionScope.Kind);
+                    return Assert.Single(reader.TypeDefinitions.Where(handle =>
+                    {
+                        var definition = reader.GetTypeDefinition(handle);
+                        return reader.GetString(definition.Name) == reader.GetString(reference.Name) &&
+                            reader.GetString(definition.Namespace) == reader.GetString(reference.Namespace) &&
+                            (ReadArchitecture(definition.GetCustomAttributes(), required: false) & architecture) == architecture;
+                    }));
+                }
+            }
+            finally
+            {
+                if (evidence != null)
+                {
+                    string retained = Path.Combine(evidence, scenario, "emitter");
+                    Directory.CreateDirectory(retained);
+                    File.Copy(header, Path.Combine(retained, "shared-aliases.h"));
+                    foreach (string file in Directory.GetFiles(inputs, "*", SearchOption.AllDirectories))
+                    {
+                        string destination = Path.Combine(retained, Path.GetRelativePath(inputs, file));
+                        Directory.CreateDirectory(Path.GetDirectoryName(destination));
+                        File.Copy(file, destination);
+                    }
+                }
+                Directory.Delete(root, recursive: true);
+            }
         }
 
         private static void AssertEnumProjectionStorage()
@@ -220,7 +1073,9 @@ extern ""C"" APPLICATION_POINTER WidthEcho(APPLICATION_POINTER value);
 extern ""C"" APPLICATION_POINTER __stdcall WidthStdcallEcho(APPLICATION_POINTER value);
 extern ""C"" void WidthUseRecord(WIDTH_RECORD* record);",
                 annotationsEnabled: false, namespaceName: "Windows.Win32.Foundation",
-                extraSettings: "--additional=-Xclang\n--additional=-fdump-record-layouts\n");
+                extraSettings: "--additional=-Xclang\n--additional=-fdump-record-layouts\n" +
+                    "--remap\nAPPLICATION_POINTER=APPLICATION_POINTER\nFIXED_CHAIN=FIXED_CHAIN\n" +
+                    "APPLICATION_POINTER_ADDRESS=APPLICATION_POINTER_ADDRESS\nRAW_APPLICATION_POINTER_ADDRESS=RAW_APPLICATION_POINTER_ADDRESS\n");
             try
             {
                 fixture.AssertSuccess();
@@ -390,11 +1245,20 @@ typedef enum _PROJECTED_POINTER { PointerFirst = 1 } _PROJECTED_POINTER;",
                 Assert.False(Directory.Exists(evidence), "Every prototype invocation requires a new evidence directory.");
                 Directory.CreateDirectory(evidence);
             }
-            string declarations = NativeDeclarations + (annotationsEnabled ? string.Empty :
+            string declarations = NativeDeclarations + InferredProjectionDeclarations + (annotationsEnabled ? string.Empty :
                 "\n_WIN32META_ANNOTATE_FIELD_(GateRecord::value, _Win32_Reserved_);\n");
+            string nominalAliases = "--remap\n" + string.Join("", new[]
+            {
+                "DWORD", "BYTE_CODE", "SCALAR_ALIAS", "VARIANT_BOOL", "HRESULT", "HDC", "HDRVR", "ADS_SEARCH_HANDLE",
+                "APP_SIGNED_POINTER_VALUE", "APP_UNSIGNED_POINTER_VALUE",
+                "EXTERNAL_COUNT_BASE", "EXTERNAL_FIELD_COUNT", "EXTERNAL_HANDLE_BASE", "EXTERNAL_API_HANDLE",
+                "SELECTED_TEMPLATE_SCALAR", "event", "SIBLING_COUNT", "SIBLING_BOOLEAN", "REDECLARED_BOOLEAN",
+                "GateGroup", "OPAQUE_HANDLE", "UI_ANIMATION_KEYFRAME", "MachineGlobalObjectTableRegistrationToken",
+                "CONFIGURED_COUNT",
+            }.Select(name => name + "=" + name + "\n"));
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                 annotationsEnabled, libraryPath: "candidate-prototype.dll", namespaceName: "Windows.Win32.Foundation",
-                extraSettings: "-DWIN32METADATA\n--remap\n_LEGACY_MASK=LEGACY_MASK\n_LEGACY_HIGH_MASK=LEGACY_HIGH_MASK\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nPREDECLARED_BOOLEAN=REDECLARED_BOOLEAN*\nPRIMARY_RESOURCE=IntPtr\nPRIMARY_RESOURCE__*=PRIMARY_RESOURCE\nSECONDARY_RESOURCE=IntPtr\nSECONDARY_RESOURCE__*=SECONDARY_RESOURCE\nPSECONDARY_RESOURCE=SECONDARY_RESOURCE*\nOPAQUE_VALUE_KEY=long\nOPAQUE_VALUE_KEY__*=OPAQUE_VALUE_KEY\nPOPAQUE_VALUE_KEY=OPAQUE_VALUE_KEY*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nPRIMARY_RESOURCE__\nSECONDARY_RESOURCE__\nOPAQUE_VALUE_KEY__\nLEGACY_RESOURCE__\n");
+                extraSettings: "-DWIN32METADATA\n--remap\n_LEGACY_MASK=LEGACY_MASK\n_LEGACY_HIGH_MASK=LEGACY_HIGH_MASK\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nPREDECLARED_BOOLEAN=REDECLARED_BOOLEAN*\nPRIMARY_RESOURCE=IntPtr\nPRIMARY_RESOURCE__*=PRIMARY_RESOURCE\nSECONDARY_RESOURCE=IntPtr\nSECONDARY_RESOURCE__*=SECONDARY_RESOURCE\nPSECONDARY_RESOURCE=SECONDARY_RESOURCE*\nOPAQUE_VALUE_KEY=long\nOPAQUE_VALUE_KEY__*=OPAQUE_VALUE_KEY\nPOPAQUE_VALUE_KEY=OPAQUE_VALUE_KEY*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nPRIMARY_RESOURCE__\nSECONDARY_RESOURCE__\nOPAQUE_VALUE_KEY__\nLEGACY_RESOURCE__\n" + nominalAliases);
             File.AppendAllText(Path.Combine(fixture.DirectoryPath, "cleanup.h"), @"
 typedef void* HANDLE;
 typedef unsigned long EXTERNAL_COUNT_BASE;
@@ -487,6 +1351,7 @@ typedef int EXTERNAL_UNUSED;
                     winmdFileName: "Windows.Win32.winmd");
                 var reader = image.Reader;
                 var decoder = new SignatureNames(qualifiedNames: true);
+                InferredIdentityPreservesOrdinaryClrProjectionAndExplicitNominalIntent(fixture, reader, annotationsEnabled);
                 if (evidence != null)
                 {
                     var observed = new

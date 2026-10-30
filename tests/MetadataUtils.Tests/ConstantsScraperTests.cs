@@ -16,6 +16,87 @@ namespace MetadataUtils.Tests
     public class ConstantsScraperTests
     {
         [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void LegacyEnumUsesTheDirectOwnerOfOneNativeDeclaration(bool typedef)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "native-enum-owner-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string header = Path.Combine(directory, "native.h");
+                File.WriteAllText(header, "typedef struct ROW { unsigned Value; } ROW;");
+                foreach (var observation in new[] { (Namespace: "Canonical", Direct: true), (Namespace: "Included", Direct: false) })
+                {
+                    var root = CSharpSyntaxTree.ParseText("namespace " + observation.Namespace +
+                        " { public struct ROW { public uint Value; } }").GetRoot();
+                    var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                    var source = new NativeRecordSource("native-row", "ROW", header,
+                        NativeConstantGroupProvenance.HashFile(header), 1, 1, "ROW", observation.Namespace,
+                        observation.Direct, 4, 4);
+                    root = root.ReplaceNode(declaration, typedef
+                        ? NativeTypedefSourceProvenance.Attach(declaration, source)
+                        : NativeRecordSourceProvenance.Attach(declaration, source));
+                    File.WriteAllText(Path.Combine(directory, observation.Namespace + (typedef ? ".header-types.cs" : ".cs")),
+                        root.ToFullString());
+                }
+                Assert.Equal("Canonical", ScraperUtils.GetNameToNamespaceMap(directory)["ROW"]);
+                string enums = Path.Combine(directory, "enums.json");
+                File.WriteAllText(enums, @"{""items"":[{""name"":""ROW_FLAGS"",""type"":""uint"",
+                    ""members"":[{""name"":""RowFlag"",""value"":""1""}],
+                    ""uses"":[{""struct"":""ROW"",""field"":""Value""}]}]}");
+                ConstantsScraper.ScrapeConstants(new[] { enums }, "Test", directory, "", new(),
+                    new() { [header] = "Canonical" }, new(), new(), new(), new());
+                Assert.True(File.Exists(Path.Combine(directory, "Canonical.enums.cs")));
+                Assert.False(File.Exists(Path.Combine(directory, "Included.enums.cs")));
+                Assert.False(File.Exists(Path.Combine(directory, "System.SystemServices.enums.cs")));
+            }
+            finally
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+        }
+
+        [Theory]
+        [InlineData("different-identity")]
+        [InlineData("different-header")]
+        [InlineData("different-header-content")]
+        [InlineData("no-direct-owner")]
+        [InlineData("multiple-direct-owners")]
+        [InlineData("ordinary-provider")]
+        public void ScannedNamespaceOwnershipDoesNotConflateAmbiguousProviders(string scenario)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "native-owner-ambiguity-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                foreach (string ns in new[] { "First", "Second" })
+                {
+                    var root = CSharpSyntaxTree.ParseText("namespace " + ns +
+                        " { public struct ROW { public uint Value; } }").GetRoot();
+                    var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                    if (scenario != "ordinary-provider" || ns != "Second")
+                    {
+                        var source = new NativeRecordSource(
+                            scenario == "different-identity" ? ns : "native-row", "ROW",
+                            Path.Combine(directory, scenario == "different-header" ? ns + ".h" : "native.h"),
+                            new string(scenario == "different-header-content" && ns == "Second" ? 'B' : 'A', 64),
+                            1, 1, "ROW", ns,
+                            scenario != "no-direct-owner" && (ns == "First" || scenario == "multiple-direct-owners"), 4, 4);
+                        root = root.ReplaceNode(declaration, NativeRecordSourceProvenance.Attach(declaration, source));
+                    }
+                    File.WriteAllText(Path.Combine(directory, ns + ".cs"), root.ToFullString());
+                }
+                Assert.Equal(new[] { "First", "Second" },
+                    ScraperUtils.GetNameToNamespaceMap(directory)["ROW"].Split(';'));
+            }
+            finally
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+        }
+
+        [Theory]
         [InlineData("0x54F39980L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8")]
         [InlineData("0xE09C77E0L,0xDA60,0x11CF,0x9B,0x06,0x00,0xA0,0xC9,0x03,0xA3,0xB8")]
         [InlineData("842094158, 0, 16, 128, 0, 0, 170, 0, 56, 155, 113")]
@@ -896,6 +977,227 @@ fine CONTINUED \
             finally
             {
                 Directory.Delete(directory, true);
+            }
+        }
+
+        [Fact]
+        public void LegacyAliasTargetsAndGeneratedFamiliesFollowChangingSourceAvailability()
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "targeted-legacy-aliases-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                var targets = new[] { (Name: "x86", Mask: 1), (Name: "x64", Mask: 2), (Name: "arm64", Mask: 4) };
+                foreach (var target in targets)
+                {
+                    string path = Path.Combine(directory, target.Name);
+                    Directory.CreateDirectory(path);
+                    File.WriteAllText(Path.Combine(path, "Bindings.header-types.cs"), HeaderTypesSourceFamily.SuccessMarker);
+                    File.WriteAllText(Path.Combine(path, "Other.constants.cs"), "// retained unrelated generated input");
+                }
+                string header = Path.Combine(directory, "aliases.h");
+                File.WriteAllText(header, "#define FORWARDED_TWICE FORWARDED\n#define FORWARDED ORIGINAL_VALUE\n" +
+                    "#define IMMEDIATE ORIGINAL_VALUE\n#define COMMON_LITERAL 7\n");
+                foreach (int mask in new[] { 6, 1, 7 })
+                {
+                    foreach (var target in targets)
+                        File.WriteAllText(Path.Combine(directory, target.Name, "Bindings.cs"),
+                            (mask & target.Mask) == 0 ? "" :
+                            "namespace Canonical { public enum ORIGINAL_KIND : int { ORIGINAL_VALUE = 5 } }");
+                    ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Alias", directory, "",
+                        new(), new() { [header] = "Alias" }, new(), new(), new(), new());
+                    foreach (var target in targets)
+                    {
+                        string path = Path.Combine(directory, target.Name);
+                        string generated = Path.Combine(path, "LegacyAliases.Alias.constants.cs");
+                        Assert.Equal(mask != 7, File.Exists(generated));
+                        if (mask != 7)
+                            Assert.Equal((mask & target.Mask) == 0, File.ReadAllText(generated).Length == 0);
+                        Assert.Equal("// retained unrelated generated input",
+                            File.ReadAllText(Path.Combine(path, "Other.constants.cs")));
+                        var trees = Directory.GetFiles(directory, "*.cs").Concat(Directory.GetFiles(path, "*.cs"))
+                            .Select(file => CSharpSyntaxTree.ParseText(File.ReadAllText(file), path: file));
+                        var compilation = CSharpCompilation.Create("TargetedLegacyAliases", trees,
+                            new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                        Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+                        var apis = compilation.GetTypeByMetadataName("Alias.Apis");
+                        foreach (string name in new[] { "FORWARDED", "FORWARDED_TWICE", "IMMEDIATE" })
+                        {
+                            var fields = apis.GetMembers(name).OfType<IFieldSymbol>().ToArray();
+                            Assert.Equal((mask & target.Mask) == 0 ? 0 : 1, fields.Length);
+                            if (fields.Length != 0)
+                            {
+                                Assert.Equal(SpecialType.System_Int32, fields[0].Type.SpecialType);
+                                Assert.Equal(5, fields[0].ConstantValue);
+                            }
+                        }
+                        Assert.Equal(7u, apis.GetMembers("COMMON_LITERAL").OfType<IFieldSymbol>().Single().ConstantValue);
+                    }
+                }
+            }
+            finally
+            {
+                Directory.Delete(directory, true);
+            }
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void CaseOnlyEnumMacroAliasesReuseTheirCanonicalOwner(bool sameNamespace)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "case-only-enum-alias-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                var targets = new[] { (Name: "x86", Mask: 1), (Name: "x64", Mask: 2), (Name: "arm64", Mask: 4) };
+                foreach (var target in targets)
+                {
+                    string path = Path.Combine(directory, target.Name);
+                    Directory.CreateDirectory(path);
+                    File.WriteAllText(Path.Combine(path, "Bindings.header-types.cs"), HeaderTypesSourceFamily.SuccessMarker);
+                }
+                string header = Path.Combine(directory, "aliases.h");
+                File.WriteAllText(header, "#define CanonicalValue CANONICALVALUE\n" +
+                    "#define FORWARDED CanonicalValue\n#define INDEPENDENT CANONICALVALUE\n");
+                string ns = sameNamespace ? "Canonical" : "Other";
+                foreach (int mask in new[] { 6, 1, 7 })
+                {
+                    foreach (var target in targets)
+                        File.WriteAllText(Path.Combine(directory, target.Name, "Bindings.cs"),
+                            (mask & target.Mask) == 0 ? "" :
+                            "namespace Canonical { public enum KIND : int { CANONICALVALUE = 5 } }");
+                    ConstantsScraper.ScrapeConstants(Array.Empty<string>(), ns, directory, "",
+                        new(), new() { [header] = ns }, new(), new(), new(), new());
+                    foreach (var target in targets)
+                    {
+                        string path = Path.Combine(directory, target.Name);
+                        var trees = Directory.GetFiles(directory, "*.cs").Concat(Directory.GetFiles(path, "*.cs"))
+                            .Select(file => CSharpSyntaxTree.ParseText(File.ReadAllText(file), path: file));
+                        var compilation = CSharpCompilation.Create("CaseOnlyEnumAliases", trees,
+                            new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                        Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+                        var apis = compilation.GetTypeByMetadataName(ns + ".Apis");
+                        bool available = (mask & target.Mask) != 0;
+                        var alias = apis?.GetMembers("CanonicalValue").OfType<IFieldSymbol>().ToArray() ?? Array.Empty<IFieldSymbol>();
+                        Assert.Equal(available && !sameNamespace ? 1 : 0, alias.Length);
+                        foreach (string name in new[] { "FORWARDED", "INDEPENDENT" })
+                        {
+                            var fields = apis?.GetMembers(name).OfType<IFieldSymbol>().ToArray() ?? Array.Empty<IFieldSymbol>();
+                            Assert.Equal(available ? 1 : 0, fields.Length);
+                            if (fields.Length != 0)
+                            {
+                                Assert.Equal(SpecialType.System_Int32, fields[0].Type.SpecialType);
+                                Assert.Equal(5, fields[0].ConstantValue);
+                            }
+                        }
+                        var canonical = compilation.GetTypeByMetadataName("Canonical.KIND");
+                        Assert.Equal(available ? 1 : 0, canonical?.GetMembers("CANONICALVALUE").Length ?? 0);
+                    }
+                }
+            }
+            finally
+            {
+                Directory.Delete(directory, true);
+            }
+        }
+
+        [Theory]
+        [InlineData("matching-observers", null)]
+        [InlineData("single-observer", null)]
+        [InlineData("same-observer-namespace", null)]
+        [InlineData("explicit-owner", null)]
+        [InlineData("storage-conflict", "source owners")]
+        [InlineData("value-conflict", "conflict")]
+        [InlineData("native-type-conflict", "conflict")]
+        [InlineData("different-header-owner", "source owners")]
+        [InlineData("producer-namespace-drift", "namespace")]
+        public void LogicalGroupObserversUseCanonicalTraversedHeaderOwnership(string scenario, string expectedError)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "logical-group-owners-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string header = Write(Path.Combine(directory, "shared.h"), "#define RAW_VALUE 1\n#define FORWARDED RAW_VALUE\n");
+                string otherHeader = Write(Path.Combine(directory, "other.h"), File.ReadAllText(header));
+                var inputs = new List<string>();
+                int observerCount = scenario == "single-observer" ? 1 : 8;
+                foreach (int index in Enumerable.Range(0, observerCount))
+                {
+                    string observer = "Observer" + index;
+                    string ns = scenario == "same-observer-namespace" ? "SharedObserver" : observer;
+                    string observedHeader = index == 7 && scenario == "different-header-owner" ? otherHeader : header;
+                    string native = index == 7 && scenario == "native-type-conflict" ? "unsigned int" : "int";
+                    string primitive = native == "int" ? "int" : "uint";
+                    string value = index == 7 && scenario == "value-conflict" ? "2" : "1";
+                    string storage = index == 7 && scenario == "storage-conflict" ? "uint" : "ushort";
+                    string source = Write(Path.Combine(directory, "Partitions", observer, "main.cpp"),
+                        $"#include \"{observedHeader}\"\n");
+                    string hash = NativeConstantGroupProvenance.HashFile(observedHeader);
+                    var binding = new NativeConstantBinding("Macro", "RAW_VALUE", observedHeader, 1, 9, hash, native, primitive, value);
+                    var group = new NativeConstantGroup("::FAMILY", "FAMILY", ns, storage, observedHeader, 3,
+                        new[] { new NativeConstantGroupMember("RAW_VALUE", value, new[] { binding }) });
+                    var proof = new NativeConstantGroupSource(source, NativeConstantGroupProvenance.HashFile(source),
+                        Architecture.X86, group);
+                    var root = CSharpSyntaxTree.ParseText("namespace " +
+                        (index == 7 && scenario == "producer-namespace-drift" ? "Unrelated" : ns) +
+                        $"\n{{\n    public enum FAMILY : {storage} {{ RAW_VALUE = {value} }}\n}}").GetRoot();
+                    var declaration = root.DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                    Write(Path.Combine(directory, "x86", observer + ".header-types.cs"), HeaderTypesSourceFamily.SuccessMarker + "\n" +
+                        root.ReplaceNode(declaration, NativeConstantGroupProvenance.Attach(declaration, proof)).ToFullString());
+                    string input = Write(Path.Combine(directory, "x86", observer + ".native-constants.json"),
+                        JsonSerializer.Serialize(new NativeConstantValues
+                        {
+                            Architecture = Architecture.X86, Namespace = ns,
+                            SourceFile = source, SourceHash = proof.SourceHash,
+                            BindingSource = Path.Combine(directory, "x86", observer + ".cs"),
+                            Headers = new[] { observedHeader },
+                            Constants = new()
+                            {
+                                new("RAW_VALUE", "RAW_VALUE", observedHeader, 1, native, primitive, value)
+                                    { Column = 9, HeaderHash = hash },
+                            },
+                            Groups = new() { group },
+                        }));
+                    inputs.Add(input);
+                }
+                var owners = new Dictionary<string, string>();
+                if (scenario == "explicit-owner")
+                    owners.Add("FAMILY", "Explicit");
+                Action scrape = () => ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", directory, "",
+                    new(), new() { [header] = "Canonical", [otherHeader] = "OtherCanonical" },
+                    owners, new(), new(), new(), new ConstantSelectionOptions { NativeInputs = inputs });
+                if (expectedError != null)
+                {
+                    Assert.Contains(expectedError, Assert.Throws<InvalidDataException>(scrape).Message,
+                        StringComparison.OrdinalIgnoreCase);
+                    return;
+                }
+                scrape();
+                using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(directory, "native-constant-conflicts.json")));
+                var dependencies = report.RootElement.GetProperty("SourceDependencies").EnumerateArray().Single();
+                var declarations = dependencies.GetProperty("Declarations").EnumerateArray().ToArray();
+                Assert.Equal(observerCount, declarations.Length);
+                string expectedOwner = scenario == "explicit-owner" ? "Explicit" : "Canonical";
+                Assert.All(declarations, declaration => Assert.Equal(expectedOwner, declaration.GetProperty("Namespace").GetString()));
+                var proofs = report.RootElement.GetProperty("SourceGroups").EnumerateArray().ToArray();
+                Assert.Equal(observerCount, proofs.Length);
+                Assert.Equal(scenario == "same-observer-namespace" ? 1 : observerCount,
+                    proofs.Select(proof => proof.GetProperty("Provenance").GetProperty("Group")
+                    .GetProperty("Namespace").GetString()).Distinct().Count());
+            }
+            finally
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+
+            static string Write(string path, string content)
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllText(path, content);
+                return path;
             }
         }
 

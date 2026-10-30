@@ -115,7 +115,8 @@ void __stdcall AfterSearch(PCWSTR SearchPath);
             })
             {
                 using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
-                    types + callbacks + other, extraSettings: "-DWIN32METADATA\n-DUNICODE\n");
+                    types + callbacks + other,
+                    extraSettings: "-DWIN32METADATA\n-DUNICODE\n--remap\nHRESULT=HRESULT\n");
                 fixture.AssertSuccess();
                 using var image = Emit(fixture, architecture);
                 var reader = image.Reader;
@@ -267,7 +268,9 @@ ABI_CHECK(__is_same(decltype(PROCESS_BASIC_INFORMATION::InheritedFromUniqueProce
 #endif
 ";
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
-                types + declaration + "\n" + sdkRecord + assertions, extraSettings: "-DWIN32METADATA\n");
+                types + declaration + "\n" + sdkRecord + assertions,
+                extraSettings: "-DWIN32METADATA\n--remap\nLONG=LONG\nNTSTATUS=NTSTATUS\n" +
+                    "KPRIORITY=KPRIORITY\nPPEB=PPEB\n");
             fixture.AssertSuccess();
             using var image = Emit(fixture, architecture);
             var reader = image.Reader;

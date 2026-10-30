@@ -224,6 +224,66 @@ namespace Second { struct Record { short value; }; typedef Record Alias; }
         }
 
         [Fact]
+        public void InferredPointerRootsSelectOriginalCompleteDefinitionsWithoutGeneralizingOrdinaryRecovery()
+        {
+            using var native = new NativeRecords(@"
+struct _stream { void* placeholder; };
+typedef _stream Stream;
+struct Ordinary { int value; };
+namespace ABI { struct Interface { virtual int Read() = 0; }; }
+struct Unused { int value; };
+");
+            var roots = GeneratedSource.FromText(@"
+public unsafe struct StreamPointer { public Stream** Value; }
+public unsafe struct InterfacePointer { public Interface* Value; }");
+            var projection = new OpaqueRecordProjection(native.Unit, new[]
+            {
+                GeneratedSource.FromText("public static unsafe class Apis { public static extern Ordinary* Read(); }"),
+                roots,
+            }, new Dictionary<string, string> { ["_stream"] = "Stream" },
+                requiredPointeeSources: new[] { roots.Tree });
+            Assert.Empty(projection.IncludedNames);
+            Assert.Equal(new[] { "Interface", "Stream" }, projection.RecordAliases
+                .Select(alias => alias.ManagedName).OrderBy(name => name));
+            Assert.All(projection.RecordAliases, alias => Assert.True(alias.Declaration.IsCompleteDefinition));
+            Assert.Contains(projection.RecordAliases, alias => alias.RecordName == "_stream");
+            Assert.Contains(projection.RecordAliases, alias => alias.RecordName == "ABI::Interface");
+        }
+
+        [Theory]
+        [InlineData("public unsafe struct Pointer { public Complete* Value; }", "Complete")]
+        [InlineData("public unsafe struct Pointer { public Complete** Value; }", "Native::Complete")]
+        [InlineData("public struct Value { public Complete Value; }", null)]
+        public void CompletePointeeRecoveryPreservesExclusionsAndDoesNotAdmitByValueRoots(string source, string excluded)
+        {
+            using var native = new NativeRecords("namespace Native { struct Complete { int value; }; }\n");
+            var roots = GeneratedSource.FromText(source);
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { roots },
+                new Dictionary<string, string>(), excluded == null ? null : new[] { excluded },
+                new[] { roots.Tree });
+            Assert.Empty(projection.IncludedNames);
+            Assert.Empty(projection.RecordAliases);
+        }
+
+        [Theory]
+        [InlineData("Local", 1)]
+        [InlineData("Foreign", 0)]
+        public void CompletePointeesRespectTheirExistingCanonicalNamespace(string owner, int count)
+        {
+            using var native = new NativeRecords("struct Complete { int value; };\n");
+            var roots = GeneratedSource.FromText($@"
+namespace Local {{
+public unsafe struct Pointer {{ public global::{owner}.Complete* Value; }}
+}}");
+            var ordinary = GeneratedSource.FromText(
+                "namespace Local { public static unsafe class Apis { public static extern Complete* Read(); } }");
+            var projection = new OpaqueRecordProjection(native.Unit, new[] { ordinary, roots },
+                new Dictionary<string, string>(), requiredPointeeSources: new[] { roots.Tree });
+            Assert.Empty(projection.IncludedNames);
+            Assert.Equal(count, projection.RecordAliases.Count);
+        }
+
+        [Fact]
         public void NativeRecordAliasDiscoveryDeduplicatesTheSameNativeDefinition()
         {
             using var native = new NativeRecords(@"

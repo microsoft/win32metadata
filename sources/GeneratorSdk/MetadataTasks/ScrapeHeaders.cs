@@ -623,9 +623,9 @@ $@"--file
             char[] lineChars = new char[] { '\r', '\n' };
 
             string expectedOutput = constantsOnly ? Path.ChangeExtension(outputFileName, ".native-constants.json") : outputFileName;
-            if (exitCode < 0 || !File.Exists(expectedOutput))
+            if (exitCode != 0 || !File.Exists(expectedOutput))
             {
-                this.Log.LogError($"{infoPrefix} - ClangSharpPInvokeGenerator failed. Full output at {scrapeToolOutput}.");
+                this.Log.LogError($"{infoPrefix} - Win32MetadataScraper failed. Full output at {scrapeToolOutput}.");
 
                 foreach (var line in output.Split(lineChars, System.StringSplitOptions.RemoveEmptyEntries))
                 {
