@@ -659,6 +659,7 @@ namespace ClangSharpSourceToWinmd
                     try
                     {
                         bool? inferred = NativeTypedefProjectionProvenance.IsInferred(declaration);
+                        _ = NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration);
                         var source = NativeTypedefSourceProvenance.Read(declaration);
                         if (source == null)
                             continue;
@@ -768,7 +769,7 @@ namespace ClangSharpSourceToWinmd
                 .ToDictionary(group => group.Key, group => group.Select(owner => owner.Namespace).ToArray(),
                     StringComparer.Ordinal);
             var records = new List<(StructDeclarationSyntax Declaration, NativeRecordSource Source, string Namespace,
-                Architecture Architectures)>();
+                Architecture Architectures, bool ConfiguredNominal)>();
             foreach (var tree in trees.Where(tree => !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase)))
             {
                 foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
@@ -789,7 +790,8 @@ namespace ClangSharpSourceToWinmd
                                 annotation.Data == string.Concat(source.Namespace.Where(character => !char.IsWhiteSpace(character))))))
                             throw new InvalidDataException("Native record source namespace drift.");
                         var architecture = GetArchitectureForFileName(tree.FilePath);
-                        records.Add((declaration, source, ns, architecture));
+                        records.Add((declaration, source, ns, architecture,
+                            NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration)));
                     }
                     catch (InvalidDataException error)
                     {
@@ -815,6 +817,18 @@ namespace ClangSharpSourceToWinmd
                 bool nativeRecord = group.All(record => NativeRecordSourceProvenance.Read(record.Declaration) != null);
                 bool nativeAlias = group.All(record => NativeTypedefSourceProvenance.Read(record.Declaration) != null);
                 string owner = requiredNamespaces.TryGetValue(group.Key.Name, out string required) ? required : null;
+                if (owner == null && nativeAlias && group.Any(record => record.ConfiguredNominal) &&
+                    retainedOwners.TryGetValue(group.Key.Name, out var configuredOwners))
+                {
+                    if (configuredOwners.Length != 1)
+                    {
+                        validation.Add(new InvalidDataException(
+                            $"Configured native typedef '{group.Key.Name}' has multiple retained metadata targets."),
+                            "CSSW005", "emitter.record-ownership", first.Declaration.SyntaxTree.FilePath, group.Key.Name);
+                        continue;
+                    }
+                    owner = configuredOwners[0];
+                }
                 bool retainedProjection = owner != null && retained.Contains((owner, group.Key.Name)) && nativeAlias;
                 bool conflictingDeclarations = nativeRecord
                     ? group.GroupBy(record => record.Source.Header, StringComparer.OrdinalIgnoreCase).Any(header =>

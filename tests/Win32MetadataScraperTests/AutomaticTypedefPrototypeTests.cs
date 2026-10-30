@@ -179,6 +179,11 @@ typedef FIRST_COUNT SECOND_COUNT;
 typedef SECOND_COUNT* PSECOND_COUNT;
 typedef float SCALAR_FLOAT;
 typedef unsigned long CONFIGURED_COUNT;
+typedef unsigned long STORAGE_COUNT;
+typedef STORAGE_COUNT* PSTORAGE_COUNT;
+typedef unsigned char STORAGE_BOOLEAN;
+typedef STORAGE_BOOLEAN* PSTORAGE_BOOLEAN;
+DECLARE_HANDLE(REMAPPED_NATIVE_HANDLE);
 typedef _Win32_AlsoUsableFor_(CONFIGURED_COUNT) unsigned long AUTHORED_COUNT;
 struct ROW {
     FIRST_COUNT first;
@@ -189,6 +194,9 @@ struct ROW {
     AUTHORED_COUNT authored;
 };
 extern ""C"" SECOND_COUNT Echo(SECOND_COUNT value, SCALAR_FLOAT factor, PSECOND_COUNT values);
+extern ""C"" void UseStorageProjections(STORAGE_COUNT count, PSTORAGE_COUNT counts,
+    STORAGE_BOOLEAN booleanValue, PSTORAGE_BOOLEAN booleanValues);
+extern ""C"" REMAPPED_NATIVE_HANDLE UseRemappedNativeHandle(REMAPPED_NATIVE_HANDLE handle);
 ";
 
         private static void InferredIdentityPreservesOrdinaryClrProjectionAndExplicitNominalIntent(
@@ -197,17 +205,26 @@ extern ""C"" SECOND_COUNT Echo(SECOND_COUNT value, SCALAR_FLOAT factor, PSECOND_
             var providers = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
                 .DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
             var identities = new HashSet<string>(StringComparer.Ordinal);
-            foreach (string name in new[] { "FIRST_COUNT", "SECOND_COUNT", "PSECOND_COUNT", "SCALAR_FLOAT" })
+            foreach (string name in new[] { "FIRST_COUNT", "SECOND_COUNT", "PSECOND_COUNT", "SCALAR_FLOAT",
+                "STORAGE_COUNT", "PSTORAGE_COUNT", "STORAGE_BOOLEAN", "PSTORAGE_BOOLEAN" })
             {
                 var provider = providers.Single(type => type.Identifier.ValueText == name);
                 var source = NativeTypedefSourceProvenance.Read(provider);
                 Assert.NotNull(source);
                 Assert.True(identities.Add(source.Identity));
                 Assert.True(NativeTypedefProjectionProvenance.IsInferred(provider));
+                Assert.False(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(provider));
             }
             Assert.False(NativeTypedefProjectionProvenance.IsInferred(providers.Single(type =>
                 type.Identifier.ValueText == "CONFIGURED_COUNT")));
+            Assert.True(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(providers.Single(type =>
+                type.Identifier.ValueText == "CONFIGURED_COUNT")));
+            var remappedHandle = providers.Single(type => type.Identifier.ValueText == "REMAPPED_NATIVE_HANDLE");
+            Assert.False(NativeTypedefProjectionProvenance.IsInferred(remappedHandle));
+            Assert.True(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(remappedHandle));
             Assert.Equal(!annotationsEnabled, NativeTypedefProjectionProvenance.IsInferred(providers.Single(type =>
+                type.Identifier.ValueText == "AUTHORED_COUNT")));
+            Assert.False(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(providers.Single(type =>
                 type.Identifier.ValueText == "AUTHORED_COUNT")));
             var secondStorage = Assert.Single(providers.Single(type =>
                 type.Identifier.ValueText == "SECOND_COUNT").Members.OfType<FieldDeclarationSyntax>());
@@ -220,7 +237,15 @@ extern ""C"" SECOND_COUNT Echo(SECOND_COUNT value, SCALAR_FLOAT factor, PSECOND_
             var method = FindMethod(reader, "Apis", "Echo").DecodeSignature(decoder, null);
             Assert.Equal("UInt32", method.ReturnType);
             Assert.Equal(new[] { "UInt32", "Single", "UInt32*" }, method.ParameterTypes);
-            foreach (string name in new[] { "FIRST_COUNT", "SECOND_COUNT", "PSECOND_COUNT", "SCALAR_FLOAT" })
+            var storageMethod = FindMethod(reader, "Apis", "UseStorageProjections").DecodeSignature(decoder, null);
+            Assert.Equal(new[] { "UInt32", "UInt32*", "Byte", "Byte*" }, storageMethod.ParameterTypes);
+            AssertWrapper(reader, "REMAPPED_NATIVE_HANDLE", "Void*");
+            Assert.Equal("Retained.NativeHandle", reader.GetString(FindType(reader, "REMAPPED_NATIVE_HANDLE").Namespace));
+            var handleMethod = FindMethod(reader, "Apis", "UseRemappedNativeHandle").DecodeSignature(decoder, null);
+            Assert.Equal("Retained.NativeHandle.REMAPPED_NATIVE_HANDLE", handleMethod.ReturnType);
+            Assert.Equal(handleMethod.ReturnType, Assert.Single(handleMethod.ParameterTypes));
+            foreach (string name in new[] { "FIRST_COUNT", "SECOND_COUNT", "PSECOND_COUNT", "SCALAR_FLOAT",
+                "STORAGE_COUNT", "PSTORAGE_COUNT", "STORAGE_BOOLEAN", "PSTORAGE_BOOLEAN" })
                 Assert.DoesNotContain(reader.TypeDefinitions, handle =>
                     reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
             AssertWrapper(reader, "CONFIGURED_COUNT", "UInt32");
@@ -1256,6 +1281,10 @@ typedef enum _PROJECTED_POINTER { PointerFirst = 1 } _PROJECTED_POINTER;",
                 "GateGroup", "OPAQUE_HANDLE", "UI_ANIMATION_KEYFRAME", "MachineGlobalObjectTableRegistrationToken",
                 "CONFIGURED_COUNT",
             }.Select(name => name + "=" + name + "\n"));
+            nominalAliases += "STORAGE_COUNT=uint\nPSTORAGE_COUNT=STORAGE_COUNT*\n" +
+                "STORAGE_BOOLEAN=byte\nPSTORAGE_BOOLEAN=STORAGE_BOOLEAN*\n" +
+                "REMAPPED_NATIVE_HANDLE=IntPtr\nREMAPPED_NATIVE_HANDLE__*=REMAPPED_NATIVE_HANDLE\n" +
+                "--exclude\nREMAPPED_NATIVE_HANDLE__\n";
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                 annotationsEnabled, libraryPath: "candidate-prototype.dll", namespaceName: "Windows.Win32.Foundation",
                 extraSettings: "-DWIN32METADATA\n--remap\n_LEGACY_MASK=LEGACY_MASK\n_LEGACY_HIGH_MASK=LEGACY_HIGH_MASK\nHANDLE=IntPtr\nRAW_HANDLE_POINTER=HANDLE*\nPADS_SEARCH_HANDLE=ADS_SEARCH_HANDLE*\nAPP_UNSIGNED_POINTER_ADDRESS=UIntPtr*\nPRECORD_BUFFER=RECORD_BUFFER*\nPROVIDED_TOKEN_t=IntPtr\nPPROVIDED_TOKEN=PROVIDED_TOKEN*\nUNTYPED_RECORD_ADDRESS=RECORD_VALUE*\nPSIBLING_COUNT=SIBLING_COUNT*\nPSIBLING_BOOLEAN=SIBLING_BOOLEAN*\nPSESSION_KEY=SESSION_KEY*\nSIBLING_HANDLE=IntPtr\nSIBLING_HANDLE__*=SIBLING_HANDLE\nPSIBLING_HANDLE=SIBLING_HANDLE*\nPROVIDED_CONTEXT_t=IntPtr\nPPROVIDED_CONTEXT=PROVIDED_CONTEXT*\nPRECORD_VIEW=RECORD_VIEW*\nPREDECLARED_BOOLEAN=REDECLARED_BOOLEAN*\nPRIMARY_RESOURCE=IntPtr\nPRIMARY_RESOURCE__*=PRIMARY_RESOURCE\nSECONDARY_RESOURCE=IntPtr\nSECONDARY_RESOURCE__*=SECONDARY_RESOURCE\nPSECONDARY_RESOURCE=SECONDARY_RESOURCE*\nOPAQUE_VALUE_KEY=long\nOPAQUE_VALUE_KEY__*=OPAQUE_VALUE_KEY\nPOPAQUE_VALUE_KEY=OPAQUE_VALUE_KEY*\nLEGACY_RESOURCE=IntPtr\nLEGACY_RESOURCE__*=LEGACY_RESOURCE\n--exclude\nPROVIDED_TOKEN_t\nPROVIDED_CONTEXT_t\nSIBLING_HANDLE__\nPRIMARY_RESOURCE__\nSECONDARY_RESOURCE__\nOPAQUE_VALUE_KEY__\nLEGACY_RESOURCE__\n" + nominalAliases);
@@ -1280,6 +1309,20 @@ typedef int EXTERNAL_UNUSED;
                 Assert.Contains("RECORD_VALUE* Value", companion);
                 var providers = new[]
                 {
+                    new ClangSharpSourceToWinmd.AutoType
+                    {
+                        Name = "HANDLE",
+                        Namespace = "Windows.Win32.Foundation",
+                        ValueType = "void*",
+                        NativeTypedef = true,
+                    },
+                    new ClangSharpSourceToWinmd.AutoType
+                    {
+                        Name = "REMAPPED_NATIVE_HANDLE",
+                        Namespace = "Retained.NativeHandle",
+                        ValueType = "DECLARE_HANDLE",
+                        NativeTypedef = true,
+                    },
                     new ClangSharpSourceToWinmd.AutoType
                     {
                         Name = "PROVIDED_TOKEN",
@@ -1335,6 +1378,30 @@ typedef int EXTERNAL_UNUSED;
                     },
                 };
                 var sessionProvider = providers.Single(provider => provider.Name == "SESSION_KEY");
+                providers = providers.Concat(new[]
+                {
+                    ("PADS_SEARCH_HANDLE", "Windows.Win32.Networking.ActiveDirectory.ADS_SEARCH_HANDLE*"),
+                    ("RAW_HANDLE_POINTER", "Windows.Win32.Foundation.HANDLE*"),
+                    ("APP_UNSIGNED_POINTER_ADDRESS", "System.UIntPtr*"),
+                    ("PRECORD_BUFFER", "Windows.Win32.Foundation.RECORD_BUFFER*"),
+                    ("PPROVIDED_TOKEN", "Windows.Win32.Foundation.PROVIDED_TOKEN*"),
+                    ("UNTYPED_RECORD_ADDRESS", "Windows.Win32.Foundation.RECORD_VALUE*"),
+                    ("PSIBLING_COUNT", "Windows.Win32.Foundation.SIBLING_COUNT*"),
+                    ("PSIBLING_BOOLEAN", "Windows.Win32.Foundation.SIBLING_BOOLEAN*"),
+                    ("PSESSION_KEY", "Windows.Win32.Foundation.SESSION_KEY*"),
+                    ("PSIBLING_HANDLE", "Windows.Win32.Foundation.SIBLING_HANDLE*"),
+                    ("PPROVIDED_CONTEXT", "Windows.Win32.Foundation.PROVIDED_CONTEXT*"),
+                    ("PRECORD_VIEW", "Windows.Win32.Foundation.RECORD_VIEW*"),
+                    ("PREDECLARED_BOOLEAN", "Windows.Win32.Foundation.REDECLARED_BOOLEAN*"),
+                    ("PSECONDARY_RESOURCE", "Windows.Win32.Foundation.SECONDARY_RESOURCE*"),
+                    ("POPAQUE_VALUE_KEY", "Windows.Win32.Foundation.OPAQUE_VALUE_KEY*"),
+                }.Select(view => new ClangSharpSourceToWinmd.AutoType
+                {
+                    Name = view.Item1,
+                    Namespace = Routing.TryGetValue(view.Item1, out string ns) ? ns : "Windows.Win32.Foundation",
+                    ValueType = view.Item2,
+                    NativeTypedef = true,
+                })).ToArray();
                 if (architecture == "x86" && !annotationsEnabled)
                 {
                     sessionProvider.ValueType = "int";
