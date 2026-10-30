@@ -85,10 +85,10 @@ namespace MetadataUtils
                 return null;
             string file = Path.GetFileName(source.Header);
             string prefix = "c:" + file + "@";
-            // Clang's file-local USRs retain the include's casing; native identifiers remain case-sensitive.
+            // File-local USRs contain only a basename; distinct physical declarations need their full header path.
             return source.Identity.StartsWith("c:", StringComparison.Ordinal) &&
                 source.Identity.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
-                ? "c:" + file.ToUpperInvariant() + source.Identity.Substring(2 + file.Length)
+                ? "c:" + source.Header.ToUpperInvariant() + source.Identity.Substring(2 + file.Length)
                 : source.Identity;
         }
 

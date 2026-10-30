@@ -365,7 +365,7 @@ namespace ClangSharpSourceToWinmd
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
             var namespaceTrees = PrepareNativeTypedefProjectionPolicies(
-                FilesToTrees(modifiedFiles).ToArray(), sourceDirectory, objDir, validation);
+                FilesToTrees(modifiedFiles).ToArray(), sourceDirectory, objDir, validation, requiredNamespaces);
             StopIfInvalid("emitter.native-typedef-policy", "source-bound native projection policies");
             var recordNamespaces = ResolveNativeNamespaces(namespaceTrees, requiredNamespaces, apiNamesToNamespaces, validation);
             StopIfInvalid("emitter.namespace-routing", "native provider ownership");
@@ -646,7 +646,8 @@ namespace ClangSharpSourceToWinmd
         }
 
         private static SyntaxTree[] PrepareNativeTypedefProjectionPolicies(SyntaxTree[] trees,
-            string sourceDirectory, string objDir, GenerationValidation validation)
+            string sourceDirectory, string objDir, GenerationValidation validation,
+            IReadOnlyDictionary<string, string> requiredNamespaces)
         {
             var policies = new List<(SyntaxTree Tree, StructDeclarationSyntax Declaration,
                 NativeRecordSource Source, bool? Inferred)>();
@@ -708,11 +709,14 @@ namespace ClangSharpSourceToWinmd
                 }
             }
             var replacements = new Dictionary<StructDeclarationSyntax, StructDeclarationSyntax>();
+            var nativeOwners = HeaderTypedefMerger.FindNativeProjectionOwners(trees,
+                policies.Select(policy => policy.Declaration), requiredNamespaces, validation);
             foreach (var family in policies.GroupBy(policy =>
                 (Identity: NativeRecordSourceProvenance.GetIdentityKey(policy.Source),
                     Header: policy.Source.Header.ToUpperInvariant())))
             {
-                bool inferred = family.All(policy => policy.Inferred == true);
+                bool inferred = family.All(policy => policy.Inferred == true) && !family.Any(policy =>
+                    nativeOwners.TryGetValue(policy.Source.Name, out var owner) && owner.IsTarget(policy.Declaration));
                 foreach (var policy in family)
                     if (policy.Inferred.HasValue)
                         replacements.Add(policy.Declaration,
@@ -802,6 +806,27 @@ namespace ClangSharpSourceToWinmd
             }
             var routes = new Dictionary<(string Namespace, string Name), string>();
             var identities = new Dictionary<(string Namespace, string Name, Architecture Architecture), string>();
+            var nativeOwners = HeaderTypedefMerger.FindNativeProjectionOwners(trees,
+                records.Select(record => record.Declaration), requiredNamespaces, validation);
+            foreach (var legacy in records.Where(record =>
+                NativeTypedefSourceProvenance.Read(record.Declaration) != null &&
+                NativeRecordSourceProvenance.GetIdentityKey(record.Source) != record.Source.Identity)
+                .GroupBy(record => (record.Source.Identity, record.Source.Name)))
+            {
+                if (legacy.Select(record => record.Source.Header).Distinct(StringComparer.OrdinalIgnoreCase).Skip(1).Any() &&
+                    legacy.Any(record => !NativeTypedefProjectionProvenance.IsInferred(record.Declaration).HasValue) &&
+                    !retainedOwners.ContainsKey(legacy.Key.Name) &&
+                    !(nativeOwners.TryGetValue(legacy.Key.Name, out var owner) &&
+                        legacy.All(record => owner.Authorizes(record.Declaration))))
+                    validation.Add(new InvalidDataException($"Conflicting native record identities for '{legacy.Key.Name}': " +
+                        "independent file-local aliases require source-bound projection policies."),
+                        "CSSW005", "emitter.record-ownership", legacy.First().Declaration.SyntaxTree.FilePath, legacy.Key.Name);
+            }
+            var intrinsicNames = records.GroupBy(record => record.Source.Name, StringComparer.Ordinal)
+                .Where(group => !retainedOwners.ContainsKey(group.Key) && group.All(record =>
+                    NativeTypedefSourceProvenance.Read(record.Declaration) != null &&
+                    NativeTypedefProjectionProvenance.IsInferred(record.Declaration) == true))
+                .Select(group => group.Key).ToHashSet(StringComparer.Ordinal);
             var independentlyOwnedRecords = records.GroupBy(record =>
                 (Identity: NativeRecordSourceProvenance.GetIdentityKey(record.Source), record.Source.Name))
                 .Where(group => group.All(record => NativeRecordSourceProvenance.Read(record.Declaration) != null) &&
@@ -817,6 +842,9 @@ namespace ClangSharpSourceToWinmd
                 bool nativeRecord = group.All(record => NativeRecordSourceProvenance.Read(record.Declaration) != null);
                 bool nativeAlias = group.All(record => NativeTypedefSourceProvenance.Read(record.Declaration) != null);
                 string owner = requiredNamespaces.TryGetValue(group.Key.Name, out string required) ? required : null;
+                var nativeOwner = nativeAlias && nativeOwners.TryGetValue(group.Key.Name, out var projectedOwner) &&
+                    group.All(record => projectedOwner.Authorizes(record.Declaration)) ? projectedOwner : null;
+                owner ??= nativeOwner?.Namespace;
                 if (owner == null && nativeAlias && group.Any(record => record.ConfiguredNominal) &&
                     retainedOwners.TryGetValue(group.Key.Name, out var configuredOwners))
                 {
@@ -829,7 +857,8 @@ namespace ClangSharpSourceToWinmd
                     }
                     owner = configuredOwners[0];
                 }
-                bool retainedProjection = owner != null && retained.Contains((owner, group.Key.Name)) && nativeAlias;
+                bool retainedProjection = owner != null && nativeAlias &&
+                    (retained.Contains((owner, group.Key.Name)) || nativeOwner?.Namespace == owner);
                 bool conflictingDeclarations = nativeRecord
                     ? group.GroupBy(record => record.Source.Header, StringComparer.OrdinalIgnoreCase).Any(header =>
                         new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 }.Any(architecture =>
@@ -886,7 +915,7 @@ namespace ClangSharpSourceToWinmd
                             continue;
                         var identityKey = (originalNamespace, group.Key.Name, architecture);
                         if (identities.TryGetValue(identityKey, out string identity) && identity != group.Key.Identity &&
-                            !retainedProjection)
+                            !retainedProjection && !intrinsicNames.Contains(group.Key.Name))
                         {
                             validation.Add(new InvalidDataException($"Distinct native records project to '{originalNamespace}.{group.Key.Name}'."),
                                 "CSSW005", "emitter.record-ownership", applicable[0].Declaration.SyntaxTree.FilePath,

@@ -66,11 +66,26 @@ auto-type omits its namespace and the existing writer resolves it from the
 cleanup API, that resolved ownership supplies a retained-provider route.
 Explicit namespace routes still take precedence. Native declaration families
 and compiler-bound storage validate separately.
+When no retained definition exists, a configured alias projection can select an
+actual native typedef provider in the same generated input. The configured
+binding must match that source observation, architecture, width and alignment,
+and the input must have one native target family. Separate inputs can select
+different native declaration families for the same explicitly routed public
+projection; each family still validates independently. An ambiguous native
+target, an unrelated alias, or an output namespace alone does not establish a
+projection. Native handle contracts also retain their source-bound public owner,
+including compatible-type annotations. A cleanup-derived namespace requires an
+unambiguous actual cleanup API. Inferred-only aliases can share an intrinsic CLR
+projection only after their independent source, storage, signedness and layout
+checks pass. These projection rules do not equate their native identities.
 Retained families include the full declaring-header identity because Clang USRs
 for file-local typedefs can contain only a shared basename such as `main.cpp`.
-Comparison folds only the filename component's casing in file-local USRs; the
+File-local identity keys include the full physical declaring-header path.
+Comparison folds physical path casing but preserves the native identifier; the
 physical header, content hash, location and case-sensitive native name still
-identify the declaration. Global record USRs are also not sufficient to join
+identify the declaration. Older typedef inputs with no projection policy still
+require an explicit retained owner when basename-only identities collide across
+physical headers. Global record USRs are also not sufficient to join
 unrelated records directly owned by different headers. Each of those records
 keeps its own declaring-header owner.
 An arbitrary colliding generated wrapper does not establish that route.
