@@ -141,6 +141,7 @@ namespace MetadataUtils
         private const string Prefix = "/* Win32Metadata.NativeTypedefProjection.v1 ";
         private const string Family = "/* Win32Metadata.NativeTypedefProjection.";
         private const string Suffix = " */";
+        private const string BindingFamily = "/* Win32Metadata.NativeTypedefBinding.";
 
         public static bool? IsInferred(StructDeclarationSyntax declaration)
         {
@@ -174,6 +175,31 @@ namespace MetadataUtils
                         SyntaxFactory.ElasticCarriageReturnLineFeed }
                         .Concat(declaration.GetLeadingTrivia().Select(Keep)))
                 .WithTrailingTrivia(declaration.GetTrailingTrivia().Select(Keep));
+        }
+
+        public static bool HasConfiguredNominalBinding(StructDeclarationSyntax declaration)
+        {
+            var binding = NativeRecordSourceProvenance.Read(declaration, BindingFamily);
+            if (binding == null)
+                return false;
+            if (IsInferred(declaration) != false || binding != NativeTypedefSourceProvenance.Read(declaration))
+                throw new InvalidDataException("A configured native typedef binding requires one source-bound nominal projection.");
+            return true;
+        }
+
+        public static StructDeclarationSyntax WithConfiguredNominalBinding(StructDeclarationSyntax declaration)
+        {
+            if (IsInferred(declaration) != false || HasConfiguredNominalBinding(declaration))
+                throw new InvalidDataException("A configured native typedef binding requires a new source-bound nominal projection.");
+            var attached = NativeRecordSourceProvenance.Attach(declaration,
+                NativeTypedefSourceProvenance.Read(declaration), BindingFamily);
+            var binding = attached.GetTrailingTrivia().Single(trivia =>
+                trivia.IsKind(SyntaxKind.MultiLineCommentTrivia) &&
+                trivia.ToString().StartsWith(BindingFamily, StringComparison.Ordinal));
+            return declaration.WithLeadingTrivia(new[]
+            {
+                SyntaxFactory.ElasticCarriageReturnLineFeed, binding, SyntaxFactory.ElasticCarriageReturnLineFeed,
+            }.Concat(declaration.GetLeadingTrivia()));
         }
     }
 }

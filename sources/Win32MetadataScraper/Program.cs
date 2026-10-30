@@ -534,8 +534,15 @@ class Program
                 using var diagnosticsTiming = GenerationTiming.BeginSpan("pinvoke.diagnostics");
                 var nativeAlignmentDiagnostics = annotations.GetNativeAlignmentDiagnostics(
                     generatedSources.Values.Select(source => source.Root));
+                var nativeFlagsDiagnostics = annotations.GetNativeFlagsDiagnostics(
+                    generatedSources.Values.Select(source => source.Root));
                 foreach (var diag in bindingDiagnostics)
                 {
+                    if (nativeFlagsDiagnostics.TryGetValue(diag, out string flagsProjection))
+                    {
+                        Console.WriteLine($"    Info: {flagsProjection} Original diagnostic: {diag}");
+                        continue;
+                    }
                     Console.WriteLine($"    {diag}");
                     if (nativeAlignmentDiagnostics.TryGetValue(diag, out string alignmentProjection))
                     {

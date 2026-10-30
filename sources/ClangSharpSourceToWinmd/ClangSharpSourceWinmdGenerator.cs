@@ -1949,14 +1949,14 @@ namespace ClangSharpSourceToWinmd
             if (GetArchitecture(typeSymbol) != Architecture.All && this.architectureTypeDefinitions != null &&
                 this.architectureTypeDefinitions.TryGetValue(fullName, out TypeDefinitionHandle architectureType))
                 return architectureType;
-            if (this.namesToTypeRefHandles.TryGetValue(fullName, out TypeReferenceHandle typeRef))
-            {
-                return typeRef;
-            }
-
             if (this.namesToTypeDefHandles.TryGetValue(fullName, out TypeDefinitionHandle typeDef))
             {
                 return typeDef;
+            }
+
+            if (this.namesToTypeRefHandles.TryGetValue(fullName, out TypeReferenceHandle typeRef))
+            {
+                return typeRef;
             }
 
             string @namespace = typeSymbol.ContainingNamespace.ToString();

@@ -2140,6 +2140,93 @@ namespace Consumer { public static partial class Apis {
                 reader.GetString(type.Name) == reader.GetString(reference.Name));
         }
 
+        [DataTestMethod]
+        [DataRow("configured")]
+        [DataRow("unmarked")]
+        [DataRow("inferred")]
+        [DataRow("conflicting-storage")]
+        [DataRow("conflicting-source")]
+        [DataRow("binding-source-drift")]
+        [DataRow("ambiguous-target")]
+        [DataRow("distinct-family")]
+        public void ConfiguredNativeNominalTargetsRequireSourceBoundIntentAndCompatibleStorage(string scenario)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", @"using Windows.Win32.Foundation.Metadata;
+namespace Retained { [NativeTypedef] public partial struct SCALAR { public int Value; } }" +
+                (scenario == "ambiguous-target" ? @"
+namespace OtherRetained { [NativeTypedef] public partial struct SCALAR { public int Value; } }" : ""));
+            fixture.Write("Bindings.header-types.cs", Provider("Native", "native-scalar",
+                scenario == "conflicting-storage" ? "uint" : "int", scenario is not "unmarked" and not "inferred"));
+            fixture.Write("Bindings.cs", @"namespace Native { public struct CARRIER { public SCALAR Value; } }");
+            if (scenario == "conflicting-source")
+                fixture.Write("Other.header-types.cs", Provider("OtherNative", "native-scalar", "int", true)
+                    .Replace(new string('A', 64), new string('B', 64)));
+            if (scenario == "distinct-family")
+            {
+                fixture.Write("Other.header-types.cs", Provider("OtherNative", "other-scalar", "int", false));
+                fixture.Write("Other.cs", @"namespace OtherNative { public struct OTHER_CARRIER { public SCALAR Value; } }");
+            }
+            if (scenario is "conflicting-storage" or "conflicting-source" or "binding-source-drift" or "ambiguous-target")
+            {
+                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile()).Message, "CSSW005");
+                return;
+            }
+            var compilation = fixture.Compile();
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            string output = Path.Combine(fixture.DirectoryPath, "ConfiguredNominal.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var scalars = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == "SCALAR").ToArray();
+            Assert.AreEqual(scenario is "unmarked" or "distinct-family" ? 2 : 1, scalars.Length);
+            foreach (var type in scalars)
+                CollectionAssert.AreEqual(new byte[] { 0x06, 0x08 },
+                    reader.GetBlobBytes(reader.GetFieldDefinition(type.GetFields().Single()).Signature));
+            AssertCarrier("Native", "CARRIER", scenario == "unmarked" ? "Native" : "Retained",
+                intrinsic: scenario == "inferred");
+            if (scenario == "distinct-family")
+                AssertCarrier("OtherNative", "OTHER_CARRIER", "OtherNative", intrinsic: false);
+
+            string Provider(string ns, string identity, string storage, bool configured)
+            {
+                var root = CSharpSyntaxTree.ParseText(TypedefProvider(fixture, ns, identity, true, storage)).GetCompilationUnitRoot();
+                var original = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var declaration = NativeTypedefProjectionProvenance.WithPolicy(original, scenario == "inferred");
+                if (configured)
+                    declaration = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(declaration);
+                if (scenario == "binding-source-drift")
+                    declaration = declaration.WithLeadingTrivia(declaration.GetLeadingTrivia().Select(trivia =>
+                        trivia.ToString().StartsWith("/* Win32Metadata.NativeTypedefBinding.", StringComparison.Ordinal)
+                            ? SyntaxFactory.Comment(trivia.ToString().Replace(new string('A', 64), new string('B', 64)))
+                            : trivia));
+                return root.ReplaceNode(original, declaration).ToFullString();
+            }
+
+            void AssertCarrier(string ns, string name, string expectedOwner, bool intrinsic)
+            {
+                var carrier = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                    reader.GetString(type.Namespace) == ns && reader.GetString(type.Name) == name);
+                var field = reader.GetFieldDefinition(carrier.GetFields().Single());
+                if (intrinsic)
+                {
+                    CollectionAssert.AreEqual(new byte[] { 0x06, 0x08 }, reader.GetBlobBytes(field.Signature));
+                    return;
+                }
+                var signature = reader.GetBlobReader(field.Signature);
+                Assert.AreEqual((byte)0x06, signature.ReadByte());
+                Assert.AreEqual((byte)0x11, signature.ReadByte());
+                var binding = ResolveLocalType(reader, signature.ReadTypeHandle());
+                Assert.AreEqual(expectedOwner, reader.GetString(binding.Namespace));
+                Assert.AreEqual("SCALAR", reader.GetString(binding.Name));
+                Assert.AreEqual(0, signature.RemainingBytes);
+            }
+        }
+
         private static string TypedefProvider(Fixture fixture, string ns, string identity, bool traversed, string storage = "int",
             long size = 4, long alignment = 4, uint line = 1)
         {

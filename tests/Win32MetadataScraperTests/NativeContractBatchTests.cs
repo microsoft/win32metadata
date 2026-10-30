@@ -7,6 +7,9 @@ using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using MetadataUtils;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Win32MetadataScraper;
 using Xunit;
 using Xunit.Abstractions;
@@ -99,7 +102,8 @@ WSAWaitForMultipleEvents=ws2_32.dll
                             "BATCH_PHANDLE=BATCH_PHANDLE\nBATCH_HOPAQUE=BATCH_HOPAQUE\nDWORD=DWORD\n" +
                             FileAndSocketResultLibraries);
                     fixtures.Add((architecture, fixture));
-                    fixture.AssertSuccess("FlagEnum", "FlagEnum", "MSInheritance", "MSInheritance");
+                    fixture.AssertSuccess("MSInheritance", "MSInheritance");
+                    Assert.Contains("is represented by System.Flags", fixture.Diagnostics);
                     Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
                         NativeSurface(fixture, target, metadataEnabled: true));
                     using var image = Emit(fixture, architecture);
@@ -256,9 +260,12 @@ _Win32_SetLastError_ _Win32_SetLastError_ int Duplicate();
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
 _Win32_AnnotateField_(Missing::value, _Win32_AssociatedEnum_(MissingEnum));
 _WIN32META_ANNOTATE_METHOD_(Missing::Run, _Win32_PreserveResult_);
+enum __attribute__((flag_enum)) DISABLED_FLAGS { DisabledRead = 1, DisabledWrite = 2 };
 int Ordinary(void);
 ", annotationsEnabled: false, extraSettings: "--language\nc\n--std\nc11\n");
-            fixture.AssertSuccess();
+            fixture.AssertSuccess("FlagEnum");
+            Assert.DoesNotContain("is represented by System.Flags", fixture.Diagnostics);
+            Assert.DoesNotContain("System.Flags", fixture.ReadSource());
             Assert.DoesNotContain("NativeAnnotation", fixture.ReadSource());
             Assert.DoesNotContain("_WIN32META_", fixture.ReadSource());
             this.output.WriteLine($"TOOLCHAIN disabled-C: scraper={fixture.InvocationCount}");
@@ -405,6 +412,37 @@ int Ordinary(void);
                 Assert.Equal(name, annotation.Name);
                 Assert.Equal(argument, Assert.Single(annotation.Arguments));
             }
+            AssertNativeFlagsProjectionProof();
+        }
+
+        private static void AssertNativeFlagsProjectionProof()
+        {
+            var source = new NativeRecordSource("c:@E@FLAG_OPTIONS", "FLAG_OPTIONS",
+                @"C:\sdk\flags.h", new string('A', 64), 7, 6, "FLAG_OPTIONS", "Test", true, 4, 4);
+            var root = SyntaxFactory.ParseCompilationUnit(
+                "namespace Test { [global::System.Flags] public enum FLAG_OPTIONS : uint { Read = 1, Write = 2 } }");
+            var original = root.DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+            var projection = HeaderAnnotationProcessor.CreateNativeFlagsProjection(source);
+            root = root.ReplaceNode(original, original.WithAdditionalAnnotations(projection));
+            var generated = GeneratedSource.FromRoot(root);
+            Assert.DoesNotContain("Win32Metadata.NativeFlagsProjection", generated.Text);
+            var declaration = generated.Root.DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+            Assert.True(HeaderAnnotationProcessor.HasNativeFlagsProjection(declaration, source, projection));
+            Assert.False(HeaderAnnotationProcessor.HasNativeFlagsProjection(
+                declaration.WithoutAnnotations(projection), source, projection));
+            Assert.False(HeaderAnnotationProcessor.HasNativeFlagsProjection(
+                declaration.WithAttributeLists(default), source, projection));
+            foreach (var other in new[]
+            {
+                source with { Identity = "c:@E@OTHER_FLAGS" },
+                source with { HeaderHash = new string('B', 64) },
+                source with { Line = 8 },
+                source with { Namespace = "Other" },
+                source with { Name = "OTHER_FLAGS" },
+            })
+                Assert.False(HeaderAnnotationProcessor.HasNativeFlagsProjection(declaration, other, projection));
+            Assert.False(HeaderAnnotationProcessor.HasNativeFlagsProjection(declaration, source,
+                HeaderAnnotationProcessor.CreateNativeFlagsProjection(source)));
         }
 
         [Fact]

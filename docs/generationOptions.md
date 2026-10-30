@@ -20,8 +20,11 @@ in its selected traversal. They do not require a header annotation or the
 for composition and native ABI validation. Discovery alone does not request a
 nominal public type. Unannotated inferred scalar and data-pointer aliases retain
 their ordinary CLR use-site projections. Authored C# `NativeTypedef` providers,
-explicit typedef remaps (including identity remaps), retained configured providers, and
-source-proven native handles retain their nominal contracts.
+explicit nominal typedef remaps (including identity remaps), retained configured
+providers, and source-proven native handles retain their nominal contracts.
+Primitive and pointer storage remaps alone do not request nominal wrappers.
+A configured native-tag pointer projection such as `HANDLE__*=HANDLE` retains
+its nominal target only for aliases of that exact qualified native record pointer.
 
 The producer transports this distinction in source-only projection trivia.
 Nominal intent survives repeated observations and retained-provider composition.
@@ -198,6 +201,12 @@ output. Only the exact native-source diagnostic whose final generated record
 still has the matching source proof and alignment attribute is reported as a
 supported metadata projection. Unrepresented alignment warnings and all other
 unhandled diagnostics keep their existing nonzero behavior.
+Native `flag_enum` diagnostics are reported as information only when the exact
+source-bound enum still carries its projection proof and `System.Flags` in the
+final generated sources. The original diagnostic remains in that informational
+record. Disabled annotation parsing, missing projections and unrelated warnings
+retain their nonzero exit status; the MSBuild task still rejects every nonzero
+scraper exit.
 Inferred native owners route only their source-bound providers and uses.
 Untracked ordinary declarations with the same short name retain their original
 namespace; only configured global routes apply to those declarations.
@@ -207,6 +216,11 @@ When the same native alias family is observed in an existing metadata typedef
 or legacy enum's namespace, that retained owner takes precedence over inferred
 header ownership. An unrelated alias family does not inherit that route, and
 multiple observed retained owners are rejected rather than chosen arbitrarily.
+An explicit nominal typedef remap also binds that source family to its unique
+retained metadata target even when no native observation was emitted in the
+target namespace. That binding carries the complete native source proof;
+output placement alone establishes no native ownership. Missing, changed or
+ambiguous binding evidence cannot substitute for source and storage validation.
 Final source, storage and compiler-bound projection validation still applies.
 Legacy constant aliases inherit the targets of their authoritative enum or
 constant declarations, including forwarding chains. Restricted aliases use

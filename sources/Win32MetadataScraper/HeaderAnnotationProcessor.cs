@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using ClangSharp;
 using ClangSharp.Interop;
@@ -56,6 +57,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<CXFile, byte[]> parameterCommentSources = new();
         private readonly Dictionary<string, string> recordSourceHashes = new(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<ClangSharp.Diagnostic, (NativeRecordSource Source, int Alignment)> nativeAlignmentDiagnostics = new();
+        private readonly Dictionary<ClangSharp.Diagnostic, List<(NativeRecordSource Source, SyntaxAnnotation Projection)>> nativeFlagsDiagnostics = new();
         private NativeNameLookup nativeNames;
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
@@ -612,10 +614,23 @@ namespace Win32MetadataScraper
                         DeclarationSourceMap.QualifiedName(nativeRecord.Decl.Handle), valueType, explicitWrapperIntent: true);
                 declaration = NativeTypedefSourceProvenance.Attach(declaration,
                     GetNativeSource(alias, declaration.Identifier.ValueText, generatedNamespace));
+                bool hasProjectionMapping = projectionTypeRemaps.TryGetValue(alias.Name, out string projectionMapping);
+                string nativeName = DeclarationSourceMap.QualifiedName(alias.Handle);
+                if (!projectionTypeRemaps.TryGetValue(nativeName, out string configuredTarget) && nativeName == alias.Name)
+                    configuredTarget = projectionMapping;
+                bool configuredNominal = configuredTarget == declaration.Identifier.ValueText;
+                if (!configuredNominal && alias.UnderlyingType.CanonicalType is PointerType nativePointer &&
+                    nativePointer.PointeeType.CanonicalType is RecordType nativePointee &&
+                    !string.IsNullOrEmpty(nativePointee.Decl.Name) &&
+                    projectionTypeRemaps.TryGetValue(DeclarationSourceMap.QualifiedName(nativePointee.Decl.Handle) + "*",
+                        out string pointerTarget))
+                    configuredNominal = pointerTarget == declaration.Identifier.ValueText;
                 declaration = NativeTypedefProjectionProvenance.WithPolicy(declaration,
-                    facts.IsInferredTypedef && facts.Annotations.Count == 0 &&
-                    !projectionTypeRemaps.ContainsKey(alias.Name) &&
+                    facts.IsInferredTypedef && facts.Annotations.Count == 0 && !configuredNominal &&
+                    (!hasProjectionMapping || IsStorageTypeName(projectionMapping)) &&
                     !NativeHandleSourceProvenance.TryRead(declaration, out _));
+                if (configuredNominal)
+                    declaration = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(declaration);
                 members.Add(declaration);
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                 }
@@ -713,6 +728,56 @@ namespace Win32MetadataScraper
                         $"Native alignment for '{source.Namespace}.{source.Name}' is carried by AlignmentAttribute({alignment}). The generated C# is compiler storage; native consumers must honor the metadata alignment.");
             }
             return represented;
+        }
+
+        internal static SyntaxAnnotation CreateNativeFlagsProjection(NativeRecordSource source)
+            => new("Win32Metadata.NativeFlagsProjection", JsonSerializer.Serialize(source));
+
+        internal static bool HasNativeFlagsProjection(EnumDeclarationSyntax declaration, NativeRecordSource source,
+            SyntaxAnnotation projection)
+            => declaration.HasAnnotation(projection) && projection.Data == JsonSerializer.Serialize(source) &&
+                declaration.Identifier.ValueText == source.Name &&
+                string.Join(".", declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>().Reverse()
+                    .Select(space => space.Name.ToString())) == source.Namespace &&
+                declaration.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                    attribute.Name.ToString() == "global::System.Flags" &&
+                    (attribute.ArgumentList?.Arguments.Count ?? 0) == 0);
+
+        private EnumDeclarationSyntax RegisterNativeFlagsDiagnostic(EnumDecl nativeEnum,
+            EnumDeclarationSyntax declaration, string projectedNamespace)
+        {
+            var source = GetNativeSource(nativeEnum, declaration.Identifier.ValueText, projectedNamespace);
+            var projection = CreateNativeFlagsProjection(source);
+            var diagnostic = new ClangSharp.Diagnostic(DiagnosticLevel.Warning,
+                "Unsupported attribute: 'FlagEnum'. Generated bindings may be incomplete.", nativeEnum.Location);
+            if (!nativeFlagsDiagnostics.TryGetValue(diagnostic, out var projections))
+                nativeFlagsDiagnostics[diagnostic] = projections = new();
+            projections.Add((source, projection));
+            return declaration.WithAdditionalAnnotations(projection);
+        }
+
+        internal IReadOnlyDictionary<ClangSharp.Diagnostic, string> GetNativeFlagsDiagnostics(
+            IEnumerable<CompilationUnitSyntax> sources)
+        {
+            var result = new Dictionary<ClangSharp.Diagnostic, string>();
+            if (nativeFlagsDiagnostics.Count == 0)
+                return result;
+            var roots = sources.ToArray();
+            foreach (var (diagnostic, projections) in nativeFlagsDiagnostics)
+            {
+                if (!projections.All(projection =>
+                {
+                    var declarations = roots.SelectMany(root => root.GetAnnotatedNodes(projection.Projection))
+                        .OfType<EnumDeclarationSyntax>().ToArray();
+                    return declarations.Length == 1 &&
+                        HasNativeFlagsProjection(declarations[0], projection.Source, projection.Projection);
+                }))
+                    continue;
+                var source = projections[0].Source;
+                result[diagnostic] = $"Native flag_enum for '{source.NativeName}' at {source.Header}:{source.Line}:{source.Column} " +
+                    $"is represented by System.Flags on '{source.Namespace}.{source.Name}'.";
+            }
+            return result;
         }
 
         internal void ValidateProjection()
@@ -2406,6 +2471,8 @@ namespace Win32MetadataScraper
                     node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
                     if (facts.Declaration is EnumDecl projectedEnum)
                         owner.RegisterEnumTypedefProjection(projectedEnum, node, ns, facts.Location);
+                    if (facts.IsFlagsEnum && facts.Declaration is EnumDecl nativeFlagsEnum)
+                        node = owner.RegisterNativeFlagsDiagnostic(nativeFlagsEnum, node, ns);
                     if (nativeAliases)
                         node = NativeConstantGroupProvenance.Attach(node, owner.GetNativeEnumSource(facts, node, ns, bindings));
                 }
