@@ -203,6 +203,7 @@ extern ""C"" void UseStorageProjections(STORAGE_COUNT count, PSTORAGE_COUNT coun
 extern ""C"" REMAPPED_NATIVE_HANDLE UseRemappedNativeHandle(REMAPPED_NATIVE_HANDLE handle);
 extern ""C"" void UseConfiguredTargets(CONFIGURED_TARGET_COUNT target, CONFIGURED_MAPPED_COUNT mapped,
     CONFIGURED_TARGET_POINTER pointer, CONFIGURED_MAPPED_POINTER mappedPointer);
+extern ""C"" void UseUntraversedEnumTarget(POINTER_INPUT_TYPE value);
 ";
 
         private static void InferredIdentityPreservesOrdinaryClrProjectionAndExplicitNominalIntent(
@@ -280,6 +281,13 @@ extern ""C"" void UseConfiguredTargets(CONFIGURED_TARGET_COUNT target, CONFIGURE
                 "Windows.Win32.Foundation.CONFIGURED_TARGET_COUNT", "Windows.Win32.Foundation.CONFIGURED_TARGET_COUNT",
                 "Windows.Win32.Foundation.CONFIGURED_TARGET_POINTER", "Windows.Win32.Foundation.CONFIGURED_TARGET_POINTER",
             }, targets.ParameterTypes);
+            var enumTarget = providers.Single(type => type.Identifier.ValueText == "POINTER_INPUT_TYPE");
+            Assert.True(NativeTypedefProjectionProvenance.IsInferred(enumTarget));
+            Assert.False(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(enumTarget));
+            Assert.DoesNotContain(reader.TypeDefinitions, handle =>
+                reader.GetString(reader.GetTypeDefinition(handle).Name) == "POINTER_INPUT_TYPE");
+            Assert.Equal("UInt32", Assert.Single(
+                FindMethod(reader, "Apis", "UseUntraversedEnumTarget").DecodeSignature(decoder, null).ParameterTypes));
             if (annotationsEnabled)
                 AssertWrapper(reader, "AUTHORED_COUNT", "UInt32");
             AssertMetadataClosure(reader);
@@ -1094,13 +1102,61 @@ static_assert(sizeof(APP_RECORD) == 8 && alignof(APP_RECORD) == 4, ""Record ABI 
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
                 @"typedef unsigned long PROJECTED_VALUE;
 typedef enum _PROJECTED_VALUE { ProjectedFirst = 1 } _PROJECTED_VALUE;
-extern ""C"" void UseProjected(PROJECTED_VALUE value);",
-                annotationsEnabled: false, extraSettings: "--remap\n_PROJECTED_VALUE=PROJECTED_VALUE\n");
+struct INTERACTION_CONTEXT_OUTPUT { POINTER_INPUT_TYPE inputType; };
+struct INTERACTION_CONTEXT_OUTPUT2 { POINTER_INPUT_TYPE inputType; };
+struct STORAGE_OUTPUT {
+    DWORD scalar;
+    PRIMITIVE_STORAGE primitive;
+    NATIVE_SCALAR_STORAGE nativeScalar;
+    SCOPED_INPUT_TYPE scoped;
+    UIntPtr nativeAlias;
+};
+extern ""C"" void UseProjected(PROJECTED_VALUE value);
+extern ""C"" void UseStorage(DWORD scalar, PRIMITIVE_STORAGE primitive, NATIVE_SCALAR_STORAGE nativeScalar);",
+                annotationsEnabled: false, extraSettings: "--remap\n_PROJECTED_VALUE=PROJECTED_VALUE\n" +
+                    "tagPOINTER_INPUT_TYPE=POINTER_INPUT_TYPE\nSCOPED_NATIVE_INPUT_TYPE=SCOPED_INPUT_TYPE\n" +
+                    "PRIMITIVE_STORAGE=uint\nNATIVE_SCALAR_STORAGE=UIntPtr\n");
+            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "cleanup.h"), @"
+typedef unsigned long DWORD;
+enum tagPOINTER_INPUT_TYPE { PT_POINTER = 1, PT_TOUCH = 2 };
+typedef DWORD POINTER_INPUT_TYPE;
+enum class SCOPED_NATIVE_INPUT_TYPE : unsigned { First = 1 };
+typedef DWORD SCOPED_INPUT_TYPE;
+typedef unsigned long PRIMITIVE_STORAGE;
+typedef __UINTPTR_TYPE__ NATIVE_SCALAR_STORAGE;
+typedef __UINTPTR_TYPE__ UIntPtr;
+");
             try
             {
                 fixture.AssertSuccess();
                 Assert.Contains("enum PROJECTED_VALUE", fixture.ReadSource());
                 Assert.DoesNotContain("struct PROJECTED_VALUE", fixture.ReadAdditionalTypes());
+                var providers = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                    .DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
+                foreach (string name in new[] { "DWORD", "POINTER_INPUT_TYPE", "SCOPED_INPUT_TYPE", "UIntPtr" })
+                {
+                    var provider = providers.Single(type => type.Identifier.ValueText == name);
+                    Assert.True(NativeTypedefProjectionProvenance.IsInferred(provider));
+                    Assert.False(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(provider));
+                }
+                using var image = Emit(fixture.DirectoryPath, "x64");
+                var reader = image.Reader;
+                var decoder = new SignatureNames(qualifiedNames: true);
+                foreach (string name in new[]
+                {
+                    "DWORD", "POINTER_INPUT_TYPE", "SCOPED_INPUT_TYPE", "PRIMITIVE_STORAGE", "NATIVE_SCALAR_STORAGE", "UIntPtr",
+                })
+                    Assert.DoesNotContain(reader.TypeDefinitions, handle =>
+                        reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
+                foreach (string name in new[] { "INTERACTION_CONTEXT_OUTPUT", "INTERACTION_CONTEXT_OUTPUT2" })
+                    Assert.Equal("UInt32", reader.GetFieldDefinition(FindType(reader, name).GetFields().Single())
+                        .DecodeSignature(decoder, null));
+                Assert.Equal(new[] { "UInt32", "UInt32", "UIntPtr", "UInt32", "UInt64" },
+                    FindType(reader, "STORAGE_OUTPUT").GetFields()
+                        .Select(handle => reader.GetFieldDefinition(handle).DecodeSignature(decoder, null)));
+                Assert.Equal(new[] { "UInt32", "UInt32", "UIntPtr" },
+                    FindMethod(reader, "Apis", "UseStorage").DecodeSignature(decoder, null).ParameterTypes);
+                AssertMetadataClosure(reader);
             }
             finally
             {
@@ -1315,6 +1371,7 @@ typedef enum _PROJECTED_POINTER { PointerFirst = 1 } _PROJECTED_POINTER;",
             nominalAliases += "STORAGE_COUNT=uint\nPSTORAGE_COUNT=STORAGE_COUNT*\n" +
                 "STORAGE_BOOLEAN=byte\nPSTORAGE_BOOLEAN=STORAGE_BOOLEAN*\n" +
                 "CONFIGURED_MAPPED_COUNT=CONFIGURED_TARGET_COUNT\nCONFIGURED_MAPPED_POINTER=CONFIGURED_TARGET_POINTER\n" +
+                "tagPOINTER_INPUT_TYPE=POINTER_INPUT_TYPE\n" +
                 "REMAPPED_NATIVE_HANDLE=IntPtr\nREMAPPED_NATIVE_HANDLE__*=REMAPPED_NATIVE_HANDLE\n" +
                 "--exclude\nREMAPPED_NATIVE_HANDLE__\n";
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
@@ -1327,6 +1384,8 @@ typedef EXTERNAL_COUNT_BASE EXTERNAL_FIELD_COUNT;
 typedef void* EXTERNAL_HANDLE_BASE;
 typedef EXTERNAL_HANDLE_BASE EXTERNAL_API_HANDLE;
 typedef int EXTERNAL_UNUSED;
+enum tagPOINTER_INPUT_TYPE { PT_POINTER = 1, PT_TOUCH = 2 };
+typedef unsigned long POINTER_INPUT_TYPE;
 ");
             try
             {

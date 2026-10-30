@@ -27,6 +27,7 @@ namespace Win32MetadataScraper
         private IReadOnlyDictionary<string, string> storageTypeRemaps;
         private readonly IReadOnlyDictionary<string, string> projectionTypeRemaps;
         private readonly IReadOnlySet<string> configuredTypedefTargets;
+        private readonly IReadOnlySet<string> enumProjectionTargets;
         private readonly IReadOnlyDictionary<string, string> automaticTagRemaps;
         private readonly Dictionary<CXCursor, string> nativeTypedefStorageRemaps = new();
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
@@ -110,10 +111,6 @@ namespace Win32MetadataScraper
             this.remaps = remaps;
             storageTypeRemaps = remaps;
             this.projectionTypeRemaps = projectionTypeRemaps ?? remaps;
-            configuredTypedefTargets = (configuredTypeRemaps ?? new Dictionary<string, string>()).Values
-                .Select(name => SyntaxFactory.ParseTypeName(name)).OfType<IdentifierNameSyntax>()
-                .Select(name => name.Identifier.ValueText).Where(name => !IsStorageTypeName(name))
-                .ToHashSet(StringComparer.Ordinal);
             this.automaticTagRemaps = automaticTagRemaps ?? new Dictionary<string, string>();
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
@@ -178,6 +175,20 @@ namespace Win32MetadataScraper
                 DiscoverNativeTypedefs();
             ThrowAnnotationErrors();
             TransferRecordTypedefFacts();
+            enumProjectionTargets = visited.OfType<EnumDecl>().Select(enumeration =>
+            {
+                string nativeName = DeclarationSourceMap.QualifiedName(enumeration.Handle);
+                return this.projectionTypeRemaps.TryGetValue(nativeName, out string name) ? name :
+                    nativeName == enumeration.Name ? Remap(enumeration.Name) : null;
+            }).Where(name => name != null)
+                .Concat(annotatedTypedefs.Where(facts => facts.LogicalEnumMembers != null)
+                    .Select(facts => Remap(facts.Declaration.Name)))
+                .ToHashSet(StringComparer.Ordinal);
+            configuredTypedefTargets = (configuredTypeRemaps ?? new Dictionary<string, string>()).Values
+                .Select(name => SyntaxFactory.ParseTypeName(name)).OfType<IdentifierNameSyntax>()
+                .Select(name => name.Identifier.ValueText).Where(name =>
+                    !IsStorageTypeName(name) && !enumProjectionTargets.Contains(name))
+                .ToHashSet(StringComparer.Ordinal);
             resolutionTiming?.Dispose();
             using var indexTiming = GenerationTiming.BeginSpan("annotations.index-projections");
             foreach (var facts in declarations.Values)
@@ -626,10 +637,12 @@ namespace Win32MetadataScraper
                 string nativeName = DeclarationSourceMap.QualifiedName(alias.Handle);
                 if (!projectionTypeRemaps.TryGetValue(nativeName, out string configuredTarget) && nativeName == alias.Name)
                     configuredTarget = projectionMapping;
-                bool configuredNominal = configuredTarget == declaration.Identifier.ValueText ||
+                bool nominalProjection = !IsStorageTypeName(declaration.Identifier.ValueText) &&
+                    !enumProjectionTargets.Contains(declaration.Identifier.ValueText);
+                bool configuredNominal = nominalProjection && (configuredTarget == declaration.Identifier.ValueText ||
                     nativeName == alias.Name && alias.Name == declaration.Identifier.ValueText &&
-                        configuredTypedefTargets.Contains(alias.Name);
-                if (!configuredNominal && alias.UnderlyingType.CanonicalType is PointerType nativePointer &&
+                        configuredTypedefTargets.Contains(alias.Name));
+                if (!configuredNominal && nominalProjection && alias.UnderlyingType.CanonicalType is PointerType nativePointer &&
                     nativePointer.PointeeType.CanonicalType is RecordType nativePointee &&
                     !string.IsNullOrEmpty(nativePointee.Decl.Name) &&
                     projectionTypeRemaps.TryGetValue(DeclarationSourceMap.QualifiedName(nativePointee.Decl.Handle) + "*",
@@ -637,7 +650,8 @@ namespace Win32MetadataScraper
                     configuredNominal = pointerTarget == declaration.Identifier.ValueText;
                 declaration = NativeTypedefProjectionProvenance.WithPolicy(declaration,
                     facts.IsInferredTypedef && facts.Annotations.Count == 0 && !configuredNominal &&
-                    (!hasProjectionMapping || IsStorageTypeName(projectionMapping)) &&
+                    (!hasProjectionMapping || IsStorageTypeName(projectionMapping) ||
+                        enumProjectionTargets.Contains(projectionMapping)) &&
                     !NativeHandleSourceProvenance.TryRead(declaration, out _));
                 if (configuredNominal)
                     declaration = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(declaration);
@@ -1261,7 +1275,7 @@ namespace Win32MetadataScraper
                     CollectAnnotationErrors(alias, () =>
                     {
                         ValidateNativeIntegerStorage(alias, mapped, facts.Location);
-                        remaps[alias.Name] = mapped;
+                        remaps[alias.Name] = GetNativeIntegerStorage(mapped);
                     });
                     continue;
                 }
