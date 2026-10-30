@@ -544,7 +544,9 @@ namespace ClangSharpSourceToWinmd
                     retainedEnumProjections?.Contains(group.Key) == true || nativeOwner != null;
                 bool intrinsicProjection = aliases.All(alias =>
                     NativeTypedefSourceProvenance.Read(alias.Declaration) != null &&
-                    NativeTypedefProjectionProvenance.IsInferred(alias.Declaration) == true);
+                    NativeTypedefProjectionProvenance.IsInferred(alias.Declaration) == true) &&
+                    aliases.Select(alias => ProjectionFamily(NativeTypedefSourceProvenance.Read(alias.Declaration)))
+                        .Distinct().Skip(1).Any();
                 bool conflictingSources = retainedProjection || intrinsicProjection
                     ? sources.GroupBy(source => (Identity: NativeRecordSourceProvenance.GetIdentityKey(source.Source),
                         Header: source.Source?.Header.ToUpperInvariant()))
