@@ -31,8 +31,8 @@ namespace ClangSharpSourceToWinmd
                     // Proven handles retain their exact producer storage spelling until composition validates it.
                     .Where(declaration => !NativeHandleSourceProvenance.TryRead(declaration, out _))
                     .SelectMany(declaration => declaration.Members.OfType<FieldDeclarationSyntax>()).ToArray();
-                root = root.ReplaceNodes(fields.Select(field => field.Declaration.Type),
-                    (original, _) => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original)).WithTriviaFrom(original));
+                root = new TypeQualifier(fields.Select(field => field.Declaration.Type),
+                    original => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original))).Visit(root);
                 tree = tree.WithRootAndOptions(root, tree.Options);
 
                 TypeSyntax Qualify(TypeSyntax type, string ns)
@@ -80,8 +80,8 @@ namespace ClangSharpSourceToWinmd
                     type.Ancestors().OfType<StructDeclarationSyntax>().Any(nativeRecords.Contains) ||
                     RefersToRelocatedNativeType(type)))
                     .Distinct().ToArray();
-                root = root.ReplaceNodes(types,
-                    (original, _) => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original)).WithTriviaFrom(original));
+                root = new TypeQualifier(types,
+                    original => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original))).Visit(root);
                 tree = tree.WithRootAndOptions(root, tree.Options);
 
                 bool IsMoved(MemberDeclarationSyntax declaration)
@@ -169,6 +169,23 @@ namespace ClangSharpSourceToWinmd
                 return nativeRecordNamespaces?.TryGetValue((ns, name), out owner) == true ||
                     namesToNamespaces.TryGetValue(name, out owner);
             }
+        }
+
+        private sealed class TypeQualifier : CSharpSyntaxRewriter
+        {
+            private readonly HashSet<TypeSyntax> types;
+            private readonly System.Func<TypeSyntax, TypeSyntax> qualify;
+
+            public TypeQualifier(IEnumerable<TypeSyntax> types, System.Func<TypeSyntax, TypeSyntax> qualify)
+            {
+                this.types = types.ToHashSet();
+                this.qualify = qualify;
+            }
+
+            public override SyntaxNode Visit(SyntaxNode node) =>
+                node is TypeSyntax type && this.types.Contains(type)
+                    ? this.qualify(type).WithTriviaFrom(type)
+                    : base.Visit(node);
         }
 
         private static TypeSyntax QualifiedAlias(string ns, string name) =>

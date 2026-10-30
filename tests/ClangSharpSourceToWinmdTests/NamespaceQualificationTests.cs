@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ClangSharpSourceToWinmd;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -53,6 +54,25 @@ public struct Second { public TARGET Qualified; }
                 field => field.Declaration.Type.ToString());
             Assert.AreEqual("TARGET", fields["Shadowed"]);
             Assert.AreEqual("global::Test.TARGET", fields["Qualified"]);
+        }
+
+        [TestMethod]
+        public void LargeQualificationRetainsTheOriginalReplacementTypesAndTrivia()
+        {
+            string members = string.Join("\r\n", Enumerable.Range(0, 512).Select(index =>
+                $"public /* before {index} */ TARGET /* after {index} */ Value{index};"));
+            var tree = CSharpSyntaxTree.ParseText(
+                $"namespace Test {{ public struct Container {{ {members} }} }}", path: "Bindings.cs");
+            var original = tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+            var expected = original.ReplaceNodes(
+                original.DescendantNodes().OfType<FieldDeclarationSyntax>().Select(field => field.Declaration.Type),
+                (type, _) => SyntaxFactory.ParseTypeName("global::Test.TARGET").WithTriviaFrom(type));
+            var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree,
+                new Dictionary<string, string> { ["Container"] = "Moved" },
+                new HashSet<(string, string)> { ("Test", "TARGET") });
+            var actual = moved.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+            Assert.AreEqual(512, actual.Members.OfType<FieldDeclarationSyntax>().Count());
+            Assert.AreEqual(expected.NormalizeWhitespace().ToFullString(), actual.NormalizeWhitespace().ToFullString());
         }
     }
 }

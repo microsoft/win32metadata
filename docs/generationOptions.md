@@ -209,6 +209,9 @@ Namespace qualification builds each enclosing type's lexical shadow-name set
 once per immutable tree traversal. Nested types, delegates and generic parameters
 retain their original binding precedence; these sets are not shared across trees
 or used to infer native ownership.
+Selected type nodes are qualified in one syntax-rewriter traversal rather than
+through Roslyn's bulk replacement bookkeeping. The original qualification rules,
+selected nodes and trivia are retained, including the original enclosing scope.
 Legacy numeric partition suffixes retain their established parsed-prefix
 namespace. The existing syntax repair records the original namespace for the
 source-provenance check while ownership uses the repaired, valid C# namespace.
