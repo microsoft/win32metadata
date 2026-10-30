@@ -13,7 +13,7 @@ namespace MetadataUtils
         public const string AttributeToRemoveSuffix = "__remove";
         public const string GuidAttributeName = "global::Windows.Win32.Foundation.Metadata.Guid";
 
-        private static readonly System.Text.RegularExpressions.Regex RemappedParmRegex = new System.Text.RegularExpressions.Regex(@"(?:\[([^\]]*)\])?(?:\s*(\w+\**)(?:\s+(\w+))?)?");
+        private static readonly System.Text.RegularExpressions.Regex RemappedParmRegex = new System.Text.RegularExpressions.Regex(@"(?:\[([^\]]*)\])?(?:\s*((?:global::)?\w+(?:\.\w+)*\**)(?:\s+(\w+))?)?");
         private static readonly System.Text.RegularExpressions.Regex AttributeRegex = new System.Text.RegularExpressions.Regex(@"(-?\w+)(\(.+\)$)?");
 
         public static bool DecodeRemap(string remappedTo, out List<AttributeSyntax> listAttributes, out string newType, out string newName)

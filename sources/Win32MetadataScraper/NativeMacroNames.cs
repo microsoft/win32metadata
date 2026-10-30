@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using System.Linq;
 using ClangSharp;
@@ -7,14 +8,14 @@ namespace Win32MetadataScraper
 {
     internal static class NativeMacroNames
     {
-        internal static string GetWrittenName(NamedDecl declaration, bool requireRecordedExpansion = false)
+        internal static string? GetWrittenName(NamedDecl declaration, bool requireRecordedExpansion = false)
             => GetWrittenName(declaration, requireRecordedExpansion, useMemberArgument: false);
 
-        internal static string GetWrittenMemberName(NamedDecl declaration)
+        internal static string? GetWrittenMemberName(NamedDecl declaration)
             => GetWrittenName(declaration, requireRecordedExpansion: false,
                 useMemberArgument: declaration is CXXMethodDecl or FieldDecl);
 
-        private static string GetWrittenName(NamedDecl declaration, bool requireRecordedExpansion, bool useMemberArgument)
+        private static string? GetWrittenName(NamedDecl declaration, bool requireRecordedExpansion, bool useMemberArgument)
         {
             var unit = declaration.TranslationUnit.Handle;
             CXFile file;
@@ -87,7 +88,7 @@ namespace Win32MetadataScraper
                 unit.DisposeTokens(directive);
             }
 
-            string Validate(ReadOnlySpan<CXToken> source, string expanded)
+            string? Validate(ReadOnlySpan<CXToken> source, string expanded)
             {
                 var identifiers = source.ToArray().Where(token => token.Kind != CXTokenKind.CXToken_Comment).ToArray();
                 if (identifiers.Length != 2 || identifiers.Any(token => token.Kind != CXTokenKind.CXToken_Identifier))

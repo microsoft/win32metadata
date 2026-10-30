@@ -4,6 +4,7 @@
 
 #include <winsock2.h>
 
+#include <lsalookup.h>
 #include <winternl.h>
 
 #define _NTDEF_

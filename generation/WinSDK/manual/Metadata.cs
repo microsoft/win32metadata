@@ -18,6 +18,14 @@ public class AlsoUsableForAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+public class AlignmentAttribute : Attribute
+{
+    public AlignmentAttribute(int alignment)
+    {
+    }
+}
+
 public class AnsiAttribute : Attribute
 {
     public AnsiAttribute()

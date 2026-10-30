@@ -79,11 +79,12 @@ namespace ClangSharpSourceToWinmd
                                 HasError(binding.Initializer.Span, errorSpans ??= GetErrorSpans(model)))
                             {
                                 if (binding.Initializer != null)
-                                    foreach (var diagnostic in model.GetDiagnostics(binding.Initializer.Span)
+                                    foreach (var diagnostic in model.GetDiagnostics(candidates[0].Span)
                                         .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error))
                                         validation.Add(new InvalidOperationException(diagnostic.ToString()), "CSSW003",
                                             "emitter.constant-binding", original.FilePath, variable.Identifier.ValueText,
-                                            architecture: architecture.ToString());
+                                            architecture: architecture.ToString(),
+                                            line: diagnostic.Location.GetLineSpan().StartLinePosition.Line + 1);
                                 throw Error(original, variable, architecture, "The constant or its dependencies could not be evaluated in this profile.");
                             }
                             string type = symbol.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);

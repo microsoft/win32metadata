@@ -16,6 +16,7 @@ namespace ClangSharpSourceToWinmd
         private readonly HashSet<string> crossArchVisitedNames = new HashSet<string>();
         private readonly HashSet<string> reservedIdentifiers;
         private readonly Dictionary<string, string> fieldRenames = new(StringComparer.Ordinal);
+        private readonly Dictionary<string, string> recordFamilies = new(StringComparer.Ordinal);
 
         public CrossArchTreeMerger(CrossArchSyntaxMap map, IEnumerable<SyntaxTree> sourceTrees = null,
             IEnumerable<MetadataReference> references = null)
@@ -45,6 +46,7 @@ namespace ClangSharpSourceToWinmd
         }
 
         internal IReadOnlyDictionary<string, string> FieldRenames => this.fieldRenames;
+        internal IReadOnlyDictionary<string, string> RecordFamilies => this.recordFamilies;
 
         private string RenameField(FieldDeclarationSyntax field, string originalName, int ordinal)
         {
@@ -353,6 +355,19 @@ namespace ClangSharpSourceToWinmd
                             name = node is FieldDeclarationSyntax field
                                 ? this.owner.RenameField(field, name, i)
                                 : $"{name}____{i}";
+                        }
+
+                        if (node is StructDeclarationSyntax && node.Parent is BaseNamespaceDeclarationSyntax)
+                        {
+                            string ns = SyntaxUtils.GetEnclosingNamespace(node);
+                            string identity = "global::" + (ns.Length == 0 ? name : ns + "." + name);
+                            string family = CrossArchSyntaxMap.GetFullName(node);
+                            lock (this.owner)
+                            {
+                                if (this.owner.recordFamilies.TryGetValue(identity, out string previous) && previous != family)
+                                    throw new System.IO.InvalidDataException($"Conflicting generated record families for '{identity}'.");
+                                this.owner.recordFamilies[identity] = family;
+                            }
                         }
 
                         string archValues = FormatArch(archGroup);

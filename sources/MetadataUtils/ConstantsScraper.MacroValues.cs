@@ -151,7 +151,7 @@ namespace MetadataUtils
                 return true;
             }
             string legacyValue = Regex.Replace(value, @"\A(-)\s+", "$1");
-            Match legacy = ConstantsScraperImpl.DefineConstantRegex.Match(legacyValue);
+            Match legacy = DefineConstantRegex.Match(legacyValue);
             if (legacy.Success && legacy.Groups[6].Success)
             {
                 result = new SimpleMacroValue("Floating", legacyValue.EndsWith("f", StringComparison.OrdinalIgnoreCase) ?

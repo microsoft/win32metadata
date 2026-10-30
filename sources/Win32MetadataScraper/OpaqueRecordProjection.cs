@@ -30,7 +30,8 @@ namespace Win32MetadataScraper
         }
 
         internal OpaqueRecordProjection(TranslationUnit unit, IEnumerable<GeneratedSource> sources,
-            IReadOnlyDictionary<string, string> remaps, IReadOnlyCollection<string> excludedNames = null)
+            IReadOnlyDictionary<string, string> remaps, IReadOnlyCollection<string> excludedNames = null,
+            IReadOnlyCollection<SyntaxTree> requiredPointeeSources = null)
         {
             using var timing = GenerationTiming.BeginSpan("native-providers.discover");
             originalTrees = sources.Select(source => source.Tree).ToArray();
@@ -57,6 +58,8 @@ namespace Win32MetadataScraper
                 compilationTiming?.SetCounter("compilationCount", 1);
             }
             var missingNames = new HashSet<string>(StringComparer.Ordinal);
+            var completePointeeNames = new HashSet<string>(StringComparer.Ordinal);
+            var pointeeTrees = requiredPointeeSources?.ToHashSet() ?? new HashSet<SyntaxTree>();
             int queryCount = 0;
             foreach (var tree in originalTrees)
             {
@@ -66,6 +69,9 @@ namespace Win32MetadataScraper
                 {
                     var type = model.GetTypeInfo(use).Type;
                     FindMissingTypes(type, missingNames);
+                    if (pointeeTrees.Contains(tree) && type is IPointerTypeSymbol pointer &&
+                        IsLocalPointee(use, model, pointer))
+                        FindMissingTypes(pointer.PointedAtType, completePointeeNames);
                     boundUses.Add((use, type));
                     queryCount++;
                 }
@@ -114,7 +120,8 @@ namespace Win32MetadataScraper
                     string recordName = DeclarationSourceMap.QualifiedName(declaration.Handle);
                     if (declaration.IsCompleteDefinition && !string.IsNullOrEmpty(declaration.Name) &&
                         missingNames.Contains(managedName) &&
-                        managedName != ManagedName(declaration.Name, recordName, remaps) &&
+                        (managedName != ManagedName(declaration.Name, recordName, remaps) ||
+                            completePointeeNames.Contains(managedName)) &&
                         !new[] { alias.Name, qualifiedName, managedName, declaration.Name, recordName }
                             .Any(name => excludedNames?.Contains(name, StringComparer.Ordinal) == true))
                         recordAliases.Add(new RecordAlias(qualifiedName, managedName, declaration));
@@ -141,6 +148,10 @@ namespace Win32MetadataScraper
                                     includedNames.Add(DeclarationSourceMap.QualifiedName(parent.Handle));
                             }
                         }
+                        else if (completePointeeNames.Contains(managedName) &&
+                            !new[] { record.Name, qualifiedName, managedName }
+                                .Any(name => excludedNames?.Contains(name, StringComparer.Ordinal) == true))
+                            recordAliases.Add(new RecordAlias(qualifiedName, managedName, declaration));
                     }
                 }
             }
@@ -341,6 +352,22 @@ namespace Win32MetadataScraper
             ArrayTypeSyntax array => MayReferenceNativeType(array.ElementType),
             _ => true,
         };
+
+        private static bool IsLocalPointee(TypeSyntax syntax, SemanticModel model, IPointerTypeSymbol pointer)
+        {
+            ITypeSymbol pointee = pointer;
+            while (syntax is PointerTypeSyntax indirection && pointee is IPointerTypeSymbol nativePointer)
+            {
+                syntax = indirection.ElementType;
+                pointee = nativePointer.PointedAtType;
+            }
+            if (syntax is IdentifierNameSyntax)
+                return true;
+            var ns = model.GetEnclosingSymbol(syntax.SpanStart)?.ContainingNamespace;
+            string qualifiedName = ns is { IsGlobalNamespace: false }
+                ? ns.ToDisplayString() + "." + pointee.Name : pointee.Name;
+            return syntax.ToString().Replace("global::", string.Empty) == qualifiedName;
+        }
 
         private static void FindMissingTypes(ITypeSymbol type, ISet<string> names)
         {

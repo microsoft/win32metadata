@@ -8,7 +8,6 @@ Once the C# files are written by ClangSharp, the emitter turns these files into 
 
 There are different options you can pass to the scraping and emitting stages to improve the final metadata. Most options are passed to the stages via response files (.rsp files). There are also two .json files that provide additional information to the build system.
 
-
 ## Scraping Options
 
 Scraping options are passed to ClangSharp via .rsp files. For the Windows Win32 metadata project, all partitions share the [generation/WinSDK/scraper.settings.rsp](/generation/WinSDK/scraper.settings.rsp) file. This allows partitions to interpret the headers in the same way.
@@ -17,13 +16,205 @@ Scraping options are passed to ClangSharp via .rsp files. For the Windows Win32 
 
 The scraper discovers supported scalar and data-pointer `typedef` declarations
 in its selected traversal. They do not require a header annotation or the
-`parse-win32-annotations` option. Each nominal alias becomes a one-field WinMD
-struct with the internal `NativeTypedefAttribute`; ECMA metadata has no C typedef
-row. Alias chains and written pointer pointees retain their discovered types,
-with native width and alignment validation.
+`parse-win32-annotations` option. Each alias has a separate source-bound provider
+for composition and native ABI validation. Discovery alone does not request a
+nominal public type. Unannotated inferred scalar and data-pointer aliases retain
+their ordinary CLR use-site projections. Authored C# `NativeTypedef` providers,
+explicit typedef remaps (including identity remaps), retained configured providers, and
+source-proven native handles retain their nominal contracts.
+
+The producer transports this distinction in source-only projection trivia.
+Nominal intent survives repeated observations and retained-provider composition.
+The writer projects inferred use sites only when the provider's native width and
+alignment match its compiler-bound storage. Native provider `Value` chains remain
+unchanged. An inferred alias of a retained nominal type uses that retained type
+at public use sites; storage validation does not flatten the retained contract.
+Inline/fixed buffers keep the projected element's native pointer depth
+and array shape; intrinsic projection does not trigger a member-remap pointer
+reduction. Existing explicit member-remap array rules remain unchanged.
+After native identity, storage and binding validation, an inferred
+provider is omitted from the image only when no remaining nominal storage,
+signature or type-valued attribute references it. A native identity or matching
+storage width never merges unrelated aliases. Older inputs without a projection
+policy remain nominal unless their successful native declaration evidence proves
+annotation parsing was disabled and their declaration carries no separate
+nominal intent. ECMA metadata has no C typedef row; exported nominal aliases use
+one-field structs with the internal `NativeTypedefAttribute`.
+
+Inferred-only partitions request the same source-bound projection join as
+annotated typedefs. Native integral constants are evaluated in the original
+translation unit before their typedef storage is lowered for C# compilation.
+Enum backing types and casts use the existing compiler-backed lowering.
+
+Repeated native record and inferred typedef observations retain the canonical
+Clang identity, declaring-header hash and location, and per-target ABI as
+source-only provenance. Explicit namespace routes take precedence; otherwise a
+partition that directly traverses the declaring header owns the provider.
+Dependency and supplemental observations reference that namespace, including
+types used in fixed-buffer locals after a record moves. Typedef providers are
+not equated by their short names or storage widths.
+Legacy enum namespace discovery also prefers the directly traversed owner when
+all observations prove the same native declaration. Different identities,
+headers, header contents, ordinary providers or multiple direct owners remain
+ambiguous; an incidental include cannot redirect a legacy enum's public owner.
+An auto-type's output namespace places that retained definition; it does not
+redirect an unrelated native declaration with the same short name. When an
+auto-type omits its namespace and the existing writer resolves it from the
+cleanup API, that resolved ownership supplies a retained-provider route.
+Explicit namespace routes still take precedence. Native declaration families
+and compiler-bound storage validate separately.
+Retained families include the full declaring-header identity because Clang USRs
+for file-local typedefs can contain only a shared basename such as `main.cpp`.
+Comparison folds only the filename component's casing in file-local USRs; the
+physical header, content hash, location and case-sensitive native name still
+identify the declaration. Global record USRs are also not sufficient to join
+unrelated records directly owned by different headers. Each of those records
+keeps its own declaring-header owner.
+An arbitrary colliding generated wrapper does not establish that route.
+Identical, identically bound record providers coalesce into one body, including
+copies in the same generated input. Compiler-resolved type spellings are
+canonicalized only for comparison, so an imported type and its fully qualified
+name can share a provider without rewriting the retained body. Distinct
+identities, storage bindings and genuine architecture variants are not flattened.
+Record helper implementation text must also agree, but its expression bindings
+are not part of metadata comparison: the existing writer emits record fields
+and nested types, not helper properties or method bodies. Declaration types,
+attribute arguments and field initializers still require matching bindings.
+Resolvable helper-local type spellings are canonicalized for comparison too.
+Unresolved helper-local type spellings remain unchanged; they do not prevent
+comparison or emission of otherwise matching record declarations.
+Named attribute constructor arguments match by parameter ordinal, type and
+compiler-bound constructor identity.
+Generated C# namespace qualification is removed from fallback `NativeTypeName`
+spelling when a member remap replaces a source-bound type. An existing native
+spelling remains unchanged; source provenance and compiler bindings still
+determine identity.
+Configured member type remaps remain authoritative at the writer boundary for
+returns, parameters and fields, including regex remaps. `NativeTypeName` remains
+available as native spelling but does not replace the selected remapped type
+with a competing typedef. Unremapped sites retain normal native projection.
+Native-name lookup prefers the member's compiler-bound namespace when distinct
+providers share a short name. Existing string projection mappings still apply;
+an unrelated global match does not replace a locally bound native alias.
+Direct macro aliases that differ only by case from an existing unscoped enum
+member in the same metadata namespace reuse that member. Other aliases can
+still reference them with the canonical member's storage and architecture
+availability. The constants receipt records this projection policy.
+The cleaner records an applied type remap in source-only trivia that survives
+processed-file reparsing and field or parameter renames. The writer uses that
+applied policy rather than looking up the renamed member. Attribute-only changes
+and implicit compiler-storage lowering do not establish an explicit type remap.
+An excluded complete native record can still have a configured external
+projection, such as `_GUID=Guid`. Inferred pointer typedefs retain that provider
+instead of erasing it to `void*`; excluding the native body does not request a
+different pointer contract. Unmapped excluded record pointees keep their existing
+opaque treatment. Automatically discovered tag-to-typedef name remaps do not
+establish external providers for excluded records.
+Alternative declarations of the same native record in different headers can
+share the canonical body when native size/alignment and compiler-resolved members
+agree. For those alternatives, comparison can follow source-proven scalar typedef
+storage. The retained body keeps its declared field types and the other nominal
+typedefs remain independent providers. Different nominal bindings of the same
+physical native declaration require matching source-proven native alias names,
+backing declarations, observed ABI and annotations. A raw pointer parameter can
+match its nominal alias only when the native spelling, pointer depth, storage
+and transported const annotation agree. A raw record-pointer field also requires
+the same written native record identity and a real source-proven pointee.
+These comparisons keep the canonical declared types; they do not merge the
+independent aliases or override an explicitly remapped member type.
+Alternate native character-pointer definitions use the existing native encoding
+proof, including pointer depth, to compare against retained character pointers.
+The canonical pointer wrapper and its native character storage stay unchanged.
+Same-header `NONAMELESSUNION` alternatives can retain the direct traversal's
+named union body. Comparison maps only source-proven anonymous-union storage
+names to the canonical names and verifies parent identity, header content,
+parent/nested ABI, compiler-bound field types and attributes. It does not rename
+the retained public members or discard an incompatible body.
+Conditional records can use different native tags on disjoint targets. Ownership
+and typedef composition compare declaration locations within each applicable
+native target, not between mutually exclusive SDK branches. Version-two source
+proofs record the actual Clang target separately from C# provider applicability:
+a common C# input can cover all targets even when its native observation came
+from x86. A transitive common record or typedef observation coalesces with the matching
+target's canonical body before cross-architecture composition when direct
+declaring-header providers cover all three targets. Native declaration, ABI and
+compiler-resolved member bindings must agree on the observed target; the other
+targets retain their own bodies. Typedef constraints that do not prove this
+reduction remain unchanged for the normal full-family merger, including
+compatible nominal backing and native spelling differences. Version-one proofs
+remain readable and retain their original profile-based applicability checks.
+Conflicting overlapping declarations still reject. When an SDK macro selects a
+record layout, dependency partitions must use the canonical traversal's profile;
+size-changing alternatives are not interchangeable.
+This includes selecting `ddraw.h` before the guarded `ksmedia.h` fallback and
+selecting the original `lsalookup.h` declarations before a local `_NTDEF_`
+override. `ntsecapi.h` remains after that override so its fallback NT aliases do
+not conflict with `winternl.h`.
+The common-record comparison applies the normal validated legacy-enum
+projection phase in memory for the observed target. Other native aliases retain
+their normal full-family composition and validation after cross-architecture
+merging. This resolves retained enum bindings before comparing fields without
+rewriting the inputs or changing the final providers.
+Isolated canonical binding views are reused only within one provider family and
+one immutable compilation, with separate entries for each canonical declaration
+and anonymous-storage, alternate-definition and coverage-normalization policy.
+The normal emitter prints separate timings for common-provider coalescing,
+cross-architecture constant qualification and final typedef/record composition,
+including failed phases.
+Legacy numeric partition suffixes retain their established parsed-prefix
+namespace. The existing syntax repair records the original namespace for the
+source-provenance check while ownership uses the repaired, valid C# namespace.
+Other namespace drift and malformed source still reject.
+References using the existing `___` projection suffix follow the configured
+unsuffixed manual provider's namespace before the cleaner removes that suffix.
+The manual provider remains subject to normal native-layout validation.
+A source-proven common typedef provider keeps its existing all-target coverage
+when sparse target observations have the same native declaration, compiler-bound
+storage and compatible annotations. Those repeated observations do not require a
+new three-target provider family or replace the canonical common body.
+Source-bound typedef `Value` fields keep their compiler-bound ABI storage when
+the writer projects API types. This prevents character projection from turning
+`CHAR.Value` into a recursive `CHAR` field; ordinary fields and existing
+unproven typedefs retain their established projection behavior.
 
 Written typedef dependencies are followed transitively through selected API
 returns, parameters, fields, pointer/array elements, callbacks and record fields.
+Native field enumeration includes implicit anonymous struct/union fields, so
+their nested scalar typedef dependencies retain the same nominal projection.
+The SDK scraper profile defines the SDK's overridable `DECLSPEC_NOINITALL` macro
+to empty. Its `no_init_all` attribute controls automatic initialization in
+executable code, not declaration layout, calling conventions or signatures.
+The native controls compare those contracts with and without the attribute on
+x86, x64 and Arm64, then inspect the emitted record fields. Other unsupported
+attributes retain their existing handling.
+Explicit native record and field alignment is derived from the resolved Clang
+declaration and written as `AlignmentAttribute(int)`. It is independent of the
+maximum field packing in `StructLayoutAttribute.Pack`; ordinary field-derived
+alignment does not add an attribute. This metadata preserves native alignment
+requirements without claiming that the temporary C# compiler storage or the
+.NET runtime can honor native over-alignment.
+The producer retains PInvokeGenerator's CLR over-alignment warning in its raw
+output. Only the exact native-source diagnostic whose final generated record
+still has the matching source proof and alignment attribute is reported as a
+supported metadata projection. Unrepresented alignment warnings and all other
+unhandled diagnostics keep their existing nonzero behavior.
+Inferred native owners route only their source-bound providers and uses.
+Untracked ordinary declarations with the same short name retain their original
+namespace; only configured global routes apply to those declarations.
+An inferred owner in another namespace also cannot veto an independently
+compiler-bound legacy enum projection. Configured metadata routes still apply.
+When the same native alias family is observed in an existing metadata typedef
+or legacy enum's namespace, that retained owner takes precedence over inferred
+header ownership. An unrelated alias family does not inherit that route, and
+multiple observed retained owners are rejected rather than chosen arbitrarily.
+Final source, storage and compiler-bound projection validation still applies.
+Legacy constant aliases inherit the targets of their authoritative enum or
+constant declarations, including forwarding chains. Restricted aliases use
+per-target `LegacyAliases.*.constants.cs` families with empty counterparts on
+unsupported targets, so normal compiler qualification and cross-architecture
+composition preserve their availability. Each constant-scraping run replaces
+only those generated alias families; unrelated per-target constant inputs stay
+intact.
 Referenced aliases in included non-traversed headers are retained too; unrelated
 aliases there and explicitly excluded declarations remain outside that selection.
 
@@ -46,6 +237,15 @@ Record and enum tag aliases keep the existing record/enum projection rather than
 receiving a scalar wrapper. An incomplete native record remains an empty record,
 without an invented `Value` field. Function-pointer aliases use the existing
 callback discovery.
+Unannotated pointer aliases to native COM interfaces retain the ordinary
+interface projection and pointer depth instead of creating nominal wrappers or
+supplemental body-recovery roots. This follows the resolved native inheritance
+chain to a UUID-bearing `QueryInterface`/`AddRef`/`Release` vtable root; a UUID,
+virtual method, namespace or type name alone is insufficient. Each virtual method
+in the chain must also use the target's effective COM calling convention: native
+`__stdcall` on x86, or Clang's normalized Windows ABI on x64 and Arm64. An x86
+`__cdecl` method retains the pointer wrapper even when the remaining root shape
+matches. Existing external contract imports and API exclusions still apply.
 
 An explicitly remapped, source-bound native enum can already provide the managed
 identity of an inferred scalar alias in the same native scope. The scraper keeps
@@ -93,22 +293,45 @@ when the effective excluded-record/provider mapping agrees and its sole
 non-bit-field integer member has zero offset and matching signed storage,
 width and alignment. This does not admit arbitrary record-to-scalar mappings,
 floating storage or narrowing providers.
-Retained-provider composition accepts the single string `NativeTypeName`
-source-transport attribute without relaxing storage or other field-attribute
-validation.
+Retained-provider composition accepts one string `NativeTypeName`
+source-transport attribute and compatible `Const`/string `Documentation`
+metadata on `Value`. Duplicate, conflicting, unsupported or malformed field
+attributes still reject. An existing `MetadataTypedef` provider retains its
+explicit contract rather than becoming a `NativeTypedef`.
 Retained-provider composition compares native nominal backing chains with the
 provider's field encoding without flattening emitted alias declarations.
 Constant qualification and lowering use the same validated backing-chain
 analysis. Every fragment, including retained providers, must agree on fixed
 integer storage and signedness before a native typedef constant can be lowered.
 This analysis does not change public alias fields or direct API identities.
+Successfully composed retained aliases keep their validated header provenance
+for constant and cast lowering. An enum backed by a native integer alias uses
+that alias's exact terminal primitive in its C# base list.
+An existing legacy enum can retain its metadata contract when its unique
+declaration, canonical namespace route and a bound ordinary source use
+establish projection ownership. Different signed metadata storage additionally
+requires an independently bound explicit member remap with unchanged integer
+ABI size. Native providers are validated in their original binding view before
+applying that projection; incompatible native aliases and incompatible
+primitive-to-enum remaps still reject. Name, width or value coincidence alone
+does not establish an enum projection.
+An established enum projection can reconcile separate native declaration
+families. Each family's declaration provenance remains independently validated,
+and all native fragments must still pass the common storage and annotation
+checks before their selected metadata enum replaces them.
 Cross-architecture dependency identity partitions the complete set of provider
 fragments for each architecture. Multiple partial providers are not separate
 architecture variants. Distinct source fragments survive variant deduplication
 until strict provider composition; a referenced type still has exactly one
 dependency group per architecture. This also retains same-signature fragments
 with different scoped bindings, including repeated namespace blocks in one file.
-Multiple native alias owners in one input still reject.
+Multiple native alias owners in one input still reject unless a single retained
+provider has an explicit canonical namespace route and every header fragment
+passes the same storage and metadata checks.
+That existing retained route can reconcile distinct native typedef declarations
+and authored remaps onto its public provider. Declaration conflicts within each
+native identity and incompatible compiler-bound storage or metadata still reject;
+a matching short name does not authorize that projection.
 Header-only integer providers can compare
 their semantically resolved terminal fixed-integer backing without flattening
 the retained field's nominal type. Signedness, width, pointer ownership,
@@ -123,16 +346,42 @@ An existing retained integral resource with `NativeTypedef`, `RAIIFree` and
 native backing has the same byte width. This does not apply to
 `IntPtr`/`UIntPtr`, incompatible widths, ordinary integer aliases or explicit
 native storage remaps.
+Retained `IntPtr`/`UIntPtr` providers can compose with fixed-integer header
+variants only with complete profile coverage, matching signedness and the
+profile's exact native pointer width. Compatible partial observations cannot
+narrow an otherwise unchanged common retained contract or erase conditional
+metadata. Plain `char` and Windows wide-character aliases can retain the
+established provider's character encoding only through their source-bound
+native character spelling and matching pointer depth.
 
 Complete named and anonymous record pointees retain their generated record and
 fields. The scraper joins the generated managed record through native source
 identity before writing the typed alias pointer; it does not invent an anonymous
 record name or replace its pointee with an opaque value.
+Header-only typed/void record-pointer views require identical native pointer
+spelling and one resolved record owner; unelaborated spellings must name that
+record. Architecture-specific pointees must belong to the same family recorded
+by the cross-architecture merger, with disjoint validated masks. Similar
+managed names or matching widths do not establish that identity.
 
 Generated `.header-types.cs` companions use the ordinary emitter namespace mover.
 Configure projection placement with the existing `--requiredNamespaceForName`
 mapping, just as for other generated declarations. This routing policy is
 independent of native typedef semantics and header-annotation parsing.
+The mover preserves each header alias's original storage dependencies before
+relocation. Ordinary declarations retain source-local native alias and
+enum bindings, including when a destination import exposes another type with
+the same name. Uses of relocated native types are qualified even when the
+consuming declaration stays in place. Namespace-level routes preserve genuine
+nested type ownership and nearer nested/type-parameter bindings.
+Header companions use the actual emitter dependency namespaces
+and framework imports; unresolved dependencies still fail compilation.
+Configured delegate pointer and function-pointer remaps add the required C#
+`unsafe` modifier without changing ordinary nonpointer delegates.
+Generated namespace declarations with numeric-only partition
+suffixes retain their established effective prefix namespace. The emitter
+repairs that parsed numeric-suffix form without changing partition settings;
+other generated syntax errors still fail preflight.
 Authored metadata, including active C++ method/parameter/field carriers and
 logical enum groups, still requires `parse-win32-annotations`. Without it, the
 scraper omits transport carriers and infers native aliases without applying or
@@ -491,6 +740,14 @@ Retained ConstantsScraper `.enums.cs` bags keep global macro ownership. Ordinary
 native enums also own loose copies recorded in ConstantsScraper `.constants.cs`
 outputs, without removing independent constants from other source scopes.
 Header-composed groups use namespace-local ownership after composition.
+Repeated observations of one logical header group use its validated
+traversed-header namespace before alias-owner comparison, unless a unique
+explicit type route exists. A scanned observer namespace is only a fallback
+after those routes, regardless of observer count or namespace duplication.
+Original producer namespaces remain in the
+provenance checks. Conflicting bindings for the same physical native
+declaration and canonical group still reject; separate physical carriers are
+not collapsed by numeric equality.
 Generated record projections bearing the existing `___` typedef-reversion suffix
 coalesce only with an exact retained manual provider selected by the existing
 namespace route. Their declaration and semantic bindings must agree; the manual

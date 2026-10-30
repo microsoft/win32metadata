@@ -55,50 +55,6 @@ namespace MetadataUtils
             }
         }
 
-        private static string RemoveComments(string line, ref bool inComment)
-        {
-            var text = new StringBuilder(line.Length);
-            char quote = '\0';
-            for (int index = 0; index < line.Length; index++)
-            {
-                char character = line[index];
-                if (inComment)
-                {
-                    if (character == '*' && index + 1 < line.Length && line[index + 1] == '/')
-                    {
-                        inComment = false;
-                        index++;
-                    }
-                    continue;
-                }
-                if (quote != '\0')
-                {
-                    text.Append(character);
-                    if (character == '\\' && index + 1 < line.Length)
-                        text.Append(line[++index]);
-                    else if (character == quote)
-                        quote = '\0';
-                    continue;
-                }
-                if (character is '"' or '\'')
-                    quote = character;
-                if (character == '/' && index + 1 < line.Length)
-                {
-                    if (line[index + 1] == '/')
-                        break;
-                    if (line[index + 1] == '*')
-                    {
-                        inComment = true;
-                        text.Append(' ');
-                        index++;
-                        continue;
-                    }
-                }
-                text.Append(character);
-            }
-            return text.ToString();
-        }
-
         public static ScraperResults ScrapeConstants(
             string[] enumJsonFiles,
             string defaultNamespace,
@@ -133,10 +89,6 @@ namespace MetadataUtils
 
         private class ConstantsScraperImpl : IDisposable
         {
-            internal static readonly Regex DefineConstantRegex =
-                new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+|(?:0x)?[\da-f]+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\})|(\(UCHAR\)\s*((?:0x)?\d+))|(\(UCHAR\)\s*(-\d+))|(\(BYTE\)((?:0x)?[\da-f]+L?))|(0x[\da-f]+\s*<<\s*\d+)||(0x[\da-f]+ui64\s*<<\s*\d+)|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
-
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
                     @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_PROPERTYKEY|DEFINE_KNOWN_FOLDER|OUR_GUID_ENTRY)\s*\((.*)");
@@ -207,6 +159,8 @@ namespace MetadataUtils
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants;
+            private readonly Dictionary<string, Architecture> writtenConstantArchitectures = new(StringComparer.Ordinal);
+            private readonly HashSet<string> legacyAliasNamespaces = new(StringComparer.Ordinal);
             private Dictionary<string, string[]> sourceConstantTypes = new(StringComparer.Ordinal);
             private Dictionary<string, ProtectedConstant[]> sourceConstants = new(StringComparer.Ordinal);
             private Dictionary<string, NativeDependency[]> nativeDependencies = new(StringComparer.Ordinal);
@@ -381,46 +335,13 @@ namespace MetadataUtils
                 return enumObjects;
             }
 
-            private static string StripComments(string rawValue)
-            {
-                bool inQuote = false;
-                for (int i = 0; i <= rawValue.Length - 2; i++)
-                {
-                    if (rawValue[i] == '\"')
-                    {
-                        inQuote = !inQuote;
-                    }
-
-                    if (!inQuote && rawValue[i] == '/')
-                    {
-                        if (rawValue[i + 1] == '/')
-                        {
-                            // Remove trailing line comments.
-                            return rawValue.Substring(0, i).Trim();
-                        }
-                        else if (rawValue[i + 1] == '*')
-                        {
-                            if (rawValue.LastIndexOf("*/") == -1)
-                            {
-                                // Remove trailing block comments that aren't closed.
-                                return rawValue.Substring(0, i).Trim();
-                            }
-                            else
-                            {
-                                // Remove inline block comments that are closed.
-                                return rawValue.Substring(0, i).Trim() + rawValue.Substring(rawValue.LastIndexOf("*/") + 2).Trim();
-                            }
-                        }
-                    }
-                }
-
-                return rawValue;
-            }
-
             private void CleanExistingFiles()
             {
                 foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
                     "NativeConstants.*.header-types.cs", SearchOption.AllDirectories))
+                    this._fileSystem.File.Delete(file);
+                foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                    "LegacyAliases.*.constants.cs", SearchOption.AllDirectories))
                     this._fileSystem.File.Delete(file);
                 foreach (string file in Directory.GetFiles(this.scraperOutputDir).Where(f => f.EndsWith(".enums.cs") || f.EndsWith(".constants.cs")))
                 {
@@ -540,7 +461,8 @@ namespace MetadataUtils
                 this.writtenConstants.Add(name, "uint");
             }
 
-            private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "")
+            private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "",
+                Architecture architecture = Architecture.All)
             {
                 if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) || this.usesNativeIntegers &&
                     type is "bool" or "char" or "sbyte" or "byte" or "short" or "ushort" or "int" or "uint" or "long" or "ulong")
@@ -548,10 +470,19 @@ namespace MetadataUtils
                     return;
                 }
 
-                var writer = this.GetConstantWriter(originalNamespace, name);
-                writer.AddValue(type, name, valueText, context);
+                if (architecture == Architecture.All)
+                    this.GetConstantWriter(originalNamespace, name).AddValue(type, name, valueText, context);
+                else
+                {
+                    if (architecture == Architecture.None || (architecture & ~Architecture.All) != 0)
+                        throw new InvalidDataException($"Constant alias '{name}' has invalid target applicability '{architecture}'.");
+                    foreach (var target in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
+                        if ((architecture & target) != 0)
+                            this.GetConstantWriter(originalNamespace, name, target).AddValue(type, name, valueText, context);
+                }
 
                 this.writtenConstants.Add(name, type);
+                this.writtenConstantArchitectures.Add(name, architecture);
             }
 
             private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
@@ -656,7 +587,7 @@ namespace MetadataUtils
                 this.writtenConstants.Add(name, finalType);
             }
 
-            private IConstantWriter GetConstantWriter(string originalNamespace, string name)
+            private IConstantWriter GetConstantWriter(string originalNamespace, string name, Architecture architecture = Architecture.All)
             {
                 string foundNamespace = originalNamespace;
 
@@ -667,9 +598,32 @@ namespace MetadataUtils
                 }
                 this.scrapedConstantNamespaces[name] = foundNamespace;
 
-                if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out IConstantWriter constantWriter))
+                string key = foundNamespace;
+                string partConstantsFile = Path.Combine(this.scraperOutputDir, $@"{foundNamespace}.constants.cs");
+                if (architecture != Architecture.All)
                 {
-                    string partConstantsFile = Path.Combine(this.scraperOutputDir, $@"{foundNamespace}.constants.cs");
+                    if (this.legacyAliasNamespaces.Add(foundNamespace))
+                        foreach (string target in new[] { "x86", "x64", "arm64" })
+                        {
+                            string directory = Path.Combine(this.scraperOutputDir, target);
+                            this._fileSystem.Directory.CreateDirectory(directory);
+                            this._fileSystem.File.WriteAllText(
+                                Path.Combine(directory, $"LegacyAliases.{foundNamespace}.constants.cs"), "");
+                        }
+                    string targetDirectory = architecture switch
+                    {
+                        Architecture.X86 => "x86",
+                        Architecture.X64 => "x64",
+                        Architecture.Arm64 => "arm64",
+                        _ => throw new InvalidDataException($"Constant writer requires one target, not '{architecture}'."),
+                    };
+                    key = Path.Combine(targetDirectory, foundNamespace);
+                    partConstantsFile = Path.Combine(this.scraperOutputDir, targetDirectory,
+                        $"LegacyAliases.{foundNamespace}.constants.cs");
+                }
+
+                if (!this.namespacesToConstantWriters.TryGetValue(key, out IConstantWriter constantWriter))
+                {
                     if (this._fileSystem.File.Exists(partConstantsFile))
                     {
                         this._fileSystem.File.Delete(partConstantsFile);
@@ -677,7 +631,7 @@ namespace MetadataUtils
 
                     var fileStream = this._fileSystem.File.OpenWrite(partConstantsFile);
                     constantWriter = new ConstantWriter(fileStream, foundNamespace, this.constantsHeaderText, this.withAttributes);
-                    this.namespacesToConstantWriters.Add(foundNamespace, constantWriter);
+                    this.namespacesToConstantWriters.Add(key, constantWriter);
                 }
 
                 return constantWriter;
@@ -927,6 +881,7 @@ namespace MetadataUtils
                 using var ownersTiming = GenerationTiming.BeginSpan("constants.load-source-owners");
                 var protectedConstants = new List<ProtectedConstant>();
                 var missingProofs = new List<string>();
+                var inputsBySource = inputs.ToLookup(input => (input.Values.Architecture, input.Values.SourceFile));
                 foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*.cs", SearchOption.AllDirectories)
                     .Where(file => !NativeConstantValues.IsGeneratedSource(file) &&
                         !file.EndsWith(".modified.cs", StringComparison.Ordinal) &&
@@ -963,7 +918,19 @@ namespace MetadataUtils
                             continue;
                         if (headerSource && proof == null)
                             missingProofs.Add(file);
-                        string ns = this.LookupNamespaceForName(group.Identifier.ValueText) ?? originalNamespace;
+                        string ns = this.LookupNamespaceForName(group.Identifier.ValueText, requiredOnly: true);
+                        if (ns == null && headerSource && proof != null)
+                        {
+                            var owners = inputsBySource[(proof.Architecture, proof.SourceFile)]
+                                .Select(input => ResolveHeader(input, proof.Group.Header))
+                                .Where(headers.ContainsKey).Select(header => headers[header])
+                                .Distinct(StringComparer.Ordinal).ToArray();
+                            if (owners.Length > 1)
+                                throw new InvalidDataException($"Native constant group '{proof.Group.NativeName}' has conflicting traversed-header owners.");
+                            if (owners.Length == 1)
+                                ns = owners.Single();
+                        }
+                        ns ??= this.LookupNamespaceForName(group.Identifier.ValueText) ?? originalNamespace;
                         foreach (var member in group.Members)
                             protectedConstants.Add(new ProtectedConstant(member.Identifier.ValueText, ns, group.Identifier.ValueText,
                                 file, architecture, group.BaseList?.Types.Single().Type.ToString() ?? "int",
@@ -1019,7 +986,6 @@ namespace MetadataUtils
                     .ToLookup(value => value.Proof, value => value.Source);
                 var proofIds = proofSources.Select((value, index) => (value.Key, index))
                     .ToDictionary(value => value.Key, value => value.index);
-                var inputsBySource = inputs.ToLookup(input => (input.Values.Architecture, input.Values.SourceFile));
                 var bindingCache = new Dictionary<(NativeInput Input, NativeConstantGroupSource Proof),
                     ILookup<string, NativeConstantBinding>>();
                 var boundProtections = new Dictionary<(Architecture Target, string Kind, string NativeName), HashSet<ProtectedConstant>>();
@@ -1115,6 +1081,17 @@ namespace MetadataUtils
                             .SelectMany(input => CompilerBindings(input, protection)
                                 .Select(binding => new { Protection = protection, Input = input, Binding = binding,
                                     Header = ResolveHeader(input, binding.Header) }))).Distinct().ToArray();
+                    if (boundDefinitions.Where(definition => definition.Protection.SourceKind == "logical-header-group")
+                        .GroupBy(definition => (definition.Protection.Namespace, definition.Protection.Owner,
+                            definition.Protection.DeclaredName, definition.Protection.Proof.Group.NativeName,
+                            GroupHeader: ResolveHeader(definition.Input, definition.Protection.Proof.Group.Header),
+                            definition.Protection.Proof.Group.Line, definition.Binding.Kind,
+                            definition.Binding.NativeName, definition.Header, definition.Binding.Line, definition.Binding.Column))
+                        .Any(definitions => definitions.Select(definition =>
+                            (definition.Binding.NativeType, definition.Binding.StorageType, definition.Binding.Value))
+                            .Distinct().Count() > 1))
+                        throw new InvalidDataException($"Conflicting compiler bindings for constant '{group.Key.Name}' " +
+                            $"in the same canonical native source group on {group.Key.Architecture}.");
                     bool typeValueConflict = ordered.Select(candidate =>
                         (candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value))
                         .Concat(boundDefinitions.Select(definition =>
@@ -1738,7 +1715,7 @@ namespace MetadataUtils
                         // See if matches one of our well known constants formats
                         Match match = DefineConstantRegex.Match(fixedRawValue);
                         string valueText;
-                        string nativeTypeName = null;
+                        string nativeTypeName = LegacyNativeTypeName(fixedRawValue);
                         string matchedConstantType = null;
                         bool matchedToOtherName = false;
 
@@ -1994,8 +1971,10 @@ namespace MetadataUtils
                             {
                                 if (matchedConstantType != null)
                                 {
-                                    this.AddConstantValue(currentNamespace, matchedConstantType, name,
-                                        this.GetConstantDependencyExpression(currentNamespace, name, valueText, matchedConstantType));
+                                    if (!this.TryReuseCaseOnlyEnumAlias(currentNamespace, name, valueText, matchedConstantType))
+                                        this.AddConstantValue(currentNamespace, matchedConstantType, name,
+                                            this.GetConstantDependencyExpression(currentNamespace, name, valueText, matchedConstantType),
+                                            architecture: this.GetConstantDependencyArchitectures(valueText));
                                 }
                                 else if (matchedToOtherName)
                                 {
@@ -2050,8 +2029,10 @@ namespace MetadataUtils
                         }
                         else if (this.TryGetConstantDependencyType(alias.Target, out var type) && type != "Guid")
                         {
-                            this.AddConstantValue(alias.Namespace, type, alias.Name,
-                                this.GetConstantDependencyExpression(alias.Namespace, alias.Name, alias.Target, type));
+                            if (!this.TryReuseCaseOnlyEnumAlias(alias.Namespace, alias.Name, alias.Target, type))
+                                this.AddConstantValue(alias.Namespace, type, alias.Name,
+                                    this.GetConstantDependencyExpression(alias.Namespace, alias.Name, alias.Target, type),
+                                    architecture: this.GetConstantDependencyArchitectures(alias.Target));
                             pendingAliases.RemoveAt(i--);
                             resolvedAlias = true;
                         }
@@ -2106,6 +2087,38 @@ namespace MetadataUtils
                     return true;
                 }
                 return this.TryGetNativeDependencyType(name, out type) || this.writtenConstants.TryGetValue(name, out type);
+            }
+
+            private Architecture GetConstantDependencyArchitectures(string name)
+            {
+                if (this.sourceConstants.TryGetValue(name, out var declarations))
+                    return declarations.Aggregate(Architecture.None, (targets, declaration) => targets | declaration.Architecture);
+                if (this.nativeDependencies.TryGetValue(name, out var dependencies))
+                    return dependencies.Aggregate(Architecture.None,
+                        (targets, dependency) => targets | (dependency.Owner.Architecture & dependency.Candidate.Input.Values.Architecture));
+                return this.writtenConstantArchitectures.GetValueOrDefault(name, Architecture.All);
+            }
+
+            private bool TryReuseCaseOnlyEnumAlias(string ns, string name, string target, string type)
+            {
+                if (name == target || !StringComparer.OrdinalIgnoreCase.Equals(name, target) ||
+                    this.sourceConstantTypes.ContainsKey(name) ||
+                    !this.sourceConstants.TryGetValue(target, out var declarations) ||
+                    declarations.Length == 0 || declarations.Any(declaration =>
+                        declaration.SourceKind != "ordinary-unscoped-enum" ||
+                        declaration.Namespace != (this.LookupNamespaceForName(name) ?? ns)))
+                    return false;
+
+                string expression = this.GetConstantDependencyExpression(ns, name, target, type);
+                this.sourceConstants.Add(name, declarations.Select(declaration => declaration with { Name = name }).ToArray());
+                this.sourceConstantTypes.Add(name, new[] { type });
+                this.legacyDependencyPolicies.Add(new
+                {
+                    Name = name, NativeName = target, Header = this.legacyHeader, Line = this.legacyLine,
+                    StorageType = type, Expression = expression,
+                    Reason = "case-only-macro-alias-reuses-source-bound-unscoped-enum-declaration",
+                });
+                return true;
             }
 
             private bool TryGetNativeDependencyType(string name, out string type)
@@ -2188,9 +2201,9 @@ namespace MetadataUtils
                 }
             }
 
-            private string LookupNamespaceForName(string name)
+            private string LookupNamespaceForName(string name, bool requiredOnly = false)
             {
-                if (!this.requiredNamespaces.TryGetValue(name, out var foundNamespace))
+                if (!this.requiredNamespaces.TryGetValue(name, out var foundNamespace) && !requiredOnly)
                 {
                     this.scannedNamesToNamespaces.TryGetValue(name, out foundNamespace);
                 }

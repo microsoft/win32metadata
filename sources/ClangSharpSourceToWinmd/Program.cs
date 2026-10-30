@@ -133,7 +133,11 @@ namespace ClangSharpSourceToWinmd
                 var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
                 Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath));
                 using var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
+                var cleanupOwnedTypes = autoTypes.Where(type =>
+                    string.IsNullOrEmpty(type.Namespace) && !string.IsNullOrEmpty(type.CloseApi)).ToArray();
                 NativeTypedefStructsCreator.WriteToStream(apiNamesToNamespaces, autoTypes, fileStream);
+                foreach (var autoType in cleanupOwnedTypes)
+                    requiredNamespaces.TryAdd(autoType.Name, autoType.Namespace);
             }
             else if (validation.HasErrors || preflightOnly)
                 validation.Block("emitter.auto-type-source", blockedBy ?? "valid auto-type declarations and inputs");
