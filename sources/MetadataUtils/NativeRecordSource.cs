@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -21,6 +23,7 @@ namespace MetadataUtils
     {
         private const string Family = "/* Win32Metadata.NativeRecordSource.";
         private const string Suffix = " */";
+        private static readonly ConditionalWeakTable<StructDeclarationSyntax, Dictionary<string, NativeRecordSource>> sources = new();
         private static readonly string[] Properties =
         {
             "Identity", "NativeName", "Header", "HeaderHash", "Line", "Column", "Name", "Namespace",
@@ -47,6 +50,20 @@ namespace MetadataUtils
             => Read(declaration, Family);
 
         internal static NativeRecordSource Read(StructDeclarationSyntax declaration, string family)
+        {
+            var cache = sources.GetValue(declaration, static _ => new(StringComparer.Ordinal));
+            lock (cache)
+            {
+                if (!cache.TryGetValue(family, out var source))
+                {
+                    source = ReadCore(declaration, family);
+                    cache.Add(family, source);
+                }
+                return source;
+            }
+        }
+
+        private static NativeRecordSource ReadCore(StructDeclarationSyntax declaration, string family)
         {
             var markers = Markers(declaration, family).ToArray();
             if (markers.Length == 0)

@@ -194,6 +194,11 @@ and anonymous-storage, alternate-definition and coverage-normalization policy.
 The normal emitter prints separate timings for common-provider coalescing,
 cross-architecture constant qualification and final typedef/record composition,
 including failed phases.
+Validated native source proofs are cached by immutable syntax declaration and
+proof family. Weak cache keys do not retain discarded trees. Rewritten or
+reparsed declarations are validated independently, including cached absence;
+malformed proofs still fail on every read. The cache contains no compiler
+symbols, ownership decisions or cross-declaration identity comparisons.
 Legacy numeric partition suffixes retain their established parsed-prefix
 namespace. The existing syntax repair records the original namespace for the
 source-provenance check while ownership uses the repaired, valid C# namespace.
