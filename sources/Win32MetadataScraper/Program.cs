@@ -261,7 +261,8 @@ class Program
                 settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
                 configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody),
                 inferNativeTypedefs: true, parseHeaderAnnotations: parseHeaderAnnotations,
-                projectionTypeRemaps: projectionTypeRemaps, automaticTagRemaps: autoRemaps);
+                projectionTypeRemaps: projectionTypeRemaps, automaticTagRemaps: autoRemaps,
+                configuredTypeRemaps: configuredRemaps);
             annotations.PrepareTypedefs();
             allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var bindingOptions = configOptions;
@@ -358,7 +359,8 @@ class Program
                     var companionAnnotations = parseHeaderAnnotations
                         ? new HeaderAnnotationProcessor(companion.Unit, companionRemaps, ns,
                             config.TraversalNames.ToArray(), allExcludes.ToHashSet(StringComparer.Ordinal),
-                            configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody), included)
+                            configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody), included,
+                            configuredTypeRemaps: configuredRemaps)
                         : null;
                     companionAnnotations?.PrepareTypedefs();
                     var companionDiscovery = RemapDiscovery.WalkTranslationUnit(companion.Unit.TranslationUnitDecl);

@@ -26,6 +26,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<string, string> remaps;
         private IReadOnlyDictionary<string, string> storageTypeRemaps;
         private readonly IReadOnlyDictionary<string, string> projectionTypeRemaps;
+        private readonly IReadOnlySet<string> configuredTypedefTargets;
         private readonly IReadOnlyDictionary<string, string> automaticTagRemaps;
         private readonly Dictionary<CXCursor, string> nativeTypedefStorageRemaps = new();
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
@@ -102,12 +103,17 @@ namespace Win32MetadataScraper
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody,
             IReadOnlySet<CXCursor> includedDeclarations = null, bool inferNativeTypedefs = false, bool parseHeaderAnnotations = true,
             IReadOnlyDictionary<string, string> projectionTypeRemaps = null,
-            IReadOnlyDictionary<string, string> automaticTagRemaps = null)
+            IReadOnlyDictionary<string, string> automaticTagRemaps = null,
+            IReadOnlyDictionary<string, string> configuredTypeRemaps = null)
         {
             using var timing = GenerationTiming.BeginSpan("annotations.discovery");
             this.remaps = remaps;
             storageTypeRemaps = remaps;
             this.projectionTypeRemaps = projectionTypeRemaps ?? remaps;
+            configuredTypedefTargets = (configuredTypeRemaps ?? new Dictionary<string, string>()).Values
+                .Select(name => SyntaxFactory.ParseTypeName(name)).OfType<IdentifierNameSyntax>()
+                .Select(name => name.Identifier.ValueText).Where(name => !IsStorageTypeName(name))
+                .ToHashSet(StringComparer.Ordinal);
             this.automaticTagRemaps = automaticTagRemaps ?? new Dictionary<string, string>();
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
@@ -620,7 +626,9 @@ namespace Win32MetadataScraper
                 string nativeName = DeclarationSourceMap.QualifiedName(alias.Handle);
                 if (!projectionTypeRemaps.TryGetValue(nativeName, out string configuredTarget) && nativeName == alias.Name)
                     configuredTarget = projectionMapping;
-                bool configuredNominal = configuredTarget == declaration.Identifier.ValueText;
+                bool configuredNominal = configuredTarget == declaration.Identifier.ValueText ||
+                    nativeName == alias.Name && alias.Name == declaration.Identifier.ValueText &&
+                        configuredTypedefTargets.Contains(alias.Name);
                 if (!configuredNominal && alias.UnderlyingType.CanonicalType is PointerType nativePointer &&
                     nativePointer.PointeeType.CanonicalType is RecordType nativePointee &&
                     !string.IsNullOrEmpty(nativePointee.Decl.Name) &&

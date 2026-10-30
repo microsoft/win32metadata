@@ -183,6 +183,10 @@ typedef unsigned long STORAGE_COUNT;
 typedef STORAGE_COUNT* PSTORAGE_COUNT;
 typedef unsigned char STORAGE_BOOLEAN;
 typedef STORAGE_BOOLEAN* PSTORAGE_BOOLEAN;
+typedef unsigned long CONFIGURED_TARGET_COUNT;
+typedef unsigned long CONFIGURED_MAPPED_COUNT;
+typedef unsigned short* CONFIGURED_TARGET_POINTER;
+typedef unsigned short* CONFIGURED_MAPPED_POINTER;
 DECLARE_HANDLE(REMAPPED_NATIVE_HANDLE);
 typedef _Win32_AlsoUsableFor_(CONFIGURED_COUNT) unsigned long AUTHORED_COUNT;
 struct ROW {
@@ -197,6 +201,8 @@ extern ""C"" SECOND_COUNT Echo(SECOND_COUNT value, SCALAR_FLOAT factor, PSECOND_
 extern ""C"" void UseStorageProjections(STORAGE_COUNT count, PSTORAGE_COUNT counts,
     STORAGE_BOOLEAN booleanValue, PSTORAGE_BOOLEAN booleanValues);
 extern ""C"" REMAPPED_NATIVE_HANDLE UseRemappedNativeHandle(REMAPPED_NATIVE_HANDLE handle);
+extern ""C"" void UseConfiguredTargets(CONFIGURED_TARGET_COUNT target, CONFIGURED_MAPPED_COUNT mapped,
+    CONFIGURED_TARGET_POINTER pointer, CONFIGURED_MAPPED_POINTER mappedPointer);
 ";
 
         private static void InferredIdentityPreservesOrdinaryClrProjectionAndExplicitNominalIntent(
@@ -222,6 +228,23 @@ extern ""C"" REMAPPED_NATIVE_HANDLE UseRemappedNativeHandle(REMAPPED_NATIVE_HAND
             var remappedHandle = providers.Single(type => type.Identifier.ValueText == "REMAPPED_NATIVE_HANDLE");
             Assert.False(NativeTypedefProjectionProvenance.IsInferred(remappedHandle));
             Assert.True(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(remappedHandle));
+            foreach (var target in new[]
+            {
+                (Name: "CONFIGURED_TARGET_COUNT", Native: "CONFIGURED_MAPPED_COUNT"),
+                (Name: "CONFIGURED_TARGET_POINTER", Native: "CONFIGURED_MAPPED_POINTER"),
+            })
+            {
+                var canonical = providers.Single(type => type.Identifier.ValueText == target.Name &&
+                    NativeTypedefSourceProvenance.Read(type)!.NativeName == target.Name);
+                var mapped = providers.Single(type => type.Identifier.ValueText == target.Name &&
+                    NativeTypedefSourceProvenance.Read(type)!.NativeName == target.Native);
+                Assert.False(NativeTypedefProjectionProvenance.IsInferred(canonical));
+                Assert.True(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(canonical));
+                Assert.False(NativeTypedefProjectionProvenance.IsInferred(mapped));
+                Assert.True(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(mapped));
+                Assert.NotEqual(NativeTypedefSourceProvenance.Read(canonical)!.Identity,
+                    NativeTypedefSourceProvenance.Read(mapped)!.Identity);
+            }
             Assert.Equal(!annotationsEnabled, NativeTypedefProjectionProvenance.IsInferred(providers.Single(type =>
                 type.Identifier.ValueText == "AUTHORED_COUNT")));
             Assert.False(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(providers.Single(type =>
@@ -249,6 +272,14 @@ extern ""C"" REMAPPED_NATIVE_HANDLE UseRemappedNativeHandle(REMAPPED_NATIVE_HAND
                 Assert.DoesNotContain(reader.TypeDefinitions, handle =>
                     reader.GetString(reader.GetTypeDefinition(handle).Name) == name);
             AssertWrapper(reader, "CONFIGURED_COUNT", "UInt32");
+            AssertWrapper(reader, "CONFIGURED_TARGET_COUNT", "UInt32");
+            AssertWrapper(reader, "CONFIGURED_TARGET_POINTER", "UInt16*");
+            var targets = FindMethod(reader, "Apis", "UseConfiguredTargets").DecodeSignature(decoder, null);
+            Assert.Equal(new[]
+            {
+                "Windows.Win32.Foundation.CONFIGURED_TARGET_COUNT", "Windows.Win32.Foundation.CONFIGURED_TARGET_COUNT",
+                "Windows.Win32.Foundation.CONFIGURED_TARGET_POINTER", "Windows.Win32.Foundation.CONFIGURED_TARGET_POINTER",
+            }, targets.ParameterTypes);
             if (annotationsEnabled)
                 AssertWrapper(reader, "AUTHORED_COUNT", "UInt32");
             AssertMetadataClosure(reader);
@@ -1283,6 +1314,7 @@ typedef enum _PROJECTED_POINTER { PointerFirst = 1 } _PROJECTED_POINTER;",
             }.Select(name => name + "=" + name + "\n"));
             nominalAliases += "STORAGE_COUNT=uint\nPSTORAGE_COUNT=STORAGE_COUNT*\n" +
                 "STORAGE_BOOLEAN=byte\nPSTORAGE_BOOLEAN=STORAGE_BOOLEAN*\n" +
+                "CONFIGURED_MAPPED_COUNT=CONFIGURED_TARGET_COUNT\nCONFIGURED_MAPPED_POINTER=CONFIGURED_TARGET_POINTER\n" +
                 "REMAPPED_NATIVE_HANDLE=IntPtr\nREMAPPED_NATIVE_HANDLE__*=REMAPPED_NATIVE_HANDLE\n" +
                 "--exclude\nREMAPPED_NATIVE_HANDLE__\n";
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
