@@ -77,8 +77,14 @@ and the input must have one native target family. An existing global native
 typedef explicitly named as a configured projection target carries its own
 source-bound nominal binding. A compatible configured alias can refer to that
 target from another input without redeclaring it locally. Automatically
-discovered tag remaps and primitive or pointer storage mappings do not establish
-this target intent. Separate inputs can select
+discovered tag remaps, native enum projection targets, and primitive or pointer
+storage mappings do not establish this target intent. Enum targets are resolved
+from the native declarations even when their headers are outside the traversal
+set. A same-named scalar typedef remains inferred when its configured target is
+an enum; the target name alone cannot turn it or its storage dependencies into
+nominal wrappers. Native integer storage remaps use qualified `System.IntPtr`
+and `System.UIntPtr` names so a native typedef cannot shadow their managed
+storage types. Separate inputs can select
 different native declaration families for the same explicitly routed public
 projection; each family still validates independently. An ambiguous native
 target, an unrelated alias, or an output namespace alone does not establish a
