@@ -43,6 +43,9 @@ See [ARCHITECTURE.md](docs/architecture.md).
 
 See [PROJECTIONS.md](docs/projections.md).
 
+The staged Direct3D 12 metadata split and its compatibility requirements are
+described in the [migration guide](docs/direct3d12-migration.md).
+
 # Contributing
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).

@@ -3,6 +3,10 @@
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.props" />
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Direct3D.D3D12" Version="$(Direct3D12PackageVersion)" GeneratePathProperty="true" PrivateAssets="all"/>
+  </ItemGroup>
+
   <!-- These are for debugging purposes only. A normal project wouldn't set these -->
   <PropertyGroup>
     <ToolsBinDir>$(RepoRootPath)bin\$(Configuration)\net10.0</ToolsBinDir>
@@ -42,7 +46,24 @@
     <OutputWinmd Condition="'$(OutputWinmd)' == ''">..\..\bin\Windows.Win32.winmd</OutputWinmd>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+    <D3D12MetadataPath Condition="'$(D3D12MetadataPath)' == ''">$(PkgMicrosoft_Direct3D_D3D12)\metadata\Microsoft.Direct3D.D3D12.winmd</D3D12MetadataPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <EmitterReference Include="$(D3D12MetadataPath)"/>
+  </ItemGroup>
+
+  <Target Name="ValidateD3D12Metadata" BeforeTargets="ScrapeHeaders;EmitWinmd">
+    <Error Condition="!Exists('$(D3D12MetadataPath)')"
+      Text="D3D12 metadata was not found at '$(D3D12MetadataPath)'. Select a Microsoft.Direct3D.D3D12 package containing metadata\Microsoft.Direct3D.D3D12.winmd, or set D3D12MetadataPath to a generated SDK winmd. The removal cannot ship until Direct3D12PackageVersion is updated to a published package containing this file."/>
+    <Delete Files="$(GeneratedDir)\common\Direct3D12.cs;$(GeneratedDir)\x86\Direct3D12.cs;$(GeneratedDir)\x64\Direct3D12.cs;$(GeneratedDir)\arm64\Direct3D12.cs;$(GeneratedDir)\Direct3D12.manual.cs;$(GeneratedDir)\Windows.Win32.Graphics.Direct3D12.constants.cs"/>
+  </Target>
+
+  <Target Name="StageD3D12Metadata" AfterTargets="EmitWinmd">
+    <Copy SourceFiles="$(D3D12MetadataPath)"
+      DestinationFolder="$([System.IO.Path]::GetDirectoryName('$(OutputWinmd)'))"
+      SkipUnchangedFiles="true"/>
+  </Target>
 
   <PropertyGroup>
     <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>

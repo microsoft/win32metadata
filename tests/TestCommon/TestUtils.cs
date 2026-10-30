@@ -20,6 +20,8 @@ namespace TestCommon
 
         public static string Win32WinmdPath => Path.GetFullPath(Path.Combine(BinPath, @"..\..\windows.win32.winmd"));
 
+        public static string Direct3D12WinmdPath => Path.Combine(Path.GetDirectoryName(Win32WinmdPath), "Microsoft.Direct3D.D3D12.winmd");
+
         public static string BinPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
         public static int ExecuteCmd(string cmd, string args, out string output, ITestOutputHelper logger)
@@ -51,4 +53,3 @@ namespace TestCommon
         }
     }
 }
-
