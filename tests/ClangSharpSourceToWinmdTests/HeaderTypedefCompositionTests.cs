@@ -2578,6 +2578,97 @@ namespace Other { public static class Apis {
         }
 
         [DataTestMethod]
+        [DataRow("pointer")]
+        [DataRow("const")]
+        [DataRow("documentation")]
+        [DataRow("termination")]
+        [DataRow("unknown-target")]
+        [DataRow("foreign")]
+        [DataRow("source-drift")]
+        [DataRow("storage")]
+        [DataRow("field-contract")]
+        public void RepeatedInferredNativeFamiliesKeepTheirExistingFieldContracts(string scenario)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", Provider(first: true));
+            fixture.Write("Other.header-types.cs", Provider(first: false));
+            fixture.Write("Bindings.cs", "namespace Native { public struct CARRIER { public SCALAR Value; } }");
+            if (scenario is "foreign" or "source-drift" or "storage" or "field-contract")
+            {
+                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() =>
+                    fixture.Compile(new() { ["SCALAR"] = "Native" })).Message, "CSSW005");
+                return;
+            }
+            var compilation = fixture.Compile();
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            var alias = compilation.CSharpCompilation.GetTypeByMetadataName("Native.SCALAR")!;
+            var declaration = (StructDeclarationSyntax)alias.DeclaringSyntaxReferences.Single().GetSyntax();
+            Assert.AreEqual(true, NativeTypedefProjectionProvenance.IsInferred(declaration));
+            var field = alias.GetMembers("Value").OfType<IFieldSymbol>().Single();
+            Assert.AreEqual("uint*", field.Type.ToDisplayString());
+            string? expectedAttribute = scenario switch
+            {
+                "const" => "ConstAttribute",
+                "documentation" => "DocumentationAttribute",
+                "termination" => "NotNullTerminatedAttribute",
+                _ => null,
+            };
+            if (expectedAttribute != null)
+                Assert.AreEqual(1, field.GetAttributes().Count(attribute => attribute.AttributeClass!.Name == expectedAttribute));
+            string output = Path.Combine(fixture.DirectoryPath, "RepeatedNativePointers.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var carrier = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Name) == "CARRIER");
+            var signature = reader.GetBlobReader(reader.GetFieldDefinition(carrier.GetFields().Single()).Signature);
+            Assert.AreEqual((byte)0x06, signature.ReadByte());
+            if (scenario == "unknown-target")
+            {
+                Assert.AreEqual((byte)0x11, signature.ReadByte());
+                Assert.AreEqual("SCALAR", reader.GetString(ResolveLocalType(reader, signature.ReadTypeHandle()).Name));
+            }
+            else
+            {
+                Assert.AreEqual((byte)0x0f, signature.ReadByte());
+                Assert.AreEqual((byte)0x09, signature.ReadByte());
+            }
+            Assert.AreEqual(0, signature.RemainingBytes);
+
+            string Provider(bool first)
+            {
+                string storage = scenario == "storage" && !first ? "int*" : "uint*";
+                string contract = scenario switch
+                {
+                    "const" or "foreign" => "[Const] ",
+                    "documentation" => "[Documentation(\"same\")] ",
+                    "termination" => "[NotNullTerminated] ",
+                    "field-contract" => "[Documentation(\"" + (first ? "first" : "second") + "\")] ",
+                    _ => "",
+                };
+                string text = TypedefProvider(fixture, "Native", "c:native.h@T@SCALAR", first, storage, 8, 8)
+                    .Replace("public partial struct", "public unsafe partial struct", StringComparison.Ordinal)
+                    .Replace("public " + storage + " Value;", contract + "[NativeTypeName(\"unsigned int *\")] public " +
+                        storage + " Value;", StringComparison.Ordinal);
+                var root = CSharpSyntaxTree.ParseText(text).GetRoot();
+                var original = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var source = NativeTypedefSourceProvenance.Read(original)! with
+                {
+                    SourceArchitecture = scenario == "unknown-target" ? null : Architecture.X64,
+                    Header = Path.Combine(fixture.DirectoryPath, scenario == "foreign" && !first ? "other.h" : "native.h"),
+                    HeaderHash = new string(scenario == "source-drift" && !first ? 'B' : 'A', 64),
+                };
+                return root.ReplaceNode(original, NativeTypedefProjectionProvenance.WithPolicy(
+                    NativeTypedefSourceProvenance.Attach(original.WithTrailingTrivia(default(SyntaxTriviaList)), source),
+                    inferred: true)).ToFullString();
+            }
+        }
+
+        [DataTestMethod]
         [DataRow("compatible")]
         [DataRow("storage")]
         [DataRow("source")]

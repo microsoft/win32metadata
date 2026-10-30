@@ -77,7 +77,10 @@ projection. Native handle contracts also retain their source-bound public owner,
 including compatible-type annotations. A cleanup-derived namespace requires an
 unambiguous actual cleanup API. Inferred-only aliases can share an intrinsic CLR
 projection only after their independent source, storage, signedness and layout
-checks pass. These projection rules do not equate their native identities.
+checks pass. Repeated observations of one native declaration family instead use
+the existing alias composition rules, preserving compatible field contracts such
+as constness, documentation and string termination. They do not select an
+independent intrinsic projection. These rules do not equate native identities.
 Retained families include the full declaring-header identity because Clang USRs
 for file-local typedefs can contain only a shared basename such as `main.cpp`.
 File-local identity keys include the full physical declaring-header path.
