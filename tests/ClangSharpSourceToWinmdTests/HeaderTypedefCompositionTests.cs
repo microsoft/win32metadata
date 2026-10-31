@@ -5103,6 +5103,36 @@ namespace Test {
         }
 
         [DataTestMethod]
+        [DataRow("checked", "0x7fffffffU", int.MaxValue, false)]
+        [DataRow("checked", "0x80000000U", 0, true)]
+        [DataRow("", "0x80000000U", 0, true)]
+        [DataRow("unchecked", "0x80000000U", int.MinValue, false)]
+        [DataRow("unchecked", "0xffffffffU", -1, false)]
+        public void NativeTypedefEnumInitializerConversionPreservesOverflowContext(
+            string context, string value, int expected, bool overflow)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("Bindings.header-types.cs", @"
+using Windows.Win32.Foundation.Metadata;
+namespace Test { [NativeTypedef] public struct STORAGE { public uint Value; } }");
+            string expression = $"{context}((STORAGE){value})";
+            fixture.Write("Bindings.cs", $"namespace Test {{ public enum VALUES : int {{ Value = {expression} }} }}");
+            var compilation = fixture.Compile();
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            if (overflow)
+            {
+                Assert.AreEqual(1, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+                Assert.AreEqual("CS0221", errors[0].Id);
+            }
+            else
+            {
+                Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
+                Assert.AreEqual(expected, compilation.CSharpCompilation.GetTypeByMetadataName("Test.VALUES")!
+                    .GetMembers("Value").OfType<IFieldSymbol>().Single().ConstantValue);
+            }
+        }
+
+        [DataTestMethod]
         [DataRow("x86")]
         [DataRow("x64")]
         [DataRow("arm64")]
