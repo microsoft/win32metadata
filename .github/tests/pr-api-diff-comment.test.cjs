@@ -9,6 +9,8 @@ const workflow = readFileSync(path.join(__dirname, '..', 'workflows', 'pr-api-di
   .replace(/\r\n/g, '\n');
 const validationWorkflow = readFileSync(path.join(__dirname, '..', 'workflows', 'pr-validation.yml'), 'utf8')
   .replace(/\r\n/g, '\n');
+const azurePipeline = readFileSync(path.join(__dirname, '..', '..', 'azure-pipelines.yml'), 'utf8')
+  .replace(/\r\n/g, '\n');
 const steps = workflowSteps(workflow);
 const validationSteps = workflowSteps(validationWorkflow);
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
@@ -25,6 +27,13 @@ function validationJob(name) {
   const start = validationWorkflow.indexOf(marker);
   assert.notEqual(start, -1, `Missing validation job: ${name}`);
   return validationWorkflow.slice(start + marker.length).split(/^  [\w-]+:\s*$/m)[0];
+}
+
+function azureJob(name) {
+  const marker = `- job: ${name}\n`;
+  const start = azurePipeline.indexOf(marker);
+  assert.notEqual(start, -1, `Missing Azure job: ${name}`);
+  return azurePipeline.slice(start + marker.length).split(/^- job: /m)[0];
 }
 
 function script(name) {
@@ -177,6 +186,15 @@ test('both artifact uploads still include the generated patch', () => {
   assert.match(winmdUpload, /^          name: winmd$/m);
   for (const file of ['Windows.Win32.winmd', 'current.apidump.cs', 'baseline.apidump.cs', 'api-diff.patch']) {
     assert.ok(winmdUpload.includes(`            bin/${file}\n`));
+  }
+});
+
+test('only managed consumer jobs use the temporary 180-minute diagnostic allowance', () => {
+  assert.match(validationJob('build-test'), /^    timeout-minutes: 180$/m);
+  assert.match(azureJob('build_winmd'), /^  timeoutInMinutes: 180$/m);
+  assert.match(validationJob('scrape'), /^    timeout-minutes: 60$/m);
+  for (const arch of ['x64', 'x86', 'arm64']) {
+    assert.match(azureJob(`scrape_${arch}`), /^  timeoutInMinutes: 60$/m);
   }
 });
 

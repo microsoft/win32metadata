@@ -161,7 +161,8 @@ jobs:
     needs: [changes, scrape]
     if: always() && needs.changes.result == 'success'
     runs-on: windows-2022
-    timeout-minutes: 60
+    # Temporary diagnostic allowance while reducing managed pipeline execution time.
+    timeout-minutes: 180
 
     steps:
       - name: Documentation-only change

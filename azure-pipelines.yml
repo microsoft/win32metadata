@@ -117,6 +117,8 @@ jobs:
 
 - job: build_winmd
   displayName: Build, test, sign, package winmd
+  # Temporary diagnostic allowance while reducing managed pipeline execution time.
+  timeoutInMinutes: 180
   workspace:
     clean: all
   dependsOn: ['scrape_x64','scrape_x86','scrape_arm64']
