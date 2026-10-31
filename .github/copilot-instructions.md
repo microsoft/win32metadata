@@ -22,18 +22,24 @@ dotnet build generation/WinSDK -c Release -p:ScanArch=crossarch -t:ScrapeHeaders
 ## Test Commands
 
 ```powershell
-# Run all tests
+# Run all tests after generating the WinMD (requires Python 3)
 ./scripts/DoTests.ps1
 
 # Individual test suites
 dotnet test tests/MetadataUtils.Tests -c Release
 dotnet test tests/Windows.Win32.Tests -c Release          # winmd integrity tests
 dotnet test tests/Win32MetadataScraperTests -c Release     # scraper heuristic tests
-dotnet test tests/ClangSharpSourceToWinmdTests -c Release
+dotnet test tests/ClangSharpSourceToWinmdTests -c Release   # emitter and cross-architecture composition
+python -m unittest discover -s tests\SdkAnnotationCoverage.Tests -p "test_*.py"
 
 # Single test
 dotnet test tests/Win32MetadataScraperTests -c Release --filter "TransitiveInclude"
 ```
+
+`DoTests.ps1` runs the utility, emitter, SDK annotation coverage-auditor, scraper,
+and WinMD integrity suites. GitHub Actions and Azure Pipelines invoke this same
+runner after generating the WinMD. The Python suite uses the standard library
+and tests the annotation coverage auditor, not the separate Node workflow tests.
 
 ## Architecture
 
@@ -65,6 +71,10 @@ Each arch job scrapes ALL partitions for that architecture.
 ## Key Conventions
 
 **NuGet feed:** The repo uses a private ADO Artifact Feed (`Win32Metadata-Dependencies`) as its sole package source. New packages from nuget.org must be saved to this feed first.
+
+**Import discovery before header overrides:** Before adding `_Win32_ImportLibrary_` or a manual DLL mapping, inspect the selected SDK's import libraries and the library-processing set in `scripts\CreateProcLibMappingForAllLibs.ps1`. Use `WinmdUtils dumpImports --lib <path>` to verify the actual symbols and DLL, not just the library filename. If a matching `.lib` was omitted or its imports were missed, fix shared discovery instead of adding a redundant header annotation. Use an authored override only when no authoritative SDK library mapping is available or the native contract genuinely requires an override; record the SDK/library search evidence.
+
+**Header-annotation migration:** Follow `docs\copilot\plans\header-annotation-migration-playbook.md`. Classify the original artifact before editing: patch authored `.h` files directly, but patch original `.idl` and regenerate all affected outputs for IDL-owned declarations. Never patch a generated `.h` or independently patch the same shared artifact in different partitions. Use exact qualified tooling/pilot pins and keep raw OLD-to-NEW differences visible.
 
 **Winmd equivalence:** After any change, the winmd must be compared against the baseline. The `NoSuggestedRemappings` test in `Windows.Win32.Tests` validates that no new unhandled remappings were introduced. API diffs are automatically posted as PR comments by CI. Run `.\scripts\DiffWinmdToBaseline.ps1` locally to see a full C# declaration diff against the last release.
 

@@ -14,4 +14,9 @@
     <ProjectReference Include="..\MetadataUtils\MetadataUtils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="MetadataUtils.Tests" />
+    <InternalsVisibleTo Include="ClangSharpSourceToWinmdTests" />
+  </ItemGroup>
+
 </Project>

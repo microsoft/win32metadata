@@ -15,8 +15,12 @@
   <ItemGroup>
     <ResponseFile Include="*.rsp"/>
     <ManualCs Include="*.cs"/>
-    <FunctionPointerFixup Include="$(MSBuildProjectDirectory)\functionPointerFixups.json"/>
-    <AutoType Include="$(MSBuildProjectDirectory)\autoTypes.json"/>
+    <FunctionPointerFixup Include="$(MSBuildProjectDirectory)\functionPointerFixups.json">
+      <IsImplicitDefault>true</IsImplicitDefault>
+    </FunctionPointerFixup>
+    <AutoType Include="$(MSBuildProjectDirectory)\autoTypes.json">
+      <IsImplicitDefault>true</IsImplicitDefault>
+    </AutoType>
 
   </ItemGroup>
 

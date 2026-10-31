@@ -35,7 +35,7 @@ namespace MetadataUtils
 
         public static Dictionary<string, string> GetNameToNamespaceMap(IEnumerable<string> sourceFiles, NameOptions nameOptions)
         {
-            var maps = new List<Dictionary<string, string>>();
+            var maps = new List<List<(string Name, string Namespace, NativeRecordSource Source)>>();
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
 
 #if MakeSingleThreaded
@@ -46,7 +46,7 @@ namespace MetadataUtils
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
                 SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                Dictionary<string, string> map = NameToNamespaceFinder.GetNamesToNamespaces(tree, nameOptions);
+                var map = NameToNamespaceFinder.GetNamesToNamespaces(tree, nameOptions);
 
                 lock (maps)
                 {
@@ -56,24 +56,15 @@ namespace MetadataUtils
 
             Dictionary<string, string> ret = new Dictionary<string, string>();
 
-            foreach (Dictionary<string, string> map in maps)
+            foreach (var group in maps.SelectMany(map => map).GroupBy(item => item.Name, StringComparer.Ordinal))
             {
-                foreach (KeyValuePair<string, string> pair in map)
-                {
-                    if (ret.TryGetValue(pair.Key, out var currentValue))
-                    {
-                        if (!currentValue.Contains(pair.Value))
-                        {
-                            currentValue += $";{pair.Value}";
-                        }
-                    }
-                    else
-                    {
-                        currentValue = pair.Value;
-                    }
-
-                    ret[pair.Key] = currentValue;
-                }
+                var first = group.First().Source;
+                var candidates = group.AsEnumerable();
+                if (first != null && group.All(item => NativeRecordSourceProvenance.SameDeclaration(first, item.Source)) &&
+                    group.Any(item => item.Source.TraversedHeader))
+                    candidates = group.Where(item => item.Source.TraversedHeader);
+                ret.Add(group.Key, string.Join(";", candidates.Select(item => item.Namespace)
+                    .Distinct(StringComparer.Ordinal).OrderBy(ns => ns, StringComparer.Ordinal)));
             }
 
             return ret;
@@ -85,9 +76,13 @@ namespace MetadataUtils
             return GetNameToNamespaceMap(sourceFiles, nameOptions);
         }
 
-        public static Dictionary<string, string> GetConstants(string scraperOutputDir)
+        public static Dictionary<string, string> GetConstants(string scraperOutputDir) =>
+            GetConstants(scraperOutputDir, out _);
+
+        public static Dictionary<string, string> GetConstants(string scraperOutputDir, out HashSet<string> mutableGlobals)
         {
             Dictionary<string, string> namesAndTypes = new();
+            var mutableNames = new HashSet<string>(StringComparer.Ordinal);
 
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
 
@@ -101,7 +96,8 @@ namespace MetadataUtils
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
                 SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                Dictionary<string, string> currentNamesAndTypes = ConstantsFinder.GetConstantsNamesAndTypes(tree);
+                var currentMutableNames = new HashSet<string>(StringComparer.Ordinal);
+                Dictionary<string, string> currentNamesAndTypes = ConstantsFinder.GetConstantsNamesAndTypes(tree, currentMutableNames);
 
                 lock (namesAndTypes)
                 {
@@ -109,15 +105,18 @@ namespace MetadataUtils
                     {
                         namesAndTypes[item.Key] = item.Value;
                     }
+                    mutableNames.UnionWith(currentMutableNames);
                 }
             });
 
+            mutableGlobals = mutableNames;
             return namesAndTypes;
         }
 
         private static bool IsValidCsSourceFile(string fileName)
         {
-            if (fileName.EndsWith(".modified.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs"))
+            if (fileName.EndsWith(".modified.cs") || fileName.EndsWith(".enums.cs") || fileName.EndsWith(".constants.cs") ||
+                NativeConstantValues.IsGeneratedSource(fileName))
             {
                 return false;
             }
@@ -127,11 +126,11 @@ namespace MetadataUtils
 
         private class ConstantsFinder
         {
-            public static Dictionary<string, string> GetConstantsNamesAndTypes(SyntaxTree tree)
+            public static Dictionary<string, string> GetConstantsNamesAndTypes(SyntaxTree tree, HashSet<string> mutableGlobals)
             {
                 Dictionary<string, string> constantsNamesAndTypes = new();
 
-                new TreeWalker(tree, constantsNamesAndTypes);
+                new TreeWalker(tree, constantsNamesAndTypes, mutableGlobals);
 
                 return constantsNamesAndTypes;
             }
@@ -139,10 +138,12 @@ namespace MetadataUtils
             private class TreeWalker : CSharpSyntaxWalker
             {
                 Dictionary<string, string> constantsNamesAndTypes;
+                private readonly HashSet<string> mutableGlobals;
 
-                public TreeWalker(SyntaxTree tree, Dictionary<string, string> constantsNamesAndTypes)
+                public TreeWalker(SyntaxTree tree, Dictionary<string, string> constantsNamesAndTypes, HashSet<string> mutableGlobals)
                 {
                     this.constantsNamesAndTypes = constantsNamesAndTypes;
+                    this.mutableGlobals = mutableGlobals;
                     this.Visit(tree.GetRoot());
                 }
 
@@ -152,9 +153,8 @@ namespace MetadataUtils
                     {
                         foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
                         {
-                            string mods = field.Modifiers.ToString();
-                            
-                            if (mods.Contains("const") || mods.Contains("static readonly"))
+                            if (field.Modifiers.Any(SyntaxKind.ConstKeyword) ||
+                                field.Modifiers.Any(SyntaxKind.StaticKeyword))
                             {
                                 this.AddNameToMap(field);
                             }
@@ -175,6 +175,8 @@ namespace MetadataUtils
                             var typeName = node.Declaration.Type.ToString();
                             this.constantsNamesAndTypes.Add(name, typeName);
                         }
+                        if (!node.Modifiers.Any(SyntaxKind.ConstKeyword) && !node.Modifiers.Any(SyntaxKind.ReadOnlyKeyword))
+                            this.mutableGlobals.Add(name);
                     }
                 }
             }
@@ -182,9 +184,10 @@ namespace MetadataUtils
 
         private class NameToNamespaceFinder
         {
-            public static Dictionary<string, string> GetNamesToNamespaces(SyntaxTree tree, NameOptions nameOptions)
+            public static List<(string Name, string Namespace, NativeRecordSource Source)> GetNamesToNamespaces(
+                SyntaxTree tree, NameOptions nameOptions)
             {
-                Dictionary<string, string> namesToNamespaces = new Dictionary<string, string>();
+                var namesToNamespaces = new List<(string Name, string Namespace, NativeRecordSource Source)>();
 
                 new TreeWalker(tree, namesToNamespaces, nameOptions);
 
@@ -193,10 +196,11 @@ namespace MetadataUtils
 
             private class TreeWalker : CSharpSyntaxWalker
             {
-                private Dictionary<string, string> namesToNamespaces;
+                private List<(string Name, string Namespace, NativeRecordSource Source)> namesToNamespaces;
                 private NameOptions nameOptions;
 
-                public TreeWalker(SyntaxTree tree, Dictionary<string, string> namesToNamespaces, NameOptions nameOptions)
+                public TreeWalker(SyntaxTree tree,
+                    List<(string Name, string Namespace, NativeRecordSource Source)> namesToNamespaces, NameOptions nameOptions)
                 {
                     this.nameOptions = nameOptions;
                     this.namesToNamespaces = namesToNamespaces;
@@ -259,14 +263,12 @@ namespace MetadataUtils
 
                     if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(ns))
                     {
-                        if (!this.namesToNamespaces.ContainsKey(name))
-                        {
-                            this.namesToNamespaces.Add(name, ns);
-                        }
+                        var source = node is StructDeclarationSyntax record
+                            ? NativeRecordSourceProvenance.Read(record) ?? NativeTypedefSourceProvenance.Read(record) : null;
+                        this.namesToNamespaces.Add((name, ns, source));
                     }
                 }
             }
         }
     }
 }
-

@@ -19,6 +19,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json.Linq;
+using Architecture = MetadataUtils.Architecture;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -39,9 +40,13 @@ namespace ClangSharpSourceToWinmd
         private static readonly Regex IsCharRegex = new Regex(@"^(?:CHAR|char)");
         private static readonly Regex ArrayMatcher = new Regex(@"\[\d*\]");
         private static readonly Regex NormalizeNativeTypeNameRegex = new Regex(@"((?:const )?(?:unsigned )?\S+)\s?(\*?(?:\[\d*\]))");
+        private static readonly SymbolDisplayFormat MetadataNameFormat = SymbolDisplayFormat.CSharpErrorMessageFormat
+            .WithMiscellaneousOptions(SymbolDisplayFormat.CSharpErrorMessageFormat.MiscellaneousOptions &
+                ~SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
+        private readonly IReadOnlyDictionary<string, string> fieldRenames;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -61,6 +66,11 @@ namespace ClangSharpSourceToWinmd
         private HashSet<string> reducePointerLevels;
         private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefHandles = new Dictionary<string, AssemblyReferenceHandle>();
         private Dictionary<string, ITypeSymbol> nameToSymbols = new Dictionary<string, ITypeSymbol>();
+        private readonly Dictionary<(string Name, Architecture Architecture), ITypeSymbol> nativeCallbacks = new();
+        private readonly Dictionary<ITypeSymbol, ITypeSymbol> intrinsicUseTypes = new(SymbolEqualityComparer.Default);
+        private readonly HashSet<ITypeSymbol> inferredNativeTypes = new(SymbolEqualityComparer.Default);
+        private readonly HashSet<ITypeSymbol> reachableNativeTypes = new(SymbolEqualityComparer.Default);
+        private IReadOnlyDictionary<string, TypeDefinitionHandle> architectureTypeDefinitions;
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
         private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
         private HashSet<string> structNameWithGuids = new HashSet<string>();
@@ -74,9 +84,11 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             HashSet<string> forceGuidConsts,
             Version assemblyVersion, 
-            string assemblyName)
+            string assemblyName,
+            IReadOnlyDictionary<string, string> fieldRenames)
         {
             this.compilation = compilation;
+            this.fieldRenames = fieldRenames;
             this.reducePointerLevels = reducePointerLevels;
             this.forceGuidConsts = forceGuidConsts;
 
@@ -169,16 +181,35 @@ namespace ClangSharpSourceToWinmd
             Version version, 
             string outputFileName)
         {
-            ClangSharpSourceWinmdGenerator generator = 
+            ClangSharpSourceWinmdGenerator CreateGenerator() =>
                 new ClangSharpSourceWinmdGenerator(
                     compilation.CSharpCompilation, 
                     typeImports, 
                     reducePointerLevels,
                     forceGuidConsts,
                     version, 
-                    Path.GetFileName(outputFileName));
+                    Path.GetFileName(outputFileName),
+                    compilation.FieldRenames);
 
+            ClangSharpSourceWinmdGenerator generator = CreateGenerator();
             generator.PopulateMetadataBuilder();
+
+            if (!generator.diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error) &&
+                compilation.CSharpCompilation.SyntaxTrees.SelectMany(tree => tree.GetRoot().DescendantNodes())
+                    .Where(node => node is DelegateDeclarationSyntax or StructDeclarationSyntax)
+                    .GroupBy(node => FixArchSpecificName(SyntaxUtils.GetFullName(node, true)), StringComparer.Ordinal)
+                    .Any(group => group.Count() > 1))
+            {
+                // Forward references to equal-public-name variants require their exact local handles.
+                var definitions = generator.namesToTypeDefHandles;
+                generator = CreateGenerator();
+                generator.architectureTypeDefinitions = definitions;
+                generator.PopulateMetadataBuilder();
+                foreach (var pair in definitions)
+                    if (!generator.namesToTypeDefHandles.TryGetValue(pair.Key, out var actual) || actual != pair.Value)
+                        generator.diagnostics.Add(new GeneratorDiagnostic(
+                            $"Architecture type-definition plan changed for '{pair.Key}'.", DiagnosticSeverity.Error));
+            }
 
             if (!generator.diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error))
             {
@@ -240,7 +271,7 @@ namespace ClangSharpSourceToWinmd
             return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
         }
 
-        private static string FixArchSpecificName(string name)
+        internal static string FixArchSpecificName(string name)
         {
             if (name.EndsWith("____1") || name.EndsWith("____2"))
             {
@@ -513,9 +544,17 @@ namespace ClangSharpSourceToWinmd
                 Directory.CreateDirectory(dir);
             }
 
-            using (FileStream fileStream = new FileStream(outputFileName, FileMode.Create, FileAccess.ReadWrite))
+            string stagedOutput = outputFileName + "." + Guid.NewGuid().ToString("N") + ".pending";
+            try
             {
-                peBlob.WriteContentTo(fileStream);
+                using (FileStream fileStream = new FileStream(stagedOutput, FileMode.CreateNew, FileAccess.Write))
+                    peBlob.WriteContentTo(fileStream);
+                File.Move(stagedOutput, outputFileName, overwrite: true);
+            }
+            finally
+            {
+                if (File.Exists(stagedOutput))
+                    File.Delete(stagedOutput);
             }
 
             this.WroteWinmd = true;
@@ -524,6 +563,7 @@ namespace ClangSharpSourceToWinmd
         private void PopulateMetadataBuilder()
         {
             GatherInterfaceTypes();
+            GatherNativeProjectionClosure();
 
             VisitAllTypes();
 
@@ -584,6 +624,154 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
+        private static bool IsNativeStorageValue(ISymbol context) =>
+            context is IFieldSymbol { Name: "Value", IsStatic: false } value &&
+            value.ContainingType.GetAttributes().Any(attribute => attribute.AttributeClass?.ToDisplayString() ==
+                "Windows.Win32.Foundation.Metadata.NativeTypedefAttribute") &&
+            value.ContainingType.DeclaringSyntaxReferences.Any(reference =>
+                reference.GetSyntax() is StructDeclarationSyntax declaration &&
+                NativeTypedefSourceProvenance.Read(declaration) != null);
+
+        private ITypeSymbol GetIntrinsicUseType(ITypeSymbol type)
+        {
+            if (type == null)
+                return null;
+            if (this.intrinsicUseTypes.TryGetValue(type, out var cached))
+                return cached;
+            this.intrinsicUseTypes.Add(type, type);
+            ITypeSymbol result = type;
+            if (type is IPointerTypeSymbol pointer)
+            {
+                var target = this.GetIntrinsicUseType(pointer.PointedAtType);
+                if (!SymbolEqualityComparer.Default.Equals(target, pointer.PointedAtType))
+                    result = this.compilation.CreatePointerTypeSymbol(target);
+            }
+            else if (type is IArrayTypeSymbol array)
+            {
+                var element = this.GetIntrinsicUseType(array.ElementType);
+                if (!SymbolEqualityComparer.Default.Equals(element, array.ElementType))
+                    result = this.compilation.CreateArrayTypeSymbol(element, array.Rank);
+            }
+            else if (this.inferredNativeTypes.Contains(type))
+            {
+                var declarations = type.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
+                    .OfType<StructDeclarationSyntax>().ToArray();
+                var value = type.GetMembers("Value").OfType<IFieldSymbol>()
+                    .SingleOrDefault(field => !field.IsStatic);
+                if (value != null)
+                {
+                    var storage = this.GetIntrinsicUseType(value.Type);
+                    if (declarations.Length != 0 && declarations.All(declaration =>
+                        HeaderTypedefMerger.NativeStorageMatches(NativeTypedefSourceProvenance.Read(declaration), storage)))
+                        result = storage;
+                }
+            }
+            this.intrinsicUseTypes[type] = result;
+            return result;
+        }
+
+        private void GatherNativeProjectionClosure()
+        {
+            var sourceTypes = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
+            foreach (var tree in this.compilation.SyntaxTrees)
+            {
+                var model = this.GetModel(tree.GetRoot());
+                foreach (var declaration in tree.GetRoot().DescendantNodes()
+                    .Where(node => node is BaseTypeDeclarationSyntax or DelegateDeclarationSyntax))
+                {
+                    if (model.GetDeclaredSymbol(declaration) is not INamedTypeSymbol type)
+                        continue;
+                    sourceTypes.Add(type);
+                    if (declaration is StructDeclarationSyntax native &&
+                        NativeTypedefProjectionProvenance.IsInferred(native) == true)
+                        this.inferredNativeTypes.Add(type);
+                }
+            }
+            var pending = new Queue<ITypeSymbol>(sourceTypes.Where(type =>
+                !this.inferredNativeTypes.Contains(type) ||
+                SymbolEqualityComparer.Default.Equals(type, this.GetIntrinsicUseType(type))));
+            var visited = new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default);
+            while (pending.TryDequeue(out var type))
+            {
+                if (!visited.Add(type))
+                    continue;
+                if (this.inferredNativeTypes.Contains(type))
+                    this.reachableNativeTypes.Add(type);
+                VisitAttributes(type.GetAttributes());
+                foreach (var member in type.GetMembers())
+                {
+                    VisitAttributes(member.GetAttributes());
+                    switch (member)
+                    {
+                        case IFieldSymbol field:
+                            VisitUse(field.Type, field);
+                            break;
+                        case IMethodSymbol method:
+                            VisitAttributes(method.GetReturnTypeAttributes());
+                            VisitUse(method.ReturnType, method);
+                            foreach (var parameter in method.Parameters)
+                            {
+                                VisitAttributes(parameter.GetAttributes());
+                                VisitUse(parameter.Type, parameter);
+                            }
+                            break;
+                        case IPropertySymbol property:
+                            VisitUse(property.Type, property);
+                            break;
+                    }
+                }
+                if (type is INamedTypeSymbol named)
+                {
+                    VisitType(named.BaseType);
+                    foreach (var contract in named.Interfaces)
+                        VisitType(contract);
+                }
+            }
+
+            void VisitUse(ITypeSymbol type, ISymbol context)
+            {
+                VisitType(IsNativeStorageValue(context) || this.HasExplicitTypeRemap(context)
+                    ? type : this.GetIntrinsicUseType(type));
+            }
+            void VisitType(ITypeSymbol type)
+            {
+                switch (type)
+                {
+                    case IPointerTypeSymbol pointer:
+                        VisitType(pointer.PointedAtType);
+                        return;
+                    case IArrayTypeSymbol array:
+                        VisitType(array.ElementType);
+                        return;
+                    case INamedTypeSymbol named:
+                        foreach (var argument in named.TypeArguments)
+                            VisitType(argument);
+                        break;
+                }
+                if (type != null && sourceTypes.Contains(type))
+                    pending.Enqueue(type);
+            }
+            void VisitAttributes(ImmutableArray<AttributeData> attributes)
+            {
+                foreach (var attribute in attributes)
+                {
+                    VisitType(attribute.AttributeClass);
+                    foreach (var argument in attribute.ConstructorArguments)
+                        VisitArgument(argument);
+                    foreach (var argument in attribute.NamedArguments)
+                        VisitArgument(argument.Value);
+                }
+            }
+            void VisitArgument(TypedConstant argument)
+            {
+                if (argument.Kind == TypedConstantKind.Array && !argument.IsNull)
+                    foreach (var value in argument.Values)
+                        VisitArgument(value);
+                else if (argument.Value is ITypeSymbol type)
+                    VisitType(type);
+            }
+        }
+
         private EntityHandle GetTypeReference(ISymbol symbol)
         {
             EntityHandle scopeRef;
@@ -600,9 +788,10 @@ namespace ClangSharpSourceToWinmd
             }
 
             // Change from namepace.parent.self => parent/self
-            string name = symbol.ToString().Substring(symbol.ContainingNamespace.ToString().Length + 1).Replace('.', '/');
+            string @namespace = symbol.ContainingNamespace.ToDisplayString(MetadataNameFormat);
+            string name = symbol.ToDisplayString(MetadataNameFormat).Substring(@namespace.Length + 1).Replace('.', '/');
 
-            return this.GetTypeReference(symbol.ContainingNamespace.ToString(), name, scopeRef);
+            return this.GetTypeReference(@namespace, name, scopeRef);
         }
 
         private EntityHandle GetTypeReference(string @namespace, string name)
@@ -1020,31 +1209,89 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
+        private ITypeSymbol GetNativeTypeFromShortName(string name, ISymbol owner)
+        {
+            ITypeSymbol type = this.GetTypeFromShortName(name);
+            SyntaxNode declaration = owner.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+            if (declaration != null)
+            {
+                var local = this.GetModel(declaration).GetSpeculativeTypeInfo(declaration.SpanStart,
+                    SyntaxFactory.ParseTypeName(name.Replace("::", ".")),
+                    SpeculativeBindingOption.BindAsTypeOrNamespace).Type as INamedTypeSymbol;
+                if (local != null && local.TypeKind != TypeKind.Error &&
+                    (local.TypeKind == TypeKind.Delegate || type == null || type.Name == local.Name))
+                    type = local;
+            }
+            if (type is not INamedTypeSymbol callback || callback.TypeKind != TypeKind.Delegate)
+                return this.GetIntrinsicUseType(type);
+            Architecture architecture = GetArchitecture(owner);
+            string identity = callback.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
+            var key = (identity, architecture);
+            if (!this.nativeCallbacks.TryGetValue(key, out var selected))
+            {
+                string originalName = FixArchSpecificName(callback.Name);
+                INamedTypeSymbol[] candidates = this.compilation.GetSymbolsWithName(
+                    candidate => FixArchSpecificName(candidate) == originalName, SymbolFilter.Type)
+                    .OfType<INamedTypeSymbol>()
+                    .Where(candidate => candidate.TypeKind == TypeKind.Delegate && candidate.Arity == callback.Arity &&
+                        SymbolEqualityComparer.Default.Equals(candidate.ContainingSymbol, callback.ContainingSymbol) &&
+                        (GetArchitecture(candidate) & architecture) == architecture).ToArray();
+                if (candidates.Length != 1)
+                    throw new InvalidOperationException(
+                        $"Native callback '{name}' does not have one definition supporting '{owner}' on '{architecture}'.");
+                this.nativeCallbacks.Add(key, selected = candidates[0]);
+            }
+            return selected;
+        }
+
+        private static Architecture GetArchitecture(ISymbol symbol)
+        {
+            Architecture architecture = Architecture.All;
+            for (; symbol != null; symbol = symbol.ContainingSymbol)
+                foreach (AttributeData attribute in symbol.GetAttributes())
+                    if (attribute.AttributeClass.Name == "SupportedArchitectureAttribute" &&
+                        attribute.ConstructorArguments.Length == 1 && attribute.ConstructorArguments[0].Value is int value)
+                        architecture &= (Architecture)value;
+            return architecture;
+        }
+
+        private bool HasExplicitTypeRemap(ISymbol context)
+        {
+            SyntaxNode declaration = (context is IMethodSymbol { MethodKind: MethodKind.DelegateInvoke }
+                ? context.ContainingType : context).DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax();
+            if (declaration is VariableDeclaratorSyntax variable)
+                declaration = variable.Parent?.Parent;
+            return MetadataSyntaxTreeCleaner.HasAppliedTypeRemap(declaration);
+        }
+
         private void RemapToMoreSpecificTypeIfPossible(
             string owner,
             string name,
             ImmutableArray<AttributeData> ownerAttributes,
-            ref ITypeSymbol typeSymbol)
+            ref ITypeSymbol typeSymbol,
+            ISymbol context)
         {
-            var nativeType = GetNormalizedNativeTypeName(ownerAttributes);
-
-            // Can't do anything without a NativeTypeNameAttribute 
-            if (nativeType == null)
-            {
+            // A source-bound typedef's Value is ABI storage, not another public projection site.
+            if (IsNativeStorageValue(context))
                 return;
-            }
+            if (!this.HasExplicitTypeRemap(context))
+                typeSymbol = this.GetIntrinsicUseType(typeSymbol);
+            var nativeType = GetNormalizedNativeTypeName(ownerAttributes);
+            if (nativeType == null)
+                return;
 
             this.EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType, out var wasEnum);
 
-            // Don't try to fix up an enum
-            if (wasEnum)
+            // AssociatedEnum describes values without replacing the declared native type.
+            if (wasEnum || ownerAttributes.Any(attribute => attribute.AttributeClass.Name == "AssociatedEnumAttribute") ||
+                this.HasExplicitTypeRemap(context))
             {
                 return;
             }
 
             if (typeSymbol.SpecialType == SpecialType.System_SByte && IsCharRegex.IsMatch(nativeType))
             {
-                typeSymbol = this.GetTypeFromShortName("CHAR");
+                typeSymbol = this.GetIntrinsicUseType(this.GetTypeFromShortName("CHAR"));
                 return;
             }
 
@@ -1088,7 +1335,7 @@ namespace ClangSharpSourceToWinmd
                     nativeType = nativeType.Substring("const ".Length);
                 }
 
-                var newTypeSymbol = this.GetTypeFromShortName(nativeType);
+                var newTypeSymbol = this.GetNativeTypeFromShortName(nativeType, context);
                 if (newTypeSymbol != null)
                 {
                     typeSymbol = newTypeSymbol;
@@ -1123,25 +1370,16 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
 
-                newTypeSymbol = this.GetTypeFromShortName(nameOnly);
+                newTypeSymbol = this.GetNativeTypeFromShortName(nameOnly, context);
 
                 if (newTypeSymbol != null)
                 {
                     if (!string.IsNullOrEmpty(star))
                     {
-                        var currentName = nameOnly;
-                        for (int i = 0; i < star.Length; i++)
-                        {
-                            currentName += "*";
-                            var pointerSymbol = this.GetTypeFromShortName(currentName);
-                            if (pointerSymbol == null)
-                            {
-                                pointerSymbol = this.compilation.CreatePointerTypeSymbol(newTypeSymbol);
-                                this.nameToSymbols[currentName] = pointerSymbol;
-                            }
-
-                            newTypeSymbol = pointerSymbol;
-                        }
+                        int pointerDepth = star.TakeWhile(character => character != '[')
+                            .Count(character => character == '*');
+                        for (int i = 0; i < pointerDepth; i++)
+                            newTypeSymbol = this.compilation.CreatePointerTypeSymbol(newTypeSymbol);
                     }
 
                     typeSymbol = newTypeSymbol;
@@ -1241,8 +1479,9 @@ namespace ClangSharpSourceToWinmd
             bool instanceMethod,
             bool thisCall)
         {
+            methodImplAttrs |= GetResultPreservationFlags(methodSymbol);
             var returnType = methodSymbol.ReturnType;
-            this.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, "return", methodSymbol.GetReturnTypeAttributes(), ref returnType);
+            this.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, "return", methodSymbol.GetReturnTypeAttributes(), ref returnType, methodSymbol);
 
             List<Parameter> parameters = new List<Parameter>();
             foreach (var p in methodSymbol.Parameters)
@@ -1252,6 +1491,11 @@ namespace ClangSharpSourceToWinmd
 
             return this.AddMethodViaParams(methodSymbol, methodSymbol.Name, returnType, parameters, methodAttrs, methodImplAttrs, instanceMethod, thisCall);
         }
+
+        private static MethodImplAttributes GetResultPreservationFlags(ISymbol symbol)
+            => symbol.GetAttributes().Any(attribute => attribute.AttributeClass.Name is
+                "PreserveSigAttribute" or "CanReturnErrorsAsSuccessAttribute" or "CanReturnMultipleSuccessValuesAttribute")
+                ? MethodImplAttributes.PreserveSig : 0;
 
         private INamedTypeSymbol GetTypeByMetadataName(string typeName)
         {
@@ -1279,7 +1523,8 @@ namespace ClangSharpSourceToWinmd
             {
                 var fieldVariable = field.Declaration.Variables.First();
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
-                string name = FixFinalName(fieldSymbol.Name);
+                string name = FixFinalName(this.fieldRenames.TryGetValue(CrossArchSyntaxMap.GetFullName(field), out var originalName)
+                    ? originalName : fieldSymbol.Name);
 
                 FieldAttributes fieldAttributes;
 
@@ -1389,7 +1634,7 @@ namespace ClangSharpSourceToWinmd
                         symbol,
                         MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
                         methodImplAttributes,
-                        false,
+                        !symbol.IsStatic,
                         false);
 
                 if (firstMethod.IsNil)
@@ -1417,10 +1662,6 @@ namespace ClangSharpSourceToWinmd
                 methodName = FixArchSpecificName(methodName);
 
                 MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
-                if (symbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
-                {
-                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
-                }
 
                 var methodDef =
                     this.AddMethodViaSymbol(
@@ -1582,7 +1823,7 @@ namespace ClangSharpSourceToWinmd
             this.AddMethodViaSymbol(
                 (IMethodSymbol)invokeMethodSymbol,
                 MethodAttributes.Public | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.Virtual,
-                MethodImplAttributes.Managed | MethodImplAttributes.Runtime,
+                MethodImplAttributes.Managed | MethodImplAttributes.Runtime | GetResultPreservationFlags(symbol),
                 true,
                 false);
 
@@ -1655,7 +1896,7 @@ namespace ClangSharpSourceToWinmd
         {
             if (typeSymbol.ContainingType == null)
             {
-                return typeSymbol.ToString();
+                return typeSymbol.ToDisplayString(MetadataNameFormat);
             }
 
             return this.GetFullNameForSymbol(typeSymbol.ContainingType) + "/" + this.GetShortNameForSymbol(typeSymbol);
@@ -1664,14 +1905,17 @@ namespace ClangSharpSourceToWinmd
         private EntityHandle GetTypeRefOrDef(ITypeSymbol typeSymbol)
         {
             string fullName = this.GetFullNameForSymbol(typeSymbol);
-            if (this.namesToTypeRefHandles.TryGetValue(fullName, out TypeReferenceHandle typeRef))
-            {
-                return typeRef;
-            }
-
+            if (GetArchitecture(typeSymbol) != Architecture.All && this.architectureTypeDefinitions != null &&
+                this.architectureTypeDefinitions.TryGetValue(fullName, out TypeDefinitionHandle architectureType))
+                return architectureType;
             if (this.namesToTypeDefHandles.TryGetValue(fullName, out TypeDefinitionHandle typeDef))
             {
                 return typeDef;
+            }
+
+            if (this.namesToTypeRefHandles.TryGetValue(fullName, out TypeReferenceHandle typeRef))
+            {
+                return typeRef;
             }
 
             string @namespace = typeSymbol.ContainingNamespace.ToString();
@@ -1759,7 +2003,7 @@ namespace ClangSharpSourceToWinmd
                 return true;
             }
 
-            return this.reducePointerLevels.Contains(symbol.Name);
+            return this.reducePointerLevels.Contains(FixArchSpecificName(symbol.Name));
         }
 
         private void EncodeTypeSymbol(ITypeSymbol typeSymbol, SignatureTypeEncoder typeEncoder)
@@ -1988,6 +2232,8 @@ namespace ClangSharpSourceToWinmd
                     case "DllImportAttribute":
                     case "NativeInheritanceAttribute":
                     case "PreserveSigAttribute":
+                    case "CanReturnErrorsAsSuccessAttribute":
+                    case "CanReturnMultipleSuccessValuesAttribute":
                         continue;
                 }
 
@@ -2126,11 +2372,6 @@ namespace ClangSharpSourceToWinmd
 
                 MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
 
-                if (methodSymbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
-                {
-                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
-                }
-
                 var methodDef =
                     this.AddMethodViaSymbol(
                         methodSymbol,
@@ -2161,7 +2402,7 @@ namespace ClangSharpSourceToWinmd
 
             name = fieldSymbol.Name;
 
-            this.RemapToMoreSpecificTypeIfPossible(structName, name, fieldSymbol.GetAttributes(), ref type);
+            this.RemapToMoreSpecificTypeIfPossible(structName, name, fieldSymbol.GetAttributes(), ref type, fieldSymbol);
 
             if (type.Name.EndsWith("_e__FixedBuffer"))
             {
@@ -2175,16 +2416,18 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 var fieldType = fixedBufferInfo.Type;
-                this.RemapToMoreSpecificTypeIfPossible(structName, name, fieldSymbol.GetAttributes(), ref fieldType);
+                var originalElementType = IsNativeStorageValue(fieldSymbol) || this.HasExplicitTypeRemap(fieldSymbol)
+                    ? fieldType : this.GetIntrinsicUseType(fieldType);
+                this.RemapToMoreSpecificTypeIfPossible(structName, name, fieldSymbol.GetAttributes(), ref fieldType, fieldSymbol);
 
-                bool symbolsChanged = !SymbolEqualityComparer.Default.Equals(fieldType, fixedBufferInfo.Type);
+                bool symbolsChanged = !SymbolEqualityComparer.Default.Equals(fieldType, originalElementType);
                 if (symbolsChanged && fieldType is IPointerTypeSymbol pointer)
                 {
                     fieldType = pointer.PointedAtType;
                 }
 
                 signatureEncoder.Array(
-                    s => this.EncodeTypeSymbol(fieldType, signatureEncoder),
+                    elementEncoder => this.EncodeTypeSymbol(fieldType, elementEncoder),
                     h => h.Shape(1, new int[1] { fixedBufferInfo.Count }.ToImmutableArray(), new int[1] { 0 }.ToImmutableArray()));
             }
             // Arrays
@@ -2252,7 +2495,17 @@ namespace ClangSharpSourceToWinmd
             // Write fields
             foreach (FieldDeclarationSyntax field in node.Members.Where(m => m is FieldDeclarationSyntax))
             {
-                var fieldSignature = this.EncodeFieldSignature(structName, model, field, out string name);
+                BlobBuilder fieldSignature;
+                string name;
+                try
+                {
+                    fieldSignature = this.EncodeFieldSignature(structName, model, field, out name);
+                }
+                catch (Exception error)
+                {
+                    throw new InvalidOperationException(
+                        $"Failed to encode field {structName}.{field.Declaration.Variables.First().Identifier.ValueText}.", error);
+                }
                 var fieldVariable = field.Declaration.Variables.First();
                 var fieldAttributes = FieldAttributes.Public;
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
@@ -2351,7 +2604,7 @@ namespace ClangSharpSourceToWinmd
                 }
                 catch (Exception e)
                 {
-                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e.Message}";
+                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e}";
                     this.parent.diagnostics.Add(new GeneratorDiagnostic(message, DiagnosticSeverity.Error));
                 }
             }
@@ -2360,11 +2613,15 @@ namespace ClangSharpSourceToWinmd
             {
                 try
                 {
+                    var symbol = this.parent.GetModel(node).GetDeclaredSymbol(node);
+                    if (this.parent.inferredNativeTypes.Contains(symbol) &&
+                        !this.parent.reachableNativeTypes.Contains(symbol))
+                        return;
                     this.parent.WriteStructDef(node);
                 }
                 catch (Exception e)
                 {
-                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e.Message}";
+                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e}";
                     this.parent.diagnostics.Add(new GeneratorDiagnostic(message, DiagnosticSeverity.Error));
                 }
             }
@@ -2377,7 +2634,7 @@ namespace ClangSharpSourceToWinmd
                 }
                 catch (Exception e)
                 {
-                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e.Message}";
+                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e}";
                     this.parent.diagnostics.Add(new GeneratorDiagnostic(message, DiagnosticSeverity.Error));
                 }
             }
@@ -2390,7 +2647,7 @@ namespace ClangSharpSourceToWinmd
                 }
                 catch (Exception e)
                 {
-                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e.Message}";
+                    string message = $"Failed to emit {node.Identifier.ValueText} in {node.SyntaxTree.FilePath}: {e}";
                     this.parent.diagnostics.Add(new GeneratorDiagnostic(message, DiagnosticSeverity.Error));
                 }
             }
@@ -2472,7 +2729,7 @@ namespace ClangSharpSourceToWinmd
                     methodName = methodSymbol.Name;
                 }
 
-                generator.RemapToMoreSpecificTypeIfPossible(methodName, paramName, parameterSymbol.GetAttributes(), ref paramType);
+                generator.RemapToMoreSpecificTypeIfPossible(methodName, paramName, parameterSymbol.GetAttributes(), ref paramType, parameterSymbol);
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();
                 if (symbolAttrs.Any(a => a.AttributeClass.Name == "InAttribute"))

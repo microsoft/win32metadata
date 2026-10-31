@@ -13,9 +13,10 @@
 #include <ksmedia.h>
 
 #include <combaseapi.h>
+// Establish multimedia packing before including the individual API headers.
+#include <mmsystem.h>
 #include <mmeapi.h>
 #include <mmreg.h>
-#include <mmsystem.h>
 #include <digitalv.h>
 #include <vfw.h>
 #include <joystickapi.h>
