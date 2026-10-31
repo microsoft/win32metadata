@@ -4,6 +4,12 @@
 *Workstream: 4 — Shift-Left Metadata Definition*
 *Branch: user/jevansaks/shift-left-metadata*
 
+**Historical planning record.** The version, transport, and enum examples below
+describe the original proposal, not current authoring instructions. Use the
+[shift-left annotation specification](shift-left-annotation-spec.md) for the
+first-parse AST contract, metadata-only groups, native Clang scopes, and
+original-SDK-artifact patching rules.
+
 ---
 
 ## Executive Summary

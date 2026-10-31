@@ -6,11 +6,55 @@ using System.IO.Abstractions;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Text.Json;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MetadataUtils
 {
-    public static class ConstantsScraper
+    public static partial class ConstantsScraper
     {
+        private static readonly Regex DefineRegex =
+            new Regex(@"^\s*#\s*define\s+([_A-Za-z][\dA-Za-z_]*)(?:\s+(.*))?$");
+
+        public static string[] ScanObjectLikeMacroNames(IEnumerable<string> headers, IEnumerable<string> includeDirectories)
+        {
+            string[] roots = includeDirectories.Where(directory => !string.IsNullOrEmpty(directory))
+                .Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+            return headers.SelectMany(header => Path.IsPathRooted(header) ? new[] { header } :
+                    roots.Select(directory => Path.Combine(directory, header)).Prepend(header))
+                .Where(File.Exists).Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase)
+                .SelectMany(header => ReadObjectLikeMacroNames(File.ReadLines(header)))
+                .Distinct(StringComparer.Ordinal).OrderBy(name => name, StringComparer.Ordinal).ToArray();
+        }
+
+        public static IEnumerable<string> ReadObjectLikeMacroNames(IEnumerable<string> lines)
+        {
+            string continuation = null;
+            bool inComment = false;
+            foreach (string currentLine in lines)
+            {
+                string line = continuation == null ? currentLine : continuation + currentLine;
+                if (line.EndsWith("\\", StringComparison.Ordinal))
+                {
+                    continuation = line.Substring(0, line.Length - 1);
+                    continue;
+                }
+                continuation = null;
+                line = RemoveComments(line, ref inComment);
+                Match match = DefineRegex.Match(line);
+                if (match.Success)
+                    yield return match.Groups[1].Value;
+            }
+            if (continuation != null)
+            {
+                Match match = DefineRegex.Match(RemoveComments(continuation, ref inComment));
+                if (match.Success)
+                    yield return match.Groups[1].Value;
+            }
+        }
+
         public static ScraperResults ScrapeConstants(
             string[] enumJsonFiles,
             string defaultNamespace,
@@ -21,22 +65,30 @@ namespace MetadataUtils
             Dictionary<string, string> requiredNamespaces,
             Dictionary<string, string> remaps,
             Dictionary<string, string> withTypes,
-            Dictionary<string, string> withAttributes)
+            Dictionary<string, string> withAttributes) =>
+            ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames,
+                traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes, null);
+
+        public static ScraperResults ScrapeConstants(
+            string[] enumJsonFiles,
+            string defaultNamespace,
+            string scraperOutputDir,
+            string constantsHeaderText,
+            HashSet<string> exclusionNames,
+            Dictionary<string, string> traversedHeaderToNamespaceMap,
+            Dictionary<string, string> requiredNamespaces,
+            Dictionary<string, string> remaps,
+            Dictionary<string, string> withTypes,
+            Dictionary<string, string> withAttributes,
+            ConstantSelectionOptions selection)
         {
+            using var timing = GenerationTiming.BeginSpan("constants.aggregate");
             using ConstantsScraperImpl imp = new ConstantsScraperImpl();
-            return imp.ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames, traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes);
+            return imp.ScrapeConstants(enumJsonFiles, defaultNamespace, scraperOutputDir, constantsHeaderText, exclusionNames, traversedHeaderToNamespaceMap, requiredNamespaces, remaps, withTypes, withAttributes, selection);
         }
 
         private class ConstantsScraperImpl : IDisposable
         {
-            private static readonly Regex DefineRegex =
-                new Regex(
-                    @"^\s*#\s*define\s+([_A-Za-z][\dA-Za-z_]+)\s+(.+)");
-
-            private static readonly Regex DefineConstantRegex =
-                new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+|(?:0x)?[\da-f]+))|([a-z0-9_]+U?\s*[\+\-]\s*(\d+|0x[0-de-f]+)U?)|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*\{\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\}\s*\})|(HIDP_ERROR_CODES\((.*),(.*)\))|(MAKEDIPROP\(\s*(\d+)\s*\))|(\{\s*(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\s*(?:(?:0x)?[\da-f]{1,2}L?,?\s*){8}\s*\})|(\(UCHAR\)\s*((?:0x)?\d+))|(\(UCHAR\)\s*(-\d+))|(\(BYTE\)((?:0x)?[\da-f]+L?))|(0x[\da-f]+\s*<<\s*\d+)||(0x[\da-f]+ui64\s*<<\s*\d+)|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
-
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
                     @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_PROPERTYKEY|DEFINE_KNOWN_FOLDER|OUR_GUID_ENTRY)\s*\((.*)");
@@ -85,11 +137,53 @@ namespace MetadataUtils
 
             private static readonly Regex ContainsLowerCase = new Regex(@"[a-z]+");
 
+            private const string StringLiteralPattern = @"(?<wide>L)?(?<literal>""(?:\\.|[^""\\])*"")";
+            private static readonly Regex StringTermRegex = new Regex(
+                @"\G\s*(?:(?<wrapper>TEXT|__TEXT|_T)\s*\(\s*" + StringLiteralPattern +
+                @"\s*\)|(?<wrapper>TEXT|_T)\s*\(\s*(?<name>[A-Za-z_]\w*)\s*\)|" +
+                StringLiteralPattern + @"|(?<name>[A-Za-z_]\w*))");
+            private static readonly HashSet<string> CppKeywords = new HashSet<string>(
+                ("alignas alignof and and_eq asm auto bitand bitor bool break case catch char " +
+                 "char8_t char16_t char32_t class co_await co_return co_yield compl concept const " +
+                 "consteval constexpr constinit const_cast continue decltype default delete do " +
+                 "double dynamic_cast else enum explicit export extern false float for friend " +
+                 "goto if inline int long mutable namespace new noexcept not not_eq nullptr " +
+                 "operator or or_eq private protected public register reinterpret_cast requires " +
+                 "return short signed sizeof static static_assert static_cast struct switch " +
+                 "template this thread_local throw true try typedef typeid typename union " +
+                 "unsigned using virtual void volatile wchar_t while xor xor_eq").Split(' '),
+                StringComparer.Ordinal);
+
             private Dictionary<string, EnumWriter> namespacesToEnumWriters = new();
             private Dictionary<string, IConstantWriter> namespacesToConstantWriters = new();
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants;
+            private readonly Dictionary<string, Architecture> writtenConstantArchitectures = new(StringComparer.Ordinal);
+            private readonly HashSet<string> legacyAliasNamespaces = new(StringComparer.Ordinal);
+            private Dictionary<string, string[]> sourceConstantTypes = new(StringComparer.Ordinal);
+            private Dictionary<string, ProtectedConstant[]> sourceConstants = new(StringComparer.Ordinal);
+            private Dictionary<string, NativeDependency[]> nativeDependencies = new(StringComparer.Ordinal);
+            private readonly Dictionary<string, List<NativeCandidate>> selectedNativeScalars = new(StringComparer.Ordinal);
+            private readonly List<object> legacyDependencyPolicies = new();
+            private object nativeConstantReport;
+            private readonly List<object> nativeInputReferences = new();
+            private string legacyHeader;
+            private int legacyLine;
+            private HashSet<string> mutableGlobalNames = new(StringComparer.Ordinal);
+            private HashSet<string> headerEnumMemberNames = new(StringComparer.Ordinal);
+            private Dictionary<string, string> scrapedConstantNamespaces = new(StringComparer.Ordinal);
+            private readonly HashSet<string> nativeIntegerHeaders = new(StringComparer.OrdinalIgnoreCase);
+            private readonly HashSet<string> nativeIntegerNames = new(StringComparer.Ordinal);
+            private readonly HashSet<string> nativePointerNames = new(StringComparer.Ordinal);
+            private bool usesNativeIntegers;
+            private ConstantSelectionOptions selection = new();
+            private Dictionary<string, int> headerPriorities = new(StringComparer.OrdinalIgnoreCase);
+            private Dictionary<string, int> headerTraversal = new(StringComparer.OrdinalIgnoreCase);
+            private string conflictReport;
+            private readonly GenerationValidation validation = new();
+            private bool nativeInputsValid = true;
+            private readonly HashSet<string> invalidLegacyConstants = new(StringComparer.Ordinal);
 
             private List<EnumObject> enumObjectsFromJsons = new();
             private Dictionary<string, string> withTypes;
@@ -134,8 +228,11 @@ namespace MetadataUtils
                 Dictionary<string, string> requiredNamespaces,
                 Dictionary<string, string> remaps,
                 Dictionary<string, string> withTypes,
-                Dictionary<string, string> withAttributes)
+                Dictionary<string, string> withAttributes,
+                ConstantSelectionOptions selection = null)
             {
+                using var inputTiming = GenerationTiming.BeginSpan("constants.load-existing-source");
+                inputTiming?.SetCounter("traversedHeaderCount", traversedHeaderToNamespaceMap.Count);
                 this.requiredNamespaces = new WildcardDictionary(requiredNamespaces);
                 this.withTypes = withTypes;
                 this.exclusionNames = exclusionNames;
@@ -143,26 +240,65 @@ namespace MetadataUtils
                 this.withAttributes = withAttributes;
                 this.scraperOutputDir = scraperOutputDir;
                 this.defaultNamespace = defaultNamespace;
+                this.selection = selection ?? new ConstantSelectionOptions();
+                this.PrepareHeaderPriority(traversedHeaderToNamespaceMap);
 
                 this.regexConstHelper = new RegexConstHelper(regexConstMakers, this);
 
                 this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(scraperOutputDir);
 
-                this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir);
+                this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir, out this.mutableGlobalNames);
+                this.headerEnumMemberNames = this.GetHeaderEnumMemberNames();
 
-                this.CleanExistingFiles();
+                if (!this.selection.PreflightOnly)
+                {
+                    this.CleanExistingFiles();
+                    this._fileSystem.File.Delete(Path.Combine(this.scraperOutputDir, "native-constant-conflicts.json"));
+                }
 
                 this.LoadEnumObjectsFromJsonFiles(enumJsonFiles);
+                inputTiming?.Dispose();
 
-                this.ScrapeConstantsFromTraversedFiles(traversedHeaderToNamespaceMap);
+                this.WriteNativeConstants(traversedHeaderToNamespaceMap);
+                if (this.selection.PreflightOnly)
+                {
+                    this.validation.Block("constants.native-selection;constants.legacy-aliases;constants.enum-finalization;EmitWinmd;default tests",
+                        this.selection.BlockedBy ?? "successful native generation");
+                    this.WriteRejectedConstantReport(this.validation.Format(), "constants-preflight-diagnostics.json");
+                    this.validation.ThrowIfAny(this.conflictReport);
+                    return new ScraperResults(new[] { this.validation.Format(), "Full diagnostics: " + this.conflictReport }, this.conflictReport);
+                }
+                if (this.nativeInputsValid)
+                    this.ScrapeConstantsFromTraversedFiles(traversedHeaderToNamespaceMap);
+                else
+                    this.validation.Block("constants.legacy-aliases", "native input and source ownership validation");
 
                 this.WriteEnumsAndRemaps(remaps);
+                if (this.validation.HasErrors)
+                {
+                    this.validation.Block("EmitWinmd", "constants finalization");
+                    this.Dispose();
+                    this.CleanExistingFiles();
+                    foreach (string file in new[] { "enumsRemap.rsp", "enumsMakeFlags.generated.rsp" })
+                        this._fileSystem.File.Delete(Path.Combine(this.scraperOutputDir, file));
+                    this.WriteRejectedConstantReport(this.validation.Format());
+                    this.validation.ThrowIfAny(this.conflictReport);
+                }
+                if (this.nativeConstantReport != null)
+                {
+                    using var reportTiming = GenerationTiming.BeginSpan("constants.write-conflict-report");
+                    this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(
+                        this.nativeConstantReport, new JsonSerializerOptions { WriteIndented = true }));
+                }
 
-                return new ScraperResults(this.output);
+                return new ScraperResults(this.output, this.conflictReport);
             }
 
             public void Dispose()
             {
+                using var timing = GenerationTiming.BeginSpan("constants.flush-csharp-writers");
+                timing?.SetCounter("enumWriterCount", this.namespacesToEnumWriters.Count);
+                timing?.SetCounter("constantWriterCount", this.namespacesToConstantWriters.Count);
                 foreach (EnumWriter enumWriter in this.namespacesToEnumWriters.Values)
                 {
                     enumWriter.Dispose();
@@ -199,44 +335,14 @@ namespace MetadataUtils
                 return enumObjects;
             }
 
-            private static string StripComments(string rawValue)
-            {
-                bool inQuote = false;
-                for (int i = 0; i <= rawValue.Length - 2; i++)
-                {
-                    if (rawValue[i] == '\"')
-                    {
-                        inQuote = !inQuote;
-                    }
-
-                    if (!inQuote && rawValue[i] == '/')
-                    {
-                        if (rawValue[i + 1] == '/')
-                        {
-                            // Remove trailing line comments.
-                            return rawValue.Substring(0, i).Trim();
-                        }
-                        else if (rawValue[i + 1] == '*')
-                        {
-                            if (rawValue.LastIndexOf("*/") == -1)
-                            {
-                                // Remove trailing block comments that aren't closed.
-                                return rawValue.Substring(0, i).Trim();
-                            }
-                            else
-                            {
-                                // Remove inline block comments that are closed.
-                                return rawValue.Substring(0, i).Trim() + rawValue.Substring(rawValue.LastIndexOf("*/") + 2).Trim();
-                            }
-                        }
-                    }
-                }
-
-                return rawValue;
-            }
-
             private void CleanExistingFiles()
             {
+                foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                    "NativeConstants.*.header-types.cs", SearchOption.AllDirectories))
+                    this._fileSystem.File.Delete(file);
+                foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                    "LegacyAliases.*.constants.cs", SearchOption.AllDirectories))
+                    this._fileSystem.File.Delete(file);
                 foreach (string file in Directory.GetFiles(this.scraperOutputDir).Where(f => f.EndsWith(".enums.cs") || f.EndsWith(".constants.cs")))
                 {
                     this._fileSystem.File.Delete(file);
@@ -288,7 +394,14 @@ namespace MetadataUtils
                 {
                     foreach (var enumJsonFile in enumJsonFiles)
                     {
-                        enumObjects.AddRange(EnumObject.LoadFromFile(enumJsonFile));
+                        try
+                        {
+                            enumObjects.AddRange(EnumObject.LoadFromFile(enumJsonFile));
+                        }
+                        catch (Newtonsoft.Json.JsonException error)
+                        {
+                            this.validation.Add(error, "WMC002", "constants.enum-input", enumJsonFile);
+                        }
                     }
                 }
 
@@ -332,7 +445,7 @@ namespace MetadataUtils
 
             private void AddCtlCodeConstant(string originalNamespace, string name, string deviceType, string function, string method, string access)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.usesNativeIntegers || this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name))
                 {
                     return;
                 }
@@ -348,29 +461,56 @@ namespace MetadataUtils
                 this.writtenConstants.Add(name, "uint");
             }
 
-            private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "")
+            private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "",
+                Architecture architecture = Architecture.All)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) || this.usesNativeIntegers &&
+                    type is "bool" or "char" or "sbyte" or "byte" or "short" or "ushort" or "int" or "uint" or "long" or "ulong")
                 {
                     return;
                 }
 
-                var writer = this.GetConstantWriter(originalNamespace, name);
-                writer.AddValue(type, name, valueText, context);
+                if (architecture == Architecture.All)
+                    this.GetConstantWriter(originalNamespace, name).AddValue(type, name, valueText, context);
+                else
+                {
+                    if (architecture == Architecture.None || (architecture & ~Architecture.All) != 0)
+                        throw new InvalidDataException($"Constant alias '{name}' has invalid target applicability '{architecture}'.");
+                    foreach (var target in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
+                        if ((architecture & target) != 0)
+                            this.GetConstantWriter(originalNamespace, name, target).AddValue(type, name, valueText, context);
+                }
 
                 this.writtenConstants.Add(name, type);
+                this.writtenConstantArchitectures.Add(name, architecture);
             }
 
             private void AddConstantGuid(string defineGuidKeyword, string originalNamespace, string line)
             {
                 int firstComma = line.IndexOf(',');
                 string name = line.Substring(0, firstComma).Trim();
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.ShouldExclude(name))
                 {
                     return;
                 }
 
-                if (this.ShouldExclude(name))
+                if (this.selectedNativeScalars.TryGetValue(name, out var scalars))
+                {
+                    foreach (var scalar in scalars)
+                        this.validation.Add(new InvalidDataException(
+                            $"Native scalar '{name}' ({scalar.Value.NativeType}, {scalar.Value.StorageType}, " +
+                            $"value {scalar.Value.Value}) selected from '{scalar.Header}':{scalar.Value.Line}:{scalar.Value.Column} " +
+                            $"(header SHA256 {scalar.Value.HeaderHash}; producer '{scalar.Input.Values.SourceFile}', " +
+                            $"source SHA256 {scalar.Input.Values.SourceHash}) conflicts with " +
+                            $"'{defineGuidKeyword}' GUID definition in '{this.legacyHeader}':{this.legacyLine}."),
+                            "NATIVE_GUID_COLLISION", "constants.legacy-guids", scalar.Input.Path, name,
+                            this.legacyHeader, this.legacyLine, scalar.Input.Values.Architecture.ToString(),
+                            Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(scalar.Input.Path)),
+                            this.selection.SdkRoot, "selected-native-scalar-versus-guid");
+                    return;
+                }
+
+                if (this.writtenConstants.ContainsKey(name))
                 {
                     return;
                 }
@@ -414,22 +554,30 @@ namespace MetadataUtils
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) ||
+                    this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
                 {
                     return;
                 }
 
                 string forcedType = nativeTypeName != null ? null : this.GetForcedTypeForName(name);
+                string dependencyType = null;
+                bool nativeDependency = nativeTypeName == null && this.TryGetNativeDependencyType(name, out dependencyType);
+                if (nativeDependency)
+                    forcedType = dependencyType;
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
                 writer.AddInt(forcedType, nativeTypeName, name, valueText, out var finalType);
 
                 this.writtenConstants.Add(name, finalType);
+                if (nativeDependency)
+                    this.RecordNativeDependencyPolicy(name, name, finalType, valueText);
             }
 
             private void AddConstantShort(string originalNamespace, string nativeTypeName, string name, string valueText)
             {
-                if (this.writtenConstants.ContainsKey(name))
+                if (this.writtenConstants.ContainsKey(name) || this.sourceConstantTypes.ContainsKey(name) ||
+                    this.usesNativeIntegers && !this.nativePointerNames.Contains(name))
                 {
                     return;
                 }
@@ -439,7 +587,7 @@ namespace MetadataUtils
                 this.writtenConstants.Add(name, finalType);
             }
 
-            private IConstantWriter GetConstantWriter(string originalNamespace, string name)
+            private IConstantWriter GetConstantWriter(string originalNamespace, string name, Architecture architecture = Architecture.All)
             {
                 string foundNamespace = originalNamespace;
 
@@ -448,10 +596,34 @@ namespace MetadataUtils
                 {
                     foundNamespace = newNamespace;
                 }
+                this.scrapedConstantNamespaces[name] = foundNamespace;
 
-                if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out IConstantWriter constantWriter))
+                string key = foundNamespace;
+                string partConstantsFile = Path.Combine(this.scraperOutputDir, $@"{foundNamespace}.constants.cs");
+                if (architecture != Architecture.All)
                 {
-                    string partConstantsFile = Path.Combine(this.scraperOutputDir, $@"{foundNamespace}.constants.cs");
+                    if (this.legacyAliasNamespaces.Add(foundNamespace))
+                        foreach (string target in new[] { "x86", "x64", "arm64" })
+                        {
+                            string directory = Path.Combine(this.scraperOutputDir, target);
+                            this._fileSystem.Directory.CreateDirectory(directory);
+                            this._fileSystem.File.WriteAllText(
+                                Path.Combine(directory, $"LegacyAliases.{foundNamespace}.constants.cs"), "");
+                        }
+                    string targetDirectory = architecture switch
+                    {
+                        Architecture.X86 => "x86",
+                        Architecture.X64 => "x64",
+                        Architecture.Arm64 => "arm64",
+                        _ => throw new InvalidDataException($"Constant writer requires one target, not '{architecture}'."),
+                    };
+                    key = Path.Combine(targetDirectory, foundNamespace);
+                    partConstantsFile = Path.Combine(this.scraperOutputDir, targetDirectory,
+                        $"LegacyAliases.{foundNamespace}.constants.cs");
+                }
+
+                if (!this.namespacesToConstantWriters.TryGetValue(key, out IConstantWriter constantWriter))
+                {
                     if (this._fileSystem.File.Exists(partConstantsFile))
                     {
                         this._fileSystem.File.Delete(partConstantsFile);
@@ -459,7 +631,7 @@ namespace MetadataUtils
 
                     var fileStream = this._fileSystem.File.OpenWrite(partConstantsFile);
                     constantWriter = new ConstantWriter(fileStream, foundNamespace, this.constantsHeaderText, this.withAttributes);
-                    this.namespacesToConstantWriters.Add(foundNamespace, constantWriter);
+                    this.namespacesToConstantWriters.Add(key, constantWriter);
                 }
 
                 return constantWriter;
@@ -480,6 +652,20 @@ namespace MetadataUtils
                 return manualEnumMemberNames;
             }
 
+            private HashSet<string> GetHeaderEnumMemberNames()
+            {
+                var files = this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*header-types.cs", SearchOption.AllDirectories)
+                    .Where(file => Path.GetFileName(file) == "header-types.cs" || file.EndsWith(".header-types.cs", StringComparison.Ordinal));
+                var members = new HashSet<string>(StringComparer.Ordinal);
+                foreach (var group in LoadEnumsFromSourceFiles(files))
+                {
+                    string groupNamespace = this.LookupNamespaceForName(group.name) ?? group.@namespace;
+                    foreach (var member in group.members)
+                        members.Add($"{groupNamespace}.{member.name}");
+                }
+                return members;
+            }
+
             private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles)
             {
                 // Load the enums scraped from the docs
@@ -494,22 +680,775 @@ namespace MetadataUtils
                 return this.exclusionNames.Contains(constName);
             }
 
+            private void PrepareHeaderPriority(Dictionary<string, string> traversedFileMap)
+            {
+                this.headerTraversal = traversedFileMap.Keys.Select((header, index) => (Header: Path.GetFullPath(header), index))
+                    .ToDictionary(value => value.Header, value => value.index, StringComparer.OrdinalIgnoreCase);
+                if (this.selection.HeaderPriority.Count != 0 && string.IsNullOrWhiteSpace(this.selection.SdkRoot))
+                {
+                    this.validation.Add(new ArgumentException("Header priority requires an explicit SDK include root."),
+                        "WMC002", "constants.header-priority");
+                    this.nativeInputsValid = false;
+                }
+                var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                for (int i = 0; i < this.selection.HeaderPriority.Count; i++)
+                {
+                    string relative = this.selection.HeaderPriority[i].Replace(Path.AltDirectorySeparatorChar, Path.DirectorySeparatorChar);
+                    if (string.IsNullOrWhiteSpace(relative) || Path.IsPathRooted(relative) ||
+                        relative.Split(Path.DirectorySeparatorChar).Any(part => part is "" or "." or "..") || !seen.Add(relative))
+                    {
+                        this.validation.Add(new ArgumentException($"Invalid or repeated SDK-root-relative priority header '{relative}'."),
+                            "WMC002", "constants.header-priority", header: relative);
+                        this.nativeInputsValid = false;
+                        continue;
+                    }
+                    if (string.IsNullOrWhiteSpace(this.selection.SdkRoot))
+                        continue;
+                    string full = Path.GetFullPath(Path.Combine(this.selection.SdkRoot, relative));
+                    this.headerPriorities.Add(full, i);
+                }
+            }
+
+            private IEnumerable<KeyValuePair<string, string>> OrderedHeaders(Dictionary<string, string> headers) =>
+                headers.OrderBy(pair => this.headerPriorities.GetValueOrDefault(Path.GetFullPath(pair.Key), int.MaxValue));
+
+            private sealed record NativeInput(string Path, NativeConstantValues Values, int Order);
+            private sealed record NativeCandidate(
+                NativeInput Input, NativeConstantValue Value, string Header, string Namespace, int HeaderPriority, int TraversalOrder);
+            private sealed record ProtectedConstant(
+                string Name, string Namespace, string Owner, string Source, Architecture Architecture, string StorageType,
+                string Expression, NativeConstantGroupSource Proof, string DeclaredName, string SourceKind);
+            private sealed record NativeDependency(NativeCandidate Candidate, ProtectedConstant Owner);
+
+            private void WriteNativeConstants(Dictionary<string, string> traversedFileMap)
+            {
+                this.WriteNativeConstantsCore(traversedFileMap);
+            }
+
+            private void WriteRejectedConstantReport(string error, string reportName = "native-constant-conflicts.json")
+            {
+                using var timing = GenerationTiming.BeginSpan("constants.write-rejection-report");
+                this.conflictReport = Path.Combine(this.scraperOutputDir, reportName);
+                this._fileSystem.File.WriteAllText(this.conflictReport, JsonSerializer.Serialize(new
+                {
+                    Version = 1, Status = this.validation.Status, Error = error, this.selection.SdkRoot,
+                    this.selection.HeaderPriority, this.selection.NativeInputs, this.selection.NativeHeaderOwnershipFile,
+                    Errors = this.validation.Errors, BlockedStages = this.validation.BlockedStages,
+                    NativeSelection = new { Status = "blocked", Dependency = "successful native inputs and constants finalization" },
+                    NativeInputReferences = this.nativeInputReferences, Output = this.output,
+                    RawInputs = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                        "*.native-constants.json", SearchOption.AllDirectories).Select(path =>
+                        {
+                            using var stream = this._fileSystem.File.OpenRead(path);
+                            return new { Path = path, Length = stream.Length,
+                                Sha256 = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(stream)) };
+                        }).ToArray(),
+                }, new JsonSerializerOptions { WriteIndented = true }));
+            }
+
+            private void WriteNativeConstantsCore(Dictionary<string, string> traversedFileMap)
+            {
+                using var timing = GenerationTiming.BeginSpan("constants.native-inputs");
+                using var loadTiming = GenerationTiming.BeginSpan("constants.load-native-facts");
+                var headers = traversedFileMap.ToDictionary(pair => Path.GetFullPath(pair.Key), pair => pair.Value,
+                    StringComparer.OrdinalIgnoreCase);
+                string[] discovered = this._fileSystem.Directory.GetFiles(this.scraperOutputDir,
+                    "*.native-constants.json", SearchOption.AllDirectories);
+                string[] paths = this.selection.NativeInputs.Count == 0 ? discovered :
+                    this.selection.NativeInputs.Select(Path.GetFullPath).ToArray();
+                if (paths.Distinct(StringComparer.OrdinalIgnoreCase).Count() != paths.Length ||
+                    !paths.ToHashSet(StringComparer.OrdinalIgnoreCase).SetEquals(discovered.Select(Path.GetFullPath)))
+                {
+                    this.validation.Add(new InvalidDataException("The native constant input plan must name every current input exactly once."),
+                        "WMC002", "constants.native-input-plan");
+                    this.nativeInputsValid = false;
+                }
+                var loadedInputs = new List<NativeInput>();
+                var rejectedInputs = new HashSet<NativeInput>();
+                var preparedSdkHeaders = new PreparedSdkHeaderResolver(
+                    this._fileSystem, this.scraperOutputDir, this.selection.SdkRoot);
+                var toolchainHeaders = new SelectedToolchainHeaderResolver(this._fileSystem,
+                    this.selection.NativeHeaderOwnershipFile, this.selection.SdkRoot, traversedFileMap);
+                var toolchainOwners = new Dictionary<(NativeInput Input, string Header), SelectedToolchainHeaderOwnership>();
+                foreach (string path in paths.Concat(discovered).Distinct(StringComparer.OrdinalIgnoreCase))
+                {
+                    NativeInput input = null;
+                    try
+                    {
+                        if (!this._fileSystem.File.Exists(path))
+                            throw new InvalidDataException($"Missing planned native constants file '{path}'.");
+                        input = new NativeInput(path,
+                            JsonSerializer.Deserialize<NativeConstantValues>(this._fileSystem.File.ReadAllText(path)) ??
+                                throw new InvalidDataException($"Invalid native constants file '{path}'."), loadedInputs.Count);
+                        this.nativeInputReferences.Add(new { input.Path, Architecture = input.Values.Architecture.ToString(),
+                            input.Values.BindingSource, input.Values.SourceFile, input.Values.SourceHash });
+                        bool valid = true;
+                        if (input.Values.Architecture is not (Architecture.X86 or Architecture.X64 or Architecture.Arm64))
+                        {
+                            RejectInput(new InvalidDataException($"Invalid native constant architecture '{input.Values.Architecture}'."), input);
+                            valid = false;
+                        }
+                        if (input.Values.Headers?.Any(header => string.IsNullOrWhiteSpace(header)) == true ||
+                            input.Values.Constants?.Any(value => value != null && string.IsNullOrWhiteSpace(value.Header)) == true)
+                        {
+                            RejectInput(new InvalidDataException($"Missing native header identity in input '{input.Path}' ({input.Values.Architecture})."),
+                                input, identityCategory: "prepared-sdk-header-binding");
+                            valid = false;
+                        }
+                        if (input.Values.Headers == null || input.Values.Constants == null ||
+                            input.Values.Issues == null || input.Values.Groups == null ||
+                            input.Values.Constants.Any(value => value == null || string.IsNullOrEmpty(value.Name) ||
+                                string.IsNullOrEmpty(value.NativeName)) ||
+                            input.Values.Issues.Any(issue => issue == null) ||
+                            input.Values.Groups.Any(group => group == null || group.Members == null ||
+                                group.Members.Any(member => member == null || member.Bindings == null)))
+                        {
+                            RejectInput(new InvalidDataException($"Missing or invalid native constant input collections in '{input.Path}'."), input);
+                            valid = false;
+                        }
+                        if (!valid)
+                            continue;
+                        foreach (string header in input.Values.Headers)
+                        {
+                            try
+                            {
+                                string resolved = ResolveHeaderCore(input, header, out bool preparedSdk);
+                                if (!headers.ContainsKey(resolved) && !preparedSdk &&
+                                    !string.IsNullOrEmpty(this.selection.NativeHeaderOwnershipFile))
+                                {
+                                    try
+                                    {
+                                        var owner = toolchainHeaders.Resolve(input.Values, input.Path, header);
+                                        toolchainOwners.TryAdd((input, ToolchainHeaderKey(header)), owner);
+                                    }
+                                    catch (InvalidDataException error)
+                                    {
+                                        RejectInput(error, input, header: header, identityCategory: "selected-toolchain-header-binding");
+                                        valid = false;
+                                        continue;
+                                    }
+                                }
+                                if (!headers.ContainsKey(resolved) && !toolchainOwners.ContainsKey((input, ToolchainHeaderKey(header))))
+                                    throw new InvalidDataException($"Native constants input '{input.Path}' ({input.Values.Architecture}) " +
+                                        $"has no traversed header identity for '{header}'.");
+                                this.nativeIntegerHeaders.Add(resolved);
+                            }
+                            catch (InvalidDataException error)
+                            {
+                                RejectInput(error, input, header: header, identityCategory: "prepared-sdk-header-binding");
+                                valid = false;
+                            }
+                            catch (JsonException error)
+                            {
+                                RejectInput(error, input, header: header, identityCategory: "prepared-sdk-header-binding");
+                                valid = false;
+                            }
+                        }
+                        if (!valid)
+                            continue;
+                        this.nativePointerNames.UnionWith(input.Values.Issues.Where(issue => issue.Reason == "pointer constant").Select(issue => issue.Name));
+                        loadedInputs.Add(input);
+                    }
+                    catch (JsonException error)
+                    {
+                        this.validation.Add(error, "WMC002", "constants.native-input", path,
+                            architecture: input?.Values.Architecture.ToString(),
+                            partition: Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
+                            selectedSdkRoot: this.selection.SdkRoot, identityCategory: "native-input-json");
+                        this.nativeInputsValid = false;
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        this.validation.Add(error, "WMC002", "constants.native-input", path,
+                            architecture: input?.Values.Architecture.ToString(),
+                            partition: Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(path)),
+                            selectedSdkRoot: this.selection.SdkRoot, identityCategory: "native-input-validation");
+                        this.nativeInputsValid = false;
+                    }
+                }
+                var inputs = loadedInputs.ToArray();
+                loadTiming?.SetCounter("inputCount", inputs.Length);
+                loadTiming?.SetCounter("acceptedFactCount", inputs.Sum(input => (long)input.Values.Constants.Count));
+                loadTiming?.SetCounter("rejectedFactCount", inputs.Sum(input => (long)input.Values.Issues.Count));
+                loadTiming?.Dispose();
+                if (inputs.Length == 0 &&
+                    !this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*header-types.cs", SearchOption.AllDirectories)
+                        .Where(file => Path.GetFileName(file) == "header-types.cs" ||
+                            file.EndsWith(".header-types.cs", StringComparison.Ordinal))
+                        .Any(file => this._fileSystem.File.ReadAllText(file)
+                            .StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal)))
+                    return;
+                using var ownersTiming = GenerationTiming.BeginSpan("constants.load-source-owners");
+                var protectedConstants = new List<ProtectedConstant>();
+                var missingProofs = new List<string>();
+                var inputsBySource = inputs.ToLookup(input => (input.Values.Architecture, input.Values.SourceFile));
+                foreach (string file in this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*.cs", SearchOption.AllDirectories)
+                    .Where(file => !NativeConstantValues.IsGeneratedSource(file) &&
+                        !file.EndsWith(".modified.cs", StringComparison.Ordinal) &&
+                        !file.EndsWith(".constants.cs", StringComparison.Ordinal) &&
+                        !file.EndsWith(".enums.cs", StringComparison.Ordinal)))
+                {
+                    var architecture = Path.GetDirectoryName(file).Split(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+                        .Select(part => part switch
+                        {
+                            "x86" => Architecture.X86, "x64" => Architecture.X64, "arm64" => Architecture.Arm64,
+                            _ => Architecture.None,
+                        }).LastOrDefault(value => value != Architecture.None);
+                    if (architecture == Architecture.None)
+                        architecture = Architecture.All;
+                    string text = this._fileSystem.File.ReadAllText(file);
+                    var root = SyntaxFactory.ParseCompilationUnit(text);
+                    bool headerSource = Path.GetFileName(file) == "header-types.cs" ||
+                        file.EndsWith(".header-types.cs", StringComparison.Ordinal);
+                    foreach (var group in root.DescendantNodes().OfType<EnumDeclarationSyntax>().Where(group =>
+                        group.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
+                    {
+                        try
+                        {
+                        var proof = NativeConstantGroupProvenance.Read(group);
+                        string originalNamespace = NamespaceOf(group);
+                        if (proof != null && (proof.Group.Namespace != originalNamespace ||
+                            !architecture.HasFlag(proof.Architecture) ||
+                            (headerSource ? proof.Group.Kind != "LogicalGroup" ||
+                                !text.StartsWith(HeaderTypesSourceFamily.SuccessMarker, StringComparison.Ordinal) :
+                                proof.Group.Kind != "NativeEnum")))
+                            throw new InvalidDataException($"Native constant group producer/namespace/target drift in '{file}'.");
+                        if (group.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                            attribute.Name.ToString().Split('.').Last() is "ScopedEnum" or "ScopedEnumAttribute"))
+                            continue;
+                        if (headerSource && proof == null)
+                            missingProofs.Add(file);
+                        string ns = this.LookupNamespaceForName(group.Identifier.ValueText, requiredOnly: true);
+                        if (ns == null && headerSource && proof != null)
+                        {
+                            var owners = inputsBySource[(proof.Architecture, proof.SourceFile)]
+                                .Select(input => ResolveHeader(input, proof.Group.Header))
+                                .Where(headers.ContainsKey).Select(header => headers[header])
+                                .Distinct(StringComparer.Ordinal).ToArray();
+                            if (owners.Length > 1)
+                                throw new InvalidDataException($"Native constant group '{proof.Group.NativeName}' has conflicting traversed-header owners.");
+                            if (owners.Length == 1)
+                                ns = owners.Single();
+                        }
+                        ns ??= this.LookupNamespaceForName(group.Identifier.ValueText) ?? originalNamespace;
+                        foreach (var member in group.Members)
+                            protectedConstants.Add(new ProtectedConstant(member.Identifier.ValueText, ns, group.Identifier.ValueText,
+                                file, architecture, group.BaseList?.Types.Single().Type.ToString() ?? "int",
+                                member.EqualsValue?.Value.ToString(), proof, member.Identifier.ValueText,
+                                headerSource ? "logical-header-group" : "ordinary-unscoped-enum"));
+                        }
+                        catch (InvalidDataException error)
+                        {
+                            this.validation.Add(error, "WMC003", "constants.source-owner", file,
+                                group.Identifier.ValueText, architecture: architecture.ToString());
+                            this.nativeInputsValid = false;
+                        }
+                    }
+                    foreach (var field in root.DescendantNodes().OfType<FieldDeclarationSyntax>().Where(field =>
+                        field.Parent is ClassDeclarationSyntax type && type.Identifier.ValueText == "Apis" &&
+                        (field.Modifiers.Any(SyntaxKind.ConstKeyword) ||
+                            field.Modifiers.ToString() == "public static readonly" &&
+                            field.Declaration.Type.ToString() != "Guid" &&
+                            field.Declaration.Variables.First().Identifier.ValueText.StartsWith("__forceconst__", StringComparison.Ordinal))))
+                        foreach (var variable in field.Declaration.Variables)
+                        {
+                            try
+                            {
+                            string declaredName = variable.Identifier.ValueText;
+                            string name = NativeMemberNameProvenance.GetProjectedFieldName(field, declaredName);
+                            if (name.StartsWith("__forceconst__", StringComparison.Ordinal))
+                                name = name.Substring("__forceconst__".Length);
+                            string ns = this.LookupNamespaceForName(declaredName) ?? NamespaceOf(field);
+                            protectedConstants.Add(new ProtectedConstant(name, ns, "Apis", file, architecture,
+                                field.Declaration.Type.ToString(), variable.Initializer?.Value.ToString(), null,
+                                declaredName, "apis-constant"));
+                            }
+                            catch (InvalidDataException error)
+                            {
+                                this.validation.Add(error, "WMC003", "constants.source-owner", file,
+                                    variable.Identifier.ValueText, architecture: architecture.ToString());
+                                this.nativeInputsValid = false;
+                            }
+                        }
+                }
+                this.sourceConstants = protectedConstants.GroupBy(value => value.Name, StringComparer.Ordinal)
+                    .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
+                this.sourceConstantTypes = this.sourceConstants.ToDictionary(pair => pair.Key,
+                    pair => pair.Value.Select(GetSourceDependencyStorageType).Distinct(StringComparer.Ordinal).ToArray(),
+                    StringComparer.Ordinal);
+                ownersTiming?.SetCounter("protectedConstantCount", protectedConstants.Count);
+                ownersTiming?.Dispose();
+                if (inputs.Length == 0)
+                    return;
+                using var resolutionTiming = GenerationTiming.BeginSpan("constants.resolve-ownership-types-aliases");
+                var protectionsByName = protectedConstants.ToLookup(value => value.Name, StringComparer.Ordinal);
+                var proofSources = protectedConstants.Where(value => value.Proof != null)
+                    .ToLookup(value => value.Proof, value => value.Source);
+                var proofIds = proofSources.Select((value, index) => (value.Key, index))
+                    .ToDictionary(value => value.Key, value => value.index);
+                var bindingCache = new Dictionary<(NativeInput Input, NativeConstantGroupSource Proof),
+                    ILookup<string, NativeConstantBinding>>();
+                var boundProtections = new Dictionary<(Architecture Target, string Kind, string NativeName), HashSet<ProtectedConstant>>();
+                foreach (var protection in protectedConstants.Where(value => value.Proof != null))
+                    foreach (var input in inputs.Where(input => protection.Architecture.HasFlag(input.Values.Architecture) &&
+                        input.Values.SourceFile == protection.Proof.SourceFile))
+                    {
+                        try
+                        {
+                        foreach (var binding in CompilerBindings(input, protection).Where(binding => binding.Kind != "Expression"))
+                        {
+                            var key = (input.Values.Architecture, binding.Kind, binding.NativeName);
+                            if (!boundProtections.TryGetValue(key, out var owners))
+                                boundProtections.Add(key, owners = new());
+                            owners.Add(protection);
+                        }
+                        }
+                        catch (InvalidDataException error)
+                        {
+                            RejectInput(error, input, protection.Name, protection.Source);
+                        }
+                    }
+                var candidates = new List<NativeCandidate>();
+                foreach (var input in inputs)
+                    foreach (var value in input.Values.Constants)
+                    {
+                        try
+                        {
+                        string header = ResolveHeader(input, value.Header);
+                        var toolchainOwner = toolchainOwners.GetValueOrDefault((input, ToolchainHeaderKey(value.Header)));
+                        string ns = toolchainOwner?.Namespace;
+                        if ((toolchainOwner == null && !headers.TryGetValue(header, out ns)) ||
+                            this.ShouldExclude(value.NativeName) || this.ShouldExclude(value.Name))
+                            continue;
+                        this.nativeIntegerNames.Add(value.NativeName);
+                        if (value.AliasTarget != null && (value.AliasTarget.Kind != "CXCursor_EnumConstantDecl" ||
+                            string.IsNullOrEmpty(value.AliasTarget.NativeName) ||
+                            string.IsNullOrEmpty(value.AliasTarget.Header) || value.AliasTarget.Line == 0 ||
+                            value.AliasTarget.Column == 0 || value.AliasTarget.HeaderHash?.Length != 64 ||
+                            !value.AliasTarget.HeaderHash.All(Uri.IsHexDigit) ||
+                            value.AliasTarget.NativeType != value.NativeType ||
+                            value.AliasTarget.StorageType != value.StorageType || value.AliasTarget.Value != value.Value ||
+                            string.IsNullOrEmpty(input.Values.SourceFile) || input.Values.SourceHash?.Length != 64 ||
+                            !input.Values.SourceHash.All(Uri.IsHexDigit)))
+                            throw new InvalidDataException($"Invalid compiler-bound native alias in '{input.Path}'.");
+                        ns = this.LookupNamespaceForName(value.Name) ?? ns;
+                        candidates.Add(new NativeCandidate(input, value, header, ns,
+                            this.headerPriorities.GetValueOrDefault(header, int.MaxValue),
+                            toolchainOwner?.TraversalOrder ?? this.headerTraversal[header]));
+                        }
+                        catch (InvalidDataException error)
+                        {
+                            RejectInput(error, input, value.NativeName, value.Header, (int)value.Line);
+                        }
+                    }
+                var constants = new Dictionary<(Architecture Architecture, string Namespace, string Name), NativeConstantValue>();
+                var decisions = new List<object>();
+                var nativeDependencies = new List<NativeDependency>();
+                foreach (var group in candidates.GroupBy(candidate => (candidate.Input.Values.Architecture, candidate.Value.Name)))
+                {
+                    try
+                    {
+                    var eligible = group.Where(candidate => !rejectedInputs.Contains(candidate.Input)).ToArray();
+                    if (eligible.Length == 0)
+                        continue;
+                    var ordered = eligible.OrderBy(candidate => candidate.HeaderPriority).ThenBy(candidate => candidate.TraversalOrder)
+                        .ThenBy(candidate => candidate.Value.Line).ThenBy(candidate => candidate.Value.Column)
+                        .ThenBy(candidate => candidate.Input.Order).ToArray();
+                    var protections = protectionsByName[group.Key.Name].Where(value =>
+                            value.Architecture.HasFlag(group.Key.Architecture))
+                        .Concat(ordered.SelectMany(candidate => NativeOwners(candidate))
+                            .Where(protection => ordered.Any(candidate => IsCompilerBound(candidate, protection))))
+                        .Distinct().ToArray();
+                    var ownership = ordered.Distinct().ToDictionary(candidate => candidate,
+                        candidate => protections.Where(protection => IsCompilerBound(candidate, protection)).ToArray());
+                    foreach (var candidate in ordered)
+                        foreach (var owner in ownership[candidate].Where(owner =>
+                            owner.SourceKind == "logical-header-group" && owner.Name != candidate.Value.NativeName &&
+                            CompilerBindings(candidate.Input, owner).Length == 1 &&
+                            IsCompilerBound(candidate, owner, alias: false)))
+                            nativeDependencies.Add(new NativeDependency(candidate, owner));
+                    var selected = protections.Length == 0 ? ordered[0] : null;
+                    if (selected != null)
+                    {
+                        constants.Add((group.Key.Architecture, selected.Namespace, selected.Value.Name), selected.Value);
+                        if (!this.selectedNativeScalars.TryGetValue(selected.Value.Name, out var scalars))
+                            this.selectedNativeScalars.Add(selected.Value.Name, scalars = new());
+                        scalars.Add(selected);
+                    }
+                    var boundDefinitions = protections.Where(protection => protection.Proof != null)
+                        .SelectMany(protection => inputsBySource[(group.Key.Architecture, protection.Proof.SourceFile)]
+                            .Where(input => !rejectedInputs.Contains(input))
+                            .SelectMany(input => CompilerBindings(input, protection)
+                                .Select(binding => new { Protection = protection, Input = input, Binding = binding,
+                                    Header = ResolveHeader(input, binding.Header) }))).Distinct().ToArray();
+                    if (boundDefinitions.Where(definition => definition.Protection.SourceKind == "logical-header-group")
+                        .GroupBy(definition => (definition.Protection.Namespace, definition.Protection.Owner,
+                            definition.Protection.DeclaredName, definition.Protection.Proof.Group.NativeName,
+                            GroupHeader: ResolveHeader(definition.Input, definition.Protection.Proof.Group.Header),
+                            definition.Protection.Proof.Group.Line, definition.Binding.Kind,
+                            definition.Binding.NativeName, definition.Header, definition.Binding.Line, definition.Binding.Column))
+                        .Any(definitions => definitions.Select(definition =>
+                            (definition.Binding.NativeType, definition.Binding.StorageType, definition.Binding.Value))
+                            .Distinct().Count() > 1))
+                        throw new InvalidDataException($"Conflicting compiler bindings for constant '{group.Key.Name}' " +
+                            $"in the same canonical native source group on {group.Key.Architecture}.");
+                    bool typeValueConflict = ordered.Select(candidate =>
+                        (candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value))
+                        .Concat(boundDefinitions.Select(definition =>
+                            (definition.Binding.NativeType, definition.Binding.StorageType, definition.Binding.Value)))
+                        .Concat(ordered.Where(candidate => candidate.Value.AliasTarget != null).Select(candidate =>
+                            (candidate.Value.AliasTarget.NativeType, candidate.Value.AliasTarget.StorageType, candidate.Value.AliasTarget.Value)))
+                        .Distinct().Count() > 1;
+                    bool projectedTypeConflict = protections.Any(protection => protection.Owner == "Apis" &&
+                        ordered.Any(candidate => IsIntegralType(protection.StorageType) &&
+                            protection.StorageType != candidate.Value.StorageType));
+                    bool distinctDefinitions = ordered.Select(candidate =>
+                        (Kind: "Macro", candidate.Value.NativeName, candidate.Header, candidate.Value.Line, candidate.Value.Column))
+                        .Concat(boundDefinitions.Select(definition =>
+                            (definition.Binding.Kind, definition.Binding.NativeName, definition.Header, definition.Binding.Line, definition.Binding.Column))).Distinct().Count() > 1;
+                    bool unrelatedProtection = protections.Length != 0 && ordered.Any(candidate => ownership[candidate].Length == 0);
+                    string reason = protections.Length != 0 ? "protected-source-declaration" :
+                        ordered[0].HeaderPriority != int.MaxValue ? "explicit-sdk-header-priority" : "first-header-traversal-and-native-location";
+                    if (ordered.Length > 1 || protections.Length != 0 || ordered.Any(candidate => candidate.Value.AliasTarget != null))
+                        decisions.Add(new
+                        {
+                            Name = group.Key.Name, Target = group.Key.Architecture.ToString(), Reason = reason,
+                            TypeValueConflict = typeValueConflict, DistinctNativeDefinitions = distinctDefinitions,
+                            ProjectedTypeConflict = projectedTypeConflict,
+                            UnrelatedProtectedDefinition = unrelatedProtection,
+                            Selected = selected == null ? null : Describe(selected, "selected", reason),
+                            Protected = protections.Select(value => new
+                            {
+                                value.Name, value.DeclaredName, value.SourceKind, value.Namespace, value.Owner, Source = value.Source, value.StorageType,
+                                Value = value.Expression, Target = group.Key.Architecture.ToString(),
+                                Provenance = value.Proof == null ? (int?)null : proofIds[value.Proof],
+                                NativeBindings = boundDefinitions.Where(definition => definition.Protection == value)
+                                    .Select(definition => new { NativeInput = definition.Input.Path, definition.Binding }).ToArray(),
+                                Disposition = "selected-authoritative-source", Reason = "protected-source-declaration",
+                            }).ToArray(),
+                            Candidates = ordered.Select(candidate => Describe(candidate,
+                                candidate == selected ? "selected" : ownership[candidate].Length == 0 ? "discarded-by-policy" :
+                                    ownership[candidate].Any(protection => IsCompilerBound(candidate, protection, alias: true)) ?
+                                        "compiler-bound-native-alias" : "compiler-bound-group-consumption",
+                                ownership[candidate].Length == 0 ? reason :
+                                    ownership[candidate].Any(protection => IsCompilerBound(candidate, protection, alias: true)) ?
+                                        "exact-native-alias-and-published-name-collision" : "exact-native-member-binding")).ToArray(),
+                        });
+                    if (typeValueConflict || projectedTypeConflict || distinctDefinitions || unrelatedProtection)
+                        this.output.Add($"warning WMC001: Constant '{group.Key.Name}' on {group.Key.Architecture}: " +
+                            $"{(typeValueConflict ? "TYPE/VALUE CONFLICT; " : "")}" +
+                            $"{(projectedTypeConflict ? "PROJECTED TYPE CONFLICT; " : "")}{reason}; " +
+                            $"selected {(selected == null ? string.Join(", ", protections.Select(value => value.Namespace + "." + value.Owner)) : selected.Header)}. " +
+                            $"All {ordered.Length} native candidates are retained in native-constant-conflicts.json.");
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        var candidate = group.First();
+                        RejectInput(error, candidate.Input, group.Key.Name, candidate.Header, (int)candidate.Value.Line);
+                    }
+                }
+                foreach (var constant in constants)
+                    if (this.sourceConstantTypes.TryGetValue(constant.Key.Name, out var types))
+                        this.sourceConstantTypes[constant.Key.Name] = types.Append(constant.Value.StorageType)
+                            .Distinct(StringComparer.Ordinal).ToArray();
+                var nativeSelections = constants.ToLookup(value => value.Key.Name, StringComparer.Ordinal);
+                this.nativeDependencies = nativeDependencies.GroupBy(value => value.Candidate.Value.NativeName, StringComparer.Ordinal)
+                    .ToDictionary(group => group.Key, group => group.Distinct().ToArray(), StringComparer.Ordinal);
+                this.conflictReport = Path.Combine(this.scraperOutputDir, "native-constant-conflicts.json");
+                this.nativeConstantReport = new
+                {
+                    Version = 1, Status = this.nativeInputsValid ? "completed" : "rejected",
+                    SdkRoot = this.selection.SdkRoot, NameComparison = "Ordinal",
+                    this.selection.NativeHeaderOwnershipFile, ToolchainHeaderOwnership = toolchainOwners.Values,
+                    PublishedAliasCollisionComparison = "OrdinalIgnoreCaseAfterExactNativeBinding",
+                    HeaderPriority = this.selection.HeaderPriority.Select((header, rank) => new
+                    {
+                        Header = header, Rank = rank,
+                        Applicable = this.headerTraversal.ContainsKey(Path.GetFullPath(Path.Combine(this.selection.SdkRoot, header))),
+                    }).ToArray(),
+                    NativeInputs = inputs.Select(input => new { input.Path, input.Order, input.Values.BindingSource,
+                        input.Values.SourceFile, input.Values.SourceHash, Target = input.Values.Architecture.ToString(),
+                        input.Values.Issues, input.Values.Groups }).ToArray(),
+                    SourceGroups = proofIds.Select(pair => new { Id = pair.Value,
+                        Sources = proofSources[pair.Key].Distinct().ToArray(), Provenance = pair.Key }).ToArray(),
+                    SourceDependencies = protectedConstants.GroupBy(value => value.Name, StringComparer.Ordinal).Select(group => new
+                    {
+                        Name = group.Key, StorageTypes = this.sourceConstantTypes[group.Key],
+                        Reason = group.Any(value => GetSourceDependencyStorageType(value) != value.StorageType) ?
+                            "compiler-bound-logical-member-primitive-storage-not-native-consumption" :
+                            "authoritative-managed-declaration-storage-not-native-consumption",
+                        Declarations = group.Select(value => new
+                        {
+                            value.Name, value.DeclaredName, value.SourceKind, value.Namespace, value.Owner, value.Source,
+                            Target = value.Architecture.ToString(), value.StorageType, Value = value.Expression,
+                            DependencyStorageType = GetSourceDependencyStorageType(value),
+                            Provenance = value.Proof == null ? (int?)null : proofIds[value.Proof],
+                        }).ToArray(),
+                        NativeSelections = nativeSelections[group.Key].Select(value => new
+                        {
+                            Target = value.Key.Architecture.ToString(), value.Key.Namespace, value.Value.StorageType,
+                        }).ToArray(),
+                    }).ToArray(),
+                    NativeDependencies = this.nativeDependencies.Select(pair => new
+                    {
+                        NativeName = pair.Key,
+                        StorageTypes = pair.Value.Select(value => value.Candidate.Value.StorageType).Distinct(StringComparer.Ordinal).ToArray(),
+                        Reason = "compiler-bound-consumed-macro-primitive-for-legacy-dependencies",
+                        Definitions = pair.Value.Select(value => new
+                        {
+                            Candidate = Describe(value.Candidate, "compiler-bound-group-consumption", "exact-native-member-binding"),
+                            value.Owner.Name, value.Owner.DeclaredName, value.Owner.Namespace, value.Owner.Owner,
+                            value.Owner.Source, value.Owner.StorageType,
+                            Provenance = proofIds[value.Owner.Proof],
+                        }).ToArray(),
+                    }).ToArray(),
+                    LegacyDependencyPolicies = this.legacyDependencyPolicies,
+                    MissingGroupProvenance = missingProofs.Distinct().ToArray(), Decisions = decisions,
+                };
+                resolutionTiming?.SetCounter("candidateCount", candidates.Count);
+                resolutionTiming?.SetCounter("selectedCount", constants.Count);
+                resolutionTiming?.SetCounter("decisionCount", decisions.Count);
+                resolutionTiming?.SetCounter("nativeDependencyCount", nativeDependencies.Count);
+                resolutionTiming?.Dispose();
+                if (!this.nativeInputsValid || this.selection.PreflightOnly)
+                {
+                    this.validation.Block("constants.native-selection",
+                        this.selection.BlockedBy ?? "all native inputs and source ownership proofs");
+                    return;
+                }
+                using var outputTiming = GenerationTiming.BeginSpan("constants.write-native-csharp");
+                outputTiming?.SetCounter("constantCount", constants.Count);
+                string[] namespaces = constants.Keys.Select(key => key.Namespace).Distinct(StringComparer.Ordinal)
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+                foreach (var architecture in inputs.Select(input => input.Values.Architecture).Distinct())
+                    foreach (string ns in namespaces)
+                    {
+                        string directory = Path.Combine(this.scraperOutputDir, architecture.ToString().ToLowerInvariant());
+                        this._fileSystem.Directory.CreateDirectory(directory);
+                        string path = Path.Combine(directory, $"NativeConstants.{ns}.header-types.cs");
+                        using var stream = this._fileSystem.File.OpenWrite(path);
+                        byte[] marker = Encoding.UTF8.GetBytes(HeaderTypesSourceFamily.SuccessMarker + Environment.NewLine);
+                        stream.Write(marker, 0, marker.Length);
+                        using var writer = new ConstantWriter(stream, ns, this.constantsHeaderText, this.withAttributes);
+                        foreach (var pair in constants.Where(pair => pair.Key.Architecture == architecture && pair.Key.Namespace == ns)
+                            .OrderBy(pair => pair.Key.Name, StringComparer.Ordinal))
+                        {
+                            writer.AddNativeInteger(pair.Value);
+                            this.writtenConstants.TryAdd(pair.Value.Name, pair.Value.StorageType);
+                            this.scrapedConstantNamespaces[pair.Value.Name] = ns;
+                        }
+                    }
+                this.output.Add($"Wrote {constants.Count} native integer constants from {inputs.Length} header compilations.");
+
+                void RejectInput(Exception error, NativeInput input, string symbol = null,
+                    string header = null, int? line = null, string identityCategory = "native-constant-proof")
+                {
+                    bool sdkBinding = identityCategory == "prepared-sdk-header-binding";
+                    bool toolchainBinding = identityCategory == "selected-toolchain-header-binding";
+                    this.validation.Add(error, sdkBinding ? "NATIVE_SDK_BINDING" : toolchainBinding ? "NATIVE_TOOLCHAIN_BINDING" : "WMC003",
+                        sdkBinding || toolchainBinding ? "constants.native-inputs" : "constants.native-validation", input.Path, symbol,
+                        header, line, input.Values.Architecture.ToString(),
+                        Path.GetFileNameWithoutExtension(Path.GetFileNameWithoutExtension(input.Path)),
+                        this.selection.SdkRoot, identityCategory);
+                    rejectedInputs.Add(input);
+                    this.nativeInputsValid = false;
+                }
+
+                string ResolveHeader(NativeInput input, string header) => ResolveHeaderCore(input, header, out _);
+
+                static string ToolchainHeaderKey(string header) => Path.GetFullPath(header).ToUpperInvariant();
+
+                string ResolveHeaderCore(NativeInput input, string header, out bool preparedSdk)
+                {
+                    preparedSdk = false;
+                    if (string.IsNullOrWhiteSpace(header))
+                        throw new InvalidDataException($"Missing native header identity in input '{input.Path}' ({input.Values.Architecture}).");
+                    string full = Path.GetFullPath(header);
+                    string prepared = preparedSdkHeaders.Resolve(input.Values, input.Path, full);
+                    if (prepared != null)
+                    {
+                        preparedSdk = true;
+                        return prepared;
+                    }
+                    if (toolchainOwners.TryGetValue((input, ToolchainHeaderKey(header)), out var owner))
+                        return owner.Header;
+                    if (headers.ContainsKey(full))
+                        return full;
+                    if (string.IsNullOrEmpty(input.Values.BindingSource) || !Path.IsPathRooted(input.Values.BindingSource))
+                        throw new InvalidDataException($"Missing or unrooted native source identity in input '{input.Path}' ({input.Values.Architecture}).");
+                    string originalDirectory = input.Values.BindingSource.EndsWith(".cs", StringComparison.OrdinalIgnoreCase)
+                        ? Path.GetDirectoryName(input.Values.BindingSource) : input.Values.BindingSource;
+                    string relative = Path.GetRelativePath(originalDirectory, full);
+                    if (Path.IsPathRooted(relative))
+                        return full;
+                    string relocated = Path.GetFullPath(Path.Combine(Path.GetDirectoryName(input.Path), relative));
+                    return headers.ContainsKey(relocated) ? relocated : full;
+                }
+
+                bool IsCompilerBound(NativeCandidate candidate, ProtectedConstant protection, bool? alias = null)
+                {
+                    if (alias == null)
+                        return IsCompilerBound(candidate, protection, alias: false) || IsCompilerBound(candidate, protection, alias: true);
+                    var target = alias.Value ? candidate.Value.AliasTarget : new NativeConstantBinding("Macro", candidate.Value.NativeName,
+                        candidate.Value.Header, candidate.Value.Line, candidate.Value.Column, candidate.Value.HeaderHash,
+                        candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value);
+                    if (target == null)
+                        return false;
+                    var definitions = CompilerBindings(candidate.Input, protection).Where(binding => binding.Kind == target.Kind &&
+                        binding.NativeName == target.NativeName).ToArray();
+                    var bindings = definitions.Where(binding =>
+                        string.Equals(ResolveHeader(candidate.Input, binding.Header), ResolveHeader(candidate.Input, target.Header), StringComparison.OrdinalIgnoreCase) &&
+                        binding.Line == target.Line && binding.Column == target.Column).ToArray();
+                    if (alias.Value && definitions.Length != 0 && bindings.Length == 0)
+                        throw new InvalidDataException($"Native constant alias definition location drift for '{candidate.Value.NativeName}' in '{candidate.Input.Path}'.");
+                    if (bindings.Any(binding => binding.HeaderHash != target.HeaderHash))
+                        throw new InvalidDataException($"Native constant definition hash drift for '{candidate.Value.NativeName}' in '{candidate.Input.Path}'.");
+                    bool bound = bindings.Any(binding => binding.NativeType == target.NativeType &&
+                        binding.StorageType == target.StorageType && binding.Value == target.Value);
+                    if (alias.Value && bindings.Length != 0 && !bound)
+                        throw new InvalidDataException($"Native constant alias binding drift for '{candidate.Value.NativeName}' in '{candidate.Input.Path}'.");
+                    // Match the existing publication gate only after exact case-sensitive native binding.
+                    return bound && (!alias.Value ||
+                        string.Equals(candidate.Value.Name, protection.Name, StringComparison.OrdinalIgnoreCase));
+                }
+
+                IEnumerable<ProtectedConstant> NativeOwners(NativeCandidate candidate)
+                {
+                    if (boundProtections.TryGetValue((candidate.Input.Values.Architecture, "Macro", candidate.Value.NativeName),
+                        out var macros))
+                        foreach (var protection in macros)
+                            yield return protection;
+                    var target = candidate.Value.AliasTarget;
+                    if (target != null && boundProtections.TryGetValue(
+                        (candidate.Input.Values.Architecture, target.Kind, target.NativeName), out var aliases))
+                        foreach (var protection in aliases)
+                            yield return protection;
+                }
+
+                static bool IsIntegralType(string type) => type is "bool" or "char" or "sbyte" or "byte" or
+                    "short" or "ushort" or "int" or "uint" or "long" or "ulong";
+
+                NativeConstantBinding[] CompilerBindings(NativeInput input, ProtectedConstant protection)
+                {
+                    var proof = protection.Proof;
+                    if (proof == null || proof.SourceFile != input.Values.SourceFile)
+                        return Array.Empty<NativeConstantBinding>();
+                    if (!bindingCache.TryGetValue((input, proof), out var bindings))
+                    {
+                        if (proof.SourceHash != input.Values.SourceHash)
+                            throw new InvalidDataException($"Native constant source-family hash drift in '{input.Path}'.");
+                        var groups = input.Values.Groups.Where(value => value.NativeName == proof.Group.NativeName &&
+                            value.Name == proof.Group.Name && value.Namespace == proof.Group.Namespace).ToArray();
+                        if (groups.Length != 0)
+                        {
+                            if (groups.Length != 1 || groups[0].Kind != proof.Group.Kind || groups[0].StorageType != proof.Group.StorageType ||
+                                !string.Equals(ResolveHeader(input, groups[0].Header),
+                                    ResolveHeader(input, proof.Group.Header), StringComparison.OrdinalIgnoreCase) ||
+                                groups[0].Line != proof.Group.Line ||
+                                !groups[0].Members.Select(value => (value.Name, value.Expression))
+                                    .SequenceEqual(proof.Group.Members.Select(value => (value.Name, value.Expression))))
+                                throw new InvalidDataException($"Native constant group declaration/target drift for '{proof.Group.Name}' in '{input.Path}'.");
+                            if (input.Values.Architecture == proof.Architecture &&
+                                JsonSerializer.Serialize(groups[0]) != JsonSerializer.Serialize(proof.Group))
+                                throw new InvalidDataException($"Native constant group binding drift for '{proof.Group.Name}' in '{input.Path}'.");
+                        }
+                        bindings = groups.SelectMany(group => group.Members)
+                            .SelectMany(member => member.Bindings.Select(binding => (member.Name, Binding: binding)))
+                            .ToLookup(value => value.Name, value => value.Binding, StringComparer.Ordinal);
+                        bindingCache.Add((input, proof), bindings);
+                    }
+                    return bindings[protection.Name].ToArray();
+                }
+
+                object Describe(NativeCandidate candidate, string disposition, string reason) => new
+                {
+                    candidate.Value.Name, candidate.Namespace, Kind = "Macro", candidate.Value.NativeName,
+                    candidate.Value.NativeType, candidate.Value.StorageType, candidate.Value.Value,
+                    candidate.Value.AliasTarget,
+                    RawHeader = candidate.Value.Header, ResolvedHeader = candidate.Header,
+                    SdkRelativeHeader = string.IsNullOrEmpty(this.selection.SdkRoot) ? null :
+                        Path.GetRelativePath(Path.GetFullPath(this.selection.SdkRoot), candidate.Header),
+                    candidate.Value.Line, candidate.Value.Column, candidate.Value.HeaderHash,
+                    Target = candidate.Input.Values.Architecture.ToString(), candidate.Input.Values.BindingSource,
+                    NativeInput = candidate.Input.Path, InputOrder = candidate.Input.Order,
+                    HeaderPriority = candidate.HeaderPriority == int.MaxValue ? (int?)null : candidate.HeaderPriority,
+                    candidate.TraversalOrder, Disposition = disposition, Reason = reason,
+                };
+
+                static string NamespaceOf(SyntaxNode node) => string.Join(".", node.Ancestors()
+                    .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(parent => parent.Name.ToString()));
+            }
+
+            internal static bool TryTranslateStringConstant(
+                string value, string name, string header, out string expression, out bool isUtf16,
+                bool rejectUnsupported = true)
+            {
+                expression = null;
+                isUtf16 = false;
+                if (!value.Contains('"') && !value.Contains("TEXT") && !value.Contains("_T"))
+                    return false;
+                value = value.Trim();
+                var terms = new List<string>();
+                bool hasStringTerm = false;
+                int position = 0;
+                while (position < value.Length)
+                {
+                    Match term = StringTermRegex.Match(value, position);
+                    if (!term.Success)
+                    {
+                        if (hasStringTerm && rejectUnsupported)
+                            throw new InvalidOperationException(
+                                $"Unsupported string expression for '{name}' in '{header}': {value}");
+                        return false;
+                    }
+                    isUtf16 |= term.Groups["wide"].Success || term.Groups["wrapper"].Success;
+                    hasStringTerm |= term.Groups["literal"].Success || term.Groups["wrapper"].Success;
+                    if (term.Groups["literal"].Success)
+                    {
+                        terms.Add(term.Groups["literal"].Value);
+                    }
+                    else
+                    {
+                        string identifier = term.Groups["name"].Value;
+                        if (CppKeywords.Contains(identifier))
+                            return false;
+                        if (SyntaxFacts.GetKeywordKind(identifier) != SyntaxKind.None)
+                            identifier = "@" + identifier;
+                        // Unlike native adjacent strings, C# string + number would silently format the number.
+                        terms.Add("(string)" + identifier);
+                    }
+                    position += term.Length;
+                }
+                if (!hasStringTerm)
+                    return false;
+                expression = string.Join(" + ", terms);
+                return true;
+            }
+
             private void ScrapeConstantsFromTraversedFiles(Dictionary<string, string> traversedFileMap)
             {
+                using var timing = GenerationTiming.BeginSpan("constants.legacy-text-and-streaming-csharp");
+                int readHeaders = 0;
+                long readLines = 0;
                 Dictionary<string, string> autoReplacements = GetAutoValueReplacements();
 
                 HashSet<string> manualEnumMemberNames = this.GetManualEnumMemberNames();
+                var pendingAliases = new List<(string Namespace, string Name, string Target, bool NativeIntegers, string Header, int Line)>();
 
                 // For each traversed header, scrape the constants
-                foreach (KeyValuePair<string, string> item in traversedFileMap)
+                foreach (KeyValuePair<string, string> item in this.OrderedHeaders(traversedFileMap))
                 {
                     var header = item.Key;
+                    this.legacyHeader = header;
+                    this.legacyLine = 0;
                     var currentNamespace = item.Value;
+                    this.usesNativeIntegers = this.nativeIntegerHeaders.Contains(Path.GetFullPath(header));
 
                     if (!this._fileSystem.File.Exists(header))
                     {
                         continue;
                     }
+                    readHeaders++;
 
                     string currentHeaderName = Path.GetFileName(header).ToLowerInvariant();
 
@@ -544,6 +1483,7 @@ namespace MetadataUtils
                     string defineGuidKeyword = null;
                     foreach (string currentLine in this._fileSystem.File.ReadAllLines(header))
                     {
+                        this.legacyLine++;
                         string fixedCurrentLine = currentLine;
 
                         if (continuation != null && continuation.EndsWith('"') && currentLine.StartsWith('"'))
@@ -665,17 +1605,21 @@ namespace MetadataUtils
                         Match defineMatch = DefineRegex.Match(line);
 
                         // Skip if not #define ...
-                        if (!defineMatch.Success)
+                        if (!defineMatch.Success || defineMatch.Groups[2].Value.Length == 0)
                         {
                             this.TryScrapingEnumFlags(line);
                             continue;
                         }
 
                         string name = defineMatch.Groups[1].Value;
+                        try
+                        {
                         if (this.ShouldExclude(name))
                         {
                             continue;
                         }
+                        if (this.usesNativeIntegers && this.nativeIntegerNames.Contains(name))
+                            continue;
 
 #if DEBUG
                         if (name == "SOME_CONST_NAME")
@@ -750,10 +1694,28 @@ namespace MetadataUtils
                             continue;
                         }
 
+                        bool translatedString;
+                        string stringExpression;
+                        bool isUtf16;
+                        try
+                        {
+                            translatedString = TryTranslateStringConstant(fixedRawValue, name, header, out stringExpression, out isUtf16);
+                        }
+                        catch (InvalidOperationException error)
+                        {
+                            this.RejectLegacyConstant(error, name, header, this.legacyLine, "constants.string");
+                            continue;
+                        }
+                        if (translatedString)
+                        {
+                            this.AddConstantValue(currentNamespace, "string", name, stringExpression, isUtf16 ? "utf-16" : "ansi");
+                            continue;
+                        }
+
                         // See if matches one of our well known constants formats
                         Match match = DefineConstantRegex.Match(fixedRawValue);
                         string valueText;
-                        string nativeTypeName = null;
+                        string nativeTypeName = LegacyNativeTypeName(fixedRawValue);
                         string matchedConstantType = null;
                         bool matchedToOtherName = false;
 
@@ -891,13 +1853,13 @@ namespace MetadataUtils
                             // (UCHAR) 123
                             else if (match.Groups[32].Success)
                             {
-                                this.AddConstantValue(currentNamespace, "ushort", name, match.Groups[33].Value);
+                                this.AddConstantValue(currentNamespace, "byte", name, $"unchecked((byte){match.Groups[33].Value})");
                                 continue;
                             }
                             // (UCHAR) -42
                             else if (match.Groups[34].Success)
                             {
-                                this.AddConstantValue(currentNamespace, "ushort", name, $"unchecked((ushort){match.Groups[35].Value})");
+                                this.AddConstantValue(currentNamespace, "byte", name, $"unchecked((byte){match.Groups[35].Value})");
                                 continue;
                             }
                             // (BYTE) 0x42
@@ -923,16 +1885,26 @@ namespace MetadataUtils
                             {
                                 string otherName = match.Groups[40].Value;
 
+                                if (this.mutableGlobalNames.Contains(otherName))
+                                {
+                                    this.output.Add($"warning: Macro '{name}' in '{item.Key}' refers to mutable global " +
+                                        $"'{otherName}', not a metadata constant.");
+                                    continue;
+                                }
+
                                 matchedToOtherName = true;
 
                                 // Only use a constant as the value if we have seen the constant before
                                 // and we know its type
-                                if (this.writtenConstants.TryGetValue(otherName, out var otherType))
+                                if (this.TryGetConstantDependencyType(otherName, out var otherType))
                                 {
                                     // Skip guids for now
                                     if (otherType != "Guid")
                                     {
-                                        matchedConstantType = otherType;
+                                        // A later legacy definition can still supply this name's value.
+                                        if (!this.nativeDependencies.ContainsKey(otherName) ||
+                                            this.sourceConstants.ContainsKey(otherName) || this.writtenConstants.ContainsKey(otherName))
+                                            matchedConstantType = otherType;
                                     }
                                 }
 
@@ -947,34 +1919,6 @@ namespace MetadataUtils
                         else
                         {
                             valueText = rawValue;
-
-                            if (valueText.StartsWith("__TEXT("))
-                            {
-                                valueText = valueText.Substring(2);
-                            }
-
-                            bool isUtf16 = false;
-                            if (valueText.StartsWith("TEXT("))
-                            {
-                                isUtf16 = true;
-                                valueText = valueText.Substring("TEXT(".Length);
-                                if (valueText.EndsWith(')'))
-                                {
-                                    valueText = valueText.Substring(0, valueText.Length - 1);
-                                }
-                            }
-                            else if (valueText.StartsWith("L\""))
-                            {
-                                isUtf16 = true;
-                                valueText = valueText.Substring(1);
-                            }
-
-                            // Strings can't be part of enums so go ahead and add the constant directly
-                            if (valueText.StartsWith('"'))
-                            {
-                                this.AddConstantValue(currentNamespace, "string", name, valueText, isUtf16 ? "utf-16" : "ansi");
-                                continue;
-                            }
 
                             valueText = valueText.Replace("(DWORD)", "(uint)");
                             valueText = valueText.Replace("(ULONG)", "(uint)");
@@ -1027,20 +1971,202 @@ namespace MetadataUtils
                             {
                                 if (matchedConstantType != null)
                                 {
-                                    this.AddConstantValue(currentNamespace, matchedConstantType, name, valueText);
+                                    if (!this.TryReuseCaseOnlyEnumAlias(currentNamespace, name, valueText, matchedConstantType))
+                                        this.AddConstantValue(currentNamespace, matchedConstantType, name,
+                                            this.GetConstantDependencyExpression(currentNamespace, name, valueText, matchedConstantType),
+                                            architecture: this.GetConstantDependencyArchitectures(valueText));
+                                }
+                                else if (matchedToOtherName)
+                                {
+                                    pendingAliases.Add((currentNamespace, name, valueText, this.usesNativeIntegers, header, this.legacyLine));
                                 }
                                 else
                                 {
-                                    // Only add as an int if it didn't match some other constant/enum name
-                                    if (!matchedToOtherName)
-                                    {
-                                        this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
-                                    }
+                                    this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                 }
                             }
                         }
+
+                        }
+                        catch (InvalidDataException error)
+                        {
+                            this.RejectLegacyConstant(error, name, header, this.legacyLine, "constants.alias",
+                                defineMatch.Groups[2].Value.Trim());
+                        }
+                    }
+                    readLines += this.legacyLine;
+                }
+
+                // Preserve resolvable native definitions before processing deferred aliases.
+                timing?.SetCounter("readHeaderCount", readHeaders);
+                timing?.SetCounter("readLineCount", readLines);
+                timing?.SetCounter("pendingAliasCount", pendingAliases.Count);
+                timing?.Dispose();
+                using var aliasesTiming = GenerationTiming.BeginSpan("constants.resolve-legacy-aliases");
+                bool resolvedAlias;
+                do
+                {
+                    resolvedAlias = false;
+                    for (int i = 0; i < pendingAliases.Count; i++)
+                    {
+                        var alias = pendingAliases[i];
+                        this.usesNativeIntegers = alias.NativeIntegers;
+                        this.legacyHeader = alias.Header;
+                        this.legacyLine = alias.Line;
+                        if (this.invalidLegacyConstants.Contains(alias.Target))
+                        {
+                            this.validation.Block("constants.alias:" + alias.Name, "constant " + alias.Target);
+                            this.invalidLegacyConstants.Add(alias.Name);
+                            pendingAliases.RemoveAt(i--);
+                            resolvedAlias = true;
+                            continue;
+                        }
+                        try
+                        {
+                        if (this.writtenConstants.ContainsKey(alias.Name))
+                        {
+                            pendingAliases.RemoveAt(i--);
+                        }
+                        else if (this.TryGetConstantDependencyType(alias.Target, out var type) && type != "Guid")
+                        {
+                            if (!this.TryReuseCaseOnlyEnumAlias(alias.Namespace, alias.Name, alias.Target, type))
+                                this.AddConstantValue(alias.Namespace, type, alias.Name,
+                                    this.GetConstantDependencyExpression(alias.Namespace, alias.Name, alias.Target, type),
+                                    architecture: this.GetConstantDependencyArchitectures(alias.Target));
+                            pendingAliases.RemoveAt(i--);
+                            resolvedAlias = true;
+                        }
+                        }
+                        catch (InvalidDataException error)
+                        {
+                            this.RejectLegacyConstant(error, alias.Name, alias.Header, alias.Line, "constants.alias", alias.Target);
+                            pendingAliases.RemoveAt(i--);
+                            resolvedAlias = true;
+                        }
                     }
                 }
+                while (resolvedAlias);
+                aliasesTiming?.SetCounter("unresolvedAliasCount", pendingAliases.Count);
+            }
+
+            private void RejectLegacyConstant(Exception error, string name, string header, int line, string stage,
+                string target = null)
+            {
+                var owners = target == null ? Array.Empty<ProtectedConstant>() :
+                    this.sourceConstants.GetValueOrDefault(target) ?? Array.Empty<ProtectedConstant>();
+                if (owners.Length != 0 && error is InvalidDataException)
+                    error = new InvalidDataException(error.Message + " Authoritative declarations: " +
+                        string.Join("; ", owners.Select(owner => $"{owner.Namespace}.{owner.Owner}.{owner.DeclaredName} " +
+                            $"in '{owner.Source}' [{owner.Architecture}; {owner.StorageType}; {owner.SourceKind}]")), error);
+                this.validation.Add(error, "WMC004", stage, header, name, header, line,
+                    architecture: owners.Length == 0 ? null : string.Join(", ", owners.Select(owner => owner.Architecture).Distinct()),
+                    partition: owners.Length == 0 ? null : string.Join(", ", owners.Select(owner => Path.GetFileName(owner.Source)).Distinct()),
+                    selectedSdkRoot: this.selection.SdkRoot, identityCategory: "legacy-constant-dependency");
+                this.invalidLegacyConstants.Add(name);
+            }
+
+            private static string GetSourceDependencyStorageType(ProtectedConstant declaration)
+            {
+                if (declaration.SourceKind == "logical-header-group" && declaration.Proof != null)
+                {
+                    var bindings = declaration.Proof.Group.Members.Single(member =>
+                        member.Name == declaration.DeclaredName).Bindings;
+                    if (bindings.Length == 1 && bindings[0].Kind != "Expression")
+                        return bindings[0].StorageType;
+                }
+                return declaration.StorageType;
+            }
+
+            private bool TryGetConstantDependencyType(string name, out string type)
+            {
+                if (this.sourceConstantTypes.TryGetValue(name, out var types))
+                {
+                    if (types.Length != 1)
+                        throw new InvalidDataException($"Constant alias target '{name}' has conflicting authoritative storage types: {string.Join(", ", types)}.");
+                    type = types[0];
+                    return true;
+                }
+                return this.TryGetNativeDependencyType(name, out type) || this.writtenConstants.TryGetValue(name, out type);
+            }
+
+            private Architecture GetConstantDependencyArchitectures(string name)
+            {
+                if (this.sourceConstants.TryGetValue(name, out var declarations))
+                    return declarations.Aggregate(Architecture.None, (targets, declaration) => targets | declaration.Architecture);
+                if (this.nativeDependencies.TryGetValue(name, out var dependencies))
+                    return dependencies.Aggregate(Architecture.None,
+                        (targets, dependency) => targets | (dependency.Owner.Architecture & dependency.Candidate.Input.Values.Architecture));
+                return this.writtenConstantArchitectures.GetValueOrDefault(name, Architecture.All);
+            }
+
+            private bool TryReuseCaseOnlyEnumAlias(string ns, string name, string target, string type)
+            {
+                if (name == target || !StringComparer.OrdinalIgnoreCase.Equals(name, target) ||
+                    this.sourceConstantTypes.ContainsKey(name) ||
+                    !this.sourceConstants.TryGetValue(target, out var declarations) ||
+                    declarations.Length == 0 || declarations.Any(declaration =>
+                        declaration.SourceKind != "ordinary-unscoped-enum" ||
+                        declaration.Namespace != (this.LookupNamespaceForName(name) ?? ns)))
+                    return false;
+
+                string expression = this.GetConstantDependencyExpression(ns, name, target, type);
+                this.sourceConstants.Add(name, declarations.Select(declaration => declaration with { Name = name }).ToArray());
+                this.sourceConstantTypes.Add(name, new[] { type });
+                this.legacyDependencyPolicies.Add(new
+                {
+                    Name = name, NativeName = target, Header = this.legacyHeader, Line = this.legacyLine,
+                    StorageType = type, Expression = expression,
+                    Reason = "case-only-macro-alias-reuses-source-bound-unscoped-enum-declaration",
+                });
+                return true;
+            }
+
+            private bool TryGetNativeDependencyType(string name, out string type)
+            {
+                type = null;
+                if (!this.nativeDependencies.TryGetValue(name, out var dependencies))
+                    return false;
+                var types = dependencies.Select(value => value.Candidate.Value.StorageType).Distinct(StringComparer.Ordinal).ToArray();
+                if (types.Length != 1)
+                    throw new InvalidDataException($"Constant alias target '{name}' has conflicting compiler primitive storage types: {string.Join(", ", types)}.");
+                type = types[0];
+                return true;
+            }
+
+            private void RecordNativeDependencyPolicy(string name, string target, string type, string expression)
+            {
+                this.legacyDependencyPolicies.Add(new
+                {
+                    Name = name, NativeName = target, Header = this.legacyHeader, Line = this.legacyLine,
+                    StorageType = type, Expression = expression,
+                    Reason = "retained-compiler-primitive-storage-not-legacy-native-binding-or-value-equivalence",
+                });
+            }
+
+            private string GetConstantDependencyExpression(string ns, string name, string target, string type)
+            {
+                if (!this.sourceConstants.TryGetValue(target, out var declarations))
+                {
+                    if (!this.nativeDependencies.TryGetValue(target, out var dependencies))
+                        return target;
+                    this.RecordNativeDependencyPolicy(name, target, type, target);
+                    if (this.writtenConstants.ContainsKey(target))
+                        return target;
+                    declarations = dependencies.Select(value => value.Owner).ToArray();
+                }
+                var owners = declarations.Select(value =>
+                    (value.Namespace, value.Owner, value.DeclaredName, value.SourceKind, value.StorageType)).Distinct().ToArray();
+                if (owners.Length != 1)
+                    throw new InvalidDataException($"Constant alias target '{target}' has conflicting authoritative source owners.");
+                var owner = owners[0];
+                if (owner.Namespace == (this.LookupNamespaceForName(name) ?? ns) &&
+                    owner.SourceKind != "ordinary-unscoped-enum" && owner.DeclaredName == target && owner.StorageType == type)
+                    return target;
+                string prefix = string.IsNullOrEmpty(owner.Namespace) ? "global::" : "global::" + owner.Namespace + ".";
+                return $"unchecked(({type}){prefix}{Identifier(owner.Owner)}.{Identifier(owner.DeclaredName)})";
+
+                static string Identifier(string identifier) =>
+                    SyntaxFacts.GetKeywordKind(identifier) == SyntaxKind.None ? identifier : "@" + identifier;
             }
 
             private void TryScrapingEnumFlags(string line)
@@ -1075,9 +2201,9 @@ namespace MetadataUtils
                 }
             }
 
-            private string LookupNamespaceForName(string name)
+            private string LookupNamespaceForName(string name, bool requiredOnly = false)
             {
-                if (!this.requiredNamespaces.TryGetValue(name, out var foundNamespace))
+                if (!this.requiredNamespaces.TryGetValue(name, out var foundNamespace) && !requiredOnly)
                 {
                     this.scannedNamesToNamespaces.TryGetValue(name, out foundNamespace);
                 }
@@ -1094,6 +2220,8 @@ namespace MetadataUtils
             private void WriteEnumsAndRemaps(
                 Dictionary<string, string> remaps)
             {
+                using var timing = GenerationTiming.BeginSpan("constants.write-enums-remaps");
+                timing?.SetCounter("enumObjectCount", this.enumObjectsFromJsons.Count);
                 // Output the enums and the rsp entries that map parameters and fields to use
                 // enum names
                 var enumRemapsFileName = Path.Combine(this.scraperOutputDir, "enumsRemap.rsp");
@@ -1188,9 +2316,15 @@ namespace MetadataUtils
 
                         if (obj.name != null)
                         {
-                            if (this.writtenConstants.ContainsKey(obj.name))
+                            // The emitter removes the loose copy of a producer-owned logical enum member.
+                            if (this.writtenConstants.ContainsKey(obj.name) &&
+                                !(this.scrapedConstantNamespaces.TryGetValue(obj.name, out var constantNamespace) &&
+                                  this.headerEnumMemberNames.Contains($"{constantNamespace}.{obj.name}")))
                             {
-                                throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
+                                this.validation.Add(new InvalidOperationException(
+                                    $"Tried to add enum {obj.name} but a constant with the same name already exists."),
+                                    "WMC005", "constants.enum-finalization", symbol: obj.name);
+                                continue;
                             }
 
                             addedEnum = enumWriter.AddEnum(obj);
@@ -1302,11 +2436,17 @@ namespace MetadataUtils
 
     public class ScraperResults
     {
-        public ScraperResults(IEnumerable<string> results)
+        public ScraperResults(IEnumerable<string> results) : this(results, null)
+        {
+        }
+
+        public ScraperResults(IEnumerable<string> results, string conflictReport)
         {
             this.Output = results;
+            this.ConflictReport = conflictReport;
         }
 
         public IEnumerable<string> Output { get; }
+        public string ConflictReport { get; }
     }
 }

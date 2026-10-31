@@ -25,7 +25,7 @@ namespace ClangSharpSourceToWinmdTests
             EnumDeclarationSyntax declaration = MergeEnums(trees).Single();
 
             Assert.AreEqual("Register", declaration.Identifier.ValueText);
-            Assert.IsNull(SyntaxUtils.GetAttribute(declaration.AttributeLists, "SupportedArchitecture"));
+            Assert.IsNull(SyntaxUtils.GetAttribute(declaration.AttributeLists, "global::Windows.Win32.Foundation.Metadata.SupportedArchitecture"));
         }
 
         [TestMethod]
@@ -42,7 +42,7 @@ namespace ClangSharpSourceToWinmdTests
 
             Assert.AreEqual("Register", declaration.Identifier.ValueText);
             Assert.AreEqual(
-                "Windows.Win32.Foundation.Metadata.Architecture.X64 | Windows.Win32.Foundation.Metadata.Architecture.Arm64",
+                "global::Windows.Win32.Foundation.Metadata.Architecture.X64 | global::Windows.Win32.Foundation.Metadata.Architecture.Arm64",
                 GetArchitectures(declaration));
         }
 
@@ -65,8 +65,8 @@ namespace ClangSharpSourceToWinmdTests
             Assert.AreEqual("Arm64Register", declarations[1].Members.Single().Identifier.ValueText);
             Assert.AreEqual("1", declarations[0].Members.Single().EqualsValue?.Value.ToString());
             Assert.AreEqual("2", declarations[1].Members.Single().EqualsValue?.Value.ToString());
-            Assert.AreEqual("Windows.Win32.Foundation.Metadata.Architecture.X64", GetArchitectures(declarations[0]));
-            Assert.AreEqual("Windows.Win32.Foundation.Metadata.Architecture.Arm64", GetArchitectures(declarations[1]));
+            Assert.AreEqual("global::Windows.Win32.Foundation.Metadata.Architecture.X64", GetArchitectures(declarations[0]));
+            Assert.AreEqual("global::Windows.Win32.Foundation.Metadata.Architecture.Arm64", GetArchitectures(declarations[1]));
         }
 
         [DataTestMethod]
@@ -78,7 +78,7 @@ namespace ClangSharpSourceToWinmdTests
             EnumDeclarationSyntax declaration = MergeEnums(
                 new[] { CreateTree(directory, "public enum Register { Value = 0 }") }).Single();
 
-            Assert.AreEqual("Windows.Win32.Foundation.Metadata.Architecture." + architecture, GetArchitectures(declaration));
+            Assert.AreEqual("global::Windows.Win32.Foundation.Metadata.Architecture." + architecture, GetArchitectures(declaration));
         }
 
         private static SyntaxTree CreateTree(string architecture, string declaration)
@@ -104,7 +104,7 @@ namespace ClangSharpSourceToWinmdTests
 
         private static string GetArchitectures(EnumDeclarationSyntax declaration)
         {
-            AttributeArgumentListSyntax arguments = SyntaxUtils.GetAttribute(declaration.AttributeLists, "SupportedArchitecture")?.ArgumentList
+            AttributeArgumentListSyntax arguments = SyntaxUtils.GetAttribute(declaration.AttributeLists, "global::Windows.Win32.Foundation.Metadata.SupportedArchitecture")?.ArgumentList
                 ?? throw new AssertFailedException("Expected a SupportedArchitecture attribute.");
             return arguments.Arguments.Single().Expression.ToString();
         }

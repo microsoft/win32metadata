@@ -5,6 +5,7 @@
     <RuntimeIdentifier>$(NETCoreSdkRuntimeIdentifier)</RuntimeIdentifier>
     <SelfContained>false</SelfContained>
     <IsPackable>false</IsPackable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +21,33 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\sources\Win32MetadataScraper\Win32MetadataScraper.csproj" />
+    <ProjectReference Include="..\..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
+    <ProjectReference Include="..\..\sources\GeneratorSdk\MetadataTasks\MetadataTasks.csproj" />
+    <ProjectReference Include="..\..\sources\ConstantsScraper\ConstantsScraper.csproj" />
+    <ProjectReference Include="..\..\sources\WinmdUtils\WinmdUtils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\Shared\HeaderAnnotationCases.cs" Link="Cases\HeaderAnnotationCases.cs" />
+    <Compile Include="..\Shared\NativeContractPhysicalAssertions.cs" Link="Cases\NativeContractPhysicalAssertions.cs" />
+    <None Include="..\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h"
+          Link="assets\win32metadata_annotations.h" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\generation\WinSDK\manual\Metadata.cs"
+          Link="assets\Metadata.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\generation\WinSDK\inc\sal.h"
+          Link="assets\sal.h" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\generation\WinSDK\RecompiledIdlHeaders\shared\concurrencysal.h"
+          Link="assets\concurrencysal.h" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\scraper.header.txt"
+          Link="assets\scraper.header.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\scraper.header.txt"
+          Link="assets\scraper\scraper.header.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\baseSettings*.rsp"
+          Link="assets\scraper\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\sdk\sdk.targets"
+          Link="assets\scraper.sdk.targets" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\sdk\sdk.props"
+          Link="assets\scraper.sdk.props" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,17 +9,187 @@ namespace ClangSharpSourceToWinmd
 {
     public class NamesToCorrectNamespacesMover
     {
-        public static SyntaxTree MoveNamesToCorrectNamespaces(SyntaxTree tree, Dictionary<string, string> namesToNamespaces)
+        public static SyntaxTree MoveNamesToCorrectNamespaces(SyntaxTree tree, Dictionary<string, string> namesToNamespaces,
+            ISet<(string Namespace, string Name)> sourceTypes = null,
+            IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces = null)
         {
             if (tree.FilePath.EndsWith("manual.cs"))
             {
                 return tree;
             }
 
-            var nameFixer = new NameFixer(namesToNamespaces);
+            if (HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
+            {
+                var root = tree.GetRoot();
+                var declarations = root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
+                    .ToLookup(declaration => (SyntaxUtils.GetEnclosingNamespace(declaration), declaration.Identifier.ValueText));
+                var aliases = root.DescendantNodes().OfType<UsingDirectiveSyntax>()
+                    .Where(directive => directive.Alias != null)
+                    .Select(directive => directive.Alias.Name.Identifier.ValueText).ToHashSet();
+                var fields = declarations.SelectMany(group => group)
+                    // Proven handles retain their exact producer storage spelling until composition validates it.
+                    .Where(declaration => !NativeHandleSourceProvenance.TryRead(declaration, out _))
+                    .SelectMany(declaration => declaration.Members.OfType<FieldDeclarationSyntax>()).ToArray();
+                root = new TypeQualifier(fields.Select(field => field.Declaration.Type),
+                    original => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original))).Visit(root);
+                tree = tree.WithRootAndOptions(root, tree.Options);
+
+                TypeSyntax Qualify(TypeSyntax type, string ns)
+                {
+                    if (type is PointerTypeSyntax pointer)
+                        return pointer.WithElementType(Qualify(pointer.ElementType, ns));
+                    if (type is IdentifierNameSyntax identifier)
+                    {
+                        string name = identifier.Identifier.ValueText;
+                        if (aliases.Contains(name))
+                            return type;
+                        if (TryGetNamespace(ns, name, out string owner))
+                            return QualifiedAlias(owner, identifier.Identifier.Text);
+                        if (declarations.Contains((ns, name)))
+                            return QualifiedAlias(ns, identifier.Identifier.Text);
+                    }
+                    else if (type is QualifiedNameSyntax qualified &&
+                        TryGetNamespace(ns, qualified.Right.Identifier.ValueText, out string owner))
+                        return QualifiedAlias(owner, qualified.Right.Identifier.Text);
+                    return type;
+                }
+            }
+            else if (sourceTypes?.Count > 0)
+            {
+                var root = tree.GetRoot();
+                var nativeRecords = root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Where(record => NativeRecordSourceProvenance.Read(record) != null).ToHashSet();
+                var aliases = root.DescendantNodes().OfType<UsingDirectiveSyntax>()
+                    .Where(directive => directive.Alias != null)
+                    .Select(directive => directive.Alias.Name.Identifier.ValueText).ToHashSet();
+                var shadowedTypeNames = new Dictionary<TypeDeclarationSyntax, HashSet<string>>();
+                var types = root.DescendantNodes().Select(node => node switch
+                {
+                    VariableDeclarationSyntax variable => variable.Type,
+                    MethodDeclarationSyntax method => method.ReturnType,
+                    DelegateDeclarationSyntax callback => callback.ReturnType,
+                    ParameterSyntax parameter => parameter.Type,
+                    PropertyDeclarationSyntax property => property.Type,
+                    IndexerDeclarationSyntax indexer => indexer.Type,
+                    CastExpressionSyntax cast => cast.Type,
+                    TypeOfExpressionSyntax typeOf => typeOf.Type,
+                    BaseTypeSyntax baseType => baseType.Type,
+                    _ => null,
+                }).Where(type => type != null && (type.Ancestors().OfType<MemberDeclarationSyntax>().Any(IsMoved) ||
+                    type.Ancestors().OfType<StructDeclarationSyntax>().Any(nativeRecords.Contains) ||
+                    RefersToRelocatedNativeType(type)))
+                    .Distinct().ToArray();
+                root = new TypeQualifier(types,
+                    original => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original))).Visit(root);
+                tree = tree.WithRootAndOptions(root, tree.Options);
+
+                bool IsMoved(MemberDeclarationSyntax declaration)
+                {
+                    string name = declaration switch
+                    {
+                        StructDeclarationSyntax record => record.Identifier.ValueText,
+                        EnumDeclarationSyntax enumeration => enumeration.Identifier.ValueText,
+                        DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
+                        MethodDeclarationSyntax method when method.AttributeLists.ToString().Contains("[DllImport(") =>
+                            method.Identifier.ValueText,
+                        _ => null,
+                    };
+                    return name != null && TryGetNamespace(SyntaxUtils.GetEnclosingNamespace(declaration), name, out string owner) &&
+                        owner != SyntaxUtils.GetEnclosingNamespace(declaration);
+                }
+
+                bool RefersToRelocatedNativeType(TypeSyntax type)
+                {
+                    string ns = SyntaxUtils.GetEnclosingNamespace(type);
+                    return type.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(identifier =>
+                        sourceTypes.Contains((ns, identifier.Identifier.ValueText)) &&
+                        nativeRecordNamespaces?.TryGetValue((ns, identifier.Identifier.ValueText), out string owner) == true &&
+                        owner != ns);
+                }
+
+                TypeSyntax Qualify(TypeSyntax type, string ns)
+                {
+                    return type switch
+                    {
+                        PointerTypeSyntax pointer => pointer.WithElementType(Qualify(pointer.ElementType, ns)),
+                        ArrayTypeSyntax array => array.WithElementType(Qualify(array.ElementType, ns)),
+                        NullableTypeSyntax nullable => nullable.WithElementType(Qualify(nullable.ElementType, ns)),
+                        RefTypeSyntax reference => reference.WithType(Qualify(reference.Type, ns)),
+                        GenericNameSyntax generic => generic.WithTypeArgumentList(generic.TypeArgumentList.WithArguments(
+                            SyntaxFactory.SeparatedList(generic.TypeArgumentList.Arguments.Select(argument => Qualify(argument, ns))))),
+                        FunctionPointerTypeSyntax function => function.WithParameterList(function.ParameterList.WithParameters(
+                            SyntaxFactory.SeparatedList(function.ParameterList.Parameters.Select(parameter =>
+                                parameter.WithType(Qualify(parameter.Type, ns)))))),
+                        IdentifierNameSyntax identifier when !aliases.Contains(identifier.Identifier.ValueText) &&
+                            sourceTypes.Contains((ns, identifier.Identifier.ValueText)) &&
+                            !IsShadowedType(identifier) =>
+                            QualifiedAlias(TryGetNamespace(ns, identifier.Identifier.ValueText, out string owner)
+                                ? owner : ns, identifier.Identifier.Text),
+                        _ => type,
+                    };
+                }
+
+                bool IsShadowedType(IdentifierNameSyntax identifier)
+                {
+                    string name = identifier.Identifier.ValueText;
+                    return identifier.Ancestors().OfType<TypeDeclarationSyntax>().Any(declaration =>
+                        GetShadowedTypeNames(declaration).Contains(name)) ||
+                        identifier.Ancestors().OfType<MethodDeclarationSyntax>().Any(method =>
+                            method.TypeParameterList?.Parameters.Any(parameter => parameter.Identifier.ValueText == name) == true);
+                }
+
+                HashSet<string> GetShadowedTypeNames(TypeDeclarationSyntax declaration)
+                {
+                    if (!shadowedTypeNames.TryGetValue(declaration, out var names))
+                    {
+                        names = declaration.TypeParameterList?.Parameters
+                            .Select(parameter => parameter.Identifier.ValueText).ToHashSet() ?? new HashSet<string>();
+                        if (declaration.Parent is TypeDeclarationSyntax)
+                            names.Add(declaration.Identifier.ValueText);
+                        names.UnionWith(declaration.Members.OfType<BaseTypeDeclarationSyntax>()
+                            .Select(member => member.Identifier.ValueText));
+                        names.UnionWith(declaration.Members.OfType<DelegateDeclarationSyntax>()
+                            .Select(member => member.Identifier.ValueText));
+                        shadowedTypeNames.Add(declaration, names);
+                    }
+                    return names;
+                }
+            }
+
+            var nameFixer = new NameFixer(namesToNamespaces, nativeRecordNamespaces);
             var newTree = nameFixer.FixNames(tree);
             return CSharpSyntaxTree.ParseText(newTree.GetText(), null, tree.FilePath);
+
+            bool TryGetNamespace(string ns, string name, out string owner)
+            {
+                if (name.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, System.StringComparison.Ordinal) &&
+                    namesToNamespaces.TryGetValue(name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length], out owner))
+                    return true;
+                return nativeRecordNamespaces?.TryGetValue((ns, name), out owner) == true ||
+                    namesToNamespaces.TryGetValue(name, out owner);
+            }
         }
+
+        private sealed class TypeQualifier : CSharpSyntaxRewriter
+        {
+            private readonly HashSet<TypeSyntax> types;
+            private readonly System.Func<TypeSyntax, TypeSyntax> qualify;
+
+            public TypeQualifier(IEnumerable<TypeSyntax> types, System.Func<TypeSyntax, TypeSyntax> qualify)
+            {
+                this.types = types.ToHashSet();
+                this.qualify = qualify;
+            }
+
+            public override SyntaxNode Visit(SyntaxNode node) =>
+                node is TypeSyntax type && this.types.Contains(type)
+                    ? this.qualify(type).WithTriviaFrom(type)
+                    : base.Visit(node);
+        }
+
+        private static TypeSyntax QualifiedAlias(string ns, string name) =>
+            SyntaxFactory.ParseTypeName($"global::{(string.IsNullOrEmpty(ns) ? "" : ns + ".")}{name}");
 
         private class MovedData
         {
@@ -30,10 +201,13 @@ namespace ClangSharpSourceToWinmd
         private class NameFixer
         {
             Dictionary<string, string> namesToNamespaces;
+            private readonly IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces;
 
-            public NameFixer(Dictionary<string, string> namesToNamespaces)
+            public NameFixer(Dictionary<string, string> namesToNamespaces,
+                IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces)
             {
                 this.namesToNamespaces = namesToNamespaces;
+                this.nativeRecordNamespaces = nativeRecordNamespaces;
             }
 
             public SyntaxTree FixNames(SyntaxTree tree)
@@ -123,9 +297,10 @@ namespace ClangSharpSourceToWinmd
 
                 private SyntaxNode VisitDeclarationSyntax(MemberDeclarationSyntax node, string name)
                 {
-                    if (this.parent.namesToNamespaces.TryGetValue(name, out var requiredNamespace))
+                    string currentNamespace = SyntaxUtils.GetEnclosingNamespace(node);
+                    if (this.parent.nativeRecordNamespaces?.TryGetValue((currentNamespace, name), out var requiredNamespace) == true ||
+                        this.parent.namesToNamespaces.TryGetValue(name, out requiredNamespace))
                     {
-                        var currentNamespace = SyntaxUtils.GetEnclosingNamespace(node);
                         if (requiredNamespace != currentNamespace)
                         {
                             if (!this.namespaceToMovedData.TryGetValue(requiredNamespace, out var movedData))
@@ -144,22 +319,25 @@ namespace ClangSharpSourceToWinmd
 
                 public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
                 {
+                    bool namespaceType = node.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax;
                     node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
 
-                    return this.VisitDeclarationSyntax(node, node.Identifier.ValueText);
+                    return namespaceType ? this.VisitDeclarationSyntax(node, node.Identifier.ValueText) : node;
                 }
 
                 public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
                 {
+                    bool namespaceType = node.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax;
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
 
-                    return this.VisitDeclarationSyntax(node, node.Identifier.ValueText);
+                    return namespaceType ? this.VisitDeclarationSyntax(node, node.Identifier.ValueText) : node;
                 }
 
                 public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
                 {
+                    bool namespaceType = node.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax;
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
-                    return this.VisitDeclarationSyntax(node, node.Identifier.ValueText);
+                    return namespaceType ? this.VisitDeclarationSyntax(node, node.Identifier.ValueText) : node;
                 }
 
                 public override SyntaxNode VisitMethodDeclaration(MethodDeclarationSyntax node)
