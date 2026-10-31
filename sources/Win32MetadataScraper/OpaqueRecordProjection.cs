@@ -106,7 +106,11 @@ namespace Win32MetadataScraper
             foreach (var group in recordAliases.GroupBy(alias => alias.ManagedName))
                 if (group.Select(alias => alias.Declaration.Handle.CanonicalCursor).Distinct().Count() != 1)
                     throw new InvalidOperationException($"Distinct native record aliases project to '{group.Key}'.");
-            var uniqueAliases = recordAliases.GroupBy(alias => alias.ManagedName).Select(group => group.First()).ToArray();
+            var uniqueAliases = recordAliases.GroupBy(alias => alias.ManagedName).Select(group => group.First())
+                .Where(alias => !records.Values.Any(record =>
+                    record.Identity == alias.Declaration.Handle.CanonicalCursor &&
+                    record.Name == alias.RecordName &&
+                    alias.ManagedName == ManagedName(alias.Declaration.Name, alias.RecordName, remaps))).ToArray();
             recordAliases.Clear();
             recordAliases.AddRange(uniqueAliases);
 

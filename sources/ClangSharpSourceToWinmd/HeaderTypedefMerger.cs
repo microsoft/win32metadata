@@ -23,6 +23,7 @@ namespace ClangSharpSourceToWinmd
         private const string RaiiFreeName = "global::Windows.Win32.Foundation.Metadata.RAIIFreeAttribute";
         private const string ArchitectureName = "global::Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute";
         private static readonly SyntaxAnnotation ComposedHeaderAlias = new SyntaxAnnotation();
+        private static readonly SyntaxAnnotation ComposedNativeCharacterProjection = new SyntaxAnnotation();
 
         internal static Dictionary<string, NativeProjectionOwner> FindNativeProjectionOwners(
             IEnumerable<SyntaxTree> trees, IEnumerable<StructDeclarationSyntax> declarations,
@@ -189,6 +190,7 @@ namespace ClangSharpSourceToWinmd
             {
                 var model = compilation.GetSemanticModel(tree);
                 var replacements = new Dictionary<TypeSyntax, TypeSyntax>();
+                var enumStorageTypes = new Dictionary<EnumMemberDeclarationSyntax, ITypeSymbol>();
                 foreach (var field in tree.GetRoot().DescendantNodes().OfType<FieldDeclarationSyntax>()
                     .Where(field => field.Modifiers.Any(SyntaxKind.ConstKeyword)))
                 {
@@ -218,7 +220,17 @@ namespace ClangSharpSourceToWinmd
                 {
                     try
                     {
-                        LowerCasts(member.EqualsValue?.Value);
+                        var expression = member.EqualsValue?.Value;
+                        if (LowerCasts(expression) && member.Parent is EnumDeclarationSyntax declaration)
+                        {
+                            var storage = declaration.BaseList?.Types.Count == 1
+                                ? GetStorage(declaration.BaseList.Types[0].Type) ??
+                                    model.GetTypeInfo(declaration.BaseList.Types[0].Type).Type
+                                : compilation.GetSpecialType(SpecialType.System_Int32);
+                            if (storage != null && IntegerWidth(storage.SpecialType) != 0 &&
+                                model.GetTypeInfo(expression).Type?.SpecialType != storage.SpecialType)
+                                enumStorageTypes.Add(member, storage);
+                        }
                     }
                     catch (InvalidDataException error)
                     {
@@ -246,20 +258,34 @@ namespace ClangSharpSourceToWinmd
                 }
                 if (replacements.Count == 0)
                     continue;
-                var replacement = tree.WithRootAndOptions(tree.GetRoot().ReplaceNodes(replacements.Keys,
-                    (original, _) => replacements[original]), tree.Options);
+                var replacement = tree.WithRootAndOptions(tree.GetRoot().ReplaceNodes(
+                    replacements.Keys.Cast<SyntaxNode>().Concat(enumStorageTypes.Keys),
+                    (original, updated) =>
+                    {
+                        if (original is TypeSyntax type)
+                            return replacements[type];
+                        var member = (EnumMemberDeclarationSyntax)updated;
+                        return member.WithEqualsValue(member.EqualsValue.WithValue(ConvertEnumInitializer(
+                            member.EqualsValue.Value, StorageSyntax(enumStorageTypes[(EnumMemberDeclarationSyntax)original],
+                                SyntaxFactory.PredefinedType(SyntaxFactory.Token(SyntaxKind.IntKeyword))))));
+                    }), tree.Options);
                 rewritten = rewritten.ReplaceSyntaxTree(tree, replacement);
 
-                void LowerCasts(ExpressionSyntax expression)
+                bool LowerCasts(ExpressionSyntax expression)
                 {
                     if (expression == null)
-                        return;
+                        return false;
+                    bool lowered = false;
                     foreach (var cast in expression.DescendantNodesAndSelf().OfType<CastExpressionSyntax>())
                     {
                         var storage = GetStorage(cast.Type);
                         if (storage != null)
+                        {
                             replacements.Add(cast.Type, StorageSyntax(storage, cast.Type));
+                            lowered = true;
+                        }
                     }
+                    return lowered;
                 }
 
                 ITypeSymbol GetStorage(TypeSyntax syntax)
@@ -329,6 +355,16 @@ namespace ClangSharpSourceToWinmd
 
         private static TypeSyntax StorageSyntax(ITypeSymbol storage, TypeSyntax original) =>
             SyntaxFactory.ParseTypeName(storage.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)).WithTriviaFrom(original);
+
+        private static ExpressionSyntax ConvertEnumInitializer(ExpressionSyntax expression, TypeSyntax storage)
+        {
+            if (expression is ParenthesizedExpressionSyntax parentheses)
+                return parentheses.WithExpression(ConvertEnumInitializer(parentheses.Expression, storage));
+            if (expression is CheckedExpressionSyntax context)
+                return context.WithExpression(ConvertEnumInitializer(context.Expression, storage));
+            return SyntaxFactory.CastExpression(storage,
+                SyntaxFactory.ParenthesizedExpression(expression.WithoutTrivia())).WithTriviaFrom(expression);
+        }
 
         internal static CSharpCompilation Merge(CSharpCompilation compilation)
         {
@@ -437,7 +473,8 @@ namespace ClangSharpSourceToWinmd
                 .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
             var candidates = compilation.SyntaxTrees.Where(tree =>
                 MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) ||
-                tree.FilePath.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase))
+                tree.FilePath.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase) ||
+                HeaderEnumGroupMerger.IsHeaderEnumSourceFile(tree.FilePath))
                 .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
                 .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
                 .Select(declaration => new EnumProjection(declaration,
@@ -885,6 +922,8 @@ namespace ClangSharpSourceToWinmd
                 (retained != null || aliases.Any(alias =>
                     NativeTypedefProjectionProvenance.IsInferred(alias.Declaration) == false)))
                 declaration = NativeTypedefProjectionProvenance.WithPolicy(declaration, inferred: false);
+            if (nativeCharacterStorage != null)
+                declaration = declaration.WithAdditionalAnnotations(ComposedNativeCharacterProjection);
             return (provenNativeStorage == true ? NativeHandleSourceProvenance.Remove(declaration) : declaration)
                 .WithAdditionalAnnotations(ComposedHeaderAlias);
         }
@@ -946,6 +985,9 @@ namespace ClangSharpSourceToWinmd
                 depth++;
                 character = pointer.PointedAtType;
             }
+            if (native && depth != 0 && character.SpecialType == SpecialType.System_Char &&
+                declarations.All(declaration => declaration.HasAnnotation(ComposedNativeCharacterProjection)))
+                return storage;
             if (depth == 0 || character.SpecialType != (retained ? SpecialType.System_Char : SpecialType.System_UInt16))
                 return type;
             ITypeSymbol projection = compilation.GetSpecialType(SpecialType.System_Char);

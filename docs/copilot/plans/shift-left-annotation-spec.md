@@ -276,6 +276,20 @@ levels from signatures: an `ALIAS*` parameter still projects as a pointer to the
 native typedef wrapper. The source-kind proofs are internal comments, distinct
 from `DECLARE_HANDLE` provenance and from public SDK annotation vocabulary.
 
+Native record recovery selects an original record once when a same-name typedef
+resolves to that same native record and managed name. Distinct aliases keep their
+own projections. Alternative record definitions may compare a native character
+pointer with a character projection already proven during typedef composition.
+That internal proof does not authorize arbitrary `ushort*` storage or erase
+nominal public aliases; the selected native record remains the output provider.
+
+A header logical enum can own a compatible inferred scalar alias from another
+header when the existing storage, namespace, use and metadata checks agree.
+Lowering native typedef casts in enum initializers also converts the final
+expression to the enum's declared integral storage. Explicit `checked` and
+`unchecked` contexts are preserved, and genuine checked overflow remains a
+compiler error.
+
 For an IDL-owned typedef, use the existing selector-bound comment transport in
 the original IDL, for example:
 
