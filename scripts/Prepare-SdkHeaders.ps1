@@ -7,14 +7,45 @@ param(
     [string]$SourceRoot = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders",
     [string]$SdkPackageRoot,
     [string]$MidlPreprocessorPath,
-    [string]$OutputRoot = "$PSScriptRoot\..\artifacts\prepared-sdk"
+    [string]$OutputRoot = "$PSScriptRoot\..\artifacts\prepared-sdk",
+    [string]$DiagnosticsPath
 )
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $repoRoot = [IO.Path]::GetFullPath("$PSScriptRoot\..")
+$preparationClock = [Diagnostics.Stopwatch]::StartNew()
+$preparationDiagnostics = [ordered]@{
+    schemaVersion = 1
+    patchValidationVersion = 1
+    patchCount = 0
+    fileHashCalls = 0
+    gitVersionCalls = 0
+    numstatGitCalls = 0
+    numstatValidatedPatches = 0
+    numstatReusedPatches = 0
+    largestNumstatBatch = 0
+    numstatSeconds = 0.0
+    patchPreflightGitCalls = 0
+    patchApplyGitCalls = 0
+    patchApplySeconds = 0.0
+    inputValidationSeconds = 0.0
+    patchStructureSeconds = 0.0
+    copySeconds = 0.0
+    midlSeconds = 0.0
+    finalInputVerificationSeconds = 0.0
+    publicationSeconds = 0.0
+    totalSeconds = 0.0
+}
+foreach ($phase in @('source', 'copiedHeaders', 'publishedHeaders', 'finalHeaders',
+        'publishedMidl', 'copiedMidl', 'finalMidl')) {
+    $preparationDiagnostics["${phase}DirectoryHashCalls"] = 0
+    $preparationDiagnostics["${phase}DirectoryFilesHashed"] = 0
+    $preparationDiagnostics["${phase}DirectoryHashSeconds"] = 0.0
+}
 
 function Get-Sha256([string]$Path) {
+    $script:preparationDiagnostics.fileHashCalls++
     (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash
 }
 
@@ -34,22 +65,86 @@ function Assert-OrdinaryPath([string]$Path) {
     }
 }
 
-function Get-DirectoryState([string]$Path) {
-    $entries = @(Get-ChildItem -LiteralPath $Path -Recurse -Force)
-    foreach ($entry in $entries) {
-        if ($entry.Attributes -band [IO.FileAttributes]::ReparsePoint) {
-            throw "Reparse points are not permitted in the header tree: $($entry.FullName)"
+function Get-DirectoryState([string]$Path, [string]$Phase) {
+    $clock = [Diagnostics.Stopwatch]::StartNew()
+    $fileCount = 0
+    try {
+        $entries = @(Get-ChildItem -LiteralPath $Path -Recurse -Force)
+        foreach ($entry in $entries) {
+            if ($entry.Attributes -band [IO.FileAttributes]::ReparsePoint) {
+                throw "Reparse points are not permitted in the header tree: $($entry.FullName)"
+            }
+        }
+        $files = @($entries | Where-Object { !$_.PSIsContainer } | ForEach-Object {
+            [pscustomobject]@{
+                path = [IO.Path]::GetRelativePath($Path, $_.FullName)
+                sha256 = Get-Sha256 $_.FullName
+            }
+        } | Sort-Object -Property path -CaseSensitive)
+        $fileCount = $files.Count
+        [pscustomobject]@{
+            files = $files
+            sha256 = Get-TextHash (($files | ForEach-Object { "$($_.path)`t$($_.sha256)" }) -join "`n")
         }
     }
-    $files = @($entries | Where-Object { !$_.PSIsContainer } | ForEach-Object {
-        [pscustomobject]@{
-            path = [IO.Path]::GetRelativePath($Path, $_.FullName)
-            sha256 = Get-Sha256 $_.FullName
+    finally {
+        $script:preparationDiagnostics["${Phase}DirectoryHashCalls"]++
+        $script:preparationDiagnostics["${Phase}DirectoryFilesHashed"] += $fileCount
+        $script:preparationDiagnostics["${Phase}DirectoryHashSeconds"] += $clock.Elapsed.TotalSeconds
+    }
+}
+
+function Assert-PinnedHeaderPatches([object[]]$Patches) {
+    foreach ($patch in $Patches) {
+        if ((Get-Sha256 $patch.fullPath) -ne $patch.sha256) {
+            throw "A pinned SDK patch changed during preparation: $($patch.path)"
         }
-    } | Sort-Object -Property path -CaseSensitive)
-    [pscustomobject]@{
-        files = $files
-        sha256 = Get-TextHash (($files | ForEach-Object { "$($_.path)`t$($_.sha256)" }) -join "`n")
+    }
+}
+
+function Assert-HeaderPatchStatistics([object[]]$Patches) {
+    $clock = [Diagnostics.Stopwatch]::StartNew()
+    try {
+        for ($offset = 0; $offset -lt $Patches.Count;) {
+            $batch = [Collections.Generic.List[object]]::new()
+            $argumentCharacters = 2 * $repoRoot.Length + 128
+            while ($offset + $batch.Count -lt $Patches.Count -and $batch.Count -lt 32) {
+                $patch = $Patches[$offset + $batch.Count]
+                $pathCharacters = 2 * $patch.fullPath.Length + 3
+                if ($batch.Count -gt 0 -and $argumentCharacters + $pathCharacters -gt 24000) {
+                    break
+                }
+                $batch.Add($patch)
+                $argumentCharacters += $pathCharacters
+            }
+            Assert-PinnedHeaderPatches $batch.ToArray()
+            $expected = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+            foreach ($patch in $batch) {
+                if (!$expected.Add($patch.artifact)) {
+                    throw "An SDK artifact appears more than once in a validation batch: $($patch.artifact)"
+                }
+            }
+            $arguments = @('-C', $repoRoot, 'apply', '-p1', '--numstat', '--') + @($batch.fullPath)
+            $script:preparationDiagnostics.numstatGitCalls++
+            $script:preparationDiagnostics.largestNumstatBatch = [Math]::Max(
+                $script:preparationDiagnostics.largestNumstatBatch, $batch.Count)
+            $statistics = @(& git @arguments)
+            if ($LASTEXITCODE -ne 0 -or $statistics.Count -ne $batch.Count) {
+                throw "Invalid or empty patch: $($batch.path -join ', ')"
+            }
+            foreach ($statistic in $statistics) {
+                if ($statistic -notmatch '^\d+\t\d+\t(.+)$' -or
+                    !$expected.Remove($Matches[1].Replace('/', '\'))) {
+                    throw "Patch changes a path other than its admitted SDK artifact: $statistic"
+                }
+            }
+            Assert-PinnedHeaderPatches $batch.ToArray()
+            $script:preparationDiagnostics.numstatValidatedPatches += $batch.Count
+            $offset += $batch.Count
+        }
+    }
+    finally {
+        $script:preparationDiagnostics.numstatSeconds += $clock.Elapsed.TotalSeconds
     }
 }
 
@@ -66,18 +161,24 @@ function Resolve-Child([string]$Root, [string]$RelativePath) {
 }
 
 function Invoke-HeaderPatch($Patch, [string]$Root) {
-    if ((Get-Sha256 $Patch.fullPath) -ne $Patch.sha256) {
-        throw "A pinned SDK patch changed during preparation: $($Patch.path)"
+    $clock = [Diagnostics.Stopwatch]::StartNew()
+    try {
+        Assert-PinnedHeaderPatches @($Patch)
+        $arguments = @('-c', 'core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol',
+            '-C', $repoRoot, 'apply', '--unsafe-paths', '-p1', "--directory=$Root", '--whitespace=error-all')
+        $script:preparationDiagnostics.patchPreflightGitCalls++
+        $output = & git @arguments --check -- $Patch.fullPath 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            throw "Patch preflight failed for $($Patch.path):`n$($output -join "`n")"
+        }
+        $script:preparationDiagnostics.patchApplyGitCalls++
+        $output = & git @arguments -- $Patch.fullPath 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            throw "Patch failed for $($Patch.path):`n$($output -join "`n")"
+        }
     }
-    $arguments = @('-c', 'core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol',
-        '-C', $repoRoot, 'apply', '--unsafe-paths', '-p1', "--directory=$Root", '--whitespace=error-all')
-    $output = & git @arguments --check -- $Patch.fullPath 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        throw "Patch preflight failed for $($Patch.path):`n$($output -join "`n")"
-    }
-    $output = & git @arguments -- $Patch.fullPath 2>&1
-    if ($LASTEXITCODE -ne 0) {
-        throw "Patch failed for $($Patch.path):`n$($output -join "`n")"
+    finally {
+        $script:preparationDiagnostics.patchApplySeconds += $clock.Elapsed.TotalSeconds
     }
 }
 
@@ -214,7 +315,7 @@ function Find-PreparedMidl([string]$Identity) {
             !(Test-Path -LiteralPath $midl -PathType Container)) {
             throw "Incomplete published MIDL cache: $($candidate.FullName)"
         }
-        if ($manifest.midlSha256 -ne (Get-DirectoryState $midl).sha256) {
+        if ($manifest.midlSha256 -ne (Get-DirectoryState $midl 'publishedMidl').sha256) {
             throw "Published MIDL cache was modified: $($candidate.FullName)."
         }
         return [pscustomobject]@{
@@ -232,6 +333,19 @@ $OutputRoot = [IO.Path]::GetFullPath($OutputRoot).TrimEnd('\')
 Assert-OrdinaryPath $Recipe
 Assert-OrdinaryPath $SourceRoot
 Assert-OrdinaryPath $OutputRoot
+if ($DiagnosticsPath) {
+    $DiagnosticsPath = [IO.Path]::GetFullPath($DiagnosticsPath)
+    Assert-OrdinaryPath $DiagnosticsPath
+    foreach ($root in @($SourceRoot, $OutputRoot, $PSScriptRoot)) {
+        if ($DiagnosticsPath -eq $root -or
+            $DiagnosticsPath.StartsWith("$root\", [StringComparison]::OrdinalIgnoreCase)) {
+            throw 'Preparation diagnostics must not overwrite source, scripts or published cache contents.'
+        }
+    }
+    if ($DiagnosticsPath -eq $Recipe) {
+        throw 'Preparation diagnostics must not overwrite the SDK recipe.'
+    }
+}
 if ($OutputRoot -eq $SourceRoot -or $OutputRoot.StartsWith("$SourceRoot\", [StringComparison]::OrdinalIgnoreCase) -or
     $SourceRoot.StartsWith("$OutputRoot\", [StringComparison]::OrdinalIgnoreCase)) {
     throw 'The source and prepared-header roots must not overlap.'
@@ -256,6 +370,10 @@ if (!$SdkPackageRoot) {
 }
 $SdkPackageRoot = [IO.Path]::GetFullPath($SdkPackageRoot).TrimEnd('\')
 Assert-OrdinaryPath $SdkPackageRoot
+if ($DiagnosticsPath -and ($DiagnosticsPath -eq $SdkPackageRoot -or
+    $DiagnosticsPath.StartsWith("$SdkPackageRoot\", [StringComparison]::OrdinalIgnoreCase))) {
+    throw 'Preparation diagnostics must not overwrite selected SDK inputs.'
+}
 [xml]$nuspec = Get-Content -LiteralPath "$SdkPackageRoot\microsoft.windows.sdk.cpp.nuspec" -Raw
 $version = $nuspec.SelectSingleNode("//*[local-name()='metadata']/*[local-name()='version']").InnerText
 if ($version -ne $config.sdkPackageVersion) {
@@ -388,6 +506,8 @@ if ($hasMidl) {
         [pscustomobject]@{ path = "$PSScriptRoot\$_"; sha256 = Get-Sha256 "$PSScriptRoot\$_" }
     }
 }
+$preparationDiagnostics.inputValidationSeconds = $preparationClock.Elapsed.TotalSeconds
+$patchStructureClock = [Diagnostics.Stopwatch]::StartNew()
 $patchedArtifacts = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 $patches = @($config.patches | ForEach-Object {
     $path = Resolve-Child $recipeRoot $_
@@ -456,27 +576,33 @@ $patches = @($config.patches | ForEach-Object {
     if ($_ -cne "$artifact.patch") {
         throw "A patch must be named after its SDK artifact: $artifact.patch"
     }
-    $statistics = @(& git -C $repoRoot apply -p1 --numstat -- $path)
-    if ($LASTEXITCODE -ne 0 -or $statistics.Count -ne 1) {
-        throw "Invalid or empty patch: $_"
-    }
-    foreach ($statistic in $statistics) {
-        if ($statistic -notmatch '^\d+\t\d+\t(.+)$' -or
-            $Matches[1].Replace('/', '\') -cne $artifact) {
-            throw "Patch changes a path other than its admitted SDK artifact: $statistic"
-        }
-    }
     [pscustomobject]@{
-        path = $_; fullPath = $path; sha256 = Get-Sha256 $path; isIdl = $isIdl; isMidlInput = $input.Count -eq 1
+        path = $_; fullPath = $path; sha256 = Get-Sha256 $path; artifact = $artifact
+        isIdl = $isIdl; isMidlInput = $input.Count -eq 1
     }
 })
+$preparationDiagnostics.patchStructureSeconds = $patchStructureClock.Elapsed.TotalSeconds
+$preparationDiagnostics.patchCount = $patches.Count
+$preparationDiagnostics.gitVersionCalls++
+$gitVersionOutput = @(& git --version)
+if ($LASTEXITCODE -ne 0 -or $gitVersionOutput.Count -ne 1 -or
+    $gitVersionOutput[0] -notmatch '^git version \S+$') {
+    throw 'Could not identify the Git patch-validation version.'
+}
+$gitVersion = $gitVersionOutput[0]
+$preparationDiagnostics.validationGitVersion = $gitVersion
+$patchValidationIdentity = Get-TextHash ('one-artifact-numstat-v1:' + $gitVersion + ':' + $preparationSha256 +
+    (($patches | ForEach-Object { "$($_.path):$($_.artifact):$($_.sha256)" }) -join "`n"))
 [IO.Directory]::CreateDirectory($OutputRoot) | Out-Null
 $lock = [IO.File]::Open("$OutputRoot\prepare.lock", [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
 $staging = $null
 $publicationFailed = $false
+$completed = $false
+$identity = $null
+$result = $null
 try {
-    $sourceState = Get-DirectoryState $SourceRoot
-    $identity = Get-TextHash ($recipeSha256 + $preparationSha256 + $sourceState.sha256 +
+    $sourceState = Get-DirectoryState $SourceRoot 'source'
+    $identity = Get-TextHash ($recipeSha256 + $preparationSha256 + $gitVersion + $sourceState.sha256 +
         (($patches | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n") +
         (($midlTools + $midlScripts | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n"))
     $midlIdentity = $null
@@ -485,6 +611,7 @@ try {
             schemaVersion = 1
             sdkPackageVersion = $version
             preparationSha256 = $preparationSha256
+            patchValidationGitVersion = $gitVersion
             configuration = $config.midl
             patches = @($patches | Where-Object isMidlInput | Select-Object path, sha256)
             tools = $midlTools
@@ -500,137 +627,165 @@ try {
             throw "Incomplete published header cache: $destination"
         }
         $manifest = Get-Content -LiteralPath $manifestPath -Raw | ConvertFrom-Json
-        $actual = Get-DirectoryState "$destination\headers"
-        if ($manifest.identity -ne $identity -or $manifest.preparedSha256 -ne $actual.sha256) {
+        $actual = Get-DirectoryState "$destination\headers" 'publishedHeaders'
+        if ($manifest.schemaVersion -ne 1 -or $manifest.identity -ne $identity -or
+            $manifest.preparedSha256 -ne $actual.sha256) {
             throw "Published header cache was modified: $destination. Do not repair a tree that a scraper may be reading."
         }
         if ($hasMidl) {
             Assert-OrdinaryPath "$destination\midl"
-            if ($manifest.midlSha256 -ne (Get-DirectoryState "$destination\midl").sha256) {
+            if ($manifest.midlSha256 -ne (Get-DirectoryState "$destination\midl" 'publishedMidl').sha256) {
                 throw "Published MIDL cache was modified: $destination."
             }
         }
-        return [pscustomobject]@{
+        if ($null -eq $manifest.PSObject.Properties['patchValidationVersion'] -or
+            $manifest.patchValidationVersion -ne 1 -or
+            $null -eq $manifest.PSObject.Properties['patchValidationGitVersion'] -or
+            $manifest.patchValidationGitVersion -cne $gitVersion -or
+            $null -eq $manifest.PSObject.Properties['patchValidationIdentity'] -or
+            $manifest.patchValidationIdentity -cne $patchValidationIdentity) {
+            throw "Published patch validation proof was modified: $destination."
+        }
+        Assert-PinnedHeaderPatches $patches
+        if ((Get-Sha256 $Recipe) -ne $recipeSha256 -or (Get-Sha256 $PSCommandPath) -ne $preparationSha256) {
+            throw 'The SDK recipe or preparation script changed during preparation.'
+        }
+        $preparationDiagnostics.numstatReusedPatches = $patches.Count
+        $completed = $true
+        $result = [pscustomobject]@{
             IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity
             Reused = $true; MidlReused = $hasMidl
+            Diagnostics = $preparationDiagnostics
         }
     }
 
-    $staging = "$OutputRoot\staging-$([Guid]::NewGuid().ToString('N'))"
-    [IO.Directory]::CreateDirectory("$staging\headers") | Out-Null
-    foreach ($file in $sourceState.files) {
-        $target = [IO.Path]::Combine("$staging\headers", $file.path)
-        [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
-        [IO.File]::Copy([IO.Path]::Combine($SourceRoot, $file.path), $target)
-    }
-    if ((Get-DirectoryState "$staging\headers").sha256 -ne $sourceState.sha256) {
-        throw 'The source header tree changed while it was being copied.'
-    }
-    foreach ($patch in @($patches | Where-Object { !$_.isIdl })) {
-        Invoke-HeaderPatch $patch "$staging\headers"
-    }
-    $reusedMidl = $null
-    if ($hasMidl) {
-        $reusedMidl = Find-PreparedMidl $midlIdentity
-        if ($reusedMidl) {
-            Copy-Item -LiteralPath $reusedMidl.path -Destination "$staging\midl" -Recurse
-            if ((Get-DirectoryState "$staging\midl").sha256 -ne $reusedMidl.sha256) {
-                throw 'The published MIDL cache changed while it was being copied.'
+    if (!$completed) {
+        Assert-HeaderPatchStatistics $patches
+        $copyClock = [Diagnostics.Stopwatch]::StartNew()
+        $staging = "$OutputRoot\staging-$([Guid]::NewGuid().ToString('N'))"
+        [IO.Directory]::CreateDirectory("$staging\headers") | Out-Null
+        foreach ($file in $sourceState.files) {
+            $target = [IO.Path]::Combine("$staging\headers", $file.path)
+            [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
+            [IO.File]::Copy([IO.Path]::Combine($SourceRoot, $file.path), $target)
+        }
+        if ((Get-DirectoryState "$staging\headers" 'copiedHeaders').sha256 -ne $sourceState.sha256) {
+            throw 'The source header tree changed while it was being copied.'
+        }
+        $preparationDiagnostics.copySeconds = $copyClock.Elapsed.TotalSeconds
+        foreach ($patch in @($patches | Where-Object { !$_.isIdl })) {
+            Invoke-HeaderPatch $patch "$staging\headers"
+        }
+        $reusedMidl = $null
+        if ($hasMidl) {
+            $midlClock = [Diagnostics.Stopwatch]::StartNew()
+            $reusedMidl = Find-PreparedMidl $midlIdentity
+            if ($reusedMidl) {
+                Copy-Item -LiteralPath $reusedMidl.path -Destination "$staging\midl" -Recurse
+                if ((Get-DirectoryState "$staging\midl" 'copiedMidl').sha256 -ne $reusedMidl.sha256) {
+                    throw 'The published MIDL cache changed while it was being copied.'
+                }
+            }
+            else {
+                Invoke-PreparedMidl $staging
+            }
+            foreach ($output in $config.midl.outputs) {
+                [IO.File]::Copy((Resolve-Child "$staging\midl\generated" $output.path),
+                    (Resolve-Child "$staging\headers" $output.path), $true)
+            }
+            $preparationDiagnostics.midlSeconds = $midlClock.Elapsed.TotalSeconds
+        }
+        $verificationClock = [Diagnostics.Stopwatch]::StartNew()
+        if ((Get-DirectoryState $SourceRoot 'source').sha256 -ne $sourceState.sha256) {
+            throw 'The source header tree changed during preparation.'
+        }
+        foreach ($input in $midlInputs) {
+            if ((Get-Sha256 $input.fullPath) -ne $input.sha256) {
+                throw "A pinned MIDL input changed during preparation: $($input.path)"
             }
         }
-        else {
-            Invoke-PreparedMidl $staging
+        foreach ($tool in @($midlTools + $midlScripts)) {
+            if ((Get-Sha256 $tool.path) -ne $tool.sha256) {
+                throw "A MIDL tool or SAL converter changed during preparation: $($tool.path)"
+            }
         }
-        foreach ($output in $config.midl.outputs) {
-            [IO.File]::Copy((Resolve-Child "$staging\midl\generated" $output.path),
-                (Resolve-Child "$staging\headers" $output.path), $true)
+        Assert-PinnedHeaderPatches $patches
+        if ((Get-Sha256 $Recipe) -ne $recipeSha256 -or (Get-Sha256 $PSCommandPath) -ne $preparationSha256) {
+            throw 'The SDK recipe or preparation script changed during preparation.'
         }
-    }
-    if ((Get-DirectoryState $SourceRoot).sha256 -ne $sourceState.sha256) {
-        throw 'The source header tree changed during preparation.'
-    }
-    foreach ($input in $midlInputs) {
-        if ((Get-Sha256 $input.fullPath) -ne $input.sha256) {
-            throw "A pinned MIDL input changed during preparation: $($input.path)"
-        }
-    }
-    foreach ($tool in @($midlTools + $midlScripts)) {
-        if ((Get-Sha256 $tool.path) -ne $tool.sha256) {
-            throw "A MIDL tool or SAL converter changed during preparation: $($tool.path)"
-        }
-    }
-    foreach ($patch in $patches) {
-        if ((Get-Sha256 $patch.fullPath) -ne $patch.sha256) {
-            throw "A pinned SDK patch changed during preparation: $($patch.path)"
-        }
-    }
-    if ((Get-Sha256 $Recipe) -ne $recipeSha256 -or (Get-Sha256 $PSCommandPath) -ne $preparationSha256) {
-        throw 'The SDK recipe or preparation script changed during preparation.'
-    }
-    $prepared = Get-DirectoryState "$staging\headers"
-    $manifest = [ordered]@{
-        schemaVersion = 1
-        identity = $identity
-        sdkPackageVersion = $version
-        sourceStage = $config.sourceStage
-        sourceGitTree = $config.sourceGitTree
-        sourceSha256 = $sourceState.sha256
-        retainedHeaders = $retainedHeaders
-        recipeSha256 = $recipeSha256
-        preparationSha256 = $preparationSha256
-        patches = @($patches | Select-Object path, sha256)
-        preparedSha256 = $prepared.sha256
-        files = $prepared.files
-    }
-    if ($hasMidl) {
-        $manifest.midlIdentity = $midlIdentity
-        $manifest.midlReusedFrom = if ($reusedMidl) { $reusedMidl.preparedIdentity } else { $null }
-        $manifest.midlProducerIdentity = if ($reusedMidl) { $reusedMidl.producerIdentity } else { $identity }
-        $manifest.midlInputs = @($midlInputs | Select-Object path, sourceKind, sdkPath, sha256)
-        $manifest.midlTools = $midlTools
-        $manifest.midlScripts = $midlScripts
-        $manifest.midlSha256 = (Get-DirectoryState "$staging\midl").sha256
-        $diagnostics = Get-Content -LiteralPath "$staging\midl\categorized-diagnostics.json" -Raw | ConvertFrom-Json
-        $manifest.midlNonBlockingErrorCount = $diagnostics.count
-        $manifest.midlNonBlockingErrorCounts = $diagnostics.counts
-    }
-    [IO.File]::WriteAllText("$staging\manifest.json", ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-    try {
-        [IO.Directory]::Move($staging, $destination)
-    }
-    catch {
-        $publicationFailed = $true
-        $publicationError = $_
-        $failure = $_.Exception.GetBaseException()
-        $diagnostic = [ordered]@{
-            status = 'failed-unpublished'
+        $preparationDiagnostics.finalInputVerificationSeconds = $verificationClock.Elapsed.TotalSeconds
+        $prepared = Get-DirectoryState "$staging\headers" 'finalHeaders'
+        $publicationClock = [Diagnostics.Stopwatch]::StartNew()
+        $manifest = [ordered]@{
+            schemaVersion = 1
             identity = $identity
-            staging = $staging
-            destination = $destination
-            exceptionType = $failure.GetType().FullName
-            hResult = '0x{0:X8}' -f $failure.HResult
-            message = $failure.Message
-            processId = $PID
-            processCurrentDirectory = [Environment]::CurrentDirectory
-            powerShellLocation = (Get-Location).Path
+            sdkPackageVersion = $version
+            sourceStage = $config.sourceStage
+            sourceGitTree = $config.sourceGitTree
+            sourceSha256 = $sourceState.sha256
+            retainedHeaders = $retainedHeaders
+            recipeSha256 = $recipeSha256
+            preparationSha256 = $preparationSha256
+            patchValidationVersion = 1
+            patchValidationGitVersion = $gitVersion
+            patchValidationIdentity = $patchValidationIdentity
+            patches = @($patches | Select-Object path, sha256)
+            preparedSha256 = $prepared.sha256
+            files = $prepared.files
         }
+        if ($hasMidl) {
+            $manifest.midlIdentity = $midlIdentity
+            $manifest.midlReusedFrom = if ($reusedMidl) { $reusedMidl.preparedIdentity } else { $null }
+            $manifest.midlProducerIdentity = if ($reusedMidl) { $reusedMidl.producerIdentity } else { $identity }
+            $manifest.midlInputs = @($midlInputs | Select-Object path, sourceKind, sdkPath, sha256)
+            $manifest.midlTools = $midlTools
+            $manifest.midlScripts = $midlScripts
+            $manifest.midlSha256 = (Get-DirectoryState "$staging\midl" 'finalMidl').sha256
+            $diagnostics = Get-Content -LiteralPath "$staging\midl\categorized-diagnostics.json" -Raw | ConvertFrom-Json
+            $manifest.midlNonBlockingErrorCount = $diagnostics.count
+            $manifest.midlNonBlockingErrorCounts = $diagnostics.counts
+        }
+        [IO.File]::WriteAllText("$staging\manifest.json", ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
         try {
-            $diagnostic.sourceAttributes = [IO.File]::GetAttributes($staging).ToString()
-            $diagnostic.parentAttributes = [IO.File]::GetAttributes($OutputRoot).ToString()
-            $diagnostic.destinationExists = [IO.Directory]::Exists($destination)
-            [IO.File]::WriteAllText("$staging\publication-failure.json",
-                ($diagnostic | ConvertTo-Json -Depth 4), [Text.UTF8Encoding]::new($false))
+            [IO.Directory]::Move($staging, $destination)
         }
         catch {
-            Write-Warning "Could not write atomic-publication diagnostics: $($_.Exception.Message)"
+            $publicationFailed = $true
+            $publicationError = $_
+            $failure = $_.Exception.GetBaseException()
+            $diagnostic = [ordered]@{
+                status = 'failed-unpublished'
+                identity = $identity
+                staging = $staging
+                destination = $destination
+                exceptionType = $failure.GetType().FullName
+                hResult = '0x{0:X8}' -f $failure.HResult
+                message = $failure.Message
+                processId = $PID
+                processCurrentDirectory = [Environment]::CurrentDirectory
+                powerShellLocation = (Get-Location).Path
+            }
+            try {
+                $diagnostic.sourceAttributes = [IO.File]::GetAttributes($staging).ToString()
+                $diagnostic.parentAttributes = [IO.File]::GetAttributes($OutputRoot).ToString()
+                $diagnostic.destinationExists = [IO.Directory]::Exists($destination)
+                [IO.File]::WriteAllText("$staging\publication-failure.json",
+                    ($diagnostic | ConvertTo-Json -Depth 4), [Text.UTF8Encoding]::new($false))
+            }
+            catch {
+                Write-Warning "Could not write atomic-publication diagnostics: $($_.Exception.Message)"
+            }
+            Write-Warning "Atomic publication failed ($($diagnostic.hResult)); unpublished diagnostic tree retained at $staging. It is not a valid prepared-header cache."
+            throw $publicationError
         }
-        Write-Warning "Atomic publication failed ($($diagnostic.hResult)); unpublished diagnostic tree retained at $staging. It is not a valid prepared-header cache."
-        throw $publicationError
-    }
-    $staging = $null
-    [pscustomobject]@{
-        IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity
-        Reused = $false; MidlReused = [bool]$reusedMidl
+        $staging = $null
+        $preparationDiagnostics.publicationSeconds = $publicationClock.Elapsed.TotalSeconds
+        $completed = $true
+        $result = [pscustomobject]@{
+            IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity
+            Reused = $false; MidlReused = [bool]$reusedMidl
+            Diagnostics = $preparationDiagnostics
+        }
     }
 }
 finally {
@@ -641,5 +796,23 @@ finally {
     }
     finally {
         $lock.Dispose()
+        $preparationDiagnostics.totalSeconds = $preparationClock.Elapsed.TotalSeconds
+        if ($DiagnosticsPath) {
+            try {
+                Assert-OrdinaryPath $DiagnosticsPath
+                [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($DiagnosticsPath)) | Out-Null
+                [IO.File]::WriteAllText($DiagnosticsPath, ([ordered]@{
+                    schemaVersion = 1
+                    status = if ($completed) { 'completed' } else { 'failed' }
+                    identity = $identity
+                    diagnostics = $preparationDiagnostics
+                } | ConvertTo-Json -Depth 5), [Text.UTF8Encoding]::new($false))
+            }
+            catch {
+                if ($completed) { throw }
+                Write-Warning "Could not retain SDK preparation diagnostics: $($_.Exception.Message)"
+            }
+        }
     }
 }
+$result

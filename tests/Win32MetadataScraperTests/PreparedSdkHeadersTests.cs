@@ -29,6 +29,9 @@ namespace Win32MetadataScraperTests
             string retained = File.ReadAllText(fixture.PreparationWarnings(architecture));
             Assert.Contains(diagnostic, retained.Replace("\r\n", "\n"));
             fixture.AssertPublishedProvenance(events[0][1], hasMidl: false, architecture);
+            using var metrics = JsonDocument.Parse(File.ReadAllText(fixture.PreparationMetrics(architecture)));
+            Assert.Equal("completed", metrics.RootElement.GetProperty("status").GetString());
+            Assert.Equal(1, metrics.RootElement.GetProperty("diagnostics").GetProperty("numstatGitCalls").GetInt32());
         }
 
         [Fact]
@@ -55,6 +58,167 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void PatchValidationIsBatchedAndWarmCacheReusesItsBoundProof()
+        {
+            using var fixture = new Fixture();
+            fixture.AddPatchedHeaders(32);
+            var first = fixture.Prepare(captureDiagnostics: true);
+            Assert.False(first.Reused);
+            Assert.Equal(33, first.Diagnostics.GetProperty("patchCount").GetInt32());
+            Assert.Equal(2, first.Diagnostics.GetProperty("numstatGitCalls").GetInt32());
+            Assert.Equal(33, first.Diagnostics.GetProperty("numstatValidatedPatches").GetInt32());
+            Assert.Equal(0, first.Diagnostics.GetProperty("numstatReusedPatches").GetInt32());
+            Assert.Equal(33, first.Diagnostics.GetProperty("patchPreflightGitCalls").GetInt32());
+            Assert.Equal(33, first.Diagnostics.GetProperty("patchApplyGitCalls").GetInt32());
+            Assert.Equal(2, first.Diagnostics.GetProperty("sourceDirectoryHashCalls").GetInt32());
+            Assert.Equal(1, first.Diagnostics.GetProperty("copiedHeadersDirectoryHashCalls").GetInt32());
+            Assert.Equal(1, first.Diagnostics.GetProperty("finalHeadersDirectoryHashCalls").GetInt32());
+            string[] paths = Directory.GetFiles(fixture.SourceRoot, "*", SearchOption.AllDirectories)
+                .Select(path => Path.GetRelativePath(fixture.SourceRoot, path)).OrderBy(path => path, StringComparer.Ordinal).ToArray();
+            Assert.Equal(paths, Directory.GetFiles(first.IncludeRoot, "*", SearchOption.AllDirectories)
+                .Select(path => Path.GetRelativePath(first.IncludeRoot, path)).OrderBy(path => path, StringComparer.Ordinal));
+            foreach (string path in paths)
+            {
+                bool patched = path.StartsWith("um" + Path.DirectorySeparatorChar, StringComparison.Ordinal);
+                byte[] original = patched ? Encoding.ASCII.GetBytes(Fixture.Before) : File.ReadAllBytes(fixture.Unrelated);
+                Assert.Equal(original, File.ReadAllBytes(Path.Combine(fixture.SourceRoot, path)));
+                Assert.Equal(patched ? Encoding.ASCII.GetBytes(Fixture.Before.Replace("VALUE 1", "VALUE 2")) : original,
+                    File.ReadAllBytes(Path.Combine(first.IncludeRoot, path)));
+            }
+
+            string manifestPath = Path.Combine(Path.GetDirectoryName(first.IncludeRoot), "manifest.json");
+            byte[] manifestBytes = File.ReadAllBytes(manifestPath);
+            var second = fixture.Prepare(captureDiagnostics: true);
+            Assert.True(second.Reused);
+            Assert.Equal(first.Identity, second.Identity);
+            Assert.Equal(manifestBytes, File.ReadAllBytes(manifestPath));
+            Assert.Equal(0, second.Diagnostics.GetProperty("numstatGitCalls").GetInt32());
+            Assert.Equal(0, second.Diagnostics.GetProperty("numstatValidatedPatches").GetInt32());
+            Assert.Equal(33, second.Diagnostics.GetProperty("numstatReusedPatches").GetInt32());
+            Assert.Equal(0, second.Diagnostics.GetProperty("patchPreflightGitCalls").GetInt32());
+            Assert.Equal(0, second.Diagnostics.GetProperty("patchApplyGitCalls").GetInt32());
+            Assert.Equal(1, second.Diagnostics.GetProperty("sourceDirectoryHashCalls").GetInt32());
+            Assert.Equal(1, second.Diagnostics.GetProperty("publishedHeadersDirectoryHashCalls").GetInt32());
+            using var metrics = JsonDocument.Parse(File.ReadAllText(fixture.Diagnostics));
+            Assert.Equal("completed", metrics.RootElement.GetProperty("status").GetString());
+            Assert.Equal(second.Identity, metrics.RootElement.GetProperty("identity").GetString());
+            Assert.True(JsonNode.DeepEquals(JsonNode.Parse(second.Diagnostics.GetRawText()),
+                JsonNode.Parse(metrics.RootElement.GetProperty("diagnostics").GetRawText())));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void MalformedLaterBatchCannotPublishOrReuseAnEarlierPositiveProof(bool hasCache)
+        {
+            using var fixture = new Fixture();
+            fixture.AddPatchedHeaders(32);
+            if (hasCache)
+                fixture.Prepare();
+            string[] published = Directory.GetDirectories(fixture.Output);
+            fixture.ReplacePatchText(@"um\sample32.h.patch", "@@ -1,4 +1,4 @@", "@@ -1,4 +1,9 @@");
+            var result = fixture.Run(captureDiagnostics: true);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("Invalid or empty patch", result.Error);
+            Assert.Equal(published, Directory.GetDirectories(fixture.Output));
+            Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+            using var metrics = JsonDocument.Parse(File.ReadAllText(fixture.Diagnostics));
+            Assert.Equal("failed", metrics.RootElement.GetProperty("status").GetString());
+            Assert.Equal(2, metrics.RootElement.GetProperty("diagnostics").GetProperty("numstatGitCalls").GetInt32());
+            Assert.Equal(0, metrics.RootElement.GetProperty("diagnostics").GetProperty("numstatReusedPatches").GetInt32());
+        }
+
+        [Theory]
+        [InlineData("extra")]
+        [InlineData("missing")]
+        [InlineData("duplicate")]
+        [InlineData("wrong-path")]
+        [InlineData("nonnumeric")]
+        public void PatchStatisticsMustHaveExactlyOneNumericRecordPerAdmittedArtifact(string mutation)
+        {
+            using var fixture = new Fixture();
+            fixture.AddPatchedHeaders(2);
+            fixture.MutatePatchStatistics(mutation);
+            var result = fixture.Run(captureDiagnostics: true);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains(mutation is "extra" or "missing" ? "Invalid or empty patch" : "Patch changes a path other than its admitted SDK artifact", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+            Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+        }
+
+        [Fact]
+        public void EmptyPatchSetCanReuseItsProofWithoutNumstatOrPatchApplication()
+        {
+            using var fixture = new Fixture();
+            fixture.WriteRecipe(patches: Array.Empty<string>());
+            var first = fixture.Prepare();
+            var second = fixture.Prepare();
+            Assert.False(first.Reused);
+            Assert.True(second.Reused);
+            Assert.Equal(first.Identity, second.Identity);
+            foreach (var result in new[] { first, second })
+            {
+                Assert.Equal(0, result.Diagnostics.GetProperty("numstatGitCalls").GetInt32());
+                Assert.Equal(0, result.Diagnostics.GetProperty("patchApplyGitCalls").GetInt32());
+                Assert.Equal(Fixture.Before, File.ReadAllText(Path.Combine(result.IncludeRoot, "um", "sample.h")));
+            }
+        }
+
+        [Theory]
+        [InlineData("patchValidationVersion")]
+        [InlineData("patchValidationIdentity")]
+        public void PublishedPatchValidationProofTamperingIsRejected(string property)
+        {
+            using var fixture = new Fixture();
+            var prepared = fixture.Prepare();
+            string manifestPath = Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot), "manifest.json");
+            var manifest = JsonNode.Parse(File.ReadAllText(manifestPath)).AsObject();
+            if (property == "patchValidationVersion")
+                manifest[property] = 2;
+            else
+                manifest[property] = new string('0', 64);
+            string changed = manifest.ToJsonString();
+            File.WriteAllText(manifestPath, changed);
+            var result = fixture.Run(captureDiagnostics: true);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("Published patch validation proof was modified", result.Error);
+            Assert.Equal(changed, File.ReadAllText(manifestPath));
+            using var metrics = JsonDocument.Parse(File.ReadAllText(fixture.Diagnostics));
+            Assert.Equal("failed", metrics.RootElement.GetProperty("status").GetString());
+            Assert.Equal(0, metrics.RootElement.GetProperty("diagnostics").GetProperty("numstatGitCalls").GetInt32());
+        }
+
+        [Fact]
+        public void PreparationScriptChangeInvalidatesPositivePatchValidation()
+        {
+            using var fixture = new Fixture();
+            fixture.UsePrivatePreparationScripts();
+            var first = fixture.Prepare();
+            File.AppendAllText(fixture.PreparationScript("Prepare-SdkHeaders.ps1"), "\n# Validator implementation identity changed.\n");
+            var second = fixture.Prepare();
+            Assert.False(second.Reused);
+            Assert.NotEqual(first.Identity, second.Identity);
+            Assert.Equal(1, second.Diagnostics.GetProperty("numstatGitCalls").GetInt32());
+            Assert.Equal(0, second.Diagnostics.GetProperty("numstatReusedPatches").GetInt32());
+        }
+
+        [Fact]
+        public void UnlistedSourceInputChangeInvalidatesPreparationWithoutChangingOldCache()
+        {
+            using var fixture = new Fixture();
+            byte[] original = File.ReadAllBytes(fixture.Unrelated);
+            var first = fixture.Prepare();
+            byte[] changed = new byte[] { 0xff, 0xfe, 0x62, 0, 0x0d, 0, 0x0a, 0 };
+            File.WriteAllBytes(fixture.Unrelated, changed);
+            var second = fixture.Prepare();
+            Assert.False(second.Reused);
+            Assert.NotEqual(first.Identity, second.Identity);
+            Assert.Equal(1, second.Diagnostics.GetProperty("numstatGitCalls").GetInt32());
+            Assert.Equal(original, File.ReadAllBytes(Path.Combine(first.IncludeRoot, "shared", "unrelated.h")));
+            Assert.Equal(changed, File.ReadAllBytes(Path.Combine(second.IncludeRoot, "shared", "unrelated.h")));
+        }
+
+        [Fact]
         public void PublishedCacheTamperingIsRejectedRatherThanRepaired()
         {
             using var fixture = new Fixture();
@@ -73,11 +237,17 @@ namespace Win32MetadataScraperTests
         {
             using var fixture = new Fixture();
             fixture.WritePatch(2, before: 99);
-            var result = fixture.Run();
+            var result = fixture.Run(captureDiagnostics: true);
             Assert.NotEqual(0, result.ExitCode);
             Assert.Contains("Patch preflight failed", result.Error);
             Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
             Assert.Empty(Directory.GetDirectories(fixture.Output));
+            using var metrics = JsonDocument.Parse(File.ReadAllText(fixture.Diagnostics));
+            Assert.Equal("failed", metrics.RootElement.GetProperty("status").GetString());
+            var counts = metrics.RootElement.GetProperty("diagnostics");
+            Assert.Equal(1, counts.GetProperty("numstatGitCalls").GetInt32());
+            Assert.Equal(1, counts.GetProperty("patchPreflightGitCalls").GetInt32());
+            Assert.Equal(0, counts.GetProperty("patchApplyGitCalls").GetInt32());
         }
 
         [Fact]
@@ -265,6 +435,8 @@ namespace Win32MetadataScraperTests
 
             internal string Output { get; }
 
+            internal string SourceRoot => this.source;
+            internal string Diagnostics => Path.Combine(this.root, "preparation.metrics.json");
             internal string SelectedSources => Path.Combine(this.root, "selected-sources");
             internal string AssembledSources => Path.Combine(this.root, "assembled-sources");
             internal string MidlInput => Path.Combine(this.sdk, "c", "include", "um", "generated.idl");
@@ -274,14 +446,38 @@ namespace Win32MetadataScraperTests
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
             internal string MidlWarnings => Path.Combine(this.root, "midl-warnings.log");
             internal string PreparationWarnings(string architecture) => Path.Combine(this.root, "obj", "prepared-sdk-provenance", architecture, "preparation.warnings.log");
+            internal string PreparationMetrics(string architecture) => Path.Combine(this.root, "obj", "prepared-sdk-provenance", architecture, "preparation.metrics.json");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt", "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }.Select(name => Path.Combine(this.root, "obj", "generated", name)).ToArray();
-            internal void WritePatch(int after, int before = 1, string path = "um/sample.h", string metadata = null, string originalPath = null, string leadingLine = null)
+            internal void WritePatch(int after, int before = 1, string path = "um/sample.h", string metadata = null, string originalPath = null, string leadingLine = null, string patchFile = null)
             {
                 string oldPath = originalPath ?? path;
                 int count = leadingLine == null ? 4 : 5;
                 string prefix = leadingLine == null ? "" : " " + leadingLine + "\r\n";
                 string text = $"diff --git a/{oldPath} b/{path}\n{metadata}" + $"--- a/{oldPath}\n+++ b/{path}\n@@ -1,{count} +1,{count} @@\n{prefix} #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" + $"-#define VALUE {before}\r\n+#define VALUE {after}\r\n #endif\r\n";
-                File.WriteAllText(this.patch, text, new UTF8Encoding(false));
+                File.WriteAllText(patchFile ?? this.patch, text, new UTF8Encoding(false));
+            }
+
+            internal void AddPatchedHeaders(int count)
+            {
+                for (int index = 1; index <= count; index++)
+                {
+                    string path = Path.Combine("um", $"sample{index}.h");
+                    string native = Path.Combine(this.sdk, "c", "include", path);
+                    File.WriteAllBytes(native, Encoding.ASCII.GetBytes(Before));
+                    File.WriteAllBytes(Path.Combine(this.source, path), Encoding.ASCII.GetBytes(Before));
+                    WritePatch(2, path: path.Replace('\\', '/'), patchFile: Path.Combine(this.root, path + ".patch"));
+                    MutateRecipe(recipe =>
+                    {
+                        recipe["headers"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                        {
+                            path,
+                            sourceSha256 = Hash(Encoding.ASCII.GetBytes(Before)),
+                            sdkPath = Path.Combine("c", "include", path),
+                            sdkSha256 = Hash(Encoding.ASCII.GetBytes(Before)),
+                        }));
+                        recipe["patches"].AsArray().Add(path + ".patch");
+                    });
+                }
             }
 
             internal void WriteFirstLinePatch(string firstLine)
@@ -306,6 +502,25 @@ namespace Win32MetadataScraperTests
             }
 
             internal string PreparationScript(string name) => Path.Combine(this.scripts, name);
+            internal void MutatePatchStatistics(string mutation)
+            {
+                UsePrivatePreparationScripts();
+                string command = mutation switch
+                {
+                    "extra" => "$statistics += $statistics[0]",
+                    "missing" => "$statistics = @($statistics | Select-Object -Skip 1)",
+                    "duplicate" => "$statistics[1] = $statistics[0]",
+                    "wrong-path" => "$statistics[1] = \"1`t1`tum/wrong.h\"",
+                    "nonnumeric" => "$statistics[1] = \"-`t1`tum/sample1.h\"",
+                    _ => throw new ArgumentOutOfRangeException(nameof(mutation)),
+                };
+                string path = PreparationScript("Prepare-SdkHeaders.ps1");
+                string text = File.ReadAllText(path);
+                const string call = "$statistics = @(& git @arguments)";
+                Assert.Contains(call, text);
+                File.WriteAllText(path, text.Replace(call, call + "\n" + command));
+            }
+
             internal void UsePrivatePreparationScripts()
             {
                 this.scripts = Path.Combine(this.root, "preparation", "scripts");
@@ -325,7 +540,7 @@ namespace Win32MetadataScraperTests
                 string path = PreparationScript("Prepare-SdkHeaders.ps1");
                 string text = File.ReadAllText(path);
                 string newline = text.Contains("\r\n", StringComparison.Ordinal) ? "\r\n" : "\n";
-                string result = "    [pscustomobject]@{" + newline + "        IncludeRoot = \"$destination\\headers\"";
+                string result = "        $result = [pscustomobject]@{" + newline + "            IncludeRoot = \"$destination\\headers\"";
                 Assert.Contains(result, text);
                 File.WriteAllText(path, text.Replace(result, command + "\n" + result));
             }
@@ -607,16 +822,16 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(File.ReadAllBytes(Path.Combine(source, path)), File.ReadAllBytes(Path.Combine(target, path)));
             }
 
-            internal PreparationResult Prepare(string workingDirectory = null, string outputRoot = null, bool captureMidlWarnings = false)
+            internal PreparationResult Prepare(string workingDirectory = null, string outputRoot = null, bool captureMidlWarnings = false, bool captureDiagnostics = false)
             {
-                var result = Run(workingDirectory, outputRoot: outputRoot, captureMidlWarnings: captureMidlWarnings);
+                var result = Run(workingDirectory, outputRoot: outputRoot, captureMidlWarnings: captureMidlWarnings, captureDiagnostics: captureDiagnostics);
                 Assert.True(result.ExitCode == 0, result.Error + result.Output);
                 return JsonSerializer.Deserialize<PreparationResult>(result.Output);
             }
 
-            internal ProcessResult Run(string workingDirectory = null, string ambientInclude = null, string outputRoot = null, bool captureMidlWarnings = false)
+            internal ProcessResult Run(string workingDirectory = null, string ambientInclude = null, string outputRoot = null, bool captureMidlWarnings = false, bool captureDiagnostics = false)
             {
-                return RunPowerShell("$ErrorActionPreference = 'Stop'; & " + Quote(PreparationScript("Prepare-SdkHeaders.ps1")) + " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) + " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(outputRoot ?? Output) + (captureMidlWarnings ? " 3> " + Quote(MidlWarnings) : "") + " | ConvertTo-Json -Compress", workingDirectory, ambientInclude);
+                return RunPowerShell("$ErrorActionPreference = 'Stop'; & " + Quote(PreparationScript("Prepare-SdkHeaders.ps1")) + " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) + " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(outputRoot ?? Output) + (captureDiagnostics ? " -DiagnosticsPath " + Quote(Diagnostics) : "") + (captureMidlWarnings ? " 3> " + Quote(MidlWarnings) : "") + " | ConvertTo-Json -Compress", workingDirectory, ambientInclude);
             }
 
             internal static void WriteGeneratedFile(string root, string relative, byte[] bytes)
@@ -734,6 +949,8 @@ namespace Win32MetadataScraperTests
             public bool Reused { get; set; }
 
             public bool MidlReused { get; set; }
+
+            public JsonElement Diagnostics { get; set; }
         }
 
         private sealed record ProcessResult(int ExitCode, string Output, string Error);

@@ -399,6 +399,24 @@ target invokes the same preparation stage; its override properties are
 `Manifest`, `Identity`, and `Reused`; record those identities rather than guessing a
 prepared path.
 
+Patch syntax validation runs in batches of at most 32 original SDK artifacts,
+with a separate command-line size bound. Each patch still has its own native
+preimage, path, mode and application checks. A verified prepared-cache hit reuses
+the successful syntax proof bound to the patch bytes, preparation script and Git
+validation version. Source, copied-tree, published-cache and MIDL hashes are still
+checked; directory hashes are not memoized.
+
+The standalone result also returns `Diagnostics`. `-DiagnosticsPath` writes a
+separate JSON record outside the source, SDK, scripts and prepared-cache trees.
+The ordinary build records it at
+`$(ObjDir)\prepared-sdk-provenance\$(ScanArch)\preparation.metrics.json`.
+Use its `numstatGitCalls`, validated/reused patch counts, application/preflight
+counts and phase times to measure the preparation change. Directory-hash and
+patch-application timings overlap some enclosing phase times and must not be
+added twice. Zero `numstatGitCalls` means no syntax-validation processes; Git
+version and source-tree identity checks still run. Script timings exclude process
+startup and diagnostic-file writing.
+
 `MaxProcessors` bounds the scraper task's own parallel partition/architecture jobs.
 MSBuild `-m` alone does not bound that internal concurrency. Set explicit bounds for
 MIDL and native-control runners too; do not use a nonpositive scraper limit, which

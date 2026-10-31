@@ -77,9 +77,10 @@
     <Message Text="Preparing SDK headers..." Importance="high" />
     <PropertyGroup>
       <_SdkPreparationWarningsLog>$(ObjDir)\prepared-sdk-provenance\$(ScanArch)\preparation.warnings.log</_SdkPreparationWarningsLog>
+      <_SdkPreparationDiagnosticsLog>$(ObjDir)\prepared-sdk-provenance\$(ScanArch)\preparation.metrics.json</_SdkPreparationDiagnosticsLog>
     </PropertyGroup>
     <MakeDir Directories="$(ObjDir)\prepared-sdk-provenance\$(ScanArch)" />
-    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)' 3&gt; '$(_SdkPreparationWarningsLog)').IncludeRoot&quot;"
+    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)' -DiagnosticsPath '$(_SdkPreparationDiagnosticsLog)' 3&gt; '$(_SdkPreparationWarningsLog)').IncludeRoot&quot;"
           ConsoleToMSBuild="true" StandardOutputImportance="low">
       <Output TaskParameter="ConsoleOutput" ItemName="_PreparedSdkIncludeRoot" />
     </Exec>
