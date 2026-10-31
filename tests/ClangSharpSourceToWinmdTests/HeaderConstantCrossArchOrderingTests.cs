@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
+using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ClangSharpSourceToWinmdTests
@@ -163,7 +164,7 @@ namespace ClangSharpSourceToWinmdTests
             {
                 foreach (string conflictingStorage in new[] { "uint", "long", "double" })
                 {
-                    var storageError = Assert.ThrowsException<InvalidDataException>(() => Emit(new Dictionary<string, string>
+                    Emit(new Dictionary<string, string>
                     {
                         ["provider.header-types.cs"] = "namespace Test { [NativeTypedef] " +
                             "public partial struct STATUS { public int Value; } " +
@@ -173,9 +174,29 @@ namespace ClangSharpSourceToWinmdTests
                         ["autotypes.cs"] = "namespace Test { [NativeTypedef] " +
                             "public partial struct STATUS { public int Value; } }",
                         ["constants.cs"] = Source("[NativeTypeName(\"const STATUS\")] public const STATUS ORIGINAL=(STATUS)1;"),
-                    }, _ => { }));
-                    StringAssert.Contains(storageError.Message, "CSSW005");
-                    StringAssert.Contains(storageError.Message, "Conflicting native typedef constant storage types");
+                    }, fields =>
+                    {
+                        var field = fields.Single();
+                        Assert.AreEqual("ORIGINAL", field.Name);
+                        Assert.AreEqual(ConstantTypeCode.Int32, field.ConstantType);
+                        Assert.AreEqual("01000000", field.ValueBits);
+                        StringAssert.StartsWith(field.Signature, "0611");
+                    }, inspectImage: image =>
+                    {
+                        using var report = JsonDocument.Parse(File.ReadAllText(
+                            Path.Combine(image.DirectoryName!, "generation-diagnostics.json")));
+                        Assert.AreEqual("completed-with-diagnostics", report.RootElement.GetProperty("Status").GetString());
+                        Assert.AreEqual(0, report.RootElement.GetProperty("BlockedStages").GetArrayLength());
+                        var diagnostics = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
+                        Assert.IsTrue(diagnostics.Length > 0);
+                        foreach (var diagnostic in diagnostics)
+                        {
+                            Assert.AreEqual("CSSW005", diagnostic.GetProperty("Code").GetString());
+                            Assert.IsFalse(diagnostic.GetProperty("BlocksEmission").GetBoolean());
+                            StringAssert.Contains(diagnostic.GetProperty("Message").GetString(), "Conflicting native typedef Value storage types");
+                            StringAssert.Contains(diagnostic.GetProperty("SelectedInput").GetString(), "autotypes");
+                        }
+                    });
                 }
             }
         }

@@ -222,8 +222,12 @@ namespace ClangSharpSourceToWinmd
             }
             if (validation.HasErrors)
             {
-                validation.Block("WinMD publication;default tests", "successful metadata emission");
-                validation.WriteReport(Path.Combine(sourceDirectory, "generation-diagnostics.json"));
+                if (validation.HasBlockingErrors)
+                    validation.Block("WinMD publication;default tests", "successful metadata emission");
+                string report = Path.Combine(sourceDirectory, "generation-diagnostics.json");
+                validation.WriteReport(report);
+                Console.Error.WriteLine(validation.Format());
+                Console.Error.WriteLine("Full diagnostics: " + report);
             }
 
             Console.WriteLine($"{OutputUtils.FormatTimespan(mainWatch.Elapsed)}");

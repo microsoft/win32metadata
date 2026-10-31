@@ -1496,11 +1496,11 @@ typedef unsigned long POINTER_INPUT_TYPE;
                 if (architecture == "x86" && !annotationsEnabled)
                 {
                     sessionProvider.ValueType = "int";
-                    AssertRejectedProvider("narrow-storage");
+                    AssertRecoveredProvider("narrow-storage", "Int32");
                     sessionProvider.ValueType = "long";
                     sessionProvider.CloseApi = null;
                     sessionProvider.InvalidHandleValues = null;
-                    AssertRejectedProvider("missing-resource-contract");
+                    AssertRecoveredProvider("missing-resource-contract", "Int64");
                     sessionProvider.CloseApi = "PrototypeCloseSession";
                     sessionProvider.InvalidHandleValues = new long[] { 0 };
                 }
@@ -1808,21 +1808,31 @@ typedef unsigned long POINTER_INPUT_TYPE;
                         providers, provider);
                 }
 
-                void AssertRejectedProvider(string label)
+                void AssertRecoveredProvider(string label, string expectedStorage)
                 {
                     WriteProviders();
-                    var error = Assert.Throws<InvalidDataException>(() =>
+                    using var recovered = Emit(fixture.DirectoryPath, architecture, requiredNamespaces: Routing,
+                        winmdFileName: "Recovered-" + label + ".winmd");
+                    AssertWrapper(recovered.Reader, "SESSION_KEY", expectedStorage);
+                    AssertMetadataClosure(recovered.Reader);
+                    string reportPath = Path.Combine(fixture.DirectoryPath, "generation-diagnostics.json");
+                    using var report = JsonDocument.Parse(File.ReadAllText(reportPath));
+                    Assert.Equal("completed-with-diagnostics", report.RootElement.GetProperty("Status").GetString());
+                    Assert.Empty(report.RootElement.GetProperty("BlockedStages").EnumerateArray());
+                    var diagnostics = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
+                    Assert.NotEmpty(diagnostics);
+                    Assert.All(diagnostics, diagnostic =>
                     {
-                        using var rejected = Emit(fixture.DirectoryPath, architecture, requiredNamespaces: Routing,
-                            winmdFileName: "Rejected.winmd");
+                        Assert.Equal("CSSW005", diagnostic.GetProperty("Code").GetString());
+                        Assert.False(diagnostic.GetProperty("BlocksEmission").GetBoolean());
+                        Assert.Contains("Conflicting native typedef Value storage types.", diagnostic.GetProperty("Message").GetString());
+                        Assert.Contains("autotypes", diagnostic.GetProperty("SelectedInput").GetString());
                     });
-                    Assert.Contains("Conflicting native typedef Value storage types.", error.Message);
-                    Assert.False(File.Exists(Path.Combine(fixture.DirectoryPath, "Rejected.winmd")));
                     if (evidence != null)
                     {
                         File.Copy(Path.Combine(fixture.DirectoryPath, "autotypes.cs"),
                             Path.Combine(evidence, label + ".cs.txt"));
-                        File.WriteAllText(Path.Combine(evidence, label + ".diagnostics.txt"), error.Message);
+                        File.Copy(reportPath, Path.Combine(evidence, label + ".diagnostics.json"));
                     }
                 }
             }

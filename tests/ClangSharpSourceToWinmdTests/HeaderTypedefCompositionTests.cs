@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Text;
+using System.Text.Json;
 using ClangSharpSourceToWinmd;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
@@ -17,11 +18,22 @@ namespace ClangSharpSourceToWinmdTests
     [TestClass]
     public partial class HeaderTypedefCompositionTests
     {
-        [TestMethod]
-        public void CrossArchPartialNativeAliasProvidersComposeBeforeDependentBinding()
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
+        public void CrossArchPartialNativeAliasProvidersComposeBeforeDependentBinding(bool reverseFiles)
         {
             using var fixture = new Fixture("crossarch");
             AddPartialNativeAliasProviders(fixture, "byte");
+            if (reverseFiles)
+                foreach (string architecture in new[] { "x86", "x64", "arm64" })
+                {
+                    string first = Path.Combine(fixture.DirectoryPath, architecture, "Bindings.header-types.cs");
+                    string second = Path.Combine(fixture.DirectoryPath, architecture, "Other.header-types.cs");
+                    string text = File.ReadAllText(first);
+                    File.WriteAllText(first, File.ReadAllText(second));
+                    File.WriteAllText(second, text);
+                }
             var compilation = fixture.Compile();
             var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
             Assert.AreEqual(0, errors.Length, string.Join(Environment.NewLine, errors.Select(error => error.ToString())));
@@ -230,8 +242,9 @@ namespace ClangSharpSourceToWinmdTests
             string? evidence = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
             if (evidence == null)
                 return;
-            Directory.CreateDirectory(evidence);
-            File.Copy(output, Path.Combine(evidence, Path.GetFileName(output)));
+            string directory = Path.Combine(evidence, Path.GetFileName(Path.GetDirectoryName(output)!));
+            Directory.CreateDirectory(directory);
+            File.Copy(output, Path.Combine(directory, Path.GetFileName(output)));
         }
 
         private static void AddPartialNativeAliasProviders(Fixture fixture, string storage)
@@ -254,6 +267,331 @@ namespace Test {
     public struct CONSUMER { public NATIVE_FLAG Flag; public NATIVE_STATUS Status; }
     public static class Apis { [DllImport(""test"")] public static extern NATIVE_STATUS Read(NATIVE_FLAG value); }
 }");
+        }
+
+        [DataTestMethod]
+        [DataRow("x86", "pstr")]
+        [DataRow("x86", "character")]
+        [DataRow("x64", "character")]
+        [DataRow("arm64", "character")]
+        [DataRow("crossarch", "character")]
+        [DataRow("x86", "direct-character")]
+        [DataRow("x64", "wide-character")]
+        [DataRow("x64", "single-header")]
+        [DataRow("x64", "target-order")]
+        [DataRow("x64", "target-order-reversed")]
+        [DataRow("x86", "signed-character")]
+        [DataRow("x64", "unsigned-target")]
+        [DataRow("x86", "pointer-depth")]
+        [DataRow("x64", "pointee-width")]
+        [DataRow("x86", "scalar")]
+        [DataRow("x64", "unproven-target")]
+        [DataRow("x64", "binding-drift")]
+        [DataRow("x64", "foreign-family")]
+        [DataRow("x86", "missing-character-proof")]
+        public void ConfiguredNativeCharacterTargetsKeepPublicEncodingWithoutRetainedSidecars(
+            string architecture, string scenario)
+        {
+            using var fixture = new Fixture(architecture);
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            bool pstr = scenario == "pstr";
+            bool wide = scenario == "wide-character";
+            bool direct = scenario is "direct-character" or "scalar";
+            bool scalar = scenario == "scalar";
+            bool targetOrder = scenario is "target-order" or "target-order-reversed";
+            bool compatible = scenario is "pstr" or "character" or "direct-character" or "wide-character" or "single-header" ||
+                targetOrder;
+            bool recoverable = scenario is "signed-character" or "unsigned-target" or "pointer-depth" or
+                "pointee-width" or "scalar" or "missing-character-proof";
+            string name = pstr ? "PSTR" : "TEXT";
+            string characterName = pstr ? "CHAR" : "NATIVE_CHARACTER";
+            string ownerNamespace = pstr ? "Windows.Win32.System.Kernel" : "Native";
+            string mappedNamespace = pstr ? "Windows.Win32.System.Rpc" : "Mapped";
+            string canonicalNamespace = pstr ? "Windows.Win32.Foundation" : "Canonical";
+            string characterStorage = wide ? "ushort" : scenario == "unsigned-target" ? "byte" : "sbyte";
+            string characterNative = wide ? "wchar_t" : scenario switch
+            {
+                "signed-character" => "signed char",
+                "unsigned-target" => "unsigned char",
+                "missing-character-proof" => "",
+                _ => "char",
+            };
+            foreach (string target in architecture == "crossarch" ? new[] { "x86", "x64", "arm64" } : new[] { architecture })
+            {
+                string owner = direct ? "" : Provider(target, ownerNamespace, characterName, characterName,
+                    characterStorage, characterNative, inferred: true, configured: false);
+                owner += Provider(target, ownerNamespace, name, name,
+                    direct ? scalar ? "sbyte" : "sbyte*" : characterName + "*",
+                    direct ? scalar ? "char" : "char *" : characterName + " *",
+                    inferred: false, configured: scenario != "unproven-target");
+                string ownerFile = targetOrder ? scenario == "target-order" ? "A-Other" : "Z-Other" : "Native";
+                File.WriteAllText(Path.Combine(fixture.DirectoryPath, target, ownerFile + ".header-types.cs"), owner);
+                if (targetOrder)
+                    File.WriteAllText(Path.Combine(fixture.DirectoryPath, target,
+                        (scenario == "target-order" ? "Z-Preferred" : "A-Preferred") + ".header-types.cs"),
+                        Provider(target, ownerNamespace, name, name, characterName + "*", characterName + " *",
+                            inferred: false, configured: true, header: "A-canonical.h"));
+                string incoming = wide ? "char*" : scenario switch
+                {
+                    "unsigned-target" => "sbyte*",
+                    "pointer-depth" => "byte**",
+                    "pointee-width" => "ushort*",
+                    "scalar" => "byte",
+                    _ => "byte*",
+                };
+                string incomingNative = wide ? "wchar_t *" : scenario switch
+                {
+                    "unsigned-target" => "signed char *",
+                    "pointer-depth" => "unsigned char * *",
+                    "pointee-width" => "unsigned short *",
+                    "scalar" => "unsigned char",
+                    _ => "unsigned char *",
+                };
+                string mapped = scenario == "single-header" ? "" :
+                    Provider(target, mappedNamespace, pstr ? "RPC_CSTR" : "MAPPED_TEXT", name,
+                        incoming, incomingNative, inferred: false, configured: true);
+                if (pstr)
+                    mapped += Provider(target, mappedNamespace, characterName, characterName,
+                        "sbyte", "char", inferred: true, configured: false);
+                if (scenario == "foreign-family")
+                    mapped += Provider(target, "Foreign", "UNRELATED", name,
+                        "byte*", "unsigned char *", inferred: true, configured: false);
+                File.WriteAllText(Path.Combine(fixture.DirectoryPath, target, "Mapped.header-types.cs"), mapped);
+            }
+            fixture.Write("Bindings.cs", "namespace " + ownerNamespace + " { public struct OWNER_CONSUMER { public " + name +
+                " Value; } } namespace " + mappedNamespace + " { public struct MAPPED_CONSUMER { public " +
+                (scenario == "single-header" ? "global::" + canonicalNamespace + "." : "") + name + " Value; } }");
+            var routes = new Dictionary<string, string> { [name] = canonicalNamespace, [characterName] = canonicalNamespace };
+            if (!compatible && !recoverable)
+            {
+                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(routes)).Message, "CSSW005");
+                return;
+            }
+            var validation = new GenerationValidation();
+            var compilation = fixture.Compile(routes, validation: validation);
+            Assert.AreEqual(recoverable, validation.HasErrors);
+            Assert.IsFalse(validation.HasBlockingErrors);
+            Assert.AreEqual(0, validation.BlockedStages.Count);
+            if (recoverable)
+            {
+                var diagnostic = validation.Errors.Single();
+                Assert.AreEqual("CSSW005", diagnostic.Code);
+                StringAssert.Contains(diagnostic.Message, "Conflicting native typedef Value storage types.");
+                Assert.AreEqual(name, diagnostic.SelectedSource!.NativeName);
+                Assert.AreEqual("MAPPED_TEXT", diagnostic.CandidateSource!.NativeName);
+                Assert.AreEqual("completed-with-diagnostics", validation.Status);
+            }
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            var canonical = compilation.CSharpCompilation.GetTypeByMetadataName(canonicalNamespace + "." + name)!;
+            var declaration = (StructDeclarationSyntax)canonical.DeclaringSyntaxReferences.Single().GetSyntax();
+            Assert.AreEqual(name, NativeTypedefSourceProvenance.Read(declaration)!.NativeName);
+            if (targetOrder)
+                StringAssert.EndsWith(NativeTypedefSourceProvenance.Read(declaration)!.Header, "A-canonical.h");
+            Assert.IsTrue(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(declaration));
+            string expectedStorage = scenario switch
+            {
+                "signed-character" or "unsigned-target" or "missing-character-proof" => canonicalNamespace + "." + characterName + "*",
+                "scalar" => "sbyte",
+                _ => wide ? "char*" : "byte*",
+            };
+            Assert.AreEqual(expectedStorage, canonical.GetMembers("Value").OfType<IFieldSymbol>().Single().Type.ToDisplayString());
+            foreach (var consumer in new[] { (ownerNamespace, "OWNER_CONSUMER"), (mappedNamespace, "MAPPED_CONSUMER") })
+            {
+                var type = compilation.CSharpCompilation.GetTypeByMetadataName(consumer.Item1 + "." + consumer.Item2)!;
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(canonical, type.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+            }
+            string output = Path.Combine(fixture.DirectoryPath, "NativeCharacterTarget.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var aliases = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == name).ToArray();
+            Assert.AreEqual(1, aliases.Length);
+            Assert.AreEqual(canonicalNamespace, reader.GetString(aliases[0].Namespace));
+            if (scenario is "signed-character" or "unsigned-target" or "missing-character-proof")
+            {
+                var signature = reader.GetBlobReader(reader.GetFieldDefinition(aliases[0].GetFields().Single()).Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.Pointer, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                var character = ResolveLocalType(reader, signature.ReadTypeHandle());
+                Assert.AreEqual(characterName, reader.GetString(character.Name));
+                Assert.AreEqual(0, signature.RemainingBytes);
+                CollectionAssert.AreEqual(new byte[] { 0x06, scenario == "unsigned-target" ? (byte)0x05 : (byte)0x04 },
+                    reader.GetBlobBytes(reader.GetFieldDefinition(character.GetFields().Single()).Signature));
+            }
+            else
+                CollectionAssert.AreEqual(scalar ? new byte[] { 0x06, 0x04 } :
+                    new byte[] { 0x06, 0x0f, scenario == "signed-character" ? (byte)0x04 : wide ? (byte)0x03 : (byte)0x05 },
+                    reader.GetBlobBytes(reader.GetFieldDefinition(aliases[0].GetFields().Single()).Signature));
+            foreach (string consumer in new[] { "OWNER_CONSUMER", "MAPPED_CONSUMER" })
+            {
+                var type = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Single(type => reader.GetString(type.Name) == consumer);
+                var signature = reader.GetBlobReader(reader.GetFieldDefinition(type.GetFields().Single()).Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                var target = ResolveLocalType(reader, signature.ReadTypeHandle());
+                Assert.AreEqual(canonicalNamespace, reader.GetString(target.Namespace));
+                Assert.AreEqual(name, reader.GetString(target.Name));
+                Assert.AreEqual(0, signature.RemainingBytes);
+            }
+
+            string Provider(string target, string ns, string nativeName, string managedName, string storage,
+                string nativeType, bool inferred, bool configured, string? header = null)
+            {
+                int size = managedName == characterName ? wide ? 2 : 1 : scalar ? 1 : target == "x86" ? 4 : 8;
+                string headerName = header ?? ns + ".h";
+                string text = TypedefProvider(fixture, ns, "c:" + headerName + "@T@" + nativeName, true,
+                    storage, size, size).Replace("SCALAR", managedName)
+                    .Replace("public partial struct", "public unsafe partial struct");
+                var root = CSharpSyntaxTree.ParseText(text).GetRoot();
+                var original = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var source = NativeTypedefSourceProvenance.Read(original)! with
+                {
+                    NativeName = nativeName,
+                    Header = Path.Combine(fixture.DirectoryPath, headerName),
+                    SourceArchitecture = target switch
+                    {
+                        "x86" => Architecture.X86,
+                        "x64" => Architecture.X64,
+                        _ => Architecture.Arm64,
+                    },
+                };
+                var field = (FieldDeclarationSyntax)original.Members.Single();
+                if (nativeType.Length != 0)
+                    original = original.ReplaceNode(field, field.AddAttributeLists(SyntaxFactory.AttributeList(
+                        SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Attribute(
+                            SyntaxFactory.ParseName("global::Windows.Win32.Foundation.Metadata.NativeTypeName"),
+                            SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(
+                                SyntaxFactory.AttributeArgument(SyntaxFactory.LiteralExpression(
+                                    SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(nativeType))))))))));
+                var stamped = NativeTypedefProjectionProvenance.WithPolicy(NativeTypedefSourceProvenance.Attach(
+                    original.WithTrailingTrivia(default(SyntaxTriviaList)), source), inferred);
+                if (configured)
+                    stamped = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(stamped);
+                if (scenario == "binding-drift" && nativeName == name)
+                    stamped = stamped.WithLeadingTrivia(stamped.GetLeadingTrivia().Select(trivia =>
+                        trivia.ToString().StartsWith("/* Win32Metadata.NativeTypedefBinding.", StringComparison.Ordinal)
+                            ? SyntaxFactory.Comment(trivia.ToString().Replace(new string('A', 64), new string('B', 64)))
+                            : trivia));
+                return root.ReplaceNode(root.DescendantNodes().OfType<StructDeclarationSyntax>().Single(), stamped).ToFullString()
+                    .Replace("using Windows.Win32.Foundation.Metadata;", "", StringComparison.Ordinal)
+                    .Replace("[NativeTypedef]", "[global::Windows.Win32.Foundation.Metadata.NativeTypedef]", StringComparison.Ordinal);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow(false, false)]
+        [DataRow(false, true)]
+        [DataRow(true, false)]
+        [DataRow(true, true)]
+        public void CanonicalProvidersCollectAllStorageConflictsAndStillEmitEveryConsumer(
+            bool retained, bool reverseFiles)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", retained ? @"using Windows.Win32.Foundation.Metadata;
+namespace Canonical {
+    [NativeTypedef] public partial struct FIRST { public int Value; }
+    [NativeTypedef] public partial struct LAST { public byte Value; }
+}" : "");
+            fixture.Write("Bindings.header-types.cs", "");
+            fixture.Write(reverseFiles ? "Z-Canonical.header-types.cs" : "A-Canonical.header-types.cs",
+                Provider("Native", "FIRST", "FIRST", "int", 4) + Provider("Native", "LAST", "LAST", "byte", 1));
+            fixture.Write(reverseFiles ? "A-Mapped.header-types.cs" : "Z-Mapped.header-types.cs",
+                Provider("Mapped", "MAPPED_FIRST", "FIRST", "uint", 4) +
+                Provider("Mapped", "WIDE_FIRST", "FIRST", "long", 8) +
+                Provider("Mapped", "MAPPED_LAST", "LAST", "ushort", 2));
+            fixture.Write("Bindings.cs", @"using System.Runtime.InteropServices;
+namespace Native { public struct OWNER_CONSUMER { public FIRST First; public LAST Last; } }
+namespace Mapped {
+    public struct MAPPED_CONSUMER { public FIRST First; public LAST Last; }
+    public static class Apis { [DllImport(""test"")] public static extern FIRST Read(LAST value); }
+}
+namespace Shared { public partial struct REPEATED { public int Value; } }");
+            fixture.Write("Other.cs", "namespace Shared { public partial struct REPEATED { public int Value; } }");
+            var validation = new GenerationValidation();
+            var compilation = fixture.Compile(new() { ["FIRST"] = "Canonical", ["LAST"] = "Canonical" },
+                validation: validation);
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            Assert.IsTrue(validation.HasErrors);
+            Assert.IsFalse(validation.HasBlockingErrors);
+            Assert.AreEqual("completed-with-diagnostics", validation.Status);
+            Assert.AreEqual(0, validation.BlockedStages.Count);
+            Assert.AreEqual(3, validation.Errors.Count, validation.Format());
+            CollectionAssert.AreEquivalent(new[] { "MAPPED_FIRST", "WIDE_FIRST", "MAPPED_LAST" },
+                validation.Errors.Select(error => error.CandidateSource!.NativeName).ToArray());
+            foreach (var error in validation.Errors)
+            {
+                Assert.IsFalse(error.BlocksEmission);
+                Assert.AreEqual("CSSW005", error.Code);
+                Assert.IsNotNull(error.Cause);
+                Assert.IsNotNull(error.SelectedStorage);
+                Assert.IsNotNull(error.CandidateStorage);
+                StringAssert.Contains(error.SelectedInput, retained ? "autotypes" : "Canonical");
+                Assert.AreEqual(retained, error.SelectedSource == null);
+                Assert.AreEqual(new string('A', 64), error.CandidateSource!.HeaderHash);
+            }
+            Assert.AreEqual(1, compilation.CSharpCompilation.GetTypeByMetadataName("Shared.REPEATED")!
+                .DeclaringSyntaxReferences.Length);
+            string output = Path.Combine(fixture.DirectoryPath, "RecoveredConflicts.winmd");
+            var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generated.WroteWinmd, string.Join(Environment.NewLine, generated.GetDiagnostics()));
+            RetainPartialProviderImage(output);
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var definitions = reader.TypeDefinitions.Select(reader.GetTypeDefinition).ToArray();
+            foreach (var expected in new[] { (Name: "FIRST", Type: SignatureTypeCode.Int32), (Name: "LAST", Type: SignatureTypeCode.Byte) })
+            {
+                var definition = definitions.Single(type => reader.GetString(type.Name) == expected.Name);
+                Assert.AreEqual("Canonical", reader.GetString(definition.Namespace));
+                var field = reader.GetFieldDefinition(definition.GetFields().Single());
+                var signature = reader.GetBlobReader(field.Signature);
+                Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.AreEqual(expected.Type, signature.ReadSignatureTypeCode());
+                Assert.AreEqual(0, signature.RemainingBytes);
+            }
+            foreach (string consumer in new[] { "OWNER_CONSUMER", "MAPPED_CONSUMER" })
+            {
+                var definition = definitions.Single(type => reader.GetString(type.Name) == consumer);
+                foreach (var field in definition.GetFields().Select(reader.GetFieldDefinition))
+                {
+                    var signature = reader.GetBlobReader(field.Signature);
+                    Assert.AreEqual(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                    Assert.AreEqual(SignatureTypeCode.TypeHandle, signature.ReadSignatureTypeCode());
+                    var target = ResolveLocalType(reader, signature.ReadTypeHandle());
+                    Assert.AreEqual("Canonical", reader.GetString(target.Namespace));
+                    Assert.AreEqual(reader.GetString(field.Name).ToUpperInvariant(), reader.GetString(target.Name));
+                    Assert.AreEqual(0, signature.RemainingBytes);
+                }
+            }
+            Assert.IsTrue(definitions.Single(type => reader.GetString(type.Name) == "Apis").GetMethods()
+                .Select(reader.GetMethodDefinition).Any(method => reader.GetString(method.Name) == "Read"));
+
+            string Provider(string ns, string nativeName, string name, string storage, int size)
+            {
+                var root = CSharpSyntaxTree.ParseText(TypedefProvider(fixture, ns,
+                    "c:" + nativeName + ".h@T@" + nativeName, true, storage, size, size).Replace("SCALAR", name)).GetRoot();
+                var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var source = NativeTypedefSourceProvenance.Read(declaration)! with
+                {
+                    NativeName = nativeName,
+                    Header = Path.Combine(fixture.DirectoryPath, nativeName + ".h"),
+                    SourceArchitecture = Architecture.X64,
+                };
+                var stamped = NativeTypedefSourceProvenance.Attach(declaration.WithTrailingTrivia(default(SyntaxTriviaList)), source);
+                stamped = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(
+                    NativeTypedefProjectionProvenance.WithPolicy(stamped, inferred: false));
+                return root.ReplaceNode(declaration, stamped).ToFullString()
+                    .Replace("using Windows.Win32.Foundation.Metadata;", "", StringComparison.Ordinal)
+                    .Replace("[NativeTypedef]", "[global::Windows.Win32.Foundation.Metadata.NativeTypedef]", StringComparison.Ordinal);
+            }
         }
 
         [DataTestMethod]
@@ -1332,12 +1670,13 @@ namespace Canonical { [NativeTypedef] public partial struct SCALAR { public int 
             var routes = new Dictionary<string, string>();
             if (scenario is not "unrouted-overlap" and not "same-family-inferred-owner")
                 routes.Add("SCALAR", "Canonical");
-            if (scenario is "storage" or "source" or "unrouted-overlap")
+            if (scenario is "source" or "unrouted-overlap")
             {
                 StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(routes)).Message, "CSSW005");
                 return;
             }
-            var compilation = fixture.Compile(routes);
+            var compilation = scenario == "storage" ? AssertRecoveredConflict(fixture, () => fixture.Compile(routes)).Compilation :
+                fixture.Compile(routes);
             Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             var type = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.SCALAR")!;
             Assert.AreEqual(1, type.DeclaringSyntaxReferences.Length);
@@ -1384,11 +1723,10 @@ namespace Retained { public static class Apis { [DllImport(""test"")] public sta
             int exit = ClangSharpSourceToWinmd.Program.Main(arguments.ToArray());
             if (scenario == "explicit-route")
             {
-                Assert.AreNotEqual(0, exit);
-                Assert.IsFalse(File.Exists(output));
+                Assert.AreEqual(0, exit);
+                Assert.IsTrue(File.Exists(output));
                 StringAssert.Contains(File.ReadAllText(Path.Combine(fixture.DirectoryPath, "generation-diagnostics.json")),
                     "Conflicting native typedef Value storage types");
-                return;
             }
             Assert.AreEqual(0, exit);
             using var stream = File.OpenRead(output);
@@ -1396,11 +1734,11 @@ namespace Retained { public static class Apis { [DllImport(""test"")] public sta
             var reader = pe.GetMetadataReader();
             var scalars = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Where(type =>
                 reader.GetString(type.Name) == "SCALAR").ToArray();
-            Assert.AreEqual(closeApi ? 1 : 2, scalars.Length);
+            Assert.AreEqual(closeApi || scenario == "explicit-route" ? 1 : 2, scalars.Length);
             var retained = scalars.Single(type => reader.GetString(type.Namespace) == "Retained");
             CollectionAssert.AreEqual(new byte[] { 0x06, 0x18 },
                 reader.GetBlobBytes(reader.GetFieldDefinition(retained.GetFields().Single()).Signature));
-            if (!closeApi)
+            if (!closeApi && scenario != "explicit-route")
             {
                 var native = scalars.Single(type => reader.GetString(type.Namespace) == "Native");
                 CollectionAssert.AreEqual(new byte[] { 0x06, 0x05 },
@@ -1412,7 +1750,7 @@ namespace Retained { public static class Apis { [DllImport(""test"")] public sta
             Assert.AreEqual((byte)0x06, signature.ReadByte());
             Assert.AreEqual((byte)0x11, signature.ReadByte());
             var binding = ResolveLocalType(reader, signature.ReadTypeHandle());
-            Assert.AreEqual(closeApi ? "Retained" : "Native", reader.GetString(binding.Namespace));
+            Assert.AreEqual(closeApi || scenario == "explicit-route" ? "Retained" : "Native", reader.GetString(binding.Namespace));
             Assert.AreEqual("SCALAR", reader.GetString(binding.Name));
             Assert.AreEqual(0, signature.RemainingBytes);
         }
@@ -2167,12 +2505,13 @@ namespace OtherRetained { [NativeTypedef] public partial struct SCALAR { public 
                 fixture.Write("Other.header-types.cs", Provider("OtherNative", "other-scalar", "int", false));
                 fixture.Write("Other.cs", @"namespace OtherNative { public struct OTHER_CARRIER { public SCALAR Value; } }");
             }
-            if (scenario is "conflicting-storage" or "conflicting-source" or "binding-source-drift" or "ambiguous-target")
+            if (scenario is "conflicting-source" or "binding-source-drift" or "ambiguous-target")
             {
                 StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile()).Message, "CSSW005");
                 return;
             }
-            var compilation = fixture.Compile();
+            var compilation = scenario == "conflicting-storage" ? AssertRecoveredConflict(fixture, () => fixture.Compile()).Compilation :
+                fixture.Compile();
             Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string output = Path.Combine(fixture.DirectoryPath, "ConfiguredNominal.winmd");
             var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
@@ -2391,12 +2730,14 @@ public static partial class Apis {
 }");
             var owners = scenario == "missing-route" ? new Dictionary<string, string>() :
                 new Dictionary<string, string> { ["SCALAR"] = "Canonical" };
-            if (scenario is not ("compatible" or "inferred" or "separate-target"))
+            if (scenario is not ("compatible" or "inferred" or "separate-target" or "storage"))
             {
                 StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(owners)).Message, "CSSW005");
                 return;
             }
-            var compilation = fixture.Compile(owners);
+            var compilation = scenario == "storage"
+                ? AssertRecoveredConflict(fixture, () => fixture.Compile(owners)).Compilation
+                : fixture.Compile(owners);
             Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string output = Path.Combine(fixture.DirectoryPath, "NativeReceiver.winmd");
             var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
@@ -2430,7 +2771,7 @@ public static partial class Apis {
                 if (expected.Method == "Echo")
                     Assert.AreNotEqual(0, (int)(method.ImplAttributes & System.Reflection.MethodImplAttributes.PreserveSig));
             }
-            if (scenario is "compatible" or "separate-target")
+            if (scenario is "compatible" or "separate-target" or "storage")
             {
                 var canonical = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.SCALAR")!;
                 var source = NativeTypedefSourceProvenance.Read((StructDeclarationSyntax)canonical.DeclaringSyntaxReferences.Single().GetSyntax())!;
@@ -2530,12 +2871,13 @@ public static partial class Apis {
                     consumer.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
                 return;
             }
-            if (scenario is not ("compatible" or "separate-target"))
+            if (scenario is not ("compatible" or "separate-target" or "storage"))
             {
                 StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(routes)).Message, "CSSW005");
                 return;
             }
-            var compilation = fixture.Compile(routes);
+            var compilation = scenario == "storage" ? AssertRecoveredConflict(fixture, () => fixture.Compile(routes)).Compilation :
+                fixture.Compile(routes);
             Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             var canonical = compilation.CSharpCompilation.GetTypeByMetadataName("Canonical.SCALAR")!;
             var declaration = (StructDeclarationSyntax)canonical.DeclaringSyntaxReferences.Single().GetSyntax();
@@ -2728,12 +3070,13 @@ namespace Canonical { public static class Apis {
 namespace Other { public static class Apis {
 [DllImport(""other.dll"")] public static extern void Release();
 } }" : ""));
-            if (scenario is "storage" or "duplicate-cleanup")
+            if (scenario == "duplicate-cleanup")
             {
                 StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile()).Message, "CSSW005");
                 return;
             }
-            var compilation = fixture.Compile();
+            var compilation = scenario == "storage" ? AssertRecoveredConflict(fixture, () => fixture.Compile()).Compilation :
+                fixture.Compile();
             Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string output = Path.Combine(fixture.DirectoryPath, "NativeHandleOwner.winmd");
             var generated = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
@@ -2750,7 +3093,7 @@ namespace Other { public static class Apis {
             var carrier = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
                 .Single(type => reader.GetString(type.Name) == "CARRIER");
             var field = reader.GetFieldDefinition(carrier.GetFields().Single());
-            if (scenario is not ("lifecycle" or "compatible-type"))
+            if (scenario is not ("lifecycle" or "compatible-type" or "storage"))
             {
                 CollectionAssert.AreEqual(new byte[] { 0x06, 0x19 }, reader.GetBlobBytes(field.Signature));
                 return;
@@ -3501,13 +3844,13 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
         [DataRow("void*", "[RAIIFree(\"DifferentClose\")]", "", "RAIIFreeAttribute")]
         [DataRow("void*", "[InvalidHandleValue(-1)]", "", "InvalidHandleValueAttribute")]
         [DataRow("void*", "", "[AlsoUsableFor(\"DifferentHandle\")]", "AlsoUsableForAttribute")]
-        public void ConflictingAliasStorageOrAnnotationsFailClosed(string storage, string headerAttribute, string retainedAttribute, string diagnostic)
+        public void ConflictingAliasStorageOrAnnotationsKeepSelectedContractAndReport(string storage, string headerAttribute, string retainedAttribute, string diagnostic)
         {
             using var fixture = new Fixture("x64");
             fixture.Write("Bindings.header-types.cs", "using Windows.Win32.Foundation.Metadata;" +
                 HeaderAlias.Replace("public void* Value", $"public {storage} Value").Replace("public unsafe", headerAttribute + "public unsafe"));
             fixture.Write("autotypes.cs", RetainedAlias.Replace("[NativeTypedef]", retainedAttribute + "[NativeTypedef]"));
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, diagnostic);
             StringAssert.Contains(error.Message, "Test.HANDLE");
         }
@@ -3529,7 +3872,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
                 .Replace("[global::Windows.Win32.Foundation.Metadata.AlsoUsableFor(\"OTHER_HANDLE\")]", "", StringComparison.Ordinal)
                 .Replace("public void* Value", $"public {storage} Value", StringComparison.Ordinal));
             fixture.Write("Bindings.cs", record);
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
             StringAssert.Contains(error.Message, "Test.HANDLE");
         }
@@ -3544,7 +3887,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
             using var fixture = new Fixture("x64");
             fixture.Write("autotypes.cs", RetainedAlias.Replace("public void* Value", $"public {retainedStorage} Value"));
             fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("public void* Value", $"public {headerStorage} Value"));
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -3560,7 +3903,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
                 RetainedAlias.Replace("public void* Value", $"public {otherStorage} Value"));
             fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("public void* Value", "public HANDLE__* Value"));
             fixture.Write("Bindings.cs", "namespace Test { public struct HANDLE__ { public int unused; } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -3638,7 +3981,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
         [DataRow("native-typedef-pointee")]
         [DataRow("ambiguous-pointee")]
         [DataRow("ambiguous-pointee-resolution")]
-        public void UnmatchedIncompleteOrAmbiguousDeclareHandleProofsFailClosed(string conflict)
+        public void UnmatchedIncompleteOrAmbiguousDeclareHandleProofsReportStorageConflicts(string conflict)
         {
             using var fixture = new Fixture("x64");
             string retained = RetainedDeclareHandleSource();
@@ -3709,7 +4052,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
             fixture.Write("autotypes.cs", retained);
             fixture.Write("Bindings.header-types.cs", header);
             fixture.Write("Bindings.cs", records);
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -3744,7 +4087,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
             fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof());
             fixture.Write("Other.header-types.cs", HeaderWithDeclareHandleProof(
                 NativeHandleHeader.Replace("HANDLE__*", "OTHER_NATIVE_STORAGE*"), storage: "OTHER_NATIVE_STORAGE*"));
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -3776,7 +4119,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
                 NativeHandleHeader.Replace("HANDLE__*", "OTHER_NATIVE_STORAGE*"), storage: "OTHER_NATIVE_STORAGE*"));
             fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } " +
                 "public partial struct OTHER_NATIVE_STORAGE { public int unused; } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -3788,12 +4131,12 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
             fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof(NativeHandleHeader.Replace("public unsafe",
                 "[global::Windows.Win32.Foundation.Metadata.InvalidHandleValue(-1)] public unsafe")));
             fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting 'global::Windows.Win32.Foundation.Metadata.InvalidHandleValueAttribute' annotations");
         }
 
         [TestMethod]
-        public void MatchingProofsCannotChooseBetweenMultipleRetainedProviders()
+        public void MultipleRetainedProvidersKeepCanonicalStorageAndReportUnprovedPointerMapping()
         {
             using var fixture = new Fixture("x64");
             string retained = RetainedDeclareHandleSource();
@@ -3803,7 +4146,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
             File.WriteAllText(Path.Combine(common, "autotypes.cs"), retained);
             fixture.Write("Bindings.header-types.cs", HeaderWithDeclareHandleProof());
             fixture.Write("Bindings.cs", "namespace Test { public partial struct HANDLE__ { public int unused; } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -3825,7 +4168,7 @@ namespace Consumers { public unsafe struct Holder { public HANDLE Value; } }");
                 _ => header.Replace("\"kind\":\"DECLARE_HANDLE\"", "\"kind\":\"OTHER_KIND\""),
             };
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "x64", "Bindings.header-types.cs"), unproven);
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -4122,14 +4465,16 @@ namespace Original {
         [DataRow("NativeTypeName(\"void *\"), NativeTypeName(\"void *\")", "", "Value fields only support")]
         [DataRow("NotNullTerminated, NotNullTerminated", "", "Value fields only support")]
         [DataRow("Documentation(\"header\")", "Documentation(\"retained\")", "Conflicting Value-field")]
-        public void UnsupportedOrConflictingValueFieldMetadataStillRejects(string header, string retained, string diagnostic)
+        public void UnsupportedValueMetadataRejectsAndConflictingMetadataReportsSelectedContract(string header, string retained, string diagnostic)
         {
             using var fixture = new Fixture("x64");
             fixture.Write("Bindings.header-types.cs", HeaderAlias.Replace("public void* Value", $"[{header}] public void* Value"));
             if (retained.Length != 0)
                 fixture.Write("autotypes.cs", RetainedAlias.Replace("public void* Value", $"[{retained}] public void* Value"));
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
-            StringAssert.Contains(error.Message, diagnostic);
+            string message = retained.Length == 0
+                ? Assert.ThrowsException<InvalidDataException>(() => fixture.Compile()).Message
+                : AssertRecoveredConflict(fixture, () => fixture.Compile()).Message;
+            StringAssert.Contains(message, diagnostic);
         }
 
         [DataTestMethod]
@@ -4149,8 +4494,10 @@ namespace Original {
                     omitArm64 && arch == "arm64" ? "" : HeaderAlias.Replace("void*", arch == "x86" ? x86 : wide));
             if (!compatible)
             {
-                var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
-                StringAssert.Contains(error.Message, omitArm64 ? "complete x86/x64/arm64 coverage" : "Value storage");
+                string message = omitArm64
+                    ? Assert.ThrowsException<InvalidDataException>(() => fixture.Compile()).Message
+                    : AssertRecoveredConflict(fixture, () => fixture.Compile()).Message;
+                StringAssert.Contains(message, omitArm64 ? "complete x86/x64/arm64 coverage" : "Value storage");
                 return;
             }
             var compilation = fixture.Compile();
@@ -4182,7 +4529,10 @@ namespace Original {
                 $"[NativeTypeName(\"{native}\")] public {incoming} Value"));
             if (!compatible)
             {
-                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile()).Message, "Value storage");
+                var recovered = AssertRecoveredConflict(fixture, () => fixture.Compile());
+                StringAssert.Contains(recovered.Message, "Value storage");
+                Assert.AreEqual(retained, recovered.Compilation.CSharpCompilation.GetTypeByMetadataName("Test.HANDLE")!
+                    .GetMembers("Value").OfType<IFieldSymbol>().Single().Type.ToDisplayString());
                 return;
             }
             var compilation = fixture.Compile();
@@ -4389,8 +4739,9 @@ namespace Test {
             Dictionary<string, string> owners = route ? new() { ["HANDLE"] = "Test" } : new();
             if (!compatible)
             {
-                StringAssert.Contains(Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(owners)).Message,
-                    route ? "Value storage" : "Multiple native aliases");
+                string message = route ? AssertRecoveredConflict(fixture, () => fixture.Compile(owners)).Message :
+                    Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(owners)).Message;
+                StringAssert.Contains(message, route ? "Value storage" : "Multiple native aliases");
                 return;
             }
             var compilation = fixture.Compile(owners);
@@ -4596,11 +4947,19 @@ namespace Test { [NativeTypedef] public unsafe partial struct HANDLE {
                 fixture.Write(provider.File + ".header-types.cs", root.ReplaceNode(declaration,
                     NativeTypedefSourceProvenance.Attach(declaration.WithTrailingTrivia(default(SyntaxTriviaList)), proof)).ToFullString());
             }
-            if (!retained || conflictingStorage)
+            if (conflictingStorage)
+            {
+                var recovered = AssertRecoveredConflict(fixture, () => fixture.Compile(new() { ["SCALAR"] = "Canonical" }));
+                StringAssert.Contains(recovered.Message, "Value storage");
+                Assert.AreEqual(SpecialType.System_Int32, recovered.Compilation.CSharpCompilation
+                    .GetTypeByMetadataName("Canonical.SCALAR")!.GetMembers("Value").OfType<IFieldSymbol>().Single().Type.SpecialType);
+                return;
+            }
+            if (!retained)
             {
                 var error = Assert.ThrowsException<InvalidDataException>(() =>
-                    fixture.Compile(retained ? new() { ["SCALAR"] = "Canonical" } : new()));
-                StringAssert.Contains(error.Message, conflictingStorage ? "Value storage" : "Conflicting native record identities");
+                    fixture.Compile(new()));
+                StringAssert.Contains(error.Message, "Conflicting native record identities");
                 return;
             }
             string output = Path.Combine(fixture.DirectoryPath, "RetainedNativeOwner.winmd");
@@ -5656,6 +6015,45 @@ namespace Test { public static unsafe partial class Apis { [DllImport(""test"")]
                 : reader.GetString(reader.GetTypeReference((TypeReferenceHandle)owner).Name);
         }
 
+        private static (string Message, ClangSharpSourceCompilation Compilation) AssertRecoveredConflict(
+            Fixture fixture, Func<ClangSharpSourceCompilation> compile, string? emissionFailure = null)
+        {
+            var compilation = compile();
+            Assert.AreEqual(0, compilation.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.DirectoryPath, "generation-diagnostics.json")));
+            Assert.AreEqual("completed-with-diagnostics", report.RootElement.GetProperty("Status").GetString());
+            Assert.AreEqual(0, report.RootElement.GetProperty("BlockedStages").GetArrayLength());
+            var errors = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
+            Assert.IsTrue(errors.Length > 0);
+            foreach (var error in errors)
+            {
+                Assert.AreEqual("CSSW005", error.GetProperty("Code").GetString());
+                Assert.IsFalse(error.GetProperty("BlocksEmission").GetBoolean());
+                Assert.IsFalse(string.IsNullOrEmpty(error.GetProperty("Cause").GetString()));
+                Assert.IsFalse(string.IsNullOrEmpty(error.GetProperty("SelectedInput").GetString()));
+                Assert.IsFalse(string.IsNullOrEmpty(error.GetProperty("SelectedStorage").GetString()));
+                Assert.IsFalse(string.IsNullOrEmpty(error.GetProperty("CandidateStorage").GetString()));
+            }
+            string output = Path.Combine(fixture.DirectoryPath, "RecoveredContract.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                compilation, new(), new(), new(), new Version(1, 0), output);
+            bool expectEmitted = emissionFailure == null;
+            Assert.AreEqual(expectEmitted, generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            if (expectEmitted)
+            {
+                using var stream = File.OpenRead(output);
+                using var pe = new PEReader(stream);
+                Assert.IsTrue(pe.HasMetadata);
+            }
+            else
+            {
+                Assert.IsTrue(generator.GetDiagnostics().Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error &&
+                    diagnostic.Message.Contains(emissionFailure!, StringComparison.Ordinal)));
+                Assert.IsFalse(File.Exists(output));
+            }
+            return (string.Join(Environment.NewLine, errors.Select(error => error.GetProperty("Message").GetString())), compilation);
+        }
+
         private sealed class Fixture : IDisposable
         {
             internal Fixture(string architecture)
@@ -5684,9 +6082,10 @@ namespace Test { public static unsafe partial class Apis { [DllImport(""test"")]
 
             internal ClangSharpSourceCompilation Compile(Dictionary<string, string>? requiredNamespaces = null,
                 Dictionary<string, string>? remaps = null,
-                Dictionary<string, string>? apiNamesToNamespaces = null) => ClangSharpSourceCompilation.Create(
+                Dictionary<string, string>? apiNamesToNamespaces = null,
+                GenerationValidation? validation = null) => ClangSharpSourceCompilation.Create(
                 DirectoryPath, Architecture, remaps ?? new(), new(), Array.Empty<string>(), new(), requiredNamespaces ?? new(), new(),
-                Array.Empty<string>(), new(), apiNamesToNamespaces ?? new());
+                Array.Empty<string>(), new(), apiNamesToNamespaces ?? new(), validation: validation);
 
             public void Dispose() => Directory.Delete(DirectoryPath, recursive: true);
         }

@@ -178,10 +178,12 @@ namespace ClangSharpSourceToWinmd
         }
 
         internal static CSharpCompilation LowerConstantsWithDiagnostics(CSharpCompilation compilation,
-            bool writeModifiedFiles, GenerationValidation validation)
+            bool writeModifiedFiles, GenerationValidation validation, bool canonicalContracts = false,
+            IReadOnlyDictionary<string, string> requiredNamespaces = null)
         {
             int previousErrors = validation.Errors.Count;
             var storageTypes = new Dictionary<ITypeSymbol, ITypeSymbol>(SymbolEqualityComparer.Default);
+            Dictionary<string, NativeProjectionOwner> nativeOwners = null;
             var rewritten = compilation;
             foreach (var tree in compilation.SyntaxTrees)
             {
@@ -273,15 +275,19 @@ namespace ClangSharpSourceToWinmd
                         declaration.HasAnnotation(ComposedHeaderAlias)))
                         return null;
                     ITypeSymbol valueType = null;
-                    foreach (var declaration in declarations)
+                    var fragments = declarations.Select(declaration =>
                     {
                         var attributes = type.GetAttributes().Where(attribute =>
                             attribute.ApplicationSyntaxReference?.SyntaxTree == declaration.SyntaxTree &&
                             declaration.AttributeLists.Any(list => list.Span.Contains(attribute.ApplicationSyntaxReference.Span))).ToArray();
-                        var fragment = new Fragment(declaration.SyntaxTree, declaration, type, attributes);
+                        return new Fragment(declaration.SyntaxTree, declaration, type, attributes);
+                    }).ToArray();
+                    foreach (var fragment in canonicalContracts ? SelectConstantProviders(fragments) : fragments)
+                    {
                         var incoming = GetHeaderBackingStorage(compilation,
-                            GetValueType(fragment, compilation.GetSemanticModel(declaration.SyntaxTree)),
-                            new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
+                            GetValueType(fragment, compilation.GetSemanticModel(fragment.Tree)),
+                            new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default),
+                            selectProviders: canonicalContracts ? SelectConstantProviders : null);
                         if (valueType != null && !SymbolEqualityComparer.Default.Equals(valueType, incoming))
                             throw Error(fragment, "Conflicting native typedef constant storage types.");
                         valueType = incoming;
@@ -301,6 +307,24 @@ namespace ClangSharpSourceToWinmd
                 foreach (var tree in rewritten.SyntaxTrees.Where(tree => !compilation.SyntaxTrees.Contains(tree)))
                     File.WriteAllText(tree.FilePath, tree.GetText().ToString());
             return rewritten;
+
+            IEnumerable<Fragment> SelectConstantProviders(Fragment[] aliases)
+            {
+                if (aliases.Length < 2)
+                    return aliases;
+                bool retained = aliases.Any(alias => IsAutoTypesFile(alias.Tree.FilePath));
+                NativeProjectionOwner owner = null;
+                if (!retained && aliases.Any(alias => NativeTypedefSourceProvenance.Read(alias.Declaration) != null))
+                {
+                    nativeOwners ??= FindNativeProjectionOwners(compilation.SyntaxTrees,
+                        compilation.SyntaxTrees.Where(tree => HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
+                            .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()),
+                        requiredNamespaces, validation);
+                    owner = GetNativeProjectionOwner(aliases, nativeOwners);
+                }
+                // This is a read-only constant view; full composition validates and reports every candidate.
+                return retained || owner != null ? OrderProviders(compilation, aliases, owner).Take(1) : aliases;
+            }
         }
 
         private static TypeSyntax StorageSyntax(ITypeSymbol storage, TypeSyntax original) =>
@@ -331,7 +355,7 @@ namespace ClangSharpSourceToWinmd
             IReadOnlyDictionary<string, string> requiredNamespaces, IReadOnlyDictionary<string, string> recordFamilies,
             IReadOnlyDictionary<string, string> remaps, bool writeModifiedFiles, bool enumProjectionsOnly)
         {
-            int previousErrors = validation.Errors.Count;
+            int previousErrors = validation.BlockingErrorCount;
             var fragments = ReadFragments(compilation, validation);
             var projections = FindLegacyEnumProjections(compilation, fragments, requiredNamespaces, remaps);
             if (projections.Count == 0)
@@ -380,12 +404,12 @@ namespace ClangSharpSourceToWinmd
                         architecture: ClangSharpSourceCompilation.GetArchitectureForFileName(fragment.Tree.FilePath).ToString());
                 }
             }
-            if (validation.Errors.Count != previousErrors)
+            if (validation.BlockingErrorCount != previousErrors)
                 return compilation;
             var rewritten = enumProjectionsOnly ? nativeCompilation :
                 MergeNativeAliases(nativeCompilation, fragments, validation, requiredNamespaces, recordFamilies,
                     projections.Keys.ToHashSet(StringComparer.Ordinal), writeModifiedFiles);
-            if (validation.Errors.Count != previousErrors)
+            if (validation.BlockingErrorCount != previousErrors)
                 return compilation;
 
             var removals = ReadFragments(rewritten, validation)
@@ -522,22 +546,17 @@ namespace ClangSharpSourceToWinmd
             IReadOnlyDictionary<string, string> recordFamilies, IReadOnlySet<string> retainedEnumProjections = null,
             bool writeModifiedFiles = true)
         {
-            int previousErrors = validation.Errors.Count;
+            int previousErrors = validation.BlockingErrorCount;
             var replacements = new Dictionary<StructDeclarationSyntax, StructDeclarationSyntax>();
             var nativeOwners = FindNativeProjectionOwners(compilation.SyntaxTrees,
                 fragments.Select(fragment => fragment.Declaration), requiredNamespaces, validation);
             foreach (var group in fragments.GroupBy(GetIdentity,
                 StringComparer.Ordinal).Where(group => group.Any(fragment => HeaderEnumGroupMerger.IsHeaderTypesFile(fragment.Tree.FilePath))))
             {
-                var nativeOwner = nativeOwners.TryGetValue(group.First().Symbol.Name, out var candidate) &&
-                    candidate.Namespace == group.First().Symbol.ContainingNamespace.ToDisplayString() &&
-                    group.Any(alias => candidate.IsTarget(alias.Declaration)) &&
-                    group.All(alias => candidate.Authorizes(alias.Declaration)) ? candidate : null;
-                var aliases = group.OrderBy(fragment => IsAutoTypesFile(fragment.Tree.FilePath) ? 0 : 1)
-                    .ThenBy(fragment => nativeOwner?.IsTarget(fragment.Declaration) == true ? 0 : 1)
-                    .ThenBy(fragment => NativeTypedefSourceProvenance.Read(fragment.Declaration)?.TraversedHeader == true ? 0 : 1)
-                    .ThenBy(fragment => fragment.Tree.FilePath, StringComparer.Ordinal).ToArray();
+                var nativeOwner = GetNativeProjectionOwner(group.ToArray(), nativeOwners);
+                var aliases = OrderProviders(compilation, group, nativeOwner);
                 var first = aliases[0];
+                bool recoverConflicts = nativeOwner != null || aliases.Any(alias => IsAutoTypesFile(alias.Tree.FilePath));
                 try
                 {
                 var sources = aliases.Select(alias => (Source: NativeTypedefSourceProvenance.Read(alias.Declaration),
@@ -559,7 +578,7 @@ namespace ClangSharpSourceToWinmd
                 if (aliases.Any(alias => alias.Symbol.DeclaringSyntaxReferences.Any(reference => !aliases.Any(fragment =>
                     fragment.Tree == reference.SyntaxTree && fragment.Declaration.Span == reference.Span))))
                     throw Error(first, "A header alias overlaps a declaration outside generated header-types/autotypes inputs.");
-                if (aliases.Length < 2)
+                if (aliases.Length < 2 && nativeOwner == null)
                     continue;
                 if (intrinsicProjection || nativeOwner != null)
                 {
@@ -576,6 +595,12 @@ namespace ClangSharpSourceToWinmd
                             throw Error(alias, "Independent native projections require source-proven intrinsic storage and compatible nominal intent.");
                     }
                 }
+                var nativeCharacterTarget = nativeOwner == null || aliases.Any(alias => IsAutoTypesFile(alias.Tree.FilePath))
+                    ? null : aliases.FirstOrDefault(alias => nativeOwner.IsTarget(alias.Declaration));
+                var nativeCharacterStorage = nativeCharacterTarget == null ? null :
+                    GetNativeCharacterPointerProjection(compilation, nativeCharacterTarget);
+                if (aliases.Length < 2 && nativeCharacterStorage == null)
+                    continue;
                 if (aliases.GroupBy(alias => (alias.Tree, alias.Symbol.Name)).Any(declarations => declarations.Count() != 1) &&
                     !retainedProjection && !intrinsicProjection)
                     throw Error(first, "Multiple native aliases in one input project to the same type.");
@@ -594,7 +619,9 @@ namespace ClangSharpSourceToWinmd
                     {
                         var copies = new[] { commonHeader }.Concat(aliases.Where(alias => alias != commonHeader)).ToArray();
                         replacements.Add(commonHeader.Declaration,
-                            MergeAliases(compilation, copies, aliases, preserveRetainedCoverage: true));
+                            MergeAliases(compilation, copies, aliases, preserveRetainedCoverage: true,
+                                nativeCharacterStorage: nativeCharacterStorage, validation: validation,
+                                recoverConflicts: recoverConflicts));
                         foreach (var copy in copies.Skip(1))
                             replacements.Add(copy.Declaration, null);
                         continue;
@@ -603,7 +630,9 @@ namespace ClangSharpSourceToWinmd
                         CanKeepCommonAliasCoverage(compilation, aliases, retained[0]))
                     {
                         replacements.Add(retained[0].Declaration,
-                            MergeAliases(compilation, aliases, aliases, preserveRetainedCoverage: true));
+                            MergeAliases(compilation, aliases, aliases, preserveRetainedCoverage: true,
+                                nativeCharacterStorage: nativeCharacterStorage, validation: validation,
+                                recoverConflicts: recoverConflicts));
                         foreach (var variant in variants)
                             replacements.Add(variant.Declaration, null);
                         continue;
@@ -614,12 +643,13 @@ namespace ClangSharpSourceToWinmd
                     foreach (var variantGroup in variants.GroupBy(alias => alias.Symbol.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)))
                     {
                         var copies = variantGroup.ToArray();
-                        if (copies.Length == 1 && headerOnly && commonHeaders.Length == 0)
+                        if (copies.Length == 1 && headerOnly && commonHeaders.Length == 0 && nativeCharacterStorage == null)
                             continue;
                         replacements.Add(copies[0].Declaration, MergeAliases(compilation,
                             headerOnly ? copies.Concat(commonHeaders).ToArray() : copies.Append(retained[0]).ToArray(),
                             aliases, compareArchitectureFamilies: headerOnly && commonHeaders.Length != 0,
-                            recordFamilies: recordFamilies));
+                            recordFamilies: recordFamilies, nativeCharacterStorage: nativeCharacterStorage,
+                            validation: validation, recoverConflicts: recoverConflicts));
                         foreach (var copy in copies.Skip(1))
                             replacements.Add(copy.Declaration, null);
                     }
@@ -630,7 +660,9 @@ namespace ClangSharpSourceToWinmd
                 }
                 else
                 {
-                    replacements.Add(first.Declaration, MergeAliases(compilation, aliases));
+                    replacements.Add(first.Declaration, MergeAliases(compilation, aliases,
+                        nativeCharacterStorage: nativeCharacterStorage, validation: validation,
+                        recoverConflicts: recoverConflicts));
                     foreach (var alias in aliases.Skip(1))
                         replacements.Add(alias.Declaration, null);
                 }
@@ -643,7 +675,7 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            if (validation.Errors.Count != previousErrors)
+            if (validation.BlockingErrorCount != previousErrors)
                 return compilation;
             if (replacements.Count == 0)
                 return compilation;
@@ -661,9 +693,44 @@ namespace ClangSharpSourceToWinmd
             return rewritten;
         }
 
+        private static NativeProjectionOwner GetNativeProjectionOwner(Fragment[] aliases,
+            IReadOnlyDictionary<string, NativeProjectionOwner> nativeOwners) =>
+            nativeOwners.TryGetValue(aliases[0].Symbol.Name, out var candidate) &&
+                candidate.Namespace == aliases[0].Symbol.ContainingNamespace.ToDisplayString() &&
+                aliases.Any(alias => candidate.IsTarget(alias.Declaration)) &&
+                aliases.All(alias => candidate.Authorizes(alias.Declaration)) ? candidate : null;
+
+        private static Fragment[] OrderProviders(CSharpCompilation compilation, IEnumerable<Fragment> aliases,
+            NativeProjectionOwner nativeOwner) =>
+            aliases.Select(fragment =>
+                {
+                    var field = fragment.Declaration.Members.OfType<FieldDeclarationSyntax>().FirstOrDefault();
+                    return (Fragment: fragment, Source: NativeTypedefSourceProvenance.Read(fragment.Declaration),
+                        Storage: field == null ? null : compilation.GetSemanticModel(fragment.Tree).GetTypeInfo(field.Declaration.Type).Type);
+                })
+                .OrderBy(item => IsAutoTypesFile(item.Fragment.Tree.FilePath) ? 0 : 1)
+                .ThenBy(item => nativeOwner?.IsTarget(item.Fragment.Declaration) == true ? 0 : 1)
+                .ThenBy(item => item.Source?.TraversedHeader == true ? 0 : 1)
+                .ThenBy(item => item.Source?.Header, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(item => item.Source?.Line)
+                .ThenBy(item => item.Source?.Column)
+                .ThenBy(item => item.Source?.HeaderHash, StringComparer.Ordinal)
+                .ThenBy(item => item.Source?.Identity, StringComparer.Ordinal)
+                .ThenBy(item => GetArchitecture(item.Fragment) == 0 ? 0 : 1)
+                .ThenBy(item => item.Source?.SourceArchitecture)
+                .ThenBy(item => item.Storage is INamedTypeSymbol named && named.TypeKind == TypeKind.Struct &&
+                    named.GetAttributes().Any(attribute => AttributeName(attribute) == NativeTypedefName) ? 0 : 1)
+                .ThenBy(item => item.Storage?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat), StringComparer.Ordinal)
+                .ThenBy(item => string.Join("|", item.Fragment.Attributes.Select(AttributeKey)
+                    .OrderBy(key => key, StringComparer.Ordinal)), StringComparer.Ordinal)
+                .ThenBy(item => item.Fragment.Declaration.WithoutTrivia().NormalizeWhitespace().ToFullString(),
+                    StringComparer.Ordinal)
+                .Select(item => item.Fragment).ToArray();
+
         private static StructDeclarationSyntax MergeAliases(CSharpCompilation compilation, Fragment[] aliases,
             Fragment[] architectureAliases = null, bool preserveRetainedCoverage = false, bool compareArchitectureFamilies = false,
-            IReadOnlyDictionary<string, string> recordFamilies = null)
+            IReadOnlyDictionary<string, string> recordFamilies = null, ITypeSymbol nativeCharacterStorage = null,
+            GenerationValidation validation = null, bool recoverConflicts = false)
         {
             var first = aliases[0];
             // Keep the retained field encoding when header bindings spell void-pointer storage as IntPtr.
@@ -676,8 +743,21 @@ namespace ClangSharpSourceToWinmd
                     .SingleOrDefault(attribute => AttributeName(attribute) == NativeTypeNameName)?.ConstructorArguments[0].Value as string)
                 .Where(type => type != null && IsNativeRecordPointer(type)).Distinct(StringComparer.Ordinal).ToArray();
             if (nativePointees.Length > 1)
-                throw Error(first, "Conflicting native typedef pointee source identities.");
-            var valueType = valueTypes[storageOwner];
+            {
+                if (!recoverConflicts)
+                    throw Error(first, "Conflicting native typedef pointee source identities.");
+                string selectedNativeType = GetFieldAttributes(storageOwner, compilation.GetSemanticModel(storageOwner.Tree))
+                    .SingleOrDefault(attribute => AttributeName(attribute) == NativeTypeNameName)?.ConstructorArguments[0].Value as string;
+                foreach (var alias in aliases.Where(alias => alias != storageOwner))
+                {
+                    string incomingNativeType = GetFieldAttributes(alias, compilation.GetSemanticModel(alias.Tree))
+                        .SingleOrDefault(attribute => AttributeName(attribute) == NativeTypeNameName)?.ConstructorArguments[0].Value as string;
+                    if (incomingNativeType != selectedNativeType)
+                        ReportCompositionConflict(validation, storageOwner, alias,
+                            "Conflicting native typedef pointee source identities.", valueTypes[storageOwner], valueTypes[alias]);
+                }
+            }
+            var valueType = nativeCharacterStorage ?? valueTypes[storageOwner];
             ITypeSymbol recordPointer = null;
             if (retained == null && TryGetHeaderRecordPointerStorage(compilation, aliases, valueTypes, out recordPointer))
                 valueType = recordPointer;
@@ -704,7 +784,7 @@ namespace ClangSharpSourceToWinmd
                             compareArchitectureFamilies && IsSameArchitectureStorage(storage, incoming, recordFamilies)))
                         continue;
                 }
-                if (retained != null && alias != retained &&
+                if ((retained != null || nativeCharacterStorage != null) && alias != retained &&
                     CanPreserveCharacterEncoding(compilation, alias, valueTypes[alias], valueType,
                         new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default)))
                     continue;
@@ -720,7 +800,12 @@ namespace ClangSharpSourceToWinmd
                         CanPreserveIntegralResourceStorage(compilation, aliases, retained, valueTypes) ||
                         CanPreserveNativeIntegerStorage(compilation, architectureAliases ?? aliases, retained);
                     if (!provenNativeStorage.Value)
-                        throw Error(alias, "Conflicting native typedef Value storage types.");
+                    {
+                        if (!recoverConflicts)
+                            throw Error(alias, "Conflicting native typedef Value storage types.");
+                        ReportCompositionConflict(validation, storageOwner, alias,
+                            "Conflicting native typedef Value storage types.", valueType, valueTypes[alias]);
+                    }
                 }
             }
             bool IncludeAttribute(AttributeData attribute) =>
@@ -738,7 +823,12 @@ namespace ClangSharpSourceToWinmd
                     {
                         if (!existing.Select(AttributeKey).OrderBy(key => key, StringComparer.Ordinal)
                             .SequenceEqual(incoming.Select(AttributeKey).OrderBy(key => key, StringComparer.Ordinal)))
-                            throw Error(alias, $"Conflicting '{attributes.Key}' annotations.");
+                        {
+                            if (!recoverConflicts)
+                                throw Error(alias, $"Conflicting '{attributes.Key}' annotations.");
+                            ReportCompositionConflict(validation, first, alias, $"Conflicting '{attributes.Key}' annotations.",
+                                valueType, valueTypes[alias]);
+                        }
                     }
                     else
                     {
@@ -763,7 +853,9 @@ namespace ClangSharpSourceToWinmd
             var existingFieldAttributes = fieldAttributes[0].Where(attribute => AttributeName(attribute) != NativeTypeNameName)
                 .GroupBy(AttributeName).ToDictionary(group => group.Key, group => group.ToArray());
             var addedFieldAttributes = new List<AttributeListSyntax>();
-            foreach (var incomingAttributes in fieldAttributes.Skip(1))
+            for (int index = 1; index < fieldAttributes.Length; index++)
+            {
+                var incomingAttributes = fieldAttributes[index];
                 foreach (var attributes in incomingAttributes.Where(attribute => AttributeName(attribute) != NativeTypeNameName)
                     .GroupBy(AttributeName))
                 {
@@ -772,7 +864,12 @@ namespace ClangSharpSourceToWinmd
                     {
                         if (!existing.Select(AttributeKey).OrderBy(key => key, StringComparer.Ordinal)
                             .SequenceEqual(incoming.Select(AttributeKey).OrderBy(key => key, StringComparer.Ordinal)))
-                            throw Error(first, $"Conflicting Value-field '{attributes.Key}' annotations.");
+                        {
+                            if (!recoverConflicts)
+                                throw Error(first, $"Conflicting Value-field '{attributes.Key}' annotations.");
+                            ReportCompositionConflict(validation, first, aliases[index],
+                                $"Conflicting Value-field '{attributes.Key}' annotations.", valueType, valueTypes[aliases[index]]);
+                        }
                     }
                     else
                     {
@@ -780,6 +877,7 @@ namespace ClangSharpSourceToWinmd
                         addedFieldAttributes.AddRange(incoming.Select(ToAttributeList));
                     }
                 }
+            }
             var valueField = (FieldDeclarationSyntax)declaration.Members.Single();
             declaration = declaration.ReplaceNode(valueField, valueField.AddAttributeLists(addedFieldAttributes.ToArray()));
             declaration = declaration.AddAttributeLists(added.ToArray());
@@ -789,6 +887,30 @@ namespace ClangSharpSourceToWinmd
                 declaration = NativeTypedefProjectionProvenance.WithPolicy(declaration, inferred: false);
             return (provenNativeStorage == true ? NativeHandleSourceProvenance.Remove(declaration) : declaration)
                 .WithAdditionalAnnotations(ComposedHeaderAlias);
+        }
+
+        private static void ReportCompositionConflict(GenerationValidation validation, Fragment selected, Fragment candidate,
+            string message, ITypeSymbol selectedStorage, ITypeSymbol candidateStorage)
+        {
+            var selectedSource = NativeTypedefSourceProvenance.Read(selected.Declaration);
+            var candidateSource = NativeTypedefSourceProvenance.Read(candidate.Declaration);
+            var error = Error(candidate, message);
+            validation.Add(new GenerationValidationError("CSSW005", "emitter.typedef-composition", error.Message)
+            {
+                BlocksEmission = false,
+                Input = candidate.Tree.FilePath,
+                Symbol = candidate.Symbol.ToDisplayString(),
+                Header = candidateSource?.Header,
+                Line = candidateSource?.Line is uint line && line <= int.MaxValue ? (int?)line : null,
+                Architecture = ((Architecture)GetArchitecture(candidate)).ToString(),
+                IdentityCategory = "selected-native-typedef-contract",
+                Cause = error.ToString(),
+                SelectedInput = selected.Tree.FilePath,
+                SelectedStorage = selectedStorage.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                CandidateStorage = candidateStorage.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                SelectedSource = selectedSource,
+                CandidateSource = candidateSource,
+            });
         }
 
         internal static ITypeSymbol GetNativeRecordScalarStorage(CSharpCompilation compilation, ITypeSymbol type)
@@ -844,17 +966,20 @@ namespace ClangSharpSourceToWinmd
         }
 
         private static ITypeSymbol GetHeaderBackingStorage(CSharpCompilation compilation, ITypeSymbol type,
-            HashSet<ITypeSymbol> resolving, IReadOnlyDictionary<string, string> recordFamilies = null)
+            HashSet<ITypeSymbol> resolving, IReadOnlyDictionary<string, string> recordFamilies = null,
+            Func<Fragment[], IEnumerable<Fragment>> selectProviders = null)
         {
             if (type is IPointerTypeSymbol pointer)
-                return compilation.CreatePointerTypeSymbol(GetHeaderBackingStorage(compilation, pointer.PointedAtType, resolving, recordFamilies));
+                return compilation.CreatePointerTypeSymbol(GetHeaderBackingStorage(compilation, pointer.PointedAtType,
+                    resolving, recordFamilies, selectProviders));
             if (type is not INamedTypeSymbol named || named.TypeKind != TypeKind.Struct ||
                 !named.GetAttributes().Any(attribute => AttributeName(attribute) == NativeTypedefName))
                 return type;
             var declarations = named.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
                 .OfType<StructDeclarationSyntax>().Where(declaration =>
                     HeaderEnumGroupMerger.IsHeaderTypesFile(declaration.SyntaxTree.FilePath) ||
-                    declaration.HasAnnotation(ComposedHeaderAlias)).ToArray();
+                    declaration.HasAnnotation(ComposedHeaderAlias) ||
+                    selectProviders != null && IsAutoTypesFile(declaration.SyntaxTree.FilePath)).ToArray();
             if (declarations.Length == 0)
                 return type;
             if (!resolving.Add(type))
@@ -866,11 +991,11 @@ namespace ClangSharpSourceToWinmd
                     attribute.ApplicationSyntaxReference?.SyntaxTree == declaration.SyntaxTree &&
                     declaration.AttributeLists.Any(list => list.Span.Contains(attribute.ApplicationSyntaxReference.Span))).ToArray();
                 return new Fragment(declaration.SyntaxTree, declaration, named, attributes);
-            }).OrderBy(fragment => GetArchitecture(fragment) == 0 ? 1 : 0);
-            foreach (var fragment in fragments)
+            }).OrderBy(fragment => GetArchitecture(fragment) == 0 ? 1 : 0).ToArray();
+            foreach (var fragment in selectProviders != null ? selectProviders(fragments) : fragments)
             {
                 var incoming = GetHeaderBackingStorage(compilation,
-                    GetValueType(fragment, compilation.GetSemanticModel(fragment.Tree)), resolving, recordFamilies);
+                    GetValueType(fragment, compilation.GetSemanticModel(fragment.Tree)), resolving, recordFamilies, selectProviders);
                 if (storage != null && !SymbolEqualityComparer.Default.Equals(storage, incoming) &&
                     !IsSameArchitectureStorage(storage, incoming, recordFamilies))
                     throw Error(fragment, "Conflicting native typedef backing storage types.");
@@ -942,12 +1067,38 @@ namespace ClangSharpSourceToWinmd
             });
         }
 
+        private static ITypeSymbol GetNativeCharacterPointerProjection(CSharpCompilation compilation, Fragment target)
+        {
+            if (!NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(target.Declaration))
+                return null;
+            var incoming = GetValueType(target, compilation.GetSemanticModel(target.Tree));
+            var storage = GetHeaderBackingStorage(compilation, incoming,
+                new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default));
+            int depth = 0;
+            while (storage is IPointerTypeSymbol pointer)
+            {
+                depth++;
+                storage = pointer.PointedAtType;
+            }
+            if (depth == 0 || storage.SpecialType is not (SpecialType.System_SByte or SpecialType.System_UInt16))
+                return null;
+            ITypeSymbol projection = compilation.GetSpecialType(storage.SpecialType == SpecialType.System_SByte
+                ? SpecialType.System_Byte : SpecialType.System_Char);
+            for (int i = 0; i < depth; i++)
+                projection = compilation.CreatePointerTypeSymbol(projection);
+            return CanPreserveCharacterEncoding(compilation, target, incoming, projection,
+                new HashSet<ITypeSymbol>(SymbolEqualityComparer.Default),
+                requireNativeCharacterSpelling: true) ? projection : null;
+        }
+
         private static bool CanPreserveCharacterEncoding(CSharpCompilation compilation, Fragment source,
-            ITypeSymbol incoming, ITypeSymbol retained, HashSet<ITypeSymbol> resolving, int pointerDepth = 0)
+            ITypeSymbol incoming, ITypeSymbol retained, HashSet<ITypeSymbol> resolving, int pointerDepth = 0,
+            bool requireNativeCharacterSpelling = false)
         {
             if (incoming is IPointerTypeSymbol pointer)
                 return retained is IPointerTypeSymbol retainedPointer && CanPreserveCharacterEncoding(compilation,
-                    source, pointer.PointedAtType, retainedPointer.PointedAtType, resolving, pointerDepth + 1);
+                    source, pointer.PointedAtType, retainedPointer.PointedAtType, resolving, pointerDepth + 1,
+                    requireNativeCharacterSpelling);
             if (incoming is INamedTypeSymbol named && named.GetAttributes().Any(attribute => AttributeName(attribute) == NativeTypedefName))
             {
                 var declarations = named.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
@@ -962,7 +1113,8 @@ namespace ClangSharpSourceToWinmd
                         declaration.AttributeLists.Any(list => list.Span.Contains(attribute.ApplicationSyntaxReference.Span))).ToArray();
                     var fragment = new Fragment(declaration.SyntaxTree, declaration, named, attributes);
                     return CanPreserveCharacterEncoding(compilation, fragment,
-                        GetValueType(fragment, compilation.GetSemanticModel(fragment.Tree)), retained, resolving);
+                        GetValueType(fragment, compilation.GetSemanticModel(fragment.Tree)), retained, resolving,
+                        requireNativeCharacterSpelling: requireNativeCharacterSpelling);
                 });
                 resolving.Remove(named);
                 return compatible;
@@ -973,7 +1125,8 @@ namespace ClangSharpSourceToWinmd
             return nativeType == "char" + suffix &&
                 (incoming.SpecialType == SpecialType.System_SByte && retained.SpecialType == SpecialType.System_Byte ||
                     incoming.SpecialType == SpecialType.System_Byte && retained.SpecialType == SpecialType.System_SByte) ||
-                nativeType is not null && (nativeType == "wchar_t" + suffix || nativeType == "unsigned short" + suffix) &&
+                nativeType is not null && (nativeType == "wchar_t" + suffix ||
+                    !requireNativeCharacterSpelling && nativeType == "unsigned short" + suffix) &&
                 incoming.SpecialType == SpecialType.System_UInt16 && retained.SpecialType == SpecialType.System_Char;
         }
 

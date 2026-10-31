@@ -8,6 +8,9 @@ namespace MetadataUtils
 {
     public sealed record GenerationValidationError(string Code, string Stage, string Message)
     {
+        public const string RecoverableErrorPrefix = "recoverable error ";
+
+        public bool BlocksEmission { get; init; } = true;
         public string Input { get; init; }
         public string Symbol { get; init; }
         public string Header { get; init; }
@@ -17,12 +20,19 @@ namespace MetadataUtils
         public string SelectedSdkRoot { get; init; }
         public string IdentityCategory { get; init; }
         public string Cause { get; init; }
+        public string SelectedInput { get; init; }
+        public string SelectedStorage { get; init; }
+        public string CandidateStorage { get; init; }
+        public NativeRecordSource SelectedSource { get; init; }
+        public NativeRecordSource CandidateSource { get; init; }
 
         public override string ToString() =>
-            $"error {this.Code}: {this.Message} [stage: {this.Stage}; input: {this.Input}; " +
+            $"{(this.BlocksEmission ? "error " : RecoverableErrorPrefix)}{this.Code}: {this.Message} [stage: {this.Stage}; input: {this.Input}; " +
             $"symbol: {this.Symbol}; header: {this.Header}; line: {this.Line}; " +
             $"partition: {this.Partition}; architecture: {this.Architecture}; " +
-            $"SDK root: {this.SelectedSdkRoot}; identity: {this.IdentityCategory}]";
+            $"SDK root: {this.SelectedSdkRoot}; identity: {this.IdentityCategory}]" +
+            (this.BlocksEmission ? "" : $" [selected input: {this.SelectedInput}; selected storage: {this.SelectedStorage}; " +
+                $"candidate storage: {this.CandidateStorage}; selected source: {this.SelectedSource}; candidate source: {this.CandidateSource}; emission continues]");
     }
 
     public sealed record BlockedGenerationStage(string Stage, string Dependency);
@@ -38,7 +48,10 @@ namespace MetadataUtils
         public IReadOnlyList<GenerationValidationError> Errors => this.errors;
         public IReadOnlyList<BlockedGenerationStage> BlockedStages => this.blockedStages;
         public bool HasErrors => this.errors.Count != 0;
-        public string Status => this.HasErrors ? "rejected" : this.blockedStages.Count != 0 ? "blocked" : "completed";
+        public int BlockingErrorCount => this.errors.Count(error => error.BlocksEmission);
+        public bool HasBlockingErrors => this.errors.Any(error => error.BlocksEmission);
+        public string Status => this.HasBlockingErrors ? "rejected" : this.blockedStages.Count != 0 ? "blocked" :
+            this.HasErrors ? "completed-with-diagnostics" : "completed";
         public static bool IsValidationFailure(Exception error) => error.Data.Contains(ValidationFailureKey);
 
         public void Add(Exception error, string code, string stage, string input = null, string symbol = null,
@@ -90,7 +103,7 @@ namespace MetadataUtils
 
         public void ThrowIfAny(string report = null)
         {
-            if (!this.HasErrors)
+            if (!this.HasBlockingErrors)
                 return;
             string message = this.Format() + (report == null ? "" : Environment.NewLine + "Full diagnostics: " + report);
             Exception failure = this.firstError is InvalidDataException
