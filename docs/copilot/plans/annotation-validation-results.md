@@ -5,16 +5,20 @@
 
 ---
 
-## Key Finding: Upgrade ClangSharp to v18+
+## Selected Toolchain
 
-ClangSharp v17.0.1 (currently pinned in this repo) only preserves
+The selected toolchain is ClangSharp 21.1.8.4 with libclang 21.1.8. Compatibility
+and execution-speed work stays on Clang21; no Clang23 upgrade is planned.
+The results below retain the original March 2026 validation of v17 and v18.
+
+ClangSharp v17.0.1 only preserves
 `__attribute__((annotate(...)))` on **parameters**. All other placements
 (functions, return values, struct fields, typedefs) are silently dropped.
 
 ClangSharp v18.1.0.4+ (via PR [#552](https://github.com/dotnet/ClangSharp/pull/552))
 adds `[NativeAnnotation("...")]` support that preserves annotate attributes on
 **all declaration types**. We validated this — every proposed annotation works.
-**Upgrading to v18+ is the path forward.**
+That historical comparison established the annotation transport requirement.
 
 ---
 
@@ -26,7 +30,7 @@ ClangSharp into the generated C# output (and thus into the final .winmd).
 ### Prerequisites
 
 - .NET 8.0+ SDK
-- `ClangSharpPInvokeGenerator` **v18.1.0.4+** (installed via `dotnet tool install --global`)
+- The repository-selected ClangSharp **21.1.8.4** and libclang **21.1.8**
   - v17.0.1 only supports parameter-level annotations
   - v18+ adds `[NativeAnnotation]` for all declaration types
 - Windows SDK headers (or the `RecompiledIdlHeaders` from this repo)
@@ -81,7 +85,7 @@ All validation test files are in `obj/annotation-validation/`:
 
 ## Results Summary
 
-### ClangSharp v17.0.1 (currently pinned)
+### ClangSharp v17.0.1 (historical validation)
 
 | Annotation Target | Works? | Output Attribute |
 |---|---|---|
@@ -96,7 +100,7 @@ All validation test files are in `obj/annotation-validation/`:
 | **typedef** | ❌ NO | Dropped |
 | **struct field** | ❌ NO | Dropped |
 
-### ClangSharp v18.1.0.4+ (recommended upgrade)
+### ClangSharp v18.1.0.4 (historical validation)
 
 | Annotation Target | Works? | Output Attribute |
 |---|---|---|
