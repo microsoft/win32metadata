@@ -371,6 +371,19 @@ Types are placed into namespaces based on the **partition** system. Each partiti
 `requiredNamespacesForNames.rsp` provides overrides for types that need to be in a
 specific namespace regardless of which partition's headers they're declared in.
 
+Namespace qualification replaces selected type nodes in one syntax-rewriter pass.
+Composite types are qualified recursively from their original lexical context.
+Lexical shadow information and member-move decisions are reused within that original
+tree. Using aliases, nested types and delegates, and generic type and method parameters
+retain their existing precedence. The subsequent namespace mover still removes
+unmapped imports even when no declarations change namespace.
+
+Native typedef and repeated-record composition reuse semantic models only within
+their producing immutable compilation. Canonical comparisons still isolate each
+provider family and rebind changed trees. Competing record providers are located by
+their exact spans rather than rescanning every declaration. Native proof, selected
+providers, ABI checks, and collect-and-emit diagnostics are unchanged.
+
 ---
 
 ## Sidecar Files

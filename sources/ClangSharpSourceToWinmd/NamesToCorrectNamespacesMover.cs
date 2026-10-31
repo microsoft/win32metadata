@@ -31,8 +31,8 @@ namespace ClangSharpSourceToWinmd
                     // Proven handles retain their exact producer storage spelling until composition validates it.
                     .Where(declaration => !NativeHandleSourceProvenance.TryRead(declaration, out _))
                     .SelectMany(declaration => declaration.Members.OfType<FieldDeclarationSyntax>()).ToArray();
-                root = root.ReplaceNodes(fields.Select(field => field.Declaration.Type),
-                    (original, _) => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original)).WithTriviaFrom(original));
+                root = new TypeQualificationRewriter(fields.Select(field => field.Declaration.Type),
+                    original => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original))).Visit(root);
                 tree = tree.WithRootAndOptions(root, tree.Options);
 
                 TypeSyntax Qualify(TypeSyntax type, string ns)
@@ -63,6 +63,8 @@ namespace ClangSharpSourceToWinmd
                 var aliases = root.DescendantNodes().OfType<UsingDirectiveSyntax>()
                     .Where(directive => directive.Alias != null)
                     .Select(directive => directive.Alias.Name.Identifier.ValueText).ToHashSet();
+                var movedMembers = new Dictionary<MemberDeclarationSyntax, bool>();
+                var shadowedTypes = new Dictionary<SyntaxNode, HashSet<string>>();
                 var types = root.DescendantNodes().Select(node => node switch
                 {
                     VariableDeclarationSyntax variable => variable.Type,
@@ -75,16 +77,18 @@ namespace ClangSharpSourceToWinmd
                     TypeOfExpressionSyntax typeOf => typeOf.Type,
                     BaseTypeSyntax baseType => baseType.Type,
                     _ => null,
-                }).Where(type => type != null && (type.Ancestors().OfType<MemberDeclarationSyntax>().Any(IsMoved) ||
-                    type.Ancestors().OfType<StructDeclarationSyntax>().Any(nativeRecords.Contains) ||
+                }).Where(type => type != null && (type.Ancestors().OfType<StructDeclarationSyntax>().Any(nativeRecords.Contains) ||
+                    type.Ancestors().OfType<MemberDeclarationSyntax>().Any(IsMoved) ||
                     RefersToRelocatedNativeType(type)))
                     .Distinct().ToArray();
-                root = root.ReplaceNodes(types,
-                    (original, _) => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original)).WithTriviaFrom(original));
+                root = new TypeQualificationRewriter(types,
+                    original => Qualify(original, SyntaxUtils.GetEnclosingNamespace(original))).Visit(root);
                 tree = tree.WithRootAndOptions(root, tree.Options);
 
                 bool IsMoved(MemberDeclarationSyntax declaration)
                 {
+                    if (movedMembers.TryGetValue(declaration, out bool moved))
+                        return moved;
                     string name = declaration switch
                     {
                         StructDeclarationSyntax record => record.Identifier.ValueText,
@@ -94,12 +98,16 @@ namespace ClangSharpSourceToWinmd
                             method.Identifier.ValueText,
                         _ => null,
                     };
-                    return name != null && TryGetNamespace(SyntaxUtils.GetEnclosingNamespace(declaration), name, out string owner) &&
-                        owner != SyntaxUtils.GetEnclosingNamespace(declaration);
+                    string ns = SyntaxUtils.GetEnclosingNamespace(declaration);
+                    moved = name != null && TryGetNamespace(ns, name, out string owner) && owner != ns;
+                    movedMembers.Add(declaration, moved);
+                    return moved;
                 }
 
                 bool RefersToRelocatedNativeType(TypeSyntax type)
                 {
+                    if (nativeRecordNamespaces == null || nativeRecordNamespaces.Count == 0)
+                        return false;
                     string ns = SyntaxUtils.GetEnclosingNamespace(type);
                     return type.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>().Any(identifier =>
                         sourceTypes.Contains((ns, identifier.Identifier.ValueText)) &&
@@ -121,24 +129,42 @@ namespace ClangSharpSourceToWinmd
                             SyntaxFactory.SeparatedList(function.ParameterList.Parameters.Select(parameter =>
                                 parameter.WithType(Qualify(parameter.Type, ns)))))),
                         IdentifierNameSyntax identifier when !aliases.Contains(identifier.Identifier.ValueText) &&
-                            !IsShadowedType(identifier) &&
-                            sourceTypes.Contains((ns, identifier.Identifier.ValueText)) =>
+                            sourceTypes.Contains((ns, identifier.Identifier.ValueText)) &&
+                            !IsShadowedType(identifier) =>
                             QualifiedAlias(TryGetNamespace(ns, identifier.Identifier.ValueText, out string owner)
                                 ? owner : ns, identifier.Identifier.Text),
                         _ => type,
                     };
                 }
 
-                static bool IsShadowedType(IdentifierNameSyntax identifier)
+                bool IsShadowedType(IdentifierNameSyntax identifier)
                 {
                     string name = identifier.Identifier.ValueText;
-                    return identifier.Ancestors().OfType<TypeDeclarationSyntax>().Any(declaration =>
-                        declaration.TypeParameterList?.Parameters.Any(parameter => parameter.Identifier.ValueText == name) == true ||
-                        declaration.Parent is TypeDeclarationSyntax && declaration.Identifier.ValueText == name ||
-                        declaration.Members.OfType<BaseTypeDeclarationSyntax>().Any(member => member.Identifier.ValueText == name) ||
-                        declaration.Members.OfType<DelegateDeclarationSyntax>().Any(member => member.Identifier.ValueText == name)) ||
-                        identifier.Ancestors().OfType<MethodDeclarationSyntax>().Any(method =>
-                            method.TypeParameterList?.Parameters.Any(parameter => parameter.Identifier.ValueText == name) == true);
+                    foreach (var scope in identifier.Ancestors().Where(ancestor =>
+                        ancestor is TypeDeclarationSyntax or MethodDeclarationSyntax))
+                    {
+                        if (!shadowedTypes.TryGetValue(scope, out var names))
+                        {
+                            names = new HashSet<string>(System.StringComparer.Ordinal);
+                            if (scope is TypeDeclarationSyntax declaration)
+                            {
+                                if (declaration.TypeParameterList != null)
+                                    names.UnionWith(declaration.TypeParameterList.Parameters.Select(parameter => parameter.Identifier.ValueText));
+                                if (declaration.Parent is TypeDeclarationSyntax)
+                                    names.Add(declaration.Identifier.ValueText);
+                                names.UnionWith(declaration.Members.OfType<BaseTypeDeclarationSyntax>()
+                                    .Select(member => member.Identifier.ValueText));
+                                names.UnionWith(declaration.Members.OfType<DelegateDeclarationSyntax>()
+                                    .Select(member => member.Identifier.ValueText));
+                            }
+                            else if (scope is MethodDeclarationSyntax { TypeParameterList: { } parameters })
+                                names.UnionWith(parameters.Parameters.Select(parameter => parameter.Identifier.ValueText));
+                            shadowedTypes.Add(scope, names);
+                        }
+                        if (names.Contains(name))
+                            return true;
+                    }
+                    return false;
                 }
             }
 
@@ -158,6 +184,24 @@ namespace ClangSharpSourceToWinmd
 
         private static TypeSyntax QualifiedAlias(string ns, string name) =>
             SyntaxFactory.ParseTypeName($"global::{(string.IsNullOrEmpty(ns) ? "" : ns + ".")}{name}");
+
+        private sealed class TypeQualificationRewriter : CSharpSyntaxRewriter
+        {
+            private readonly HashSet<TypeSyntax> types;
+            private readonly System.Func<TypeSyntax, TypeSyntax> qualify;
+
+            internal TypeQualificationRewriter(IEnumerable<TypeSyntax> types, System.Func<TypeSyntax, TypeSyntax> qualify)
+            {
+                this.types = types.ToHashSet();
+                this.qualify = qualify;
+            }
+
+            // Composite types are qualified from their original node, including their children.
+            public override SyntaxNode Visit(SyntaxNode node) =>
+                node is TypeSyntax type && types.Contains(type)
+                    ? qualify(type).WithTriviaFrom(type)
+                    : base.Visit(node);
+        }
 
         private class MovedData
         {

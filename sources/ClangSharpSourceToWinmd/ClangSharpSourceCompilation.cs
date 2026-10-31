@@ -1057,6 +1057,7 @@ namespace ClangSharpSourceToWinmd
 
         private static CSharpCompilation MergeRepeatedStructs(CSharpCompilation compilation, GenerationValidation validation)
         {
+            var models = new BindingModels(compilation);
             var removals = new HashSet<StructDeclarationSyntax>();
             var groups = compilation.SyntaxTrees.Where(tree =>
                 !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase) &&
@@ -1097,15 +1098,15 @@ namespace ClangSharpSourceToWinmd
                 if (!native && (copies.Select(declaration => declaration.SyntaxTree).Distinct().Count() != copies.Length ||
                     copies.Skip(1).Any(declaration => !SyntaxFactory.AreEquivalent(copies[0], declaration))))
                     continue;
-                var firstModel = compilation.GetSemanticModel(copies[0].SyntaxTree);
+                var firstModel = models.Get(copies[0].SyntaxTree);
                 var firstSymbol = firstModel.GetDeclaredSymbol(copies[0]);
                 if (firstSymbol == null)
                     continue;
-                var nativeBindings = native ? new NativeBindingComparison(compilation, copies) : null;
+                var nativeBindings = native ? new NativeBindingComparison(models, copies) : null;
                 // Identical text can refer to different field types or annotation arguments through using aliases.
                 if (copies.Skip(1).Any(declaration =>
                 {
-                    var model = compilation.GetSemanticModel(declaration.SyntaxTree);
+                    var model = models.Get(declaration.SyntaxTree);
                     return !SymbolEqualityComparer.Default.Equals(firstSymbol, model.GetDeclaredSymbol(declaration)) ||
                         !(native ? NativeBindingsMatch(nativeBindings, copies[0], declaration) :
                             BindingsMatch(copies[0], firstModel, declaration, model));
@@ -1150,15 +1151,40 @@ namespace ClangSharpSourceToWinmd
                     pair.First.Source.Alignment == pair.Second.Source.Alignment);
         }
 
+        private sealed class BindingModels
+        {
+            private readonly Dictionary<SyntaxTree, SemanticModel> models = new();
+
+            public BindingModels(CSharpCompilation compilation) => Compilation = compilation;
+
+            public CSharpCompilation Compilation { get; }
+
+            public SemanticModel Get(SyntaxTree tree)
+            {
+                if (!models.TryGetValue(tree, out var model))
+                {
+                    model = Compilation.GetSemanticModel(tree);
+                    models.Add(tree, model);
+                }
+                return model;
+            }
+        }
+
         private sealed class NativeBindingComparison
         {
             public NativeBindingComparison(CSharpCompilation compilation, IReadOnlyList<StructDeclarationSyntax> copies)
+                : this(new BindingModels(compilation), copies)
             {
-                Compilation = compilation;
+            }
+
+            public NativeBindingComparison(BindingModels models, IReadOnlyList<StructDeclarationSyntax> copies)
+            {
+                Models = models;
                 Copies = copies.ToArray();
             }
 
-            public CSharpCompilation Compilation { get; }
+            public BindingModels Models { get; }
+            public CSharpCompilation Compilation => Models.Compilation;
             public IReadOnlyList<StructDeclarationSyntax> Copies { get; }
             public Dictionary<(StructDeclarationSyntax Canonical, bool Alternate, bool Anonymous, bool Broader),
                 (StructDeclarationSyntax Declaration, SemanticModel Model, StructDeclarationSyntax Normalized)> CanonicalViews { get; } = new();
@@ -1199,10 +1225,10 @@ namespace ClangSharpSourceToWinmd
                     var root = tree.GetRoot();
                     if (tree == retained.SyntaxTree)
                         root = root.ReplaceNode(retained, retained.WithAdditionalAnnotations(marker));
-                    var spans = group.Where(declaration => declaration != retained)
-                        .Select(declaration => declaration.Span).ToHashSet();
-                    root = root.RemoveNodes(root.DescendantNodes().OfType<StructDeclarationSyntax>()
-                        .Where(declaration => spans.Contains(declaration.Span)), SyntaxRemoveOptions.KeepNoTrivia);
+                    // Adding the retained marker preserves spans; unrelated declarations need not be rescanned.
+                    root = root.RemoveNodes(group.Where(declaration => declaration != retained)
+                        .Select(declaration => root.FindNode(declaration.Span, getInnermostNodeForTie: true)),
+                        SyntaxRemoveOptions.KeepNoTrivia);
                     var replacement = tree.WithRootAndOptions(root, tree.Options);
                     result = result.ReplaceSyntaxTree(tree, replacement);
                     if (tree == retained.SyntaxTree)
@@ -1356,6 +1382,7 @@ namespace ClangSharpSourceToWinmd
                     BaseTypeSyntax baseType => baseType.Type,
                     _ => null,
                 }).Where(type => type != null).Distinct().ToArray();
+                var scalarStorage = new Dictionary<ITypeSymbol, ITypeSymbol>(SymbolEqualityComparer.Default);
                 foreach (var type in types)
                 {
                     var symbol = model.GetTypeInfo(type is RefTypeSyntax reference ? reference.Type : type).Type;
@@ -1366,7 +1393,14 @@ namespace ClangSharpSourceToWinmd
                         return (null, null, null);
                     }
                     if (alternateDefinitions)
-                        symbol = HeaderTypedefMerger.GetNativeRecordScalarStorage(result, symbol);
+                    {
+                        if (!scalarStorage.TryGetValue(symbol, out var storage))
+                        {
+                            storage = HeaderTypedefMerger.GetNativeRecordScalarStorage(result, symbol);
+                            scalarStorage.Add(symbol, storage);
+                        }
+                        symbol = storage;
+                    }
                     var qualified = SyntaxFactory.ParseTypeName(string.Concat(symbol.ToDisplayParts(SymbolDisplayFormat.FullyQualifiedFormat)
                         .Select(part => part.Symbol != null && renamedSymbols.TryGetValue(part.Symbol, out string name) ? name : part.ToString())));
                     replacements.Add(type, type is RefTypeSyntax refType ? refType.WithType(qualified) : qualified);
@@ -1392,7 +1426,7 @@ namespace ClangSharpSourceToWinmd
 
             int SupportedMask(StructDeclarationSyntax declaration)
             {
-                var model = compilation.GetSemanticModel(declaration.SyntaxTree);
+                var model = comparison.Models.Get(declaration.SyntaxTree);
                 var attributes = declaration.AttributeLists.SelectMany(list => list.Attributes)
                     .Where(attribute => IsArchitectureAttribute(attribute, model)).ToArray();
                 if (attributes.Length == 0)
@@ -1513,6 +1547,7 @@ namespace ClangSharpSourceToWinmd
         private static CSharpCompilation MergeLegacyTypedefProjections(CSharpCompilation compilation,
             IReadOnlyDictionary<string, string> requiredNamespaces, GenerationValidation validation)
         {
+            var models = new BindingModels(compilation);
             var removals = new HashSet<StructDeclarationSyntax>();
             foreach (var tree in compilation.SyntaxTrees.Where(tree =>
                 !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) &&
@@ -1536,8 +1571,8 @@ namespace ClangSharpSourceToWinmd
                         continue;
 
                     // The suffix requests the established manual typedef, not another native provider.
-                    var generatedModel = compilation.GetSemanticModel(tree);
-                    var manualModel = compilation.GetSemanticModel(reference.SyntaxTree);
+                    var generatedModel = models.Get(tree);
+                    var manualModel = models.Get(reference.SyntaxTree);
                     if (!SyntaxFactory.AreEquivalent(
                             WithoutDocumentation(declaration, generatedModel).WithIdentifier(manual.Identifier),
                             WithoutDocumentation(manual, manualModel)) ||
