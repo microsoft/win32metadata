@@ -6,6 +6,11 @@ this playbook defines artifact ownership, migration order, and acceptance eviden
 Keep the C# pipeline. Do not introduce a second C++ parse, API-specific sidecars,
 copied native declarations, or a replacement annotation transport.
 
+Use the supported matched ClangSharp, ClangSharp.Interop and
+ClangSharp.PInvokeGenerator 21.1.8.4, libclang 21.1.8, and libClangSharp 21.1.8.2
+stack. Keep these compiler pins unchanged throughout the migration and the
+end-to-end CI performance repairs.
+
 ## Parallel drafting and central integration
 
 Drafting does not wait for validation. Assign disjoint original headers and IDL
@@ -25,6 +30,15 @@ parses, partition scrapes, WinMD emissions, tests, or producer replays. Existing
 text/metadata readers and patch-authoring helpers are fine. Split a helper's drafting
 and validation stages if it otherwise forces a compiler run before delivering a patch.
 Bound subprocess concurrency inside the compilation lanes as well.
+
+Temporary 180-minute CI metadata/build-test-package limits provide diagnostic
+time while end-to-end CI performance is repaired. The shared tooling layer owns
+those job limits and equivalent enclosing pipeline caps; the SDK layer consumes
+its normally published changes for subsequent runs. Existing original attempts
+keep their original limits and are not cancelled or retried for this allowance.
+The unchanged install-inclusive local default remains limited to 600 seconds
+under four-CPU affinity. Retain every failure; an expanded CI limit does not
+establish image, API or default qualification.
 
 An author takes the next leased original after handing off a draft; it does not wait
 for the preceding draft's build or API review. Existing image reviews can continue

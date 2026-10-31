@@ -82,4 +82,4 @@ Each arch job scrapes ALL partitions for that architecture.
 
 **C++ namespace types:** Types inside C++ namespaces (`Gdiplus::Status`, `ABI::Windows::*`) are handled by PInvokeGenerator internally. The auto-remap discovery skips namespace-qualified tags.
 
-**ClangSharp version pinning:** The repo pins ClangSharp v17.0.1. `Win32MetadataScraper` references ClangSharp NuGet packages directly; native libs (`libclang.dll`, `libClangSharp.dll`) are resolved at runtime via NuGet's `runtime.json` mechanism.
+**ClangSharp version pinning:** Keep the supported matched stack: ClangSharp, ClangSharp.Interop and ClangSharp.PInvokeGenerator 21.1.8.4, libclang 21.1.8, and libClangSharp 21.1.8.2. The header-annotation migration and CI performance repairs retain these pins. `Win32MetadataScraper` references the packages directly; native libs (`libclang.dll`, `libClangSharp.dll`) are resolved at runtime via NuGet's `runtime.json` mechanism.
