@@ -75,10 +75,13 @@ namespace MetadataTasks
                                 paths.Add(retained);
                     if (root.TryGetProperty("Errors", out var errors))
                     {
-                        primaryFailureRetained |= primaryReports.Contains(path) && errors.GetArrayLength() > 0;
                         foreach (var error in errors.EnumerateArray())
-                            validation.Add(error.Deserialize<GenerationValidationError>() ??
-                                throw new JsonException("Null generation diagnostic."));
+                        {
+                            var diagnostic = error.Deserialize<GenerationValidationError>() ??
+                                throw new JsonException("Null generation diagnostic.");
+                            primaryFailureRetained |= primaryReports.Contains(path) && diagnostic.BlocksEmission;
+                            validation.Add(diagnostic);
+                        }
                     }
                     if (root.TryGetProperty("BlockedStages", out var blockedStages))
                         foreach (var blocked in blockedStages.EnumerateArray())
@@ -115,7 +118,7 @@ namespace MetadataTasks
                 throw new JsonException("Generation diagnostic report requires Version 1.");
             RequireString(root, "Status");
             string status = root.GetProperty("Status").GetString();
-            if (status is not ("completed" or "rejected" or "blocked"))
+            if (status is not ("completed" or "completed-with-diagnostics" or "rejected" or "blocked"))
                 throw new JsonException($"Invalid generation diagnostic Status '{status}'.");
             JsonElement errors = RequireArray(root, "Errors");
             JsonElement blocked = RequireArray(root, "BlockedStages");
@@ -133,6 +136,9 @@ namespace MetadataTasks
                 if (error.TryGetProperty("Line", out var line) && line.ValueKind != JsonValueKind.Null &&
                     (line.ValueKind != JsonValueKind.Number || !line.TryGetInt32(out _)))
                     throw new JsonException("Generation diagnostic Line must be an integer or null.");
+                if (error.TryGetProperty("BlocksEmission", out var blocking) &&
+                    blocking.ValueKind is not (JsonValueKind.True or JsonValueKind.False))
+                    throw new JsonException("Generation diagnostic BlocksEmission must be a boolean.");
             }
             foreach (var stage in blocked.EnumerateArray())
             {
@@ -151,6 +157,10 @@ namespace MetadataTasks
             }
             if (status == "completed" && (errors.GetArrayLength() > 0 || blocked.GetArrayLength() > 0))
                 throw new JsonException("Completed generation diagnostic report cannot contain errors or blocked stages.");
+            if (status == "completed-with-diagnostics" && (errors.GetArrayLength() == 0 || blocked.GetArrayLength() != 0 ||
+                errors.EnumerateArray().Any(error => !error.TryGetProperty("BlocksEmission", out var blocking) ||
+                    blocking.ValueKind != JsonValueKind.False)))
+                throw new JsonException("Completed-with-diagnostics reports require only nonblocking errors and no blocked stages.");
 
             static JsonElement RequireArray(JsonElement value, string name)
             {

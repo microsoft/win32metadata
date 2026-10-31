@@ -7,11 +7,15 @@ using System.IO;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Xml.Linq;
 using ClangSharpSourceToWinmd;
 using MetadataTasks;
 using MetadataUtils;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using Xunit;
@@ -322,14 +326,157 @@ namespace Win32MetadataScraperTests
             fixture.Write(@"common\Associations.cs", imports + "public static class Apis { " +
                 "[AssociatedEnum(\"MISSING_FIRST\")] public static int First; " +
                 "[AssociatedEnum(\"MISSING_LAST\")] public static int Last; } }");
-            Assert.Throws<InvalidDataException>(() => Compile(fixture.Root, "x64"));
+            Assert.Throws<InvalidOperationException>(() => Compile(fixture.Root, "x64"));
             using var report = fixture.Report("generation-diagnostics.json");
             var errors = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
             Assert.Equal(2, errors.Count(error => error.GetProperty("Stage").GetString() == "emitter.typedef-composition"));
+            Assert.All(errors.Where(error => error.GetProperty("Stage").GetString() == "emitter.typedef-composition"),
+                error => Assert.False(error.GetProperty("BlocksEmission").GetBoolean()));
             foreach (string name in new[] { "MISSING_FIRST", "MISSING_LAST" })
                 Assert.Contains(errors, error => error.GetProperty("Message").GetString().Contains(name));
-            Assert.Contains(report.RootElement.GetProperty("BlockedStages").EnumerateArray(),
+            Assert.DoesNotContain(report.RootElement.GetProperty("BlockedStages").EnumerateArray(),
                 stage => stage.GetProperty("Stage").GetString() == "emitter.typedef-constant-lowering");
+            Assert.Contains(report.RootElement.GetProperty("BlockedStages").EnumerateArray(),
+                stage => stage.GetProperty("Stage").GetString() == "emitter.compilation");
+        }
+
+        [Theory]
+        [InlineData(false, false)]
+        [InlineData(false, true)]
+        [InlineData(true, false)]
+        [InlineData(true, true)]
+        public void RecoverableTypedefConflictsReportAtTheEndAndEmitThroughCliAndMsbuild(bool msbuild, bool headerOnly)
+        {
+            using var fixture = new Fixture();
+            string generated = Path.Combine(fixture.Root, "obj", "generated");
+            fixture.Write(@"obj\generated\Metadata.manual.cs",
+                File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs")));
+            const string imports = "using Windows.Win32.Foundation.Metadata; namespace Test { ";
+            string autoTypes = fixture.Write("autoTypes.json", headerOnly ? "[]" :
+                "[{\"Namespace\":\"Test\",\"Name\":\"FIRST\",\"ValueType\":\"int\"}," +
+                "{\"Namespace\":\"Test\",\"Name\":\"LAST\",\"ValueType\":\"byte\"}]");
+            string nativeHeader = fixture.Write("native.h", "typedef int FIRST;\ntypedef unsigned char LAST;\n" +
+                "typedef unsigned int MAPPED_FIRST;\ntypedef long long WIDE_FIRST;\ntypedef unsigned short MAPPED_LAST;\n");
+            string nativeHash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(nativeHeader)));
+            if (headerOnly)
+                fixture.Write(@"obj\generated\common\Canonical.header-types.cs", HeaderTypesSourceFamily.SuccessMarker + "\n" +
+                    Provider("FIRST", "FIRST", "int", 4, 1) + Provider("LAST", "LAST", "byte", 1, 2));
+            fixture.Write(@"obj\generated\common\First.header-types.cs", HeaderTypesSourceFamily.SuccessMarker + "\n" +
+                (headerOnly ? Provider("MAPPED_FIRST", "FIRST", "uint", 4, 3) + Provider("MAPPED_LAST", "LAST", "ushort", 2, 5) :
+                imports + "[NativeTypedef] public partial struct FIRST { public uint Value; } " +
+                "[NativeTypedef] public partial struct LAST { public ushort Value; } }"));
+            fixture.Write(@"obj\generated\common\Other.header-types.cs", HeaderTypesSourceFamily.SuccessMarker + "\n" +
+                (headerOnly ? Provider("WIDE_FIRST", "FIRST", "long", 8, 4) :
+                imports + "[NativeTypedef] public partial struct FIRST { public long Value; } }"));
+            fixture.Write(@"obj\generated\common\Bindings.cs", @"using System.Runtime.InteropServices;
+namespace Test {
+    public struct CONSUMER { public FIRST First; public LAST Last; }
+    public static class Apis {
+        [Windows.Win32.Foundation.Metadata.NativeTypeName(""FIRST"")] public const FIRST READY = (FIRST)7;
+        [DllImport(""test""), PreserveSig] public static extern FIRST Read(LAST value);
+    }
+}");
+            string output = Path.Combine(fixture.Root, "Windows.Win32.winmd");
+            var result = msbuild
+                ? Run("msbuild", WriteEmitterProject(fixture, output, autoTypes), "-nologo", "-verbosity:minimal",
+                    "-maxcpucount:1", "-target:EmitWinmd")
+                : Run(typeof(ClangSharpSourceToWinmd.Program).Assembly.Location,
+                    "--sourceDir", generated, "--arch", "crossarch", "--outputFileName", output, "--autoTypes", autoTypes);
+            Assert.True(result.ExitCode == 0, result.Output);
+            Assert.Equal(3, result.Output.Split(GenerationValidationError.RecoverableErrorPrefix + "CSSW005:").Length - 1);
+            Assert.Contains("emission continues", result.Output);
+            Assert.DoesNotContain("WMG002", result.Output);
+            Assert.DoesNotContain("Generation rejected", result.Output);
+            Assert.True(result.Output.LastIndexOf(GenerationValidationError.RecoverableErrorPrefix, StringComparison.Ordinal) >
+                result.Output.IndexOf("Emitting " + output, StringComparison.Ordinal), result.Output);
+            using var report = fixture.Report(@"obj\generated\generation-diagnostics.json");
+            Assert.Equal("completed-with-diagnostics", report.RootElement.GetProperty("Status").GetString());
+            Assert.Empty(report.RootElement.GetProperty("BlockedStages").EnumerateArray());
+            var errors = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
+            Assert.Equal(3, errors.Length);
+            Assert.All(errors, error =>
+            {
+                Assert.False(error.GetProperty("BlocksEmission").GetBoolean());
+                Assert.Contains(headerOnly ? "Canonical" : "autotypes", error.GetProperty("SelectedInput").GetString());
+                if (headerOnly)
+                {
+                    Assert.Equal(nativeHash, error.GetProperty("SelectedSource").GetProperty("HeaderHash").GetString());
+                    Assert.Equal(nativeHash, error.GetProperty("CandidateSource").GetProperty("HeaderHash").GetString());
+                }
+                Assert.False(string.IsNullOrEmpty(error.GetProperty("SelectedStorage").GetString()));
+                Assert.False(string.IsNullOrEmpty(error.GetProperty("CandidateStorage").GetString()));
+                Assert.False(string.IsNullOrEmpty(error.GetProperty("Cause").GetString()));
+            });
+            using var image = new PEReader(File.OpenRead(output));
+            var reader = image.GetMetadataReader();
+            var definitions = reader.TypeDefinitions.Select(reader.GetTypeDefinition).ToArray();
+            foreach (var expected in new[] { (Name: "FIRST", Type: SignatureTypeCode.Int32), (Name: "LAST", Type: SignatureTypeCode.Byte) })
+            {
+                var definition = Assert.Single(definitions.Where(type => reader.GetString(type.Name) == expected.Name));
+                var field = reader.GetFieldDefinition(Assert.Single(definition.GetFields()));
+                var signature = reader.GetBlobReader(field.Signature);
+                Assert.Equal(SignatureKind.Field, signature.ReadSignatureHeader().Kind);
+                Assert.Equal(expected.Type, signature.ReadSignatureTypeCode());
+                Assert.Equal(0, signature.RemainingBytes);
+            }
+            var consumer = Assert.Single(definitions.Where(type => reader.GetString(type.Name) == "CONSUMER"));
+            Assert.Equal(2, consumer.GetFields().Count);
+            var apis = Assert.Single(definitions.Where(type => reader.GetString(type.Name) == "Apis"));
+            Assert.Contains(apis.GetMethods(), method => reader.GetString(reader.GetMethodDefinition(method).Name) == "Read");
+            var ready = reader.GetFieldDefinition(Assert.Single(apis.GetFields()));
+            Assert.Equal("READY", reader.GetString(ready.Name));
+            Assert.False(ready.GetDefaultValue().IsNil);
+            var constant = reader.GetConstant(ready.GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.Int32, constant.TypeCode);
+            Assert.Equal(7, reader.GetBlobReader(constant.Value).ReadInt32());
+            Assert.False(File.Exists(Path.Combine(generated, "generation-failures.json")));
+            Assert.Empty(Directory.GetFiles(fixture.Root, "*.pending", SearchOption.AllDirectories));
+
+            string Provider(string nativeName, string name, string storage, int size, uint line)
+            {
+                var root = CSharpSyntaxTree.ParseText(imports +
+                    $"[NativeTypedef] public partial struct {name} {{ public {storage} Value; }} }}").GetRoot();
+                var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                var source = new NativeRecordSource("c:native.h@T@" + nativeName, nativeName, nativeHeader,
+                    nativeHash, line, 1, name, "Test", true, size, size);
+                var stamped = NativeTypedefSourceProvenance.Attach(declaration, source);
+                stamped = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(
+                    NativeTypedefProjectionProvenance.WithPolicy(stamped, inferred: false));
+                return root.ReplaceNode(declaration, stamped).ToFullString()
+                    .Replace("using Windows.Win32.Foundation.Metadata;", "", StringComparison.Ordinal)
+                    .Replace("[NativeTypedef]", "[global::Windows.Win32.Foundation.Metadata.NativeTypedef]", StringComparison.Ordinal);
+            }
+        }
+
+        [Fact]
+        public void RecoverableDiagnosticsDoNotMaskAnIndependentToolFailure()
+        {
+            using var fixture = new Fixture();
+            var validation = new GenerationValidation();
+            validation.Add(new GenerationValidationError("CSSW005", "emitter.typedef-composition", "retained contract")
+            {
+                BlocksEmission = false,
+                Cause = "conflicting candidate",
+                SelectedInput = "autotypes.cs",
+                SelectedStorage = "int",
+                CandidateStorage = "uint",
+            });
+            Assert.True(validation.HasErrors);
+            Assert.False(validation.HasBlockingErrors);
+            validation.ThrowIfAny();
+            validation.WriteReport(Path.Combine(fixture.Root, "generation-diagnostics.json"));
+            var task = new CollectGenerationDiagnostics { BuildEngine = new BuildEngine(),
+                GeneratedDir = fixture.Root, FailedStage = "EmitWinmd" };
+            Assert.False(task.Execute());
+            using var report = fixture.Report("generation-failures.json");
+            Assert.Equal("rejected", report.RootElement.GetProperty("Status").GetString());
+            var errors = report.RootElement.GetProperty("Errors").EnumerateArray().ToArray();
+            var recoverable = Assert.Single(errors.Where(error => error.GetProperty("Code").GetString() == "CSSW005"));
+            Assert.False(recoverable.GetProperty("BlocksEmission").GetBoolean());
+            Assert.Equal("int", recoverable.GetProperty("SelectedStorage").GetString());
+            var failure = Assert.Single(errors.Where(error => error.GetProperty("Code").GetString() == "WMG999"));
+            Assert.True(failure.GetProperty("BlocksEmission").GetBoolean());
+            Assert.Equal("infrastructure-or-unreported-failure", failure.GetProperty("IdentityCategory").GetString());
         }
 
         [Fact]
@@ -477,19 +624,7 @@ namespace Win32MetadataScraperTests
             string unrelated = fixture.Write(@"obj\generated\unrelated\Old.cs.generation-diagnostics.json", OldReport());
             string oldPreflight = fixture.Write(@"obj\generated\emitter-preflight-diagnostics.json", OldReport());
             string output = fixture.Write("Windows.Win32.winmd", "previous-valid-image");
-            var project = new XElement("Project",
-                new XElement("PropertyGroup",
-                    new XElement("ObjDir", Path.Combine(fixture.Root, "obj")),
-                    new XElement("ToolsBinDir", Path.GetDirectoryName(typeof(ConstantsScraperApp.Program).Assembly.Location)),
-                    new XElement("TaskBinDir", Path.GetDirectoryName(typeof(ScrapeHeaders).Assembly.Location)),
-                    new XElement("Win32WinmdBinDir", fixture.Root),
-                    new XElement("WinmdVersion", "1.0.0.0"),
-                    new XElement("OutputWinmd", output),
-                    new XElement("ScanArch", "crossarch")),
-                new XElement("Import", new XAttribute("Project", Path.Combine(AppContext.BaseDirectory, "assets", "scraper.sdk.targets"))),
-                new XElement("ItemGroup", new XElement("ImportLibs", new XAttribute("Include", Path.Combine(fixture.Root, "unused.lib")))),
-                new XElement("Target", new XAttribute("Name", "ScrapeConstants")));
-            string path = fixture.Write("emitter-only.proj", project.ToString());
+            string path = WriteEmitterProject(fixture, output);
             string[] args = { path, "-nologo", "-verbosity:minimal", "-maxcpucount:1", "-target:EmitWinmd" };
             var rejected = Run("msbuild", args);
             Assert.NotEqual(0, rejected.ExitCode);
@@ -571,6 +706,9 @@ namespace Win32MetadataScraperTests
                 "{\"Version\":1,\"Status\":\"rejected\",\"Errors\":[],\"BlockedStages\":[{\"Stage\":1,\"Dependency\":\"input\"}]}",
                 valid.Replace("\"Line\":null", "\"Line\":{}"),
                 valid.Replace("\"Status\":\"rejected\"", "\"Status\":\"completed\""),
+                valid.Replace("\"BlocksEmission\":true", "\"BlocksEmission\":\"false\""),
+                valid.Replace("\"Status\":\"rejected\"", "\"Status\":\"completed-with-diagnostics\""),
+                "{\"Version\":1,\"Status\":\"completed-with-diagnostics\",\"Errors\":[],\"BlockedStages\":[]}",
             };
             foreach (string contents in malformed)
             {
@@ -737,6 +875,25 @@ namespace Win32MetadataScraperTests
 
         private static ClangSharpSourceCompilation Compile(string root, string arch) => ClangSharpSourceCompilation.Create(
             root, arch, new(), new(), Array.Empty<string>(), new(), new(), new(), Array.Empty<string>(), new(), new());
+
+        private static string WriteEmitterProject(Fixture fixture, string output, string autoTypes = null)
+        {
+            var project = new XElement("Project",
+                new XElement("PropertyGroup",
+                    new XElement("ObjDir", Path.Combine(fixture.Root, "obj")),
+                    new XElement("ToolsBinDir", Path.GetDirectoryName(typeof(ConstantsScraperApp.Program).Assembly.Location)),
+                    new XElement("TaskBinDir", Path.GetDirectoryName(typeof(ScrapeHeaders).Assembly.Location)),
+                    new XElement("Win32WinmdBinDir", fixture.Root),
+                    new XElement("WinmdVersion", "1.0.0.0"),
+                    new XElement("OutputWinmd", output),
+                    new XElement("ScanArch", "crossarch")),
+                new XElement("Import", new XAttribute("Project", Path.Combine(AppContext.BaseDirectory, "assets", "scraper.sdk.targets"))),
+                new XElement("ItemGroup", new XElement("ImportLibs", new XAttribute("Include", Path.Combine(fixture.Root, "unused.lib")))),
+                new XElement("Target", new XAttribute("Name", "ScrapeConstants")));
+            if (autoTypes != null)
+                project.Add(new XElement("ItemGroup", new XElement("AutoType", new XAttribute("Include", autoTypes))));
+            return fixture.Write("emitter-only.proj", project.ToString());
+        }
 
         private static string OldReport() => JsonSerializer.Serialize(new
         {

@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MetadataUtils;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
@@ -176,7 +177,10 @@ namespace MetadataTasks
 
             this.fullOutput.AppendLine(singleLine);
 
-            base.LogEventsFromTextOutput(singleLine, messageImportance);
+            if (singleLine.StartsWith(GenerationValidationError.RecoverableErrorPrefix, StringComparison.Ordinal))
+                this.Log.LogMessage(MessageImportance.High, singleLine);
+            else
+                base.LogEventsFromTextOutput(singleLine, messageImportance);
         }
 
         private string[] GetStaticLibs()

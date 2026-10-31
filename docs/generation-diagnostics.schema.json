@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Win32 metadata generation failure and preflight diagnostics, version 1",
+  "title": "Win32 metadata generation diagnostics, version 1",
   "type": "object",
   "required": ["Version", "Status", "Errors", "BlockedStages"],
   "properties": {
     "Version": { "const": 1 },
-    "Status": { "enum": ["completed", "rejected", "blocked"] },
+    "Status": { "enum": ["completed", "completed-with-diagnostics", "rejected", "blocked"] },
     "Errors": {
       "type": "array",
       "items": { "$ref": "#/$defs/error" }
@@ -57,8 +57,44 @@
       }
     }
   },
+  "allOf": [
+    {
+      "if": { "properties": { "Status": { "const": "completed-with-diagnostics" } } },
+      "then": {
+        "properties": {
+          "Errors": {
+            "minItems": 1,
+            "items": {
+              "required": ["BlocksEmission"],
+              "properties": { "BlocksEmission": { "const": false } }
+            }
+          },
+          "BlockedStages": { "maxItems": 0 }
+        }
+      }
+    }
+  ],
   "additionalProperties": true,
   "$defs": {
+    "nativeSource": {
+      "type": ["object", "null"],
+      "required": ["Identity", "NativeName", "Header", "HeaderHash", "Line", "Column", "Name", "Namespace", "TraversedHeader", "Size", "Alignment"],
+      "properties": {
+        "Identity": { "type": "string" },
+        "NativeName": { "type": "string" },
+        "Header": { "type": "string" },
+        "HeaderHash": { "type": "string", "pattern": "^[0-9A-Fa-f]{64}$" },
+        "Line": { "type": "integer", "minimum": 1 },
+        "Column": { "type": "integer", "minimum": 1 },
+        "Name": { "type": "string" },
+        "Namespace": { "type": "string" },
+        "TraversedHeader": { "type": "boolean" },
+        "Size": { "type": "integer", "minimum": -1 },
+        "Alignment": { "type": "integer", "minimum": -1 },
+        "SourceArchitecture": { "enum": [null, 1, 2, 4] }
+      },
+      "additionalProperties": false
+    },
     "error": {
       "type": "object",
       "required": ["Code", "Stage", "Message", "Cause"],
@@ -66,6 +102,11 @@
         "Code": { "type": "string" },
         "Stage": { "type": "string" },
         "Message": { "type": "string" },
+        "BlocksEmission": {
+          "type": "boolean",
+          "default": true,
+          "description": "False retains a recoverable canonical-provider conflict as an error without blocking dependent emission. An absent field remains blocking."
+        },
         "Input": { "type": ["string", "null"] },
         "Symbol": { "type": ["string", "null"] },
         "Header": { "type": ["string", "null"] },
@@ -74,6 +115,11 @@
         "Partition": { "type": ["string", "null"] },
         "SelectedSdkRoot": { "type": ["string", "null"] },
         "IdentityCategory": { "type": ["string", "null"] },
+        "SelectedInput": { "type": ["string", "null"] },
+        "SelectedStorage": { "type": ["string", "null"] },
+        "CandidateStorage": { "type": ["string", "null"] },
+        "SelectedSource": { "$ref": "#/$defs/nativeSource" },
+        "CandidateSource": { "$ref": "#/$defs/nativeSource" },
         "Cause": {
           "type": "string",
           "description": "Original Exception.ToString(), retained without deduplication."
