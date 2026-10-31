@@ -239,7 +239,10 @@ namespace MetadataUtils.Tests
         public void ExternalToolchainTaskRequiresCurrentPhysicalHeaderAndPlan()
         {
             string directory = Path.Combine(AppContext.BaseDirectory, "toolchain-task-" + Guid.NewGuid().ToString("N"));
+            // Keep native host temporary files independent of the potentially deep test output path.
+            string scratch = Path.Combine(Path.GetTempPath(), "win32metadata-toolchain-task-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(directory);
+            Directory.CreateDirectory(scratch);
             try
             {
                 string output = Path.Combine(directory, "consumer", "obj", "generated");
@@ -313,8 +316,6 @@ namespace MetadataUtils.Tests
 
                 void Run(bool success, bool cached)
                 {
-                    string scratch = Path.Combine(directory, "process-files");
-                    Directory.CreateDirectory(scratch);
                     var start = new System.Diagnostics.ProcessStartInfo(dotnet)
                     {
                         WorkingDirectory = directory, UseShellExecute = false,
@@ -328,12 +329,15 @@ namespace MetadataUtils.Tests
                     using var process = System.Diagnostics.Process.Start(start);
                     var stdout = process.StandardOutput.ReadToEndAsync();
                     var stderr = process.StandardError.ReadToEndAsync();
-                    if (!process.WaitForExit(60000))
+                    bool exited = process.WaitForExit(60000);
+                    if (!exited)
                     {
                         process.Kill(entireProcessTree: true);
-                        throw new TimeoutException("Isolated managed constants task did not finish in 60 seconds.");
+                        process.WaitForExit();
                     }
                     string log = stdout.GetAwaiter().GetResult() + stderr.GetAwaiter().GetResult();
+                    if (!exited)
+                        throw new TimeoutException("Isolated managed constants task did not finish in 60 seconds.\n" + log);
                     Assert.True(success == (process.ExitCode == 0), log);
                     Assert.Equal(!cached, log.Contains("Scraping constants and enums...", StringComparison.Ordinal));
                 }
@@ -350,6 +354,7 @@ namespace MetadataUtils.Tests
             finally
             {
                 Directory.Delete(directory, recursive: true);
+                Directory.Delete(scratch, recursive: true);
             }
 
             static string Xml(string value) => System.Security.SecurityElement.Escape(value);

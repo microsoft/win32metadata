@@ -8,7 +8,7 @@
 ## Selected Toolchain
 
 The selected toolchain is ClangSharp 21.1.8.4 with libclang 21.1.8. Compatibility
-and execution-speed work stays on Clang21; no Clang23 upgrade is planned.
+and execution-speed work stays on Clang21.
 The results below retain the original March 2026 validation of v17 and v18.
 
 ClangSharp v17.0.1 only preserves

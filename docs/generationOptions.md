@@ -206,6 +206,20 @@ and anonymous-storage, alternate-definition and coverage-normalization policy.
 The normal emitter prints separate timings for common-provider coalescing,
 cross-architecture constant qualification and final typedef/record composition,
 including failed phases.
+Validated native source proofs are cached by immutable syntax declaration and
+proof family. Weak cache keys do not retain discarded trees. Rewritten or
+reparsed declarations are validated independently, including cached absence;
+malformed proofs still fail on every read. The cache contains no compiler
+symbols, ownership decisions or cross-declaration identity comparisons.
+Namespace qualification builds each enclosing type's lexical shadow-name set
+once per immutable tree traversal. Nested types, delegates and generic parameters
+retain their original binding precedence; these sets are not shared across trees
+or used to infer native ownership.
+Selected type nodes are qualified in one syntax-rewriter traversal rather than
+through Roslyn's bulk replacement bookkeeping. The original qualification rules,
+selected nodes and trivia are retained, including the original enclosing scope.
+Managed-task fixtures keep native host temporary files in an independent short
+directory; long checkout and physical-input paths remain supported.
 Legacy numeric partition suffixes retain their established parsed-prefix
 namespace. The existing syntax repair records the original namespace for the
 source-provenance check while ownership uses the repaired, valid C# namespace.
