@@ -1,7 +1,7 @@
---with-type
-ATTRIBUTEID=uint
 --traverse
 <IncludeRoot>/um/authif.h
 <IncludeRoot>/um/sdoias.h
 --namespace
 Windows.Win32.NetworkManagement.NetworkPolicyServer
+--config
+parse-win32-annotations

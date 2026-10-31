@@ -1,0 +1,12 @@
+diff --git a/um/mtxdm.h b/um/mtxdm.h
+index dfcfa823..7d66bd31 100644
+--- a/um/mtxdm.h
++++ b/um/mtxdm.h
+@@ -22,6 +22,7 @@ extern "C"{
+ // GetDispenserManager
+ // A Dispenser calls this API to get a reference to DispenserManager.
+ //
++_Win32_SupportedOS_Windows2000_
+ __declspec(dllimport) HRESULT __cdecl GetDispenserManager(IDispenserManager**);
+ 
+ 

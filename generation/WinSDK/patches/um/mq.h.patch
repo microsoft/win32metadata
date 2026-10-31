@@ -1,0 +1,31 @@
+diff --git a/um/mq.h b/um/mq.h
+index 6aa2b19d..69a83ef6 100644
+--- a/um/mq.h
++++ b/um/mq.h
+@@ -856,6 +856,26 @@ typedef enum tagMQConnectionState
+                                              MQSEC_CHANGE_QUEUE_PERMISSIONS | \
+                                              MQSEC_TAKE_QUEUE_OWNERSHIP)
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MQQUEUEACCESSMASK, unsigned long,
++    MQSEC_DELETE_QUEUE,
++    MQSEC_GET_QUEUE_PERMISSIONS,
++    MQSEC_CHANGE_QUEUE_PERMISSIONS,
++    MQSEC_TAKE_QUEUE_OWNERSHIP,
++    MQSEC_RECEIVE_MESSAGE,
++    MQSEC_RECEIVE_JOURNAL_MESSAGE,
++    MQSEC_QUEUE_GENERIC_READ,
++    MQSEC_QUEUE_GENERIC_WRITE,
++    MQSEC_QUEUE_GENERIC_ALL,
++    MQSEC_DELETE_MESSAGE,
++    MQSEC_PEEK_MESSAGE,
++    MQSEC_WRITE_MESSAGE,
++    MQSEC_DELETE_JOURNAL_MESSAGE,
++    MQSEC_SET_QUEUE_PROPERTIES,
++    MQSEC_GET_QUEUE_PROPERTIES,
++    MQSEC_QUEUE_GENERIC_EXECUTE);
++#endif
++
+ /////////////////////////////////////////////////////////////////////////
+ //
+ // Message Queuing Success values

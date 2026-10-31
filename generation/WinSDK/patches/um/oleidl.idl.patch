@@ -1,0 +1,265 @@
+diff --git a/um/oleidl.idl b/um/oleidl.idl
+index 46379c61..0c4159f5 100644
+--- a/um/oleidl.idl
++++ b/um/oleidl.idl
+@@ -7,6 +7,10 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <win32metadata_annotations.h>")
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -34,6 +38,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+ interface IOleInPlaceActiveObject;
+ interface IEnumOLEVERB;
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleAdviseHolder => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     local,
+     object,
+@@ -84,6 +89,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleCache => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(0000011e-0000-0000-C000-000000000046),
+@@ -126,6 +132,8 @@ interface IOleCache : IUnknown
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleCache2 => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IOleCache2::UpdateCache::grfUpdf => AssociatedEnum(UPDFCACHE_FLAGS) */")
+ [
+     object,
+     uuid(00000128-0000-0000-C000-000000000046),
+@@ -188,12 +196,26 @@ interface IOleCache2 : IOleCache
+ 
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(UPDFCACHE_FLAGS, unsigned long,")
++cpp_quote("    UPDFCACHE_ALL,")
++cpp_quote("    UPDFCACHE_ALLBUTNODATACACHE,")
++cpp_quote("    UPDFCACHE_NORMALCACHE,")
++cpp_quote("    UPDFCACHE_IFBLANK,")
++cpp_quote("    UPDFCACHE_ONLYIFBLANK,")
++cpp_quote("    UPDFCACHE_NODATACACHE,")
++cpp_quote("    UPDFCACHE_ONSAVECACHE,")
++cpp_quote("    UPDFCACHE_ONSTOPCACHE,")
++cpp_quote("    UPDFCACHE_IFBLANKORONSAVECACHE);")
++cpp_quote("#endif")
++
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */")
+ #pragma endregion
+ 
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleCacheControl => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000129-0000-0000-C000-000000000046)
+@@ -215,6 +237,7 @@ interface IOleCacheControl : IUnknown
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IParseDisplayName => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(0000011a-0000-0000-C000-000000000046),
+@@ -236,6 +259,7 @@ interface IParseDisplayName : IUnknown
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleContainer => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(0000011b-0000-0000-C000-000000000046),
+@@ -258,7 +282,9 @@ interface IOleContainer : IParseDisplayName
+         [in] BOOL fLock
+     );
+ }
++cpp_quote("/* Win32Metadata: parameter ::IOleContainer::EnumObjects::grfFlags => AssociatedEnum(OLECONTF) */")
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleClientSite => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000118-0000-0000-C000-000000000046),
+@@ -303,7 +329,19 @@ interface IOleClientSite : IUnknown
+     );
+ 
+ }
+-
++cpp_quote("/* Win32Metadata: parameter ::IOleClientSite::GetMoniker::dwWhichMoniker => AssociatedEnum(OLEWHICHMK) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleClientSite::GetMoniker::dwAssign => AssociatedEnum(OLEGETMONIKER) */")
++
++cpp_quote("/* Win32Metadata: interface ::IOleObject => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::Close::dwSaveOption => AssociatedEnum(OLECLOSE) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::SetMoniker::dwWhichMoniker => AssociatedEnum(OLEWHICHMK) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::GetMoniker::dwAssign => AssociatedEnum(OLEGETMONIKER) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::GetMoniker::dwWhichMoniker => AssociatedEnum(OLEWHICHMK) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::GetUserType::dwFormOfType => AssociatedEnum(USERCLASSTYPE) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::SetExtent::dwDrawAspect => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::GetExtent::dwDrawAspect => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::GetMiscStatus::dwAspect => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IOleObject::GetMiscStatus::pdwStatus => AssociatedEnum(OLEMISC) */")
+ [
+     object,
+     uuid(00000112-0000-0000-C000-000000000046),
+@@ -568,6 +606,7 @@ interface IOLETypes
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleWindow => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000114-0000-0000-C000-000000000046),
+@@ -591,6 +630,7 @@ interface IOleWindow : IUnknown
+     );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleLink => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(0000011d-0000-0000-C000-000000000046)
+@@ -677,6 +717,7 @@ interface IOleLink : IUnknown
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleItemContainer => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(0000011c-0000-0000-C000-000000000046),
+@@ -721,6 +762,7 @@ interface IOleItemContainer : IOleContainer
+         [in] LPOLESTR pszItem);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceUIWindow => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000115-0000-0000-C000-000000000046),
+@@ -765,6 +807,7 @@ interface IOleInPlaceUIWindow : IOleWindow
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceActiveObject => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000117-0000-0000-C000-000000000046)
+@@ -820,6 +863,7 @@ interface IOleInPlaceActiveObject : IOleWindow
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceFrame => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000116-0000-0000-C000-000000000046),
+@@ -887,6 +931,7 @@ typedef struct tagOleMenuGroupWidths
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceObject => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000113-0000-0000-C000-000000000046),
+@@ -922,6 +967,7 @@ interface IOleInPlaceObject : IOleWindow
+     );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IOleInPlaceSite => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000119-0000-0000-C000-000000000046),
+@@ -999,6 +1045,12 @@ interface IContinue : IUnknown
+     HRESULT FContinue();
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IViewObject => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObject::Draw::dwDrawAspect => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObject::GetColorSet::dwDrawAspect => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObject::Freeze::dwDrawAspect => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObject::SetAdvise::aspects => AssociatedEnum(DVASPECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObject::GetAdvise::pAspects => AssociatedEnum(DVASPECT) */")
+ [
+     object,
+     uuid(0000010d-0000-0000-C000-000000000046)
+@@ -1109,6 +1161,8 @@ interface IViewObject : IUnknown
+ 
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IViewObject2 => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IViewObject2::GetExtent::dwDrawAspect => AssociatedEnum(DVASPECT) */")
+ [
+     object,
+     uuid(00000127-0000-0000-C000-000000000046)
+@@ -1130,6 +1184,9 @@ interface IViewObject2 : IViewObject
+ }
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IDropSource => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDropSource::QueryContinueDrag::grfKeyState => AssociatedEnum(MODIFIERKEYS_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::IDropSource::GiveFeedback::dwEffect => AssociatedEnum(DROPEFFECT) */")
+ [
+     local,
+     object,
+@@ -1152,7 +1209,16 @@ interface IDropSource : IUnknown
+         [in, annotation("_In_")] DWORD dwEffect
+     );
+ }
+-
++cpp_quote("/* Win32Metadata: method ::IDropSource::GiveFeedback => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IDropSource::QueryContinueDrag => PreserveResult */")
++
++cpp_quote("/* Win32Metadata: interface ::IDropTarget => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDropTarget::DragEnter::grfKeyState => AssociatedEnum(MODIFIERKEYS_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::IDropTarget::DragEnter::pdwEffect => AssociatedEnum(DROPEFFECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IDropTarget::DragOver::grfKeyState => AssociatedEnum(MODIFIERKEYS_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::IDropTarget::DragOver::pdwEffect => AssociatedEnum(DROPEFFECT) */")
++cpp_quote("/* Win32Metadata: parameter ::IDropTarget::Drop::grfKeyState => AssociatedEnum(MODIFIERKEYS_FLAGS) */")
++cpp_quote("/* Win32Metadata: parameter ::IDropTarget::Drop::pdwEffect => AssociatedEnum(DROPEFFECT) */")
+ [
+     object,
+     uuid(00000122-0000-0000-C000-000000000046),
+@@ -1230,7 +1296,11 @@ interface IDropTarget : IUnknown
+         [in, out] DWORD *pdwEffect
+     );
+ }
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DROPEFFECT, unsigned int, DROPEFFECT_NONE, DROPEFFECT_COPY, DROPEFFECT_MOVE, DROPEFFECT_LINK, DROPEFFECT_SCROLL);")
++cpp_quote("#endif")
+ 
++cpp_quote("/* Win32Metadata: interface ::IDropSourceNotify => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     local,
+     object,
+@@ -1250,6 +1320,7 @@ interface IDropSourceNotify : IUnknown
+     );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnterpriseDropTarget => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(390E3878-FD55-4E18-819D-4682081C0CFD),
+@@ -1270,6 +1341,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumOLEVERB => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(00000104-0000-0000-C000-000000000046),
+@@ -1281,6 +1353,8 @@ interface IEnumOLEVERB : IUnknown
+ 
+     typedef [unique] IEnumOLEVERB *LPENUMOLEVERB;
+ 
++cpp_quote("/* Win32Metadata: field ::OLEVERB::lVerb => AssociatedEnum(OLEIVERB) */")
++cpp_quote("/* Win32Metadata: field ::OLEVERB::fuFlags => AssociatedEnum(MENU_ITEM_FLAGS) */")
+     typedef struct tagOLEVERB {
+         LONG    lVerb;
+         LPOLESTR  lpszVerbName;

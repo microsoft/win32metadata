@@ -5,3 +5,5 @@
 <IncludeRoot>/um/wcnfunctiondiscoverykeys.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsConnectNow
+--config
+parse-win32-annotations

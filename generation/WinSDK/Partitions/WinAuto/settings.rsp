@@ -5,3 +5,5 @@
 <IncludeRoot>/um/UIAutomationClient.h
 --namespace
 Windows.Win32.UI.Accessibility
+--config
+parse-win32-annotations

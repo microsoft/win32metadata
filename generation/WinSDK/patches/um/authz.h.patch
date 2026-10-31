@@ -1,0 +1,401 @@
+diff --git a/um/authz.h b/um/authz.h
+--- a/um/authz.h
++++ b/um/authz.h
+@@ -25,6 +25,7 @@
+ #ifndef __AUTHZ_H__
+ #define __AUTHZ_H__
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -119,6 +120,10 @@
+ // Structure to return the results of the access check call.
+ //
+ 
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long AUTHZ_GENERATE_RESULTS;
++#endif
+ typedef struct _AUTHZ_ACCESS_REPLY
+ {
+     //
+@@ -147,7 +152,7 @@
+ #define AUTHZ_GENERATE_SUCCESS_AUDIT 0x1
+ #define AUTHZ_GENERATE_FAILURE_AUDIT 0x2
+ 
+-    _Field_size_opt_(ResultListLength) PDWORD SaclEvaluationResults;
++    _Win32_AssociatedEnum_(AUTHZ_GENERATE_RESULTS) _Field_size_opt_(ResultListLength) PDWORD SaclEvaluationResults;
+     
+     //
+     // Array of results for each element of the array. This memory is allocated
+@@ -157,6 +162,12 @@
+     _Field_size_(ResultListLength) PDWORD Error;
+ 
+ } AUTHZ_ACCESS_REPLY, *PAUTHZ_ACCESS_REPLY;
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(AUTHZ_GENERATE_RESULTS, unsigned long,
++    AUTHZ_GENERATE_SUCCESS_AUDIT,
++    AUTHZ_GENERATE_FAILURE_AUDIT);
++#endif
+ 
+ //
+ // Typedefs for callback functions to be provided by the resource manager.
+@@ -472,7 +483,7 @@
+                         AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE     \
+                         )
+ 
+-    ULONG   Flags;
++    _Win32_AssociatedEnum_(AUTHZ_SECURITY_ATTRIBUTE_FLAGS) ULONG   Flags;
+ 
+     //
+     //  Number of values.
+@@ -492,6 +503,12 @@
+     } Values;
+ } AUTHZ_SECURITY_ATTRIBUTE_V1, *PAUTHZ_SECURITY_ATTRIBUTE_V1;
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(AUTHZ_SECURITY_ATTRIBUTE_FLAGS, unsigned long,
++    AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE,
++    AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE);
++#endif
++
+ 
+ //
+ //  Set of security attributes.
+@@ -541,11 +558,18 @@
+ 
+ #define AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD 0x00000001
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(AUTHZ_ACCESS_CHECK_FLAGS, unsigned long,
++    AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD);
++#endif
++
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+ AuthzAccessCheck(
+-    _In_      DWORD                              Flags,
++    _In_      _Win32_AssociatedEnum_(AUTHZ_ACCESS_CHECK_FLAGS) DWORD                              Flags,
+     _In_      AUTHZ_CLIENT_CONTEXT_HANDLE        hAuthzClientContext,
+     _In_      PAUTHZ_ACCESS_REQUEST              pRequest,
+     _In_opt_  AUTHZ_AUDIT_EVENT_HANDLE           hAuditEvent,
+@@ -557,6 +581,8 @@
+     _Out_opt_ PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE phAccessCheckResults
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -568,6 +594,8 @@
+      _Inout_ PAUTHZ_ACCESS_REPLY               pReply
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -583,6 +611,8 @@
+     _In_     PAUTHZ_ACCESS_REPLY         pReply
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -597,10 +627,19 @@
+ #define AUTHZ_RM_FLAG_NO_AUDIT 0x1
+ #define AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION 0x2
+ #define AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES 0x4
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(AUTHZ_RESOURCE_MANAGER_FLAGS, unsigned long,
++    AUTHZ_RM_FLAG_NO_AUDIT,
++    AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION,
++    AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES);
++#endif
+ #define AUTHZ_VALID_RM_INIT_FLAGS (AUTHZ_RM_FLAG_NO_AUDIT | \
+         AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION | \
+         AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -668,17 +707,21 @@
+     PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY    pfnFreeCentralAccessPolicy;
+ } AUTHZ_INIT_INFO, *PAUTHZ_INIT_INFO;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+ AuthzInitializeResourceManagerEx(
+-    _In_opt_ DWORD                          Flags,
++    _In_opt_ _Win32_AssociatedEnum_(AUTHZ_RESOURCE_MANAGER_FLAGS) DWORD                          Flags,
+     _In_opt_ PAUTHZ_INIT_INFO               pAuthzInitInfo,
+     _Out_    PAUTHZ_RESOURCE_MANAGER_HANDLE phAuthzResourceManager
+     );
+ 
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -689,6 +732,8 @@
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -696,6 +741,8 @@
+     _In_ AUTHZ_RESOURCE_MANAGER_HANDLE hAuthzResourceManager
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -709,6 +756,8 @@
+     _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE  phAuthzClientContext
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -722,6 +771,8 @@
+     _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE  phAuthzClientContext
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -737,6 +788,8 @@
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -748,6 +801,8 @@
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -764,6 +819,8 @@
+ //  API to modify security attributes in AUTHZ client context.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -801,6 +858,8 @@
+ } AUTHZ_CONTEXT_INFORMATION_CLASS;
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -813,6 +872,8 @@
+     _In_opt_ PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION pClaims
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -825,6 +886,8 @@
+     _In_opt_ PTOKEN_GROUPS                          pSids
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -838,6 +901,8 @@
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -849,6 +914,8 @@
+     _Out_ PVOID                           Buffer
+ );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -864,6 +931,13 @@
+ #define AUTHZ_NO_SUCCESS_AUDIT                   0x00000001
+ #define AUTHZ_NO_FAILURE_AUDIT                   0x00000002
+ #define AUTHZ_NO_ALLOC_STRINGS                   0x00000004
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, unsigned long,
++    AUTHZ_NO_SUCCESS_AUDIT,
++    AUTHZ_NO_FAILURE_AUDIT,
++    AUTHZ_NO_ALLOC_STRINGS);
++#endif
+ 
+ #define AUTHZ_WPD_CATEGORY_FLAG                  0x00000010
+ 
+@@ -872,11 +946,13 @@
+                                                   AUTHZ_NO_ALLOC_STRINGS | \
+                                                   AUTHZ_WPD_CATEGORY_FLAG)
+                              
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+ AuthzInitializeObjectAccessAuditEvent(
+-    _In_    DWORD                         Flags,
++    _In_    _Win32_AssociatedEnum_(AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS) DWORD                         Flags,
+     _In_    AUTHZ_AUDIT_EVENT_TYPE_HANDLE hAuditEventType,
+     _In_    PWSTR                         szOperationType,
+     _In_    PWSTR                         szObjectType,
+@@ -887,6 +963,8 @@
+     ...
+     );
+     
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -917,6 +995,8 @@
+     AuthzAuditEventInfoAdditionalInfo,
+ } AUTHZ_AUDIT_EVENT_INFORMATION_CLASS;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -991,6 +1071,8 @@
+ 
+ #define AUTHZ_FLAG_ALLOW_MULTIPLE_SOURCE_INSTANCES 0x1
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL 
+ WINAPI
+@@ -999,6 +1081,8 @@
+     _In_ PAUTHZ_SOURCE_SCHEMA_REGISTRATION pRegistration
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1008,6 +1092,8 @@
+     );
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1018,6 +1104,8 @@
+      _Inout_ PDWORD                            pdwLength
+     );
+     
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1027,6 +1115,8 @@
+     _Out_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
+     );
+     
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1035,6 +1125,8 @@
+      _Inout_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1047,6 +1139,8 @@
+     ...    
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1059,6 +1153,8 @@
+     );
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ _Success_(return != FALSE)
+ AUTHZAPI
+ BOOL
+@@ -1069,6 +1165,8 @@
+     _In_opt_ PVOID pCallbackContext
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI
+@@ -1076,6 +1174,8 @@
+     _In_ AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE hCapChangeSubscription
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ AUTHZAPI
+ BOOL
+ WINAPI

@@ -1,0 +1,108 @@
+diff --git a/um/uiribbon.idl b/um/uiribbon.idl
+index bcea86d2..b17251b5 100644
+--- a/um/uiribbon.idl
++++ b/um/uiribbon.idl
+@@ -8,6 +8,7 @@
+ //
+ //****************************************************************************
+ 
++#include <sal.h>
+ cpp_quote("//****************************************************************************")
+ cpp_quote("//")
+ cpp_quote("//  Copyright (c) Microsoft Corporation. All rights reserved.")
+@@ -210,6 +211,7 @@ typedef [v1_enum] enum UI_EVENTLOCATION
+     UI_EVENTLOCATION_ContextPopup       =3,
+ } UI_EVENTLOCATION;
+ 
++cpp_quote("/* Win32Metadata: interface ::IUISimplePropertySet => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Simple property bag"),
+     uuid(c205bb48-5b1c-4219-a106-15bd0a5f24e2),
+@@ -223,6 +225,7 @@ interface IUISimplePropertySet : IUnknown
+     UI_CHECKRETURN HRESULT GetValue([in] REFPROPERTYKEY key, [out] PROPVARIANT* value);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIRibbon => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Ribbon view interface"),
+     uuid(803982ab-370a-4f7e-a9e7-8784036a6e26),
+@@ -244,6 +247,7 @@ interface IUIRibbon : IUnknown
+ 
+ interface IUIApplication; // forward reference
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIFramework => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Windows Ribbon Application interface"),
+     uuid(F4F0385D-6872-43a8-AD09-4C339CB3F5C5),
+@@ -317,6 +321,7 @@ cpp_quote("    };")
+ cpp_quote("} UI_EVENTPARAMS;")
+ cpp_quote("#endif //__midl")
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIEventLogger => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     helpstring("Event logging interface"),
+     uuid(ec3e1034-dbf4-41a1-95d5-03e0f1026e05),
+@@ -330,6 +335,7 @@ interface IUIEventLogger : IUnknown
+     void OnUIEvent([in] UI_EVENTPARAMS* pEventParams);        // the event parameters
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIEventingManager => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     helpstring("Windows Ribbon event reporting interface"),
+     uuid(3BE6EA7F-9A9B-4198-9368-9B0F923BD534),
+@@ -343,6 +349,7 @@ interface IUIEventingManager : IUnknown
+     UI_CHECKRETURN HRESULT SetEventLogger([in] IUIEventLogger* eventLogger);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIContextualUI => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Windows Ribbon ContextualUI interface"),
+     uuid(EEA11F37-7C46-437c-8E55-B52122B29293),
+@@ -358,6 +365,7 @@ interface IUIContextualUI : IUnknown
+     UI_CHECKRETURN HRESULT ShowAtLocation(INT32 x, INT32 y);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUICollection => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Windows Ribbon Collection interface"),
+     uuid(DF4F45BF-6F9D-4dd7-9D68-D8F9CD18C4DB),
+@@ -399,6 +407,7 @@ typedef [v1_enum] enum UI_COLLECTIONCHANGE
+ 
+ const UINT32 UI_COLLECTION_INVALIDINDEX = 0xffffffff;
+ 
++cpp_quote("/* Win32Metadata: interface ::IUICollectionChangedEvent => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Connection Sink for listening to collection changes"),
+     uuid(6502AE91-A14D-44b5-BBD0-62AACC581D52),
+@@ -418,6 +427,7 @@ interface IUICollectionChangedEvent : IUnknown
+ 
+ // Windows Ribbon interfaces implemented by the application
+ 
++cpp_quote("/* Win32Metadata: interface ::IUICommandHandler => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Command handler interface"),
+     uuid(75ae0a2d-dc03-4c9f-8883-069660d0beb6),
+@@ -472,6 +482,7 @@ typedef [v1_enum] enum UI_VIEWTYPE
+     UI_VIEWTYPE_RIBBON   = 1,
+ } UI_VIEWTYPE;
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIApplication => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Application callback interface"),
+     uuid(D428903C-729A-491d-910D-682A08FF2522),
+@@ -508,6 +519,7 @@ interface IUIApplication : IUnknown
+ 
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIImage => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Container for bitmap image"),
+     uuid(23c8c838-4de6-436b-ab01-5554bb7c30dd),
+@@ -520,6 +532,7 @@ interface IUIImage : IUnknown
+     UI_CHECKRETURN HRESULT GetBitmap([out] HBITMAP *bitmap);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IUIImageFromBitmap => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     helpstring("Produces containers for bitmap images"),
+     uuid(18aba7f3-4c1c-4ba2-bf6c-f5c3326fa816),

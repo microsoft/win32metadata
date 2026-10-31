@@ -1,0 +1,48 @@
+diff --git a/um/fibersapi.h b/um/fibersapi.h
+index 0383dfc9..89ee8346 100644
+--- a/um/fibersapi.h
++++ b/um/fibersapi.h
+@@ -30,6 +30,8 @@ extern "C" {
+ #define FLS_OUT_OF_INDEXES ((DWORD)0xFFFFFFFF)
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -37,6 +39,8 @@ FlsAlloc(
+     _In_opt_ PFLS_CALLBACK_FUNCTION lpCallback
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ PVOID
+ WINAPI
+@@ -44,6 +48,8 @@ FlsGetValue(
+     _In_ DWORD dwFlsIndex
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -52,6 +58,8 @@ FlsSetValue(
+     _In_opt_ PVOID lpFlsData
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -69,6 +77,7 @@ FlsFree(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI

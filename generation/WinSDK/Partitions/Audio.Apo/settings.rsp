@@ -1,5 +1,3 @@
---with-librarypath
-GetDeviceID=DSOUND.dll
 --exclude
 _D3DVECTOR
 IReferenceClock
@@ -13,3 +11,5 @@ AUDIO_CURVE_TYPE
 <IncludeRoot>/um/audiomediatype.h
 --namespace
 Windows.Win32.Media.Audio.Apo
+--config
+parse-win32-annotations

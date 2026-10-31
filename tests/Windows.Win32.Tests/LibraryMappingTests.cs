@@ -27,7 +27,7 @@ namespace Windows.Win32.Tests
         [InlineData("Windows.Win32.Security.Authentication.WebAuthn", "WebAuthNPluginPerformUserVerification2", "webauthn.dll")]
         [InlineData("Windows.Win32.Devices.AllJoyn", "AllJoynCloseBusHandle", "MSAJApi.dll")]
         [InlineData("Windows.Win32.Devices.AllJoyn", "alljoyn_init", "MSAJApi.dll")]
-        [InlineData("Windows.Win32.NetworkManagement.P2P", "PeerGroupStartup", "P2P.dll")]
+        [InlineData("Windows.Win32.NetworkManagement.P2P", "PeerDistStartup", "PeerDist.dll")]
         [InlineData("Windows.Win32.Media.MediaFoundation", "OPMXboxEnableHDCP", "OPMXbox.dll")]
         [InlineData("Windows.Win32.Media.MediaFoundation", "OPMXboxGetHDCPStatus", "OPMXbox.dll")]
         [InlineData("Windows.Win32.Media.MediaFoundation", "OPMXboxGetHDCPStatusAndType", "OPMXbox.dll")]
@@ -46,6 +46,17 @@ namespace Windows.Win32.Tests
             Assert.False(import.Module.IsNil);
             Assert.Equal(methodName, reader.GetString(import.Name));
             Assert.Equal(expectedDll, reader.GetString(reader.GetModuleReference(import.Module).Name));
+        }
+
+        [Fact]
+        public void RemovedPeerGroupSdkApiIsNotRestored()
+        {
+            using var stream = File.OpenRead(TestCommon.TestUtils.Win32WinmdPath);
+            using var peReader = new PEReader(stream);
+            var reader = peReader.GetMetadataReader();
+
+            Assert.DoesNotContain(reader.MethodDefinitions.Select(reader.GetMethodDefinition),
+                method => reader.StringComparer.Equals(method.Name, "PeerGroupStartup"));
         }
     }
 }

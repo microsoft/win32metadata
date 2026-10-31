@@ -1,0 +1,43 @@
+diff --git a/um/gdipluspixelformats.h b/um/gdipluspixelformats.h
+index 1503a328..3975f44c 100644
+--- a/um/gdipluspixelformats.h
++++ b/um/gdipluspixelformats.h
+@@ -74,25 +74,25 @@ typedef INT PixelFormat;
+ #define    PixelFormatMax             16
+ 
+ inline UINT
+-GetPixelFormatSize(PixelFormat pixfmt)
++_Win32_SupportedOS_WindowsVista_ GetPixelFormatSize(PixelFormat pixfmt)
+ {
+     return (pixfmt >> 8) & 0xff;
+ }
+ 
+ inline BOOL
+-IsIndexedPixelFormat(PixelFormat pixfmt)
++_Win32_SupportedOS_WindowsVista_ IsIndexedPixelFormat(PixelFormat pixfmt)
+ {
+     return (pixfmt & PixelFormatIndexed) != 0;
+ }
+ 
+ inline BOOL
+-IsAlphaPixelFormat(PixelFormat pixfmt)
++_Win32_SupportedOS_WindowsVista_ IsAlphaPixelFormat(PixelFormat pixfmt)
+ {
+    return (pixfmt & PixelFormatAlpha) != 0;
+ }
+ 
+ inline BOOL
+-IsExtendedPixelFormat(PixelFormat pixfmt)
++_Win32_SupportedOS_WindowsVista_ IsExtendedPixelFormat(PixelFormat pixfmt)
+ {
+    return (pixfmt & PixelFormatExtended) != 0;
+ }
+@@ -106,7 +106,7 @@ IsExtendedPixelFormat(PixelFormat pixfmt)
+ //--------------------------------------------------------------------------
+ 
+ inline BOOL
+-IsCanonicalPixelFormat(PixelFormat pixfmt)
++_Win32_SupportedOS_WindowsVista_ IsCanonicalPixelFormat(PixelFormat pixfmt)
+ {
+    return (pixfmt & PixelFormatCanonical) != 0;
+ }

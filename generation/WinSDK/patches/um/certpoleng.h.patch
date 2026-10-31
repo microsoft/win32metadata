@@ -1,0 +1,52 @@
+diff --git a/um/certpoleng.h b/um/certpoleng.h
+index f2b2b06b..d130e89d 100644
+--- a/um/certpoleng.h
++++ b/um/certpoleng.h
+@@ -12,6 +12,7 @@
+ extern "C" {
+ #endif
+ 
++_Win32_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstGetTrustAnchors(
+@@ -39,6 +40,7 @@ PstGetCertificateChain(
+     _Out_                                   PCCERT_CHAIN_CONTEXT*               ppCertChainContext
+     );
+     
++_Win32_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstGetCertificates(
+@@ -50,6 +52,7 @@ PstGetCertificates(
+     _Outptr_result_buffer_(*pdwCertChainContextCount) PCCERT_CHAIN_CONTEXT**    ppCertChainContexts
+     );
+     
++_Win32_SupportedOS_Windows7_
+ NTSTATUS
+ NTAPI
+ PstAcquirePrivateKey(
+@@ -57,6 +60,7 @@ PstAcquirePrivateKey(
+     );
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstValidate(
+@@ -68,6 +72,7 @@ PstValidate(
+     _Out_opt_                               GUID*                               pProvGUID
+    );
+ 
++_Win32_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstMapCertificate(
+@@ -76,6 +81,7 @@ PstMapCertificate(
+     _Outptr_                             PVOID*                              ppTokenInformation
+   );
+ 
++_Win32_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstGetUserNameForCertificate(

@@ -1,0 +1,58 @@
+diff --git a/shared/dxgi1_5.idl b/shared/dxgi1_5.idl
+index d08fe528..2e06b8c0 100644
+--- a/shared/dxgi1_5.idl
++++ b/shared/dxgi1_5.idl
+@@ -1,5 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
+ 
++#include <sal.h>
+ import "dxgi1_4.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -7,14 +8,21 @@ cpp_quote("#include <winapifamily.h>")
+ #pragma region App Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_OUTDUPL_FLAG {
+     DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY = 1,
+ } DXGI_OUTDUPL_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput5 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDXGIOutput5 => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [
+     object,
+     uuid(80A07424-AB52-42EB-833C-0C42FD282D98),
+@@ -85,10 +93,16 @@ interface IDXGISwapChain4 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIDevice4 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum _DXGI_OFFER_RESOURCE_FLAGS
+ {
+     DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT = 0x1,
+ } DXGI_OFFER_RESOURCE_FLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ typedef enum _DXGI_RECLAIM_RESOURCE_RESULTS
+ {
+@@ -97,6 +111,7 @@ typedef enum _DXGI_RECLAIM_RESOURCE_RESULTS
+     DXGI_RECLAIM_RESOURCE_RESULT_NOT_COMMITTED = 2,
+ } DXGI_RECLAIM_RESOURCE_RESULTS;
+ 
++cpp_quote("/* Win32Metadata: parameter ::IDXGIDevice4::OfferResources1::Flags => AssociatedEnum(DXGI_OFFER_RESOURCE_FLAGS) */")
+ [
+     object,
+     uuid(95B4F95F-D8DA-4CA4-9EE6-3B76D5968A10),

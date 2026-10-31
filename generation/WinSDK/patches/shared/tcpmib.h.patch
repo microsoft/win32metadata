@@ -1,0 +1,58 @@
+diff --git a/shared/tcpmib.h b/shared/tcpmib.h
+index 9dcc2e0c..73f3b93e 100644
+--- a/shared/tcpmib.h
++++ b/shared/tcpmib.h
+@@ -67,7 +67,7 @@ typedef enum {
+ 
+ typedef struct _MIB_TCPROW_LH {
+     union {
+-        DWORD dwState;       // Old field used DWORD type.
++        _Win32_AssociatedEnum_(MIB_TCP_STATE) DWORD dwState;       // Old field used DWORD type.
+         MIB_TCP_STATE State; // New field uses enum type.
+     };
+     DWORD dwLocalAddr;
+@@ -77,7 +77,7 @@ typedef struct _MIB_TCPROW_LH {
+ } MIB_TCPROW_LH, *PMIB_TCPROW_LH;
+ 
+ typedef struct _MIB_TCPROW_W2K {
+-    DWORD       dwState;
++    _Win32_AssociatedEnum_(MIB_TCP_STATE) DWORD       dwState;
+     DWORD       dwLocalAddr;
+     DWORD       dwLocalPort;
+     DWORD       dwRemoteAddr;
+@@ -123,7 +123,7 @@ typedef struct _MIB_TCPTABLE2 {
+ 
+ typedef struct _MIB_TCPROW_OWNER_PID
+ {
+-    DWORD       dwState;
++    _Win32_AssociatedEnum_(MIB_TCP_STATE) DWORD       dwState;
+     DWORD       dwLocalAddr;
+     DWORD       dwLocalPort;
+     DWORD       dwRemoteAddr;
+@@ -141,7 +141,7 @@ typedef struct _MIB_TCPTABLE_OWNER_PID
+ 									  ((X) * sizeof(MIB_TCPROW_OWNER_PID)) + ALIGN_SIZE)
+ 
+ typedef struct _MIB_TCPROW_OWNER_MODULE {
+-    DWORD dwState;
++    _Win32_AssociatedEnum_(MIB_TCP_STATE) DWORD dwState;
+     DWORD dwLocalAddr;
+     DWORD dwLocalPort;
+     DWORD dwRemoteAddr;
+@@ -211,7 +211,7 @@ typedef struct _MIB_TCP6ROW_OWNER_PID
+     UCHAR           ucRemoteAddr[16];
+     DWORD           dwRemoteScopeId;
+     DWORD           dwRemotePort;
+-    DWORD           dwState;
++    _Win32_AssociatedEnum_(MIB_TCP_STATE) DWORD           dwState;
+     DWORD           dwOwningPid;
+ } MIB_TCP6ROW_OWNER_PID, *PMIB_TCP6ROW_OWNER_PID;
+ 
+@@ -233,7 +233,7 @@ typedef struct _MIB_TCP6ROW_OWNER_MODULE
+     UCHAR           ucRemoteAddr[16];
+     DWORD           dwRemoteScopeId;
+     DWORD           dwRemotePort;
+-    DWORD           dwState;
++    _Win32_AssociatedEnum_(MIB_TCP_STATE) DWORD           dwState;
+     DWORD           dwOwningPid;
+     LARGE_INTEGER   liCreateTimestamp;
+     ULONGLONG       OwningModuleInfo[TCPIP_OWNING_MODULE_SIZE];

@@ -1,0 +1,81 @@
+diff --git a/um/networkisolation.h b/um/networkisolation.h
+index 83241cb2..16076c58 100644
+--- a/um/networkisolation.h
++++ b/um/networkisolation.h
+@@ -11,6 +11,7 @@
+ #ifndef _NETISO_H_
+ #define _NETISO_H_
+ 
++#include <sal.h>
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+@@ -99,7 +100,7 @@ typedef void (CALLBACK *PAC_CHANGES_CALLBACK_FN) (
+ 
+ HRESULT
+ WINAPI
+-NetworkIsolationSetupAppContainerBinaries(
++_Win32_SupportedOS_Windows8_ NetworkIsolationSetupAppContainerBinaries(
+     _In_ PSID applicationContainerSid,
+     _In_ LPCWSTR packageFullName,
+     _In_ LPCWSTR packageFolder,
+@@ -111,7 +112,7 @@ NetworkIsolationSetupAppContainerBinaries(
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationRegisterForAppContainerChanges(
++_Win32_SupportedOS_Windows8_ NetworkIsolationRegisterForAppContainerChanges(
+     _In_ DWORD flags,
+     _In_ PAC_CHANGES_CALLBACK_FN callback,
+     _In_opt_ PVOID context,
+@@ -120,7 +121,7 @@ NetworkIsolationRegisterForAppContainerChanges(
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationUnregisterForAppContainerChanges(
++_Win32_SupportedOS_Windows8_ NetworkIsolationUnregisterForAppContainerChanges(
+     _In_ HANDLE registrationObject
+     );
+ 
+@@ -134,13 +135,13 @@ NetworkIsolationUnregisterForAppContainerChanges(
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationFreeAppContainers(
++_Win32_SupportedOS_Windows8_ NetworkIsolationFreeAppContainers(
+     _In_ PINET_FIREWALL_APP_CONTAINER pPublicAppCs
+     );
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationEnumAppContainers(
++_Win32_SupportedOS_Windows8_ NetworkIsolationEnumAppContainers(
+     DWORD Flags,
+     _Out_ DWORD* pdwNumPublicAppCs,
+     _Outptr_result_buffer_(*pdwNumPublicAppCs) PINET_FIREWALL_APP_CONTAINER* ppPublicAppCs
+@@ -148,14 +149,14 @@ NetworkIsolationEnumAppContainers(
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationGetAppContainerConfig(
++_Win32_SupportedOS_Windows8_ NetworkIsolationGetAppContainerConfig(
+     _Out_ DWORD* pdwNumPublicAppCs,
+     _Outptr_result_buffer_(*pdwNumPublicAppCs) PSID_AND_ATTRIBUTES* appContainerSids
+     );
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationSetAppContainerConfig(
++_Win32_SupportedOS_Windows8_ NetworkIsolationSetAppContainerConfig(
+     _In_ DWORD dwNumPublicAppCs,
+     _In_reads_(dwNumPublicAppCs) PSID_AND_ATTRIBUTES appContainerSids
+     );
+@@ -179,7 +180,7 @@ NetworkIsolationDiagnoseConnectFailure(
+ 
+ DWORD
+ WINAPI
+-NetworkIsolationDiagnoseConnectFailureAndGetInfo(
++_Win32_SupportedOS_Windows8_ NetworkIsolationDiagnoseConnectFailureAndGetInfo(
+     _In_ LPCWSTR wszServerName,
+     _Out_ NETISO_ERROR_TYPE* netIsoError
+     );

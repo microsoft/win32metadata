@@ -2,3 +2,5 @@
 <IncludeRoot>/um/namedpipeapi.h
 --namespace
 Windows.Win32.System.Pipes
+--config
+parse-win32-annotations

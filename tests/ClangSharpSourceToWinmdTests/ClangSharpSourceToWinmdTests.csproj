@@ -18,7 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
     <ProjectReference Include="..\..\sources\WinmdUtils\WinmdUtils.csproj" />
-    <None Include="..\..\generation\WinSDK\manual\Shell.cs"
-          Link="assets\Shell.manual.cs" CopyToOutputDirectory="PreserveNewest" />
+    <!-- Preserve the legacy syntax-recovery input independently of SDK sidecar retirement. -->
+    <None Update="assets\Shell.manual.cs.txt"
+          TargetPath="assets\Shell.manual.cs" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

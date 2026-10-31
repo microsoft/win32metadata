@@ -1,0 +1,28 @@
+diff --git a/um/aux_ulib.h b/um/aux_ulib.h
+index a3ff54a0..3c750832 100644
+--- a/um/aux_ulib.h
++++ b/um/aux_ulib.h
+@@ -47,6 +47,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ AuxUlibInitialize (
+@@ -82,6 +83,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SetLastError_
+ BOOL 
+ WINAPI
+ AuxUlibSetSystemFileCacheSize (
+@@ -131,6 +133,7 @@ Return Value:
+ 
+ --*/
+ 
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ AuxUlibIsDLLSynchronizationHeld (

@@ -2,3 +2,5 @@
 <IncludeRoot>/winrt/webapplication.h
 --namespace
 Windows.Win32.System.Diagnostics.Debug.WebApp
+--config
+parse-win32-annotations

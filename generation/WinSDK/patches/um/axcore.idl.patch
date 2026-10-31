@@ -1,0 +1,190 @@
+diff --git a/um/axcore.idl b/um/axcore.idl
+index 5bb673d5..028b8771 100644
+--- a/um/axcore.idl
++++ b/um/axcore.idl
+@@ -10,6 +10,7 @@
+ 
+ // include unknwn.idl and objidl.idl first
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -163,6 +164,7 @@ interface IReferenceClock;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IPin => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -292,6 +294,7 @@ interface IPin : IUnknown {
+                 [in] REFERENCE_TIME tStop,
+                 [in] double dRate);
+ }
++cpp_quote("/* Win32Metadata: method ::IPin::QueryAccept => PreserveResult */")
+ 
+ typedef IPin *PPIN;
+ 
+@@ -304,6 +307,7 @@ typedef IPin *PPIN;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumPins => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -327,6 +331,7 @@ interface IEnumPins : IUnknown {
+         [out AM_ANNOTATION("_Out_")] IEnumPins **ppEnum
+     );
+ }
++cpp_quote("/* Win32Metadata: method ::IEnumPins::Next => PreserveResult */")
+ 
+ typedef IEnumPins *PENUMPINS;
+ 
+@@ -339,6 +344,7 @@ typedef IEnumPins *PENUMPINS;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumMediaTypes => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -367,6 +373,7 @@ interface IEnumMediaTypes : IUnknown {
+         [out AM_ANNOTATION("_Out_")] IEnumMediaTypes **ppEnum
+     );
+ }
++cpp_quote("/* Win32Metadata: method ::IEnumMediaTypes::Next => PreserveResult */")
+ 
+ typedef IEnumMediaTypes *PENUMMEDIATYPES;
+ 
+@@ -381,6 +388,7 @@ typedef IEnumMediaTypes *PENUMMEDIATYPES;
+ //========================================================================
+ //========================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IFilterGraph => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -491,6 +499,7 @@ typedef IFilterGraph *PFILTERGRAPH;
+ //==========================================================================
+ //==========================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumFilters => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -518,6 +527,7 @@ interface IEnumFilters : IUnknown {
+         ( [out AM_ANNOTATION("_Out_")] IEnumFilters **ppEnum
+         );
+ }
++cpp_quote("/* Win32Metadata: method ::IEnumFilters::Next => PreserveResult */")
+ 
+ typedef IEnumFilters *PENUMFILTERS;
+ 
+@@ -537,6 +547,7 @@ typedef IEnumFilters *PENUMFILTERS;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaFilter => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -639,6 +650,7 @@ typedef IMediaFilter *PMEDIAFILTER;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IBaseFilter => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -708,6 +720,7 @@ typedef IBaseFilter *PFILTER;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IReferenceClock => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -750,6 +763,7 @@ typedef IReferenceClock *PREFERENCECLOCK;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IReferenceClockTimerControl => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+         local,
+         object,
+@@ -798,6 +812,7 @@ typedef IReferenceClock2 *PREFERENCECLOCK2;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaSample => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -871,6 +886,9 @@ interface IMediaSample : IUnknown {
+         [in, annotation("_In_opt_")] LONGLONG * pTimeEnd
+     );
+ }
++cpp_quote("/* Win32Metadata: method ::IMediaSample::IsSyncPoint => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IMediaSample::IsPreroll => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IMediaSample::IsDiscontinuity => PreserveResult */")
+ 
+ typedef IMediaSample *PMEDIASAMPLE;
+ 
+@@ -930,6 +948,7 @@ typedef struct tagAM_SAMPLE2_PROPERTIES {
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaSample2 => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -989,6 +1008,7 @@ interface IMediaSample2 : IMediaSample {
+ 
+ typedef IMediaSample2 *PMEDIASAMPLE2;
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaSample2Config => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+         object,
+         uuid(68961E68-832B-41ea-BC91-63593F3E70E3),
+@@ -1036,6 +1056,7 @@ cpp_quote("#define AM_GBF_NODDSURFACELOCK 8")
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IMemAllocator => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -1100,6 +1121,7 @@ typedef IMemAllocator *PMEMALLOCATOR;
+ //
+ //=====================================================================
+ //=====================================================================
++cpp_quote("/* Win32Metadata: interface ::IMemAllocatorCallbackTemp => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -1123,6 +1145,7 @@ interface IMemAllocatorCallbackTemp : IMemAllocator {
+ //
+ //=====================================================================
+ //=====================================================================
++cpp_quote("/* Win32Metadata: interface ::IMemAllocatorNotifyCallbackTemp => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -1147,6 +1170,7 @@ interface IMemAllocatorNotifyCallbackTemp : IUnknown {
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IMemInputPin => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -1266,6 +1290,7 @@ typedef enum AM_SEEKING_SeekingCapabilities
+                                             // count segment ends
+ } AM_SEEKING_SEEKING_CAPABILITIES;
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaSeeking => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,

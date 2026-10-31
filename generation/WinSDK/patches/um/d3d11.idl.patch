@@ -1,0 +1,616 @@
+diff --git a/um/d3d11.idl b/um/d3d11.idl
+index cecbd199..cad11702 100644
+--- a/um/d3d11.idl
++++ b/um/d3d11.idl
+@@ -8,6 +8,9 @@
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <win32metadata_annotations.h>")
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "dxgi.idl";
+@@ -556,6 +559,9 @@ typedef enum D3D11_USAGE
+     D3D11_USAGE_STAGING = 3,
+ } D3D11_USAGE;
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum D3D11_BIND_FLAG
+ {
+     D3D11_BIND_VERTEX_BUFFER = 0x00000001L,
+@@ -569,13 +575,25 @@ typedef enum D3D11_BIND_FLAG
+     D3D11_BIND_DECODER = 0x00000200L,
+     D3D11_BIND_VIDEO_ENCODER = 0x00000400L,
+ } D3D11_BIND_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum D3D11_CPU_ACCESS_FLAG
+ {
+     D3D11_CPU_ACCESS_WRITE = 0x00010000L,
+     D3D11_CPU_ACCESS_READ = 0x00020000L,
+ } D3D11_CPU_ACCESS_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum D3D11_RESOURCE_MISC_FLAG
+ {
+     D3D11_RESOURCE_MISC_GENERATE_MIPS                   = 0x00000001L,
+@@ -599,6 +617,9 @@ typedef enum D3D11_RESOURCE_MISC_FLAG
+     D3D11_RESOURCE_MISC_SHARED_EXCLUSIVE_WRITER         = 0x00200000L,
+     D3D11_RESOURCE_MISC_NO_SHADER_ACCESS                = 0x00400000L,
+ } D3D11_RESOURCE_MISC_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ typedef enum D3D11_MAP // for calling ID3D11Resource::Map()
+ {
+@@ -620,11 +641,17 @@ typedef enum D3D11_RAISE_FLAG
+ } D3D11_RAISE_FLAG;
+ 
+ // Flags for ClearDepthStencil
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum D3D11_CLEAR_FLAG
+ {
+     D3D11_CLEAR_DEPTH = 0x01L,
+     D3D11_CLEAR_STENCIL = 0x02L,
+ } D3D11_CLEAR_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ typedef RECT D3D11_RECT;
+ 
+@@ -714,6 +741,7 @@ interface ID3D11ClassLinkage;
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11DeviceChild => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 1841e5c8-16b0-489b-bcc8-44cfb0d5deae ), object, local, pointer_default( unique ) ]
+ interface ID3D11DeviceChild
+     : IUnknown
+@@ -847,6 +875,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11DepthStencilState => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 03823efb-8d8f-4e1c-9aa2-f64bb2cbfdf1 ), object, local, pointer_default( unique ) ]
+ interface ID3D11DepthStencilState
+     : ID3D11DeviceChild
+@@ -952,6 +981,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11BlendState => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 75b68faa-347d-4159-8f45-a0640f01cd9a ), object, local, pointer_default( unique ) ]
+ interface ID3D11BlendState
+     : ID3D11DeviceChild
+@@ -1028,6 +1058,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11RasterizerState => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 9bb4ab81-ab1a-4d8f-b506-fc04200b6ee7 ), object, local, pointer_default( unique ) ]
+ interface ID3D11RasterizerState
+     : ID3D11DeviceChild
+@@ -1061,6 +1092,7 @@ typedef struct D3D11_MAPPED_SUBRESOURCE
+     UINT DepthPitch;
+ } D3D11_MAPPED_SUBRESOURCE;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Resource => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( dc8e63f3-d12b-4952-b47b-5e45026a862d ), object, local, pointer_default( unique ) ]
+ interface ID3D11Resource
+     : ID3D11DeviceChild
+@@ -1075,12 +1107,15 @@ interface ID3D11Resource
+ // Buffer
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: field ::D3D11_BUFFER_DESC::BindFlags => AssociatedEnum(D3D11_BIND_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_BUFFER_DESC::CPUAccessFlags => AssociatedEnum(D3D11_CPU_ACCESS_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_BUFFER_DESC::MiscFlags => AssociatedEnum(D3D11_RESOURCE_MISC_FLAG) */")
+ typedef struct D3D11_BUFFER_DESC
+ {
+     UINT ByteWidth;
+     D3D11_USAGE Usage;
+     UINT BindFlags;
+-    UINT CPUAccessFlags;    
++    UINT CPUAccessFlags;
+     UINT MiscFlags;
+     UINT StructureByteStride; // Stride of Structured Buffer; ignored if STRUCTURED MiscFlag not set
+ } D3D11_BUFFER_DESC;
+@@ -1113,6 +1148,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Buffer => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 48570b85-d1ee-4fcd-a250-eb350722b037 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Buffer
+     : ID3D11Resource
+@@ -1125,6 +1161,9 @@ interface ID3D11Buffer
+ // Texture1D
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE1D_DESC::BindFlags => AssociatedEnum(D3D11_BIND_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE1D_DESC::CPUAccessFlags => AssociatedEnum(D3D11_CPU_ACCESS_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE1D_DESC::MiscFlags => AssociatedEnum(D3D11_RESOURCE_MISC_FLAG) */")
+ typedef struct D3D11_TEXTURE1D_DESC
+ {
+     UINT Width;
+@@ -1133,7 +1172,7 @@ typedef struct D3D11_TEXTURE1D_DESC
+     DXGI_FORMAT Format;
+     D3D11_USAGE Usage;
+     UINT BindFlags;
+-    UINT CPUAccessFlags;    
++    UINT CPUAccessFlags;
+     UINT MiscFlags;
+ } D3D11_TEXTURE1D_DESC;
+ 
+@@ -1169,6 +1208,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Texture1D => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( f8fb5c27-c6b3-4f75-a4c8-439af2ef564c ), object, local, pointer_default( unique ) ]
+ interface ID3D11Texture1D
+     : ID3D11Resource
+@@ -1181,6 +1221,9 @@ interface ID3D11Texture1D
+ // Texture2D
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE2D_DESC::BindFlags => AssociatedEnum(D3D11_BIND_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE2D_DESC::CPUAccessFlags => AssociatedEnum(D3D11_CPU_ACCESS_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE2D_DESC::MiscFlags => AssociatedEnum(D3D11_RESOURCE_MISC_FLAG) */")
+ typedef struct D3D11_TEXTURE2D_DESC
+ {
+     UINT Width;
+@@ -1191,7 +1234,7 @@ typedef struct D3D11_TEXTURE2D_DESC
+     DXGI_SAMPLE_DESC SampleDesc;
+     D3D11_USAGE Usage;
+     UINT BindFlags;
+-    UINT CPUAccessFlags;    
++    UINT CPUAccessFlags;
+     UINT MiscFlags;
+ } D3D11_TEXTURE2D_DESC;
+ 
+@@ -1233,6 +1276,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Texture2D => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 6f15aaf2-d208-4e89-9ab4-489535d34f9c ), object, local, pointer_default( unique ) ]
+ interface ID3D11Texture2D
+     : ID3D11Resource
+@@ -1245,6 +1289,9 @@ interface ID3D11Texture2D
+ // Texture3D
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE3D_DESC::BindFlags => AssociatedEnum(D3D11_BIND_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE3D_DESC::CPUAccessFlags => AssociatedEnum(D3D11_CPU_ACCESS_FLAG) */")
++cpp_quote("/* Win32Metadata: field ::D3D11_TEXTURE3D_DESC::MiscFlags => AssociatedEnum(D3D11_RESOURCE_MISC_FLAG) */")
+ typedef struct D3D11_TEXTURE3D_DESC
+ {
+     UINT Width;
+@@ -1254,7 +1301,7 @@ typedef struct D3D11_TEXTURE3D_DESC
+     DXGI_FORMAT Format;
+     D3D11_USAGE Usage;    
+     UINT BindFlags;
+-    UINT CPUAccessFlags;    
++    UINT CPUAccessFlags;
+     UINT MiscFlags;
+ } D3D11_TEXTURE3D_DESC;
+ 
+@@ -1292,6 +1339,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Texture3D => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 037e866e-f56d-4357-a8af-9dabbe6e250e ), object, local, pointer_default( unique ) ]
+ interface ID3D11Texture3D
+     : ID3D11Resource
+@@ -1315,6 +1363,7 @@ typedef enum D3D11_TEXTURECUBE_FACE
+ // View
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11View => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 839d1216-bb2e-412b-b7f4-a9dbebe08ed1 ), object, local, pointer_default( unique ) ]
+ interface ID3D11View
+     : ID3D11DeviceChild
+@@ -1639,6 +1688,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11ShaderResourceView => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( b0e06fe0-8192-4e1a-b1ca-36d7414710b2 ), object, local, pointer_default( unique ) ]
+ interface ID3D11ShaderResourceView
+     : ID3D11View
+@@ -1884,6 +1934,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11RenderTargetView => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( dfdba067-0b8d-4865-875b-d7b4516cc164 ), object, local, pointer_default( unique ) ]
+ interface ID3D11RenderTargetView
+     : ID3D11View
+@@ -2225,6 +2276,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11DepthStencilView => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 9fdac92a-1876-48c3-afad-25b94f84a9b6 ), object, local, pointer_default( unique ) ]
+ interface ID3D11DepthStencilView
+     : ID3D11View
+@@ -2447,6 +2499,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11UnorderedAccessView => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 28acf509-7f5c-48f6-8611-f316010a6380 ), object, local, pointer_default( unique ) ]
+ interface ID3D11UnorderedAccessView
+     : ID3D11View
+@@ -2459,6 +2512,7 @@ interface ID3D11UnorderedAccessView
+ // Vertex Shader
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11VertexShader => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 3b301d64-d678-4289-8897-22f8928b72f3 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VertexShader
+     : ID3D11DeviceChild
+@@ -2470,6 +2524,7 @@ interface ID3D11VertexShader
+ // Hull Shader
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11HullShader => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 8e5c6061-628a-4c8e-8264-bbe45cb3d5dd ), object, local, pointer_default( unique ) ]
+ interface ID3D11HullShader
+     : ID3D11DeviceChild
+@@ -2481,6 +2536,7 @@ interface ID3D11HullShader
+ // Domain Shader
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11DomainShader => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( f582c508-0f36-490c-9977-31eece268cfa ), object, local, pointer_default( unique ) ]
+ interface ID3D11DomainShader
+     : ID3D11DeviceChild
+@@ -2492,6 +2548,7 @@ interface ID3D11DomainShader
+ // Geometry Shader
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11GeometryShader => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 38325b96-effb-4022-ba02-2e795b70275c ), object, local, pointer_default( unique ) ]
+ interface ID3D11GeometryShader
+     : ID3D11DeviceChild
+@@ -2503,6 +2560,7 @@ interface ID3D11GeometryShader
+ // Pixel Shader
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11PixelShader => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( ea82e40d-51dc-4f33-93d4-db7c9125ae8c ), object, local, pointer_default( unique ) ]
+ interface ID3D11PixelShader
+     : ID3D11DeviceChild
+@@ -2514,6 +2572,7 @@ interface ID3D11PixelShader
+ // Compute Shader
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11ComputeShader => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 4f5b196e-c2bd-495e-bd01-1fded38e4969 ), object, local, pointer_default( unique ) ]
+ interface ID3D11ComputeShader
+     : ID3D11DeviceChild
+@@ -2525,6 +2584,7 @@ interface ID3D11ComputeShader
+ // InputLayout
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11InputLayout => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( e4819ddc-4cf0-4025-bd26-5de82a3e07b7 ), object, local, pointer_default( unique ) ]
+ interface ID3D11InputLayout
+     : ID3D11DeviceChild
+@@ -2739,6 +2799,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11SamplerState => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( da6fea51-564c-4487-9810-f0d0f9b4e3a5 ), object, local, pointer_default( unique ) ]
+ interface ID3D11SamplerState
+     : ID3D11DeviceChild
+@@ -2812,6 +2873,7 @@ typedef enum D3D11_FORMAT_SUPPORT2
+ // Query
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ID3D11Asynchronous => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 4b35d0cd-1e15-4258-9c98-1b1333f6dd3b ), object, local, pointer_default( unique ) ]
+ interface ID3D11Asynchronous
+     : ID3D11DeviceChild
+@@ -2876,6 +2938,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Query => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( d6c00747-87b7-425e-b84d-44d108560afd ), object, local, pointer_default( unique ) ]
+ interface ID3D11Query
+     : ID3D11Asynchronous
+@@ -2883,6 +2946,7 @@ interface ID3D11Query
+     void GetDesc( [annotation("_Out_")] D3D11_QUERY_DESC* pDesc );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Predicate => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 9eb576dd-9f77-4d86-81aa-8bab5fe490e2 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Predicate
+     : ID3D11Query
+@@ -2963,6 +3027,7 @@ typedef struct D3D11_COUNTER_INFO
+     UINT8 NumDetectableParallelUnits;
+ } D3D11_COUNTER_INFO;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Counter => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( 6e8c49fb-a371-4770-b440-29086022b741 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Counter
+     : ID3D11Asynchronous
+@@ -2997,6 +3062,7 @@ typedef struct D3D11_CLASS_INSTANCE_DESC
+     BOOL Created;
+ } D3D11_CLASS_INSTANCE_DESC;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11ClassInstance => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( a6cd7faa-b0b7-4a2f-9436-8662a65797cb ), object, local, pointer_default( unique ) ]
+ interface ID3D11ClassInstance
+     : ID3D11DeviceChild
+@@ -3013,6 +3079,7 @@ interface ID3D11ClassInstance
+         [annotation("_Inout_")] SIZE_T* pBufferLength);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11ClassLinkage => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( ddf57cba-9543-46e4-a12b-f207a0fe7fed ), object, local, pointer_default( unique ) ]
+ interface ID3D11ClassLinkage
+     : ID3D11DeviceChild
+@@ -3039,6 +3106,7 @@ interface ID3D11ClassLinkage
+         [annotation("_COM_Outptr_")] ID3D11ClassInstance** ppInstance);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11CommandList => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( a24bc4d1-769e-43f7-8013-98ff566c18e2 ), object, local, pointer_default( unique ) ]
+ interface ID3D11CommandList
+     : ID3D11DeviceChild
+@@ -3279,6 +3347,7 @@ typedef struct D3D11_FEATURE_DATA_D3D11_OPTIONS6
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11DeviceContext => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( c0bfa96c-e089-44fb-8eaf-26f8796190da ), object, local, pointer_default( unique ) ]
+ interface ID3D11DeviceContext
+     : ID3D11DeviceChild
+@@ -3868,6 +3937,7 @@ typedef struct D3D11_VIDEO_DECODER_EXTENSION
+     [annotation("_Field_size_opt_(ResourceCount)")] ID3D11Resource** ppResourceList;
+ } D3D11_VIDEO_DECODER_EXTENSION;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoDecoder => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 3C9C5B51-995D-48d1-9B8D-FA5CAEDED65C ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoDecoder
+     : ID3D11DeviceChild
+@@ -4097,6 +4167,7 @@ typedef struct D3D11_VIDEO_PROCESSOR_CONTENT_DESC
+ } D3D11_VIDEO_PROCESSOR_CONTENT_DESC;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoProcessorEnumerator => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 31627037-53AB-4200-9061-05FAA9AB45F9 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoProcessorEnumerator : ID3D11DeviceChild
+ {
+@@ -4230,6 +4301,7 @@ typedef struct D3D11_VIDEO_PROCESSOR_STREAM
+ } D3D11_VIDEO_PROCESSOR_STREAM;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoProcessor => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 1D7B0652-185F-41c6-85CE-0C5BE3D4AE6C ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoProcessor
+     : ID3D11DeviceChild
+@@ -4263,6 +4335,7 @@ typedef enum D3D11_AUTHENTICATED_CHANNEL_TYPE
+ } D3D11_AUTHENTICATED_CHANNEL_TYPE;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11AuthenticatedChannel => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 3015A308-DCBD-47aa-A747-192486D14D4A ), object, local, pointer_default( unique ) ]
+ interface ID3D11AuthenticatedChannel
+     : ID3D11DeviceChild
+@@ -4271,11 +4344,11 @@ interface ID3D11AuthenticatedChannel
+                 [annotation("_Out_")] UINT* pCertificateSize);
+ 
+     HRESULT GetCertificate(
+-                [annotation("_In_")] UINT CertificateSize, 
++                [annotation("_In_")] UINT CertificateSize,
+                 [annotation("_Out_writes_bytes_(CertificateSize)")] BYTE* pCertificate);
+ 
+     void GetChannelHandle(
+-                [annotation("_Out_")] HANDLE* pChannelHandle); 
++                [annotation("_Out_")] HANDLE* pChannelHandle);
+ };
+ 
+ cpp_quote("DEFINE_GUID( D3D11_AUTHENTICATED_QUERY_PROTECTION, 0xa84eb584, 0xc495, 0x48aa, 0xb9, 0x4d, 0x8b, 0xd2, 0xd6, 0xfb, 0xce, 0x5 );")
+@@ -4533,6 +4606,7 @@ typedef struct D3D11_AUTHENTICATED_CONFIGURE_ACCESSIBLE_ENCRYPTION_INPUT
+ 
+ cpp_quote("DEFINE_GUID(D3D11_KEY_EXCHANGE_RSAES_OAEP, 0xc1949895, 0xd72a, 0x4a1d, 0x8e, 0x5d, 0xed, 0x85, 0x7d, 0x17, 0x15, 0x20);")
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11CryptoSession => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 9B32F9AD-BDCC-40a6-A39D-D5C865845720 ), object, local, pointer_default( unique ) ]
+ interface ID3D11CryptoSession
+     : ID3D11DeviceChild
+@@ -4547,7 +4621,7 @@ interface ID3D11CryptoSession
+                 [annotation("_Out_")] UINT* pCertificateSize);
+ 
+     HRESULT GetCertificate(
+-                [annotation("_In_")] UINT CertificateSize, 
++                [annotation("_In_")] UINT CertificateSize,
+                 [annotation("_Out_writes_bytes_(CertificateSize)")] BYTE* pCertificate);
+ 
+     void GetCryptoSessionHandle(
+@@ -4576,6 +4650,7 @@ typedef struct D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC
+     };
+ } D3D11_VIDEO_DECODER_OUTPUT_VIEW_DESC;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoDecoderOutputView => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( C2931AEA-2A85-4f20-860F-FBA1FD256E18 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoDecoderOutputView
+     : ID3D11View
+@@ -4606,6 +4681,7 @@ typedef struct D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC
+     };
+ } D3D11_VIDEO_PROCESSOR_INPUT_VIEW_DESC;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoProcessorInputView => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 11EC5A5F-51DC-4945-AB34-6E8C21300EA5 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoProcessorInputView
+     : ID3D11View
+@@ -4643,6 +4719,7 @@ typedef struct D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC
+     };
+ } D3D11_VIDEO_PROCESSOR_OUTPUT_VIEW_DESC;
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoProcessorOutputView => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( A048285E-25A9-4527-BD93-D68B68C44254 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoProcessorOutputView
+     : ID3D11View
+@@ -4656,6 +4733,7 @@ interface ID3D11VideoProcessorOutputView
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoContext => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 61F21C45-3C0E-4a74-9CEA-67100D9AD5E4 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoContext
+     : ID3D11DeviceChild
+@@ -4682,7 +4760,7 @@ interface ID3D11VideoContext
+ 
+     HRESULT SubmitDecoderBuffers( 
+                 [annotation("_In_")] ID3D11VideoDecoder* pDecoder,
+-                [annotation("_In_")] UINT NumBuffers, 
++                [annotation("_In_")] UINT NumBuffers,
+                 [annotation("_In_reads_(NumBuffers)")] const D3D11_VIDEO_DECODER_BUFFER_DESC* pBufferDesc );
+ 
+     APP_DEPRECATED_HRESULT DecoderExtension( 
+@@ -4933,19 +5011,19 @@ interface ID3D11VideoContext
+                 [annotation("_In_reads_(StreamCount)")] const D3D11_VIDEO_PROCESSOR_STREAM *pStreams);
+ 
+     HRESULT NegotiateCryptoSessionKeyExchange(
+-                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession, 
+-                [annotation("_In_")] UINT DataSize, 
++                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession,
++                [annotation("_In_")] UINT DataSize,
+                 [annotation("_Inout_updates_bytes_(DataSize)")] void* pData);
+ 
+     void EncryptionBlt( 
+-                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession, 
++                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession,
+                 [annotation("_In_")] ID3D11Texture2D* pSrcSurface,
+                 [annotation("_In_")] ID3D11Texture2D* pDstSurface,
+                 [annotation("_In_")] UINT IVSize,
+                 [annotation("_Inout_opt_bytecount_(IVSize)")] void* pIV);
+ 
+     void DecryptionBlt( 
+-                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession, 
++                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession,
+                 [annotation("_In_")] ID3D11Texture2D* pSrcSurface,
+                 [annotation("_In_")] ID3D11Texture2D* pDstSurface,
+                 [annotation("_In_opt_")] D3D11_ENCRYPTED_BLOCK_INFO* pEncryptedBlockInfo,
+@@ -4955,32 +5033,32 @@ interface ID3D11VideoContext
+                 [annotation("_Inout_opt_bytecount_(IVSize)")] void* pIV );
+ 
+     void StartSessionKeyRefresh( 
+-                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession, 
+-                [annotation("_In_")] UINT RandomNumberSize, 
++                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession,
++                [annotation("_In_")] UINT RandomNumberSize,
+                 [annotation("_Out_writes_bytes_(RandomNumberSize)")] void* pRandomNumber);
+ 
+     void FinishSessionKeyRefresh(
+                 [annotation("_In_")] ID3D11CryptoSession* pCryptoSession);
+ 
+     HRESULT GetEncryptionBltKey( 
+-                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession, 
+-                [annotation("_In_")] UINT KeySize, 
++                [annotation("_In_")] ID3D11CryptoSession* pCryptoSession,
++                [annotation("_In_")] UINT KeySize,
+                 [annotation("_Out_writes_bytes_(KeySize)")] void* pReadbackKey);
+                 
+     HRESULT NegotiateAuthenticatedChannelKeyExchange(
+-                [annotation("_In_")] ID3D11AuthenticatedChannel* pChannel, 
+-                [annotation("_In_")] UINT DataSize, 
++                [annotation("_In_")] ID3D11AuthenticatedChannel* pChannel,
++                [annotation("_In_")] UINT DataSize,
+                 [annotation("_Inout_updates_bytes_(DataSize)")] void* pData);
+ 
+     HRESULT QueryAuthenticatedChannel(
+-                [annotation("_In_")] ID3D11AuthenticatedChannel* pChannel, 
+-                [annotation("_In_")] UINT InputSize, 
++                [annotation("_In_")] ID3D11AuthenticatedChannel* pChannel,
++                [annotation("_In_")] UINT InputSize,
+                 [annotation("_In_reads_bytes_(InputSize)")] const void* pInput,
+                 [annotation("_In_")] UINT OutputSize,
+                 [annotation("_Out_writes_bytes_(OutputSize)")] void* pOutput);
+ 
+     HRESULT ConfigureAuthenticatedChannel( 
+-                [annotation("_In_")] ID3D11AuthenticatedChannel* pChannel, 
++                [annotation("_In_")] ID3D11AuthenticatedChannel* pChannel,
+                 [annotation("_In_")] UINT InputSize,
+                 [annotation("_In_reads_bytes_(InputSize)")] const void* pInput,
+                 [annotation("_Out_")] D3D11_AUTHENTICATED_CONFIGURE_OUTPUT* pOutput);
+@@ -5004,6 +5082,7 @@ interface ID3D11VideoContext
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11VideoDevice => SupportedOSPlatform(\"windows8.0\") */")
+ [ uuid( 10EC4D5B-975A-4689-B9E4-D0AAC30FE333 ), object, local, pointer_default( unique ) ]
+ interface ID3D11VideoDevice
+     : IUnknown
+@@ -5102,6 +5181,7 @@ interface ID3D11VideoDevice
+ 
+ cpp_quote("#include <winapifamily.h>")
+ 
++cpp_quote("/* Win32Metadata: interface ::ID3D11Device => SupportedOSPlatform(\"windows6.1\") */")
+ [ uuid( db6f6ddb-ac77-4e88-8253-819df9bbf140 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Device
+     : IUnknown
+@@ -5261,6 +5341,9 @@ interface ID3D11Device
+ };
+ 
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum D3D11_CREATE_DEVICE_FLAG
+ {
+     D3D11_CREATE_DEVICE_SINGLETHREADED = 0x1,
+@@ -5274,6 +5357,9 @@ typedef enum D3D11_CREATE_DEVICE_FLAG
+     D3D11_CREATE_DEVICE_VIDEO_SUPPORT = 0x0800,
+ 
+ } D3D11_CREATE_DEVICE_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ const UINT D3D11_SDK_VERSION = 7;
+ 
+@@ -5347,7 +5433,9 @@ cpp_quote( "HRESULT WINAPI D3D11CreateDevice(" )
+ cpp_quote( "    _In_opt_ IDXGIAdapter* pAdapter," )
+ cpp_quote( "    D3D_DRIVER_TYPE DriverType," )
+ cpp_quote( "    HMODULE Software," )
++cpp_quote("/* Win32Metadata: parameter ::D3D11CreateDevice::Software => Optional(true) */")
+ cpp_quote( "    UINT Flags," )
++cpp_quote("/* Win32Metadata: parameter ::D3D11CreateDevice::Flags => AssociatedEnum(D3D11_CREATE_DEVICE_FLAG) */")
+ cpp_quote( "    _In_reads_opt_( FeatureLevels ) CONST D3D_FEATURE_LEVEL* pFeatureLevels," )
+ cpp_quote( "    UINT FeatureLevels," )
+ cpp_quote( "    UINT SDKVersion," )
+@@ -5424,6 +5512,7 @@ cpp_quote( "    _In_opt_ IDXGIAdapter* pAdapter," )
+ cpp_quote( "    D3D_DRIVER_TYPE DriverType," )
+ cpp_quote( "    HMODULE Software," )
+ cpp_quote( "    UINT Flags," )
++cpp_quote("/* Win32Metadata: parameter ::D3D11CreateDeviceAndSwapChain::Flags => AssociatedEnum(D3D11_CREATE_DEVICE_FLAG) */")
+ cpp_quote( "    _In_reads_opt_( FeatureLevels ) CONST D3D_FEATURE_LEVEL* pFeatureLevels," )
+ cpp_quote( "    UINT FeatureLevels," )
+ cpp_quote( "    UINT SDKVersion," )

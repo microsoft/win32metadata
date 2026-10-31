@@ -242,10 +242,11 @@ The new manifest records `midlIdentity`, `midlReusedFrom` and the original
 Old caches without that identity require one fresh production. Corrupt matching
 caches fail rather than falling back to regeneration.
 
-Respect the SDK artifact boundary, not just a recipe filename extension. Patch a
-shipped source IDL before MIDL when its corresponding generated header owns the
-fact; keep real direct-shipped header artifacts as header patches. A generated
-dependency is not automatically another annotation target. Never run broad
+Follow the actual preparation inputs. When preparation regenerates the consumed
+header, patch its owning SDK IDL before MIDL. Otherwise patch the shipped SDK header
+that preparation consumes, even when it has a generated banner or a corresponding
+IDL/ODL that is not regenerated. A generated dependency is not automatically another
+annotation target. Never run broad
 SDK/IDL update scripts to implement a bounded migration: those scripts reset the
 mirror and restore removed SDK artifacts.
 
@@ -258,14 +259,30 @@ that same artifact (`a/um/winhttp.h` to `b/um/winhttp.h`), starting from its pri
 admitted SDK bytes, not another patch's output. Reject repeated targets even
 under different filenames; do not stack semantic layers on a header.
 
+Retained compatibility headers require an explicit recipe entry with
+`sourceKind: "retained"`, their repository `sourceSha256`, and a nonempty
+`retentionReason`. They have no `sdkPath` or `sdkSha256`, cannot replace an SDK MIDL
+input, and are listed separately in the prepared manifest's `retainedHeaders`.
+This update deliberately retains the existing AllJoyn surface for compatibility.
+Ordinary entries still require their exact selected-SDK binding; a missing SDK
+header never enables retention automatically.
+
+The cumulative `um\winternl.h` patch selects the documented
+`PROCESS_BASIC_INFORMATION` fields only under `WIN32METADATA`. It uses the native
+`NTSTATUS`, `PPEB`, `ULONG_PTR` and `KPRIORITY` typedefs already available to that
+header. Ordinary SDK clients retain the shipped reserved-field declaration.
+The metadata-only declaration preserves native size, alignment and corresponding
+field offsets on x86, x64 and Arm64; it is not an emitter-owned record replacement.
+
 Artifact identity determines preparation, not a stage directory or recipe order.
 Apply direct-header patches to private SDK header copies and IDL patches to the
 pinned raw source closure before the existing MIDL-to-SAL conversion and shared
-`MidlHeaderUtils.ps1` flags regenerate only the admitted outputs. There are no
-post-MIDL annotation patches or patches on generated headers. Scraping
-and constants still consume one private root. Reject generated-header patches,
-unpinned imports, changed tools/preimages, failed generation and modified caches;
-never fall back to an old generated header.
+`MidlHeaderUtils.ps1` flags regenerate only the admitted outputs. Never patch those
+regenerated outputs or the SDK mirror directly. Consumed shipped headers that are
+not regenerated use the direct-header patch phase. Scraping
+and constants still consume one private root. Reject patches to headers that
+preparation regenerates, unpinned imports, changed tools/preimages, failed
+generation and modified caches; never fall back to an old generated header.
 Every admitted header whose source IDL participates in the MIDL input closure
 must have its own pinned output, including an unpatched IDL that includes a
 patched source. A shared declaration guard can otherwise make an unchanged
@@ -1501,9 +1518,9 @@ remains unverified.
 
 ## Resumed original-artifact preflight and source-blocked residuals
 
-The selected SDK's generated banners and all 930 shipped IDL files were checked
-before resuming authoring. Seven previously patched headers are MIDL-generated
-but their owning IDL and interface declarations are not present in that SDK:
+The historical SDK26100 preflight checked generated banners and all 930 shipped
+IDL files before resuming authoring. Seven previously patched headers are
+MIDL-generated but their owning IDL and interface declarations were not present:
 `iwscapi.h`, `winsatcominterfacei.h`, `locationapi.h`, `WcnDevice.h`,
 `IdentityProvider.h`, `IdentityStore.h` and `rendezvoussession.h`.
 A shipped generated header is a consumption artifact, not an authored C/C++
@@ -1512,11 +1529,31 @@ source merely because its filename ends in `.h`.
 These seven migrations are **source-blocked**, not accepted header-only
 migrations and not removed APIs. Their historical generated-header patches and
 images remain immutable controls; the seven patches are removed from the active
-recipe. Their exact existing legacy contracts remain: 26 availability rows,
-three associations and the IdentityUpdateEvent flags setting. No declaration,
+recipe. The frozen SDK26100 controls retained 26 availability rows, three
+associations and the IdentityUpdateEvent flags setting. That is historical
+preservation evidence, not a current SDK28000 preservation claim. No declaration,
 floor, native alias or replacement authoring source is invented. Natural SDK
 SAL/MIDL facts may still be read from unchanged consumption headers; that does
 not authorize annotating the generated files.
+
+The selected SDK28000 package `10.0.28000.2705` was separately checked across all
+932 shipped IDL contents. None of the 47 interface probes below or the two
+`IdentityUpdateEvent`/`tag_IdentityUpdateEvent` probes occurs. The package archive
+SHA256 is `A74CA8F9AF98BD61925D9E2932AD98F746306123167B8F0BBA99CD9EA9F03807`;
+the content-probe receipt SHA256 is
+`9333E1407910D8EE961DEC3BC3BDBA53C472F0666BC1F5DD6C99A08CAC7554EB`.
+
+Current source-blocked accounting uses the report-only
+`tests\SdkAnnotationCoverage.Tests\SourceBlockedMetadata.json` inventory. All 30
+historical identities and values remain deferred and unqualified. No current
+availability, association or Flags preservation is inferred from removing
+sidecars. `Get-SdkAnnotationCoverage.py` reports deferred facts rather than
+`preservedLegacyFacts`; it supplies no semantic fallback or completed migration
+credit. Always-running accounting checks reject deleted or changed entries and
+false coverage claims, retain sidecar-absence and no-generated-header-patch
+checks, and leave current raw losses visible for bulk grading. Incomplete
+migration is nonblocking for image production; genuine parser, compiler, emitter,
+integrity and regression failures remain blocking.
 
 ### Original-source request inventory
 
@@ -1525,8 +1562,8 @@ SDK package `10.0.26100.7705`, include version `10.0.26100.0`. None of the
 47 interface names or seven filename probes matched. The IDL filenames below
 are search terms, not reconstructed source artifacts or proof of their original
 authoring filenames. Use the shipped header and its interface names when
-requesting the matching original SDK source; preserve its legacy metadata until
-that source is available and qualified.
+requesting the matching original SDK source. Current deferred accounting does
+not restore sidecars or claim physical preservation while that source is absent.
 
 | Shipped generated header | IDL filename probe | Exact interface-name probes |
 | --- | --- | --- |
@@ -1548,12 +1585,12 @@ ddpbackup, NotificationActivationCallback and wsbapp reuse grouped interface
 carriers and ordinary SAL includes, without copying declarations or adding a
 per-API annotation-header include.
 
-`SourceBlockedArtifactsRetainEveryLegacyPhysicalFact` checks the retained facts
-on x86, x64 and ARM64: all 26 original availability values, all three association
+The unchanged historical `SourceBlockedArtifactsRetainEveryLegacyPhysicalFact`
+control checks retained facts on x86, x64 and ARM64: all 26 original availability values, all three association
 values and their unchanged native signatures/parameter flags, and the complete
 IdentityUpdateEvent enum including its Flags payload. This also covers the mixed
-SecurityCenter owner; admitting authored Wsc functions must not discard IWsc
-metadata. These checks do not suppress independently captured native retval facts.
+SecurityCenter owner. These strict frozen controls are not current-image
+qualification and do not suppress independently captured native retval facts.
 
 These are source classifications and bounded authoring inputs only. Updated
 qualified tooling, common native/MIDL SAL bootstrap, measured input/including-IDL

@@ -5,3 +5,5 @@ _SecPkgContext_IssuerListInfoEx
 <IncludeRoot>/um/IContentPrefetcherTaskTrigger.h
 --namespace
 Windows.Win32.Networking.WindowsWebServices
+--config
+parse-win32-annotations

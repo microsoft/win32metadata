@@ -8,3 +8,5 @@
 <IncludeRoot>/um/raserror.h
 --namespace
 Windows.Win32.NetworkManagement.Rras
+--config
+parse-win32-annotations

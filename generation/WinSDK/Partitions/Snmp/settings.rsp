@@ -4,3 +4,5 @@
 <IncludeRoot>/um/WinSnmp.h
 --namespace
 Windows.Win32.NetworkManagement.Snmp
+--config
+parse-win32-annotations

@@ -95,6 +95,76 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void ExplicitRetainedHeadersAreSourcePinnedAndReportedSeparatelyFromTheSdk()
+        {
+            using var fixture = new Fixture();
+            File.Delete(fixture.SdkHeader);
+            fixture.MutateRecipe(recipe =>
+            {
+                var header = recipe["headers"][0].AsObject();
+                header.Remove("sdkPath");
+                header.Remove("sdkSha256");
+                header["sourceKind"] = "retained";
+                header["retentionReason"] = "Temporary compatibility surface.";
+            });
+            var prepared = fixture.Prepare();
+            Assert.Contains("VALUE 2", File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", "sample.h")));
+            using var manifest = JsonDocument.Parse(File.ReadAllText(
+                Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot), "manifest.json")));
+            var retained = Assert.Single(manifest.RootElement.GetProperty("retainedHeaders").EnumerateArray());
+            Assert.Equal(@"um\sample.h", retained.GetProperty("path").GetString());
+            Assert.Equal(Fixture.Hash(Encoding.ASCII.GetBytes(Fixture.Before)),
+                retained.GetProperty("sourceSha256").GetString());
+            Assert.Equal("Temporary compatibility surface.", retained.GetProperty("retentionReason").GetString());
+        }
+
+        [Fact]
+        public void RetainedHeadersCannotOmitTheirReasonOrClaimASelectedSdkBinding()
+        {
+            foreach (bool keepSdkBinding in new[] { false, true })
+            {
+                using var fixture = new Fixture();
+                fixture.MutateRecipe(recipe =>
+                {
+                    var header = recipe["headers"][0].AsObject();
+                    header["sourceKind"] = "retained";
+                    if (keepSdkBinding)
+                        header["retentionReason"] = "Temporary compatibility surface.";
+                    else
+                    {
+                        header.Remove("sdkPath");
+                        header.Remove("sdkSha256");
+                    }
+                });
+                var result = fixture.Run();
+                Assert.NotEqual(0, result.ExitCode);
+                Assert.Contains("retained header requires an explicit reason", result.Error);
+                Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+            }
+        }
+
+        [Fact]
+        public void GeneratedBannerAndUnusedIdlDoNotTurnAConsumedHeaderIntoAMidlOutput()
+        {
+            using var fixture = new Fixture();
+            string original = "/* File created by MIDL compiler */\r\n" + Fixture.Before;
+            File.WriteAllText(fixture.Header, original, new UTF8Encoding(false));
+            File.WriteAllText(fixture.SdkHeader, original, new UTF8Encoding(false));
+            File.WriteAllText(Path.ChangeExtension(fixture.SdkHeader, ".idl"), "/* Not regenerated. */");
+            fixture.WritePatch(2, leadingLine: "/* File created by MIDL compiler */");
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Fixture.Hash(File.ReadAllBytes(fixture.Header));
+                recipe["headers"][0]["sourceSha256"] = hash;
+                recipe["headers"][0]["sdkSha256"] = hash;
+            });
+            var prepared = fixture.Prepare();
+            Assert.Equal(original.Replace("VALUE 1", "VALUE 2"),
+                File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", "sample.h")));
+            Assert.Equal(original, File.ReadAllText(fixture.Header));
+        }
+
+        [Fact]
         public void RemoteMidlRegenerationPreservesSynthesizedDirectionsAndCounts()
         {
             using var fixture = new Fixture();
@@ -205,10 +275,12 @@ namespace Win32MetadataScraperTests
             internal string MidlWarnings => Path.Combine(this.root, "midl-warnings.log");
             internal string PreparationWarnings(string architecture) => Path.Combine(this.root, "obj", "prepared-sdk-provenance", architecture, "preparation.warnings.log");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt", "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }.Select(name => Path.Combine(this.root, "obj", "generated", name)).ToArray();
-            internal void WritePatch(int after, int before = 1, string path = "um/sample.h", string metadata = null, string originalPath = null)
+            internal void WritePatch(int after, int before = 1, string path = "um/sample.h", string metadata = null, string originalPath = null, string leadingLine = null)
             {
                 string oldPath = originalPath ?? path;
-                string text = $"diff --git a/{oldPath} b/{path}\n{metadata}" + $"--- a/{oldPath}\n+++ b/{path}\n@@ -1,4 +1,4 @@\n #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" + $"-#define VALUE {before}\r\n+#define VALUE {after}\r\n #endif\r\n";
+                int count = leadingLine == null ? 4 : 5;
+                string prefix = leadingLine == null ? "" : " " + leadingLine + "\r\n";
+                string text = $"diff --git a/{oldPath} b/{path}\n{metadata}" + $"--- a/{oldPath}\n+++ b/{path}\n@@ -1,{count} +1,{count} @@\n{prefix} #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" + $"-#define VALUE {before}\r\n+#define VALUE {after}\r\n #endif\r\n";
                 File.WriteAllText(this.patch, text, new UTF8Encoding(false));
             }
 

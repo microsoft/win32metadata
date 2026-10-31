@@ -1,0 +1,1684 @@
+--- a/um/cfgmgr32.h
++++ b/um/cfgmgr32.h
+@@ -15,6 +15,10 @@
+ 
+ #ifndef _CFGMGR32_H_
+ #define _CFGMGR32_H_
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long CM_LOG_CONF;
++#endif
+ 
+ #if _MSC_VER > 1000
+ #pragma once
+@@ -158,21 +162,26 @@
+ typedef ULONG_PTR      CONFLICT_LIST;
+ typedef CONFLICT_LIST *PCONFLICT_LIST;
+ 
++#ifdef WIN32METADATA
++typedef ULONG CM_CDMASK;
++typedef ULONG CM_CDFLAGS;
++#endif
++
+ typedef struct _CONFLICT_DETAILS_A {
+     ULONG       CD_ulSize;                   // size of structure, ie: sizeof(CONFLICT_DETAILS)
+-    ULONG       CD_ulMask;                   // indicates what information is required/valid
++    _Win32_AssociatedEnum_(CM_CDMASK) ULONG       CD_ulMask;                   // indicates what information is required/valid
+     DEVINST     CD_dnDevInst;                // filled with DevInst of conflicting device if CM_CDMASK_DEVINST set
+     RES_DES     CD_rdResDes;                 // filled with a ResDes of conflict if CM_CDMASK_RESDES set
+-    ULONG       CD_ulFlags;                  // various flags regarding conflict
++    _Win32_AssociatedEnum_(CM_CDFLAGS) ULONG       CD_ulFlags;                  // various flags regarding conflict
+     CHAR        CD_szDescription[MAX_PATH];  // description of conflicting device
+ } CONFLICT_DETAILS_A , *PCONFLICT_DETAILS_A;
+ 
+ typedef struct _CONFLICT_DETAILS_W {
+     ULONG       CD_ulSize;                   // size of structure, ie: sizeof(CONFLICT_DETAILS)
+-    ULONG       CD_ulMask;                   // indicates what information is required/valid
++    _Win32_AssociatedEnum_(CM_CDMASK) ULONG       CD_ulMask;                   // indicates what information is required/valid
+     DEVINST     CD_dnDevInst;                // filled with DevInst of conflicting device if CM_CDMASK_DEVINST set
+     RES_DES     CD_rdResDes;                 // filled with a ResDes of conflict if CM_CDMASK_RESDES set
+-    ULONG       CD_ulFlags;                  // various flags regarding conflict
++    _Win32_AssociatedEnum_(CM_CDFLAGS) ULONG       CD_ulFlags;                  // various flags regarding conflict
+     WCHAR       CD_szDescription[MAX_PATH];  // description of conflicting device
+ } CONFLICT_DETAILS_W , *PCONFLICT_DETAILS_W;
+ 
+@@ -190,9 +199,21 @@
+ #define CM_CDMASK_DESCRIPTION  (0x00000008)   // mask to retrieve CD_szDescription attribute for conflict
+ #define CM_CDMASK_VALID        (0x0000000F)   // valid bits
+ 
++_Win32_FlagsEnum_(CM_CDMASK, ULONG,
++    CM_CDMASK_DEVINST,
++    CM_CDMASK_RESDES,
++    CM_CDMASK_FLAGS,
++    CM_CDMASK_DESCRIPTION,
++    CM_CDMASK_VALID);
++
+ #define CM_CDFLAGS_DRIVER      (0x00000001)     // CD_ulFlags: CD_szDescription reports back legacy driver name
+ #define CM_CDFLAGS_ROOT_OWNED  (0x00000002)     // CD_ulFlags: Root owned device
+ #define CM_CDFLAGS_RESERVED    (0x00000004)     // CD_ulFlags: Specified range is not available for use
++
++_Win32_FlagsEnum_(CM_CDFLAGS, ULONG,
++    CM_CDFLAGS_DRIVER,
++    CM_CDFLAGS_ROOT_OWNED,
++    CM_CDFLAGS_RESERVED);
+ 
+ typedef  ULONG             REGDISPOSITION;
+ 
+@@ -243,6 +264,34 @@
+ #define fMD_WINDOW_DECODE           (0x40) // Memory range is bridge window decode.
+ #define fMD_MEMORY_BAR              (0x80) // Memory BAR resource.
+ 
++_Win32_FlagsEnum_(MD_FLAGS, DWORD,
++    mMD_MemoryType,
++    fMD_MemoryType,
++    fMD_ROM,
++    fMD_RAM,
++    mMD_32_24,
++    fMD_32_24,
++    fMD_24,
++    fMD_32,
++    mMD_Prefetchable,
++    fMD_Prefetchable,
++    fMD_Pref,
++    fMD_PrefetchDisallowed,
++    fMD_PrefetchAllowed,
++    mMD_Readable,
++    fMD_Readable,
++    fMD_ReadAllowed,
++    fMD_ReadDisallowed,
++    mMD_CombinedWrite,
++    fMD_CombinedWrite,
++    fMD_CombinedWriteDisallowed,
++    fMD_CombinedWriteAllowed,
++    mMD_Cacheable,
++    fMD_NonCacheable,
++    fMD_Cacheable,
++    fMD_WINDOW_DECODE,
++    fMD_MEMORY_BAR);
++
+ //
+ // MEM_RANGE Structure
+ //
+@@ -251,7 +300,7 @@
+    ULONG     MR_nBytes;    // specifies number of bytes required
+    DWORDLONG MR_Min;       // specifies minimum address of the range
+    DWORDLONG MR_Max;       // specifies maximum address of the range
+-   DWORD     MR_Flags;     // specifies flags describing range (fMD flags)
++   _Win32_AssociatedEnum_(MD_FLAGS) DWORD     MR_Flags;     // specifies flags describing range (fMD flags)
+    DWORD     MR_Reserved;
+ } MEM_RANGE, *PMEM_RANGE;
+ 
+@@ -263,7 +312,7 @@
+    DWORD     MD_Type;         // size (in bytes) of MEM_RANGE (MType_Range)
+    DWORDLONG MD_Alloc_Base;   // base memory address of range allocated
+    DWORDLONG MD_Alloc_End;    // end of allocated range
+-   DWORD     MD_Flags;        // flags describing allocated range (fMD flags)
++   _Win32_AssociatedEnum_(MD_FLAGS) DWORD     MD_Flags;        // flags describing allocated range (fMD flags)
+    DWORD     MD_Reserved;
+ } MEM_DES, *PMEM_DES;
+ 
+@@ -346,6 +395,19 @@
+ #define fIOD_WINDOW_DECODE    (0x0080)
+ #define fIOD_PORT_BAR         (0x0100)
+ 
++_Win32_FlagsEnum_(IOD_DESFLAGS, DWORD,
++    fIOD_PortType,
++    fIOD_Memory,
++    fIOD_IO,
++    fIOD_DECODE,
++    fIOD_10_BIT_DECODE,
++    fIOD_12_BIT_DECODE,
++    fIOD_16_BIT_DECODE,
++    fIOD_POSITIVE_DECODE,
++    fIOD_PASSIVE_DECODE,
++    fIOD_WINDOW_DECODE,
++    fIOD_PORT_BAR);
++
+ //
+ // these are for compatiblity
+ //
+@@ -362,7 +424,7 @@
+    DWORD     IOR_nPorts;     // number of ports
+    DWORDLONG IOR_Min;        // minimum port address
+    DWORDLONG IOR_Max;        // maximum port address
+-   DWORD     IOR_RangeFlags; // flags for this port range
++   _Win32_AssociatedEnum_(IOD_DESFLAGS) DWORD     IOR_RangeFlags; // flags for this port range
+    DWORDLONG IOR_Alias;      // multiplier that generates aliases for port(s)
+ } IO_RANGE, *PIO_RANGE;
+ 
+@@ -374,7 +436,7 @@
+    DWORD     IOD_Type;           // size (in bytes) of IO_RANGE (IOType_Range)
+    DWORDLONG IOD_Alloc_Base;     // base of allocated port range
+    DWORDLONG IOD_Alloc_End;      // end of allocated port range
+-   DWORD     IOD_DesFlags;       // flags relating to allocated port range
++   _Win32_AssociatedEnum_(IOD_DESFLAGS) DWORD     IOD_DesFlags;       // flags relating to allocated port range
+ } IO_DES, *PIO_DES;
+ 
+ //
+@@ -417,13 +479,28 @@
+ #define fDD_TypeB        (0x10)    //   Type-B DMA
+ #define fDD_TypeF        (0x18)    //   Type-F DMA
+ 
++_Win32_FlagsEnum_(DD_FLAGS, ULONG,
++    mDD_Width,
++    fDD_BYTE,
++    fDD_WORD,
++    fDD_DWORD,
++    fDD_BYTE_AND_WORD,
++    mDD_BusMaster,
++    fDD_NoBusMaster,
++    fDD_BusMaster,
++    mDD_Type,
++    fDD_TypeStandard,
++    fDD_TypeA,
++    fDD_TypeB,
++    fDD_TypeF);
++
+ //
+ // DMA_RANGE structure
+ //
+ typedef struct DMA_Range_s {
+    ULONG DR_Min;     // minimum DMA port in the range
+    ULONG DR_Max;     // maximum DMA port in the range
+-   ULONG DR_Flags;   // flags describing the range (fDD flags)
++   _Win32_AssociatedEnum_(DD_FLAGS) ULONG DR_Flags;   // flags describing the range (fDD flags)
+ } DMA_RANGE, *PDMA_RANGE;
+ 
+ //
+@@ -432,7 +509,7 @@
+ typedef struct DMA_Des_s {
+    DWORD  DD_Count;       // number of DMA_RANGE structs in DMA_RESOURCE
+    DWORD  DD_Type;        // size (in bytes) of DMA_RANGE struct (DType_Range)
+-   DWORD  DD_Flags;       // Flags describing DMA channel (fDD flags)
++   _Win32_AssociatedEnum_(DD_FLAGS) DWORD  DD_Flags;       // Flags describing DMA channel (fDD flags)
+    ULONG  DD_Alloc_Chan;  // Specifies the DMA channel that was allocated
+ } DMA_DES, *PDMA_DES;
+ 
+@@ -474,6 +551,16 @@
+ #define fIRQD_Level        (0x0) //   The IRQ is level-sensitive
+ #define fIRQD_Edge         (0x2) //   The IRQ is edge-sensitive
+ 
++_Win32_FlagsEnum_(IRQD_FLAGS, ULONG,
++    mIRQD_Share,
++    fIRQD_Exclusive,
++    fIRQD_Share,
++    fIRQD_Share_Bit,
++    fIRQD_Level_Bit,
++    mIRQD_Edge_Level,
++    fIRQD_Level,
++    fIRQD_Edge);
++
+ //
+ // IRQ_RANGE
+ //
+@@ -481,10 +568,10 @@
+    ULONG IRQR_Min;      // minimum IRQ in the range
+    ULONG IRQR_Max;      // maximum IRQ in the range
+ #if defined(NT_PROCESSOR_GROUPS)
+-   USHORT IRQR_Flags;   // flags describing the range (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) USHORT IRQR_Flags;   // flags describing the range (fIRQD flags)
+    USHORT IRQR_Rsvdz;   // Reserved, must be zero.
+ #else
+-   ULONG IRQR_Flags;    // flags describing the range (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) ULONG IRQR_Flags;    // flags describing the range (fIRQD flags)
+ #endif
+ } IRQ_RANGE, *PIRQ_RANGE;
+ 
+@@ -495,10 +582,10 @@
+    DWORD   IRQD_Count;       // number of IRQ_RANGE structs in IRQ_RESOURCE
+    DWORD   IRQD_Type;        // size (in bytes) of IRQ_RANGE (IRQType_Range)
+ #if defined(NT_PROCESSOR_GROUPS)
+-   USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+    USHORT  IRQD_Group;       // Group number of interrupt target.
+ #else
+-   DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+ #endif
+    ULONG   IRQD_Alloc_Num;   // specifies the IRQ that was allocated
+    ULONG32 IRQD_Affinity;
+@@ -508,10 +595,10 @@
+    DWORD   IRQD_Count;       // number of IRQ_RANGE structs in IRQ_RESOURCE
+    DWORD   IRQD_Type;        // size (in bytes) of IRQ_RANGE (IRQType_Range)
+ #if defined(NT_PROCESSOR_GROUPS)
+-   USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+    USHORT  IRQD_Group;       // Group number of interrupt target.
+ #else
+-   DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+ #endif
+    ULONG   IRQD_Alloc_Num;   // specifies the IRQ that was allocated
+    ULONG64 IRQD_Affinity;
+@@ -671,6 +758,44 @@
+ #define fPCD_MEM2_WS_THREE  (0x30000000)  // MEM window 2, 3 wait states
+ #define fPCD_MEM2_16        (0x40000000)  // MEM window 2 is 16-bit
+ 
++_Win32_FlagsEnum_(PCD_FLAGS, DWORD,
++    mPCD_IO_8_16,
++    fPCD_IO_8,
++    fPCD_IO_16,
++    mPCD_MEM_8_16,
++    fPCD_MEM_8,
++    fPCD_MEM_16,
++    mPCD_MEM_A_C,
++    fPCD_MEM1_A,
++    fPCD_MEM2_A,
++    fPCD_IO_ZW_8,
++    fPCD_IO_SRC_16,
++    fPCD_IO_WS_16,
++    mPCD_MEM_WS,
++    fPCD_MEM_WS_ONE,
++    fPCD_MEM_WS_TWO,
++    fPCD_MEM_WS_THREE,
++    fPCD_MEM_A,
++    fPCD_ATTRIBUTES_PER_WINDOW,
++    fPCD_IO1_16,
++    fPCD_IO1_ZW_8,
++    fPCD_IO1_SRC_16,
++    fPCD_IO1_WS_16,
++    fPCD_IO2_16,
++    fPCD_IO2_ZW_8,
++    fPCD_IO2_SRC_16,
++    fPCD_IO2_WS_16,
++    mPCD_MEM1_WS,
++    fPCD_MEM1_WS_ONE,
++    fPCD_MEM1_WS_TWO,
++    fPCD_MEM1_WS_THREE,
++    fPCD_MEM1_16,
++    mPCD_MEM2_WS,
++    fPCD_MEM2_WS_ONE,
++    fPCD_MEM2_WS_TWO,
++    fPCD_MEM2_WS_THREE,
++    fPCD_MEM2_16);
++
+ #define PCD_MAX_MEMORY   2
+ #define PCD_MAX_IO       2
+ #endif // (WINVER >= _WIN32_WINNT_WINXP)
+@@ -678,7 +803,7 @@
+ typedef struct PcCard_Des_s {
+     DWORD    PCD_Count;
+     DWORD    PCD_Type;
+-    DWORD    PCD_Flags;
++    _Win32_AssociatedEnum_(PCD_FLAGS) DWORD    PCD_Flags;
+     BYTE     PCD_ConfigIndex;
+     BYTE     PCD_Reserved[3];
+     DWORD    PCD_MemoryCardBase1;
+@@ -703,10 +828,12 @@
+ #define mPMF_AUDIO_ENABLE   (0x8)   // Bitmask, whether audio is enabled or not
+ #define fPMF_AUDIO_ENABLE   (0x8)   // Audio is enabled
+ 
++_Win32_FlagsEnum_(PMF_FLAGS, DWORD, fPMF_AUDIO_ENABLE);
++
+ typedef struct MfCard_Des_s {
+     DWORD    PMF_Count;
+     DWORD    PMF_Type;
+-    DWORD    PMF_Flags;
++    _Win32_AssociatedEnum_(PMF_FLAGS) DWORD    PMF_Flags;
+     BYTE     PMF_ConfigOptions;
+     BYTE     PMF_IoResourceIndex;
+     BYTE     PMF_Reserved[2];
+@@ -854,8 +981,26 @@
+ #define ResType_DevicePrivate (0x00008001)   // device private data
+ #define ResType_PcCardConfig  (0x00008002)   // PC Card configuration data
+ #define ResType_MfCardConfig  (0x00008003)   // MF Card configuration data
++_Win32_Enum_(CM_RESTYPE, RESOURCEID,
++    ResType_All,
++    ResType_None,
++    ResType_Mem,
++    ResType_IO,
++    ResType_DMA,
++    ResType_IRQ,
++    ResType_DoNotUse,
++    ResType_BusNumber,
++    ResType_MemLarge,
++    ResType_MAX,
++    ResType_Ignored_Bit,
++    ResType_ClassSpecific,
++    ResType_Reserved,
++    ResType_DevicePrivate,
++    ResType_PcCardConfig,
++    ResType_MfCardConfig);
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+ #define ResType_Connection    (0x00008004)   // Connection (Resource Hub) resource
++_Win32_Enum_(CM_RESTYPE, RESOURCEID, ResType_Connection);
+ #endif // (WINVER >= _WIN32_WINNT_WIN8)
+ 
+ //
+@@ -876,6 +1021,16 @@
+ #define FORCED_LOG_CONF   0x00000004  // Specifies the Forced Log Conf
+ #define OVERRIDE_LOG_CONF 0x00000005  // Specifies the Override req list.
+ #define NUM_LOG_CONF      0x00000006  // Number of Log Conf type
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(CM_LOG_CONF, unsigned long,
++    BASIC_LOG_CONF,
++    FILTERED_LOG_CONF,
++    ALLOC_LOG_CONF,
++    BOOT_LOG_CONF,
++    FORCED_LOG_CONF,
++    OVERRIDE_LOG_CONF,
++    NUM_LOG_CONF);
++#endif
+ #define LOG_CONF_BITS     0x00000007  // The bits of the log conf type.
+ 
+ #define PRIORITY_EQUAL_FIRST  (0x00000008) // Same priority, new one first
+@@ -937,6 +1092,10 @@
+ #define CM_ENUMERATE_CLASSES_INSTALLER (0x00000000)
+ #define CM_ENUMERATE_CLASSES_INTERFACE (0x00000001)
+ #define CM_ENUMERATE_CLASSES_BITS      (0x00000001)
++_Win32_FlagsEnum_(CM_ENUMERATE_FLAGS, ULONG,
++    CM_ENUMERATE_CLASSES_INSTALLER,
++    CM_ENUMERATE_CLASSES_INTERFACE,
++    CM_ENUMERATE_CLASSES_BITS);
+ #endif // (WINVER >= _WIN32_WINNT_WIN8)
+ 
+ //
+@@ -985,6 +1144,11 @@
+ #define CM_GET_DEVICE_INTERFACE_LIST_PRESENT     (0x00000000)  // only currently 'live' device interfaces
+ #define CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES (0x00000001)  // all registered device interfaces, live or not
+ #define CM_GET_DEVICE_INTERFACE_LIST_BITS        (0x00000001)
++
++_Win32_Enum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS, ULONG,
++    CM_GET_DEVICE_INTERFACE_LIST_PRESENT,
++    CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES,
++    CM_GET_DEVICE_INTERFACE_LIST_BITS);
+ 
+ //
+ // Registry properties (specified in call to CM_Get_DevInst_Registry_Property or CM_Get_Class_Registry_Property,
+@@ -1076,6 +1240,19 @@
+ #define CM_DEVCAP_NONDYNAMIC        (0x00000200)
+ #define CM_DEVCAP_SECUREDEVICE      (0x00000400)
+ 
++_Win32_FlagsEnum_(CM_DEVCAP, ULONG,
++    CM_DEVCAP_LOCKSUPPORTED,
++    CM_DEVCAP_EJECTSUPPORTED,
++    CM_DEVCAP_REMOVABLE,
++    CM_DEVCAP_DOCKDEVICE,
++    CM_DEVCAP_UNIQUEID,
++    CM_DEVCAP_SILENTINSTALL,
++    CM_DEVCAP_RAWDEVICEOK,
++    CM_DEVCAP_SURPRISEREMOVALOK,
++    CM_DEVCAP_HARDWAREDISABLED,
++    CM_DEVCAP_NONDYNAMIC,
++    CM_DEVCAP_SECUREDEVICE);
++
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ //
+ // Removal policies (retrievable via CM_Get_DevInst_Registry_Property with
+@@ -1085,6 +1262,11 @@
+ #define CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL             1
+ #define CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL        2
+ #define CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL       3
++
++_Win32_Enum_(CM_REMOVAL_POLICY, ULONG,
++    CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL,
++    CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL,
++    CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL);
+ 
+ //
+ // Device install states (retrievable via CM_Get_DevInst_Registry_Property with
+@@ -1094,6 +1276,11 @@
+ #define CM_INSTALL_STATE_NEEDS_REINSTALL                1
+ #define CM_INSTALL_STATE_FAILED_INSTALL                 2
+ #define CM_INSTALL_STATE_FINISH_INSTALL                 3
++_Win32_Enum_(CM_INSTALL_STATE, ULONG,
++    CM_INSTALL_STATE_INSTALLED,
++    CM_INSTALL_STATE_NEEDS_REINSTALL,
++    CM_INSTALL_STATE_FAILED_INSTALL,
++    CM_INSTALL_STATE_FINISH_INSTALL);
+ #endif // (WINVER >= _WIN32_WINNT_WINXP)
+ 
+ //
+@@ -1105,6 +1292,13 @@
+ #define CM_LOCATE_DEVNODE_NOVALIDATION 0x00000004
+ #define CM_LOCATE_DEVNODE_BITS         0x00000007
+ 
++_Win32_Enum_(CM_LOCATE_DEVNODE_FLAGS, ULONG,
++    CM_LOCATE_DEVNODE_NORMAL,
++    CM_LOCATE_DEVNODE_PHANTOM,
++    CM_LOCATE_DEVNODE_CANCELREMOVE,
++    CM_LOCATE_DEVNODE_NOVALIDATION,
++    CM_LOCATE_DEVNODE_BITS);
++
+ #define CM_LOCATE_DEVINST_NORMAL       CM_LOCATE_DEVNODE_NORMAL
+ #define CM_LOCATE_DEVINST_PHANTOM      CM_LOCATE_DEVNODE_PHANTOM
+ #define CM_LOCATE_DEVINST_CANCELREMOVE CM_LOCATE_DEVNODE_CANCELREMOVE
+@@ -1145,12 +1339,21 @@
+ #define CM_REENUMERATE_NORMAL                   0x00000000
+ #define CM_REENUMERATE_SYNCHRONOUS              0x00000001
+ 
++_Win32_FlagsEnum_(CM_REENUMERATE_FLAGS, ULONG,
++    CM_REENUMERATE_NORMAL,
++    CM_REENUMERATE_SYNCHRONOUS);
++
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ #define CM_REENUMERATE_RETRY_INSTALLATION       0x00000002
+ #define CM_REENUMERATE_ASYNCHRONOUS             0x00000004
++_Win32_FlagsEnum_(CM_REENUMERATE_FLAGS, ULONG,
++    CM_REENUMERATE_RETRY_INSTALLATION,
++    CM_REENUMERATE_ASYNCHRONOUS);
+ #endif // (WINVER >= _WIN32_WINNT_WINXP)
+ 
+ #define CM_REENUMERATE_BITS                     0x00000007
++
++_Win32_FlagsEnum_(CM_REENUMERATE_FLAGS, ULONG, CM_REENUMERATE_BITS);
+ 
+ //
+ // Flags for CM_Register_Device_Driver
+@@ -1388,6 +1591,7 @@
+ // Function prototypes
+ //--------------------------------------------------------------
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1398,6 +1602,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1418,6 +1623,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1437,6 +1643,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1465,6 +1672,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1477,6 +1685,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1498,6 +1707,7 @@
+     _Out_ PHMACHINE     phMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1583,6 +1793,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1612,6 +1823,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1684,6 +1896,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1711,6 +1924,7 @@
+ 
+ #define CM_Disable_DevInst_Ex    CM_Disable_DevNode_Ex
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1733,6 +1947,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1760,22 +1975,24 @@
+ 
+ #define CM_Enable_DevInst_Ex     CM_Enable_DevNode_Ex
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Enumerate_Classes(
+     _In_  ULONG         ulClassIndex,
+     _Out_ LPGUID        ClassGuid,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _In_  _Win32_AssociatedEnum_(CM_ENUMERATE_FLAGS) ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Enumerate_Classes_Ex(
+     _In_  ULONG         ulClassIndex,
+     _Out_ LPGUID        ClassGuid,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_ENUMERATE_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -1789,6 +2006,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1810,6 +2028,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1853,6 +2072,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1861,6 +2081,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1870,6 +2091,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1885,6 +2107,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1894,6 +2117,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1904,6 +2128,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1917,6 +2142,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -1932,6 +2158,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2048,6 +2275,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2063,6 +2291,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2089,6 +2318,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2122,6 +2352,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2145,6 +2376,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2155,6 +2387,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2188,6 +2421,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2211,6 +2445,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2220,6 +2455,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2251,6 +2487,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2273,6 +2510,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2288,6 +2526,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2306,6 +2545,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2328,6 +2568,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2351,6 +2592,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2367,6 +2609,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2398,6 +2641,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2536,12 +2780,13 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Status(
+-    _Out_ PULONG        pulStatus,
+-    _Out_ PULONG        pulProblemNumber,
++    _Out_ _Win32_AssociatedEnum_(CM_DEVNODE_STATUS_FLAGS) PULONG        pulStatus,
++    _Out_ _Win32_AssociatedEnum_(CM_PROB) PULONG        pulProblemNumber,
+     _In_  DEVINST       dnDevInst,
+     _In_  ULONG         ulFlags
+     );
+@@ -2554,12 +2799,13 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_DevNode_Status_Ex(
+-    _Out_ PULONG        pulStatus,
+-    _Out_ PULONG        pulProblemNumber,
++    _Out_ _Win32_AssociatedEnum_(CM_DEVNODE_STATUS_FLAGS) PULONG        pulStatus,
++    _Out_ _Win32_AssociatedEnum_(CM_PROB) PULONG        pulProblemNumber,
+     _In_  DEVINST       dnDevInst,
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+@@ -2567,22 +2813,24 @@
+ 
+ #define CM_Get_DevInst_Status_Ex CM_Get_DevNode_Status_Ex
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_First_Log_Conf(
+     _Out_opt_ PLOG_CONF plcLogConf,
+     _In_  DEVINST       dnDevInst,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _Win32_AssociatedEnum_(CM_LOG_CONF) _In_  ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_First_Log_Conf_Ex(
+     _Out_opt_ PLOG_CONF plcLogConf,
+     _In_  DEVINST       dnDevInst,
+-    _In_  ULONG         ulFlags,
++    _Win32_AssociatedEnum_(CM_LOG_CONF) _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2657,6 +2905,7 @@
+ #define CM_Get_Hardware_Profile_Info_Ex   CM_Get_Hardware_Profile_Info_ExA
+ #endif // UNICODE
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2667,6 +2916,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2677,6 +2927,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2688,6 +2939,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2718,6 +2970,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2767,6 +3020,7 @@
+ #pragma region Desktop Family, OneCore Family, or App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2775,9 +3029,10 @@
+     _In_opt_ DEVINSTID_A pDeviceID,
+     _Out_writes_(BufferLen) PZZSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2786,7 +3041,7 @@
+     _In_opt_ DEVINSTID_W pDeviceID,
+     _Out_writes_(BufferLen) PZZWSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -2809,7 +3064,7 @@
+     _In_opt_ DEVINSTID_A pDeviceID,
+     _Out_writes_(BufferLen) PZZSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2821,7 +3076,7 @@
+     _In_opt_ DEVINSTID_W pDeviceID,
+     _Out_writes_(BufferLen) PZZWSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ #ifdef UNICODE
+@@ -2836,6 +3091,7 @@
+ #pragma region Desktop Family, OneCore Family, or App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2843,9 +3099,10 @@
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_A pDeviceID,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2853,7 +3110,7 @@
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_W pDeviceID,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -2875,7 +3132,7 @@
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_A pDeviceID,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2886,7 +3143,7 @@
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_W pDeviceID,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2904,6 +3161,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2926,6 +3184,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2949,6 +3208,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2969,6 +3229,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -2992,6 +3253,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3001,6 +3263,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3011,22 +3274,24 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Next_Log_Conf(
+     _Out_opt_ PLOG_CONF plcLogConf,
+     _In_  LOG_CONF      lcLogConf,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _Reserved_ _In_  ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Next_Log_Conf_Ex(
+     _Out_opt_ PLOG_CONF plcLogConf,
+     _In_  LOG_CONF      lcLogConf,
+-    _In_  ULONG         ulFlags,
++    _Reserved_ _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -3036,6 +3301,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3051,6 +3317,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3061,6 +3328,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3071,6 +3339,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3082,6 +3351,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3091,6 +3361,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3107,6 +3378,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3122,6 +3394,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3132,6 +3405,8 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ CMAPI
+ WORD
+ WINAPI
+@@ -3139,6 +3414,8 @@
+     VOID
+     );
+ 
++_Win32_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ CMAPI
+ WORD
+ WINAPI
+@@ -3147,6 +3424,7 @@
+     );
+ 
+ #if (WINVER >= _WIN32_WINNT_WINXP)
++_Win32_SupportedOS_WindowsXP_
+ CMAPI
+ BOOL
+ WINAPI
+@@ -3154,6 +3432,7 @@
+     _In_  WORD          wVersion
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ CMAPI
+ BOOL
+ WINAPI
+@@ -3189,22 +3468,24 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Locate_DevNodeA(
+     _Out_ PDEVINST      pdnDevInst,
+     _In_opt_ DEVINSTID_A pDeviceID,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _In_  _Win32_AssociatedEnum_(CM_LOCATE_DEVNODE_FLAGS) ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Locate_DevNodeW(
+     _Out_ PDEVINST      pdnDevInst,
+     _In_opt_ DEVINSTID_W pDeviceID,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_LOCATE_DEVNODE_FLAGS) ULONG         ulFlags
+     );
+ 
+ #define CM_Locate_DevInstA       CM_Locate_DevNodeA
+@@ -3232,6 +3513,7 @@
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3262,6 +3544,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3274,6 +3557,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3319,25 +3603,27 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Next_Res_Des(
+     _Out_ PRES_DES      prdResDes,
+     _In_  RES_DES       rdResDes,
+-    _In_  RESOURCEID    ForResource,
+-    _Out_opt_ PRESOURCEID pResourceID,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _In_  _Win32_AssociatedEnum_(CM_RESTYPE) RESOURCEID    ForResource,
++    _Out_opt_ _Win32_AssociatedEnum_(CM_RESTYPE) PRESOURCEID pResourceID,
++    _In_  ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Get_Next_Res_Des_Ex(
+     _Out_ PRES_DES      prdResDes,
+     _In_  RES_DES       rdResDes,
+-    _In_  RESOURCEID    ForResource,
+-    _Out_opt_ PRESOURCEID pResourceID,
++    _In_  _Win32_AssociatedEnum_(CM_RESTYPE) RESOURCEID    ForResource,
++    _Out_opt_ _Win32_AssociatedEnum_(CM_RESTYPE) PRESOURCEID pResourceID,
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+@@ -3360,6 +3646,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3422,6 +3709,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3465,6 +3753,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3476,6 +3765,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3499,6 +3789,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3511,6 +3802,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3543,6 +3835,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3563,6 +3856,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3572,6 +3866,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3673,6 +3968,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3708,6 +4004,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3749,6 +4046,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3760,6 +4058,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3780,14 +4079,16 @@
+ #define CM_Request_Device_Eject_Ex CM_Request_Device_Eject_ExA
+ #endif // UNICODE
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Reenumerate_DevNode(
+     _In_  DEVINST       dnDevInst,
+-    _In_  ULONG         ulFlags
+-    );
+-
++    _In_  _Win32_AssociatedEnum_(CM_REENUMERATE_FLAGS) ULONG         ulFlags
++    );
++
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3857,6 +4158,7 @@
+ #define CM_Register_Device_Interface_Ex CM_Register_Device_Interface_ExA
+ #endif // UNICODE
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3867,6 +4169,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3965,6 +4268,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -3987,6 +4291,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4023,6 +4328,7 @@
+     _In_  ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4092,6 +4398,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4114,6 +4421,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4139,6 +4447,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4146,6 +4455,7 @@
+     _Out_ PBOOL         pbPresent
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4154,6 +4464,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4161,6 +4472,7 @@
+     VOID
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4224,6 +4536,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4267,6 +4580,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4383,19 +4697,21 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Query_Resource_Conflict_List(
+     _Out_ PCONFLICT_LIST pclConflictList,
+     _In_  DEVINST       dnDevInst,
+-    _In_  RESOURCEID    ResourceID,
++    _In_  _Win32_AssociatedEnum_(CM_RESTYPE) RESOURCEID    ResourceID,
+     _In_reads_bytes_(ResourceLen) PCVOID ResourceData,
+     _In_  ULONG         ResourceLen,
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4403,6 +4719,7 @@
+     _In_  CONFLICT_LIST clConflictList
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4420,6 +4737,7 @@
+     _Inout_ PCONFLICT_DETAILS_A pConflictDetails
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4443,6 +4761,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4465,6 +4784,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4488,6 +4808,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4504,6 +4825,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4521,6 +4843,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsVista_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4543,6 +4866,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_10240_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4582,6 +4906,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4607,6 +4932,7 @@
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4636,6 +4962,8 @@
+ #if (WINVER >= _WIN32_WINNT_WIN2K)
+ #define CM_WaitNoPendingInstallEvents CMP_WaitNoPendingInstallEvents
+ 
++_Win32_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ CM_WaitNoPendingInstallEvents(
+@@ -4651,6 +4979,15 @@
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+ 
++_Win32_SupportedOS_Windows8_
++CMAPI
++CONFIGRET
++WINAPI
++CM_Unregister_Notification(
++    _In_    HCMNOTIFICATION NotifyContext
++    );
++
++_Win32_SupportedOS_Windows8_
+ CMAPI
+ CONFIGRET
+ WINAPI
+@@ -4658,14 +4995,8 @@
+     _In_    PCM_NOTIFY_FILTER       pFilter,
+     _In_opt_ PVOID                  pContext,
+     _In_    PCM_NOTIFY_CALLBACK     pCallback,
+-    _Out_   PHCMNOTIFICATION        pNotifyContext
+-    );
+-
+-CMAPI
+-CONFIGRET
+-WINAPI
+-CM_Unregister_Notification(
+-    _In_    HCMNOTIFICATION NotifyContext
++    _Out_ _Win32_RAIIFree_(CM_Unregister_Notification, -1, 0)
++            PHCMNOTIFICATION        pNotifyContext
+     );
+ 
+ #endif // (WINVER >= _WIN32_WINNT_WIN8)
+@@ -4676,6 +5007,7 @@
+ // CONFIGRET to Win32 error mapping routine
+ //
+ 
++_Win32_SupportedOS_Windows7_
+ CMAPI
+ DWORD
+ WINAPI
+@@ -4754,7 +5086,27 @@
+ #define CR_INVALID_CONFLICT_LIST    (0x00000039)
+ #define CR_INVALID_INDEX            (0x0000003A)
+ #define CR_INVALID_STRUCTURE_SIZE   (0x0000003B)
+ #define NUM_CR_RESULTS              (0x0000003C)
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(CONFIGRET, RETURN_TYPE,
++    CR_SUCCESS, CR_DEFAULT, CR_OUT_OF_MEMORY, CR_INVALID_POINTER,
++    CR_INVALID_FLAG, CR_INVALID_DEVNODE, CR_INVALID_DEVINST, CR_INVALID_RES_DES,
++    CR_INVALID_LOG_CONF, CR_INVALID_ARBITRATOR, CR_INVALID_NODELIST, CR_DEVNODE_HAS_REQS,
++    CR_DEVINST_HAS_REQS, CR_INVALID_RESOURCEID, CR_DLVXD_NOT_FOUND, CR_NO_SUCH_DEVNODE,
++    CR_NO_SUCH_DEVINST, CR_NO_MORE_LOG_CONF, CR_NO_MORE_RES_DES, CR_ALREADY_SUCH_DEVNODE,
++    CR_ALREADY_SUCH_DEVINST, CR_INVALID_RANGE_LIST, CR_INVALID_RANGE, CR_FAILURE,
++    CR_NO_SUCH_LOGICAL_DEV, CR_CREATE_BLOCKED, CR_NOT_SYSTEM_VM, CR_REMOVE_VETOED,
++    CR_APM_VETOED, CR_INVALID_LOAD_TYPE, CR_BUFFER_SMALL, CR_NO_ARBITRATOR,
++    CR_NO_REGISTRY_HANDLE, CR_REGISTRY_ERROR, CR_INVALID_DEVICE_ID, CR_INVALID_DATA,
++    CR_INVALID_API, CR_DEVLOADER_NOT_READY, CR_NEED_RESTART, CR_NO_MORE_HW_PROFILES,
++    CR_DEVICE_NOT_THERE, CR_NO_SUCH_VALUE, CR_WRONG_TYPE, CR_INVALID_PRIORITY,
++    CR_NOT_DISABLEABLE, CR_FREE_RESOURCES, CR_QUERY_VETOED, CR_CANT_SHARE_IRQ,
++    CR_NO_DEPENDENT, CR_SAME_RESOURCES, CR_NO_SUCH_REGISTRY_KEY, CR_INVALID_MACHINENAME,
++    CR_REMOTE_COMM_FAILURE, CR_MACHINE_UNAVAILABLE, CR_NO_CM_SERVICES, CR_ACCESS_DENIED,
++    CR_CALL_NOT_IMPLEMENTED, CR_INVALID_PROPERTY, CR_DEVICE_INTERFACE_ACTIVE, CR_NO_SUCH_DEVICE_INTERFACE,
++    CR_INVALID_REFERENCE_STRING, CR_INVALID_CONFLICT_LIST, CR_INVALID_INDEX, CR_INVALID_STRUCTURE_SIZE,
++    NUM_CR_RESULTS);
++#endif
+ 
+ 
+ #ifdef __cplusplus
+@@ -4765,4 +5117,3 @@
+ #pragma endregion
+ 
+ #endif // _CFGMGR32_H_
+-

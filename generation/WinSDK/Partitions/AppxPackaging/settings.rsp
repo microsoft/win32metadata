@@ -6,3 +6,5 @@
 <IncludeRoot>/um/getcurrentpackageinfo3.h
 --namespace
 Windows.Win32.Storage.Packaging.Appx
+--config
+parse-win32-annotations

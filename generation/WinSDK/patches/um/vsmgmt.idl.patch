@@ -1,0 +1,60 @@
+diff --git a/um/vsmgmt.idl b/um/vsmgmt.idl
+index 8efb7222..40e7c9cb 100644
+--- a/um/vsmgmt.idl
++++ b/um/vsmgmt.idl
+@@ -10,6 +10,7 @@
+ //  Imports
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -141,6 +142,7 @@ interface IVssEnumMgmtObject;
+ 
+ // Used to manage diff areas remotely for Software-based snapshots (using hte copy-on-write mechanism).
+ // Implemented by VSS and each provider.
++cpp_quote("/* Win32Metadata: interface ::IVssSnapshotMgmt => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(FA7DF749-66E7-4986-A27F-E2F04AE53772),
+@@ -180,6 +182,7 @@ interface IVssSnapshotMgmt: IUnknown
+ 
+ // More APIs to manage diff areas remotely for Software-based snapshots (using hte copy-on-write mechanism).
+ // Implemented by VSS 
++cpp_quote("/* Win32Metadata: interface ::IVssSnapshotMgmt2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(0f61ec39-fe82-45f2-a3f0-768b5d427102),
+@@ -200,6 +203,7 @@ interface IVssSnapshotMgmt2: IUnknown
+ // snapshots (using the copy-on-write mechanism).
+ // This is implemented by a Snapshot/System provider and
+ // returned by IVssSnapshotMgmt::GetProviderMgmtInterface
++cpp_quote("/* Win32Metadata: interface ::IVssDifferentialSoftwareSnapshotMgmt => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(214A0F28-B737-4026-B847-4F9E37D79529),
+@@ -259,6 +263,7 @@ interface IVssDifferentialSoftwareSnapshotMgmt: IUnknown
+         );                                              
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssDifferentialSoftwareSnapshotMgmt2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(949d7353-675f-4275-8969-f044c6277815),
+@@ -292,6 +297,7 @@ interface IVssDifferentialSoftwareSnapshotMgmt2 : IVssDifferentialSoftwareSnapsh
+         );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IVssDifferentialSoftwareSnapshotMgmt3 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(383f7e71-a4c5-401f-b27f-f826289f8458),
+@@ -339,6 +345,7 @@ interface IVssDifferentialSoftwareSnapshotMgmt3 : IVssDifferentialSoftwareSnapsh
+ 
+ 
+ // This returns a set of volumes that can be snapshotted by Babbage. Returned by Query.
++cpp_quote("/* Win32Metadata: interface ::IVssEnumMgmtObject => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(01954E6B-9254-4e6e-808C-C9E05D007696),

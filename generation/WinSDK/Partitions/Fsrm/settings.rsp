@@ -9,3 +9,6 @@
 <IncludeRoot>/um/fsrmerr.h
 --namespace
 Windows.Win32.Storage.FileServerResourceManager
+
+--config
+parse-win32-annotations

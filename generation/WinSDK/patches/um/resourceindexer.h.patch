@@ -1,0 +1,29 @@
+diff --git a/um/resourceindexer.h b/um/resourceindexer.h
+index f0efd89f..4b4648fc 100644
+--- a/um/resourceindexer.h
++++ b/um/resourceindexer.h
+@@ -23,13 +23,16 @@ typedef struct
+     PWSTR value;
+ } IndexedResourceQualifier;
+ 
++_Win32_SupportedOS_10240_
+ STDAPI CreateResourceIndexer(
+     _In_ PCWSTR projectRoot,
+     _In_opt_ PCWSTR extensionDllPath,
+     _Outptr_ PVOID* ppResourceIndexer);
+ 
++_Win32_SupportedOS_10240_
+ void DestroyResourceIndexer(_In_opt_ PVOID resourceIndexer);
+ 
++_Win32_SupportedOS_10240_
+ STDAPI IndexFilePath(
+     _In_ PVOID resourceIndexer,
+     _In_ PCWSTR filePath,
+@@ -37,6 +40,7 @@ STDAPI IndexFilePath(
+     _Out_ ULONG* pQualifierCount,
+     _Out_writes_(*pQualifierCount) IndexedResourceQualifier** ppQualifiers);
+ 
++_Win32_SupportedOS_10240_
+ void DestroyIndexedResults(
+     _In_opt_ PWSTR resourceUri,
+     _In_ ULONG qualifierCount,

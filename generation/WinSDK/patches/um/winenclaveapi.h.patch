@@ -1,0 +1,44 @@
+diff --git a/um/winenclaveapi.h b/um/winenclaveapi.h
+index 52b9355b..1d379639 100644
+--- a/um/winenclaveapi.h
++++ b/um/winenclaveapi.h
+@@ -27,6 +27,7 @@ extern "C" {
+ // Attestation APIs.
+ //
+ 
++_Win32_SupportedOS_16299_
+ STDAPI
+ EnclaveGetAttestationReport(
+     _In_opt_ const UINT8 EnclaveData[ENCLAVE_REPORT_DATA_LENGTH],
+@@ -35,6 +36,7 @@ EnclaveGetAttestationReport(
+     _Out_ UINT32 *OutputSize
+     );
+ 
++_Win32_SupportedOS_16299_
+ STDAPI
+ EnclaveVerifyAttestationReport(
+     _In_ UINT32 EnclaveType,
+@@ -46,6 +48,7 @@ EnclaveVerifyAttestationReport(
+ // Sealing/unsealing APIs.
+ //
+ 
++_Win32_SupportedOS_16299_
+ STDAPI
+ EnclaveSealData(
+     _In_reads_bytes_(DataToEncryptSize) const VOID *DataToEncrypt,
+@@ -57,6 +60,7 @@ EnclaveSealData(
+     _Out_ UINT32 *ProtectedBlobSize
+     );
+ 
++_Win32_SupportedOS_16299_
+ STDAPI
+ EnclaveUnsealData(
+     _In_reads_bytes_(ProtectedBlobSize) const VOID *ProtectedBlob,
+@@ -82,6 +86,7 @@ EnclaveEncryptDataForTrustlet(
+ // Enclave properties.
+ //
+ 
++_Win32_SupportedOS_16299_
+ STDAPI
+ EnclaveGetEnclaveInformation(
+     _In_ UINT32 InformationSize,

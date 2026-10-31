@@ -1,0 +1,238 @@
+diff --git a/um/mmiscapi.h b/um/mmiscapi.h
+--- a/um/mmiscapi.h
++++ b/um/mmiscapi.h
+@@ -95,6 +95,7 @@
+ 
+ typedef LRESULT (CALLBACK* DRIVERPROC)(DWORD_PTR, HDRVR, UINT, LPARAM, LPARAM);
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LRESULT
+ WINAPI
+@@ -104,6 +105,7 @@
+     _In_ LPARAM lParam2
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ HDRVR
+ WINAPI
+@@ -113,6 +115,7 @@
+     _In_ LPARAM lParam2
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LRESULT
+ WINAPI
+@@ -123,6 +126,7 @@
+     _In_ LPARAM lParam2
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ HMODULE
+ WINAPI
+@@ -130,6 +134,7 @@
+     _In_ HDRVR hDriver
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ HMODULE
+ WINAPI
+@@ -137,6 +142,7 @@
+     _In_ HDRVR hDriver
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LRESULT
+ WINAPI
+@@ -175,6 +181,7 @@
+                       Driver Helper function moved from mmddk.h
+ 
+ ***************************************************************************/
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ APIENTRY
+ DriverCallback(
+@@ -191,7 +198,9 @@
+ 
+   Sound schemes
+ 
+-****************************************************************************/LONG
++****************************************************************************/
++_Win32_SupportedOS_Windows81_
++LONG
+ WINAPI
+ sndOpenSound(
+     _In_ LPCWSTR EventName,
+@@ -382,6 +391,7 @@
+ /* MMIO function prototypes */
+ #ifdef _WIN32
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ FOURCC
+ WINAPI
+@@ -390,6 +400,7 @@
+     _In_ UINT uFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ FOURCC
+ WINAPI
+@@ -403,6 +414,7 @@
+ #else
+ #define mmioStringToFOURCC  mmioStringToFOURCCA
+ #endif // !UNICODE
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LPMMIOPROC
+ WINAPI
+@@ -412,6 +424,7 @@
+     _In_ DWORD dwFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LPMMIOPROC
+ WINAPI
+@@ -426,6 +439,7 @@
+ #else
+ #define mmioInstallIOProc  mmioInstallIOProcA
+ #endif // !UNICODE
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ HMMIO
+ WINAPI
+@@ -435,6 +449,7 @@
+     _In_ DWORD fdwOpen
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ HMMIO
+ WINAPI
+@@ -449,6 +464,7 @@
+ #else
+ #define mmioOpen  mmioOpenA
+ #endif // !UNICODE
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -459,6 +475,7 @@
+     _In_ DWORD fdwRename
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -483,6 +500,7 @@
+ #endif /* ifdef WINVER >= 0x030a */
+ #endif
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -491,6 +509,7 @@
+     _In_ UINT fuClose
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LONG
+ WINAPI
+@@ -500,6 +519,7 @@
+     _In_ LONG cch
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LONG
+ WINAPI
+@@ -509,6 +529,7 @@
+     _In_ LONG cch
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LONG
+ WINAPI
+@@ -518,6 +539,7 @@
+     _In_ int iOrigin
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -527,6 +549,7 @@
+     _In_ UINT fuInfo
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -536,6 +559,7 @@
+     _In_ UINT fuInfo
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -546,6 +570,7 @@
+     _In_ UINT fuBuffer
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -554,6 +579,7 @@
+     _In_ UINT fuFlush
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -563,6 +589,7 @@
+     _In_ UINT fuAdvance
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ LRESULT
+ WINAPI
+@@ -573,6 +600,7 @@
+     _In_opt_ LPARAM lParam2
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -583,6 +611,7 @@
+     _In_ UINT fuDescend
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -592,6 +621,7 @@
+     _In_ UINT fuAscend
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI

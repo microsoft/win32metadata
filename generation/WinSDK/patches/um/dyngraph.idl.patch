@@ -1,0 +1,59 @@
+diff --git a/um/dyngraph.idl b/um/dyngraph.idl
+index 016f37bf..8c36567e 100644
+--- a/um/dyngraph.idl
++++ b/um/dyngraph.idl
+@@ -7,6 +7,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -22,6 +23,7 @@ interface IGraphConfigCallback;
+ //  IPinConnection - supported by input pins
+ //
+ //--------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IPinConnection => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         local,
+         object,
+@@ -42,12 +44,14 @@ interface IPinConnection : IUnknown {
+ 
+     HRESULT DynamicDisconnect();
+ };
++cpp_quote("/* Win32Metadata: method ::IPinConnection::IsEndPin => PreserveResult */")
+ 
+ //--------------------------------------------------------------------
+ //
+ //  IPinFlowControl - supported by output pins
+ //
+ //--------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IPinFlowControl => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         local,
+         object,
+@@ -88,6 +92,7 @@ typedef enum _AM_FILTER_FLAGS {
+ //
+ //--------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IGraphConfig => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         local,
+         object,
+@@ -133,6 +138,7 @@ interface IGraphConfig : IUnknown {
+ //
+ //--------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IGraphConfigCallback => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         local,
+         object,
+@@ -304,6 +310,7 @@ interface IGraphConfigCallback : IUnknown
+ // information on interpreting HRESULTs.
+ // 
+ // 
++cpp_quote("/* Win32Metadata: interface ::IFilterChain => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     local,
+     object,

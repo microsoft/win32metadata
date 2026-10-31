@@ -1,0 +1,251 @@
+diff --git a/um/wsman.h b/um/wsman.h
+--- a/um/wsman.h
++++ b/um/wsman.h
+@@ -285,6 +285,7 @@
+ // Returns a nonzero error code upon failure
+ // -----------------------------------------------------------------------------
+ // 
++_Win32_SupportedOS_Windows8_
+ DWORD WINAPI WSManInitialize(
+     DWORD flags,
+     _Out_ WSMAN_API_HANDLE *apiHandle
+@@ -299,6 +300,7 @@
+ // Returns non zero error code upon failure
+ // -----------------------------------------------------------------------------
+ // 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManDeinitialize(
+     _Inout_opt_ WSMAN_API_HANDLE apiHandle,
+     DWORD flags
+@@ -319,6 +321,7 @@
+ //  the messageLengthUsed parameter contains the requested size of the buffer.
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManGetErrorMessage(
+     _In_ WSMAN_API_HANDLE apiHandle,
+     _Reserved_ DWORD flags,            // reserved for future use; must be 0
+@@ -380,6 +383,7 @@
+ // Returns a non zero error code upon failure
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManCreateSession(
+     _In_ WSMAN_API_HANDLE apiHandle,
+     _In_opt_ PCWSTR connection,                         // if NULL, then connection will default to localhost
+@@ -396,6 +400,7 @@
+ // Returns a non zero error code upon failure
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManCloseSession(
+     _Inout_opt_ WSMAN_SESSION_HANDLE session,
+     DWORD flags
+@@ -469,6 +474,7 @@
+ //  Returns a non zero error code upon failure
+ // -----------------------------------------------------------------------------
+ // 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManSetSessionOption(
+     _In_ WSMAN_SESSION_HANDLE session,
+     WSManSessionOption option,
+@@ -481,6 +487,7 @@
+ //  Returns a non zero error code upon failure
+ // -----------------------------------------------------------------------------
+ // 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManGetSessionOptionAsDword(
+     _In_ WSMAN_SESSION_HANDLE session,
+     WSManSessionOption option,
+@@ -493,6 +500,7 @@
+ //  Returns a non zero error code upon failure
+ // -----------------------------------------------------------------------------
+ // 
++_Win32_SupportedOS_Windows7_
+ _Success_(return == NO_ERROR)
+ DWORD WINAPI WSManGetSessionOptionAsString(
+     _In_ WSMAN_SESSION_HANDLE session,
+@@ -564,6 +572,7 @@
+ //  after the callback returns.
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManCloseOperation(
+     _Inout_opt_ WSMAN_OPERATION_HANDLE operationHandle,
+     DWORD flags
+@@ -874,6 +883,7 @@
+ // WSManCreateShell API - wxf:Create
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManCreateShell(
+ 
+     _Inout_ WSMAN_SESSION_HANDLE session,
+@@ -904,6 +914,7 @@
+ 
+ } WSMAN_COMMAND_ARG_SET;
+ 
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManRunShellCommand(
+ 
+     _Inout_ WSMAN_SHELL_HANDLE shell,
+@@ -930,6 +941,7 @@
+ #define WSMAN_SIGNAL_SHELL_CODE_CTRL_C WSMAN_SHELL_NS L"/signal/ctrl_c"
+ #define WSMAN_SIGNAL_SHELL_CODE_CTRL_BREAK WSMAN_SHELL_NS L"/signal/ctrl_break"
+ 
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManSignalShell(
+ 
+     _In_ WSMAN_SHELL_HANDLE shell,
+@@ -946,6 +958,7 @@
+ // -----------------------------------------------------------------------------
+ //
+ 
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManReceiveShellOutput(
+ 
+     _Inout_ WSMAN_SHELL_HANDLE shell,
+@@ -961,6 +974,7 @@
+ //  WSManSendShellInput API - rsp:Send
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManSendShellInput(
+ 
+     _In_ WSMAN_SHELL_HANDLE shell,
+@@ -986,6 +1000,7 @@
+ //  is called with WSMAN_FLAG_CALLBACK_END_OF_OPERATION flag as result of this operation
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManCloseCommand(
+     _Inout_opt_ WSMAN_COMMAND_HANDLE commandHandle,
+     DWORD flags,
+@@ -1004,6 +1019,7 @@
+ //  WSMAN_FLAG_CALLBACK_END_OF_OPERATION flag as result of this operation
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ void WINAPI WSManCloseShell(
+     _Inout_opt_ WSMAN_SHELL_HANDLE shellHandle,
+     DWORD flags,
+@@ -1018,6 +1034,7 @@
+ // WSManCreateShellEx API - wxf:Create with specific shell Id.
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManCreateShellEx(
+     _Inout_ WSMAN_SESSION_HANDLE session,
+     DWORD flags,  
+@@ -1035,6 +1052,7 @@
+ // WSManRunShellCommandEx API - rsp:Command with specific command Id.
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManRunShellCommandEx(
+ 
+     _Inout_ WSMAN_SHELL_HANDLE shell,
+@@ -1052,6 +1070,7 @@
+ // WSManDisconnectShell API - rsp:Disconnect
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManDisconnectShell(
+     _Inout_ WSMAN_SHELL_HANDLE shell,
+     DWORD flags,  
+@@ -1064,6 +1083,7 @@
+ // WSManReconnectShell API - rsp:Disconnect
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManReconnectShell(
+     _Inout_ WSMAN_SHELL_HANDLE shell,
+     DWORD flags,  
+@@ -1078,6 +1098,7 @@
+ // WSManRunShellCommand is used to report the completion of this operation
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManReconnectShellCommand(
+     _Inout_ WSMAN_COMMAND_HANDLE commandHandle,
+     DWORD flags,  
+@@ -1089,6 +1110,7 @@
+ // WSManConnectShell API - rsp:Connect
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManConnectShell(
+     _Inout_ WSMAN_SESSION_HANDLE session,
+     DWORD flags,  
+@@ -1105,6 +1127,7 @@
+ // WSManConnectShellCommand API - rsp:Connect
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows8_
+ void WINAPI WSManConnectShellCommand(
+     _Inout_ WSMAN_SHELL_HANDLE shell,
+     DWORD flags,  
+@@ -1187,6 +1210,7 @@
+ // errors being generated.
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginReportContext(
+     _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
+     _In_ DWORD flags,
+@@ -1235,6 +1259,7 @@
+ #define WSMAN_FLAG_RECEIVE_FLUSH               2
+ #define WSMAN_FLAG_RECEIVE_RESULT_DATA_BOUNDARY 4
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginReceiveResult(
+     _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
+     _In_ DWORD flags,
+@@ -1260,6 +1285,7 @@
+ // - to supply open Xml content in certain wsman responses like rsp:ConnectResponse
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginOperationComplete(
+     _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
+     _In_ DWORD flags,
+@@ -1287,6 +1313,7 @@
+ #define WSMAN_PLUGIN_PARAMS_GET_REQUESTED_DATA_LOCALE 6 /* Returns WSMAN_DATA_TEXT */
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginGetOperationParameters ( 
+     _In_ WSMAN_PLUGIN_REQUEST *requestDetails,
+     _In_ DWORD flags,
+@@ -1355,6 +1382,7 @@
+ // not call the operation complete method for some time.  
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginFreeRequestDetails(_In_ WSMAN_PLUGIN_REQUEST *requestDetails);
+ 
+ //
+@@ -1594,6 +1622,7 @@
+ // Authorization Plug-in Callback methods
+ // -----------------------------------------------------------------------------
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginAuthzUserComplete ( 
+     _In_ WSMAN_SENDER_DETAILS *senderDetails,
+     _In_ DWORD flags,
+@@ -1604,6 +1633,7 @@
+     _In_opt_ PCWSTR extendedErrorInformation
+     );
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginAuthzOperationComplete ( 
+     _In_ WSMAN_SENDER_DETAILS *senderDetails,
+     _In_ DWORD flags,
+@@ -1612,6 +1642,7 @@
+     _In_opt_ PCWSTR extendedErrorInformation
+     );
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD WINAPI WSManPluginAuthzQueryQuotaComplete ( 
+     _In_ WSMAN_SENDER_DETAILS *senderDetails,
+     _In_ DWORD flags,

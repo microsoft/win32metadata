@@ -2,3 +2,5 @@
 <IncludeRoot>/um/xmllite.h
 --namespace
 Windows.Win32.Data.Xml.XmlLite
+--config
+parse-win32-annotations

@@ -3,3 +3,5 @@
 <IncludeRoot>/um/taskschd.h
 --namespace
 Windows.Win32.System.TaskScheduler
+--config
+parse-win32-annotations

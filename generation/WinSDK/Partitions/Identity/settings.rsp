@@ -1,6 +1,3 @@
---with-type
-_tagSLDATATYPE=uint
-SLDATATYPE=uint
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD
@@ -12,7 +9,6 @@ SystemFunction041
 <IncludeRoot>/shared/secext.h
 <IncludeRoot>/shared/security.h
 <IncludeRoot>/shared/sspi.h
-<IncludeRoot>/shared/issper16.h
 <IncludeRoot>/um/lsalookup.h
 <IncludeRoot>/um/minschannel.h
 <IncludeRoot>/um/ntlsa.h
@@ -33,3 +29,5 @@ Windows.Win32.Security.Authentication.Identity
 --preserve-auto-fnptr-level
 PLSA_REDIRECTED_LOGON_CALLBACK
 PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK
+--config
+parse-win32-annotations

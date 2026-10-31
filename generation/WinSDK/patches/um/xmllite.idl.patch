@@ -1,0 +1,25 @@
+diff --git a/um/xmllite.idl b/um/xmllite.idl
+index fdf5f752..1abd7a07 100644
+--- a/um/xmllite.idl
++++ b/um/xmllite.idl
+@@ -6,6 +6,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -562,6 +563,12 @@ interface IXmlWriterLite : IUnknown
+ };
+ 
+ cpp_quote("////////////////////////////////////////////////////////////////////////////////////////////////////////////")
++cpp_quote("/* Win32Metadata: method ::IXmlReader::MoveToAttributeByName => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IXmlReader::MoveToNextAttribute => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IXmlReader::MoveToFirstAttribute => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IXmlReader::Read => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IXmlReader::ReadValueChunk => PreserveResult */")
++
+ cpp_quote("// IID helpers")
+ cpp_quote("static const IID _IID_IXmlReader = { 0x7279FC81, 0x709D, 0x4095, { 0xB6, 0x3D, 0x69, 0xFE, 0x4B, 0x0D, 0x90, 0x30 } };")
+ cpp_quote("static const IID _IID_IXmlWriter = { 0x7279FC88, 0x709D, 0x4095, { 0xB6, 0x3D, 0x69, 0xFE, 0x4B, 0x0D, 0x90, 0x30 } };")

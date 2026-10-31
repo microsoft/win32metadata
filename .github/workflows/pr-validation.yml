@@ -98,7 +98,7 @@ jobs:
     needs: [changes]
     if: needs.changes.outputs.build_needed == 'true'
     runs-on: windows-2022
-    timeout-minutes: 60
+    timeout-minutes: 120
 
     strategy:
       fail-fast: false

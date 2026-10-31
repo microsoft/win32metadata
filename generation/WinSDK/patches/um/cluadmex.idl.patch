@@ -1,0 +1,148 @@
+diff --git a/um/cluadmex.idl b/um/cluadmex.idl
+index 769ca49f..1d3afedb 100644
+--- a/um/cluadmex.idl
++++ b/um/cluadmex.idl
+@@ -50,6 +50,7 @@
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ #ifndef _CLUADMEX_IDL_
+ #define _CLUADMEX_IDL_
+ 
+@@ -100,6 +101,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterUIInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE50-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -126,6 +128,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterDataInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE51-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -151,6 +154,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterObjectInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE52-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -178,6 +182,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterNodeInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE53-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -200,6 +205,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterGroupInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE54-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -222,6 +228,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterResourceInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE55-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -254,6 +261,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterNetworkInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE56-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -276,6 +284,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetClusterNetInterfaceInfo => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE57-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -302,6 +311,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWCPropertySheetCallback => SupportedOSPlatform(\"windowsserver2008\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE60-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -324,6 +334,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWEExtendPropertySheet => SupportedOSPlatform(\"windowsserver2008\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE61-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -347,6 +358,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWCWizardCallback => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE62-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -373,6 +385,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWEExtendWizard => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE63-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -396,6 +409,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWCContextMenuCallback => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE64-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -422,6 +436,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWEExtendContextMenu => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE65-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -445,6 +460,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWEInvokeCommand => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE66-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -468,6 +484,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWCWizard97Callback => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE67-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -494,6 +511,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IWEExtendWizard97 => SupportedOSPlatform(\"windowsserver2003\") */")
+ 	[
+ 		object,
+ 		uuid(97DEDE68-FC6B-11CF-B5F5-00A0C90AB505),

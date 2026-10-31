@@ -1,0 +1,36 @@
+diff --git a/winrt/roparameterizediid.h b/winrt/roparameterizediid.h
+--- a/winrt/roparameterizediid.h
++++ b/winrt/roparameterizediid.h
+@@ -8,6 +8,7 @@
+ #define _ROPARAMETERIXEDIID_H
+ 
+ #ifdef _CONTRACT_GEN
++#include <sal.h>
+ #include <nt.h>
+ #include <ntrtl.h>
+ #include <nturtl.h>
+@@ -65,20 +66,23 @@
+     ) const = 0;
+ };
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI
+ RoGetParameterizedTypeInstanceIID(
+     UINT32 nameElementCount,
+     _In_reads_(nameElementCount) PCWSTR* nameElements,
+     _In_ const IRoMetaDataLocator& metaDataLocator,
+     _Out_ GUID* iid,
+-    _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
++    _Win32_RAIIFree_(RoFreeParameterizedTypeExtra, -1, 0) _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(void)
+ RoFreeParameterizedTypeExtra(
+     _In_ ROPARAMIIDHANDLE extra
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(PCSTR)
+ RoParameterizedTypeExtraGetTypeSignature(
+     _In_ ROPARAMIIDHANDLE extra

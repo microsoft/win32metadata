@@ -1,0 +1,25 @@
+diff --git a/um/statehelpers.h b/um/statehelpers.h
+--- a/um/statehelpers.h
++++ b/um/statehelpers.h
+@@ -16,6 +16,11 @@
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++#include <winerror.h>
++#endif
++
+ #ifdef _CONTRACT_GEN
+ #include <minwindef.h>
+ #include <minwinbase.h>
+@@ -31,6 +36,9 @@
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AssociatedEnum_(WIN32_ERROR)
++#endif
+ WINBASEAPI
+ LSTATUS
+ WINAPI
