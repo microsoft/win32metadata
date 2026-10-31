@@ -21,7 +21,8 @@ namespace ClangSharpSourceToWinmd
         }
 
         internal static IEnumerable<SyntaxTree> QualifyWithDiagnostics(SyntaxTree[] trees,
-            IEnumerable<MetadataReference> references, GenerationValidation validation)
+            IEnumerable<MetadataReference> references, GenerationValidation validation,
+            IReadOnlyDictionary<string, string> requiredNamespaces = null)
         {
             var paths = new HashSet<string>(trees.Select(tree => tree.FilePath), StringComparer.OrdinalIgnoreCase);
             var fields = trees.ToDictionary(tree => tree, tree => GetFields(tree).ToArray());
@@ -41,9 +42,10 @@ namespace ClangSharpSourceToWinmd
                     "CrossArchConstants", inputs, references,
                     new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)));
                 // Common trees must not be overwritten by another profile's intermediate lowering.
-                int previousErrors = validation.Errors.Count;
-                compilation = HeaderTypedefMerger.LowerConstantsWithDiagnostics(compilation, false, validation);
-                if (validation.Errors.Count != previousErrors)
+                int previousErrors = validation.BlockingErrorCount;
+                compilation = HeaderTypedefMerger.LowerConstantsWithDiagnostics(compilation, false, validation,
+                    canonicalContracts: true, requiredNamespaces: requiredNamespaces);
+                if (validation.BlockingErrorCount != previousErrors)
                 {
                     validation.Block("emitter.constant-qualification:" + architecture, "native typedef storage lowering");
                     continue;
@@ -118,7 +120,7 @@ namespace ClangSharpSourceToWinmd
                         "CSSW003", "emitter.constant-qualification", use.Tree.FilePath, use.Variable.Identifier.ValueText,
                         architecture: use.Architecture.ToString());
 
-            if (validation.HasErrors)
+            if (validation.HasBlockingErrors)
                 return trees;
             return trees.Select(tree => tree.WithRootAndOptions(tree.GetRoot().ReplaceNodes(fields[tree], (field, _) =>
             {

@@ -100,7 +100,7 @@ namespace ClangSharpSourceToWinmdTests
         [DataRow("generic-pointee")]
         [DataRow("nested-pointee")]
         [DataRow("aliased-pointee")]
-        public void OpaqueStructPointerCompositionRejectsIncompleteOrConflictingProof(string conflict)
+        public void OpaqueStructPointerCompositionReportsIncompleteOrConflictingProof(string conflict)
         {
             using var fixture = new Fixture("x64");
             string retained = RetainedOpaqueStructSource();
@@ -189,12 +189,13 @@ namespace ClangSharpSourceToWinmdTests
             fixture.Write("autotypes.cs", retained);
             fixture.Write("Bindings.header-types.cs", header);
             fixture.Write("Bindings.cs", records);
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile(),
+                emissionFailure: conflict == "generic-pointee" ? "GENERIC_TAG" : null);
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
         [TestMethod]
-        public void OpaqueStructPointerProofCannotChooseBetweenRetainedProviders()
+        public void OpaqueStructPointerProvidersKeepCanonicalStorageAndReportUnprovedMappings()
         {
             using var fixture = new Fixture("x64");
             string retained = RetainedOpaqueStructSource();
@@ -204,7 +205,7 @@ namespace ClangSharpSourceToWinmdTests
             File.WriteAllText(Path.Combine(common, "autotypes.cs"), retained);
             fixture.Write("Bindings.header-types.cs", HeaderWithOpaqueStructProof());
             fixture.Write("Bindings.cs", "namespace Test { public partial struct OPAQUE_TAG { } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -217,7 +218,7 @@ namespace ClangSharpSourceToWinmdTests
                 source: OpaqueHeaderSource().Replace("public unsafe",
                     "[global::Windows.Win32.Foundation.Metadata.InvalidHandleValue(5)] public unsafe", StringComparison.Ordinal)));
             fixture.Write("Bindings.cs", "namespace Test { public partial struct OPAQUE_TAG { } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting 'global::Windows.Win32.Foundation.Metadata.InvalidHandleValueAttribute' annotations");
         }
 
@@ -239,7 +240,7 @@ namespace ClangSharpSourceToWinmdTests
                 _ => header.Replace("\"pointerDepth\":1", "\"pointerDepth\":2", StringComparison.Ordinal),
             };
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "x64", "Bindings.header-types.cs"), conflicting);
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 
@@ -254,7 +255,7 @@ namespace ClangSharpSourceToWinmdTests
             fixture.Write("Other.header-types.cs", HeaderWithOpaqueStructProof(storage: "OTHER_TAG*"));
             fixture.Write("Bindings.cs", excludedTags ? "" :
                 "namespace Test { public partial struct OPAQUE_TAG { } public partial struct OTHER_TAG { } }");
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = AssertRecoveredConflict(fixture, () => fixture.Compile());
             StringAssert.Contains(error.Message, "Conflicting native typedef Value storage types");
         }
 

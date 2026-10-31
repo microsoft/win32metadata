@@ -89,6 +89,12 @@ different native declaration families for the same explicitly routed public
 projection; each family still validates independently. An ambiguous native
 target, an unrelated alias, or an output namespace alone does not establish a
 projection. Native handle contracts also retain their source-bound public owner.
+A retained provider or a proven native target establishes the canonical contract.
+Provider priority uses the retained definition, native target ownership, direct
+traversal, physical header identity and location, then architecture and semantic
+declaration keys. Equivalent nominal native-typedef backing takes precedence
+over primitive storage when those source facts tie. Partition order, input order
+and generated filenames do not select the public contract.
 A `DECLARE_HANDLE` observation identifies its own native family; it does not
 redirect an unrelated inferred typedef with the same name. Explicit cleanup or
 compatible-type annotations can select a shared owner, while native storage and
@@ -345,14 +351,16 @@ width and alignment. This does not admit arbitrary record-to-scalar mappings,
 floating storage or narrowing providers.
 Retained-provider composition accepts one string `NativeTypeName`
 source-transport attribute and compatible `Const`/string `Documentation`
-metadata on `Value`. Duplicate, conflicting, unsupported or malformed field
-attributes still reject. An existing `MetadataTypedef` provider retains its
+metadata on `Value`. Duplicate, unsupported or malformed field attributes still
+reject. Conflicts between otherwise valid provider annotations retain the
+canonical contract and produce contextual diagnostics. An existing
+`MetadataTypedef` provider retains its
 explicit contract rather than becoming a `NativeTypedef`.
 Retained-provider composition compares native nominal backing chains with the
 provider's field encoding without flattening emitted alias declarations.
-Constant qualification and lowering use the same validated backing-chain
-analysis. Every fragment, including retained providers, must agree on fixed
-integer storage and signedness before a native typedef constant can be lowered.
+Constant qualification uses the same canonical provider choice for its read-only
+backing-chain view; full composition subsequently validates and reports every
+candidate. Constant lowering then uses the selected fixed-integer contract.
 This analysis does not change public alias fields or direct API identities.
 Successfully composed retained aliases keep their validated header provenance
 for constant and cast lowering. An enum backed by a native integer alias uses
@@ -379,9 +387,13 @@ Multiple native alias owners in one input still reject unless a single retained
 provider has an explicit canonical namespace route and every header fragment
 passes the same storage and metadata checks.
 That existing retained route can reconcile distinct native typedef declarations
-and authored remaps onto its public provider. Declaration conflicts within each
-native identity and incompatible compiler-bound storage or metadata still reject;
-a matching short name does not authorize that projection.
+and authored remaps onto its public provider. Invalid native declaration identity
+or an unproved mapping still rejects; a matching short name does not authorize
+that projection. Once a retained provider or proven native target establishes
+the contract, incompatible compiler-bound storage, pointee shape and otherwise
+valid annotations produce `CSSW005` errors while the selected definition and its
+consumers continue through composition and emission. Every independent candidate
+is checked; equal byte size does not establish compatibility.
 Header-only integer providers can compare
 their semantically resolved terminal fixed-integer backing without flattening
 the retained field's nominal type. Signedness, width, pointer ownership,
@@ -389,8 +401,9 @@ annotations and other storage conflicts remain validated.
 Source-bound fixed-integer constant variables use Clang's evaluated native
 value, including native character-to-unsigned and signed-to-unsigned
 conversions, from the original translation unit. This does not reinterpret
-managed C# initializers during emission: invalid managed casts, overflow and
-conflicting backing storage still reject.
+managed C# initializers during emission: invalid managed casts and overflow still
+reject. Recoverable provider conflicts do not replace the selected backing
+contract during constant qualification.
 An existing retained integral resource with `NativeTypedef`, `RAIIFree` and
 `InvalidHandleValue` can preserve its fixed-integer signed encoding when the
 native backing has the same byte width. This does not apply to
@@ -402,7 +415,17 @@ profile's exact native pointer width. Compatible partial observations cannot
 narrow an otherwise unchanged common retained contract or erase conditional
 metadata. Plain `char` and Windows wide-character aliases can retain the
 established provider's character encoding only through their source-bound
-native character spelling and matching pointer depth.
+native character spelling and matching pointer depth. The same rule applies
+to proven header-only configured native targets after native ABI validation.
+Creating that projection requires native `char` or `wchar_t` spelling; an
+ordinary configured `unsigned short*` contract remains `ushort*`. Existing
+retained character contracts can still accept their supported unsigned-short
+native encoding.
+For example, canonical native `PSTR` can retain its `CHAR*` provenance while its
+public `Value` remains `byte*`; the native scalar `CHAR` remains `sbyte`. An
+explicit `RPC_CSTR` to `PSTR` mapping can compose with that character projection.
+Arbitrary signed/unsigned pointers, explicit `signed char`, different pointer
+depths and unproved mappings do not acquire this equivalence.
 
 Complete named and anonymous record pointees retain their generated record and
 fields. The scraper joins the generated managed record through native source
@@ -611,11 +634,16 @@ blocked receipts follow the [version 1 schema](generation-diagnostics.schema.jso
 | `ObjDir\idl-generation-diagnostics.json` | IDL source-preparation and compiler process failures. |
 | `constants-task-diagnostics.json`, `native-constant-conflicts.json` | Input-plan, SDK identity, native proof, ownership, legacy constant and enum-finalization errors. The successful native selection report retains its existing shape. |
 | `constants-preflight-diagnostics.json`, `emitter-preflight-diagnostics.json` | Read-only input validation after an earlier prerequisite failed; dependent selection, transformation, compilation and publication remain blocked. |
-| `generation-diagnostics.json` | Managed source, reference, composition, compilation or emission rejection. |
+| `generation-diagnostics.json` | Managed source, reference, composition, compilation or emission diagnostics, including retained recoverable composition errors after successful emission. |
 
 `Errors` retain `Code`, `Stage`, `Message`, `Input`, `Symbol`, `Header`, `Line`,
 `Architecture`, `Partition`, `SelectedSdkRoot`, `IdentityCategory` and the
-original exception's full `Cause`. Group by stable code/stage/identity and source
+original exception's full `Cause`. `BlocksEmission` defaults to `true`, including
+older receipts without that field. Recoverable canonical-provider conflicts set
+it to `false` and also retain `SelectedInput`, `SelectedStorage`,
+`CandidateStorage`, `SelectedSource` and `CandidateSource`. Native source context
+includes declaration identity, header hash/location, traversal, measured ABI and
+the source architecture when recorded. Group by stable code/stage/identity and source
 context; keep every raw error. Prepared SDK binding errors use
 `NATIVE_SDK_BINDING` / `constants.native-inputs` /
 `prepared-sdk-header-binding`, including the raw header, input architecture and
@@ -626,6 +654,15 @@ and its prerequisite; `Reports` names retained stage receipts. Constants failure
 input paths, byte lengths and SHA-256 pins, plus source identities, rather than
 copying the native-input payloads into another JSON document.
 
+An emitter report with only recoverable conflicts has
+`Status: "completed-with-diagnostics"`, a nonempty `Errors` array and no blocked
+stages. The CLI reports the complete collection after emission with the explicit
+`recoverable error` prefix. The MSBuild task retains those full messages without
+turning them into task failures or `WMG002` gates. The WinMD contains the chosen
+definitions and all successfully bound consumers; this status does not mean the
+output is error-free. Native producer authorization still requires the separate,
+strict `Status: "completed"` receipt described above.
+
 Report membership is scoped to the targets and jobs attempted by the current
 failure path, not a recursive scan of unrelated old reports or a timestamp guess.
 Read-only emitter preflight neither deletes nor rewrites `generated\obj` or a
@@ -635,13 +672,18 @@ Known report schema violations produce `WMG999` diagnostics at the report
 boundary without stopping later independent report imports; malformed originals
 remain referenced on disk. A successful up-to-date `EmitWinmd` target also
 retires stale final/preflight failure receipts without rebuilding the image.
+Recoverable composition diagnostics retain the current emitter report after
+successful emission. An independently failed task still produces a blocking
+infrastructure diagnostic when its receipts contain only nonblocking errors.
 No failed/preflight path publishes an incomplete WinMD; successful serialization
 uses a same-directory `.pending` file before replacing the output. An existing
 valid image is not overwritten by a rejected attempt.
 
 Collection stops at genuine dependencies: invalid native ownership sets block
-legacy alias finalization; invalid transformed source/composition blocks the
-dependent semantic stages. A partial metadata builder is never resumed.
+legacy alias finalization; malformed transformed source, unproved ownership and
+independent compiler or metadata-encoding errors still block their dependent
+semantic stages. Recoverable conflicts against an established canonical provider
+do not block those stages. A partial metadata builder is never resumed.
 Unexpected exceptions, cancellation, unavailable tools and unclassified I/O or
 native-parser failures remain fatal, with explicit blocked stages; the reporter
 does not claim that their remaining work ran. External SDK, MIDL and native

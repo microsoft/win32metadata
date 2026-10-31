@@ -309,7 +309,7 @@ namespace ClangSharpSourceToWinmd
                     IsValidCsSourceFile(file, arch)).ToArray();
             if (arch == "crossarch")
                 ValidateHeaderTypesFamilies(sourceFiles, validation);
-            if (preflightOnly || validation.HasErrors)
+            if (preflightOnly || validation.HasBlockingErrors)
             {
                 CollectSyntaxErrors(FilesToTrees(sourceFiles));
                 validation.Block("emitter.source-transformation;emitter.compilation;EmitWinmd;default tests",
@@ -480,7 +480,8 @@ namespace ClangSharpSourceToWinmd
                 watch.Restart();
                 try
                 {
-                    var qualified = CrossArchConstantQualifier.QualifyWithDiagnostics(canonicalProviders, refs, validation);
+                    var qualified = CrossArchConstantQualifier.QualifyWithDiagnostics(canonicalProviders, refs, validation,
+                        configuredRequiredNamespaces);
                     StopIfInvalid("emitter.crossarch-composition", "constant qualification for every architecture");
                     foreach (var tree in qualified)
                         WriteTree(tree, tree.FilePath);
@@ -594,7 +595,7 @@ namespace ClangSharpSourceToWinmd
             {
                 comp = MergeLegacyTypedefProjections(comp, requiredNamespaces, validation);
                 comp = HeaderTypedefMerger.MergeWithDiagnostics(comp, validation, configuredRequiredNamespaces, recordFamilies, remaps);
-                if (!validation.HasErrors)
+                if (!validation.HasBlockingErrors)
                     comp = MergeRepeatedStructs(comp, validation);
             }
             finally
@@ -603,16 +604,18 @@ namespace ClangSharpSourceToWinmd
             }
             Console.WriteLine("  Lowering constants and validating associations...");
             watch.Restart();
-            if (!validation.HasErrors)
+            if (!validation.HasBlockingErrors)
             {
                 comp = HeaderTypedefMerger.LowerConstantsWithDiagnostics(comp, true, validation);
-                if (!validation.HasErrors)
+                if (!validation.HasBlockingErrors)
                     comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
             }
             else
                 validation.Block("emitter.typedef-constant-lowering", "native typedef composition");
             HeaderEnumGroupMerger.ValidateAssociationsWithDiagnostics(comp, arch, validation);
             StopIfInvalid("emitter.compilation", "typedef and association validation", comp.SyntaxTrees);
+            if (validation.HasErrors)
+                validation.WriteReport(validationReport, producerReports);
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
@@ -623,7 +626,7 @@ namespace ClangSharpSourceToWinmd
             {
                 if (syntaxTrees != null)
                     CollectSyntaxErrors(syntaxTrees);
-                if (!validation.HasErrors)
+                if (!validation.HasBlockingErrors)
                     return;
                 if (syntaxTrees == null)
                     CollectSyntaxErrors(FilesToTrees(modifiedFiles.Where(File.Exists)));
@@ -994,7 +997,7 @@ namespace ClangSharpSourceToWinmd
                             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)));
                         compilation = HeaderTypedefMerger.BindLegacyEnumProjectionsForComparison(compilation, validation,
                             requiredNamespaces, remaps);
-                        if (validation.HasErrors)
+                        if (validation.HasBlockingErrors)
                             return trees;
                         compilations.Add(architecture, compilation);
                         comparisonTrees.Add(architecture, compilation.SyntaxTrees.ToDictionary(tree => tree.FilePath,
