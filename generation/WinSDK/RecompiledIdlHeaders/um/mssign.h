@@ -180,6 +180,27 @@ typedef struct _SIGNER_SUBJECT_INFO {
     };
 } SIGNER_SUBJECT_INFO, *PSIGNER_SUBJECT_INFO;
 
+typedef struct _SIGNER_SIGN_EX2_PARAMS {
+    DWORD                  dwFlags;
+    PSIGNER_SUBJECT_INFO   pSubjectInfo;
+    PSIGNER_CERT           pSigningCert;
+    PSIGNER_SIGNATURE_INFO pSignatureInfo;
+    PSIGNER_PROVIDER_INFO  pProviderInfo;
+    DWORD                  dwTimestampFlags;
+    PCSTR                  pszAlgorithmOid;
+    PCWSTR                 pwszTimestampURL;
+    PCRYPT_ATTRIBUTES      pCryptAttrs;
+    PVOID                  pSipData;
+    PSIGNER_CONTEXT        *pSignerContext;
+    PVOID                  pCryptoPolicy;
+    PVOID                  pReserved;
+} SIGNER_SIGN_EX2_PARAMS, *PSIGNER_SIGN_EX2_PARAMS;
+
+typedef struct _APPX_SIP_CLIENT_DATA {
+    PSIGNER_SIGN_EX2_PARAMS pSignerParams;
+    IUnknown                *pAppxSipState;
+} APPX_SIP_CLIENT_DATA, *PAPPX_SIP_CLIENT_DATA;
+
 HRESULT WINAPI SignError(void);
 
 HRESULT WINAPI SignerFreeSignerContext(
