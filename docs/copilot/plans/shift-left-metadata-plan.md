@@ -449,7 +449,7 @@ DoAll.ps1
    21.1.8 provide `[NativeAnnotation("...")]` support for
    `__attribute__((annotate(...)))` on all declaration types (functions,
    parameters, struct fields, return values). Compatibility and execution-speed
-   corrections use these existing pins. No Clang23 upgrade is planned.
+   corrections use these existing pins.
 2. Create `win32metadata.h` with the annotation macros
 3. Add `-D_WIN32METADATA_=1` to `baseSettings.rsp`
 4. Add `#include "win32metadata.h"` to the scraper include chain
