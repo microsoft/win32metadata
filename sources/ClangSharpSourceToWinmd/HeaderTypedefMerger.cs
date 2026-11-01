@@ -600,6 +600,7 @@ namespace ClangSharpSourceToWinmd
                 var sources = aliases.Select(alias => (Source: NativeTypedefSourceProvenance.Read(alias.Declaration),
                     Architectures: (Architecture)GetArchitecture(alias)));
                 bool retainedProjection = HasRoutedRetainedOwner(aliases, requiredNamespaces) ||
+                    HasConfiguredRetainedOwner(aliases) ||
                     retainedEnumProjections?.Contains(group.Key) == true || nativeOwner != null;
                 bool intrinsicProjection = aliases.All(alias =>
                     NativeTypedefSourceProvenance.Read(alias.Declaration) != null &&
@@ -1057,6 +1058,23 @@ namespace ClangSharpSourceToWinmd
                 requiredNamespaces.TryGetValue(retained[0].Symbol.Name, out string owner) &&
                 owner == retained[0].Symbol.ContainingNamespace.ToDisplayString() &&
                 aliases.Where(alias => alias != retained[0]).All(alias => HeaderEnumGroupMerger.IsHeaderTypesFile(alias.Tree.FilePath));
+        }
+
+        private static bool HasConfiguredRetainedOwner(Fragment[] aliases)
+        {
+            var retained = aliases.Where(alias => IsAutoTypesFile(alias.Tree.FilePath)).ToArray();
+            if (retained.Length != 1)
+                return false;
+            var headers = aliases.Where(alias => alias != retained[0]).ToArray();
+            if (headers.Length == 0 || headers.Any(alias => !HeaderEnumGroupMerger.IsHeaderTypesFile(alias.Tree.FilePath)))
+                return false;
+            var configuredFamilies = headers.Where(alias =>
+                    NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(alias.Declaration))
+                .Select(alias => ProjectionFamily(NativeTypedefSourceProvenance.Read(alias.Declaration))).ToHashSet();
+            // A configured public target can compose distinct native families without equating their declarations.
+            return configuredFamilies.Count != 0 && headers.All(alias =>
+                NativeTypedefSourceProvenance.Read(alias.Declaration) is { } source &&
+                source.Name == retained[0].Symbol.Name && configuredFamilies.Contains(ProjectionFamily(source)));
         }
 
         private static bool CanKeepCommonHeaderCoverage(CSharpCompilation compilation, Fragment[] aliases, Fragment common)
