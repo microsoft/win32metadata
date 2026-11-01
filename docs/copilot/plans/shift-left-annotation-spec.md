@@ -303,7 +303,10 @@ configuration and does not require a header annotation or a self-remap.
 For inferred scalar aliases, the producer can retain nominal source spelling
 alongside a layout-backed provider. The provider's primitive storage and inferred
 projection policy govern subsequent lowering. Producer checks verify those
-contracts before requiring any final CLR spelling.
+contracts before requiring any final CLR spelling. They bind signature return and
+parameter types to the source-proven provider in the same compilation and verify
+its primitive field type. An unchanged native spelling does not require a
+redundant `NativeTypeName` attribute.
 
 Source-proven native aliases with configured nominal bindings to one retained
 public wrapper can compose into that wrapper. Their native declaration families

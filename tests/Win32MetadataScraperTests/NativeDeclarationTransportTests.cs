@@ -62,8 +62,9 @@ ORDINARY_COUNT ReadCount(ORDINARY_COUNT value);
             Assert.Equal(new[] { "GROUP_FIRST", "GROUP_SECOND" },
                 declaration.Members.Select(member => member.Identifier.ValueText)
                     .OrderBy(value => value, StringComparer.Ordinal));
+            var sourceTree = CSharpSyntaxTree.ParseText(fixture.ReadSource());
             var compilation = CSharpCompilation.Create("NativeLogicalGroupValues",
-                new[] { declaration.SyntaxTree },
+                new[] { declaration.SyntaxTree, sourceTree },
                 new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) });
             var model = compilation.GetSemanticModel(declaration.SyntaxTree);
             var members = declaration.Members.ToDictionary(member => member.Identifier.ValueText,
@@ -75,7 +76,7 @@ ORDINARY_COUNT ReadCount(ORDINARY_COUNT value);
             Assert.DoesNotContain("\"Size\"", declaration.GetTrailingTrivia().ToFullString());
             Assert.DoesNotContain("\"Alignment\"", declaration.GetTrailingTrivia().ToFullString());
 
-            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot()
+            var methods = sourceTree.GetRoot()
                 .DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
             var groupMethod = methods.Single(method => method.Identifier.ValueText == "ReadGroup");
             Assert.Equal("GROUP", SyntaxUtils.GetNativeTypeNameFromAttributesLists(
@@ -103,10 +104,14 @@ ORDINARY_COUNT ReadCount(ORDINARY_COUNT value);
             var ordinaryField = ordinaryProvider.Members.OfType<FieldDeclarationSyntax>().Single();
             Assert.Equal("Value", ordinaryField.Declaration.Variables.Single().Identifier.ValueText);
             Assert.Equal("uint", ordinaryField.Declaration.Type.ToString());
-            Assert.Equal("ORDINARY_COUNT", SyntaxUtils.GetNativeTypeNameFromAttributesLists(
-                SyntaxFactory.List(ordinary.AttributeLists.Where(list => list.Target?.Identifier.ValueText == "return"))));
-            Assert.Equal("ORDINARY_COUNT", SyntaxUtils.GetNativeTypeNameFromAttributesLists(
-                ordinary.ParameterList.Parameters.Single().AttributeLists));
+            var providerSymbol = Assert.IsAssignableFrom<INamedTypeSymbol>(model.GetDeclaredSymbol(ordinaryProvider));
+            var ordinarySymbol = Assert.IsAssignableFrom<IMethodSymbol>(
+                compilation.GetSemanticModel(sourceTree).GetDeclaredSymbol(ordinary));
+            Assert.True(SymbolEqualityComparer.Default.Equals(providerSymbol, ordinarySymbol.ReturnType));
+            Assert.True(SymbolEqualityComparer.Default.Equals(providerSymbol, ordinarySymbol.Parameters.Single().Type));
+            var storageSymbol = Assert.IsAssignableFrom<IFieldSymbol>(
+                model.GetDeclaredSymbol(ordinaryField.Declaration.Variables.Single()));
+            Assert.Equal(SpecialType.System_UInt32, storageSymbol.Type.SpecialType);
 
             var reparsed = CSharpSyntaxTree.ParseText(declaration.ToFullString()).GetRoot()
                 .DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
