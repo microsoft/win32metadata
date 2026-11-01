@@ -218,6 +218,9 @@ or used to infer native ownership.
 Selected type nodes are qualified in one syntax-rewriter traversal rather than
 through Roslyn's bulk replacement bookkeeping. The original qualification rules,
 selected nodes and trivia are retained, including the original enclosing scope.
+Namespace addition appends the collected declarations and APIs at the root without
+revisiting its unchanged descendants. Removal, import filtering, qualification,
+namespace formatting and final reparsing remain unchanged.
 Legacy numeric partition suffixes retain their established parsed-prefix
 namespace. The existing syntax repair records the original namespace for the
 source-provenance check while ownership uses the repaired, valid C# namespace.

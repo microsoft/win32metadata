@@ -246,8 +246,6 @@ namespace ClangSharpSourceToWinmd
 
                 public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
                 {
-                    node = (CompilationUnitSyntax)base.VisitCompilationUnit(node);
-
                     if (this.namespaceToMovedData.Count != 0)
                     {
                         List<MemberDeclarationSyntax> newNamespaces = new List<MemberDeclarationSyntax>();

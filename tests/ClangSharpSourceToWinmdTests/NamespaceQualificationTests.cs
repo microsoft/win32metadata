@@ -12,6 +12,65 @@ namespace ClangSharpSourceToWinmdTests
     public class NamespaceQualificationTests
     {
         [DataTestMethod]
+        [DataRow("")]
+        [DataRow("namespace Original { /* keep */ }")]
+        [DataRow("namespace Original { /* type */ public struct VALUE { public int Field; } /* api */ public static partial class Apis { [DllImport(\"fixture.dll\")] public static extern void Call(); } }")]
+        public void NamespaceAdditionPreservesExactUnmovedOutput(string source)
+        {
+            var tree = CSharpSyntaxTree.ParseText(source, path: "Bindings.cs");
+            var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree,
+                new Dictionary<string, string>());
+            Assert.AreEqual(source, moved.GetText().ToString());
+            Assert.AreEqual(tree.FilePath, moved.FilePath);
+        }
+
+        [DataTestMethod]
+        [DataRow("/* struct */ public struct VALUE { /* field */ public int Field; }", false)]
+        [DataRow("/* enum */ public enum VALUE : uint { /* member */ A = 1 }", false)]
+        [DataRow("/* callback */ public delegate void VALUE(int value);", false)]
+        [DataRow("public static partial class Apis { /* api */ [DllImport(\"fixture.dll\", EntryPoint = \"NativeCall\")] public static extern void VALUE(); }", true)]
+        public void NamespaceAdditionPreservesExactMovedOutputAndTrivia(string source, bool api)
+        {
+            var tree = CSharpSyntaxTree.ParseText($"namespace Original {{ {source} }}", path: "Bindings.cs");
+            var root = tree.GetCompilationUnitRoot();
+            MemberDeclarationSyntax declaration = api
+                ? root.DescendantNodes().OfType<MethodDeclarationSyntax>().Single()
+                : root.Members.OfType<NamespaceDeclarationSyntax>().Single().Members.Single();
+            var expected = root.RemoveNode(declaration, SyntaxRemoveOptions.KeepNoTrivia);
+            MemberDeclarationSyntax projected = declaration;
+            if (api)
+            {
+                projected = CSharpSyntaxTree.ParseText("public static unsafe partial class Apis {}")
+                    .GetCompilationUnitRoot().Members.OfType<ClassDeclarationSyntax>().Single()
+                    .AddMembers(declaration);
+            }
+            var destination = SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName("Moved"))
+                .AddMembers(projected).NormalizeWhitespace()
+                .WithLeadingTrivia(SyntaxFactory.Whitespace("\r\n"))
+                .WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
+            expected = expected.AddMembers(destination);
+
+            var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree,
+                new Dictionary<string, string> { ["VALUE"] = "Moved" });
+            Assert.AreEqual(expected.ToFullString(), moved.GetText().ToString());
+            Assert.AreEqual(tree.FilePath, moved.FilePath);
+        }
+
+        [TestMethod]
+        public void NamespaceAdditionPreservesEmptyDllImportFiltering()
+        {
+            var tree = CSharpSyntaxTree.ParseText(
+                "namespace Original { public static class Apis { [DllImport(\"\")] public static extern void Missing(); } }",
+                path: "Bindings.cs");
+            var root = tree.GetCompilationUnitRoot();
+            var method = root.DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var expected = root.RemoveNode(method, SyntaxRemoveOptions.KeepNoTrivia);
+            var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree,
+                new Dictionary<string, string>());
+            Assert.AreEqual(expected.ToFullString(), moved.GetText().ToString());
+        }
+
+        [DataTestMethod]
         [DataRow("<TARGET>", "public TARGET Value;", "TARGET")]
         [DataRow("", "public struct TARGET {} public TARGET Value;", "TARGET")]
         [DataRow("", "public enum TARGET { Zero } public TARGET Value;", "TARGET")]
