@@ -318,8 +318,11 @@ unproved same-name types do not inherit a native layout.
 
 The production integrity suite checks each architecture's `SLIST_ENTRY` in the
 emitted SDK image. Its 64-bit rows read the physical ClassLayout size and serialized
-Alignment payload. The x86 row checks effective size without asserting a raw
-layout size or Alignment payload.
+Alignment payload. The x86 row derives effective size from the actual single
+instance self-pointer field and its target-width storage, together with the
+declared layout minimum. Empty, widened, displaced, static, or multiple fields
+cannot pass as four-byte records. It does not assert a raw layout size or
+Alignment payload.
 
 Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that

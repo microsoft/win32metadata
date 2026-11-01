@@ -3,8 +3,10 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using TestCommon;
+using Win32MetadataTestCases;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -121,7 +123,7 @@ namespace Windows.Win32.Tests
 
             if (architecture == 1)
             {
-                Assert.Equal(size, Math.Max(4, record.GetLayout().Size));
+                Assert.Equal(size, NativeContractPhysicalAssertions.X86SinglePointerRecordSize(reader, record));
                 return;
             }
 
@@ -134,6 +136,71 @@ namespace Windows.Win32.Tests
             Assert.Equal(size, value.ReadInt32());
             Assert.Equal(0, value.ReadUInt16());
             Assert.Equal(0, value.RemainingBytes);
+        }
+
+        [Fact]
+        public void X86PointerRecordSizeRejectsBrokenPhysicalStorage()
+        {
+            foreach (var (fieldCount, wideField, offset, attributes, classSize, valid) in new[]
+            {
+                (1, false, -1, FieldAttributes.Public, 0, true),
+                (1, false, -1, FieldAttributes.Public, 4, true),
+                (0, false, -1, FieldAttributes.Public, 0, false),
+                (2, false, -1, FieldAttributes.Public, 0, false),
+                (1, true, -1, FieldAttributes.Public, 0, false),
+                (1, false, 4, FieldAttributes.Public, 0, false),
+                (1, false, -1, FieldAttributes.Public | FieldAttributes.Static, 0, false),
+                (1, false, -1, FieldAttributes.Public, 8, false),
+            })
+            {
+                using var image = PointerRecordMetadata(fieldCount, wideField, offset, attributes, classSize);
+                var reader = image.GetMetadataReader(MetadataReaderOptions.None);
+                var record = Assert.Single(reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => reader.GetString(type.Name) == "SLIST_ENTRY"));
+                if (valid)
+                    Assert.Equal(4, NativeContractPhysicalAssertions.X86SinglePointerRecordSize(reader, record));
+                else
+                    Assert.ThrowsAny<Xunit.Sdk.XunitException>(() =>
+                        Assert.Equal(4, NativeContractPhysicalAssertions.X86SinglePointerRecordSize(reader, record)));
+            }
+        }
+
+        private static MetadataReaderProvider PointerRecordMetadata(
+            int fieldCount, bool wideField, int offset, FieldAttributes attributes, int classSize)
+        {
+            var metadata = new MetadataBuilder();
+            metadata.AddModule(0, metadata.GetOrAddString("pointer-record.dll"),
+                metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+            var assembly = metadata.AddAssemblyReference(metadata.GetOrAddString("mscorlib"),
+                new Version(4, 0, 0, 0), default, default, default, default);
+            var baseType = metadata.AddTypeReference(assembly,
+                metadata.GetOrAddString("System"), metadata.GetOrAddString("ValueType"));
+            var fields = MetadataTokens.FieldDefinitionHandle(1);
+            var methods = MetadataTokens.MethodDefinitionHandle(1);
+            metadata.AddTypeDefinition(TypeAttributes.NotPublic, default,
+                metadata.GetOrAddString("<Module>"), default, fields, methods);
+            var record = metadata.AddTypeDefinition(TypeAttributes.Public |
+                (offset < 0 ? TypeAttributes.SequentialLayout : TypeAttributes.ExplicitLayout),
+                metadata.GetOrAddString("Windows.Win32.System.Kernel"),
+                metadata.GetOrAddString("SLIST_ENTRY"), baseType, fields, methods);
+            if (classSize != 0)
+                metadata.AddTypeLayout(record, 0, (uint)classSize);
+            for (int index = 0; index < fieldCount; index++)
+            {
+                var signature = new BlobBuilder();
+                var encoder = new BlobEncoder(signature).FieldSignature();
+                if (wideField)
+                    encoder.UInt64();
+                else
+                    encoder.Pointer().Type(record, isValueType: true);
+                var field = metadata.AddFieldDefinition(attributes,
+                    metadata.GetOrAddString(index == 0 ? "Next" : "Extra"), metadata.GetOrAddBlob(signature));
+                if (offset >= 0)
+                    metadata.AddFieldLayout(field, offset);
+            }
+            var bytes = new BlobBuilder();
+            new MetadataRootBuilder(metadata).Serialize(bytes, methodBodyStreamRva: 0, mappedFieldDataStreamRva: 0);
+            return MetadataReaderProvider.FromMetadataImage(bytes.ToImmutableArray());
         }
 
         private static int ReadSupportedArchitectures(MetadataReader reader, CustomAttributeHandleCollection attributes)

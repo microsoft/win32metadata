@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Win32MetadataTestCases;
 using Xunit;
 using static Win32MetadataScraperTests.HeaderAnnotationWinmdTests;
 
@@ -137,7 +138,9 @@ SLIST_ENTRY* __stdcall ReadSListRecord(SLIST_ENTRY* entry);
                 Assert.Equal("Next", reader.GetString(next.Name));
                 Assert.Equal(projectedPointer, next.DecodeSignature(decoder, null));
                 Assert.Contains(next.GetOffset(), new[] { -1, 0 });
-                Assert.Equal(size, Math.Max(architecture == "x86" ? 4 : 8, record.GetLayout().Size));
+                Assert.Equal(size, architecture == "x86"
+                    ? NativeContractPhysicalAssertions.X86SinglePointerRecordSize(reader, record)
+                    : record.GetLayout().Size);
                 if (architecture != "x86")
                 {
                     var attribute = reader.GetCustomAttribute(Assert.Single(record.GetCustomAttributes(),
@@ -155,7 +158,7 @@ SLIST_ENTRY* __stdcall ReadSListRecord(SLIST_ENTRY* entry);
                     var canonicalNext = reader.GetFieldDefinition(Assert.Single(canonicalRecord.GetFields()));
                     Assert.Equal("Next", reader.GetString(canonicalNext.Name));
                     Assert.Equal(canonicalNamespace + ".SINGLE_LIST_ENTRY*", canonicalNext.DecodeSignature(decoder, null));
-                    Assert.Equal(size, Math.Max(4, canonicalRecord.GetLayout().Size));
+                    Assert.Equal(size, NativeContractPhysicalAssertions.X86SinglePointerRecordSize(reader, canonicalRecord));
                 }
                 foreach (string name in new[] { "ReadSListAlias", "ReadSListRecord" })
                 {

@@ -91,6 +91,49 @@ namespace Win32MetadataTestCases
             AssertMetadataClosure(reader);
         }
 
+        internal static int X86SinglePointerRecordSize(MetadataReader reader, TypeDefinition record)
+        {
+            Assert.Equal(HandleKind.TypeReference, record.BaseType.Kind);
+            var baseType = reader.GetTypeReference((TypeReferenceHandle)record.BaseType);
+            Assert.Equal("System", reader.GetString(baseType.Namespace));
+            Assert.Equal("ValueType", reader.GetString(baseType.Name));
+            Assert.Equal(HandleKind.AssemblyReference, baseType.ResolutionScope.Kind);
+            var layout = record.Attributes & TypeAttributes.LayoutMask;
+            Assert.Contains(layout, new[] { TypeAttributes.SequentialLayout, TypeAttributes.ExplicitLayout });
+
+            var field = reader.GetFieldDefinition(Assert.Single(record.GetFields()));
+            Assert.Equal("Next", reader.GetString(field.Name));
+            Assert.Equal(FieldAttributes.Public, field.Attributes & FieldAttributes.FieldAccessMask);
+            Assert.False(field.Attributes.HasFlag(FieldAttributes.Static));
+            Assert.True(field.GetMarshallingDescriptor().IsNil);
+            int offset = field.GetOffset();
+            if (layout == TypeAttributes.ExplicitLayout)
+                Assert.Equal(0, offset);
+            else
+                Assert.Contains(offset, new[] { -1, 0 });
+
+            var signature = reader.GetBlobReader(field.Signature);
+            Assert.Equal((byte)SignatureKind.Field, signature.ReadSignatureHeader().RawValue);
+            Assert.Equal(SignatureTypeCode.Pointer, signature.ReadSignatureTypeCode());
+            Assert.Equal((byte)SignatureTypeKind.ValueType, signature.ReadByte());
+            var pointee = signature.ReadTypeHandle();
+            if (pointee.Kind == HandleKind.TypeDefinition)
+            {
+                Assert.Equal(record, reader.GetTypeDefinition((TypeDefinitionHandle)pointee));
+            }
+            else
+            {
+                Assert.Equal(HandleKind.TypeReference, pointee.Kind);
+                var reference = reader.GetTypeReference((TypeReferenceHandle)pointee);
+                Assert.Equal(HandleKind.ModuleDefinition, reference.ResolutionScope.Kind);
+                Assert.Equal(reader.GetString(record.Namespace), reader.GetString(reference.Namespace));
+                Assert.Equal(reader.GetString(record.Name), reader.GetString(reference.Name));
+            }
+            Assert.Equal(0, signature.RemainingBytes);
+
+            return Math.Max(sizeof(uint), record.GetLayout().Size);
+        }
+
         internal static void AssertMetadataClosure(MetadataReader reader)
         {
             var localTypes = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
