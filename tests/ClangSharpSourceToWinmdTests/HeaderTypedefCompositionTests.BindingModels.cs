@@ -3,6 +3,8 @@ using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using ClangSharpSourceToWinmd;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
@@ -88,16 +90,28 @@ public class NativeTypeNameAttribute : global::System.Attribute {
             using var relocated = new Fixture("x64");
             relocated.Write("autotypes.cs", "");
             string header = Path.Combine(relocated.DirectoryPath, "native-record.h");
-            File.WriteAllText(header, "struct NODE { int Value; };\n");
+            File.WriteAllText(header, "struct NODE { __declspec(align(16)) int Value; };\n");
             var record = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
+                "[global::Windows.Win32.Foundation.Metadata.Alignment(16)] " +
                 "public partial struct NODE { public int Value; }")!;
             var source = new NativeRecordSource("c:@S@NODE", "NODE", header,
-                NativeConstantGroupProvenance.HashFile(header), 1, 8, "NODE", "Original", true, 4, 4)
+                NativeConstantGroupProvenance.HashFile(header), 1, 8, "NODE", "Original", true, 16, 16)
             { SourceArchitecture = Architecture.X64 };
             record = NativeRecordSourceProvenance.Attach(record, source);
             relocated.Write("Bindings.cs", $"namespace Original {{\n{record.ToFullString()}\n}}");
             relocated.Write("Foreign.manual.cs",
                 "namespace Foreign { public struct NODE { public short Value; } }");
+            relocated.Write("Layout.manual.cs", @"
+namespace Windows.Win32.Foundation.Metadata {
+    public sealed class AlignmentAttribute : global::System.Attribute {
+        public AlignmentAttribute(int alignment) { }
+    }
+}
+namespace Foreign {
+    [global::System.Runtime.InteropServices.StructLayout(
+        global::System.Runtime.InteropServices.LayoutKind.Sequential, Pack = 1, Size = 12)]
+    public struct EXPLICIT_SIZE { public byte Value; }
+}");
             relocated.Write("Bindings.header-types.cs", @"
 using Windows.Win32.Foundation.Metadata;
 namespace Original {
@@ -123,6 +137,34 @@ namespace Original {
                     .PointedAtType.ToDisplayString());
             Assert.AreEqual(source, NativeRecordSourceProvenance.Read(
                 (StructDeclarationSyntax)native.DeclaringSyntaxReferences.Single().GetSyntax()));
+            string output = Path.Combine(relocated.DirectoryPath, "NativeRecordSize.winmd");
+            var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+                routed, new(), new(), new(), new Version(1, 0), output);
+            Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+            using var stream = File.OpenRead(output);
+            using var pe = new PEReader(stream);
+            var reader = pe.GetMetadataReader();
+            var physical = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Namespace) == "Support" &&
+                    reader.GetString(type.Name) == "NODE");
+            Assert.AreEqual(16, physical.GetLayout().Size);
+            Assert.AreEqual(0, (int)physical.GetLayout().PackingSize);
+            var alignment = reader.GetCustomAttribute(physical.GetCustomAttributes()
+                .Single(handle => AttributeName(reader, handle) == "AlignmentAttribute"));
+            var payload = reader.GetBlobReader(alignment.Value);
+            Assert.AreEqual((ushort)1, payload.ReadUInt16());
+            Assert.AreEqual(16, payload.ReadInt32());
+            Assert.AreEqual((ushort)0, payload.ReadUInt16());
+            Assert.AreEqual(0, payload.RemainingBytes);
+            var foreign = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Namespace) == "Foreign" &&
+                    reader.GetString(type.Name) == "NODE");
+            Assert.AreEqual(0, foreign.GetLayout().Size);
+            var explicitSize = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Namespace) == "Foreign" &&
+                    reader.GetString(type.Name) == "EXPLICIT_SIZE");
+            Assert.AreEqual(12, explicitSize.GetLayout().Size);
+            Assert.AreEqual(1, (int)explicitSize.GetLayout().PackingSize);
         }
 
         [TestMethod]

@@ -293,6 +293,13 @@ Definitions and textual qualification use that exact native route for names with
 source-proven owners. A same-named declaration outside those routes retains its
 own namespace instead of inheriting the short-name relocation.
 
+WinMD emission preserves a complete record's source-bound native size in its
+ClassLayout entry, including native tail padding caused by over-alignment.
+Packing remains separate, and the Alignment attribute retains its original
+argument. Explicit StructLayout sizes are also preserved; conflicting native
+sizes or a different explicit size are blocking. Incomplete declarations and
+unproved same-name types do not inherit a native layout.
+
 Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that
 owner together with their uses and constant ownership. Composition preserves
