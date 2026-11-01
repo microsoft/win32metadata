@@ -1035,6 +1035,13 @@ namespace ClangSharpSourceToWinmd
                 typeAttributes |= TypeAttributes.Public;
             }
 
+            var nativeSizes = symbol.DeclaringSyntaxReferences.Select(reference => reference.GetSyntax())
+                .OfType<StructDeclarationSyntax>()
+                .Select(declaration => NativeRecordSourceProvenance.Read(declaration)?.Size)
+                .OfType<long>().Distinct().ToArray();
+            if (nativeSizes.Length > 1)
+                throw new InvalidDataException($"Conflicting native record sizes for '{fullName}'.");
+            uint classSize = nativeSizes.Length == 0 ? 0 : checked((uint)nativeSizes[0]);
             int? packSize = null;
             var structLayoutAttr = symbol.GetAttributes().FirstOrDefault(a => a.AttributeClass.Name == "StructLayoutAttribute");
             if (structLayoutAttr != null)
@@ -1045,6 +1052,14 @@ namespace ClangSharpSourceToWinmd
                 foreach (var nameVal in structLayoutAttr.NamedArguments.Where(n => n.Key == "Pack"))
                 {
                     packSize = (int)nameVal.Value.Value;
+                    break;
+                }
+                foreach (var nameVal in structLayoutAttr.NamedArguments.Where(n => n.Key == "Size"))
+                {
+                    uint declaredSize = checked((uint)(int)nameVal.Value.Value);
+                    if (nativeSizes.Length != 0 && declaredSize != classSize)
+                        throw new InvalidDataException($"StructLayout size does not match native record size for '{fullName}'.");
+                    classSize = declaredSize;
                     break;
                 }
             }
@@ -1077,9 +1092,9 @@ namespace ClangSharpSourceToWinmd
 
             this.WriteStructEnums(node, destTypeDefHandle);
 
-            if (packSize.HasValue)
+            if (packSize.HasValue || classSize != 0)
             {
-                this.metadataBuilder.AddTypeLayout(destTypeDefHandle, (ushort)packSize.Value, 0);
+                this.metadataBuilder.AddTypeLayout(destTypeDefHandle, (ushort)(packSize ?? 0), classSize);
             }
 
             this.AddCustomAttributes(node, destTypeDefHandle);
