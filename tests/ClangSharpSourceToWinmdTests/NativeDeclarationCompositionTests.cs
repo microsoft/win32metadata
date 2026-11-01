@@ -275,9 +275,9 @@ namespace Windows.Win32.Foundation.Metadata {
                 "int", "uint", value.ToString(System.Globalization.CultureInfo.InvariantCulture));
             var group = new NativeConstantGroup("::" + nativeName, "GROUP", ns, "uint", header, 1,
                 new[] { new NativeConstantGroupMember(member, expression, new[] { binding }) });
-            var constants = new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
+            var constantSource = new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
                 DeclarationArchitecture(architecture), group);
-            declaration = NativeConstantGroupProvenance.Attach(declaration, constants);
+            declaration = NativeConstantGroupProvenance.Attach(declaration, constantSource);
             var source = new NativeDeclarationSource("c:" + headerName + "@T@" + nativeName, nativeName, header,
                 NativeConstantGroupProvenance.HashFile(header), 1, 1, "GROUP", ns, owner, NativeDeclarationKind.LogicalEnum)
             { SourceArchitecture = DeclarationArchitecture(architecture) };
@@ -288,11 +288,11 @@ namespace Windows.Win32.Foundation.Metadata {
             Assert.AreEqual(source, NativeDeclarationSourceProvenance.Read(reparsed));
             var transportedConstants = NativeConstantGroupProvenance.Read(reparsed);
             Assert.IsNotNull(transportedConstants);
-            Assert.AreEqual(constants.SourceFile, transportedConstants.SourceFile);
-            Assert.AreEqual(constants.SourceHash, transportedConstants.SourceHash);
-            Assert.AreEqual(constants.Architecture, transportedConstants.Architecture);
-            Assert.AreEqual(constants.Group.NativeName, transportedConstants.Group.NativeName);
-            Assert.AreEqual(constants.Group.Namespace, transportedConstants.Group.Namespace);
+            Assert.AreEqual(constantSource.SourceFile, transportedConstants.SourceFile);
+            Assert.AreEqual(constantSource.SourceHash, transportedConstants.SourceHash);
+            Assert.AreEqual(constantSource.Architecture, transportedConstants.Architecture);
+            Assert.AreEqual(constantSource.Group.NativeName, transportedConstants.Group.NativeName);
+            Assert.AreEqual(constantSource.Group.Namespace, transportedConstants.Group.Namespace);
             return text;
         }
 
