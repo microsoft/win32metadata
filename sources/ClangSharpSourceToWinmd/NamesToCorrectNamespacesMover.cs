@@ -15,7 +15,7 @@ namespace ClangSharpSourceToWinmd
             ISet<(string Namespace, string Name)> nativeEnumTypes = null,
             IReadOnlyList<SemanticModel> nativeReferenceModels = null)
         {
-            if (tree.FilePath.EndsWith("manual.cs"))
+            if (MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
             {
                 return tree;
             }
@@ -323,9 +323,44 @@ namespace ClangSharpSourceToWinmd
                 replacement = null;
                 if (!CouldReferenceRoutedType(node))
                     return false;
-                replacement = ConsistentRoute(models.Select(model =>
-                    GetTypeRoute(model.GetSymbolInfo(node).Symbol as INamedTypeSymbol, model)).ToArray(), node);
+                replacement = ConsistentRoute(models.Select(model => GetTypeRoute(node, model)).ToArray(), node);
                 return replacement != null;
+            }
+
+            private string GetTypeRoute(SyntaxNode node, SemanticModel model)
+            {
+                var binding = model.GetSymbolInfo(node);
+                if (binding.Symbol is INamedTypeSymbol resolved)
+                    return GetTypeRoute(resolved, model);
+                if (binding.CandidateReason != CandidateReason.Ambiguous ||
+                    binding.CandidateSymbols.Length == 0 ||
+                    binding.CandidateSymbols.Any(symbol => symbol is not INamedTypeSymbol))
+                    return null;
+                var candidates = binding.CandidateSymbols.Cast<INamedTypeSymbol>().ToArray();
+                var identities = candidates.Select(NativeIdentity).ToArray();
+                if (identities.Any(identity => identity == null) || identities.Distinct().Count() != 1)
+                    return null;
+                var candidateRoutes = candidates.Select(type => GetTypeRoute(type, model)).ToArray();
+                return candidateRoutes.All(route => route != null) && candidateRoutes.Distinct().Count() == 1
+                    ? candidateRoutes[0] : null;
+            }
+
+            private static (string Identity, string NativeName)? NativeIdentity(INamedTypeSymbol type)
+            {
+                var identities = type.DeclaringSyntaxReferences.Select(reference =>
+                {
+                    if (reference.GetSyntax() is not StructDeclarationSyntax declaration)
+                        return ((string Identity, string NativeName)?)null;
+                    var record = NativeRecordSourceProvenance.Read(declaration);
+                    if (record != null)
+                        return (NativeRecordSourceProvenance.GetIdentityKey(record), record.NativeName);
+                    var forward = NativeDeclarationSourceProvenance.Read(declaration);
+                    return forward?.Kind == NativeDeclarationKind.IncompleteRecord
+                        ? (NativeDeclarationSourceProvenance.GetIdentityKey(forward), forward.NativeName)
+                        : ((string Identity, string NativeName)?)null;
+                }).ToArray();
+                return identities.Length != 0 && identities.All(identity => identity != null) &&
+                    identities.Distinct().Count() == 1 ? identities[0] : null;
             }
 
             private bool CouldReferenceRoutedType(SyntaxNode node)
@@ -348,7 +383,19 @@ namespace ClangSharpSourceToWinmd
                     routes == null || !routes.TryGetValue(
                         (type.ContainingNamespace.ToDisplayString(), type.Name), out string owner))
                     return null;
-                string identifier = SyntaxFacts.GetKeywordKind(type.Name) == SyntaxKind.None ? type.Name : "@" + type.Name;
+                string name = type.Name;
+                if (name.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, System.StringComparison.Ordinal))
+                {
+                    string projectedName = name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length];
+                    var target = model.Compilation.GetTypeByMetadataName(
+                        owner.Length == 0 ? projectedName : owner + "." + projectedName);
+                    if (target?.TypeKind == TypeKind.Struct && target.DeclaringSyntaxReferences.Length != 0 &&
+                        target.DeclaringSyntaxReferences.All(reference =>
+                            MetadataSyntaxTreeCleaner.IsLegacyManualSource(reference.SyntaxTree.FilePath) &&
+                            reference.GetSyntax() is StructDeclarationSyntax { Members.Count: > 0 }))
+                        name = projectedName;
+                }
+                string identifier = SyntaxFacts.GetKeywordKind(name) == SyntaxKind.None ? name : "@" + name;
                 return "global::" + (owner.Length == 0 ? "" : owner + ".") + identifier;
             }
 

@@ -406,7 +406,8 @@ namespace ClangSharpSourceToWinmd
                 inputSourceTrees, sourceDirectory, objDir, validation, requiredNamespaces);
             StopIfInvalid("emitter.native-typedef-policy", "source-bound native projection policies");
             var recordNamespaces = ResolveNativeNamespaces(namespaceTrees, requiredNamespaces, apiNamesToNamespaces, validation);
-            foreach (var route in ResolveNativeDeclarationNamespaces(namespaceTrees, requiredNamespaces, validation))
+            foreach (var route in ResolveNativeDeclarationNamespaces(
+                namespaceTrees, requiredNamespaces, recordNamespaces, validation))
             {
                 if (recordNamespaces.TryGetValue(route.Key, out string owner) && owner != route.Value)
                     validation.Add(new InvalidDataException(
@@ -858,17 +859,23 @@ namespace ClangSharpSourceToWinmd
 
         private static Dictionary<(string Namespace, string Name), string> ResolveNativeDeclarationNamespaces(
             IEnumerable<SyntaxTree> trees, IReadOnlyDictionary<string, string> requiredNamespaces,
+            IReadOnlyDictionary<(string Namespace, string Name), string> recordNamespaces,
             GenerationValidation validation)
         {
+            var sourceTrees = trees.ToArray();
+            var completeDefinitions = new List<(StructDeclarationSyntax Declaration, NativeRecordSource Source)>();
             var declarations = new List<(BaseTypeDeclarationSyntax Declaration, NativeDeclarationSource Source,
                 string Namespace, Architecture Architectures)>();
-            foreach (var tree in trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath)))
+            foreach (var tree in sourceTrees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath)))
             {
                 foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
                     .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
                 {
                     try
                     {
+                        if (declaration is StructDeclarationSyntax complete &&
+                            NativeRecordSourceProvenance.Read(complete) is { } definition)
+                            completeDefinitions.Add((complete, definition));
                         var source = NativeDeclarationSourceProvenance.Read(declaration);
                         if (source == null)
                             continue;
@@ -904,6 +911,8 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
             }
+            var definitions = completeDefinitions.ToLookup(item =>
+                (Identity: NativeRecordSourceProvenance.GetIdentityKey(item.Source), item.Source.Name, item.Source.NativeName));
             var routes = new Dictionary<(string Namespace, string Name), string>();
             var identities = new Dictionary<(string Namespace, string Name, Architecture Architecture), string>();
             foreach (var group in declarations.GroupBy(item => (
@@ -929,12 +938,28 @@ namespace ClangSharpSourceToWinmd
                 var namespaces = group.Select(item => item.Namespace).Distinct(StringComparer.Ordinal).ToArray();
                 var direct = group.Where(item => item.Source.TraversedHeader).Select(item => item.Namespace)
                     .Distinct(StringComparer.Ordinal).ToArray();
-                if (direct.Length > 1 || direct.Length == 0 && namespaces.Length != 1)
+                var completeOwners = group.Key.Kind == NativeDeclarationKind.IncompleteRecord
+                    ? definitions[(group.Key.Identity, group.Key.Name, first.Source.NativeName)]
+                        .Select(item =>
+                        {
+                            string ns = SyntaxUtils.GetEnclosingNamespace(item.Declaration);
+                            return recordNamespaces.TryGetValue((ns, item.Source.Name), out string completeOwner)
+                                ? completeOwner : null;
+                        }).Distinct(StringComparer.Ordinal).ToArray()
+                    : Array.Empty<string>();
+                if (completeOwners.Any(completeOwner => completeOwner == null) || completeOwners.Length > 1)
+                {
+                    Report("Matching complete native definitions require one source-bound public owner.");
+                    continue;
+                }
+                if (completeOwners.Length == 0 &&
+                    (direct.Length > 1 || direct.Length == 0 && namespaces.Length != 1))
                 {
                     Report("Canonical ownership requires one source-bound traversed-header namespace.");
                     continue;
                 }
-                string owner = direct.Length == 1 ? direct[0] : namespaces.Single();
+                string owner = completeOwners.Length == 1 ? completeOwners[0] :
+                    direct.Length == 1 ? direct[0] : namespaces.Single();
                 if (requiredNamespaces.TryGetValue(group.Key.Name, out string required))
                     owner = required;
                 foreach (string ns in namespaces)
@@ -979,6 +1004,14 @@ namespace ClangSharpSourceToWinmd
             IReadOnlyDictionary<string, string> requiredNamespaces, IReadOnlyDictionary<string, string> scannedNamespaces,
             GenerationValidation validation)
         {
+            var legacyRecordOwners = trees.Where(tree => MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
+                    declaration.TypeParameterList == null && declaration.BaseList == null && declaration.Members.Count != 0)
+                .GroupBy(declaration => declaration.Identifier.ValueText, StringComparer.Ordinal)
+                .ToDictionary(group => group.Key,
+                    group => group.Select(SyntaxUtils.GetEnclosingNamespace).Distinct(StringComparer.Ordinal).ToArray(),
+                    StringComparer.Ordinal);
             var retained = trees.Where(tree => tree.FilePath.EndsWith("autotypes.modified.cs", StringComparison.OrdinalIgnoreCase))
                 .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
                 .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
@@ -1071,6 +1104,23 @@ namespace ClangSharpSourceToWinmd
                 bool nativeRecord = group.All(record => NativeRecordSourceProvenance.Read(record.Declaration) != null);
                 bool nativeAlias = group.All(record => NativeTypedefSourceProvenance.Read(record.Declaration) != null);
                 string owner = requiredNamespaces.TryGetValue(group.Key.Name, out string required) ? required : null;
+                if (group.Key.Name.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, StringComparison.Ordinal) &&
+                    legacyRecordOwners.TryGetValue(
+                        group.Key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length], out var legacyOwners))
+                {
+                    string projectedName = group.Key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length];
+                    string retainedManualOwner = owner ?? (requiredNamespaces.TryGetValue(projectedName, out string legacyRequired)
+                        ? legacyRequired : null);
+                    if (retainedManualOwner != null ? !legacyOwners.Contains(retainedManualOwner, StringComparer.Ordinal) :
+                        legacyOwners.Length != 1)
+                    {
+                        validation.Add(new InvalidDataException(
+                            $"Native projection '{group.Key.Name}' requires one qualified retained manual target."),
+                            "CSSW005", "emitter.record-ownership", first.Declaration.SyntaxTree.FilePath, group.Key.Name);
+                        continue;
+                    }
+                    owner = retainedManualOwner ?? legacyOwners[0];
+                }
                 var nativeOwner = nativeAlias && nativeOwners.TryGetValue(group.Key.Name, out var projectedOwner) &&
                     group.All(record => projectedOwner.Authorizes(record.Declaration)) ? projectedOwner : null;
                 owner ??= nativeOwner?.Namespace;
@@ -1173,6 +1223,13 @@ namespace ClangSharpSourceToWinmd
             IEnumerable<MetadataReference> references, GenerationValidation validation)
         {
             var singleCommonFiles = SingleCommonSourceFiles(trees.Select(tree => tree.FilePath));
+            var retainedOpaqueProjections = trees.Where(tree =>
+                    Path.GetFileName(tree.FilePath).Equals("autotypes.cs", StringComparison.OrdinalIgnoreCase) ||
+                    Path.GetFileName(tree.FilePath).Equals("autotypes.modified.cs", StringComparison.OrdinalIgnoreCase))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(IsRetainedOpaqueProjection)
+                .ToLookup(declaration => (Namespace: SyntaxUtils.GetEnclosingNamespace(declaration),
+                    Name: declaration.Identifier.ValueText));
             var completeProviders = trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
                 .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
                     .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
@@ -1197,46 +1254,67 @@ namespace ClangSharpSourceToWinmd
             var models = new Dictionary<Architecture, BindingModels>();
             foreach (var group in groups)
             {
+                var first = group.First();
+                var invalidSingleCommon = group.Where(item => item.Architecture == Architecture.None &&
+                    singleCommonFiles.Contains(item.Declaration.SyntaxTree.FilePath) &&
+                    !group.Any(observation => observation.Architecture != Architecture.None) &&
+                    item.Source.SourceArchitecture != Architecture.X86).Select(item => item.Declaration).ToHashSet();
+                foreach (var declaration in invalidSingleCommon)
+                    validation.Add(new InvalidDataException(
+                        $"Single-common native declaration '{group.Key.Namespace}.{group.Key.Name}' requires its actual x86 producing target."),
+                        "CSSW005", "emitter.declaration-composition", declaration.SyntaxTree.FilePath, group.Key.Name);
+                var definitions = group.Key.Kind == NativeDeclarationKind.IncompleteRecord
+                    ? completeProviders[(group.Key.Namespace, group.Key.Name, group.Key.Identity, first.Source.NativeName)]
+                        .ToArray()
+                    : Array.Empty<(StructDeclarationSyntax Declaration, NativeRecordSource Source, Architecture Architecture)>();
+                if (definitions.Length != 0)
+                {
+                    bool singleCommonDefinition = !definitions.Any(item => item.Architecture != Architecture.None) &&
+                        definitions.Any(item => singleCommonFiles.Contains(item.Declaration.SyntaxTree.FilePath) &&
+                            item.Source.SourceArchitecture == Architecture.X86);
+                    var coverage = definitions.Where(item => item.Architecture != Architecture.None &&
+                            (item.Source.SourceArchitecture ?? item.Architecture) == item.Architecture)
+                        .Aggregate(Architecture.None, (targets, item) => targets | item.Architecture);
+                    foreach (var observation in group.Where(item => !invalidSingleCommon.Contains(item.Declaration)))
+                    {
+                        if (!singleCommonDefinition &&
+                            (observation.Architecture == Architecture.None ? coverage != Architecture.All :
+                                (coverage & observation.Architecture) == 0))
+                        {
+                            validation.Add(new InvalidDataException(
+                                $"Incomplete native declaration '{group.Key.Namespace}.{group.Key.Name}' requires " +
+                                "a source-bound single-common definition or complete providers for all three architectures " +
+                                "when the declaration is common, and a matching provider for each originating target."),
+                                "CSSW005", "emitter.declaration-composition",
+                                observation.Declaration.SyntaxTree.FilePath, group.Key.Name);
+                            continue;
+                        }
+                        // Identity-only forwards never contribute a complete provider's storage or target coverage.
+                        removals.Add(observation.Declaration);
+                    }
+                }
+                else if (group.Key.Kind == NativeDeclarationKind.IncompleteRecord)
+                {
+                    var projections = retainedOpaqueProjections[(group.Key.Namespace, group.Key.Name)].ToArray();
+                    // A retained opaque wrapper is an explicit managed projection, not native layout authority.
+                    if (projections.Length == 1)
+                    {
+                        foreach (var observation in group.Where(item => item.Source.Namespace == group.Key.Namespace &&
+                            !invalidSingleCommon.Contains(item.Declaration)))
+                            removals.Add(observation.Declaration);
+                    }
+                }
                 var direct = group.Where(item => item.Architecture != Architecture.None &&
                     item.Source.TraversedHeader &&
                     (item.Source.SourceArchitecture ?? item.Architecture) == item.Architecture).ToArray();
                 foreach (var common in group.Where(item => item.Architecture == Architecture.None))
                 {
+                    if (definitions.Length != 0 || removals.Contains(common.Declaration) ||
+                        invalidSingleCommon.Contains(common.Declaration))
+                        continue;
                     if (singleCommonFiles.Contains(common.Declaration.SyntaxTree.FilePath) &&
                         !group.Any(item => item.Architecture != Architecture.None))
                     {
-                        if (common.Source.SourceArchitecture != Architecture.X86)
-                        {
-                            validation.Add(new InvalidDataException(
-                                $"Single-common native declaration '{group.Key.Namespace}.{group.Key.Name}' requires its actual x86 producing target."),
-                                "CSSW005", "emitter.declaration-composition", common.Declaration.SyntaxTree.FilePath, group.Key.Name);
-                            continue;
-                        }
-                        if (common.Source.Kind == NativeDeclarationKind.IncompleteRecord)
-                        {
-                            var definitions = completeProviders[(group.Key.Namespace, group.Key.Name, group.Key.Identity,
-                                common.Source.NativeName)].ToArray();
-                            if (definitions.Length != 0)
-                            {
-                                bool singleCommonDefinition = !definitions.Any(item => item.Architecture != Architecture.None) &&
-                                    definitions.Any(item =>
-                                    singleCommonFiles.Contains(item.Declaration.SyntaxTree.FilePath) &&
-                                    item.Source.SourceArchitecture == Architecture.X86);
-                                var coverage = definitions.Where(item => item.Architecture != Architecture.None &&
-                                    (item.Source.SourceArchitecture ?? item.Architecture) == item.Architecture)
-                                    .Aggregate(Architecture.None, (targets, item) => targets | item.Architecture);
-                                if (!singleCommonDefinition && coverage != Architecture.All)
-                                {
-                                    validation.Add(new InvalidDataException(
-                                        $"Single-common incomplete native declaration '{group.Key.Namespace}.{group.Key.Name}' requires " +
-                                        "a source-bound single-common definition or complete providers for all three architectures."),
-                                        "CSSW005", "emitter.declaration-composition", common.Declaration.SyntaxTree.FilePath, group.Key.Name);
-                                    continue;
-                                }
-                                // A forward contributes identity, never the complete definition's storage or layout.
-                                removals.Add(common.Declaration);
-                            }
-                        }
                         continue;
                     }
                     var providers = direct.Where(item => item.Source.HeaderHash == common.Source.HeaderHash).ToArray();
@@ -1294,6 +1372,36 @@ namespace ClangSharpSourceToWinmd
                     leftSource.Group.Members.Length == rightSource.Group.Members.Length &&
                     leftSource.Group.Members.Zip(rightSource.Group.Members).All(pair =>
                         pair.First.Name == pair.Second.Name && pair.First.Bindings.SequenceEqual(pair.Second.Bindings));
+            }
+
+            static bool IsRetainedOpaqueProjection(StructDeclarationSyntax declaration)
+            {
+                if (declaration.Parent is not (BaseNamespaceDeclarationSyntax or CompilationUnitSyntax) ||
+                    !declaration.Modifiers.Any(SyntaxKind.PublicKeyword) ||
+                    declaration.TypeParameterList != null || declaration.BaseList != null ||
+                    declaration.Members.Count != 1 ||
+                    declaration.Members[0] is not FieldDeclarationSyntax field ||
+                    !field.Modifiers.Any(SyntaxKind.PublicKeyword) ||
+                    field.Modifiers.Any(SyntaxKind.StaticKeyword) ||
+                    field.Declaration.Variables.Count != 1 ||
+                    field.Declaration.Variables[0].Identifier.ValueText != "Value" ||
+                    field.Declaration.Variables[0].Initializer != null ||
+                    NativeDeclarationSourceProvenance.Read(declaration) != null ||
+                    NativeRecordSourceProvenance.Read(declaration) != null ||
+                    NativeTypedefSourceProvenance.Read(declaration) != null)
+                    return false;
+                string storage = field.Declaration.Type.ToString();
+                return (storage is "IntPtr" or "UIntPtr" or "System.IntPtr" or "System.UIntPtr" or
+                        "global::System.IntPtr" or "global::System.UIntPtr" ||
+                        field.Declaration.Type is PointerTypeSyntax) &&
+                    !declaration.SyntaxTree.GetRoot().DescendantNodes().OfType<UsingDirectiveSyntax>()
+                        .Any(directive => directive.Alias?.Name.Identifier.ValueText is "IntPtr" or "UIntPtr") &&
+                    declaration.AttributeLists.SelectMany(list => list.Attributes).Any(attribute =>
+                        attribute.Name.ToString() is "NativeTypedef" or "NativeTypedefAttribute" or
+                            "Windows.Win32.Foundation.Metadata.NativeTypedef" or
+                            "Windows.Win32.Foundation.Metadata.NativeTypedefAttribute" or
+                            "global::Windows.Win32.Foundation.Metadata.NativeTypedef" or
+                            "global::Windows.Win32.Foundation.Metadata.NativeTypedefAttribute");
             }
         }
 

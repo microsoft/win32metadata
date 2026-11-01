@@ -299,6 +299,13 @@ assembly, arity, nesting, handle-storage and cross-architecture ownership checks
 Definitions and textual qualification use that exact native route for names with
 source-proven owners. A same-named declaration outside those routes retains its
 own namespace instead of inheriting the short-name relocation.
+An incomplete record follows its matching complete native provider's public
+owner. An ambiguous reference is routed only when every compiler candidate has
+the same native identity and owner. Retained `___` projections bind to their
+qualified manual target before cleaning, including constructor references.
+A compatible empty forward may yield to the exact retained `autotypes` opaque
+wrapper. That wrapper supplies explicit managed storage, not native layout
+proof; ordinary unproved providers do not qualify.
 
 WinMD emission preserves a complete record's source-bound native size in its
 ClassLayout entry, including native tail padding caused by over-alignment.
