@@ -764,7 +764,13 @@ namespace ClangSharpSourceToWinmd
                 .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
                 .GroupBy(declaration => (Namespace: SyntaxUtils.GetEnclosingNamespace(declaration),
                     Name: declaration.Identifier.ValueText))
-                .Where(group => group.Count() == 1).Select(group => group.Key).ToHashSet();
+                // Identical per-target inputs still describe one retained public projection.
+                .Where(group => group.Count() == 1 || group.Count() == 3 &&
+                    group.Aggregate(Architecture.None, (targets, declaration) =>
+                        targets | GetArchitectureForFileName(declaration.SyntaxTree.FilePath)) == Architecture.All &&
+                    group.Skip(1).All(declaration => declaration.SyntaxTree.GetText()
+                        .ContentEquals(group.First().SyntaxTree.GetText())))
+                .Select(group => group.Key).ToHashSet();
             var retainedOwners = retained.Concat(trees.Where(tree =>
                     MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) ||
                     tree.FilePath.EndsWith(".enums.modified.cs", StringComparison.OrdinalIgnoreCase))
