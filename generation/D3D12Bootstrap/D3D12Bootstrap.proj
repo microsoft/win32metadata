@@ -17,7 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Update="Microsoft.Windows.SDK.CPP" Version="10.0.28000.2705" />
-    <PackageReference Update="Microsoft.Windows.SDK.Win32Metadata" Version="71.0.25-preview" />
+    <PackageReference Update="Microsoft.Windows.SDK.Win32Metadata" Version="$(LastWin32MetadataReleaseVersion)" />
     <PackageReference Include="Microsoft.Direct3D.D3D12" Version="1.619.3" GeneratePathProperty="true" PrivateAssets="all" />
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.28000.2705" GeneratePathProperty="true" PrivateAssets="all" />
     <ImportLibs Include="$(PkgMicrosoft_Windows_SDK_CPP_x64)\c\um\x64\d3d12.lib" />
