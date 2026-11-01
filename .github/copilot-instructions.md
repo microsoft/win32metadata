@@ -67,10 +67,16 @@ The toolchain converts Windows SDK C/C++ headers into a .NET metadata assembly (
 **CI pipeline** (`azure-pipelines.yml` / `.github/workflows/pr-validation.yml`):
 Three parallel scrape jobs (x64, x86, arm64) → artifacts merged → one build/test/package job.
 Each arch job scrapes ALL partitions for that architecture.
-GitHub Actions also runs selected emitter regressions in an independent early
-Windows job that depends only on change detection. Its `fast_managed_tests` TRX
-artifact is separate from the complete unfiltered `DoTests.ps1` results; the full
-SDK job does not depend on the early job.
+GitHub Actions also runs selected emitter and metadata utility regressions in an
+independent early Windows job that depends only on change detection. Its emitter
+inventory includes the existing HGROUP/model/cache/namespace controls and the
+actual `HeaderTypedefCompositionTests` method families for logical groups and
+incomplete declarations. `NativeDeclarationSourceProvenanceTests` runs separately
+in `MetadataUtils.Tests`. `FastManaged.trx` and `FastProvenance.trx` are checked
+separately and uploaded in `fast_managed_tests` even on failure. The four native
+producer rows remain outside this managed lane; the complete unfiltered
+`DoTests.ps1` results are separate, and the full SDK job does not depend on the
+early job.
 
 ## Key Conventions
 

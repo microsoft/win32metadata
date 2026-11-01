@@ -11,12 +11,26 @@ namespace ClangSharpSourceToWinmd
     {
         public static SyntaxTree MoveNamesToCorrectNamespaces(SyntaxTree tree, Dictionary<string, string> namesToNamespaces,
             ISet<(string Namespace, string Name)> sourceTypes = null,
-            IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces = null)
+            IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces = null,
+            ISet<(string Namespace, string Name)> nativeEnumTypes = null,
+            IReadOnlyList<SemanticModel> nativeReferenceModels = null)
         {
             if (tree.FilePath.EndsWith("manual.cs"))
             {
                 return tree;
             }
+
+            if (nativeReferenceModels?.Count > 0)
+            {
+                if (nativeReferenceModels.Any(model => model.SyntaxTree != tree))
+                    throw new System.ArgumentException("Native references require models of the original source tree.",
+                        nameof(nativeReferenceModels));
+                tree = tree.WithRootAndOptions(new NativeReferenceRewriter(
+                    nativeRecordNamespaces, nativeEnumTypes, nativeReferenceModels).Visit(tree.GetRoot()), tree.Options);
+            }
+            else if (nativeEnumTypes?.Count > 0)
+                throw new System.ArgumentException("Source-bound enum references require original compiler bindings.",
+                    nameof(nativeReferenceModels));
 
             if (HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
             {
@@ -50,6 +64,7 @@ namespace ClangSharpSourceToWinmd
                             return QualifiedAlias(ns, identifier.Identifier.Text);
                     }
                     else if (type is QualifiedNameSyntax qualified &&
+                        nativeRecordNamespaces?.ContainsKey((ns, qualified.Right.Identifier.ValueText)) != true &&
                         TryGetNamespace(ns, qualified.Right.Identifier.ValueText, out string owner))
                         return QualifiedAlias(owner, qualified.Right.Identifier.Text);
                     return type;
@@ -75,6 +90,7 @@ namespace ClangSharpSourceToWinmd
                     IndexerDeclarationSyntax indexer => indexer.Type,
                     CastExpressionSyntax cast => cast.Type,
                     TypeOfExpressionSyntax typeOf => typeOf.Type,
+                    SizeOfExpressionSyntax sizeOf => sizeOf.Type,
                     BaseTypeSyntax baseType => baseType.Type,
                     _ => null,
                 }).Where(type => type != null && (type.Ancestors().OfType<StructDeclarationSyntax>().Any(nativeRecords.Contains) ||
@@ -201,6 +217,119 @@ namespace ClangSharpSourceToWinmd
                 node is TypeSyntax type && types.Contains(type)
                     ? qualify(type).WithTriviaFrom(type)
                     : base.Visit(node);
+        }
+
+        private sealed class NativeReferenceRewriter : CSharpSyntaxRewriter
+        {
+            private readonly IReadOnlyDictionary<(string Namespace, string Name), string> routes;
+            private readonly ISet<(string Namespace, string Name)> enums;
+            private readonly IReadOnlyList<SemanticModel> models;
+
+            internal NativeReferenceRewriter(
+                IReadOnlyDictionary<(string Namespace, string Name), string> routes,
+                ISet<(string Namespace, string Name)> enums,
+                IReadOnlyList<SemanticModel> models)
+            {
+                this.routes = routes;
+                this.enums = enums;
+                this.models = models;
+            }
+
+            public override SyntaxNode VisitQualifiedName(QualifiedNameSyntax node) =>
+                !PreservesHandleStorage(node) && TryTypeRoute(node, out string name)
+                    ? SyntaxFactory.ParseName(name).WithTriviaFrom(node)
+                    : base.VisitQualifiedName(node);
+
+            public override SyntaxNode VisitAliasQualifiedName(AliasQualifiedNameSyntax node) =>
+                !PreservesHandleStorage(node) && TryTypeRoute(node, out string name)
+                    ? SyntaxFactory.ParseName(name).WithTriviaFrom(node)
+                    : base.VisitAliasQualifiedName(node);
+
+            public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
+            {
+                if (node.Expression is not IdentifierNameSyntax identifier ||
+                    !models.Any(model => model.GetAliasInfo(identifier) != null))
+                {
+                    if (TryTypeRoute(node.Expression, out string name))
+                        return node.WithExpression(SyntaxFactory.ParseExpression(name).WithTriviaFrom(node.Expression));
+                }
+                return base.VisitMemberAccessExpression(node);
+            }
+
+            public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
+            {
+                if (!PreservesHandleStorage(node) && !models.Any(model => model.GetAliasInfo(node) != null) &&
+                    TryTypeRoute(node, out string name))
+                    return SyntaxFactory.ParseName(name).WithTriviaFrom(node);
+                return base.VisitIdentifierName(node);
+            }
+
+            public override SyntaxNode VisitAttribute(AttributeSyntax node)
+            {
+                if (enums?.Count > 0 && node.ArgumentList?.Arguments.Count == 1 &&
+                    node.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal &&
+                    literal.IsKind(SyntaxKind.StringLiteralExpression))
+                {
+                    var replacements = models.Select(model =>
+                    {
+                        if (model.GetSymbolInfo(node).Symbol is not IMethodSymbol constructor ||
+                            constructor.ContainingType.ToDisplayString() !=
+                                "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute")
+                            return null;
+                        string value = literal.Token.ValueText;
+                        var candidates = value.Contains('.', System.StringComparison.Ordinal)
+                            ? new[] { model.Compilation.GetTypeByMetadataName(value) }
+                            : model.LookupNamespacesAndTypes(literal.SpanStart, name: value)
+                                .OfType<INamedTypeSymbol>().Where(type => type.TypeKind == TypeKind.Enum).ToArray();
+                        if (candidates.Length != 1 || candidates[0] == null)
+                            return null;
+                        var type = candidates[0];
+                        var key = (Namespace: type.ContainingNamespace.ToDisplayString(), type.Name);
+                        return enums.Contains(key) ? GetTypeRoute(type, model)?.Substring("global::".Length) : null;
+                    }).ToArray();
+                    string name = ConsistentRoute(replacements, node);
+                    if (name != null)
+                        return node.WithArgumentList(node.ArgumentList.WithArguments(
+                            SyntaxFactory.SingletonSeparatedList(node.ArgumentList.Arguments[0].WithExpression(
+                                SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression,
+                                    SyntaxFactory.Literal(name)).WithTriviaFrom(literal)))));
+                }
+                return base.VisitAttribute(node);
+            }
+
+            private bool TryTypeRoute(SyntaxNode node, out string replacement)
+            {
+                replacement = ConsistentRoute(models.Select(model =>
+                    GetTypeRoute(model.GetSymbolInfo(node).Symbol as INamedTypeSymbol, model)).ToArray(), node);
+                return replacement != null;
+            }
+
+            private string GetTypeRoute(INamedTypeSymbol type, SemanticModel model)
+            {
+                if (type == null || type.ContainingType != null || type.Arity != 0 ||
+                    !SymbolEqualityComparer.Default.Equals(type.ContainingAssembly, model.Compilation.Assembly) ||
+                    routes == null || !routes.TryGetValue(
+                        (type.ContainingNamespace.ToDisplayString(), type.Name), out string owner))
+                    return null;
+                string identifier = SyntaxFacts.GetKeywordKind(type.Name) == SyntaxKind.None ? type.Name : "@" + type.Name;
+                return "global::" + (owner.Length == 0 ? "" : owner + ".") + identifier;
+            }
+
+            private static string ConsistentRoute(string[] routes, SyntaxNode context)
+            {
+                if (routes.All(route => route == null))
+                    return null;
+                if (routes.Any(route => route == null) || routes.Distinct(System.StringComparer.Ordinal).Count() != 1)
+                    throw new System.IO.InvalidDataException(
+                        $"Native reference '{context}' does not have one compiler-bound owner across its source targets.");
+                return routes[0];
+            }
+
+            private static bool PreservesHandleStorage(SyntaxNode context) =>
+                context.Ancestors().OfType<FieldDeclarationSyntax>().Any(field =>
+                    field.Parent is StructDeclarationSyntax declaration &&
+                    NativeHandleSourceProvenance.TryRead(declaration, out _));
+
         }
 
         private class MovedData

@@ -100,13 +100,18 @@ namespace MetadataUtils
         {
             if (source == null)
                 return null;
-            string file = Path.GetFileName(source.Header);
+            return GetIdentityKey(source.Identity, source.Header);
+        }
+
+        internal static string GetIdentityKey(string identity, string header)
+        {
+            string file = Path.GetFileName(header);
             string prefix = "c:" + file + "@";
             // File-local USRs contain only a basename; distinct physical declarations need their full header path.
-            return source.Identity.StartsWith("c:", StringComparison.Ordinal) &&
-                source.Identity.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
-                ? "c:" + source.Header.ToUpperInvariant() + source.Identity.Substring(2 + file.Length)
-                : source.Identity;
+            return identity.StartsWith("c:", StringComparison.Ordinal) &&
+                identity.StartsWith(prefix, StringComparison.OrdinalIgnoreCase)
+                ? "c:" + header.ToUpperInvariant() + identity.Substring(2 + file.Length)
+                : identity;
         }
 
         public static bool SameDeclaration(NativeRecordSource left, NativeRecordSource right) =>
@@ -122,19 +127,23 @@ namespace MetadataUtils
 
         private static void Validate(StructDeclarationSyntax declaration, NativeRecordSource source)
         {
-            if (source == null || string.IsNullOrEmpty(source.Identity) || string.IsNullOrEmpty(source.NativeName) ||
-                string.IsNullOrEmpty(source.Header) || !Path.IsPathFullyQualified(source.Header) ||
-                source.HeaderHash == null || source.HeaderHash.Length != 64 ||
-                source.HeaderHash.Any(character => !Uri.IsHexDigit(character)) ||
-                source.SourceArchitecture.HasValue &&
-                    source.SourceArchitecture.Value is not (Architecture.X86 or Architecture.X64 or Architecture.Arm64) ||
-                source.Line == 0 || source.Column == 0 || string.IsNullOrEmpty(source.Name) ||
-                string.IsNullOrEmpty(source.Namespace) || source.Size < 0 || source.Alignment <= 0 ||
+            if (source == null || !IsValidIdentity(source.Identity, source.NativeName, source.Header, source.HeaderHash,
+                    source.Line, source.Column, source.Name, source.Namespace, source.SourceArchitecture) ||
+                source.Size < 0 || source.Alignment <= 0 ||
                 (source.Alignment & (source.Alignment - 1)) != 0 ||
-                declaration.Identifier.ValueText != source.Name &&
-                    !IsVariant(declaration.Identifier.ValueText, source.Name))
+                !MatchesName(declaration.Identifier.ValueText, source.Name))
                 throw new InvalidDataException("Native provider source proof does not match its emitted declaration.");
         }
+
+        internal static bool IsValidIdentity(string identity, string nativeName, string header, string headerHash,
+            uint line, uint column, string name, string ns, Architecture? architecture) =>
+            !string.IsNullOrEmpty(identity) && !string.IsNullOrEmpty(nativeName) &&
+            !string.IsNullOrEmpty(header) && Path.IsPathFullyQualified(header) &&
+            headerHash?.Length == 64 && headerHash.All(Uri.IsHexDigit) &&
+            (!architecture.HasValue || architecture.Value is Architecture.X86 or Architecture.X64 or Architecture.Arm64) &&
+            line != 0 && column != 0 && !string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(ns);
+
+        internal static bool MatchesName(string name, string original) => name == original || IsVariant(name, original);
 
         private static bool IsVariant(string name, string original) =>
             name.StartsWith(original + "____", StringComparison.Ordinal) &&

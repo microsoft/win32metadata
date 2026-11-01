@@ -111,7 +111,8 @@ jobs:
       - name: Run selected managed regression tests
         shell: pwsh
         run: |
-          $selection = [ordered]@{
+          $PSNativeCommandUseErrorActionPreference = $false
+          $emitterSelection = [ordered]@{
             'FullyQualifiedName~ConfiguredNativeFamiliesShareOnlyTheRetainedPublicProjection' = 4
             'FullyQualifiedName~ConfiguredRetainedProjectionDoesNotBypassNativeFamilyValidation' = 6
             'FullyQualifiedName~TypedefFragmentsRetainOnlyTheirProducingCompilationsSemanticModels' = 1
@@ -119,49 +120,22 @@ jobs:
             'FullyQualifiedName~LargeNativeRecordFamiliesKeepEveryCanonicalBinding' = 1
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.NamesToCorrectNamespacesMoverTests' = 7
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.NamespaceQualificationTests' = 12
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.LogicalGroupOwnershipMovesConsumersAndRemovesOnlyItsOriginalConstantCopies' = 4
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.LogicalGroupOwnershipRejectsAmbiguousOrMissingTraversalOwners' = 2
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.IndependentLogicalContributionsKeepTheirMembersWithoutClaimingOneNativeDeclaration' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SameManagedGroupNameDoesNotAuthorizeDifferentNativeNames' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.IncompleteDeclarationsUseNativeIdentityAndKeepPointerConsumers' = 4
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.AnUnprovenEmptyRecordCannotComposeWithAProvenNativeDeclaration' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.UnprovenEmptyRecordsRemainUnresolvedInsteadOfBeingCollapsedBySpelling' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.LegacyEmptyPlaceholdersRequireTheirOwnQualifiedDefinition' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SameSpelledIncompleteRecordsDoNotAcquireACommonOwner' = 2
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.CommonNativeObservationRequiresAllDirectArchitectureProviders' = 2
           }
-          $filter = $selection.Keys -join '|'
-          $started = Get-Date
-          dotnet test .\tests\ClangSharpSourceToWinmdTests -c Release --filter $filter `
-            --logger "trx;LogFileName=FastManaged.trx" `
-            --results-directory .\bin\logs\tests\fast-managed
-          $testExitCode = $LASTEXITCODE
-          Write-Host ("Managed restore/build/test: {0:N2} seconds." -f ((Get-Date) - $started).TotalSeconds)
-
-          $trxPath = '.\bin\logs\tests\fast-managed\FastManaged.trx'
-          if (!(Test-Path -LiteralPath $trxPath -PathType Leaf)) {
-            throw "Selected managed tests produced no TRX (dotnet exit code $testExitCode)."
-          }
-          [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
-          $ns = [System.Xml.XmlNamespaceManager]::new($trx.NameTable)
-          $ns.AddNamespace('t', 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010')
-          $results = @($trx.SelectNodes('/t:TestRun/t:Results/t:UnitTestResult', $ns))
-          if ($results.Count -eq 0) {
-            throw 'The fast managed filter selected zero test rows.'
-          }
-          $definitions = @{}
-          foreach ($definition in $trx.SelectNodes('/t:TestRun/t:TestDefinitions/t:UnitTest', $ns)) {
-            $definitions[$definition.GetAttribute('id')] = $definition
-          }
-          $qualifiedNames = @(
-            foreach ($result in $results) {
-              $definition = $definitions[$result.GetAttribute('testId')]
-              if ($null -eq $definition) {
-                throw "Test definition is missing for '$($result.GetAttribute('testName'))'."
-              }
-              $method = $definition.SelectSingleNode('t:TestMethod', $ns)
-              if ($null -eq $method) {
-                throw "Test method is missing for '$($result.GetAttribute('testName'))'."
-              }
-              ($method.GetAttribute('className') -split ',')[0] + '.' + $method.GetAttribute('name')
-            }
-          )
-          foreach ($selector in $selection.Keys) {
-            $name = $selector.Substring('FullyQualifiedName~'.Length)
-            $count = @($qualifiedNames | Where-Object { $_.Contains($name) }).Count
-            if ($count -lt $selection[$selector]) {
-              throw "Incomplete fast managed selection: '$name' has $count rows; expected at least $($selection[$selector])."
-            }
+          $provenanceSelection = [ordered]@{
+            'FullyQualifiedName~MetadataUtils.Tests.NativeDeclarationSourceProvenanceTests.RoundTripsOnlyDeclarationIdentity' = 4
+            'FullyQualifiedName~MetadataUtils.Tests.NativeDeclarationSourceProvenanceTests.CacheRemainsBoundToTheExactImmutableNode' = 2
+            'FullyQualifiedName~MetadataUtils.Tests.NativeDeclarationSourceProvenanceTests.RejectsMalformedOrLayoutBearingTransport' = 6
+            'FullyQualifiedName~MetadataUtils.Tests.NativeDeclarationSourceProvenanceTests.DoesNotReplaceCompleteLayoutOrUnrelatedDeclarationIdentity' = 1
           }
           $expectedHGroupRows = @(
             foreach ($target in @('x86', 'x64', 'arm64', 'crossarch')) {
@@ -172,14 +146,80 @@ jobs:
               "ConfiguredRetainedProjectionDoesNotBypassNativeFamilyValidation ($reason)"
             }
           )
-          foreach ($name in $expectedHGroupRows) {
-            if (@($results | Where-Object { $_.GetAttribute('testName') -ceq $name }).Count -ne 1) {
-              throw "Expected exactly one fast managed HGROUP row '$name'."
+          $projects = @(
+            @{
+              Label = 'Emitter'
+              Project = '.\tests\ClangSharpSourceToWinmdTests'
+              Selection = $emitterSelection
+              LogName = 'FastManaged.trx'
+              RequiredRows = $expectedHGroupRows
             }
+            @{
+              Label = 'Provenance'
+              Project = '.\tests\MetadataUtils.Tests'
+              Selection = $provenanceSelection
+              LogName = 'FastProvenance.trx'
+              RequiredRows = @()
+            }
+          )
+          foreach ($project in $projects) {
+            $filter = $project.Selection.Keys -join '|'
+            $started = Get-Date
+            dotnet test $project.Project -c Release --filter $filter `
+              --logger "trx;LogFileName=$($project.LogName)" `
+              --results-directory .\bin\logs\tests\fast-managed
+            $project.ExitCode = $LASTEXITCODE
+            Write-Host ("{0} restore/build/test: {1:N2} seconds; exit code {2}." -f
+              $project.Label, ((Get-Date) - $started).TotalSeconds, $project.ExitCode)
           }
-          Write-Host "Verified $($results.Count) selected managed rows, including all ten HGROUP rows."
-          if ($testExitCode -ne 0) { exit $testExitCode }
-          if (@($results | Where-Object { $_.GetAttribute('outcome') -cne 'Passed' }).Count -ne 0) {
+          $failedRows = @()
+          foreach ($project in $projects) {
+            $trxPath = Join-Path '.\bin\logs\tests\fast-managed' $project.LogName
+            if (!(Test-Path -LiteralPath $trxPath -PathType Leaf)) {
+              throw "$($project.Label) tests produced no TRX (dotnet exit code $($project.ExitCode))."
+            }
+            [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
+            $ns = [System.Xml.XmlNamespaceManager]::new($trx.NameTable)
+            $ns.AddNamespace('t', 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010')
+            $results = @($trx.SelectNodes('/t:TestRun/t:Results/t:UnitTestResult', $ns))
+            if ($results.Count -eq 0) {
+              throw "The $($project.Label) filter selected zero test rows."
+            }
+            $definitions = @{}
+            foreach ($definition in $trx.SelectNodes('/t:TestRun/t:TestDefinitions/t:UnitTest', $ns)) {
+              $definitions[$definition.GetAttribute('id')] = $definition
+            }
+            $qualifiedNames = @(
+              foreach ($result in $results) {
+                $definition = $definitions[$result.GetAttribute('testId')]
+                if ($null -eq $definition) {
+                  throw "Test definition is missing for '$($result.GetAttribute('testName'))'."
+                }
+                $method = $definition.SelectSingleNode('t:TestMethod', $ns)
+                if ($null -eq $method) {
+                  throw "Test method is missing for '$($result.GetAttribute('testName'))'."
+                }
+                ($method.GetAttribute('className') -split ',')[0] + '.' + $method.GetAttribute('name')
+              }
+            )
+            foreach ($selector in $project.Selection.Keys) {
+              $name = $selector.Substring('FullyQualifiedName~'.Length)
+              $count = @($qualifiedNames | Where-Object { $_.Contains($name) }).Count
+              if ($count -lt $project.Selection[$selector]) {
+                throw "Incomplete $($project.Label) selection: '$name' has $count rows; expected at least $($project.Selection[$selector])."
+              }
+            }
+            foreach ($name in $project.RequiredRows) {
+              if (@($results | Where-Object { $_.GetAttribute('testName') -ceq $name }).Count -ne 1) {
+                throw "Expected exactly one $($project.Label) row '$name'."
+              }
+            }
+            Write-Host "Verified $($results.Count) selected $($project.Label) rows in $($project.LogName)."
+            $failedRows += @($results | Where-Object { $_.GetAttribute('outcome') -cne 'Passed' })
+          }
+          $failedProjects = @($projects | Where-Object { $_.ExitCode -ne 0 })
+          if ($failedProjects.Count -ne 0) { exit $failedProjects[0].ExitCode }
+          if ($failedRows.Count -ne 0) {
             throw 'Every selected managed test row must pass; skipped or unexecuted rows do not qualify.'
           }
 
