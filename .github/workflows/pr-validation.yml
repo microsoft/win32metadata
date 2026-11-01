@@ -123,6 +123,9 @@ jobs:
             'FullyQualifiedName~NativeBindingCanonicalViewsStayWithinTheirFamilyAndCompilation' = 1
             'FullyQualifiedName~IdenticalRecordTextWithDifferentTypeBindingsRemainsACompilerError' = 1
             'FullyQualifiedName~NativeRecordProvidersDoNotDiscardDistinctNominalTypedefBindings' = 1
+            'FullyQualifiedName~ProviderIsolationSpanLookupsPreserveExactRemovalAndTrivia' = 2
+            'FullyQualifiedName~ProviderIsolationSpanLookupsPreserveMalformedAndEmptySelections' = 1
+            'FullyQualifiedName~RepeatedNativeRecordsDoNotDiscardUnresolvedDeclarationBindings' = 3
           }
           $filter = $selection.Keys -join '|'
           $started = Get-Date

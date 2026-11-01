@@ -21,6 +21,85 @@ namespace ClangSharpSourceToWinmdTests
         [DataTestMethod]
         [DataRow(false)]
         [DataRow(true)]
+        public void ProviderIsolationSpanLookupsPreserveExactRemovalAndTrivia(bool reverseProviders)
+        {
+            string unrelated = string.Join("\n", Enumerable.Range(0, 80).Select(index =>
+                $"/* keep {index} */ public struct UNRELATED{index} {{ public int Value; }}"));
+            var trees = new[] { CSharpSyntaxTree.ParseText(@"
+namespace Other { /* keep */ public struct RECORD { public int Value; } }
+namespace Test {
+" + unrelated + @"
+/* first */ public partial struct RECORD { /* field */ public int Value; }
+/* nested keep */ public class OWNER { public struct RECORD { public int Value; } }
+/* second */ public partial struct RECORD { public int Value; }
+/* third */ public partial struct RECORD { public int Value; }
+}"), CSharpSyntaxTree.ParseText(@"
+namespace Test { /* other file */ public partial struct RECORD { public int Value; } }") };
+            var providers = trees.SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(declaration => declaration.Identifier.ValueText == "RECORD" &&
+                    declaration.Parent is NamespaceDeclarationSyntax ns && ns.Name.ToString() == "Test").ToArray();
+            var retained = reverseProviders ? providers.Last() : providers.First();
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Static;
+            var find = typeof(ClangSharpSourceCompilation).GetMethod("GetProviderRemovalNodes", flags)!;
+            foreach (var tree in trees)
+            {
+                var root = tree.GetRoot();
+                if (retained.SyntaxTree == tree)
+                    root = root.ReplaceNode(retained, retained.WithAdditionalAnnotations(new SyntaxAnnotation()));
+                var removed = providers.Where(declaration => declaration.SyntaxTree == tree && declaration != retained);
+                var spans = (reverseProviders ? removed.Reverse() : removed).Select(declaration => declaration.Span).ToHashSet();
+                var expected = root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Where(declaration => spans.Contains(declaration.Span)).ToArray();
+                object[] arguments = { root, spans, false };
+                var actual = (StructDeclarationSyntax[])find.Invoke(null, arguments)!;
+                Assert.IsFalse((bool)arguments[2]);
+                CollectionAssert.AreEqual(expected.Select(declaration => declaration.Span).ToArray(),
+                    actual.Select(declaration => declaration.Span).ToArray());
+                var rewritten = root.RemoveNodes(actual, SyntaxRemoveOptions.KeepNoTrivia)!;
+                Assert.AreEqual(root.RemoveNodes(expected, SyntaxRemoveOptions.KeepNoTrivia)!.ToFullString(),
+                    rewritten.ToFullString());
+                Assert.AreEqual(root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Count(declaration => declaration.Identifier.ValueText == "RECORD") - spans.Count,
+                    rewritten.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Count(declaration => declaration.Identifier.ValueText == "RECORD"));
+            }
+        }
+
+        [TestMethod]
+        public void ProviderIsolationSpanLookupsPreserveMalformedAndEmptySelections()
+        {
+            var missing = SyntaxFactory.StructDeclaration(SyntaxFactory.MissingToken(SyntaxKind.IdentifierToken))
+                .WithKeyword(SyntaxFactory.MissingToken(SyntaxKind.StructKeyword))
+                .WithOpenBraceToken(SyntaxFactory.MissingToken(SyntaxKind.OpenBraceToken))
+                .WithCloseBraceToken(SyntaxFactory.MissingToken(SyntaxKind.CloseBraceToken));
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Static;
+            var find = typeof(ClangSharpSourceCompilation).GetMethod("GetProviderRemovalNodes", flags)!;
+            foreach (var inner in new MemberDeclarationSyntax[] { missing,
+                SyntaxFactory.ParseMemberDeclaration("public struct INNER { public int Value; }")! })
+            {
+                var root = SyntaxFactory.CompilationUnit().AddMembers(missing.AddMembers(inner));
+                var providers = root.DescendantNodes().OfType<StructDeclarationSyntax>().ToArray();
+                Assert.AreEqual(2, providers.Length);
+                Assert.AreEqual(providers[0].Span, providers[1].Span);
+                object[] arguments = { root, providers.Select(declaration => declaration.Span).ToHashSet(), false };
+                var actual = (StructDeclarationSyntax[])find.Invoke(null, arguments)!;
+                Assert.IsTrue((bool)arguments[2]);
+                Assert.AreEqual(providers.Length, actual.Length);
+                Assert.AreEqual(root.RemoveNodes(providers, SyntaxRemoveOptions.KeepNoTrivia)!.ToFullString(),
+                    root.RemoveNodes(actual, SyntaxRemoveOptions.KeepNoTrivia)!.ToFullString());
+                arguments = new object[] { root,
+                    Array.Empty<StructDeclarationSyntax>().Select(declaration => declaration.Span).ToHashSet(), true };
+                actual = (StructDeclarationSyntax[])find.Invoke(null, arguments)!;
+                Assert.AreEqual(0, actual.Length);
+                Assert.IsFalse((bool)arguments[2]);
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void RepeatedRecordModelReusePreservesBindingsAcrossCompilationVersions(bool reverseFiles)
         {
             string records = string.Join("\n", Enumerable.Range(0, 20).Select(index =>

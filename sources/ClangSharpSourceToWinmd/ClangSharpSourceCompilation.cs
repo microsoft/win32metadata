@@ -10,6 +10,7 @@ using System.Text.Json;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Text;
 using MetadataUtils;
 
 namespace ClangSharpSourceToWinmd
@@ -1091,6 +1092,8 @@ namespace ClangSharpSourceToWinmd
             var removals = new HashSet<StructDeclarationSyntax>();
             var originalModels = new Dictionary<SyntaxTree, SemanticModel>();
             int modelRequests = 0;
+            int nativeComparisons = 0, isolationTrees = 0, isolationTargets = 0, isolationEmptyTrees = 0, isolationScans = 0;
+            TimeSpan nativeBindingTime = TimeSpan.Zero, isolationSyntaxTime = TimeSpan.Zero;
             var groups = compilation.SyntaxTrees.Where(tree =>
                 !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase) &&
                 !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
@@ -1136,17 +1139,38 @@ namespace ClangSharpSourceToWinmd
                     continue;
                 var nativeBindings = native ? new NativeBindingComparison(compilation, copies) : null;
                 // Identical text can refer to different field types or annotation arguments through using aliases.
-                if (copies.Skip(1).Any(declaration =>
+                bool bindingMismatch = copies.Skip(1).Any(declaration =>
                 {
                     var model = OriginalModel(declaration.SyntaxTree);
-                    return !SymbolEqualityComparer.Default.Equals(firstSymbol, model.GetDeclaredSymbol(declaration)) ||
-                        !(native ? NativeBindingsMatch(nativeBindings, copies[0], declaration) :
-                            BindingsMatch(copies[0], firstModel, declaration, model));
-                }))
+                    if (!SymbolEqualityComparer.Default.Equals(firstSymbol, model.GetDeclaredSymbol(declaration)))
+                        return true;
+                    if (!native)
+                        return !BindingsMatch(copies[0], firstModel, declaration, model);
+                    long bindingStart = System.Diagnostics.Stopwatch.GetTimestamp();
+                    try
+                    {
+                        return !NativeBindingsMatch(nativeBindings, copies[0], declaration);
+                    }
+                    finally
+                    {
+                        nativeComparisons++;
+                        nativeBindingTime += System.Diagnostics.Stopwatch.GetElapsedTime(bindingStart);
+                    }
+                });
+                if (nativeBindings != null)
+                {
+                    isolationTrees += nativeBindings.IsolationTrees;
+                    isolationTargets += nativeBindings.IsolationTargets;
+                    isolationEmptyTrees += nativeBindings.IsolationEmptyTrees;
+                    isolationScans += nativeBindings.IsolationScans;
+                    isolationSyntaxTime += nativeBindings.IsolationSyntaxTime;
+                }
+                if (bindingMismatch)
                     continue;
                 removals.UnionWith(copies.Skip(1));
             }
             Console.WriteLine($"  Repeated record original binding models: {originalModels.Count} created for {modelRequests} requests.");
+            Console.WriteLine($"  Repeated record native binding comparisons: {nativeComparisons} ({OutputUtils.FormatTimespan(nativeBindingTime)}); provider isolation syntax: {isolationTrees} trees, {isolationTargets} removal targets, {isolationEmptyTrees} empty removal sets, {isolationScans} fallback scans ({OutputUtils.FormatTimespan(isolationSyntaxTime)}).");
             return RemoveStructs(compilation, removals);
 
             SemanticModel OriginalModel(SyntaxTree tree)
@@ -1205,6 +1229,11 @@ namespace ClangSharpSourceToWinmd
 
             public CSharpCompilation Compilation { get; }
             public IReadOnlyList<StructDeclarationSyntax> Copies { get; }
+            public int IsolationTrees { get; set; }
+            public int IsolationTargets { get; set; }
+            public int IsolationEmptyTrees { get; set; }
+            public int IsolationScans { get; set; }
+            public TimeSpan IsolationSyntaxTime { get; set; }
             public Dictionary<(StructDeclarationSyntax Canonical, bool Alternate, bool Anonymous, bool Broader),
                 (StructDeclarationSyntax Declaration, SemanticModel Model, StructDeclarationSyntax Normalized)> CanonicalViews { get; } = new();
         }
@@ -1235,6 +1264,7 @@ namespace ClangSharpSourceToWinmd
             (StructDeclarationSyntax Declaration, SemanticModel Model, StructDeclarationSyntax Normalized)
                 Isolate(StructDeclarationSyntax retained)
             {
+                long isolationStart = System.Diagnostics.Stopwatch.GetTimestamp();
                 var marker = new SyntaxAnnotation();
                 var result = compilation;
                 SyntaxTree retainedTree = null;
@@ -1246,14 +1276,21 @@ namespace ClangSharpSourceToWinmd
                         root = root.ReplaceNode(retained, retained.WithAdditionalAnnotations(marker));
                     var spans = group.Where(declaration => declaration != retained)
                         .Select(declaration => declaration.Span).ToHashSet();
-                    root = root.RemoveNodes(root.DescendantNodes().OfType<StructDeclarationSyntax>()
-                        .Where(declaration => spans.Contains(declaration.Span)), SyntaxRemoveOptions.KeepNoTrivia);
+                    var removed = GetProviderRemovalNodes(root, spans, out bool scanned);
+                    comparison.IsolationTrees++;
+                    comparison.IsolationTargets += spans.Count;
+                    if (spans.Count == 0)
+                        comparison.IsolationEmptyTrees++;
+                    if (scanned)
+                        comparison.IsolationScans++;
+                    root = root.RemoveNodes(removed, SyntaxRemoveOptions.KeepNoTrivia);
                     var replacement = tree.WithRootAndOptions(root, tree.Options);
                     result = result.ReplaceSyntaxTree(tree, replacement);
                     if (tree == retained.SyntaxTree)
                         retainedTree = replacement;
                 }
                 var declaration = (StructDeclarationSyntax)retainedTree.GetRoot().GetAnnotatedNodes(marker).Single();
+                comparison.IsolationSyntaxTime += System.Diagnostics.Stopwatch.GetElapsedTime(isolationStart);
                 var model = result.GetSemanticModel(retainedTree);
                 if (retained != first && left.Declaration != null && NativeRecordSourceProvenance.SameDeclaration(
                     NativeRecordSourceProvenance.Read(first), NativeRecordSourceProvenance.Read(retained)))
@@ -1454,6 +1491,28 @@ namespace ClangSharpSourceToWinmd
 
             static string AnonymousRecordName(NativeRecordSource source) =>
                 $"__AnonymousRecord_{Path.GetFileNameWithoutExtension(source.Header)}_L{source.Line}_C{source.Column}";
+        }
+
+        private static StructDeclarationSyntax[] GetProviderRemovalNodes(SyntaxNode root, HashSet<TextSpan> spans,
+            out bool scanned)
+        {
+            scanned = false;
+            if (spans.Count == 0)
+                return Array.Empty<StructDeclarationSyntax>();
+            // Annotating the retained provider leaves the original source spans unchanged.
+            if (spans.All(span => span.Length > 0 && root.FullSpan.Contains(span)))
+            {
+                var nodes = spans.OrderBy(span => span.Start).Select(span =>
+                    (Span: span, Node: root.FindNode(span, getInnermostNodeForTie: true))).ToArray();
+                if (nodes.All(item => item.Node is StructDeclarationSyntax declaration &&
+                    declaration.Span == item.Span && !declaration.ContainsDiagnostics &&
+                    !declaration.Ancestors().OfType<StructDeclarationSyntax>().Any(parent => parent.Span == item.Span)))
+                    return nodes.Select(item => (StructDeclarationSyntax)item.Node).ToArray();
+            }
+            // Malformed or tied spans retain the original discovery and removal behavior.
+            scanned = true;
+            return root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                .Where(declaration => spans.Contains(declaration.Span)).ToArray();
         }
 
         private static string MemberKey(MemberDeclarationSyntax member) => string.Join("/", member.AncestorsAndSelf()

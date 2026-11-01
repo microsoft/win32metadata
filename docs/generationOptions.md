@@ -203,6 +203,12 @@ rewriting the inputs or changing the final providers.
 Isolated canonical binding views are reused only within one provider family and
 one immutable compilation, with separate entries for each canonical declaration
 and anonymous-storage, alternate-definition and coverage-normalization policy.
+Provider isolation resolves its already-known removal spans on the current root
+instead of rediscovering declarations throughout each partition. Empty removal
+sets need no discovery. Malformed or tied spans retain the original full scan;
+removal trivia and canonical binding policies are unchanged. Phase-level counters
+and clocks measure isolation syntax/compilation rewrites within native comparisons
+without per-provider or per-node logging.
 The normal emitter prints separate timings for common-provider coalescing,
 cross-architecture constant qualification and final typedef/record composition,
 including failed phases.
