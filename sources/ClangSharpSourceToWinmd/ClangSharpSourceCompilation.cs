@@ -618,7 +618,7 @@ namespace ClangSharpSourceToWinmd
                 static CSharpCompilation Compose(string stage, Func<CSharpCompilation> action)
                 {
                     Console.WriteLine($"  {stage} started...");
-                    var stageWatch = Stopwatch.StartNew();
+                    var stageWatch = System.Diagnostics.Stopwatch.StartNew();
                     try
                     {
                         return action();
