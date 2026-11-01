@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\scripts\CreateImportEntryPoints.ps1" Link="CreateImportEntryPoints.ps1" CopyToOutputDirectory="PreserveNewest" />
     <None Update="assets\*\ordinalfixture.dll;assets\*\ordinalfixture.lib;assets\ordinalfixture.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

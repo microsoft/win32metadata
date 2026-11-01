@@ -35,6 +35,7 @@
     <EmitterRsp Include="emitter.settings.rsp"/>
     <EmitterRsp Include="requiredNamespacesForNames.rsp"/>
     <EmitterRsp Include="documentationMappings.rsp"/>
+    <EmitterRsp Condition="'$(PreserveOrdinalImports)' != 'false'" Include="importEntryPoints.rsp"/>
   </ItemGroup>
 
   <PropertyGroup>

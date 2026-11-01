@@ -64,8 +64,10 @@ namespace Windows.Win32.Fixture
             Assert.AreEqual("#7", GetEntryPoint(method));
         }
 
-        [TestMethod]
-        public void EmittedWinmd_ImportsOrdinalOnlyExportByOrdinalAndKeepsManagedName()
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
+        public void EmittedWinmd_ImportsOrdinalOnlyExportByOrdinalAndKeepsManagedName(bool overrideExisting)
         {
             string root = Path.Combine(Path.GetTempPath(), "importentrypoint-" + Guid.NewGuid().ToString("N"));
             string sourceDir = Path.Combine(root, "src");
@@ -78,12 +80,57 @@ namespace Windows.Win32.Fixture
                 File.WriteAllText(Path.Combine(sourceDir, "x64", "fixture.cs"), FixtureSource);
                 File.WriteAllText(rspPath, "--importEntryPoint" + Environment.NewLine + "FixtureByOrdinal=#7" + Environment.NewLine);
 
-                int exitCode = Program.Main(new[] { "--sourceDir", sourceDir, "--arch", "x64", "--outputFileName", winmdPath, "@" + rspPath });
+                var args = new List<string> { "--sourceDir", sourceDir, "--arch", "x64", "--outputFileName", winmdPath };
+                if (overrideExisting)
+                {
+                    args.AddRange(new[] { "--importEntryPoint", "FixtureByOrdinal=#8" });
+                }
+                args.Add("@" + rspPath);
+                int exitCode = Program.Main(args.ToArray());
                 Assert.AreEqual(0, exitCode);
 
                 Dictionary<string, string> imports = ReadImports(winmdPath);
                 Assert.AreEqual("#7", imports["FixtureByOrdinal"]);
                 Assert.AreEqual("FixtureByName", imports["FixtureByName"]);
+            }
+            finally
+            {
+                Directory.Delete(root, true);
+            }
+        }
+
+        [TestMethod]
+        public void EmittedWinmd_LoadsEverySnapshotMappingWithoutSystemProbing()
+        {
+            string rspPath = Path.Combine(AppContext.BaseDirectory, "importEntryPoints.rsp");
+            var mappings = File.ReadAllLines(rspPath)
+                .Where(line => !line.StartsWith("#") && line.Contains('='))
+                .Select(line => line.Split('='))
+                .ToDictionary(parts => parts[0], parts => parts[1]);
+            Assert.IsTrue(mappings.Count > 0);
+            string methods = string.Join(Environment.NewLine, mappings.Keys.Select(name =>
+                $"[DllImport(\"Snapshot\", ExactSpelling = true)] public static extern int {name}();"));
+            string source = "using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata; namespace Windows.Win32.Fixture { public static class Apis { " +
+                methods + " [DllImport(\"Snapshot\")] public static extern int UnmappedImport(); } } " +
+                "namespace Windows.Win32.Foundation.Metadata { " +
+                "public sealed class AnsiAttribute : System.Attribute {} " +
+                "public sealed class UnicodeAttribute : System.Attribute {} }";
+            string root = Path.Combine(Path.GetTempPath(), "importsnapshot-" + Guid.NewGuid().ToString("N"));
+            string sourceDir = Path.Combine(root, "src");
+            string winmdPath = Path.Combine(root, "snapshot.winmd");
+            Directory.CreateDirectory(Path.Combine(sourceDir, "x64"));
+            try
+            {
+                File.WriteAllText(Path.Combine(sourceDir, "x64", "snapshot.cs"), source);
+                Assert.AreEqual(0, Program.Main(new[] {
+                    "--sourceDir", sourceDir, "--arch", "x64", "--outputFileName", winmdPath, "@" + rspPath }));
+                var imports = ReadImports(winmdPath);
+                Assert.AreEqual(mappings.Count + 1, imports.Count);
+                foreach (var mapping in mappings)
+                {
+                    Assert.AreEqual(mapping.Value, imports[mapping.Key], mapping.Key);
+                }
+                Assert.AreEqual("UnmappedImport", imports["UnmappedImport"]);
             }
             finally
             {
@@ -136,5 +183,3 @@ namespace Windows.Win32.Fixture
         }
     }
 }
-
-

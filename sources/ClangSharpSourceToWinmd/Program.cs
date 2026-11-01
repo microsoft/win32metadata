@@ -68,7 +68,7 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             Dictionary<string, string> requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
             Dictionary<string, string> staticLibs = ConvertValuePairsToDictionary(staticLibValuePairs);
-            Dictionary<string, string> importEntryPoints = ConvertValuePairsToDictionary(importEntryPointValuePairs);
+            Dictionary<string, string> importEntryPoints = ConvertValuePairsToDictionary(importEntryPointValuePairs, replaceExisting: true);
             var forceGuidConsts = new HashSet<string>(forceGuidConstsVals ?? (Array.Empty<string>()));
 
             string rawVersion = version.Split('-')[0];
@@ -214,7 +214,7 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
-        private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items)
+        private static Dictionary<string, string> ConvertValuePairsToDictionary(string[] items, bool replaceExisting = false)
         {
             Dictionary<string, string> ret = new Dictionary<string, string>();
 
@@ -233,7 +233,7 @@ namespace ClangSharpSourceToWinmd
                         string name = item.Substring(0, firstEqual);
                         string value = item.Substring(firstEqual + 1);
 
-                        if (ret.ContainsKey(name))
+                        if (!replaceExisting && ret.ContainsKey(name))
                         {
                             ret[name] += value;
                         }

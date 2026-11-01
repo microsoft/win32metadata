@@ -28,6 +28,10 @@ namespace MetadataTasks
         // DLL's export table decides: "#ordinal" is used only when the DLL does not export the name.
         public ITaskItem[] DllSearchPaths { get; set; }
 
+        // Opt in to the build process's Windows system directory after explicit search paths.
+        // Its DLLs reflect the host OS and process architecture, not necessarily the target SDK.
+        public bool ProbeSystemDlls { get; set; }
+
         // When true, imports the import library marks ordinal-type are emitted as "#ordinal" even if the DLL
         // can't be found to confirm it. Defaults to false, which keeps the by-name import in that case.
         public bool TrustImportLibOrdinals { get; set; }
@@ -48,7 +52,7 @@ namespace MetadataTasks
             var functionNames = new HashSet<string>(System.StringComparer.OrdinalIgnoreCase);
             StringBuilder libLines = new StringBuilder();
             StringBuilder entryPointLines = new StringBuilder();
-            var namedExportsByDll = new Dictionary<string, HashSet<string>>(System.StringComparer.OrdinalIgnoreCase);
+            var exportsByDll = new Dictionary<string, (HashSet<string> Names, HashSet<ushort> Ordinals)>(System.StringComparer.OrdinalIgnoreCase);
             foreach (var lib in libFiles)
             {
                 var importInfos = LibScraper.GetImportInfos(lib);
@@ -67,7 +71,7 @@ namespace MetadataTasks
                         libLines.AppendLine($"{procName}={dllName}");
                         functionNames.Add(procName);
 
-                        if (this.PreserveOrdinalImports && importInfo.Ordinal.HasValue && this.IsOrdinalOnly(importInfo, namedExportsByDll))
+                        if (this.PreserveOrdinalImports && importInfo.Ordinal.HasValue && this.IsOrdinalOnly(importInfo, exportsByDll))
                         {
                             if (entryPointLines.Length == 0)
                             {
@@ -111,18 +115,19 @@ namespace MetadataTasks
             return true;
         }
 
-        private bool IsOrdinalOnly(ImportInfo importInfo, Dictionary<string, HashSet<string>> namedExportsByDll)
+        private bool IsOrdinalOnly(ImportInfo importInfo, Dictionary<string, (HashSet<string> Names, HashSet<ushort> Ordinals)> exportsByDll)
         {
-            if (!namedExportsByDll.TryGetValue(importInfo.Dll, out HashSet<string> namedExports))
+            if (!exportsByDll.TryGetValue(importInfo.Dll, out var exports))
             {
-                namedExports = this.FindNamedExports(importInfo.Dll);
-                namedExportsByDll[importInfo.Dll] = namedExports;
+                exports = this.FindExports(importInfo.Dll);
+                exportsByDll[importInfo.Dll] = exports;
             }
 
-            return namedExports == null ? this.TrustImportLibOrdinals : !namedExports.Contains(importInfo.ProcName);
+            return exports.Names == null ? this.TrustImportLibOrdinals :
+                !exports.Names.Contains(importInfo.ProcName) && exports.Ordinals.Contains(importInfo.Ordinal.Value);
         }
 
-        private HashSet<string> FindNamedExports(string dllName)
+        private (HashSet<string> Names, HashSet<ushort> Ordinals) FindExports(string dllName)
         {
             if (this.DllSearchPaths != null)
             {
@@ -132,12 +137,22 @@ namespace MetadataTasks
                     string path = Path.Combine(dir, dllName);
                     if (File.Exists(path))
                     {
-                        return DllExports.GetNamedExports(path);
+                        return (DllExports.GetNamedExports(path), DllExports.GetOrdinalOnlyExports(path));
                     }
                 }
             }
 
-            return null;
+            if (this.ProbeSystemDlls && System.OperatingSystem.IsWindows())
+            {
+                string path = Path.Combine(System.Environment.SystemDirectory, dllName);
+                if (File.Exists(path))
+                {
+                    this.Log.LogMessage(MessageImportance.Low, $"Checking host system DLL exports: {path}");
+                    return (DllExports.GetNamedExports(path), DllExports.GetOrdinalOnlyExports(path));
+                }
+            }
+
+            return (null, null);
         }
 
         private string[] GetLibs()

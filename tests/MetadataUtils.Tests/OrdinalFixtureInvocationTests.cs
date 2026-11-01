@@ -1,6 +1,8 @@
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using TestCommon;
 using Xunit;
@@ -66,6 +68,41 @@ namespace MetadataUtils.Tests
         }
 
         [Fact]
+        public void DllExports_ListsOnlyPopulatedUnnamedOrdinals()
+        {
+            var ordinals = DllExports.GetOrdinalOnlyExports(FixtureDllPath);
+
+            Assert.Equal(new ushort[] { 7 }, ordinals.OrderBy(ordinal => ordinal));
+        }
+
+        [Fact]
+        public void DllExports_HandlesExportTableWithoutNames()
+        {
+            byte[] image = File.ReadAllBytes(FixtureDllPath);
+            using var stream = new MemoryStream(image);
+            using var pe = new PEReader(stream);
+            int rva = pe.PEHeaders.PEHeader!.ExportTableDirectory.RelativeVirtualAddress;
+            var section = pe.PEHeaders.SectionHeaders.Single(s => rva >= s.VirtualAddress && rva < s.VirtualAddress + s.VirtualSize);
+            int offset = rva - section.VirtualAddress + section.PointerToRawData;
+            Array.Clear(image, offset + 24, 4);
+            Array.Clear(image, offset + 32, 8);
+            string path = Path.Combine(Path.GetTempPath(), $"unnamed-{Guid.NewGuid():N}.dll");
+            try
+            {
+                File.WriteAllBytes(path, image);
+                Assert.Empty(DllExports.GetNamedExports(path));
+                var ordinals = DllExports.GetOrdinalOnlyExports(path);
+                Assert.Equal(3, ordinals.Count);
+                Assert.Contains((ushort)7, ordinals);
+                Assert.Contains((ushort)9, ordinals);
+            }
+            finally
+            {
+                File.Delete(path);
+            }
+        }
+
+        [Fact]
         public void NamedImport_Succeeds()
         {
             if (!CanRun) return;
@@ -90,4 +127,3 @@ namespace MetadataUtils.Tests
         }
     }
 }
-

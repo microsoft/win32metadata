@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\..\generation\WinSDK\importEntryPoints.rsp" Link="importEntryPoints.rsp" CopyToOutputDirectory="PreserveNewest" />
     <ProjectReference Include="..\..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
   </ItemGroup>
 </Project>

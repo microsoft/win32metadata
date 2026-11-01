@@ -60,6 +60,7 @@
     <FunctionPointerFixup Include="$(WinSDKAssets)\functionPointerFixups.json"/>
     <AutoTypesForSettingsOnly Include="$(WinSDKAssets)\autotypes.json"/>
     <ScraperRsp Include="$(WinSDKAssets)\scraper.settings.rsp"/>
+    <WinSDKImportEntryPointsRsp Condition="'$(PreserveOrdinalImports)' == 'true'" Include="$(WinSDKAssets)\importEntryPoints.rsp"/>
   </ItemGroup>
 
   <PropertyGroup Condition="'$(UseWinSDKAssets)' == 'true'">
@@ -151,6 +152,7 @@
       PreserveOrdinalImports="$(PreserveOrdinalImports)"
       TrustImportLibOrdinals="$(TrustImportLibOrdinals)"
       DllSearchPaths="@(DllSearchPath)"
+      ProbeSystemDlls="$(ProbeSystemDlls)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </ScanLibs>
 
@@ -268,12 +270,14 @@
 
   </Target>
 
-  <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp)"
-    Outputs="$(OutputWinmd)"
+  <Target Name="PrepareEmitterResponseFiles"
     DependsOnTargets="ScrapeConstants">
 
     <ItemGroup>
+      <ProjectEmitterRsp Include="@(EmitterRsp)"/>
+      <EmitterRsp Remove="@(EmitterRsp)"/>
+      <!-- SDK defaults precede project/UDK mappings; live scan mappings are last. -->
+      <EmitterRsp Include="@(WinSDKImportEntryPointsRsp);@(ProjectEmitterRsp)"/>
       <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
       <!-- When scraping ran in this build, include only the current arch's auto-rsp -->
       <EmitterRsp Condition="'$(SkipScraping)' != 'true' and Exists('$(EmitterAutoFnPtrRsp)')" Include="$(EmitterAutoFnPtrRsp)"/>
@@ -283,7 +287,12 @@
       <EmitterRsp Include="$(GeneratedDir)\enumsRemap.rsp"/>
       <EmitterRsp Include="$(ImportEntryPointsRsp)"/>
     </ItemGroup>
+  </Target>
 
+  <Target Name="EmitWinmd" BeforeTargets="Build"
+    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp)"
+    Outputs="$(OutputWinmd)"
+    DependsOnTargets="PrepareEmitterResponseFiles">
     <Message Text="Writing winmd..." Importance="high"/>
 
     <EmitWinmd
