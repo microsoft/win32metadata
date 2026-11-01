@@ -215,7 +215,11 @@ enum class _Win32_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long
 
 ### Typedefs and callback aliases
 
-Type metadata precedes the typedef.
+Type metadata precedes the typedef. Native scalar and data-pointer aliases use
+automatic discovery and the normal remap configuration. API metadata and
+configured nominal targets can require a named projection; ordinary aliases
+retain their existing intrinsic lowering, and an explicit storage remap takes
+precedence.
 
 Native typedef identity is inferred from native declarations in ordinary and
 annotation-enabled scrapes. Supported scalar and data-pointer typedefs keep their
@@ -224,6 +228,13 @@ attribute and single `Value` field describe each inferred wrapper; no header
 identity annotation is required or accepted. Do not add a marker, same-name
 typedef bridge, lifecycle fact, or per-name allowlist to force wrapper emission.
 Traversal, dependencies, and exclusions determine emitted scope.
+
+The authored `_Win32_NativeTypedef_` marker and `Win32Metadata.NativeTypedef`
+payload are retired. Do not author them in headers, compiler annotations, or
+IDL selector comments. The reader rejects these forms. Generated
+`[NativeTypedef]` remains part of the wrapper projection and is not an SDK
+annotation. Traversal and exclusion rules still decide which native declarations
+are emitted.
 
 The generator's configured intrinsic pointer-sized integral projections remain
 intrinsic when their native width and signedness match. Application typedefs
@@ -255,7 +266,7 @@ empty emitted records do not prove equivalence. Other pointer representations ar
 not admitted by this rule, and complete native records remain intact.
 
 A separate source-kind rule covers an explicitly retained opaque
-`typedef struct TAG` factory whose authored `NativeTypedef` intent and invalid
+`typedef struct TAG` factory whose retained wrapper intent and invalid
 values must survive an annotated native `typedef struct TAG* ALIAS`. Both fresh
 providers must prove the same qualified alias and tag, explicit wrapper intent
 and exactly one ordinary, unqualified native pointer. The retained `IntPtr Value`
@@ -285,12 +296,23 @@ storage remap on the scalar alias still takes precedence; ordinary aliases and
 enum targets keep their existing lowering behavior. This uses the normal remap
 configuration and does not require a header annotation or a self-remap.
 
+Source-proven native aliases with configured nominal bindings to one retained
+public wrapper can compose into that wrapper. Their native declaration families
+remain distinct and are validated independently. Unconfigured families do not
+gain that target from matching names, and native identity, layout and storage
+checks remain in effect.
+
 A header logical enum can own a compatible inferred scalar alias from another
 header when the existing storage, namespace, use and metadata checks agree.
 Lowering native typedef casts in enum initializers also converts the final
 expression to the enum's declared integral storage. Explicit `checked` and
 `unchecked` contexts are preserved, and genuine checked overflow remains a
 compiler error.
+
+For an IDL-owned typedef, author supported API metadata through the existing
+selector-bound comment transport in the original IDL. Native typedef identity
+continues to use automatic discovery and configuration; the retired
+`NativeTypedef` payload is not valid in a selector comment.
 
 Callback aliases keep their existing callback projection. Independent API facts
 still use the annotation or original-IDL comment transport:
@@ -1136,8 +1158,9 @@ is not an identity. Distinct typedef aliases remain distinct.
 
 The same canonical fact parser, validation, native cleanup resolution, projection
 and final emitter serve macros and comments. `return` accepts RAIIFree and
-AssociatedEnum. Native typedef identity is inferred from the native declaration;
-it is not a selector-bound annotation. References use native lookup from the bound declaration.
+AssociatedEnum. Native typedef identity uses automatic discovery and
+configuration; a `type` selector rejects the retired `NativeTypedef` payload.
+References use native lookup from the bound declaration.
 AssociatedEnum admits real enum declarations and already-compiled logical groups,
 including exact native `__MIDL_*` tags. AlsoUsableFor and AssociatedConstant must
 resolve actual native types/constants. ImportLibrary uses literal quoted strings.
