@@ -337,8 +337,8 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
                 NativeTypedefStructsCreator.WriteToStream(new(), new[] { new AutoType
                 {
                     Namespace = nominal.GetProperty("Namespace").GetString(),
-                    Name = nominal.GetProperty("Name").GetString(),
-                    ValueType = nominal.GetProperty("ValueType").GetString(),
+                    Name = nominal.GetProperty("Name").GetString()!,
+                    ValueType = nominal.GetProperty("ValueType").GetString()!,
                     NativeTypedef = nominal.GetProperty("NativeTypedef").GetBoolean(),
                 } }, output);
                 trees.Add(CSharpSyntaxTree.ParseText(Encoding.UTF8.GetString(output.ToArray()),
@@ -387,7 +387,7 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             var original = ManagedNativeReferenceCompilation(trees, references);
             var sourceTypes = DeclarationRecords(trees).Select(record =>
                 (SyntaxUtils.GetEnclosingNamespace(record), record.Identifier.ValueText)).ToHashSet();
-            var moved = trees.Select(tree => MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) ? tree :
+            var moved = trees.Select(tree =>
                 NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, new(), sourceTypes, recordRoutes,
                     nativeReferenceModels: new[] { original.GetSemanticModel(tree) })).ToArray();
             var required = owners.ToDictionary(pair => pair.Key, pair => pair.Value);
