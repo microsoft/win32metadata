@@ -42,7 +42,6 @@ namespace ClangSharpSourceToWinmd
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
-        private readonly string assemblyName;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -78,7 +77,6 @@ namespace ClangSharpSourceToWinmd
             string assemblyName)
         {
             this.compilation = compilation;
-            this.assemblyName = assemblyName;
             this.reducePointerLevels = reducePointerLevels;
             this.forceGuidConsts = forceGuidConsts;
 
@@ -441,47 +439,22 @@ namespace ClangSharpSourceToWinmd
             this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
         }
 
-        private void CacheInterfaceInfo(INamedTypeSymbol symbol)
+        private void CacheInterfaceInfo(InterfaceInfo interfaceInfo)
         {
-            this.interfaceSymbols.Add(symbol);
-            this.interfaceMethodCount[symbol] = this.GetReferencedInterfaceMethodCount(symbol, new HashSet<ISymbol>(SymbolEqualityComparer.Default));
-            if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
+            string fullName = $"{interfaceInfo.Namespace}.{interfaceInfo.Name}";
+            var symbol = this.compilation.GetTypeByMetadataName(fullName);
+            if (symbol != null)
             {
-                symbols = new List<ISymbol>();
-                this.namesToInterfaceSymbols[symbol.Name] = symbols;
-            }
-
-            symbols.Add(symbol);
-        }
-
-        private int GetReferencedInterfaceMethodCount(INamedTypeSymbol symbol, HashSet<ISymbol> visited)
-        {
-            if (!visited.Add(symbol))
-            {
-                return 0;
-            }
-
-            if (symbol.TypeKind == TypeKind.Error)
-            {
-                // A referenced interface may inherit from the assembly we are currently emitting.
-                var local = symbol.ContainingAssembly?.Name == this.assemblyName
-                    ? this.compilation.Assembly.GetTypeByMetadataName(symbol.ToDisplayString())
-                    : null;
-                if (local != null && this.interfaceMethodCount.TryGetValue(local, out int localCount))
+                this.interfaceSymbols.Add(symbol);
+                this.interfaceMethodCount[symbol] = interfaceInfo.ImplementedMethodCount;
+                if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
                 {
-                    return localCount;
+                    symbols = new List<ISymbol>();
+                    this.namesToInterfaceSymbols[symbol.Name] = symbols;
                 }
 
-                throw new InvalidOperationException($"Could not resolve inherited interface '{symbol}' from '{symbol.ContainingAssembly?.Name}'.");
+                symbols.Add(symbol);
             }
-
-            int count = symbol.GetMembers().OfType<IMethodSymbol>().Count(method => method.MethodKind == MethodKind.Ordinary);
-            foreach (var inherited in symbol.Interfaces)
-            {
-                count += this.GetReferencedInterfaceMethodCount(inherited, visited);
-            }
-
-            return count;
         }
 
         private void CacheGuidOnlyStruct(StructDeclarationSyntax structNode)
@@ -571,30 +544,42 @@ namespace ClangSharpSourceToWinmd
                     interfaceWalker.Visit(tree.GetRoot());
                 }
 
-                foreach (var reference in this.compilation.References.Where(r => !r.Display.EndsWith("netstandard.dll")))
+                var allWinmds = this.compilation.References.Where(r => !r.Display.EndsWith("netstandard.dll")).Select(r => MetadataUtils.WinmdUtils.LoadFromFile(r.Display)).ToList();
+
+                foreach (var winmd in allWinmds)
                 {
-                    var assembly = (IAssemblySymbol)this.compilation.GetAssemblyOrModuleSymbol(reference);
-                    GatherReferencedTypes(assembly.GlobalNamespace);
+                    foreach (var typeInfo in winmd.GetTypes(allWinmds))
+                    {
+                        if (typeInfo is MetadataUtils.InterfaceInfo interfaceInfo)
+                        {
+                            this.CacheInterfaceInfo(interfaceInfo);
+                        }
+                        else if (typeInfo is MetadataUtils.StructInfo)
+                        {
+                            var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                            var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+
+                            if (typeSymbol != null)
+                            {
+                                this.nameToSymbols[typeInfo.Name] = typeSymbol;
+                            }
+                        }
+                        else if (typeInfo is MetadataUtils.DelegateTypeInfo)
+                        {
+                            var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
+                            var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
+
+                            if (typeSymbol != null)
+                            {
+                                this.nameToSymbols[typeInfo.Name] = typeSymbol;
+                            }
+                        }
+                    }
                 }
 
-                void GatherReferencedTypes(INamespaceSymbol @namespace)
+                foreach (var winmd in allWinmds)
                 {
-                    foreach (var symbol in @namespace.GetTypeMembers())
-                    {
-                        if (symbol.TypeKind == TypeKind.Interface)
-                        {
-                            this.CacheInterfaceInfo(symbol);
-                        }
-                        else if (symbol.TypeKind == TypeKind.Struct || symbol.TypeKind == TypeKind.Delegate)
-                        {
-                            this.nameToSymbols[symbol.Name] = symbol;
-                        }
-                    }
-
-                    foreach (var child in @namespace.GetNamespaceMembers())
-                    {
-                        GatherReferencedTypes(child);
-                    }
+                    winmd.Dispose();
                 }
             }
         }
@@ -603,7 +588,7 @@ namespace ClangSharpSourceToWinmd
         {
             EntityHandle scopeRef;
 
-            if (SymbolEqualityComparer.Default.Equals(symbol.ContainingAssembly, this.compilation.Assembly))
+            if (symbol.ContainingAssembly.Name == "?")
             {
                 scopeRef = this.moduleRef;
             }

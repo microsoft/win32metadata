@@ -5,9 +5,8 @@
 #
 # Pipeline structure:
 #   1. Detect whether the PR changes files outside docs/ and apidocs/
-#   2. Generate a public-header D3D12 bootstrap reference with source tools
-#   3. Three parallel scrape jobs (x64, x86, arm64) generate metadata source
-#   4. One build job assembles the winmd, packages, samples, and runs tests
+#   2. Three parallel scrape jobs (x64, x86, arm64) generate metadata source
+#   3. One build job assembles the winmd, packages, samples, and runs tests
 #      or reports success immediately for documentation-only PRs
 
 name: PR Validation
@@ -94,41 +93,12 @@ jobs:
   # Stage 1: Parallel header scraping (one job per architecture)
   # ──────────────────────────────────────────────────────────────────────
 
-  d3d12-bootstrap:
-    name: Public D3D12 bootstrap reference
+  scrape:
+    name: 'Scrape headers: ${{ matrix.arch }}'
     needs: [changes]
     if: needs.changes.outputs.build_needed == 'true'
     runs-on: windows-2022
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
-        with:
-          lfs: true
-          fetch-depth: 0
-      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
-        with:
-          global-json-file: global.json
-      - name: Generate reference from released public headers
-        shell: pwsh
-        run: |
-          . .\scripts\CommonUtils.ps1
-          Install-BuildTools
-          dotnet build generation\D3D12Bootstrap\D3D12Bootstrap.proj -c Release -t:EmitWinmd
-          if ($LASTEXITCODE -ne 0) { throw 'Public D3D12 bootstrap generation failed.' }
-      - uses: ./.github/actions/upload-artifact-with-retry
-        with:
-          name: d3d12-bootstrap
-          path: bin/d3d12-bootstrap/Microsoft.Direct3D.D3D12.winmd
-          retention-days: 7
-
-  scrape:
-    name: 'Scrape headers: ${{ matrix.arch }}'
-    needs: [changes, d3d12-bootstrap]
-    if: needs.changes.outputs.build_needed == 'true'
-    runs-on: windows-2022
     timeout-minutes: 60
-    env:
-      D3D12MetadataPath: ${{ github.workspace }}\bin\d3d12-bootstrap\Microsoft.Direct3D.D3D12.winmd
 
     strategy:
       fail-fast: false
@@ -154,11 +124,6 @@ jobs:
       - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
         with:
           global-json-file: global.json
-
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
-        with:
-          name: d3d12-bootstrap
-          path: bin/d3d12-bootstrap
 
       - name: Install nbgv and set version
         if: matrix.set_version
@@ -192,12 +157,10 @@ jobs:
 
   build-test:
     name: 'Build, test, package'
-    needs: [changes, d3d12-bootstrap, scrape]
+    needs: [changes, scrape]
     if: always() && needs.changes.result == 'success'
     runs-on: windows-2022
     timeout-minutes: 60
-    env:
-      D3D12MetadataPath: ${{ github.workspace }}\bin\d3d12-bootstrap\Microsoft.Direct3D.D3D12.winmd
 
     steps:
       - name: Documentation-only change
@@ -223,12 +186,6 @@ jobs:
 
       - uses: microsoft/setup-msbuild@6fb02220983dee41ce7ae257b6f4d8f9bf5ed4ce # v2.0.0
         if: needs.changes.outputs.build_needed == 'true'
-
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
-        if: needs.changes.outputs.build_needed == 'true'
-        with:
-          name: d3d12-bootstrap
-          path: bin/d3d12-bootstrap
 
       - name: Download all generated assets
         if: needs.changes.outputs.build_needed == 'true'

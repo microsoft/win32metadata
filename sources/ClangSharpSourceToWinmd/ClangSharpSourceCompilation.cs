@@ -130,8 +130,7 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             IEnumerable<string> addedRefs,
             Dictionary<string, string> staticLibs,
-            Dictionary<string, string> apiNamesToNamespaces,
-            string assemblyName = null)
+            Dictionary<string, string> apiNamesToNamespaces)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
@@ -300,7 +299,7 @@ namespace ClangSharpSourceToWinmd
             CSharpCompilationOptions compilationOptions = new CSharpCompilationOptions(OutputKind.WindowsRuntimeMetadata, allowUnsafe: true);
             var comp =
                 CSharpCompilation.Create(
-                    assemblyName,
+                    null,
                     FilesToTrees(modifiedFiles.Where(f => File.Exists(f))),
                     refs,
                     compilationOptions);
