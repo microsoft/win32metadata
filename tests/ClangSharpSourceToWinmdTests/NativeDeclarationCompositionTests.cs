@@ -104,8 +104,10 @@ namespace Observer {
                 LogicalProvider(fixture, "x86", "Owner", true));
             WriteDeclaration(fixture, "x86", "Second.header-types.cs",
                 LogicalProvider(fixture, "x86", "Owner", true, "SECOND", 2, "second-native.h", "OTHER"));
-            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            var error = Assert.ThrowsException<InvalidOperationException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "error WMA003:");
             StringAssert.Contains(error.Message, "Distinct native logical groups cannot share a projection solely by managed name.");
+            StringAssert.Contains(error.Message, "Blocked stage 'emitter.source-cleaning': requires valid logical enum composition.");
         }
 
         [DataTestMethod]
