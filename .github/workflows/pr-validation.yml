@@ -126,6 +126,7 @@ jobs:
             'FullyQualifiedName~ProviderIsolationSpanLookupsPreserveExactRemovalAndTrivia' = 2
             'FullyQualifiedName~ProviderIsolationSpanLookupsPreserveMalformedAndEmptySelections' = 1
             'FullyQualifiedName~RepeatedNativeRecordsDoNotDiscardUnresolvedDeclarationBindings' = 3
+            'FullyQualifiedName~NativeArchitectureMasksOnlyBindForAlternateHeaderCoverage' = 2
           }
           $filter = $selection.Keys -join '|'
           $started = Get-Date

@@ -2762,6 +2762,64 @@ namespace OtherRetained { [NativeTypedef] public partial struct SCALAR { public 
             Assert.AreNotSame(model, Model(replaced));
         }
 
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
+        public void NativeArchitectureMasksOnlyBindForAlternateHeaderCoverage(bool alternateHeader)
+        {
+            using var fixture = new Fixture("x64");
+            fixture.Write("autotypes.cs", "");
+            fixture.Write("Bindings.header-types.cs", "");
+            var compilation = fixture.Compile().CSharpCompilation;
+            var copies = Enumerable.Range(0, 2).Select(index =>
+            {
+                string text = RecordProvider(fixture, "Test", "native-record", index == 0);
+                string mask = index == 0 ? "All" : "X86";
+                text = text.Replace("public partial struct", "[global::Windows.Win32.Foundation.Metadata.SupportedArchitecture(" +
+                    "global::Windows.Win32.Foundation.Metadata.Architecture." + mask + ")] public partial struct");
+                var root = CSharpSyntaxTree.ParseText(text).GetRoot();
+                if (index == 1 && alternateHeader)
+                {
+                    var declaration = root.DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+                    var source = NativeRecordSourceProvenance.Read(declaration)! with
+                    {
+                        Header = Path.Combine(fixture.DirectoryPath, "alternate.h"),
+                    };
+                    root = root.ReplaceNode(declaration, NativeRecordSourceProvenance.Attach(
+                        declaration.WithTrailingTrivia(default(SyntaxTriviaList)), source));
+                }
+                return CSharpSyntaxTree.Create((CSharpSyntaxNode)root,
+                    path: Path.Combine(fixture.DirectoryPath, $"Provider{index}.cs"));
+            }).Select(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>().Single()).ToArray();
+            compilation = compilation.AddSyntaxTrees(copies.Select(declaration => declaration.SyntaxTree));
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static;
+            var contextType = typeof(ClangSharpSourceCompilation).GetNestedType("NativeBindingComparison",
+                System.Reflection.BindingFlags.NonPublic)!;
+            var constructor = contextType.GetConstructor(new[] { typeof(CSharpCompilation), typeof(IReadOnlyList<StructDeclarationSyntax>) })!;
+            var compare = typeof(ClangSharpSourceCompilation).GetMethod("NativeBindingsMatch", flags)!;
+            object Context(CSharpCompilation source) => constructor.Invoke(new object[] { source, copies });
+            bool Match(object context) => (bool)compare.Invoke(null, new object[] { context, copies[0], copies[1] })!;
+            int Requests(object context) => (int)contextType.GetProperty("ArchitectureModelRequests")!.GetValue(context)!;
+            var original = Context(compilation);
+            Assert.AreEqual(alternateHeader, Match(original));
+            Assert.AreEqual(alternateHeader ? 2 : 0, Requests(original));
+            Assert.AreEqual(alternateHeader, Match(original));
+            Assert.AreEqual(alternateHeader ? 4 : 0, Requests(original));
+            var metadataTree = compilation.SyntaxTrees.Single(tree => tree.GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().Any(declaration => declaration.Identifier.ValueText == "Architecture"));
+            var metadataRoot = metadataTree.GetRoot();
+            var member = metadataRoot.DescendantNodes().OfType<EnumMemberDeclarationSyntax>()
+                .Single(declaration => declaration.Identifier.ValueText == "X86");
+            var replacement = metadataTree.WithRootAndOptions(metadataRoot.ReplaceNode(member,
+                member.WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.LiteralExpression(
+                    SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(0))))), metadataTree.Options);
+            var replaced = Context(compilation.ReplaceSyntaxTree(metadataTree, replacement));
+            Assert.IsFalse(Match(replaced));
+            Assert.AreEqual(alternateHeader ? 2 : 0, Requests(replaced));
+            Assert.AreEqual(alternateHeader, Match(original));
+            Assert.AreEqual(alternateHeader ? 6 : 0, Requests(original));
+        }
+
         [TestMethod]
         public void UnrelatedNativeRecordsWithTheSameGlobalUsrKeepTheirPhysicalHeaderOwners()
         {

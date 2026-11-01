@@ -1094,6 +1094,9 @@ namespace ClangSharpSourceToWinmd
             int modelRequests = 0;
             int nativeComparisons = 0, isolationTrees = 0, isolationTargets = 0, isolationEmptyTrees = 0, isolationScans = 0;
             TimeSpan nativeBindingTime = TimeSpan.Zero, isolationSyntaxTime = TimeSpan.Zero;
+            TimeSpan nativeGuardTime = TimeSpan.Zero, nativeViewTime = TimeSpan.Zero,
+                nativeSyntaxTime = TimeSpan.Zero, nativeSemanticTime = TimeSpan.Zero;
+            int nativeViews = 0, architectureModelRequests = 0, nativeSemanticComparisons = 0;
             var groups = compilation.SyntaxTrees.Where(tree =>
                 !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase) &&
                 !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
@@ -1164,6 +1167,13 @@ namespace ClangSharpSourceToWinmd
                     isolationEmptyTrees += nativeBindings.IsolationEmptyTrees;
                     isolationScans += nativeBindings.IsolationScans;
                     isolationSyntaxTime += nativeBindings.IsolationSyntaxTime;
+                    nativeGuardTime += nativeBindings.GuardTime;
+                    nativeViewTime += nativeBindings.ProviderViewTime;
+                    nativeSyntaxTime += nativeBindings.SyntaxComparisonTime;
+                    nativeSemanticTime += nativeBindings.SemanticComparisonTime;
+                    nativeViews += nativeBindings.ProviderViews;
+                    architectureModelRequests += nativeBindings.ArchitectureModelRequests;
+                    nativeSemanticComparisons += nativeBindings.SemanticComparisons;
                 }
                 if (bindingMismatch)
                     continue;
@@ -1171,6 +1181,7 @@ namespace ClangSharpSourceToWinmd
             }
             Console.WriteLine($"  Repeated record original binding models: {originalModels.Count} created for {modelRequests} requests.");
             Console.WriteLine($"  Repeated record native binding comparisons: {nativeComparisons} ({OutputUtils.FormatTimespan(nativeBindingTime)}); provider isolation syntax: {isolationTrees} trees, {isolationTargets} removal targets, {isolationEmptyTrees} empty removal sets, {isolationScans} fallback scans ({OutputUtils.FormatTimespan(isolationSyntaxTime)}).");
+            Console.WriteLine($"  Repeated record native comparison stages: guards ({OutputUtils.FormatTimespan(nativeGuardTime)}, {architectureModelRequests} original architecture model requests); {nativeViews} provider views ({OutputUtils.FormatTimespan(nativeViewTime)}, including isolation syntax); normalized syntax ({OutputUtils.FormatTimespan(nativeSyntaxTime)}); {nativeSemanticComparisons} semantic comparisons ({OutputUtils.FormatTimespan(nativeSemanticTime)}).");
             return RemoveStructs(compilation, removals);
 
             SemanticModel OriginalModel(SyntaxTree tree)
@@ -1234,6 +1245,13 @@ namespace ClangSharpSourceToWinmd
             public int IsolationEmptyTrees { get; set; }
             public int IsolationScans { get; set; }
             public TimeSpan IsolationSyntaxTime { get; set; }
+            public TimeSpan GuardTime { get; set; }
+            public TimeSpan ProviderViewTime { get; set; }
+            public TimeSpan SyntaxComparisonTime { get; set; }
+            public TimeSpan SemanticComparisonTime { get; set; }
+            public int ProviderViews { get; set; }
+            public int ArchitectureModelRequests { get; set; }
+            public int SemanticComparisons { get; set; }
             public Dictionary<(StructDeclarationSyntax Canonical, bool Alternate, bool Anonymous, bool Broader),
                 (StructDeclarationSyntax Declaration, SemanticModel Model, StructDeclarationSyntax Normalized)> CanonicalViews { get; } = new();
         }
@@ -1242,24 +1260,49 @@ namespace ClangSharpSourceToWinmd
             StructDeclarationSyntax second)
         {
             var compilation = comparison.Compilation;
+            long guardStart = System.Diagnostics.Stopwatch.GetTimestamp();
             // Bind each complete provider without its duplicate fields, indexers and locals.
             bool alternateDefinitions = !string.Equals(NativeRecordSourceProvenance.Read(first)?.Header,
                 NativeRecordSourceProvenance.Read(second)?.Header, StringComparison.OrdinalIgnoreCase);
             bool anonymousStorageVariants = HasAnonymousStorageVariants(first, second);
-            int firstMask = SupportedMask(first);
-            int secondMask = SupportedMask(second);
-            bool retainBroaderCoverage = alternateDefinitions && firstMask != 0 && secondMask != 0 &&
-                (secondMask & ~firstMask) == 0;
+            bool retainBroaderCoverage = false;
+            if (alternateDefinitions)
+            {
+                int firstMask = SupportedMask(first);
+                int secondMask = SupportedMask(second);
+                retainBroaderCoverage = firstMask != 0 && secondMask != 0 && (secondMask & ~firstMask) == 0;
+            }
+            comparison.GuardTime += System.Diagnostics.Stopwatch.GetElapsedTime(guardStart);
             var key = (first, alternateDefinitions, anonymousStorageVariants, retainBroaderCoverage);
             if (!comparison.CanonicalViews.TryGetValue(key, out var left))
             {
+                long start = System.Diagnostics.Stopwatch.GetTimestamp();
                 left = Isolate(first);
+                comparison.ProviderViews++;
+                comparison.ProviderViewTime += System.Diagnostics.Stopwatch.GetElapsedTime(start);
                 comparison.CanonicalViews.Add(key, left);
             }
+            long rightStart = System.Diagnostics.Stopwatch.GetTimestamp();
             var right = Isolate(second);
-            return left.Declaration != null && right.Declaration != null &&
-                SyntaxFactory.AreEquivalent(left.Normalized, right.Normalized) &&
-                BindingsMatch(left.Declaration, left.Model, right.Declaration, right.Model, isolated: true);
+            comparison.ProviderViews++;
+            comparison.ProviderViewTime += System.Diagnostics.Stopwatch.GetElapsedTime(rightStart);
+            if (left.Declaration == null || right.Declaration == null)
+                return false;
+            long syntaxStart = System.Diagnostics.Stopwatch.GetTimestamp();
+            bool equivalent = SyntaxFactory.AreEquivalent(left.Normalized, right.Normalized);
+            comparison.SyntaxComparisonTime += System.Diagnostics.Stopwatch.GetElapsedTime(syntaxStart);
+            if (!equivalent)
+                return false;
+            long semanticStart = System.Diagnostics.Stopwatch.GetTimestamp();
+            try
+            {
+                return BindingsMatch(left.Declaration, left.Model, right.Declaration, right.Model, isolated: true);
+            }
+            finally
+            {
+                comparison.SemanticComparisons++;
+                comparison.SemanticComparisonTime += System.Diagnostics.Stopwatch.GetElapsedTime(semanticStart);
+            }
 
             (StructDeclarationSyntax Declaration, SemanticModel Model, StructDeclarationSyntax Normalized)
                 Isolate(StructDeclarationSyntax retained)
@@ -1474,6 +1517,7 @@ namespace ClangSharpSourceToWinmd
 
             int SupportedMask(StructDeclarationSyntax declaration)
             {
+                comparison.ArchitectureModelRequests++;
                 var model = compilation.GetSemanticModel(declaration.SyntaxTree);
                 var attributes = declaration.AttributeLists.SelectMany(list => list.Attributes)
                     .Where(attribute => IsArchitectureAttribute(attribute, model)).ToArray();

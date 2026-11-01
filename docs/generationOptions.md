@@ -209,6 +209,11 @@ sets need no discovery. Malformed or tied spans retain the original full scan;
 removal trivia and canonical binding policies are unchanged. Phase-level counters
 and clocks measure isolation syntax/compilation rewrites within native comparisons
 without per-provider or per-node logging.
+Original architecture masks are bound only for alternate-header coverage
+normalization; same-header records still undergo the full attribute and binding
+comparison. Native comparison clocks separate guards, complete provider-view
+preparation, normalized syntax comparison and semantic comparison. View time
+includes the isolation syntax subset; these nested clocks are not additive.
 The normal emitter prints separate timings for common-provider coalescing,
 cross-architecture constant qualification and final typedef/record composition,
 including failed phases.
