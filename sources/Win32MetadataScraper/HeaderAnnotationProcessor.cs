@@ -185,7 +185,7 @@ namespace Win32MetadataScraper
                     .Select(facts => Remap(facts.Declaration.Name)))
                 .ToHashSet(StringComparer.Ordinal);
             configuredTypedefTargets = (configuredTypeRemaps ?? new Dictionary<string, string>()).Values
-                .Select(name => SyntaxFactory.ParseTypeName(name)).OfType<IdentifierNameSyntax>()
+                .Select(name => GetProjectionTarget(SyntaxFactory.ParseTypeName(name))).OfType<IdentifierNameSyntax>()
                 .Select(name => name.Identifier.ValueText).Where(name =>
                     !IsStorageTypeName(name) && !enumProjectionTargets.Contains(name))
                 .ToHashSet(StringComparer.Ordinal);
@@ -640,7 +640,8 @@ namespace Win32MetadataScraper
                 bool nominalProjection = !IsStorageTypeName(declaration.Identifier.ValueText) &&
                     !enumProjectionTargets.Contains(declaration.Identifier.ValueText);
                 bool configuredNominal = nominalProjection && (configuredTarget == declaration.Identifier.ValueText ||
-                    nativeName == alias.Name && alias.Name == declaration.Identifier.ValueText &&
+                    (!hasProjectionMapping || !IsStorageTypeName(projectionMapping)) &&
+                        nativeName == alias.Name && alias.Name == declaration.Identifier.ValueText &&
                         configuredTypedefTargets.Contains(alias.Name));
                 if (!configuredNominal && nominalProjection && alias.UnderlyingType.CanonicalType is PointerType nativePointer &&
                     nativePointer.PointeeType.CanonicalType is RecordType nativePointee &&
@@ -673,6 +674,13 @@ namespace Win32MetadataScraper
                 SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata"))).AddMembers(
                 SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(generatedNamespace)).AddMembers(members.ToArray()))
                 .NormalizeWhitespace().ToFullString() + Environment.NewLine;
+        }
+
+        private static TypeSyntax GetProjectionTarget(TypeSyntax type)
+        {
+            while (type is PointerTypeSyntax pointer)
+                type = pointer.ElementType;
+            return type;
         }
 
         private NativeRecordSource GetNativeSource(NamedDecl declaration, string name, string ns)

@@ -278,6 +278,13 @@ pointer with a character projection already proven during typedef composition.
 That internal proof does not authorize arbitrary `ushort*` storage or erase
 nominal public aliases; the selected native record remains the output provider.
 
+An existing pointer remap such as `PBOOL=BOOL*` names the native scalar typedef
+that signatures must retain. Automatic typedef discovery recognizes that target
+through every pointer level and preserves its nominal projection. An explicit
+storage remap on the scalar alias still takes precedence; ordinary aliases and
+enum targets keep their existing lowering behavior. This uses the normal remap
+configuration and does not require a header annotation or a self-remap.
+
 A header logical enum can own a compatible inferred scalar alias from another
 header when the existing storage, namespace, use and metadata checks agree.
 Lowering native typedef casts in enum initializers also converts the final
