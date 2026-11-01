@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
@@ -102,6 +103,73 @@ namespace Windows.Win32.Tests
                 Assert.False(method.Attributes.HasFlag(MethodAttributes.Static));
             }
             Assert.True(constructorCount > 0);
+        }
+
+        [Theory]
+        [InlineData(1, 4)]
+        [InlineData(2, 16)]
+        [InlineData(4, 16)]
+        public void SListEntriesPreserveNativeRecordLayout(int architecture, int size)
+        {
+            using var image = new PEReader(File.OpenRead(TestUtils.Win32WinmdPath));
+            var reader = image.GetMetadataReader(MetadataReaderOptions.None);
+            var record = Assert.Single(reader.TypeDefinitions
+                .Select(handle => reader.GetTypeDefinition(handle))
+                .Where(type => reader.GetString(type.Namespace) == "Windows.Win32.System.Kernel" &&
+                    reader.GetString(type.Name) == "SLIST_ENTRY" &&
+                    (ReadSupportedArchitectures(reader, type.GetCustomAttributes()) & architecture) != 0));
+
+            if (architecture == 1)
+            {
+                Assert.Equal(size, Math.Max(4, record.GetLayout().Size));
+                return;
+            }
+
+            Assert.Equal(size, record.GetLayout().Size);
+            var attributeHandle = Assert.Single(record.GetCustomAttributes()
+                .Where(handle => AttributeTypeName(reader, handle) ==
+                    "Windows.Win32.Foundation.Metadata.AlignmentAttribute"));
+            var value = reader.GetBlobReader(reader.GetCustomAttribute(attributeHandle).Value);
+            Assert.Equal(1, value.ReadUInt16());
+            Assert.Equal(size, value.ReadInt32());
+            Assert.Equal(0, value.ReadUInt16());
+            Assert.Equal(0, value.RemainingBytes);
+        }
+
+        private static int ReadSupportedArchitectures(MetadataReader reader, CustomAttributeHandleCollection attributes)
+        {
+            var matches = attributes.Where(handle => AttributeTypeName(reader, handle) ==
+                "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute").ToArray();
+            if (matches.Length == 0)
+                return 7;
+
+            var value = reader.GetBlobReader(reader.GetCustomAttribute(Assert.Single(matches)).Value);
+            Assert.Equal(1, value.ReadUInt16());
+            int architectures = value.ReadInt32();
+            Assert.InRange(architectures, 1, 7);
+            Assert.Equal(0, value.ReadUInt16());
+            Assert.Equal(0, value.RemainingBytes);
+            return architectures;
+        }
+
+        private static string AttributeTypeName(MetadataReader reader, CustomAttributeHandle handle)
+        {
+            var constructor = reader.GetCustomAttribute(handle).Constructor;
+            EntityHandle type = constructor.Kind switch
+            {
+                HandleKind.MemberReference => reader.GetMemberReference((MemberReferenceHandle)constructor).Parent,
+                HandleKind.MethodDefinition => reader.GetMethodDefinition((MethodDefinitionHandle)constructor).GetDeclaringType(),
+                _ => throw new BadImageFormatException($"Invalid attribute constructor kind: {constructor.Kind}.")
+            };
+            var names = type.Kind switch
+            {
+                HandleKind.TypeReference => (Namespace: reader.GetTypeReference((TypeReferenceHandle)type).Namespace,
+                    Name: reader.GetTypeReference((TypeReferenceHandle)type).Name),
+                HandleKind.TypeDefinition => (Namespace: reader.GetTypeDefinition((TypeDefinitionHandle)type).Namespace,
+                    Name: reader.GetTypeDefinition((TypeDefinitionHandle)type).Name),
+                _ => throw new BadImageFormatException($"Invalid attribute type kind: {type.Kind}.")
+            };
+            return reader.GetString(names.Namespace) + "." + reader.GetString(names.Name);
         }
 
         private void ExecWinmdUtils(string args)
