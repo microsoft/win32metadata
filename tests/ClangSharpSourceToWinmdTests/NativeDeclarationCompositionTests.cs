@@ -275,14 +275,25 @@ namespace Windows.Win32.Foundation.Metadata {
                 "int", "uint", value.ToString(System.Globalization.CultureInfo.InvariantCulture));
             var group = new NativeConstantGroup("::" + nativeName, "GROUP", ns, "uint", header, 1,
                 new[] { new NativeConstantGroupMember(member, expression, new[] { binding }) });
-            declaration = NativeConstantGroupProvenance.Attach(declaration,
-                new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
-                    DeclarationArchitecture(architecture), group));
-            declaration = NativeDeclarationSourceProvenance.Attach(declaration,
-                new NativeDeclarationSource("c:" + headerName + "@T@" + nativeName, nativeName, header,
-                    NativeConstantGroupProvenance.HashFile(header), 1, 1, "GROUP", ns, owner, NativeDeclarationKind.LogicalEnum)
-                { SourceArchitecture = DeclarationArchitecture(architecture) });
-            return $"namespace {ns} {{ {declaration.ToFullString()} }}";
+            var constants = new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
+                DeclarationArchitecture(architecture), group);
+            declaration = NativeConstantGroupProvenance.Attach(declaration, constants);
+            var source = new NativeDeclarationSource("c:" + headerName + "@T@" + nativeName, nativeName, header,
+                NativeConstantGroupProvenance.HashFile(header), 1, 1, "GROUP", ns, owner, NativeDeclarationKind.LogicalEnum)
+            { SourceArchitecture = DeclarationArchitecture(architecture) };
+            declaration = NativeDeclarationSourceProvenance.Attach(declaration, source);
+            string text = $"namespace {ns} {{\n{declaration.ToFullString()}\n}}";
+            var reparsed = CSharpSyntaxTree.ParseText(text).GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().Single();
+            Assert.AreEqual(source, NativeDeclarationSourceProvenance.Read(reparsed));
+            var transportedConstants = NativeConstantGroupProvenance.Read(reparsed);
+            Assert.IsNotNull(transportedConstants);
+            Assert.AreEqual(constants.SourceFile, transportedConstants.SourceFile);
+            Assert.AreEqual(constants.SourceHash, transportedConstants.SourceHash);
+            Assert.AreEqual(constants.Architecture, transportedConstants.Architecture);
+            Assert.AreEqual(constants.Group.NativeName, transportedConstants.Group.NativeName);
+            Assert.AreEqual(constants.Group.Namespace, transportedConstants.Group.Namespace);
+            return text;
         }
 
         private static string IncompleteProvider(Fixture fixture, string architecture, string ns, bool owner,

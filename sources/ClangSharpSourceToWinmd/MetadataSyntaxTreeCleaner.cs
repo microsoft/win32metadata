@@ -48,6 +48,15 @@ namespace ClangSharpSourceToWinmd
         internal static string GetFullNameWithoutArchSuffix(SyntaxNode node)
             => SyntaxUtils.GetFullName(node).Replace("____1", string.Empty).Replace("____2", string.Empty);
 
+        internal static string GetQualifiedStructIdentity(StructDeclarationSyntax node)
+        {
+            string ns = string.Join(".", node.Ancestors().OfType<BaseNamespaceDeclarationSyntax>()
+                .Reverse().Select(declaration => declaration.Name.ToString()));
+            string name = string.Join("::", node.AncestorsAndSelf().OfType<TypeDeclarationSyntax>()
+                .Reverse().Select(declaration => declaration.Identifier.ValueText));
+            return ns + "::" + name.Replace("____1", string.Empty).Replace("____2", string.Empty);
+        }
+
         internal static bool IsEnumMemberConstant(FieldDeclarationSyntax node, ISet<string> enumMemberNames)
             => node.Modifiers.ToString() == "public const" &&
                 (enumMemberNames.Contains(node.Declaration.Variables.First().Identifier.ValueText) ||
@@ -392,7 +401,7 @@ namespace ClangSharpSourceToWinmd
                 if (IsLegacyManualSource(node.SyntaxTree.FilePath) && SyntaxUtils.IsEmptyStruct(node) &&
                     NativeDeclarationSourceProvenance.Read(node) == null &&
                     NativeRecordSourceProvenance.Read(node) == null &&
-                    this.nonEmptyStructs.Contains(GetFullNameWithoutArchSuffix(node)))
+                    this.nonEmptyStructs.Contains(GetQualifiedStructIdentity(node)))
                 {
                     return null;
                 }
