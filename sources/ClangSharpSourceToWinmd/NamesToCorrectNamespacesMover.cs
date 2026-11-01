@@ -392,7 +392,7 @@ namespace ClangSharpSourceToWinmd
                     if (target?.TypeKind == TypeKind.Struct && target.DeclaringSyntaxReferences.Length != 0 &&
                         target.DeclaringSyntaxReferences.All(reference =>
                             MetadataSyntaxTreeCleaner.IsLegacyManualSource(reference.SyntaxTree.FilePath) &&
-                            reference.GetSyntax() is StructDeclarationSyntax { Members.Count: > 0 }))
+                            reference.GetSyntax() is StructDeclarationSyntax { Members: { Count: > 0 } }))
                         name = projectedName;
                 }
                 string identifier = SyntaxFacts.GetKeywordKind(name) == SyntaxKind.None ? name : "@" + name;
