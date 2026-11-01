@@ -92,11 +92,17 @@ namespace ClangSharpSourceToWinmd
                 tree.GetRoot().ReplaceNodes(replacements.Keys, (original, _) => replacements[original]), tree.Options);
         }
 
-        private static IEnumerable<SyntaxTree> FilesToTrees(IEnumerable<string> files)
+        private static IEnumerable<SyntaxTree> FilesToTrees(IEnumerable<string> files, bool reportCleaningProgress = false)
         {
             foreach (string file in files)
             {
-                yield return ReadTree(file);
+                if (reportCleaningProgress)
+                    Console.WriteLine($"  Syntax cleaning read/parse started: {file}");
+                long readStart = reportCleaningProgress ? System.Diagnostics.Stopwatch.GetTimestamp() : 0;
+                var tree = ReadTree(file);
+                if (reportCleaningProgress)
+                    Console.WriteLine($"  Syntax cleaning read/parse completed: {file} ({OutputUtils.FormatTimespan(System.Diagnostics.Stopwatch.GetElapsedTime(readStart))})");
+                yield return tree;
             }
         }
 
@@ -447,14 +453,23 @@ namespace ClangSharpSourceToWinmd
             watch.Restart();
 
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
-            System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
+            System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles, reportCleaningProgress: true), opt, (tree) =>
             {
                 var enumMemberNames = tree.FilePath.EndsWith(".constants.modified.cs", StringComparison.OrdinalIgnoreCase)
                     ? scrapedEnumMemberNames : infoFinder.EnumMemberNames;
+                Console.WriteLine($"  Syntax cleaning rewrite started: {tree.FilePath}");
+                var rewriteWatch = System.Diagnostics.Stopwatch.StartNew();
                 var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, enumMemberNames, tree.FilePath, nativeFieldArrayInfo, validation);
+                Console.WriteLine($"  Syntax cleaning rewrite completed: {tree.FilePath} ({OutputUtils.FormatTimespan(rewriteWatch.Elapsed)})");
+                Console.WriteLine($"  Syntax cleaning output started: {cleanedTree.FilePath}");
+                var outputWatch = System.Diagnostics.Stopwatch.StartNew();
                 WriteTree(cleanedTree, cleanedTree.FilePath);
+                Console.WriteLine($"  Syntax cleaning output completed: {cleanedTree.FilePath} ({OutputUtils.FormatTimespan(outputWatch.Elapsed)})");
             });
+            Console.WriteLine("  Syntax cleaning validation started...");
+            var validationWatch = System.Diagnostics.Stopwatch.StartNew();
             StopIfInvalid("emitter.crossarch-composition", "source declaration validation");
+            Console.WriteLine($"  Syntax cleaning validation completed: {OutputUtils.FormatTimespan(validationWatch.Elapsed)}");
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();

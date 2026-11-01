@@ -206,6 +206,10 @@ and anonymous-storage, alternate-definition and coverage-normalization policy.
 The normal emitter prints separate timings for common-provider coalescing,
 cross-architecture constant qualification and final typedef/record composition,
 including failed phases.
+Syntax cleaning reports each file's read/parse, rewrite and output start and
+completion, with separate elapsed times and a final validation boundary. An
+unfinished operation retains its start record; the parallel file order and
+existing validation and output behavior are unchanged.
 Validated native source proofs are cached by immutable syntax declaration and
 proof family. Weak cache keys do not retain discarded trees. Rewritten or
 reparsed declarations are validated independently, including cached absence;
