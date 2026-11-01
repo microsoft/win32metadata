@@ -297,19 +297,26 @@ controls, and nineteen logical-group/incomplete-declaration composition rows.
 The separate metadata utility selection has thirteen declaration-provenance rows.
 The workflow checks each inventory in its own `FastManaged.trx` or
 `FastProvenance.trx`; both are uploaded in `fast_managed_tests` even when tests fail.
-The four native producer regressions also run in a separate early Windows job
-that depends only on change detection. It uses the normal scraper subprocess
-fixtures and tracked repository headers, without generated SDK artifacts:
+The four native producer regressions and three existing SDK SLIST rows also run
+in a separate early Windows job that depends only on change detection. It uses
+the normal scraper subprocess fixtures and tracked repository headers, without
+generated SDK artifacts:
 
 ```powershell
-dotnet test .\tests\Win32MetadataScraperTests -c Release --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests"
+dotnet test .\tests\Win32MetadataScraperTests -c Release --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests|FullyQualifiedName=Win32MetadataScraperTests.HeaderCompatibilityPatchTests.BackupSListAliasesRetainNativeRecordProviders"
 ```
 
-This job verifies the three logical-group architecture rows and one forward-record
-row in `FastNativeProducer.trx`, uploaded separately in
-`fast_native_producer_tests` even on failure. The complete SDK build and
-`DoTests.ps1` remain unfiltered, retain these producer tests, and do not depend
-on either early job.
+This job verifies the three logical-group architecture rows, one forward-record
+row and three `BackupSListAliasesRetainNativeRecordProviders` architecture rows
+in `FastNativeProducer.trx`, uploaded separately in `fast_native_producer_tests`
+even on failure. All seven unique rows must execute and pass. The SLIST rows use
+the same native inputs and final alignment assertions as the full suite. The
+SLIST rows retain their actual generated C#, serialized proofs, native surfaces,
+scraper diagnostics and final fixture WinMD before cleanup in the same artifact.
+Set `WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT` to a new evidence root to retain these
+normal fixture outputs; each architecture requires a new destination. No fixture
+is replayed to capture evidence. The complete SDK build and `DoTests.ps1` remain
+unfiltered, retain these tests, and do not depend on either early job.
 
 The coverage-auditor suite uses Python's standard library:
 

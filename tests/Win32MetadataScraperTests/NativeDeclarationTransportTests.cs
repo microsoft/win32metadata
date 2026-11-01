@@ -84,8 +84,29 @@ ORDINARY_COUNT ReadCount(ORDINARY_COUNT value);
                 groupMethod.ParameterList.Parameters.Single().AttributeLists));
             var ordinary = methods
                 .Single(method => method.Identifier.ValueText == "ReadCount");
-            Assert.Equal("uint", ordinary.ReturnType.ToString());
-            Assert.Equal("uint", ordinary.ParameterList.Parameters.Single().Type.ToString());
+            Assert.Equal("ORDINARY_COUNT", ordinary.ReturnType.ToString());
+            Assert.Equal("ORDINARY_COUNT", ordinary.ParameterList.Parameters.Single().Type.ToString());
+            var ordinaryProvider = root.DescendantNodes().OfType<StructDeclarationSyntax>()
+                .Single(value => value.Identifier.ValueText == "ORDINARY_COUNT");
+            var ordinarySource = NativeTypedefSourceProvenance.Read(ordinaryProvider);
+            Assert.NotNull(ordinarySource);
+            Assert.EndsWith("@T@ORDINARY_COUNT", ordinarySource.Identity, StringComparison.Ordinal);
+            Assert.Equal("ORDINARY_COUNT", ordinarySource.NativeName);
+            Assert.Equal("NativeOwner", ordinarySource.Namespace);
+            Assert.Equal(source.Header, ordinarySource.Header);
+            Assert.Equal(source.HeaderHash, ordinarySource.HeaderHash);
+            Assert.Equal(expectedArchitecture, ordinarySource.SourceArchitecture);
+            Assert.Equal(4, ordinarySource.Size);
+            Assert.Equal(4, ordinarySource.Alignment);
+            Assert.True(NativeTypedefProjectionProvenance.IsInferred(ordinaryProvider));
+            Assert.False(NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(ordinaryProvider));
+            var ordinaryField = ordinaryProvider.Members.OfType<FieldDeclarationSyntax>().Single();
+            Assert.Equal("Value", ordinaryField.Declaration.Variables.Single().Identifier.ValueText);
+            Assert.Equal("uint", ordinaryField.Declaration.Type.ToString());
+            Assert.Equal("ORDINARY_COUNT", SyntaxUtils.GetNativeTypeNameFromAttributesLists(
+                SyntaxFactory.List(ordinary.AttributeLists.Where(list => list.Target?.Identifier.ValueText == "return"))));
+            Assert.Equal("ORDINARY_COUNT", SyntaxUtils.GetNativeTypeNameFromAttributesLists(
+                ordinary.ParameterList.Parameters.Single().AttributeLists));
 
             var reparsed = CSharpSyntaxTree.ParseText(declaration.ToFullString()).GetRoot()
                 .DescendantNodes().OfType<EnumDeclarationSyntax>().Single();

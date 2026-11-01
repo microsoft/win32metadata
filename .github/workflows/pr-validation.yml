@@ -249,13 +249,15 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Run native declaration producer regressions
+      - name: Run native declaration and SDK SLIST regressions
         shell: pwsh
+        env:
+          WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT: ${{ github.workspace }}\bin\logs\tests\fast-native-producer\fixtures
         run: |
           $PSNativeCommandUseErrorActionPreference = $false
           $started = Get-Date
           dotnet test .\tests\Win32MetadataScraperTests -c Release `
-            --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests" `
+            --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests|FullyQualifiedName=Win32MetadataScraperTests.HeaderCompatibilityPatchTests.BackupSListAliasesRetainNativeRecordProviders" `
             --logger "trx;LogFileName=FastNativeProducer.trx" `
             --results-directory .\bin\logs\tests\fast-native-producer
           $testExitCode = $LASTEXITCODE
@@ -270,8 +272,18 @@ jobs:
           $ns = [System.Xml.XmlNamespaceManager]::new($trx.NameTable)
           $ns.AddNamespace('t', 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010')
           $results = @($trx.SelectNodes('/t:TestRun/t:Results/t:UnitTestResult', $ns))
-          if ($results.Count -ne 4) {
-            throw "Incomplete native producer selection: $($results.Count) rows; expected exactly four."
+          if ($results.Count -ne 7) {
+            throw "Incomplete native producer selection: $($results.Count) rows; expected exactly seven."
+          }
+          $counters = $trx.SelectSingleNode('/t:TestRun/t:ResultSummary/t:Counters', $ns)
+          if ($null -eq $counters -or $counters.GetAttribute('total') -ne '7' -or
+              $counters.GetAttribute('executed') -ne '7') {
+            throw 'Native producer TRX must record exactly seven executed rows.'
+          }
+          $executionIds = @($results | ForEach-Object { $_.GetAttribute('executionId') })
+          if (@($executionIds | Where-Object { [string]::IsNullOrWhiteSpace($_) }).Count -ne 0 -or
+              @($executionIds | Sort-Object -Unique).Count -ne 7) {
+            throw 'Native producer results must contain seven unique execution identities.'
           }
           $definitions = @{}
           foreach ($definition in $trx.SelectNodes('/t:TestRun/t:TestDefinitions/t:UnitTest', $ns)) {
@@ -301,8 +313,11 @@ jobs:
           $forwardRows = @($rows | Where-Object {
             $_.QualifiedName -ceq "$class.IncompleteRecordProducerTransportsDeclarationIdentityWithoutLayout"
           })
-          if ($logicalRows.Count -ne 3 -or $forwardRows.Count -ne 1) {
-            throw 'Native producer results must contain three logical-group rows and one forward-record row.'
+          $slistRows = @($rows | Where-Object {
+            $_.QualifiedName -ceq 'Win32MetadataScraperTests.HeaderCompatibilityPatchTests.BackupSListAliasesRetainNativeRecordProviders'
+          })
+          if ($logicalRows.Count -ne 3 -or $forwardRows.Count -ne 1 -or $slistRows.Count -ne 3) {
+            throw 'Native producer results must contain three logical-group rows, one forward-record row and three SDK SLIST rows.'
           }
           $targets = [ordered]@{
             x86 = 'i686-pc-windows-msvc'
@@ -317,8 +332,14 @@ jobs:
             if ($matching.Count -ne 1) {
               throw "Expected exactly one native logical-group producer row for $architecture/$($targets[$architecture])."
             }
+            $slistMatching = @($slistRows | Where-Object {
+              $_.Name -cmatch $token -and $_.Name.Contains($targets[$architecture])
+            })
+            if ($slistMatching.Count -ne 1) {
+              throw "Expected exactly one SDK SLIST row for $architecture/$($targets[$architecture])."
+            }
           }
-          Write-Host 'Verified all three native logical-group architecture rows and the forward-record row.'
+          Write-Host 'Verified all three native logical-group architecture rows, the forward-record row and all three SDK SLIST architecture rows.'
           if ($testExitCode -ne 0) { exit $testExitCode }
           if (@($results | Where-Object { $_.GetAttribute('outcome') -cne 'Passed' }).Count -ne 0) {
             throw 'Every native producer row must pass; skipped or unexecuted rows do not qualify.'
@@ -329,7 +350,7 @@ jobs:
         uses: ./.github/actions/upload-artifact-with-retry
         with:
           name: fast_native_producer_tests
-          path: bin/logs/tests/fast-native-producer/FastNativeProducer.trx
+          path: bin/logs/tests/fast-native-producer/
           retention-days: 7
 
   # ──────────────────────────────────────────────────────────────────────

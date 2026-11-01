@@ -295,6 +295,10 @@ header path/hash and coordinates, target, and traversal ownership without size o
 alignment. Missing source-location association remains unresolved; emitted tag
 spelling and empty managed bodies do not supply native identity.
 
+A legacy authored empty struct yields to a nonempty definition only when its
+complete namespace and nested-type path match. The short names used by member
+remapping do not establish that match.
+
 Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that
 owner together with their uses and constant ownership. Composition preserves
@@ -308,6 +312,11 @@ through every pointer level and preserves its nominal projection. An explicit
 storage remap on the scalar alias still takes precedence; ordinary aliases and
 enum targets keep their existing lowering behavior. This uses the normal remap
 configuration and does not require a header annotation or a self-remap.
+
+For inferred scalar aliases, the producer can retain nominal source spelling
+alongside a layout-backed provider. The provider's primitive storage and inferred
+projection policy govern subsequent lowering. Producer checks verify those
+contracts before requiring any final CLR spelling.
 
 Source-proven native aliases with configured nominal bindings to one retained
 public wrapper can compose into that wrapper. Their native declaration families

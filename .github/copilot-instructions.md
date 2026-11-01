@@ -73,14 +73,21 @@ inventory includes the existing HGROUP/model/cache/namespace controls and the
 actual `HeaderTypedefCompositionTests` method families for logical groups and
 incomplete declarations. `NativeDeclarationSourceProvenanceTests` runs separately
 in `MetadataUtils.Tests`. `FastManaged.trx` and `FastProvenance.trx` are checked
-separately and uploaded in `fast_managed_tests` even on failure. The four native
-producer rows remain outside this managed lane and run in a separate changes-only
-Windows job using normal filtered `dotnet test` on `Win32MetadataScraperTests`.
-Its three logical-group architecture rows and one forward-record row are checked
-in `FastNativeProducer.trx`, uploaded in `fast_native_producer_tests` even on
-failure. This job uses tracked fixture/header inputs rather than full SDK
-artifacts. The complete unfiltered `DoTests.ps1` results remain separate, and the
-full SDK job does not depend on either early job.
+separately and uploaded in `fast_managed_tests` even on failure. The native
+producer and SDK SLIST rows remain outside this managed lane and run in a separate
+changes-only Windows job using normal filtered `dotnet test` on
+`Win32MetadataScraperTests`. Its three logical-group architecture rows, one
+forward-record row and the three existing `BackupSListAliasesRetainNativeRecordProviders`
+architecture rows are checked in `FastNativeProducer.trx`, uploaded in
+`fast_native_producer_tests` even on failure. All seven unique rows must execute
+and pass. The SLIST fixtures retain their original native inputs and final
+alignment assertions. This job uses tracked fixture/header inputs rather than
+full SDK artifacts. Before cleanup, the SLIST rows retain their actual generated
+C#, serialized proofs, native surfaces, scraper diagnostics and final fixture
+WinMD through `WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT`. Those original outputs
+travel in the same native test artifact, including on failure. The complete
+unfiltered `DoTests.ps1` results remain separate, and the full SDK job does not
+depend on either early job.
 
 ## Key Conventions
 

@@ -2180,7 +2180,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     lock (this.EmptyStructs)
                     {
-                        this.EmptyStructs.Add(MetadataSyntaxTreeCleaner.GetFullNameWithoutArchSuffix(node));
+                        this.EmptyStructs.Add(MetadataSyntaxTreeCleaner.GetQualifiedStructIdentity(node));
                     }
                 }
             }

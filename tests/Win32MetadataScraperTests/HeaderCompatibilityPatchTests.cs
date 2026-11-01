@@ -98,62 +98,80 @@ SLIST_ENTRY* __stdcall ReadSListRecord(SLIST_ENTRY* entry);
                 "#define DECLSPEC_ALIGN(n) __declspec(align(n))\n" + single + "\n" + slist + declarations,
                 extraSettings: "--config\nexclude-empty-records\n" + exclusions + "--remap\n" + pointerMapping + "\n",
                 namespaceName: projectionNamespace);
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            string[] expectedWarnings = architecture == "x86" ? Array.Empty<string>() : new[]
+            string evidenceRoot = Environment.GetEnvironmentVariable("WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT");
+            string evidence = evidenceRoot == null ? null : Path.Combine(evidenceRoot, architecture + "-sdk-slist");
+            if (evidence != null)
             {
-                "Struct 'SLIST_ENTRY' requests 16 byte alignment which .NET cannot honor; " +
-                "over-alignment can only lower, never raise, alignment, so the runtime will align it to 8 bytes.",
-            };
-            Assert.Equal(expectedWarnings, Regex.Matches(fixture.Diagnostics,
-                @"(?m)^\s*Warning \([^\r\n]+\): ([^\r\n]+)").Select(match => match.Groups[1].Value.TrimEnd()));
-            Assert.DoesNotContain("Error (", fixture.Diagnostics);
-            Assert.DoesNotContain("error:", fixture.Diagnostics);
-            Assert.True(File.Exists(fixture.Output), fixture.Diagnostics);
-            string nativeRecord = architecture == "x86" ? "_SINGLE_LIST_ENTRY" : "_SLIST_ENTRY";
-            foreach (string language in new[] { "c", "c++" })
-                Assert.Contains($"record {nativeRecord} {size} {alignment}",
-                    NativeSurface(fixture, target, metadataEnabled: false, language));
+                Assert.False(Directory.Exists(evidence), "Every SDK SLIST invocation requires a new evidence directory.");
+                Directory.CreateDirectory(evidence);
+            }
+            try
+            {
+                Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+                string[] expectedWarnings = architecture == "x86" ? Array.Empty<string>() : new[]
+                {
+                    "Struct 'SLIST_ENTRY' requests 16 byte alignment which .NET cannot honor; " +
+                    "over-alignment can only lower, never raise, alignment, so the runtime will align it to 8 bytes.",
+                };
+                Assert.Equal(expectedWarnings, Regex.Matches(fixture.Diagnostics,
+                    @"(?m)^\s*Warning \([^\r\n]+\): ([^\r\n]+)").Select(match => match.Groups[1].Value.TrimEnd()));
+                Assert.DoesNotContain("Error (", fixture.Diagnostics);
+                Assert.DoesNotContain("error:", fixture.Diagnostics);
+                Assert.True(File.Exists(fixture.Output), fixture.Diagnostics);
+                string nativeRecord = architecture == "x86" ? "_SINGLE_LIST_ENTRY" : "_SLIST_ENTRY";
+                foreach (string language in new[] { "c", "c++" })
+                {
+                    string[] surface = NativeSurface(fixture, target, metadataEnabled: false, language);
+                    if (evidence != null)
+                        File.WriteAllLines(Path.Combine(fixture.DirectoryPath, language + ".native-surface.txt"), surface);
+                    Assert.Contains($"record {nativeRecord} {size} {alignment}", surface);
+                }
 
-            using var image = Emit(fixture.DirectoryPath, architecture, requiredNamespaces: requiredNamespaces);
-            var reader = image.Reader;
-            var decoder = new SignatureNames(qualifiedNames: true);
-            string projectedPointer = canonicalNamespace + ".SLIST_ENTRY*";
-            var record = FindType(reader, "SLIST_ENTRY");
-            Assert.Equal(canonicalNamespace, reader.GetString(record.Namespace));
-            var next = reader.GetFieldDefinition(Assert.Single(record.GetFields()));
-            Assert.Equal("Next", reader.GetString(next.Name));
-            Assert.Equal(projectedPointer, next.DecodeSignature(decoder, null));
-            Assert.Contains(next.GetOffset(), new[] { -1, 0 });
-            Assert.Equal(size, Math.Max(architecture == "x86" ? 4 : 8, record.GetLayout().Size));
-            if (architecture != "x86")
-            {
-                var attribute = reader.GetCustomAttribute(Assert.Single(record.GetCustomAttributes(),
-                    handle => AttributeName(reader, handle) == "AlignmentAttribute"));
-                var value = reader.GetBlobReader(attribute.Value);
-                Assert.Equal(1, value.ReadUInt16());
-                Assert.Equal(alignment, value.ReadInt32());
-                Assert.Equal(0, value.ReadUInt16());
-                Assert.Equal(0, value.RemainingBytes);
+                using var image = Emit(fixture.DirectoryPath, architecture, requiredNamespaces: requiredNamespaces);
+                var reader = image.Reader;
+                var decoder = new SignatureNames(qualifiedNames: true);
+                string projectedPointer = canonicalNamespace + ".SLIST_ENTRY*";
+                var record = FindType(reader, "SLIST_ENTRY");
+                Assert.Equal(canonicalNamespace, reader.GetString(record.Namespace));
+                var next = reader.GetFieldDefinition(Assert.Single(record.GetFields()));
+                Assert.Equal("Next", reader.GetString(next.Name));
+                Assert.Equal(projectedPointer, next.DecodeSignature(decoder, null));
+                Assert.Contains(next.GetOffset(), new[] { -1, 0 });
+                Assert.Equal(size, Math.Max(architecture == "x86" ? 4 : 8, record.GetLayout().Size));
+                if (architecture != "x86")
+                {
+                    var attribute = reader.GetCustomAttribute(Assert.Single(record.GetCustomAttributes(),
+                        handle => AttributeName(reader, handle) == "AlignmentAttribute"));
+                    var value = reader.GetBlobReader(attribute.Value);
+                    Assert.Equal(1, value.ReadUInt16());
+                    Assert.Equal(alignment, value.ReadInt32());
+                    Assert.Equal(0, value.ReadUInt16());
+                    Assert.Equal(0, value.RemainingBytes);
+                }
+                else
+                {
+                    var canonicalRecord = FindType(reader, "SINGLE_LIST_ENTRY");
+                    Assert.Equal(canonicalNamespace, reader.GetString(canonicalRecord.Namespace));
+                    var canonicalNext = reader.GetFieldDefinition(Assert.Single(canonicalRecord.GetFields()));
+                    Assert.Equal("Next", reader.GetString(canonicalNext.Name));
+                    Assert.Equal(canonicalNamespace + ".SINGLE_LIST_ENTRY*", canonicalNext.DecodeSignature(decoder, null));
+                    Assert.Equal(size, Math.Max(4, canonicalRecord.GetLayout().Size));
+                }
+                foreach (string name in new[] { "ReadSListAlias", "ReadSListRecord" })
+                {
+                    // The pointer remap names SLIST_ENTRY; a direct x86 record alias resolves to SINGLE_LIST_ENTRY.
+                    string expectedPointer = architecture == "x86" && name == "ReadSListRecord"
+                        ? canonicalNamespace + ".SINGLE_LIST_ENTRY*" : projectedPointer;
+                    var signature = FindMethod(reader, "Apis", name).DecodeSignature(decoder, null);
+                    Assert.Equal(expectedPointer, signature.ReturnType);
+                    Assert.Equal(expectedPointer, Assert.Single(signature.ParameterTypes));
+                }
+                AssertMetadataClosure(reader);
             }
-            else
+            finally
             {
-                var canonicalRecord = FindType(reader, "SINGLE_LIST_ENTRY");
-                Assert.Equal(canonicalNamespace, reader.GetString(canonicalRecord.Namespace));
-                var canonicalNext = reader.GetFieldDefinition(Assert.Single(canonicalRecord.GetFields()));
-                Assert.Equal("Next", reader.GetString(canonicalNext.Name));
-                Assert.Equal(canonicalNamespace + ".SINGLE_LIST_ENTRY*", canonicalNext.DecodeSignature(decoder, null));
-                Assert.Equal(size, Math.Max(4, canonicalRecord.GetLayout().Size));
+                fixture.Retain(evidence);
             }
-            foreach (string name in new[] { "ReadSListAlias", "ReadSListRecord" })
-            {
-                // The pointer remap names SLIST_ENTRY; a direct x86 record alias resolves to SINGLE_LIST_ENTRY.
-                string expectedPointer = architecture == "x86" && name == "ReadSListRecord"
-                    ? canonicalNamespace + ".SINGLE_LIST_ENTRY*" : projectedPointer;
-                var signature = FindMethod(reader, "Apis", name).DecodeSignature(decoder, null);
-                Assert.Equal(expectedPointer, signature.ReturnType);
-                Assert.Equal(expectedPointer, Assert.Single(signature.ParameterTypes));
-            }
-            AssertMetadataClosure(reader);
         }
 
         [Fact]
