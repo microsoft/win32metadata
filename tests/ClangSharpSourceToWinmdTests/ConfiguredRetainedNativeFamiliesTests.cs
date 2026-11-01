@@ -41,6 +41,8 @@ namespace Canonical { [NativeTypedef] public partial struct HGROUP { public IntP
                     CSharpSyntaxTree.ParseText(first).GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>().Single())!;
                 var secondSource = NativeTypedefSourceProvenance.Read(
                     CSharpSyntaxTree.ParseText(second).GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>().Single())!;
+                Assert.IsNotNull(firstSource);
+                Assert.IsNotNull(secondSource);
                 Assert.AreNotEqual(NativeRecordSourceProvenance.GetIdentityKey(firstSource),
                     NativeRecordSourceProvenance.GetIdentityKey(secondSource));
                 Assert.IsFalse(NativeRecordSourceProvenance.SameDeclaration(firstSource, secondSource));
@@ -149,10 +151,16 @@ namespace Other { [NativeTypedef] public partial struct HGROUP { public IntPtr V
                 },
             };
             var declaration = NativeTypedefProjectionProvenance.WithPolicy(
-                NativeTypedefSourceProvenance.Attach(original, source), inferred);
+                NativeTypedefSourceProvenance.Attach(original.WithTrailingTrivia(default(SyntaxTriviaList)), source), inferred);
             if (configured)
                 declaration = NativeTypedefProjectionProvenance.WithConfiguredNominalBinding(declaration);
-            return root.ReplaceNode(original, declaration).ToFullString();
+            string text = root.ReplaceNode(original, declaration).ToFullString();
+            var transported = CSharpSyntaxTree.ParseText(text).GetRoot()
+                .DescendantNodes().OfType<StructDeclarationSyntax>().Single();
+            Assert.AreEqual(source, NativeTypedefSourceProvenance.Read(transported));
+            Assert.AreEqual((bool?)inferred, NativeTypedefProjectionProvenance.IsInferred(transported));
+            Assert.AreEqual(configured, NativeTypedefProjectionProvenance.HasConfiguredNominalBinding(transported));
+            return text;
         }
     }
 }
