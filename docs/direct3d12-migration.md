@@ -50,9 +50,10 @@ that removes these definitions will expose
 `WindowsWin32MetadataIncludesDirect3D12=false` from its `build` and
 `buildTransitive` props. Missing or non-false values must be treated as
 incompatible; do not infer compatibility from an unassigned version number.
-This draft deliberately does not expose the capability property. Enable it only
-after the fixed generator and projection tool are published, the SDK metadata is
-published and pinned, and the released combination passes paired validation.
+The removal package exposes this property because it no longer owns these
+definitions. This is an ownership capability, not a guarantee that the selected
+projection tool or SDK package is compatible. The release prerequisites above
+still apply, including the separate factory projection-root contract.
 
 This migration does not remove common Direct3D, DXGI, shader cache registration,
 Media Foundation's `d3d12video.h`, `mfd3d12.h`, Direct3D 11-on-12/9-on-12,
@@ -78,6 +79,23 @@ The build removes the retired partition's stale generated `Direct3D12.cs`,
 files so an incremental build cannot accidentally retain the old definitions.
 The SDK winmd is also staged beside the Windows output for metadata inspection
 and integrity tests, but is not included in the Windows NuGet package.
+
+PR validation explicitly builds a bootstrap reference from the released public
+Agility SDK `1.619.3` headers using the fixed in-repository generator:
+
+```powershell
+dotnet build generation\D3D12Bootstrap\D3D12Bootstrap.proj -c Release -t:EmitWinmd
+$reference = Join-Path $PWD 'bin\d3d12-bootstrap\Microsoft.Direct3D.D3D12.winmd'
+dotnet build generation\WinSDK -c Release -t:EmitWinmd "-p:D3D12MetadataPath=$reference"
+```
+
+The workflow passes the absolute artifact path explicitly to generation
+and sample emission. This public-only bootstrap is limited to PR validation; it
+is not packaged with Windows metadata, published as an SDK release, or selected
+as a production fallback. The default SDK pin still must be updated to a
+released metadata-bearing package before merge. A Windows PR package must also
+be validated against the actual coordinated SDK and projection-tool packages,
+not just this bootstrap reference.
 
 When inspecting a metadata file with external interface references, pass every
 required metadata file explicitly to the delegate inspection commands:

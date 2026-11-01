@@ -1,0 +1,6 @@
+<Project>
+  <Import Project="..\..\..\Directory.Build.targets" />
+  <ItemGroup Condition="'$(D3D12MetadataPath)' != ''">
+    <EmitterReference Include="$(D3D12MetadataPath)" />
+  </ItemGroup>
+</Project>

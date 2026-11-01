@@ -1,4 +1,7 @@
 <Project>
+  <PropertyGroup>
+    <WindowsWin32MetadataIncludesDirect3D12>false</WindowsWin32MetadataIncludesDirect3D12>
+  </PropertyGroup>
   <ItemGroup>
     <ProjectionMetadataWinmd Include="$(MSBuildThisFileDirectory)..\Windows.Win32.winmd" />
   </ItemGroup>

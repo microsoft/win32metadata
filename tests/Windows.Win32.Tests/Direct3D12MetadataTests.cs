@@ -51,6 +51,29 @@ namespace Windows.Win32.Tests
         }
 
         [Fact]
+        public void SdkInterfacesDeclareOnlyTheirOwnVtableSlots()
+        {
+            using var stream = File.OpenRead(TestUtils.Direct3D12WinmdPath);
+            using var pe = new PEReader(stream);
+            MetadataReader reader = pe.GetMetadataReader(MetadataReaderOptions.None);
+            var expected = new[]
+            {
+                ("ID3D12Object", new[] { "GetPrivateData", "SetPrivateData", "SetPrivateDataInterface", "SetName" }),
+                ("ID3D12DeviceChild", new[] { "GetDevice" }),
+                ("ID3D12Pageable", Array.Empty<string>()),
+                ("ID3D12Resource", new[] { "Map", "Unmap", "GetDesc", "GetGPUVirtualAddress", "WriteToSubresource", "ReadFromSubresource", "GetHeapProperties" }),
+            };
+
+            foreach (var (name, methods) in expected)
+            {
+                TypeDefinition type = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Single(definition => reader.GetString(definition.Name) == name);
+                Assert.Equal(methods, type.GetMethods().Select(reader.GetMethodDefinition)
+                    .Select(method => reader.GetString(method.Name)).ToArray());
+            }
+        }
+
+        [Fact]
         public void WindowsVideoInterfaceKeepsOnlyItsOwnVtableSlots()
         {
             using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
