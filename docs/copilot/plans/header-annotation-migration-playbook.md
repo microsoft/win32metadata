@@ -202,6 +202,13 @@ Backup must not exclude `_SINGLE_LIST_ENTRY` and leave its x86 alias without a
 provider. Preserve the native pointer mapping and coalesce repeated providers
 using proven declaration identity and binding equivalence. Do not copy a 64-bit
 body into the x86 projection or widen architecture annotations.
+The existing `PSLIST_ENTRY=SLIST_ENTRY*` remap retains its named pointer target.
+A direct x86 `SLIST_ENTRY*` use can project through the native canonical
+`SINGLE_LIST_ENTRY*`; validate both complete record providers and their pointer
+signatures. The 64-bit native record still requires 16-byte alignment even when
+ClangSharp reports the CLR's 8-byte field-alignment limit. An expected diagnostic
+must match that complete warning exactly and be accompanied by native C/C++
+extent checks and the final `AlignmentAttribute(16)`, not a blanket warning filter.
 Every data-pointer level must match the target's ordinary pointer width;
 non-default `__ptr32`/`__ptr64` widths, even beneath ordinary outer pointers or
 typedefs, fail with WMA001 before output. Do not strip those qualifiers or
