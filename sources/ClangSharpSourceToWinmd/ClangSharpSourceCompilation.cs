@@ -481,7 +481,7 @@ namespace ClangSharpSourceToWinmd
             System.Threading.Tasks.Parallel.ForEach(namespaceTrees, opt, (tree) =>
             {
                 string treeFile = tree.FilePath;
-                if (!treeFile.EndsWith(".manual.cs"))
+                if (!MetadataSyntaxTreeCleaner.IsLegacyManualSource(treeFile))
                 {
                     try
                     {
@@ -1003,7 +1003,7 @@ namespace ClangSharpSourceToWinmd
                     StringComparer.Ordinal);
             var records = new List<(StructDeclarationSyntax Declaration, NativeRecordSource Source, string Namespace,
                 Architecture Architectures, bool ConfiguredNominal)>();
-            foreach (var tree in trees.Where(tree => !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase)))
+            foreach (var tree in trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath)))
             {
                 foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
                     .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
@@ -1414,7 +1414,7 @@ namespace ClangSharpSourceToWinmd
             var models = new BindingModels(compilation);
             var removals = new HashSet<StructDeclarationSyntax>();
             var groups = compilation.SyntaxTrees.Where(tree =>
-                !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase) &&
+                !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) &&
                 !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
                 .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
                 .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&

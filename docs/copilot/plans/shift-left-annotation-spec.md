@@ -285,6 +285,10 @@ spelling and empty managed bodies do not supply native identity.
 A legacy authored empty struct yields to a nonempty definition only when its
 complete namespace and nested-type path match. The short names used by member
 remapping do not establish that match.
+Legacy `.manual.cs` inputs retain that source role after becoming
+`.manual.modified.cs`. Namespace preparation and automatic native-provider
+composition use the same classification; a surviving authored placeholder is
+not an additional native observation or complete native definition.
 
 Relocated complete native records also use the original per-architecture semantic
 models when no logical enum or incomplete declaration is present. Explicitly
