@@ -289,6 +289,13 @@ To run the existing emitter suite on its own:
 dotnet test tests\ClangSharpSourceToWinmdTests -c Release
 ```
 
+The PR Validation workflow runs selected emitter regressions in an independent
+Windows job immediately after change detection. It includes all ten HGROUP rows
+and the existing semantic-model, provenance-cache, and namespace regressions,
+with normal project restore and build. Its separate `fast_managed_tests` TRX
+artifact is uploaded even when tests fail. The complete SDK build and
+`DoTests.ps1` remain unfiltered and do not depend on this early job.
+
 The coverage-auditor suite uses Python's standard library:
 
 ```powershell
