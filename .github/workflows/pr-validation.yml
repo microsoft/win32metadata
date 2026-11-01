@@ -119,6 +119,10 @@ jobs:
             'FullyQualifiedName~NamespaceAdditionPreservesExactMovedOutputAndTrivia' = 4
             'FullyQualifiedName~NamespaceAdditionPreservesEmptyDllImportFiltering' = 1
             'FullyQualifiedName~SourceOwnedGroupKeepsItsNamespaceWithoutAnAuthoredUse' = 1
+            'FullyQualifiedName~RepeatedRecordModelReusePreservesBindingsAcrossCompilationVersions' = 2
+            'FullyQualifiedName~NativeBindingCanonicalViewsStayWithinTheirFamilyAndCompilation' = 1
+            'FullyQualifiedName~IdenticalRecordTextWithDifferentTypeBindingsRemainsACompilerError' = 1
+            'FullyQualifiedName~NativeRecordProvidersDoNotDiscardDistinctNominalTypedefBindings' = 1
           }
           $filter = $selection.Keys -join '|'
           $started = Get-Date
@@ -183,7 +187,7 @@ jobs:
 
   scrape:
     name: 'Scrape headers: ${{ matrix.arch }}'
-    needs: [changes, managed-regressions]
+    needs: [changes]
     if: needs.changes.outputs.build_needed == 'true'
     runs-on: windows-2022
     timeout-minutes: 60
@@ -246,7 +250,7 @@ jobs:
 
   build-test:
     name: 'Build, test, package'
-    needs: [changes, managed-regressions, scrape]
+    needs: [changes, scrape]
     if: always() && needs.changes.result == 'success'
     runs-on: windows-2022
     timeout-minutes: 60

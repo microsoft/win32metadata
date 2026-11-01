@@ -206,6 +206,11 @@ and anonymous-storage, alternate-definition and coverage-normalization policy.
 The normal emitter prints separate timings for common-provider coalescing,
 cross-architecture constant qualification and final typedef/record composition,
 including failed phases.
+The final composition bucket also reports separate legacy typedef projection,
+header typedef composition and repeated record composition clocks. Repeated
+record comparisons retain one semantic model per original tree for that call's
+immutable compilation and report model creations and requests. Replaced
+compilations and isolated native binding views do not share those models.
 Syntax cleaning reports each file's read/parse, rewrite and output start and
 completion, with separate elapsed times and a final validation boundary. An
 unfinished operation retains its start record; the parallel file order and

@@ -608,10 +608,26 @@ namespace ClangSharpSourceToWinmd
             watch.Restart();
             try
             {
-                comp = MergeLegacyTypedefProjections(comp, requiredNamespaces, validation);
-                comp = HeaderTypedefMerger.MergeWithDiagnostics(comp, validation, configuredRequiredNamespaces, recordFamilies, remaps);
+                comp = Compose("Legacy typedef projections",
+                    () => MergeLegacyTypedefProjections(comp, requiredNamespaces, validation));
+                comp = Compose("Header typedef composition",
+                    () => HeaderTypedefMerger.MergeWithDiagnostics(comp, validation, configuredRequiredNamespaces, recordFamilies, remaps));
                 if (!validation.HasBlockingErrors)
-                    comp = MergeRepeatedStructs(comp, validation);
+                    comp = Compose("Repeated record composition", () => MergeRepeatedStructs(comp, validation));
+
+                static CSharpCompilation Compose(string stage, Func<CSharpCompilation> action)
+                {
+                    Console.WriteLine($"  {stage} started...");
+                    var stageWatch = Stopwatch.StartNew();
+                    try
+                    {
+                        return action();
+                    }
+                    finally
+                    {
+                        Console.WriteLine($"  {stage}: {OutputUtils.FormatTimespan(stageWatch.Elapsed)}");
+                    }
+                }
             }
             finally
             {
@@ -1073,6 +1089,8 @@ namespace ClangSharpSourceToWinmd
         private static CSharpCompilation MergeRepeatedStructs(CSharpCompilation compilation, GenerationValidation validation)
         {
             var removals = new HashSet<StructDeclarationSyntax>();
+            var originalModels = new Dictionary<SyntaxTree, SemanticModel>();
+            int modelRequests = 0;
             var groups = compilation.SyntaxTrees.Where(tree =>
                 !tree.FilePath.EndsWith("manual.cs", StringComparison.OrdinalIgnoreCase) &&
                 !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
@@ -1112,7 +1130,7 @@ namespace ClangSharpSourceToWinmd
                 if (!native && (copies.Select(declaration => declaration.SyntaxTree).Distinct().Count() != copies.Length ||
                     copies.Skip(1).Any(declaration => !SyntaxFactory.AreEquivalent(copies[0], declaration))))
                     continue;
-                var firstModel = compilation.GetSemanticModel(copies[0].SyntaxTree);
+                var firstModel = OriginalModel(copies[0].SyntaxTree);
                 var firstSymbol = firstModel.GetDeclaredSymbol(copies[0]);
                 if (firstSymbol == null)
                     continue;
@@ -1120,7 +1138,7 @@ namespace ClangSharpSourceToWinmd
                 // Identical text can refer to different field types or annotation arguments through using aliases.
                 if (copies.Skip(1).Any(declaration =>
                 {
-                    var model = compilation.GetSemanticModel(declaration.SyntaxTree);
+                    var model = OriginalModel(declaration.SyntaxTree);
                     return !SymbolEqualityComparer.Default.Equals(firstSymbol, model.GetDeclaredSymbol(declaration)) ||
                         !(native ? NativeBindingsMatch(nativeBindings, copies[0], declaration) :
                             BindingsMatch(copies[0], firstModel, declaration, model));
@@ -1128,7 +1146,19 @@ namespace ClangSharpSourceToWinmd
                     continue;
                 removals.UnionWith(copies.Skip(1));
             }
+            Console.WriteLine($"  Repeated record original binding models: {originalModels.Count} created for {modelRequests} requests.");
             return RemoveStructs(compilation, removals);
+
+            SemanticModel OriginalModel(SyntaxTree tree)
+            {
+                modelRequests++;
+                if (!originalModels.TryGetValue(tree, out var model))
+                {
+                    model = compilation.GetSemanticModel(tree);
+                    originalModels.Add(tree, model);
+                }
+                return model;
+            }
         }
 
         private static (StructDeclarationSyntax Declaration, NativeRecordSource Source, int Index)[] AnonymousUnionProviders(

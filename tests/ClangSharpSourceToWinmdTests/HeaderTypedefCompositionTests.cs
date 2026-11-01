@@ -21,6 +21,45 @@ namespace ClangSharpSourceToWinmdTests
         [DataTestMethod]
         [DataRow(false)]
         [DataRow(true)]
+        public void RepeatedRecordModelReusePreservesBindingsAcrossCompilationVersions(bool reverseFiles)
+        {
+            string records = string.Join("\n", Enumerable.Range(0, 20).Select(index =>
+                $"public partial struct RECORD{index} {{ public STORAGE Value; }}"));
+            string Text(string storage) => $"using STORAGE = System.{storage}; namespace Test {{ {records} }}";
+            var first = CSharpSyntaxTree.ParseText(Text("Int32"), path: "A.cs");
+            var second = CSharpSyntaxTree.ParseText(Text("Int32"), path: "B.cs");
+            var compilation = CSharpCompilation.Create("RecordModelVersions",
+                reverseFiles ? new[] { second, first } : new[] { first, second },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            const System.Reflection.BindingFlags flags = System.Reflection.BindingFlags.NonPublic |
+                System.Reflection.BindingFlags.Static;
+            var merge = typeof(ClangSharpSourceCompilation).GetMethod("MergeRepeatedStructs", flags)!;
+
+            AssertRecords(compilation, 20);
+            var equivalent = second.WithRootAndOptions(
+                second.GetRoot().WithLeadingTrivia(SyntaxFactory.Comment("// next compilation\n")), second.Options);
+            AssertRecords(compilation.ReplaceSyntaxTree(second, equivalent), 20);
+            var conflicting = CSharpSyntaxTree.ParseText(Text("UInt32"), path: second.FilePath);
+            var changed = compilation.ReplaceSyntaxTree(second, conflicting);
+            AssertRecords(changed, 40);
+            AssertRecords(changed.ReplaceSyntaxTree(conflicting, equivalent), 20);
+
+            void AssertRecords(CSharpCompilation source, int expected)
+            {
+                var validation = new GenerationValidation();
+                var result = (CSharpCompilation)merge.Invoke(null, new object[] { source, validation })!;
+                Assert.IsFalse(validation.HasBlockingErrors);
+                Assert.AreEqual(expected, result.SyntaxTrees.Sum(tree => tree.GetRoot().DescendantNodes()
+                    .OfType<StructDeclarationSyntax>().Count()));
+                Assert.AreEqual(expected == 20, !result.GetDiagnostics()
+                    .Any(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow(false)]
+        [DataRow(true)]
         public void CrossArchPartialNativeAliasProvidersComposeBeforeDependentBinding(bool reverseFiles)
         {
             using var fixture = new Fixture("crossarch");
