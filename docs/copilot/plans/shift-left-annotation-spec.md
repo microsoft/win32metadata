@@ -302,6 +302,9 @@ remapping do not establish that match.
 Relocated complete native records also use the original per-architecture semantic
 models when no logical enum or incomplete declaration is present. Explicitly
 qualified consumers follow the same source-bound owner.
+A syntax-name prefilter avoids binding references that cannot name a registered
+native route. Every possible candidate retains the original alias, namespace,
+assembly, arity, nesting, handle-storage and cross-architecture ownership checks.
 Definitions and textual qualification use that exact native route for names with
 source-proven owners. A same-named declaration outside those routes retains its
 own namespace instead of inheriting the short-name relocation.
