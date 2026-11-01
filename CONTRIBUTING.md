@@ -289,12 +289,27 @@ To run the existing emitter suite on its own:
 dotnet test tests\ClangSharpSourceToWinmdTests -c Release
 ```
 
-The PR Validation workflow runs selected emitter regressions in an independent
-Windows job immediately after change detection. It includes all ten HGROUP rows
-and the existing semantic-model, provenance-cache, and namespace regressions,
-with normal project restore and build. Its separate `fast_managed_tests` TRX
-artifact is uploaded even when tests fail. The complete SDK build and
-`DoTests.ps1` remain unfiltered and do not depend on this early job.
+The PR Validation workflow runs selected emitter and metadata utility regressions
+in an independent Windows job immediately after change detection, with normal
+project restore, build, and test for each project. The emitter selection has 51
+existing rows: ten HGROUP rows, the semantic-model, provenance-cache, and namespace
+controls, and nineteen logical-group/incomplete-declaration composition rows.
+The separate metadata utility selection has thirteen declaration-provenance rows.
+The workflow checks each inventory in its own `FastManaged.trx` or
+`FastProvenance.trx`; both are uploaded in `fast_managed_tests` even when tests fail.
+The four native producer regressions also run in a separate early Windows job
+that depends only on change detection. It uses the normal scraper subprocess
+fixtures and tracked repository headers, without generated SDK artifacts:
+
+```powershell
+dotnet test .\tests\Win32MetadataScraperTests -c Release --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests"
+```
+
+This job verifies the three logical-group architecture rows and one forward-record
+row in `FastNativeProducer.trx`, uploaded separately in
+`fast_native_producer_tests` even on failure. The complete SDK build and
+`DoTests.ps1` remain unfiltered, retain these producer tests, and do not depend
+on either early job.
 
 The coverage-auditor suite uses Python's standard library:
 

@@ -248,7 +248,7 @@ namespace Win32MetadataScraper
 
         internal bool RequiresProjectionIdentity => annotatedTypedefs.Any(facts => facts.HasNativeTypedefIdentity) ||
             recordPointees.Count != 0 ||
-            declarations.Values.Any(facts => facts.Declaration is RecordDecl { IsCompleteDefinition: true } &&
+            declarations.Values.Any(facts => facts.Declaration is RecordDecl &&
                 ShouldEmit(facts.Declaration, facts.Location)) ||
             declarations.Values.Any(facts => facts.Declaration is EnumDecl enumeration &&
                 projectionTypeRemaps.TryGetValue(enumeration.Name, out string name) &&
@@ -585,6 +585,8 @@ namespace Win32MetadataScraper
                             SyntaxFactory.EnumMemberDeclaration(Remap(member.Name))
                                 .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression(member.Value)))).ToArray());
                     logicalEnum = NativeConstantGroupProvenance.Attach(logicalEnum, GetConstantGroupSource(facts));
+                    logicalEnum = NativeDeclarationSourceProvenance.Attach(logicalEnum,
+                        GetNativeDeclarationSource(alias, name, generatedNamespace, NativeDeclarationKind.LogicalEnum));
                     members.Add(logicalEnum);
                     projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
                     continue;
@@ -694,6 +696,22 @@ namespace Win32MetadataScraper
             return new NativeRecordSource(identity.ToString(), DeclarationSourceMap.QualifiedName(declaration.Handle),
                 header, hash, line, column, name, ns, MatchesTraversalFile(traversalNames, header),
                 declaration.Handle.Type.SizeOf, declaration.Handle.Type.AlignOf)
+            {
+                SourceArchitecture = nativeSourceArchitecture,
+            };
+        }
+
+        private NativeDeclarationSource GetNativeDeclarationSource(NamedDecl declaration, string name, string ns,
+            NativeDeclarationKind kind)
+        {
+            var canonical = declaration.Handle.CanonicalCursor;
+            canonical.Location.GetFileLocation(out var file, out uint line, out uint column, out _);
+            using var identity = clang.getCursorUSR(canonical);
+            string header = Path.GetFullPath(file.ToString());
+            if (!recordSourceHashes.TryGetValue(header, out string hash))
+                recordSourceHashes.Add(header, hash = NativeConstantGroupProvenance.HashFile(header));
+            return new NativeDeclarationSource(identity.ToString(), DeclarationSourceMap.QualifiedName(canonical),
+                header, hash, line, column, name, ns, MatchesTraversalFile(traversalNames, header), kind)
             {
                 SourceArchitecture = nativeSourceArchitecture,
             };
@@ -2475,6 +2493,12 @@ namespace Win32MetadataScraper
                             node = NativeRecordSourceProvenance.Attach(node, source);
                             if (alignment != null)
                                 owner.RegisterNativeAlignmentDiagnostic(definition, source);
+                        }
+                        else if (!definition.IsCompleteDefinition && definition.Name.Length != 0)
+                        {
+                            node = NativeDeclarationSourceProvenance.Attach(node,
+                                owner.GetNativeDeclarationSource(record, node.Identifier.ValueText, sourceNamespace,
+                                    NativeDeclarationKind.IncompleteRecord));
                         }
                     }
                 }

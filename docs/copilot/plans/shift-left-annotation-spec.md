@@ -289,6 +289,19 @@ pointer with a character projection already proven during typedef composition.
 That internal proof does not authorize arbitrary `ushort*` storage or erase
 nominal public aliases; the selected native record remains the output provider.
 
+Incomplete native records carry declaration provenance separately from complete
+record layout evidence. The declaration proof records the actual native identity,
+header path/hash and coordinates, target, and traversal ownership without size or
+alignment. Missing source-location association remains unresolved; emitted tag
+spelling and empty managed bodies do not supply native identity.
+
+Logical groups join their native declaration and constant proofs to the actual
+traversed-header owner. Identical observations from other partitions route to that
+owner together with their uses and constant ownership. Composition preserves
+independent native contributions and checks their storage, values, and bindings.
+A common observation does not establish applicability to every architecture;
+coalescing it requires matching direct providers for all three targets.
+
 An existing pointer remap such as `PBOOL=BOOL*` names the native scalar typedef
 that signatures must retain. Automatic typedef discovery recognizes that target
 through every pointer level and preserves its nominal projection. An explicit

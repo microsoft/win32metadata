@@ -388,8 +388,11 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
             {
-                // If the struct is empty and we found a non-empty struct in all the source files, delete it
-                if (SyntaxUtils.IsEmptyStruct(node) && this.nonEmptyStructs.Contains(node.Identifier.ValueText))
+                // Native declarations need source-bound composition, not a same-spelled nonempty record.
+                if (IsLegacyManualSource(node.SyntaxTree.FilePath) && SyntaxUtils.IsEmptyStruct(node) &&
+                    NativeDeclarationSourceProvenance.Read(node) == null &&
+                    NativeRecordSourceProvenance.Read(node) == null &&
+                    this.nonEmptyStructs.Contains(GetFullNameWithoutArchSuffix(node)))
                 {
                     return null;
                 }
@@ -505,7 +508,7 @@ namespace ClangSharpSourceToWinmd
                 if (node.Modifiers.ToString() == "public static readonly")
                 {
                     // Turn public static readonly Guids into string constants with an attribute
-                    // to signal language projections to turn them into Guid constants. Guid constants 
+                    // to signal language projections to turn them into Guid constants. Guid constants
                     // aren't allowed in metadata, requiring us to surface them this way
                     if (node.Declaration.Type.ToString() == "Guid")
                     {
@@ -642,9 +645,9 @@ namespace ClangSharpSourceToWinmd
 
                 switch (attrName)
                 {
-                    // We don't want more than one of these on an interface. Get rid of it if the 
+                    // We don't want more than one of these on an interface. Get rid of it if the
                     // struct doesn't have a NativeTypeName, which means it's a forward declaration.
-                    // The real declaration will have the SupportedOSPlatform that we'll keep 
+                    // The real declaration will have the SupportedOSPlatform that we'll keep
                     case "SupportedOSPlatform":
                     {
                         if (node.Parent is StructDeclarationSyntax structDeclaration)
@@ -1426,7 +1429,7 @@ namespace ClangSharpSourceToWinmd
                     }
                     else
                     {
-                        // If it didn't match the regex and we don't see inexpressibleCount, we can't do 
+                        // If it didn't match the regex and we don't see inexpressibleCount, we can't do
                         // anything but return an empty string, because we don't know how to interpret it
                         if (!p1Text.StartsWith("inexpressibleCount"))
                         {
@@ -1596,7 +1599,7 @@ namespace ClangSharpSourceToWinmd
                             }
                         }
 
-                        // Add NativeTypeName attribute if it is missing 
+                        // Add NativeTypeName attribute if it is missing
                         bool hasNativeTypeName = false;
 
                         foreach (var attrList in existingAttrList.ToArray())
@@ -1643,7 +1646,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (newType == null && currentType != null)
                 {
-                    // See if the type ends in the magic suffix. We use a remap fed to clangsharp 
+                    // See if the type ends in the magic suffix. We use a remap fed to clangsharp
                     // to keep some typedefs from following down to their original type
                     EncodeHelpers.SplitType(currentType, out var typeOnly, out var pointers);
                     if (typeOnly.EndsWith(RevertToTypeSuffix))

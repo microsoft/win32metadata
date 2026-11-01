@@ -45,8 +45,24 @@ namespace ClangSharpSourceToWinmd
                             file, declaration.Identifier.ValueText, architecture);
                         continue;
                     }
-                    fragments.Add(new Fragment(file, ns, declaration,
-                        architecture == "crossarch" ? GetArchitectures(file, fileSet) : Architecture.All));
+                    var target = architecture == "crossarch" ? GetArchitectures(file, fileSet) : Architecture.All;
+                    if (architecture == "crossarch")
+                    {
+                        var source = NativeDeclarationSourceProvenance.Read(declaration);
+                        if (source != null)
+                        {
+                            target = source.SourceArchitecture ??
+                                ClangSharpSourceCompilation.GetArchitectureForFileName(file);
+                            if (target == Architecture.None)
+                            {
+                                Record(Error(file, declaration.Identifier.ValueText,
+                                    "A source-bound logical group requires an actual source architecture."),
+                                    file, declaration.Identifier.ValueText, architecture);
+                                continue;
+                            }
+                        }
+                    }
+                    fragments.Add(new Fragment(file, ns, declaration, target));
                 }
             }
 
@@ -452,6 +468,33 @@ namespace ClangSharpSourceToWinmd
 
         private static EnumDeclarationSyntax MergeGroup(Fragment[] fragments, CSharpCompilation legacyCompilation)
         {
+            var nativeFragments = fragments.Where(fragment => fragment.HeaderDefined).Select(fragment => (
+                Fragment: fragment, Source: NativeDeclarationSourceProvenance.Read(fragment.Declaration),
+                Constants: NativeDeclarationSourceProvenance.Read(fragment.Declaration) == null
+                    ? null : NativeConstantGroupProvenance.Read(fragment.Declaration))).ToArray();
+            var canonical = nativeFragments.Where(fragment => fragment.Source?.TraversedHeader == true)
+                .OrderBy(fragment => fragment.Fragment.File, StringComparer.Ordinal).FirstOrDefault();
+            var source = canonical.Source ?? nativeFragments.FirstOrDefault(fragment => fragment.Source != null).Source;
+            if (source != null && nativeFragments.Any(fragment => fragment.Source == null))
+                throw Error(fragments[0].File, fragments[0].Declaration.Identifier.ValueText,
+                    "A source-bound logical group cannot compose an unproven header contribution.");
+            if (source != null && nativeFragments.Select(fragment => fragment.Constants?.Group.NativeName)
+                .Distinct(StringComparer.Ordinal).Count() != 1)
+                throw Error(fragments[0].File, fragments[0].Declaration.Identifier.ValueText,
+                    "Distinct native logical groups cannot share a projection solely by managed name.");
+            var nativeMembers = new Dictionary<string, NativeConstantBinding[]>(StringComparer.Ordinal);
+            foreach (var fragment in nativeFragments.Where(fragment => fragment.Source != null))
+            {
+                if (fragment.Constants == null)
+                    throw Error(fragment.Fragment.File, fragment.Source.Name, "Logical group constant provenance is missing.");
+                foreach (var member in fragment.Constants.Group.Members)
+                {
+                    if (nativeMembers.TryGetValue(member.Name, out var previous) && !previous.SequenceEqual(member.Bindings))
+                        throw Error(fragment.Fragment.File, fragment.Source.Name,
+                            $"Conflicting native constant bindings for '{member.Name}'.");
+                    nativeMembers[member.Name] = member.Bindings;
+                }
+            }
             fragments = fragments.Select(fragment => fragment.HeaderDefined ? fragment :
                 ReadLegacyGroup(fragment, fragments, legacyCompilation)).ToArray();
             var first = fragments[0];
@@ -500,9 +543,13 @@ namespace ClangSharpSourceToWinmd
                     }
                 }
             }
-            return first.Declaration.WithoutTrivia().WithAttributeLists(SyntaxFactory.List(attributes.Select(attribute =>
+            var merged = first.Declaration.WithoutTrivia().WithAttributeLists(SyntaxFactory.List(attributes.Select(attribute =>
                     SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(attribute.WithoutTrivia())))))
                 .WithMembers(SyntaxFactory.SeparatedList(members.Values.Select(member => member.WithoutTrivia())));
+            // A multi-declaration union cannot claim one contributor's native declaration identity.
+            return source == null || nativeFragments.Any(fragment =>
+                !NativeDeclarationSourceProvenance.SameDeclaration(source, fragment.Source))
+                ? merged : NativeDeclarationSourceProvenance.Attach(merged, source);
         }
 
         private static CSharpCompilation ReplaceGroup(CSharpCompilation compilation, Fragment[] fragments,

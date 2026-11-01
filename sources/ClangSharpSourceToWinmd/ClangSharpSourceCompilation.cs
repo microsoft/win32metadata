@@ -368,6 +368,15 @@ namespace ClangSharpSourceToWinmd
                 FilesToTrees(modifiedFiles).ToArray(), sourceDirectory, objDir, validation, requiredNamespaces);
             StopIfInvalid("emitter.native-typedef-policy", "source-bound native projection policies");
             var recordNamespaces = ResolveNativeNamespaces(namespaceTrees, requiredNamespaces, apiNamesToNamespaces, validation);
+            foreach (var route in ResolveNativeDeclarationNamespaces(namespaceTrees, requiredNamespaces, validation))
+            {
+                if (recordNamespaces.TryGetValue(route.Key, out string owner) && owner != route.Value)
+                    validation.Add(new InvalidDataException(
+                        $"Native declarations for '{route.Key.Namespace}.{route.Key.Name}' have conflicting owners."),
+                        "CSSW005", "emitter.declaration-ownership", symbol: route.Key.Name);
+                else
+                    recordNamespaces[route.Key] = route.Value;
+            }
             StopIfInvalid("emitter.namespace-routing", "native provider ownership");
             var configuredRequiredNamespaces = requiredNamespaces;
             requiredNamespaces = new Dictionary<string, string>(requiredNamespaces);
@@ -384,13 +393,50 @@ namespace ClangSharpSourceToWinmd
                     .Where(declaration => declaration is EnumDeclarationSyntax ||
                         declaration is StructDeclarationSyntax record &&
                             (HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath) ||
-                                NativeRecordSourceProvenance.Read(record) != null)))
+                                NativeRecordSourceProvenance.Read(record) != null ||
+                                NativeDeclarationSourceProvenance.Read(record) != null)))
                 .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
+                .Select(declaration => (Namespace: SyntaxUtils.GetEnclosingNamespace(declaration), Name: declaration.Identifier.ValueText))
+                .ToHashSet();
+            var nativeEnumTypes = namespaceTrees.SelectMany(tree =>
+                    tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
+                .Where(declaration => NativeDeclarationSourceProvenance.Read(declaration)?.Kind == NativeDeclarationKind.LogicalEnum)
                 .Select(declaration => (Namespace: SyntaxUtils.GetEnclosingNamespace(declaration), Name: declaration.Identifier.ValueText))
                 .ToHashSet();
             var dependencyNamespaces = apiNamesToNamespaces.Values.SelectMany(namespaces => namespaces.Split(';'))
                 .Append("System").Where(ns => ns.Length != 0).Distinct(StringComparer.Ordinal).OrderBy(ns => ns, StringComparer.Ordinal)
                 .ToArray();
+            namespaceTrees = namespaceTrees.Select(tree =>
+            {
+                if (!HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
+                    return tree;
+                var root = tree.GetCompilationUnitRoot();
+                var imports = root.Usings.Where(directive => directive.Alias == null &&
+                    !directive.StaticKeyword.IsKind(SyntaxKind.StaticKeyword))
+                    .Select(directive => directive.Name.ToString()).ToHashSet(StringComparer.Ordinal);
+                return tree.WithRootAndOptions(root.AddUsings(dependencyNamespaces.Where(ns => !imports.Contains(ns))
+                    .Select(ns => SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(ns)).NormalizeWhitespace()
+                        .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)).ToArray()), tree.Options);
+            }).ToArray();
+            var nativeReferenceCompilations = new Dictionary<Architecture, CSharpCompilation>();
+            if (nativeEnumTypes.Count != 0 || namespaceTrees.Any(tree =>
+                tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Any(record => NativeDeclarationSourceProvenance.Read(record) != null)))
+            {
+                var targets = arch switch
+                {
+                    "x86" => new[] { Architecture.X86 },
+                    "x64" => new[] { Architecture.X64 },
+                    "arm64" => new[] { Architecture.Arm64 },
+                    _ => new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 },
+                };
+                foreach (var target in targets)
+                    nativeReferenceCompilations.Add(target, AddNetstandardReference(CSharpCompilation.Create(
+                        "NativeNamespaceReferences",
+                        namespaceTrees.Where(tree => GetArchitectureForFileName(tree.FilePath) == Architecture.None ||
+                            GetArchitectureForFileName(tree.FilePath) == target), refs,
+                        new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true))));
+            }
 
             Console.WriteLine($"  Moving names to correct namespaces...");
             System.Threading.Tasks.Parallel.ForEach(namespaceTrees, opt, (tree) =>
@@ -398,31 +444,47 @@ namespace ClangSharpSourceToWinmd
                 string treeFile = tree.FilePath;
                 if (!treeFile.EndsWith(".manual.cs"))
                 {
-                    if (HeaderEnumGroupMerger.IsHeaderTypesFile(treeFile))
+                    try
                     {
-                        var root = tree.GetCompilationUnitRoot();
-                        var imports = root.Usings.Where(directive => directive.Alias == null &&
-                            !directive.StaticKeyword.IsKind(SyntaxKind.StaticKeyword))
-                            .Select(directive => directive.Name.ToString()).ToHashSet(StringComparer.Ordinal);
-                        tree = tree.WithRootAndOptions(root.AddUsings(dependencyNamespaces.Where(ns => !imports.Contains(ns))
-                            .Select(ns => SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(ns)).NormalizeWhitespace()
-                                .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)).ToArray()), tree.Options);
+                        var architecture = GetArchitectureForFileName(treeFile);
+                        var sourceTargets = architecture == Architecture.None
+                            ? tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
+                                .Select(declaration => NativeDeclarationSourceProvenance.Read(declaration)?.SourceArchitecture)
+                                .Where(target => target.HasValue).Select(target => target.Value).Distinct().ToArray()
+                            : new[] { architecture };
+                        var models = nativeReferenceCompilations.Where(pair =>
+                                sourceTargets.Length != 1 || pair.Key == sourceTargets[0])
+                            .Select(pair => pair.Value.GetSemanticModel(tree)).ToArray();
+                        // Keep pre-move enum ownership for removing the original loose-constant copies.
+                        infoFinder.AnalyzeTree(tree);
+                        tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(
+                            tree, configuredRequiredNamespaces, sourceTypes, recordNamespaces, nativeEnumTypes, models);
+
+                        infoFinder.AnalyzeTree(tree);
+
+                        WriteTree(tree, treeFile);
                     }
-                    // Loose constants retain their source namespace when their owning enum is routed elsewhere.
-                    infoFinder.AnalyzeTree(tree);
-                    tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, configuredRequiredNamespaces, sourceTypes, recordNamespaces);
-
-                    infoFinder.AnalyzeTree(tree);
-
-                    WriteTree(tree, treeFile);
+                    catch (InvalidDataException error)
+                    {
+                        validation.Add(error, "CSSW005", "emitter.native-references", treeFile);
+                    }
                 }
             });
+            StopIfInvalid("emitter.namespace-routing", "compiler-bound native references");
 
             var elapsed = watch.Elapsed;
             Console.WriteLine($"  {OutputUtils.FormatTimespan(elapsed)}");
 
             ShowMemory();
 
+            if (arch == "crossarch")
+            {
+                var declarations = CoalesceCommonNativeDeclarations(
+                    FilesToTrees(modifiedFiles).ToArray(), refs, validation);
+                StopIfInvalid("emitter.source-cleaning", "source-bound common declaration observations");
+                foreach (var tree in declarations)
+                    WriteTree(tree, tree.FilePath);
+            }
             HeaderEnumGroupMerger.MergeWithDiagnostics(modifiedFiles, objDir, arch, infoFinder.EnumMemberNames, validation);
             StopIfInvalid("emitter.source-cleaning", "logical enum composition");
 
@@ -755,6 +817,125 @@ namespace ClangSharpSourceToWinmd
             });
         }
 
+        private static Dictionary<(string Namespace, string Name), string> ResolveNativeDeclarationNamespaces(
+            IEnumerable<SyntaxTree> trees, IReadOnlyDictionary<string, string> requiredNamespaces,
+            GenerationValidation validation)
+        {
+            var declarations = new List<(BaseTypeDeclarationSyntax Declaration, NativeDeclarationSource Source,
+                string Namespace, Architecture Architectures)>();
+            foreach (var tree in trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath)))
+            {
+                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
+                {
+                    try
+                    {
+                        var source = NativeDeclarationSourceProvenance.Read(declaration);
+                        if (source == null)
+                            continue;
+                        string ns = SyntaxUtils.GetEnclosingNamespace(declaration);
+                        if (source.Namespace != ns && !declaration.Ancestors().OfType<NamespaceDeclarationSyntax>()
+                            .Any(owner => owner.GetAnnotations(NumericNamespaceSource).Any(annotation =>
+                                annotation.Data == string.Concat(source.Namespace.Where(character => !char.IsWhiteSpace(character))))))
+                            throw new InvalidDataException("Native declaration source namespace drift.");
+                        if (declaration is StructDeclarationSyntax record &&
+                            (NativeRecordSourceProvenance.Read(record) != null || NativeTypedefSourceProvenance.Read(record) != null))
+                            throw new InvalidDataException("An incomplete declaration cannot claim a complete native layout or typedef identity.");
+                        if (declaration is EnumDeclarationSyntax enumeration)
+                        {
+                            var constants = NativeConstantGroupProvenance.Read(enumeration);
+                            var group = constants?.Group;
+                            if (group == null || group.Kind != "LogicalGroup" || group.Name != source.Name ||
+                                group.Namespace != source.Namespace || group.NativeName != "::" + source.NativeName)
+                                throw new InvalidDataException("Logical group ownership requires its compiler-bound native constant proof.");
+                            if (source.SourceArchitecture.HasValue &&
+                                source.SourceArchitecture.Value != constants.Architecture)
+                                throw new InvalidDataException("Logical group declaration and constant source targets differ.");
+                        }
+                        var architecture = GetArchitectureForFileName(tree.FilePath);
+                        if (source.SourceArchitecture.HasValue && architecture != Architecture.None &&
+                            architecture != source.SourceArchitecture.Value)
+                            throw new InvalidDataException("Native declaration source architecture drift.");
+                        declarations.Add((declaration, source, ns, source.SourceArchitecture ?? architecture));
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        validation.Add(error, "CSSW005", "emitter.declaration-ownership", tree.FilePath,
+                            declaration.Identifier.ValueText);
+                    }
+                }
+            }
+            var routes = new Dictionary<(string Namespace, string Name), string>();
+            var identities = new Dictionary<(string Namespace, string Name, Architecture Architecture), string>();
+            foreach (var group in declarations.GroupBy(item => (
+                Identity: NativeDeclarationSourceProvenance.GetIdentityKey(item.Source), item.Source.Name,
+                Header: item.Source.Header.ToUpperInvariant(), item.Source.Kind)))
+            {
+                var first = group.First();
+                bool conflict = new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 }.Any(architecture =>
+                {
+                    var applicable = group.Where(item =>
+                    {
+                        var targets = item.Source.SourceArchitecture ?? item.Architectures;
+                        return targets == Architecture.None || (targets & architecture) != 0;
+                    }).ToArray();
+                    return applicable.Skip(1).Any(item =>
+                        !NativeDeclarationSourceProvenance.SameDeclaration(applicable[0].Source, item.Source));
+                });
+                if (conflict || group.Any(item => item.Source.NativeName != first.Source.NativeName))
+                {
+                    Report("Conflicting native declaration identities.");
+                    continue;
+                }
+                var namespaces = group.Select(item => item.Namespace).Distinct(StringComparer.Ordinal).ToArray();
+                var direct = group.Where(item => item.Source.TraversedHeader).Select(item => item.Namespace)
+                    .Distinct(StringComparer.Ordinal).ToArray();
+                if (direct.Length > 1 || direct.Length == 0 && namespaces.Length != 1)
+                {
+                    Report("Canonical ownership requires one source-bound traversed-header namespace.");
+                    continue;
+                }
+                string owner = direct.Length == 1 ? direct[0] : namespaces.Single();
+                if (requiredNamespaces.TryGetValue(group.Key.Name, out string required))
+                    owner = required;
+                foreach (string ns in namespaces)
+                {
+                    bool identityConflict = false;
+                    foreach (var architecture in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
+                    {
+                        if (!group.Any(item => item.Namespace == ns &&
+                            (item.Architectures == Architecture.None || (item.Architectures & architecture) != 0)))
+                            continue;
+                        var key = (ns, group.Key.Name, architecture);
+                        string identity = $"{group.Key.Kind}:{group.Key.Identity}:{group.Key.Header}";
+                        if (identities.TryGetValue(key, out string previous) && previous != identity &&
+                            !(group.Key.Kind == NativeDeclarationKind.LogicalEnum &&
+                                previous.StartsWith(NativeDeclarationKind.LogicalEnum + ":", StringComparison.Ordinal)))
+                        {
+                            Report($"Distinct native declarations project to '{ns}.{group.Key.Name}' for {architecture}.");
+                            identityConflict = true;
+                        }
+                        else
+                            identities[key] = identity;
+                    }
+                    if (identityConflict)
+                        continue;
+                    var route = (ns, group.Key.Name);
+                    if (routes.TryGetValue(route, out string previousOwner) && previousOwner != owner)
+                    {
+                        Report($"Conditional native declarations have conflicting public owners '{previousOwner}' and '{owner}'.");
+                        continue;
+                    }
+                    routes[route] = owner;
+                }
+
+                void Report(string message) => validation.Add(new InvalidDataException(
+                    $"Native declaration '{group.Key.Name}': {message}"), "CSSW005", "emitter.declaration-ownership",
+                    first.Declaration.SyntaxTree.FilePath, group.Key.Name);
+            }
+            return routes;
+        }
+
         private static Dictionary<(string Namespace, string Name), string> ResolveNativeNamespaces(IEnumerable<SyntaxTree> trees,
             IReadOnlyDictionary<string, string> requiredNamespaces, IReadOnlyDictionary<string, string> scannedNamespaces,
             GenerationValidation validation)
@@ -949,6 +1130,86 @@ namespace ClangSharpSourceToWinmd
             return routes;
         }
 
+        private static SyntaxTree[] CoalesceCommonNativeDeclarations(SyntaxTree[] trees,
+            IEnumerable<MetadataReference> references, GenerationValidation validation)
+        {
+            var groups = trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
+                .Select(declaration => (Declaration: declaration,
+                    Source: NativeDeclarationSourceProvenance.Read(declaration),
+                    Architecture: GetArchitectureForFileName(declaration.SyntaxTree.FilePath)))
+                .Where(item => item.Source != null)
+                .GroupBy(item => (Namespace: SyntaxUtils.GetEnclosingNamespace(item.Declaration), item.Source.Name,
+                    Identity: NativeDeclarationSourceProvenance.GetIdentityKey(item.Source),
+                    Header: item.Source.Header.ToUpperInvariant(), item.Source.Kind)).ToArray();
+            var removals = new HashSet<BaseTypeDeclarationSyntax>();
+            var models = new Dictionary<Architecture, BindingModels>();
+            foreach (var group in groups)
+            {
+                var direct = group.Where(item => item.Architecture != Architecture.None &&
+                    item.Source.TraversedHeader &&
+                    (item.Source.SourceArchitecture ?? item.Architecture) == item.Architecture).ToArray();
+                foreach (var common in group.Where(item => item.Architecture == Architecture.None))
+                {
+                    var providers = direct.Where(item => item.Source.HeaderHash == common.Source.HeaderHash).ToArray();
+                    if (!common.Source.SourceArchitecture.HasValue ||
+                        providers.Aggregate(Architecture.None, (coverage, item) => coverage | item.Architecture) != Architecture.All)
+                    {
+                        validation.Add(new InvalidDataException(
+                            $"Common native declaration '{group.Key.Namespace}.{group.Key.Name}' requires its actual " +
+                            "source target and direct providers for all three architectures."),
+                            "CSSW005", "emitter.declaration-composition", common.Declaration.SyntaxTree.FilePath, group.Key.Name);
+                        continue;
+                    }
+                    Architecture architecture = common.Source.SourceArchitecture.Value;
+                    var matching = providers.Where(item => item.Architecture == architecture &&
+                        NativeDeclarationSourceProvenance.SameDeclaration(item.Source, common.Source)).ToArray();
+                    if (!models.TryGetValue(architecture, out var binding))
+                    {
+                        var compilation = AddNetstandardReference(CSharpCompilation.Create("CommonNativeDeclarations",
+                            trees.Where(tree => GetArchitectureForFileName(tree.FilePath) is Architecture.None ||
+                                GetArchitectureForFileName(tree.FilePath) == architecture), references,
+                            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)));
+                        models.Add(architecture, binding = new BindingModels(compilation));
+                    }
+                    bool equivalent = matching.Any(provider =>
+                        SyntaxFactory.AreEquivalent(provider.Declaration, common.Declaration) &&
+                        BindingsMatch(provider.Declaration, binding.Get(provider.Declaration.SyntaxTree),
+                            common.Declaration, binding.Get(common.Declaration.SyntaxTree)) &&
+                        SameConstantBindings(provider.Declaration, common.Declaration));
+                    if (!equivalent)
+                    {
+                        validation.Add(new InvalidDataException(
+                            $"Common native declaration '{group.Key.Namespace}.{group.Key.Name}' conflicts with its " +
+                            $"source-bound {architecture} provider."),
+                            "CSSW005", "emitter.declaration-composition", common.Declaration.SyntaxTree.FilePath,
+                            group.Key.Name, architecture: architecture.ToString());
+                        continue;
+                    }
+                    removals.Add(common.Declaration);
+                }
+            }
+            return trees.Select(tree =>
+            {
+                var removed = removals.Where(declaration => declaration.SyntaxTree == tree).ToArray();
+                return removed.Length == 0 ? tree : tree.WithRootAndOptions(
+                    tree.GetRoot().RemoveNodes(removed, SyntaxRemoveOptions.KeepNoTrivia), tree.Options);
+            }).ToArray();
+
+            static bool SameConstantBindings(BaseTypeDeclarationSyntax first, BaseTypeDeclarationSyntax second)
+            {
+                if (first is not EnumDeclarationSyntax left || second is not EnumDeclarationSyntax right)
+                    return true;
+                var leftSource = NativeConstantGroupProvenance.Read(left);
+                var rightSource = NativeConstantGroupProvenance.Read(right);
+                return leftSource != null && rightSource != null &&
+                    leftSource.Group.Members.Length == rightSource.Group.Members.Length &&
+                    leftSource.Group.Members.Zip(rightSource.Group.Members).All(pair =>
+                        pair.First.Name == pair.Second.Name && pair.First.Bindings.SequenceEqual(pair.Second.Bindings));
+            }
+        }
+
         private static SyntaxTree[] CoalesceCommonNativeProviders(SyntaxTree[] trees,
             IEnumerable<MetadataReference> references, GenerationValidation validation,
             IReadOnlyDictionary<string, string> requiredNamespaces, IReadOnlyDictionary<string, string> remaps)
@@ -1081,9 +1342,24 @@ namespace ClangSharpSourceToWinmd
             foreach (var group in groups)
             {
                 var copies = group.OrderBy(declaration => NativeRecordSourceProvenance.Read(declaration)?.TraversedHeader == true ? 0 : 1)
+                    .ThenBy(declaration => NativeDeclarationSourceProvenance.Read(declaration)?.TraversedHeader == true ? 0 : 1)
                     .ThenBy(declaration => declaration.SyntaxTree.FilePath, StringComparer.Ordinal).ToArray();
                 var sources = copies.Select(NativeRecordSourceProvenance.Read).ToArray();
+                var incompleteSources = copies.Select(NativeDeclarationSourceProvenance.Read).ToArray();
+                if (incompleteSources.Any(source => source != null) &&
+                    (incompleteSources.Any(source => source == null) ||
+                        sources.Any(source => source != null) ||
+                        incompleteSources.Skip(1).Any(source =>
+                            !NativeDeclarationSourceProvenance.SameDeclaration(incompleteSources[0], source))))
+                {
+                    validation.Add(new InvalidDataException($"Conflicting incomplete native declarations for '{group.Key}'."),
+                        "CSSW005", "emitter.record-composition", copies[0].SyntaxTree.FilePath, group.Key);
+                    continue;
+                }
                 bool native = sources.All(source => source != null);
+                if (!native && incompleteSources.All(source => source == null) &&
+                    copies.All(declaration => declaration.Members.Count == 0))
+                    continue;
                 if (native && sources.Skip(1).Select((source, index) => (Source: source, Declaration: copies[index + 1])).Any(item =>
                 {
                     var source = item.Source;
@@ -1623,8 +1899,8 @@ namespace ClangSharpSourceToWinmd
             return compilation;
         }
 
-        private static bool BindingsMatch(StructDeclarationSyntax first, SemanticModel firstModel,
-            StructDeclarationSyntax second, SemanticModel secondModel, bool ignoreDocumentation = false,
+        private static bool BindingsMatch(BaseTypeDeclarationSyntax first, SemanticModel firstModel,
+            BaseTypeDeclarationSyntax second, SemanticModel secondModel, bool ignoreDocumentation = false,
             bool isolated = false)
         {
             var comparison = new DeclarationBindingComparison(first, firstModel, second, secondModel, isolated);
@@ -1664,8 +1940,8 @@ namespace ClangSharpSourceToWinmd
             private readonly Dictionary<ISymbol, int> firstDeclarations;
             private readonly Dictionary<ISymbol, int> secondDeclarations;
 
-            public DeclarationBindingComparison(StructDeclarationSyntax first, SemanticModel firstModel,
-                StructDeclarationSyntax second, SemanticModel secondModel, bool isolated)
+            public DeclarationBindingComparison(BaseTypeDeclarationSyntax first, SemanticModel firstModel,
+                BaseTypeDeclarationSyntax second, SemanticModel secondModel, bool isolated)
             {
                 this.isolated = isolated;
                 firstDeclarations = isolated ? DeclaredSymbols(first, firstModel) : null;
@@ -1718,7 +1994,7 @@ namespace ClangSharpSourceToWinmd
                 return false;
             }
 
-            private static Dictionary<ISymbol, int> DeclaredSymbols(StructDeclarationSyntax declaration, SemanticModel model)
+            private static Dictionary<ISymbol, int> DeclaredSymbols(BaseTypeDeclarationSyntax declaration, SemanticModel model)
             {
                 var result = new Dictionary<ISymbol, int>(SymbolEqualityComparer.Default);
                 int index = 0;
@@ -1904,7 +2180,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     lock (this.EmptyStructs)
                     {
-                        this.EmptyStructs.Add(node.Identifier.ValueText);
+                        this.EmptyStructs.Add(MetadataSyntaxTreeCleaner.GetFullNameWithoutArchSuffix(node));
                     }
                 }
             }

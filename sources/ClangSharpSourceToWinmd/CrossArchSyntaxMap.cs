@@ -59,7 +59,8 @@ namespace ClangSharpSourceToWinmd
 
         public static bool IsPotentialCrossArch(StructDeclarationSyntax node)
         {
-            return node.Parent is NamespaceDeclarationSyntax && !SyntaxUtils.IsEmptyStruct(node);
+            return node.Parent is NamespaceDeclarationSyntax &&
+                (!SyntaxUtils.IsEmptyStruct(node) || NativeDeclarationSourceProvenance.Read(node) != null);
         }
 
         public static bool IsPotentialCrossArch(DelegateDeclarationSyntax node)
@@ -300,6 +301,7 @@ namespace ClangSharpSourceToWinmd
                 StringBuilder ret = new StringBuilder();
                 // Keep profiles with different provider proofs separate until validation.
                 ret.Append(NativeHandleSourceProvenance.GetSignature(s));
+                ret.Append(GetNativeDeclarationSignature(s));
                 AppendAttributes(ret, s.AttributeLists);
                 ret.Append(s.Identifier.ValueText);
                 ret.Append(s.BaseList?.ToString());
@@ -322,7 +324,7 @@ namespace ClangSharpSourceToWinmd
                         else
                         {
                             ret.Append(',');
-                        }   
+                        }
 
                         var firstVar = field.Declaration.Variables.First();
                         var typeName = GetTypeName(field.Declaration.Type.ToString(), field.AttributeLists);
@@ -368,7 +370,16 @@ namespace ClangSharpSourceToWinmd
                 return ret.ToString();
             }
 
-            return node.ToString();
+            return (node is EnumDeclarationSyntax enumeration ? GetNativeDeclarationSignature(enumeration) : "") +
+                node.ToString();
+        }
+
+        private static string GetNativeDeclarationSignature(BaseTypeDeclarationSyntax declaration)
+        {
+            var source = NativeDeclarationSourceProvenance.Read(declaration);
+            return source == null ? "" : string.Join("|", "NativeDeclaration",
+                NativeDeclarationSourceProvenance.GetIdentityKey(source), source.NativeName,
+                source.Header.ToUpperInvariant(), source.HeaderHash, source.Line, source.Column, source.Kind) + ":";
         }
 
         private void AddNode(Architecture arch, SyntaxNode node)
