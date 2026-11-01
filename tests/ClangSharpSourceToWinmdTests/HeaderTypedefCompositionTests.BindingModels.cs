@@ -84,6 +84,45 @@ public class NativeTypeNameAttribute : global::System.Attribute {
             Assert.AreNotSame(model, incoming);
             Assert.AreSame(incoming, get.Invoke(changed, new object[] { tree }));
             Assert.ThrowsException<TargetInvocationException>(() => get.Invoke(original, new object[] { added }));
+
+            using var relocated = new Fixture("x64");
+            relocated.Write("autotypes.cs", "");
+            string header = Path.Combine(relocated.DirectoryPath, "native-record.h");
+            File.WriteAllText(header, "struct NODE { int Value; };\n");
+            var record = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
+                "public partial struct NODE { public int Value; }")!;
+            var source = new NativeRecordSource("c:@S@NODE", "NODE", header,
+                NativeConstantGroupProvenance.HashFile(header), 1, 8, "NODE", "Original", true, 4, 4)
+            { SourceArchitecture = Architecture.X64 };
+            record = NativeRecordSourceProvenance.Attach(record, source);
+            relocated.Write("Bindings.cs", $"namespace Original {{\n{record.ToFullString()}\n}}");
+            relocated.Write("Foreign.manual.cs",
+                "namespace Foreign { public struct NODE { public short Value; } }");
+            relocated.Write("Bindings.header-types.cs", @"
+using Windows.Win32.Foundation.Metadata;
+namespace Original {
+    [NativeTypedef] public unsafe partial struct POINTER {
+        public global::Original.NODE* Value;
+    }
+    public unsafe partial struct Consumer {
+        public global::Original.NODE* Value;
+        public global::Foreign.NODE* Foreign;
+    }
+}");
+            var routed = relocated.Compile(requiredNamespaces: new() { ["NODE"] = "Support" });
+            AssertDeclarationCompilation(routed);
+            var native = routed.CSharpCompilation.GetTypeByMetadataName("Support.NODE")!;
+            Assert.IsNull(routed.CSharpCompilation.GetTypeByMetadataName("Original.NODE"));
+            var pointer = routed.CSharpCompilation.GetTypeByMetadataName("Original.POINTER")!;
+            var consumer = routed.CSharpCompilation.GetTypeByMetadataName("Original.Consumer")!;
+            foreach (var owner in new[] { pointer, consumer })
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(native,
+                    ((IPointerTypeSymbol)owner.GetMembers("Value").OfType<IFieldSymbol>().Single().Type).PointedAtType));
+            Assert.AreEqual("Foreign.NODE",
+                ((IPointerTypeSymbol)consumer.GetMembers("Foreign").OfType<IFieldSymbol>().Single().Type)
+                    .PointedAtType.ToDisplayString());
+            Assert.AreEqual(source, NativeRecordSourceProvenance.Read(
+                (StructDeclarationSyntax)native.DeclaringSyntaxReferences.Single().GetSyntax()));
         }
 
         [TestMethod]

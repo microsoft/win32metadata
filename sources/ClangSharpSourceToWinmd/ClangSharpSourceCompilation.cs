@@ -419,7 +419,8 @@ namespace ClangSharpSourceToWinmd
                         .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)).ToArray()), tree.Options);
             }).ToArray();
             var nativeReferenceCompilations = new Dictionary<Architecture, CSharpCompilation>();
-            if (nativeEnumTypes.Count != 0 || namespaceTrees.Any(tree =>
+            if (nativeEnumTypes.Count != 0 ||
+                recordNamespaces.Any(route => route.Key.Namespace != route.Value) || namespaceTrees.Any(tree =>
                 tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
                     .Any(record => NativeDeclarationSourceProvenance.Read(record) != null)))
             {
