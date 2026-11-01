@@ -20,5 +20,6 @@
     <ProjectReference Include="..\..\sources\WinmdUtils\WinmdUtils.csproj" />
     <None Include="..\..\generation\WinSDK\manual\Shell.cs"
           Link="assets\Shell.manual.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="assets\CommonNativeDeclarations.original9f.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

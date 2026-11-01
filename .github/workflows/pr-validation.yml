@@ -129,7 +129,11 @@ jobs:
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.UnprovenEmptyRecordsRemainUnresolvedInsteadOfBeingCollapsedBySpelling' = 1
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.LegacyEmptyPlaceholdersRequireTheirOwnQualifiedDefinition' = 1
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SameSpelledIncompleteRecordsDoNotAcquireACommonOwner' = 2
-            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.CommonNativeObservationRequiresAllDirectArchitectureProviders' = 2
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.CommonNativeObservationRequiresAllDirectArchitectureProviders' = 6
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonOriginalSdkDeclarationsPreserveNativeContracts' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonDeclarationsRequireTheirActualProducingTarget' = 3
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonForwardsRequireCompleteProviderCoverage' = 6
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonForwardDoesNotAcceptManagedSpellingAsDefinition' = 1
           }
           $provenanceSelection = [ordered]@{
             'FullyQualifiedName~MetadataUtils.Tests.NativeDeclarationSourceProvenanceTests.RoundTripsOnlyDeclarationIdentity' = 4
