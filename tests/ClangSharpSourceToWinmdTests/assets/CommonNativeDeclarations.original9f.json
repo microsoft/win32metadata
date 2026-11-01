@@ -1,5 +1,17 @@
 {
   "Version": 1,
+  "LegacyManualSources": [
+    {
+      "Path": "GdiPlus.manual.cs",
+      "Run": 41333182677,
+      "ArchiveId": 13095433548,
+      "ArchiveSha256": "E20F58714C266B77719A290507208CA6B4A83CF1D6C73337C87D62E5DCC31813",
+      "ArchiveEntry": "generated/GdiPlus.manual.cs",
+      "Bytes": 942,
+      "Sha256": "652EF03D7C197E05E21FF2E1BB67BB16BD4A4824D30E41761D41CD935CA7FD4E",
+      "Content": "using System;\r\nusing System.Runtime.InteropServices;\r\nusing Windows.Win32.Foundation.Metadata;\r\n\r\nnamespace Windows.Win32.Graphics.GdiPlus\r\n{\r\n    public struct GpGraphics;\r\n    public struct GpBrush;\r\n    public struct GpTexture;\r\n    public struct GpSolidFill;\r\n    public struct GpLineGradient;\r\n    public struct GpPathGradient;\r\n    public struct GpHatch;\r\n    public struct GpPen;\r\n    public struct GpCustomLineCap;\r\n    public struct GpAdjustableArrowCap;\r\n    public struct GpImage;\r\n    public struct GpBitmap;\r\n    public struct GpMetafile;\r\n    public struct GpImageAttributes;\r\n    public struct GpPath;\r\n    public struct GpRegion;\r\n    public struct GpPathIterator;\r\n    public struct GpFontFamily;\r\n    public struct GpFont;\r\n    public struct GpStringFormat;\r\n    public struct GpFontCollection;\r\n    public struct GpInstalledFontCollection;\r\n    public struct GpPrivateFontCollection;\r\n    public struct GpCachedBitmap;\r\n}\r\n"
+    }
+  ],
   "Run": 41316602747,
   "Published": "9f47605d4c502c0739e979ffbb1db058499e5a8a",
   "ActualExecuting": "8b0a751696a05a3e1596adc4ac968e72466d8cf1",

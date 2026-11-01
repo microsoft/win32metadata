@@ -301,6 +301,7 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
                         definition.Name == source.Name && definition.NativeName == source.NativeName;
                 }));
             }
+            AssertOriginalLegacyManualSourceRoles(forwards);
         }
 
         [DataTestMethod]
@@ -397,6 +398,72 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
                 BindingFlags.NonPublic | BindingFlags.Static);
             Assert.IsNotNull(method);
             return (SyntaxTree[])method!.Invoke(null, new object[] { trees, Array.Empty<MetadataReference>(), validation })!;
+        }
+
+        private static void AssertOriginalLegacyManualSourceRoles(StructDeclarationSyntax[] forwards)
+        {
+            var sourceTrees = forwards.GroupBy(record => record.SyntaxTree.FilePath).Select(group =>
+                CSharpSyntaxTree.ParseText(string.Join(Environment.NewLine, group.Select(record =>
+                    $"namespace {SyntaxUtils.GetEnclosingNamespace(record)} {{\n{record.ToFullString()}\n}}")),
+                    path: group.Key)).ToArray();
+            var originalSources = DeclarationRecords(sourceTrees).Select(record =>
+                NativeDeclarationSourceProvenance.Read(record)!).ToArray();
+            using var stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "assets", "CommonNativeDeclarations.original9f.json"));
+            using var document = JsonDocument.Parse(stream);
+            var inputs = document.RootElement.GetProperty("LegacyManualSources").EnumerateArray().ToArray();
+            Assert.AreEqual(1, inputs.Length);
+            foreach (var input in inputs)
+            {
+                string text = input.GetProperty("Content").GetString()!;
+                var bytes = Encoding.UTF8.GetBytes(text);
+                Assert.AreEqual(input.GetProperty("Bytes").GetInt32(), bytes.Length);
+                Assert.AreEqual(input.GetProperty("Sha256").GetString(), Convert.ToHexString(SHA256.HashData(bytes)));
+                Assert.AreEqual(41333182677L, input.GetProperty("Run").GetInt64());
+                string directory = Path.GetDirectoryName(sourceTrees[0].FilePath)!;
+                string name = input.GetProperty("Path").GetString()!;
+                var original = CSharpSyntaxTree.ParseText(text, path: Path.Combine(directory, name));
+                var cleaning = new GenerationValidation();
+                var cleaned = MetadataSyntaxTreeCleaner.CleanSyntaxTree(original, new(), new(), new(),
+                    new(), new(), new(), new(), new(),
+                    Path.Combine(directory, Path.GetFileNameWithoutExtension(name) + ".modified.cs"),
+                    validation: cleaning);
+                Assert.AreEqual(0, cleaning.BlockingErrorCount, cleaning.Format());
+                var manualDeclarations = DeclarationRecords(new[] { cleaned }).ToArray();
+                Assert.AreEqual(24, manualDeclarations.Length);
+                Assert.IsTrue(manualDeclarations.All(record => record.Modifiers.Any(SyntaxKind.PartialKeyword) &&
+                    NativeDeclarationSourceProvenance.Read(record) == null &&
+                    NativeRecordSourceProvenance.Read(record) == null));
+                foreach (string fileName in new[] { name, Path.GetFileName(cleaned.FilePath),
+                    Path.GetFileName(cleaned.FilePath).ToUpperInvariant() })
+                {
+                    var manual = cleaned.WithFilePath(Path.Combine(directory, fileName));
+                    var validation = new GenerationValidation();
+                    var composed = ComposeRepeatedDeclarations(sourceTrees.Append(manual).ToArray(), validation);
+                    Assert.AreEqual(0, validation.BlockingErrorCount, validation.Format());
+                    Assert.AreEqual(manual.GetRoot().ToFullString(),
+                        composed.SyntaxTrees.Single(tree => tree.FilePath == manual.FilePath).GetRoot().ToFullString());
+                    CollectionAssert.AreEquivalent(originalSources, DeclarationRecords(composed.SyntaxTrees)
+                        .Select(NativeDeclarationSourceProvenance.Read).Where(source => source != null).ToArray());
+
+                    var unproved = manual.WithFilePath(Path.Combine(directory, "Ordinary.generated.modified.cs"));
+                    var rejected = new GenerationValidation();
+                    ComposeRepeatedDeclarations(sourceTrees.Append(unproved).ToArray(), rejected);
+                    Assert.AreEqual(1, rejected.BlockingErrorCount, rejected.Format());
+                    Assert.IsTrue(rejected.Errors.All(error => error.Code == "CSSW005" &&
+                        error.Stage == "emitter.record-composition" &&
+                        error.Message.Contains("Conflicting incomplete native declarations", StringComparison.Ordinal)));
+                }
+            }
+        }
+
+        private static CSharpCompilation ComposeRepeatedDeclarations(SyntaxTree[] trees, GenerationValidation validation)
+        {
+            var method = typeof(ClangSharpSourceCompilation).GetMethod("MergeRepeatedStructs",
+                BindingFlags.NonPublic | BindingFlags.Static);
+            Assert.IsNotNull(method);
+            var compilation = CSharpCompilation.Create("OriginalNativeDeclarationPolicy", trees,
+                options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+            return (CSharpCompilation)method!.Invoke(null, new object[] { compilation, validation })!;
         }
 
         private static Fixture DeclarationFixture(string architecture)
