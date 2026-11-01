@@ -40,6 +40,90 @@ namespace Win32MetadataScraperTests
                 "DXGI_USAGE_DISCARD_ON_PRESENT, DXGI_USAGE_UNORDERED_ACCESS);", patch);
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", 4, 4)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", 16, 16)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", 16, 16)]
+        public void BackupSListAliasesRetainNativeRecordProviders(
+            string architecture, string target, int size, int alignment)
+        {
+            using var headers = new PatchedHeaders(@"um\winnt.h");
+            string original = headers.ReadOriginal(@"um\winnt.h").Replace("\r\n", "\n");
+            string patched = headers.Read(@"um\winnt.h").Replace("\r\n", "\n");
+            const string singleStart = "typedef struct _SINGLE_LIST_ENTRY {";
+            const string singleEnd = "\n// end_ntoshvp";
+            const string slistStart = "#if defined(_WIN64)\n\n//\n// The type SINGLE_LIST_ENTRY";
+            const string slistEnd = "\n#if defined(_AMD64_)";
+            string single = Between(original, singleStart, singleEnd);
+            string slist = Between(original, slistStart, slistEnd);
+            Assert.Equal(single, Between(patched, singleStart, singleEnd));
+            Assert.Equal(slist, Between(patched, slistStart, slistEnd));
+            Assert.Contains("typedef struct _SINGLE_LIST_ENTRY SLIST_ENTRY, *PSLIST_ENTRY;", slist);
+
+            string sdk = Path.Combine(RepositoryRoot(), "generation", "WinSDK");
+            string settings = File.ReadAllText(Path.Combine(sdk, "Partitions", "Backup", "settings.rsp"))
+                .Replace("\r\n", "\n");
+            string exclusions = Between(settings, "--exclude\n", "--traverse\n");
+            string[] excludedNames = exclusions.Split('\n', StringSplitOptions.RemoveEmptyEntries);
+            Assert.DoesNotContain("_SINGLE_LIST_ENTRY", excludedNames);
+            Assert.Contains("_LIST_ENTRY", excludedNames);
+            string pointerMapping = Assert.Single(File.ReadAllLines(Path.Combine(sdk, "scraper.settings.rsp")),
+                line => line.StartsWith("PSLIST_ENTRY=", StringComparison.Ordinal));
+            Assert.Equal("PSLIST_ENTRY=SLIST_ENTRY*", pointerMapping);
+            var requiredNamespaces = File.ReadAllLines(Path.Combine(sdk, "requiredNamespacesForNames.rsp"))
+                .Where(line => line.StartsWith("SLIST_ENTRY=", StringComparison.Ordinal) ||
+                    line.StartsWith("SINGLE_LIST_ENTRY=", StringComparison.Ordinal))
+                .Select(line => line.Split('=', 2)).ToDictionary(parts => parts[0], parts => parts[1]);
+            const string canonicalNamespace = "Windows.Win32.System.Kernel";
+            Assert.Equal(canonicalNamespace, requiredNamespaces["SLIST_ENTRY"]);
+            Assert.Equal(canonicalNamespace, requiredNamespaces["SINGLE_LIST_ENTRY"]);
+
+            const string declarations = @"
+#ifdef __cplusplus
+#ifdef _WIN64
+static_assert(!__is_same(SLIST_ENTRY, SINGLE_LIST_ENTRY), ""64-bit SLIST entries are a distinct native record."");
+#else
+static_assert(__is_same(SLIST_ENTRY, SINGLE_LIST_ENTRY), ""x86 SLIST entries retain their native alias identity."");
+#endif
+extern ""C"" {
+#endif
+PSLIST_ENTRY __stdcall ReadSListAlias(PSLIST_ENTRY entry);
+SLIST_ENTRY* __stdcall ReadSListRecord(SLIST_ENTRY* entry);
+#ifdef __cplusplus
+}
+#endif
+";
+            const string projectionNamespace = "Windows.Win32.System.SystemServices";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                "#define DECLSPEC_ALIGN(n) __declspec(align(n))\n" + single + "\n" + slist + declarations,
+                extraSettings: "--config\nexclude-empty-records\n" + exclusions + "--remap\n" + pointerMapping + "\n",
+                namespaceName: projectionNamespace);
+            fixture.AssertSuccess();
+            string nativeRecord = architecture == "x86" ? "_SINGLE_LIST_ENTRY" : "_SLIST_ENTRY";
+            foreach (string language in new[] { "c", "c++" })
+                Assert.Contains($"record {nativeRecord} {size} {alignment}",
+                    NativeSurface(fixture, target, metadataEnabled: false, language));
+
+            using var image = Emit(fixture.DirectoryPath, architecture, requiredNamespaces: requiredNamespaces);
+            var reader = image.Reader;
+            var decoder = new SignatureNames(qualifiedNames: true);
+            string projectedPointer = canonicalNamespace + ".SLIST_ENTRY*";
+            var record = FindType(reader, "SLIST_ENTRY");
+            Assert.Equal(canonicalNamespace, reader.GetString(record.Namespace));
+            var next = reader.GetFieldDefinition(Assert.Single(record.GetFields()));
+            Assert.Equal("Next", reader.GetString(next.Name));
+            Assert.Equal(projectedPointer, next.DecodeSignature(decoder, null));
+            Assert.Contains(next.GetOffset(), new[] { -1, 0 });
+            Assert.Equal(size, Math.Max(architecture == "x86" ? 4 : 8, record.GetLayout().Size));
+            foreach (string name in new[] { "ReadSListAlias", "ReadSListRecord" })
+            {
+                var signature = FindMethod(reader, "Apis", name).DecodeSignature(decoder, null);
+                Assert.Equal(projectedPointer, signature.ReturnType);
+                Assert.Equal(projectedPointer, Assert.Single(signature.ParameterTypes));
+            }
+            AssertMetadataClosure(reader);
+        }
+
         [Fact]
         public void ActiveFileAndSocketDeclarationsPreserveNativeResults()
         {
@@ -350,11 +434,11 @@ ABI_CHECK(__is_same(decltype(PROCESS_BASIC_INFORMATION::InheritedFromUniqueProce
             private readonly string root = Path.Combine(Path.GetTempPath(), "header-compatibility-" + Guid.NewGuid().ToString("N"));
             private readonly string sdk = Path.Combine(RepositoryRoot(), "generation", "WinSDK");
 
-            internal PatchedHeaders()
+            internal PatchedHeaders(params string[] headers)
             {
                 using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(this.sdk, "patches", "SdkHeaders.json")));
-                foreach (string header in new[] { @"shared\minwindef.h", @"um\winternl.h", @"um\Iads.h",
-                    @"um\alljoyn_c\AboutDataListener.h", @"um\dbghelp.h" })
+                foreach (string header in headers.Length != 0 ? headers : new[] { @"shared\minwindef.h", @"um\winternl.h",
+                    @"um\Iads.h", @"um\alljoyn_c\AboutDataListener.h", @"um\dbghelp.h" })
                 {
                     string source = Path.Combine(this.sdk, "RecompiledIdlHeaders", header);
                     var entry = Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray(),

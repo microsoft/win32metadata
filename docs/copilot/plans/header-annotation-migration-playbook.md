@@ -195,6 +195,13 @@ Configured intrinsic integral projections retain their native width and
 signedness; application aliases over them keep their own nominal identity.
 Complete record pointees, including anonymous inline records, retain their actual
 generated managed record identity and fields.
+Partition exclusions must leave complete providers available for native aliases
+used by emitted signatures. In `winnt.h`, x86 `SLIST_ENTRY` aliases
+`_SINGLE_LIST_ENTRY`; x64 and arm64 use a separate 16-byte-aligned `_SLIST_ENTRY`.
+Backup must not exclude `_SINGLE_LIST_ENTRY` and leave its x86 alias without a
+provider. Preserve the native pointer mapping and coalesce repeated providers
+using proven declaration identity and binding equivalence. Do not copy a 64-bit
+body into the x86 projection or widen architecture annotations.
 Every data-pointer level must match the target's ordinary pointer width;
 non-default `__ptr32`/`__ptr64` widths, even beneath ordinary outer pointers or
 typedefs, fail with WMA001 before output. Do not strip those qualifiers or
