@@ -316,6 +316,11 @@ argument. Explicit StructLayout sizes are also preserved; conflicting native
 sizes or a different explicit size are blocking. Incomplete declarations and
 unproved same-name types do not inherit a native layout.
 
+The production integrity suite checks each architecture's `SLIST_ENTRY` in the
+emitted SDK image. Its 64-bit rows read the physical ClassLayout size and serialized
+Alignment payload. The x86 row checks effective size without asserting a raw
+layout size or Alignment payload.
+
 Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that
 owner together with their uses and constant ownership. Composition preserves
