@@ -289,6 +289,9 @@ remapping do not establish that match.
 Relocated complete native records also use the original per-architecture semantic
 models when no logical enum or incomplete declaration is present. Explicitly
 qualified consumers follow the same source-bound owner.
+Definitions and textual qualification use that exact native route for names with
+source-proven owners. A same-named declaration outside those routes retains its
+own namespace instead of inheriting the short-name relocation.
 
 Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that

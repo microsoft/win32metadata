@@ -32,6 +32,9 @@ namespace ClangSharpSourceToWinmd
                 throw new System.ArgumentException("Source-bound enum references require original compiler bindings.",
                     nameof(nativeReferenceModels));
 
+            var nativeNames = nativeRecordNamespaces?.Keys.Select(key => key.Name)
+                .ToHashSet(System.StringComparer.Ordinal);
+
             if (HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
             {
                 var root = tree.GetRoot();
@@ -184,7 +187,7 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
-            var nameFixer = new NameFixer(namesToNamespaces, nativeRecordNamespaces);
+            var nameFixer = new NameFixer(namesToNamespaces, nativeRecordNamespaces, nativeNames);
             var newTree = nameFixer.FixNames(tree);
             return CSharpSyntaxTree.ParseText(newTree.GetText(), null, tree.FilePath);
 
@@ -193,9 +196,23 @@ namespace ClangSharpSourceToWinmd
                 if (name.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, System.StringComparison.Ordinal) &&
                     namesToNamespaces.TryGetValue(name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length], out owner))
                     return true;
-                return nativeRecordNamespaces?.TryGetValue((ns, name), out owner) == true ||
-                    namesToNamespaces.TryGetValue(name, out owner);
+                return TryResolveNamespace(ns, name, namesToNamespaces, nativeRecordNamespaces, nativeNames, out owner);
             }
+        }
+
+        private static bool TryResolveNamespace(string ns, string name,
+            IReadOnlyDictionary<string, string> namesToNamespaces,
+            IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces,
+            ISet<string> nativeNames, out string owner)
+        {
+            if (nativeRecordNamespaces?.TryGetValue((ns, name), out owner) == true)
+                return true;
+            if (nativeNames?.Contains(name) == true)
+            {
+                owner = null;
+                return false;
+            }
+            return namesToNamespaces.TryGetValue(name, out owner);
         }
 
         private static TypeSyntax QualifiedAlias(string ns, string name) =>
@@ -343,12 +360,15 @@ namespace ClangSharpSourceToWinmd
         {
             Dictionary<string, string> namesToNamespaces;
             private readonly IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces;
+            private readonly ISet<string> nativeNames;
 
             public NameFixer(Dictionary<string, string> namesToNamespaces,
-                IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces)
+                IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces,
+                ISet<string> nativeNames)
             {
                 this.namesToNamespaces = namesToNamespaces;
                 this.nativeRecordNamespaces = nativeRecordNamespaces;
+                this.nativeNames = nativeNames;
             }
 
             public SyntaxTree FixNames(SyntaxTree tree)
@@ -439,8 +459,8 @@ namespace ClangSharpSourceToWinmd
                 private SyntaxNode VisitDeclarationSyntax(MemberDeclarationSyntax node, string name)
                 {
                     string currentNamespace = SyntaxUtils.GetEnclosingNamespace(node);
-                    if (this.parent.nativeRecordNamespaces?.TryGetValue((currentNamespace, name), out var requiredNamespace) == true ||
-                        this.parent.namesToNamespaces.TryGetValue(name, out requiredNamespace))
+                    if (TryResolveNamespace(currentNamespace, name, this.parent.namesToNamespaces,
+                        this.parent.nativeRecordNamespaces, this.parent.nativeNames, out var requiredNamespace))
                     {
                         if (requiredNamespace != currentNamespace)
                         {
