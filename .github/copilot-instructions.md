@@ -74,9 +74,13 @@ actual `HeaderTypedefCompositionTests` method families for logical groups and
 incomplete declarations. `NativeDeclarationSourceProvenanceTests` runs separately
 in `MetadataUtils.Tests`. `FastManaged.trx` and `FastProvenance.trx` are checked
 separately and uploaded in `fast_managed_tests` even on failure. The four native
-producer rows remain outside this managed lane; the complete unfiltered
-`DoTests.ps1` results are separate, and the full SDK job does not depend on the
-early job.
+producer rows remain outside this managed lane and run in a separate changes-only
+Windows job using normal filtered `dotnet test` on `Win32MetadataScraperTests`.
+Its three logical-group architecture rows and one forward-record row are checked
+in `FastNativeProducer.trx`, uploaded in `fast_native_producer_tests` even on
+failure. This job uses tracked fixture/header inputs rather than full SDK
+artifacts. The complete unfiltered `DoTests.ps1` results remain separate, and the
+full SDK job does not depend on either early job.
 
 ## Key Conventions
 

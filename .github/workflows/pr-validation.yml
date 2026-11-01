@@ -231,6 +231,107 @@ jobs:
           path: bin/logs/tests/fast-managed/*.trx
           retention-days: 7
 
+  native-producer-regressions:
+    name: Fast native producer regressions
+    needs: [changes]
+    if: needs.changes.outputs.build_needed == 'true'
+    runs-on: windows-2022
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        id: checkout
+        with:
+          lfs: true
+          fetch-depth: 0
+
+      - uses: actions/setup-dotnet@67a3573c9a986a3f9c594539f4ab511d57bb3ce9 # v4.3.1
+        with:
+          global-json-file: global.json
+
+      - name: Run native declaration producer regressions
+        shell: pwsh
+        run: |
+          $PSNativeCommandUseErrorActionPreference = $false
+          $started = Get-Date
+          dotnet test .\tests\Win32MetadataScraperTests -c Release `
+            --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests" `
+            --logger "trx;LogFileName=FastNativeProducer.trx" `
+            --results-directory .\bin\logs\tests\fast-native-producer
+          $testExitCode = $LASTEXITCODE
+          Write-Host ("Native producer restore/build/test: {0:N2} seconds; exit code {1}." -f
+            ((Get-Date) - $started).TotalSeconds, $testExitCode)
+
+          $trxPath = '.\bin\logs\tests\fast-native-producer\FastNativeProducer.trx'
+          if (!(Test-Path -LiteralPath $trxPath -PathType Leaf)) {
+            throw "Native producer tests produced no TRX (dotnet exit code $testExitCode)."
+          }
+          [xml]$trx = Get-Content -LiteralPath $trxPath -Raw
+          $ns = [System.Xml.XmlNamespaceManager]::new($trx.NameTable)
+          $ns.AddNamespace('t', 'http://microsoft.com/schemas/VisualStudio/TeamTest/2010')
+          $results = @($trx.SelectNodes('/t:TestRun/t:Results/t:UnitTestResult', $ns))
+          if ($results.Count -ne 4) {
+            throw "Incomplete native producer selection: $($results.Count) rows; expected exactly four."
+          }
+          $definitions = @{}
+          foreach ($definition in $trx.SelectNodes('/t:TestRun/t:TestDefinitions/t:UnitTest', $ns)) {
+            $definitions[$definition.GetAttribute('id')] = $definition
+          }
+          $rows = @(
+            foreach ($result in $results) {
+              $definition = $definitions[$result.GetAttribute('testId')]
+              if ($null -eq $definition) {
+                throw "Native producer definition is missing for '$($result.GetAttribute('testName'))'."
+              }
+              $method = $definition.SelectSingleNode('t:TestMethod', $ns)
+              if ($null -eq $method) {
+                throw "Native producer method is missing for '$($result.GetAttribute('testName'))'."
+              }
+              @{
+                Name = $result.GetAttribute('testName')
+                QualifiedName = ($method.GetAttribute('className') -split ',')[0] + '.' +
+                  ($method.GetAttribute('name') -split '\(', 2)[0]
+              }
+            }
+          )
+          $class = 'Win32MetadataScraperTests.NativeDeclarationTransportTests'
+          $logicalRows = @($rows | Where-Object {
+            $_.QualifiedName -ceq "$class.LogicalGroupProducerTransportsTheActualNativeDeclaration"
+          })
+          $forwardRows = @($rows | Where-Object {
+            $_.QualifiedName -ceq "$class.IncompleteRecordProducerTransportsDeclarationIdentityWithoutLayout"
+          })
+          if ($logicalRows.Count -ne 3 -or $forwardRows.Count -ne 1) {
+            throw 'Native producer results must contain three logical-group rows and one forward-record row.'
+          }
+          $targets = [ordered]@{
+            x86 = 'i686-pc-windows-msvc'
+            x64 = 'x86_64-pc-windows-msvc'
+            arm64 = 'aarch64-pc-windows-msvc'
+          }
+          foreach ($architecture in $targets.Keys) {
+            $token = '(?<![A-Za-z0-9_])' + [regex]::Escape($architecture) + '(?![A-Za-z0-9_])'
+            $matching = @($logicalRows | Where-Object {
+              $_.Name -cmatch $token -and $_.Name.Contains($targets[$architecture])
+            })
+            if ($matching.Count -ne 1) {
+              throw "Expected exactly one native logical-group producer row for $architecture/$($targets[$architecture])."
+            }
+          }
+          Write-Host 'Verified all three native logical-group architecture rows and the forward-record row.'
+          if ($testExitCode -ne 0) { exit $testExitCode }
+          if (@($results | Where-Object { $_.GetAttribute('outcome') -cne 'Passed' }).Count -ne 0) {
+            throw 'Every native producer row must pass; skipped or unexecuted rows do not qualify.'
+          }
+
+      - name: Upload native producer test results
+        if: always() && steps.checkout.outcome == 'success'
+        uses: ./.github/actions/upload-artifact-with-retry
+        with:
+          name: fast_native_producer_tests
+          path: bin/logs/tests/fast-native-producer/FastNativeProducer.trx
+          retention-days: 7
+
   # ──────────────────────────────────────────────────────────────────────
   # Stage 1: Parallel header scraping (one job per architecture)
   # ──────────────────────────────────────────────────────────────────────

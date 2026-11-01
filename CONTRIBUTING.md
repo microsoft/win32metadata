@@ -297,9 +297,19 @@ controls, and nineteen logical-group/incomplete-declaration composition rows.
 The separate metadata utility selection has thirteen declaration-provenance rows.
 The workflow checks each inventory in its own `FastManaged.trx` or
 `FastProvenance.trx`; both are uploaded in `fast_managed_tests` even when tests fail.
-The four native producer regressions remain in the complete scraper suite.
-The complete SDK build and `DoTests.ps1` remain unfiltered and do not depend on
-this early job.
+The four native producer regressions also run in a separate early Windows job
+that depends only on change detection. It uses the normal scraper subprocess
+fixtures and tracked repository headers, without generated SDK artifacts:
+
+```powershell
+dotnet test .\tests\Win32MetadataScraperTests -c Release --filter "FullyQualifiedName~Win32MetadataScraperTests.NativeDeclarationTransportTests"
+```
+
+This job verifies the three logical-group architecture rows and one forward-record
+row in `FastNativeProducer.trx`, uploaded separately in
+`fast_native_producer_tests` even on failure. The complete SDK build and
+`DoTests.ps1` remain unfiltered, retain these producer tests, and do not depend
+on either early job.
 
 The coverage-auditor suite uses Python's standard library:
 
