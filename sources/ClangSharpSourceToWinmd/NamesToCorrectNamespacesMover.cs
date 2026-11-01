@@ -20,20 +20,20 @@ namespace ClangSharpSourceToWinmd
                 return tree;
             }
 
+            var nativeNames = nativeRecordNamespaces?.Keys.Select(key => key.Name)
+                .ToHashSet(System.StringComparer.Ordinal);
+
             if (nativeReferenceModels?.Count > 0)
             {
                 if (nativeReferenceModels.Any(model => model.SyntaxTree != tree))
                     throw new System.ArgumentException("Native references require models of the original source tree.",
                         nameof(nativeReferenceModels));
                 tree = tree.WithRootAndOptions(new NativeReferenceRewriter(
-                    nativeRecordNamespaces, nativeEnumTypes, nativeReferenceModels).Visit(tree.GetRoot()), tree.Options);
+                    nativeRecordNamespaces, nativeEnumTypes, nativeReferenceModels, nativeNames).Visit(tree.GetRoot()), tree.Options);
             }
             else if (nativeEnumTypes?.Count > 0)
                 throw new System.ArgumentException("Source-bound enum references require original compiler bindings.",
                     nameof(nativeReferenceModels));
-
-            var nativeNames = nativeRecordNamespaces?.Keys.Select(key => key.Name)
-                .ToHashSet(System.StringComparer.Ordinal);
 
             if (HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
             {
@@ -241,15 +241,18 @@ namespace ClangSharpSourceToWinmd
             private readonly IReadOnlyDictionary<(string Namespace, string Name), string> routes;
             private readonly ISet<(string Namespace, string Name)> enums;
             private readonly IReadOnlyList<SemanticModel> models;
+            private readonly ISet<string> candidateNames;
 
             internal NativeReferenceRewriter(
                 IReadOnlyDictionary<(string Namespace, string Name), string> routes,
                 ISet<(string Namespace, string Name)> enums,
-                IReadOnlyList<SemanticModel> models)
+                IReadOnlyList<SemanticModel> models,
+                ISet<string> candidateNames)
             {
                 this.routes = routes;
                 this.enums = enums;
                 this.models = models;
+                this.candidateNames = candidateNames;
             }
 
             public override SyntaxNode VisitQualifiedName(QualifiedNameSyntax node) =>
@@ -264,8 +267,9 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitMemberAccessExpression(MemberAccessExpressionSyntax node)
             {
-                if (node.Expression is not IdentifierNameSyntax identifier ||
-                    !models.Any(model => model.GetAliasInfo(identifier) != null))
+                if (CouldReferenceRoutedType(node.Expression) &&
+                    (node.Expression is not IdentifierNameSyntax identifier ||
+                        !models.Any(model => model.GetAliasInfo(identifier) != null)))
                 {
                     if (TryTypeRoute(node.Expression, out string name))
                         return node.WithExpression(SyntaxFactory.ParseExpression(name).WithTriviaFrom(node.Expression));
@@ -275,8 +279,8 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitIdentifierName(IdentifierNameSyntax node)
             {
-                if (!PreservesHandleStorage(node) && !models.Any(model => model.GetAliasInfo(node) != null) &&
-                    TryTypeRoute(node, out string name))
+                if (!PreservesHandleStorage(node) && CouldReferenceRoutedType(node) &&
+                    !models.Any(model => model.GetAliasInfo(node) != null) && TryTypeRoute(node, out string name))
                     return SyntaxFactory.ParseName(name).WithTriviaFrom(node);
                 return base.VisitIdentifierName(node);
             }
@@ -316,9 +320,25 @@ namespace ClangSharpSourceToWinmd
 
             private bool TryTypeRoute(SyntaxNode node, out string replacement)
             {
+                replacement = null;
+                if (!CouldReferenceRoutedType(node))
+                    return false;
                 replacement = ConsistentRoute(models.Select(model =>
                     GetTypeRoute(model.GetSymbolInfo(node).Symbol as INamedTypeSymbol, model)).ToArray(), node);
                 return replacement != null;
+            }
+
+            private bool CouldReferenceRoutedType(SyntaxNode node)
+            {
+                string name = node switch
+                {
+                    IdentifierNameSyntax identifier => identifier.Identifier.ValueText,
+                    QualifiedNameSyntax { Right: IdentifierNameSyntax identifier } => identifier.Identifier.ValueText,
+                    AliasQualifiedNameSyntax { Name: IdentifierNameSyntax identifier } => identifier.Identifier.ValueText,
+                    MemberAccessExpressionSyntax { Name: IdentifierNameSyntax identifier } => identifier.Identifier.ValueText,
+                    _ => null,
+                };
+                return name != null && candidateNames?.Contains(name) == true;
             }
 
             private string GetTypeRoute(INamedTypeSymbol type, SemanticModel model)

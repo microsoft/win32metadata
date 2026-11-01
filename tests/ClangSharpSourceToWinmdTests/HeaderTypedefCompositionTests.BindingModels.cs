@@ -114,6 +114,9 @@ namespace Foreign {
 }");
             relocated.Write("Bindings.header-types.cs", @"
 using Windows.Win32.Foundation.Metadata;
+using NativeNodeAlias = global::Original.NODE;
+using NativeNamespace = global::Original;
+using ForeignNodeAlias = global::Foreign.NODE;
 namespace Original {
     [NativeTypedef] public unsafe partial struct POINTER {
         public global::Original.NODE* Value;
@@ -121,6 +124,11 @@ namespace Original {
     public unsafe partial struct Consumer {
         public global::Original.NODE* Value;
         public global::Foreign.NODE* Foreign;
+        public NativeNodeAlias* AliasedValue;
+        public NativeNamespace.NODE* NamespaceValue;
+        public ForeignNodeAlias* ForeignAliasedValue;
+        public global::Foreign.EXPLICIT_SIZE* ExplicitValue;
+        public global::System.Int32 UnrelatedValue;
     }
 }");
             var routed = relocated.Compile(requiredNamespaces: new() { ["NODE"] = "Support" });
@@ -135,6 +143,17 @@ namespace Original {
             Assert.AreEqual("Foreign.NODE",
                 ((IPointerTypeSymbol)consumer.GetMembers("Foreign").OfType<IFieldSymbol>().Single().Type)
                     .PointedAtType.ToDisplayString());
+            foreach (string field in new[] { "AliasedValue", "NamespaceValue" })
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(native,
+                    ((IPointerTypeSymbol)consumer.GetMembers(field).OfType<IFieldSymbol>().Single().Type).PointedAtType));
+            Assert.AreEqual("Foreign.NODE",
+                ((IPointerTypeSymbol)consumer.GetMembers("ForeignAliasedValue").OfType<IFieldSymbol>().Single().Type)
+                    .PointedAtType.ToDisplayString());
+            Assert.AreEqual("Foreign.EXPLICIT_SIZE",
+                ((IPointerTypeSymbol)consumer.GetMembers("ExplicitValue").OfType<IFieldSymbol>().Single().Type)
+                    .PointedAtType.ToDisplayString());
+            Assert.AreEqual(SpecialType.System_Int32,
+                consumer.GetMembers("UnrelatedValue").OfType<IFieldSymbol>().Single().Type.SpecialType);
             Assert.AreEqual(source, NativeRecordSourceProvenance.Read(
                 (StructDeclarationSyntax)native.DeclaringSyntaxReferences.Single().GetSyntax()));
             string output = Path.Combine(relocated.DirectoryPath, "NativeRecordSize.winmd");
