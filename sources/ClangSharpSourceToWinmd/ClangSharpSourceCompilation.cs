@@ -148,6 +148,39 @@ namespace ClangSharpSourceToWinmd
             return Path.GetFileName(fileName).Replace(".modified.cs", string.Empty);
         }
 
+        private static HashSet<string> SingleCommonSourceFiles(IEnumerable<string> files)
+        {
+            var paths = files.ToHashSet(StringComparer.OrdinalIgnoreCase);
+            return paths.Where(file =>
+                string.Equals(Path.GetFileName(Path.GetDirectoryName(file)), "common", StringComparison.OrdinalIgnoreCase) &&
+                !new[] { "x86", "x64", "arm64" }.Any(architecture => paths.Contains(Path.Combine(
+                    Path.GetDirectoryName(Path.GetDirectoryName(file)), architecture, Path.GetFileName(file)))))
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+        }
+
+        private static void ValidateSingleCommonDeclarationTargets(SyntaxTree[] trees, GenerationValidation validation)
+        {
+            var commonFiles = SingleCommonSourceFiles(trees.Select(tree => tree.FilePath));
+            foreach (var tree in trees.Where(tree => commonFiles.Contains(tree.FilePath) &&
+                !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath)))
+                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
+                {
+                    try
+                    {
+                        var source = NativeDeclarationSourceProvenance.Read(declaration);
+                        if (source != null && source.SourceArchitecture != Architecture.X86)
+                            throw new InvalidDataException(
+                                $"Single-common native declaration '{source.Namespace}.{source.Name}' requires its actual x86 producing target.");
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        validation.Add(error, "CSSW005", "emitter.source-family-preflight", tree.FilePath,
+                            declaration.Identifier.ValueText);
+                    }
+                }
+        }
+
         private static void ValidateHeaderTypesFamilies(IEnumerable<string> files, GenerationValidation validation)
         {
             var paths = new HashSet<string>(files, StringComparer.OrdinalIgnoreCase);
@@ -311,7 +344,9 @@ namespace ClangSharpSourceToWinmd
                 ValidateHeaderTypesFamilies(sourceFiles, validation);
             if (preflightOnly || validation.HasBlockingErrors)
             {
-                CollectSyntaxErrors(FilesToTrees(sourceFiles));
+                var inputTrees = FilesToTrees(sourceFiles).ToArray();
+                ValidateSingleCommonDeclarationTargets(inputTrees, validation);
+                CollectSyntaxErrors(inputTrees);
                 validation.Block("emitter.source-transformation;emitter.compilation;EmitWinmd;default tests",
                     blockedBy ?? "valid source families, producer receipts, auto-type inputs and explicit references");
                 validation.WriteReport(validationReport, producerReports);
@@ -364,8 +399,11 @@ namespace ClangSharpSourceToWinmd
 
             System.Diagnostics.Stopwatch watch = System.Diagnostics.Stopwatch.StartNew();
 
+            var inputSourceTrees = FilesToTrees(modifiedFiles).ToArray();
+            ValidateSingleCommonDeclarationTargets(inputSourceTrees, validation);
+            StopIfInvalid("emitter.source-transformation", "actual producing targets for single-common declarations");
             var namespaceTrees = PrepareNativeTypedefProjectionPolicies(
-                FilesToTrees(modifiedFiles).ToArray(), sourceDirectory, objDir, validation, requiredNamespaces);
+                inputSourceTrees, sourceDirectory, objDir, validation, requiredNamespaces);
             StopIfInvalid("emitter.native-typedef-policy", "source-bound native projection policies");
             var recordNamespaces = ResolveNativeNamespaces(namespaceTrees, requiredNamespaces, apiNamesToNamespaces, validation);
             foreach (var route in ResolveNativeDeclarationNamespaces(namespaceTrees, requiredNamespaces, validation))
@@ -1134,6 +1172,17 @@ namespace ClangSharpSourceToWinmd
         private static SyntaxTree[] CoalesceCommonNativeDeclarations(SyntaxTree[] trees,
             IEnumerable<MetadataReference> references, GenerationValidation validation)
         {
+            var singleCommonFiles = SingleCommonSourceFiles(trees.Select(tree => tree.FilePath));
+            var completeProviders = trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
+                        declaration.Modifiers.Any(SyntaxKind.PartialKeyword) &&
+                        declaration.TypeParameterList == null && declaration.BaseList == null))
+                .Select(declaration => (Declaration: declaration, Source: NativeRecordSourceProvenance.Read(declaration),
+                    Architecture: GetArchitectureForFileName(declaration.SyntaxTree.FilePath)))
+                .Where(item => item.Source != null)
+                .ToLookup(item => (Namespace: SyntaxUtils.GetEnclosingNamespace(item.Declaration), item.Source.Name,
+                    Identity: NativeRecordSourceProvenance.GetIdentityKey(item.Source), item.Source.NativeName));
             var groups = trees.Where(tree => !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
                 .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
                     .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax))
@@ -1153,6 +1202,43 @@ namespace ClangSharpSourceToWinmd
                     (item.Source.SourceArchitecture ?? item.Architecture) == item.Architecture).ToArray();
                 foreach (var common in group.Where(item => item.Architecture == Architecture.None))
                 {
+                    if (singleCommonFiles.Contains(common.Declaration.SyntaxTree.FilePath) &&
+                        !group.Any(item => item.Architecture != Architecture.None))
+                    {
+                        if (common.Source.SourceArchitecture != Architecture.X86)
+                        {
+                            validation.Add(new InvalidDataException(
+                                $"Single-common native declaration '{group.Key.Namespace}.{group.Key.Name}' requires its actual x86 producing target."),
+                                "CSSW005", "emitter.declaration-composition", common.Declaration.SyntaxTree.FilePath, group.Key.Name);
+                            continue;
+                        }
+                        if (common.Source.Kind == NativeDeclarationKind.IncompleteRecord)
+                        {
+                            var definitions = completeProviders[(group.Key.Namespace, group.Key.Name, group.Key.Identity,
+                                common.Source.NativeName)].ToArray();
+                            if (definitions.Length != 0)
+                            {
+                                bool singleCommonDefinition = !definitions.Any(item => item.Architecture != Architecture.None) &&
+                                    definitions.Any(item =>
+                                    singleCommonFiles.Contains(item.Declaration.SyntaxTree.FilePath) &&
+                                    item.Source.SourceArchitecture == Architecture.X86);
+                                var coverage = definitions.Where(item => item.Architecture != Architecture.None &&
+                                    (item.Source.SourceArchitecture ?? item.Architecture) == item.Architecture)
+                                    .Aggregate(Architecture.None, (targets, item) => targets | item.Architecture);
+                                if (!singleCommonDefinition && coverage != Architecture.All)
+                                {
+                                    validation.Add(new InvalidDataException(
+                                        $"Single-common incomplete native declaration '{group.Key.Namespace}.{group.Key.Name}' requires " +
+                                        "a source-bound single-common definition or complete providers for all three architectures."),
+                                        "CSSW005", "emitter.declaration-composition", common.Declaration.SyntaxTree.FilePath, group.Key.Name);
+                                    continue;
+                                }
+                                // A forward contributes identity, never the complete definition's storage or layout.
+                                removals.Add(common.Declaration);
+                            }
+                        }
+                        continue;
+                    }
                     var providers = direct.Where(item => item.Source.HeaderHash == common.Source.HeaderHash).ToArray();
                     if (!common.Source.SourceArchitecture.HasValue ||
                         providers.Aggregate(Architecture.None, (coverage, item) => coverage | item.Architecture) != Architecture.All)

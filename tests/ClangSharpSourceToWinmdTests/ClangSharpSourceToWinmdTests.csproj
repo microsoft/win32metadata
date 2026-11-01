@@ -21,5 +21,6 @@
     <!-- Preserve the legacy syntax-recovery input independently of SDK sidecar retirement. -->
     <None Update="assets\Shell.manual.cs.txt"
           TargetPath="assets\Shell.manual.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="assets\CommonNativeDeclarations.original9f.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

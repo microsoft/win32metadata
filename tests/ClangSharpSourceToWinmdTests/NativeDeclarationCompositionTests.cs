@@ -2,8 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
 using ClangSharpSourceToWinmd;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
@@ -211,14 +215,22 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
         }
 
         [DataTestMethod]
-        [DataRow(true)]
-        [DataRow(false)]
-        public void CommonNativeObservationRequiresAllDirectArchitectureProviders(bool fullCoverage)
+        [DataRow(true, false, false)]
+        [DataRow(false, false, false)]
+        [DataRow(true, true, true)]
+        [DataRow(false, true, true)]
+        [DataRow(true, true, false)]
+        [DataRow(false, true, false)]
+        public void CommonNativeObservationRequiresAllDirectArchitectureProviders(bool fullCoverage, bool commonDirectory, bool samePartition)
         {
             using var fixture = DeclarationFixture("crossarch");
             foreach (string target in fullCoverage ? DeclarationTargets("crossarch") : new[] { "x86", "x64" })
                 WriteDeclaration(fixture, target, "Owner.cs", IncompleteProvider(fixture, target, "Owner", true));
-            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Observation.cs"),
+            string observation = commonDirectory
+                ? Path.Combine(Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName,
+                    samePartition ? "Owner.cs" : "Observation.cs")
+                : Path.Combine(fixture.DirectoryPath, "Observation.cs");
+            File.WriteAllText(observation,
                 IncompleteProvider(fixture, "x86", "Observer", false));
             if (!fullCoverage)
             {
@@ -232,6 +244,159 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             Assert.AreEqual(1, record.DeclaringSyntaxReferences.Length);
             Assert.AreEqual(0, record.GetAttributes().Count(attribute =>
                 attribute.AttributeClass?.ToDisplayString() == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute"));
+        }
+
+        [TestMethod]
+        public void SingleCommonOriginalSdkDeclarationsPreserveNativeContracts()
+        {
+            var trees = OriginalCommonNativeInputs();
+            var original = DeclarationRecords(trees).ToArray();
+            var originalForwards = original.Where(record => NativeDeclarationSourceProvenance.Read(record) != null).ToArray();
+            var originalProviders = original.Where(record => NativeRecordSourceProvenance.Read(record) != null).ToArray();
+            var originalForwardMap = originalForwards.ToDictionary(record =>
+                (record.SyntaxTree.FilePath, Source: NativeDeclarationSourceProvenance.Read(record)!));
+            Assert.AreEqual(1435, originalForwards.Length);
+            Assert.AreEqual(8, originalProviders.Length);
+            var foreign = CSharpSyntaxTree.ParseText(
+                "namespace Foreign { public struct CONTEXT { public int Value; } }",
+                path: Path.Combine(Path.GetTempPath(), "common", "Foreign.cs"));
+            var validation = new GenerationValidation();
+            var composed = CoalesceNativeDeclarations(trees.Append(foreign).ToArray(), validation);
+            Assert.AreEqual(0, validation.BlockingErrorCount, validation.Format());
+            Assert.IsTrue(composed.Contains(foreign));
+            var declarations = DeclarationRecords(composed).ToArray();
+            var forwards = declarations.Where(record => NativeDeclarationSourceProvenance.Read(record) != null).ToArray();
+            var forwardKeys = forwards.Select(record =>
+                (record.SyntaxTree.FilePath, Source: NativeDeclarationSourceProvenance.Read(record)!)).ToHashSet();
+            Assert.AreEqual(1431, forwards.Length);
+            foreach (var forward in forwards)
+            {
+                var source = NativeDeclarationSourceProvenance.Read(forward)!;
+                var originalForward = originalForwardMap[(forward.SyntaxTree.FilePath, source)];
+                Assert.AreEqual(Architecture.X86, source.SourceArchitecture);
+                Assert.AreEqual(originalForward.ToFullString(), forward.ToFullString());
+                Assert.IsNull(NativeRecordSourceProvenance.Read(forward));
+                Assert.IsNull(NativeTypedefSourceProvenance.Read(forward));
+            }
+            foreach (var provider in originalProviders)
+            {
+                var source = NativeRecordSourceProvenance.Read(provider)!;
+                var retained = declarations.Single(record => record.SyntaxTree.FilePath == provider.SyntaxTree.FilePath &&
+                    NativeRecordSourceProvenance.Read(record) == source);
+                Assert.AreEqual(provider.ToFullString(), retained.ToFullString());
+                Assert.AreEqual(source, NativeRecordSourceProvenance.Read(retained));
+            }
+            var removed = originalForwards.Where(record =>
+                !forwardKeys.Contains((record.SyntaxTree.FilePath, NativeDeclarationSourceProvenance.Read(record)!))).ToArray();
+            Assert.AreEqual(4, removed.Length);
+            Assert.AreEqual(2, removed.Count(record => !NativeDeclarationSourceProvenance.Read(record)!.TraversedHeader));
+            foreach (var forward in removed)
+            {
+                var source = NativeDeclarationSourceProvenance.Read(forward)!;
+                Assert.IsTrue(originalProviders.Any(record =>
+                {
+                    var definition = NativeRecordSourceProvenance.Read(record)!;
+                    return NativeRecordSourceProvenance.GetIdentityKey(definition) ==
+                        NativeDeclarationSourceProvenance.GetIdentityKey(source) &&
+                        definition.Name == source.Name && definition.NativeName == source.NativeName;
+                }));
+            }
+        }
+
+        [DataTestMethod]
+        [DataRow("x86", false)]
+        [DataRow("x64", true)]
+        [DataRow("arm64", true)]
+        public void SingleCommonDeclarationsRequireTheirActualProducingTarget(string architecture, bool includeArchitecture)
+        {
+            using var fixture = DeclarationFixture("crossarch");
+            string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+            File.WriteAllText(Path.Combine(common, "Owner.cs"),
+                IncompleteProvider(fixture, architecture, "Owner", true, includeArchitecture: includeArchitecture));
+            var validation = new GenerationValidation();
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(validation: validation));
+            StringAssert.Contains(error.Message, "requires its actual x86 producing target");
+            Assert.IsTrue(validation.Errors.Any(item => item.Stage == "emitter.source-family-preflight"));
+            Assert.IsTrue(validation.BlockedStages.Any(item => item.Stage == "emitter.source-transformation"));
+        }
+
+        [DataTestMethod]
+        [DataRow("x86", false)]
+        [DataRow("x64", false)]
+        [DataRow("arm64", false)]
+        [DataRow("x86", true)]
+        [DataRow("x64", true)]
+        [DataRow("arm64", true)]
+        public void SingleCommonForwardsRequireCompleteProviderCoverage(string missingTarget, bool commonObservation)
+        {
+            var inputs = OriginalCommonNativeInputs();
+            var trees = inputs.Where(tree =>
+                Path.GetFileName(Path.GetDirectoryName(tree.FilePath)) != missingTarget ||
+                Path.GetFileName(tree.FilePath) != "Debug.cs").ToArray();
+            if (commonObservation)
+            {
+                var x86 = inputs.Single(tree => Path.GetFileName(Path.GetDirectoryName(tree.FilePath)) == "x86" &&
+                    Path.GetFileName(tree.FilePath) == "Debug.cs");
+                var observed = CSharpSyntaxTree.ParseText(x86.GetText(),
+                    path: Path.Combine(Path.GetDirectoryName(Path.GetDirectoryName(x86.FilePath))!, "common", "ObservedDebug.cs"));
+                trees = trees.Append(observed).ToArray();
+            }
+            var validation = new GenerationValidation();
+            var composed = CoalesceNativeDeclarations(trees, validation);
+            Assert.AreEqual(2, validation.BlockingErrorCount, validation.Format());
+            Assert.IsTrue(validation.Errors.All(error => error.Code == "CSSW005" &&
+                error.Stage == "emitter.declaration-composition" &&
+                error.Message.Contains("complete providers for all three architectures", StringComparison.Ordinal)));
+            Assert.AreEqual(1433, DeclarationRecords(composed).Count(record =>
+                NativeDeclarationSourceProvenance.Read(record) != null));
+        }
+
+        [TestMethod]
+        public void SingleCommonForwardDoesNotAcceptManagedSpellingAsDefinition()
+        {
+            using var fixture = DeclarationFixture("crossarch");
+            string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+            File.WriteAllText(Path.Combine(common, "Forward.cs"), IncompleteProvider(fixture, "x86", "Owner", true));
+            fixture.Write("Unproven.cs", "namespace Owner { public partial struct VALUE { public int Field; } }");
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "Conflicting incomplete native declarations");
+        }
+
+        private static SyntaxTree[] OriginalCommonNativeInputs()
+        {
+            using var stream = File.OpenRead(Path.Combine(AppContext.BaseDirectory, "assets", "CommonNativeDeclarations.original9f.json"));
+            using var document = JsonDocument.Parse(stream);
+            var root = document.RootElement;
+            Assert.AreEqual(1, root.GetProperty("Version").GetInt32());
+            Assert.AreEqual(1435, root.GetProperty("DeclarationCount").GetInt32());
+            Assert.AreEqual(8, root.GetProperty("CompleteProviderCount").GetInt32());
+            string directory = Path.Combine(Path.GetTempPath(), "original-common-native-" + Guid.NewGuid().ToString("N"));
+            return root.GetProperty("Inputs").EnumerateArray().GroupBy(input => input.GetProperty("Path").GetString()!)
+                .Select(group =>
+                {
+                    string text = string.Join(Environment.NewLine, group.Select(input =>
+                    {
+                        string declaration = input.GetProperty("Declaration").GetString()!;
+                        Assert.AreEqual(input.GetProperty("Sha256").GetString(),
+                            Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(declaration))));
+                        return $"namespace {input.GetProperty("Namespace").GetString()} {{\n{declaration}\n}}";
+                    }));
+                    var tree = CSharpSyntaxTree.ParseText(text, path: Path.Combine(directory, group.Key));
+                    Assert.AreEqual(0, tree.GetDiagnostics().Count(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+                    return tree;
+                }).ToArray();
+        }
+
+        private static IEnumerable<StructDeclarationSyntax> DeclarationRecords(IEnumerable<SyntaxTree> trees) =>
+            trees.SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(record => record.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax);
+
+        private static SyntaxTree[] CoalesceNativeDeclarations(SyntaxTree[] trees, GenerationValidation validation)
+        {
+            var method = typeof(ClangSharpSourceCompilation).GetMethod("CoalesceCommonNativeDeclarations",
+                BindingFlags.NonPublic | BindingFlags.Static);
+            Assert.IsNotNull(method);
+            return (SyntaxTree[])method!.Invoke(null, new object[] { trees, Array.Empty<MetadataReference>(), validation })!;
         }
 
         private static Fixture DeclarationFixture(string architecture)
@@ -299,7 +464,7 @@ namespace Windows.Win32.Foundation.Metadata {
         }
 
         private static string IncompleteProvider(Fixture fixture, string architecture, string ns, bool owner,
-            string headerName = "native-shared.h", string identity = "c:@S@VALUE")
+            string headerName = "native-shared.h", string identity = "c:@S@VALUE", bool includeArchitecture = true)
         {
             string header = DeclarationHeader(fixture, headerName, "struct VALUE;\n");
             var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
@@ -307,7 +472,7 @@ namespace Windows.Win32.Foundation.Metadata {
             declaration = NativeDeclarationSourceProvenance.Attach(declaration,
                 new NativeDeclarationSource(identity, identity.Contains("@N@", StringComparison.Ordinal) ? "Other::VALUE" : "VALUE",
                     header, NativeConstantGroupProvenance.HashFile(header), 1, 1, "VALUE", ns, owner,
-                    NativeDeclarationKind.IncompleteRecord) { SourceArchitecture = DeclarationArchitecture(architecture) });
+                    NativeDeclarationKind.IncompleteRecord) { SourceArchitecture = includeArchitecture ? DeclarationArchitecture(architecture) : null });
             return $"namespace {ns} {{ {declaration.ToFullString()} }}";
         }
 

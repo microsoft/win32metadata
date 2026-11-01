@@ -330,6 +330,14 @@ owner together with their uses and constant ownership. Composition preserves
 independent native contributions and checks their storage, values, and bindings.
 A common observation does not establish applicability to every architecture;
 coalescing it requires matching direct providers for all three targets.
+The producer's single-common mode is different: an excluded partition emits
+declarations only from x86 into `common`, with no same-partition architecture
+companions. Its original target is validated before semantic transformations and
+remains x86; the declarations are retained rather than treated as redundant
+three-target observations. A forward may yield to an independently proven
+complete native definition in that mode, or to a complete architecture family
+with the same native identity and public owner. The forward supplies no storage,
+size, alignment or traversal authority to those definitions.
 
 An existing pointer remap such as `PBOOL=BOOL*` names the native scalar typedef
 that signatures must retain. Automatic typedef discovery recognizes that target
