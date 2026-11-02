@@ -14,6 +14,8 @@ namespace Win32MetadataScraper
     internal sealed partial class HeaderAnnotationProcessor
     {
         private ILookup<(string File, uint Offset), Cursor> constantMacroExpansions;
+        private readonly Dictionary<string, (NativeLocation Start, NativeLocation End)[]> constantMacroRanges =
+            new(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, string> constantHeaderHashes = new(StringComparer.OrdinalIgnoreCase);
         private string constantSourceFile;
         private string constantSourceHash;
@@ -91,7 +93,7 @@ namespace Win32MetadataScraper
             EnsureConstantGroups();
             var start = GetLocation(attribute.Extent.Start);
             var end = GetLocation(attribute.Extent.End);
-            var argumentLocation = FileLocation(argument.Extent.Start);
+            var argumentLocation = ConstantFileLocation(argument.Extent.Start);
             var expansions = constantMacroExpansions[(argumentLocation.File, argumentLocation.Offset)].Where(macro =>
             {
                 var use = GetLocation(macro.Location);
@@ -137,17 +139,56 @@ namespace Win32MetadataScraper
             };
             var binding = new NativeConstantBinding(kind, identity, definition.File, definition.Line, definition.Column,
                 hash, expression.Type.AsString, storage, literal);
+            var argumentRange = ReadArgumentFileRange(attribute, argument);
             var occurrence = new NativeConstantOccurrence(binding, ReadSite(attribute.Extent.Start),
-                ReadSite(attribute.Extent.End), ReadSite(argument.Extent.Start), ReadSite(argument.Extent.End));
+                ReadSite(attribute.Extent.End), ReadSite(argumentRange.Start), ReadSite(argumentRange.End));
             if (kind == "Macro" && expansions.Length == 1)
-                occurrence = occurrence with { Literal = ReadLiteralMacro(expansions[0].Handle, argument, occurrence) };
+                occurrence = occurrence with { Literal = ReadLiteralMacro(expansions[0].Handle, argument, argumentRange, occurrence) };
             return occurrence;
+        }
 
-            static NativeLocation FileLocation(CXSourceLocation source)
+        private CXSourceRange ReadArgumentFileRange(Attr attribute, Cursor argument)
+        {
+            var attributeStart = ConstantFileLocation(attribute.Extent.Start);
+            var attributeEnd = ConstantFileLocation(attribute.Extent.End);
+            var originalStart = ConstantFileLocation(argument.Extent.Start);
+            var originalEnd = ConstantFileLocation(argument.Extent.End);
+            var start = originalStart;
+            var end = originalEnd;
+            if (!constantMacroRanges.TryGetValue(attributeStart.File, out var ranges))
             {
-                source.GetFileLocation(out var file, out uint line, out uint column, out uint offset);
-                return new NativeLocation(file.ToString(), line, column, offset);
+                ranges = constantMacroExpansions
+                    .Where(group => string.Equals(group.Key.File, attributeStart.File, StringComparison.OrdinalIgnoreCase))
+                    .SelectMany(group => group)
+                    .Select(macro => (Start: ConstantFileLocation(macro.Extent.Start), End: ConstantFileLocation(macro.Extent.End)))
+                    .Where(range => string.Equals(range.Start.File, range.End.File, StringComparison.OrdinalIgnoreCase) &&
+                        range.Start.Offset < range.End.Offset)
+                    .Distinct().ToArray();
+                constantMacroRanges.Add(attributeStart.File, ranges);
             }
+            // Macro-argument file locations can collapse an expansion to its first offset.
+            foreach (var range in ranges.Where(range =>
+                range.Start.Offset >= attributeStart.Offset && range.End.Offset <= attributeEnd.Offset &&
+                (range.Start.Offset > attributeStart.Offset || range.End.Offset < attributeEnd.Offset)))
+            {
+                if (Contains(range, originalStart) && range.Start.Offset < start.Offset)
+                    start = range.Start;
+                if (Contains(range, originalEnd) && range.End.Offset > end.Offset)
+                    end = range.End;
+            }
+            var unit = constantTranslationUnit.Handle;
+            return CXSourceRange.Create(unit.GetLocationForOffset(unit.GetFile(start.File), start.Offset),
+                unit.GetLocationForOffset(unit.GetFile(end.File), end.Offset));
+
+            static bool Contains((NativeLocation Start, NativeLocation End) range, NativeLocation point) =>
+                string.Equals(range.Start.File, point.File, StringComparison.OrdinalIgnoreCase) &&
+                range.Start.Offset <= point.Offset && point.Offset < range.End.Offset;
+        }
+
+        private static NativeLocation ConstantFileLocation(CXSourceLocation source)
+        {
+            source.GetFileLocation(out var file, out uint line, out uint column, out uint offset);
+            return new NativeLocation(file.ToString(), line, column, offset);
         }
 
         private NativeConstantSite ReadSite(CXSourceLocation source)
@@ -160,7 +201,7 @@ namespace Win32MetadataScraper
         }
 
         private NativeLiteralMacroProof ReadLiteralMacro(
-            CXCursor expansion, Cursor argument, NativeConstantOccurrence occurrence)
+            CXCursor expansion, Cursor argument, CXSourceRange argumentRange, NativeConstantOccurrence occurrence)
         {
             var definition = expansion.Referenced;
             if (definition.Kind != CXCursorKind.CXCursor_MacroDefinition || definition.IsMacroFunctionLike)
@@ -176,7 +217,7 @@ namespace Win32MetadataScraper
             if (literalArgument.CursorKind != CXCursorKind.CXCursor_IntegerLiteral)
                 return null;
             var unit = constantTranslationUnit.Handle;
-            var argumentTokens = unit.Tokenize(argument.Extent);
+            var argumentTokens = unit.Tokenize(argumentRange);
             var definitionTokens = unit.Tokenize(definition.Extent);
             try
             {

@@ -38,6 +38,7 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
 #define BATCH_LITERAL_ALIAS BATCH_LITERAL_MACRO
 #define BATCH_LITERAL_PAREN (0xf0)
 #define BATCH_LITERAL_FUNCTION() 0xf0
+#define BATCH_LITERAL_FORWARD(value) value
 _Win32_Enum_(BATCH_LITERAL_GROUP, unsigned short, BATCH_LITERAL_MACRO);
 typedef _WIN32META_ANNOTATION_(""Enum(BATCH_PLUS_ZERO)"", BATCH_LITERAL_MACRO + 0) unsigned short BATCH_PLUS_ZERO_GROUP;
 typedef _WIN32META_ANNOTATION_(""Enum(BATCH_PLUS_ONE)"", BATCH_LITERAL_MACRO + 1) unsigned short BATCH_PLUS_ONE_GROUP;
@@ -45,6 +46,7 @@ _Win32_Enum_(BATCH_ALIAS_GROUP, unsigned short, BATCH_LITERAL_ALIAS);
 _Win32_Enum_(BATCH_PAREN_GROUP, unsigned short, BATCH_LITERAL_PAREN);
 typedef _WIN32META_ANNOTATION_(""Enum(BATCH_PAREN_ARGUMENT)"", (BATCH_LITERAL_MACRO)) unsigned short BATCH_PAREN_ARGUMENT_GROUP;
 typedef _WIN32META_ANNOTATION_(""Enum(BATCH_FUNCTION)"", BATCH_LITERAL_FUNCTION()) unsigned short BATCH_FUNCTION_GROUP;
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_FUNCTION_FORWARD)"", BATCH_LITERAL_FORWARD(BATCH_LITERAL_MACRO)) unsigned short BATCH_FUNCTION_FORWARD_GROUP;
 typedef _WIN32META_ANNOTATION_(""Enum(BATCH_REPEAT)"", BATCH_LITERAL_MACRO) unsigned short BATCH_REPEAT_GROUP;
 typedef _WIN32META_ANNOTATION_(""Enum(BATCH_REPEAT)"", BATCH_LITERAL_MACRO) unsigned short BATCH_REPEAT_GROUP;
 #define BATCH_FOLDED_LITERAL 1
@@ -212,7 +214,7 @@ typedef _WIN32META_ANNOTATION_(""Enum(BATCH_FOLDED)"", BATCH_FOLDED_LITERAL) uns
             Assert.Equal(occurrence.ArgumentEnd, occurrence.Literal.ExpansionEnd);
             Assert.Equal(Path.GetFullPath(fixture.Header), occurrence.Literal.DefinitionStart.Header);
             foreach (string name in new[] { "BATCH_PLUS_ZERO_GROUP", "BATCH_PLUS_ONE_GROUP", "BATCH_ALIAS_GROUP",
-                "BATCH_PAREN_GROUP", "BATCH_PAREN_ARGUMENT_GROUP", "BATCH_FUNCTION_GROUP" })
+                "BATCH_PAREN_GROUP", "BATCH_PAREN_ARGUMENT_GROUP", "BATCH_FUNCTION_GROUP", "BATCH_FUNCTION_FORWARD_GROUP" })
                 Assert.Null(Assert.Single(Assert.Single(groups[name].Group.Members).Occurrences).Literal);
             var repeated = Assert.Single(groups["BATCH_REPEAT_GROUP"].Group.Members);
             Assert.Single(repeated.Bindings);

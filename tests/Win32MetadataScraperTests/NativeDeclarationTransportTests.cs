@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -59,6 +60,17 @@ ORDINARY_COUNT ReadCount(ORDINARY_COUNT value);
             Assert.Equal(source.Namespace, constants.Group.Namespace);
             Assert.Equal("uint", constants.Group.StorageType);
             Assert.Equal("LogicalGroup", constants.Group.Kind);
+            byte[] headerBytes = File.ReadAllBytes(fixture.Header);
+            foreach (var member in constants.Group.Members)
+            {
+                var occurrence = Assert.Single(member.Occurrences);
+                Assert.Equal(Assert.Single(member.Bindings), occurrence.Binding);
+                Assert.NotNull(occurrence.Literal);
+                Assert.True(NativeConstantGroupProvenance.IsSupportedLiteralOccurrence(occurrence));
+                Assert.Equal(member.Name, Encoding.UTF8.GetString(headerBytes,
+                    checked((int)occurrence.ArgumentStart.Offset),
+                    checked((int)(occurrence.ArgumentEnd.Offset - occurrence.ArgumentStart.Offset))));
+            }
             Assert.Equal(new[] { "GROUP_FIRST", "GROUP_SECOND" },
                 declaration.Members.Select(member => member.Identifier.ValueText)
                     .OrderBy(value => value, StringComparer.Ordinal));
@@ -134,6 +146,7 @@ ORDINARY_COUNT ReadCount(ORDINARY_COUNT value);
                 Assert.Equal(pair.First.Name, pair.Second.Name);
                 Assert.Equal(pair.First.Expression, pair.Second.Expression);
                 Assert.Equal<NativeConstantBinding>(pair.First.Bindings, pair.Second.Bindings);
+                Assert.Equal<NativeConstantOccurrence>(pair.First.Occurrences, pair.Second.Occurrences);
             }
             Assert.Equal(declaration.GetLeadingTrivia().ToFullString(), reparsed.GetLeadingTrivia().ToFullString());
         }
