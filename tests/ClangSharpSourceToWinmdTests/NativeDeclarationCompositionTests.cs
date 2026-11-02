@@ -491,7 +491,8 @@ namespace Foreign {
                 if (control == "nonliteral-valid")
                     Assert.IsNotNull(NativeConstantGroupProvenance.Read(malformed));
                 else
-                    Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.Read(malformed), control);
+                    AssertOccurrenceDiagnostic(Assert.ThrowsException<InvalidDataException>(
+                        () => NativeConstantGroupProvenance.Read(malformed), control));
                 var values = JObject.FromObject(new NativeConstantValues
                 {
                     SourceFile = source.SourceFile, SourceHash = source.SourceHash, Architecture = source.Architecture,
@@ -504,7 +505,21 @@ namespace Foreign {
                 if (control == "nonliteral-valid")
                     Assert.IsNotNull(NativeConstantGroupProvenance.ReadValues(nativeJson));
                 else
-                    Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.ReadValues(nativeJson), control);
+                    AssertOccurrenceDiagnostic(Assert.ThrowsException<InvalidDataException>(
+                        () => NativeConstantGroupProvenance.ReadValues(nativeJson), control));
+
+                void AssertOccurrenceDiagnostic(InvalidDataException error)
+                {
+                    if (!control.StartsWith("nonliteral-", StringComparison.Ordinal))
+                        return;
+                    StringAssert.Contains(error.Message, $"'{source.Group.Namespace}.{source.Group.Name}'");
+                    StringAssert.Contains(error.Message, $"({source.Architecture})");
+                    const string marker = "Occurrence=";
+                    int start = error.Message.IndexOf(marker, StringComparison.Ordinal);
+                    Assert.IsTrue(start >= 0, error.Message);
+                    Assert.IsTrue(JToken.DeepEquals(occurrence,
+                        JObject.Parse(error.Message.Substring(start + marker.Length))), error.Message);
+                }
             }
         }
 
