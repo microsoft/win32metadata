@@ -53,7 +53,7 @@ namespace ClangSharpSourceToWinmdTests
 
         private static byte[] Generate(string source)
         {
-            using var fixture = new MetadataFixture();
+            using var fixture = new CrossArchMetadataTests.MetadataFixture();
             return File.ReadAllBytes(fixture.Generate(source, source, source));
         }
 
