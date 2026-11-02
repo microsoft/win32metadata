@@ -315,7 +315,13 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             Assert.AreEqual(1, root.GetProperty("Version").GetInt32());
             Assert.AreEqual(8, root.GetProperty("Inputs").GetArrayLength());
             Assert.AreEqual(32, root.GetProperty("Consumers").GetArrayLength());
-            var trees = root.GetProperty("Inputs").EnumerateArray().Select(input =>
+            Assert.AreEqual(1, root.GetProperty("AdditionalInputs").GetArrayLength());
+            Assert.AreEqual(1, root.GetProperty("AdditionalConsumers").GetArrayLength());
+            var required = root.GetProperty("NamespacePolicy").GetProperty("Lines").EnumerateArray()
+                .Select(line => line.GetString()!.Split('=', 2))
+                .ToDictionary(parts => parts[0], parts => parts[1]);
+            var trees = root.GetProperty("Inputs").EnumerateArray()
+                .Concat(root.GetProperty("AdditionalInputs").EnumerateArray()).Select(input =>
             {
                 string declaration = input.GetProperty("Declaration").GetString()!;
                 Assert.AreEqual(input.GetProperty("Sha256").GetString(),
@@ -350,17 +356,20 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             {
                 ["IDirectDrawSurface"] = "Windows.Win32.Graphics.DirectDraw",
                 ["IPrintDocumentPackageTarget"] = "Windows.Win32.Storage.Xps.Printing",
-                ["D2D_COLOR_F___"] = "Windows.Win32.Graphics.Direct2D",
+                ["D2D_COLOR_F___"] = required["D2D_COLOR_F"],
+                ["D2D1_COLOR_F___"] = required["D2D1_COLOR_F"],
                 ["CGpEffect"] = "Windows.Win32.Graphics.GdiPlus",
             };
             int index = 0;
-            foreach (var consumer in root.GetProperty("Consumers").EnumerateArray())
+            foreach (var consumer in root.GetProperty("Consumers").EnumerateArray()
+                .Concat(root.GetProperty("AdditionalConsumers").EnumerateArray()))
             {
                 string signature = consumer.GetProperty("Signature").GetString()!;
                 Assert.AreEqual(consumer.GetProperty("Sha256").GetString(),
                     Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(signature))));
-                string usings = string.Join("\n", root.GetProperty("ImportsByOriginalEntry")
-                    .GetProperty(consumer.GetProperty("OriginalEntry").GetString()!).EnumerateArray()
+                var imports = consumer.TryGetProperty("Imports", out var retainedImports) ? retainedImports :
+                    root.GetProperty("ImportsByOriginalEntry").GetProperty(consumer.GetProperty("OriginalEntry").GetString()!);
+                string usings = string.Join("\n", imports.EnumerateArray()
                     .Select(import => $"using {import.GetString()};"));
                 string body = signature.EndsWith(';') ? "" : " => throw new System.NotImplementedException();";
                 trees.Add(CSharpSyntaxTree.ParseText(
@@ -372,8 +381,12 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             var validation = new GenerationValidation();
             var originalRecords = DeclarationRecords(trees).Select(record => NativeRecordSourceProvenance.Read(record))
                 .Where(source => source != null).ToDictionary(source => source!.Name);
-            var recordRoutes = NativeNamespaceRoutes(trees.ToArray(), validation);
+            var rawRoutes = NativeNamespaceRoutes(trees.ToArray(), validation, required);
             Assert.AreEqual(0, validation.BlockingErrorCount, validation.Format());
+            trees = trees.Select(tree => tree.WithFilePath(Path.ChangeExtension(tree.FilePath, ".modified.cs"))).ToList();
+            var recordRoutes = NativeNamespaceRoutes(trees.ToArray(), validation, required);
+            Assert.AreEqual(0, validation.BlockingErrorCount, validation.Format());
+            CollectionAssert.AreEquivalent(rawRoutes.ToArray(), recordRoutes.ToArray());
             foreach (var declaration in DeclarationRecords(trees).Where(record =>
                 NativeRecordSourceProvenance.Read(record) != null ||
                 NativeDeclarationSourceProvenance.Read(record) != null))
@@ -385,15 +398,19 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
 
             var references = new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) };
             var original = ManagedNativeReferenceCompilation(trees, references);
-            var sourceTypes = DeclarationRecords(trees).Select(record =>
+            var sourceTypes = DeclarationRecords(trees).Where(record =>
+                NativeRecordSourceProvenance.Read(record) != null ||
+                NativeDeclarationSourceProvenance.Read(record) != null).Select(record =>
                 (SyntaxUtils.GetEnclosingNamespace(record), record.Identifier.ValueText)).ToHashSet();
             var moved = trees.Select(tree =>
-                NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, new(), sourceTypes, recordRoutes,
+                NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, required, sourceTypes, recordRoutes,
                     nativeReferenceModels: new[] { original.GetSemanticModel(tree) })).ToArray();
-            var required = owners.ToDictionary(pair => pair.Key, pair => pair.Value);
+            var processedRequired = new Dictionary<string, string>(required);
+            foreach (var route in recordRoutes.GroupBy(route => route.Key.Name))
+                if (route.Select(item => item.Value).Distinct().Count() == 1)
+                    processedRequired[route.Key] = route.First().Value;
             var cleaned = moved.Select(tree => MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, new(), new(), new(),
-                required, new(), required, new(), new(), Path.Combine(Path.GetDirectoryName(tree.FilePath)!,
-                    Path.GetFileNameWithoutExtension(tree.FilePath) + ".modified.cs"), validation: validation)).ToArray();
+                processedRequired, new(), processedRequired, new(), new(), tree.FilePath, validation: validation)).ToArray();
             Assert.IsTrue(cleaned.Any(tree => Path.GetFileName(tree.FilePath) == "autotypes.modified.cs"));
             Assert.IsTrue(cleaned.Any(tree => Path.GetFileName(tree.FilePath) == "Direct2D.manual.modified.cs"));
             var composed = CoalesceNativeDeclarations(cleaned, validation);
@@ -412,13 +429,21 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             var beforeLegacy = ManagedNativeReferenceCompilation(composed, references);
             var mergeLegacy = typeof(ClangSharpSourceCompilation).GetMethod("MergeLegacyTypedefProjections",
                 BindingFlags.NonPublic | BindingFlags.Static)!;
-            var final = (CSharpCompilation)mergeLegacy.Invoke(null, new object[] { beforeLegacy, required, validation })!;
+            var final = (CSharpCompilation)mergeLegacy.Invoke(null, new object[] { beforeLegacy, processedRequired, validation })!;
             Assert.AreEqual(0, validation.BlockingErrorCount, validation.Format());
-            Assert.IsNull(final.GetTypeByMetadataName("Windows.Win32.Graphics.Direct2D.D2D_COLOR_F___"));
+            foreach (string name in new[] { "D2D_COLOR_F", "D2D1_COLOR_F" })
+            {
+                Assert.IsNull(final.GetTypeByMetadataName(required[name] + "." + name + "___"));
+                Assert.IsNull(final.GetTypeByMetadataName("Windows.Win32.Graphics.Direct2D." + name));
+                Assert.IsNotNull(final.GetTypeByMetadataName(required[name] + "." + name));
+            }
             Assert.IsNull(final.GetTypeByMetadataName("Windows.Win32.System.WinRT.Pdf.D2D_COLOR_F"));
             var expectedOwners = owners.ToDictionary(pair => pair.Key, pair => pair.Value);
-            expectedOwners.Remove("D2D_COLOR_F___");
-            expectedOwners.Add("D2D_COLOR_F", "Windows.Win32.Graphics.Direct2D");
+            foreach (string name in required.Keys)
+            {
+                expectedOwners.Remove(name + "___");
+                expectedOwners.Add(name, required[name]);
+            }
             int checkedReferences = 0;
             foreach (var tree in final.SyntaxTrees.Where(tree => Path.GetFileName(tree.FilePath).StartsWith("Consumer",
                 StringComparison.Ordinal)))
@@ -435,12 +460,13 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
                     checkedReferences++;
                 }
             }
-            Assert.AreEqual(33, checkedReferences);
+            Assert.AreEqual(34, checkedReferences);
             var nominalType = final.GetTypeByMetadataName("Windows.Win32.Graphics.GdiPlus.CGpEffect")!;
             Assert.AreEqual(1, nominalType.DeclaringSyntaxReferences.Length);
             Assert.AreEqual(SpecialType.System_IntPtr, nominalType.GetMembers("Value").OfType<IFieldSymbol>().Single().Type.SpecialType);
 
-            AssertNativeReferenceIsolation(trees, references, recordRoutes);
+            AssertNativeReferenceIsolation(trees, references, recordRoutes, required);
+            AssertManualNamespacePolicyRequiresOneSourceOwner(trees, required);
             AssertRetainedOpaqueProjectionRequiresItsSourceRole(cleaned);
             var alteredManual = beforeLegacy.SyntaxTrees.Single(tree =>
                 Path.GetFileName(tree.FilePath) == "Direct2D.manual.modified.cs");
@@ -448,7 +474,7 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
                 alteredManual.GetText().ToString().Replace("float a", "uint a", StringComparison.Ordinal),
                 path: alteredManual.FilePath));
             var mismatchValidation = new GenerationValidation();
-            mergeLegacy.Invoke(null, new object[] { mismatched, required, mismatchValidation });
+            mergeLegacy.Invoke(null, new object[] { mismatched, processedRequired, mismatchValidation });
             Assert.IsTrue(mismatchValidation.Errors.Any(error => error.Code == "CSSW005" &&
                 error.Stage == "emitter.legacy-typedef-composition"));
         }
@@ -458,16 +484,17 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
                 trees, references, new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
 
         private static Dictionary<(string Namespace, string Name), string> NativeNamespaceRoutes(
-            SyntaxTree[] trees, GenerationValidation validation)
+            SyntaxTree[] trees, GenerationValidation validation, Dictionary<string, string>? required = null)
         {
+            required ??= new();
             var records = typeof(ClangSharpSourceCompilation).GetMethod("ResolveNativeNamespaces",
                 BindingFlags.NonPublic | BindingFlags.Static)!;
             var declarations = typeof(ClangSharpSourceCompilation).GetMethod("ResolveNativeDeclarationNamespaces",
                 BindingFlags.NonPublic | BindingFlags.Static)!;
             var routes = (Dictionary<(string Namespace, string Name), string>)records.Invoke(null,
-                new object[] { trees, new Dictionary<string, string>(), new Dictionary<string, string>(), validation })!;
+                new object[] { trees, required, new Dictionary<string, string>(), validation })!;
             var forwards = (Dictionary<(string Namespace, string Name), string>)declarations.Invoke(null,
-                new object[] { trees, new Dictionary<string, string>(), routes, validation })!;
+                new object[] { trees, required, routes, validation })!;
             foreach (var pair in forwards)
             {
                 if (routes.TryGetValue(pair.Key, out string? previous))
@@ -477,8 +504,30 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             return routes;
         }
 
+        private static void AssertManualNamespacePolicyRequiresOneSourceOwner(IEnumerable<SyntaxTree> inputs,
+            Dictionary<string, string> required)
+        {
+            var manual = inputs.Single(tree => Path.GetFileName(tree.FilePath) == "Direct2D.manual.modified.cs");
+            var other = CSharpSyntaxTree.ParseText(manual.GetText().ToString()
+                .Replace("Windows.Win32.Graphics.Direct2D", "ForeignManual", StringComparison.Ordinal),
+                path: "Foreign.manual.modified.cs");
+            var ambiguous = new GenerationValidation();
+            NativeNamespaceRoutes(inputs.Append(other).ToArray(), ambiguous, required);
+            foreach (string name in required.Keys)
+                Assert.IsTrue(ambiguous.Errors.Any(error => error.Code == "CSSW005" &&
+                    error.Stage == "emitter.record-ownership" && error.Symbol == name + "___"));
+            var conflict = new GenerationValidation();
+            NativeNamespaceRoutes(inputs.ToArray(), conflict, new Dictionary<string, string>(required)
+            {
+                ["D2D_COLOR_F___"] = "Foreign",
+            });
+            Assert.IsTrue(conflict.Errors.Any(error => error.Code == "CSSW005" &&
+                error.Stage == "emitter.record-ownership"));
+        }
+
         private static void AssertNativeReferenceIsolation(IEnumerable<SyntaxTree> inputs,
-            IEnumerable<MetadataReference> references, Dictionary<(string Namespace, string Name), string> routes)
+            IEnumerable<MetadataReference> references, Dictionary<(string Namespace, string Name), string> routes,
+            Dictionary<string, string> required)
         {
             var foreign = CSharpSyntaxTree.ParseText(@"
 namespace Foreign { public struct IDirectDrawSurface { public int Different; } }
@@ -494,7 +543,7 @@ namespace AmbiguousConsumer { public struct Carrier { public IDirectDrawSurface 
             var compilation = ManagedNativeReferenceCompilation(inputs.Concat(new[] { foreign, alias, ambiguous }), references);
             foreach (var tree in new[] { foreign, alias, ambiguous })
             {
-                var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, new(),
+                var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, required,
                     nativeRecordNamespaces: routes, nativeReferenceModels: new[] { compilation.GetSemanticModel(tree) });
                 Assert.AreEqual(tree.GetText().ToString(), moved.GetText().ToString());
             }
@@ -516,10 +565,10 @@ namespace NativeAmbiguousConsumer { public struct Carrier { public IDirectDrawSu
                 path: "NativeAmbiguous.cs");
             var originalInputs = inputs.Concat(new[] { nativeForeign, nativeAmbiguous }).ToArray();
             var validation = new GenerationValidation();
-            var nativeRoutes = NativeNamespaceRoutes(originalInputs, validation);
+            var nativeRoutes = NativeNamespaceRoutes(originalInputs, validation, required);
             Assert.AreEqual(0, validation.BlockingErrorCount, validation.Format());
             var nativeCompilation = ManagedNativeReferenceCompilation(originalInputs, references);
-            var unchanged = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(nativeAmbiguous, new(),
+            var unchanged = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(nativeAmbiguous, required,
                 nativeRecordNamespaces: nativeRoutes,
                 nativeReferenceModels: new[] { nativeCompilation.GetSemanticModel(nativeAmbiguous) });
             Assert.AreEqual(nativeAmbiguous.GetText().ToString(), unchanged.GetText().ToString());
