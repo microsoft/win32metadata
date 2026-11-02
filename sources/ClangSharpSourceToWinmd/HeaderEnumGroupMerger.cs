@@ -23,6 +23,7 @@ namespace ClangSharpSourceToWinmd
         {
             int previousErrors = validation.Errors.Count;
             var fileSet = files.ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var singleCommonFiles = ClangSharpSourceCompilation.SingleCommonSourceFiles(files);
             var roots = new Dictionary<string, SyntaxNode>(StringComparer.OrdinalIgnoreCase);
             var fragments = new List<Fragment>();
             foreach (string file in files.Where(IsHeaderTypesFile).OrderBy(file => file, StringComparer.OrdinalIgnoreCase))
@@ -51,15 +52,19 @@ namespace ClangSharpSourceToWinmd
                         var source = NativeDeclarationSourceProvenance.Read(declaration);
                         if (source != null)
                         {
-                            target = source.SourceArchitecture ??
+                            var sourceTarget = source.SourceArchitecture ??
                                 ClangSharpSourceCompilation.GetArchitectureForFileName(file);
-                            if (target == Architecture.None)
+                            if (sourceTarget == Architecture.None)
                             {
                                 Record(Error(file, declaration.Identifier.ValueText,
                                     "A source-bound logical group requires an actual source architecture."),
                                     file, declaration.Identifier.ValueText, architecture);
                                 continue;
                             }
+                            // Common projection applicability does not change the native observation's target.
+                            if (!singleCommonFiles.Contains(file) || sourceTarget != Architecture.X86 ||
+                                !IsSourceBoundLogicalContribution(declaration, source))
+                                target = sourceTarget;
                         }
                     }
                     fragments.Add(new Fragment(file, ns, declaration, target));
@@ -195,6 +200,17 @@ namespace ClangSharpSourceToWinmd
         {
             string name = Path.GetFileName(path);
             return name == "header-types.modified.cs" || name.EndsWith(".header-types.modified.cs", StringComparison.Ordinal);
+        }
+
+        internal static bool IsSourceBoundLogicalContribution(BaseTypeDeclarationSyntax declaration, NativeDeclarationSource source)
+        {
+            if (source?.Kind != NativeDeclarationKind.LogicalEnum || declaration is not EnumDeclarationSyntax logical ||
+                !IsHeaderTypesFile(declaration.SyntaxTree.FilePath))
+                return false;
+            var constants = NativeConstantGroupProvenance.Read(logical);
+            return constants?.Group.Kind == "LogicalGroup" && constants.Group.Name == source.Name &&
+                constants.Group.Namespace == source.Namespace && constants.Architecture == source.SourceArchitecture &&
+                constants.Group.NativeName.TrimStart(':') == source.NativeName.TrimStart(':');
         }
 
         internal static bool IsHeaderEnumSourceFile(string path)
