@@ -1670,7 +1670,11 @@
     ],
     "ManualOriginalEntry": "generated/Direct2D.manual.cs",
     "ManualOriginalEntrySha256": "EC7D632F6EA564804E5B69A75FE67293B19516B064D1DB687A3CE84C9DC0924E",
-    "ManualSourceExactlyMatchesRetainedOriginal": true
+    "ManualSourceExactlyMatchesRetainedOriginal": true,
+    "ManualOriginalEntryBytes": 471,
+    "ManualOriginalEntryUtf8BomBytes": 3,
+    "ManualDecodedUtf8Bytes": 468,
+    "ManualEquality": "Decoded UTF8 source text is exact; raw original includes its three-byte UTF8 BOM."
   },
   "AdditionalInputs": [
     {
@@ -1700,6 +1704,7 @@
       "Imports": [
         "System",
         "Windows.Win32.Foundation.Metadata",
+        "Windows.Win32.Foundation",
         "System.Diagnostics.CodeAnalysis",
         "Windows.Win32.AI.MachineLearning.DirectML",
         "Windows.Win32.AI.MachineLearning.WinML",

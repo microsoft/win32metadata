@@ -15,9 +15,54 @@ namespace ClangSharpSourceToWinmd
             ISet<(string Namespace, string Name)> nativeEnumTypes = null,
             IReadOnlyList<SemanticModel> nativeReferenceModels = null)
         {
+            if (nativeReferenceModels?.Count > 0 && nativeReferenceModels.Any(model => model.SyntaxTree != tree))
+                throw new System.ArgumentException("Native references require models of the original source tree.",
+                    nameof(nativeReferenceModels));
             if (MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
             {
-                return namesToNamespaces.Count == 0 ? tree : new NameFixer(namesToNamespaces, null, null).FixNames(tree);
+                if ((nativeReferenceModels?.Count ?? 0) == 0 || nativeRecordNamespaces == null)
+                    return tree;
+                var manualDeclarations = GetLegacyManualRecordOwners(new[] { tree }, namesToNamespaces);
+                var manualProjections = nativeRecordNamespaces.Where(route =>
+                        route.Key.Name.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, System.StringComparison.Ordinal) &&
+                        manualDeclarations.ContainsKey(route.Key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length]))
+                    .Select(route => (Name: route.Key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length],
+                        Namespace: route.Value)).Distinct().ToArray();
+                if (manualProjections.Length == 0)
+                    return tree;
+                var manualOwnersByModel = nativeReferenceModels.Select(model =>
+                    GetLegacyManualRecordOwners(model.Compilation.SyntaxTrees, namesToNamespaces)).ToArray();
+                var manualMoves = new Dictionary<(string Namespace, string Name), string>();
+                foreach (var manualProjection in manualProjections)
+                {
+                    var manualSources = manualOwnersByModel.Select(owners =>
+                    {
+                        if (!owners.TryGetValue(manualProjection.Name, out var manualTargets))
+                            return null;
+                        var selectedManual = manualTargets.Where(target => target.Namespace == manualProjection.Namespace).ToArray();
+                        return selectedManual.Length == 1 ? selectedManual[0].SourceNamespace : null;
+                    }).ToArray();
+                    if (manualSources.All(source => source == null))
+                        continue;
+                    if (manualSources.Any(source => source == null) ||
+                        manualSources.Distinct(System.StringComparer.Ordinal).Count() != 1)
+                        throw new System.IO.InvalidDataException(
+                            $"Retained manual projection '{manualProjection.Name}' requires one source-bound owner across its targets.");
+                    if (!manualDeclarations[manualProjection.Name].Any(declaration =>
+                        declaration.SourceNamespace == manualSources[0] && declaration.Namespace == manualProjection.Namespace))
+                        continue;
+                    var manualKey = (Namespace: manualSources[0], manualProjection.Name);
+                    if (manualMoves.TryGetValue(manualKey, out string previousManualOwner) &&
+                        previousManualOwner != manualProjection.Namespace)
+                        throw new System.IO.InvalidDataException(
+                            $"Retained manual projection '{manualProjection.Name}' has conflicting public owners.");
+                    manualMoves[manualKey] = manualProjection.Namespace;
+                }
+                if (manualMoves.Count == 0)
+                    return tree;
+                var manualNames = manualMoves.Keys.Select(key => key.Name).ToHashSet(System.StringComparer.Ordinal);
+                var relocatedManual = new NameFixer(new(), manualMoves, manualNames).FixNames(tree);
+                return CSharpSyntaxTree.ParseText(relocatedManual.GetText(), null, tree.FilePath);
             }
 
             var nativeNames = nativeRecordNamespaces?.Keys.Select(key => key.Name)
@@ -25,9 +70,6 @@ namespace ClangSharpSourceToWinmd
 
             if (nativeReferenceModels?.Count > 0)
             {
-                if (nativeReferenceModels.Any(model => model.SyntaxTree != tree))
-                    throw new System.ArgumentException("Native references require models of the original source tree.",
-                        nameof(nativeReferenceModels));
                 tree = tree.WithRootAndOptions(new NativeReferenceRewriter(
                     nativeRecordNamespaces, nativeEnumTypes, nativeReferenceModels, nativeNames,
                     namesToNamespaces).Visit(tree.GetRoot()), tree.Options);
