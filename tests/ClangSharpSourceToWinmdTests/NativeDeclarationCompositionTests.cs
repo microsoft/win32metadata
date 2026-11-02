@@ -404,8 +404,24 @@ namespace Foreign {
         [TestMethod]
         public void ClaimedLiteralEvidenceIsValidatedInBothTransportsEvenForEqualBindings()
         {
+            using (var legacy = DeclarationFixture("x86"))
+            {
+                var declaration = CSharpSyntaxTree.ParseText(LogicalProvider(legacy, "x86", "Owner", true))
+                    .GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                var source = NativeConstantGroupProvenance.Read(declaration)!;
+                foreach (string path in new[] { "", "Group", "Group.Members[0].Bindings[0]" })
+                {
+                    var json = JObject.FromObject(source);
+                    var target = path.Length == 0 ? json : (JObject)json.SelectToken(path)!;
+                    target["Unknown"] = true;
+                    Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.Read(
+                        ReplaceLiteralProof(declaration, json.ToString(Newtonsoft.Json.Formatting.None), "v1")), path);
+                }
+            }
             foreach (string control in new[] { "version", "unknown", "duplicate", "missing", "null-occurrences",
-                "duplicate-occurrence", "carrier", "operand", "compound-zero", "compound-one", "literal", "typed-number" })
+                "duplicate-occurrence", "carrier", "operand", "compound-zero", "compound-one", "literal", "typed-number",
+                "nonliteral-valid", "nonliteral-empty-argument", "nonliteral-reversed-argument",
+                "nonliteral-empty-attribute", "nonliteral-reversed-attribute", "nonliteral-outside-attribute" })
             {
                 using var fixture = DeclarationFixture("x86");
                 string text = LiteralLogicalProvider(fixture, "x86", "Owner", true, "same-constants.h");
@@ -426,6 +442,28 @@ namespace Foreign {
                 var group = (JObject)json["Group"]!;
                 var member = (JObject)group["Members"]![0]!;
                 var occurrence = (JObject)member["Occurrences"]![0]!;
+                if (control.StartsWith("nonliteral-", StringComparison.Ordinal))
+                {
+                    occurrence.Remove("Literal");
+                    if (control.Contains("-empty-", StringComparison.Ordinal))
+                    {
+                        string range = control.EndsWith("-argument", StringComparison.Ordinal) ? "Argument" : "Attribute";
+                        occurrence[range + "End"] = occurrence[range + "Start"]!.DeepClone();
+                    }
+                    else if (control.Contains("-reversed-", StringComparison.Ordinal))
+                    {
+                        string range = control.EndsWith("-argument", StringComparison.Ordinal) ? "Argument" : "Attribute";
+                        var start = occurrence[range + "Start"]!.DeepClone();
+                        occurrence[range + "Start"] = occurrence[range + "End"]!.DeepClone();
+                        occurrence[range + "End"] = start;
+                    }
+                    else if (control == "nonliteral-outside-attribute")
+                    {
+                        occurrence["ArgumentEnd"] = occurrence["AttributeEnd"]!.DeepClone();
+                        occurrence["ArgumentEnd"]!["Offset"] = occurrence["AttributeEnd"]!["Offset"]!.Value<uint>() + 1;
+                        occurrence["ArgumentEnd"]!["Column"] = occurrence["AttributeEnd"]!["Column"]!.Value<uint>() + 1;
+                    }
+                }
                 switch (control)
                 {
                     case "version": group["DefinitionEvidence"]!["Version"] = 99; break;
@@ -450,7 +488,10 @@ namespace Foreign {
                 if (control == "duplicate")
                     privateJson = privateJson.Replace("\"Version\":1", "\"Version\":1,\"Version\":1", StringComparison.Ordinal);
                 var malformed = ReplaceLiteralProof(original, privateJson, "v2");
-                Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.Read(malformed), control);
+                if (control == "nonliteral-valid")
+                    Assert.IsNotNull(NativeConstantGroupProvenance.Read(malformed));
+                else
+                    Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.Read(malformed), control);
                 var values = JObject.FromObject(new NativeConstantValues
                 {
                     SourceFile = source.SourceFile, SourceHash = source.SourceHash, Architecture = source.Architecture,
@@ -460,7 +501,10 @@ namespace Foreign {
                 string nativeJson = values.ToString(Newtonsoft.Json.Formatting.None);
                 if (control == "duplicate")
                     nativeJson = nativeJson.Replace("\"Version\":1", "\"Version\":1,\"Version\":1", StringComparison.Ordinal);
-                Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.ReadValues(nativeJson), control);
+                if (control == "nonliteral-valid")
+                    Assert.IsNotNull(NativeConstantGroupProvenance.ReadValues(nativeJson));
+                else
+                    Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.ReadValues(nativeJson), control);
             }
         }
 

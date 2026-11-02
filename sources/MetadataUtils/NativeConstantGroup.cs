@@ -103,7 +103,7 @@ namespace MetadataUtils
                     throw new InvalidDataException("Native constant group proof version does not match its definition evidence.");
                 if (version2)
                     ValidateSourceJson(json);
-                var source = json.ToObject<NativeConstantGroupSource>(version2 ? StrictSerializer() : JsonSerializer.CreateDefault());
+                var source = json.ToObject<NativeConstantGroupSource>(StrictSerializer());
                 if (version2 && source?.Group?.DefinitionEvidence == null)
                     throw new InvalidDataException("Native constant group v2 requires definition evidence.");
                 Validate(declaration, source);
@@ -274,9 +274,7 @@ namespace MetadataUtils
                     throw new InvalidDataException($"Native occurrence inventory does not match member '{member.Name}'.");
                 foreach (var occurrence in member.Occurrences)
                 {
-                    if (!ValidBinding(occurrence.Binding) ||
-                        !ValidSite(occurrence.AttributeStart) || !ValidSite(occurrence.AttributeEnd) ||
-                        !ValidSite(occurrence.ArgumentStart) || !ValidSite(occurrence.ArgumentEnd))
+                    if (!ValidBinding(occurrence.Binding) || !ValidOccurrenceRange(occurrence))
                         throw new InvalidDataException($"Invalid native occurrence site for '{member.Name}'.");
                     if (occurrence.Literal != null)
                     {
@@ -304,15 +302,11 @@ namespace MetadataUtils
             var proof = occurrence?.Literal;
             return binding != null && proof != null && binding.Kind == "Macro" && !string.IsNullOrEmpty(binding.NativeName) &&
                 IsSupportedIntegerLiteral(proof.Literal, binding) &&
-                ValidRange(occurrence.AttributeStart, occurrence.AttributeEnd) &&
-                ValidRange(occurrence.ArgumentStart, occurrence.ArgumentEnd) &&
+                ValidOccurrenceRange(occurrence) &&
                 ValidRange(proof.ExpansionStart, proof.ExpansionEnd) &&
                 ValidRange(proof.DefinitionStart, proof.DefinitionEnd) &&
                 SameSite(occurrence.ArgumentStart, proof.ExpansionStart) &&
                 SameSite(occurrence.ArgumentEnd, proof.ExpansionEnd) &&
-                SameHeader(occurrence.AttributeStart, occurrence.ArgumentStart) &&
-                occurrence.ArgumentStart.Offset >= occurrence.AttributeStart.Offset &&
-                occurrence.ArgumentEnd.Offset <= occurrence.AttributeEnd.Offset &&
                 proof.ExpansionEnd.Offset - proof.ExpansionStart.Offset == Encoding.UTF8.GetByteCount(binding.NativeName) &&
                 string.Equals(proof.DefinitionStart.Header, binding.Header, StringComparison.OrdinalIgnoreCase) &&
                 proof.DefinitionStart.HeaderHash == binding.HeaderHash &&
@@ -358,6 +352,16 @@ namespace MetadataUtils
         private static bool ValidRange(NativeConstantSite start, NativeConstantSite end) =>
             ValidSite(start) && ValidSite(end) && SameHeader(start, end) && end.Offset > start.Offset &&
             (end.Line > start.Line || end.Line == start.Line && end.Column > start.Column);
+
+        private static bool ValidOccurrenceRange(NativeConstantOccurrence occurrence) =>
+            ValidRange(occurrence.AttributeStart, occurrence.AttributeEnd) &&
+            ValidRange(occurrence.ArgumentStart, occurrence.ArgumentEnd) &&
+            SameHeader(occurrence.AttributeStart, occurrence.ArgumentStart) &&
+            AtOrBefore(occurrence.AttributeStart, occurrence.ArgumentStart) &&
+            AtOrBefore(occurrence.ArgumentEnd, occurrence.AttributeEnd);
+
+        private static bool AtOrBefore(NativeConstantSite start, NativeConstantSite end) =>
+            start.Offset <= end.Offset && (start.Line < end.Line || start.Line == end.Line && start.Column <= end.Column);
 
         private static void Validate(EnumDeclarationSyntax declaration, NativeConstantGroupSource source)
         {
