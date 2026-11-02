@@ -100,8 +100,16 @@ public struct Consumer { public Payload Value; }
             moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(unshadowed, names, sourceTypes, routes);
             var second = Compile(moved).GetTypeByMetadataName(owner)!;
             Assert.AreEqual("Support.Payload", Field(second, "Value").Type.ToDisplayString());
-            var manual = shadowed.WithFilePath("Bindings.manual.cs");
-            Assert.AreSame(manual, NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(manual, names, sourceTypes, routes));
+            foreach (string path in new[] { "Bindings.manual.cs", "Bindings.manual.modified.cs", "BINDINGS.MANUAL.MODIFIED.CS" })
+            {
+                var manual = shadowed.WithFilePath(path);
+                var manualResult = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(manual, names, sourceTypes, routes);
+                if (nativeRoute)
+                    Assert.AreSame(manual, manualResult);
+                var manualConsumer = Compile(manualResult).GetTypeByMetadataName(owner)!;
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(manualConsumer.GetTypeMembers("Payload").Single(),
+                    Field(manualConsumer, "Value").Type));
+            }
         }
 
         [TestMethod]

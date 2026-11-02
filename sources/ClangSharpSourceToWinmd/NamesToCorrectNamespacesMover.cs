@@ -17,7 +17,7 @@ namespace ClangSharpSourceToWinmd
         {
             if (MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
             {
-                return tree;
+                return namesToNamespaces.Count == 0 ? tree : new NameFixer(namesToNamespaces, null, null).FixNames(tree);
             }
 
             var nativeNames = nativeRecordNamespaces?.Keys.Select(key => key.Name)
@@ -29,7 +29,8 @@ namespace ClangSharpSourceToWinmd
                     throw new System.ArgumentException("Native references require models of the original source tree.",
                         nameof(nativeReferenceModels));
                 tree = tree.WithRootAndOptions(new NativeReferenceRewriter(
-                    nativeRecordNamespaces, nativeEnumTypes, nativeReferenceModels, nativeNames).Visit(tree.GetRoot()), tree.Options);
+                    nativeRecordNamespaces, nativeEnumTypes, nativeReferenceModels, nativeNames,
+                    namesToNamespaces).Visit(tree.GetRoot()), tree.Options);
             }
             else if (nativeEnumTypes?.Count > 0)
                 throw new System.ArgumentException("Source-bound enum references require original compiler bindings.",
@@ -200,6 +201,19 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
+        internal static Dictionary<string, (string SourceNamespace, string Namespace)[]> GetLegacyManualRecordOwners(
+            IEnumerable<SyntaxTree> trees, IReadOnlyDictionary<string, string> namesToNamespaces) =>
+            trees.Where(tree => MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
+                    declaration.TypeParameterList == null && declaration.BaseList == null && declaration.Members.Count != 0)
+                .GroupBy(declaration => declaration.Identifier.ValueText, System.StringComparer.Ordinal)
+                .ToDictionary(group => group.Key, group => group.Select(declaration =>
+                {
+                    string ns = SyntaxUtils.GetEnclosingNamespace(declaration);
+                    return (SourceNamespace: ns, Namespace: namesToNamespaces.TryGetValue(group.Key, out string owner) ? owner : ns);
+                }).Distinct().ToArray(), System.StringComparer.Ordinal);
+
         private static bool TryResolveNamespace(string ns, string name,
             IReadOnlyDictionary<string, string> namesToNamespaces,
             IReadOnlyDictionary<(string Namespace, string Name), string> nativeRecordNamespaces,
@@ -242,17 +256,22 @@ namespace ClangSharpSourceToWinmd
             private readonly ISet<(string Namespace, string Name)> enums;
             private readonly IReadOnlyList<SemanticModel> models;
             private readonly ISet<string> candidateNames;
+            private readonly IReadOnlyDictionary<string, string> namesToNamespaces;
+            private readonly Dictionary<Compilation,
+                Dictionary<string, (string SourceNamespace, string Namespace)[]>> manualRecordOwners = new();
 
             internal NativeReferenceRewriter(
                 IReadOnlyDictionary<(string Namespace, string Name), string> routes,
                 ISet<(string Namespace, string Name)> enums,
                 IReadOnlyList<SemanticModel> models,
-                ISet<string> candidateNames)
+                ISet<string> candidateNames,
+                IReadOnlyDictionary<string, string> namesToNamespaces)
             {
                 this.routes = routes;
                 this.enums = enums;
                 this.models = models;
                 this.candidateNames = candidateNames;
+                this.namesToNamespaces = namesToNamespaces;
             }
 
             public override SyntaxNode VisitQualifiedName(QualifiedNameSyntax node) =>
@@ -387,13 +406,26 @@ namespace ClangSharpSourceToWinmd
                 if (name.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, System.StringComparison.Ordinal))
                 {
                     string projectedName = name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length];
-                    var target = model.Compilation.GetTypeByMetadataName(
-                        owner.Length == 0 ? projectedName : owner + "." + projectedName);
-                    if (target?.TypeKind == TypeKind.Struct && target.DeclaringSyntaxReferences.Length != 0 &&
-                        target.DeclaringSyntaxReferences.All(reference =>
-                            MetadataSyntaxTreeCleaner.IsLegacyManualSource(reference.SyntaxTree.FilePath) &&
-                            reference.GetSyntax() is StructDeclarationSyntax { Members: { Count: > 0 } }))
-                        name = projectedName;
+                    if (!manualRecordOwners.TryGetValue(model.Compilation, out var manualOwners))
+                    {
+                        manualOwners = GetLegacyManualRecordOwners(model.Compilation.SyntaxTrees, namesToNamespaces);
+                        manualRecordOwners.Add(model.Compilation, manualOwners);
+                    }
+                    if (manualOwners.TryGetValue(projectedName, out var targets))
+                    {
+                        var selected = targets.Where(target => target.Namespace == owner).ToArray();
+                        if (selected.Length == 1)
+                        {
+                            string ns = selected[0].SourceNamespace;
+                            var target = model.Compilation.GetTypeByMetadataName(
+                                ns.Length == 0 ? projectedName : ns + "." + projectedName);
+                            if (target?.TypeKind == TypeKind.Struct && target.DeclaringSyntaxReferences.Length != 0 &&
+                                target.DeclaringSyntaxReferences.All(reference =>
+                                    MetadataSyntaxTreeCleaner.IsLegacyManualSource(reference.SyntaxTree.FilePath) &&
+                                    reference.GetSyntax() is StructDeclarationSyntax { Members: { Count: > 0 } }))
+                                name = projectedName;
+                        }
+                    }
                 }
                 string identifier = SyntaxFacts.GetKeywordKind(name) == SyntaxKind.None ? name : "@" + name;
                 return "global::" + (owner.Length == 0 ? "" : owner + ".") + identifier;

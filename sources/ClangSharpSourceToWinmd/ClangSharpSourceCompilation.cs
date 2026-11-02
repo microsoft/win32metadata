@@ -482,32 +482,36 @@ namespace ClangSharpSourceToWinmd
             System.Threading.Tasks.Parallel.ForEach(namespaceTrees, opt, (tree) =>
             {
                 string treeFile = tree.FilePath;
-                if (!MetadataSyntaxTreeCleaner.IsLegacyManualSource(treeFile))
+                try
                 {
-                    try
+                    if (MetadataSyntaxTreeCleaner.IsLegacyManualSource(treeFile))
                     {
-                        var architecture = GetArchitectureForFileName(treeFile);
-                        var sourceTargets = architecture == Architecture.None
-                            ? tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
-                                .Select(declaration => NativeDeclarationSourceProvenance.Read(declaration)?.SourceArchitecture)
-                                .Where(target => target.HasValue).Select(target => target.Value).Distinct().ToArray()
-                            : new[] { architecture };
-                        var models = nativeReferenceCompilations.Where(pair =>
-                                sourceTargets.Length != 1 || pair.Key == sourceTargets[0])
-                            .Select(pair => pair.Value.GetSemanticModel(tree)).ToArray();
-                        // Keep pre-move enum ownership for removing the original loose-constant copies.
-                        infoFinder.AnalyzeTree(tree);
                         tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(
-                            tree, configuredRequiredNamespaces, sourceTypes, recordNamespaces, nativeEnumTypes, models);
-
-                        infoFinder.AnalyzeTree(tree);
-
+                            tree, configuredRequiredNamespaces);
                         WriteTree(tree, treeFile);
+                        return;
                     }
-                    catch (InvalidDataException error)
-                    {
-                        validation.Add(error, "CSSW005", "emitter.native-references", treeFile);
-                    }
+                    var architecture = GetArchitectureForFileName(treeFile);
+                    var sourceTargets = architecture == Architecture.None
+                        ? tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
+                            .Select(declaration => NativeDeclarationSourceProvenance.Read(declaration)?.SourceArchitecture)
+                            .Where(target => target.HasValue).Select(target => target.Value).Distinct().ToArray()
+                        : new[] { architecture };
+                    var models = nativeReferenceCompilations.Where(pair =>
+                            sourceTargets.Length != 1 || pair.Key == sourceTargets[0])
+                        .Select(pair => pair.Value.GetSemanticModel(tree)).ToArray();
+                    // Keep pre-move enum ownership for removing the original loose-constant copies.
+                    infoFinder.AnalyzeTree(tree);
+                    tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(
+                        tree, configuredRequiredNamespaces, sourceTypes, recordNamespaces, nativeEnumTypes, models);
+
+                    infoFinder.AnalyzeTree(tree);
+
+                    WriteTree(tree, treeFile);
+                }
+                catch (InvalidDataException error)
+                {
+                    validation.Add(error, "CSSW005", "emitter.native-references", treeFile);
                 }
             });
             StopIfInvalid("emitter.namespace-routing", "compiler-bound native references");
@@ -1004,14 +1008,7 @@ namespace ClangSharpSourceToWinmd
             IReadOnlyDictionary<string, string> requiredNamespaces, IReadOnlyDictionary<string, string> scannedNamespaces,
             GenerationValidation validation)
         {
-            var legacyRecordOwners = trees.Where(tree => MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath))
-                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
-                .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
-                    declaration.TypeParameterList == null && declaration.BaseList == null && declaration.Members.Count != 0)
-                .GroupBy(declaration => declaration.Identifier.ValueText, StringComparer.Ordinal)
-                .ToDictionary(group => group.Key,
-                    group => group.Select(SyntaxUtils.GetEnclosingNamespace).Distinct(StringComparer.Ordinal).ToArray(),
-                    StringComparer.Ordinal);
+            var legacyRecordOwners = NamesToCorrectNamespacesMover.GetLegacyManualRecordOwners(trees, requiredNamespaces);
             var retained = trees.Where(tree => tree.FilePath.EndsWith("autotypes.modified.cs", StringComparison.OrdinalIgnoreCase))
                 .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
                 .Where(declaration => declaration.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax)
@@ -1108,18 +1105,15 @@ namespace ClangSharpSourceToWinmd
                     legacyRecordOwners.TryGetValue(
                         group.Key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length], out var legacyOwners))
                 {
-                    string projectedName = group.Key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length];
-                    string retainedManualOwner = owner ?? (requiredNamespaces.TryGetValue(projectedName, out string legacyRequired)
-                        ? legacyRequired : null);
-                    if (retainedManualOwner != null ? !legacyOwners.Contains(retainedManualOwner, StringComparer.Ordinal) :
-                        legacyOwners.Length != 1)
+                    var targets = legacyOwners.Where(target => owner == null || target.Namespace == owner).ToArray();
+                    if (targets.Length != 1)
                     {
                         validation.Add(new InvalidDataException(
                             $"Native projection '{group.Key.Name}' requires one qualified retained manual target."),
                             "CSSW005", "emitter.record-ownership", first.Declaration.SyntaxTree.FilePath, group.Key.Name);
                         continue;
                     }
-                    owner = retainedManualOwner ?? legacyOwners[0];
+                    owner = targets[0].Namespace;
                 }
                 var nativeOwner = nativeAlias && nativeOwners.TryGetValue(group.Key.Name, out var projectedOwner) &&
                     group.All(record => projectedOwner.Authorizes(record.Declaration)) ? projectedOwner : null;
