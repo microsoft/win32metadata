@@ -367,8 +367,12 @@ namespace Win32MetadataScraper
                 var members = annotation.Arguments.Zip(arguments, (name, argument) =>
                 {
                     ulong value = ReadInteger(argument, location);
+                    var occurrence = ReadConstantOccurrence(attribute, name, argument, location);
                     return new LogicalEnumMember(name, $"unchecked(({storage}){value.ToString(CultureInfo.InvariantCulture)}UL)",
-                        value & mask, new[] { ReadConstantBinding(attribute, name, argument, location) });
+                        value & mask, new[] { occurrence.Binding })
+                    {
+                        Occurrences = new[] { occurrence },
+                    };
                 }).ToArray();
                 facts.LogicalEnumMembers = MergeEnumMembers(facts.LogicalEnumMembers, members, location);
                 facts.IsFlagsEnum = annotation.Name == "FlagsEnum";
@@ -1157,6 +1161,7 @@ namespace Win32MetadataScraper
                     members[index] = members[index] with
                     {
                         Bindings = members[index].Bindings.Concat(member.Bindings).Distinct().ToArray(),
+                        Occurrences = members[index].Occurrences.Concat(member.Occurrences).Distinct().ToArray(),
                     };
                     continue;
                 }
@@ -2183,7 +2188,10 @@ namespace Win32MetadataScraper
         }
 
         private sealed record NativeLocation(string File, uint Line, uint Column, uint Offset);
-        private sealed record LogicalEnumMember(string Name, string Value, ulong StorageBits, NativeConstantBinding[] Bindings);
+        private sealed record LogicalEnumMember(string Name, string Value, ulong StorageBits, NativeConstantBinding[] Bindings)
+        {
+            public NativeConstantOccurrence[] Occurrences { get; init; }
+        }
 
         private sealed class DeclarationFacts
         {

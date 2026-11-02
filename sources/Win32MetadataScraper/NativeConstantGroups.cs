@@ -86,18 +86,19 @@ namespace Win32MetadataScraper
                 });
         }
 
-        private unsafe NativeConstantBinding ReadConstantBinding(Attr attribute, string name, Cursor argument, NativeLocation location)
+        private unsafe NativeConstantOccurrence ReadConstantOccurrence(Attr attribute, string name, Cursor argument, NativeLocation location)
         {
             EnsureConstantGroups();
             var start = GetLocation(attribute.Extent.Start);
             var end = GetLocation(attribute.Extent.End);
             var argumentLocation = FileLocation(argument.Extent.Start);
-            var macros = constantMacroExpansions[(argumentLocation.File, argumentLocation.Offset)].Where(macro =>
+            var expansions = constantMacroExpansions[(argumentLocation.File, argumentLocation.Offset)].Where(macro =>
             {
                 var use = GetLocation(macro.Location);
                 return string.Equals(use.File, start.File, StringComparison.OrdinalIgnoreCase) &&
                     use.Offset >= start.Offset && use.Offset < end.Offset;
-            }).Select(macro => macro.Handle.Referenced).Distinct().ToArray();
+            }).ToArray();
+            var macros = expansions.Select(macro => macro.Handle.Referenced).Distinct().ToArray();
             CXCursor declaration;
             string kind, identity;
             if (macros.Length == 1)
@@ -134,13 +135,83 @@ namespace Win32MetadataScraper
                 "char" => SymbolDisplay.FormatLiteral((char)value.AsUnsigned, quote: true),
                 _ => number,
             };
-            return new NativeConstantBinding(kind, identity, definition.File, definition.Line, definition.Column,
+            var binding = new NativeConstantBinding(kind, identity, definition.File, definition.Line, definition.Column,
                 hash, expression.Type.AsString, storage, literal);
+            var occurrence = new NativeConstantOccurrence(binding, ReadSite(attribute.Extent.Start),
+                ReadSite(attribute.Extent.End), ReadSite(argument.Extent.Start), ReadSite(argument.Extent.End));
+            if (kind == "Macro" && expansions.Length == 1)
+                occurrence = occurrence with { Literal = ReadLiteralMacro(expansions[0].Handle, argument, occurrence) };
+            return occurrence;
 
             static NativeLocation FileLocation(CXSourceLocation source)
             {
                 source.GetFileLocation(out var file, out uint line, out uint column, out uint offset);
                 return new NativeLocation(file.ToString(), line, column, offset);
+            }
+        }
+
+        private NativeConstantSite ReadSite(CXSourceLocation source)
+        {
+            source.GetFileLocation(out var file, out uint line, out uint column, out uint offset);
+            string header = Path.GetFullPath(file.ToString());
+            if (!constantHeaderHashes.TryGetValue(header, out string hash))
+                constantHeaderHashes[header] = hash = NativeConstantGroupProvenance.HashFile(header);
+            return new NativeConstantSite(header, hash, line, column, offset);
+        }
+
+        private NativeLiteralMacroProof ReadLiteralMacro(
+            CXCursor expansion, Cursor argument, NativeConstantOccurrence occurrence)
+        {
+            var definition = expansion.Referenced;
+            if (definition.Kind != CXCursorKind.CXCursor_MacroDefinition || definition.IsMacroFunctionLike)
+                return null;
+            var literalArgument = argument;
+            while (literalArgument.CursorKind == CXCursorKind.CXCursor_UnexposedExpr)
+            {
+                var children = literalArgument.CursorChildren.ToArray();
+                if (children.Length != 1)
+                    return null;
+                literalArgument = children[0];
+            }
+            if (literalArgument.CursorKind != CXCursorKind.CXCursor_IntegerLiteral)
+                return null;
+            var unit = constantTranslationUnit.Handle;
+            var argumentTokens = unit.Tokenize(argument.Extent);
+            var definitionTokens = unit.Tokenize(definition.Extent);
+            try
+            {
+                var use = argumentTokens.ToArray().Where(token => token.Kind != CXTokenKind.CXToken_Comment).ToArray();
+                var body = definitionTokens.ToArray().Where(token => token.Kind != CXTokenKind.CXToken_Comment).ToArray();
+                if (use.Length != 1 || use[0].Kind != CXTokenKind.CXToken_Identifier ||
+                    body.Length != 2 || body[0].Kind != CXTokenKind.CXToken_Identifier ||
+                    body[1].Kind != CXTokenKind.CXToken_Literal ||
+                    TokenText(use[0]) != occurrence.Binding.NativeName ||
+                    TokenText(body[0]) != occurrence.Binding.NativeName)
+                    return null;
+                string text = TokenText(body[1]);
+                if (!NativeConstantGroupProvenance.IsSupportedIntegerLiteral(text, occurrence.Binding))
+                    return null;
+                var expansionStart = ReadSite(expansion.Extent.Start);
+                var expansionEnd = ReadSite(expansion.Extent.End);
+                if (occurrence.ArgumentStart != expansionStart || occurrence.ArgumentEnd != expansionEnd ||
+                    occurrence.AttributeStart.Header != occurrence.ArgumentStart.Header ||
+                    occurrence.AttributeStart.Offset > occurrence.ArgumentStart.Offset ||
+                    occurrence.AttributeEnd.Offset < occurrence.ArgumentEnd.Offset)
+                    return null;
+                var proof = new NativeLiteralMacroProof(text, expansionStart, expansionEnd,
+                    ReadSite(definition.Extent.Start), ReadSite(definition.Extent.End));
+                return NativeConstantGroupProvenance.IsSupportedLiteralOccurrence(occurrence with { Literal = proof }) ? proof : null;
+            }
+            finally
+            {
+                unit.DisposeTokens(argumentTokens);
+                unit.DisposeTokens(definitionTokens);
+            }
+
+            string TokenText(CXToken token)
+            {
+                using var spelling = token.GetSpelling(unit);
+                return spelling.ToString();
             }
         }
 
@@ -151,7 +222,11 @@ namespace Win32MetadataScraper
             var group = new NativeConstantGroup(GetNativeTarget(alias.Handle), Remap(alias.Name), generatedNamespace,
                 GetManagedType(alias.UnderlyingType, facts.Location), facts.Location.File, facts.Location.Line,
                 facts.LogicalEnumMembers.Select(member => new NativeConstantGroupMember(
-                    Remap(member.Name), member.Value, member.Bindings)).ToArray());
+                    Remap(member.Name), member.Value, member.Bindings) { Occurrences = member.Occurrences }).ToArray())
+            {
+                DefinitionEvidence = new NativeLogicalGroupEvidence(1,
+                    GetNativeDeclarationSource(alias, Remap(alias.Name), generatedNamespace, NativeDeclarationKind.LogicalEnum)),
+            };
             return new NativeConstantGroupSource(constantSourceFile, constantSourceHash, constantArchitecture, group);
         }
 

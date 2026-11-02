@@ -90,6 +90,27 @@ _Win32_AlsoUsableFor_(BATCH_REDECL_ALIAS)
 typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
 ";
 
+        private const string LiteralMacroDeclarations = @"
+#define BATCH_LITERAL_MACRO 0xf0
+#define BATCH_LITERAL_ALIAS BATCH_LITERAL_MACRO
+#define BATCH_LITERAL_PAREN (0xf0)
+#define BATCH_LITERAL_FUNCTION() 0xf0
+_Win32_Enum_(BATCH_LITERAL_GROUP, unsigned short, BATCH_LITERAL_MACRO);
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_PLUS_ZERO)"", BATCH_LITERAL_MACRO + 0) unsigned short BATCH_PLUS_ZERO_GROUP;
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_PLUS_ONE)"", BATCH_LITERAL_MACRO + 1) unsigned short BATCH_PLUS_ONE_GROUP;
+_Win32_Enum_(BATCH_ALIAS_GROUP, unsigned short, BATCH_LITERAL_ALIAS);
+_Win32_Enum_(BATCH_PAREN_GROUP, unsigned short, BATCH_LITERAL_PAREN);
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_PAREN_ARGUMENT)"", (BATCH_LITERAL_MACRO)) unsigned short BATCH_PAREN_ARGUMENT_GROUP;
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_FUNCTION)"", BATCH_LITERAL_FUNCTION()) unsigned short BATCH_FUNCTION_GROUP;
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_REPEAT)"", BATCH_LITERAL_MACRO) unsigned short BATCH_REPEAT_GROUP;
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_REPEAT)"", BATCH_LITERAL_MACRO) unsigned short BATCH_REPEAT_GROUP;
+#define BATCH_FOLDED_LITERAL 1
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_FOLDED)"", BATCH_FOLDED_LITERAL) unsigned short BATCH_FOLDED_GROUP;
+#undef BATCH_FOLDED_LITERAL
+#define BATCH_FOLDED_LITERAL 1
+typedef _WIN32META_ANNOTATION_(""Enum(BATCH_FOLDED)"", BATCH_FOLDED_LITERAL) unsigned short BATCH_FOLDED_GROUP;
+";
+
         [Fact]
         public void OneHeaderPerArchitectureExercisesNativeContractsAndPhysicalMetadata()
         {
@@ -108,7 +129,7 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
                     string declarations = "#define _WIN32_WINNT 0x0600\n" + Declarations +
                         ScopedDeclarations + AssociatedConstantNativeDeclarations + AdditionalDeclarations +
                         ImageHlpLastErrorDeclarations + FileAndSocketResultDeclarations +
-                        RedeclaredAliasDeclarations;
+                        RedeclaredAliasDeclarations + LiteralMacroDeclarations;
                     var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
                         extraSettings: "--config\nnative-constant-values\n" +
                             "--remap\nBATCH_BOOL=BATCH_BOOL\nBATCH_HANDLE=BATCH_HANDLE\n" +
@@ -120,6 +141,7 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
                     Assert.Contains("is represented by System.Flags", fixture.Diagnostics);
                     Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
                         NativeSurface(fixture, target, metadataEnabled: true));
+                    AssertLiteralMacroEvidence(fixture, architecture);
                     var typedefSource = Assert.Single(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
                         .DescendantNodes().OfType<StructDeclarationSyntax>().Select(NativeTypedefSourceProvenance.Read)
                         .Where(source => source?.Name == "BATCH_HOPAQUE"));
@@ -235,6 +257,47 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
             {
                 foreach (var (_, fixture) in fixtures)
                     fixture.Dispose();
+            }
+        }
+
+        private static void AssertLiteralMacroEvidence(HeaderAnnotationTests.NativeFixture fixture, string architecture)
+        {
+            var groups = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().Select(NativeConstantGroupProvenance.Read)
+                .Where(source => source != null).ToDictionary(source => source.Group.Name);
+            var native = NativeConstantGroupProvenance.ReadValues(
+                File.ReadAllText(Path.ChangeExtension(fixture.Output, ".native-constants.json")));
+            var literal = Assert.Single(groups["BATCH_LITERAL_GROUP"].Group.Members);
+            var occurrence = Assert.Single(literal.Occurrences);
+            Assert.NotNull(occurrence.Literal);
+            Assert.Equal("0xf0", occurrence.Literal.Literal);
+            Assert.Equal(occurrence.Binding, Assert.Single(literal.Bindings));
+            Assert.True(NativeConstantGroupProvenance.IsSupportedLiteralOccurrence(occurrence));
+            Assert.Equal(occurrence.ArgumentStart, occurrence.Literal.ExpansionStart);
+            Assert.Equal(occurrence.ArgumentEnd, occurrence.Literal.ExpansionEnd);
+            Assert.Equal(Path.GetFullPath(fixture.Header), occurrence.Literal.DefinitionStart.Header);
+            foreach (string name in new[] { "BATCH_PLUS_ZERO_GROUP", "BATCH_PLUS_ONE_GROUP", "BATCH_ALIAS_GROUP",
+                "BATCH_PAREN_GROUP", "BATCH_PAREN_ARGUMENT_GROUP", "BATCH_FUNCTION_GROUP" })
+                Assert.Null(Assert.Single(Assert.Single(groups[name].Group.Members).Occurrences).Literal);
+            var repeated = Assert.Single(groups["BATCH_REPEAT_GROUP"].Group.Members);
+            Assert.Single(repeated.Bindings);
+            Assert.Equal(2, repeated.Occurrences.Length);
+            Assert.All(repeated.Occurrences, item => Assert.NotNull(item.Literal));
+            Assert.NotEqual(repeated.Occurrences[0].AttributeStart, repeated.Occurrences[1].AttributeStart);
+            var folded = Assert.Single(groups["BATCH_FOLDED_GROUP"].Group.Members);
+            Assert.Equal(2, folded.Bindings.Length);
+            Assert.Equal(2, folded.Occurrences.Length);
+            Assert.All(folded.Occurrences, item => Assert.NotNull(item.Literal));
+            Assert.NotEqual(folded.Bindings[0].Line, folded.Bindings[1].Line);
+            foreach (var source in groups.Values.Where(source => source.Group.Name.StartsWith("BATCH_", StringComparison.Ordinal)))
+            {
+                Assert.Equal(architecture switch
+                {
+                    "x86" => Architecture.X86, "x64" => Architecture.X64, "arm64" => Architecture.Arm64,
+                    _ => throw new ArgumentOutOfRangeException(nameof(architecture)),
+                }, source.Architecture);
+                var jsonGroup = Assert.Single(native.Groups.Where(group => group.Name == source.Group.Name));
+                Assert.Equal(JsonSerializer.Serialize(source.Group), JsonSerializer.Serialize(jsonGroup));
             }
         }
 

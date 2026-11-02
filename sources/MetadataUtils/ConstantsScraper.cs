@@ -778,7 +778,7 @@ namespace MetadataUtils
                         if (!this._fileSystem.File.Exists(path))
                             throw new InvalidDataException($"Missing planned native constants file '{path}'.");
                         input = new NativeInput(path,
-                            JsonSerializer.Deserialize<NativeConstantValues>(this._fileSystem.File.ReadAllText(path)) ??
+                            NativeConstantGroupProvenance.ReadValues(this._fileSystem.File.ReadAllText(path)) ??
                                 throw new InvalidDataException($"Invalid native constants file '{path}'."), loadedInputs.Count);
                         this.nativeInputReferences.Add(new { input.Path, Architecture = input.Values.Architecture.ToString(),
                             input.Values.BindingSource, input.Values.SourceFile, input.Values.SourceHash });
