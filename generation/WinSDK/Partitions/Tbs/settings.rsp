@@ -1,6 +1,6 @@
---with-librarypath
-GetDeviceID=tbs.dll
 --traverse
 <IncludeRoot>/shared/tbs.h
 --namespace
 Windows.Win32.System.TpmBaseServices
+--config
+parse-win32-annotations

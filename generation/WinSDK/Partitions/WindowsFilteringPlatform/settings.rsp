@@ -13,3 +13,5 @@ _DL_EUI48
 <IncludeRoot>/um/fwptypes.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsFilteringPlatform
+--config
+parse-win32-annotations

@@ -1,0 +1,20 @@
+diff --git a/um/atacct.h b/um/atacct.h
+index 9a159290..65d4334c 100644
+--- a/um/atacct.h
++++ b/um/atacct.h
+@@ -27,6 +27,7 @@ Revision History:
+ extern "C" {
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ STDAPI
+ GetNetScheduleAccountInformation(
+     IN    LPCWSTR pwszServerName,
+@@ -34,6 +35,7 @@ GetNetScheduleAccountInformation(
+     OUT _Out_writes_(ccAccount)  WCHAR wszAccount[]
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ STDAPI
+ SetNetScheduleAccountInformation(
+     IN    LPCWSTR pwszServerName,

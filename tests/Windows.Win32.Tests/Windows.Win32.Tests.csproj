@@ -29,6 +29,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\sources\MetadataUtils\MetadataUtils.csproj" />
     <ProjectReference Include="..\TestCommon\TestCommon.csproj" />
+    <Compile Include="..\Shared\NativeContractPhysicalAssertions.cs" Link="Cases\NativeContractPhysicalAssertions.cs" />
   </ItemGroup>
 
   <ItemGroup>

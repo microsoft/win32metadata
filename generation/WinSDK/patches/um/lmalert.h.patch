@@ -1,0 +1,20 @@
+diff --git a/um/lmalert.h b/um/lmalert.h
+index 2df437fc..fb406c17 100644
+--- a/um/lmalert.h
++++ b/um/lmalert.h
+@@ -46,6 +46,7 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetAlertRaise(
+     _In_ LPCWSTR AlertType,
+@@ -53,6 +54,7 @@ NetAlertRaise(
+     _In_ DWORD   BufferSize
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetAlertRaiseEx(
+     _In_ LPCWSTR AlertType,

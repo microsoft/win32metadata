@@ -1,0 +1,90 @@
+diff --git a/um/davclnt.h b/um/davclnt.h
+index c369d61a..a79e99f9 100644
+--- a/um/davclnt.h
++++ b/um/davclnt.h
+@@ -80,6 +80,7 @@ typedef DWORD (CALLBACK *PFNDAVAUTHCALLBACK)(
+     _Out_ PFNDAVAUTHCALLBACK_FREECRED *pFreeCred    // Callback to free the memory allocated for creds by the callback
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -92,6 +93,7 @@ DavAddConnection(
+     _In_ DWORD CertSize
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -99,6 +101,7 @@ DavDeleteConnection(
+     _In_ HANDLE ConnectionHandle
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -108,6 +111,7 @@ DavGetUNCFromHTTPPath (
+     _Inout_ LPDWORD lpSize
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -117,6 +121,7 @@ DavGetHTTPFromUNCPath (
+     _Inout_ LPDWORD lpSize
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -126,6 +131,7 @@ DavGetTheLockOwnerOfTheFile(
+     _Inout_ PULONG LockOwnerNameLengthInBytes
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -136,6 +142,7 @@ DavGetExtendedError(
+     _Inout_ DWORD *cChSize
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -143,6 +150,7 @@ DavFlushFile(
+     _In_ HANDLE hFile
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -150,6 +158,7 @@ DavInvalidateCache(
+     _In_ LPCWSTR URLName
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -158,11 +167,13 @@ DavCancelConnectionsToServer(
+     _In_ BOOL fForce
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ OPAQUE_HANDLE
+ WINAPI
+ DavRegisterAuthCallback(_In_ PFNDAVAUTHCALLBACK CallBack,
+                         _In_ ULONG Version);
+ 
++_Win32_SupportedOS_WindowsVista_
+ VOID
+ WINAPI
+ DavUnregisterAuthCallback(_In_ OPAQUE_HANDLE hCallback);

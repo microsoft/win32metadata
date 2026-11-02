@@ -2,3 +2,5 @@
 <IncludeRoot>/um/propvarutil.h
 --namespace
 Windows.Win32.System.Variant
+--config
+parse-win32-annotations

@@ -1,0 +1,12 @@
+diff --git a/um/nb30.h b/um/nb30.h
+index 89d51226..42761031 100644
+--- a/um/nb30.h
++++ b/um/nb30.h
+@@ -302,6 +302,7 @@ typedef struct _ACTION_HEADER {
+  * Usage: result = Netbios( pncb );                             *
+  ****************************************************************/
+ 
++_Win32_SupportedOS_Windows2000_
+ UCHAR
+ APIENTRY
+ Netbios(

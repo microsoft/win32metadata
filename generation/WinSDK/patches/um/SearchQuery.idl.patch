@@ -1,0 +1,36 @@
+diff --git a/um/SearchQuery.idl b/um/SearchQuery.idl
+index e32352b1..e0b5c55b 100644
+--- a/um/SearchQuery.idl
++++ b/um/SearchQuery.idl
+@@ -36,6 +36,7 @@
+ // 2) Expose AQS/NQS.
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -44,6 +45,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //**********************************************************************
+ // Query Helper
+ //**********************************************************************
++cpp_quote("/* Win32Metadata: interface ::ISearchQueryHelper => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF63),
+@@ -208,6 +210,7 @@ typedef [v1_enum] enum
+ } PRIORITY_LEVEL;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRowsetPrioritization => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(42811652-079D-481B-87A2-09A69ECC5F44),
+@@ -248,6 +251,7 @@ typedef [v1_enum] enum
+ } ROWSETEVENT_TYPE;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRowsetEvents => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(1551AEA5-5D66-4B11-86F5-D5634CB211B9),

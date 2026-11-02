@@ -1,0 +1,394 @@
+diff --git a/um/mmc.idl b/um/mmc.idl
+index ad21af41..b055b484 100644
+--- a/um/mmc.idl
++++ b/um/mmc.idl
+@@ -11,6 +11,8 @@
+ // mmc.idl : IDL source for mmc.exe
+ //
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("#ifndef MMC_VER")
+ cpp_quote("#define MMC_VER 0x0210")
+ cpp_quote("#endif")
+@@ -972,13 +974,17 @@
+ //
+ 
+ cpp_quote("STDAPI MMCPropertyChangeNotify(LONG_PTR lNotifyHandle, LPARAM param);")
++cpp_quote("/* Win32Metadata: function ::MMCPropertyChangeNotify => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("#if (MMC_VER >= 0x0110)")
+ cpp_quote("#include <specstrings.h>")
+ cpp_quote("STDAPI MMCPropertyHelp(_In_ LPOLESTR pszHelpTopic);")
++cpp_quote("/* Win32Metadata: function ::MMCPropertyHelp => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("#endif // MMC_VER >= 0x0110")
+ cpp_quote("STDAPI MMCFreeNotifyHandle(LONG_PTR lNotifyHandle);")
++cpp_quote("/* Win32Metadata: function ::MMCFreeNotifyHandle => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("// MMCPropPageCallback is only available in mmc.lib. See MMCAfxPropPageCallback if linking against mmcutil.lib.")
+ cpp_quote("STDAPI MMCPropPageCallback(void* vpsp);")
++cpp_quote("/* Win32Metadata: function ::MMCPropPageCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("EXTERN_C const CLSID CLSID_NodeManager;")
+ 
+ cpp_quote("#if (MMC_VER >= 0x0120)")
+@@ -1023,6 +1029,8 @@
+ ///////////////////////////////////////////////////////////////////////////////
+ //  Interfaces
+ //
++cpp_quote("/* Win32Metadata: interface ::IComponent => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: interface ::IComponentData => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(955AB28A-5218-11D0-A985-00C04FD8D565),
+@@ -1090,6 +1098,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IResultDataCompare => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(E8315A52-7A1A-11D0-A2D2-00C04FD909DD),
+@@ -1104,6 +1113,7 @@
+     }
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IResultOwnerData => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(9CB396D8-EA83-11d0-AEF1-00C04FB6DD2C),
+@@ -1123,6 +1133,7 @@
+     }
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConsole => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(43136EB1-D36C-11CF-ADBC-00AA00A80033),
+@@ -1171,6 +1182,7 @@
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IHeaderCtrl => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(43136EB3-D36C-11CF-ADBC-00AA00A80033),
+@@ -1367,6 +1379,7 @@
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IContextMenuCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(43136EB7-D36C-11CF-ADBC-00AA00A80033),
+@@ -1391,6 +1404,7 @@
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IContextMenuProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(43136EB6-D36C-11CF-ADBC-00AA00A80033),
+@@ -1431,6 +1445,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IExtendContextMenu => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(4F3B7A4F-CFAC-11CF-B8E3-00C04FD8D5B0),
+@@ -1459,6 +1474,7 @@
+ cpp_quote("#define ILSI_SMALL_ICON(nLoc)   (nLoc | ILSIF_LEAVE_LARGE_ICON)")
+ cpp_quote("#endif // MMC_VER >= 0x0120")
+ 
++cpp_quote("/* Win32Metadata: interface ::IImageList => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(43136EB8-D36C-11CF-ADBC-00AA00A80033),
+@@ -1477,6 +1493,7 @@
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IResultData => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(31DA5FA0-E0EB-11cf-9F21-00AA003CA9F6),
+@@ -1535,6 +1552,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConsoleNameSpace => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(BEDEB620-F24D-11cf-8AFC-00AA003CA9F6),
+@@ -1570,6 +1588,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConsoleNameSpace2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(255F18CC-65DB-11D1-A7DC-00C04FD8D565),
+@@ -1588,7 +1607,8 @@
+ 
+ struct _PSP;
+ typedef struct _PSP * HPROPSHEETPAGE;
+-
++
++cpp_quote("/* Win32Metadata: interface ::IPropertySheetCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         local,
+         object,
+@@ -1606,6 +1626,7 @@
+         HRESULT RemovePage([in] HPROPSHEETPAGE  hPage);
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IPropertySheetProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(85DE64DE-EF21-11cf-A285-00C04FD8DBE6),
+@@ -1632,6 +1653,7 @@
+         HRESULT Show([in] LONG_PTR window, [in] int page);
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IExtendPropertySheet => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(85DE64DC-EF21-11cf-A285-00C04FD8DBE6),
+@@ -1656,6 +1678,7 @@
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IControlbar => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(69FB811E-6C1C-11D0-A2CB-00C04FD909DD),
+@@ -1676,6 +1699,7 @@
+         HRESULT Detach([in] LPUNKNOWN lpUnknown);
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IExtendControlbar => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(49506520-6F40-11D0-A98B-00C04FD8D565),
+@@ -1693,6 +1717,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IToolbar => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(43136EB9-D36C-11CF-ADBC-00AA00A80033),
+@@ -1720,6 +1745,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConsoleVerb => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(E49F7A60-74AF-11D0-A286-00C04FD8FE93),
+@@ -1741,6 +1767,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ISnapinAbout => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(1245208C-A151-11D0-A7D7-00C04FD909DD),
+@@ -1768,6 +1795,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IMenuButton => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(951ED750-D080-11d0-B197-000000000000),
+@@ -1790,6 +1818,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ISnapinHelp => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(A6B15ACE-DF59-11D0-A7DD-00C04FD909DD),
+@@ -1812,6 +1841,7 @@
+ ////
+ cpp_quote("#if (MMC_VER >= 0x0110)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IExtendPropertySheet2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(B7A87232-4A51-11D1-A7EA-00C04FD909DD),
+@@ -1828,6 +1858,7 @@
+                               [out] BOOL* bStretch);
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IHeaderCtrl2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(9757abb8-1b32-11d1-a7ce-00c04fd8d565),
+@@ -1847,6 +1878,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ISnapinHelp2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(4861A010-20F9-11d2-A510-00C04FB6DD2C),
+@@ -1930,6 +1962,7 @@
+ typedef DWORD MMC_STRING_ID;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumTASK => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         local,
+         object,
+@@ -1954,6 +1987,7 @@
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IExtendTaskPad => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         local,
+         object,
+@@ -1989,6 +2023,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IConsole2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(103D842A-AA63-11D1-A7E1-00C04FD8D565),
+@@ -2008,6 +2043,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IDisplayHelp => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(cc593830-b926-11d1-8063-0000f875a9ce),
+@@ -2021,6 +2057,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IRequiredExtensions => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         local,
+         object,
+@@ -2041,6 +2078,7 @@
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IStringTable => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(DE40B7A4-0F65-11d2-8E25-00C04F8ECD78),
+@@ -2139,6 +2177,7 @@
+     MMC_SORT_DATA*   pSortData;   // Array of column data
+ } MMC_SORT_SET_DATA;
+ 
++cpp_quote("/* Win32Metadata: interface ::IColumnData => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(547C1354-024D-11d3-A707-00C04F8EF4CB),
+@@ -2172,6 +2211,7 @@
+             );
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IMessageView => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(80F94174-FCCC-11d2-B991-00C04F8ECD78),
+@@ -2233,6 +2273,7 @@
+     } RDCOMPARE;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IResultDataCompareEx => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(96933476-0251-11d3-AEB0-00C04F8ECD78),
+@@ -2386,6 +2427,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IComponentData2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(CCA0F2D2-82DE-41B5-BF47-3B2076273D5C),
+@@ -2406,6 +2448,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IComponent2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(79A2D615-4A10-4ED4-8C65-8633F9335095),
+@@ -2433,6 +2476,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IContextMenuCallback2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(E178BC0E-2ED0-4b5e-8097-42C9087E8B33),
+@@ -2462,6 +2506,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IMMCVersionInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         uuid(A8D2C5FE-CDCB-4b9d-BDE5-A27343FF54BC),
+         helpstring("IMMCVersionInfo Interface"),
+@@ -2514,6 +2559,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IExtendView => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(89995CEE-D2ED-4c0e-AE5E-DF7E76F3FA53),
+@@ -2535,6 +2581,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IViewExtensionCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
+    [
+        object,
+        uuid(34DD928A-7599-41E5-9F5E-D6BC3062C2DA),
+@@ -2554,6 +2601,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IConsolePower => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(1cfbdd0e-62ca-49ce-a3af-dbb2de61b068),
+@@ -2576,6 +2624,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IConsolePowerSink => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(3333759f-fe4f-4975-b143-fec0a5dd6d65),
+@@ -2599,6 +2648,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::INodeProperties => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(15BC4D24-A522-4406-AA55-0749537A6865),
+@@ -2618,6 +2668,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IConsole3 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(4F85EFDB-D0E1-498c-8D4A-D010DFDD404F),
+@@ -2637,6 +2688,7 @@
+     //
+     //#######################################################################
+     //#######################################################################
++cpp_quote("/* Win32Metadata: interface ::IResultData2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         uuid(0F36E0EB-A7F1-4a81-BE5A-9247F7DE4B1B),

@@ -23,3 +23,5 @@ DWRITE_PAINT_FEATURE_LEVEL
 <IncludeRoot>/um/d2derr.h
 --namespace
 Windows.Win32.Graphics.Direct2D
+--config
+parse-win32-annotations

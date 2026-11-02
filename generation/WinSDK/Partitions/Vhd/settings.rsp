@@ -2,3 +2,5 @@
 <IncludeRoot>/um/virtdisk.h
 --namespace
 Windows.Win32.Storage.Vhd
+--config
+parse-win32-annotations

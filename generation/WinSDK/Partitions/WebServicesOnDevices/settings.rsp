@@ -12,3 +12,5 @@
 <IncludeRoot>/um/wsdns.h
 --namespace
 Windows.Win32.Devices.WebServicesOnDevices
+--config
+parse-win32-annotations

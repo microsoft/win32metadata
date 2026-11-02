@@ -1,0 +1,13 @@
+diff --git a/um/jobapi.h b/um/jobapi.h
+index 611069d3..3d177dc7 100644
+--- a/um/jobapi.h
++++ b/um/jobapi.h
+@@ -27,6 +27,8 @@ extern "C" {
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI

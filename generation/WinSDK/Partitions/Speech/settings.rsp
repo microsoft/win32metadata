@@ -1,5 +1,3 @@
---with-type
-SpeechStreamSeekPositionType=uint
 --traverse
 <IncludeRoot>/um/sapi.h
 <IncludeRoot>/um/sapi53.h

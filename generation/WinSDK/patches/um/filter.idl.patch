@@ -1,0 +1,20 @@
+diff --git a/um/filter.idl b/um/filter.idl
+index 7c5ca1ea..2dd3f582 100644
+--- a/um/filter.idl
++++ b/um/filter.idl
+@@ -11,6 +11,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ import "unknwn.idl";
+ import "objidl.idl";
+ import "propidl.idl";
+@@ -36,6 +37,7 @@ typedef struct tagFULLPROPSPEC
+ } FULLPROPSPEC;
+ cpp_quote("#endif // #if !defined(_TAGFULLPROPSPEC_DEFINED_)")
+ 
++cpp_quote("/* Win32Metadata: interface ::IFilter => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(89BCB740-6119-101A-BCB7-00DD010655AF),

@@ -1,0 +1,17 @@
+diff --git a/um/lmuseflg.h b/um/lmuseflg.h
+index 2b24767a..48a8308e 100644
+--- a/um/lmuseflg.h
++++ b/um/lmuseflg.h
+@@ -49,4 +49,12 @@ Revision History:
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(FORCE_LEVEL_FLAGS, unsigned long,
++    USE_NOFORCE,
++    USE_FORCE,
++    USE_LOTS_OF_FORCE);
++#endif
++
+ #endif // _LMUSEFLG_

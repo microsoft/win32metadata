@@ -8,3 +8,5 @@
 <IncludeRoot>/um/pdhmsg.h
 --namespace
 Windows.Win32.System.Performance
+--config
+parse-win32-annotations

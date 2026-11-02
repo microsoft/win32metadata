@@ -3,3 +3,5 @@
 <IncludeRoot>/um/memoryapi.h
 --namespace
 Windows.Win32.System.Memory
+--config
+parse-win32-annotations

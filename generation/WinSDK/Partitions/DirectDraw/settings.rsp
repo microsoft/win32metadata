@@ -11,3 +11,5 @@ PMDL=DDMDL*
 <IncludeRoot>/um/dxmini.h
 --namespace
 Windows.Win32.Graphics.DirectDraw
+--config
+parse-win32-annotations

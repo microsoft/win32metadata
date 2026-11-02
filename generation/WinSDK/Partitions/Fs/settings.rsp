@@ -31,3 +31,5 @@ DumpLogRecords
 <IncludeRoot>/shared/ntddstor.h
 --namespace
 Windows.Win32.Storage.FileSystem
+--config
+parse-win32-annotations

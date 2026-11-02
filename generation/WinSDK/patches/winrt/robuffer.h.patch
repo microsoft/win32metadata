@@ -1,0 +1,12 @@
+diff --git a/winrt/robuffer.h b/winrt/robuffer.h
+index ff81a7e7..4cca81c6 100644
+--- a/winrt/robuffer.h
++++ b/winrt/robuffer.h
+@@ -16,6 +16,7 @@
+ #include <apisetcconv.h>
+ #include <objidl.h>
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI
+ RoGetBufferMarshaler(
+     _Outptr_ IMarshal** bufferMarshaler

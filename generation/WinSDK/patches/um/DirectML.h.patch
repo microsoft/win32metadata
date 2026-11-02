@@ -1,0 +1,12 @@
+diff --git a/um/DirectML.h b/um/DirectML.h
+index b8b66036..934cc8b0 100644
+--- a/um/DirectML.h
++++ b/um/DirectML.h
+@@ -2284,6 +2284,7 @@ enum DML_CREATE_DEVICE_FLAGS
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(DML_CREATE_DEVICE_FLAGS)
+ 
++_Win32_SupportedOS_10240_
+ STDAPI DMLCreateDevice(
+     ID3D12Device* d3d12Device,
+     DML_CREATE_DEVICE_FLAGS flags,

@@ -1,0 +1,21 @@
+diff --git a/um/rstkys.idl b/um/rstkys.idl
+index 9cfc9f36..ae304343 100644
+--- a/um/rstkys.idl
++++ b/um/rstkys.idl
+@@ -34,14 +34,14 @@ interface IRowsetKeys : IUnknown {
+ 
+ 	HRESULT ListKeys(
+ 		[in, out] DBORDINAL * pcColumns,
+-		[out, size_is(,(ULONG)*pcColumns)] DBORDINAL ** prgColumns
++		[out, size_is(,(ULONG)*pcColumns), annotation("_Outptr_result_buffer_(*pcColumns)")] DBORDINAL ** prgColumns
+ 	);
+ 	
+ #else  //No casting by ULONG for 32-bit.
+ 
+ 	HRESULT ListKeys(
+ 		[in, out] DBORDINAL * pcColumns,
+-		[out, size_is(,*pcColumns)] DBORDINAL ** prgColumns
++		[out, size_is(,*pcColumns), annotation("_Outptr_result_buffer_(*pcColumns)")] DBORDINAL ** prgColumns
+ 	);
+ 	
+ #endif

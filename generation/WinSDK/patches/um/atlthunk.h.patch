@@ -1,0 +1,44 @@
+diff --git a/um/atlthunk.h b/um/atlthunk.h
+index 67558895..814f90e9 100644
+--- a/um/atlthunk.h
++++ b/um/atlthunk.h
+@@ -15,6 +15,7 @@ Author:
+ --*/
+ 
+ #pragma once
++#include <sal.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -29,13 +30,13 @@ typedef struct AtlThunkData_t AtlThunkData_t;
+ 
+ AtlThunkData_t*
+ __stdcall
+-AtlThunk_AllocateData(
++_Win32_SupportedOS_10240_ AtlThunk_AllocateData(
+     void
+     );
+ 
+ void
+ __stdcall
+-AtlThunk_InitData(
++_Win32_SupportedOS_10240_ AtlThunk_InitData(
+     AtlThunkData_t* Thunk,
+     void* /*WNDPROC*/ Proc,
+     size_t FirstParameter
+@@ -43,13 +44,13 @@ AtlThunk_InitData(
+ 
+ WNDPROC
+ __stdcall
+-AtlThunk_DataToCode(
++_Win32_SupportedOS_10240_ AtlThunk_DataToCode(
+     AtlThunkData_t*
+     );
+ 
+ void
+ __stdcall
+-AtlThunk_FreeData(
++_Win32_SupportedOS_10240_ AtlThunk_FreeData(
+     AtlThunkData_t* Thunk
+     );
+ 

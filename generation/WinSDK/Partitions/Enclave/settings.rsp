@@ -6,3 +6,5 @@
 <IncludeRoot>/um/winenclaveapi.h
 --namespace
 Windows.Win32.System.Environment
+--config
+parse-win32-annotations

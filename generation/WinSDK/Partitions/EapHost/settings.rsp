@@ -13,3 +13,5 @@ _NgcTicketContext
 <IncludeRoot>/um/eapmethodauthenticatorapis.h
 --namespace
 Windows.Win32.Security.ExtensibleAuthenticationProtocol
+--config
+parse-win32-annotations

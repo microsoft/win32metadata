@@ -9,3 +9,5 @@
 <IncludeRoot>/um/wdstptmgmtmsg.h
 --namespace
 Windows.Win32.System.DeploymentServices
+--config
+parse-win32-annotations

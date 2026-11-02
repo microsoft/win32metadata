@@ -5,3 +5,5 @@
 <IncludeRoot>/um/wsbonlineerror.h
 --namespace
 Windows.Win32.System.ServerBackup
+--config
+parse-win32-annotations

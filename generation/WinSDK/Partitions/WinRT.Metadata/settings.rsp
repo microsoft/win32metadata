@@ -1,7 +1,3 @@
---with-type
-HANDLE_OPTIONS=uint
---with-attribute
-HANDLE_OPTIONS=Flags
 --exclude
 RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration
@@ -20,3 +16,5 @@ ID2D1Factory
 <IncludeRoot>/winrt/roparameterizediid.h
 --namespace
 Windows.Win32.System.WinRT.Metadata
+--config
+parse-win32-annotations

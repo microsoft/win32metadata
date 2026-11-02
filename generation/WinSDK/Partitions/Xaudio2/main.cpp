@@ -13,3 +13,6 @@
 #include <xaudio2fx.h>
 #include <hrtfapoapi.h>
 #include <xapo.h>
+// The exported declarations do not require DirectXMath's compiler-specific SIMD headers.
+#define _XM_NO_INTRINSICS_
+#include <x3daudio.h>

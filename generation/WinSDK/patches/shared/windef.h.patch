@@ -1,0 +1,39 @@
+--- a/shared/windef.h
++++ b/shared/windef.h
+@@ -39,4 +39,7 @@
+ DECLARE_HANDLE            (HWND);
+ DECLARE_HANDLE            (HHOOK);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AlsoUsableFor_(HANDLE) typedef HWND HWND;
++#endif
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -73,3 +76,7 @@
+ DECLARE_HANDLE(HBITMAP);
+ DECLARE_HANDLE(HBRUSH);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HBITMAP HBITMAP;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HBRUSH HBRUSH;
++#endif
+ #endif
+@@ -86,2 +93,5 @@
+ DECLARE_HANDLE(HFONT);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HFONT HFONT;
++#endif
+ #endif
+@@ -93,3 +103,7 @@
+ DECLARE_HANDLE(HPALETTE);
+ DECLARE_HANDLE(HPEN);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HPALETTE HPALETTE;
++_Win32_AlsoUsableFor_(HGDIOBJ) typedef HPEN HPEN;
++#endif
+ #endif
+@@ -134,3 +148,6 @@
+ #endif
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AlsoUsableFor_(HICON) typedef HCURSOR HCURSOR;
++#endif
+ typedef DWORD   COLORREF;

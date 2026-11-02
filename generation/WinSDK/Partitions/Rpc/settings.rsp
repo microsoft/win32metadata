@@ -14,3 +14,5 @@ NDR_SCONTEXT
 <IncludeRoot>/um/rpcnsip.h
 --namespace
 Windows.Win32.System.Rpc
+--config
+parse-win32-annotations

@@ -1,0 +1,26 @@
+--- a/um/alljoyn_c/AboutDataListener.h
++++ b/um/alljoyn_c/AboutDataListener.h
+@@ -23,6 +23,7 @@
+ #ifndef _ALLJOYN_ABOUTDATALISTENER_C_H
+ #define _ALLJOYN_ABOUTDATALISTENER_C_H
+ 
++#include <sal.h>
+ #include <alljoyn_c/AjAPI.h>
+ #include <alljoyn_c/MsgArg.h>
+ 
+@@ -72,7 +73,7 @@
+  *  - other error indicating failure
+  */
+ typedef QStatus (AJ_CALL * alljoyn_aboutdatalistener_getaboutdata_ptr)(const void* context,
+-                                                                       alljoyn_msgarg msgArg,
++                                                                       _In_ alljoyn_msgarg msgArg,
+                                                                        const char* language);
+ 
+ /**
+@@ -104,5 +105,5 @@
+  * @return ER_OK if successful
+  */
+ typedef QStatus (AJ_CALL * alljoyn_aboutdatalistener_getannouncedaboutdata_ptr)(const void* context,
+-                                                                                alljoyn_msgarg msgArg);
++                                                                                _In_ alljoyn_msgarg msgArg);
+ 

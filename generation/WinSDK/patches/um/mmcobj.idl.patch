@@ -1,0 +1,28 @@
+diff --git a/um/mmcobj.idl b/um/mmcobj.idl
+index faa5645d..360af95c 100644
+--- a/um/mmcobj.idl
++++ b/um/mmcobj.idl
+@@ -13,6 +13,7 @@
+ // This file will be processed by the MIDL compiler to produce the
+ // type library (MMCObj.tlb).
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -128,6 +129,7 @@ typedef     IDispatch**       PPDISPATCH;
+  * so it is defined here for the same reason.
+  *--------------------------------------------------------------------------*/
+ 
++cpp_quote("/* Win32Metadata: interface ::ISnapinProperties => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(F7889DA9-4A02-4837-BF89-1A6F2A021010),
+@@ -162,6 +164,7 @@ interface ISnapinProperties : IUnknown
+         [in, size_is(cProperties)] MMC_SNAPIN_PROPERTY* pProperties);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::ISnapinPropertiesCallback => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(A50FA2E5-7E61-45EB-A8D4-9A07B3E851A8),

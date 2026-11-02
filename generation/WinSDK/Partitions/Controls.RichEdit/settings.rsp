@@ -7,4 +7,5 @@ UiaRect
 <IncludeRoot>/um/TOM.h
 --namespace
 Windows.Win32.UI.Controls.RichEdit
-
+--config
+parse-win32-annotations

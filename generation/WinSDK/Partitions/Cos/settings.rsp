@@ -6,3 +6,5 @@ IResourceManagerXXX
 <IncludeRoot>/um/Mtxdm.h
 --namespace
 Windows.Win32.System.ComponentServices
+--config
+parse-win32-annotations

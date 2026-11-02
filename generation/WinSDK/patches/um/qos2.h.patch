@@ -1,0 +1,107 @@
+diff --git a/um/qos2.h b/um/qos2.h
+index 1d59ed67b57a2613a197b810fdb128d88bf911db..fec565d2cff8215e5677097fa41dfb080da3dd32 100644
+--- a/um/qos2.h
++++ b/um/qos2.h
+@@ -13,6 +13,8 @@
+ --*/
+ 
+ #pragma once
++
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -504,11 +506,12 @@
+ //          and MSFT firewall documentation for more details.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSCreateHandle(
+     _In_    PQOS_VERSION    Version,
+-    _Out_   PHANDLE         QOSHandle
++    _Out_   _Win32_RAIIFree_(QOSCloseHandle, -1, 0) PHANDLE         QOSHandle
+ );
+ 
+ //
+@@ -539,6 +542,7 @@
+ //  information, call GetLastError.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSCloseHandle(
+@@ -596,6 +600,7 @@
+ //          have the required components or that it is not on the same link.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSStartTrackingClient(
+@@ -630,6 +635,7 @@
+ //  information, call GetLastError.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSStopTrackingClient(
+@@ -675,6 +681,7 @@
+ //          to perform this call.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSEnumerateFlows(
+@@ -818,6 +825,7 @@
+ //          have the required components or that it is not on the same link.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSAddSocketToFlow(
+@@ -881,6 +889,7 @@
+ //          Invalid FlowId specified
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSRemoveSocketFromFlow(
+@@ -985,6 +994,7 @@
+ //          to perform this call.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSSetFlow(
+@@ -1107,6 +1117,7 @@
+ //          before ascertaining the state of the network.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSQueryFlow(
+@@ -1228,6 +1239,7 @@
+ //          information on your network is currently not supported.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSNotifyFlow(
+@@ -1274,6 +1286,7 @@
+ //  information, call GetLastError.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSCancel(

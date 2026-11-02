@@ -3,3 +3,5 @@
 <IncludeRoot>/um/jobapi2.h
 --namespace
 Windows.Win32.System.JobObjects
+--config
+parse-win32-annotations

@@ -1,0 +1,14 @@
+diff --git a/um/fxsutility.h b/um/fxsutility.h
+index a836ed0f..00357196 100644
+--- a/um/fxsutility.h
++++ b/um/fxsutility.h
+@@ -36,7 +36,9 @@ typedef enum {
+ 	  SEND_TO_FAX_RECIPIENT_ATTACHMENT
+ } SendToMode;
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI CanSendToFaxRecipient();
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI SendToFaxRecipient(SendToMode sndMode, LPCWSTR lpFileName);
+ 
+ #ifdef __cplusplus

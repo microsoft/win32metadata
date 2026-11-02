@@ -4,3 +4,5 @@
 <IncludeRoot>/um/wsmerror.h
 --namespace
 Windows.Win32.System.RemoteManagement
+--config
+parse-win32-annotations

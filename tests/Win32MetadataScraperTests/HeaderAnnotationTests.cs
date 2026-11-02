@@ -113,6 +113,19 @@ generate-cpp-attributes
 
             internal string ReadSource() => File.ReadAllText(Output);
             internal string ReadAdditionalTypes() => File.ReadAllText(Path.ChangeExtension(Output, ".header-types.cs"));
+            internal void Retain(string evidence)
+            {
+                if (evidence == null)
+                    return;
+                File.WriteAllText(Path.Combine(evidence, "scraper.stdout-stderr.log"), Diagnostics ?? "");
+                foreach (string file in Directory.EnumerateFiles(DirectoryPath, "*", SearchOption.AllDirectories))
+                {
+                    string destination = Path.Combine(evidence, "fixture", Path.GetRelativePath(DirectoryPath, file));
+                    Directory.CreateDirectory(Path.GetDirectoryName(destination));
+                    File.Copy(file, destination, overwrite: false);
+                }
+            }
+
             public void Dispose() => Directory.Delete(DirectoryPath, recursive: true);
         }
     }

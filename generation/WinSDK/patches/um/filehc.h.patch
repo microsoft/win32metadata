@@ -1,0 +1,12 @@
+diff --git a/um/filehc.h b/um/filehc.h
+index d1db3603..fb180ca4 100644
+--- a/um/filehc.h
++++ b/um/filehc.h
+@@ -639,6 +639,7 @@ FindSyncContextFromName(
+ //
+ //	If the name is already present in the cache, this will fail with GetLastError()==ERROR_DUP_NAME !
+ //
++_Win32_SetLastError_
+ FILEHC_EXPORT
+ BOOL	__stdcall
+ AssociateContextWithName(	

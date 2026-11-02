@@ -1,0 +1,60 @@
+diff --git a/um/casetup.idl b/um/casetup.idl
+index 295d43d5..3a030ca9 100644
+--- a/um/casetup.idl
++++ b/um/casetup.idl
+@@ -9,6 +9,7 @@
+ //
+ //---------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -20,6 +21,7 @@ import "oaidl.idl";
+ //
+ // Interface ICertSrvSetupKeyInformation
+ //
++cpp_quote("/* Win32Metadata: interface ::ICertSrvSetupKeyInformation => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(6ba73778-36da-4c39-8a85-bcfa7d000793),
+@@ -83,6 +85,7 @@ interface ICertSrvSetupKeyInformation: IDispatch
+ //+--------------------------------------------------------------------------
+ // ICertSrvSetupKeyInformationCollection -- local COM interface
+ //+--------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::ICertSrvSetupKeyInformationCollection => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(e65c8b00-e58f-41f9-a9ec-a28d7427c844),
+@@ -134,6 +137,7 @@ typedef enum {
+ //
+ // Interface ICertSrvSetup
+ //
++cpp_quote("/* Win32Metadata: interface ::ICertSrvSetup => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(b760a1bb-4784-44c0-8f12-555f0780ff25),
+@@ -246,6 +250,7 @@ typedef enum
+ //
+ // Interface IMSCEPSetup
+ //
++cpp_quote("/* Win32Metadata: interface ::IMSCEPSetup => SupportedOSPlatform(\"windowsserver2008\") */")
+ [
+     object,
+     uuid(4f7761bb-9f3b-4592-9ee0-9a73259c313e),
+@@ -312,6 +317,7 @@ typedef enum
+ //
+ // Interface ICertificateEnrollmentServerSetup
+ //
++cpp_quote("/* Win32Metadata: interface ::ICertificateEnrollmentServerSetup => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(70027FDB-9DD9-4921-8944-B35CB31BD2EC),
+@@ -359,6 +365,7 @@ typedef enum
+ //
+ // Interface ICertificateEnrollmentPolicyServerSetup
+ //
++cpp_quote("/* Win32Metadata: interface ::ICertificateEnrollmentPolicyServerSetup => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(859252CC-238C-4a88-B8FD-A37E7D04E68B),

@@ -2,6 +2,5 @@
 <IncludeRoot>/um/xamlOM.h
 --namespace
 Windows.Win32.UI.Xaml.Diagnostics
---with-librarypath
-InitializeXamlDiagnostic=Windows.UI.Xaml.dll
-InitializeXamlDiagnosticsEx=Windows.UI.Xaml.dll
+--config
+parse-win32-annotations

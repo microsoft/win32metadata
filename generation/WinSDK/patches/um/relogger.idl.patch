@@ -1,0 +1,36 @@
+diff --git a/um/relogger.idl b/um/relogger.idl
+index 93264ea7..dfdf7db9 100644
+--- a/um/relogger.idl
++++ b/um/relogger.idl
+@@ -2,6 +2,7 @@
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+ //
+ 
++#include <sal.h>
+ cpp_quote("//  Copyright (c) Microsoft Corporation.  All rights reserved.")
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -110,6 +111,7 @@ typedef ULONG64 RELOGSTREAM_ID;
+ 
+ interface ITraceRelogger;
+ 
++cpp_quote("/* Win32Metadata: interface ::ITraceEvent => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(8CC97F40-9028-4FF3-9B62-7D1F79CA7BCB),
+@@ -170,6 +172,7 @@ interface ITraceEvent : IUnknown
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ITraceEventCallback => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(3ED25501-593F-43E9-8F38-3AB46F5A4A52),
+@@ -193,6 +196,7 @@ interface ITraceEventCallback : IUnknown
+ };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ITraceRelogger => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     uuid(F754AD43-3BCC-4286-8009-9C5DA214E84E),

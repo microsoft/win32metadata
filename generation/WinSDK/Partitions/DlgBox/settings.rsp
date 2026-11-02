@@ -4,3 +4,5 @@
 <IncludeRoot>/um/colordlg.h
 --namespace
 Windows.Win32.UI.Controls.Dialogs
+--config
+parse-win32-annotations

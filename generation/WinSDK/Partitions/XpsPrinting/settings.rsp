@@ -3,3 +3,5 @@
 <IncludeRoot>/um/xpsprint.h
 --namespace
 Windows.Win32.Storage.Xps.Printing
+--config
+parse-win32-annotations

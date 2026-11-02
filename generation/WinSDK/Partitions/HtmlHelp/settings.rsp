@@ -8,3 +8,5 @@ IWordBreaker
 <IncludeRoot>/um/infotech.h
 --namespace
 Windows.Win32.Data.HtmlHelp
+--config
+parse-win32-annotations

@@ -1,6 +1,5 @@
---with-type
-_tagSLDATATYPE=uint
-SLDATATYPE=uint
+--config
+parse-win32-annotations
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD

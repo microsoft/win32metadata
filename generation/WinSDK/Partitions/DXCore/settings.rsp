@@ -10,4 +10,5 @@
 <IncludeRoot>/um/dxcore_interface.h
 --namespace
 Windows.Win32.Graphics.DXCore
-
+--config
+parse-win32-annotations

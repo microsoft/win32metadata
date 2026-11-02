@@ -26,3 +26,5 @@ SignalObjectAndWait
 <PartitionDir>/main.cpp
 --namespace
 Windows.Win32.System.Threading
+--config
+parse-win32-annotations

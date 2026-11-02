@@ -1,0 +1,21 @@
+diff --git a/um/servprov.idl b/um/servprov.idl
+index 5603cd62..a685557c 100644
+--- a/um/servprov.idl
++++ b/um/servprov.idl
+@@ -9,6 +9,8 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+ cpp_quote("// ServProv.h")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+@@ -92,6 +94,7 @@ cpp_quote("#else // VC6 Hack")
+         [in] REFIID riid,
+         [out, iid_is(riid)] IUnknown ** ppvObject);
+ }
++cpp_quote("/* Win32Metadata: parameter ::IServiceProvider::QueryService::ppvObject => ComOutPtr(true) */")
+ cpp_quote("#endif // VC6 Hack")
+ 
+ 

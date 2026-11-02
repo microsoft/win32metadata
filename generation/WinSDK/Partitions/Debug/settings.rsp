@@ -12,3 +12,5 @@
 <IncludeRoot>/um/wheadef.h
 --namespace
 Windows.Win32.System.Diagnostics.Debug
+--config
+parse-win32-annotations

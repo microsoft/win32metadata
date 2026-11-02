@@ -1,0 +1,12 @@
+diff --git a/um/wtshintapi.h b/um/wtshintapi.h
+index 338e64c8..8e5a66ce 100644
+--- a/um/wtshintapi.h
++++ b/um/wtshintapi.h
+@@ -86,6 +86,7 @@ extern "C" {
+ //                 The hintDataSize MUST be sizeof(RECT)
+ /*------------------------------------------------------------------*/
+ 
++_Win32_SupportedOS_Windows8_
+ HRESULT WINAPI WTSSetRenderHint(
+   _Inout_  UINT64*             pRenderHintID,
+   _In_     HWND  	       hwndOwner,

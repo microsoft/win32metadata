@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using ClangSharpSourceToWinmd;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -462,6 +464,97 @@ namespace Windows.Win32.Foundation
             }, requiredNamespaces: new Dictionary<string, string> { ["G"] = "Canonical" });
         }
 
+        [DataTestMethod]
+        [DataRow("x86")]
+        [DataRow("x64")]
+        [DataRow("arm64")]
+        [DataRow("crossarch")]
+        public void SharedDxgiUsageDependenciesComposeAtTheirConfiguredNamespace(string architecture)
+        {
+            var members = new Dictionary<string, uint>
+            {
+                ["DXGI_USAGE_SHADER_INPUT"] = 16,
+                ["DXGI_USAGE_RENDER_TARGET_OUTPUT"] = 32,
+                ["DXGI_USAGE_BACK_BUFFER"] = 64,
+                ["DXGI_USAGE_SHARED"] = 128,
+                ["DXGI_USAGE_READ_ONLY"] = 256,
+                ["DXGI_USAGE_DISCARD_ON_PRESENT"] = 512,
+                ["DXGI_USAGE_UNORDERED_ACCESS"] = 1024,
+            };
+            string declarations = string.Join(", ", members.Select(member =>
+                $"{member.Key}=unchecked((uint){member.Value}UL)"));
+            var inputs = new Dictionary<string, string>
+            {
+                ["association.manual.cs"] = @"namespace Windows.Win32.Foundation.Metadata {
+                    [System.AttributeUsage(System.AttributeTargets.Field)]
+                    public sealed class AssociatedEnumAttribute:System.Attribute {
+                        public AssociatedEnumAttribute(string name) { }
+                    }
+                }",
+            };
+            foreach (string partition in new[] { "Direct3D10", "Direct3D11", "Dxgi" })
+            {
+                string ns = "Windows.Win32.Graphics." + partition;
+                inputs[partition + ".header-types.cs"] =
+                    $"namespace {ns} {{ [global::System.Flags] public enum DXGI_USAGE:uint {{ {declarations} }} }}";
+                inputs[partition + ".cs"] = $@"namespace {ns} {{ public struct Consumer {{
+                    [global::Windows.Win32.Foundation.Metadata.AssociatedEnum(""DXGI_USAGE"")] public uint BufferUsage;
+                    public DXGI_USAGE TypedUsage;
+                }} }}";
+            }
+            var unorganized = Assert.ThrowsException<InvalidOperationException>(() =>
+                Compile(inputs, _ => Assert.Fail("Unorganized shared groups must remain ambiguous."), architecture));
+            StringAssert.Contains(unorganized.Message, "found 3");
+            Compile(inputs, compilation =>
+            {
+                AssertCompiles(compilation);
+                var group = compilation.GetTypeByMetadataName("Windows.Win32.Graphics.Dxgi.DXGI_USAGE")!;
+                Assert.IsNotNull(group);
+                Assert.AreEqual(SpecialType.System_UInt32, group.EnumUnderlyingType!.SpecialType);
+                Assert.IsTrue(group.GetAttributes().Any(attribute =>
+                    attribute.AttributeClass?.ToDisplayString() == "System.FlagsAttribute"));
+                CollectionAssert.AreEqual(members.Values.ToArray(),
+                    group.GetMembers().OfType<IFieldSymbol>().Where(field => field.HasConstantValue)
+                        .Select(field => (uint)field.ConstantValue!).ToArray());
+                foreach (string partition in new[] { "Direct3D10", "Direct3D11", "Dxgi" })
+                {
+                    string ns = "Windows.Win32.Graphics." + partition;
+                    if (partition != "Dxgi")
+                        Assert.IsNull(compilation.GetTypeByMetadataName(ns + ".DXGI_USAGE"));
+                    var fields = compilation.GetTypeByMetadataName(ns + ".Consumer")!
+                        .GetMembers().OfType<IFieldSymbol>().ToArray();
+                    Assert.IsTrue(SymbolEqualityComparer.Default.Equals(group,
+                        fields.Single(field => field.Name == "TypedUsage").Type));
+                    var usage = fields.Single(field => field.Name == "BufferUsage");
+                    Assert.AreEqual(SpecialType.System_UInt32, usage.Type.SpecialType);
+                    Assert.AreEqual("DXGI_USAGE", usage.GetAttributes().Single().ConstructorArguments.Single().Value);
+                }
+            }, architecture, new Dictionary<string, string> { ["DXGI_USAGE"] = "Windows.Win32.Graphics.Dxgi" },
+            assertWinmd: (compilation, directory) =>
+            {
+                string output = Path.Combine(directory, "Test.winmd");
+                var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
+                    new Dictionary<string, string>(), new HashSet<string>(), new HashSet<string>(), new Version(1, 0), output);
+                Assert.IsTrue(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
+                using var stream = File.OpenRead(output);
+                using var pe = new PEReader(stream);
+                var reader = pe.GetMetadataReader(MetadataReaderOptions.None);
+                var groups = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => reader.GetString(type.Name) == "DXGI_USAGE").ToArray();
+                Assert.AreEqual(1, groups.Length);
+                Assert.AreEqual("Windows.Win32.Graphics.Dxgi", reader.GetString(groups[0].Namespace));
+                var fields = groups[0].GetFields().Select(reader.GetFieldDefinition)
+                    .Where(field => !field.GetDefaultValue().IsNil).ToArray();
+                Assert.AreEqual(members.Count, fields.Length);
+                foreach (var field in fields)
+                {
+                    var value = reader.GetConstant(field.GetDefaultValue());
+                    Assert.AreEqual(ConstantTypeCode.UInt32, value.TypeCode);
+                    Assert.AreEqual(members[reader.GetString(field.Name)], reader.GetBlobReader(value.Value).ReadUInt32());
+                }
+            });
+        }
+
         [TestMethod]
         public void DistinctNativeDeclarationsInOneTranslationUnitRemainAnError()
         {
@@ -479,7 +572,8 @@ namespace Windows.Win32.Foundation
         }
 
         private static void Compile(Dictionary<string, string> inputs, Action<CSharpCompilation> assert, string arch = "crossarch",
-            Dictionary<string, string>? requiredNamespaces = null)
+            Dictionary<string, string>? requiredNamespaces = null,
+            Action<ClangSharpSourceCompilation, string>? assertWinmd = null)
         {
             string directory = Path.Combine(Path.GetTempPath(), "header-enum-composition-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(directory);
@@ -506,6 +600,7 @@ namespace Windows.Win32.Foundation.Metadata
                     Array.Empty<string>(), new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(),
                     new HashSet<string>(), Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
                 assert(compilation.CSharpCompilation);
+                assertWinmd?.Invoke(compilation, directory);
                 foreach (var input in inputs)
                     Assert.AreEqual(input.Value, File.ReadAllText(Path.Combine(directory, input.Key)));
             }

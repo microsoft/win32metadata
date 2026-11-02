@@ -11,3 +11,5 @@
 <IncludeRoot>/um/wbcl.h
 --namespace
 Windows.Win32.NetworkManagement.QoS
+--config
+parse-win32-annotations

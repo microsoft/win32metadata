@@ -1,10 +1,11 @@
 --config
 exclude-empty-records
+parse-win32-annotations
+# winnt.h's x86 SLIST_ENTRY alias needs the complete _SINGLE_LIST_ENTRY provider.
 --exclude
 _LIST_ENTRY
 LIST_ENTRY32
 LIST_ENTRY64
-_SINGLE_LIST_ENTRY
 _PROCESSOR_NUMBER
 _GROUP_AFFINITY
 _GROUP_AFFINITY32

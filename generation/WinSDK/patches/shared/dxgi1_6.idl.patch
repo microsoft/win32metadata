@@ -1,0 +1,53 @@
+diff --git a/shared/dxgi1_6.idl b/shared/dxgi1_6.idl
+index 6b9879bd..88541e70 100644
+--- a/shared/dxgi1_6.idl
++++ b/shared/dxgi1_6.idl
+@@ -1,4 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("// Copyright (c) Microsoft Corporation.  All Rights Reserved")
+ 
+ import "dxgi1_5.idl";
+@@ -9,6 +11,7 @@ cpp_quote("#include <winapifamily.h>")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
+ cpp_quote( "HRESULT WINAPI DXGIDeclareAdapterRemovalSupport();" )
++cpp_quote("/* Win32Metadata: function ::DXGIDeclareAdapterRemovalSupport => SupportedOSPlatform(\"windows10.0.17134\") */")
+ 
+ typedef enum DXGI_ADAPTER_FLAG3
+ {
+@@ -47,6 +50,7 @@ typedef struct DXGI_ADAPTER_DESC3
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIAdapter4 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: parameter ::IDXGIAdapter4::GetDesc3::pDesc => RetVal */")
+ [
+     object,
+     uuid(3c8d99d1-4fbf-4181-a82c-af66bf7bd24e),
+@@ -112,6 +116,9 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS( DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS )
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput6 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDXGIOutput6 => SupportedOSPlatform(\"windows10.0.10240\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGIOutput6::GetDesc1::pDesc => RetVal */")
++cpp_quote("/* Win32Metadata: parameter ::IDXGIOutput6::CheckHardwareCompositionSupport::pFlags => AssociatedEnum(DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS) */")
+ [
+     object,
+     uuid(068346e8-aaec-4b84-add7-137f513f77a1),
+@@ -141,6 +148,7 @@ typedef enum DXGI_GPU_PREFERENCE
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIFactory6 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDXGIFactory6 => SupportedOSPlatform(\"windows10.0.17134\") */")
+ [
+     object,
+     uuid(c1b6694f-ff09-44a9-b03c-77900a0a1d17),
+@@ -161,6 +169,7 @@ interface IDXGIFactory6 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIFactory7 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDXGIFactory7 => SupportedOSPlatform(\"windows10.0.17763\") */")
+ [
+     object,
+     uuid(a4966eed-76db-44da-84c1-ee9a7afb20a8),

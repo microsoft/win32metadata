@@ -4,3 +4,5 @@
 <IncludeRoot>/um/fdi.h
 --namespace
 Windows.Win32.Storage.Cabinets
+--config
+parse-win32-annotations

@@ -1843,17 +1843,7 @@ typedef unsigned long POINTER_INPUT_TYPE;
         }
 
         private static void RetainFixture(HeaderAnnotationTests.NativeFixture fixture, string evidence)
-        {
-            if (evidence == null)
-                return;
-            File.WriteAllText(Path.Combine(evidence, "scraper.stdout-stderr.log"), fixture.Diagnostics ?? "");
-            foreach (string file in Directory.EnumerateFiles(fixture.DirectoryPath, "*", SearchOption.AllDirectories))
-            {
-                string destination = Path.Combine(evidence, "fixture", Path.GetRelativePath(fixture.DirectoryPath, file));
-                Directory.CreateDirectory(Path.GetDirectoryName(destination));
-                File.Copy(file, destination, overwrite: false);
-            }
-        }
+            => fixture.Retain(evidence);
 
         private static void AssertWrapper(MetadataReader reader, string name, string expectedStorage)
         {

@@ -1,0 +1,92 @@
+diff --git a/um/dxva2api.idl b/um/dxva2api.idl
+index 5ca7bc2e..e087e3f7 100644
+--- a/um/dxva2api.idl
++++ b/um/dxva2api.idl
+@@ -5,6 +5,7 @@
+ // Copyright (c) 1999 - 2005, Microsoft Corporation.  All rights reserved.
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "unknwn.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -549,6 +550,7 @@ typedef struct _DXVA2_ConfigPictureDecode
+     USHORT      ConfigDecoderSpecific;
+ } DXVA2_ConfigPictureDecode;
+ 
++cpp_quote("/* Win32Metadata: field ::DXVA2_DecodeBufferDesc::CompressedBufferType => AssociatedEnum(__MIDL___MIDL_itf_dxva2api_0000_0000_0012) */")
+ typedef struct _DXVA2_DecodeBufferDesc
+ {
+     DWORD       CompressedBufferType;
+@@ -631,6 +633,7 @@ interface IDirectXVideoProcessor;
+ //
+ //  TBD.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirect3DDeviceManager9 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75),
+@@ -679,6 +682,8 @@ interface IDirect3DDeviceManager9 : IUnknown
+ //
+ //  TBD.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirectXVideoAccelerationService => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDirectXVideoAccelerationService::CreateSurface::DxvaType => AssociatedEnum(__MIDL___MIDL_itf_dxva2api_0000_0000_0013) */")
+ [
+     object,
+     uuid(fc51a550-d5e7-11d9-af55-00054e43ff02),
+@@ -705,6 +710,7 @@ interface IDirectXVideoAccelerationService : IUnknown
+ //
+ //  TBD.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirectXVideoDecoderService => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(fc51a551-d5e7-11d9-af55-00054e43ff02),
+@@ -747,6 +753,7 @@ interface IDirectXVideoDecoderService : IDirectXVideoAccelerationService
+ //
+ //  TBD.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirectXVideoProcessorService => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(fc51a552-d5e7-11d9-af55-00054e43ff02),
+@@ -817,6 +824,8 @@ interface IDirectXVideoProcessorService : IDirectXVideoAccelerationService
+ //
+ //  TBD.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirectXVideoDecoder => SupportedOSPlatform(\"windows6.0.6000\") */")
++cpp_quote("/* Win32Metadata: parameter ::IDirectXVideoDecoder::GetBuffer::BufferType => AssociatedEnum(__MIDL___MIDL_itf_dxva2api_0000_0000_0012) */")
+ [
+     object,
+     uuid(f2b0810a-fd00-43c9-918c-df94e2d8ef7d),
+@@ -867,6 +876,7 @@ interface IDirectXVideoDecoder : IUnknown
+ //
+ //  TBD.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirectXVideoProcessor => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(8c3a39f0-916e-4690-804f-4c8001355d25),
+@@ -939,6 +949,7 @@ typedef enum
+ //  in DirectShow disconnecting 2 filters invalidates any prior agreement between
+ //  the two filters about the surface type to use for media samples.
+ //
++cpp_quote("/* Win32Metadata: interface ::IDirectXVideoMemoryConfiguration => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(b7f916dd-db3b-49c1-84d7-e45ef99ec726),
+@@ -990,11 +1001,13 @@ interface IDirectXVideoMemoryConfiguration : IUnknown
+ //////////////////////////////////////////////////////////////////////////////
+ 
+ cpp_quote("STDAPI DXVA2CreateDirect3DDeviceManager9(")
++cpp_quote("/* Win32Metadata: function ::DXVA2CreateDirect3DDeviceManager9 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("    _Out_ UINT* pResetToken,")
+ cpp_quote("    _Outptr_ IDirect3DDeviceManager9** ppDeviceManager")
+ cpp_quote("    );")
+ 
+ cpp_quote("STDAPI DXVA2CreateVideoService(")
++cpp_quote("/* Win32Metadata: function ::DXVA2CreateVideoService => SupportedOSPlatform(\"windows6.0.6000\") */")
+ cpp_quote("    _In_ IDirect3DDevice9* pDD,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void** ppService")

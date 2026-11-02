@@ -4,3 +4,5 @@
 <IncludeRoot>/um/devquerydef.h
 --namespace
 Windows.Win32.Devices.DeviceQuery
+--config
+parse-win32-annotations

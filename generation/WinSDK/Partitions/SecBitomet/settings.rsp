@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/shared/winbio_types.h
 <IncludeRoot>/um/WinBio.h

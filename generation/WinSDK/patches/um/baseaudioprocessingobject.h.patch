@@ -1,0 +1,31 @@
+diff --git a/um/baseaudioprocessingobject.h b/um/baseaudioprocessingobject.h
+index 5ac2cb00..4bf521e6 100644
+--- a/um/baseaudioprocessingobject.h
++++ b/um/baseaudioprocessingobject.h
+@@ -6,6 +6,8 @@
+ //
+ 
+ #pragma once
++#include <sal.h>
++
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -40,7 +42,7 @@ extern "C"
+     //      E_OUTOFMEMORY - No memory is available.
+     //
+     _Success_(return == S_OK)
+-    STDAPI AERT_Allocate(_In_ size_t size, _Outptr_result_bytebuffer_(size) void **pMemory);
++    _Win32_SupportedOS_WindowsVista_ STDAPI AERT_Allocate(_In_ size_t size, _Outptr_result_bytebuffer_(size) void **pMemory);
+ 
+     //-------------------------------------------------------------------------
+     // Description: Locked memory free
+@@ -51,7 +53,7 @@ extern "C"
+     // Return codes:
+     //      S_OK
+     //
+-    STDAPI AERT_Free(_In_ void *pMemory);
++    _Win32_SupportedOS_WindowsVista_ STDAPI AERT_Free(_In_ void *pMemory);
+ }
+ 
+ 

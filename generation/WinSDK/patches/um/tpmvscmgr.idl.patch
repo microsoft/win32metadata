@@ -1,0 +1,28 @@
+diff --git a/um/tpmvscmgr.idl b/um/tpmvscmgr.idl
+index d32f8659..5f10a719 100644
+--- a/um/tpmvscmgr.idl
++++ b/um/tpmvscmgr.idl
+@@ -7,6 +7,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -67,6 +68,7 @@ typedef [v1_enum] enum
+     TPMVSCMGR_ERROR_CARD_DESTROY, // Unable to destroy TPM Smart Card.
+ } TPMVSCMGR_ERROR;
+ 
++cpp_quote("/* Win32Metadata: interface ::ITpmVirtualSmartCardManagerStatusCallback => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(1A1BB35F-ABB8-451C-A1AE-33D98F1BEF4A),
+@@ -94,6 +96,7 @@ cpp_quote("//")
+ 
+ const BYTE TPMVSC_DEFAULT_ADMIN_ALGORITHM_ID = 0x82;
+ 
++cpp_quote("/* Win32Metadata: interface ::ITpmVirtualSmartCardManager => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(112B1DFF-D9DC-41F7-869F-D67FEE7CB591),

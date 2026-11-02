@@ -4,3 +4,5 @@
 --namespace
 Windows.Win32.Graphics.CompositionSwapchain
 
+--config
+parse-win32-annotations

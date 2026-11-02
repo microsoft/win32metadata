@@ -16,3 +16,5 @@
 UIALL
 --namespace
 Windows.Win32.System.ApplicationInstallationAndServicing
+--config
+parse-win32-annotations

@@ -1,0 +1,47 @@
+diff --git a/um/faxroute.h b/um/faxroute.h
+index 539c7a02..f77caf9e 100644
+--- a/um/faxroute.h
++++ b/um/faxroute.h
+@@ -100,12 +100,16 @@ enum FAXROUTE_ENABLE {
+ // prototypes
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxRouteInitialize(
+     IN HANDLE HeapHandle,
+     IN PFAX_ROUTE_CALLBACKROUTINES FaxRouteCallbackRoutines
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxRouteDeviceEnable(
+     IN  LPCWSTR RoutingGuid,
+@@ -113,12 +117,16 @@ FaxRouteDeviceEnable(
+     IN  LONG Enabled
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxRouteDeviceChangeNotification(
+     IN  DWORD DeviceId,
+     IN  BOOL  NewDevice
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxRouteGetRoutingInfo(
+     IN  LPCWSTR RoutingGuid,
+@@ -127,6 +135,8 @@ FaxRouteGetRoutingInfo(
+     OUT LPDWORD RoutingInfoSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxRouteSetRoutingInfo(
+     IN  LPCWSTR RoutingGuid,

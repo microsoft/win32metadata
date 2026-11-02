@@ -7,3 +7,5 @@
 <IncludeRoot>/um/jscript9diag.h
 --namespace
 Windows.Win32.System.Diagnostics.Debug.ActiveScript
+--config
+parse-win32-annotations

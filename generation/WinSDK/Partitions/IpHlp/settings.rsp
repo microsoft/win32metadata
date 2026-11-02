@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --exclude
 RtlIpv4AddressToStringA
 RtlIpv6AddressToStringA

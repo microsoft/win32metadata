@@ -1,5 +1,3 @@
---with-type
-D3DFORMAT=uint
 --traverse
 <IncludeRoot>/shared/d3d9.h
 <IncludeRoot>/shared/d3d9caps.h

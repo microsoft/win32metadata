@@ -3,3 +3,5 @@
 <IncludeRoot>/um/timezoneapi.h
 --namespace
 Windows.Win32.System.Time
+--config
+parse-win32-annotations

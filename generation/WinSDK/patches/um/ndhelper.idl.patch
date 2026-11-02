@@ -1,0 +1,44 @@
+diff --git a/um/ndhelper.idl b/um/ndhelper.idl
+index 6a10a3e9..edff4ff8 100644
+--- a/um/ndhelper.idl
++++ b/um/ndhelper.idl
+@@ -2,6 +2,7 @@
+ //
+ // IDL source for Network Diagnostics Helper Class provider
+ 
++#include <sal.h>
+ cpp_quote("// Copyright (C) Microsoft Corporation. All rights reserved.")
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -140,6 +141,7 @@ cpp_quote("#endif")
+ //
+ // interfaces implemented by Network Diagnostics Helper Classes
+ //
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelper => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+   object,
+   uuid(c0b35746-ebf5-11d8-bbe9-505054503030),
+@@ -243,6 +245,7 @@ typedef struct tagHypothesisResult
+     DIAGNOSIS_STATUS pathStatus;
+ } HypothesisResult;
+ 
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelperUtilFactory => SupportedOSPlatform(\"windows6.1\") */")
+ [     object,
+       uuid(104613FB-BC57-4178-95BA-88809698354A),
+       pointer_default(unique) // default embedded ptrs to [unique]
+@@ -259,6 +262,7 @@ cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagHelperUtilFactory)")
+ //
+ // interface implemented by Network Diagnostics Helper Classes
+ //
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelperEx => SupportedOSPlatform(\"windows6.1\") */")
+ [
+   object,
+   uuid(972DAB4D-E4E3-4fc6-AE54-5F65CCDE4A15),
+@@ -286,6 +290,7 @@ cpp_quote("NOT_BUILD_WINDOWS_NDHELPER_DEPRECATE(INetDiagHelperEx)")
+ //
+ // interfaces implemented by Network Diagnostics Helper Classes
+ //
++cpp_quote("/* Win32Metadata: interface ::INetDiagHelperInfo => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+   object,
+   uuid(c0b35747-ebf5-11d8-bbe9-505054503030),

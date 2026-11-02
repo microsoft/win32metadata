@@ -2,3 +2,5 @@
 <IncludeRoot>/um/wmlss.h
 --namespace
 Windows.Win32.Media.LibrarySharingServices
+--config
+parse-win32-annotations

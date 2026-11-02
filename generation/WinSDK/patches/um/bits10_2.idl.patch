@@ -1,0 +1,29 @@
+diff --git a/um/bits10_2.idl b/um/bits10_2.idl
+index 702530ac..fdf76af2 100644
+--- a/um/bits10_2.idl
++++ b/um/bits10_2.idl
+@@ -4,6 +4,8 @@
+ *                                                        *
+ *********************************************************/
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)")
+ cpp_quote("#include <winapifamily.h>")
+ 
+@@ -19,6 +21,7 @@ import "bits4_0.idl";
+ import "bits5_0.idl";
+ import "bits10_1.idl";
+ 
++cpp_quote("/* Win32Metadata: interface ::IBackgroundCopyJobHttpOptions2 => SupportedOSPlatform(\"windows10.0.17763\") */")
+ [
+     uuid(B591A192-A405-4FC3-8323-4C5C542578FC)
+ ]
+@@ -32,6 +35,7 @@ interface IBackgroundCopyJobHttpOptions2 : IBackgroundCopyJobHttpOptions
+         [out] LPWSTR *method
+         );
+ }
++cpp_quote("/* Win32Metadata: parameter ::IBackgroundCopyJobHttpOptions2::GetHttpMethod::method => RAIIFree(CoTaskMemFree) */")
+ 
+ [
+   uuid(70CDC92E-4B95-49EB-8CDA-AD39AA7CC4A0),

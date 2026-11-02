@@ -3,3 +3,5 @@
 <IncludeRoot>/um/waasapitypes.h
 --namespace
 Windows.Win32.System.UpdateAssessment
+--config
+parse-win32-annotations

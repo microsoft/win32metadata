@@ -1,0 +1,58 @@
+diff --git a/shared/secext.h b/shared/secext.h
+index 8353e4cd..e317c41b 100644
+--- a/shared/secext.h
++++ b/shared/secext.h
+@@ -110,6 +110,8 @@ typedef enum
+ } EXTENDED_NAME_FORMAT, * PEXTENDED_NAME_FORMAT ;
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ _Success_(return != 0)
+ BOOLEAN
+ SEC_ENTRY
+@@ -119,6 +121,8 @@ GetUserNameExA(
+     _Inout_ PULONG nSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ _Success_(return != 0)
+ BOOLEAN
+ SEC_ENTRY
+@@ -140,6 +144,8 @@ GetUserNameExW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLEAN
+ SEC_ENTRY
+ GetComputerObjectNameA(
+@@ -147,6 +153,8 @@ GetComputerObjectNameA(
+     _Out_writes_to_opt_(*nSize,*nSize) LPSTR lpNameBuffer,
+     _Inout_ PULONG nSize
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLEAN
+ SEC_ENTRY
+ GetComputerObjectNameW(
+@@ -161,6 +169,8 @@ GetComputerObjectNameW(
+ #define GetComputerObjectName   GetComputerObjectNameA
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLEAN
+ SEC_ENTRY
+ TranslateNameA(
+@@ -170,6 +180,8 @@ TranslateNameA(
+     _Out_writes_to_opt_(*nSize,*nSize) LPSTR lpTranslatedName,
+     _Inout_ PULONG nSize
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLEAN
+ SEC_ENTRY
+ TranslateNameW(

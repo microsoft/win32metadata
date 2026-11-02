@@ -2,3 +2,5 @@
 <IncludeRoot>/um/oobenotification.h
 --namespace
 Windows.Win32.System.SetupAndMigration
+--config
+parse-win32-annotations

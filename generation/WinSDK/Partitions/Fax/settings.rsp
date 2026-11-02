@@ -9,3 +9,5 @@
 <IncludeRoot>/um/faxmmc.h
 --namespace
 Windows.Win32.Devices.Fax
+--config
+parse-win32-annotations

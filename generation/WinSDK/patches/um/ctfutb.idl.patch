@@ -1,0 +1,141 @@
+diff --git a/um/ctfutb.idl b/um/ctfutb.idl
+index 3e8ec12d..f8163e90 100644
+--- a/um/ctfutb.idl
++++ b/um/ctfutb.idl
+@@ -1,3 +1,5 @@
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+-------------------------------------------------------------------------
+@@ -147,6 +149,9 @@
+ 
+ // SystemDeviceTypeLangbarItem Flag
+ cpp_quote("#define TF_DTLBI_USEPROFILEICON         0x00000001")
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef _WIN32META_ANNOTATION_(\"Enum(TF_DTLBI_NONE, TF_DTLBI_USEPROFILEICON)\", 0, TF_DTLBI_USEPROFILEICON) DWORD LANG_BAR_ITEM_ICON_MODE_FLAGS;")
++cpp_quote("#endif")
+ 
+ cpp_quote("#ifdef __cplusplus")
+ cpp_quote("}")
+@@ -170,6 +175,7 @@ interface ITfMenu;
+ //
+ // ITfLangBarMgr
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarMgr => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(87955690-e627-11d2-8ddb-00105a2799b5),
+@@ -212,6 +218,7 @@ interface ITfLangBarMgr: IUnknown
+ //
+ // ITfLangBarEventSink
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarEventSink => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(18a4e900-e0ae-11d2-afdd-00105a2799b5),
+@@ -238,6 +245,7 @@ interface ITfLangBarEventSink: IUnknown
+ //
+ // ITfLangBarItemSink
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItemSink => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(57dbe1a0-de25-11d2-afdd-00105a2799b5),
+@@ -251,6 +259,7 @@ interface ITfLangBarItemSink : IUnknown
+ //
+ // IEnumTfLangBarItems
+ //
++cpp_quote("/* Win32Metadata: interface ::IEnumTfLangBarItems => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(583f34d0-de25-11d2-afdd-00105a2799b5),
+@@ -295,6 +304,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfLangBarItemMgr
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItemMgr => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(ba468c55-9956-4fb1-a59d-52a7dd7cc6aa),
+@@ -349,6 +359,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfLangBarItem
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItem => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(73540d69-edeb-4ee9-96c9-23aa30b25916),
+@@ -374,6 +385,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfSystemLangBarItemSink
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfSystemLangBarItemSink => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(1449d9ab-13cf-4687-aa3e-8d8b18574396),
+@@ -389,6 +401,7 @@ interface ITfSystemLangBarItemSink : IUnknown
+ //
+ // ITfSystemLangBarItem
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfSystemLangBarItem => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(1e13e9ec-6b33-4d4a-b5eb-8a92f029f356),
+@@ -405,6 +418,7 @@ interface ITfSystemLangBarItem : IUnknown
+ //
+ // ITfSystemLangBarItemText
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfSystemLangBarItemText => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f),
+@@ -420,6 +434,8 @@ interface ITfSystemLangBarItemText : IUnknown
+ //
+ // ITfSystemDeviceTypeLangBarItem
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfSystemDeviceTypeLangBarItem => SupportedOSPlatform(\"windows5.0\") */")
++cpp_quote("/* Win32Metadata: parameter ::ITfSystemDeviceTypeLangBarItem::SetIconMode::dwFlags => AssociatedEnum(LANG_BAR_ITEM_ICON_MODE_FLAGS) */")
+ [
+   object,
+   uuid(45672eb9-9059-46a2-838d-4530355f6a77),
+@@ -453,6 +469,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfLangBarItemButton
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItemButton => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(28c7f1d0-de25-11d2-afdd-00105a2799b5),
+@@ -476,6 +493,7 @@ interface ITfLangBarItemButton : ITfLangBarItem
+ //
+ // ITfLangBarItemBitmapButton
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItemBitmapButton => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(a26a0525-3fae-4fa0-89ee-88a964f9f1b5),
+@@ -506,6 +524,7 @@ interface ITfLangBarItemBitmapButton : ITfLangBarItem
+ //
+ // ITfLangBarItemBitmap
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItemBitmap => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(73830352-d722-4179-ada5-f045c98df355),
+@@ -536,6 +555,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfLangBarItemBalloon
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfLangBarItemBalloon => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(01C2D285-D3C7-4B7B-B5B5-D97411D0C283),
+@@ -574,6 +594,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfMenu
+ //
++cpp_quote("/* Win32Metadata: interface ::ITfMenu => SupportedOSPlatform(\"windows5.0\") */")
+ [
+   object,
+   uuid(6F8A98E4-AAA0-4F15-8C5B-07E0DF0A3DD8),

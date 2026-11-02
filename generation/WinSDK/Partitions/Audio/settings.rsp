@@ -17,3 +17,5 @@
 <IncludeRoot>/um/msacmdrv.h
 --namespace
 Windows.Win32.Media.Audio
+--config
+parse-win32-annotations

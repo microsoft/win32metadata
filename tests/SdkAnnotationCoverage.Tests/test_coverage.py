@@ -46,6 +46,97 @@ def report_fixture():
     }
 
 
+class SourceBlockedAccountingTests(unittest.TestCase):
+    def inventory(self):
+        return json.loads((Path(__file__).parent / "SourceBlockedMetadata.json").read_text())
+
+    def test_every_historical_unit_is_deferred_without_a_preservation_claim(self):
+        result = coverage.source_blocked_accounting(self.inventory(), "10.0.28000.2705")
+        self.assertEqual(result["deferredLegacyFacts"], 30)
+        self.assertEqual(result["availability"], 26)
+        self.assertEqual(result["associatedEnumUses"], 3)
+        self.assertEqual(result["enumFlags"], 1)
+        self.assertNotIn("preservedLegacyFacts", result)
+        self.assertFalse(result["currentPreservationClaimed"])
+        self.assertEqual(result["currentProjectionState"], "unqualified")
+        self.assertEqual(len(result["facts"]), 30)
+        self.assertTrue(all(fact["currentPhysicalProjection"] is None for fact in result["facts"]))
+        flags = [fact for fact in result["facts"] if fact["category"] == "enum-flags"]
+        self.assertEqual([(fact["target"], fact["value"]) for fact in flags], [("IdentityUpdateEvent", "Flags")])
+
+    def test_missing_changed_or_falsely_covered_units_cannot_turn_green(self):
+        for mutation in (
+            "missing", "duplicate", "value", "flags", "covered", "preserved",
+            "available-source", "extra-coverage-claim", "owner", "source-hash",
+        ):
+            with self.subTest(mutation=mutation):
+                inventory = self.inventory()
+                header = inventory["headers"][0]
+                facts = header["facts"]
+                if mutation == "missing":
+                    facts.pop(0)
+                elif mutation == "duplicate":
+                    facts.append(facts[0].copy())
+                elif mutation == "value":
+                    facts[0]["value"] = "windows10.0"
+                elif mutation == "flags":
+                    header["facts"] = [fact for fact in facts if fact["category"] != "enum-flags"]
+                elif mutation == "covered":
+                    inventory["migrationState"] = "covered"
+                elif mutation == "preserved":
+                    inventory["currentProjectionState"] = "preserved"
+                elif mutation == "available-source":
+                    inventory["sourceState"] = "original-available"
+                elif mutation == "extra-coverage-claim":
+                    inventory["preservedLegacyFacts"] = 30
+                elif mutation == "owner":
+                    header["path"] = r"um\unrelated.h"
+                elif mutation == "source-hash":
+                    header["sha256"] = "0" * 64
+                with self.assertRaisesRegex(ValueError, "Source-blocked"):
+                    coverage.source_blocked_accounting(inventory, "10.0.28000.2705")
+
+    def test_another_selected_sdk_requires_a_fresh_source_disposition(self):
+        with self.assertRaisesRegex(ValueError, "selected SDK"):
+            coverage.source_blocked_accounting(self.inventory(), "10.0.26100.7705")
+
+    def test_refresh_replaces_the_old_preservation_claim_without_rescanning_sources(self):
+        report = report_fixture()
+        report["snapshot"].update({
+            "configurationGitTree": "frozen-tree", "sdkPackageVersion": "10.0.28000.2705",
+            "sdkIncludeVersion": "10.0.28000.0",
+        })
+        report["scope"] = {}
+        report["additionalSelectedSourceProviders"] = [{"publicIncludeFiles": []}]
+        report["sourceProgressScoreboard"] = {
+            "committedPatchInputs": True, "strictApplyRows": [],
+            "committedNonBootstrapNativeHeaderCount": 0, "goalEligibleCommittedNativeHeaderCount": 0,
+            "actuallyAffectedGeneratedHeaderCount": None, "goalEligibleObservedGeneratedHeaderCount": None,
+            "eligiblePatchedHeaderCountKnown": None, "newNativeHeaderPathsBeyondSnapshot": [],
+            "receiptStrictApplyStatusCounts": {},
+        }
+        report["missingOriginalSourceMigrations"] = {"preservedLegacyFacts": 30}
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "c" / "include" / "10.0.28000.0").mkdir(parents=True)
+            output = root / "inventory.json"
+            output.write_text(json.dumps(report), encoding="utf-8")
+            with (
+                patch("sys.argv", ["coverage", "--refresh", "--output", str(output),
+                                   "--sdk-package-root", str(root)]),
+                patch.object(coverage, "git", side_effect=lambda repo, *args:
+                             "" if args[0] == "diff" else "frozen-tree"),
+                patch.object(coverage, "update_source_receipts"),
+                patch.object(coverage, "update_generated_observations"),
+                patch.object(coverage, "write_operational_outputs"),
+                patch("builtins.print"),
+            ):
+                coverage.main()
+            refreshed = json.loads(output.read_text(encoding="utf-8"))
+        self.assertEqual(refreshed["missingOriginalSourceMigrations"],
+                         coverage.source_blocked_accounting(self.inventory(), "10.0.28000.2705"))
+
+
 class ConfigurationTests(unittest.TestCase):
     def test_response_sections_keep_exact_lines_and_duplicate_rules(self):
         entries = list(coverage.rsp_entries(

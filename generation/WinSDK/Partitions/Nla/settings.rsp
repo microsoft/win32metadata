@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/um/netlistmgr.h
 --namespace

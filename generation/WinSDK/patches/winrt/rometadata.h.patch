@@ -1,0 +1,12 @@
+diff --git a/winrt/rometadata.h b/winrt/rometadata.h
+index 82fdc8af..90b5df1a 100644
+--- a/winrt/rometadata.h
++++ b/winrt/rometadata.h
+@@ -12,6 +12,7 @@
+ // Arguments:
+ //    rclsid - Only CLSID_CorMetaDataDispenser supported.
+ //    riid   - Interfaces supported: IID_IMetaDataDispenser, IID_IMetaDataDispenserEx.
++_Win32_SupportedOS_Windows8_
+ STDAPI MetaDataGetDispenser(
+         __in REFCLSID            rclsid, 
+         __in REFIID              riid, 

@@ -1,0 +1,22 @@
+diff --git a/um/gdiplusenums.h b/um/gdiplusenums.h
+index b32ee5c5..3d2942ef 100644
+--- a/um/gdiplusenums.h
++++ b/um/gdiplusenums.h
+@@ -14,6 +14,8 @@
+ 
+ #ifndef _GDIPLUSENUMS_H
+ #define _GDIPLUSENUMS_H
++
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -530,7 +532,7 @@ enum ObjectType
+     ObjectTypeMin = ObjectTypeBrush
+ };
+ 
+-inline BOOL
++_Win32_SupportedOS_WindowsXP_ inline BOOL
+ ObjectTypeIsValid(
+     ObjectType      type
+     )

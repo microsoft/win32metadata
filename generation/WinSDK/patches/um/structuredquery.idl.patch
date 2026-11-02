@@ -1,0 +1,129 @@
+diff --git a/um/structuredquery.idl b/um/structuredquery.idl
+index 8620ac16..05e3daa2 100644
+--- a/um/structuredquery.idl
++++ b/um/structuredquery.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -294,6 +295,7 @@ typedef [v1_enum] enum tagQUERY_PARSER_MANAGER_OPTION
+ // -----------------------------------------------
+ // IQueryParser -- parse an input string to a query structure
+ // -----------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IQueryParser => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(2EBDEE67-3505-43f8-9946-EA44ABC8E5B0),
+@@ -335,6 +337,7 @@ interface IQueryParser : IUnknown
+ // ----------------------------------------------------------------------------------
+ // IQuerySolution -- encapsulates all information about the interpretation of a query
+ // ----------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IQuerySolution => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(D6EBC66B-8921-4193-AFDD-A1789FB7FF57),
+@@ -361,6 +364,7 @@ interface IQuerySolution : IConditionFactory
+ // ----------------------------------------------------------------------------------
+ // IConditionFactory -- interface for creating conditions
+ // ----------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IConditionFactory => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(A5EFE073-B16F-474f-9F3E-9F8B497A3E08),
+@@ -449,6 +453,7 @@ typedef [v1_enum] enum CONDITION_CREATION_OPTIONS
+ } CONDITION_CREATION_OPTIONS;
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(CONDITION_CREATION_OPTIONS);")
+ 
++cpp_quote("/* Win32Metadata: interface ::IConditionFactory2 => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     uuid(71D222E1-432F-429e-8C13-B6DAFDE5077A),
+     object,
+@@ -577,6 +582,7 @@ interface IConditionFactory2 : IConditionFactory
+ // any recognized named entities for type T are added to a named entity collection.
+ // The query parser will call the GenerateForLeaf method of G any time it is about to generate a leaf
+ // condition with a value of semantic type T.     
++cpp_quote("/* Win32Metadata: interface ::IConditionGenerator => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(92D2CC58-4386-45a3-B98C-7E0CE64A4117),
+@@ -636,6 +642,7 @@ interface IConditionGenerator : IUnknown
+ // IInterval -- a closed or open interval
+ // ---------------------------------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IInterval => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(6BF0A714-3C18-430b-8B5D-83B1C234D3DB),
+@@ -651,6 +658,7 @@ interface IInterval : IUnknown
+ // ---------------------------------------------------------------------------------------------
+ // IMetaData -- a pair of strings, to be thought of as a key and a value
+ // ---------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IMetaData => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Key/Value pair of strings"),
+     object,
+@@ -668,6 +676,7 @@ interface IMetaData : IUnknown
+ // ----------------------------------------------------------------------------------------------
+ interface IRelationship;
+ 
++cpp_quote("/* Win32Metadata: interface ::IEntity => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Representing a schema type"),
+     uuid(24264891-E80B-4fd3-B7CE-4FF2FAE8931F),
+@@ -711,6 +720,7 @@ interface IEntity : IUnknown
+ // ----------------------------------------------------------------------------------------------
+ // IRelationship -- a property in the schema
+ // ----------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IRelationship => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Representing a schema property"),
+     uuid(2769280B-5108-498c-9C7F-A51239B63147),
+@@ -743,6 +753,7 @@ interface IRelationship : IUnknown
+ // ---------------------------------------------------------------------------------------------
+ // INamedEntity -- a known value of some entity type
+ // ---------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::INamedEntity => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Representing a known value of some type"),
+     object,
+@@ -762,6 +773,7 @@ interface INamedEntity : IUnknown
+ // ----------------------------------------------------------------------------------------------
+ // ISchemaProvider -- a repository of schema
+ // ----------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::ISchemaProvider => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Browsable, localizable schema repository"),
+     uuid(8CF89BCB-394C-49b2-AE28-A59DD4ED7F68),
+@@ -802,6 +814,7 @@ interface ISchemaProvider : IUnknown
+ // ----------------------------------------------------------------------------------------------
+ // ITokenCollection -- the result of applying a word breaker
+ // ----------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::ITokenCollection => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Sequence of tokens"),
+     uuid(22D8B4F2-F577-4adb-A335-C2AE88416FAB),
+@@ -830,6 +843,7 @@ typedef [v1_enum] enum
+     NEC_HIGH,     // It almost certainly is this named entity; it should be ok to toss other possibilities.
+ } NAMED_ENTITY_CERTAINTY; // prefix NEC
+ 
++cpp_quote("/* Win32Metadata: interface ::INamedEntityCollector => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     helpstring("Accumulator for named entities"),
+     uuid(AF2440F6-8AFC-47d0-9A7F-396A0ACFB43D),
+@@ -850,6 +864,7 @@ interface INamedEntityCollector : IUnknown
+ // ----------------------------------------------------------------------------------------------
+ // ISchemaLocalizationSupport -- an application-provided object to translate annotations
+ // ----------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::ISchemaLocalizerSupport => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     uuid(CA3FDCA2-BFBE-4eed-90D7-0CAEF0A1BDA1),
+     object,
+@@ -865,6 +880,7 @@ interface ISchemaLocalizerSupport : IUnknown
+ // ----------------------------------------------------------------------------------------------
+ // IQueryParserManager -- a helper API for creating and initializing query parsers for SearchAPI
+ // ----------------------------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IQueryParserManager => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     uuid(A879E3C4-AF77-44fb-8F37-EBD1487CF920),
+     object,

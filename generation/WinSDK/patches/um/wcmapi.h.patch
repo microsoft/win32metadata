@@ -1,0 +1,36 @@
+diff --git a/um/wcmapi.h b/um/wcmapi.h
+index 16e9b47f..bc43f46d 100644
+--- a/um/wcmapi.h
++++ b/um/wcmapi.h
+@@ -135,6 +135,7 @@ extern "C"
+ 
+ #ifndef __midl
+ 
++    _Win32_SupportedOS_Windows8_
+     DWORD WINAPI WcmQueryProperty(
+         _In_opt_ const GUID* pInterface, // NULL for global properties
+         _In_opt_ LPCWSTR strProfileName,
+@@ -143,6 +144,7 @@ extern "C"
+         _Out_ PDWORD pdwDataSize,
+         _Outptr_result_buffer_maybenull_(*pdwDataSize) PBYTE* ppData);
+ 
++    _Win32_SupportedOS_Windows8_
+     DWORD WINAPI WcmSetProperty(
+         _In_opt_ const GUID* pInterface, // NULL for global properties
+         _In_opt_ LPCWSTR strProfileName,
+@@ -151,12 +153,15 @@ extern "C"
+         _In_ DWORD dwDataSize,
+         _In_reads_opt_(dwDataSize) const BYTE* pbData);
+ 
++    _Win32_SupportedOS_Windows8_
+     DWORD WINAPI WcmGetProfileList(_Reserved_ void* pReserved, _Outptr_ WCM_PROFILE_INFO_LIST** ppProfileList);
+ 
+     // Ethernet pseudo-profiles should not be included in pProfileList
++    _Win32_SupportedOS_Windows8_
+     DWORD WINAPI WcmSetProfileList(
+         _In_ WCM_PROFILE_INFO_LIST* pProfileList, _In_ DWORD dwPosition, _In_ BOOL fIgnoreUnknownProfiles, _Reserved_ void* pReserved);
+ 
++    _Win32_SupportedOS_Windows8_
+     void WINAPI WcmFreeMemory(__deallocate(Mem) void* pMemory);
+ 
+ #endif // not __midl

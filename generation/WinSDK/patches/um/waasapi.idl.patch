@@ -1,0 +1,20 @@
+diff --git a/um/waasapi.idl b/um/waasapi.idl
+index b1de0c62..d1701053 100644
+--- a/um/waasapi.idl
++++ b/um/waasapi.idl
+@@ -15,12 +15,15 @@ cpp_quote("#pragma once")
+ cpp_quote("#endif")
+ cpp_quote("")
+ cpp_quote("#include <winapifamily.h>")
++#include <sal.h>
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ import "WaaSAPITypes.idl";
+ 
++cpp_quote("/* Win32Metadata: interface ::IWaaSAssessor => SupportedOSPlatform(\"windows10.0.15063\") */")
++
+ [
+     object,
+     uuid(2347bbef-1a3b-45a4-902d-3e09c269b45e),

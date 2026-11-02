@@ -1,0 +1,13 @@
+diff --git a/um/gb18030.h b/um/gb18030.h
+index 870ddf9a..cf507d7e 100644
+--- a/um/gb18030.h
++++ b/um/gb18030.h
+@@ -95,6 +95,8 @@
+ //
+ ////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ STDAPI_(DWORD) NlsDllCodePageTranslation(
+     DWORD CodePage,
+     DWORD dwFlags,

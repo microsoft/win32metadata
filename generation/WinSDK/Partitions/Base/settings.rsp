@@ -39,3 +39,5 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/storprop.h
 --namespace
 Windows.Win32.System.SystemServices
+--config
+parse-win32-annotations

@@ -5,3 +5,5 @@ MLOperatorEdgeTypeConstrant
 <IncludeRoot>/um/MLOperatorAuthor.h
 --namespace
 Windows.Win32.AI.MachineLearning.WinML
+--config
+parse-win32-annotations

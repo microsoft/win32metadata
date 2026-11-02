@@ -25,3 +25,5 @@
 <IncludeRoot>/um/printpreview.h
 --namespace
 Windows.Win32.Graphics.Printing
+--config
+parse-win32-annotations

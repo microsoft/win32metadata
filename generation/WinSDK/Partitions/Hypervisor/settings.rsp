@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/shared/hvsocket.h
 <IncludeRoot>/um/WinHvPlatformDefs.h

@@ -1,0 +1,22 @@
+diff --git a/um/profileapi.h b/um/profileapi.h
+index 2593eb79..85812ed6 100644
+--- a/um/profileapi.h
++++ b/um/profileapi.h
+@@ -28,6 +28,8 @@ extern "C" {
+ // Performance counter API's
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -35,6 +37,8 @@ QueryPerformanceCounter(
+     _Out_ LARGE_INTEGER* lpPerformanceCount
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI

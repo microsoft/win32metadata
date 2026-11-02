@@ -10,3 +10,5 @@ CXAPOBase
 <IncludeRoot>/um/x3daudio.h
 --namespace
 Windows.Win32.Media.Audio.XAudio2
+--config
+parse-win32-annotations

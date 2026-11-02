@@ -1,0 +1,46 @@
+diff --git a/um/sensevts.idl b/um/sensevts.idl
+index 6b563d00..96e1e671 100644
+--- a/um/sensevts.idl
++++ b/um/sensevts.idl
+@@ -25,6 +25,8 @@ Revision History:
+ 
+ --*/
+ 
++cpp_quote("#include <sal.h>")
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -59,6 +61,8 @@ library SensEvents
+     //
+     // Interface ISensNetwork
+     //
++cpp_quote("/* Win32Metadata: interface ::ISensNetwork => SupportedOSPlatform(\"windows5.1.2600\") */")
++cpp_quote("/* Win32Metadata: parameter ::ISensNetwork::ConnectionLost::ulType => AssociatedEnum(SENS_CONNECTION_TYPE) */")
+     [
+     object,
+     uuid(d597bab1-5b9f-11d1-8dd2-00aa004abd5e),
+@@ -112,6 +116,7 @@ library SensEvents
+     //
+     // Interface ISensOnNow
+     //
++cpp_quote("/* Win32Metadata: interface ::ISensOnNow => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+     object,
+     uuid(d597bab2-5b9f-11d1-8dd2-00aa004abd5e),
+@@ -144,6 +149,7 @@ library SensEvents
+     //
+     // Interface ISensLogon
+     //
++cpp_quote("/* Win32Metadata: interface ::ISensLogon => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+     object,
+     uuid(d597bab3-5b9f-11d1-8dd2-00aa004abd5e),
+@@ -201,6 +207,7 @@ library SensEvents
+     //
+     // Interface ISensLogon2
+     //
++cpp_quote("/* Win32Metadata: interface ::ISensLogon2 => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+     object,
+     uuid(d597bab4-5b9f-11d1-8dd2-00aa004abd5e),

@@ -3,3 +3,5 @@
 <IncludeRoot>/um/ddeml.h
 --namespace
 Windows.Win32.System.DataExchange
+--config
+parse-win32-annotations

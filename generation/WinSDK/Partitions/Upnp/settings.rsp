@@ -3,3 +3,5 @@
 <IncludeRoot>/um/upnphost.h
 --namespace
 Windows.Win32.Devices.Enumeration.Pnp
+--config
+parse-win32-annotations

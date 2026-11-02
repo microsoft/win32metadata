@@ -221,12 +221,24 @@ configured nominal targets can require a named projection; ordinary aliases
 retain their existing intrinsic lowering, and an explicit storage remap takes
 precedence.
 
+Native typedef identity is inferred from native declarations in ordinary and
+annotation-enabled scrapes. Supported scalar and data-pointer typedefs keep their
+written alias chains and native storage. The existing `[NativeTypedef]` metadata
+attribute and single `Value` field describe each inferred wrapper; no header
+identity annotation is required or accepted. Do not add a marker, same-name
+typedef bridge, lifecycle fact, or per-name allowlist to force wrapper emission.
+Traversal, dependencies, and exclusions determine emitted scope.
+
 The authored `_Win32_NativeTypedef_` marker and `Win32Metadata.NativeTypedef`
 payload are retired. Do not author them in headers, compiler annotations, or
 IDL selector comments. The reader rejects these forms. Generated
 `[NativeTypedef]` remains part of the wrapper projection and is not an SDK
 annotation. Traversal and exclusion rules still decide which native declarations
 are emitted.
+
+The generator's configured intrinsic pointer-sized integral projections remain
+intrinsic when their native width and signedness match. Application typedefs
+over those intrinsic types retain their own nominal identity.
 
 Supported storage preserves the target's native scalar width and signedness and
 every data-pointer level. Pointer-sized integral remaps must match that ABI.
@@ -235,12 +247,13 @@ widths such as x64 `__ptr32` or x86 `__ptr64`, including beneath ordinary outer
 pointers or intervening typedefs, fail with WMA001 before output is committed.
 The reader does not erase the qualifier or substitute integer storage.
 Direct fixed-width integer storage is not made into a pointer because OLD used
-`IntPtr`. Genuine pointers to complete or incomplete native records are allowed;
-record **values**, including incomplete-record value aliases, are not. Native
-enum values, logical enum groups, callbacks/function pointers, arrays, references,
-C++ `using` declarations, and unsupported scalar representations fail explicitly.
-Do not invent an OS floor or a self-compatibility annotation merely to force a
-provider, and do not infer native pointer storage from historical metadata.
+`IntPtr`. Genuine pointers to complete or incomplete native records preserve
+their actual managed record pointees, including source-bound generated anonymous
+record identities. Record and enum value aliases keep their native declarations;
+incomplete record values stay opaque. Logical enum groups, callbacks/function
+pointers, arrays, references, and C++ `using` declarations are not inferred
+scalar/data-pointer wrappers. Unsupported scalar representations fail explicitly.
+Do not infer native pointer storage from historical metadata.
 
 When a retained invalid-value record was authored as `DECLARE_HANDLE`, the tooling
 can preserve its existing `void* Value` only with independent, identity-bound
@@ -342,6 +355,14 @@ Packing remains separate, and the Alignment attribute retains its original
 argument. Explicit StructLayout sizes are also preserved; conflicting native
 sizes or a different explicit size are blocking. Incomplete declarations and
 unproved same-name types do not inherit a native layout.
+
+The production integrity suite checks each architecture's `SLIST_ENTRY` in the
+emitted SDK image. Its 64-bit rows read the physical ClassLayout size and serialized
+Alignment payload. The x86 row derives effective size from the actual single
+instance self-pointer field and its target-width storage, together with the
+declared layout minimum. Empty, widened, displaced, static, or multiple fields
+cannot pass as four-byte records. It does not assert a raw layout size or
+Alignment payload.
 
 Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that
@@ -454,7 +475,8 @@ selector-bound comment transport in the original IDL. Native typedef identity
 continues to use automatic discovery and configuration; the retired
 `NativeTypedef` payload is not valid in a selector comment.
 
-Callback aliases continue to use their own existing projection:
+Callback aliases keep their existing callback projection. Independent API facts
+still use the annotation or original-IDL comment transport:
 
 ```cpp
 _Win32_SupportedOS_10240_
@@ -801,11 +823,33 @@ groups remain unprojected.
 
 A group whose constants have multiple original-header owners may repeat
 `_Win32_Enum_` or `_Win32_FlagsEnum_` on the same native typedef, with the same
-storage and kind. Each owner lists its own existing constants after their native
-definitions. The original Clang declaration graph combines contributions in one
+storage and kind. Each contribution lists existing constants after their native
+definitions are visible. The original Clang declaration graph combines contributions in one
 translation unit; the emitter combines the generated `.header-types.cs` contributions
 by qualified metadata identity after namespace assignment. Keep those producer
 filenames when staging sources for emission.
+
+The metadata-only group declaration may live in an existing SDK header that owns
+the intended API namespace, even when its constants are defined in another header.
+Those constants must already be visible through the chosen header's existing include
+closure. Move only the group declaration; retain the native constant definitions,
+values, guards, API types, and associated uses. Do not copy constants, fabricate a
+forward carrier, or add an unrelated include to obtain namespace placement.
+
+The producer must report the actual declaration's canonical native identity,
+declaration header, and traversal namespace. Member proofs retain each constant's
+original definition header, native binding, and compiled value. Namespace routing
+uses that genuine declaration ownership; a desired public namespace must not replace
+source provenance. Contributions left in other headers still compose with it.
+Require the complete member union and exactly one resolved enum for every associated
+use on each target before accepting the changed output.
+
+`ACE_FLAGS` places its seven-member WinNT contribution in `securitybaseapi.h`,
+whose direct traversal belongs to `Windows.Win32.Security`. The seven native
+constant definitions stay in `winnt.h`; `accctrl.h` retains its six-member
+contribution. The combined enum keeps all thirteen members and its public Security
+FullName. This placement uses the existing group carrier and generic owner election,
+without an `ACE_FLAGS` namespace override.
 
 When partitions initially emit the same group in different namespaces, use the
 existing global `--requiredNamespaceForName` organization to preserve its established

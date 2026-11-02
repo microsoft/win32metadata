@@ -1,0 +1,48 @@
+diff --git a/um/gdiplusimagecodec.h b/um/gdiplusimagecodec.h
+index 0e83da3a..10f8af50 100644
+--- a/um/gdiplusimagecodec.h
++++ b/um/gdiplusimagecodec.h
+@@ -14,6 +14,7 @@
+ 
+ #ifndef _GDIPLUSIMAGECODEC_H
+ #define _GDIPLUSIMAGECODEC_H
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -25,7 +26,7 @@
+ //--------------------------------------------------------------------------
+ 
+ inline Status 
+-GetImageDecodersSize(
++_Win32_SupportedOS_WindowsXP_ GetImageDecodersSize(
+     _Out_ UINT *numDecoders,
+     _Out_ _Out_range_(>=, (*numDecoders) * sizeof(ImageCodecInfo)) UINT *size)
+ {
+@@ -34,7 +35,7 @@ GetImageDecodersSize(
+ 
+ 
+ inline Status 
+-GetImageDecoders(
++_Win32_SupportedOS_WindowsXP_ GetImageDecoders(
+     _In_ UINT numDecoders,
+     _In_ UINT size,
+     _Out_writes_bytes_(size) ImageCodecInfo *decoders)
+@@ -44,7 +45,7 @@ GetImageDecoders(
+ 
+ 
+ inline Status 
+-GetImageEncodersSize(
++_Win32_SupportedOS_WindowsXP_ GetImageEncodersSize(
+     _Out_ UINT *numEncoders, 
+     _Out_ _Out_range_(>=, (*numEncoders) * sizeof(ImageCodecInfo)) UINT *size)
+ {
+@@ -53,7 +54,7 @@ GetImageEncodersSize(
+ 
+ 
+ inline Status 
+-GetImageEncoders(
++_Win32_SupportedOS_WindowsXP_ GetImageEncoders(
+     _In_ UINT numEncoders,
+     _In_ IN UINT size,
+     _Out_writes_bytes_(size) ImageCodecInfo *encoders)

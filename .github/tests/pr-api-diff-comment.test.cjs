@@ -192,7 +192,7 @@ test('both artifact uploads still include the generated patch', () => {
 test('only managed consumer jobs use the temporary 180-minute diagnostic allowance', () => {
   assert.match(validationJob('build-test'), /^    timeout-minutes: 180$/m);
   assert.match(azureJob('build_winmd'), /^  timeoutInMinutes: 180$/m);
-  assert.match(validationJob('scrape'), /^    timeout-minutes: 60$/m);
+  assert.match(validationJob('scrape'), /^    timeout-minutes: 120$/m);
   for (const arch of ['x64', 'x86', 'arm64']) {
     assert.match(azureJob(`scrape_${arch}`), /^  timeoutInMinutes: 60$/m);
   }

@@ -2,3 +2,5 @@
 <IncludeRoot>/um/DirectML.h
 --namespace
 Windows.Win32.AI.MachineLearning.DirectML
+--config
+parse-win32-annotations

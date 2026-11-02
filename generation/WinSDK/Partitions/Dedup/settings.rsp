@@ -5,3 +5,5 @@
 <IncludeRoot>/um/ddpdataport.h
 --namespace
 Windows.Win32.Storage.DataDeduplication
+--config
+parse-win32-annotations

@@ -12,3 +12,6 @@
 <IncludeRoot>/um/functiondiscoveryerror.h
 --namespace
 Windows.Win32.Devices.FunctionDiscovery
+
+--config
+parse-win32-annotations

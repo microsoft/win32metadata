@@ -1,0 +1,164 @@
+diff --git a/um/imapi2fs.idl b/um/imapi2fs.idl
+index bb565ae2..6eb3f533 100644
+--- a/um/imapi2fs.idl
++++ b/um/imapi2fs.idl
+@@ -4,6 +4,7 @@
+ // This file will be processed by the MIDL tool to
+ // produce the type library (FileSystemImaging.tlb) and marshalling code.
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -60,6 +61,7 @@ typedef enum PlatformId {
+     PlatformEFI = 0xEF,
+ } PlatformId;
+ 
++cpp_quote("/* Win32Metadata: interface ::IBootOptions => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, nonextensible, oleautomation,
+@@ -124,6 +126,7 @@ interface IBootOptions : IDispatch
+ 
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IProgressItem => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, nonextensible, oleautomation,
+@@ -157,6 +160,7 @@ interface IProgressItem : IDispatch
+     HRESULT  BlockCount([out,retval] ULONG *blocks);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumProgressItems => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     uuid(2C941FD6-975B-59BE-A960-9A2A262853A5),
+@@ -192,6 +196,7 @@ interface IEnumProgressItems : IUnknown
+     HRESULT  Clone([out] IEnumProgressItems **ppEnum );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IProgressItems => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, nonextensible, oleautomation,
+@@ -239,6 +244,7 @@ interface IProgressItems : IDispatch
+     HRESULT  EnumProgressItems([out,retval] IEnumProgressItems **NewEnum );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImageResult => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -278,6 +284,7 @@ interface IFileSystemImageResult : IDispatch
+     HRESULT  DiscId([out,retval] BSTR *pVal);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImageResult2 => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation, 
+@@ -293,6 +300,7 @@ interface IFileSystemImageResult2 : IFileSystemImageResult
+     HRESULT  ModifiedBlocks([out,ref,retval] IBlockRangeList **pVal);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsiItem => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -374,6 +382,7 @@ interface IFsiItem : IDispatch
+     HRESULT  FileSystemPath([in] FsiFileSystems fileSystem, [out,retval] BSTR *pVal );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IEnumFsiItems => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     uuid(2C941FDA-975B-59BE-A960-9A2A262853A5),
+@@ -409,6 +418,7 @@ interface IEnumFsiItems : IUnknown
+     HRESULT  Clone([out] IEnumFsiItems **ppEnum );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsiFileItem => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -451,6 +461,7 @@ interface IFsiFileItem : IFsiItem
+ // Forward declaration for interface IFsiNamedStreams
+ interface IFsiNamedStreams;
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsiFileItem2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -497,6 +508,7 @@ interface IFsiFileItem2 : IFsiFileItem
+     HRESULT  IsRealTime([in] VARIANT_BOOL newVal);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsiNamedStreams => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation, nonextensible,
+@@ -532,6 +544,7 @@ interface IFsiNamedStreams : IDispatch
+     HRESULT  EnumNamedStreams([out,ref,retval] IEnumFsiItems **NewEnum);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsiDirectoryItem => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -603,6 +616,7 @@ interface IFsiDirectoryItem : IFsiItem
+     HRESULT  RemoveTree([in] BSTR path);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFsiDirectoryItem2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -620,6 +634,7 @@ interface IFsiDirectoryItem2 : IFsiDirectoryItem
+                                      [in] VARIANT_BOOL includeBaseDirectory);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImage => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -929,6 +944,7 @@ interface IFileSystemImage : IDispatch
+     HRESULT  MultisessionInterfaces([in] SAFEARRAY(VARIANT) newVal);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImage2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -950,6 +966,7 @@ interface IFileSystemImage2 : IFileSystemImage
+     HRESULT  BootImageOptionsArray([in] SAFEARRAY(VARIANT) newVal);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSystemImage3 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, pointer_default(unique),
+     dual, oleautomation,
+@@ -982,6 +999,7 @@ interface IFileSystemImage3 : IFileSystemImage2
+ ////////////////////////////////////////////////////////////////////////////////
+ 
+ cpp_quote("#define DISPID_DFILESYSTEMIMAGEEVENTS_UPDATE 0x100")
++cpp_quote("/* Win32Metadata: interface ::DFileSystemImageEvents => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, nonextensible, 
+     oleautomation,
+@@ -1002,6 +1020,7 @@ interface DFileSystemImageEvents : IDispatch
+ }
+ 
+ cpp_quote("#define DISPID_DFILESYSTEMIMAGEIMPORTEVENTS_UPDATEIMPORT 0x101")
++cpp_quote("/* Win32Metadata: interface ::DFileSystemImageImportEvents => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object, nonextensible, 
+     oleautomation,
+@@ -1024,6 +1043,7 @@ interface DFileSystemImageImportEvents : IDispatch
+                          [in] LONG totalFileItems);
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IIsoImageManager => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(6CA38BE5-FBBB-4800-95A1-A438865EB0D4),

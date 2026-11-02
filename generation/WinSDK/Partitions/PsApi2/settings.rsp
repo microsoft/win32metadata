@@ -17,3 +17,5 @@ _PERFORMANCE_INFORMATION
 <IncludeRoot>/um/Psapi.h
 --namespace
 Windows.Win32.System.ProcessStatus
+--config
+parse-win32-annotations

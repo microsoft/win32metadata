@@ -1,0 +1,19 @@
+diff --git a/um/gdiplusheaders.h b/um/gdiplusheaders.h
+--- a/um/gdiplusheaders.h
++++ b/um/gdiplusheaders.h
+@@ -92,6 +92,7 @@ public:
+     Status GetBounds(OUT RectF* rect,
+                      IN const Graphics* g) const;
+ 
++    _Win32_RAIIFree_(DeleteObject, -1, 0)
+     HRGN   GetHRGN  (IN const Graphics * g) const;
+ 
+     BOOL IsEmpty(IN const Graphics *g) const;
+@@ -879,6 +880,7 @@ public:
+     // and can no longer be used.  It is the responsiblity of the caller to
+     // invoke DeleteEnhMetaFile to delete this hEmf.
+ 
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0)
+     HENHMETAFILE GetHENHMETAFILE();
+ 
+     // Used in conjuction with Graphics::EnumerateMetafile to play an EMF+

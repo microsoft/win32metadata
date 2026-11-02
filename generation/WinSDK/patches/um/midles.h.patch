@@ -1,0 +1,80 @@
+diff --git a/um/midles.h b/um/midles.h
+index 89b4c703..bdc62b58 100644
+--- a/um/midles.h
++++ b/um/midles.h
+@@ -74,6 +74,7 @@ typedef struct _MIDL_TYPE_PICKLING_INFO
+ } MIDL_TYPE_PICKLING_INFO,  * PMIDL_TYPE_PICKLING_INFO;
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesEncodeIncrementalHandleCreate(
+     void          * UserState,
+@@ -81,6 +82,7 @@ MesEncodeIncrementalHandleCreate(
+     MIDL_ES_WRITE   WriteFn,
+     handle_t      * pHandle );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesDecodeIncrementalHandleCreate(
+     void         *  UserState,
+@@ -88,6 +90,7 @@ MesDecodeIncrementalHandleCreate(
+     handle_t     *  pHandle );
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesIncrementalHandleReset(
+     handle_t        Handle,
+@@ -98,6 +101,7 @@ MesIncrementalHandleReset(
+     MIDL_ES_CODE    Operation );
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesEncodeFixedBufferHandleCreate(
+     _Out_writes_bytes_(BufferSize) char *pBuffer,
+@@ -106,6 +110,7 @@ MesEncodeFixedBufferHandleCreate(
+     _Out_ handle_t *pHandle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesEncodeDynBufferHandleCreate(
+     _Outptr_result_bytebuffer_(*pEncodedSize) char **pBuffer,
+@@ -113,6 +118,7 @@ MesEncodeDynBufferHandleCreate(
+     _Out_ handle_t *pHandle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesDecodeBufferHandleCreate(
+     _In_reads_bytes_(BufferSize ) char * Buffer,
+@@ -121,6 +127,7 @@ MesDecodeBufferHandleCreate(
+     );
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesBufferHandleReset(
+     _In_ handle_t Handle,
+@@ -132,9 +139,11 @@ MesBufferHandleReset(
+     );
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesHandleFree( handle_t  Handle );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPC_STATUS  RPC_ENTRY
+ MesInqProcEncodingId(
+     handle_t                    Handle,
+@@ -219,6 +228,7 @@ NdrMesProcEncodeDecode(
+     PFORMAT_STRING          pFormatString,
+     ... );
+ 
++_Win32_SupportedOS_Windows2000_
+ CLIENT_CALL_RETURN  RPC_VAR_ENTRY
+ NdrMesProcEncodeDecode2(
+     handle_t                Handle,

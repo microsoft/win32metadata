@@ -1,0 +1,678 @@
+diff --git a/um/axextend.idl b/um/axextend.idl
+index 8ec2b4a8..b4921df8 100644
+--- a/um/axextend.idl
++++ b/um/axextend.idl
+@@ -1,3 +1,4 @@
++cpp_quote("#include <sal.h>")
+ //------------------------------------------------------------------------------
+ // File: AXExtend.idl
+ //
+@@ -10,6 +11,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -136,6 +138,7 @@ interface IEnumRegFilters : IUnknown {
+         [out AM_ANNOTATION("_Out_")] IEnumRegFilters **ppEnum
+     );
+ }
++cpp_quote("/* Win32Metadata: method ::IEnumRegFilters::Next => PreserveResult */")
+ 
+ 
+ typedef IEnumRegFilters *PENUMREGFILTERS;
+@@ -307,6 +310,9 @@ typedef struct REGPINMEDIUM
+ } REGPINMEDIUM;
+ 
+ // flags for dwFlags in REFILTERPINS2
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum
+ {
+     // OK to have zero instances of pin In this case you will have to
+@@ -322,6 +328,9 @@ enum
+     // This is an Output pin
+     REG_PINFLAG_B_OUTPUT = 0x8
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ // describes pin for filter registration through IFilterMapper2
+@@ -375,6 +384,7 @@ typedef struct REGFILTER2
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IFilterMapper2 => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -442,6 +452,7 @@ interface IFilterMapper2 : IUnknown {
+        );
+ }
+ 
++cpp_quote("/* Win32Metadata: interface ::IFilterMapper3 => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -489,6 +500,7 @@ typedef struct tagQuality {
+ typedef IQualityControl *PQUALITYCONTROL;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IQualityControl => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -551,6 +563,9 @@ typedef struct tagCOLORKEY {
+ // doesn't mean that the other notification call backs won't ever be called
+ // the IOverlay implementation may use this as an efficiency optimisation
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum { ADVISE_NONE = 0x0,               // No notifications required
+        ADVISE_CLIPPING = 0x1,           // Synchronous clip information
+        ADVISE_PALETTE = 0x2,            // Palette change notifications
+@@ -558,6 +573,9 @@ enum { ADVISE_NONE = 0x0,               // No notifications required
+        ADVISE_POSITION = 0x8,           // Likewise when window moves etc
+        ADVISE_DISPLAY_CHANGE = 0x10     // Called on WM_DISPLAYCHANGE
+      };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ const DWORD ADVISE_ALL = ADVISE_CLIPPING |
+                          ADVISE_PALETTE |
+@@ -596,6 +614,7 @@ cpp_quote("#endif")
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IOverlayNotify => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -667,6 +686,7 @@ cpp_quote("#endif")
+ cpp_quote("DECLARE_HANDLE(HMONITOR);")
+ cpp_quote("#endif")
+ 
++cpp_quote("/* Win32Metadata: interface ::IOverlayNotify2 => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ object,
+ local,
+@@ -693,6 +713,7 @@ typedef IOverlayNotify2 *POVERLAYNOTIFY2;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IOverlay => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ object,
+ local,
+@@ -758,6 +779,7 @@ typedef IOverlay *POVERLAY;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaEventSink => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         local,
+         object,
+@@ -785,6 +807,7 @@ typedef IMediaEventSink *PMEDIAEVENTSINK;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSourceFilter => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -815,6 +838,7 @@ typedef IFileSourceFilter *PFILTERFILESOURCE;
+ //=====================================================================
+ //=====================================================================
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSinkFilter => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -837,6 +861,7 @@ interface IFileSinkFilter : IUnknown {
+ 
+ typedef IFileSinkFilter *PFILTERFILESINK;
+ 
++cpp_quote("/* Win32Metadata: interface ::IFileSinkFilter2 => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -870,6 +895,7 @@ typedef enum AM_FILESINK_FLAGS {
+ // building of graphs by automatic selection and connection of appropriate
+ // filters
+ 
++cpp_quote("/* Win32Metadata: interface ::IGraphBuilder => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1043,6 +1069,7 @@ interface ICaptureGraphBuilder : IUnknown {
+ //
+ // Capture graph builder "CopyCapturedFile" progress callback
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMCopyCaptureFileProgress => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1068,6 +1095,7 @@ interface IAMCopyCaptureFileProgress : IUnknown {
+ // video, for example
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::ICaptureGraphBuilder2 => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1185,6 +1213,7 @@ enum _AM_RENSDEREXFLAGS {
+ // New methods on for IFilterGraph and IGraphBuilder will have to go here.
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::IFilterGraph2 => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1248,6 +1277,7 @@ interface IFilterGraph2: IGraphBuilder {
+ // IFilterGraph3
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::IFilterGraph3 => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1275,6 +1305,7 @@ interface IFilterGraph3 : IFilterGraph2 {
+ // aka convergent graphs
+ // aka Closed captioning
+ 
++cpp_quote("/* Win32Metadata: interface ::IStreamBuilder => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     local,
+@@ -1304,6 +1335,7 @@ interface IStreamBuilder : IUnknown {
+ // multiple overlapped reads from different positions
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IAsyncReader => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -1385,6 +1417,7 @@ interface IAsyncReader : IUnknown
+ // interface provided by the filtergraph itself to let other objects
+ // (especially plug-in distributors, but also apps like graphedt) know
+ // when the graph has changed.
++cpp_quote("/* Win32Metadata: interface ::IGraphVersion => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1412,6 +1445,7 @@ interface IGraphVersion : IUnknown
+ // need to pass your implementation of this pointer as an in param.
+ //
+ // use if: you are a resource manager who implements IResourceManager
++cpp_quote("/* Win32Metadata: interface ::IResourceConsumer => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     local,
+     object,
+@@ -1460,6 +1494,7 @@ interface IResourceConsumer : IUnknown
+ // Notifying change of focus to the resource manager will cause the resource
+ // manager to switch contended resources to the objects that have the user's
+ // focus
++cpp_quote("/* Win32Metadata: interface ::IResourceManager => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     local,
+     object,
+@@ -1590,6 +1625,7 @@ interface IResourceManager : IUnknown
+ // under HKCR\Interface\<IID>\Distributor= for some interface).
+ //
+ // Use if: you are the filtergraph.
++cpp_quote("/* Win32Metadata: interface ::IDistributorNotify => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1653,6 +1689,7 @@ cpp_quote("#endif")
+ // IAMStreamControl
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMStreamControl => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1692,6 +1729,7 @@ interface IAMStreamControl : IUnknown
+ // ISeekingPassThru
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::ISeekingPassThru => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1809,6 +1847,7 @@ interface ISeekingPassThru : IUnknown
+ // media type can describe which other sample rates, bit rates and channels
+ // you support.
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMStreamConfig => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -1944,6 +1983,7 @@ cpp_quote("#endif")
+ 
+ 
+ // Interface to control interleaving of different streams in one file
++cpp_quote("/* Win32Metadata: interface ::IConfigInterleaving => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -1993,6 +2033,7 @@ interface IConfigInterleaving : IUnknown
+ }
+ 
+ // Interface to control the AVI mux
++cpp_quote("/* Win32Metadata: interface ::IConfigAviMux => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -2049,6 +2090,7 @@ interface IConfigAviMux : IUnknown
+     // many keyframes, etc., and to find information like capabilities and
+     // the description of this compressor
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMVideoCompression => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2173,6 +2215,7 @@ interface IConfigAviMux : IUnknown
+     // capture driver Capture Filter.  It allows an application to bring up
+     // one of the 3 driver dialogs that VfW capture drivers have.
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMVfwCaptureDialogs => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         object,
+         local,
+@@ -2215,6 +2258,7 @@ interface IConfigAviMux : IUnknown
+     // (Co).  It allows an application to bring up either the Configure or
+     // About dialogs for the ICM codec that it is currently using.
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMVfwCompressDialogs => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         object,
+         local,
+@@ -2304,6 +2348,7 @@ interface IConfigAviMux : IUnknown
+     // Never send the same frame # twice, and never go back in time.  The
+     // regular time stamp of a sample can also never go back in time.
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMDroppedFrames => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2362,6 +2407,7 @@ interface IConfigAviMux : IUnknown
+     // This interface can also be supported by the audio capture filter itself
+     // to control to overall record level and panning after the mix
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMAudioInputMixer => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2473,6 +2519,7 @@ interface IConfigAviMux : IUnknown
+     // GetAllocatorProperties can only be called after a pin is connected and
+     // it returns the properties of the current allocator being used
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMBufferNegotiation => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2546,6 +2593,7 @@ interface IConfigAviMux : IUnknown
+     // IAMAnalogVideoDecoder interface
+     //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMAnalogVideoDecoder => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2630,6 +2678,7 @@ interface IConfigAviMux : IUnknown
+     //
+     //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMVideoProcAmp => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2697,6 +2746,7 @@ interface IConfigAviMux : IUnknown
+     // Control of local or remote cameras
+     //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMCameraControl => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2752,6 +2802,7 @@ interface IConfigAviMux : IUnknown
+     // and listing available frame rates
+     //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMVideoControl => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2815,6 +2866,7 @@ interface IConfigAviMux : IUnknown
+     // Controls a routing matrix for analog or digital video or audio
+     //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMCrossbar => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2893,6 +2945,7 @@ interface IConfigAviMux : IUnknown
+ 
+     interface IAMTunerNotification;
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMTuner => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -2994,6 +3047,7 @@ interface IConfigAviMux : IUnknown
+     // Controls an analog TV tuner device
+     //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMTVTuner => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -3110,6 +3164,7 @@ interface IConfigAviMux : IUnknown
+ 
+     interface IAMTVAudioNotification;
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMTVAudio => SupportedOSPlatform(\"windows5.0\") */")
+     [
+         AM_LOCAL
+         object,
+@@ -3292,6 +3347,7 @@ cpp_quote("#define KSPROPERTY_SUPPORT_SET  2")
+     }
+ cpp_quote("#endif // _IKsPropertySet_")
+ 
++cpp_quote("/* Win32Metadata: interface ::IMediaPropertyBag => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -3314,6 +3370,7 @@ interface IMediaPropertyBag : IPropertyBag
+ }
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IPersistMediaPropertyBag => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -3389,6 +3446,7 @@ typedef IAMPhysicalPinInfo *PAMPHYSICALPININFO;
+    //
+    // See edevdefs.h for the enumerated parameter list
+    //---------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IAMExtDevice => SupportedOSPlatform(\"windows5.0\") */")
+  [
+      AM_LOCAL
+      object,
+@@ -3452,6 +3510,7 @@ typedef IAMExtDevice *PEXTDEVICE;
+    //
+    // See edevdefs.h for the parameter lists
+    //---------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IAMExtTransport => SupportedOSPlatform(\"windows5.0\") */")
+ [
+      AM_LOCAL
+      object,
+@@ -3665,6 +3724,7 @@ cpp_quote("#endif /* 0 */")
+ typedef TIMECODE *PTIMECODE;
+ typedef TIMECODE_SAMPLE *PTIMECODE_SAMPLE;
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMTimecodeReader => SupportedOSPlatform(\"windows5.0\") */")
+ [
+      AM_LOCAL
+      object,
+@@ -3722,6 +3782,7 @@ typedef IAMTimecodeReader *PIAMTIMECODEREADER;
+    //
+    // See edevdefs.h for the parameter lists
+     //---------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IAMTimecodeGenerator => SupportedOSPlatform(\"windows5.0\") */")
+ [
+      AM_LOCAL
+      object,
+@@ -3790,6 +3851,7 @@ typedef IAMTimecodeGenerator *PIAMTIMECODEGENERATOR;
+    //
+    // See edevdefs.h for the parameter lists
+     //---------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IAMTimecodeDisplay => SupportedOSPlatform(\"windows5.0\") */")
+ [
+      AM_LOCAL
+      object,
+@@ -3903,6 +3965,7 @@ enum _AMSTREAMSELECTENABLEFLAGS {
+ //  Control which logical streams are played and find out information about
+ //  them
+ //  Normally supported by a filter
++cpp_quote("/* Win32Metadata: interface ::IAMStreamSelect => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -3951,6 +4014,7 @@ enum _AMRESCTL_RESERVEFLAGS
+ //
+ //  Normally supported by a filter
+ //
++cpp_quote("/* Win32Metadata: interface ::IAMResourceControl => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -3971,6 +4035,7 @@ interface IAMResourceControl : IUnknown
+ 
+ 
+ //  Set clock adjustments - supported by some clocks
++cpp_quote("/* Win32Metadata: interface ::IAMClockAdjust => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -3995,6 +4060,7 @@ enum _AM_FILTER_MISC_FLAGS {
+     AM_FILTER_MISC_FLAGS_IS_SOURCE   = 0x00000002  /*  Filter sources data */
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMFilterMiscFlags => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4041,6 +4107,7 @@ interface IDrawVideoImage : IUnknown
+ // decimating their output image by an arbitary amount.
+ //
+ //
++cpp_quote("/* Win32Metadata: interface ::IDecimateVideoImage => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -4076,6 +4143,7 @@ typedef enum _DECIMATION_USAGE {
+     DECIMATION_DEFAULT              // decimate at decoder then ovly the vide port then crop
+ } DECIMATION_USAGE;
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMVideoDecimationProperties => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -4105,6 +4173,7 @@ interface IAMVideoDecimationProperties: IUnknown
+ //
+ //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IVideoFrameStep => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4190,6 +4259,7 @@ enum _AM_PUSHSOURCE_FLAGS {
+ //
+ // Used to set a source filter to run in a "live" mode.
+ //
++cpp_quote("/* Win32Metadata: interface ::IAMPushSource => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4243,6 +4313,7 @@ interface IAMPushSource : IAMLatency
+ //
+ // ------------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMDeviceRemoval => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -4300,6 +4371,7 @@ enum _DVENCODERFORMAT {     // dvsd/dvhd/dvsl
+     DVENCODERFORMAT_DVHD        =   2008,
+     DVENCODERFORMAT_DVSL        =   2009
+ };
++cpp_quote("/* Win32Metadata: interface ::IDVEnc => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -4346,6 +4418,7 @@ enum _DVRESOLUTION {
+     DVRESOLUTION_QUARTER        =   1002,
+     DVRESOLUTION_DC         =   1003
+ };
++cpp_quote("/* Win32Metadata: interface ::IIPDVDec => SupportedOSPlatform(\"windows5.0\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -4376,6 +4449,7 @@ interface IIPDVDec : IUnknown
+ //
+ //------------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IDVRGB219 => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         AM_LOCAL
+         object,
+@@ -4395,6 +4469,7 @@ interface IDVRGB219 : IUnknown
+ // Implemented by DV splitter filters
+ //
+ // ------------------------------------------------------------------------
++cpp_quote("/* Win32Metadata: interface ::IDVSplitter => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4439,6 +4514,7 @@ enum _AM_AUDIO_RENDERER_STAT_PARAM {
+ //
+ //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMAudioRendererStats => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4464,6 +4540,7 @@ interface IAMAudioRendererStats : IUnknown
+ //
+ //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMLatency => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4493,6 +4570,7 @@ enum _AM_INTF_SEARCH_FLAGS {
+ //
+ //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMGraphStreams => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4543,6 +4621,7 @@ enum AMOVERLAYFX {
+     AMOVERFX_DEINTERLACE =      0x00000008
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMOverlayFX => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4579,6 +4658,7 @@ interface IAMOverlayFX : IUnknown
+ // IAMOpenProgress interface provides information about current progress through
+ // a download
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMOpenProgress => SupportedOSPlatform(\"windows5.0\") */")
+ [
+ AM_LOCAL
+ object,
+@@ -4610,6 +4690,7 @@ interface IAMOpenProgress : IUnknown
+     This interface is implemented by the MPEG-2 Demultiplexer filter,
+     irrespective of program vs. transport stream splitting functionality.
+ --*/
++cpp_quote("/* Win32Metadata: interface ::IMpeg2Demultiplexer => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -4687,6 +4768,7 @@ typedef struct STREAM_ID_MAP {
+ /*++
+     Enumerates the StreamIds mapped on a pin
+ --*/
++cpp_quote("/* Win32Metadata: interface ::IEnumStreamIdMap => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -4722,6 +4804,7 @@ interface IEnumStreamIdMap : IUnknown
+ 
+     Provides the ability to map/unmap a stream_id to/from an output pin.
+ --*/
++cpp_quote("/* Win32Metadata: interface ::IMPEG2StreamIdMap => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     local,
+@@ -4752,6 +4835,7 @@ interface IMPEG2StreamIdMap : IUnknown
+ 
+ 
+ //  Register a service provider with the filter graph
++cpp_quote("/* Win32Metadata: interface ::IRegisterServiceProvider => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         object,
+         local,
+@@ -4783,6 +4867,7 @@ interface IRegisterServiceProvider : IUnknown
+ //
+ // Used to set/get the error tolerance used by a slaving audio renderer
+ //
++cpp_quote("/* Win32Metadata: interface ::IAMClockSlave => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     AM_LOCAL
+     object,
+@@ -4824,6 +4909,7 @@ interface IAMClockSlave : IUnknown
+ //
+ //---------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMGraphBuilderCallback => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(4995f511-9ddb-4f12-bd3b-f04611807b79),
+@@ -4868,6 +4954,7 @@ cpp_quote("#endif")
+ // Copyright (c) 1992 - 2002, Microsoft Corporation.  All rights reserved.
+ //------------------------------------------------------------------------------
+ 
++cpp_quote("/* Win32Metadata: interface ::IGetCapabilitiesKey => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         object,
+         local,
+@@ -4963,6 +5050,7 @@ cpp_quote("#define AM_GETDECODERCAP_QUERY_EVR_SUPPORT   0x00000007")
+ cpp_quote("#define      DECODER_CAP_NOTSUPPORTED        0x00000000")
+ cpp_quote("#define      DECODER_CAP_SUPPORTED           0x00000001")
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMDecoderCaps => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         object,
+         local,
+@@ -5006,6 +5094,7 @@ typedef struct _AMCOPPStatusOutput {
+ } AMCOPPStatusOutput, *LPAMCOPPStatusOutput;
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMCertifiedOutputProtection => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+         object,
+         local,
+@@ -5037,6 +5126,7 @@ interface IAMCertifiedOutputProtection : IUnknown
+ //  Can be implemented by implementors of IAsyncReader on a Filter's output pin
+ //  fRaw = TRUE means sample timestamp = byte position
+ //  fRaw = FALSE (default) means sample timestamp = 10000000 * (byte position)
++cpp_quote("/* Win32Metadata: interface ::IAMAsyncReaderTimestampScaling => SupportedOSPlatform(\"windows6.1\") */")
+ [
+         object,
+         local,
+@@ -5062,6 +5152,7 @@ interface IAMAsyncReaderTimestampScaling : IUnknown
+ //  COM object
+ //
+ 
++cpp_quote("/* Win32Metadata: interface ::IAMPluginControl => SupportedOSPlatform(\"windows6.1\") */")
+ [
+     object,
+     local,
+@@ -5104,4 +5195,3 @@ interface IAMPluginControl : IUnknown
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
+-

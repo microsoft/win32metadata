@@ -1,0 +1,97 @@
+diff --git a/um/oaidl.idl b/um/oaidl.idl
+index c39506f..7fe8405 100644
+--- a/um/oaidl.idl
++++ b/um/oaidl.idl
+@@ -1,3 +1,7 @@
++cpp_quote("#include <sal.h>")
++#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <win32metadata_annotations.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+---------------------------------------------------------------------------
+@@ -169,6 +173,6 @@ typedef [unique] wireSAFEARRAY * wirePSAFEARRAY;
+ typedef struct tagSAFEARRAY {
+     USHORT cDims;
+-    USHORT fFeatures;
++    [annotation("_Win32_AssociatedEnum_(ADVANCED_FEATURE_FLAGS)")] USHORT fFeatures;
+     ULONG  cbElements;
+     ULONG  cLocks;
+     PVOID  pvData;
+@@ -190,6 +194,7 @@ const USHORT FADF_UNKNOWN    = 0x0200;  /* an array of IUnknown* */
+ const USHORT FADF_DISPATCH   = 0x0400;  /* an array of IDispatch* */
+ const USHORT FADF_VARIANT    = 0x0800;  /* an array of VARIANTs */
+ const USHORT FADF_RESERVED   = 0xF008;  /* reserved bits */
++cpp_quote("_Win32_FlagsEnum_(ADVANCED_FEATURE_FLAGS, unsigned short, FADF_AUTO, FADF_STATIC, FADF_EMBEDDED, FADF_FIXEDSIZE, FADF_RECORD, FADF_HAVEIID, FADF_HAVEVARTYPE, FADF_BSTR, FADF_UNKNOWN, FADF_DISPATCH, FADF_VARIANT, FADF_RESERVED);")
+ 
+ 
+ // #########################################################################
+@@ -265,10 +270,10 @@ cpp_quote("#endif")
+ 
+ typedef [wire_marshal(wireVARIANT)] struct tagVARIANT VARIANT;
+ 
+ struct tagVARIANT {
+     union {
+         struct __tagVARIANT {
+-            VARTYPE vt;
++            [annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vt;
+             WORD    wReserved1;
+             WORD    wReserved2;
+             WORD    wReserved3;
+@@ -503,6 +508,7 @@ const USHORT PARAMFLAG_FRETVAL      = 0x08;
+ const USHORT PARAMFLAG_FOPT         = 0x10;
+ const USHORT PARAMFLAG_FHASDEFAULT  = 0x20;
+ const USHORT PARAMFLAG_FHASCUSTDATA = 0x40;
++cpp_quote("_Win32_FlagsEnum_(PARAMFLAGS, unsigned short, PARAMFLAG_NONE, PARAMFLAG_FIN, PARAMFLAG_FOUT, PARAMFLAG_FLCID, PARAMFLAG_FRETVAL, PARAMFLAG_FOPT, PARAMFLAG_FHASDEFAULT, PARAMFLAG_FHASCUSTDATA);")
+ 
+ typedef struct tagIDLDESC {
+     ULONG_PTR dwReserved;
+@@ -514,6 +520,7 @@ const USHORT IDLFLAG_FIN     = PARAMFLAG_FIN;
+ const USHORT IDLFLAG_FOUT    = PARAMFLAG_FOUT;
+ const USHORT IDLFLAG_FLCID   = PARAMFLAG_FLCID;
+ const USHORT IDLFLAG_FRETVAL = PARAMFLAG_FRETVAL;
++cpp_quote("_Win32_FlagsEnum_(IDLFLAGS, unsigned short, IDLFLAG_NONE, IDLFLAG_FIN, IDLFLAG_FOUT, IDLFLAG_FLCID, IDLFLAG_FRETVAL);")
+ 
+ cpp_quote("//;begin_internal")
+ cpp_quote("#if 0")
+@@ -665,6 +672,7 @@ const USHORT IMPLTYPEFLAG_FDEFAULT      = 0x1;
+ const USHORT IMPLTYPEFLAG_FSOURCE       = 0x2;
+ const USHORT IMPLTYPEFLAG_FRESTRICTED   = 0x4;
+ const USHORT IMPLTYPEFLAG_FDEFAULTVTABLE= 0x8;
++cpp_quote("_Win32_FlagsEnum_(IMPLTYPEFLAGS, int, IMPLTYPEFLAG_FDEFAULT, IMPLTYPEFLAG_FSOURCE, IMPLTYPEFLAG_FRESTRICTED, IMPLTYPEFLAG_FDEFAULTVTABLE);")
+ 
+ typedef struct tagVARDESC {
+     MEMBERID memid;
+@@ -754,6 +762,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++cpp_quote("/* Win32Metadata: parameter ::ICreateTypeInfo::SetImplTypeFlags::implTypeFlags => AssociatedEnum(IMPLTYPEFLAGS) */")
+ [
+     object,
+     uuid(00020405-0000-0000-C000-000000000046),
+@@ -1056,6 +1065,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++cpp_quote("/* Win32Metadata: parameter ::IDispatch::Invoke::wFlags => AssociatedEnum(DISPATCH_FLAGS) */")
+ [
+     object,
+     uuid(00020400-0000-0000-C000-000000000046),
+@@ -1181,6 +1191,8 @@ interface IEnumVARIANT : IUnknown
+                 [out] IEnumVARIANT ** ppEnum
+             );
+ }
++cpp_quote("/* Win32Metadata: method ::IEnumVARIANT::Skip => PreserveResult */")
++cpp_quote("/* Win32Metadata: method ::IEnumVARIANT::Next => PreserveResult */")
+ 
+ 
+ [
+@@ -1253,6 +1265,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++cpp_quote("/* Win32Metadata: parameter ::ITypeInfo::GetImplTypeFlags::pImplTypeFlags => AssociatedEnum(IMPLTYPEFLAGS) */")
+ [
+     object,
+     uuid(00020401-0000-0000-C000-000000000046),

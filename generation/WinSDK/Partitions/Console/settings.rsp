@@ -11,3 +11,5 @@ Windows.Win32.System.Console
 --remap
 _APPKEY=APPKEY
 _CONSOLE_GRAPHICS_BUFFER_INFO=CONSOLE_GRAPHICS_BUFFER_INFO
+--config
+parse-win32-annotations

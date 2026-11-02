@@ -7,3 +7,5 @@
 <IncludeRoot>/um/relogger.h
 --namespace
 Windows.Win32.System.Diagnostics.Etw
+--config
+parse-win32-annotations

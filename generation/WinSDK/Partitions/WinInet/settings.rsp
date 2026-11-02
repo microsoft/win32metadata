@@ -8,3 +8,5 @@ tagTEXT_SOURCE
 <IncludeRoot>/um/ProofOfPossessionCookieInfo.h
 --namespace
 Windows.Win32.Networking.WinInet
+--config
+parse-win32-annotations

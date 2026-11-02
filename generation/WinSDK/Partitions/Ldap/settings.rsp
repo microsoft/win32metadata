@@ -4,3 +4,5 @@
 <IncludeRoot>/um/ntldap.h
 --namespace
 Windows.Win32.Networking.Ldap
+--config
+parse-win32-annotations

@@ -2,3 +2,5 @@
 <IncludeRoot>/um/mbnapi.h
 --namespace
 Windows.Win32.NetworkManagement.MobileBroadband
+--config
+parse-win32-annotations

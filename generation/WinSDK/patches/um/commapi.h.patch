@@ -1,0 +1,22 @@
+diff --git a/um/commapi.h b/um/commapi.h
+index b07322c27a976d2b08df183e950a7976f3329ee4..b2b35e2a13abe011cace48fbe339265402ebb288 100644
+--- a/um/commapi.h
++++ b/um/commapi.h
+@@ -13,6 +13,8 @@
+ #ifndef _COMM_H_
+ #define _COMM_H_
+ 
++#include <sal.h>
++
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <windows.h>
+@@ -175,7 +177,7 @@
+     );
+ 
+ WINBASEAPI
+-HANDLE
++_Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ WINAPI
+ OpenCommPort(
+     _In_ ULONG uPortNumber,

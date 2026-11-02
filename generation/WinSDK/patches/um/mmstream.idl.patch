@@ -1,0 +1,22 @@
+diff --git a/um/mmstream.idl b/um/mmstream.idl
+index efa530ae..2a9e5ee0 100644
+--- a/um/mmstream.idl
++++ b/um/mmstream.idl
+@@ -68,11 +68,17 @@ typedef enum {
+ } COMPLETION_STATUS_FLAGS;
+ 
+ //  Flags for GetInformation
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum {
+     MMSSF_HASCLOCK          = 0x00000001,
+     MMSSF_SUPPORTSEEK       = 0x00000002,
+     MMSSF_ASYNCHRONOUS      = 0x00000004
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ //  Flags for StreamSample::Update
+ enum {

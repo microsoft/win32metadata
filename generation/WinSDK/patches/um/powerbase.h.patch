@@ -1,0 +1,53 @@
+diff --git a/um/powerbase.h b/um/powerbase.h
+index 73c8bfd..9be6c2a 100644
+--- a/um/powerbase.h
++++ b/um/powerbase.h
+@@ -44,6 +44,7 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
+ #define _OVERRIDE_NTSTATUS_
+ #endif
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ WINAPI
+ CallNtPowerInformation(
+@@ -58,6 +59,8 @@ CallNtPowerInformation(
+ #undef NTSTATUS
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOLEAN
+ WINAPI
+ GetPwrCapabilities(
+@@ -65,6 +68,8 @@ GetPwrCapabilities(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++/* Win32Metadata: parameter ::PowerDeterminePlatformRoleEx::Version => AssociatedEnum(POWER_PLATFORM_ROLE_VERSION) */
++_Win32_SupportedOS_Windows8_
+ POWER_PLATFORM_ROLE
+ WINAPI
+ PowerDeterminePlatformRoleEx(
+@@ -74,10 +79,12 @@ PowerDeterminePlatformRoleEx(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ PowerRegisterSuspendResumeNotification(
+-    _In_ DWORD Flags,
++    _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) _In_ DWORD Flags,
+     _In_ HANDLE Recipient,
+     _Out_ PHPOWERNOTIFY RegistrationHandle
+     );
+@@ -85,6 +92,8 @@ PowerRegisterSuspendResumeNotification(
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ PowerUnregisterSuspendResumeNotification(

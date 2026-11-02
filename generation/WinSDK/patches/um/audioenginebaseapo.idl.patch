@@ -1,0 +1,15 @@
+diff --git a/um/audioenginebaseapo.idl b/um/audioenginebaseapo.idl
+index 08a3e6f6..03b6f9ec 100644
+--- a/um/audioenginebaseapo.idl
++++ b/um/audioenginebaseapo.idl
+@@ -537,8 +537,8 @@ interface IAudioProcessingObjectConfiguration : IUnknown{
+     //
+     //  Note: This method may not be called from a real-time processing thread.
+     //
+-    HRESULT LockForProcess([in, annotation("_In_")] UINT32 u32NumInputConnections, [in, annotation("_In_")] APO_CONNECTION_DESCRIPTOR** ppInputConnections,
+-        [in, annotation("_In_")] UINT32 u32NumOutputConnections, [in, annotation("_In_")] APO_CONNECTION_DESCRIPTOR** ppOutputConnections);
++    HRESULT LockForProcess([in, annotation("_In_")] UINT32 u32NumInputConnections, [in, annotation("_In_reads_(u32NumInputConnections)")] APO_CONNECTION_DESCRIPTOR** ppInputConnections,
++        [in, annotation("_In_")] UINT32 u32NumOutputConnections, [in, annotation("_In_reads_(u32NumOutputConnections)")] APO_CONNECTION_DESCRIPTOR** ppOutputConnections);
+ 
+     //-------------------------------------------------------------------------
+     // Description:

@@ -1,0 +1,363 @@
+diff --git a/um/usp10.h b/um/usp10.h
+index bcb720b2..75b25e98 100644
+--- a/um/usp10.h
++++ b/um/usp10.h
+@@ -6,6 +6,12 @@
+ 
+ #ifndef __usp10__
+ #define __usp10__
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int SCRIPT_IS_COMPLEX_FLAGS;
++#endif
++
++#include <sal.h>
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
+@@ -114,6 +120,7 @@ typedef void *SCRIPT_CACHE;
+ //      mis-referencing.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptFreeCache(
+     _Inout_updates_(1) _At_(*psc, _Post_null_) SCRIPT_CACHE   *psc);       //InOut  Cache handle
+ 
+@@ -356,6 +363,7 @@ typedef struct tag_SCRIPT_ITEM {
+ //      returned.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptItemize(
+     _In_reads_(cInChars) const WCHAR                   *pwcInChars,    // In   Unicode string to be itemized
+     int                                                 cInChars,       // In   Codepoint count to itemize
+@@ -476,6 +484,7 @@ _Check_return_ HRESULT WINAPI ScriptItemize(
+ //      necessary information for layout.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptLayout(
+     int                             cRuns,                  // In   Number of runs to process
+     _In_reads_(cRuns) const BYTE    *pbLevel,               // In   Array of run embedding levels
+@@ -566,6 +575,7 @@ typedef struct tag_SCRIPT_VISATTR {
+ //      it, possibly more than once, until a large enough buffer is found.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptShape(
+     HDC                                                     hdc,            // In    Optional (see under caching)
+     _Inout_updates_(1) SCRIPT_CACHE                         *psc,           // InOut Cache handle
+@@ -671,6 +681,7 @@ typedef struct tagGOFFSET {
+ #endif
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptPlace(
+     HDC                                         hdc,        // In    Optional (see under caching)
+     _Inout_updates_(1) SCRIPT_CACHE             *psc,       // InOut Cache handle
+@@ -698,6 +709,7 @@ _Check_return_ HRESULT WINAPI ScriptPlace(
+ //      psa.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptTextOut(
+     const HDC                               hdc,            // In     OS handle to device context (required)
+     _Inout_updates_(1) SCRIPT_CACHE        *psc,           // InOut  Cache handle
+@@ -781,6 +793,7 @@ _Check_return_ HRESULT WINAPI ScriptTextOut(
+ //      is expected that the extra width will be rendered to the right of the
+ //      glyph, with as white space or, for Arabic text, as kashida.
+ /////
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptJustify(
+     _In_reads_(cGlyphs) const SCRIPT_VISATTR   *psva,          // In   Collected visual attributes for entire line
+     _In_reads_(cGlyphs) const int              *piAdvance,     // In   Advance widths from ScriptPlace
+@@ -870,6 +883,7 @@ typedef struct tag_SCRIPT_LOGATTR {
+ //      ScriptProperties identifies which scripts do this.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptBreak(
+     _In_reads_(cChars) const WCHAR             *pwcChars,  // In   Logical unicode item
+     int                                         cChars,     // In   Length of unicode item
+@@ -898,6 +912,7 @@ _Check_return_ HRESULT WINAPI ScriptBreak(
+ //      snapped to the requested edge of the cluster containing CP.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptCPtoX(
+     int                                         iCP,            // In   Logical character position in run
+     BOOL                                        fTrailing,      // In   Which edge (default - leading)
+@@ -940,6 +955,7 @@ _Check_return_ HRESULT WINAPI ScriptCPtoX(
+ //      X positions following the item).
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptXtoCP(
+     int                                         iX,             // In   X offset from left of run
+     int                                         cChars,         // In   Count of logical codepoints in run
+@@ -1174,6 +1190,7 @@ _Check_return_ HRESULT WINAPI ScriptXtoCP(
+ //      they represent.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptGetLogicalWidths(
+     _In_reads_(1) const SCRIPT_ANALYSIS        *psa,           // In   Script analysis from item attributes
+     int                                         cChars,         // In   Count of logical codepoints in run
+@@ -1207,6 +1224,7 @@ _Check_return_ HRESULT WINAPI ScriptGetLogicalWidths(
+ 
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptApplyLogicalWidth(
+     _In_reads_(cChars) const int               *piDx,          // In     Logical dx array to apply
+     int                                         cChars,         // In     Count of logical codepoints in run
+@@ -1267,6 +1285,7 @@ _Check_return_ HRESULT WINAPI ScriptApplyLogicalWidth(
+ #define SGCM_RTL  0x00000001      // Return mirrored glyph for mirrorable Unicode codepoints
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptGetCMap(
+     HDC                                     hdc,            // In    Optional (see notes on caching)
+     _Inout_updates_(1) SCRIPT_CACHE        *psc,           // InOut Address of Cache handle
+@@ -1291,6 +1310,7 @@ _Check_return_ HRESULT WINAPI ScriptGetCMap(
+ //      run of the mill complex script text formatting.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptGetGlyphABCWidth(
+     HDC                                     hdc,        // In    Optional (see notes on caching)
+     _Inout_updates_(1) SCRIPT_CACHE        *psc,       // InOut Address of Cache handle
+@@ -1389,6 +1409,7 @@ typedef struct {
+ //      numeric and whether it's complex.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptGetProperties(
+     _Outptr_result_buffer_(*piNumScripts) const SCRIPT_PROPERTIES   ***ppSp,        // Out  Receives pointer to table of pointers to properties indexed by script
+     _Out_ int                                                     *piNumScripts); // Out  Receives number of scripts (valid values are 0 through NumScripts-1)
+@@ -1415,6 +1436,7 @@ typedef struct {
+ //      Returns information from the font cache
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptGetFontProperties(
+     HDC                                     hdc,    // In    Optional (see notes on caching)
+     _Inout_updates_(1) SCRIPT_CACHE        *psc,   // InOut Address of Cache handle
+@@ -1430,6 +1452,7 @@ _Check_return_ HRESULT WINAPI ScriptGetFontProperties(
+ //
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptCacheGetHeight(
+     HDC                                     hdc,        // In    Optional (see notes on caching)
+     _Inout_updates_(1) SCRIPT_CACHE        *psc,       // InOut Address of Cache handle
+@@ -1530,6 +1553,7 @@ typedef struct tag_SCRIPT_TABDEF {
+ typedef void* SCRIPT_STRING_ANALYSIS;
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringAnalyse(
+     HDC                                             hdc,        //In  Device context (required)
+     const void                                      *pString,   //In  String in 8 or 16 bit characters
+@@ -1555,6 +1579,7 @@ _Check_return_ HRESULT WINAPI ScriptStringAnalyse(
+ //
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringFree(
+     _Inout_updates_(1) SCRIPT_STRING_ANALYSIS  *pssa);  //InOut Address of pointer to analysis
+ 
+@@ -1571,6 +1596,7 @@ _Check_return_ HRESULT WINAPI ScriptStringFree(
+ //      SCRIPT_STRING_ANALYSIS is passed to ScriptStringFree.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ const SIZE* WINAPI ScriptString_pSize(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
+ 
+@@ -1587,6 +1613,7 @@ const SIZE* WINAPI ScriptString_pSize(
+ //      SCRIPT_STRING_ANALYSIS is passed to ScriptStringFree.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ const int* WINAPI ScriptString_pcOutChars(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
+ 
+@@ -1606,6 +1633,7 @@ const int* WINAPI ScriptString_pcOutChars(
+ //      entries.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ const SCRIPT_LOGATTR* WINAPI ScriptString_pLogAttr(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
+ 
+@@ -1628,6 +1656,7 @@ const SCRIPT_LOGATTR* WINAPI ScriptString_pLogAttr(
+ //      at least *ScriptString_pcOutChars(ssa) ints.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringGetOrder(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,
+     UINT                                    *puOrder); 
+@@ -1642,6 +1671,7 @@ _Check_return_ HRESULT WINAPI ScriptStringGetOrder(
+ //      Return x coordinate for leading or trailing edge of character icp.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringCPtoX(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,        //In  String analysis
+     int                                     icp,        //In  Caret character position
+@@ -1658,6 +1688,7 @@ _Check_return_ HRESULT WINAPI ScriptStringCPtoX(
+ //
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringXtoCP(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,            // In
+     int                                     iX,             // In
+@@ -1680,6 +1711,7 @@ _Check_return_ HRESULT WINAPI ScriptStringXtoCP(
+ //      at least *ScriptString_pcOutChars(ssa) ints.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringGetLogicalWidths(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,
+     int                                     *piDx); 
+@@ -1700,6 +1732,7 @@ _Check_return_ HRESULT WINAPI ScriptStringGetLogicalWidths(
+ //              S_FALSE - one or more invalid glyphs are present
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringValidate(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
+ 
+@@ -1716,11 +1749,12 @@ _Check_return_ HRESULT WINAPI ScriptStringValidate(
+ //      Requires SSA_GLYPHS requested in original ScriptStringAnalyse call.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptStringOut(
+     _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,            //In  Analysis with glyphs
+     int                                     iX,             //In
+     int                                     iY,             //In
+-    UINT                                    uOptions,       //In  ExtTextOut options
++    _Win32_AssociatedEnum_(ETO_OPTIONS) UINT                                    uOptions,       //In  ExtTextOut options
+     _In_reads_opt_(1) const RECT           *prc,           //In  Clipping rectangle (iff ETO_CLIPPED)
+     int                                     iMinSel,        //In  Logical selection. Set iMinSel>=iMaxSel for no selection
+     int                                     iMaxSel,        //In
+@@ -1742,6 +1776,13 @@ _Check_return_ HRESULT WINAPI ScriptStringOut(
+ #define SIC_COMPLEX     1   // Treat complex script letters as complex
+ #define SIC_ASCIIDIGIT  2   // Treat digits U+0030 through U+0039 as complex
+ #define SIC_NEUTRAL     4   // Treat neutrals as complex
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SCRIPT_IS_COMPLEX_FLAGS, unsigned int,
++    SIC_COMPLEX,
++    SIC_ASCIIDIGIT,
++    SIC_NEUTRAL);
++#endif
+ //
+ //      SIC_COMPLEX: Should normally set. Causes complex script letters to
+ //      be treated as complex.
+@@ -1761,10 +1802,11 @@ _Check_return_ HRESULT WINAPI ScriptStringOut(
+ //                       side from left to right.
+ 
+ 
+-_Check_return_ HRESULT WINAPI ScriptIsComplex(
++_Win32_SupportedOS_Windows2000_
++_Win32_PreserveResult_ _Check_return_ HRESULT WINAPI ScriptIsComplex(
+     _In_reads_(cInChars) const WCHAR   *pwcInChars,    //In  String to be tested
+     int                                 cInChars,       //In  Length in characters
+-    DWORD                               dwFlags);       //In  Flags (see above)
++    _Win32_AssociatedEnum_(SCRIPT_IS_COMPLEX_FLAGS) DWORD                               dwFlags);       //In  Flags (see above)
+ 
+ 
+ 
+@@ -1808,6 +1850,7 @@ typedef struct tag_SCRIPT_DIGITSUBSTITUTE {
+ //      script used by that locale.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptRecordDigitSubstitution(
+     LCID                                    Locale,     // In   LOCALE_USER_DEFAULT or desired locale
+     _Out_writes_(1) SCRIPT_DIGITSUBSTITUTE  *psds);     // Out  Digit substitution settings
+@@ -1896,6 +1939,7 @@ _Check_return_ HRESULT WINAPI ScriptRecordDigitSubstitution(
+ //          ScriptRecordDigitSubstitution.
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ HRESULT WINAPI ScriptApplyDigitSubstitution(
+     _In_reads_(1) const SCRIPT_DIGITSUBSTITUTE *psds,  // In   Digit substitution settings
+     _Out_writes_(1) SCRIPT_CONTROL              *psc,   // Out  Script control structure
+@@ -2003,6 +2047,7 @@ typedef struct script_glyphprop{
+ // pGlyphProps          - array of glyph properties, replaces visual attributes (4 bytes now)
+ // pfCanGlyphAlone      - flag per character, indicate that char can be shaped independently 
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptShapeOpenType(
+     _In_opt_                   HDC                     hdc,            // In    Optional (see under caching)
+     _Inout_                    SCRIPT_CACHE           *psc,            // InOut Cache handle
+@@ -2045,6 +2090,7 @@ _Check_return_ HRESULT WINAPI ScriptShapeOpenType(
+ // Character information - pwcChars, pwLogClust, pCharProps are now passed to ScriptPlace
+ // pGlyphProps           - array of glyph properties, replaces visual attributes (4 bytes now)
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptPlaceOpenType(
+     _In_opt_                   HDC                     hdc,            // In    Optional (see under caching)
+     _Inout_                    SCRIPT_CACHE           *psc,            // InOut Cache handle
+@@ -2077,6 +2123,7 @@ _Check_return_ HRESULT WINAPI ScriptPlaceOpenType(
+ // pScriptTags -- array parallel to items, contains script tags
+ //                                              to be passed to ScriptShapeOpenType.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptItemizeOpenType(
+     _In_reads_(cInChars) const WCHAR                   *pwcInChars,    // In   Unicode string to be itemized
+     _In_                  int                            cInChars,      // In   Codepoint count to itemize
+@@ -2099,6 +2146,7 @@ _Check_return_ HRESULT WINAPI ScriptItemizeOpenType(
+ //       shaping engine may require particular language system or feature
+ //       to be present.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptGetFontScriptTags(
+     _In_opt_           HDC                              hdc,             // In    Optional (see under caching)
+     _Inout_            SCRIPT_CACHE                    *psc,             // InOut Cache handle
+@@ -2113,6 +2161,7 @@ _Check_return_ HRESULT WINAPI ScriptGetFontScriptTags(
+ // 
+ // Returns list of language system tags supported by layout tables for particular script.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptGetFontLanguageTags(
+     _In_opt_           HDC                    hdc,             // In    Optional (see under caching)
+     _Inout_            SCRIPT_CACHE          *psc,             // InOut Cache handle
+@@ -2135,6 +2184,7 @@ _Check_return_ HRESULT WINAPI ScriptGetFontLanguageTags(
+ //
+ // If psa==NULL function returns unfiltered feature list
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptGetFontFeatureTags(
+     _In_opt_           HDC                    hdc,             // In    Optional (see under caching)
+     _Inout_            SCRIPT_CACHE          *psc,             // InOut Cache handle
+@@ -2164,6 +2214,7 @@ _Check_return_ HRESULT WINAPI ScriptGetFontFeatureTags(
+ //  Note: It theoretically can be emulated by ScriptSubstituteSingleGlyph. 
+ //        Just try parameters one by one while glyphs are substituted.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptGetFontAlternateGlyphs(
+     _In_opt_           HDC                    hdc,             // In    Optional (see under caching)
+     _Inout_            SCRIPT_CACHE          *psc,             // InOut Cache handle
+@@ -2185,6 +2236,7 @@ _Check_return_ HRESULT WINAPI ScriptGetFontAlternateGlyphs(
+ //  Apply partcular feature to single glyph, assuming that 
+ //  expected result is one-to-one substitution
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptSubstituteSingleGlyph(
+     _In_opt_           HDC                    hdc,             // In    Optional (see under caching)
+     _Inout_            SCRIPT_CACHE          *psc,             // InOut Cache handle
+@@ -2204,6 +2256,7 @@ _Check_return_ HRESULT WINAPI ScriptSubstituteSingleGlyph(
+ //  Apply particular feature to single glyph, assuming that 
+ //  expected result is single position adjustment.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_ HRESULT WINAPI ScriptPositionSingleGlyph(
+     _In_opt_           HDC                    hdc,             // In    Optional (see under caching)
+     _Inout_            SCRIPT_CACHE          *psc,             // InOut Cache handle

@@ -1,0 +1,76 @@
+diff --git a/um/functiondiscoveryprovider.idl b/um/functiondiscoveryprovider.idl
+index 0537a878..461b2d5f 100644
+--- a/um/functiondiscoveryprovider.idl
++++ b/um/functiondiscoveryprovider.idl
+@@ -2,6 +2,7 @@
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -24,6 +25,7 @@ interface IProviderPropertyConstraintCollection;
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IFunctionDiscoveryProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(dcde394f-1478-4813-a402-f6fb10657222),
+@@ -71,6 +73,7 @@ interface IFunctionDiscoveryProvider : IUnknown
+ //
+ // If a provider does not implement this interface, then the provider must provide a property store
+ // at CreatingInstance time or as a last resort in response to InstanceOpenPropertyStore.
++cpp_quote("/* Win32Metadata: interface ::IProviderProperties => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(cf986ea6-3b5f-4c5f-b88a-2f8b20ceef17),
+@@ -102,6 +105,7 @@ interface IProviderProperties : IUnknown
+ 
+ // Providers that want to impement Function Instance Add and Remove (IFunctionDiscovery::AddInstance/RemoveInstance)
+ // may do so by implementing this interface.
++cpp_quote("/* Win32Metadata: interface ::IProviderPublishing => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(CD1B9A04-206C-4a05-A0C8-1635A21A2B7C),
+@@ -129,6 +133,7 @@ interface IProviderPublishing : IUnknown
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IFunctionDiscoveryProviderFactory => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(86443ff0-1ad5-4e68-a45a-40c2c329de3b),
+@@ -156,6 +161,7 @@ interface IFunctionDiscoveryProviderFactory : IUnknown
+ 
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IFunctionDiscoveryProviderQuery => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(6876ea98-baec-46db-bc20-75a76e267a3a),
+@@ -176,6 +182,7 @@ interface IFunctionDiscoveryProviderQuery : IUnknown
+         [out] IProviderPropertyConstraintCollection ** ppIProviderPropertyConstraints );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IProviderQueryConstraintCollection => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(9c243e11-3261-4bcd-b922-84a873d460ae),
+@@ -200,6 +207,7 @@ interface IProviderQueryConstraintCollection : IUnknown
+     HRESULT Reset( );
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::IProviderPropertyConstraintCollection => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(f4fae42f-5778-4a13-8540-b5fd8c1398dd),
+@@ -234,6 +242,7 @@ interface IProviderPropertyConstraintCollection : IUnknown
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IFunctionDiscoveryServiceProvider => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [
+     object,
+     uuid(4c81ed02-1b04-43f2-a451-69966cbcd1c2),

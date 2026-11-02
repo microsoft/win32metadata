@@ -2,3 +2,5 @@
 <IncludeRoot>/um/windowsceip.h
 --namespace
 Windows.Win32.System.Diagnostics.Ceip
+--config
+parse-win32-annotations

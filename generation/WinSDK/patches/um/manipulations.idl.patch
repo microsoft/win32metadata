@@ -1,0 +1,35 @@
+diff --git a/um/manipulations.idl b/um/manipulations.idl
+index f59148b9..0bd08253 100644
+--- a/um/manipulations.idl
++++ b/um/manipulations.idl
+@@ -1,5 +1,6 @@
+ // manipulations.idl
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -43,6 +44,7 @@ library ManipulationsLib
+     // _IManipulationEvents interface
+     // Public COM event interface for Manipulation and Inertia Processors
+     ////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::_IManipulationEvents => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(4f62c8da-9c53-4b22-93df-927a862bbb03),
+@@ -78,6 +80,7 @@ library ManipulationsLib
+     // IInertiaProcessor interface
+     // Public COM interface for Inertia Processor
+     ////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IInertiaProcessor => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(18b00c6d-c5ee-41b1-90a9-9d4a929095ad),
+@@ -200,6 +203,7 @@ library ManipulationsLib
+     // IManipulationProcessor interface
+     // Public COM Interface for Manipulation Processor (WM_TOUCH-based)
+     ////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IManipulationProcessor => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(A22AC519-8300-48a0-BEF4-F1BE8737DBA4),

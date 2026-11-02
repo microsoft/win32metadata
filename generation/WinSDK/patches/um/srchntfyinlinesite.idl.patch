@@ -1,0 +1,18 @@
+diff --git a/um/srchntfyinlinesite.idl b/um/srchntfyinlinesite.idl
+index 826d9e7a..60a1e76e 100644
+--- a/um/srchntfyinlinesite.idl
++++ b/um/srchntfyinlinesite.idl
+@@ -15,11 +15,13 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++cpp_quote("/* Win32Metadata: interface ::ISearchNotifyInlineSite => SupportedOSPlatform(\"windows5.1.2600\") */")
+ [
+     object,
+     uuid(B5702E61-E75C-4B64-82A1-6CB4F832FCCF),

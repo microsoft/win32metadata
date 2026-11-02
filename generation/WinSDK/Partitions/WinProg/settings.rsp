@@ -1,9 +1,7 @@
 --exclude
-_FILE_DISPOSITION_INFO
 _KEY_SET_INFORMATION_CLASS
 _KEY_VALUE_ENTRY
 _OBJECT_INFORMATION_CLASS
-_PROCESS_BASIC_INFORMATION
 _PROCESSINFOCLASS
 _STRING
 _SYSTEM_INFORMATION_CLASS
@@ -61,3 +59,5 @@ UiaRect
 <IncludeRoot>/um/deletebrowsinghistory.h
 --namespace
 Windows.Win32.System.WindowsProgramming
+--config
+parse-win32-annotations

@@ -1,0 +1,30 @@
+--- a/um/Iads.h
++++ b/um/Iads.h
+@@ -1253,6 +1253,6 @@
+ typedef HANDLE ADS_SEARCH_HANDLE;
+ 
+-typedef HANDLE *PADS_SEARCH_HANDLE;
++typedef ADS_SEARCH_HANDLE *PADS_SEARCH_HANDLE;
+ 
+ typedef struct ads_search_column
+     {
+@@ -13700,15 +13700,19 @@
+         virtual HRESULT STDMETHODCALLTYPE AbandonSearch( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE phSearchResult) = 0;
+         
++        _Win32_PreserveResult_
+         virtual HRESULT STDMETHODCALLTYPE GetFirstRow( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
+         
++        _Win32_PreserveResult_
+         virtual HRESULT STDMETHODCALLTYPE GetNextRow( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
+         
++        _Win32_PreserveResult_
+         virtual HRESULT STDMETHODCALLTYPE GetPreviousRow( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchResult) = 0;
+         
++        _Win32_PreserveResult_
+         virtual HRESULT STDMETHODCALLTYPE GetNextColumnName( 
+             /* [in] */ __RPC__in ADS_SEARCH_HANDLE hSearchHandle,
+             /* [out] */ __RPC__deref_out_opt LPWSTR *ppszColumnName) = 0;

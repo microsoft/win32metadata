@@ -1,0 +1,37 @@
+diff --git a/shared/winusbio.h b/shared/winusbio.h
+index 344a28e9..1e26d8ad 100644
+--- a/shared/winusbio.h
++++ b/shared/winusbio.h
+@@ -54,6 +54,19 @@ Revision History:
+ #define MAXIMUM_TRANSFER_SIZE   0x08
+ #define RESET_PIPE_ON_RESUME    0x09
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(WINUSB_PIPE_POLICY, unsigned long,
++    SHORT_PACKET_TERMINATE,
++    AUTO_CLEAR_STALL,
++    PIPE_TRANSFER_TIMEOUT,
++    IGNORE_SHORT_PACKETS,
++    ALLOW_PARTIAL_READS,
++    AUTO_FLUSH,
++    RAW_IO,
++    MAXIMUM_TRANSFER_SIZE,
++    RESET_PIPE_ON_RESUME);
++#endif
++
+ // Power policy types
+ //
+ // Add 0x80 for Power policy types in order to prevent overlap with 
+@@ -63,6 +76,12 @@ Revision History:
+ #define AUTO_SUSPEND            0x81
+ #define SUSPEND_DELAY           0x83
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(WINUSB_POWER_POLICY, unsigned long,
++    AUTO_SUSPEND,
++    SUSPEND_DELAY);
++#endif
++
+ // Device Information types
+ #define DEVICE_SPEED            0x01
+ 

@@ -3,3 +3,5 @@
 <IncludeRoot>/um/libloaderapi2.h
 --namespace
 Windows.Win32.System.LibraryLoader
+--config
+parse-win32-annotations

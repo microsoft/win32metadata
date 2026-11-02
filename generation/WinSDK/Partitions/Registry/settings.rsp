@@ -4,3 +4,5 @@
 <IncludeRoot>/um/regstr.h
 --namespace
 Windows.Win32.System.Registry
+--config
+parse-win32-annotations

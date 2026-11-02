@@ -3,9 +3,9 @@
 <IncludeRoot>/um/winhttp.h
 --namespace
 Windows.Win32.Networking.WinHttp
---exclude
-LPWINHTTP_STATUS_CALLBACK
+--config
+parse-win32-annotations
 --remap
-# Preserve the callback typedef instead of its pointer-to-pointer alias.
+# Newer upstream facts not covered by this frozen patch payload.
 WINHTTP_STATUS_CALLBACK=WINHTTP_STATUS_CALLBACK
 LPWINHTTP_STATUS_CALLBACK=WINHTTP_STATUS_CALLBACK

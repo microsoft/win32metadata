@@ -1,0 +1,40 @@
+diff --git a/shared/wtypes.idl b/shared/wtypes.idl
+index 7f4a102f3..6cc54ff1e 100644
+--- a/shared/wtypes.idl
++++ b/shared/wtypes.idl
+@@ -314,6 +314,9 @@ cpp_quote("#define _ROTFLAGS_DEFINED")
+ cpp_quote("#define ROTFLAGS_REGISTRATIONKEEPSALIVE 0x1")
+ cpp_quote("#define ROTFLAGS_ALLOWANYCLIENT 0x2")
+ cpp_quote("#endif // !_ROTFLAGS_DEFINED")
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("_Win32_FlagsEnum_(ROT_FLAGS, DWORD, ROTFLAGS_REGISTRATIONKEEPSALIVE, ROTFLAGS_ALLOWANYCLIENT);")
++cpp_quote("#endif")
+ // Maximum size of comparison buffer for IROTData::GetComparisonData
+ cpp_quote("#ifndef _ROT_COMPARE_MAX_DEFINED")
+ cpp_quote("#define _ROT_COMPARE_MAX_DEFINED")
+@@ -334,11 +337,17 @@ typedef enum tagDVASPECT
+     DVASPECT_ICON = 4,
+     DVASPECT_DOCPRINT = 8
+ } DVASPECT;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)")
++cpp_quote("namespace Win32Metadata {")
++cpp_quote("_Win32_Enum_(DVASPECT, unsigned long, DVASPECT_CONTENT, DVASPECT_THUMBNAIL, DVASPECT_ICON, DVASPECT_DOCPRINT);")
++cpp_quote("}")
++cpp_quote("#endif")
+ 
+ /****** Storage types *************************************************/
+ 
+ 
+ /* Storage commit types */
++cpp_quote("/* Win32Metadata: enum ::tagSTGC => Flags */")
+ typedef enum tagSTGC
+ {
+     STGC_DEFAULT        = 0,
+@@ -824,6 +833,7 @@ cpp_quote(" *  VT_BYREF            [V]           void* for local use")
+ cpp_quote(" *  VT_BSTR_BLOB                      Reserved for system use")
+ cpp_quote(" */")
+ 
++cpp_quote("/* Win32Metadata: enum ::VARENUM => Flags */")
+ enum VARENUM
+ {
+     VT_EMPTY           = 0,

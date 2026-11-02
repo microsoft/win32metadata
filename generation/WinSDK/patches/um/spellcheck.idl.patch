@@ -1,0 +1,80 @@
+diff --git a/um/spellcheck.idl b/um/spellcheck.idl
+index 09de4339..88acd5a9 100644
+--- a/um/spellcheck.idl
++++ b/um/spellcheck.idl
+@@ -1,4 +1,6 @@
++cpp_quote("#include <sal.h>")
+ // Copyright (c) Microsoft Corporation. All Rights Reserved.
++#include <sal.h>
+ cpp_quote("// Copyright (c) Microsoft Corporation. All Rights Reserved.")
+ 
+ cpp_quote("#ifndef MIN_SPELLING_NTDDI")
+@@ -28,6 +30,7 @@ typedef [v1_enum] enum WORDLIST_TYPE
+ // This interface represents a spelling error - you can get information like the range that comprises the error, or the suggestions for that misspelled word
+ // Should be implemented by any spell check provider (someone who provides a spell checking engine), and used by clients of spell checking
+ // It is obtained through IEnumSpellingError::Next
++cpp_quote("/* Win32Metadata: interface ::ISpellingError => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3),
+@@ -53,6 +56,7 @@ interface ISpellingError : IUnknown
+ // This interface is an enumeration of spelling errors
+ // Should be implemented by any spell check provider (someone who provides a spell checking engine), and used by clients of spell checking
+ // It is obtained through ISpellChecker::Check
++cpp_quote("/* Win32Metadata: interface ::IEnumSpellingError => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(803E3BD4-2828-4410-8290-418D1D73C762),
+@@ -63,9 +67,12 @@ interface IEnumSpellingError : IUnknown
+     HRESULT Next([out, retval] ISpellingError** value);
+ }
+ 
++cpp_quote("/* Win32Metadata: method ::IEnumSpellingError::Next => PreserveResult */")
++
+ // This interface holds the associated data of a spelling option
+ // Should be implemented by any spell check provider (someone who provides a spell checking engine), and used by clients of spell checking
+ // It is obtained through ISpellChecker::GetOptionDescription
++cpp_quote("/* Win32Metadata: interface ::IOptionDescription => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(432E5F85-35CF-4606-A801-6F70277E1D7A),
+@@ -82,6 +89,7 @@ interface IOptionDescription : IUnknown
+ interface ISpellChecker;
+ 
+ // This interface should be implemented by clients of spell checking that wish to be notified of any changes that might change spell checking results
++cpp_quote("/* Win32Metadata: interface ::ISpellCheckerChangedEventHandler => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(0B83A5B0-792F-4EAB-9799-ACF52C5ED08A),
+@@ -99,6 +107,7 @@ interface ISpellCheckerChangedEventHandler : IUnknown
+ // A suggested scenario for ComprehensiveCheck is for a real-time text input of small text by the user (such as when the user is typing a word) 
+ // On the other hand, Check is better suited for large-text input scenarios
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpellChecker => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(B6FD0B71-E2BC-4653-8D05-F197E412770B),
+@@ -122,6 +131,7 @@ interface ISpellChecker : IUnknown
+     HRESULT ComprehensiveCheck([in] LPCWSTR text, [out, retval] IEnumSpellingError** value);
+ };
+ 
++cpp_quote("/* Win32Metadata: interface ::ISpellChecker2 => SupportedOSPlatform(\"windows10.0.10240\") */")
+ [ 
+     object, 
+     uuid(E7ED1C71-87F7-4378-A840-C9200DACEE47), 
+@@ -136,6 +146,7 @@ interface ISpellChecker2 : ISpellChecker
+ // This interface is used to create a spell checker for a given language and to obtain information about which language do have a spell checker available in the system
+ // Should be used by clients of spell checking
+ // It is obtained through CoCreateInstance
++cpp_quote("/* Win32Metadata: interface ::ISpellCheckerFactory => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(8E018A9D-2415-4677-BF08-794EA61F94BB),
+@@ -157,6 +168,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ // This interface is used to register new spelling dictionaries to be read by the spell checking facility
+ // Should be used by clients of spell checking
+ // It is obtained through a QueryInterface in ISpellCheckerFactory
++cpp_quote("/* Win32Metadata: interface ::IUserDictionariesRegistrar => SupportedOSPlatform(\"windows8.0\") */")
+ [
+     object,
+     uuid(AA176B85-0E12-4844-8E1A-EEF1DA77F586),

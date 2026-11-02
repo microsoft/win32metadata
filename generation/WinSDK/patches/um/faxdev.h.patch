@@ -1,0 +1,81 @@
+diff --git a/um/faxdev.h b/um/faxdev.h
+index fb607988..3827d252 100644
+--- a/um/faxdev.h
++++ b/um/faxdev.h
+@@ -116,6 +116,8 @@ typedef void
+     IN DWORD_PTR dwParam3
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevInitialize(
+     IN  HLINEAPP LineAppHandle,
+@@ -124,10 +126,13 @@ FaxDevInitialize(
+     IN  PFAX_SERVICE_CALLBACK FaxServiceCallback
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ HRESULT WINAPI FaxDevShutdown(
+     void
+ );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevVirtualDeviceCreation(
+     OUT LPDWORD DeviceCount,
+@@ -137,6 +142,8 @@ FaxDevVirtualDeviceCreation(
+     IN  ULONG_PTR CompletionKey
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevStartJob(
+     IN  HLINE LineHandle,
+@@ -146,6 +153,8 @@ FaxDevStartJob(
+     IN  ULONG_PTR CompletionKey
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevEndJob(
+     IN  HANDLE FaxHandle
+@@ -159,6 +168,8 @@ typedef BOOL
+     IN DWORD Reserved2
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevSend(
+     IN  HANDLE FaxHandle,
+@@ -168,6 +179,8 @@ FaxDevSend(
+ 
+ #define FAXDEVRECEIVE_SIZE 4096
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevReceive(
+     IN  HANDLE FaxHandle,
+@@ -177,6 +190,8 @@ FaxDevReceive(
+ 
+ #define FAXDEVREPORTSTATUS_SIZE 4096
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevReportStatus(
+     IN  HANDLE FaxHandle OPTIONAL,
+@@ -185,6 +200,8 @@ FaxDevReportStatus(
+     OUT LPDWORD FaxStatusSizeRequired
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL WINAPI
+ FaxDevAbortOperation(
+     IN  HANDLE FaxHandle

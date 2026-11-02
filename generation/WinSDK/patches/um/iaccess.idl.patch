@@ -1,0 +1,20 @@
+diff --git a/um/iaccess.idl b/um/iaccess.idl
+index 2293cb02..11e140ea 100644
+--- a/um/iaccess.idl
++++ b/um/iaccess.idl
+@@ -11,6 +11,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -39,6 +40,7 @@ typedef PACTRL_ACCESSW PACTRL_ACCESSW_ALLOCATE_ALL_NODES;
+ typedef PACTRL_AUDITW  PACTRL_AUDITW_ALLOCATE_ALL_NODES;
+ 
+ interface IAccessControl;
++cpp_quote("/* Win32Metadata: interface ::IAccessControl => SupportedOSPlatform(\"windows5.0\") */")
+ [
+     object,
+     uuid(EEDD23E0-8410-11CE-A1C3-08002B2B8D8F),

@@ -66,3 +66,6 @@ UI_PKEY_GlobalHighlightColor
 UI_PKEY_GlobalTextColor
 --namespace
 Windows.Win32.UI.Ribbon
+
+--config
+parse-win32-annotations

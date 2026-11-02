@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/um/gdiplusenums.h
 <IncludeRoot>/um/gdiplustypes.h
@@ -5,6 +7,7 @@
 <IncludeRoot>/um/gdipluscolor.h
 <IncludeRoot>/um/gdipluscolormatrix.h
 <IncludeRoot>/um/gdiplusgpstubs.h
+<IncludeRoot>/um/gdiplusmatrix.h
 <IncludeRoot>/um/gdiplusimaging.h
 <IncludeRoot>/um/gdiplusmetaheader.h
 <IncludeRoot>/um/gdipluspixelformats.h
@@ -13,5 +16,3 @@
 <IncludeRoot>/um/gdiplusmem.h
 --namespace
 Windows.Win32.Graphics.GdiPlus
---exclude
-PathData

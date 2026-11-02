@@ -1,12 +1,58 @@
 # Header annotation migration: problems and decisions
 
-Updated: 2026-10-23 (UTC).
+Updated: 2026-10-25 (UTC).
 
 This is the running record of migration blockers, their evidence, and the decisions
 made while resolving them. The goal is to express win32metadata's intended API
 metadata faithfully in the selected SDK's original headers and IDL. A zero-difference
 OLD-to-NEW WinMD is not a goal. Breaking changes and unexplained differences remain
 visible for review.
+
+## Constant conflict policy
+
+Use `E_NOTFOUND = 0x80070490` from `um\devicetopology.h` as canonical.
+Resolve competing loose constant projections by header priority and first-wins
+selection. Give that header explicit priority; preserve the actual project
+partition, traversed-header and native declaration order for unlisted headers.
+Keep source-bound group ownership distinct from choosing between unrelated
+native definitions.
+
+Produce warnings and a complete conflict dump for final review. Retain every
+candidate's native identity, header and source location, architecture, type,
+storage and raw value, with the winner and selection reason. Include discarded
+definitions even when their values match. The competing definitions remain
+distinct native contracts, and raw OLD-to-NEW differences remain visible.
+
+## Full generation and green PR gates
+
+Produce the complete ordinary SDK image and its unfiltered same-SDK OLD-to-NEW
+comparison using one coherent published toolchain and prepared-header identity.
+Do not wait for individual native or physical investigations, projected-storage
+changes, or character-projection fixes before running the full scrape, constant
+extraction, manual-source composition, and emission.
+
+Both stacked PRs must pass their exact-head normal CI gates. Parser, compiler,
+emitter, integrity, and regression-test failures remain blocking and require
+repairs. Do not disable jobs, blanket-skip tests, suppress diagnostics, or report
+an incomplete image as successful.
+
+Keep the migration-difference report separate from those build gates. Known
+`PSTR` versus `CHAR*` projection and `VARENUM` storage differences are nonblocking
+follow-up findings for image production; they are not equality or qualified
+compatibility. Preserve the full raw differences and independent Const, import,
+flag, and parameter-sequence evidence. Retain native, SAL, and coverage findings
+without turning each investigation into a prerequisite for the next full image.
+After establishing green normal CI, make further repairs with focused regression
+coverage and a fresh normal CI run.
+
+For original IDL unavailable in the shipped SDK, ordinary tests enforce exact
+deferred-fact accounting rather than unconditional migration completion. The
+report-only `tests\SdkAnnotationCoverage.Tests\SourceBlockedMetadata.json` ledger
+retains all 30 historical units: 26 availability values, three associations and
+`IdentityUpdateEvent` Flags. It supplies no emitter input or semantic fallback.
+Missing entries, altered values, generated-header patches and false coverage or
+preservation claims remain failures. Current physical projection is unqualified;
+raw losses remain visible in the bulk comparison.
 
 ## Completion plan and next review
 
@@ -66,8 +112,10 @@ unchanged preparation test fails with MIDL9008 beneath the long session-artifact
 prefix and passes beneath `artifacts\t-002`; no preparation success policy or
 fixture spaces/quoting is changed. Source-state tests inspect effective global
 plus partition annotation settings and source-owned facts, not retired sidecar
-rows. Retiring a row does not prove source coverage: missing original-IDL floors
-and native associations remain explicit test failures, not accepted baselines.
+rows. Retiring a row does not prove source coverage. Missing original-IDL floors,
+native associations and Flags remain exactly inventoried, deferred and
+unqualified; ordinary accounting regressions reject unaccounted changes or false
+coverage claims without making incomplete migration a generation prerequisite.
 
 The manual-type inventory exposed replacement-era exclusions that survived
 deletion of their handwritten providers. The frozen source packet retires ten

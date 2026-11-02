@@ -1,0 +1,33 @@
+diff --git a/um/wmiutils.idl b/um/wmiutils.idl
+index 4e24444a..46bc2b76 100644
+--- a/um/wmiutils.idl
++++ b/um/wmiutils.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("/*******************************************************************************/" )
+ cpp_quote("/*                                                                             */" )
+ cpp_quote("/*    Copyright (c) Microsoft Corporation.  All rights reserved.               */" )
+@@ -67,6 +68,7 @@ library WbemUtilities_v1
+     //*******************************************************************
+     // NOT CoCreatable; get this from IWbemPath
+ 
++cpp_quote("/* Win32Metadata: interface ::IWbemPathKeyList => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [local, object, uuid(9AE62877-7544-4bb0-AA26-A13824659ED6)]
+ 
+     interface IWbemPathKeyList : IUnknown
+@@ -140,6 +142,7 @@ library WbemUtilities_v1
+     //*******************************************************************
+     // CoCreatable
+ 
++cpp_quote("/* Win32Metadata: interface ::IWbemPath => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [local, object, uuid(3BC15AF2-736C-477e-9E51-238AF8667DCC)]
+ 
+     interface IWbemPath : IUnknown
+@@ -628,6 +631,7 @@ typedef struct tag_SWbemAssocQueryInf
+ 
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IWbemQuery => SupportedOSPlatform(\"windows6.0.6000\") */")
+ [local, object, uuid(81166f58-dd98-11d3-a120-00105a1f515a)]
+ interface IWbemQuery : IUnknown
+ {

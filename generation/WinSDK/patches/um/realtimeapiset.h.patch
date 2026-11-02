@@ -1,0 +1,95 @@
+diff --git a/um/realtimeapiset.h b/um/realtimeapiset.h
+index bcdcab08..63301ed7 100644
+--- a/um/realtimeapiset.h
++++ b/um/realtimeapiset.h
+@@ -26,6 +26,8 @@ extern "C" {
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -34,6 +36,8 @@ QueryThreadCycleTime(
+     _Out_ PULONG64 CycleTime
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -42,6 +46,8 @@ QueryProcessCycleTime(
+     _Out_ PULONG64 CycleTime
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -54,6 +60,7 @@ QueryIdleProcessorCycleTime(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -71,6 +78,7 @@ QueryIdleProcessorCycleTimeEx(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -78,6 +86,7 @@ QueryInterruptTimePrecise(
+     _Out_ PULONGLONG lpInterruptTimePrecise
+     );
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -85,6 +94,7 @@ QueryUnbiasedInterruptTimePrecise(
+     _Out_ PULONGLONG lpUnbiasedInterruptTimePrecise
+     );
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -94,6 +104,7 @@ QueryInterruptTime(
+ 
+ #if (_WIN32_WINNT >= 0x0601)
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -103,6 +114,7 @@ QueryUnbiasedInterruptTime(
+ 
+ #endif // (_WIN32_WINNT >= 0x0601)
+ 
++_Win32_SupportedOS_15063_
+ WINBASEAPI
+ HRESULT
+ WINAPI
+@@ -110,6 +122,7 @@ QueryAuxiliaryCounterFrequency(
+     _Out_ PULONGLONG lpAuxiliaryCounterFrequency
+     );
+ 
++_Win32_SupportedOS_15063_
+ WINBASEAPI
+ HRESULT
+ WINAPI
+@@ -119,6 +132,7 @@ ConvertAuxiliaryCounterToPerformanceCounter(
+     _Out_opt_ PULONGLONG lpConversionError
+     );
+ 
++_Win32_SupportedOS_15063_
+ WINBASEAPI
+ HRESULT
+ WINAPI

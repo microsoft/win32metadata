@@ -5,3 +5,5 @@
 <IncludeRoot>/um/ehstormsg.h
 --namespace
 Windows.Win32.Storage.EnhancedStorage
+--config
+parse-win32-annotations

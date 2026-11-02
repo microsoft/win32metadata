@@ -4,3 +4,5 @@
 <IncludeRoot>/um/GPEdit.h
 --namespace
 Windows.Win32.System.GroupPolicy
+--config
+parse-win32-annotations

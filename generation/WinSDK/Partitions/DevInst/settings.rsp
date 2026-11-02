@@ -8,3 +8,5 @@
 <IncludeRoot>/shared/wdmguid.h
 --namespace
 Windows.Win32.Devices.DeviceAndDriverInstallation
+--config
+parse-win32-annotations

@@ -1,0 +1,52 @@
+diff --git a/um/sdoias.idl b/um/sdoias.idl
+index 0e1ae287..607201c6 100644
+--- a/um/sdoias.idl
++++ b/um/sdoias.idl
+@@ -9,6 +9,7 @@
+ //             04/2007              Added IAS_ATTRIBUTE_USER_TOKEN_SID and IAS_ATTRIBUTE_MACHINE_TOKEN_SID
+ //
+ //////////////////////////////////////////////////////////////////////////////
++#include <sal.h>
+ #ifndef __SDOIAS_IDL__
+ #define __SDOIAS_IDL__
+ cpp_quote("#include <winapifamily.h>")
+@@ -972,6 +973,7 @@ library SDOIASLib
+    //////////////////////////////////////////////////////////////////////////
+    // ISdoMachine - Used to retrieve information from a Machine SDO
+    //////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ISdoMachine => SupportedOSPlatform(\"windowsserver2008\") */")
+    [
+       object,
+       uuid(479F6E75-49A2-11d2-8ECA-00C04FC2F519),
+@@ -1127,6 +1129,7 @@ library SDOIASLib
+    //////////////////////////////////////////////////////////////////////////
+    // ISdoServiceControl - Used to control a Service SDO
+    //////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ISdoServiceControl => SupportedOSPlatform(\"windowsserver2008\") */")
+    [
+       object,
+       uuid(479F6E74-49A2-11d2-8ECA-00C04FC2F519),
+@@ -1152,6 +1155,7 @@ library SDOIASLib
+    //////////////////////////////////////////////////////////////////////////
+    // ISdo - Used to store, retrieve and update SDO information
+    //////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ISdo => SupportedOSPlatform(\"windowsserver2008\") */")
+    [
+       object,
+       uuid(56BC53DE-96DB-11D1-BF3F-000000000000),
+@@ -1188,6 +1192,7 @@ library SDOIASLib
+    //////////////////////////////////////////////////////////////////////////
+    // ISdoCollection - Used to manipulate the contents of a collection
+    //////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ISdoCollection => SupportedOSPlatform(\"windowsserver2008\") */")
+    [
+       object,
+       uuid(56BC53E2-96DB-11D1-BF3F-000000000000),
+@@ -1315,6 +1320,7 @@ library SDOIASLib
+    //////////////////////////////////////////////////////////////////////////
+    // ISdoDictionaryOld - interface Used to access dictionary contents
+    //////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ISdoDictionaryOld => SupportedOSPlatform(\"windowsserver2008\") */")
+    [
+       object,
+       uuid(d432e5f4-53d8-11d2-9a3a-00c04fb998ac),

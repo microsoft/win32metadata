@@ -5,3 +5,5 @@
 <IncludeRoot>/um/t2embapi.h
 --namespace
 Windows.Win32.Graphics.Gdi
+--config
+parse-win32-annotations

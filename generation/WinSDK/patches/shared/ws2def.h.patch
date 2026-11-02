@@ -1,0 +1,21 @@
+diff --git a/shared/ws2def.h b/shared/ws2def.h
+index 95fb10c5..e2cc92dc 100644
+--- a/shared/ws2def.h
++++ b/shared/ws2def.h
+@@ -29,6 +29,7 @@ Environment:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #if !defined(_WINSOCK_DEPRECATED_BY)
+@@ -119,6 +120,8 @@ typedef USHORT ADDRESS_FAMILY;
+ #define AF_BAN          21              // Banyan
+ #define AF_ATM          22              // Native ATM Services
+ #define AF_INET6        23              // Internetwork Version 6
++
++_Win32_Enum_(ADDRESS_FAMILY, USHORT, AF_UNSPEC, AF_INET, AF_INET6);
+ #define AF_CLUSTER      24              // Microsoft Wolfpack
+ #define AF_12844        25              // IEEE 1284.4 WG AF
+ #define AF_IRDA         26              // IrDA

@@ -3,3 +3,5 @@
 <IncludeRoot>/um/cscapi.h
 --namespace
 Windows.Win32.Storage.OfflineFiles
+--config
+parse-win32-annotations

@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/shared/gnssdriver.h
 <IncludeRoot>/um/locationapi.h

@@ -16,3 +16,5 @@
 <IncludeRoot>/um/ntdsbmsg.h
 --namespace
 Windows.Win32.Networking.ActiveDirectory
+--config
+parse-win32-annotations

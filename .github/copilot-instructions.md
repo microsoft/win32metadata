@@ -73,14 +73,21 @@ inventory includes the existing HGROUP/model/cache/namespace controls and the
 actual `HeaderTypedefCompositionTests` method families for logical groups and
 incomplete declarations. `NativeDeclarationSourceProvenanceTests` runs separately
 in `MetadataUtils.Tests`. `FastManaged.trx` and `FastProvenance.trx` are checked
-separately and uploaded in `fast_managed_tests` even on failure. The four native
-producer rows remain outside this managed lane and run in a separate changes-only
-Windows job using normal filtered `dotnet test` on `Win32MetadataScraperTests`.
-Its three logical-group architecture rows and one forward-record row are checked
-in `FastNativeProducer.trx`, uploaded in `fast_native_producer_tests` even on
-failure. This job uses tracked fixture/header inputs rather than full SDK
-artifacts. The complete unfiltered `DoTests.ps1` results remain separate, and the
-full SDK job does not depend on either early job.
+separately and uploaded in `fast_managed_tests` even on failure. The native
+producer and SDK SLIST rows remain outside this managed lane and run in a separate
+changes-only Windows job using normal filtered `dotnet test` on
+`Win32MetadataScraperTests`. Its three logical-group architecture rows, one
+forward-record row and the three existing `BackupSListAliasesRetainNativeRecordProviders`
+architecture rows are checked in `FastNativeProducer.trx`, uploaded in
+`fast_native_producer_tests` even on failure. All seven unique rows must execute
+and pass. The SLIST fixtures retain their original native inputs and final
+alignment assertions. This job uses tracked fixture/header inputs rather than
+full SDK artifacts. Before cleanup, the SLIST rows retain their actual generated
+C#, serialized proofs, native surfaces, scraper diagnostics and final fixture
+WinMD through `WIN32_TYPEDEF_PROTOTYPE_EVIDENCE_ROOT`. Those original outputs
+travel in the same native test artifact, including on failure. The complete
+unfiltered `DoTests.ps1` results remain separate, and the full SDK job does not
+depend on either early job.
 
 ## Key Conventions
 
@@ -88,7 +95,7 @@ full SDK job does not depend on either early job.
 
 **Import discovery before header overrides:** Before adding `_Win32_ImportLibrary_` or a manual DLL mapping, inspect the selected SDK's import libraries and the library-processing set in `scripts\CreateProcLibMappingForAllLibs.ps1`. Use `WinmdUtils dumpImports --lib <path>` to verify the actual symbols and DLL, not just the library filename. If a matching `.lib` was omitted or its imports were missed, fix shared discovery instead of adding a redundant header annotation. Use an authored override only when no authoritative SDK library mapping is available or the native contract genuinely requires an override; record the SDK/library search evidence.
 
-**Header-annotation migration:** Follow `docs\copilot\plans\header-annotation-migration-playbook.md`. Classify the original artifact before editing: patch authored `.h` files directly, but patch original `.idl` and regenerate all affected outputs for IDL-owned declarations. Never patch a generated `.h` or independently patch the same shared artifact in different partitions. Use exact qualified tooling/pilot pins and keep raw OLD-to-NEW differences visible.
+**Header-annotation migration:** Follow `docs\copilot\plans\header-annotation-migration-playbook.md`. Annotate the definition consumed by the actual SDK preparation. If preparation runs MIDL to regenerate that header, patch the owning IDL input before MIDL and regenerate the affected outputs. Otherwise, patch the consumed shipped SDK header in the established patch phase, even if it has a generated banner or corresponding IDL/ODL is present but not regenerated. An external IDL/ODL import or version match is not a prerequisite for that header patch. Do not edit the SDK mirror or prepared outputs directly, or independently patch the same shared artifact in different partitions. Use exact qualified tooling/pilot pins and keep raw OLD-to-NEW differences visible.
 
 **Winmd equivalence:** After any change, the winmd must be compared against the baseline. The `NoSuggestedRemappings` test in `Windows.Win32.Tests` validates that no new unhandled remappings were introduced. API diffs are automatically posted as PR comments by CI. Run `.\scripts\DiffWinmdToBaseline.ps1` locally to see a full C# declaration diff against the last release.
 
@@ -96,4 +103,4 @@ full SDK job does not depend on either early job.
 
 **C++ namespace types:** Types inside C++ namespaces (`Gdiplus::Status`, `ABI::Windows::*`) are handled by PInvokeGenerator internally. The auto-remap discovery skips namespace-qualified tags.
 
-**ClangSharp version pinning:** The repo pins ClangSharp v17.0.1. `Win32MetadataScraper` references ClangSharp NuGet packages directly; native libs (`libclang.dll`, `libClangSharp.dll`) are resolved at runtime via NuGet's `runtime.json` mechanism.
+**ClangSharp version pinning:** Keep the supported matched stack: ClangSharp, ClangSharp.Interop and ClangSharp.PInvokeGenerator 21.1.8.4, libclang 21.1.8, and libClangSharp 21.1.8.2. The header-annotation migration and CI performance repairs retain these pins. `Win32MetadataScraper` references the packages directly; native libs (`libclang.dll`, `libClangSharp.dll`) are resolved at runtime via NuGet's `runtime.json` mechanism.

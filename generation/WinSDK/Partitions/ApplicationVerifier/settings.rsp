@@ -2,3 +2,5 @@
 <IncludeRoot>/um/avrfsdk.h
 --namespace
 Windows.Win32.System.ApplicationVerifier
+--config
+parse-win32-annotations

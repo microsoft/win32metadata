@@ -19,3 +19,5 @@ MAPIFREEBUFFER
 <IncludeRoot>/um/wabutil.h
 --namespace
 Windows.Win32.System.AddressBook
+--config
+parse-win32-annotations

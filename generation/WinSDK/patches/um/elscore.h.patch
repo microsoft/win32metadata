@@ -1,0 +1,44 @@
+diff --git a/um/elscore.h b/um/elscore.h
+index 3df39097..28e06066 100644
+--- a/um/elscore.h
++++ b/um/elscore.h
+@@ -149,6 +149,7 @@ typedef struct _MAPPING_PROPERTY_BAG
+ // Public ELS APIs
+ //
+ 
++_Win32_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingGetServices(
+@@ -158,6 +159,7 @@ MappingGetServices(
+     );
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingFreeServices(
+@@ -165,6 +167,7 @@ MappingFreeServices(
+     );
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingRecognizeText(
+@@ -182,6 +185,7 @@ MappingRecognizeText(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingDoAction(
+@@ -196,6 +200,7 @@ MappingDoAction(
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
++_Win32_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingFreePropertyBag(

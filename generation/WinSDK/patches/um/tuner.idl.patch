@@ -1,0 +1,468 @@
+diff --git a/um/tuner.idl b/um/tuner.idl
+index 895cf1b2..6f46843a 100644
+--- a/um/tuner.idl
++++ b/um/tuner.idl
+@@ -7,6 +7,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -276,6 +277,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ //////////////////////////////////////////////////////////////////////////////////////
+ // simple read-only collection of tuning spaces for enumerating subsets of the total
+ // set of system tuning spaces
++cpp_quote("/* Win32Metadata: interface ::ITuningSpaces => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         uuid(901284E4-33FE-4b69-8D63-634A596F3756),
+@@ -318,6 +320,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ //////////////////////////////////////////////////////////////////////////////////////
+ // Tuning Space Container
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ITuningSpaceContainer => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         uuid(5B692E84-E2F1-11d2-9493-00C04F72D980),
+@@ -416,6 +419,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
+ // note: the network type is the clsid of the tuning space implementation
++cpp_quote("/* Win32Metadata: interface ::ITuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         uuid(061C6E30-E622-11d2-9493-00C04F72D980),
+@@ -529,6 +533,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IEnumTuningSpaces => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         hidden,
+         restricted,
+@@ -557,6 +562,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -585,6 +591,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBTuningSpace2 => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -613,6 +620,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBSTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -692,6 +700,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IAuxInTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+    [
+         object,
+         hidden,
+@@ -729,6 +738,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+     
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IAnalogTVTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -784,6 +794,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IATSCTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -854,6 +865,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDigitalCableTuningSpace => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         hidden,
+@@ -927,6 +939,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IAnalogRadioTuningSpace => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1005,6 +1018,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ // ITuningSpace::CreateTuneRequest.  one reason for this is that we always want to be 
+ // certain that a tune request is bound to the right tuning space.  this means we don't 
+ // have to perform consistency checks all over the place.
++cpp_quote("/* Win32Metadata: interface ::ITuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1045,6 +1059,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IChannelIDTuneRequest => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         nonextensible,
+@@ -1069,6 +1084,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IChannelTuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1094,6 +1110,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IATSCChannelTuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1119,6 +1136,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDigitalCableTuneRequest => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         nonextensible,
+@@ -1165,6 +1183,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBTuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1218,6 +1237,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ /// from their createtunerequest() method.  in other words, this is not the "best" tune request
+ /// for any of the current tuning spaces.
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IMPEG2TuneRequest => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1252,6 +1272,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMPEG2TuneRequestFactory => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1273,6 +1294,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     }
+ 
++cpp_quote("/* Win32Metadata: interface ::IMPEG2TuneRequestSupport => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1320,6 +1342,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ITunerCapEx => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         hidden,
+@@ -1503,6 +1526,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 
+     // Component Category
+ 
++cpp_quote("/* Win32Metadata: interface ::IComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1607,6 +1631,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::ILanguageComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1634,6 +1659,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IMPEG2ComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1662,6 +1688,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IATSCComponentType => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1689,6 +1716,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IEnumComponentTypes => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         hidden, restricted,
+         object,
+@@ -1720,6 +1748,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ // Component Type Container
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IComponentTypes => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -1785,6 +1814,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ // Component Interfaces
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IComponent => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         nonextensible,
+@@ -1861,6 +1891,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IAnalogAudioComponentType => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         nonextensible,
+@@ -1886,6 +1917,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     }
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IMPEG2Component => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -1936,6 +1968,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IEnumComponents => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         hidden, restricted,
+         object,
+@@ -1967,6 +2000,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ // Component Container
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IComponents => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -2090,6 +2124,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::ILocator => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         nonextensible,
+@@ -2163,6 +2198,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+         HRESULT Clone([out, retval] ILocator **NewLocator);
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IAnalogLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         nonextensible,
+@@ -2185,6 +2221,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     }
+ 
++cpp_quote("/* Win32Metadata: interface ::IDigitalLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         nonextensible,
+@@ -2200,6 +2237,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IATSCLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -2235,6 +2273,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IATSCLocator2 => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         hidden,
+@@ -2262,6 +2301,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDigitalCableLocator => SupportedOSPlatform(\"windows6.0.6000\") */")
+     [
+         object,
+         hidden,
+@@ -2278,6 +2318,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     }
+ //////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IDVBTLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -2350,6 +2391,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     };
+ 
++cpp_quote("/* Win32Metadata: interface ::IDVBTLocator2 => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         hidden,
+@@ -2374,6 +2416,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBSLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -2430,6 +2473,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     };
+     //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBSLocator2 => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         hidden,
+@@ -2518,6 +2562,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             );
+     };
+  //////////////////////////////////////////////////////////////////////////////////////
++cpp_quote("/* Win32Metadata: interface ::IDVBCLocator => SupportedOSPlatform(\"windows5.1.2600\") */")
+     [
+         object,
+         hidden,
+@@ -2553,6 +2598,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ // Extensible eventing mechanism
+ ///////////////////////////////////////////////////////////////////////////////////////
+ 
++cpp_quote("/* Win32Metadata: interface ::IESOpenMmiEvent => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+ 		uuid(BA4B6526-1A35-4635-8B56-3EC612746A8C),
+@@ -2575,6 +2621,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 		HRESULT GetDialogStringData ([out] BSTR* pbstrBaseUrl, [out, retval] BSTR* pbstrData);
+ 	};
+ 
++cpp_quote("/* Win32Metadata: interface ::IESCloseMmiEvent => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+ 		uuid(6B80E96F-55E2-45aa-B754-0C23C8E7D5C1),
+@@ -2587,6 +2634,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 		HRESULT GetDialogNumber ([out, retval] DWORD* pDialogNumber);
+ 	};
+ 
++cpp_quote("/* Win32Metadata: interface ::IESValueUpdatedEvent => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+ 		uuid(8A24C46E-BB63-4664-8602-5D9C718C146D),
+@@ -2599,6 +2647,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 		HRESULT GetValueNames ([out, retval] SAFEARRAY(BSTR)* pbstrNames);
+ 	};
+ 
++cpp_quote("/* Win32Metadata: interface ::IESRequestTunerEvent => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+ 		uuid(54C7A5E8-C3BB-4f51-AF14-E0E2C0E34C6D),
+@@ -2620,6 +2669,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 		HRESULT GetEstimatedTime ([out, retval] DWORD* pdwEstimatedTime);
+ 	};
+ 
++cpp_quote("/* Win32Metadata: interface ::IESIsdbCasResponseEvent => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+ 		uuid(2017cb03-dc0f-4c24-83ca-36307b2cd19f),
+@@ -2674,6 +2724,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+             [out, retval] IESEvent** ppESEvent);
+ 	};
+ 
++cpp_quote("/* Win32Metadata: interface ::IESLicenseRenewalResultEvent => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(d5a48ef5-a81b-4df0-acaa-5e35e7ea45d4),
+@@ -2699,6 +2750,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IESFileExpiryDateEvent => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(BA9EDCB6-4D36-4cfe-8C56-87A6B0CA48E1),
+@@ -2716,6 +2768,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+ 
++cpp_quote("/* Win32Metadata: interface ::IESEventService => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+ 		uuid(ED89A619-4C06-4b2f-99EB-C7669B13047C),
+@@ -2727,6 +2780,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 	    HRESULT FireESEvent(IESEvent* pESEvent);
+ 	};
+ 
++cpp_quote("/* Win32Metadata: interface ::IESEventServiceConfiguration => SupportedOSPlatform(\"windows6.1\") */")
+ 	[
+ 		object,
+         hidden,
+@@ -2809,6 +2863,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+ 
+     // IPersistTuneXml : defines an individual property-based xml persistence mechanism
+     //
++cpp_quote("/* Win32Metadata: interface ::IPersistTuneXml => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(0754CD31-8D15-47a9-8215-D20064157244),
+@@ -2830,6 +2885,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     // IPersistTuneXmlUtility : defines an utility object to create Tuning Model 
+     // objects based on the xml node passed in
+     //
++cpp_quote("/* Win32Metadata: interface ::IPersistTuneXmlUtility => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         hidden,
+@@ -2848,6 +2904,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+      // IPersistTuneXmlUtility2 : defines an utility object to extract TuneXml
+     // from the Tune Request.
+     //
++cpp_quote("/* Win32Metadata: interface ::IPersistTuneXmlUtility2 => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         hidden,
+@@ -2862,6 +2919,7 @@ DISPID_MP2TUNERFACTORY_CREATETUNEREQUEST        = 1,
+     };
+ 
+         // this interface adds a CreateTuneRequestEx method to a TuningSpace
++cpp_quote("/* Win32Metadata: interface ::IBDACreateTuneRequestEx => SupportedOSPlatform(\"windows6.1\") */")
+     [
+         object,
+         uuid(C0A4A1D4-2B3C-491a-BA22-499FBADD4D12),

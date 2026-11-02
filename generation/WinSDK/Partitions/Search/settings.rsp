@@ -38,3 +38,5 @@ PROGID_MSPersist_Version
 <IncludeRoot>/um/windowssearcherrors.h
 --namespace
 Windows.Win32.System.Search
+--config
+parse-win32-annotations

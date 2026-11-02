@@ -4,3 +4,5 @@
 <IncludeRoot>/um/edpwin32.h
 --namespace
 Windows.Win32.Security.EnterpriseData
+--config
+parse-win32-annotations

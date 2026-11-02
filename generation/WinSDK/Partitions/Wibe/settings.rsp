@@ -4,3 +4,5 @@ MilMatrix3x2D
 <IncludeRoot>/um/mileffects.h
 --namespace
 Windows.Win32.UI.Wpf
+--config
+parse-win32-annotations

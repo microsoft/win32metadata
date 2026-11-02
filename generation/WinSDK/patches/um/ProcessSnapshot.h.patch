@@ -1,0 +1,91 @@
+diff --git a/um/processsnapshot.h b/um/processsnapshot.h
+--- a/um/processsnapshot.h
++++ b/um/processsnapshot.h
+@@ -370,6 +370,7 @@
+ #if (NTDDI_VERSION >= NTDDI_WINBLUE)
+ 
+ // Win32 APIs.
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssCaptureSnapshot(
+@@ -379,6 +380,7 @@
+     _Out_ HPSS* SnapshotHandle
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssFreeSnapshot(
+@@ -386,6 +388,7 @@
+     _In_ HPSS SnapshotHandle
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssQuerySnapshot(
+@@ -395,6 +398,7 @@
+     _In_ DWORD BufferLength
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkSnapshot(
+@@ -405,6 +409,7 @@
+     _In_ DWORD BufferLength
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssDuplicateSnapshot(
+@@ -416,19 +421,22 @@
+     );
+ 
+ // Win32 walk marker management.
++_Win32_SupportedOS_Windows81_
++_Success_(return == ERROR_SUCCESS)
++STDAPI_(DWORD)
++PssWalkMarkerFree(
++    _In_ HPSSWALK WalkMarkerHandle
++    );
++
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerCreate(
+     _In_opt_ PSS_ALLOCATOR const *Allocator,
+-    _Out_ HPSSWALK* WalkMarkerHandle
+-    );
+-
+-_Success_(return == ERROR_SUCCESS)
+-STDAPI_(DWORD)
+-PssWalkMarkerFree(
+-    _In_ HPSSWALK WalkMarkerHandle
+-    );
+-
++    _Out_ _Win32_RAIIFree_(PssWalkMarkerFree, -1, 0) HPSSWALK* WalkMarkerHandle
++    );
++
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerGetPosition(
+@@ -436,6 +444,7 @@
+     _Out_ ULONG_PTR *Position
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerSetPosition(
+@@ -443,6 +452,7 @@
+     _In_ ULONG_PTR Position
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerSeekToBeginning(

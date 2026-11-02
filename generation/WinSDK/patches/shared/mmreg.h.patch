@@ -1,0 +1,18 @@
+diff --git a/shared/mmreg.h b/shared/mmreg.h
+index 55920c8e..5402afca 100644
+--- a/shared/mmreg.h
++++ b/shared/mmreg.h
+@@ -3077,6 +3077,13 @@ typedef MPEGLAYER3WAVEFORMAT FAR     *LPMPEGLAYER3WAVEFORMAT;
+ #define MPEGLAYER3_FLAG_PADDING_ON       0x00000001
+ #define MPEGLAYER3_FLAG_PADDING_OFF      0x00000002
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(MPEGLAYER3WAVEFORMAT_FLAGS, unsigned long,
++    MPEGLAYER3_FLAG_PADDING_ISO,
++    MPEGLAYER3_FLAG_PADDING_ON,
++    MPEGLAYER3_FLAG_PADDING_OFF);
++#endif
++
+ /* ==========================================================================
+ 
+       For WAVE_FORMAT_MPEG_HEAAC (0x1610)

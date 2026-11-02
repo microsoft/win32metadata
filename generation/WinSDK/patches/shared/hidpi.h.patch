@@ -1,0 +1,17 @@
+diff --git a/shared/hidpi.h b/shared/hidpi.h
+--- a/shared/hidpi.h
++++ b/shared/hidpi.h
+@@ -2031,6 +2031,13 @@
+ //
+ #define HIDP_STATUS_I8242_TRANS_UNKNOWN HIDP_STATUS_I8042_TRANS_UNKNOWN
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("HIDP_STATUS_I8242_TRANS_UNKNOWN")
++#undef HIDP_STATUS_I8242_TRANS_UNKNOWN
++const NTSTATUS HIDP_STATUS_I8242_TRANS_UNKNOWN = HIDP_STATUS_I8042_TRANS_UNKNOWN;
++#pragma pop_macro("HIDP_STATUS_I8242_TRANS_UNKNOWN")
++#endif
++
+ #ifndef _KERNEL_MODE
+ 
+ typedef NTSTATUS

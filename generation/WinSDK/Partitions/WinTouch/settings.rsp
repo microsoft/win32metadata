@@ -6,3 +6,5 @@ NaN
 <IncludeRoot>/um/manipulations.h
 --namespace
 Windows.Win32.UI.Input.Touch
+--config
+parse-win32-annotations

@@ -1,0 +1,47 @@
+diff --git a/shared/ntdddisk.h b/shared/ntdddisk.h
+index f28a2640..cadd6c1c 100644
+--- a/shared/ntdddisk.h
++++ b/shared/ntdddisk.h
+@@ -22,6 +22,7 @@
+ #define _NTDDDISK_H_
+ 
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -644,13 +645,17 @@
+ // not common to both GPT and MBR partitions.
+ //
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long long GPT_ATTRIBUTES;
++#endif
++
+ typedef struct _PARTITION_INFORMATION_GPT {
+ 
+     GUID PartitionType;                 // Partition type. See table 16-3.
+ 
+     GUID PartitionId;                   // Unique GUID for this partition.
+ 
+-    ULONG64 Attributes;                 // See table 16-4.
++    _Win32_AssociatedEnum_(GPT_ATTRIBUTES) ULONG64 Attributes;                 // See table 16-4.
+ 
+     WCHAR Name [36];                    // Partition Name in Unicode.
+ 
+@@ -674,6 +679,15 @@
+ #define GPT_BASIC_DATA_ATTRIBUTE_HIDDEN             (0x4000000000000000)
+ #define GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY        (0x2000000000000000)
+ #define GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY          (0x1000000000000000)
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(GPT_ATTRIBUTES, unsigned long long,
++    GPT_ATTRIBUTE_PLATFORM_REQUIRED,
++    GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER,
++    GPT_BASIC_DATA_ATTRIBUTE_HIDDEN,
++    GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY,
++    GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY);
++#endif
+ #define GPT_BASIC_DATA_ATTRIBUTE_OFFLINE            (0x0800000000000000)
+ #define GPT_BASIC_DATA_ATTRIBUTE_DAX                (0x0400000000000000)
+ #define GPT_BASIC_DATA_ATTRIBUTE_SERVICE            (0x0200000000000000)
