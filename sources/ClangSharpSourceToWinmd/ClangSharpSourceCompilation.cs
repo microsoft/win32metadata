@@ -417,6 +417,39 @@ namespace ClangSharpSourceToWinmd
                     recordNamespaces[route.Key] = route.Value;
             }
             StopIfInvalid("emitter.namespace-routing", "native provider ownership");
+            var legacyManualOwners = NamesToCorrectNamespacesMover.GetLegacyManualRecordOwners(namespaceTrees, requiredNamespaces);
+            foreach (var legacyRecord in namespaceTrees.Where(tree =>
+                    !MetadataSyntaxTreeCleaner.IsLegacyManualSource(tree.FilePath) &&
+                    !HeaderEnumGroupMerger.IsHeaderTypesFile(tree.FilePath))
+                .SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
+                .Where(record => record.Parent is BaseNamespaceDeclarationSyntax or CompilationUnitSyntax &&
+                    record.TypeParameterList == null && record.BaseList == null && record.Members.Count != 0 &&
+                    record.Identifier.ValueText.EndsWith(MetadataSyntaxTreeCleaner.RevertToTypeSuffix, StringComparison.Ordinal)))
+            {
+                string name = legacyRecord.Identifier.ValueText;
+                string projectedName = name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length];
+                if (!legacyManualOwners.TryGetValue(projectedName, out var manualTargets) ||
+                    NativeRecordSourceProvenance.Read(legacyRecord) != null ||
+                    NativeTypedefSourceProvenance.Read(legacyRecord) != null ||
+                    NativeDeclarationSourceProvenance.Read(legacyRecord) != null)
+                    continue;
+                var key = (Namespace: SyntaxUtils.GetEnclosingNamespace(legacyRecord), Name: name);
+                if (manualTargets.Length != 1)
+                {
+                    validation.Add(new InvalidDataException(
+                        $"Legacy projection '{key.Namespace}.{name}' requires one qualified retained manual target."),
+                        "CSSW005", "emitter.record-ownership", legacyRecord.SyntaxTree.FilePath, name);
+                    continue;
+                }
+                string owner = manualTargets[0].Namespace;
+                if (recordNamespaces.TryGetValue(key, out string previousOwner) && previousOwner != owner)
+                    validation.Add(new InvalidDataException(
+                        $"Legacy projection '{key.Namespace}.{name}' conflicts with its source-bound native owner."),
+                        "CSSW005", "emitter.record-ownership", legacyRecord.SyntaxTree.FilePath, name);
+                else
+                    recordNamespaces[key] = owner;
+            }
+            StopIfInvalid("emitter.namespace-routing", "qualified legacy manual projections");
             var configuredRequiredNamespaces = requiredNamespaces;
             requiredNamespaces = new Dictionary<string, string>(requiredNamespaces);
             apiNamesToNamespaces = new Dictionary<string, string>(apiNamesToNamespaces);

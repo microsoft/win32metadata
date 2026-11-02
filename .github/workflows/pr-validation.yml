@@ -132,6 +132,7 @@ jobs:
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.CommonNativeObservationRequiresAllDirectArchitectureProviders' = 6
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonOriginalSdkDeclarationsPreserveNativeContracts' = 1
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.OriginalSdkNativeProvidersAndReferencesShareTheirPublicOwnerAcrossPhaseHandoffs' = 1
+            'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.RetainedManualProvidersOwnLegacyRevertedRecordAliases' = 8
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonDeclarationsRequireTheirActualProducingTarget' = 3
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonForwardsRequireCompleteProviderCoverage' = 6
             'FullyQualifiedName~ClangSharpSourceToWinmdTests.HeaderTypedefCompositionTests.SingleCommonForwardDoesNotAcceptManagedSpellingAsDefinition' = 1
