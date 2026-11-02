@@ -9,8 +9,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using ClangSharp;
+using ClangSharp.Interop;
+using MetadataUtils;
 
 namespace Win32MetadataScraper
 {
@@ -23,6 +26,9 @@ public class DiscoveryResult
 {
     /// <summary>Tag name → list of typedef names. One tag may have multiple typedefs.</summary>
     public Dictionary<string, List<string>> TagToTypedefs { get; } = new();
+
+    /// <summary>Qualified typedef name to its canonical tag, including same-level aliases.</summary>
+    public Dictionary<string, string> NativeTypedefTags { get; } = new();
 
     /// <summary>Names of tags that are enums.</summary>
     public HashSet<string> EnumTags { get; } = new();
@@ -81,6 +87,227 @@ public static class RemapDiscovery
         var result = new DiscoveryResult();
         WalkDecl(rootDecl, result);
         return result;
+    }
+
+    internal static Dictionary<string, string> CreateBindingRemaps(
+        DiscoveryResult discovery, IReadOnlyDictionary<string, string> remaps, ISet<string> autoRemapExcludes)
+    {
+        var result = new Dictionary<string, string>(remaps);
+        // Native identity and existing no-rename choices are binding decisions.
+        foreach (var pair in discovery.TagToTypedefs)
+            if (pair.Value.Contains(pair.Key, StringComparer.Ordinal) ||
+                autoRemapExcludes.Contains(pair.Key) || IsLikelyComInterfaceTag(pair.Key))
+                result.TryAdd(pair.Key, pair.Key);
+
+        foreach (var group in discovery.NativeTypedefTags.GroupBy(pair => pair.Value, StringComparer.Ordinal))
+        {
+            string tag = group.Key;
+            string tagName = SimpleName(tag);
+            var aliases = group.Where(pair => pair.Key != tag).ToArray();
+            if (aliases.Length == 0 || result.ContainsKey(tag) || result.ContainsKey(tagName) ||
+                !aliases.All(pair => HasExplicitProjection(pair.Key, tag, tagName)))
+                continue;
+            // Explicit alias projections do not rename the underlying native tag.
+            result.Add(tag, tagName);
+        }
+
+        foreach (var pair in remaps)
+        {
+            if (pair.Value.EndsWith("___", StringComparison.Ordinal) &&
+                discovery.NativeTypedefTags.TryGetValue(pair.Value[..^3], out string tag) &&
+                tag == pair.Key)
+            {
+                // ClangSharp's force marker preserves the authored temporary name;
+                // the native alias proof does not authorize an arbitrary remap.
+                result[pair.Key] = "@" + pair.Value;
+            }
+        }
+        return result;
+
+        static string SimpleName(string name)
+        {
+            int separator = name.LastIndexOf("::", StringComparison.Ordinal);
+            return separator < 0 ? name : name.Substring(separator + 2);
+        }
+
+        bool HasExplicitProjection(string alias, string tag, string tagName)
+        {
+            string aliasName = SimpleName(alias);
+            return (remaps.TryGetValue(alias, out string target) || remaps.TryGetValue(aliasName, out target)) &&
+                target != alias && target != aliasName && target != tag && target != tagName;
+        }
+    }
+
+    internal static Dictionary<string, string> FindEmbeddedIncompleteRecordPointerRemaps(
+        Decl rootDecl, NativeCursorIndex nativeDeclarations = null)
+    {
+        using var timing = GenerationTiming.BeginSpan("remap-discovery.embedded-type-uses");
+        using var preparationTiming = GenerationTiming.BeginSpan("remap-discovery.embedded-prepare-declarations");
+        var declarations = (nativeDeclarations ?? new NativeCursorIndex(rootDecl)).Cursors;
+        var declaredRecords = declarations.Where(IsRecordDeclaration)
+            .Where(record => !IsRecordDeclaration(record.LexicalParent) ||
+                record.LexicalParent == record.SemanticParent)
+            .Select(record => record.CanonicalCursor).ToHashSet();
+        preparationTiming?.SetCounter("declarationCount", declarations.Count);
+        preparationTiming?.SetCounter("declaredRecordCount", declaredRecords.Count);
+        preparationTiming?.Dispose();
+        using var seedTiming = GenerationTiming.BeginSpan("remap-discovery.embedded-seed-types");
+        var pending = new Stack<(CXType Type, bool ValueUse, bool BehindPointer)>();
+        var visited = new HashSet<(CXType Type, bool ValueUse, bool BehindPointer)>();
+        var canonicalTypes = new Dictionary<CXType, CXType>();
+        var byValue = new HashSet<string>(StringComparer.Ordinal);
+        var result = new Dictionary<string, string>(StringComparer.Ordinal);
+        foreach (var declaration in declarations)
+        {
+            var kind = declaration.DeclKind;
+            if (kind is >= CX_DeclKind.CX_DeclKind_FirstValue and <= CX_DeclKind.CX_DeclKind_LastValue)
+                pending.Push((declaration.Type, true, false));
+            else if (kind is >= CX_DeclKind.CX_DeclKind_FirstTypedefName and <= CX_DeclKind.CX_DeclKind_LastTypedefName)
+                pending.Push((declaration.TypedefDeclUnderlyingType, false, false));
+        }
+        timing?.SetCounter("declarationCount", declarations.Count);
+        timing?.SetCounter("initialTypeUseCount", pending.Count);
+        seedTiming?.SetCounter("initialTypeUseCount", pending.Count);
+        seedTiming?.Dispose();
+        using var visitTiming = GenerationTiming.BeginSpan("remap-discovery.embedded-visit-types");
+        while (pending.Count != 0)
+        {
+            var (type, valueUse, behindPointer) = pending.Pop();
+            if (!canonicalTypes.TryGetValue(type, out var canonical))
+                canonicalTypes.Add(type, canonical = type.CanonicalType);
+            type = canonical;
+            if (!visited.Add((type, valueUse, behindPointer)))
+                continue;
+            switch (type.TypeClass)
+            {
+                case CX_TypeClass.CX_TypeClass_Pointer:
+                    pending.Push((type.PointeeType, valueUse, true));
+                    break;
+                case CX_TypeClass.CX_TypeClass_Record:
+                {
+                    var record = type.Declaration;
+                    var definition = record.Definition;
+                    if ((!definition.IsNull ? definition : record).IsCompleteDefinition ||
+                        declaredRecords.Contains(record.CanonicalCursor))
+                        break;
+                    // Keep the compiler record identity without constructing every managed type wrapper.
+                    string name = DeclarationSourceMap.QualifiedName(record);
+                    if (name.Length != 0)
+                    {
+                        if (behindPointer)
+                            result.TryAdd(name, "void");
+                        else if (valueUse)
+                            byValue.Add(name);
+                    }
+                    break;
+                }
+                case CX_TypeClass.CX_TypeClass_FunctionProto:
+                    pending.Push((type.ResultType, true, false));
+                    for (uint index = 0; index < type.NumArgTypes; index++)
+                        pending.Push((type.GetArgType(index), true, false));
+                    break;
+                case CX_TypeClass.CX_TypeClass_FunctionNoProto:
+                    pending.Push((type.ResultType, true, false));
+                    break;
+                case CX_TypeClass.CX_TypeClass_ConstantArray:
+                case CX_TypeClass.CX_TypeClass_ArrayParameter:
+                case CX_TypeClass.CX_TypeClass_IncompleteArray:
+                case CX_TypeClass.CX_TypeClass_VariableArray:
+                case CX_TypeClass.CX_TypeClass_DependentSizedArray:
+                    pending.Push((type.ArrayElementType, valueUse, behindPointer));
+                    break;
+                case CX_TypeClass.CX_TypeClass_LValueReference:
+                case CX_TypeClass.CX_TypeClass_RValueReference:
+                    pending.Push((type.PointeeType, valueUse, false));
+                    break;
+            }
+        }
+        timing?.SetCounter("canonicalTypeCount", canonicalTypes.Count);
+        timing?.SetCounter("visitedTypeUseCount", visited.Count);
+        timing?.SetCounter("pointerRemapCount", result.Count);
+        foreach (string name in byValue)
+            if (result.ContainsKey(name))
+                throw new InvalidOperationException($"Incomplete native record '{name}' is used by value; opaque pointer storage cannot establish its layout.");
+        return result;
+    }
+
+    private static bool IsRecordDeclaration(CXCursor cursor)
+        => cursor.DeclKind is >= CX_DeclKind.CX_DeclKind_FirstRecord and <= CX_DeclKind.CX_DeclKind_LastRecord;
+
+    public static HashSet<string> FindInaccessibleCopyMembers(Decl rootDecl, bool excludeFunctionsWithBody)
+        => FindInaccessibleCopyMembers(new NativeCursorIndex(rootDecl), excludeFunctionsWithBody);
+
+    internal static HashSet<string> FindInaccessibleCopyMembers(
+        NativeCursorIndex nativeDeclarations, bool excludeFunctionsWithBody)
+    {
+        var result = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var record in nativeDeclarations.Cursors.Where(IsRecordDeclaration)
+            .Select(nativeDeclarations.GetCursor).OfType<CXXRecordDecl>().Where(record => record.IsCompleteDefinition))
+        {
+            foreach (var group in record.Methods.GroupBy(method => method.Name))
+            {
+                // Exclusion keys do not distinguish overloads. Do not hide a
+                // callable overload or change a virtual table to omit a private copy member.
+                if (!record.CursorChildren.OfType<FunctionTemplateDecl>().Any(template => template.Name == group.Key) &&
+                    group.Any(IsInaccessibleCopyMember) && group.All(method =>
+                    !method.IsVirtual && (IsInaccessibleCopyMember(method) || excludeFunctionsWithBody && method.HasBody)))
+                    result.Add(DeclarationSourceMap.QualifiedName(group.First().Handle));
+            }
+        }
+        return result;
+
+        static bool IsInaccessibleCopyMember(CXXMethodDecl method)
+            => method.Access is CX_CXXAccessSpecifier.CX_CXXPrivate or CX_CXXAccessSpecifier.CX_CXXProtected &&
+                (method is CXXConstructorDecl constructor && constructor.IsCopyOrMoveConstructor ||
+                    method.IsCopyAssignmentOperator || method.IsMoveAssignmentOperator);
+    }
+
+    public static string[] ResolveTraversalFiles(Decl rootDecl, IEnumerable<string> configuredFiles)
+    {
+        var files = configuredFiles.ToArray();
+        var unresolved = new HashSet<string>(files.Where(file =>
+            Path.GetFileName(file) == file && !File.Exists(file)), StringComparer.OrdinalIgnoreCase);
+        if (unresolved.Count == 0)
+            return files;
+
+        var candidates = new Dictionary<string, HashSet<string>>(StringComparer.OrdinalIgnoreCase);
+        foreach (var declaration in EnumerateDeclarations(rootDecl))
+        {
+            declaration.Location.GetFileLocation(out var source, out _, out _, out _);
+            string path = source.ToString();
+            string name = Path.GetFileName(path);
+            if (name != null && unresolved.Contains(name))
+            {
+                if (!candidates.TryGetValue(name, out var paths))
+                    candidates[name] = paths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+                paths.Add(Path.GetFullPath(path));
+            }
+        }
+        return files.Select(file =>
+        {
+            if (!unresolved.Contains(file) || !candidates.TryGetValue(file, out var paths))
+                return file;
+            if (paths.Count != 1)
+                throw new InvalidOperationException($"Traversal header '{file}' matches distinct native source files: " +
+                    string.Join(", ", paths.OrderBy(path => path, StringComparer.OrdinalIgnoreCase)));
+            return paths.Single();
+        }).ToArray();
+    }
+
+    private static IEnumerable<Decl> EnumerateDeclarations(Decl rootDecl)
+    {
+        var visited = new HashSet<Cursor>();
+        var pending = new Stack<Decl>();
+        pending.Push(rootDecl);
+        while (pending.Count != 0)
+        {
+            var declaration = pending.Pop();
+            if (!visited.Add(declaration))
+                continue;
+            yield return declaration;
+            foreach (var child in declaration.CursorChildren.OfType<Decl>())
+                pending.Push(child);
+        }
     }
 
     /// <summary>
@@ -239,7 +466,8 @@ public static class RemapDiscovery
     /// reducePointerLevel entries. Uses AST structure (bare vs pointer-to-function)
     /// to determine direction, replacing the old name-prefix heuristic.
     ///
-    /// Only the "bare function + pointer alias" pattern generates fixups:
+    /// Bare function typedefs need pointer reduction even without a named pointer alias.
+    /// The "bare function + pointer alias" pattern also chooses the pointer alias:
     ///   typedef void CALLBACK(int x);      // bare function proto
     ///   typedef CALLBACK *LPCALLBACK;      // pointer alias (adds *)
     /// → remap proto→alias, exclude alias, reducePointerLevel alias
@@ -264,7 +492,11 @@ public static class RemapDiscovery
         foreach (var protoName in discovery.FnBareFunctionTypedefs)
         {
             if (!discovery.FnProtoToPointerTypedefs.TryGetValue(protoName, out var aliasNames))
+            {
+                // A delegate already represents the first native function pointer.
+                result.ReducePointerLevel.Add(protoName);
                 continue;
+            }
 
             // Filter out aliases that are already manually excluded
             var candidates = aliasNames.Where(a => !configuredExcludes.Contains(a)).ToList();
@@ -329,6 +561,12 @@ public static class RemapDiscovery
     {
         if (decl is TypedefDecl typedefDecl)
         {
+            if (typedefDecl.UnderlyingType.CanonicalType is TagType canonicalTag &&
+                !string.IsNullOrEmpty(canonicalTag.Decl.Name))
+            {
+                result.NativeTypedefTags[DeclarationSourceMap.QualifiedName(typedefDecl.Handle)] =
+                    DeclarationSourceMap.QualifiedName(canonicalTag.Decl.Handle);
+            }
             var underlyingType = UnwrapType(typedefDecl.UnderlyingType);
 
             if (underlyingType is TagType tagType)
@@ -415,6 +653,7 @@ public static class RemapDiscovery
 
         if (decl is IDeclContext context)
         {
+            var directDeclarations = new HashSet<Decl>(context.Decls);
             // Walk Decls first (direct declarations)
             foreach (var child in context.Decls)
             {
@@ -425,7 +664,7 @@ public static class RemapDiscovery
             // headers that don't appear in Decls. PInvokeGenerator uses both traversals.
             foreach (var cursor in decl.CursorChildren)
             {
-                if (cursor is TypedefDecl && !context.Decls.Contains((Decl)cursor))
+                if (cursor is TypedefDecl && !directDeclarations.Contains((Decl)cursor))
                 {
                     WalkDecl((Decl)cursor, result);
                 }
@@ -434,5 +673,3 @@ public static class RemapDiscovery
     }
 }
 }
-
-

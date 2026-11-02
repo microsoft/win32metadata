@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Win32 metadata local generation timing",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "tool", "processId", "startedUtc", "exitCode", "context", "cpuScope", "spans"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "tool": { "type": "string", "minLength": 1 },
+    "processId": { "type": "integer", "minimum": 1 },
+    "startedUtc": { "type": "string", "format": "date-time" },
+    "exitCode": { "type": ["integer", "null"] },
+    "context": { "type": "object", "additionalProperties": { "type": "string" } },
+    "cpuScope": { "const": "all-process-threads" },
+    "spans": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "parentId", "name", "startedMilliseconds", "wallMilliseconds", "processCpuMilliseconds", "childWallMilliseconds", "selfWallMilliseconds", "selfProcessCpuMilliseconds", "counters"],
+        "properties": {
+          "id": { "type": "integer", "minimum": 1 },
+          "parentId": { "type": ["integer", "null"], "minimum": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "startedMilliseconds": { "type": "number", "minimum": 0 },
+          "wallMilliseconds": { "type": "number", "minimum": 0 },
+          "processCpuMilliseconds": { "type": "number", "minimum": 0 },
+          "childWallMilliseconds": { "type": "number", "minimum": 0 },
+          "selfWallMilliseconds": { "type": "number", "minimum": 0 },
+          "selfProcessCpuMilliseconds": { "type": "number", "minimum": 0 },
+          "counters": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } }
+        }
+      }
+    }
+  }
+}

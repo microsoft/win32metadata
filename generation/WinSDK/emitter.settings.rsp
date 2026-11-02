@@ -347,9 +347,9 @@ ADsOpenObject::dwReserved=ADS_AUTHENTICATION_ENUM
 GetObjectA::h=HGDIOBJ
 GetObjectW::h=HGDIOBJ
 EapHostPeerGetDataToUnplumbCredentials::phCredentialImpersonationToken=IntPtr*
-FARPROC::return=IntPtr
-NEARPROC::return=IntPtr
-PROC::return=IntPtr
+FARPROC::return=global::System.IntPtr
+NEARPROC::return=global::System.IntPtr
+PROC::return=global::System.IntPtr
 DHCP_IP_ARRAY::Elements=[NativeArrayInfo(CountParamIndex=0)]
 LoadCursorA::return=[DoNotRelease]
 LoadCursorW::return=[DoNotRelease]

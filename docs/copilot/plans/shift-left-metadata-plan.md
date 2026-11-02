@@ -4,6 +4,12 @@
 *Workstream: 4 — Shift-Left Metadata Definition*
 *Branch: user/jevansaks/shift-left-metadata*
 
+**Historical planning record.** The version, transport, and enum examples below
+describe the original proposal, not current authoring instructions. Use the
+[shift-left annotation specification](shift-left-annotation-spec.md) for the
+first-parse AST contract, metadata-only groups, native Clang scopes, and
+original-SDK-artifact patching rules.
+
 ---
 
 ## Executive Summary
@@ -439,12 +445,11 @@ DoAll.ps1
 **Goal:** Establish the annotation mechanism and prove it works end-to-end.
 
 **Tasks:**
-1. **Upgrade ClangSharp from v17.0.1 to v18.1.0.4+** — This is the critical
-   prerequisite. v18 adds `[NativeAnnotation("...")]` support for
+1. **Keep the selected Clang21 toolchain.** ClangSharp 21.1.8.4 and libclang
+   21.1.8 provide `[NativeAnnotation("...")]` support for
    `__attribute__((annotate(...)))` on all declaration types (functions,
-   parameters, struct fields, return values). Without this upgrade, only
-   parameter-level annotations work. Update the version pin in
-   `global.json` / `ScrapeHeaders.cs` and validate existing builds still pass.
+   parameters, struct fields, return values). Compatibility and execution-speed
+   corrections use these existing pins.
 2. Create `win32metadata.h` with the annotation macros
 3. Add `-D_WIN32METADATA_=1` to `baseSettings.rsp`
 4. Add `#include "win32metadata.h"` to the scraper include chain
@@ -698,8 +703,9 @@ generated structurally and will continue to need their JSON definition for the
 
 ## Open Questions for Review
 
-1. **ClangSharp upgrade**: v17→v18 is a major version bump. Are there breaking
-   changes that affect our existing pipeline? Need a compatibility assessment.
+1. **Toolchain compatibility**: Keep ClangSharp 21.1.8.4 and libclang 21.1.8.
+   The annotation migration and execution-speed work do not require a compiler
+   upgrade.
 
 2. **`NativeAnnotation` vs `CppAttributeList`**: v18 emits BOTH for parameters.
    Should `MetadataSyntaxTreeCleaner` process `NativeAnnotation` only (cleaner),

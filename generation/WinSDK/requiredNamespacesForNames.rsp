@@ -1,4 +1,51 @@
 --requiredNamespaceForName
+# Shared native typedefs keep one identity across their header owners.
+BOOLEAN=Windows.Win32.Foundation
+CHAR=Windows.Win32.Foundation
+HANDLE=Windows.Win32.Foundation
+HRESULT=Windows.Win32.Foundation
+NTSTATUS=Windows.Win32.Foundation
+PSTR=Windows.Win32.Foundation
+PWSTR=Windows.Win32.Foundation
+# Source-owned logical groups retain their established projection namespaces.
+ACE_FLAGS=Windows.Win32.Security
+ATF_FLAGS=Windows.Win32.System.SystemServices
+COPYFILE2_V2_FLAGS=Windows.Win32.Storage.FileSystem
+CPU_ARCHITECTURE=Windows.Win32.System.DeploymentServices
+DESKTOP_ACCESS_FLAGS=Windows.Win32.System.StationsAndDesktops
+DFC_TYPE=Windows.Win32.Graphics.Gdi
+DFCS_STATE=Windows.Win32.Graphics.Gdi
+DRAWITEMSTRUCT_CTL_TYPE=Windows.Win32.UI.Controls
+EXIT_WINDOWS_FLAGS=Windows.Win32.System.Shutdown
+FILE_CREATION_DISPOSITION=Windows.Win32.Storage.FileSystem
+FILE_DISPOSITION_INFO_EX_FLAGS=Windows.Win32.Storage.FileSystem
+FILE_SHARE_MODE=Windows.Win32.Storage.FileSystem
+HPOWERNOTIFY=Windows.Win32.System.Power
+HPROPSHEETPAGE=Windows.Win32.UI.Controls
+HTHEME=Windows.Win32.UI.Controls
+IMAGE_FILE_CHARACTERISTICS2=Windows.Win32.System.Diagnostics.Debug
+IMAGE_FILE_MACHINE=Windows.Win32.System.SystemInformation
+JET_API_PTR=Windows.Win32.Storage.StructuredStorage
+JET_HANDLE=Windows.Win32.Storage.StructuredStorage
+JET_TABLEID=Windows.Win32.Storage.StructuredStorage
+JOB_OBJECT_LIMIT=Windows.Win32.System.JobObjects
+JOB_OBJECT_SECURITY=Windows.Win32.System.JobObjects
+JOB_OBJECT_UILIMIT=Windows.Win32.System.JobObjects
+PSINJECT_POINT=Windows.Win32.Storage.Xps
+REDRAW_WINDOW_FLAGS=Windows.Win32.Graphics.Gdi
+RESOURCE_DISPLAY_TYPE=Windows.Win32.Networking.WinSock
+ROT_FLAGS=Windows.Win32.System.Com
+RTL_VIRTUAL_UNWIND_HANDLER_TYPE=Windows.Win32.System.Diagnostics.Debug
+SHARE_INFO_PERMISSIONS=Windows.Win32.Storage.FileSystem
+SHUTDOWN_FLAGS=Windows.Win32.System.Shutdown
+SYMBOLIC_LINK_FLAGS=Windows.Win32.Storage.FileSystem
+SYNCHRONIZATION_ACCESS_RIGHTS=Windows.Win32.System.Threading
+VIRTUAL_FREE_TYPE=Windows.Win32.System.Memory
+VIRTUAL_KEY=Windows.Win32.UI.Input.KeyboardAndMouse
+WAIT_EVENT=Windows.Win32.Foundation
+WORD_BREAK_ACTION=Windows.Win32.UI.Controls
+WORD_WHEEL_OPEN_FLAGS=Windows.Win32.System.SystemServices
+WOW64_CONTEXT_FLAGS=Windows.Win32.System.Diagnostics.Debug
 # region amvideo.h
 VIDEOINFOHEADER=Windows.Win32.Media.MediaFoundation
 MPEG1VIDEOINFO=Windows.Win32.Media.MediaFoundation
@@ -153,6 +200,7 @@ IAMWMBufferPassCallback=Windows.Win32.Media.DirectShow
 # region dvdmedia.h
 VIDEOINFOHEADER2=Windows.Win32.Media.MediaFoundation
 MPEG2VIDEOINFO=Windows.Win32.Media.MediaFoundation
+MPEG2VIDEOINFO_FLAGS=Windows.Win32.Media.MediaFoundation
 # dvdmedia dxgi.h
 # region dxgi.h
 DXGI_FORMAT=Windows.Win32.Graphics.Dxgi.Common
@@ -283,6 +331,7 @@ HEAACWAVEFORMAT=Windows.Win32.Media.DirectShow
 HEAACWAVEINFO=Windows.Win32.Media.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Media.DirectShow
 MPEGLAYER3WAVEFORMAT=Windows.Win32.Media.DirectShow
+MPEGLAYER3WAVEFORMAT_FLAGS=Windows.Win32.Media.DirectShow
 # endregion mmreg.h
 # region mscoree.h
 DEPRECATED_CLR_API_MESG=Windows.Win32.System.ClrHosting
@@ -478,6 +527,10 @@ StgGetIFillLockBytesOnFile=Windows.Win32.System.Com.StructuredStorage
 StgOpenLayoutDocfile=Windows.Win32.System.Com.StructuredStorage
 CoRegisterMessageFilter=Windows.Win32.Media.Audio
 # endregion objbase.h
+# region oleauto.h
+DISPATCH_FLAGS=Windows.Win32.System.Com
+VAR_CHANGE_FLAGS=Windows.Win32.System.Variant
+# endregion oleauto.h
 # region objidl.h
 IMessageFilter=Windows.Win32.Media.Audio
 IThumbnailExtractor=Windows.Win32.System.Com.UI
@@ -650,6 +703,9 @@ WM_UNICHAR=Windows.Win32.UI.WindowsAndMessaging
 WM_PRINTCLIENT=Windows.Win32.UI.WindowsAndMessaging
 WM_NOTIFY=Windows.Win32.UI.WindowsAndMessaging
 # endregion
+# region richole.h
+RECO_FLAGS=Windows.Win32.System.SystemServices
+# endregion richole.h
 # region securitybaseapi.h
 CveEventWrite=Windows.Win32.System.Diagnostics.Etw
 # endregion securitybaseapi.h
@@ -937,6 +993,7 @@ FILE_RENAME_INFO=Windows.Win32.Storage.FileSystem
 FILE_STANDARD_INFO=Windows.Win32.Storage.FileSystem
 FILE_STORAGE_INFO=Windows.Win32.Storage.FileSystem
 FILE_STREAM_INFO=Windows.Win32.Storage.FileSystem
+FILE_TYPE=Windows.Win32.Storage.FileSystem
 FILE_WRITE_FLAGS=Windows.Win32.Storage.FileSystem
 FileEncryptionStatusA=Windows.Win32.Storage.FileSystem
 FileEncryptionStatusW=Windows.Win32.Storage.FileSystem
@@ -992,6 +1049,7 @@ GetFileBandwidthReservation=Windows.Win32.Storage.FileSystem
 GetFileInformationByHandleEx=Windows.Win32.Storage.FileSystem
 GetFileInformationByName=Windows.Win32.Storage.FileSystem
 GetFileSecurityA=Windows.Win32.Security
+GETFINALPATHNAMEBYHANDLE_FLAGS=Windows.Win32.Storage.FileSystem
 GetFirmwareType=Windows.Win32.System.SystemInformation
 GetFullPathNameTransactedA=Windows.Win32.Storage.FileSystem
 GetFullPathNameTransactedW=Windows.Win32.Storage.FileSystem
@@ -1256,6 +1314,9 @@ IWICImageEncoder=Windows.Win32.Graphics.Imaging.D2D
 IWICImagingFactory2=Windows.Win32.Graphics.Imaging.D2D
 IWICImagingFactory3=Windows.Win32.Graphics.Imaging.D2D
 # endregion wincodec.h
+# region wincrypt.h
+CERT_ALT_NAME=Windows.Win32.Security.Cryptography.Certificates
+# endregion wincrypt.h
 # region winddi.h
 BLENDOBJ=Windows.Win32.Devices.Display
 BRUSHOBJ_hGetColorTransform=Windows.Win32.Devices.Display
@@ -1693,6 +1754,9 @@ InitiateSystemShutdownExW=Windows.Win32.System.Shutdown
 InitiateSystemShutdownW=Windows.Win32.System.Shutdown
 # endregion winreg.h
 # region winnt.h (SLIST per-architecture design also defined in ntdef.h)
+CONTEXT_FLAGS=Windows.Win32.System.Diagnostics.Debug
+HEAP_FLAGS=Windows.Win32.System.Memory
+IS_TEXT_UNICODE_RESULT=Windows.Win32.Globalization
 ACCESS_ALLOWED_ACE=Windows.Win32.Security
 ACCESS_ALLOWED_CALLBACK_ACE=Windows.Win32.Security
 ACCESS_ALLOWED_CALLBACK_OBJECT_ACE=Windows.Win32.Security
@@ -1742,6 +1806,8 @@ CRITICAL_SECTION=Windows.Win32.System.Threading
 CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG=Windows.Win32.System.WindowsProgramming
 CY=Windows.Win32.System.Com
 DECIMAL=Windows.Win32.Foundation
+DEVICE_POWER_CAPABILITIES=Windows.Win32.System.Power
+IGP_ID=Windows.Win32.System.SystemServices
 DEVICE_POWER_STATE=Windows.Win32.System.Power
 DISPATCHER_CONTEXT_ARM64=Windows.Win32.System.Diagnostics.Debug
 DISPATCHER_CONTEXT=Windows.Win32.System.Diagnostics.Debug
@@ -1865,6 +1931,7 @@ POWER_MONITOR_REQUEST_REASON=Windows.Win32.System.Power
 POWER_MONITOR_REQUEST_TYPE=Windows.Win32.System.Power
 POWER_PLATFORM_INFORMATION=Windows.Win32.System.Power
 POWER_PLATFORM_ROLE=Windows.Win32.System.Power
+POWER_PLATFORM_ROLE_VERSION=Windows.Win32.System.Power
 POWER_REQUEST_TYPE=Windows.Win32.System.Power
 POWER_SESSION_ALLOW_EXTERNAL_DMA_DEVICES=Windows.Win32.System.Power
 POWER_SESSION_CONNECT=Windows.Win32.System.Power
@@ -2650,6 +2717,14 @@ Wow64GetThreadContext=Windows.Win32.System.Diagnostics.Debug
 Wow64RevertWow64FsRedirection=Windows.Win32.Storage.FileSystem
 Wow64SetThreadContext=Windows.Win32.System.Diagnostics.Debug
 # endregion wow64apiset.h
+# region rpcdce.h
+RPC_C_AUTHN_LEVEL=Windows.Win32.System.Com
+RPC_C_IMP_LEVEL=Windows.Win32.System.Com
+# endregion rpcdce.h
+# region cryptography logical groups
+ALG_ID=Windows.Win32.Security.Cryptography
+SIGNER_SIGN_FLAGS=Windows.Win32.Security.Cryptography
+# endregion cryptography logical groups
 # region wtypes.h
 uCLSSPEC=Windows.Win32.System.Com
 CSPLATFORM=Windows.Win32.System.Com
@@ -2664,3 +2739,168 @@ PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.Variant
 # endregion wtypes.h
+MIDI_WAVE_OPEN_TYPE=Windows.Win32.Media.Audio
+# region ntdef.h
+OS_PRODUCT_TYPE=Windows.Win32.System.SystemInformation
+OBJECT_ATTRIBUTE_FLAGS=Windows.Win32.Foundation
+# endregion ntdef.h
+# region regstr.h
+SETUP_DI_DEVICE_CONFIGURATION_FLAGS=Windows.Win32.Devices.DeviceAndDriverInstallation
+# endregion regstr.h
+ALERT_SYSTEM_SEV=Windows.Win32.System.SystemServices
+APPCOMMAND_ID=Windows.Win32.System.SystemServices
+CDS_TYPE=Windows.Win32.Graphics.Gdi
+COPYFILE_FLAGS=Windows.Win32.Storage.FileSystem
+COPYPROGRESSROUTINE_PROGRESS=Windows.Win32.Storage.FileSystem
+DESKTOP_CONTROL_FLAGS=Windows.Win32.System.StationsAndDesktops
+DISP_CHANGE=Windows.Win32.Graphics.Gdi
+DRAWSTATE_FLAGS=Windows.Win32.Graphics.Gdi
+ENUM_DISPLAY_SETTINGS_FLAGS=Windows.Win32.Graphics.Gdi
+FILE_MAP=Windows.Win32.System.Memory
+GESTURECONFIG_FLAGS=Windows.Win32.System.SystemServices
+GESTURECONFIG_ID=Windows.Win32.UI.Input.Touch
+HELP_INFO_TYPE=Windows.Win32.UI.Shell
+LCSCSTYPE=Windows.Win32.UI.ColorSystem
+MAP_VIRTUAL_KEY_TYPE=Windows.Win32.UI.Input.KeyboardAndMouse
+ODA_FLAGS=Windows.Win32.UI.Controls
+ODS_FLAGS=Windows.Win32.UI.Controls
+POINTER_FLAGS=Windows.Win32.UI.Input.Pointer
+QUERY_DISPLAY_CONFIG_FLAGS=Windows.Win32.Devices.Display
+SET_DISPLAY_CONFIG_FLAGS=Windows.Win32.Devices.Display
+SOUNDSENTRY_FLAGS=Windows.Win32.UI.Accessibility
+STATIC_STYLES=Windows.Win32.System.SystemServices
+STICKYKEYS_FLAGS=Windows.Win32.UI.Accessibility
+TOUCHEVENTF_FLAGS=Windows.Win32.UI.Input.Touch
+TOUCHINPUTMASKF_MASK=Windows.Win32.UI.Input.Touch
+TOUCH_FEEDBACK_MODE=Windows.Win32.UI.Input.Pointer
+ACTIVATE_KEYBOARD_LAYOUT_FLAGS=Windows.Win32.UI.Input.KeyboardAndMouse
+BROADCAST_SYSTEM_MESSAGE_FLAGS=Windows.Win32.System.StationsAndDesktops
+BROADCAST_SYSTEM_MESSAGE_INFO=Windows.Win32.System.StationsAndDesktops
+CLEAR_COMM_ERROR_FLAGS=Windows.Win32.Devices.Communication
+COLOR_MATCH_TO_TARGET_ACTION=Windows.Win32.UI.ColorSystem
+COMBOBOXINFO_BUTTON_STATE=Windows.Win32.UI.Controls
+COMMPROP_STOP_PARITY=Windows.Win32.Devices.Communication
+COMM_EVENT_MASK=Windows.Win32.Devices.Communication
+CREATE_PROCESS_LOGON_FLAGS=Windows.Win32.System.Threading
+DCB_PARITY=Windows.Win32.Devices.Communication
+DCB_STOP_BITS=Windows.Win32.Devices.Communication
+DLG_BUTTON_CHECK_STATE=Windows.Win32.UI.Controls
+DLG_DIR_LIST_FILE_TYPE=Windows.Win32.UI.Controls
+DRAW_CAPTION_FLAGS=Windows.Win32.Graphics.Gdi
+ENABLE_SCROLL_BAR_ARROWS=Windows.Win32.UI.Controls
+ENUM_DISPLAY_SETTINGS_MODE=Windows.Win32.Graphics.Gdi
+ESCAPE_COMM_FUNCTION=Windows.Win32.Devices.Communication
+FORMAT_MESSAGE_OPTIONS=Windows.Win32.System.Diagnostics.Debug
+GET_DCX_FLAGS=Windows.Win32.Graphics.Gdi
+GET_MOUSE_MOVE_POINTS_EX_RESOLUTION=Windows.Win32.UI.Input.KeyboardAndMouse
+GET_TAPE_DRIVE_PARAMETERS_OPERATION=Windows.Win32.Storage.FileSystem
+HIGHCONTRASTW_FLAGS=Windows.Win32.UI.Accessibility
+HOT_KEY_MODIFIERS=Windows.Win32.UI.Input.KeyboardAndMouse
+ICM_COMMAND=Windows.Win32.UI.ColorSystem
+ICM_MODE=Windows.Win32.UI.ColorSystem
+INPUT_TYPE=Windows.Win32.UI.Input.KeyboardAndMouse
+KEYBD_EVENT_FLAGS=Windows.Win32.UI.Input.KeyboardAndMouse
+LOGON32_LOGON=Windows.Win32.Security
+LOGON32_PROVIDER=Windows.Win32.Security
+LPPROGRESS_ROUTINE_CALLBACK_REASON=Windows.Win32.Storage.FileSystem
+MODEM_STATUS_FLAGS=Windows.Win32.Devices.Communication
+MONITOR_FROM_FLAGS=Windows.Win32.Graphics.Gdi
+MOUSE_EVENT_FLAGS=Windows.Win32.UI.Input.KeyboardAndMouse
+MOUSE_STATE=Windows.Win32.UI.Input
+MOVE_FILE_FLAGS=Windows.Win32.Storage.FileSystem
+OPERATION_END_PARAMETERS_FLAGS=Windows.Win32.Storage.OperationRecorder
+OPERATION_START_FLAGS=Windows.Win32.Storage.OperationRecorder
+PFD_FLAGS=Windows.Win32.Graphics.OpenGL
+PFD_LAYER_TYPE=Windows.Win32.Graphics.OpenGL
+PFD_PIXEL_TYPE=Windows.Win32.Graphics.OpenGL
+PRINTER_DEVICE_CAPABILITIES=Windows.Win32.Storage.Xps
+PRINT_WINDOW_FLAGS=Windows.Win32.Storage.Xps
+PROCESS_PROTECTION_LEVEL=Windows.Win32.System.Threading
+PURGE_COMM_FLAGS=Windows.Win32.Devices.Communication
+RAWINPUTDEVICE_FLAGS=Windows.Win32.UI.Input
+RAW_INPUT_DATA_COMMAND_FLAGS=Windows.Win32.UI.Input
+RAW_INPUT_DEVICE_INFO_COMMAND=Windows.Win32.UI.Input
+REGISTER_APPLICATION_RESTART_FLAGS=Windows.Win32.System.Recovery
+REGISTER_TOUCH_WINDOW_FLAGS=Windows.Win32.UI.Input.Touch
+REPLACE_FILE_FLAGS=Windows.Win32.Storage.FileSystem
+RID_DEVICE_INFO_TYPE=Windows.Win32.UI.Input
+SERIALKEYS_FLAGS=Windows.Win32.UI.Accessibility
+SET_FILE_POINTER_MOVE_METHOD=Windows.Win32.Storage.FileSystem
+SOUNDSENTRY_TEXT_EFFECT=Windows.Win32.UI.Accessibility
+SOUNDSENTRY_WINDOWS_EFFECT=Windows.Win32.UI.Accessibility
+SOUND_SENTRY_GRAPHICS_EFFECT=Windows.Win32.UI.Accessibility
+STARTUPINFOW_FLAGS=Windows.Win32.System.Threading
+TAPE_INFORMATION_TYPE=Windows.Win32.Storage.FileSystem
+TRACKMOUSEEVENT_FLAGS=Windows.Win32.UI.Input.KeyboardAndMouse
+TRANSLATE_CHARSET_INFO_FLAGS=Windows.Win32.Globalization
+USER_OBJECT_INFORMATION_INDEX=Windows.Win32.System.StationsAndDesktops
+WIN_STREAM_ID=Windows.Win32.Storage.FileSystem
+DUPLICATE_HANDLE_OPTIONS=Windows.Win32.Foundation
+GENERIC_ACCESS_RIGHTS=Windows.Win32.Foundation
+COMPRESSION_FORMAT=Windows.Win32.Storage.FileSystem
+IMAGE_SECTION_CHARACTERISTICS=Windows.Win32.System.Diagnostics.Debug
+IMAGE_SUBSYSTEM=Windows.Win32.System.Diagnostics.Debug
+IMAGE_DLL_CHARACTERISTICS=Windows.Win32.System.Diagnostics.Debug
+SECTION_FLAGS=Windows.Win32.System.Memory
+SETPROCESSWORKINGSETSIZEEX_FLAGS=Windows.Win32.System.Memory
+DEVICEFAMILYINFOENUM=Windows.Win32.System.SystemInformation
+DEVICEFAMILYDEVICEFORM=Windows.Win32.System.SystemInformation
+PROCESSOR_FEATURE_ID=Windows.Win32.System.Threading
+HANDLE_FLAGS=Windows.Win32.Foundation
+THREAD_ERROR_MODE=Windows.Win32.System.Diagnostics.Debug
+GLOBAL_ALLOC_FLAGS=Windows.Win32.System.Memory
+NAMED_PIPE_MODE=Windows.Win32.System.Pipes
+THREAD_PRIORITY=Windows.Win32.System.Threading
+PROCESS_DEP_FLAGS=Windows.Win32.System.Threading
+PROCESS_NAME_FORMAT=Windows.Win32.System.Threading
+ACE_REVISION=Windows.Win32.Security
+CLAIM_SECURITY_ATTRIBUTE_FLAGS=Windows.Win32.Security
+CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE=Windows.Win32.Security
+CREATE_RESTRICTED_TOKEN_FLAGS=Windows.Win32.Security
+CREATE_TAPE_PARTITION_METHOD=Windows.Win32.Storage.FileSystem
+ENUM_SERVICE_TYPE=Windows.Win32.System.Services
+ERASE_TAPE_TYPE=Windows.Win32.Storage.FileSystem
+EXECUTION_STATE=Windows.Win32.System.Power
+FILE_ACTION=Windows.Win32.Storage.FileSystem
+FILE_NOTIFY_CHANGE=Windows.Win32.Storage.FileSystem
+IMAGE_DEBUG_TYPE=Windows.Win32.System.Diagnostics.Debug
+IMAGE_DIRECTORY_ENTRY=Windows.Win32.System.Diagnostics.Debug
+IMAGE_FILE_CHARACTERISTICS=Windows.Win32.System.Diagnostics.Debug
+JOB_OBJECT_CPU_RATE_CONTROL=Windows.Win32.System.JobObjects
+JOB_OBJECT_TERMINATE_AT_END_ACTION=Windows.Win32.System.JobObjects
+PAGE_TYPE=Windows.Win32.System.Memory
+POWER_ACTION_POLICY_EVENT_CODE=Windows.Win32.System.Power
+POWER_REQUEST_CONTEXT_FLAGS=Windows.Win32.System.Threading
+PREPARE_TAPE_OPERATION=Windows.Win32.Storage.FileSystem
+READ_EVENT_LOG_READ_FLAGS=Windows.Win32.System.EventLog
+REG_NOTIFY_FILTER=Windows.Win32.System.Registry
+REG_RESTORE_KEY_FLAGS=Windows.Win32.System.Registry
+REG_SAVE_FORMAT=Windows.Win32.System.Registry
+REPORT_EVENT_TYPE=Windows.Win32.System.EventLog
+SECURITY_AUTO_INHERIT_FLAGS=Windows.Win32.Security
+SERVICE_ERROR=Windows.Win32.System.Services
+SERVICE_START_TYPE=Windows.Win32.System.Services
+SYSTEM_AUDIT_OBJECT_ACE_FLAGS=Windows.Win32.Security
+TAPEMARK_TYPE=Windows.Win32.Storage.FileSystem
+TAPE_POSITION_METHOD=Windows.Win32.Storage.FileSystem
+TAPE_POSITION_TYPE=Windows.Win32.Storage.FileSystem
+TOKEN_MANDATORY_POLICY_ID=Windows.Win32.Security
+TOKEN_PRIVILEGES_ATTRIBUTES=Windows.Win32.Security
+VER_FLAGS=Windows.Win32.System.SystemInformation
+WORKER_THREAD_FLAGS=Windows.Win32.System.Threading
+LOCAL_ALLOC_FLAGS=Windows.Win32.System.Memory
+LOCK_FILE_FLAGS=Windows.Win32.Storage.FileSystem
+DEBUG_EVENT_CODE=Windows.Win32.System.Diagnostics.Debug
+FIND_FIRST_EX_FLAGS=Windows.Win32.Storage.FileSystem
+WSA_ERROR=Windows.Win32.Networking.WinSock
+PROCESS_ACCESS_RIGHTS=Windows.Win32.System.Threading
+REG_VALUE_TYPE=Windows.Win32.System.Registry
+TOKEN_ACCESS_MASK=Windows.Win32.Security
+STD_HANDLE=Windows.Win32.System.Console
+FILE_ACCESS_RIGHTS=Windows.Win32.Storage.FileSystem
+FILE_FLAGS_AND_ATTRIBUTES=Windows.Win32.Storage.FileSystem
+OBJECT_SECURITY_INFORMATION=Windows.Win32.Security
+PROCESSOR_ARCHITECTURE=Windows.Win32.System.SystemInformation
+REG_CREATE_KEY_DISPOSITION=Windows.Win32.System.Registry
+REG_OPEN_CREATE_OPTIONS=Windows.Win32.System.Registry
+REG_SAM_FLAGS=Windows.Win32.System.Registry
