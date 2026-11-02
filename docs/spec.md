@@ -368,8 +368,17 @@ Types are placed into namespaces based on the **partition** system. Each partiti
 (`main.cpp`) and maps to a namespace (e.g., `Partitions/Foundation/` →
 `Windows.Win32.Foundation`).
 
-`requiredNamespacesForNames.rsp` provides overrides for types that need to be in a
-specific namespace regardless of which partition's headers they're declared in.
+Header-backed types and their references use compiler-bound declaration or typedef
+identities and the namespace of the traverse-header owner.
+`requiredNamespacesForNames.rsp` retains exceptions for shared-header splits or
+established public projection namespaces. Each exception must identify the native
+declaration header and explain the compatibility contract.
+
+For example, `DXGI_USAGE` uses the `Dxgi` partition's traversal of `shared/dxgi.h`
+directly. The Foundation projections of `BSTR` and `VARIANT_BOOL` retain their
+established namespaces even though `shared/wtypes.h` is traversed by `Base`.
+The shared `windef.h`, `mmsyscom.h`, and `winnt.h` declarations likewise retain
+their established Gdi, Multimedia, Security, and Threading projections.
 
 Namespace qualification replaces selected type nodes in one syntax-rewriter pass.
 Composite types are qualified recursively from their original lexical context.
