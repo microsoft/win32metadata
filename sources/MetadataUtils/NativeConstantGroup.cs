@@ -132,11 +132,11 @@ namespace MetadataUtils
                 for (int i = 0; i < values.Groups.Count; i++)
                 {
                     var group = values.Groups[i];
-                    if (ClaimsEvidence(rawGroups?[i] as JObject))
+                    if (ClaimsEvidence(rawGroups[i] as JObject))
                     {
                         RequireProperties(json, ("SourceFile", JTokenType.String), ("SourceHash", JTokenType.String),
                             ("Architecture", JTokenType.Integer));
-                        ValidateGroupJson(rawGroups?[i], requireEvidence: true);
+                        ValidateGroupJson(rawGroups[i], requireEvidence: true);
                         rawGroups[i].ToObject<NativeConstantGroup>(StrictSerializer());
                         ValidateSource(new NativeConstantGroupSource(values.SourceFile, values.SourceHash, values.Architecture, group));
                     }
