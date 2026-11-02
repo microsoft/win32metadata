@@ -318,9 +318,12 @@ the same native identity and owner. Retained `___` projections bind to their
 qualified manual target before cleaning, including constructor references.
 The retained manual source namespace may differ from its explicitly configured
 public namespace. Owner election and reference routing retain the original
-manual binding while applying that public destination. Only compiler-bound,
-qualified targets of proved native `___` projections follow that policy;
-unrelated manual declarations remain unchanged. Moved syntax is reparsed
+manual binding while applying that public destination. Compiler-bound, qualified
+targets of proved native `___` projections and ordinary legacy `___` records
+follow that policy. A legacy route requires an observed namespace-level,
+nonempty record and one qualified retained manual target in the original inputs;
+it supplies no native identity or layout proof. Unrelated manual declarations
+remain unchanged. Moved syntax is reparsed
 before subsequent semantic lookup, without acquiring native provider authority.
 A compatible empty forward may yield to the exact retained `autotypes` opaque
 wrapper. That wrapper supplies explicit managed storage, not native layout
