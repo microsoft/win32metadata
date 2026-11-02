@@ -210,7 +210,10 @@ namespace Foreign {
                     WriteDeclaration(fixture, target, "Observer.header-types.cs",
                         LogicalProvider(fixture, target, "Observer", false, groupKind: kind));
                 var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
-                StringAssert.Contains(error.Message, "direct providers for all three architectures");
+                StringAssert.Contains(error.Message,
+                    "error CSSW005: Logical group ownership requires its compiler-bound native constant proof.");
+                StringAssert.Contains(error.Message,
+                    "Blocked stage 'emitter.namespace-routing': requires valid native provider ownership.");
             }
         }
 
