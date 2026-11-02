@@ -347,8 +347,13 @@ Logical groups join their native declaration and constant proofs to the actual
 traversed-header owner. Identical observations from other partitions route to that
 owner together with their uses and constant ownership. Composition preserves
 independent native contributions and checks their storage, values, and bindings.
-A common observation does not establish applicability to every architecture;
-coalescing it requires matching direct providers for all three targets.
+Source-bound `LogicalGroup` contributions in header-types files use that qualified
+logical-group merger rather than whole-declaration coalescing. Their declaration
+and constant proofs must agree on native name, projected name, original namespace,
+and actual producing target. Native enums and unproved inputs do not acquire this
+route, and native member-binding conflicts remain blocking.
+A redundant common observation does not establish applicability to every architecture;
+whole-declaration coalescing requires matching direct providers for all three targets.
 The producer's single-common mode is different: an excluded partition emits
 declarations only from x86 into `common`, with no same-partition architecture
 companions. Its original target is validated before semantic transformations and
@@ -357,6 +362,12 @@ three-target observations. A forward may yield to an independently proven
 complete native definition in that mode, or to a complete architecture family
 with the same native identity and public owner. The forward supplies no storage,
 size, alignment or traversal authority to those definitions.
+An identity-only forward with one genuine direct single-common owner may retain
+that original owner while equivalent indirect target observations yield to it.
+This requires matching original native identity, header/hash/coordinates and
+attribute-free empty partial-record syntax. Competing owners, annotations,
+definitions and unproved inputs keep their existing validation. The retained proof
+stays x86 and supplies no layout or three-target record authority.
 
 An existing pointer remap such as `PBOOL=BOOL*` names the native scalar typedef
 that signatures must retain. Automatic typedef discovery recognizes that target
