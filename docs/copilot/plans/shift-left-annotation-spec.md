@@ -375,6 +375,11 @@ Argument file spans retain the actual same-TU macro invocation extents at their
 original endpoints, including enclosing invocations within the attribute.
 Tokenization uses that complete physical argument span. An enclosing function-like
 invocation cannot become a single object-like macro argument by losing its wrapper.
+These actual spans are indexed lazily within their producing translation unit.
+Endpoint queries retain the original half-open containment and attribute boundaries,
+including enclosing invocations, without rescanning every macro in the header for
+each group member. The index selects existing native locations; it creates no
+new extent or proof authority.
 
 Generated private C# and native-constants JSON carry the same strict versioned
 carrier, occurrence and optional literal facts. Claimed malformed, duplicate,
