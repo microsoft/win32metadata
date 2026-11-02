@@ -275,7 +275,9 @@ namespace MetadataUtils
                 foreach (var occurrence in member.Occurrences)
                 {
                     if (!ValidBinding(occurrence.Binding) || !ValidOccurrenceRange(occurrence))
-                        throw new InvalidDataException($"Invalid native occurrence site for '{member.Name}'.");
+                        throw new InvalidDataException(
+                            $"Invalid native occurrence site for '{member.Name}' in '{group.Namespace}.{group.Name}' " +
+                            $"({source.Architecture}). Occurrence={JsonConvert.SerializeObject(occurrence)}");
                     if (occurrence.Literal != null)
                     {
                         ValidateLiteral(occurrence);
