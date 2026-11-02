@@ -282,6 +282,11 @@ header path/hash and coordinates, target, and traversal ownership without size o
 alignment. Missing source-location association remains unresolved; emitted tag
 spelling and empty managed bodies do not supply native identity.
 
+Cross-architecture fixtures claiming one native declaration compile their target
+variants from the same physical header and retain its original source proof.
+Identical text in separate temporary headers does not establish that identity.
+Cleaning and generated variant suffixes do not change the native declaration.
+
 A legacy authored empty struct yields to a nonempty definition only when its
 complete namespace and nested-type path match. The short names used by member
 remapping do not establish that match.

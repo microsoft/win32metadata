@@ -19,19 +19,28 @@ namespace Win32MetadataScraperTests
     {
         internal sealed class NativeFixture : IDisposable
         {
-            internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true, string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "", string directoryRoot = null, string namespaceName = "Test")
+            internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true, string libraryPath = "scan.dll", bool multipleFiles = false, string extraSettings = "", string directoryRoot = null, string namespaceName = "Test", string sharedHeader = null)
             {
                 string annotations = Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h");
                 if (!File.Exists(annotations))
                     throw new FileNotFoundException("Annotation header not found.", annotations);
                 DirectoryPath = Path.Combine(directoryRoot ?? Path.GetTempPath(), "win32-annotations-" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(DirectoryPath);
-                Header = Path.Combine(DirectoryPath, "test.h");
+                Header = sharedHeader ?? Path.Combine(DirectoryPath, "test.h");
                 string sal = Path.Combine(AppContext.BaseDirectory, "assets", "sal.h");
-                File.WriteAllText(Path.Combine(DirectoryPath, "cleanup.h"), "int CloseThing(void*);\nint CloseFirst(void*);\nint CloseSecond(void*);\n");
-                File.WriteAllText(Header, $"#include \"{sal.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n" + declarations);
+                string headerText = $"#include \"{sal.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n" + declarations;
+                if (sharedHeader == null)
+                {
+                    File.WriteAllText(Path.Combine(DirectoryPath, "cleanup.h"), "int CloseThing(void*);\nint CloseFirst(void*);\nint CloseSecond(void*);\n");
+                    File.WriteAllText(Header, headerText);
+                }
+                else
+                {
+                    Assert.Equal(headerText, File.ReadAllText(Header));
+                }
                 string main = Path.Combine(DirectoryPath, "test.cpp");
-                File.WriteAllText(main, "#include \"test.h\"\n");
+                string include = sharedHeader == null ? "test.h" : Header.Replace('\\', '/');
+                File.WriteAllText(main, $"#include \"{include}\"\n");
                 Output = multipleFiles ? Path.Combine(DirectoryPath, architecture) : Path.Combine(DirectoryPath, architecture, "Bindings.cs");
                 string rsp = Path.Combine(DirectoryPath, "test.rsp");
                 File.WriteAllText(rsp, $@"--file
