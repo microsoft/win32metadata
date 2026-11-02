@@ -313,6 +313,15 @@ A compatible empty forward may yield to the exact retained `autotypes` opaque
 wrapper. That wrapper supplies explicit managed storage, not native layout
 proof; ordinary unproved providers do not qualify.
 
+Native reference destinations follow the public declaration or typedef's own
+traversed-header owner. Remove redundant per-name namespace overrides when that
+owner and the existing public projection agree. Retained legacy enums and manual
+declarations keep their independently established namespaces; configured auto
+types retain their authored namespace or derive it from their cleanup API.
+An enum's generated namespace is independent evidence only when its original
+configuration and use-site namespace lookups do not depend on the removed
+overrides. Remaining compatibility mappings still require ownership review.
+
 WinMD emission preserves a complete record's source-bound native size in its
 ClassLayout entry, including native tail padding caused by over-alignment.
 Packing remains separate, and the Alignment attribute retains its original
