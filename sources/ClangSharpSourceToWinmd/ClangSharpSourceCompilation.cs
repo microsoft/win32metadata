@@ -534,15 +534,10 @@ namespace ClangSharpSourceToWinmd
                         WriteTree(tree, treeFile);
                         return;
                     }
-                    var architecture = GetArchitectureForFileName(treeFile);
-                    var sourceTargets = architecture == Architecture.None
-                        ? tree.GetRoot().DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
-                            .Select(declaration => NativeDeclarationSourceProvenance.Read(declaration)?.SourceArchitecture)
-                            .Where(target => target.HasValue).Select(target => target.Value).Distinct().ToArray()
-                        : new[] { architecture };
-                    var models = nativeReferenceCompilations.Where(pair =>
-                            sourceTargets.Length != 1 || pair.Key == sourceTargets[0])
-                        .Select(pair => pair.Value.GetSemanticModel(tree)).ToArray();
+                    // Common C# participates in each selected projection while native observations keep their actual target.
+                    var models = nativeReferenceCompilations.Values
+                        .Where(compilation => compilation.ContainsSyntaxTree(tree))
+                        .Select(compilation => compilation.GetSemanticModel(tree)).ToArray();
                     // Keep pre-move enum ownership for removing the original loose-constant copies.
                     infoFinder.AnalyzeTree(tree);
                     tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(

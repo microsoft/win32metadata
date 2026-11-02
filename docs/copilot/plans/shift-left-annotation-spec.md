@@ -410,6 +410,11 @@ suffix renaming and equivalent-target coalescing retain that manifest and its
 validated signature. The envelope is not a public WinMD attribute and supplies no
 native-enum, physical-record, layout or missing-provider exemption.
 
+Namespace-reference models follow the original C# tree's projected applicability.
+A common tree is bound in every selected target compilation that contains it;
+its native source proof retains the actual producing target. These original C#
+bindings supply no additional native observations or physical target coverage.
+
 A redundant common observation does not establish applicability to every architecture;
 whole-declaration coalescing requires matching direct providers for all three targets.
 The producer's single-common mode is different: an excluded partition emits
