@@ -296,6 +296,12 @@ qualified consumers follow the same source-bound owner.
 A syntax-name prefilter avoids binding references that cannot name a registered
 native route. Every possible candidate retains the original alias, namespace,
 assembly, arity, nesting, handle-storage and cross-architecture ownership checks.
+Associated-enum constructor binding first filters impossible attribute spellings.
+Qualified names, local and namespace-scoped type aliases, compilation-wide global
+aliases and C# attribute-suffix lookup still reach the original semantic checks.
+Uncertain name syntax also retains those checks. An alias or matching spelling
+never authorizes a foreign constructor. Unrelated
+string-valued SAL and native attributes remain unchanged for later processing.
 Definitions and textual qualification use that exact native route for names with
 source-proven owners. A same-named declaration outside those routes retains its
 own namespace instead of inheriting the short-name relocation.

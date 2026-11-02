@@ -35,10 +35,24 @@ namespace ClangSharpSourceToWinmdTests
                     LogicalProvider(fixture, target, "Observer", false));
                 WriteDeclaration(fixture, target, "Observer.cs", @"
 using Windows.Win32.Foundation.Metadata;
+using HintAttribute = Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute;
+using Metadata = Windows.Win32.Foundation.Metadata;
+using @event = Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute;
 namespace Observer {
+    using NestedHint = Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute;
     public partial struct Carrier {
         public GROUP Value;
         [AssociatedEnum(""Observer.GROUP"")] public uint Code;
+        [Hint(""Observer.GROUP"")] public uint AliasCode;
+        [HintAttribute(""Observer.GROUP"")] public uint FullAliasCode;
+        [Metadata.AssociatedEnum(""Observer.GROUP"")] public uint NamespaceAliasCode;
+        [Metadata::AssociatedEnum(""Observer.GROUP"")] public uint NamespaceQualifiedAliasCode;
+        [global::Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute(""Observer.GROUP"")] public uint QualifiedCode;
+        [@event(""Observer.GROUP"")] public uint EscapedAliasCode;
+        [NestedHint(""Observer.GROUP"")] public uint NestedAliasCode;
+        [GlobalHint(""Observer.GROUP"")] public uint GlobalAliasCode;
+        [GlobalHintAttribute(""Observer.GROUP"")] public uint FullGlobalAliasCode;
+        [GlobalMetadata.AssociatedEnum(""Observer.GROUP"")] public uint GlobalNamespaceAliasCode;
         public uint Read() => (uint)GROUP.FIRST;
     }
     public static partial class Apis { public const uint Alias = (uint)GROUP.FIRST; }
@@ -46,7 +60,14 @@ namespace Observer {
                 WriteDeclaration(fixture, target, "Observer.constants.cs",
                     "namespace Observer { public static partial class Apis { public const uint FIRST = 1; } }");
                 WriteDeclaration(fixture, target, "Foreign.constants.cs",
-                    "namespace Foreign { public static partial class Apis { public const uint FIRST = 9; } }");
+                    @"global using GlobalHintAttribute = Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute;
+global using GlobalMetadata = Windows.Win32.Foundation.Metadata;
+namespace Foreign {
+    using AssociatedEnumAttribute = global::System.ObsoleteAttribute;
+    public static partial class Apis {
+        [AssociatedEnum(""Observer.GROUP"")] public const uint FIRST = 9;
+    }
+}");
             }
 
             var compilation = fixture.Compile();
@@ -61,11 +82,22 @@ namespace Observer {
             Assert.AreEqual("Owner.GROUP", code.GetAttributes().Single(attribute =>
                 attribute.AttributeClass?.ToDisplayString() == "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute")
                 .ConstructorArguments.Single().Value);
+            foreach (string fieldName in new[] { "AliasCode", "FullAliasCode", "NamespaceAliasCode", "QualifiedCode",
+                "NamespaceQualifiedAliasCode", "EscapedAliasCode", "NestedAliasCode", "GlobalAliasCode",
+                "FullGlobalAliasCode", "GlobalNamespaceAliasCode" })
+                Assert.AreEqual("Owner.GROUP", carrier.GetMembers(fieldName).OfType<IFieldSymbol>().Single()
+                    .GetAttributes().Single(attribute => attribute.AttributeClass?.ToDisplayString() ==
+                        "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute").ConstructorArguments.Single().Value,
+                    fieldName);
             var originalConstants = compilation.CSharpCompilation.GetTypeByMetadataName("Observer.Apis")!;
             Assert.AreEqual(0, originalConstants.GetMembers("FIRST").Length);
             Assert.AreEqual(1U, originalConstants.GetMembers("Alias").OfType<IFieldSymbol>().Single().ConstantValue);
             Assert.AreEqual(9U, compilation.CSharpCompilation.GetTypeByMetadataName("Foreign.Apis")!
                 .GetMembers("FIRST").OfType<IFieldSymbol>().Single().ConstantValue);
+            Assert.AreEqual("Observer.GROUP", compilation.CSharpCompilation.GetTypeByMetadataName("Foreign.Apis")!
+                .GetMembers("FIRST").OfType<IFieldSymbol>().Single().GetAttributes()
+                .Single(attribute => attribute.AttributeClass?.ToDisplayString() == "System.ObsoleteAttribute")
+                .ConstructorArguments.Single().Value);
             AssertDeclarationImage(fixture, compilation, "GROUP", "Owner", "Observer");
         }
 
