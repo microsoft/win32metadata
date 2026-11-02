@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
@@ -92,6 +94,7 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
         public void OneHeaderPerArchitectureExercisesNativeContractsAndPhysicalMetadata()
         {
             var fixtures = new List<(string Architecture, HeaderAnnotationTests.NativeFixture Fixture)>();
+            NativeRecordSource firstTypedefSource = null;
             try
             {
                 foreach (var (architecture, target) in new[]
@@ -110,12 +113,24 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
                         extraSettings: "--config\nnative-constant-values\n" +
                             "--remap\nBATCH_BOOL=BATCH_BOOL\nBATCH_HANDLE=BATCH_HANDLE\n" +
                             "BATCH_PHANDLE=BATCH_PHANDLE\nBATCH_HOPAQUE=BATCH_HOPAQUE\nDWORD=DWORD\n" +
-                            FileAndSocketResultLibraries);
+                            FileAndSocketResultLibraries,
+                        sharedHeader: fixtures.Count == 0 ? null : fixtures[0].Fixture.Header);
                     fixtures.Add((architecture, fixture));
                     fixture.AssertSuccess("MSInheritance", "MSInheritance");
                     Assert.Contains("is represented by System.Flags", fixture.Diagnostics);
                     Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
                         NativeSurface(fixture, target, metadataEnabled: true));
+                    var typedefSource = Assert.Single(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                        .DescendantNodes().OfType<StructDeclarationSyntax>().Select(NativeTypedefSourceProvenance.Read)
+                        .Where(source => source?.Name == "BATCH_HOPAQUE"));
+                    this.output.WriteLine($"Native typedef source ({architecture}): {JsonSerializer.Serialize(typedefSource)}");
+                    Assert.Equal(Path.GetFullPath(fixture.Header), Path.GetFullPath(typedefSource.Header));
+                    Assert.Equal(Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(fixture.Header))),
+                        typedefSource.HeaderHash.ToUpperInvariant());
+                    if (firstTypedefSource != null)
+                        Assert.True(NativeRecordSourceProvenance.SameDeclaration(firstTypedefSource, typedefSource),
+                            "Target variants must retain the same physical native typedef declaration.");
+                    firstTypedefSource ??= typedefSource;
                     using var image = Emit(fixture, architecture);
                     var reader = image.Reader;
                     AssertNativeHeaders(fixture, reader);
@@ -191,7 +206,9 @@ typedef BATCH_REDECL_HANDLE BATCH_REDECL_HANDLE;
                 }
                 ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", first.DirectoryPath,
                     "using System; using Windows.Win32.Foundation.Metadata;", new(),
-                    fixtures.ToDictionary(value => value.Fixture.Header, _ => "Test"), new(), new(), new(), new());
+                    fixtures.Select(value => value.Fixture.Header).Distinct(StringComparer.OrdinalIgnoreCase)
+                        .ToDictionary(header => header, _ => "Test", StringComparer.OrdinalIgnoreCase),
+                    new(), new(), new(), new());
                 using var combined = Emit(first, "crossarch");
                 AssertNativeHeaders(first, combined.Reader);
                 AssertImageHlpLastError(combined.Reader);
