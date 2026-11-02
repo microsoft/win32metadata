@@ -403,9 +403,53 @@ namespace ClangSharpSourceToWinmd
 
         private static string FindNetstandardDllPath()
         {
-            // Is there a better way to find this?
-            string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
+            // The reference assembly ships next to the tool. The other locations cover running from
+            // a build tree, or against a machine-wide or per-user .NET SDK that has the targeting pack.
+            var candidates = new List<string>
+            {
+                Path.Combine(AppContext.BaseDirectory, "ref", "netstandard.dll"),
+            };
+
+            string[] dotnetRoots =
+            {
+                Path.GetDirectoryName(Environment.ProcessPath),
+                Environment.GetEnvironmentVariable("DOTNET_ROOT"),
+                Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "dotnet"),
+            };
+            foreach (string dotnetRoot in dotnetRoots.Where(root => !string.IsNullOrEmpty(root)))
+            {
+                candidates.AddRange(FindInVersionedDirectory(Path.Combine(dotnetRoot, "packs", "NETStandard.Library.Ref")));
+            }
+
+            string nugetPackages = Environment.GetEnvironmentVariable("NUGET_PACKAGES");
+            if (string.IsNullOrEmpty(nugetPackages))
+            {
+                nugetPackages = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".nuget", "packages");
+            }
+
+            candidates.AddRange(FindInVersionedDirectory(Path.Combine(nugetPackages, "netstandard.library.ref")));
+
+            string found = candidates.FirstOrDefault(File.Exists);
+            if (found == null)
+            {
+                throw new FileNotFoundException(
+                    "Failed to find the netstandard 2.1 reference assembly. Pass it with --ref, or install a .NET SDK that includes the NETStandard.Library.Ref targeting pack. Looked in:" +
+                    string.Concat(candidates.Select(candidate => Environment.NewLine + "  " + candidate)));
+            }
+
+            return found;
+
+            static IEnumerable<string> FindInVersionedDirectory(string packDirectory)
+            {
+                if (!Directory.Exists(packDirectory))
+                {
+                    return Enumerable.Empty<string>();
+                }
+
+                return Directory.GetDirectories(packDirectory, "2.1.*")
+                    .OrderByDescending(directory => directory, StringComparer.OrdinalIgnoreCase)
+                    .Select(directory => Path.Combine(directory, "ref", "netstandard2.1", "netstandard.dll"));
+            }
         }
 
 #if ShowMemoryInfo
