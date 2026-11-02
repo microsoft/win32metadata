@@ -133,6 +133,76 @@ namespace Foreign {
         }
 
         [TestMethod]
+        public void SourceBoundLogicalContributionsComposeAcrossCommonAndTargetInputs()
+        {
+            using var fixture = DeclarationFixture("crossarch");
+            string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+            File.WriteAllText(Path.Combine(common, "Owner.header-types.cs"),
+                LogicalProvider(fixture, "x86", "Owner", true));
+            foreach (string target in DeclarationTargets("crossarch"))
+            {
+                WriteDeclaration(fixture, target, "First.header-types.cs",
+                    LogicalProvider(fixture, target, "Observer", false));
+                WriteDeclaration(fixture, target, "Second.header-types.cs",
+                    LogicalProvider(fixture, target, "Observer", false, "SECOND", 2));
+                WriteDeclaration(fixture, target, "Consumer.cs",
+                    "namespace Observer { public partial struct Carrier { public GROUP Value; } }");
+            }
+            var compilation = fixture.Compile();
+            AssertDeclarationCompilation(compilation);
+            var group = compilation.CSharpCompilation.GetTypeByMetadataName("Owner.GROUP")!;
+            Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("Observer.GROUP"));
+            CollectionAssert.AreEquivalent(new[] { "FIRST", "SECOND" }, group.GetMembers().OfType<IFieldSymbol>()
+                .Where(field => field.HasConstantValue).Select(field => field.Name).ToArray());
+            Assert.AreEqual(1U, group.GetMembers("FIRST").OfType<IFieldSymbol>().Single().ConstantValue);
+            Assert.AreEqual(2U, group.GetMembers("SECOND").OfType<IFieldSymbol>().Single().ConstantValue);
+            Assert.IsTrue(SymbolEqualityComparer.Default.Equals(group, compilation.CSharpCompilation
+                .GetTypeByMetadataName("Observer.Carrier")!.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+        }
+
+        [TestMethod]
+        public void LogicalContributionAdmissionKeepsNativeEnumsAndUnprovenInputsBlocking()
+        {
+            foreach (bool nativeEnum in new[] { true, false })
+            {
+                using var fixture = DeclarationFixture("crossarch");
+                string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+                string kind = nativeEnum ? "NativeEnum" : "LogicalGroup";
+                string text = LogicalProvider(fixture, "x86", "Owner", true, groupKind: kind);
+                if (!nativeEnum)
+                {
+                    var root = CSharpSyntaxTree.ParseText(text).GetRoot();
+                    var declaration = root.DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                    text = root.ReplaceNode(declaration, declaration.WithLeadingTrivia(declaration.GetLeadingTrivia()
+                        .Where(trivia => !trivia.ToString().StartsWith("/* Win32Metadata.NativeConstantGroup.",
+                            StringComparison.Ordinal)))).ToFullString();
+                }
+                File.WriteAllText(Path.Combine(common, "Owner.header-types.cs"), text);
+                foreach (string target in DeclarationTargets("crossarch"))
+                    WriteDeclaration(fixture, target, "Observer.header-types.cs",
+                        LogicalProvider(fixture, target, "Observer", false, groupKind: kind));
+                var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+                StringAssert.Contains(error.Message, "direct providers for all three architectures");
+            }
+        }
+
+        [TestMethod]
+        public void SourceBoundLogicalContributionsKeepDifferentNativeMemberBindingsBlocking()
+        {
+            using var fixture = DeclarationFixture("crossarch");
+            string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+            File.WriteAllText(Path.Combine(common, "Owner.header-types.cs"),
+                LogicalProvider(fixture, "x86", "Owner", true));
+            foreach (string target in DeclarationTargets("crossarch"))
+                WriteDeclaration(fixture, target, "Observer.header-types.cs",
+                    LogicalProvider(fixture, target, "Observer", false, constantsHeaderName: "other-constants.h"));
+            var error = Assert.ThrowsException<InvalidOperationException>(() => fixture.Compile());
+            StringAssert.Contains(error.Message, "error WMA003:");
+            StringAssert.Contains(error.Message, "Conflicting native constant bindings for 'FIRST'.");
+            StringAssert.Contains(error.Message, "Blocked stage 'emitter.source-cleaning': requires valid logical enum composition.");
+        }
+
+        [TestMethod]
         public void SameManagedGroupNameDoesNotAuthorizeDifferentNativeNames()
         {
             using var fixture = DeclarationFixture("x86");
@@ -276,6 +346,57 @@ namespace Owner { public unsafe struct Carrier { public VALUE* Pointer; } }");
             Assert.AreEqual(1, record.DeclaringSyntaxReferences.Length);
             Assert.AreEqual(0, record.GetAttributes().Count(attribute =>
                 attribute.AttributeClass?.ToDisplayString() == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute"));
+        }
+
+        [TestMethod]
+        public void SingleCommonNativeOwnerRemovesOnlyEquivalentIndirectForwards()
+        {
+            using var fixture = DeclarationFixture("crossarch");
+            string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+            File.WriteAllText(Path.Combine(common, "Owner.cs"), IncompleteProvider(fixture, "x86", "Owner", true));
+            foreach (string target in DeclarationTargets("crossarch"))
+                WriteDeclaration(fixture, target, "Observer.cs", IncompleteProvider(fixture, target, "Observer", false) +
+                    "namespace Observer { public unsafe partial struct Carrier { public VALUE* Pointer; } }");
+            var compilation = fixture.Compile();
+            AssertDeclarationCompilation(compilation);
+            var record = compilation.CSharpCompilation.GetTypeByMetadataName("Owner.VALUE")!;
+            Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("Observer.VALUE"));
+            var declaration = (StructDeclarationSyntax)record.DeclaringSyntaxReferences.Single().GetSyntax();
+            Assert.AreEqual("common", Path.GetFileName(Path.GetDirectoryName(declaration.SyntaxTree.FilePath)));
+            Assert.AreEqual(Architecture.X86, NativeDeclarationSourceProvenance.Read(declaration)!.SourceArchitecture);
+            Assert.IsNull(NativeRecordSourceProvenance.Read(declaration));
+            Assert.IsNull(NativeTypedefSourceProvenance.Read(declaration));
+            Assert.AreEqual(0, declaration.Members.Count);
+            Assert.IsFalse(declaration.DescendantNodes().Any(node => node is ExpressionSyntax or AttributeSyntax));
+            Assert.AreEqual(0, record.GetAttributes().Count(attribute =>
+                attribute.AttributeClass?.ToDisplayString() == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute"));
+            var carrier = compilation.CSharpCompilation.GetTypeByMetadataName("Observer.Carrier")!;
+            var pointer = (IPointerTypeSymbol)carrier.GetMembers("Pointer").OfType<IFieldSymbol>().Single().Type;
+            Assert.IsTrue(SymbolEqualityComparer.Default.Equals(record, pointer.PointedAtType));
+            AssertDeclarationImage(fixture, compilation, "VALUE", "Owner", "Observer");
+        }
+
+        [TestMethod]
+        public void SingleCommonNativeOwnerDoesNotAbsorbCompetingOrAnnotatedForwards()
+        {
+            foreach (bool competingOwner in new[] { true, false })
+            {
+                using var fixture = DeclarationFixture("crossarch");
+                string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+                File.WriteAllText(Path.Combine(common, "Owner.cs"), IncompleteProvider(fixture, "x86", "Owner", true));
+                if (competingOwner)
+                    File.WriteAllText(Path.Combine(common, "SecondOwner.cs"), IncompleteProvider(fixture, "x86", "Owner", true));
+                foreach (string target in DeclarationTargets("crossarch"))
+                {
+                    string observation = IncompleteProvider(fixture, target, "Observer", false);
+                    if (!competingOwner)
+                        observation = observation.Replace("public partial struct VALUE", "[global::System.Obsolete] public partial struct VALUE",
+                            StringComparison.Ordinal);
+                    WriteDeclaration(fixture, target, "Observer.cs", observation);
+                }
+                var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
+                StringAssert.Contains(error.Message, "direct providers for all three architectures");
+            }
         }
 
         [TestMethod]
@@ -823,10 +944,11 @@ namespace Windows.Win32.Foundation.Metadata {
         }
 
         private static string LogicalProvider(Fixture fixture, string architecture, string ns, bool owner,
-            string member = "FIRST", uint value = 1, string headerName = "native-shared.h", string nativeName = "GROUP")
+            string member = "FIRST", uint value = 1, string headerName = "native-shared.h", string nativeName = "GROUP",
+            string constantsHeaderName = "constants.h", string groupKind = "LogicalGroup")
         {
             string header = DeclarationHeader(fixture, headerName, "typedef unsigned int GROUP;\n");
-            string constants = DeclarationHeader(fixture, "constants.h", "#define FIRST 1\n#define SECOND 2\n");
+            string constants = DeclarationHeader(fixture, constantsHeaderName, "#define FIRST 1\n#define SECOND 2\n");
             string main = DeclarationHeader(fixture, "main.cpp", "#include \"native-shared.h\"\n");
             string expression = $"unchecked((uint){value}UL)";
             var declaration = (EnumDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
@@ -835,7 +957,7 @@ namespace Windows.Win32.Foundation.Metadata {
                 member == "FIRST" ? 1U : 2U, 1, NativeConstantGroupProvenance.HashFile(constants),
                 "int", "uint", value.ToString(System.Globalization.CultureInfo.InvariantCulture));
             var group = new NativeConstantGroup("::" + nativeName, "GROUP", ns, "uint", header, 1,
-                new[] { new NativeConstantGroupMember(member, expression, new[] { binding }) });
+                new[] { new NativeConstantGroupMember(member, expression, new[] { binding }) }) { Kind = groupKind };
             var constantSource = new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
                 DeclarationArchitecture(architecture), group);
             declaration = NativeConstantGroupProvenance.Attach(declaration, constantSource);

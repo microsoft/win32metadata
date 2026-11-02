@@ -1291,6 +1291,9 @@ namespace ClangSharpSourceToWinmd
             var models = new Dictionary<Architecture, BindingModels>();
             foreach (var group in groups)
             {
+                if (group.Key.Kind == NativeDeclarationKind.LogicalEnum &&
+                    group.All(item => IsLogicalContribution(item.Declaration, item.Source)))
+                    continue;
                 var first = group.First();
                 var invalidSingleCommon = group.Where(item => item.Architecture == Architecture.None &&
                     singleCommonFiles.Contains(item.Declaration.SyntaxTree.FilePath) &&
@@ -1340,6 +1343,24 @@ namespace ClangSharpSourceToWinmd
                             !invalidSingleCommon.Contains(item.Declaration)))
                             removals.Add(observation.Declaration);
                     }
+                }
+                var commonOwners = group.Where(item => item.Architecture == Architecture.None &&
+                    singleCommonFiles.Contains(item.Declaration.SyntaxTree.FilePath) &&
+                    item.Source.TraversedHeader && item.Source.SourceArchitecture == Architecture.X86).ToArray();
+                if (group.Key.Kind == NativeDeclarationKind.IncompleteRecord && definitions.Length == 0 &&
+                    commonOwners.Length == 1 && group.Count(item => item.Architecture == Architecture.None) == 1 &&
+                    group.All(item => !removals.Contains(item.Declaration) &&
+                        item.Declaration.AttributeLists.Count == 0 &&
+                        item.Declaration.Modifiers.Any(SyntaxKind.PartialKeyword) &&
+                        NativeDeclarationSourceProvenance.SameDeclaration(commonOwners[0].Source, item.Source) &&
+                        SyntaxFactory.AreEquivalent(commonOwners[0].Declaration, item.Declaration) &&
+                        (item.Architecture == Architecture.None || !item.Source.TraversedHeader &&
+                            item.Source.SourceArchitecture == item.Architecture)))
+                {
+                    // Empty, attribute-free forwards have no expression or attribute bindings to compare.
+                    foreach (var observation in group.Where(item => item.Architecture != Architecture.None))
+                        removals.Add(observation.Declaration);
+                    continue;
                 }
                 var direct = group.Where(item => item.Architecture != Architecture.None &&
                     item.Source.TraversedHeader &&
@@ -1398,6 +1419,17 @@ namespace ClangSharpSourceToWinmd
                 return removed.Length == 0 ? tree : tree.WithRootAndOptions(
                     tree.GetRoot().RemoveNodes(removed, SyntaxRemoveOptions.KeepNoTrivia), tree.Options);
             }).ToArray();
+
+            static bool IsLogicalContribution(BaseTypeDeclarationSyntax declaration, NativeDeclarationSource source)
+            {
+                if (declaration is not EnumDeclarationSyntax logical ||
+                    !HeaderEnumGroupMerger.IsHeaderTypesFile(declaration.SyntaxTree.FilePath))
+                    return false;
+                var constants = NativeConstantGroupProvenance.Read(logical);
+                return constants?.Group.Kind == "LogicalGroup" && constants.Group.Name == source.Name &&
+                    constants.Group.Namespace == source.Namespace && constants.Architecture == source.SourceArchitecture &&
+                    constants.Group.NativeName.TrimStart(':') == source.NativeName.TrimStart(':');
+            }
 
             static bool SameConstantBindings(BaseTypeDeclarationSyntax first, BaseTypeDeclarationSyntax second)
             {
