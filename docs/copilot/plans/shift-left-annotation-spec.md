@@ -352,6 +352,11 @@ logical-group merger rather than whole-declaration coalescing. Their declaration
 and constant proofs must agree on native name, projected name, original namespace,
 and actual producing target. Native enums and unproved inputs do not acquire this
 route, and native member-binding conflicts remain blocking.
+For these proven logical contributions, the existing single-common input role
+retains its common projected applicability, including members contributed only
+there. The source proofs still report their actual x86 observation. This
+projection role supplies no additional native observations, record/layout proof
+or coverage exemption for native enums.
 A redundant common observation does not establish applicability to every architecture;
 whole-declaration coalescing requires matching direct providers for all three targets.
 The producer's single-common mode is different: an excluded partition emits

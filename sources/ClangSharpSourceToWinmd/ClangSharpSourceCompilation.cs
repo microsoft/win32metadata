@@ -148,7 +148,7 @@ namespace ClangSharpSourceToWinmd
             return Path.GetFileName(fileName).Replace(".modified.cs", string.Empty);
         }
 
-        private static HashSet<string> SingleCommonSourceFiles(IEnumerable<string> files)
+        internal static HashSet<string> SingleCommonSourceFiles(IEnumerable<string> files)
         {
             var paths = files.ToHashSet(StringComparer.OrdinalIgnoreCase);
             return paths.Where(file =>
@@ -1292,7 +1292,7 @@ namespace ClangSharpSourceToWinmd
             foreach (var group in groups)
             {
                 if (group.Key.Kind == NativeDeclarationKind.LogicalEnum &&
-                    group.All(item => IsLogicalContribution(item.Declaration, item.Source)))
+                    group.All(item => HeaderEnumGroupMerger.IsSourceBoundLogicalContribution(item.Declaration, item.Source)))
                     continue;
                 var first = group.First();
                 var invalidSingleCommon = group.Where(item => item.Architecture == Architecture.None &&
@@ -1419,17 +1419,6 @@ namespace ClangSharpSourceToWinmd
                 return removed.Length == 0 ? tree : tree.WithRootAndOptions(
                     tree.GetRoot().RemoveNodes(removed, SyntaxRemoveOptions.KeepNoTrivia), tree.Options);
             }).ToArray();
-
-            static bool IsLogicalContribution(BaseTypeDeclarationSyntax declaration, NativeDeclarationSource source)
-            {
-                if (declaration is not EnumDeclarationSyntax logical ||
-                    !HeaderEnumGroupMerger.IsHeaderTypesFile(declaration.SyntaxTree.FilePath))
-                    return false;
-                var constants = NativeConstantGroupProvenance.Read(logical);
-                return constants?.Group.Kind == "LogicalGroup" && constants.Group.Name == source.Name &&
-                    constants.Group.Namespace == source.Namespace && constants.Architecture == source.SourceArchitecture &&
-                    constants.Group.NativeName.TrimStart(':') == source.NativeName.TrimStart(':');
-            }
 
             static bool SameConstantBindings(BaseTypeDeclarationSyntax first, BaseTypeDeclarationSyntax second)
             {

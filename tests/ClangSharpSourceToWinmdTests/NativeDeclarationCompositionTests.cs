@@ -135,29 +135,56 @@ namespace Foreign {
         [TestMethod]
         public void SourceBoundLogicalContributionsComposeAcrossCommonAndTargetInputs()
         {
-            using var fixture = DeclarationFixture("crossarch");
-            string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
-            File.WriteAllText(Path.Combine(common, "Owner.header-types.cs"),
-                LogicalProvider(fixture, "x86", "Owner", true));
-            foreach (string target in DeclarationTargets("crossarch"))
+            foreach (string architecture in new[] { "x86", "x64", "arm64", "crossarch" })
             {
-                WriteDeclaration(fixture, target, "First.header-types.cs",
-                    LogicalProvider(fixture, target, "Observer", false));
-                WriteDeclaration(fixture, target, "Second.header-types.cs",
-                    LogicalProvider(fixture, target, "Observer", false, "SECOND", 2));
-                WriteDeclaration(fixture, target, "Consumer.cs",
-                    "namespace Observer { public partial struct Carrier { public GROUP Value; } }");
+                using var fixture = DeclarationFixture(architecture);
+                string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+                File.WriteAllText(Path.Combine(common, "Owner.header-types.cs"),
+                    LogicalProvider(fixture, "x86", "Owner", true, includeSecond: true));
+                foreach (string target in DeclarationTargets(architecture))
+                {
+                    WriteDeclaration(fixture, target, "First.header-types.cs",
+                        LogicalProvider(fixture, target, "Observer", false));
+                    WriteDeclaration(fixture, target, "Consumer.cs",
+                        "namespace Observer { public partial struct Carrier { public GROUP Value; } }");
+                }
+                var compilation = fixture.Compile();
+                AssertDeclarationCompilation(compilation);
+                var group = compilation.CSharpCompilation.GetTypeByMetadataName("Owner.GROUP")!;
+                Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("Observer.GROUP"));
+                Assert.AreEqual(0, group.ContainingNamespace.GetTypeMembers().Count(type =>
+                    type.Name.StartsWith("GROUP____", StringComparison.Ordinal)), architecture);
+                CollectionAssert.AreEquivalent(new[] { "FIRST", "SECOND" }, group.GetMembers().OfType<IFieldSymbol>()
+                    .Where(field => field.HasConstantValue).Select(field => field.Name).ToArray());
+                Assert.AreEqual(1U, group.GetMembers("FIRST").OfType<IFieldSymbol>().Single().ConstantValue);
+                Assert.AreEqual(2U, group.GetMembers("SECOND").OfType<IFieldSymbol>().Single().ConstantValue);
+                Assert.AreEqual(0, group.GetAttributes().Length, architecture);
+                Assert.AreEqual(0, group.GetMembers("SECOND").OfType<IFieldSymbol>().Single().GetAttributes().Length, architecture);
+                var declaration = (EnumDeclarationSyntax)group.DeclaringSyntaxReferences.Single().GetSyntax();
+                var source = NativeDeclarationSourceProvenance.Read(declaration)!;
+                Assert.AreEqual(Architecture.X86, source.SourceArchitecture, architecture);
+                Assert.IsTrue(source.TraversedHeader, architecture);
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(group, compilation.CSharpCompilation
+                    .GetTypeByMetadataName("Observer.Carrier")!.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+                AssertDeclarationImage(fixture, compilation, "GROUP", "Owner", "Observer");
+                using var pe = new PEReader(File.OpenRead(Path.Combine(fixture.DirectoryPath, "NativeDeclaration.winmd")));
+                var reader = pe.GetMetadataReader();
+                var metadata = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                    reader.GetString(type.Namespace) == "Owner" && reader.GetString(type.Name) == "GROUP");
+                Assert.AreEqual(0, metadata.GetCustomAttributes().Count, architecture);
+                var fields = metadata.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(field => !field.GetDefaultValue().IsNil).ToArray();
+                CollectionAssert.AreEquivalent(new[] { "FIRST", "SECOND" },
+                    fields.Select(field => reader.GetString(field.Name)).ToArray(), architecture);
+                foreach (var field in fields)
+                {
+                    Assert.AreEqual(0, field.GetCustomAttributes().Count, architecture);
+                    var value = reader.GetConstant(field.GetDefaultValue());
+                    Assert.AreEqual(ConstantTypeCode.UInt32, value.TypeCode, architecture);
+                    Assert.AreEqual(reader.GetString(field.Name) == "FIRST" ? 1U : 2U,
+                        reader.GetBlobReader(value.Value).ReadUInt32(), architecture);
+                }
             }
-            var compilation = fixture.Compile();
-            AssertDeclarationCompilation(compilation);
-            var group = compilation.CSharpCompilation.GetTypeByMetadataName("Owner.GROUP")!;
-            Assert.IsNull(compilation.CSharpCompilation.GetTypeByMetadataName("Observer.GROUP"));
-            CollectionAssert.AreEquivalent(new[] { "FIRST", "SECOND" }, group.GetMembers().OfType<IFieldSymbol>()
-                .Where(field => field.HasConstantValue).Select(field => field.Name).ToArray());
-            Assert.AreEqual(1U, group.GetMembers("FIRST").OfType<IFieldSymbol>().Single().ConstantValue);
-            Assert.AreEqual(2U, group.GetMembers("SECOND").OfType<IFieldSymbol>().Single().ConstantValue);
-            Assert.IsTrue(SymbolEqualityComparer.Default.Equals(group, compilation.CSharpCompilation
-                .GetTypeByMetadataName("Observer.Carrier")!.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
         }
 
         [TestMethod]
@@ -945,7 +972,7 @@ namespace Windows.Win32.Foundation.Metadata {
 
         private static string LogicalProvider(Fixture fixture, string architecture, string ns, bool owner,
             string member = "FIRST", uint value = 1, string headerName = "native-shared.h", string nativeName = "GROUP",
-            string constantsHeaderName = "constants.h", string groupKind = "LogicalGroup")
+            string constantsHeaderName = "constants.h", string groupKind = "LogicalGroup", bool includeSecond = false)
         {
             string header = DeclarationHeader(fixture, headerName, "typedef unsigned int GROUP;\n");
             string constants = DeclarationHeader(fixture, constantsHeaderName, "#define FIRST 1\n#define SECOND 2\n");
@@ -956,8 +983,17 @@ namespace Windows.Win32.Foundation.Metadata {
             var binding = new NativeConstantBinding("Macro", member, constants,
                 member == "FIRST" ? 1U : 2U, 1, NativeConstantGroupProvenance.HashFile(constants),
                 "int", "uint", value.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            var members = new[] { new NativeConstantGroupMember(member, expression, new[] { binding }) };
+            if (includeSecond)
+            {
+                string second = "unchecked((uint)2UL)";
+                declaration = declaration.AddMembers(SyntaxFactory.EnumMemberDeclaration("SECOND")
+                    .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression(second))));
+                members = members.Append(new NativeConstantGroupMember("SECOND", second,
+                    new[] { binding with { NativeName = "SECOND", Line = 2, Value = "2" } })).ToArray();
+            }
             var group = new NativeConstantGroup("::" + nativeName, "GROUP", ns, "uint", header, 1,
-                new[] { new NativeConstantGroupMember(member, expression, new[] { binding }) }) { Kind = groupKind };
+                members) { Kind = groupKind };
             var constantSource = new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
                 DeclarationArchitecture(architecture), group);
             declaration = NativeConstantGroupProvenance.Attach(declaration, constantSource);
