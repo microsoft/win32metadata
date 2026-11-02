@@ -294,10 +294,14 @@ namespace ClangSharpSourceToWinmd
 
         private sealed class NativeReferenceRewriter : CSharpSyntaxRewriter
         {
+            private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<Compilation, HashSet<string>>
+                globalAttributeAliases = new();
             private readonly IReadOnlyDictionary<(string Namespace, string Name), string> routes;
             private readonly ISet<(string Namespace, string Name)> enums;
             private readonly IReadOnlyList<SemanticModel> models;
             private readonly ISet<string> candidateNames;
+            private readonly HashSet<string> associationAttributeNames = new(System.StringComparer.Ordinal)
+                { "AssociatedEnum", "AssociatedEnumAttribute" };
             private readonly IReadOnlyDictionary<string, string> namesToNamespaces;
             private readonly Dictionary<Compilation,
                 Dictionary<string, (string SourceNamespace, string Namespace)[]>> manualRecordOwners = new();
@@ -314,6 +318,46 @@ namespace ClangSharpSourceToWinmd
                 this.models = models;
                 this.candidateNames = candidateNames;
                 this.namesToNamespaces = namesToNamespaces;
+                if (enums?.Count > 0)
+                {
+                    associationAttributeNames.UnionWith(AttributeAliases(
+                        models.Select(model => model.SyntaxTree).Distinct(), false));
+                    foreach (var model in models)
+                        associationAttributeNames.UnionWith(globalAttributeAliases.GetValue(
+                            model.Compilation, compilation => AttributeAliases(compilation.SyntaxTrees, true)));
+                }
+            }
+
+            private static HashSet<string> AttributeAliases(IEnumerable<SyntaxTree> trees, bool globalOnly)
+            {
+                var names = new HashSet<string>(System.StringComparer.Ordinal);
+                foreach (var directive in trees.SelectMany(tree => tree.GetRoot()
+                    .DescendantNodes(node => node is CompilationUnitSyntax or BaseNamespaceDeclarationSyntax)
+                    .OfType<UsingDirectiveSyntax>()))
+                {
+                    if (directive.Alias == null || globalOnly && !directive.GlobalKeyword.IsKind(SyntaxKind.GlobalKeyword))
+                        continue;
+                    string name = directive.Alias.Name.Identifier.ValueText;
+                    names.Add(name);
+                    if (name.EndsWith("Attribute", System.StringComparison.Ordinal))
+                        names.Add(name[..^"Attribute".Length]);
+                }
+                return names;
+            }
+
+            private bool CouldBeAssociationAttribute(NameSyntax name)
+            {
+                if (name.ContainsDiagnostics)
+                    return true;
+                var identifier = name switch
+                {
+                    IdentifierNameSyntax simple => simple,
+                    QualifiedNameSyntax qualified => qualified.Right as IdentifierNameSyntax,
+                    AliasQualifiedNameSyntax alias => alias.Name as IdentifierNameSyntax,
+                    _ => null,
+                };
+                return identifier == null || identifier.Identifier.IsMissing ||
+                    associationAttributeNames.Contains(identifier.Identifier.ValueText);
             }
 
             public override SyntaxNode VisitQualifiedName(QualifiedNameSyntax node) =>
@@ -350,7 +394,7 @@ namespace ClangSharpSourceToWinmd
             {
                 if (enums?.Count > 0 && node.ArgumentList?.Arguments.Count == 1 &&
                     node.ArgumentList.Arguments[0].Expression is LiteralExpressionSyntax literal &&
-                    literal.IsKind(SyntaxKind.StringLiteralExpression))
+                    literal.IsKind(SyntaxKind.StringLiteralExpression) && CouldBeAssociationAttribute(node.Name))
                 {
                     var replacements = models.Select(model =>
                     {
