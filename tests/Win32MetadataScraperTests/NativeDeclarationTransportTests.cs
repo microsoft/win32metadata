@@ -6,12 +6,89 @@ using MetadataUtils;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Win32MetadataScraper;
 using Xunit;
 
 namespace Win32MetadataScraperTests
 {
     public class NativeDeclarationTransportTests
     {
+        private static void AssertNativeMacroRangesRetainEnclosingInvocationsWithinTheActualAttribute()
+        {
+            var ranges = new (string File, uint Start, uint End)[]
+            {
+                ("native.h", 15U, 17U),
+                ("native.h", 10U, 30U),
+                ("native.h", 0U, 100U),
+                ("foreign.h", 5U, 95U),
+                ("native.h", 1U, 101U),
+                ("native.h", 30U, 40U),
+            };
+            var index = new NativeMacroRangeIndex(ranges);
+            Assert.Equal((1, 1), index.FindEnclosing(("NATIVE.H", 15U), ("native.h", 15U), 0, 100));
+            Assert.Equal((-1, 0), index.FindEnclosing(("native.h", 15U), ("native.h", 15U), 12, 25));
+            Assert.Equal((-1, -1), index.FindEnclosing(("native.h", 15U), ("native.h", 15U), 15, 17));
+            Assert.Equal((-1, -1), index.FindEnclosing(("native.h", 40U), ("native.h", 41U), 0, 100));
+            Assert.Equal((-1, -1), index.FindEnclosing(("missing.h", 15U), ("missing.h", 15U), 0, 100));
+        }
+
+        private static void AssertNativeMacroRangesKeepOriginalNonMacroAndHalfOpenEndpoints()
+        {
+            var index = new NativeMacroRangeIndex(new (string File, uint Start, uint End)[]
+            {
+                ("native.h", 10U, 20U),
+                ("native.h", 20U, 30U),
+            });
+            Assert.Equal((-1, -1), index.FindEnclosing(("native.h", 31U), ("native.h", 35U), 0, 100));
+            Assert.Equal((-1, -1), index.FindEnclosing(("native.h", 10U), ("native.h", 30U), 0, 100));
+            Assert.Equal((-1, 1), index.FindEnclosing(("native.h", 20U), ("native.h", 20U), 0, 100));
+            Assert.Equal((0, -1), index.FindEnclosing(("native.h", 15U), ("native.h", 30U), 0, 100));
+            Assert.Equal((-1, -1), new NativeMacroRangeIndex(
+                Array.Empty<(string File, uint Start, uint End)>()).FindEnclosing(
+                    ("native.h", 10U), ("native.h", 10U), 0, 100));
+        }
+
+        private static void AssertNativeMacroRangesMatchLinearSelectionAcrossManySiblingUses()
+        {
+            var ranges = Enumerable.Range(0, 4096).Select(value =>
+                (File: "native.h", Start: checked((uint)(value * 10) + 20U),
+                    End: checked((uint)(value * 10) + 24U)))
+                .Concat(new (string File, uint Start, uint End)[]
+                {
+                    ("native.h", 0U, 50000U),
+                    ("native.h", 15U, 25U),
+                    ("native.h", 14U, 25U),
+                    ("foreign.h", 0U, 49999U),
+                    ("native.h", 500U, 1500U),
+                }).ToArray();
+            var index = new NativeMacroRangeIndex(ranges);
+            for (uint point = 0; point <= 50000; point += 97)
+            {
+                int expectedStart = -1, expectedEnd = -1;
+                uint start = point, end = point;
+                for (int candidate = 0; candidate < ranges.Length; candidate++)
+                {
+                    var range = ranges[candidate];
+                    if (!string.Equals(range.File, "native.h", StringComparison.OrdinalIgnoreCase) ||
+                        range.Start > point || range.End <= point ||
+                        range.End > 50000 || (range.Start == 0 && range.End == 50000))
+                        continue;
+                    if (range.Start < start)
+                    {
+                        start = range.Start;
+                        expectedStart = candidate;
+                    }
+                    if (range.End > end)
+                    {
+                        end = range.End;
+                        expectedEnd = candidate;
+                    }
+                }
+                Assert.Equal((expectedStart, expectedEnd),
+                    index.FindEnclosing(("native.h", point), ("native.h", point), 0, 50000));
+            }
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", Architecture.X86)]
         [InlineData("x64", "x86_64-pc-windows-msvc", Architecture.X64)]
@@ -19,6 +96,9 @@ namespace Win32MetadataScraperTests
         public void LogicalGroupProducerTransportsTheActualNativeDeclaration(
             string architecture, string target, Architecture expectedArchitecture)
         {
+            AssertNativeMacroRangesRetainEnclosingInvocationsWithinTheActualAttribute();
+            AssertNativeMacroRangesKeepOriginalNonMacroAndHalfOpenEndpoints();
+            AssertNativeMacroRangesMatchLinearSelectionAcrossManySiblingUses();
             using var fixture = new HeaderAnnotationTests.NativeFixture(
                 architecture, target, @"
 #define WIN32METADATA

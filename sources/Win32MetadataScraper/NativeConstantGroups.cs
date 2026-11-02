@@ -14,7 +14,9 @@ namespace Win32MetadataScraper
     internal sealed partial class HeaderAnnotationProcessor
     {
         private ILookup<(string File, uint Offset), Cursor> constantMacroExpansions;
-        private readonly Dictionary<string, (NativeLocation Start, NativeLocation End)[]> constantMacroRanges =
+        private ILookup<string, Cursor> constantMacroExpansionsByFile;
+        private readonly Dictionary<string,
+            ((NativeLocation Start, NativeLocation End)[] Ranges, NativeMacroRangeIndex Index)> constantMacroRanges =
             new(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, string> constantHeaderHashes = new(StringComparer.OrdinalIgnoreCase);
         private string constantSourceFile;
@@ -155,34 +157,30 @@ namespace Win32MetadataScraper
             var originalEnd = ConstantFileLocation(argument.Extent.End);
             var start = originalStart;
             var end = originalEnd;
-            if (!constantMacroRanges.TryGetValue(attributeStart.File, out var ranges))
+            if (!constantMacroRanges.TryGetValue(attributeStart.File, out var fileRanges))
             {
-                ranges = constantMacroExpansions
-                    .Where(group => string.Equals(group.Key.File, attributeStart.File, StringComparison.OrdinalIgnoreCase))
-                    .SelectMany(group => group)
+                constantMacroExpansionsByFile ??= constantMacroExpansions
+                    .SelectMany(group => group.Select(cursor => (group.Key.File, Cursor: cursor)))
+                    .ToLookup(value => value.File, value => value.Cursor, StringComparer.OrdinalIgnoreCase);
+                var ranges = constantMacroExpansionsByFile[attributeStart.File]
                     .Select(macro => (Start: ConstantFileLocation(macro.Extent.Start), End: ConstantFileLocation(macro.Extent.End)))
                     .Where(range => string.Equals(range.Start.File, range.End.File, StringComparison.OrdinalIgnoreCase) &&
                         range.Start.Offset < range.End.Offset)
                     .Distinct().ToArray();
-                constantMacroRanges.Add(attributeStart.File, ranges);
+                fileRanges = (ranges, new NativeMacroRangeIndex(ranges.Select(range =>
+                    (range.Start.File, range.Start.Offset, range.End.Offset))));
+                constantMacroRanges.Add(attributeStart.File, fileRanges);
             }
             // Macro-argument file locations can collapse an expansion to its first offset.
-            foreach (var range in ranges.Where(range =>
-                range.Start.Offset >= attributeStart.Offset && range.End.Offset <= attributeEnd.Offset &&
-                (range.Start.Offset > attributeStart.Offset || range.End.Offset < attributeEnd.Offset)))
-            {
-                if (Contains(range, originalStart) && range.Start.Offset < start.Offset)
-                    start = range.Start;
-                if (Contains(range, originalEnd) && range.End.Offset > end.Offset)
-                    end = range.End;
-            }
+            var enclosing = fileRanges.Index.FindEnclosing((originalStart.File, originalStart.Offset),
+                (originalEnd.File, originalEnd.Offset), attributeStart.Offset, attributeEnd.Offset);
+            if (enclosing.Start >= 0)
+                start = fileRanges.Ranges[enclosing.Start].Start;
+            if (enclosing.End >= 0)
+                end = fileRanges.Ranges[enclosing.End].End;
             var unit = constantTranslationUnit.Handle;
             return CXSourceRange.Create(unit.GetLocationForOffset(unit.GetFile(start.File), start.Offset),
                 unit.GetLocationForOffset(unit.GetFile(end.File), end.Offset));
-
-            static bool Contains((NativeLocation Start, NativeLocation End) range, NativeLocation point) =>
-                string.Equals(range.Start.File, point.File, StringComparison.OrdinalIgnoreCase) &&
-                range.Start.Offset <= point.Offset && point.Offset < range.End.Offset;
         }
 
         private static NativeLocation ConstantFileLocation(CXSourceLocation source)
