@@ -22,7 +22,6 @@ PTP_WORK=Windows.Win32.System.Threading
 SECURITY_DESCRIPTOR_CONTROL=Windows.Win32.Security
 VARIANT_BOOL=Windows.Win32.Foundation
 # Source-owned logical groups retain their established projection namespaces.
-ACE_FLAGS=Windows.Win32.Security
 ADVANCED_FEATURE_FLAGS=Windows.Win32.System.Com
 ATF_FLAGS=Windows.Win32.System.SystemServices
 COPYFILE2_V2_FLAGS=Windows.Win32.Storage.FileSystem

@@ -749,11 +749,33 @@ groups remain unprojected.
 
 A group whose constants have multiple original-header owners may repeat
 `_Win32_Enum_` or `_Win32_FlagsEnum_` on the same native typedef, with the same
-storage and kind. Each owner lists its own existing constants after their native
-definitions. The original Clang declaration graph combines contributions in one
+storage and kind. Each contribution lists existing constants after their native
+definitions are visible. The original Clang declaration graph combines contributions in one
 translation unit; the emitter combines the generated `.header-types.cs` contributions
 by qualified metadata identity after namespace assignment. Keep those producer
 filenames when staging sources for emission.
+
+The metadata-only group declaration may live in an existing SDK header that owns
+the intended API namespace, even when its constants are defined in another header.
+Those constants must already be visible through the chosen header's existing include
+closure. Move only the group declaration; retain the native constant definitions,
+values, guards, API types, and associated uses. Do not copy constants, fabricate a
+forward carrier, or add an unrelated include to obtain namespace placement.
+
+The producer must report the actual declaration's canonical native identity,
+declaration header, and traversal namespace. Member proofs retain each constant's
+original definition header, native binding, and compiled value. Namespace routing
+uses that genuine declaration ownership; a desired public namespace must not replace
+source provenance. Contributions left in other headers still compose with it.
+Require the complete member union and exactly one resolved enum for every associated
+use on each target before accepting the changed output.
+
+`ACE_FLAGS` places its seven-member WinNT contribution in `securitybaseapi.h`,
+whose direct traversal belongs to `Windows.Win32.Security`. The seven native
+constant definitions stay in `winnt.h`; `accctrl.h` retains its six-member
+contribution. The combined enum keeps all thirteen members and its public Security
+FullName. This placement uses the existing group carrier and generic owner election,
+without an `ACE_FLAGS` namespace override.
 
 When partitions initially emit the same group in different namespaces, use the
 existing global `--requiredNamespaceForName` organization to preserve its established

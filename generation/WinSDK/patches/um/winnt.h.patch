@@ -398,25 +398,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  // This is the history of ACL revisions.  Add a new one whenever
  // ACL_REVISION is updated
  
-@@ -11179,6 +11305,17 @@
- 
- #define SUCCESSFUL_ACCESS_ACE_FLAG       (0x40)
- #define FAILED_ACCESS_ACE_FLAG           (0x80)
-+
-+#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
-+_Win32_FlagsEnum_(ACE_FLAGS, unsigned long,
-+    CONTAINER_INHERIT_ACE,
-+    FAILED_ACCESS_ACE_FLAG,
-+    INHERIT_ONLY_ACE,
-+    INHERITED_ACE,
-+    NO_PROPAGATE_INHERIT_ACE,
-+    OBJECT_INHERIT_ACE,
-+    SUCCESSFUL_ACCESS_ACE_FLAG);
-+#endif
- 
- //
- //  SYSTEM_ACCESS_FILTER_ACE AceFlags
-@@ -11306,7 +11443,7 @@
+@@ -11306,7 +11432,7 @@
  typedef struct _ACCESS_ALLOWED_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -425,7 +407,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11315,7 +11452,7 @@
+@@ -11315,7 +11441,7 @@
  typedef struct _ACCESS_DENIED_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -434,7 +416,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11324,7 +11461,7 @@
+@@ -11324,7 +11450,7 @@
  typedef struct _SYSTEM_AUDIT_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -443,7 +425,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11375,7 +11512,7 @@
+@@ -11375,7 +11501,7 @@
  typedef struct _ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -452,7 +434,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11385,7 +11522,7 @@
+@@ -11385,7 +11511,7 @@
  typedef struct _ACCESS_DENIED_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -461,7 +443,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11395,7 +11532,7 @@
+@@ -11395,7 +11521,7 @@
  typedef struct _SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -470,7 +452,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11405,7 +11542,7 @@
+@@ -11405,7 +11531,7 @@
  typedef struct _SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -479,7 +461,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11418,6 +11555,12 @@
+@@ -11418,6 +11544,12 @@
  
  #define ACE_OBJECT_TYPE_PRESENT           0x1
  #define ACE_INHERITED_OBJECT_TYPE_PRESENT 0x2
@@ -492,7 +474,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  
  //
-@@ -11494,6 +11637,24 @@
+@@ -11494,6 +11626,24 @@
  #define SE_RM_CONTROL_VALID              (0x4000)
  #define SE_SELF_RELATIVE                 (0x8000)
  
@@ -517,7 +499,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  //  Where:
  //
-@@ -11570,7 +11731,7 @@
+@@ -11570,7 +11720,7 @@
  typedef struct _SECURITY_DESCRIPTOR_RELATIVE {
      BYTE  Revision;
      BYTE  Sbz1;
@@ -526,7 +508,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD Owner;
      DWORD Group;
      DWORD Sacl;
-@@ -11580,7 +11741,7 @@
+@@ -11580,7 +11730,7 @@
  typedef struct _SECURITY_DESCRIPTOR {
     BYTE  Revision;
     BYTE  Sbz1;
@@ -535,7 +517,7 @@ diff --git a/um/winnt.h b/um/winnt.h
     PSID Owner;
     PSID Group;
     PACL Sacl;
-@@ -11696,6 +11857,14 @@
+@@ -11696,6 +11846,14 @@
  #define SE_PRIVILEGE_ENABLED            (0x00000002L)
  #define SE_PRIVILEGE_REMOVED            (0X00000004L)
  #define SE_PRIVILEGE_USED_FOR_ACCESS    (0x80000000L)
@@ -550,7 +532,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  #define SE_PRIVILEGE_VALID_ATTRIBUTES   (SE_PRIVILEGE_ENABLED_BY_DEFAULT | \
                                           SE_PRIVILEGE_ENABLED            | \
-@@ -12017,6 +12186,56 @@
+@@ -12017,6 +12175,56 @@
  
  #define TOKEN_ACCESS_PSEUDO_HANDLE TOKEN_ACCESS_PSEUDO_HANDLE_WIN8
  
@@ -607,7 +589,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #endif
  //
  // end_access
-@@ -12202,12 +12421,20 @@
+@@ -12202,12 +12410,20 @@
  #define TOKEN_MANDATORY_POLICY_VALID_MASK      (TOKEN_MANDATORY_POLICY_NO_WRITE_UP | \
                                                  TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN)
  
@@ -629,7 +611,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } TOKEN_MANDATORY_POLICY, *PTOKEN_MANDATORY_POLICY;
  
  typedef PVOID PSECURITY_ATTRIBUTES_OPAQUE;
-@@ -12365,6 +12592,17 @@
+@@ -12365,6 +12581,17 @@
  
  #define CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING  0x10
  
@@ -647,7 +629,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // Attribute Flags
  //
-@@ -12407,6 +12645,16 @@
+@@ -12407,6 +12634,16 @@
  //
  
  #define CLAIM_SECURITY_ATTRIBUTE_MANDATORY 0x0020
@@ -664,7 +646,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  
  #define CLAIM_SECURITY_ATTRIBUTE_VALID_FLAGS   (    \
-@@ -12442,7 +12690,7 @@
+@@ -12442,7 +12679,7 @@
      //  Data type of attribute.
      //
  
@@ -673,7 +655,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
      //
      //  Pass 0 in a set operation and check for 0 in
-@@ -12494,7 +12742,7 @@
+@@ -12494,7 +12731,7 @@
      //  Data type of attribute.
      //
  
@@ -682,7 +664,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
      //
      //  Pass 0 in a set operation and check for 0 in
-@@ -12507,7 +12755,7 @@
+@@ -12507,7 +12744,7 @@
      // Attribute Flags
      //
  
@@ -691,7 +673,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
      //
      //  Number of values.
-@@ -12607,6 +12855,14 @@
+@@ -12607,6 +12844,14 @@
  #define SANDBOX_INERT           0x2 
  #define LUA_TOKEN               0x4 
  #define WRITE_RESTRICTED        0x8 
@@ -706,7 +688,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  typedef DWORD SECURITY_INFORMATION, *PSECURITY_INFORMATION;
  
-@@ -12625,6 +12881,22 @@
+@@ -12625,6 +12870,22 @@
  #define PROTECTED_SACL_SECURITY_INFORMATION         (0x40000000L)
  #define UNPROTECTED_DACL_SECURITY_INFORMATION       (0x20000000L)
  #define UNPROTECTED_SACL_SECURITY_INFORMATION       (0x10000000L)
@@ -729,7 +711,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  
  //
-@@ -12706,6 +12978,32 @@
+@@ -12706,6 +12967,32 @@
                                     0xFFF)
  #endif
  
@@ -762,7 +744,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  #define THREAD_TERMINATE                 (0x0001)  
  #define THREAD_SUSPEND_RESUME            (0x0002)  
-@@ -12726,6 +13024,30 @@
+@@ -12726,6 +13013,30 @@
  #else
  #define THREAD_ALL_ACCESS         (STANDARD_RIGHTS_REQUIRED | SYNCHRONIZE | \
                                     0x3FF)
@@ -793,7 +775,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #endif
  
  //
-@@ -12869,6 +13191,15 @@
+@@ -12869,6 +13180,15 @@
  #define MEMORY_PRIORITY_BELOW_NORMAL     4
  #define MEMORY_PRIORITY_NORMAL           5
  
@@ -809,7 +791,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  //
  
-@@ -12955,6 +13286,14 @@
+@@ -12955,6 +13275,14 @@
  #define QUOTA_LIMITS_HARDWS_MIN_DISABLE 0x00000002
  #define QUOTA_LIMITS_HARDWS_MAX_ENABLE  0x00000004
  #define QUOTA_LIMITS_HARDWS_MAX_DISABLE 0x00000008
@@ -824,7 +806,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define QUOTA_LIMITS_USE_DEFAULT_LIMITS 0x00000010
  
  typedef union _RATE_QUOTA_LIMIT {
-@@ -13342,7 +13681,7 @@
+@@ -13342,7 +13670,7 @@
  typedef struct _JOBOBJECT_BASIC_LIMIT_INFORMATION {
      LARGE_INTEGER PerProcessUserTimeLimit;
      LARGE_INTEGER PerJobUserTimeLimit;
@@ -833,7 +815,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      SIZE_T MinimumWorkingSetSize;
      SIZE_T MaximumWorkingSetSize;
      DWORD ActiveProcessLimit;
-@@ -13372,7 +13711,7 @@
+@@ -13372,7 +13700,7 @@
  } JOBOBJECT_BASIC_PROCESS_ID_LIST, *PJOBOBJECT_BASIC_PROCESS_ID_LIST;
  
  typedef struct _JOBOBJECT_BASIC_UI_RESTRICTIONS {
@@ -842,7 +824,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } JOBOBJECT_BASIC_UI_RESTRICTIONS, *PJOBOBJECT_BASIC_UI_RESTRICTIONS;
  
  //
-@@ -13380,7 +13719,7 @@
+@@ -13380,7 +13708,7 @@
  //
  
  typedef struct _JOBOBJECT_SECURITY_LIMIT_INFORMATION {
@@ -851,7 +833,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      HANDLE JobToken ;
      PTOKEN_GROUPS SidsToDisable ;
      PTOKEN_PRIVILEGES PrivilegesToDelete ;
-@@ -13388,7 +13727,7 @@
+@@ -13388,7 +13716,7 @@
  } JOBOBJECT_SECURITY_LIMIT_INFORMATION, *PJOBOBJECT_SECURITY_LIMIT_INFORMATION ;
  
  typedef struct _JOBOBJECT_END_OF_JOB_TIME_INFORMATION {
@@ -860,7 +842,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } JOBOBJECT_END_OF_JOB_TIME_INFORMATION, *PJOBOBJECT_END_OF_JOB_TIME_INFORMATION;
  
  typedef struct _JOBOBJECT_ASSOCIATE_COMPLETION_PORT {
-@@ -13430,7 +13769,7 @@
+@@ -13430,7 +13758,7 @@
      DWORD64 JobMemoryLimit;
      JOBOBJECT_RATE_CONTROL_TOLERANCE RateControlTolerance;
      JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL RateControlToleranceInterval;
@@ -869,7 +851,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION, *PJOBOBJECT_NOTIFICATION_LIMIT_INFORMATION;
  
  typedef struct JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2 {
-@@ -13453,7 +13792,7 @@
+@@ -13453,7 +13781,7 @@
              CpuRateControlToleranceInterval;
      } DUMMYUNIONNAME3;
  
@@ -878,7 +860,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      JOBOBJECT_RATE_CONTROL_TOLERANCE IoRateControlTolerance;
      DWORD64 JobLowMemoryLimit;
      JOBOBJECT_RATE_CONTROL_TOLERANCE_INTERVAL IoRateControlToleranceInterval;
-@@ -13465,7 +13804,7 @@
+@@ -13465,7 +13793,7 @@
  //
  
  typedef struct _JOBOBJECT_LIMIT_VIOLATION_INFORMATION {
@@ -888,7 +870,7 @@ diff --git a/um/winnt.h b/um/winnt.h
 +    _Win32_AssociatedEnum_(JOB_OBJECT_LIMIT) DWORD ViolationLimitFlags;
      DWORD64 IoReadBytes;
      DWORD64 IoReadBytesLimit;
-@@ -13480,7 +13819,7 @@
+@@ -13480,7 +13808,7 @@
  } JOBOBJECT_LIMIT_VIOLATION_INFORMATION, *PJOBOBJECT_LIMIT_VIOLATION_INFORMATION;
  
  typedef struct JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2 {
@@ -898,7 +880,7 @@ diff --git a/um/winnt.h b/um/winnt.h
 +    _Win32_AssociatedEnum_(JOB_OBJECT_LIMIT) DWORD ViolationLimitFlags;
      DWORD64 IoReadBytes;
      DWORD64 IoReadBytesLimit;
-@@ -13515,7 +13854,7 @@
+@@ -13515,7 +13843,7 @@
  //
  
  typedef struct _JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
@@ -907,7 +889,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      union {
          DWORD CpuRate;
          DWORD Weight;
-@@ -13530,7 +13869,11 @@
+@@ -13530,7 +13858,11 @@
  // Control flags for network rate control.
  //
  
@@ -920,7 +902,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      JOB_OBJECT_NET_RATE_CONTROL_ENABLE = 0x1,
      JOB_OBJECT_NET_RATE_CONTROL_MAX_BANDWIDTH = 0x2,
      JOB_OBJECT_NET_RATE_CONTROL_DSCP_TAG = 0x4,
-@@ -13662,6 +14005,12 @@
+@@ -13662,6 +13994,12 @@
  #define JOB_OBJECT_TERMINATE_AT_END_OF_JOB  0
  #define JOB_OBJECT_POST_AT_END_OF_JOB       1
  
@@ -933,7 +915,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // Completion Port Messages for job objects
  //
-@@ -13746,7 +14095,17 @@
+@@ -13746,7 +14084,17 @@
       JOB_OBJECT_LIMIT_JOB_MEMORY_HIGH | \
       JOB_OBJECT_LIMIT_CPU_RATE_CONTROL | \
       JOB_OBJECT_LIMIT_IO_RATE_CONTROL | \
@@ -951,7 +933,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  //
-@@ -13773,14 +14132,26 @@
+@@ -13773,14 +14121,26 @@
  
  #define JOB_OBJECT_UILIMIT_ALL              0x000003FF
  
@@ -978,7 +960,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  // Control flags for CPU rate control.
-@@ -13793,6 +14164,16 @@
+@@ -13793,6 +14153,16 @@
  #define JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE        0x10
  #define JOB_OBJECT_CPU_RATE_CONTROL_PER_PROCESSOR_CAPS  0x20
  #define JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS         0x3f
@@ -995,7 +977,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  //
-@@ -13945,6 +14326,23 @@
+@@ -13945,6 +14315,23 @@
  #define TIMER_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE|\
                            TIMER_QUERY_STATE|TIMER_MODIFY_STATE)
  
@@ -1019,7 +1001,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  //
  
-@@ -14179,6 +14577,31 @@
+@@ -14179,6 +14566,31 @@
  #define PROCESSOR_ARCHITECTURE_IA32_ON_ARM64    14
  
  #define PROCESSOR_ARCHITECTURE_UNKNOWN 0xFFFF
@@ -1051,7 +1033,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  #define PF_FLOATING_POINT_PRECISION_ERRATA           0   
-@@ -14270,7 +14693,100 @@
+@@ -14270,7 +14682,100 @@
  #define PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE    86   
  #define PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE     87   
  #define PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE      88   
@@ -1152,7 +1134,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  
  //
-@@ -14877,7 +15393,7 @@
+@@ -14877,7 +15382,7 @@
      SIZE_T RegionSize;
      DWORD State;
      DWORD Protect;
@@ -1161,7 +1143,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } MEMORY_BASIC_INFORMATION, *PMEMORY_BASIC_INFORMATION;
  
  // end_ntifs
-@@ -14889,7 +15405,7 @@
+@@ -14889,7 +15394,7 @@
      DWORD RegionSize;
      DWORD State;
      DWORD Protect;
@@ -1170,7 +1152,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } MEMORY_BASIC_INFORMATION32, *PMEMORY_BASIC_INFORMATION32;
  
  typedef struct DECLSPEC_ALIGN(16) _MEMORY_BASIC_INFORMATION64 {
-@@ -14900,7 +15416,7 @@
+@@ -14900,7 +15405,7 @@
      ULONGLONG RegionSize;
      DWORD     State;
      DWORD     Protect;
@@ -1179,7 +1161,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD     __alignment2;
  } MEMORY_BASIC_INFORMATION64, *PMEMORY_BASIC_INFORMATION64;
  
-@@ -14959,6 +15475,17 @@
+@@ -14959,6 +15464,17 @@
                              SECTION_MAP_READ |       \
                              SECTION_MAP_EXECUTE |    \
                              SECTION_EXTEND_SIZE)
@@ -1197,7 +1179,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  // Session Specific Access Rights.
-@@ -15017,9 +15544,35 @@
+@@ -15017,9 +15533,35 @@
  #define MEM_UNMAP_WITH_TRANSIENT_BOOST  0x00000001  
  #define MEM_COALESCE_PLACEHOLDERS       0x00000001  
  #define MEM_PRESERVE_PLACEHOLDER        0x00000002  
@@ -1233,7 +1215,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define MEM_EXTENDED_PARAMETER_GRAPHICS                 0x00000001  
  #define MEM_EXTENDED_PARAMETER_NONPAGED                 0x00000002  
  #define MEM_EXTENDED_PARAMETER_ZERO_PAGES_OPTIONAL      0x00000004  
-@@ -15096,6 +15649,49 @@
+@@ -15096,6 +15638,49 @@
  #define SEC_WRITECOMBINE            0x40000000  
  #define SEC_LARGE_PAGES             0x80000000  
  #define SEC_IMAGE_NO_EXECUTE (SEC_IMAGE | SEC_NOCACHE)  
@@ -1283,7 +1265,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  // begin_wdm
  
  typedef enum MEM_SECTION_EXTENDED_PARAMETER_TYPE {
-@@ -15109,6 +15705,13 @@
+@@ -15109,6 +15694,13 @@
  #define MEM_PRIVATE                 0x00020000  
  #define MEM_MAPPED                  0x00040000  
  #define MEM_IMAGE                   0x01000000  
@@ -1297,7 +1279,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define WRITE_WATCH_FLAG_RESET  0x01    
  #define VM_PREFETCH_TO_WORKING_SET        0x1  
  
-@@ -15300,9 +15903,51 @@
+@@ -15300,9 +15892,51 @@
                                     FILE_EXECUTE             |\
                                     SYNCHRONIZE)
  
@@ -1349,7 +1331,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define FILE_ATTRIBUTE_READONLY             0x00000001  
  #define FILE_ATTRIBUTE_HIDDEN               0x00000002  
  #define FILE_ATTRIBUTE_SYSTEM               0x00000004  
-@@ -15325,6 +15970,32 @@
+@@ -15325,6 +15959,32 @@
  #define FILE_ATTRIBUTE_UNPINNED             0x00100000  
  #define FILE_ATTRIBUTE_RECALL_ON_OPEN       0x00040000  
  #define FILE_ATTRIBUTE_RECALL_ON_DATA_ACCESS 0x00400000 
@@ -1382,7 +1364,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define TREE_CONNECT_ATTRIBUTE_PRIVACY      0x00004000  
  #define TREE_CONNECT_ATTRIBUTE_INTEGRITY    0x00008000  
  #define TREE_CONNECT_ATTRIBUTE_GLOBAL       0x00000004  
-@@ -15338,11 +16009,32 @@
+@@ -15338,11 +15998,32 @@
  #define FILE_NOTIFY_CHANGE_LAST_ACCESS  0x00000020   
  #define FILE_NOTIFY_CHANGE_CREATION     0x00000040   
  #define FILE_NOTIFY_CHANGE_SECURITY     0x00000100   
@@ -1415,7 +1397,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define MAILSLOT_NO_MESSAGE             ((DWORD)-1) 
  #define MAILSLOT_WAIT_FOREVER           ((DWORD)-1) 
  #define FILE_CASE_SENSITIVE_SEARCH          0x00000001  
-@@ -15388,7 +16080,7 @@
+@@ -15388,7 +16069,7 @@
  
  typedef struct _FILE_NOTIFY_INFORMATION {
      DWORD NextEntryOffset;
@@ -1424,7 +1406,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD FileNameLength;
      WCHAR FileName[1];
  } FILE_NOTIFY_INFORMATION, *PFILE_NOTIFY_INFORMATION;
-@@ -15396,7 +16088,7 @@
+@@ -15396,7 +16077,7 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS3)
  typedef struct _FILE_NOTIFY_EXTENDED_INFORMATION {
      DWORD NextEntryOffset;
@@ -1433,7 +1415,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      LARGE_INTEGER CreationTime;
      LARGE_INTEGER LastModificationTime;
      LARGE_INTEGER LastChangeTime;
-@@ -16372,6 +17064,12 @@
+@@ -16372,6 +17053,12 @@
  #define DUPLICATE_CLOSE_SOURCE      0x00000001  
  #define DUPLICATE_SAME_ACCESS       0x00000002  
  
@@ -1446,7 +1428,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // =========================================
  // Define GUIDs which represent well-known power schemes
-@@ -18447,6 +19145,15 @@
+@@ -18447,6 +19134,15 @@
  #define ES_AWAYMODE_REQUIRED ((DWORD)0x00000040)
  #define ES_CONTINUOUS        ((DWORD)0x80000000)
  
@@ -1462,7 +1444,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  typedef DWORD EXECUTION_STATE, *PEXECUTION_STATE;
  
  typedef enum {
-@@ -18470,6 +19177,12 @@
+@@ -18470,6 +19166,12 @@
  
  #define POWER_REQUEST_CONTEXT_SIMPLE_STRING         DIAGNOSTIC_REASON_SIMPLE_STRING
  #define POWER_REQUEST_CONTEXT_DETAILED_STRING       DIAGNOSTIC_REASON_DETAILED_STRING
@@ -1475,7 +1457,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  typedef enum _POWER_REQUEST_TYPE {
      PowerRequestDisplayRequired,
-@@ -18496,6 +19209,19 @@
+@@ -18496,6 +19198,19 @@
  #define PDCAP_WAKE_FROM_D2_SUPPORTED    0x00000040
  #define PDCAP_WAKE_FROM_D3_SUPPORTED    0x00000080
  #define PDCAP_WARM_EJECT_SUPPORTED      0x00000100
@@ -1495,7 +1477,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  typedef struct CM_Power_Data_s {
      DWORD               PD_Size;
-@@ -18923,6 +19649,12 @@
+@@ -18923,6 +19638,12 @@
  #define POWER_PLATFORM_ROLE_V1_MAX (PlatformRolePerformanceServer + 1)
  
  #define POWER_PLATFORM_ROLE_V2     (0x00000002)
@@ -1508,7 +1490,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define POWER_PLATFORM_ROLE_V2_MAX (PlatformRoleSlate + 1)
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
-@@ -19269,7 +20001,7 @@
+@@ -19269,7 +19990,7 @@
  typedef struct {
      POWER_ACTION    Action;
      DWORD           Flags;
@@ -1517,7 +1499,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } POWER_ACTION_POLICY, *PPOWER_ACTION_POLICY;
  
  // POWER_ACTION_POLICY->Flags:
-@@ -19296,6 +20028,16 @@
+@@ -19296,6 +20017,16 @@
  #define POWER_USER_NOTIFY_SHUTDOWN        0x00000010 // Application and Services are intimated of shutdown.
  #define POWER_USER_NOTIFY_FORCED_SHUTDOWN 0x00000020 // Immediate shutdown - Application and Services are not intimated.
  #define POWER_FORCE_TRIGGER_RESET         0x80000000
@@ -1534,7 +1516,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  // Note: for battery alarm EventCodes, the ID of the battery alarm << 16 is ORed
  // into the flags.  For example: DISCHARGE_POLICY_LOW << 16
-@@ -19773,14 +20515,18 @@
+@@ -19773,14 +20504,18 @@
  // File header format.
  //
  
@@ -1555,7 +1537,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
  
  #define IMAGE_SIZEOF_FILE_HEADER             20
-@@ -19800,6 +20546,33 @@
+@@ -19800,6 +20535,33 @@
  #define IMAGE_FILE_DLL                       0x2000  // File is a DLL.
  #define IMAGE_FILE_UP_SYSTEM_ONLY            0x4000  // File should only be run on a UP machine
  #define IMAGE_FILE_BYTES_REVERSED_HI         0x8000  // Bytes of machine word are reversed.
@@ -1589,7 +1571,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  #define IMAGE_FILE_MACHINE_UNKNOWN           0
  #define IMAGE_FILE_MACHINE_TARGET_HOST       0x0001  // Useful for indicating we want to interact with the host and not a WoW guest.
-@@ -19834,6 +20607,42 @@
+@@ -19834,6 +20596,42 @@
  #define IMAGE_FILE_MACHINE_ARM64             0xAA64  // ARM64 Little-Endian
  #define IMAGE_FILE_MACHINE_CEE               0xC0EE
  
@@ -1632,7 +1614,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  // Directory format.
-@@ -19849,6 +20658,14 @@
+@@ -19849,6 +20647,14 @@
  //
  // Optional header format.
  //
@@ -1647,7 +1629,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  typedef struct _IMAGE_OPTIONAL_HEADER {
      //
-@@ -19882,12 +20699,15 @@
+@@ -19882,12 +20688,15 @@
      DWORD   SizeOfImage;
      DWORD   SizeOfHeaders;
      DWORD   CheckSum;
@@ -1665,7 +1647,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD   LoaderFlags;
      DWORD   NumberOfRvaAndSizes;
      IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
-@@ -19931,12 +20751,15 @@
+@@ -19931,12 +20740,15 @@
      DWORD       SizeOfImage;
      DWORD       SizeOfHeaders;
      DWORD       CheckSum;
@@ -1683,7 +1665,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD       LoaderFlags;
      DWORD       NumberOfRvaAndSizes;
      IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES];
-@@ -19954,6 +20777,14 @@
+@@ -19954,6 +20766,14 @@
  typedef IMAGE_OPTIONAL_HEADER32             IMAGE_OPTIONAL_HEADER;
  typedef PIMAGE_OPTIONAL_HEADER32            PIMAGE_OPTIONAL_HEADER;
  #define IMAGE_NT_OPTIONAL_HDR_MAGIC         IMAGE_NT_OPTIONAL_HDR32_MAGIC
@@ -1698,7 +1680,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #endif
  
  typedef struct _IMAGE_NT_HEADERS64 {
-@@ -20006,6 +20837,25 @@
+@@ -20006,6 +20826,25 @@
  #define IMAGE_SUBSYSTEM_XBOX                 14
  #define IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION 16
  #define IMAGE_SUBSYSTEM_XBOX_CODE_CATALOG    17
@@ -1724,7 +1706,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  // DllCharacteristics Entries
  
-@@ -20044,6 +20894,25 @@
+@@ -20044,6 +20883,25 @@
  #define IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT   13   // Delay Load Import Descriptors
  #define IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR 14   // COM Runtime descriptor
  
@@ -1750,7 +1732,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // Non-COFF Object file header
  //
-@@ -20095,6 +20964,10 @@
+@@ -20095,6 +20953,10 @@
  //
  
  #define IMAGE_SIZEOF_SHORT_NAME              8
@@ -1761,7 +1743,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  typedef struct _IMAGE_SECTION_HEADER {
      BYTE    Name[IMAGE_SIZEOF_SHORT_NAME];
-@@ -20109,7 +20982,7 @@
+@@ -20109,7 +20971,7 @@
      DWORD   PointerToLinenumbers;
      WORD    NumberOfRelocations;
      WORD    NumberOfLinenumbers;
@@ -1770,7 +1752,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  } IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;
  
  #define IMAGE_SIZEOF_SECTION_HEADER          40
-@@ -20174,6 +21047,49 @@
+@@ -20174,6 +21036,49 @@
  // TLS Characteristic Flags
  //
  #define IMAGE_SCN_SCALE_INDEX                0x00000001  // Tls index is scaled
@@ -1820,7 +1802,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  #ifndef _MAC
  #include "pshpack2.h"                       // Symbols, relocs, and linenumbers are 2 byte packed
-@@ -21901,7 +22817,7 @@
+@@ -21901,7 +22806,7 @@
      DWORD   TimeDateStamp;
      WORD    MajorVersion;
      WORD    MinorVersion;
@@ -1829,7 +1811,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD   SizeOfData;
      DWORD   AddressOfRawData;
      DWORD   PointerToRawData;
-@@ -21917,6 +22833,18 @@
+@@ -21917,6 +22822,18 @@
  #define IMAGE_DEBUG_TYPE_OMAP_TO_SRC            7
  #define IMAGE_DEBUG_TYPE_OMAP_FROM_SRC          8
  #define IMAGE_DEBUG_TYPE_BORLAND                9
@@ -1848,7 +1830,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define IMAGE_DEBUG_TYPE_RESERVED10             10
  #define IMAGE_DEBUG_TYPE_BBT                    IMAGE_DEBUG_TYPE_RESERVED10
  #define IMAGE_DEBUG_TYPE_CLSID                  11
-@@ -21936,6 +22864,29 @@
+@@ -21936,6 +22853,29 @@
  #define IMAGE_DLLCHARACTERISTICS_EX_CET_RESERVED_2                              0x20  // Reserved for CET policy *downgrade* only!
  #define IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT                          0x40
  #define IMAGE_DLLCHARACTERISTICS_EX_HOTPATCH_COMPATIBLE                         0x80
@@ -1878,7 +1860,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  
  typedef struct _IMAGE_COFF_SYMBOLS_HEADER {
-@@ -22239,7 +23190,7 @@
+@@ -22239,7 +23179,7 @@
  _Success_(return != 0)
  WORD  
  NTAPI
@@ -1887,7 +1869,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ DWORD FramesToSkip,
      _In_ DWORD FramesToCapture,
      _Out_writes_to_(FramesToCapture,return) PVOID* BackTrace,
-@@ -22253,7 +23204,7 @@
+@@ -22253,7 +23193,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1896,7 +1878,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Out_ PCONTEXT ContextRecord
      );
  
-@@ -22317,7 +23268,7 @@
+@@ -22317,7 +23257,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1905,7 +1887,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_opt_ PVOID TargetFrame,
      _In_opt_ PVOID TargetIp,
      _In_opt_ PEXCEPTION_RECORD ExceptionRecord,
-@@ -22371,7 +23322,7 @@
+@@ -22371,7 +23311,7 @@
  NTSYSAPI
  DWORD   
  NTAPI
@@ -1914,7 +1896,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Out_ PVOID* DynamicTable,
      _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
      _In_ DWORD EntryCount,
-@@ -22383,7 +23334,7 @@
+@@ -22383,7 +23323,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1923,7 +1905,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Inout_ PVOID DynamicTable,
      _In_ DWORD NewEntryCount
      );
-@@ -22391,7 +23342,7 @@
+@@ -22391,7 +23331,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1932,7 +1914,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ PVOID DynamicTable
      );
  
-@@ -22436,7 +23387,7 @@
+@@ -22436,7 +23376,7 @@
  PEXCEPTION_ROUTINE
  NTAPI
  RtlVirtualUnwind(
@@ -1941,7 +1923,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ DWORD64 ImageBase,
      _In_ DWORD64 ControlPc,
      _In_ PRUNTIME_FUNCTION FunctionEntry,
-@@ -22508,7 +23459,7 @@
+@@ -22508,7 +23448,7 @@
  NTSYSAPI
  DWORD   
  NTAPI
@@ -1950,7 +1932,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Out_ PVOID* DynamicTable,
      _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
      _In_ DWORD EntryCount,
-@@ -22520,7 +23471,7 @@
+@@ -22520,7 +23460,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1959,7 +1941,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Inout_ PVOID DynamicTable,
      _In_ DWORD NewEntryCount
      );
-@@ -22528,7 +23479,7 @@
+@@ -22528,7 +23468,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1968,7 +1950,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ PVOID DynamicTable
      );
  
-@@ -22573,7 +23524,7 @@
+@@ -22573,7 +23513,7 @@
  PEXCEPTION_ROUTINE
  NTAPI
  RtlVirtualUnwind(
@@ -1977,7 +1959,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ DWORD ImageBase,
      _In_ DWORD ControlPc,
      _In_ PRUNTIME_FUNCTION FunctionEntry,
-@@ -22634,7 +23585,7 @@
+@@ -22634,7 +23574,7 @@
  NTSYSAPI
  DWORD   
  NTAPI
@@ -1986,7 +1968,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Out_ PVOID* DynamicTable,
      _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
      _In_ DWORD EntryCount,
-@@ -22646,7 +23597,7 @@
+@@ -22646,7 +23586,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1995,7 +1977,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Inout_ PVOID DynamicTable,
      _In_ DWORD NewEntryCount
      );
-@@ -22654,7 +23605,7 @@
+@@ -22654,7 +23594,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -2004,7 +1986,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ PVOID DynamicTable
      );
  
-@@ -22699,7 +23650,7 @@
+@@ -22699,7 +23639,7 @@
  PEXCEPTION_ROUTINE
  NTAPI
  RtlVirtualUnwind(
@@ -2013,7 +1995,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ ULONG_PTR ImageBase,
      _In_ ULONG_PTR ControlPc,
      _In_ PRUNTIME_FUNCTION FunctionEntry,
-@@ -22918,7 +23869,7 @@
+@@ -22918,7 +23858,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -2022,7 +2004,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Out_ PSLIST_HEADER ListHead
      );
  
-@@ -22926,21 +23877,21 @@
+@@ -22926,21 +23866,21 @@
  NTSYSAPI
  PSLIST_ENTRY
  NTAPI
@@ -2047,7 +2029,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _Inout_ PSLIST_HEADER ListHead,
      _Inout_ __drv_aliasesMem PSLIST_ENTRY ListEntry
      );
-@@ -22958,14 +23909,14 @@
+@@ -22958,14 +23898,14 @@
  NTSYSAPI
  PSLIST_ENTRY
  NTAPI
@@ -2064,7 +2046,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ PSLIST_HEADER ListHead
      );
  
-@@ -23143,6 +24094,28 @@
+@@ -23143,6 +24083,28 @@
  #define HEAP_TAG_SHIFT                  18                  
  #define HEAP_CREATE_SEGMENT_HEAP        0x00000100      
  #define HEAP_CREATE_HARDENED            0x00000200      
@@ -2093,7 +2075,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  #if !defined(MIDL_PASS)
-@@ -23183,6 +24156,25 @@
+@@ -23183,6 +24145,25 @@
  #define IS_TEXT_UNICODE_NOT_UNICODE_MASK      0x0F00
  #define IS_TEXT_UNICODE_NOT_ASCII_MASK        0xF000
  
@@ -2119,7 +2101,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define COMPRESSION_FORMAT_NONE          (0x0000)   
  #define COMPRESSION_FORMAT_DEFAULT       (0x0001)   
  #define COMPRESSION_FORMAT_LZNT1         (0x0002)   
-@@ -23192,6 +24184,19 @@
+@@ -23192,6 +24173,19 @@
  #define COMPRESSION_FORMAT_LZ4           (0x0006)   
  #define COMPRESSION_FORMAT_DEFLATE       (0x0007)   
  #define COMPRESSION_FORMAT_ZLIB          (0x0008)   
@@ -2139,7 +2121,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define COMPRESSION_ENGINE_STANDARD      (0x0000)   
  #define COMPRESSION_ENGINE_MAXIMUM       (0x0100)   
  #define COMPRESSION_ENGINE_HIBER         (0x0200)   
-@@ -23457,6 +24462,21 @@
+@@ -23457,6 +24451,21 @@
  #define SEF_MACL_NO_EXECUTE_UP            0x400
  #define SEF_AI_USE_EXTRA_PARAMS           0x800
  #define SEF_AVOID_OWNER_RESTRICTION       0x1000
@@ -2161,7 +2143,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define SEF_FORCE_USER_MODE               0x2000
  #define SEF_NORMALIZE_OUTPUT_DESCRIPTOR   0x4000
  
-@@ -23582,6 +24602,18 @@
+@@ -23582,6 +24591,18 @@
  #define VER_SUITENAME                   0x0000040
  #define VER_PRODUCT_TYPE                0x0000080
  
@@ -2180,7 +2162,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // RtlVerifyVersionInfo() os product type values
  //
-@@ -23598,6 +24630,13 @@
+@@ -23598,6 +24619,13 @@
  #define VER_PLATFORM_WIN32_WINDOWS      1
  #define VER_PLATFORM_WIN32_NT           2
  
@@ -2194,7 +2176,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
-@@ -23620,9 +24659,9 @@
+@@ -23620,9 +24648,9 @@
  NTSYSAPI
  ULONGLONG
  NTAPI
@@ -2206,7 +2188,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      _In_ BYTE  Condition
      );
  
-@@ -24443,6 +25482,18 @@
+@@ -24443,6 +25471,18 @@
  #define WT_EXECUTEINPERSISTENTIOTHREAD  0x00000040                   
  #define WT_EXECUTEINPERSISTENTTHREAD 0x00000080                      
  #define WT_TRANSFER_IMPERSONATION 0x00000100                         
@@ -2225,7 +2207,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define WT_SET_MAX_THREADPOOL_THREADS(Flags, Limit)  ((Flags) |= (Limit)<<16) 
  typedef VOID (NTAPI * WAITORTIMERCALLBACKFUNC) (PVOID, BOOLEAN );   
  typedef VOID (NTAPI * WORKERCALLBACKFUNC) (PVOID );                 
-@@ -24680,6 +25731,29 @@
+@@ -24680,6 +25720,29 @@
  #define DEVICEFAMILYINFOENUM_WINDOWS_CORE_HEADLESS      0x00000011
  
  #define DEVICEFAMILYINFOENUM_MAX                        0x00000011
@@ -2255,7 +2237,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  #define DEVICEFAMILYDEVICEFORM_UNKNOWN                  0x00000000
  #define DEVICEFAMILYDEVICEFORM_PHONE                    0x00000001
-@@ -24735,12 +25809,65 @@
+@@ -24735,12 +25798,65 @@
  
  #define DEVICEFAMILYDEVICEFORM_MAX                      0x0000002F
  
@@ -2323,7 +2305,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  );
  
  DWORD   
-@@ -24780,6 +25907,14 @@
+@@ -24780,6 +25896,14 @@
  #define EVENTLOG_FORWARDS_READ          0x0004
  #define EVENTLOG_BACKWARDS_READ         0x0008
  
@@ -2338,7 +2320,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // The types of events that can be logged.
  //
-@@ -24789,6 +25924,16 @@
+@@ -24789,6 +25913,16 @@
  #define EVENTLOG_INFORMATION_TYPE       0x0004
  #define EVENTLOG_AUDIT_SUCCESS          0x0008
  #define EVENTLOG_AUDIT_FAILURE          0x0010
@@ -2355,7 +2337,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  // Defines for the WRITE flags used by Auditing for paired events
-@@ -24816,7 +25961,7 @@
+@@ -24816,7 +25950,7 @@
      DWORD  TimeGenerated; // Seconds since 1-1-1970
      DWORD  TimeWritten;   // Seconds since 1-1-1970
      DWORD  EventID;
@@ -2364,7 +2346,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      WORD   NumStrings;
      WORD   EventCategory;
      WORD   ReservedFlags;
-@@ -24923,6 +26068,23 @@
+@@ -24923,6 +26057,23 @@
                                    &                           \
                                   (~SYNCHRONIZE))
  
@@ -2388,7 +2370,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  // end_access
  
  //
-@@ -24966,12 +26128,29 @@
+@@ -24966,12 +26117,29 @@
                   REG_OPTION_OPEN_LINK           |\
                   REG_OPTION_DONT_VIRTUALIZE)
  
@@ -2418,7 +2400,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  // hive format to be used by Reg(Nt)SaveKeyEx
-@@ -24979,6 +26158,13 @@
+@@ -24979,6 +26147,13 @@
  #define REG_STANDARD_FORMAT     1
  #define REG_LATEST_FORMAT       2
  #define REG_NO_COMPRESSION      4
@@ -2432,7 +2414,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  // Key restore & hive load flags
-@@ -24988,6 +26174,12 @@
+@@ -24988,6 +26163,12 @@
  #define REG_REFRESH_HIVE                (0x00000002L)   // Unwind changes to last flush
  #define REG_NO_LAZY_FLUSH               (0x00000004L)   // Never lazy flush this hive
  #define REG_FORCE_RESTORE               (0x00000008L)   // Force the restore process even when we have open handles on subkeys
@@ -2445,7 +2427,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define REG_APP_HIVE                    (0x00000010L)   // Loads the hive visible to the calling process
  #define REG_PROCESS_PRIVATE             (0x00000020L)   // Hive cannot be mounted by any other process while in use
  #define REG_START_JOURNAL               (0x00000040L)   // Starts Hive Journal
-@@ -25017,6 +26209,15 @@
+@@ -25017,6 +26198,15 @@
  #define REG_NOTIFY_CHANGE_LAST_SET      (0x00000004L) // time stamp
  #define REG_NOTIFY_CHANGE_SECURITY      (0x00000008L)
  #define REG_NOTIFY_THREAD_AGNOSTIC      (0x10000000L) // Not associated with a calling thread, can only be used
@@ -2461,7 +2443,7 @@ diff --git a/um/winnt.h b/um/winnt.h
                                                        // for async user event based notification
  
  #define REG_LEGAL_CHANGE_FILTER                 \
-@@ -25049,6 +26250,24 @@
+@@ -25049,6 +26239,24 @@
  #define REG_QWORD                   ( 11ul ) // 64-bit number
  #define REG_QWORD_LITTLE_ENDIAN     ( 11ul ) // 64-bit number (same as REG_QWORD)
  
@@ -2486,7 +2468,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  // end_wdm
  
  // begin_wdm
-@@ -25076,6 +26295,21 @@
+@@ -25076,6 +26284,21 @@
                                          SERVICE_WIN32_SHARE_PROCESS)
  #define SERVICE_USER_OWN_PROCESS       (SERVICE_USER_SERVICE | \
                                          SERVICE_WIN32_OWN_PROCESS)
@@ -2508,7 +2490,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  #define SERVICE_INTERACTIVE_PROCESS    0x00000100
  #define SERVICE_PKG_SERVICE            0x00000200
-@@ -25098,6 +26332,16 @@
+@@ -25098,6 +26321,16 @@
  #define SERVICE_DEMAND_START           0x00000003
  #define SERVICE_DISABLED               0x00000004
  
@@ -2525,7 +2507,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  //
  // Error control type
  //
-@@ -25105,6 +26349,15 @@
+@@ -25105,6 +26338,15 @@
  #define SERVICE_ERROR_NORMAL           0x00000001
  #define SERVICE_ERROR_SEVERE           0x00000002
  #define SERVICE_ERROR_CRITICAL         0x00000003
@@ -2541,7 +2523,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  //
  //
-@@ -25204,8 +26457,14 @@
+@@ -25204,8 +26446,14 @@
  #define TAPE_ERASE_SHORT            0L
  #define TAPE_ERASE_LONG             1L
  
@@ -2557,7 +2539,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      BOOLEAN Immediate;
  } TAPE_ERASE, *PTAPE_ERASE;
  
-@@ -25220,8 +26479,18 @@
+@@ -25220,8 +26468,18 @@
  #define TAPE_UNLOCK                 4L
  #define TAPE_FORMAT                 5L
  
@@ -2577,7 +2559,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      BOOLEAN Immediate;
  } TAPE_PREPARE, *PTAPE_PREPARE;
  
-@@ -25234,8 +26503,16 @@
+@@ -25234,8 +26492,16 @@
  #define TAPE_SHORT_FILEMARKS        2L
  #define TAPE_LONG_FILEMARKS         3L
  
@@ -2595,7 +2577,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD Count;
      BOOLEAN Immediate;
  } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
-@@ -25246,10 +26523,16 @@
+@@ -25246,10 +26512,16 @@
  
  #define TAPE_ABSOLUTE_POSITION       0L
  #define TAPE_LOGICAL_POSITION        1L
@@ -2613,7 +2595,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD Partition;
      LARGE_INTEGER Offset;
  } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
-@@ -25269,8 +26552,21 @@
+@@ -25269,8 +26541,21 @@
  #define TAPE_SPACE_SETMARKS         8L
  #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
  
@@ -2636,7 +2618,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD Partition;
      LARGE_INTEGER Offset;
      BOOLEAN Immediate;
-@@ -25358,6 +26654,39 @@
+@@ -25358,6 +26643,39 @@
  #define TAPE_DRIVE_WRITE_LONG_FMKS  0x88000000
  
  #define TAPE_DRIVE_WRITE_MARK_IMMED 0x90000000
@@ -2676,7 +2658,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  #define TAPE_DRIVE_FORMAT           0xA0000000
  #define TAPE_DRIVE_FORMAT_IMMEDIATE 0xC0000000
  #define TAPE_DRIVE_HIGH_FEATURES    0x80000000  //mask for high features flag
-@@ -25372,7 +26701,7 @@
+@@ -25372,7 +26690,7 @@
      DWORD MinimumBlockSize;
      DWORD MaximumPartitionCount;
      DWORD FeaturesLow;
@@ -2685,7 +2667,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      DWORD EOTWarningZoneSize;
  } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
  
-@@ -25415,6 +26744,13 @@
+@@ -25415,6 +26733,13 @@
  #define TAPE_FIXED_PARTITIONS       0L
  #define TAPE_SELECT_PARTITIONS      1L
  #define TAPE_INITIATOR_PARTITIONS   2L
@@ -2699,7 +2681,7 @@ diff --git a/um/winnt.h b/um/winnt.h
  
  typedef struct _TAPE_CREATE_PARTITION {
      DWORD Method;
-@@ -26145,12 +27481,12 @@
+@@ -26145,12 +27470,12 @@
  
  
  typedef struct _TP_IO TP_IO, *PTP_IO;
@@ -2713,7 +2695,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  
-@@ -26286,7 +27622,7 @@
+@@ -26286,7 +27611,7 @@
  
  __forceinline
  PVOID
@@ -2722,7 +2704,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  
-@@ -26296,7 +27632,7 @@
+@@ -26296,7 +27621,7 @@
  
  __forceinline
  PVOID
@@ -2731,7 +2713,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  
-@@ -26311,7 +27647,7 @@
+@@ -26311,7 +27636,7 @@
  
  __forceinline
  struct _TEB *
@@ -2740,7 +2722,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  {
-@@ -26320,7 +27656,7 @@
+@@ -26320,7 +27645,7 @@
  
  __forceinline
  PVOID
@@ -2749,7 +2731,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  {
-@@ -26329,7 +27665,7 @@
+@@ -26329,7 +27654,7 @@
  
  __forceinline
  PVOID
@@ -2758,7 +2740,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  
-@@ -26344,7 +27680,7 @@
+@@ -26344,7 +27669,7 @@
  
  __forceinline
  struct _TEB *
@@ -2767,7 +2749,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  {
-@@ -26433,7 +27769,7 @@
+@@ -26433,7 +27758,7 @@
  
  __forceinline
  PVOID
@@ -2776,7 +2758,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  {
-@@ -26442,7 +27778,7 @@
+@@ -26442,7 +27767,7 @@
  
  __forceinline
  PVOID
@@ -2785,7 +2767,7 @@ diff --git a/um/winnt.h b/um/winnt.h
      VOID
      )
  
-@@ -26461,7 +27797,7 @@
+@@ -26461,7 +27786,7 @@
  
  __inline
  struct _TEB*
