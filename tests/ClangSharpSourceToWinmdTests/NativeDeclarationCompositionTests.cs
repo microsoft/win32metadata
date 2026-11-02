@@ -227,7 +227,7 @@ namespace Foreign {
             foreach (string target in DeclarationTargets("crossarch"))
                 WriteDeclaration(fixture, target, "Observer.header-types.cs",
                     LogicalProvider(fixture, target, "Observer", false, constantsHeaderName: "other-constants.h"));
-            var error = Assert.ThrowsException<InvalidOperationException>(() => fixture.Compile());
+            var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile());
             StringAssert.Contains(error.Message, "error WMA003:");
             StringAssert.Contains(error.Message, "Conflicting native constant bindings for 'FIRST'.");
             StringAssert.Contains(error.Message, "Blocked stage 'emitter.source-cleaning': requires valid logical enum composition.");
@@ -297,7 +297,7 @@ namespace Foreign {
                 var renamed = declaration.WithIdentifier(SyntaxFactory.Identifier("GROUP____1"));
                 foreach (var target in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
                     Assert.AreEqual(signature, NativeLogicalGroupCompositionProvenance.GetSignature(renamed, target));
-                var reparsed = CSharpSyntaxTree.ParseText("namespace Owner { " + renamed.ToFullString() + " }")
+                var reparsed = CSharpSyntaxTree.ParseText("namespace Owner {\n" + renamed.ToFullString() + "\n}")
                     .GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
                 Assert.AreEqual(JsonSerializer.Serialize(composition),
                     JsonSerializer.Serialize(NativeLogicalGroupCompositionProvenance.Read(reparsed)));
@@ -398,7 +398,7 @@ namespace Foreign {
                     }
                     WriteDeclaration(fixture, target, "Target.header-types.cs", text);
                 }
-                var error = Assert.ThrowsException<InvalidOperationException>(() => fixture.Compile(), control);
+                var error = Assert.ThrowsException<InvalidDataException>(() => fixture.Compile(), control);
                 StringAssert.Contains(error.Message, "error WMA003:");
                 StringAssert.Contains(error.Message, "Conflicting native constant bindings for 'FIRST'.");
             }
