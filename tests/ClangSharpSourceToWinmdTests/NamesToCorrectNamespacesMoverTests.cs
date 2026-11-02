@@ -104,9 +104,8 @@ public struct Consumer { public Payload Value; }
             {
                 var manual = shadowed.WithFilePath(path);
                 var manualResult = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(manual, names, sourceTypes, routes);
-                if (nativeRoute)
-                    Assert.AreSame(manual, manualResult);
-                var manualConsumer = Compile(manualResult).GetTypeByMetadataName(owner)!;
+                Assert.AreSame(manual, manualResult);
+                var manualConsumer = Compile(manualResult).GetTypeByMetadataName("Original.Consumer")!;
                 Assert.IsTrue(SymbolEqualityComparer.Default.Equals(manualConsumer.GetTypeMembers("Payload").Single(),
                     Field(manualConsumer, "Value").Type));
             }

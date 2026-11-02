@@ -318,8 +318,10 @@ the same native identity and owner. Retained `___` projections bind to their
 qualified manual target before cleaning, including constructor references.
 The retained manual source namespace may differ from its explicitly configured
 public namespace. Owner election and reference routing retain the original
-manual binding while applying that public destination. Manual declarations
-follow explicit namespace policy without acquiring native provider authority.
+manual binding while applying that public destination. Only compiler-bound,
+qualified targets of proved native `___` projections follow that policy;
+unrelated manual declarations remain unchanged. Moved syntax is reparsed
+before subsequent semantic lookup, without acquiring native provider authority.
 A compatible empty forward may yield to the exact retained `autotypes` opaque
 wrapper. That wrapper supplies explicit managed storage, not native layout
 proof; ordinary unproved providers do not qualify.

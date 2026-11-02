@@ -458,7 +458,12 @@ namespace ClangSharpSourceToWinmd
                         .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)).ToArray()), tree.Options);
             }).ToArray();
             var nativeReferenceCompilations = new Dictionary<Architecture, CSharpCompilation>();
+            var retainedManualNames = NamesToCorrectNamespacesMover
+                .GetLegacyManualRecordOwners(namespaceTrees, configuredRequiredNamespaces).Keys;
             if (nativeEnumTypes.Count != 0 ||
+                recordNamespaces.Keys.Any(key => key.Name.EndsWith(
+                    MetadataSyntaxTreeCleaner.RevertToTypeSuffix, StringComparison.Ordinal) &&
+                    retainedManualNames.Contains(key.Name[..^MetadataSyntaxTreeCleaner.RevertToTypeSuffix.Length])) ||
                 recordNamespaces.Any(route => route.Key.Namespace != route.Value) || namespaceTrees.Any(tree =>
                 tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
                     .Any(record => NativeDeclarationSourceProvenance.Read(record) != null)))
@@ -486,8 +491,13 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (MetadataSyntaxTreeCleaner.IsLegacyManualSource(treeFile))
                     {
+                        var manualArchitecture = GetArchitectureForFileName(treeFile);
+                        var manualModels = nativeReferenceCompilations.Where(pair =>
+                                manualArchitecture == Architecture.None || pair.Key == manualArchitecture)
+                            .Select(pair => pair.Value.GetSemanticModel(tree)).ToArray();
                         tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(
-                            tree, configuredRequiredNamespaces);
+                            tree, configuredRequiredNamespaces, nativeRecordNamespaces: recordNamespaces,
+                            nativeReferenceModels: manualModels);
                         WriteTree(tree, treeFile);
                         return;
                     }
