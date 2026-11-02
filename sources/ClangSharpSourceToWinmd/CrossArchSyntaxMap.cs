@@ -376,6 +376,13 @@ namespace ClangSharpSourceToWinmd
 
         private static string GetNativeDeclarationSignature(BaseTypeDeclarationSyntax declaration)
         {
+            if (declaration is EnumDeclarationSyntax enumeration)
+            {
+                string composition = NativeLogicalGroupCompositionProvenance.GetSignature(enumeration,
+                    ClangSharpSourceCompilation.GetArchitectureForFileName(declaration.SyntaxTree.FilePath));
+                if (composition.Length != 0)
+                    return composition;
+            }
             var source = NativeDeclarationSourceProvenance.Read(declaration);
             return source == null ? "" : string.Join("|", "NativeDeclaration",
                 NativeDeclarationSourceProvenance.GetIdentityKey(source), source.NativeName,

@@ -14,6 +14,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Linq;
 
 namespace ClangSharpSourceToWinmdTests
 {
@@ -227,6 +228,240 @@ namespace Foreign {
             StringAssert.Contains(error.Message, "error WMA003:");
             StringAssert.Contains(error.Message, "Conflicting native constant bindings for 'FIRST'.");
             StringAssert.Contains(error.Message, "Blocked stage 'emitter.source-cleaning': requires valid logical enum composition.");
+        }
+
+        [TestMethod]
+        public void LiteralAlternativesKeepOriginalContributionsAndCommonOnlyApplicability()
+        {
+            foreach (string architecture in new[] { "x86", "x64", "arm64", "crossarch" })
+            {
+                using var fixture = DeclarationFixture(architecture);
+                var originals = new List<NativeLogicalGroupInput>();
+                string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+                string text = LiteralLogicalProvider(fixture, "x86", "Common", false,
+                    "common-constants.h", includeSecond: true);
+                File.WriteAllText(Path.Combine(common, "Common.header-types.cs"), text);
+                SaveOriginal(text, Architecture.All, commonProjection: true);
+                foreach (string target in DeclarationTargets(architecture))
+                {
+                    foreach (var (ns, owner, header) in new[]
+                    {
+                        ("Owner", true, "common-constants.h"), ("Observer", false, "other-constants.h"),
+                    })
+                    {
+                        text = LiteralLogicalProvider(fixture, target, ns, owner, header);
+                        WriteDeclaration(fixture, target, ns + ".header-types.cs", text);
+                        SaveOriginal(text, DeclarationArchitecture(target));
+                    }
+                    WriteDeclaration(fixture, target, "Consumer.cs",
+                        "namespace Observer { public partial struct Carrier { public GROUP Value; } }");
+                }
+                var compilation = fixture.Compile();
+                AssertDeclarationCompilation(compilation);
+                var group = compilation.CSharpCompilation.GetTypeByMetadataName("Owner.GROUP")!;
+                Assert.AreEqual(SpecialType.System_UInt16, group.EnumUnderlyingType!.SpecialType);
+                CollectionAssert.AreEquivalent(new[] { "FIRST", "SECOND" }, group.GetMembers().OfType<IFieldSymbol>()
+                    .Where(field => field.HasConstantValue).Select(field => field.Name).ToArray());
+                Assert.AreEqual((ushort)1, group.GetMembers("FIRST").OfType<IFieldSymbol>().Single().ConstantValue);
+                Assert.AreEqual((ushort)2, group.GetMembers("SECOND").OfType<IFieldSymbol>().Single().ConstantValue);
+                Assert.IsTrue(SymbolEqualityComparer.Default.Equals(group, compilation.CSharpCompilation
+                    .GetTypeByMetadataName("Observer.Carrier")!.GetMembers("Value").OfType<IFieldSymbol>().Single().Type));
+                Assert.AreEqual(0, group.ContainingNamespace.GetTypeMembers().Count(type =>
+                    type.Name.StartsWith("GROUP____", StringComparison.Ordinal)));
+                var declaration = (EnumDeclarationSyntax)group.DeclaringSyntaxReferences.Single().GetSyntax();
+                var composition = NativeLogicalGroupCompositionProvenance.Read(declaration)!;
+                Assert.IsNotNull(composition);
+                Assert.IsNull(NativeDeclarationSourceProvenance.Read(declaration));
+                Assert.IsNull(NativeConstantGroupProvenance.Read(declaration));
+                CollectionAssert.AreEquivalent(originals.Select(input => JsonSerializer.Serialize(input)).ToArray(),
+                    composition.Inputs.Select(input => JsonSerializer.Serialize(input)).ToArray(), architecture);
+                Assert.AreEqual(1 + 2 * DeclarationTargets(architecture).Length, composition.Inputs.Length);
+                Assert.IsTrue(composition.Inputs.All(input => input.Source.SourceArchitecture != Architecture.All));
+                var commonInput = composition.Inputs.Single(input => input.Source.Namespace == "Common");
+                Assert.AreEqual(Architecture.X86, commonInput.Source.SourceArchitecture);
+                Assert.AreEqual(Architecture.All, commonInput.ProjectedArchitectures);
+                Assert.IsTrue(commonInput.CommonProjection);
+                Assert.AreEqual(2, commonInput.Constants.Group.Members.Length);
+                var alternative = composition.Alternatives.Single();
+                Assert.AreEqual("FIRST", alternative.Member);
+                Assert.AreEqual(2, alternative.Definitions.Length);
+                Assert.AreEqual(composition.Inputs.Length, alternative.Occurrences.Length);
+                Assert.AreEqual(composition.Inputs.Length + 1, composition.Inputs.Sum(input =>
+                    input.Constants.Group.Members.Sum(member => member.Occurrences.Length)));
+                Assert.IsTrue(composition.Inputs.SelectMany(input => input.Constants.Group.Members)
+                    .All(member => member.Bindings.Length == 1));
+                string signature = NativeLogicalGroupCompositionProvenance.GetSignature(declaration);
+                var renamed = declaration.WithIdentifier(SyntaxFactory.Identifier("GROUP____1"));
+                foreach (var target in new[] { Architecture.X86, Architecture.X64, Architecture.Arm64 })
+                    Assert.AreEqual(signature, NativeLogicalGroupCompositionProvenance.GetSignature(renamed, target));
+                var reparsed = CSharpSyntaxTree.ParseText("namespace Owner { " + renamed.ToFullString() + " }")
+                    .GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                Assert.AreEqual(JsonSerializer.Serialize(composition),
+                    JsonSerializer.Serialize(NativeLogicalGroupCompositionProvenance.Read(reparsed)));
+                var donor = NativeDeclarationSourceProvenance.Attach(renamed, originals[0].Source);
+                Assert.ThrowsException<InvalidDataException>(() => NativeLogicalGroupCompositionProvenance.Read(donor));
+                var missingCommonMember = renamed.WithMembers(SyntaxFactory.SeparatedList(renamed.Members
+                    .Where(member => member.Identifier.ValueText != "SECOND")));
+                Assert.ThrowsException<InvalidDataException>(() => NativeLogicalGroupCompositionProvenance.Read(missingCommonMember));
+                if (architecture == "crossarch")
+                    foreach (string control in new[] { "missing-occurrence", "missing-input", "duplicate-input", "projection", "unknown" })
+                    {
+                        var json = JObject.FromObject(composition);
+                        if (control == "missing-occurrence")
+                            ((JArray)json["Alternatives"]![0]!["Occurrences"]!).RemoveAt(0);
+                        else if (control == "missing-input")
+                            ((JArray)json["Inputs"]!).RemoveAt(0);
+                        else if (control == "duplicate-input")
+                            ((JArray)json["Inputs"]!).Add(json["Inputs"]![0]!.DeepClone());
+                        else if (control == "projection")
+                            ((JArray)json["Inputs"]!).OfType<JObject>().First(input => !input["CommonProjection"]!.Value<bool>())
+                                ["ProjectedArchitectures"] = (int)Architecture.All;
+                        else
+                            json["Unknown"] = true;
+                        var malformed = renamed.WithLeadingTrivia(renamed.GetLeadingTrivia().Select(trivia =>
+                            trivia.ToString().StartsWith("/* Win32Metadata.NativeLogicalGroupComposition.", StringComparison.Ordinal)
+                                ? SyntaxFactory.Comment("/* Win32Metadata.NativeLogicalGroupComposition.v1 " +
+                                    json.ToString(Newtonsoft.Json.Formatting.None) + " */") : trivia));
+                        Assert.ThrowsException<InvalidDataException>(() => NativeLogicalGroupCompositionProvenance.Read(malformed), control);
+                    }
+                AssertDeclarationImage(fixture, compilation, "GROUP", "Owner", "Observer");
+                using var pe = new PEReader(File.OpenRead(Path.Combine(fixture.DirectoryPath, "NativeDeclaration.winmd")));
+                var reader = pe.GetMetadataReader();
+                var metadata = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                    reader.GetString(type.Namespace) == "Owner" && reader.GetString(type.Name) == "GROUP");
+                Assert.AreEqual(0, metadata.GetCustomAttributes().Count);
+                var fields = metadata.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(field => !field.GetDefaultValue().IsNil).ToArray();
+                CollectionAssert.AreEquivalent(new[] { "FIRST", "SECOND" },
+                    fields.Select(field => reader.GetString(field.Name)).ToArray());
+                foreach (var field in fields)
+                {
+                    var value = reader.GetConstant(field.GetDefaultValue());
+                    Assert.AreEqual(ConstantTypeCode.UInt16, value.TypeCode);
+                    Assert.AreEqual(reader.GetString(field.Name) == "FIRST" ? (ushort)1 : (ushort)2,
+                        reader.GetBlobReader(value.Value).ReadUInt16());
+                }
+                var consumer = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                    reader.GetString(type.Namespace) == "Observer" && reader.GetString(type.Name) == "Carrier");
+                var signatureReader = reader.GetBlobReader(reader.GetFieldDefinition(consumer.GetFields().Single()).Signature);
+                Assert.AreEqual(SignatureKind.Field, signatureReader.ReadSignatureHeader().Kind);
+                Assert.AreEqual(SignatureTypeCode.TypeHandle, signatureReader.ReadSignatureTypeCode());
+                var referenced = signatureReader.ReadTypeHandle();
+                if (referenced.Kind == HandleKind.TypeDefinition)
+                {
+                    var type = reader.GetTypeDefinition((TypeDefinitionHandle)referenced);
+                    Assert.AreEqual("Owner.GROUP", reader.GetString(type.Namespace) + "." + reader.GetString(type.Name));
+                }
+                else
+                {
+                    Assert.AreEqual(HandleKind.TypeReference, referenced.Kind);
+                    var type = reader.GetTypeReference((TypeReferenceHandle)referenced);
+                    Assert.AreEqual("Owner.GROUP", reader.GetString(type.Namespace) + "." + reader.GetString(type.Name));
+                }
+
+                void SaveOriginal(string source, Architecture projected, bool commonProjection = false)
+                {
+                    var original = CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes()
+                        .OfType<EnumDeclarationSyntax>().Single();
+                    originals.Add(new NativeLogicalGroupInput(NativeDeclarationSourceProvenance.Read(original)!,
+                        NativeConstantGroupProvenance.Read(original)!, projected, commonProjection));
+                }
+            }
+        }
+
+        [TestMethod]
+        public void LiteralAlternativesRejectUnclaimedMixedForeignAndFoldedProofs()
+        {
+            foreach (string control in new[] { "unclaimed", "mixed", "foreign", "folded" })
+            {
+                using var fixture = DeclarationFixture("crossarch");
+                string common = Directory.CreateDirectory(Path.Combine(fixture.DirectoryPath, "common")).FullName;
+                File.WriteAllText(Path.Combine(common, "Owner.header-types.cs"),
+                    LiteralLogicalProvider(fixture, "x86", "Owner", true, "common-constants.h"));
+                foreach (string target in DeclarationTargets("crossarch"))
+                {
+                    string ns = control == "foreign" ? "Owner" : "Observer";
+                    string text = LiteralLogicalProvider(fixture, target, ns, control == "foreign",
+                        "other-constants.h", proveLiteral: control != "unclaimed",
+                        folded: control == "folded", carrierHeader: control == "foreign" ? "foreign-native.h" : "literal-native.h");
+                    if (control == "mixed")
+                    {
+                        text = RewriteLiteralProof(text, json =>
+                        {
+                            ((JObject)json["Group"]!).Remove("DefinitionEvidence");
+                            foreach (JObject member in (JArray)json["Group"]!["Members"]!)
+                                member.Remove("Occurrences");
+                        }, "v1");
+                    }
+                    WriteDeclaration(fixture, target, "Target.header-types.cs", text);
+                }
+                var error = Assert.ThrowsException<InvalidOperationException>(() => fixture.Compile(), control);
+                StringAssert.Contains(error.Message, "error WMA003:");
+                StringAssert.Contains(error.Message, "Conflicting native constant bindings for 'FIRST'.");
+            }
+        }
+
+        [TestMethod]
+        public void ClaimedLiteralEvidenceIsValidatedInBothTransportsEvenForEqualBindings()
+        {
+            foreach (string control in new[] { "version", "unknown", "duplicate", "missing", "null-occurrences",
+                "duplicate-occurrence", "carrier", "operand", "compound-zero", "compound-one", "literal", "typed-number" })
+            {
+                using var fixture = DeclarationFixture("x86");
+                string text = LiteralLogicalProvider(fixture, "x86", "Owner", true, "same-constants.h");
+                string peer = LiteralLogicalProvider(fixture, "x86", "Observer", false, "same-constants.h");
+                var original = CSharpSyntaxTree.ParseText(text).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                var peerDeclaration = CSharpSyntaxTree.ParseText(peer).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+                var source = NativeConstantGroupProvenance.Read(original)!;
+                Assert.IsTrue(source.Group.Members.Single().Bindings.SequenceEqual(
+                    NativeConstantGroupProvenance.Read(peerDeclaration)!.Group.Members.Single().Bindings));
+                if (control == "carrier")
+                {
+                    var changed = JObject.FromObject(source);
+                    changed["Group"]!["DefinitionEvidence"]!["Carrier"]!["HeaderHash"] = new string('B', 64);
+                    Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.Read(
+                        ReplaceLiteralProof(original, changed.ToString(Newtonsoft.Json.Formatting.None), "v2")));
+                }
+                var json = JObject.FromObject(source);
+                var group = (JObject)json["Group"]!;
+                var member = (JObject)group["Members"]![0]!;
+                var occurrence = (JObject)member["Occurrences"]![0]!;
+                switch (control)
+                {
+                    case "version": group["DefinitionEvidence"]!["Version"] = 99; break;
+                    case "unknown": group["DefinitionEvidence"]!["Unknown"] = true; break;
+                    case "missing": ((JObject)group["DefinitionEvidence"]!["Carrier"]!).Remove("TraversedHeader"); break;
+                    case "null-occurrences":
+                        group.Remove("DefinitionEvidence");
+                        member["Occurrences"] = null;
+                        break;
+                    case "duplicate-occurrence": ((JArray)member["Occurrences"]!).Add(occurrence.DeepClone()); break;
+                    case "carrier": group["DefinitionEvidence"]!["Carrier"]!["Namespace"] = "Foreign"; break;
+                    case "operand": occurrence["Binding"]!["HeaderHash"] = new string('B', 64); break;
+                    case "compound-zero":
+                    case "compound-one":
+                        occurrence["ArgumentEnd"]!["Offset"] = occurrence["ArgumentEnd"]!["Offset"]!.Value<uint>() + 2;
+                        occurrence["ArgumentEnd"]!["Column"] = occurrence["ArgumentEnd"]!["Column"]!.Value<uint>() + 2;
+                        break;
+                    case "literal": occurrence["Literal"]!["Literal"] = "2"; break;
+                    case "typed-number": occurrence["ArgumentStart"]!["Offset"] = "5"; break;
+                }
+                string privateJson = json.ToString(Newtonsoft.Json.Formatting.None);
+                if (control == "duplicate")
+                    privateJson = privateJson.Replace("\"Version\":1", "\"Version\":1,\"Version\":1", StringComparison.Ordinal);
+                var malformed = ReplaceLiteralProof(original, privateJson, "v2");
+                Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.Read(malformed), control);
+                var values = JObject.FromObject(new NativeConstantValues
+                {
+                    SourceFile = source.SourceFile, SourceHash = source.SourceHash, Architecture = source.Architecture,
+                    Namespace = source.Group.Namespace, Groups = new() { source.Group },
+                });
+                values["Groups"]![0] = group.DeepClone();
+                string nativeJson = values.ToString(Newtonsoft.Json.Formatting.None);
+                if (control == "duplicate")
+                    nativeJson = nativeJson.Replace("\"Version\":1", "\"Version\":1,\"Version\":1", StringComparison.Ordinal);
+                Assert.ThrowsException<InvalidDataException>(() => NativeConstantGroupProvenance.ReadValues(nativeJson), control);
+            }
         }
 
         [TestMethod]
@@ -1027,6 +1262,90 @@ namespace Windows.Win32.Foundation.Metadata {
                     NativeDeclarationKind.IncompleteRecord) { SourceArchitecture = includeArchitecture ? DeclarationArchitecture(architecture) : null });
             return $"namespace {ns} {{ {declaration.ToFullString()} }}";
         }
+
+        private static string LiteralLogicalProvider(Fixture fixture, string architecture, string ns, bool owner,
+            string constantsHeader, bool includeSecond = false, bool proveLiteral = true, bool folded = false,
+            string carrierHeader = "literal-native.h")
+        {
+            string header = DeclarationHeader(fixture, carrierHeader, "typedef unsigned short GROUP;\n");
+            string constants = DeclarationHeader(fixture, constantsHeader, "#define FIRST 1\n#define SECOND 2\n");
+            string id = ns + "-" + architecture + "-" + constantsHeader + "-" + carrierHeader;
+            string argument = DeclarationHeader(fixture, id + ".arguments.h",
+                includeSecond ? "Enum(FIRST, SECOND)" : "Enum(FIRST)");
+            string argumentText = File.ReadAllText(argument);
+            string main = DeclarationHeader(fixture, id + ".cpp", "#include \"" + carrierHeader + "\"\n");
+            var source = new NativeDeclarationSource("c:" + carrierHeader + "@T@GROUP", "GROUP", header,
+                NativeConstantGroupProvenance.HashFile(header), 1, 23, "GROUP", ns, owner, NativeDeclarationKind.LogicalEnum)
+                { SourceArchitecture = DeclarationArchitecture(architecture) };
+            var members = new List<NativeConstantGroupMember>();
+            foreach (string name in includeSecond ? new[] { "FIRST", "SECOND" } : new[] { "FIRST" })
+            {
+                string value = name == "FIRST" ? "1" : "2";
+                var binding = new NativeConstantBinding("Macro", name, constants, name == "FIRST" ? 1U : 2U, 9,
+                    NativeConstantGroupProvenance.HashFile(constants), "int", "int", value);
+                var occurrence = Occurrence(binding, argument, argumentText);
+                var bindings = new[] { binding };
+                var occurrences = new[] { occurrence };
+                if (folded)
+                {
+                    string other = DeclarationHeader(fixture, "folded-" + constantsHeader, "#define FIRST 1\n#define SECOND 2\n");
+                    var second = binding with { Header = other, HeaderHash = NativeConstantGroupProvenance.HashFile(other) };
+                    string foldedArgument = DeclarationHeader(fixture, "folded-" + id + ".arguments.h", "Enum(FIRST)");
+                    bindings = bindings.Append(second).ToArray();
+                    occurrences = occurrences.Append(Occurrence(second, foldedArgument, "Enum(FIRST)")).ToArray();
+                }
+                members.Add(new NativeConstantGroupMember(name, $"unchecked((ushort){value}UL)", bindings)
+                    { Occurrences = occurrences });
+            }
+            var group = new NativeConstantGroup("::GROUP", "GROUP", ns, "ushort", argument, 1, members.ToArray())
+                { DefinitionEvidence = new NativeLogicalGroupEvidence(1, source) };
+            var declaration = (EnumDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration("public enum GROUP : ushort { }")!;
+            declaration = declaration.WithMembers(SyntaxFactory.SeparatedList(members.Select(member =>
+                SyntaxFactory.EnumMemberDeclaration(member.Name).WithEqualsValue(
+                    SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression(member.Expression))))));
+            declaration = NativeConstantGroupProvenance.Attach(declaration,
+                new NativeConstantGroupSource(main, NativeConstantGroupProvenance.HashFile(main),
+                    DeclarationArchitecture(architecture), group));
+            declaration = NativeDeclarationSourceProvenance.Attach(declaration, source);
+            return $"namespace {ns} {{\n{declaration.ToFullString()}\n}}";
+
+            NativeConstantOccurrence Occurrence(NativeConstantBinding binding, string path, string contents)
+            {
+                string hash = NativeConstantGroupProvenance.HashFile(path);
+                int start = contents.IndexOf(binding.NativeName, StringComparison.Ordinal);
+                var argumentStart = new NativeConstantSite(path, hash, 1, (uint)start + 1, (uint)start);
+                var argumentEnd = argumentStart with
+                    { Column = argumentStart.Column + (uint)binding.NativeName.Length, Offset = argumentStart.Offset + (uint)binding.NativeName.Length };
+                string definition = File.ReadAllText(binding.Header);
+                int definitionStart = definition.IndexOf(binding.NativeName, StringComparison.Ordinal);
+                int definitionEnd = definition.IndexOf('\n', definitionStart);
+                var nativeStart = new NativeConstantSite(binding.Header, binding.HeaderHash, binding.Line,
+                    binding.Column, (uint)definitionStart);
+                var nativeEnd = nativeStart with
+                    { Column = nativeStart.Column + (uint)(definitionEnd - definitionStart), Offset = (uint)definitionEnd };
+                return new NativeConstantOccurrence(binding, new NativeConstantSite(path, hash, 1, 1, 0),
+                    new NativeConstantSite(path, hash, 1, (uint)contents.Length + 1, (uint)contents.Length), argumentStart, argumentEnd)
+                {
+                    Literal = proveLiteral ? new NativeLiteralMacroProof(binding.Value,
+                        argumentStart, argumentEnd, nativeStart, nativeEnd) : null,
+                };
+            }
+        }
+
+        private static string RewriteLiteralProof(string text, Action<JObject> edit, string version)
+        {
+            var root = CSharpSyntaxTree.ParseText(text).GetRoot();
+            var declaration = root.DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+            var json = JObject.FromObject(NativeConstantGroupProvenance.Read(declaration)!);
+            edit(json);
+            return root.ReplaceNode(declaration, ReplaceLiteralProof(declaration,
+                json.ToString(Newtonsoft.Json.Formatting.None), version)).ToFullString();
+        }
+
+        private static EnumDeclarationSyntax ReplaceLiteralProof(EnumDeclarationSyntax declaration, string json, string version) =>
+            declaration.WithLeadingTrivia(declaration.GetLeadingTrivia().Select(trivia =>
+                trivia.ToString().StartsWith("/* Win32Metadata.NativeConstantGroup.", StringComparison.Ordinal)
+                    ? SyntaxFactory.Comment("/* Win32Metadata.NativeConstantGroup." + version + " " + json + " */") : trivia));
 
         private static Architecture DeclarationArchitecture(string architecture) => architecture switch
         {

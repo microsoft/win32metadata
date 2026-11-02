@@ -46,10 +46,21 @@ namespace ClangSharpSourceToWinmd
                             file, declaration.Identifier.ValueText, architecture);
                         continue;
                     }
+                    NativeDeclarationSource source;
+                    NativeConstantGroupSource constants;
+                    try
+                    {
+                        source = NativeDeclarationSourceProvenance.Read(declaration);
+                        constants = NativeConstantGroupProvenance.Read(declaration);
+                    }
+                    catch (InvalidDataException error)
+                    {
+                        Record(error, file, declaration.Identifier.ValueText, architecture);
+                        continue;
+                    }
                     var target = architecture == "crossarch" ? GetArchitectures(file, fileSet) : Architecture.All;
                     if (architecture == "crossarch")
                     {
-                        var source = NativeDeclarationSourceProvenance.Read(declaration);
                         if (source != null)
                         {
                             var sourceTarget = source.SourceArchitecture ??
@@ -67,7 +78,7 @@ namespace ClangSharpSourceToWinmd
                                 target = sourceTarget;
                         }
                     }
-                    fragments.Add(new Fragment(file, ns, declaration, target));
+                    fragments.Add(new Fragment(file, ns, declaration, target) { Source = source, Constants = constants });
                 }
             }
 
@@ -114,6 +125,32 @@ namespace ClangSharpSourceToWinmd
 
             var legacySources = groups.Any(group => group.Any(fragment => !fragment.HeaderDefined))
                 ? ReadLegacySources(files, roots, sourceEnumMembers) : null;
+            var originalInputs = groups.ToDictionary(group => group.Key, group => group.Select(fragment =>
+            {
+                bool common = singleCommonFiles.Contains(fragment.File) &&
+                    fragment.Source?.SourceArchitecture == Architecture.X86 &&
+                    IsSourceBoundLogicalContribution(fragment.Declaration, fragment.Source);
+                return new NativeLogicalGroupInput(fragment.Source, fragment.Constants,
+                    common ? Architecture.All : fragment.Source?.SourceArchitecture ?? fragment.Architectures, common);
+            }).ToArray());
+            var compositions = new Dictionary<(string Namespace, string Name), NativeLogicalGroupComposition>();
+            foreach (var group in groups.Where(group =>
+                NativeLogicalGroupCompositionProvenance.RequiresComposition(originalInputs[group.Key])))
+            {
+                var first = group.First();
+                try
+                {
+                    compositions.Add(group.Key, NativeLogicalGroupCompositionProvenance.Create(
+                        first.Declaration.Identifier.ValueText, first.Namespace,
+                        first.Declaration.BaseList?.Types.Single().Type.ToString(), originalInputs[group.Key]));
+                }
+                catch (InvalidDataException error)
+                {
+                    Record(error, first.File, first.Declaration.Identifier.ValueText, architecture);
+                }
+            }
+            if (validation.Errors.Count != previousErrors)
+                return;
             var removed = groups.SelectMany(group => group).Select(fragment => fragment.Declaration).ToHashSet();
             foreach (var pair in roots)
             {
@@ -144,7 +181,14 @@ namespace ClangSharpSourceToWinmd
                         EnumDeclarationSyntax declaration;
                         try
                         {
-                            declaration = MergeGroup(group, legacyCompilation);
+                            compositions.TryGetValue((group[0].Namespace, group[0].Declaration.Identifier.ValueText),
+                                out var composition);
+                            declaration = MergeGroup(group, legacyCompilation,
+                                composition, composition != null && target == Architecture.All ? architecture switch
+                                {
+                                    "x86" => Architecture.X86, "x64" => Architecture.X64, "arm64" => Architecture.Arm64,
+                                    _ => throw new ArgumentException("Unsupported logical group target.", nameof(architecture)),
+                                } : target);
                         }
                         catch (LegacyValueEvaluationException failure)
                         {
@@ -482,12 +526,11 @@ namespace ClangSharpSourceToWinmd
             return sources;
         }
 
-        private static EnumDeclarationSyntax MergeGroup(Fragment[] fragments, CSharpCompilation legacyCompilation)
+        private static EnumDeclarationSyntax MergeGroup(Fragment[] fragments, CSharpCompilation legacyCompilation,
+            NativeLogicalGroupComposition composition, Architecture projectedTarget)
         {
             var nativeFragments = fragments.Where(fragment => fragment.HeaderDefined).Select(fragment => (
-                Fragment: fragment, Source: NativeDeclarationSourceProvenance.Read(fragment.Declaration),
-                Constants: NativeDeclarationSourceProvenance.Read(fragment.Declaration) == null
-                    ? null : NativeConstantGroupProvenance.Read(fragment.Declaration))).ToArray();
+                Fragment: fragment, fragment.Source, fragment.Constants)).ToArray();
             var canonical = nativeFragments.Where(fragment => fragment.Source?.TraversedHeader == true)
                 .OrderBy(fragment => fragment.Fragment.File, StringComparer.Ordinal).FirstOrDefault();
             var source = canonical.Source ?? nativeFragments.FirstOrDefault(fragment => fragment.Source != null).Source;
@@ -505,7 +548,8 @@ namespace ClangSharpSourceToWinmd
                     throw Error(fragment.Fragment.File, fragment.Source.Name, "Logical group constant provenance is missing.");
                 foreach (var member in fragment.Constants.Group.Members)
                 {
-                    if (nativeMembers.TryGetValue(member.Name, out var previous) && !previous.SequenceEqual(member.Bindings))
+                    if (nativeMembers.TryGetValue(member.Name, out var previous) && !previous.SequenceEqual(member.Bindings) &&
+                        composition?.Alternatives.Any(alternative => alternative.Member == member.Name) != true)
                         throw Error(fragment.Fragment.File, fragment.Source.Name,
                             $"Conflicting native constant bindings for '{member.Name}'.");
                     nativeMembers[member.Name] = member.Bindings;
@@ -562,6 +606,18 @@ namespace ClangSharpSourceToWinmd
             var merged = first.Declaration.WithoutTrivia().WithAttributeLists(SyntaxFactory.List(attributes.Select(attribute =>
                     SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(attribute.WithoutTrivia())))))
                 .WithMembers(SyntaxFactory.SeparatedList(members.Values.Select(member => member.WithoutTrivia())));
+            if (composition != null)
+            {
+                try
+                {
+                    return NativeLogicalGroupCompositionProvenance.Attach(merged,
+                        composition, projectedTarget);
+                }
+                catch (InvalidDataException error)
+                {
+                    throw Error(first.File, name, error.Message);
+                }
+            }
             // A multi-declaration union cannot claim one contributor's native declaration identity.
             return source == null || nativeFragments.Any(fragment =>
                 !NativeDeclarationSourceProvenance.SameDeclaration(source, fragment.Source))
@@ -709,6 +765,10 @@ namespace ClangSharpSourceToWinmd
         }
 
         private sealed record Fragment(string File, string Namespace, EnumDeclarationSyntax Declaration,
-            Architecture Architectures, bool HeaderDefined = true);
+            Architecture Architectures, bool HeaderDefined = true)
+        {
+            internal NativeDeclarationSource Source { get; init; }
+            internal NativeConstantGroupSource Constants { get; init; }
+        }
     }
 }

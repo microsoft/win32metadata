@@ -351,12 +351,44 @@ Source-bound `LogicalGroup` contributions in header-types files use that qualifi
 logical-group merger rather than whole-declaration coalescing. Their declaration
 and constant proofs must agree on native name, projected name, original namespace,
 and actual producing target. Native enums and unproved inputs do not acquire this
-route, and native member-binding conflicts remain blocking.
+route. Differing native member bindings require the explicit alternative-definition
+proof below; matching values alone leave the conflict blocking.
 For these proven logical contributions, the existing single-common input role
 retains its common projected applicability, including members contributed only
 there. The source proofs still report their actual x86 observation. This
 projection role supplies no additional native observations, record/layout proof
 or coverage exemption for native enums.
+
+The bounded alternative-definition route applies only to compiler-bound logical
+members with the same qualified owner and genuine canonical native carrier.
+Every participating member retains its one original physical macro binding and
+all original annotation occurrences. A versioned producer fact must join the
+whole argument to its actual macro expansion and `Referenced` object-like macro
+definition in that translation unit. Native tokenization must establish one
+decimal or hexadecimal integer-literal replacement token. Literal spelling,
+compiler integer type, storage and value must agree between alternatives.
+An argument such as `M + 0` or `M + 1`, an alias, parentheses, function-like macro,
+cast or compound replacement cannot supply that proof. A source contribution
+with multiple folded physical bindings remains unsupported by this route.
+
+Generated private C# and native-constants JSON carry the same strict versioned
+carrier, occurrence and optional literal facts. Claimed malformed, duplicate,
+unknown or inconsistent evidence is rejected before binding equality can bypass
+validation. Unclaimed unsupported shapes retain valid legacy behavior but cannot
+authorize alternatives; v1 evidence supplies no new authority.
+
+An admitted composition has a separate private envelope containing every original
+contribution, complete member/binding/occurrence inventory and actual native target.
+Its distinct physical definitions reference those original observations without
+appending bindings or selecting a donor declaration. Projected input applicability
+is separate from actual native targets. An explicit common-projection role requires
+the qualified genuine x86 single-common input; ordinary inputs retain their actual
+target mask. Each target result retains the same complete
+manifest, including already-equal contributions and common-only members. Cleaning,
+suffix renaming and equivalent-target coalescing retain that manifest and its
+validated signature. The envelope is not a public WinMD attribute and supplies no
+native-enum, physical-record, layout or missing-provider exemption.
+
 A redundant common observation does not establish applicability to every architecture;
 whole-declaration coalescing requires matching direct providers for all three targets.
 The producer's single-common mode is different: an excluded partition emits
