@@ -71,6 +71,7 @@
     <file src="generation\WinSDK\autoTypes.json" target="tools\assets\WinSDK"/>
     <file src="generation\WinSDK\functionPointerFixups.json" target="tools\assets\WinSDK"/>
     <file src="generation\WinSDK\scraper.settings.rsp" target="tools\assets\WinSDK"/>
+    <file src="generation\WinSDK\importEntryPoints.rsp" target="tools\assets\WinSDK"/>
     <file src="generation\WinSDK\ConstantsScraper.header.txt" target="tools\assets\WinSDK"/>
     <file src="generation\WinSDK\scraper.header.txt" target="tools\assets\WinSDK"/>
     <file src="generation\WinSDK\inc\*" target="tools\assets\WinSDK\inc"/>

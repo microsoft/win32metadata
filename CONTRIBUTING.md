@@ -58,6 +58,86 @@ You can test localized changes to partitions by running `./scripts/ScrapeHeaders
 
 For an API to be emitted in the metadata, it also needs a proper import library mapping in [libMappings.rsp](generation/WinSDK/libMappings.rsp). This file was prepopulated by scanning the `.lib` files in the SDK with [CreateProcLibMappingForAllLibs.ps1](scripts/CreateProcLibMappingForAllLibs.ps1), so most of the time no changes are required here. However there are cases where APIs may not have proper entries in that file. If APIs do not appear in the metadata despite the Partition definition looking correct, make sure [libMappings.rsp](generation/WinSDK/libMappings.rsp) contains the correct entries.
 
+### Ordinal-only imports
+
+Import libraries record ordinals for both ordinal-only (`NONAME`) exports and named exports
+with explicit ordinals. The DLL's export name table is required to distinguish them.
+Normal builds load the checked-in [importEntryPoints.rsp](generation/WinSDK/importEntryPoints.rsp)
+snapshot. This response file contains `--importEntryPoint` followed by `FunctionName=#ordinal`
+mappings, not DLL binaries or a complete list of exports. Clients do not need to enable
+system probing to use the snapshot. `/p:PreserveOrdinalImports=false` disables it.
+
+Regenerate the snapshot when updating the SDK:
+
+```powershell
+.\scripts\CreateImportEntryPoints.ps1 `
+    -LibDirectories 'C:\sdk\Lib\10.0.x\um\x64' `
+    -DllDirectories 'C:\matching-windows-dlls\x64' `
+    -SdkVersion '10.0.x'
+```
+
+Build `sources\MetadataUtils\MetadataUtils.csproj` in Release first. The script only
+includes imports whose library DLL agrees with the existing library mappings and whose
+ordinal has a populated, unnamed export slot in the source DLL. It records source DLL
+versions and SHA-256 hashes, reports missing DLLs and absent ordinals, and rejects
+conflicting ordinals across library directories. Supply matching architecture/version
+DLLs, and review regenerated mappings before checking them in.
+
+The initial snapshot uses SDK 10.0.26100.7705 x64 libraries and system DLLs
+primarily from Windows 10.0.26720.1001. It is a partial, versioned snapshot, not
+verified coverage of other SDK versions or all
+architectures. Missing DLLs and absent ordinals keep the previous by-name behavior.
+
+For optional live scanning, `ScanLibs` searches the directories in `@(DllSearchPath)` first.
+
+Set `/p:ProbeSystemDlls=true` to opt in to probing the build process's Windows system
+directory when the DLL is not found in the explicit search paths. This reads PE export
+tables without loading or executing the DLLs. The system probe is off by default.
+For example, after building the tools, use
+`dotnet build generation\WinSDK -c Release -p:ProbeSystemDlls=true`.
+
+System DLLs reflect the host's installed Windows version and the build process's
+architecture, which may differ from the target SDK or architecture. This fallback is
+useful for local testing, but is not a reproducible source of target DLLs. Use explicit
+search paths with matching DLLs when available. Use a clean build when changing these
+settings so the generated library and entry-point mappings are rescanned.
+
+Without a DLL, imports remain by name, preserving parity with the previous behavior,
+including its limitation that ordinal-only exports cannot be called by name.
+`TrustImportLibOrdinals` remains a separate, default-off setting; it is not enabled by
+the system probe. Live mappings override snapshot entries without concatenating ordinal
+strings.
+
+#### Private API / UDK snapshots
+
+Generate a private snapshot by supplying the UDK's own function-to-DLL mappings.
+`-LibraryMappings` replaces the public SDK mapping inputs; private functions are not
+filtered through the public SDK list:
+
+```powershell
+.\scripts\CreateImportEntryPoints.ps1 `
+    -LibDirectories 'C:\udk\lib\x64' `
+    -DllDirectories 'C:\udk\matching-os-dlls\x64' `
+    -LibraryMappings 'C:\udk\udk.libMappings.rsp' `
+    -SdkVersion 'UDK-build-version' `
+    -OutputFile 'C:\udk\udk.importEntryPoints.rsp'
+```
+
+Keep the private snapshot with the UDK, not in this public repository. Include it in
+the UDK generation project as an emitter response file:
+
+```xml
+<ItemGroup>
+  <EmitterRsp Include="udk.importEntryPoints.rsp" />
+</ItemGroup>
+```
+
+The response file contains only `--importEntryPoint` and `PrivateFunction=#ordinal`
+mappings plus source-version comments. The UDK still supplies its normal
+function-to-DLL mappings for scraping. No OS DLLs or network access are required
+to consume the snapshot. SDK snapshot defaults precede project/UDK mappings;
+later entry-point mappings replace earlier ones.
+
 ### Split a header file among multiple namespaces
 
 If a header file doesn't cleanly map to one namespace, it should be associated with a partition and namespace that makes sense for the majority of its APIs (using the steps above for a single namespace), and then the rest of the APIs should be manually remapped using [requiredNamespacesForNames.rsp](generation/WinSDK/requiredNamespacesForNames.rsp). This file contains one line per API and follows the format `<API>=<NAMESPACE>`. It is a single file that is shared across all partitions.

@@ -1,4 +1,4 @@
-﻿//#define MakeSingleThreaded
+//#define MakeSingleThreaded
 //#define ShowMemoryInfo
 
 using System;
@@ -130,7 +130,8 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             IEnumerable<string> addedRefs,
             Dictionary<string, string> staticLibs,
-            Dictionary<string, string> apiNamesToNamespaces)
+            Dictionary<string, string> apiNamesToNamespaces,
+            Dictionary<string, string> importEntryPoints = null)
         {
             sourceDirectory = Path.GetFullPath(sourceDirectory);
 
@@ -206,7 +207,7 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath);
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath, importEntryPoints);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
