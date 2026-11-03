@@ -266,12 +266,15 @@
   <Target Name="PrepareWinmdOutputs" DependsOnTargets="ScrapeConstants">
     <Error Condition="'@(NamespaceOutput)' != '' and '%(NamespaceOutput.OutputWinmd)' == ''"
            Text="NamespaceOutput '%(NamespaceOutput.Identity)' requires OutputWinmd metadata." />
+    <PropertyGroup>
+      <_EmitPrimaryFileName>$([System.IO.Path]::GetFileName('$(OutputWinmd)'))</_EmitPrimaryFileName>
+    </PropertyGroup>
     <ItemGroup>
       <_EmitSource Include="$(GeneratedDir)\**\*.cs" Exclude="$(GeneratedDir)\obj\**" />
       <_EmitSource Remove="$(GeneratedDir)\common\autotypes.cs" Condition="'@(AutoType)' != ''" />
       <_EmitGeneratedRsp Include="$(GeneratedDir)\*.rsp" />
       <_EmitBaselineReference Include="$(Win32WinmdBinDir)\Windows.Win32.winmd;$(Win32WinmdBinDir)\Microsoft.Direct3D.D3D12.winmd"
-          Condition="'$([System.IO.Path]::GetFileName('$(OutputWinmd)'))' != 'Windows.Win32.winmd'" />
+          Condition="'$(_EmitPrimaryFileName)' != 'Windows.Win32.winmd'" />
       <_EmitBaselineReference Remove="@(_EmitBaselineReference)" Condition="!Exists('%(_EmitBaselineReference.Identity)')" />
       <_EmitOutputs Include="$(OutputWinmd);@(NamespaceOutput->'%(OutputWinmd)')" />
       <_EmitConfiguration Include="Output=$(OutputWinmd);Version=$(WinmdAssemblyVersion);Arch=$(ScanArch)" />
