@@ -130,7 +130,7 @@ namespace ClangSharpSourceToWinmdTests
             return output;
         }
 
-        private sealed class MetadataFixture : IDisposable
+        internal sealed class MetadataFixture : IDisposable
         {
             private readonly string directory = Path.Combine(Path.GetTempPath(), "Win32MetadataTests-" + Guid.NewGuid().ToString("N"));
 

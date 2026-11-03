@@ -13,6 +13,7 @@ using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using MetadataUtils;
 using Microsoft.CodeAnalysis;
@@ -43,6 +44,7 @@ namespace ClangSharpSourceToWinmd
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
         private ModuleDefinitionHandle moduleRef;
+        private ReservedBlob<GuidHandle> mvid;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
         private Dictionary<string, MethodDefinitionHandle> namesToMethodDefHandles = new Dictionary<string, MethodDefinitionHandle>();
@@ -124,11 +126,14 @@ namespace ClangSharpSourceToWinmd
 
             void InitModule(string assemblyName)
             {
+                // The MVID is filled in from a hash of the finished file in WriteWinmd,
+                // so that the same input always gives the same winmd.
+                this.mvid = this.metadataBuilder.ReserveGuid();
                 this.moduleRef =
                     this.metadataBuilder.AddModule(
                         0,
                         this.metadataBuilder.GetOrAddString(assemblyName),
-                        this.metadataBuilder.GetOrAddGuid(Guid.NewGuid()),
+                        this.mvid.Handle,
                         default,
                         default);
 
@@ -502,10 +507,21 @@ namespace ClangSharpSourceToWinmd
             var peBuilder = new ManagedPEBuilder(
                 PEHeaderBuilder.CreateLibraryHeader(),
                 new MetadataRootBuilder(this.metadataBuilder),
-                ilStream: new BlobBuilder());
+                ilStream: new BlobBuilder(),
+                deterministicIdProvider: content =>
+                {
+                    using var hash = IncrementalHash.CreateHash(HashAlgorithmName.SHA256);
+                    foreach (var blob in content)
+                    {
+                        hash.AppendData(blob.GetBytes());
+                    }
+
+                    return BlobContentId.FromHash(hash.GetHashAndReset());
+                });
 
             var peBlob = new BlobBuilder();
-            peBuilder.Serialize(peBlob);
+            var contentId = peBuilder.Serialize(peBlob);
+            new BlobWriter(this.mvid.Content).WriteGuid(contentId.Guid);
 
             string dir = Path.GetDirectoryName(outputFileName);
             if (!Directory.Exists(dir))
