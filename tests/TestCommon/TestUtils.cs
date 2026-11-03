@@ -18,7 +18,17 @@ namespace TestCommon
             return Path.Combine(BinPath, "assets");
         }
 
-        public static string Win32WinmdPath => Path.GetFullPath(Path.Combine(BinPath, @"..\..\windows.win32.winmd"));
+        public static string Win32WinmdPath => GetWinmdPath(Environment.GetEnvironmentVariable("WIN32_METADATA_TEST_WINMD"));
+
+        public static string GetWinmdPath(string path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return Path.GetFullPath(Path.Combine(BinPath, @"..\..\windows.win32.winmd"));
+            string full = Path.GetFullPath(path);
+            if (!File.Exists(full))
+                throw new FileNotFoundException("The explicitly selected integrity-test image does not exist.", full);
+            return full;
+        }
 
         public static string BinPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -50,5 +60,5 @@ namespace TestCommon
             return process.ExitCode;
         }
     }
-}
 
+}

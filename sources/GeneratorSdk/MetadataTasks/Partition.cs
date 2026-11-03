@@ -65,7 +65,10 @@ namespace MetadataTasks
                     var ns = this.item.GetMetadata("Namespace");
                     if (string.IsNullOrEmpty(ns))
                     {
-                        ns = this.GetSettingsValues("--namespace").Single();
+                        string[] namespaces = this.GetSettingsValues("--namespace").ToArray();
+                        if (namespaces.Length != 1 || string.IsNullOrWhiteSpace(namespaces[0]))
+                            throw new InvalidDataException($"Partition '{this.FullPath}' must specify exactly one nonempty namespace.");
+                        ns = namespaces[0];
                     }
 
                     lock (this.syncLock)

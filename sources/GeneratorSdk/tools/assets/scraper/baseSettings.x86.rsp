@@ -1,4 +1,4 @@
---additional
+--additional=--target=i686-pc-windows-msvc
 -mrtd
 -D_X86_=1
 --exclude

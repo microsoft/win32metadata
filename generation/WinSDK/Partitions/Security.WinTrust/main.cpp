@@ -1,5 +1,6 @@
 #define SECURITY_WIN32 // For sspi.h
 #define QCC_OS_GROUP_WINDOWS
+#define CERT_CHAIN_PARA_HAS_EXTRA_FIELDS
 
 #include "intrinfix.h"
 

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#nullable enable
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -18,27 +20,19 @@ namespace MetadataUtils
             }
         }
 
-        public bool TryGetValue(string key, out string value)
+        public bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
         {
-            bool found = false;
-
-            if (!this.items.TryGetValue(key, out value))
+            if (this.items.TryGetValue(key, out value))
+                return true;
+            foreach (var wc in wildcards)
             {
-                foreach (var wc in wildcards)
+                if (wc.IsMatch(key))
                 {
-                    if (wc.IsMatch(key))
-                    {
-                        value = wc.Value;
-                        return true;
-                    }
+                    value = wc.Value;
+                    return true;
                 }
             }
-            else
-            {
-                found = true;
-            }
-
-            return found;
+            return false;
         }
 
         private class WildcardInfo

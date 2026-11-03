@@ -1,0 +1,39 @@
+<Project>
+  <PropertyGroup>
+    <MicrosoftNoTargetsSdkImported>false</MicrosoftNoTargetsSdkImported>
+    <UseWinSDKAssets>false</UseWinSDKAssets>
+    <TaskBinDir>$(ExternalToolsDirectory)</TaskBinDir>
+    <ToolsBinDir>$(ExternalToolsDirectory)</ToolsBinDir>
+    <LibToolsBinDir>$(ExternalToolsDirectory)</LibToolsBinDir>
+    <Win32MetadataAssetsDir>$(ExternalAssetsDirectory)</Win32MetadataAssetsDir>
+    <ScriptsDir>$(ExternalScriptsDirectory)</ScriptsDir>
+    <SdkIncRoot>$(PreparedIncludeRoot)</SdkIncRoot>
+    <TargetPlatformSdkRootOverride>$(PreparedIncludeRoot)</TargetPlatformSdkRootOverride>
+    <AdditionalIncludes>$(SdkProjectDirectory)\inc;$(NativeIncludeDirectories)</AdditionalIncludes>
+    <ObjDir>$(ExternalOutputDirectory)\obj</ObjDir>
+    <CompiledHeadersDir>$(ObjDir)\CompiledHeaders</CompiledHeadersDir>
+    <OutputWinmd>$(ExternalOutputDirectory)\Windows.Win32.winmd</OutputWinmd>
+    <Win32WinmdBinDir>$(ExternalOutputDirectory)</Win32WinmdBinDir>
+    <WinmdVersion>1.0.0.0</WinmdVersion>
+    <ScanArch Condition="'$(ScanArch)' == ''">crossarch</ScanArch>
+    <ScraperHeader>$(SdkProjectDirectory)\scraper.header.txt</ScraperHeader>
+    <ConstantsScraperHeader>$(SdkProjectDirectory)\ConstantsScraper.header.txt</ConstantsScraperHeader>
+    <EnumsJson>$(SdkProjectDirectory)\enums.json</EnumsJson>
+    <ShowEmitWinmdOutputDetails>true</ShowEmitWinmdOutputDetails>
+  </PropertyGroup>
+  <ItemGroup>
+    <Partition Include="$(SdkProjectDirectory)\Partitions\**\main.cpp">
+      <Name>$([System.IO.Path]::GetFileName($([System.IO.Path]::GetDirectoryName('%(Identity)'))))</Name>
+    </Partition>
+    <FunctionPointerFixup Include="$(SdkProjectDirectory)\functionPointerFixups.json"/>
+    <AutoType Include="$(SdkProjectDirectory)\autoTypes.json"/>
+    <ManualCs Include="$(SdkProjectDirectory)\manual\*.cs"/>
+    <ScraperRsp Include="$(SdkProjectDirectory)\scraper.settings.rsp;$(SdkProjectDirectory)\libMappings.rsp;$(SdkProjectDirectory)\libMappingsManual.rsp;$(SdkProjectDirectory)\supportedOS.rsp;$(SdkProjectDirectory)\WithSetLastError.rsp"/>
+    <ConstantsScraperRsp Include="$(SdkProjectDirectory)\ConstantsScraper.settings.rsp;$(SdkProjectDirectory)\requiredNamespacesForNames.rsp"/>
+    <EmitterRsp Include="$(SdkProjectDirectory)\emitter.settings.rsp;$(SdkProjectDirectory)\requiredNamespacesForNames.rsp;$(SdkProjectDirectory)\documentationMappings.rsp"/>
+  </ItemGroup>
+  <Import Project="$(ExternalSdkTargetsFile)"/>
+  <PropertyGroup>
+    <EnumsJson>$(SdkProjectDirectory)\enums.json</EnumsJson>
+  </PropertyGroup>
+</Project>

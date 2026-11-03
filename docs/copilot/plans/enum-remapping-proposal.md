@@ -1,11 +1,39 @@
 # Enum Remapping Proposal: Replacing enums.json with Header Declarations
 
 *Created: April 2026*
-*Status: Proposal — validated end-to-end with ClangSharp v17*
+*Status: Historical prototype; superseded by the metadata-only group contract below.*
 
 ---
 
-## Summary
+## Current authoring contract
+
+Use the
+[shift-left annotation specification](shift-left-annotation-spec.md#enum-and-constant-migration),
+not the conditional-enum implementation retained below for historical context.
+
+```cpp
+_Win32_FlagsEnum_(SET_THEME_APP_PROPERTIES_FLAGS, DWORD,
+    STAP_ALLOW_NONCLIENT, STAP_ALLOW_CONTROLS, STAP_ALLOW_WEBCONTENT);
+
+void SetThemeAppProperties(
+    _Win32_AssociatedEnum_(SET_THEME_APP_PROPERTIES_FLAGS) DWORD dwFlags);
+```
+
+`_Win32_Enum_` is the non-flags form. Both macros expand to nothing outside
+`WIN32METADATA`; they do not introduce ordinary-consumer typedefs or symbols.
+In metadata mode, the first Clang AST supplies a typedef's storage and the
+annotation's compiled value expressions. The reader lowers that carrier to an
+unscoped logical enum. Keep native signatures unchanged and annotate their uses.
+Rare historical member labels use the spec's explicit name/value carrier.
+
+Do not use scoped synthetic enums, `#else` integer aliases, signature retargeting,
+`push_macro`/`undef` scaffolding, or a custom macro-expression parser. Native SDK
+enums retain their genuine scopedness and `clang::flag_enum` attributes.
+
+## Historical prototype
+
+The remaining sections describe the earlier experiment, not the adoption plan or
+current tooling contract. Their validation statements apply only to that prototype.
 
 This proposal replaces the `enums.json` sidecar file (~37K lines, ~1,072 enum
 definitions) with conditional C++ enum declarations in the SDK headers, eliminating
@@ -49,7 +77,7 @@ enums.
 
 ---
 
-## Proposed Approach: Conditional Enum Declarations
+## Historical Approach: Conditional Enum Declarations
 
 ### Core pattern
 

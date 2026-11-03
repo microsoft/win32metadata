@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 
 namespace Win32MetadataScraperTests
@@ -9,6 +10,40 @@ namespace Win32MetadataScraperTests
     /// </summary>
     public class TagTypedefDiscoveryTests
     {
+
+        [Fact]
+        public void NativeAliasProofRetainsQualificationAndCanonicalTagIdentity()
+        {
+            var discovery = HeaderSnippetParser.ParseAndDiscover(@"
+typedef struct _COLOR { float Red; } COLOR;
+typedef COLOR COLOR_ALIAS;
+typedef COLOR_ALIAS CHAINED_ALIAS;
+typedef COLOR* COLOR_POINTER;
+namespace Other { typedef struct _COLOR { int Other; } COLOR_ALIAS; }
+");
+            Assert.Equal("_COLOR", discovery.NativeTypedefTags["COLOR"]);
+            Assert.Equal("_COLOR", discovery.NativeTypedefTags["COLOR_ALIAS"]);
+            Assert.Equal("_COLOR", discovery.NativeTypedefTags["CHAINED_ALIAS"]);
+            Assert.Equal("Other::_COLOR", discovery.NativeTypedefTags["Other::COLOR_ALIAS"]);
+            Assert.False(discovery.NativeTypedefTags.ContainsKey("COLOR_POINTER"));
+            var configured = new Dictionary<string, string> { ["_COLOR"] = "CHAINED_ALIAS___" };
+            Assert.Equal("@CHAINED_ALIAS___", Win32MetadataScraper.RemapDiscovery.CreateBindingRemaps(
+                discovery, configured, new HashSet<string>())["_COLOR"]);
+            Assert.Equal("CHAINED_ALIAS___", configured["_COLOR"]);
+        }
+
+        [Fact]
+        public void ManyDirectTypedefsKeepAliasOrderWithoutDuplicateDiscovery()
+        {
+            string declarations = string.Join("\n", Enumerable.Range(0, 2000).Select(index =>
+                $"typedef struct _TAG_{index} {{ int value; }} TYPE_{index};\n" +
+                $"typedef struct _TAG_{index} TYPE_ALIAS_{index};"));
+            var discovery = HeaderSnippetParser.ParseAndDiscover(declarations);
+
+            for (int index = 0; index < 2000; index++)
+                Assert.Equal(new[] { $"TYPE_{index}", $"TYPE_ALIAS_{index}" }, discovery.TagToTypedefs[$"_TAG_{index}"]);
+        }
+
         // ── Simple tag-typedef patterns ──────────────────────────────────────
 
         [Fact]
@@ -496,6 +531,19 @@ namespace Win32MetadataScraperTests
     /// </summary>
     public class FunctionPointerDiscoveryTests
     {
+        [Fact]
+        public void BareFunctionWithoutPointerAliasRetainsItsNativeFunctionType()
+        {
+            var result = HeaderSnippetParser.ParseAndResolveFnPtrFixups(@"
+                typedef void __stdcall NATIVE_CALLBACK(unsigned long value);
+                typedef void (__stdcall *POINTER_CALLBACK)(unsigned long value);
+            ");
+
+            Assert.Empty(result.FnPtrRemaps);
+            Assert.Empty(result.FnPtrExcludes);
+            Assert.Equal(new[] { "NATIVE_CALLBACK" }, result.ReducePointerLevel);
+        }
+
         // ── Two-step function pointer pattern ────────────────────────────────
 
         [Fact]

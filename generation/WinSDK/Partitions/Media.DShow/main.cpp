@@ -7,6 +7,7 @@
 #include <sdkddkver.h>
 
 //#include <uuids.h>
+#include <ddraw.h>
 #include <ks.h>
 #include <ksmedia.h>
 //#include <ksuuids.h>
@@ -23,7 +24,6 @@
 #include <ocidl.h>
 #include <wingdi.h>
 #include <camerauicontrol.h>
-#include <ddraw.h>
 #include <wmcodecdsp.h>
 #include <windows.devices.midi.h>
 #include <qnetwork.h>

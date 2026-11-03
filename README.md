@@ -47,6 +47,38 @@ See [PROJECTIONS.md](docs/projections.md).
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+## Comparing generated metadata
+
+Run `.\scripts\CompareBinToLastRelease.ps1 -SkipInstallTools` after building to
+compare the generated winmd with the previous release. For a compiler upgrade,
+use `WinmdUtils compare --first <old.winmd> --second <new.winmd>` with both images
+generated from the same SDK and unchanged annotation inputs.
+
+The comparison checks positional parameter types, sequential instance-field
+order, interface method order and base types. Reordering repeated custom
+attributes does not count as a change, but their values and multiplicity do.
+
+## Header annotations in the C# toolchain
+
+The scraper supports the [shift-left annotation vocabulary and placement rules](docs/copilot/plans/shift-left-annotation-spec.md).
+Enable it for an individual partition by adding `parse-win32-annotations` under
+`--config` in that partition's `settings.rsp`. Annotated headers include
+`win32metadata_annotations.h` from the ingested SDK's `shared` directory.
+This option is not enabled globally; existing partitions retain their legacy inputs.
+
+The scraper captures native declaration ownership, evaluates invalid handle
+constants in their declaration-time macro context, and projects the facts into
+the existing C# emitter. Producer ownership is emitted on return/output parameter
+rows, not handle types. Header import overrides are applied before unmapped
+imports are removed, and annotation differences survive architecture merging.
+SAL and MIDL comments remain the source for direction, buffers, and `[retval]`.
+
+Invalid header annotations fail with source-located `WMA001` diagnostics.
+Conflicting legacy attribute remappings fail with `WMA002`; identical facts
+deduplicate. Unsupported annotated typedef shapes, including array aliases,
+fail explicitly rather than losing their metadata. The current implementation
+uses the existing matched ClangSharp 21 stack and C++17 scrape mode.
+
 # Licensing
 
 ## MIT
