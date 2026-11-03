@@ -103,6 +103,7 @@ extern "C"{
 
 #pragma once
 DEFINE_GUID(CLSID_D3DShaderCacheInstallerFactory,    0x16195a0b, 0x607c, 0x41f1, 0xbf, 0x03, 0xc7, 0x69, 0x4d, 0x60, 0xa8, 0xd4);
+#define D3D_SHADER_CACHE_NO_SODB L""
 typedef 
 enum D3D_SHADER_CACHE_APP_REGISTRATION_SCOPE
     {
