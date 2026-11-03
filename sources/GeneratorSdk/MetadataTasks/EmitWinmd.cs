@@ -81,6 +81,14 @@ namespace MetadataTasks
                 Path.GetFileName(win32WinmdPath)))
             {
                 builder.AppendSwitchIfNotNull("--ref ", win32WinmdPath);
+                string d3d12WinmdPath = Path.Combine(this.Win32WinmdBinDir, "Microsoft.Direct3D.D3D12.winmd");
+                if (File.Exists(d3d12WinmdPath) &&
+                    !StringComparer.OrdinalIgnoreCase.Equals(Path.GetFileName(this.outputWinmdFullPath), Path.GetFileName(d3d12WinmdPath)) &&
+                    !(this.NamespaceOutputs ?? Array.Empty<ITaskItem>()).Any(route =>
+                        StringComparer.OrdinalIgnoreCase.Equals(Path.GetFileName(route.GetMetadata("OutputWinmd")), Path.GetFileName(d3d12WinmdPath))))
+                {
+                    builder.AppendSwitchIfNotNull("--ref ", d3d12WinmdPath);
+                }
             }
 
             builder.AppendSwitchIfNotNull("--version ", this.WinmdVersion);

@@ -270,10 +270,13 @@
       <_EmitSource Include="$(GeneratedDir)\**\*.cs" Exclude="$(GeneratedDir)\obj\**" />
       <_EmitSource Remove="$(GeneratedDir)\common\autotypes.cs" Condition="'@(AutoType)' != ''" />
       <_EmitGeneratedRsp Include="$(GeneratedDir)\*.rsp" />
+      <_EmitBaselineReference Include="$(Win32WinmdBinDir)\Windows.Win32.winmd;$(Win32WinmdBinDir)\Microsoft.Direct3D.D3D12.winmd"
+          Condition="'$([System.IO.Path]::GetFileName('$(OutputWinmd)'))' != 'Windows.Win32.winmd'" />
+      <_EmitBaselineReference Remove="@(_EmitBaselineReference)" Condition="!Exists('%(_EmitBaselineReference.Identity)')" />
       <_EmitOutputs Include="$(OutputWinmd);@(NamespaceOutput->'%(OutputWinmd)')" />
       <_EmitConfiguration Include="Output=$(OutputWinmd);Version=$(WinmdAssemblyVersion);Arch=$(ScanArch)" />
       <_EmitConfiguration Include="@(NamespaceOutput->'%(Identity)=%(OutputWinmd)')" />
-      <_EmitConfiguration Include="@(EmitterRsp);@(EmitterReference)" />
+      <_EmitConfiguration Include="@(EmitterRsp);@(EmitterReference);@(_EmitBaselineReference)" />
       <_EmitConfiguration Include="@(_EmitSource);@(_EmitGeneratedRsp);@(AutoType)" />
     </ItemGroup>
     <WriteLinesToFile File="$(ObjDir)\winmd-emission.inputs" Lines="@(_EmitConfiguration)" Overwrite="true" WriteOnlyWhenDifferent="true" />
@@ -290,7 +293,7 @@
   </Target>
 
   <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="@(_EmitSource);$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp);@(EmitterReference);@(_EmitGeneratedRsp);$(ObjDir)\winmd-emission.inputs;$(ToolsBinDir)\ClangSharpSourceToWinmd.dll;$(TaskBinDir)\MetadataTasks.dll;$(MSBuildThisFileFullPath)"
+    Inputs="@(_EmitSource);$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp);@(EmitterReference);@(_EmitBaselineReference);@(_EmitGeneratedRsp);$(ObjDir)\winmd-emission.inputs;$(ToolsBinDir)\ClangSharpSourceToWinmd.dll;$(TaskBinDir)\MetadataTasks.dll;$(MSBuildThisFileFullPath)"
     Outputs="@(_EmitOutputs)"
     DependsOnTargets="PrepareWinmdOutputs">
 
