@@ -41,6 +41,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <OutputWinmd Condition="'$(OutputWinmd)' == ''">..\..\bin\Windows.Win32.winmd</OutputWinmd>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
+    <WinmdAssemblyVersion>1.0.0.0</WinmdAssemblyVersion>
     <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
   </PropertyGroup>
 
@@ -65,4 +66,10 @@
   </ItemGroup>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
+
+  <ItemGroup Condition="'$(EmitDirect3D12Separately)' != 'false'">
+    <NamespaceOutput Include="Windows.Win32.Graphics.Direct3D12">
+      <OutputWinmd>$([System.IO.Path]::Combine($([System.IO.Path]::GetDirectoryName('$(OutputWinmd)')), 'Microsoft.Direct3D.D3D12.winmd'))</OutputWinmd>
+    </NamespaceOutput>
+  </ItemGroup>
 </Project>

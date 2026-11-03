@@ -42,6 +42,10 @@ namespace ClangSharpSourceToWinmd
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
+        private readonly NamespaceOutputs outputs;
+        private readonly string outputPath;
+        private readonly Version outputVersion;
+        private readonly string assemblyName;
         private ModuleDefinitionHandle moduleRef;
         private Dictionary<string, TypeReferenceHandle> namesToTypeRefHandles = new Dictionary<string, TypeReferenceHandle>();
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
@@ -74,9 +78,15 @@ namespace ClangSharpSourceToWinmd
             HashSet<string> reducePointerLevels,
             HashSet<string> forceGuidConsts,
             Version assemblyVersion, 
-            string assemblyName)
+            string assemblyName,
+            NamespaceOutputs outputs = null,
+            string outputPath = null)
         {
             this.compilation = compilation;
+            this.outputs = outputs;
+            this.outputPath = outputPath;
+            this.outputVersion = assemblyVersion;
+            this.assemblyName = assemblyName;
             this.reducePointerLevels = reducePointerLevels;
             this.forceGuidConsts = forceGuidConsts;
 
@@ -191,6 +201,57 @@ namespace ClangSharpSourceToWinmd
         public ReadOnlyCollection<GeneratorDiagnostic> GetDiagnostics()
         {
             return this.diagnostics.AsReadOnly();
+        }
+
+        public static IReadOnlyList<ClangSharpSourceWinmdGenerator> GenerateWinmdsForCompilation(
+            ClangSharpSourceCompilation compilation,
+            Dictionary<string, string> typeImports,
+            HashSet<string> reducePointerLevels,
+            HashSet<string> forceGuidConsts,
+            Version version,
+            NamespaceOutputs outputs)
+        {
+            var generators = new List<ClangSharpSourceWinmdGenerator>();
+            var identities = new HashSet<string>(outputs.OutputPaths.Select(Path.GetFileName), StringComparer.OrdinalIgnoreCase);
+            foreach (var reference in compilation.CSharpCompilation.References)
+            {
+                var assembly = (IAssemblySymbol)compilation.CSharpCompilation.GetAssemblyOrModuleSymbol(reference);
+                foreach (var dependency in assembly.Modules.SelectMany(m => m.ReferencedAssemblies))
+                {
+                    if (identities.Contains(dependency.Name) &&
+                        (dependency.Version != version || !dependency.PublicKeyToken.IsDefaultOrEmpty ||
+                         !string.IsNullOrEmpty(dependency.CultureName)))
+                    {
+                        throw new ArgumentException($"Reference '{assembly.Name}' expects '{dependency}', but the configured output is unsigned, neutral, version {version}.");
+                    }
+                }
+            }
+
+            foreach (string path in outputs.OutputPaths)
+            {
+                Console.WriteLine($"  Output: {path}");
+                if (compilation.CSharpCompilation.ReferencedAssemblyNames.Any(a =>
+                    StringComparer.OrdinalIgnoreCase.Equals(a.Name, Path.GetFileName(path))))
+                {
+                    throw new ArgumentException($"Output identity '{Path.GetFileName(path)}' conflicts with an input reference.");
+                }
+
+                var generator = new ClangSharpSourceWinmdGenerator(
+                    compilation.CSharpCompilation, typeImports, reducePointerLevels, forceGuidConsts,
+                    version, Path.GetFileName(path), outputs, path);
+                generator.PopulateMetadataBuilder();
+                generators.Add(generator);
+            }
+
+            if (generators.All(g => !g.diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error)))
+            {
+                for (int i = 0; i < generators.Count; i++)
+                {
+                    generators[i].WriteWinmd(outputs.OutputPaths[i]);
+                }
+            }
+
+            return generators;
         }
 
         private static string FixFinalName(string name)
@@ -439,24 +500,6 @@ namespace ClangSharpSourceToWinmd
             this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
         }
 
-        private void CacheInterfaceInfo(InterfaceInfo interfaceInfo)
-        {
-            string fullName = $"{interfaceInfo.Namespace}.{interfaceInfo.Name}";
-            var symbol = this.compilation.GetTypeByMetadataName(fullName);
-            if (symbol != null)
-            {
-                this.interfaceSymbols.Add(symbol);
-                this.interfaceMethodCount[symbol] = interfaceInfo.ImplementedMethodCount;
-                if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
-                {
-                    symbols = new List<ISymbol>();
-                    this.namesToInterfaceSymbols[symbol.Name] = symbols;
-                }
-
-                symbols.Add(symbol);
-            }
-        }
-
         private void CacheGuidOnlyStruct(StructDeclarationSyntax structNode)
         {
             if (!this.forceGuidConsts.Contains(structNode.Identifier.ValueText))
@@ -544,65 +587,138 @@ namespace ClangSharpSourceToWinmd
                     interfaceWalker.Visit(tree.GetRoot());
                 }
 
-                var allWinmds = this.compilation.References.Where(r => !r.Display.EndsWith("netstandard.dll")).Select(r => MetadataUtils.WinmdUtils.LoadFromFile(r.Display)).ToList();
-
-                foreach (var winmd in allWinmds)
+                foreach (var reference in this.compilation.References.Where(r => !r.Display.EndsWith("netstandard.dll")))
                 {
-                    foreach (var typeInfo in winmd.GetTypes(allWinmds))
+                    var assembly = (IAssemblySymbol)this.compilation.GetAssemblyOrModuleSymbol(reference);
+                    GatherReferencedTypes(assembly.GlobalNamespace);
+                }
+
+                void GatherReferencedTypes(INamespaceSymbol ns)
+                {
+                    foreach (var symbol in ns.GetTypeMembers())
                     {
-                        if (typeInfo is MetadataUtils.InterfaceInfo interfaceInfo)
+                        if (symbol.TypeKind == TypeKind.Interface)
                         {
-                            this.CacheInterfaceInfo(interfaceInfo);
+                            this.CacheReferencedInterface(symbol);
                         }
-                        else if (typeInfo is MetadataUtils.StructInfo)
+                        else if (symbol.TypeKind == TypeKind.Struct || symbol.TypeKind == TypeKind.Delegate)
                         {
-                            var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
-                            var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
-
-                            if (typeSymbol != null)
-                            {
-                                this.nameToSymbols[typeInfo.Name] = typeSymbol;
-                            }
-                        }
-                        else if (typeInfo is MetadataUtils.DelegateTypeInfo)
-                        {
-                            var fullName = $"{typeInfo.Namespace}.{typeInfo.Name}";
-                            var typeSymbol = this.compilation.GetTypeByMetadataName(fullName);
-
-                            if (typeSymbol != null)
-                            {
-                                this.nameToSymbols[typeInfo.Name] = typeSymbol;
-                            }
+                            this.nameToSymbols[symbol.Name] = symbol;
                         }
                     }
-                }
 
-                foreach (var winmd in allWinmds)
-                {
-                    winmd.Dispose();
+                    foreach (var child in ns.GetNamespaceMembers())
+                    {
+                        GatherReferencedTypes(child);
+                    }
                 }
             }
+        }
+
+        private void CacheReferencedInterface(INamedTypeSymbol symbol)
+        {
+            this.interfaceSymbols.Add(symbol);
+            this.interfaceMethodCount[symbol] = this.GetReferencedInterfaceMethodCount(symbol,
+                new HashSet<ISymbol>(SymbolEqualityComparer.Default), new HashSet<ISymbol>(SymbolEqualityComparer.Default));
+            if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
+            {
+                symbols = new List<ISymbol>();
+                this.namesToInterfaceSymbols.Add(symbol.Name, symbols);
+            }
+
+            symbols.Add(symbol);
+        }
+
+        private int GetReferencedInterfaceMethodCount(INamedTypeSymbol symbol, HashSet<ISymbol> visited, HashSet<ISymbol> counted)
+        {
+            if (!visited.Add(symbol))
+            {
+                throw new InvalidOperationException($"Interface inheritance cycle at '{symbol}'.");
+            }
+
+            if (!counted.Add(symbol))
+            {
+                visited.Remove(symbol);
+                return 0;
+            }
+
+            if (symbol.TypeKind == TypeKind.Error)
+            {
+                var local = this.compilation.GetTypeByMetadataName(symbol.ToDisplayString());
+                string owner = this.outputs == null ? this.assemblyName :
+                    Path.GetFileName(this.outputs.GetOutput(symbol.ContainingNamespace.ToDisplayString()));
+                if (symbol.ContainingAssembly?.Name == owner &&
+                    local != null && this.interfaceMethodCount.TryGetValue(local, out int localCount))
+                {
+                    visited.Remove(symbol);
+                    return localCount;
+                }
+
+                throw new InvalidOperationException($"Could not resolve inherited interface '{symbol}'.");
+            }
+
+            int count = symbol.GetMembers().OfType<IMethodSymbol>().Count(m => m.MethodKind == MethodKind.Ordinary);
+            foreach (var inherited in symbol.Interfaces)
+            {
+                count += this.GetReferencedInterfaceMethodCount(inherited, visited, counted);
+            }
+
+            visited.Remove(symbol);
+            return count;
+        }
+
+        private bool Owns(SyntaxNode node)
+        {
+            var symbol = this.GetModel(node).GetDeclaredSymbol(node);
+            return this.outputs == null || this.outputs.GetOutput(symbol.ContainingNamespace.ToDisplayString()) == this.outputPath;
+        }
+
+        private EntityHandle GetSourceScope(string ns)
+        {
+            string owner = this.outputs?.GetOutput(ns);
+            if (owner == null || owner == this.outputPath)
+            {
+                return this.moduleRef;
+            }
+
+            string name = Path.GetFileName(owner);
+            if (!this.assemblyNamesToRefHandles.TryGetValue(name, out var handle))
+            {
+                handle = this.metadataBuilder.AddAssemblyReference(
+                    this.metadataBuilder.GetOrAddString(name),
+                    this.outputVersion,
+                    default, default, default, default);
+                this.assemblyNamesToRefHandles.Add(name, handle);
+            }
+
+            return handle;
         }
 
         private EntityHandle GetTypeReference(ISymbol symbol)
         {
             EntityHandle scopeRef;
 
-            if (symbol.ContainingAssembly.Name == "?")
+            if (SymbolEqualityComparer.Default.Equals(symbol.ContainingAssembly, this.compilation.Assembly))
             {
-                scopeRef = this.moduleRef;
+                scopeRef = this.GetSourceScope(symbol.ContainingNamespace.ToDisplayString());
             }
             else
             {
-                this.assemblyNamesToRefHandles.TryGetValue(symbol.ContainingAssembly.Name, out var assemblyRef);
+                if (!this.assemblyNamesToRefHandles.TryGetValue(symbol.ContainingAssembly.Name, out var assemblyRef))
+                {
+                    throw new InvalidOperationException($"Could not resolve assembly '{symbol.ContainingAssembly.Name}' for '{symbol}'.");
+                }
 
                 scopeRef = assemblyRef;
             }
 
-            // Change from namepace.parent.self => parent/self
-            string name = symbol.ToString().Substring(symbol.ContainingNamespace.ToString().Length + 1).Replace('.', '/');
+            string name = symbol.MetadataName;
+            for (var parent = symbol.ContainingType; parent != null; parent = parent.ContainingType)
+            {
+                name = parent.MetadataName + "/" + name;
+            }
 
-            return this.GetTypeReference(symbol.ContainingNamespace.ToString(), name, scopeRef);
+            return this.GetTypeReference(symbol.ContainingNamespace.ToDisplayString(), name, scopeRef);
         }
 
         private EntityHandle GetTypeReference(string @namespace, string name)
@@ -613,28 +729,27 @@ namespace ClangSharpSourceToWinmd
         private EntityHandle GetTypeReference(string @namespace, string name, EntityHandle scopeRef)
         {
             name = FixArchSpecificName(name);
+            if (scopeRef.IsNil)
+            {
+                if (@namespace == "System" || @namespace.StartsWith("System.", StringComparison.Ordinal))
+                {
+                    scopeRef = this.assemblyNamesToRefHandles[SystemAssemblyName];
+                }
+                else
+                {
+                    scopeRef = this.GetSourceScope(@namespace);
+                }
+            }
 
-            string fullname = GetQualifiedName(@namespace, name);
+            string fullname = GetQualifiedName(@namespace, name) + ":" + MetadataTokens.GetToken(scopeRef);
             if (!this.namesToTypeRefHandles.TryGetValue(fullname, out var typeRef))
             {
-                if (scopeRef == default)
-                {
-                    if (@namespace.StartsWith("System"))
-                    {
-                        scopeRef = this.assemblyNamesToRefHandles[SystemAssemblyName];
-                    }
-                    else
-                    {
-                        scopeRef = this.moduleRef;
-                    }
-                }
-
                 int lastPlus = name.LastIndexOf('/');
                 if (lastPlus != -1)
                 {
                     string parent = name.Substring(0, lastPlus);
                     name = name.Substring(lastPlus + 1);
-                    scopeRef = this.GetTypeReference(@namespace, parent);
+                    scopeRef = this.GetTypeReference(@namespace, parent, scopeRef);
 
                     // No longer using the namespace name when a dervied ref
                     @namespace = null;
@@ -1540,7 +1655,7 @@ namespace ClangSharpSourceToWinmd
                     typeAttributes,
                     nsHandle,
                     this.metadataBuilder.GetOrAddString(name),
-                    this.GetTypeReference("System", node.BaseList is null ? "Object" : node.BaseList.Types[0].ToString()),
+                    this.GetTypeReference(symbol.BaseType),
                     fieldList: fieldDefinition,
                     methodList: methodDefinition);
 
@@ -1876,10 +1991,7 @@ namespace ClangSharpSourceToWinmd
                         .First(c => c.Parameters.Length == argTypes.Length && c.Parameters.Select(param => param.Type)
                         .SequenceEqual(typeSymbols, SymbolEqualityComparer.Default));
 
-                var @namespace = interfaceTypeAttr.ContainingNamespace.ToString();
-                var name = interfaceTypeAttr.Name;
-
-                var typeRef = this.GetTypeReference(@namespace, name);
+                var typeRef = this.GetTypeReference(interfaceTypeAttr);
 
                 ctorRef = this.CreateAndCacheCtorRefForTypeRef(typeRef, parameters, ctorKey);
             }
@@ -1919,10 +2031,7 @@ namespace ClangSharpSourceToWinmd
             string ctorKey = attributeData.AttributeConstructor.ToDisplayString();
             if (!this.ctorNamesToRefs.TryGetValue(ctorKey, out var ctorRef))
             {
-                var @namespace = attributeData.AttributeClass.ContainingNamespace.ToString();
-                var name = attributeData.AttributeClass.Name;
-
-                var typeRef = this.GetTypeReference(@namespace, name);
+                var typeRef = this.GetTypeReference(attributeData.AttributeClass);
 
                 List<Parameter> parameters = new List<Parameter>();
                 foreach (var arg in attributeData.ConstructorArguments)
@@ -2345,6 +2454,10 @@ namespace ClangSharpSourceToWinmd
 
             public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
+                if (!this.parent.Owns(node))
+                {
+                    return;
+                }
                 try
                 {
                     this.parent.WriteEnumDef(node);
@@ -2358,6 +2471,10 @@ namespace ClangSharpSourceToWinmd
 
             public override void VisitStructDeclaration(StructDeclarationSyntax node)
             {
+                if (!this.parent.Owns(node))
+                {
+                    return;
+                }
                 try
                 {
                     this.parent.WriteStructDef(node);
@@ -2371,6 +2488,10 @@ namespace ClangSharpSourceToWinmd
 
             public override void VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
+                if (!this.parent.Owns(node))
+                {
+                    return;
+                }
                 try
                 {
                     this.parent.WriteDelegateDef(node);
@@ -2384,6 +2505,10 @@ namespace ClangSharpSourceToWinmd
 
             public override void VisitClassDeclaration(ClassDeclarationSyntax node)
             {
+                if (!this.parent.Owns(node))
+                {
+                    return;
+                }
                 try
                 {
                     this.parent.WriteClassDef(node);

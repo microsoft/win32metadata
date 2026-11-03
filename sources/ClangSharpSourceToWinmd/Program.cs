@@ -25,6 +25,7 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--arch", () => "x64", "The CPU architecture."),
                 new Option<string>("--outputFileName", "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
+                new Option<string>("--namespaceOutput", "Route a namespace and its descendants to Namespace=Output.winmd. Overlapping routes are not allowed.", ArgumentArity.OneOrMore),
                 new Option<string>("--memberRemap", "Remaps fields and parameters by adding attributes or changing the type.", ArgumentArity.OneOrMore),
 
                 new Option<string>("--enumAddition", "Add a member to an enum.", ArgumentArity.OneOrMore),
@@ -49,6 +50,16 @@ namespace ClangSharpSourceToWinmd
             string arch = context.ParseResult.ValueForOption<string>("--arch");
             string outputFileName = context.ParseResult.ValueForOption<string>("--outputFileName");
             string version = context.ParseResult.ValueForOption<string>("--version");
+            NamespaceOutputs outputs;
+            try
+            {
+                outputs = new NamespaceOutputs(outputFileName, context.ParseResult.ValueForOption<string[]>("--namespaceOutput"));
+            }
+            catch (ArgumentException e)
+            {
+                Console.WriteLine(new GeneratorDiagnostic(e.Message, Microsoft.CodeAnalysis.DiagnosticSeverity.Error));
+                return -1;
+            }
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
             var enumAdditionsNameValuePairs = context.ParseResult.ValueForOption<string[]>("--enumAddition");
             var enumMakeFlags = context.ParseResult.ValueForOption<string[]>("--enumMakeFlags");
@@ -116,7 +127,8 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces);
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs, apiNamesToNamespaces,
+                    Path.GetFileName(outputs.PrimaryOutput));
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");
@@ -153,18 +165,18 @@ namespace ClangSharpSourceToWinmd
             mainWatch.Restart();
 
             Console.WriteLine($"Emitting {outputFileName}...");
-            var generator = 
-                ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(
+            var generators =
+                ClangSharpSourceWinmdGenerator.GenerateWinmdsForCompilation(
                     clangSharpCompliation, 
                     typeImports,
                     reducePointerLevels,
                     forceGuidConsts,
                     assemblyVersion, 
-                    outputFileName);
+                    outputs);
 
             mainWatch.Stop();
 
-            foreach (GeneratorDiagnostic diag in generator.GetDiagnostics())
+            foreach (GeneratorDiagnostic diag in generators.SelectMany(g => g.GetDiagnostics()))
             {
                 Console.WriteLine(diag.ToString());
             }
@@ -172,7 +184,7 @@ namespace ClangSharpSourceToWinmd
             Console.WriteLine($"{OutputUtils.FormatTimespan(mainWatch.Elapsed)}");
             ClangSharpSourceCompilation.ShowMemory();
 
-            return generator.WroteWinmd ? 0 : -1;
+            return generators.All(g => g.WroteWinmd) ? 0 : -1;
         }
 
         private static readonly Regex EnumAddtionRegex = new Regex(@"([^\:]+)::([^\:]+)=(.+)");

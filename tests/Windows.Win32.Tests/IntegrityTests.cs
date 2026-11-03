@@ -18,20 +18,39 @@ namespace Windows.Win32.Tests
         }
 
         [Fact]
-        public void Direct3D12IsDefinedInWindowsMetadata()
+        public void Direct3D12IsDefinedInWindowsSdkBaseline()
         {
-            using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
-            using var pe = new PEReader(stream);
-            MetadataReader reader = pe.GetMetadataReader(MetadataReaderOptions.None);
-            var types = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
-                .Where(type => reader.GetString(type.Namespace) == "Windows.Win32.Graphics.Direct3D12")
-                .Select(type => reader.GetString(type.Name)).ToArray();
+            var paths = TestUtils.Win32WinmdPaths;
+            using var windowsStream = File.OpenRead(paths[0]);
+            using var windowsPe = new PEReader(windowsStream);
+            var windows = windowsPe.GetMetadataReader(MetadataReaderOptions.None);
+            if (paths.Length == 1)
+            {
+                Assert.Contains(windows.TypeDefinitions.Select(windows.GetTypeDefinition),
+                    type => windows.GetString(type.Namespace) == "Windows.Win32.Graphics.Direct3D12" &&
+                            windows.GetString(type.Name) == "ID3D12Device");
+                return;
+            }
 
-            Assert.Contains("ID3D12Device", types);
-            Assert.Contains("ID3D12Resource", types);
-            Assert.Contains("D3D12_RESOURCE_DESC", types);
-            Assert.DoesNotContain(reader.AssemblyReferences.Select(reader.GetAssemblyReference),
-                reference => reader.GetString(reference.Name) == "Microsoft.Direct3D.D3D12.winmd");
+            using var d3dStream = File.OpenRead(paths[1]);
+            using var d3dPe = new PEReader(d3dStream);
+            var d3d = d3dPe.GetMetadataReader(MetadataReaderOptions.None);
+            Assert.Equal(new System.Version(1, 0, 0, 0), windows.GetAssemblyDefinition().Version);
+            Assert.Equal(new System.Version(1, 0, 0, 0), d3d.GetAssemblyDefinition().Version);
+            Assert.DoesNotContain(windows.TypeDefinitions.Select(windows.GetTypeDefinition),
+                type => windows.GetString(type.Namespace) == "Windows.Win32.Graphics.Direct3D12");
+            foreach (string name in new[] { "ID3D12Device", "ID3D12Resource", "D3D12_RESOURCE_DESC" })
+            {
+                Assert.Contains(d3d.TypeDefinitions.Select(d3d.GetTypeDefinition),
+                    type => d3d.GetString(type.Namespace) == "Windows.Win32.Graphics.Direct3D12" &&
+                            d3d.GetString(type.Name) == name);
+            }
+            Assert.Contains(windows.AssemblyReferences.Select(windows.GetAssemblyReference),
+                reference => windows.GetString(reference.Name) == "Microsoft.Direct3D.D3D12.winmd" &&
+                             reference.Version == d3d.GetAssemblyDefinition().Version);
+            Assert.Contains(d3d.AssemblyReferences.Select(d3d.GetAssemblyReference),
+                reference => d3d.GetString(reference.Name) == "Windows.Win32.winmd" &&
+                             reference.Version == windows.GetAssemblyDefinition().Version);
         }
 
         [Fact]
@@ -99,10 +118,24 @@ namespace Windows.Win32.Tests
         private void ExecWinmdUtils(string args)
         {
             string winmdUtilsDll = Path.Combine(TestUtils.BinPath, "winmdutils.dll");
-            string fullArgs = $"\"{winmdUtilsDll}\" {args}";
-            int ret = TestUtils.ExecuteCmd("dotnet", fullArgs, out var outputText, this.outputHelper);
-            this.outputHelper.WriteLine(outputText);
-            Assert.Equal(0, ret);
+            var paths = TestUtils.Win32WinmdPaths;
+            foreach (string path in paths)
+            {
+                string selectedArgs = args.Replace($"\"{TestUtils.Win32WinmdPath}\"", $"\"{path}\"");
+                if (args.StartsWith("showEmptyDelegates") || args.StartsWith("showPointersToDelegates"))
+                {
+                    var references = paths.Where(p => p != path).ToArray();
+                    if (references.Length > 0)
+                    {
+                        selectedArgs += " --ref " + string.Join(" ", references.Select(p => $"\"{p}\""));
+                    }
+                }
+
+                string fullArgs = $"\"{winmdUtilsDll}\" {selectedArgs}";
+                int ret = TestUtils.ExecuteCmd("dotnet", fullArgs, out var outputText, this.outputHelper);
+                this.outputHelper.WriteLine(outputText);
+                Assert.Equal(0, ret);
+            }
         }
     }
 }

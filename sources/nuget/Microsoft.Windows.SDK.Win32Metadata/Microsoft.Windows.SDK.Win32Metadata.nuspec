@@ -7,8 +7,8 @@
     <owners>Microsoft</owners>
     <title>Win32 Metadata</title>
     <copyright>© Microsoft Corporation. All rights reserved.</copyright>
-    <summary>This packages provides the Win32 API surface as a winmd (Windows metadata) file.</summary>
-    <description>This packages provides the Win32 API surface as a winmd (Windows metadata) file. It is intended to be used as the basis for generating language-specific projections. It is not loadable as a CLR assembly.</description>
+    <summary>This package provides the Win32 API surface as Windows metadata files.</summary>
+    <description>This package provides the Win32 API surface as Windows metadata files, including a separate Windows SDK D3D12 baseline. They are intended to be used as the basis for generating language-specific projections and are not loadable as CLR assemblies.</description>
     <releaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$version$</releaseNotes>
     <projectUrl>https://github.com/microsoft/win32metadata</projectUrl>
     <tags>Win32 Metadata</tags>
@@ -23,6 +23,7 @@
       <file src="images\windows.png" target="images"/>
 
       <file src="bin\Windows.Win32.winmd" target=""/>
+      <file src="bin\Microsoft.Direct3D.D3D12.winmd" target=""/>
       <file src="buildTransitive\**" target="buildTransitive\"/>
       <file src="buildTransitive\**" target="build\"/>
   </files>

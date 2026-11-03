@@ -51,6 +51,7 @@
 
     <ScrapedConstantsMarker>$(GeneratedDir)\constants.scraped.txt</ScrapedConstantsMarker>
     <ScrapedHeadersMarker>$(GeneratedDir)\scannedheaders.$(ScanArch).txt</ScrapedHeadersMarker>
+    <WinmdAssemblyVersion Condition="'$(WinmdAssemblyVersion)' == ''">$(WinmdVersion)</WinmdAssemblyVersion>
 
   </PropertyGroup>
 
@@ -262,10 +263,36 @@
 
   </Target>
 
+  <Target Name="PrepareWinmdOutputs" DependsOnTargets="ScrapeConstants">
+    <Error Condition="'@(NamespaceOutput)' != '' and '%(NamespaceOutput.OutputWinmd)' == ''"
+           Text="NamespaceOutput '%(NamespaceOutput.Identity)' requires OutputWinmd metadata." />
+    <ItemGroup>
+      <_EmitSource Include="$(GeneratedDir)\**\*.cs" Exclude="$(GeneratedDir)\obj\**" />
+      <_EmitSource Remove="$(GeneratedDir)\common\autotypes.cs" Condition="'@(AutoType)' != ''" />
+      <_EmitGeneratedRsp Include="$(GeneratedDir)\*.rsp" />
+      <_EmitOutputs Include="$(OutputWinmd);@(NamespaceOutput->'%(OutputWinmd)')" />
+      <_EmitConfiguration Include="Output=$(OutputWinmd);Version=$(WinmdAssemblyVersion);Arch=$(ScanArch)" />
+      <_EmitConfiguration Include="@(NamespaceOutput->'%(Identity)=%(OutputWinmd)')" />
+      <_EmitConfiguration Include="@(EmitterRsp);@(EmitterReference)" />
+      <_EmitConfiguration Include="@(_EmitSource);@(_EmitGeneratedRsp);@(AutoType)" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(ObjDir)\winmd-emission.inputs" Lines="@(_EmitConfiguration)" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ReadLinesFromFile File="$(ObjDir)\winmd-emission.outputs" Condition="Exists('$(ObjDir)\winmd-emission.outputs')">
+      <Output TaskParameter="Lines" ItemName="_KnownWinmdOutputs" />
+    </ReadLinesFromFile>
+    <ItemGroup>
+      <_KnownWinmdOutputs Include="@(_EmitOutputs)" />
+    </ItemGroup>
+    <WriteLinesToFile File="$(ObjDir)\winmd-emission.outputs" Lines="@(_KnownWinmdOutputs->Distinct())" Overwrite="true" WriteOnlyWhenDifferent="true" />
+    <ItemGroup>
+      <FileWrites Include="@(_EmitOutputs);$(ObjDir)\winmd-emission.inputs;$(ObjDir)\winmd-emission.outputs" />
+    </ItemGroup>
+  </Target>
+
   <Target Name="EmitWinmd" BeforeTargets="Build"
-    Inputs="$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp)"
-    Outputs="$(OutputWinmd)"
-    DependsOnTargets="ScrapeConstants">
+    Inputs="@(_EmitSource);$(ScrapedConstantsMarker);@(AutoType);@(EmitterRsp);@(EmitterReference);@(_EmitGeneratedRsp);$(ObjDir)\winmd-emission.inputs;$(ToolsBinDir)\ClangSharpSourceToWinmd.dll;$(TaskBinDir)\MetadataTasks.dll;$(MSBuildThisFileFullPath)"
+    Outputs="@(_EmitOutputs)"
+    DependsOnTargets="PrepareWinmdOutputs">
 
     <ItemGroup>
       <EmitterRsp Include="$(FilteredRspForEmitter);$(EmitterFunctionPointerFixupsRsp)"/>
@@ -286,8 +313,10 @@
       ToolsBinDir="$(ToolsBinDir)"
       ResponseFiles="@(EmitterRsp)"
       Win32WinmdBinDir="$(Win32WinmdBinDir)"
-      WinmdVersion="$(WinmdVersion)"
+      WinmdVersion="$(WinmdAssemblyVersion)"
       OutputWinmd="$(OutputWinmd)"
+      NamespaceOutputs="@(NamespaceOutput)"
+      References="@(EmitterReference)"
       ShowOutputDetails="$(ShowEmitWinmdOutputDetails)"
       MSBuildProjectDirectory="$(MSBuildProjectDirectory)">
     </EmitWinmd>
@@ -297,7 +326,11 @@
   <Import Condition="'$(MicrosoftNoTargetsSdkImported)' == 'true'" Sdk="Microsoft.Build.NoTargets" Version="3.0.4" Project="sdk.targets"/>
 
   <Target Name="BeforeClean">
-    <RemoveDir Directories="obj" />
+    <ReadLinesFromFile File="$(ObjDir)\winmd-emission.outputs" Condition="Exists('$(ObjDir)\winmd-emission.outputs')">
+      <Output TaskParameter="Lines" ItemName="_PreviousWinmdOutputs" />
+    </ReadLinesFromFile>
+    <Delete Files="@(_PreviousWinmdOutputs);@(NamespaceOutput->'%(OutputWinmd)')" />
+    <RemoveDir Directories="$(ObjDir)" />
     <Delete Files="$(OutputWinmd)"/>
   </Target>
 

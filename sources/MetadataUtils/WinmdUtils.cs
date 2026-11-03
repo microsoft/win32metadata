@@ -209,50 +209,89 @@ namespace MetadataUtils
 
         private int InternalGetImplementedMethodCount(TypeDefinition typeDef, List<WinmdUtils> allWinmds)
         {
+            return this.InternalGetImplementedMethodCount(typeDef, allWinmds,
+                new HashSet<(WinmdUtils, TypeDefinition)>(), new HashSet<(WinmdUtils, TypeDefinition)>());
+        }
+
+        private int InternalGetImplementedMethodCount(TypeDefinition typeDef, List<WinmdUtils> allWinmds,
+            HashSet<(WinmdUtils, TypeDefinition)> visiting, HashSet<(WinmdUtils, TypeDefinition)> counted)
+        {
+            if (!visiting.Add((this, typeDef)))
+            {
+                throw new InvalidOperationException("Cyclical interface ancestry.");
+            }
+
+            if (!counted.Add((this, typeDef)))
+            {
+                visiting.Remove((this, typeDef));
+                return 0;
+            }
+
             int methodCount = typeDef.GetMethods().Count;
             var interfaceImplHandles = typeDef.GetInterfaceImplementations();
             foreach (var interfaceImplHandle in interfaceImplHandles)
             {
                 var interfaceImpl = this.metadataReader.GetInterfaceImplementation(interfaceImplHandle);
 
-                TypeDefinition interfaceTypeDef;
                 switch (interfaceImpl.Interface.Kind)
                 {
                     case HandleKind.TypeReference:
                         {
-                            interfaceTypeDef = this.GetDefinitionFromReference(this.metadataReader.GetTypeReference((TypeReferenceHandle)interfaceImpl.Interface), allWinmds);
+                            var definition = this.ResolveDefinitionFromReference(this.metadataReader.GetTypeReference((TypeReferenceHandle)interfaceImpl.Interface), allWinmds);
+                            methodCount += definition.Owner.InternalGetImplementedMethodCount(definition.Type, allWinmds, visiting, counted);
                             break;
                         }
 
                     case HandleKind.TypeDefinition:
                         {
-                            interfaceTypeDef = this.metadataReader.GetTypeDefinition((TypeDefinitionHandle)interfaceImpl.Interface);
+                            var interfaceTypeDef = this.metadataReader.GetTypeDefinition((TypeDefinitionHandle)interfaceImpl.Interface);
+                            methodCount += this.InternalGetImplementedMethodCount(interfaceTypeDef, allWinmds, visiting, counted);
                             break;
                         }
                     default:
                         throw new NotImplementedException();
                 }
 
-                methodCount += interfaceTypeDef.GetMethods().Count;
             }
 
+            visiting.Remove((this, typeDef));
             return methodCount;
         }
 
         public TypeDefinition GetDefinitionFromReference(TypeReference typeReference, List<WinmdUtils> allWinmds)
+        {
+            return this.ResolveDefinitionFromReference(typeReference, allWinmds).Type;
+        }
+
+        private (WinmdUtils Owner, TypeDefinition Type) ResolveDefinitionFromReference(TypeReference typeReference, List<WinmdUtils> allWinmds)
         {
             var name = this.metadataReader.GetString(typeReference.Name);
             var @namespace = this.metadataReader.GetString(typeReference.Namespace);
 
             foreach (var winmd in allWinmds)
             {
+                if (typeReference.ResolutionScope.Kind == HandleKind.AssemblyReference)
+                {
+                    var expected = this.metadataReader.GetAssemblyReference((AssemblyReferenceHandle)typeReference.ResolutionScope);
+                    var actual = winmd.metadataReader.GetAssemblyDefinition();
+                    if (this.metadataReader.GetString(expected.Name) != winmd.metadataReader.GetString(actual.Name) ||
+                        expected.Version != actual.Version)
+                    {
+                        continue;
+                    }
+                }
+                else if (typeReference.ResolutionScope.Kind == HandleKind.ModuleDefinition && winmd != this)
+                {
+                    continue;
+                }
+
                 foreach (var typeDefinitionHandle in winmd.metadataReader.TypeDefinitions)
                 {
                     var typeDefinition = winmd.metadataReader.GetTypeDefinition(typeDefinitionHandle);
                     if (winmd.metadataReader.GetString(typeDefinition.Name) == name &&
                         winmd.metadataReader.GetString(typeDefinition.Namespace) == @namespace)
                     {
-                        return typeDefinition;
+                        return (winmd, typeDefinition);
                     }
                 }
             }

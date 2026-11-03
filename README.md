@@ -39,6 +39,52 @@ Below are some principles that guide the metadata that we produce:
 
 See [ARCHITECTURE.md](docs/architecture.md).
 
+## Namespace outputs
+
+The emitter defaults to one output. `--namespaceOutput Namespace=Additional.winmd`
+routes that namespace, its descendant namespaces, and all nested types to an
+additional output. Matching is ordinal and uses whole namespace segments;
+overlapping routes are rejected. The complete source set is prepared and compiled
+once, then each output is emitted from that semantic model with assembly-scoped
+references to types owned by the other outputs. File names are metadata assembly
+identities, including `.winmd`; all outputs share the configured assembly version.
+
+GeneratorSdk projects can configure the same routing with MSBuild items:
+
+```xml
+<NamespaceOutput Include="Windows.Win32.Graphics.Direct3D12">
+  <OutputWinmd>..\..\bin\Microsoft.Direct3D.D3D12.winmd</OutputWinmd>
+</NamespaceOutput>
+```
+
+The WinSDK project enables that route while retaining its Windows
+SDK headers and annotations. `EmitDirect3D12Separately=false` restores monolithic
+WinSDK emission for comparison. The package includes both baseline files, and
+projection inputs select the packaged D3D12 baseline by default. A compatible
+replacement package sets `Direct3D12ProjectionMetadataPath` instead of adding a
+second D3D input. Video/Media Foundation, Windows integration, common D3D, and DXGI
+remain Windows-owned; canonical namespaces do not change.
+
+Both metadata identities use assembly version `1.0.0.0`
+(`WinmdAssemblyVersion`), independently of the NuGet release version.
+Replacement producers must use that identity and satisfy
+the selected Windows baseline's minimum type/signature surface. Emission rejects
+input references whose reciprocal dependencies require a different output
+version, culture, or public key. Existing Agility
+enum-name omissions and evolving sentinel values still require an explicit
+compatibility decision. Consumers must resolve both metadata files; older
+single-file or external-COM-unaware projection tooling needs updating.
+
+The repository's integrity checks inspect both baseline files. Delegate checks
+accept `--ref` metadata paths so COM ancestry and delegate dependencies resolve
+across the output boundary. Namespace-cycle checks remain file-local and are not
+cross-assembly validation.
+
+`WinmdUtils dump --includeReferencedWinmds` compares the combined surface,
+following `.winmd` assembly references beside the input and rejecting missing or
+mismatched providers. The local baseline diff and CI API diff use this option;
+CI publishes and signs both metadata files.
+
 # Projections
 
 See [PROJECTIONS.md](docs/projections.md).
