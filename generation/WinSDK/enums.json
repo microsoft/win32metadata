@@ -30158,6 +30158,7 @@
   },
   {
     "type": "uint",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "name": "STATIC_STYLES",
     "autoPopulate": {
       "filter": "SS_",
