@@ -657,7 +657,10 @@ namespace ClangSharpSourceToWinmd
                 throw new InvalidOperationException($"Could not resolve inherited interface '{symbol}'.");
             }
 
-            int count = symbol.GetMembers().OfType<IMethodSymbol>().Count(m => m.MethodKind == MethodKind.Ordinary);
+            var members = symbol.GetMembers();
+            int count = members.OfType<IMethodSymbol>().Count(m => m.MethodKind == MethodKind.Ordinary);
+            count += members.OfType<IPropertySymbol>().Sum(p => (p.GetMethod == null ? 0 : 1) + (p.SetMethod == null ? 0 : 1));
+            count += members.OfType<IEventSymbol>().Sum(e => (e.AddMethod == null ? 0 : 1) + (e.RemoveMethod == null ? 0 : 1) + (e.RaiseMethod == null ? 0 : 1));
             foreach (var inherited in symbol.Interfaces)
             {
                 count += this.GetReferencedInterfaceMethodCount(inherited, visited, counted);

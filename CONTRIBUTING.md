@@ -215,10 +215,6 @@ Win32 Metadata depends on the following:
 
 To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.28000.2705).
 
-Direct3D and DXGI metadata use the headers from this pinned Windows SDK.
-Do not overlay Direct3D Agility SDK headers; Agility provides a separate,
-run-ahead replacement rather than changing the Windows SDK metadata baseline.
-
 Some older headers are intentionally restored by `RecompileIdlFilesForScraping.ps1` for compatibility. Preserve these inputs and their library mappings during SDK updates; removing their metadata requires a separate compatibility decision.
 
 Run a [full build](#full-builds), fix any metadata issues that surface, address failures from tests, then update the baseline.

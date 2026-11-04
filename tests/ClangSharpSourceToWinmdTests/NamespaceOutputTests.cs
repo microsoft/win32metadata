@@ -13,6 +13,7 @@ namespace ClangSharpSourceToWinmdTests
     public interface IReferencedLeft : IReferencedBase { void Left(); }
     public interface IReferencedRight : IReferencedBase { void Right(); }
     public interface IReferencedDiamond : IReferencedLeft, IReferencedRight { void Own(); }
+    public interface IReferencedProperty { int Value { get; set; } event Action Changed; }
 
     [TestClass]
     public class NamespaceOutputTests
@@ -60,6 +61,52 @@ namespace ClangSharpSourceToWinmdTests
                 Assert.AreEqual(0, Program.Main(new[] {
                     "--sourceDir", directory, "--outputFileName", Path.Combine(directory, "Main.winmd"),
                     "--ref", typeof(IReferencedDiamond).Assembly.Location }));
+            }
+            finally
+            {
+                Directory.Delete(directory, true);
+            }
+        }
+
+        [TestMethod]
+        public void ReferencedInterfaceAccessorsRetainInheritedVtableSlots()
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "NamespaceOutputAccessorTests-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                File.WriteAllText(Path.Combine(directory, "Source.manual.cs"), @"
+using System;
+using System.Runtime.InteropServices;
+using Shared;
+namespace Shared {
+    public class NativeInheritanceAttribute : Attribute { public NativeInheritanceAttribute(string name) {} }
+}
+namespace Routed {
+    [NativeInheritance(""IReferencedProperty"")]
+    public unsafe struct Derived {
+        public void** lpVtbl;
+        public ClangSharpSourceToWinmdTests.IReferencedProperty Base;
+        public delegate void _Own();
+        public int get_Value() { Marshal.GetDelegateForFunctionPointer<_Own>((IntPtr)(lpVtbl[0]))(); return 0; }
+        public void set_Value(int value) { Marshal.GetDelegateForFunctionPointer<_Own>((IntPtr)(lpVtbl[1]))(); }
+        public void add_Changed(Action value) { Marshal.GetDelegateForFunctionPointer<_Own>((IntPtr)(lpVtbl[2]))(); }
+        public void remove_Changed(Action value) { Marshal.GetDelegateForFunctionPointer<_Own>((IntPtr)(lpVtbl[3]))(); }
+        public void Own() { Marshal.GetDelegateForFunctionPointer<_Own>((IntPtr)(lpVtbl[4]))(); }
+    }
+}");
+                string main = Path.Combine(directory, "Main.winmd");
+                string routed = Path.Combine(directory, "Routed.winmd");
+                Assert.AreEqual(0, Program.Main(new[] {
+                    "--sourceDir", directory, "--outputFileName", main,
+                    "--namespaceOutput", "Routed=" + routed, "--ref", typeof(IReferencedProperty).Assembly.Location }));
+                using var stream = File.OpenRead(routed);
+                using var pe = new PEReader(stream);
+                var reader = pe.GetMetadataReader();
+                var derived = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Single(t => reader.GetString(t.Name) == "Derived");
+                var methods = derived.GetMethods().Select(h => reader.GetString(reader.GetMethodDefinition(h).Name)).ToArray();
+                Assert.AreEqual("Own", string.Join(", ", methods));
             }
             finally
             {
