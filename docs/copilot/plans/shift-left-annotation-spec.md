@@ -257,12 +257,21 @@ an existing enum:
 [annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vt;
 ```
 
-The transport helpers `_Win32_AnnotateInterface_(Name, annotation)` and
-`_Win32_AnnotateMethod_(Interface::Method, annotation)` carry existing annotations
-from authoritative IDL to the named interface or method in generated C++.
-They introduce no new semantic vocabulary. A method helper targets that method,
-not the interface or every method in it. Generated transport declarations must be
-metadata-only and must not become projected APIs or supply native layout.
+The named IDL transport helpers carry existing annotations to precise targets
+in generated C++:
+
+| Helper | Target |
+| --- | --- |
+| `_Win32_AnnotateMethod_(Interface::Method, annotation)` | The named method, not its interface or every method in it. |
+| `_Win32_AnnotateParameter_(Interface::Method, parameter, annotation)` | The parameter with that source name on the named method, not its return value or other parameters. |
+| `_Win32_AnnotateField_(Record::field, annotation)` | The named field, not its containing record or other fields. |
+
+Interface-level annotations must reach the owning interface declaration through
+authoritative IDL; no public helper spelling is prescribed for that transport here.
+These helpers introduce no new semantic vocabulary, and their presence in one
+header does not establish support in another header or reader. Generated transport
+declarations must be metadata-only and must not become projected APIs or supply
+native layout.
 
 ## Attribute solution matrix
 
