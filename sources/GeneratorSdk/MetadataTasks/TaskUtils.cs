@@ -169,6 +169,32 @@ namespace MetadataTasks
             return scriptOutput;
         }
 
+        public static bool TrySelectNativeConstantToolchainHeaders(string scriptsDir, string[] includeRoots,
+            TaskLoggingHelper log, out string[] selectedRoots)
+        {
+            selectedRoots = null;
+            if (includeRoots == null || includeRoots.Length == 0)
+            {
+                string vcBin = GetVcDirPath(scriptsDir, log)?.Trim();
+                if (log.HasLoggedErrors)
+                    return false;
+                if (string.IsNullOrEmpty(vcBin) || !Path.IsPathFullyQualified(vcBin) || !Directory.Exists(vcBin))
+                {
+                    log.LogError($"The selected Visual C++ tools directory is missing or invalid: '{vcBin}'.");
+                    return false;
+                }
+                includeRoots = new[] { Path.GetFullPath(Path.Combine(vcBin, "..", "..", "..", "include")) };
+            }
+            foreach (string root in includeRoots)
+                if (string.IsNullOrWhiteSpace(root) || !Path.IsPathFullyQualified(root) || !Directory.Exists(root))
+                {
+                    log.LogError($"The selected native constant compiler include root is missing or invalid: '{root}'.");
+                    return false;
+                }
+            selectedRoots = includeRoots.Select(Path.GetFullPath).ToArray();
+            return true;
+        }
+
         public static int ExecuteCmd(string cmd, string args, out string output, out string error, TaskLoggingHelper log, string extraPath = null, string workingDirectory = null)
         {
             output = null;
@@ -179,6 +205,12 @@ namespace MetadataTasks
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
+
+            // Windows PowerShell must build its own module path instead of inheriting PowerShell Core modules.
+            if (string.Equals(Path.GetFileName(cmd), "powershell.exe", StringComparison.OrdinalIgnoreCase))
+            {
+                process.StartInfo.Environment.Remove("PSModulePath");
+            }
 
             if (extraPath != null)
             {

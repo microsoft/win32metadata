@@ -14,7 +14,7 @@ if (!$SkipInstallTools.IsPresent)
 Write-Host "*** Running tests on .winmd" -ForegroundColor Blue
 
 $windowsWin32TestsDir = "$rootDir\tests\Windows.Win32.Tests"
-dotnet test $windowsWin32TestsDir -c:Release
+dotnet test $windowsWin32TestsDir -c:Release --logger "console;verbosity=detailed" --logger "trx;LogFilePrefix=Windows.Win32.Tests" --results-directory "$binDir\logs\tests"
 ThrowOnNativeProcessError
 
 Write-Host "`n`e[32mTesting .winmd succeeded`e[0m"

@@ -18,6 +18,14 @@ public class AlsoUsableForAttribute : Attribute
     }
 }
 
+[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Field, AllowMultiple = false, Inherited = false)]
+public class AlignmentAttribute : Attribute
+{
+    public AlignmentAttribute(int alignment)
+    {
+    }
+}
+
 public class AnsiAttribute : Attribute
 {
     public AnsiAttribute()
@@ -151,7 +159,7 @@ public class IgnoreIfReturnAttribute : Attribute
     }
 }
 
-[AttributeUsage(AttributeTargets.Struct, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Parameter | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = true)]
 public class InvalidHandleValueAttribute : Attribute
 {
     public InvalidHandleValueAttribute(long Value)
@@ -331,7 +339,7 @@ public class StructSizeFieldAttribute : Attribute
     }
 }
 
-[Flags]
+[Flags, ScopedEnum]
 public enum Architecture
 {
     None = 0,
@@ -348,7 +356,7 @@ public class SupportedArchitectureAttribute : Attribute
     }
 }
 
-[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Method, AllowMultiple = false)]
+[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Method | AttributeTargets.Enum | AttributeTargets.Delegate, AllowMultiple = false)]
 public class SupportedOSPlatformAttribute : Attribute
 {
     public SupportedOSPlatformAttribute(string platform)

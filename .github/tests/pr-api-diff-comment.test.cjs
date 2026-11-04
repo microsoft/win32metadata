@@ -20,6 +20,13 @@ function workflowSteps(source) {
   }));
 }
 
+function validationJob(name) {
+  const marker = `  ${name}:\n`;
+  const start = validationWorkflow.indexOf(marker);
+  assert.notEqual(start, -1, `Missing validation job: ${name}`);
+  return validationWorkflow.slice(start + marker.length).split(/^  [\w-]+:\s*$/m)[0];
+}
+
 function script(name) {
   const step = steps.get(name);
   assert.ok(step, `Missing workflow step: ${name}`);
@@ -171,6 +178,58 @@ test('both artifact uploads still include the generated patch', () => {
   for (const file of ['Windows.Win32.winmd', 'current.apidump.cs', 'baseline.apidump.cs', 'api-diff.patch']) {
     assert.ok(winmdUpload.includes(`            bin/${file}\n`));
   }
+});
+
+for (const [jobName, uploadCount] of [['scrape', 1], ['build-test', 2]]) {
+  test(`${jobName} always-run local uploads require a successful checkout`, () => {
+    const job = validationJob(jobName);
+    assert.match(job, /^      - uses: actions\/checkout@[^\n]+\n        id: checkout$/m);
+    const uploads = [...workflowSteps(job).values()].filter(step =>
+      /^        uses: \.\/\.github\/actions\/upload-artifact-with-retry$/m.test(step) &&
+      /^        if: always\(\)/m.test(step));
+    assert.equal(uploads.length, uploadCount);
+    for (const upload of uploads) {
+      const condition = upload.match(/^        if: (.+)$/m)[1];
+      const shouldUpload = new Function('needs', 'steps', 'always', `return (${condition});`);
+      const needs = { changes: { outputs: { build_needed: 'true' } } };
+      for (const outcome of ['', 'skipped', 'failure', 'cancelled']) {
+        assert.equal(shouldUpload(needs, { checkout: { outcome } }, () => true), false,
+          `Local action must not load after checkout outcome ${JSON.stringify(outcome)}.`);
+      }
+      assert.equal(shouldUpload(needs, { checkout: { outcome: 'success' } }, () => true), true,
+        'Diagnostics must still upload after later build or test failures.');
+      if (jobName === 'build-test') {
+        needs.changes.outputs.build_needed = 'false';
+        assert.equal(shouldUpload(needs, { checkout: { outcome: 'success' } }, () => true), false);
+      }
+    }
+  });
+}
+
+test('failed prerequisite scrapes still fail before checkout without masking the primary error', () => {
+  const job = validationJob('build-test');
+  const verify = workflowSteps(job).get('Verify scrape jobs');
+  const condition = verify.match(/^        if: (.+)$/m)[1];
+  const shouldFail = new Function('needs', `return (${condition});`);
+  for (const result of ['failure', 'cancelled', 'skipped']) {
+    assert.equal(shouldFail({
+      changes: { outputs: { build_needed: 'true' } }, scrape: { result }
+    }), true);
+  }
+  assert.equal(shouldFail({
+    changes: { outputs: { build_needed: 'true' } }, scrape: { result: 'success' }
+  }), false);
+  assert.equal(shouldFail({
+    changes: { outputs: { build_needed: 'false' } }, scrape: { result: 'skipped' }
+  }), false);
+  assert.ok(job.indexOf('      - name: Verify scrape jobs\n') <
+    job.indexOf('      - uses: actions/checkout@'));
+  assert.doesNotMatch(verify, /continue-on-error: true/);
+  const command = verify.match(/^        run: (.+)$/m)[1];
+  assert.throws(() => execFileSync('pwsh',
+    ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', command], { windowsHide: true }),
+  error => error.status !== 0 &&
+    /One or more header scrape jobs did not succeed\./.test(error.stderr.toString()));
 });
 
 for (const [name, patch, expectedOutputs] of [

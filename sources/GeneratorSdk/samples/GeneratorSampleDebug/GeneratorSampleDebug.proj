@@ -39,5 +39,15 @@
     </Partition>
   </ItemGroup>
 
+  <!-- Match the packaged helper asset without adding other recompiled SDK headers to the search path. -->
+  <Target Name="StageAnnotationHeader" BeforeTargets="ScrapeHeaders">
+    <PropertyGroup>
+      <AnnotationIncludeDir>$(ObjDir)\annotation-inc</AnnotationIncludeDir>
+      <AdditionalIncludes>$(AnnotationIncludeDir);$(AdditionalIncludes)</AdditionalIncludes>
+    </PropertyGroup>
+    <Copy SourceFiles="$(WinSDKAssets)\RecompiledIdlHeaders\shared\win32metadata_annotations.h"
+          DestinationFolder="$(AnnotationIncludeDir)" SkipUnchangedFiles="true" />
+  </Target>
+
   <Import Project="..\..\sdk\sdk.targets" />
 </Project>
