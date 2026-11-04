@@ -1,0 +1,23 @@
+<Project>
+  <Target Name="SelectDirect3D12ProjectionMetadata"
+          BeforeTargets="PrepareForBuild;AssembleCsWin32InputPaths;GenerateCsWin32Code">
+    <PropertyGroup>
+      <Direct3D12ProjectionMetadataPath Condition="'$(Direct3D12ProjectionMetadataPath)' == ''">$(WindowsD3D12BaselineMetadataPath)</Direct3D12ProjectionMetadataPath>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(Direct3D12ProjectionMetadataPath)')"
+           Text="The selected D3D12 metadata provider does not exist: $(Direct3D12ProjectionMetadataPath)" />
+    <ItemGroup>
+      <ProjectionMetadataWinmd Include="$(Direct3D12ProjectionMetadataPath)" />
+    </ItemGroup>
+  </Target>
+  <Target Name="ValidateDirect3D12ProjectionMetadata"
+          BeforeTargets="AssembleCsWin32InputPaths;GenerateCsWin32Code"
+          DependsOnTargets="SelectDirect3D12ProjectionMetadata">
+    <ItemGroup>
+      <_Direct3D12ProjectionInputs Include="@(ProjectionMetadataWinmd)"
+           Condition="'%(ProjectionMetadataWinmd.Filename)%(ProjectionMetadataWinmd.Extension)' == 'Microsoft.Direct3D.D3D12.winmd'" />
+    </ItemGroup>
+    <Error Condition="'@(_Direct3D12ProjectionInputs->Count())' != '1'"
+           Text="Exactly one D3D12 metadata provider must be selected. Use a replacement package that sets Direct3D12ProjectionMetadataPath instead of adding another ProjectionMetadataWinmd." />
+  </Target>
+</Project>

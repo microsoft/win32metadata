@@ -209,7 +209,6 @@ To [safeguard against malicious public packages](https://learn.microsoft.com/azu
 Win32 Metadata depends on the following:
 
 * [Windows SDK](#windows-sdk)
-* [Direct3D Agility SDK](#direct3d-agility-sdk)
 * [ClangSharp](#clangsharp)
 
 ### Windows SDK
@@ -225,12 +224,6 @@ Manual fixups may be required:
 * If test reports missing entries in suggestedRemappingsAllowList.rsp, they should probably be added to scraper.settings.rsp. MIDL generates random names for enums and the tooling needs to know the mapping from that name to the typedef'd name.
 * If test reports missing entries in emptyDelegatesAllowList.rsp, those entries probably need to be added to functionPointerFixups.json (unless they really are empty delegates). Function pointers are expressed as typedefs which the tooling doesn't see the mapping from the declared name to the typedef'd name so you need to connect the dots this way.
 * Additional entries for entrypoints not present in import libs should be added to [libMappingsManual.rsp](generation/WinSDK/libMappingsManual.rsp). You probably won't know you need to add things here until someone reports a bug that an API isn't present because it's a LoadLibrary + GetProcAddress only API.
-
-### Direct3D Agility SDK
-
-To update the Direct3D Agility SDK dependency, update the corresponding PackageReference version number in [BuildTools.proj](BuildTools/BuildTools.proj) and run [scripts/RecompileIdlFilesForScraping.ps1](scripts/RecompileIdlFilesForScraping.ps1).
-
-Run a [full build](#full-builds), fix any metadata issues that surface, then update the baseline.
 
 ### ClangSharp
 

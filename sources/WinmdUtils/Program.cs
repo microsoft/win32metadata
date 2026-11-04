@@ -70,18 +70,20 @@ namespace WinmdUtilsProgram
             var showEmptyDelegates = new Command("showEmptyDelegates", "Show delegates that have no parameters.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--ref", "Referenced metadata files.", ArgumentArity.OneOrMore),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showEmptyDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowEmptyDelegates);
+            showEmptyDelegates.Handler = CommandHandler.Create<FileInfo, string[], string[], IConsole>(ShowEmptyDelegates);
 
             var showPointersToDelegates = new Command("showPointersToDelegates", "Show pointers to delegates.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--ref", "Referenced metadata files.", ArgumentArity.OneOrMore),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
             };
 
-            showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowPointersToDelegates);
+            showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], string[], IConsole>(ShowPointersToDelegates);
 
             var showSuggestedRemappings = new Command("showSuggestedRemappings", "Show suggested remappings.")
             {
@@ -138,10 +140,11 @@ namespace WinmdUtilsProgram
             var dumpCommand = new Command("dump", "Dump all types in a winmd as sorted C# declarations.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to dump.") { IsRequired = true }.ExistingOnly(),
+                new Option<bool>("--includeReferencedWinmds", "Include assembly-referenced winmd files beside the primary input."),
                 new Option<FileInfo>("--output", "Output file path. If not specified, writes to stdout.") { IsRequired = false },
             };
 
-            dumpCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, IConsole>(DumpWinmd);
+            dumpCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, bool, IConsole>(DumpWinmd);
 
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
@@ -425,16 +428,42 @@ namespace WinmdUtilsProgram
             return 0;
         }
 
-        public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)
+        private static IEnumerable<MetadataUtils.TypeInfo> GetTypesWithReferences(string path, string[] references, bool includeReferences = false)
+        {
+            var inputs = new List<WinmdUtils>();
+            try
+            {
+                inputs.Add(WinmdUtils.LoadFromFile(path));
+                foreach (string reference in references ?? Array.Empty<string>())
+                {
+                    inputs.Add(WinmdUtils.LoadFromFile(reference));
+                }
+
+                foreach (var input in includeReferences ? inputs : inputs.Take(1))
+                {
+                    foreach (var type in input.GetTypes(inputs))
+                    {
+                        yield return type;
+                    }
+                }
+            }
+            finally
+            {
+                foreach (var input in inputs)
+                {
+                    input.Dispose();
+                }
+            }
+        }
+
+        public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, string[] @ref, IConsole console)
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            List<WinmdUtils> allWinmds = new List<WinmdUtils>{ w1 };
             bool pointersFound = false;
 
-            HashSet<string> delegateNames = new HashSet<string>(w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
+            HashSet<string> delegateNames = new HashSet<string>(GetTypesWithReferences(winmd.FullName, @ref, true).Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
 
-            foreach (var type in w1.GetTypes(allWinmds))
+            foreach (var type in GetTypesWithReferences(winmd.FullName, @ref))
             {
                 foreach (var pointerInUse in PointerToOneOfNamesInUse(delegateNames, type))
                 {
@@ -709,13 +738,11 @@ namespace WinmdUtilsProgram
             return dupsFound ? -1 : 0;
         }
 
-        public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, IConsole console)
+        public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, string[] @ref, IConsole console)
         {
             HashSet<string> allowTable = new HashSet<string>(allowItem);
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
-            List<WinmdUtils> allWinmds = new List<WinmdUtils> { w1 };
             bool emptyFound = false;
-            foreach (DelegateTypeInfo type in w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo))
+            foreach (DelegateTypeInfo type in GetTypesWithReferences(winmd.FullName, @ref).Where(t => t is DelegateTypeInfo))
             {
                 if (!type.Parameters.Any())
                 {
@@ -1877,7 +1904,7 @@ namespace WinmdUtilsProgram
             }
         }
 
-        public static int DumpWinmd(FileInfo winmd, FileInfo output, IConsole console)
+        public static int DumpWinmd(FileInfo winmd, FileInfo output, bool includeReferencedWinmds, IConsole console)
         {
             var settings = new DecompilerSettings()
             {
@@ -1885,34 +1912,79 @@ namespace WinmdUtilsProgram
                 LoadInMemory = true
             };
 
-            var decompiler = new CSharpDecompiler(winmd.FullName, settings);
-
-            // Map types from metadata, sorted by full name for deterministic output
-            var peFile = decompiler.TypeSystem.MainModule.PEFile;
-            var metadata = peFile.Metadata;
-
-            var sortedHandles = new List<System.Reflection.Metadata.TypeDefinitionHandle>();
-            var typeFullNames = new Dictionary<System.Reflection.Metadata.TypeDefinitionHandle, string>();
-
-            foreach (var handle in metadata.TypeDefinitions)
+            using var primary = new PEFile(winmd.FullName, System.Reflection.PortableExecutable.PEStreamOptions.PrefetchEntireImage, MetadataReaderOptions.None);
+            using var resolver = new WinmdAssemblyResolver(winmd.FullName, primary.DetectTargetFrameworkId());
+            var pending = new Queue<string>();
+            var inputs = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            var types = new List<(string Name, TypeDefinitionHandle Handle, CSharpDecompiler Decompiler)>();
+            pending.Enqueue(winmd.FullName);
+            while (pending.Count > 0)
             {
-                var typeDef = metadata.GetTypeDefinition(handle);
-                string ns = metadata.GetString(typeDef.Namespace);
-                string name = metadata.GetString(typeDef.Name);
-                string fullName = string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}";
-
-                if (fullName == "<Module>")
+                string path = pending.Dequeue();
+                if (!inputs.Add(path))
+                {
                     continue;
+                }
 
-                // Skip nested types — they'll be decompiled as part of their parent
-                if (typeDef.GetDeclaringType().IsNil == false)
-                    continue;
+                var decompiler = new CSharpDecompiler(path, resolver, settings);
+                var metadata = decompiler.TypeSystem.MainModule.PEFile.Metadata;
+                if (includeReferencedWinmds)
+                {
+                    foreach (var handle in metadata.AssemblyReferences)
+                    {
+                        var reference = metadata.GetAssemblyReference(handle);
+                        string name = metadata.GetString(reference.Name);
+                        if (!name.EndsWith(".winmd", StringComparison.OrdinalIgnoreCase))
+                        {
+                            continue;
+                        }
 
-                sortedHandles.Add(handle);
-                typeFullNames[handle] = fullName;
+                        if (Path.GetFileName(name) != name)
+                        {
+                            throw new InvalidOperationException($"Invalid referenced metadata identity '{name}'.");
+                        }
+
+                        string sibling = Path.Combine(Path.GetDirectoryName(path), name);
+                        using var stream = File.OpenRead(sibling);
+                        using var pe = new System.Reflection.PortableExecutable.PEReader(stream);
+                        var reader = pe.GetMetadataReader();
+                        var definition = reader.GetAssemblyDefinition();
+                        if (reader.GetString(definition.Name) != name || definition.Version != reference.Version ||
+                            reader.GetString(definition.Culture) != metadata.GetString(reference.Culture) ||
+                            !reader.GetBlobBytes(definition.PublicKey).SequenceEqual(metadata.GetBlobBytes(reference.PublicKeyOrToken)))
+                        {
+                            throw new InvalidOperationException($"Referenced metadata identity mismatch: '{sibling}'.");
+                        }
+
+                        pending.Enqueue(sibling);
+                    }
+                }
+
+                foreach (var handle in metadata.TypeDefinitions)
+                {
+                    var typeDef = metadata.GetTypeDefinition(handle);
+                    string ns = metadata.GetString(typeDef.Namespace);
+                    string name = metadata.GetString(typeDef.Name);
+                    if (name == "<Module>" || typeDef.IsNested)
+                    {
+                        continue;
+                    }
+
+                    types.Add((string.IsNullOrEmpty(ns) ? name : $"{ns}.{name}", handle, decompiler));
+                }
             }
 
-            sortedHandles.Sort((a, b) => string.Compare(typeFullNames[a], typeFullNames[b], StringComparison.Ordinal));
+            types.Sort((a, b) =>
+            {
+                int names = string.Compare(a.Name, b.Name, StringComparison.Ordinal);
+                return names != 0 ? names : System.Reflection.Metadata.Ecma335.MetadataTokens.GetRowNumber(a.Handle)
+                    .CompareTo(System.Reflection.Metadata.Ecma335.MetadataTokens.GetRowNumber(b.Handle));
+            });
+            var duplicates = types.GroupBy(t => t.Name).Where(g => g.Select(t => t.Decompiler).Distinct().Count() > 1).Select(g => g.Key).ToArray();
+            if (duplicates.Length > 0)
+            {
+                throw new InvalidOperationException($"Duplicate metadata definitions: {string.Join(", ", duplicates)}");
+            }
 
             TextWriter writer;
             if (output != null)
@@ -1931,9 +2003,9 @@ namespace WinmdUtilsProgram
                 writer.WriteLine();
 
                 string currentNamespace = null;
-                foreach (var handle in sortedHandles)
+                foreach (var type in types)
                 {
-                    string fullName = typeFullNames[handle];
+                    string fullName = type.Name;
                     string ns = fullName.Contains('.') ? fullName.Substring(0, fullName.LastIndexOf('.')) : "";
 
                     if (ns != currentNamespace)
@@ -1949,22 +2021,13 @@ namespace WinmdUtilsProgram
                         currentNamespace = ns;
                     }
 
-                    try
-                    {
-                        var fullTypeName = new ICSharpCode.Decompiler.TypeSystem.FullTypeName(fullName);
-                        var syntaxTree = decompiler.DecompileType(fullTypeName);
-                        writer.WriteLine(syntaxTree.ToString());
-                    }
-                    catch (Exception ex)
-                    {
-                        writer.WriteLine($"// ERROR decompiling {fullName}: {ex.Message}");
-                        writer.WriteLine();
-                    }
+                    var syntaxTree = type.Decompiler.DecompileTypes(new[] { type.Handle });
+                    writer.WriteLine(syntaxTree.ToString());
                 }
 
                 if (output != null)
                 {
-                    console.Out.WriteLine($"Dumped {sortedHandles.Count} types to {output.FullName}");
+                    console.Out.WriteLine($"Dumped {types.Count} types from {inputs.Count} metadata files to {output.FullName}");
                 }
             }
             finally

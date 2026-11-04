@@ -289,7 +289,7 @@ jobs:
         id: apidump
         shell: pwsh
         run: |
-          $ErrorActionPreference = 'Continue'
+          $ErrorActionPreference = 'Stop'
           $PSNativeCommandUseErrorActionPreference = $false
 
           $winmdUtils = "bin\Release\net10.0\WinmdUtils.dll"
@@ -308,17 +308,18 @@ jobs:
 
           # Dump baseline
           Write-Host "Dumping baseline..."
-          & dotnet $winmdUtils dump --winmd $baselineWinmd --output bin\baseline.apidump.cs
+          & dotnet $winmdUtils dump --winmd $baselineWinmd --includeReferencedWinmds --output bin\baseline.apidump.cs
           if ($LASTEXITCODE -ne 0) { throw "Failed to dump baseline" }
 
           # Dump current build
           Write-Host "Dumping current build..."
-          & dotnet $winmdUtils dump --winmd $currentWinmd --output bin\current.apidump.cs
+          & dotnet $winmdUtils dump --winmd $currentWinmd --includeReferencedWinmds --output bin\current.apidump.cs
           if ($LASTEXITCODE -ne 0) { throw "Failed to dump current" }
 
           # Generate diff — git diff exits 1 when differences exist, which is expected
           & cmd /c "git diff --no-index --unified=3 bin\baseline.apidump.cs bin\current.apidump.cs > bin\api-diff.patch 2>&1"
           $diffExitCode = $LASTEXITCODE
+          if ($diffExitCode -gt 1) { throw "API comparison failed with exit code $diffExitCode" }
 
           if ($diffExitCode -eq 0) {
             Write-Host "No API differences found."
@@ -355,6 +356,7 @@ jobs:
           name: winmd
           path: |
             bin/Windows.Win32.winmd
+            bin/Microsoft.Direct3D.D3D12.winmd
             bin/current.apidump.cs
             bin/baseline.apidump.cs
             bin/api-diff.patch

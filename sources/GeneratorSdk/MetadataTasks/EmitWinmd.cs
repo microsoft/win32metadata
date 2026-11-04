@@ -41,6 +41,10 @@ namespace MetadataTasks
 
         public ITaskItem[] AutoTypes { get; set; }
 
+        public ITaskItem[] NamespaceOutputs { get; set; }
+
+        public ITaskItem[] References { get; set; }
+
         protected override string ToolName => "dotnet";
 
         protected override string GenerateFullPathToTool() => this.ToolExe;
@@ -77,10 +81,38 @@ namespace MetadataTasks
                 Path.GetFileName(win32WinmdPath)))
             {
                 builder.AppendSwitchIfNotNull("--ref ", win32WinmdPath);
+                string d3d12WinmdPath = Path.Combine(this.Win32WinmdBinDir, "Microsoft.Direct3D.D3D12.winmd");
+                if (File.Exists(d3d12WinmdPath) &&
+                    !StringComparer.OrdinalIgnoreCase.Equals(Path.GetFileName(this.outputWinmdFullPath), Path.GetFileName(d3d12WinmdPath)) &&
+                    !(this.NamespaceOutputs ?? Array.Empty<ITaskItem>()).Any(route =>
+                        StringComparer.OrdinalIgnoreCase.Equals(Path.GetFileName(route.GetMetadata("OutputWinmd")), Path.GetFileName(d3d12WinmdPath))))
+                {
+                    builder.AppendSwitchIfNotNull("--ref ", d3d12WinmdPath);
+                }
             }
 
             builder.AppendSwitchIfNotNull("--version ", this.WinmdVersion);
             builder.AppendSwitchIfNotNull("--outputFileName ", this.outputWinmdFullPath);
+            foreach (var route in this.NamespaceOutputs ?? Array.Empty<ITaskItem>())
+            {
+                string path = route.GetMetadata("OutputWinmd");
+                if (string.IsNullOrWhiteSpace(path))
+                {
+                    throw new ArgumentException($"NamespaceOutput '{route.ItemSpec}' requires OutputWinmd metadata.");
+                }
+
+                if (!Path.IsPathRooted(path))
+                {
+                    path = Path.GetFullPath(Path.Combine(this.MSBuildProjectDirectory, path));
+                }
+
+                builder.AppendSwitchIfNotNull("--namespaceOutput ", route.ItemSpec + "=" + path);
+            }
+
+            foreach (string reference in TaskUtils.GetFullPaths(this.References ?? Array.Empty<ITaskItem>(), this.MSBuildProjectDirectory))
+            {
+                builder.AppendSwitchIfNotNull("--ref ", reference);
+            }
 
             foreach (var autoTypeJson in TaskUtils.GetFullPaths(this.AutoTypes, this.MSBuildProjectDirectory))
             {

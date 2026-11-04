@@ -2,6 +2,9 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Linq;
+using System.Reflection.Metadata;
+using System.Reflection.PortableExecutable;
 using Xunit.Abstractions;
 
 namespace TestCommon
@@ -19,6 +22,21 @@ namespace TestCommon
         }
 
         public static string Win32WinmdPath => Path.GetFullPath(Path.Combine(BinPath, @"..\..\windows.win32.winmd"));
+
+        public static string[] Win32WinmdPaths
+        {
+            get
+            {
+                using var stream = File.OpenRead(Win32WinmdPath);
+                using var pe = new PEReader(stream);
+                var reader = pe.GetMetadataReader();
+                bool split = reader.AssemblyReferences.Any(handle =>
+                    reader.GetString(reader.GetAssemblyReference(handle).Name) == "Microsoft.Direct3D.D3D12.winmd");
+                return split
+                    ? new[] { Win32WinmdPath, Path.Combine(Path.GetDirectoryName(Win32WinmdPath), "Microsoft.Direct3D.D3D12.winmd") }
+                    : new[] { Win32WinmdPath };
+            }
+        }
 
         public static string BinPath => Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
@@ -51,4 +69,3 @@ namespace TestCommon
         }
     }
 }
-

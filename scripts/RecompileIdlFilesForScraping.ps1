@@ -15,13 +15,6 @@ if (!(Test-Path $sdkIncludeDir)) {
     exit -1
 }
 
-$d3dPkgPath = Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Direct3D_D3D12")
-$d3dIncludeDir = Join-Path $d3dPkgPath "build/native/include/"
-if (!(Test-Path $d3dIncludeDir)) {
-    Write-Error "Couldn't find $d3dIncludeDir."
-    exit -1
-}
-
 $vcDirPath = Get-VcDirPath -Arch x86 -HostArch x86
 if (!$env:Path.Contains($vcDirPath)) {
     $env:Path += ";$vcDirPath"
@@ -36,10 +29,6 @@ Copy-Item "$sdkIncludeDir\um" "$recompiledIdlHeadersDir" -Recurse
 Copy-Item "$sdkIncludeDir\shared" "$recompiledIdlHeadersDir" -Recurse
 Copy-Item "$sdkIncludeDir\winrt" "$recompiledIdlHeadersDir" -Recurse
 Copy-Item "$sdkIncludeDir\ucrt" "$recompiledIdlHeadersDir" -Recurse
-
-Write-Host "Copying D3D headers from $d3dIncludeDir to $recompiledIdlHeadersDir..."
-Copy-Item "$d3dIncludeDir\*.*" "$recompiledIdlHeadersDir\um" -Exclude "dxgiformat.*" -Recurse
-Copy-Item "$d3dIncludeDir\dxgiformat.*" "$recompiledIdlHeadersDir\shared" -Recurse
 
 Write-Host "Copying additional headers from $windowsWin32ProjectRoot\AdditionalHeaders to $recompiledIdlHeadersDir\um..."
 Copy-Item "$windowsWin32ProjectRoot\AdditionalHeaders\*" "$recompiledIdlHeadersDir\um" -Recurse

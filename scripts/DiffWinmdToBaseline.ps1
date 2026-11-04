@@ -56,11 +56,11 @@ $baselineDump = Join-Path $tempDir "baseline.cs"
 $currentDump = Join-Path $tempDir "current.cs"
 
 Write-Host "Dumping baseline winmd..." -ForegroundColor Blue
-& dotnet $winmdUtilsPathBin dump --winmd $previousReleaseWinmd --output $baselineDump
+& dotnet $winmdUtilsPathBin dump --winmd $previousReleaseWinmd --includeReferencedWinmds --output $baselineDump
 if ($LastExitCode -ne 0) { Write-Error "Failed to dump baseline winmd"; exit 1 }
 
 Write-Host "Dumping current winmd..." -ForegroundColor Blue
-& dotnet $winmdUtilsPathBin dump --winmd $winmdPath --output $currentDump
+& dotnet $winmdUtilsPathBin dump --winmd $winmdPath --includeReferencedWinmds --output $currentDump
 if ($LastExitCode -ne 0) { Write-Error "Failed to dump current winmd"; exit 1 }
 
 Write-Host "`nAPI Diff (baseline -> current):" -ForegroundColor Green
@@ -80,7 +80,12 @@ if ($exitCode -eq 0)
 {
     Write-Host "`nNo API differences found." -ForegroundColor Green
 }
-else
+elseif ($exitCode -eq 1)
 {
     Write-Host "`nDifferences shown above." -ForegroundColor Yellow
+}
+else
+{
+    Write-Error "API comparison failed with exit code $exitCode."
+    exit $exitCode
 }
