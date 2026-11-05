@@ -1,26 +1,24 @@
 # Publishes draft releases created by the ADO win32metadata-Release pipeline.
 #
-# The ADO pipeline creates a draft GitHub release and attaches the signed NuGet packages.
-# Draft releases don't raise workflow events, so this workflow polls for them. For each
-# eligible draft it verifies the packages, pushes them to nuget.org via Trusted Publishing,
-# and then publishes the GitHub release.
+# After creating a draft GitHub release and attaching the signed NuGet packages, the ADO
+# pipeline must dispatch this workflow on the default branch with the release tag.
+# It verifies the packages, pushes them to nuget.org via Trusted Publishing, and then
+# publishes the GitHub release. Draft releases don't raise workflow events themselves.
 #
 # One-time setup:
-# - nuget.org Trusted Publishing policy: owner microsoft, repository win32metadata,
+# - nuget.org Trusted Publishing policy: GitHub owner microsoft, repository win32metadata,
 #   workflow publish-release.yml, environment nuget-org.
 # - GitHub environment 'nuget-org' limited to the default branch.
-# - Repository variable NUGET_USER set to the nuget.org profile name the policy belongs to.
+# - Repository variable NUGET_USER set to the nuget.org profile that created the policy.
 
 name: Publish release
 
 on:
-  schedule:
-    - cron: '*/15 * * * *'
   workflow_dispatch:
     inputs:
       tag:
-        description: Tag of the draft release to publish (default is the oldest eligible draft)
-        required: false
+        description: Tag of the draft release to publish (for example, v71.0.43-preview)
+        required: true
         type: string
 
 permissions: {}
@@ -35,7 +33,7 @@ env:
 
 jobs:
   find:
-    name: Find draft release
+    name: Validate draft release
     runs-on: ubuntu-latest
     permissions:
       contents: write # Required to list draft releases.
@@ -43,7 +41,7 @@ jobs:
       release_id: ${{ steps.find.outputs.release_id }}
       tag: ${{ steps.find.outputs.tag }}
     steps:
-      - name: Find eligible draft release
+      - name: Validate requested draft release
         id: find
         shell: pwsh
         env:
@@ -53,63 +51,50 @@ jobs:
         run: |
           $ErrorActionPreference = 'Stop'
           $repo = $env:GITHUB_REPOSITORY
+          $tag = $env:REQUESTED_TAG
 
-          $releases = gh api "repos/$repo/releases?per_page=100" | ConvertFrom-Json
+          if ($tag -notmatch '^v(?<version>\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?)$') {
+            throw "Invalid release tag '$tag'. Expected v<version>, for example v71.0.43-preview."
+          }
+          $version = $Matches.version
+
+          # A draft without a Git tag cannot be retrieved by the release-by-tag endpoint.
+          $releases = gh api --paginate --slurp "repos/$repo/releases?per_page=100" |
+            ConvertFrom-Json | ForEach-Object { $_ }
           if ($LASTEXITCODE) { throw 'Failed to list releases.' }
 
-          $drafts = @($releases | Where-Object { $_.draft } | Sort-Object created_at)
-          if ($env:REQUESTED_TAG) {
-            $drafts = @($drafts | Where-Object { $_.tag_name -eq $env:REQUESTED_TAG })
-            if (-not $drafts) { throw "No draft release with tag '$env:REQUESTED_TAG' was found." }
+          $drafts = @($releases | Where-Object { $_.draft -and $_.tag_name -ceq $tag })
+          if ($drafts.Count -ne 1) {
+            throw "Expected one draft release with tag '$tag' but found $($drafts.Count)."
+          }
+          $release = $drafts[0]
+
+          $packages = @($release.assets | Where-Object { $_.name -like '*.nupkg' })
+          $metadataName = "$env:METADATA_PACKAGE_ID.$version.nupkg"
+          $generatorPattern = '^' + [regex]::Escape("$env:GENERATOR_PACKAGE_ID.") + '\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?\.nupkg$'
+
+          if ($packages | Where-Object { $_.state -ne 'uploaded' }) {
+            throw "Package uploads for $tag are not complete."
+          }
+          if ($packages.Count -ne 2 -or
+              -not ($packages | Where-Object { $_.name -eq $metadataName }) -or
+              -not ($packages | Where-Object { $_.name -match $generatorPattern })) {
+            throw "$tag must contain exactly $metadataName and one $env:GENERATOR_PACKAGE_ID package (found: $($packages.name -join ', '))."
           }
 
-          foreach ($release in $drafts) {
-            $tag = $release.tag_name
-            $reason = $null
-
-            if ($tag -notmatch '^v(?<version>\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?)$') {
-              $reason = 'its tag is not a release version'
-            } else {
-              $version = $Matches.version
-              $packages = @($release.assets | Where-Object { $_.name -like '*.nupkg' })
-              $metadataName = "$env:METADATA_PACKAGE_ID.$version.nupkg"
-              $generatorPattern = '^' + [regex]::Escape("$env:GENERATOR_PACKAGE_ID.") + '\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?\.nupkg$'
-
-              if ($packages.Count -eq 0) {
-                $reason = 'it has no package assets'
-              } elseif ($packages | Where-Object { $_.state -ne 'uploaded' }) {
-                $reason = 'its package uploads are not complete'
-              } elseif ($packages.Count -ne 2 -or
-                        -not ($packages | Where-Object { $_.name -eq $metadataName }) -or
-                        -not ($packages | Where-Object { $_.name -match $generatorPattern })) {
-                $reason = "it must contain exactly $metadataName and one $env:GENERATOR_PACKAGE_ID package (found: $($packages.name -join ', '))"
-              } else {
-                $comparison = gh api "repos/$repo/compare/$($release.target_commitish)...$env:DEFAULT_BRANCH" | ConvertFrom-Json
-                if ($LASTEXITCODE -or $comparison.status -notin 'ahead', 'identical') {
-                  $reason = "its target '$($release.target_commitish)' is not on $env:DEFAULT_BRANCH"
-                }
-              }
-            }
-
-            if ($reason) {
-              $message = "Skipping draft release $tag because $reason."
-              if ($env:REQUESTED_TAG) { throw $message }
-              Write-Host $message
-              continue
-            }
-
-            Write-Host "Selected draft release $tag ($($release.id))."
-            "release_id=$($release.id)" >> $env:GITHUB_OUTPUT
-            "tag=$tag" >> $env:GITHUB_OUTPUT
-            exit 0
+          $comparison = gh api "repos/$repo/compare/$($release.target_commitish)...$env:DEFAULT_BRANCH" | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw 'Failed to check the release target.' }
+          if ($comparison.status -notin 'ahead', 'identical') {
+            throw "Release target '$($release.target_commitish)' is not on $env:DEFAULT_BRANCH."
           }
 
-          Write-Host 'No eligible draft release found.'
+          Write-Host "Validated draft release $tag ($($release.id))."
+          "release_id=$($release.id)" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
 
   publish:
     name: Publish ${{ needs.find.outputs.tag }}
     needs: find
-    if: needs.find.outputs.release_id != ''
     runs-on: windows-latest
     environment: nuget-org
     permissions:
