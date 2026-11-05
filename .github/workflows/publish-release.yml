@@ -1,0 +1,177 @@
+# Publishes draft releases created by the ADO win32metadata-Release pipeline.
+#
+# The ADO pipeline creates a draft GitHub release and attaches the signed NuGet packages.
+# Draft releases don't raise workflow events, so this workflow polls for them. For each
+# eligible draft it verifies the packages, pushes them to nuget.org via Trusted Publishing,
+# and then publishes the GitHub release.
+#
+# One-time setup:
+# - nuget.org Trusted Publishing policy: owner microsoft, repository win32metadata,
+#   workflow publish-release.yml, environment nuget-org.
+# - GitHub environment 'nuget-org' limited to the default branch.
+# - Repository variable NUGET_USER set to the nuget.org profile name the policy belongs to.
+
+name: Publish release
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag of the draft release to publish (default is the oldest eligible draft)
+        required: false
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+
+env:
+  METADATA_PACKAGE_ID: Microsoft.Windows.SDK.Win32Metadata
+  GENERATOR_PACKAGE_ID: Microsoft.Windows.WinmdGenerator
+
+jobs:
+  find:
+    name: Find draft release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to list draft releases.
+    outputs:
+      release_id: ${{ steps.find.outputs.release_id }}
+      tag: ${{ steps.find.outputs.tag }}
+    steps:
+      - name: Find eligible draft release
+        id: find
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_TAG: ${{ inputs.tag }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $repo = $env:GITHUB_REPOSITORY
+
+          $releases = gh api "repos/$repo/releases?per_page=100" | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw 'Failed to list releases.' }
+
+          $drafts = @($releases | Where-Object { $_.draft } | Sort-Object created_at)
+          if ($env:REQUESTED_TAG) {
+            $drafts = @($drafts | Where-Object { $_.tag_name -eq $env:REQUESTED_TAG })
+            if (-not $drafts) { throw "No draft release with tag '$env:REQUESTED_TAG' was found." }
+          }
+
+          foreach ($release in $drafts) {
+            $tag = $release.tag_name
+            $reason = $null
+
+            if ($tag -notmatch '^v(?<version>\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?)$') {
+              $reason = 'its tag is not a release version'
+            } else {
+              $version = $Matches.version
+              $packages = @($release.assets | Where-Object { $_.name -like '*.nupkg' })
+              $metadataName = "$env:METADATA_PACKAGE_ID.$version.nupkg"
+              $generatorPattern = '^' + [regex]::Escape("$env:GENERATOR_PACKAGE_ID.") + '\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?\.nupkg$'
+
+              if ($packages.Count -eq 0) {
+                $reason = 'it has no package assets'
+              } elseif ($packages | Where-Object { $_.state -ne 'uploaded' }) {
+                $reason = 'its package uploads are not complete'
+              } elseif ($packages.Count -ne 2 -or
+                        -not ($packages | Where-Object { $_.name -eq $metadataName }) -or
+                        -not ($packages | Where-Object { $_.name -match $generatorPattern })) {
+                $reason = "it must contain exactly $metadataName and one $env:GENERATOR_PACKAGE_ID package (found: $($packages.name -join ', '))"
+              } else {
+                $comparison = gh api "repos/$repo/compare/$($release.target_commitish)...$env:DEFAULT_BRANCH" | ConvertFrom-Json
+                if ($LASTEXITCODE -or $comparison.status -notin 'ahead', 'identical') {
+                  $reason = "its target '$($release.target_commitish)' is not on $env:DEFAULT_BRANCH"
+                }
+              }
+            }
+
+            if ($reason) {
+              $message = "Skipping draft release $tag because $reason."
+              if ($env:REQUESTED_TAG) { throw $message }
+              Write-Host $message
+              continue
+            }
+
+            Write-Host "Selected draft release $tag ($($release.id))."
+            "release_id=$($release.id)" >> $env:GITHUB_OUTPUT
+            "tag=$tag" >> $env:GITHUB_OUTPUT
+            exit 0
+          }
+
+          Write-Host 'No eligible draft release found.'
+
+  publish:
+    name: Publish ${{ needs.find.outputs.tag }}
+    needs: find
+    if: needs.find.outputs.release_id != ''
+    runs-on: windows-latest
+    environment: nuget-org
+    permissions:
+      contents: write # Required to download draft assets and publish the release.
+      id-token: write # Required for nuget.org Trusted Publishing.
+    steps:
+      - name: Download packages
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ needs.find.outputs.release_id }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $release = gh api "repos/$env:GITHUB_REPOSITORY/releases/$env:RELEASE_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw 'Failed to read the release.' }
+          if (-not $release.draft) { throw "Release $($release.tag_name) is no longer a draft." }
+
+          $packageDir = New-Item -ItemType Directory -Force (Join-Path $env:RUNNER_TEMP packages)
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/octet-stream' }
+          foreach ($asset in $release.assets | Where-Object { $_.name -like '*.nupkg' }) {
+            Write-Host "Downloading $($asset.name)"
+            Invoke-WebRequest -Uri $asset.url -Headers $headers -OutFile (Join-Path $packageDir $asset.name)
+          }
+
+      - name: Verify package signatures
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $packages = Get-ChildItem (Join-Path $env:RUNNER_TEMP packages) -Filter *.nupkg
+          if ($packages.Count -ne 2) { throw "Expected 2 packages but found $($packages.Count)." }
+
+          foreach ($package in $packages) {
+            $output = dotnet nuget verify --all $package.FullName -v normal 2>&1 | Out-String
+            Write-Host $output
+            if ($LASTEXITCODE) { throw "Signature verification failed for $($package.Name)." }
+            if ($output -notmatch 'Signature type: Author\s+Subject Name: CN=Microsoft Corporation, O=Microsoft Corporation,') {
+              throw "$($package.Name) is not author-signed by Microsoft Corporation."
+            }
+          }
+
+      - name: Get temporary nuget.org API key
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push packages to nuget.org
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($package in Get-ChildItem (Join-Path $env:RUNNER_TEMP packages) -Filter *.nupkg) {
+            dotnet nuget push $package.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+            if ($LASTEXITCODE) { throw "Failed to push $($package.Name)." }
+          }
+
+      - name: Publish GitHub release
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ needs.find.outputs.release_id }}
+        run: |
+          gh api -X PATCH "repos/$env:GITHUB_REPOSITORY/releases/$env:RELEASE_ID" -F draft=false --jq .html_url
+          if ($LASTEXITCODE) { throw 'Failed to publish the release.' }

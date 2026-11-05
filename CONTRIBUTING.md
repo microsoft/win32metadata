@@ -273,10 +273,10 @@ Additionally, it is useful to load the winmd in [ILSpy](https://github.com/icsha
 
 ## Releasing
 
-The main branch must have a clean build to publish a new release. Run the [release pipeline](https://github-private.visualstudio.com/microsoft/_build?definitionId=750) to publish new packages to nuget.org and create a new draft release on GitHub autopopulated with the list of resolved issues.
+The main branch must have a clean build to publish a new release. Add the `auto-release` tag to a successful `main` run of the [official pipeline](https://github-private.visualstudio.com/microsoft/_build?definitionId=648). This queues the [release pipeline](https://github-private.visualstudio.com/microsoft/_build?definitionId=750), which creates a draft GitHub release autopopulated with the list of resolved issues and attaches the signed NuGet packages.
+
+The [Publish release](.github/workflows/publish-release.yml) workflow checks for draft releases every 15 minutes. You can also run it manually with the release tag. It verifies the packages are Microsoft-signed and built from `main`, pushes them to nuget.org using [Trusted Publishing](https://learn.microsoft.com/nuget/nuget-org/trusted-publishing), and then publishes the GitHub release. If publishing fails, the release stays a draft and the workflow can be rerun.
 
 Once the packages are live on nuget.org, manually save the new package versions to the ADO Artifact Feed [https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies](https://dev.azure.com/shine-oss/Win32Metadata/_artifacts/feed/Win32Metadata-Dependencies) following the instructions at [https://learn.microsoft.com/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#save-packages](https://learn.microsoft.com/azure/devops/artifacts/how-to/search-upstream?view=azure-devops#save-packages).
-
-Once the packages are saved to the ADO Artifact Feed, publish the GitHub release.
 
 After the release is published, run [Set-LastReleaseVersion.ps1](scripts/Set-LastReleaseVersion.ps1) with the metadata package version published to nuget.org, and run [Set-MajorVersion.ps1](scripts/Set-MajorVersion.ps1) to increment the version number in the build for the next release.
