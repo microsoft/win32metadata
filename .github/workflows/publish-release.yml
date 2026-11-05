@@ -1,0 +1,151 @@
+# Pushes the signed NuGet packages attached to a published release to nuget.org.
+#
+# The ADO win32metadata-Release pipeline publishes the GitHub release with the signed
+# packages attached, which triggers this workflow. It verifies the packages and pushes them
+# to nuget.org via Trusted Publishing. Run it manually with the release tag to retry.
+#
+# One-time setup:
+# - nuget.org Trusted Publishing policy: GitHub owner microsoft, repository win32metadata,
+#   workflow publish-release.yml, environment nuget-org.
+# - GitHub environment 'nuget-org' limited to the default branch and 'v*' tags.
+# - Repository variable NUGET_USER set to the nuget.org profile that created the policy.
+
+name: Publish release
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Tag of the published release to push to nuget.org (for example, v71.0.43-preview)
+        required: true
+        type: string
+
+permissions: {}
+
+concurrency:
+  group: publish-release
+  cancel-in-progress: false
+
+env:
+  METADATA_PACKAGE_ID: Microsoft.Windows.SDK.Win32Metadata
+  GENERATOR_PACKAGE_ID: Microsoft.Windows.WinmdGenerator
+
+jobs:
+  find:
+    name: Validate release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      release_id: ${{ steps.find.outputs.release_id }}
+      tag: ${{ steps.find.outputs.tag }}
+    steps:
+      - name: Validate release
+        id: find
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REQUESTED_TAG: ${{ github.event_name == 'release' && github.event.release.tag_name || inputs.tag }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $repo = $env:GITHUB_REPOSITORY
+          $tag = $env:REQUESTED_TAG
+
+          if ($tag -notmatch '^v(?<version>\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?)$') {
+            $message = "Release tag '$tag' is not a win32metadata release version."
+            if ($env:GITHUB_EVENT_NAME -eq 'release') {
+              Write-Host "Skipping: $message"
+              exit 0
+            }
+            throw $message
+          }
+          $version = $Matches.version
+
+          $release = gh api "repos/$repo/releases/tags/$tag" | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw "Failed to find a published release with tag '$tag'." }
+
+          $packages = @($release.assets | Where-Object { $_.name -like '*.nupkg' })
+          $metadataName = "$env:METADATA_PACKAGE_ID.$version.nupkg"
+          $generatorPattern = '^' + [regex]::Escape("$env:GENERATOR_PACKAGE_ID.") + '\d+\.\d+\.\d+(-[0-9A-Za-z.-]+)?\.nupkg$'
+
+          if ($packages | Where-Object { $_.state -ne 'uploaded' }) {
+            throw "Package uploads for $tag are not complete."
+          }
+          if ($packages.Count -ne 2 -or
+              -not ($packages | Where-Object { $_.name -eq $metadataName }) -or
+              -not ($packages | Where-Object { $_.name -match $generatorPattern })) {
+            throw "$tag must contain exactly $metadataName and one $env:GENERATOR_PACKAGE_ID package (found: $($packages.name -join ', '))."
+          }
+
+          $comparison = gh api "repos/$repo/compare/$tag...$env:DEFAULT_BRANCH" | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw 'Failed to check the release commit.' }
+          if ($comparison.status -notin 'ahead', 'identical') {
+            throw "Release tag '$tag' is not on $env:DEFAULT_BRANCH."
+          }
+
+          Write-Host "Validated release $tag ($($release.id))."
+          "release_id=$($release.id)" >> $env:GITHUB_OUTPUT
+          "tag=$tag" >> $env:GITHUB_OUTPUT
+
+  publish:
+    name: Publish ${{ needs.find.outputs.tag }}
+    needs: find
+    if: needs.find.outputs.release_id != ''
+    runs-on: windows-latest
+    environment: nuget-org
+    permissions:
+      contents: read
+      id-token: write # Required for nuget.org Trusted Publishing.
+    steps:
+      - name: Download packages
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_ID: ${{ needs.find.outputs.release_id }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $release = gh api "repos/$env:GITHUB_REPOSITORY/releases/$env:RELEASE_ID" | ConvertFrom-Json
+          if ($LASTEXITCODE) { throw 'Failed to read the release.' }
+
+          $packageDir = New-Item -ItemType Directory -Force (Join-Path $env:RUNNER_TEMP packages)
+          $headers = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/octet-stream' }
+          foreach ($asset in $release.assets | Where-Object { $_.name -like '*.nupkg' }) {
+            Write-Host "Downloading $($asset.name)"
+            Invoke-WebRequest -Uri $asset.url -Headers $headers -OutFile (Join-Path $packageDir $asset.name)
+          }
+
+      - name: Verify package signatures
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $packages = Get-ChildItem (Join-Path $env:RUNNER_TEMP packages) -Filter *.nupkg
+          if ($packages.Count -ne 2) { throw "Expected 2 packages but found $($packages.Count)." }
+
+          foreach ($package in $packages) {
+            $output = dotnet nuget verify --all $package.FullName -v normal 2>&1 | Out-String
+            Write-Host $output
+            if ($LASTEXITCODE) { throw "Signature verification failed for $($package.Name)." }
+            if ($output -notmatch 'Signature type: Author\s+Subject Name: CN=Microsoft Corporation, O=Microsoft Corporation,') {
+              throw "$($package.Name) is not author-signed by Microsoft Corporation."
+            }
+          }
+
+      - name: Get temporary nuget.org API key
+        id: nuget-login
+        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1
+        with:
+          user: ${{ vars.NUGET_USER }}
+
+      - name: Push packages to nuget.org
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          foreach ($package in Get-ChildItem (Join-Path $env:RUNNER_TEMP packages) -Filter *.nupkg) {
+            dotnet nuget push $package.FullName --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+            if ($LASTEXITCODE) { throw "Failed to push $($package.Name)." }
+          }
