@@ -128,7 +128,7 @@ jobs:
             $output = dotnet nuget verify --all $package.FullName -v normal 2>&1 | Out-String
             Write-Host $output
             if ($LASTEXITCODE) { throw "Signature verification failed for $($package.Name)." }
-            if ($output -notmatch 'Signature type: Author\s+Subject Name: CN=Microsoft Corporation, O=Microsoft Corporation,') {
+            if ($output -notmatch 'Signature type: Author\s+Verifying the author primary signature with certificate:\s+Subject Name: CN=Microsoft Corporation, O=Microsoft Corporation,') {
               throw "$($package.Name) is not author-signed by Microsoft Corporation."
             }
           }
