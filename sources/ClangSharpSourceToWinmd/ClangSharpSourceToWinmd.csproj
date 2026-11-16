@@ -22,4 +22,14 @@
     <ProjectReference Include="..\MetadataUtils\MetadataUtils.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!-- The emitter compiles the scraped C# against netstandard 2.1. Ship the reference assembly
+         next to the tool so it does not depend on the targeting pack of whichever SDK runs it. -->
+    <PackageDownload Include="NETStandard.Library.Ref" Version="[2.1.0]" />
+    <None Include="$(NuGetPackageRoot)netstandard.library.ref\2.1.0\ref\netstandard2.1\netstandard.dll"
+          Link="ref\netstandard.dll"
+          CopyToOutputDirectory="PreserveNewest"
+          Visible="false" />
+  </ItemGroup>
+
 </Project>

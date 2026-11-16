@@ -311,7 +311,10 @@ namespace ClangSharpSourceToWinmd
                 var netstandardPath = FindNetstandardDllPath();
                 if (!File.Exists(netstandardPath))
                 {
-                    throw new FileNotFoundException("Failed to find the netstandard DLL.");
+                    throw new FileNotFoundException(
+                        $"The netstandard 2.1 reference assembly that ships with this tool is missing from {netstandardPath}. " +
+                        "The tool's package is incomplete; restore or rebuild it, or pass netstandard.dll with --ref.",
+                        netstandardPath);
                 }
 
                 comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
@@ -404,9 +407,8 @@ namespace ClangSharpSourceToWinmd
 
         private static string FindNetstandardDllPath()
         {
-            // Is there a better way to find this?
-            string progFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles);
-            return Path.Combine(progFiles, @"dotnet\packs\NETStandard.Library.Ref\2.1.0\ref\netstandard2.1\netstandard.dll");
+            // The build copies the pinned reference assembly next to the tool, and the BuildSdk package ships it there.
+            return Path.Combine(AppContext.BaseDirectory, "ref", "netstandard.dll");
         }
 
 #if ShowMemoryInfo
