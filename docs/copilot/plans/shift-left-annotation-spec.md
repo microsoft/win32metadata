@@ -187,28 +187,30 @@ same-allocation relationship from the API contract, not infer it from pointer fi
 
 ### Records, interfaces, and enums
 
-Attributes appear between the declaration keyword and name.
+When required, attributes appear between the declaration keyword and name.
 
 ```cpp
-struct _Win32_SupportedOS_10240_ DESCRIPTION {
+struct DESCRIPTION {
     DWORD cbSize;
 };
 ```
 
 ```cpp
-enum class _Win32_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long {
+enum class [[clang::flag_enum]] OPTION : unsigned long {
     OPTION_NONE = 0,
 };
 ```
 
 ### Typedefs and callback aliases
 
-Type metadata precedes the typedef.
+Typedefs retain their native form; any required type metadata precedes the typedef.
 
 ```cpp
-_Win32_SupportedOS_10240_
 typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 ```
+
+Supported Windows versions for these declarations come from native conditional
+compilation guards, as described below, not from declaration annotations.
 
 ## Attribute solution matrix
 
@@ -216,7 +218,7 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | --- | --- | --- |
 | `SetLastError` / P/Invoke `SupportsLastError` | `_Win32_SetLastError_` | Function. No existing SAL annotation means that an API sets thread last error; sets the ECMA-335 P/Invoke flag. |
 | P/Invoke module override | `_Win32_ImportLibrary_("name.dll")` | Function. Overrides import-library scan results. |
-| `SupportedOSPlatform("windows...")` | One fixed `_Win32_SupportedOS_*_` macro from the menu below, or `_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` for a [scoped default](#scoped-supportedos-defaults) | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. An explicit declaration annotation overrides scoped defaults. |
+| `SupportedOSPlatform("windows...")` | Existing native version guards: `NTDDI_VERSION`, `_WIN32_WINNT`, `WINVER`, and related macros | Associate declarations with their [preprocessor conditions](#supported-windows-versions-from-native-guards). Emit only justified Windows-version information; correct inaccurate or missing guards in SDK headers. No custom SupportedOS input annotation or scoped default. |
 | preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional integer literals or object-like macros such as `INVALID_HANDLE_VALUE`. The consumer resolves macros in the declaration's preprocessor context, evaluates each constant expression, and emits one `RAIIFree` attribute plus one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
@@ -233,162 +235,129 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | scoped enum | Native `enum class` | Emitted as `ScopedEnum`. Existing scoped SDK enums are supported, but synthetic bags of constants use ordinary unscoped enums. |
 | flags enum | `[[clang::flag_enum]]` | Enum. Emitted with flags semantics. |
 
-### Supported OS macro menu
+### Supported Windows versions from native guards
 
-The annotation header defines only the versions currently present in
-`supportedOS.rsp`. Each per-declaration macro expands to a fixed annotation payload:
+Drop custom SupportedOS input annotations. Neither the per-declaration
+`_Win32_SupportedOS_*_` vocabulary nor the proposed
+`_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` scopes are part of the future
+authoring strategy. Infer version scopes from existing native `#if` / `#ifdef`
+conditions involving `NTDDI_VERSION`, `_WIN32_WINNT`, `WINVER`, and related SDK macros.
+When those guards disagree with documented actual availability, review and correct
+the SDK header guards. Do not introduce a replacement annotation or API-specific
+availability sidecar.
 
-```cpp
-_Win32_SupportedOS_Windows2000_
-_Win32_SupportedOS_WindowsXP_
-_Win32_SupportedOS_WindowsVista_
-_Win32_SupportedOS_Windows7_
-_Win32_SupportedOS_Windows8_
-_Win32_SupportedOS_Windows81_
-_Win32_SupportedOS_10240_
-_Win32_SupportedOS_10586_
-_Win32_SupportedOS_14393_
-_Win32_SupportedOS_15063_
-_Win32_SupportedOS_16299_
-_Win32_SupportedOS_17134_
-_Win32_SupportedOS_17763_
-_Win32_SupportedOS_18362_
-_Win32_SupportedOS_19041_
-_Win32_SupportedOS_Server2000_
-_Win32_SupportedOS_Server2003_
-_Win32_SupportedOS_Server2008_
-_Win32_SupportedOS_Server2012_
-_Win32_SupportedOS_Server2016_
-```
+This changes the source of availability facts, not the generated metadata contract.
+Retain `SupportedOSPlatform` output where the inferred Windows-version information
+can be represented accurately. Preserve native declarations and ABI. Guard corrections
+intentionally affect declaration visibility for the corrected targets and require
+native compilation review; they must not rewrite signatures or layouts.
 
-New versions require a reviewed entry in the canonical version table and the
-corresponding fixed macro, rather than a free-form version on individual declarations
-or scopes. The scope lookup must share that table, not introduce a divergent
-version menu.
+The following is an implementation recommendation and feasibility analysis.
+Guard inference and the example header corrections are not implemented by this
+documentation change.
 
-Existing compiler/SAL facts remain the preferred source for attributes already expressed
-by native syntax, including `noreturn`, architecture guards, alignment, native typedef
-identity, bitfields, UUIDs, packing, parameter direction, optionality, and array sizes.
-The custom annotations are fallbacks where existing syntax is absent or wrong.
+#### What Clang and ClangSharp expose
 
-### Scoped SupportedOS defaults
+An ordinary Clang AST contains declarations from the active preprocessing path.
+`#if` expressions and declarations in skipped branches are not ordinary AST nodes.
+Walking the AST alone cannot recover their version scopes.
 
-`_Win32_SupportedOS_BEGIN_(WindowsVista)` pushes an authored supported-OS default;
-`_Win32_SupportedOS_END_()` pops it and restores the enclosing default. Nested scopes
-override, rather than combine, defaults. An explicit per-declaration
-`_Win32_SupportedOS_*_` annotation wins over every scoped default. The innermost
-applicable scope wins otherwise, not the greatest version.
+The current [scraper](../../../sources/Win32MetadataScraper/Program.cs) parses one
+translation unit, walks its declarations, and passes it to `PInvokeGenerator`.
+Its translation flags enable attributed types and implicit attributes, not a detailed
+preprocessing record or a conditional-provenance collector. The
+[project references](../../../sources/Win32MetadataScraper/Win32MetadataScraper.csproj)
+pin ClangSharp 21.1.8.4 and libclang 21.1.8. These APIs provide useful building blocks:
 
-Implementations must provide end-to-end reader resolution before enabling scope
-authoring. Scopes factor reviewed availability facts already being migrated; grouping
-declarations must not infer new OS floors. The emitted annotation remains the existing
-`SupportedOSPlatform` payload; no new emitted metadata schema or runtime attribute is
-required.
-
-#### Macro definition
-
-The `_Win32_SupportedOS_BEGIN_` argument is a token from the existing per-declaration
-menu, without the `_Win32_SupportedOS_` prefix or trailing underscore. This definition
-illustrates the Vista and Windows7 entries of the shared canonical version table,
-including their per-declaration spellings. The complete table must retain
-the other reviewed entries above. `_WIN32META_ANNOTATION_` is the existing transport
-helper.
-
-```cpp
-#define _WIN32META_OS_STRINGIFY_RAW(...) #__VA_ARGS__
-#define _WIN32META_OS_STRINGIFY(...) _WIN32META_OS_STRINGIFY_RAW(__VA_ARGS__)
-#define _WIN32META_OS_PRAGMA(...) _Pragma(_WIN32META_OS_STRINGIFY(__VA_ARGS__))
-
-#define _WIN32META_OS_VERSION_WindowsVista "SupportedOSPlatform(\"windows6.0.6000\")"
-#define _WIN32META_OS_VERSION_Windows7 "SupportedOSPlatform(\"windows6.1\")"
-#define _WIN32META_OS_VERSION_RAW(os) _WIN32META_OS_VERSION_##os
-#define _WIN32META_OS_VERSION(os) _WIN32META_OS_VERSION_RAW(os)
-
-#define _Win32_SupportedOS_WindowsVista_ \
-    _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(WindowsVista))
-#define _Win32_SupportedOS_Windows7_ \
-    _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(Windows7))
-
-#if defined(WIN32METADATA) && defined(__clang__)
-#define _Win32_SupportedOS_BEGIN_(os) \
-    _WIN32META_OS_PRAGMA(clang attribute win32_os.push( \
-        __attribute__((annotate(_WIN32META_OS_VERSION(os)))), \
-        apply_to = any(function, record, enum, type_alias)))
-#define _Win32_SupportedOS_END_() \
-    _WIN32META_OS_PRAGMA(clang attribute win32_os.pop)
-#else
-#define _Win32_SupportedOS_BEGIN_(os)
-#define _Win32_SupportedOS_END_()
-#endif
-```
-
-The two-stage variadic stringification expands the payload before `_Pragma`
-stringification; the two-stage token lookup also permits an OS token supplied by a
-macro. Push and pop use the same `win32_os` pragma namespace. Both public scope macros
-are empty outside Clang metadata compilation, including ordinary MSVC builds with or
-without `WIN32METADATA`; the fixed declaration macros retain their existing no-op
-behavior.
-
-ClangSharp 21.1.8.4 with native Clang 21.1.8 supports this namespaced pragma transport.
-The subject filter is exactly `any(function, record, enum, type_alias)`: `typedef` is
-not a valid pragma matcher; `type_alias` covers genuine typedefs and callback typedefs.
-C++ `using` aliases can reach the compiler AST, but the current reader does not support
-`TypeAliasDecl`; the matcher alone does not establish end-to-end alias support.
-
-#### Nesting and applicability
-
-These APIs are fictional; comments describe the effective metadata after reader
-resolution, not a change to native declarations:
-
-```cpp
-void ExampleBeforeScope(void); // No scoped default.
-
-_Win32_SupportedOS_BEGIN_(WindowsVista)
-void ExampleVista(void); // Vista default.
-
-_Win32_SupportedOS_BEGIN_(Windows7)
-void ExampleWindows7(void); // Windows7 default.
-_Win32_SupportedOS_Windows8_
-void ExampleExplicitWindows8(void); // Explicit Windows8 wins.
-_Win32_SupportedOS_END_()
-
-void ExampleVistaAgain(void); // Vista default restored.
-_Win32_SupportedOS_END_()
-
-void ExampleAfterScope(void); // No scoped default.
-```
-
-A default applies to eligible declarations lexically inside the scope in the same
-physical header/expansion file and include instance. Eligible COM methods and nested
-types receive the default independently when their declarations are within that scope.
-An annotation on a record or interface alone does not imply inheritance by its members;
-parameters and fields are not scope targets.
-
-An included header does not inherit the including header's default. It may establish
-its own balanced scopes. A declaration-producing macro is evaluated at its expansion
-file and include instance, not merely the file where its replacement text was spelled.
-Pair every `BEGIN` and `END` within the same file and include instance, balanced in
-each active preprocessing path; an included file cannot pop its caller's scope.
-
-#### Future acceptance coverage
-
-These are implementation acceptance cases, not completed broad validation. The small
-x64 transport/final-winmd fixture does not establish cross-architecture, full-SDK, or
-PCH behavior.
-
-| Case | Required result |
+| Interface | Available information and limit |
 | --- | --- |
-| Nesting and explicit precedence | Verify Vista -> Windows7 -> Vista -> no default, plus before/after absence and an explicit later-version annotation inside a scope. Also nest an earlier version inside a later one and use an earlier explicit value: lexical/explicit precedence must win, not greatest-version selection. |
-| Pairing and diagnostics | Cover active/inactive conditional paths, unknown tokens, unmatched pops, unclosed scopes, cross-file pairing, invalid targets, and conflicting explicit annotations. Errors retain source locations. |
-| Includes and expansions | Cover transitive and repeated includes, independently scoped included headers, and declaration-producing macros expanded in another file. No caller-default leakage or lost genuine explicit annotations. |
-| Declaration shapes | Cover C and C++ functions, records, enums, genuine typedefs/callbacks, eligible nested types, and COM methods, without inferring member inheritance from a container annotation. Do not count AST-only C++ `using` coverage as reader support. |
-| Native no-op behavior | Compile ordinary C/C++ with MSVC with and without `WIN32METADATA`, and Clang without it. Preserve native types, layouts, calling conventions, symbols, and vtables. |
-| Final metadata | Read back effective annotations and required absence from final x86, x64, and ARM64 winmds, including COM methods and callbacks. Validate full-SDK and PCH/include reuse separately rather than extrapolating from a small fixture. |
+| [libclang `Index.h`][clang-index] and [preprocessing record][clang-pp-record] | `CXTranslationUnit_DetailedPreprocessingRecord` retains macro definitions/expansions and includes. `clang_getSkippedRanges` / `clang_getAllSkippedRanges` expose skipped source ranges when a preprocessing record exists. Neither is a complete tree of conditional expressions or inactive declarations. |
+| [ClangSharp translation-unit wrappers][clangsharp-tu] and [source locations][clangsharp-locations] | `GetFileContents`, `Tokenize`, `GetSkippedRanges`, `AllSkippedRanges`, and spelling/expansion locations allow source inspection and association with declaration locations. They do not resolve a declaration's version predicate automatically. |
+| [Clang C++ `PPCallbacks`][clang-pp-callbacks] | `If` / `Elif` provide condition source ranges and evaluated or not-evaluated status; `Ifdef`, `Ifndef`, `Else`, `Endif`, macro, inclusion, and skipped-range callbacks provide preprocessing events. A native collector can track encountered conditions alongside AST construction. This requires integration beyond the current managed `TryParse` call. |
+| `CXTranslationUnit_RetainExcludedConditionalBlocks` | This flag is exposed, but [Clang 21's implementation][clang-pp-directives] restricts retention to the main file. It is not a solution for the included SDK header tree or a complete symbolic conditional model. |
+
+Build declaration-to-preprocessor provenance rather than treating directives as AST
+attributes. A concrete route is a native `PPCallbacks` collector joined to AST source
+locations, with a directive lexer over original source buffers to retain nested
+conditions inside skipped regions. A libclang-only alternative can build that
+unevaluated directive model from `GetFileContents` and source ranges, but must also
+resolve macros with preprocessing semantics. Neither route is implemented here.
+A regex over preprocessed output cannot recover discarded conditions.
+
+Retain the original predicates and their file offsets, include instances, macro
+definitions/redefinitions, and spelling/expansion provenance. Associate both the
+owning declaration's conditions and relevant conditions on the include path or
+declaration-producing macro. Do not leak conditions between unrelated include
+instances or use presumed locations changed by `#line` as physical file identities.
+File/offset-only joins are insufficient for repeated inclusion; preserve native
+source-manager or include-stack identity.
+Callbacks from one configuration are not evidence that every nested skipped
+directive or inactive declaration was visited.
+
+#### Resolving version conditions
+
+| Case | Required interpretation |
+| --- | --- |
+| Nested conditions | Conjoin enclosing predicates. An inner version check does not replace an outer check. |
+| `#elif` / `#else` | Retain exclusions from earlier arms. For parent `P`, `#if A`, `#elif B`, `#else` means `P && A`, `P && !A && B`, and `P && !A && !B`, respectively. |
+| Aliases and boolean expressions | Resolve object-like aliases and relevant function-like macros, including SDK `OSVER` / `SPVER` helpers, in their original macro context. Preserve `&&`, `\|\|`, `!`, comparisons, masks, and `defined` semantics. Keep the target version symbolic; substituting the scraper's current target value loses the boundary. An unresolved expression stays unresolved. |
+| Lower and upper bounds | Preserve inclusive/exclusive endpoints and unions of intervals. `V >= A && V < B` is bounded, not simply minimum `A`. Union equivalent redeclaration paths; do not choose the greatest encountered version. Conditions that only change SAL or declaration shape do not establish an API's introduction or removal. |
+| Windows release mapping | Use the selected SDK's constants from [sdkddkver.h](../../../generation/WinSDK/RecompiledIdlHeaders/shared/sdkddkver.h) and a reviewed global mapping to output version strings. NTDDI subversion ordinals are not Windows build numbers. `_WIN32_WINNT == 0x0A00` alone cannot distinguish Windows 10 builds or Windows 11; shared client/server values do not prove separate product minima. No API-specific mapping fallback. |
+| Architecture, API family, and features | Keep `_M_*`, `WINAPI_FAMILY_PARTITION`, feature flags, compiler modes, and similar dimensions separate from Windows-version bounds. An OR between a version and a feature check may not reduce to one OS minimum. Include guards and `defined(WINVER)` alone are not version floors. |
+| Missing or ambiguous version guards | Record unknown availability with source-located diagnostics for review; do not invent a minimum, assume oldest-OS support, or use the parse target, SDK release, neighboring API, or old sidecar value as the answer. Establish actual availability and correct the native header guard. |
+| Output cannot express the predicate | Do not silently flatten upper bounds, disjoint ranges, or non-version conditions into `SupportedOSPlatform` minima. Define and test the output policy before claiming those cases are covered. |
+
+An unevaluated conditional model is needed to preserve the predicates. Additional
+coherent macro configurations are also needed wherever required declarations or
+versioned native shapes are absent from the initial AST. Cover relevant version
+boundaries, x86/x64/arm64, and API families without brute-forcing every macro
+combination. Keep `NTDDI_VERSION`, `_WIN32_WINNT`, and `WINVER` consistent with SDK
+rules. Merge by native declaration identity and configuration; do not combine
+incompatible layouts or count one successful parse as proof of all-version coverage.
+Source predicates alone cannot provide the typed AST for an inactive declaration.
+
+#### Representative native SDK declarations
+
+These are observations from the checked-in headers, not newly assigned OS versions:
+
+| Declaration | Existing source and implication |
+| --- | --- |
+| `InitializeCriticalSectionEx` | [synchapi.h, lines 145-156](../../../generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h#L145-L156) uses `_WIN32_WINNT >= 0x0600` inside an API-family guard. The version bound and family restriction are distinct facts. |
+| `InitializeCriticalSection` | [synchapi.h, lines 101-120](../../../generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h#L101-L120) declares the same native function in both arms of `_WIN32_WINNT < 0x0600`, with different SAL. The `#else` arm does not mean the function first exists at Vista, nor does the earlier arm prove removal there. |
+| `QueueUserAPC2` and its supporting types | [processthreadsapi.h, lines 87-132](../../../generation/WinSDK/RecompiledIdlHeaders/um/processthreadsapi.h#L87-L132) nests `NTDDI_VERSION >= NTDDI_WIN10_MN` inside a family partition. Preserve the symbolic NTDDI bound pending release mapping and availability review. |
+| `WaitOnAddress` | [synchapi.h, lines 695-720](../../../generation/WinSDK/RecompiledIdlHeaders/um/synchapi.h#L695-L720) has a family guard but no enclosing Windows-version guard. Its [documentation](https://learn.microsoft.com/windows/win32/api/synchapi/nf-synchapi-waitonaddress#requirements) specifies Windows 8 / Windows Server 2012. Flag the missing version guard for SDK correction; the unguarded AST declaration does not prove that floor. |
+
+#### Remaining implementation questions and acceptance
+
+Choose and prototype the native callback bridge or the libclang/source-model route,
+including macro-history capture and declarations produced by macros. Establish
+include/PCH reuse behavior and the cost of the required parse configurations. Review
+the global SDK-version-to-output mapping, client/server distinctions, and the output
+policy for predicates beyond a single lower bound. Define actionable diagnostics and
+coverage accounting for unresolved declarations before retiring `supportedOS.rsp`.
+Existing sidecar values and documentation can identify discrepancies during review,
+but must not become fallback inputs to the new inference path.
+
+Acceptance requires nested and skipped conditions, all branch arms, aliases,
+redefinitions, mixed version/feature predicates, bounded/disjoint ranges, unguarded
+declarations, repeated includes/PCH, macro-generated declarations, and versioned
+redeclarations. Verify functions, COM methods, records, enums, and typedefs through
+final x86/x64/arm64 metadata, including required absence of unjustified version
+attributes and native compilation after guard corrections. Until that work is
+complete, this is a source-policy decision, not a claim of sidecar-removal readiness.
+
+[clang-index]: https://github.com/llvm/llvm-project/blob/llvmorg-21.1.8/clang/include/clang-c/Index.h
+[clang-pp-record]: https://github.com/llvm/llvm-project/blob/llvmorg-21.1.8/clang/include/clang/Lex/PreprocessingRecord.h
+[clang-pp-callbacks]: https://github.com/llvm/llvm-project/blob/llvmorg-21.1.8/clang/include/clang/Lex/PPCallbacks.h
+[clang-pp-directives]: https://github.com/llvm/llvm-project/blob/llvmorg-21.1.8/clang/lib/Lex/PPDirectives.cpp
+[clangsharp-tu]: https://github.com/dotnet/ClangSharp/blob/v21.1.8.4/sources/ClangSharp.Interop/Extensions/CXTranslationUnit.cs
+[clangsharp-locations]: https://github.com/dotnet/ClangSharp/blob/v21.1.8.4/sources/ClangSharp.Interop/Extensions/CXSourceLocation.cs
 
 ### Vocabulary not included in the initial implementation
 
 | Semantic | Decision |
 | --- | --- |
+| custom SupportedOS annotations, including scoped defaults | Not included. Infer supported Windows-version scopes from native preprocessing guards and correct inaccurate guards in the SDK. Generated `SupportedOSPlatform` output remains a separate concern. |
 | `IgnoreIfReturn` | Not included. Neither CsWin32 nor windows-rs consumes it, including the `CreatePipe` sidecars. |
 | `FreeWith` | Not included. Allocated producer outputs use `RAIIFree`; cleanup is not attached to pointer typedefs. |
 | `DoNotRelease` | Not included. Plain handles are borrowed unless a producer site carries ownership metadata. |
@@ -482,7 +451,7 @@ duplicating the complete scan-derived mapping.
 | Existing source | Header representation |
 | --- | --- |
 | `WithSetLastError.rsp` | `_Win32_SetLastError_` on each function. |
-| `supportedOS.rsp` | The matching fixed `_Win32_SupportedOS_*_` macro on the owning declaration, or a reviewed [scoped default](#scoped-supportedos-defaults) in the owning header after reader support and acceptance coverage exist. |
+| `supportedOS.rsp` | [Native version-guard inference](#supported-windows-versions-from-native-guards), associated with AST declarations through preprocessor/source provenance. Correct inaccurate or missing SDK guards; do not migrate entries to custom availability annotations. Retire the existing sidecar only after inference and discrepancy review are ready. |
 | `libMappingsManual.rsp` | `_Win32_ImportLibrary_`; scanning remains default. |
 | `libMappings.rsp` | Import-library scan, with header override only where needed. |
 | `autoTypes.json` | Move cleanup and invalid-value semantics to producer returns/output parameters; no typedef ownership and no pseudo handles. |
@@ -507,8 +476,8 @@ references a declaration owned elsewhere.
 - For function-like macros, preserve the macro for normal compilation and represent
   functional metadata through a guarded metadata-only function/constant declaration or
   an explicit annotated-macro construct consumed before Clang declaration traversal.
-- Put supported-OS and ownership annotations on the header that owns the complete
-  declaration, not on aliases or references.
+- Correct version guards in the header that owns the complete declaration. Put
+  ownership annotations there as well, not on aliases or references.
 - Do not synthesize declarations or values absent from the selected SDK.
 - Pointer aliases such as `PSECURITY_DESCRIPTOR` do not own pointed-to memory. Use
   producer-specific return/parameter ownership.
@@ -759,6 +728,8 @@ The windows-rs consumer must:
 - resolve object-like macros used as annotation values in the declaration's
   preprocessor context and evaluate the expanded constant expression;
 - apply SAL semantic defaults without requiring redundant header edits;
+- infer supported Windows-version scopes from native preprocessor/source provenance,
+  retaining unresolved cases for diagnostics rather than inventing availability;
 - retain raw signatures where metadata does not justify an opinionated transformation.
 
 For large validation runs, windows-rs supports `WIN32METADATA_SEQUENTIAL=1` to process
@@ -811,6 +782,8 @@ requires a source syntax, consumer behavior, patch, and regression test.
 5. Add or confirm consumer tests for `Retained`, exact-result preservation, and
    producer-site ownership.
 6. Retain the direct-generation behavior for `EnumWindows` and `LocalFree`.
+7. Implement native version-guard provenance and inference, with the coverage and
+   unresolved-case handling defined above; do not add SupportedOS input annotations.
 
 ### Phase 3: patch canonical SDK examples
 
@@ -839,7 +812,8 @@ requires a source syntax, consumer behavior, patch, and regression test.
 4. Correct native pointer types and existing SAL count/byte-size/string semantics.
 5. Generator callback-alias and pointer-depth fixes.
 6. Obsolete and other proven type-level semantics.
-7. Import library, last error, supported OS, and documentation-source work.
+7. Import library and last error; native version-guard inference; documentation-source
+   work.
 
 For each family, require a canonical header example, source-to-RDL test, RDL-to-winmd
 test, generated binding test where behavior changes, and logical comparison to both the

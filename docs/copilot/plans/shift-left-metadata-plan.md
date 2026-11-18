@@ -6,21 +6,38 @@
 
 ---
 
+## Current decisions
+
+The [annotation specification](shift-left-annotation-spec.md) governs the current
+vocabulary and supersedes this March design where they differ. Supported Windows
+versions will come from existing native version guards (`NTDDI_VERSION`,
+`_WIN32_WINNT`, `WINVER`, and related macros), not custom SupportedOS annotations or
+scoped defaults. Where guards disagree with documented actual availability, correct
+the SDK header guards while preserving native declarations and ABI.
+
+The specification's [guard-inference analysis](shift-left-annotation-spec.md#supported-windows-versions-from-native-guards)
+describes the preprocessor/source provenance needed alongside AST declarations.
+Ordinary AST traversal does not retain arbitrary `#if` expressions or inactive
+declarations. This extraction work is proposed, not implemented, and does not remove
+the existing generated `SupportedOSPlatform` output contract.
+
 ## Executive Summary
 
 Win32metadata currently defines critical API semantics — RAII handles, enum groupings,
 SetLastError behavior, OS version support, and more — in **sidecar files** (`.rsp`, `.json`)
 that live outside the Windows SDK headers. This plan details how to move each class of
-metadata into the headers themselves, using a SAL-like annotation mechanism that's already
-proven in the Windows SDK. We'll use a structured patch system to apply these annotations
-to ingested SDK headers until the official SDK adopts them.
+metadata into the headers themselves, using existing native syntax where available and
+a SAL-like annotation mechanism for the remaining semantics. OS-version information
+uses native conditional compilation guards. Temporary header corrections use the SDK
+ingestion patch system until the official SDK adopts them.
 
 **Key finding (March 2026):** ClangSharp v18+ (via PR [#552](https://github.com/dotnet/ClangSharp/pull/552))
 added `[NativeAnnotation("...")]` support that preserves `__attribute__((annotate(...)))`
 on **all declaration types** — functions, parameters, struct fields, and return values.
-This repo currently pins v17.0.1 which only supports parameter-level annotations.
-**Upgrading ClangSharp to v18+ unblocks the entire shift-left strategy with no
-workarounds or extraction tools needed.**
+The v17 limitation described in the historical sections below no longer describes the
+current [ClangSharp package references](../../../sources/Win32MetadataScraper/Win32MetadataScraper.csproj).
+Annotation transport does not solve version-guard extraction; that requires separate
+preprocessing provenance and conditional analysis.
 
 ---
 
@@ -124,9 +141,6 @@ compilation pattern:
 
 // Function calls SetLastError on failure
 #define _Sets_last_error_              _W32M_anno0("setlasterror")
-
-// Minimum OS version required (e.g., "10.0.19041")
-#define _Min_os_version_(ver)          _W32M_anno1("minversion", #ver)
 
 // Function's return value must be freed with the named function
 #define _Must_close_with_(func)        _W32M_anno1("raiifree", #func)
@@ -241,7 +255,6 @@ private AttributeSyntax ProcessWin32MetadataAnnotation(string annotation)
         "raiifree"        => MakeAttribute("RAIIFree", value),
         "closeapi"        => MakeAttribute("RAIIFree", value),
         "invalidhandle"   => MakeAttribute("InvalidHandleValue", long.Parse(value)),
-        "minversion"      => MakeAttribute("SupportedOSPlatform", $"windows{value}"),
         "comoutptr"       => MakeAttribute("ComOutPtr"),
         "donotrelease"    => MakeAttribute("DoNotRelease"),
         "notnullterm"     => MakeAttribute("NotNullTerminated"),
@@ -270,10 +283,10 @@ Each class of sidecar metadata falls into one of three categories:
 
 These express *semantic properties of the API* and should be in the headers.
 
-| Class | Current Location | Header Annotation | Entries | Difficulty |
+| Class | Current Location | Native Source / Annotation | Entries | Difficulty |
 |---|---|---|---|---|
 | **SetLastError** | `WithSetLastError.rsp` | `_Sets_last_error_` on function | ~1,600 | Low |
-| **OS Version** | `supportedOS.rsp` | `_Min_os_version_(...)` on function | ~8,600 | Low |
+| **OS Version** | `supportedOS.rsp` | Existing native version guards associated with AST declarations; correct guard discrepancies in SDK headers | ~8,600 | Requires preprocessor analysis; see specification |
 | **RAII/Close API** | `autoTypes.json` | `_Close_handle_with_(...)` on typedef | ~60 | Low |
 | **Invalid Handle Values** | `autoTypes.json` | `_Invalid_handle_(...)` on typedef | ~40 | Low |
 | **AlsoUsableFor** | `autoTypes.json` | `_Also_usable_for_(...)` on typedef | ~10 | Low |
@@ -352,18 +365,6 @@ annotations to them during ingestion.
       "placement": "before-return-type",
       "status": "pending",
       "sourceRsp": "WithSetLastError.rsp"
-    },
-    {
-      "id": "minversion-AmsiInitialize",
-      "header": "um/amsi.h",
-      "target": {
-        "kind": "function",
-        "name": "AmsiInitialize"
-      },
-      "annotation": "_Min_os_version_(10.0.10240)",
-      "placement": "before-return-type",
-      "status": "pending",
-      "sourceRsp": "supportedOS.rsp"
     },
     {
       "id": "raii-HANDLE",
@@ -465,21 +466,33 @@ DoAll.ps1
 **Success criteria:** A header with `_Sets_last_error_` produces the same winmd metadata
 as the current `--with-setlasterror` rsp entry.
 
-### Phase 2: Simple Function Annotations
+### Phase 2: Function Metadata and Native Version Guards
 
-**Goal:** Move the three largest function-level sidecar files into header annotations.
+**Goal:** Move function-level API facts to headers, using native version guards for
+availability and annotations only for the semantics that require them.
 
 | Sub-phase | Sidecar File | Entries | What Moves |
 |---|---|---|---|
 | 2a | `WithSetLastError.rsp` | ~1,600 | `_Sets_last_error_` on each function |
-| 2b | `supportedOS.rsp` | ~8,600 | `_Min_os_version_(...)` on each function |
+| 2b | `supportedOS.rsp` | ~8,600 | Infer from native version guards; review and correct header/documentation discrepancies |
 | 2c | `libMappingsManual.rsp` | ~190 | `#pragma comment(lib, "...")` in headers |
 
-**Approach:** For each sub-phase:
+**Approach for annotation sub-phases:**
 1. Generate `patches.json` entries from the current `.rsp` file (scripted conversion)
 2. Implement the patch application tool
 3. Remove the corresponding `.rsp` entries as patches take over
 4. Validate winmd output is identical via `CompareBinToLastRelease.ps1`
+
+**Approach for OS versions (2b):** Implement the specification's
+[declaration-to-preprocessor provenance and conditional model](shift-left-annotation-spec.md#supported-windows-versions-from-native-guards).
+Preserve nested branches, aliases, lower/upper bounds, and non-version dimensions;
+use additional coherent parse configurations where declarations are otherwise
+inactive. Diagnose unguarded or ambiguous declarations without assigning a guessed
+minimum. Use documentation and existing sidecar values to review discrepancies,
+then correct native SDK guards rather than generating availability annotations or a
+replacement sidecar. Retire `supportedOS.rsp` only after inference coverage and
+intentional output differences have been reviewed. `SupportedOSPlatform` remains
+the output where it accurately represents the inferred version information.
 
 ### Phase 3: Parameter and Return Value Annotations
 
@@ -640,7 +653,7 @@ For each sidecar file, track:
 
 ```
 Total entries in sidecar file:       N
-Entries moved to header annotations: M  (patches applied)
+Entries resolved from headers:       M  (native facts or annotation patches)
 Entries adopted by official SDK:     A  (patches no longer needed)
 Entries remaining in sidecar:        N - M - A
 Coverage:                            (M + A) / N × 100%
@@ -670,7 +683,6 @@ We validated every proposed annotation:
 | Annotation | Placement | v17 | v18 |
 |---|---|---|---|
 | `_Sets_last_error_` | function | ❌ | ✅ `[NativeAnnotation("w32m:setlasterror")]` |
-| `_Min_os_version_(ver)` | function | ❌ | ✅ `[NativeAnnotation("w32m:minversion=...")]` |
 | `_Must_close_with_(func)` | function/return | ❌ | ✅ `[NativeAnnotation("w32m:raiifree=...")]` |
 | `_Can_return_errors_as_success_` | function | ❌ | ✅ `[NativeAnnotation("w32m:errorsassuccess")]` |
 | `_Multiple_success_values_` | function | ❌ | ✅ `[NativeAnnotation("w32m:multiplesuccess")]` |
@@ -682,9 +694,10 @@ We validated every proposed annotation:
 | SAL + custom coexistence | param | ✅ | ✅ Both present without interference |
 | `__declspec` on function | function | ❌ | ❌ Still dropped (not needed) |
 
-**Conclusion:** Upgrading ClangSharp to v18+ eliminates all workarounds. No extraction
-tools, no carrier-parameter hacks — `__attribute__((annotate(...)))` flows through the
-AST into `[NativeAnnotation("...")]` on the correct declaration in the generated C#.
+**Conclusion for annotation transport:** ClangSharp v18+ supports
+`__attribute__((annotate(...)))` flowing through the AST into
+`[NativeAnnotation("...")]` on the correct declaration in the generated C#.
+This historical annotation check does not validate native version-guard inference.
 The emitter (`MetadataSyntaxTreeCleaner`) needs to be updated to process
 `NativeAnnotation` attributes in addition to `CppAttributeList`.
 
