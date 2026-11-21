@@ -35438,6 +35438,10 @@
       {
         "method": "SignerSignEx3",
         "parameter": "dwFlags"
+      },
+      {
+        "struct": "SIGNER_SIGN_EX2_PARAMS",
+        "field": "dwFlags"
       }
     ]
   },
@@ -35463,6 +35467,10 @@
       {
         "method": "SignerSignEx3",
         "parameter": "dwTimestampFlags"
+      },
+      {
+        "struct": "SIGNER_SIGN_EX2_PARAMS",
+        "field": "dwTimestampFlags"
       }
     ]
   },
